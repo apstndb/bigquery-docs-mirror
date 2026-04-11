@@ -1,10 +1,10 @@
 # Choose a text generation function
 
-This document provides a comparison of the BigQuery ML [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) and [`  AI.GENERATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) text generation functions. You can use the information in this document to help you decide which function to use in cases where the functions have overlapping capabilities.
+This document provides a comparison of the BigQuery ML [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) and [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) text generation functions. You can use the information in this document to help you decide which function to use in cases where the functions have overlapping capabilities.
 
 ## Function similarities
 
-The `  AI.GENERATE_TEXT  ` and `  AI.GENERATE  ` functions are similar in the following ways:
+The `AI.GENERATE_TEXT` and `AI.GENERATE` functions are similar in the following ways:
 
   - **Purpose** : Generate text by passing a prompt to a large language model (LLM).
   - **Billing** : Incur BigQuery ML charges for data processed. For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) . Incur Vertex AI charges for calls to the LLM. If you are using a Gemini 2.0 or greater model, the call is billed at the batch API rate. For more information, see [Cost of building and deploying AI models in Vertex AI](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
@@ -13,7 +13,7 @@ The `  AI.GENERATE_TEXT  ` and `  AI.GENERATE  ` functions are similar in the fo
 
 ## Function differences
 
-Use the following table to evaluate the differences between the `  AI.GENERATE_TEXT  ` and `  AI.GENERATE  ` functions:
+Use the following table to evaluate the differences between the `AI.GENERATE_TEXT` and `AI.GENERATE` functions:
 
 <table>
 <colgroup>
@@ -24,8 +24,8 @@ Use the following table to evaluate the differences between the `  AI.GENERATE_T
 <thead>
 <tr class="header">
 <th></th>
-<th><code dir="ltr" translate="no">       AI.GENERATE_TEXT      </code></th>
-<th><code dir="ltr" translate="no">       AI.GENERATE      </code></th>
+<th><code dir="ltr" translate="no">AI.GENERATE_TEXT</code></th>
+<th><code dir="ltr" translate="no">AI.GENERATE</code></th>
 </tr>
 </thead>
 <tbody>
@@ -65,8 +65,8 @@ Use the following table to evaluate the differences between the `  AI.GENERATE_T
 </tr>
 <tr class="even">
 <td>Function output format</td>
-<td>Generated values are returned in a single JSON column or in separate table columns, depending on the <code dir="ltr" translate="no">       flatten_json_output      </code> argument value.</td>
-<td>Generated values are returned as fields in a <code dir="ltr" translate="no">       STRUCT      </code> object.</td>
+<td>Generated values are returned in a single JSON column or in separate table columns, depending on the <code dir="ltr" translate="no">flatten_json_output</code> argument value.</td>
+<td>Generated values are returned as fields in a <code dir="ltr" translate="no">STRUCT</code> object.</td>
 </tr>
 <tr class="odd">
 <td>User journey</td>
@@ -85,8 +85,8 @@ Use the following table to evaluate the differences between the `  AI.GENERATE_T
 </tr>
 <tr class="even">
 <td>Extended functions</td>
-<td>You can use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table"><code dir="ltr" translate="no">        AI.GENERATE_TABLE       </code> function</a> to generate output that is structured according to a SQL output schema that you specify.</td>
-<td>You can use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool"><code dir="ltr" translate="no">        AI.GENERATE_BOOL       </code></a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int"><code dir="ltr" translate="no">        AI.GENERATE_INT       </code></a> , and <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double"><code dir="ltr" translate="no">        AI.GENERATE_DOUBLE       </code></a> functions to generate different types of scalar values.</td>
+<td>You can use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table"><code dir="ltr" translate="no">AI.GENERATE_TABLE</code> function</a> to generate output that is structured according to a SQL output schema that you specify.</td>
+<td>You can use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool"><code dir="ltr" translate="no">AI.GENERATE_BOOL</code></a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int"><code dir="ltr" translate="no">AI.GENERATE_INT</code></a> , and <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double"><code dir="ltr" translate="no">AI.GENERATE_DOUBLE</code></a> functions to generate different types of scalar values.</td>
 </tr>
 </tbody>
 </table>

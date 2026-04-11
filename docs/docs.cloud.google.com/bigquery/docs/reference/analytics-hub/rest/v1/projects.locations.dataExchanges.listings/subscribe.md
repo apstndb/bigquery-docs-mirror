@@ -41,7 +41,7 @@ Currently, with Analytics Hub, you can create listings that reference only BigQu
 
 ### HTTP request
 
-`  POST https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}:subscribe  `
+`POST https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}:subscribe`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -49,11 +49,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the listing that you want to subscribe to. e.g. `  projects/myproject/locations/us/dataExchanges/123/listings/456  ` .
+Required. Resource name of the listing that you want to subscribe to. e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456` .
 
 ### Request body
 
@@ -70,34 +70,24 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field destination can be only one of the following:
-  &quot;destinationDataset&quot;: {
-    object (DestinationDataset)
-  },
-  &quot;destinationPubsubSubscription&quot;: {
-    object (DestinationPubSubSubscription)
-  }
-  // End of list of possible types for union field destination.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field destination can be only one of the following:&quot;destinationDataset&quot;: {object (DestinationDataset)},&quot;destinationPubsubSubscription&quot;: {object (DestinationPubSubSubscription)}// End of list of possible types for union field destination.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  destination  ` . Resulting destination of the listing that you subscribed to. `  destination  ` can be only one of the following:
+Union field `destination` . Resulting destination of the listing that you subscribed to. `destination` can be only one of the following:
 
-`  destinationDataset  `
+`destinationDataset`
 
-`  object ( DestinationDataset  ` )
+` object ( DestinationDataset  ` )
 
 Input only. BigQuery destination dataset to create for the subscriber.
 
-`  destinationPubsubSubscription  `
+`destinationPubsubSubscription`
 
-`  object ( DestinationPubSubSubscription  ` )
+` object ( DestinationPubSubSubscription  ` )
 
 Input only. Destination Pub/Sub subscription to create for the subscriber.
 
@@ -118,20 +108,16 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;subscription&quot;: {
-    object (Subscription)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;subscription&quot;: {object (Subscription)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  subscription  `
+`subscription`
 
-`  object ( Subscription  ` )
+` object ( Subscription  ` )
 
 Subscription object created from this subscribe action.
 
@@ -139,8 +125,8 @@ Subscription object created from this subscribe action.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
@@ -159,26 +145,22 @@ Defines the destination Pub/Sub subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;pubsubSubscription&quot;: {
-    object (PubSubSubscription)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;pubsubSubscription&quot;: {object (PubSubSubscription)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  pubsubSubscription  `
+`pubsubSubscription`
 
-`  object ( PubSubSubscription  ` )
+` object ( PubSubSubscription  ` )
 
 Required. Destination Pub/Sub subscription resource.
 
 ## PubSubSubscription
 
-Defines the destination Pub/Sub subscription. If none of `  pushConfig  ` , `  bigqueryConfig  ` , `  cloudStorageConfig  ` , `  pubsubExportConfig  ` , or `  pubsubliteExportConfig  ` is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
+Defines the destination Pub/Sub subscription. If none of `pushConfig` , `bigqueryConfig` , `cloudStorageConfig` , `pubsubExportConfig` , or `pubsubliteExportConfig` is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
 
 <table>
 <colgroup>
@@ -191,175 +173,135 @@ Defines the destination Pub/Sub subscription. If none of `  pushConfig  ` , `  b
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;pushConfig&quot;: {
-    object (PushConfig)
-  },
-  &quot;bigqueryConfig&quot;: {
-    object (BigQueryConfig)
-  },
-  &quot;cloudStorageConfig&quot;: {
-    object (CloudStorageConfig)
-  },
-  &quot;ackDeadlineSeconds&quot;: integer,
-  &quot;retainAckedMessages&quot;: boolean,
-  &quot;messageRetentionDuration&quot;: string,
-  &quot;labels&quot;: {
-    string: string,
-    ...
-  },
-  &quot;enableMessageOrdering&quot;: boolean,
-  &quot;expirationPolicy&quot;: {
-    object (ExpirationPolicy)
-  },
-  &quot;filter&quot;: string,
-  &quot;deadLetterPolicy&quot;: {
-    object (DeadLetterPolicy)
-  },
-  &quot;retryPolicy&quot;: {
-    object (RetryPolicy)
-  },
-  &quot;detached&quot;: boolean,
-  &quot;enableExactlyOnceDelivery&quot;: boolean,
-  &quot;messageTransforms&quot;: [
-    {
-      object (MessageTransform)
-    }
-  ],
-  &quot;tags&quot;: {
-    string: string,
-    ...
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;pushConfig&quot;: {object (PushConfig)},&quot;bigqueryConfig&quot;: {object (BigQueryConfig)},&quot;cloudStorageConfig&quot;: {object (CloudStorageConfig)},&quot;ackDeadlineSeconds&quot;: integer,&quot;retainAckedMessages&quot;: boolean,&quot;messageRetentionDuration&quot;: string,&quot;labels&quot;: {string: string,...},&quot;enableMessageOrdering&quot;: boolean,&quot;expirationPolicy&quot;: {object (ExpirationPolicy)},&quot;filter&quot;: string,&quot;deadLetterPolicy&quot;: {object (DeadLetterPolicy)},&quot;retryPolicy&quot;: {object (RetryPolicy)},&quot;detached&quot;: boolean,&quot;enableExactlyOnceDelivery&quot;: boolean,&quot;messageTransforms&quot;: [{object (MessageTransform)}],&quot;tags&quot;: {string: string,...}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the subscription. Format is `  projects/{project}/subscriptions/{sub}  ` .
+Required. Name of the subscription. Format is `projects/{project}/subscriptions/{sub}` .
 
-`  pushConfig  `
+`pushConfig`
 
-`  object ( PushConfig  ` )
+` object ( PushConfig  ` )
 
 Optional. If push delivery is used with this subscription, this field is used to configure it.
 
-`  bigqueryConfig  `
+`bigqueryConfig`
 
-`  object ( BigQueryConfig  ` )
+` object ( BigQueryConfig  ` )
 
 Optional. If delivery to BigQuery is used with this subscription, this field is used to configure it.
 
-`  cloudStorageConfig  `
+`cloudStorageConfig`
 
-`  object ( CloudStorageConfig  ` )
+` object ( CloudStorageConfig  ` )
 
 Optional. If delivery to Google Cloud Storage is used with this subscription, this field is used to configure it.
 
-`  ackDeadlineSeconds  `
+`ackDeadlineSeconds`
 
-`  integer  `
+`integer`
 
 Optional. The approximate amount of time (on a best-effort basis) Pub/Sub waits for the subscriber to acknowledge receipt before resending the message. In the interval after the message is delivered and before it is acknowledged, it is considered to be *outstanding* . During that time period, the message will not be redelivered (on a best-effort basis).
 
-For pull subscriptions, this value is used as the initial value for the ack deadline. To override this value for a given message, call `  ModifyAckDeadline  ` with the corresponding `  ack_id  ` if using non-streaming pull or send the `  ack_id  ` in a `  StreamingModifyAckDeadlineRequest  ` if using streaming pull. The minimum custom deadline you can specify is 10 seconds. The maximum custom deadline you can specify is 600 seconds (10 minutes). If this parameter is 0, a default value of 10 seconds is used.
+For pull subscriptions, this value is used as the initial value for the ack deadline. To override this value for a given message, call `ModifyAckDeadline` with the corresponding `ack_id` if using non-streaming pull or send the `ack_id` in a `StreamingModifyAckDeadlineRequest` if using streaming pull. The minimum custom deadline you can specify is 10 seconds. The maximum custom deadline you can specify is 600 seconds (10 minutes). If this parameter is 0, a default value of 10 seconds is used.
 
 For push delivery, this value is also used to set the request timeout for the call to the push endpoint.
 
 If the subscriber never acknowledges the message, the Pub/Sub system will eventually redeliver the message.
 
-`  retainAckedMessages  `
+`retainAckedMessages`
 
-`  boolean  `
+`boolean`
 
-Optional. Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription's backlog, even if they are acknowledged, until they fall out of the `  messageRetentionDuration  ` window. This must be true if you would like to [`  Seek  ` to a timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time) in the past to replay previously-acknowledged messages.
+Optional. Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription's backlog, even if they are acknowledged, until they fall out of the `messageRetentionDuration` window. This must be true if you would like to [`Seek` to a timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time) in the past to replay previously-acknowledged messages.
 
-`  messageRetentionDuration  `
+`messageRetentionDuration`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
-Optional. How long to retain unacknowledged messages in the subscription's backlog, from the moment a message is published. If `  retainAckedMessages  ` is true, then this also configures the retention of acknowledged messages, and thus configures how far back in time a `  Seek  ` can be done. Defaults to 7 days. Cannot be more than 31 days or less than 10 minutes.
+Optional. How long to retain unacknowledged messages in the subscription's backlog, from the moment a message is published. If `retainAckedMessages` is true, then this also configures the retention of acknowledged messages, and thus configures how far back in time a `Seek` can be done. Defaults to 7 days. Cannot be more than 31 days or less than 10 minutes.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Optional. See [Creating and managing labels](https://cloud.google.com/pubsub/docs/labels) .
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-`  enableMessageOrdering  `
+`enableMessageOrdering`
 
-`  boolean  `
+`boolean`
 
-Optional. If true, messages published with the same `  ordering_key  ` in `  PubsubMessage  ` will be delivered to the subscribers in the order in which they are received by the Pub/Sub system. Otherwise, they may be delivered in any order.
+Optional. If true, messages published with the same `ordering_key` in `PubsubMessage` will be delivered to the subscribers in the order in which they are received by the Pub/Sub system. Otherwise, they may be delivered in any order.
 
-`  expirationPolicy  `
+`expirationPolicy`
 
-`  object ( ExpirationPolicy  ` )
+` object ( ExpirationPolicy  ` )
 
-Optional. A policy that specifies the conditions for this subscription's expiration. A subscription is considered active as long as any connected subscriber is successfully consuming messages from the subscription or is issuing operations on the subscription. If `  expirationPolicy  ` is not set, a *default policy* with `  ttl  ` of 31 days will be used. The minimum allowed value for `  expirationPolicy.ttl  ` is 1 day. If `  expirationPolicy  ` is set, but `  expirationPolicy.ttl  ` is not set, the subscription never expires.
+Optional. A policy that specifies the conditions for this subscription's expiration. A subscription is considered active as long as any connected subscriber is successfully consuming messages from the subscription or is issuing operations on the subscription. If `expirationPolicy` is not set, a *default policy* with `ttl` of 31 days will be used. The minimum allowed value for `expirationPolicy.ttl` is 1 day. If `expirationPolicy` is set, but `expirationPolicy.ttl` is not set, the subscription never expires.
 
-`  filter  `
+`filter`
 
-`  string  `
+`string`
 
-Optional. An expression written in the Pub/Sub [filter language](https://cloud.google.com/pubsub/docs/filtering) . If non-empty, then only `  PubsubMessage  ` s whose `  attributes  ` field matches the filter are delivered on this subscription. If empty, then no messages are filtered out.
+Optional. An expression written in the Pub/Sub [filter language](https://cloud.google.com/pubsub/docs/filtering) . If non-empty, then only `PubsubMessage` s whose `attributes` field matches the filter are delivered on this subscription. If empty, then no messages are filtered out.
 
-`  deadLetterPolicy  `
+`deadLetterPolicy`
 
-`  object ( DeadLetterPolicy  ` )
+` object ( DeadLetterPolicy  ` )
 
 Optional. A policy that specifies the conditions for dead lettering messages in this subscription. If deadLetterPolicy is not set, dead lettering is disabled.
 
 The Pub/Sub service account associated with this subscriptions's parent project (i.e., service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com) must have permission to Acknowledge() messages on this subscription.
 
-`  retryPolicy  `
+`retryPolicy`
 
-`  object ( RetryPolicy  ` )
+` object ( RetryPolicy  ` )
 
 Optional. A policy that specifies how Pub/Sub retries message delivery for this subscription.
 
 If not set, the default retry policy is applied. This generally implies that messages will be retried as soon as possible for healthy subscribers. RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded events for a given message.
 
-`  detached  `
+`detached`
 
-`  boolean  `
+`boolean`
 
-Optional. Indicates whether the subscription is detached from its topic. Detached subscriptions don't receive messages from their topic and don't retain any backlog. `  Pull  ` and `  StreamingPull  ` requests will return FAILED\_PRECONDITION. If the subscription is a push subscription, pushes to the endpoint will not be made.
+Optional. Indicates whether the subscription is detached from its topic. Detached subscriptions don't receive messages from their topic and don't retain any backlog. `Pull` and `StreamingPull` requests will return FAILED\_PRECONDITION. If the subscription is a push subscription, pushes to the endpoint will not be made.
 
-`  enableExactlyOnceDelivery  `
+`enableExactlyOnceDelivery`
 
-`  boolean  `
+`boolean`
 
-Optional. If true, Pub/Sub provides the following guarantees for the delivery of a message with a given value of `  message_id  ` on this subscription:
+Optional. If true, Pub/Sub provides the following guarantees for the delivery of a message with a given value of `message_id` on this subscription:
 
   - The message sent to a subscriber is guaranteed not to be resent before the message's acknowledgement deadline expires.
   - An acknowledged message will not be resent to a subscriber.
 
-Note that subscribers may still receive multiple copies of a message when `  enableExactlyOnceDelivery  ` is true if the message was published multiple times by a publisher client. These copies are considered distinct by Pub/Sub and have distinct `  message_id  ` values.
+Note that subscribers may still receive multiple copies of a message when `enableExactlyOnceDelivery` is true if the message was published multiple times by a publisher client. These copies are considered distinct by Pub/Sub and have distinct `message_id` values.
 
-`  messageTransforms[]  `
+`messageTransforms[]`
 
-`  object ( MessageTransform  ` )
+` object ( MessageTransform  ` )
 
 Optional. Transforms to be applied to messages before they are delivered to subscribers. Transforms are applied in the order specified.
 
-`  tags  `
+`tags`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Optional. Input only. Immutable. Tag keys/values directly bound to this resource. For example: "123/environment": "production", "123/costCenter": "marketing"
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
 ## PushConfig
 
@@ -376,78 +318,57 @@ Configuration for a push delivery endpoint.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;pushEndpoint&quot;: string,
-  &quot;attributes&quot;: {
-    string: string,
-    ...
-  },
-
-  // Union field authentication_method can be only one of the following:
-  &quot;oidcToken&quot;: {
-    object (OidcToken)
-  }
-  // End of list of possible types for union field authentication_method.
-
-  // Union field wrapper can be only one of the following:
-  &quot;pubsubWrapper&quot;: {
-    object (PubsubWrapper)
-  },
-  &quot;noWrapper&quot;: {
-    object (NoWrapper)
-  }
-  // End of list of possible types for union field wrapper.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;pushEndpoint&quot;: string,&quot;attributes&quot;: {string: string,...},// Union field authentication_method can be only one of the following:&quot;oidcToken&quot;: {object (OidcToken)}// End of list of possible types for union field authentication_method.// Union field wrapper can be only one of the following:&quot;pubsubWrapper&quot;: {object (PubsubWrapper)},&quot;noWrapper&quot;: {object (NoWrapper)}// End of list of possible types for union field wrapper.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  pushEndpoint  `
+`pushEndpoint`
 
-`  string  `
+`string`
 
-Optional. A URL locating the endpoint to which messages should be pushed. For example, a Webhook endpoint might use `  https://example.com/push  ` .
+Optional. A URL locating the endpoint to which messages should be pushed. For example, a Webhook endpoint might use `https://example.com/push` .
 
-`  attributes  `
+`attributes`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Optional. Endpoint configuration attributes that can be used to control different aspects of the message delivery.
 
-The only currently supported attribute is `  x-goog-version  ` , which you can use to change the format of the pushed message. This attribute indicates the version of the data expected by the endpoint. This controls the shape of the pushed message (i.e., its fields and metadata).
+The only currently supported attribute is `x-goog-version` , which you can use to change the format of the pushed message. This attribute indicates the version of the data expected by the endpoint. This controls the shape of the pushed message (i.e., its fields and metadata).
 
-If not present during the `  CreateSubscription  ` call, it will default to the version of the Pub/Sub API used to make such call. If not present in a `  ModifyPushConfig  ` call, its value will not be changed. `  GetSubscription  ` calls will always return a valid version, even if the subscription was created without this attribute.
+If not present during the `CreateSubscription` call, it will default to the version of the Pub/Sub API used to make such call. If not present in a `ModifyPushConfig` call, its value will not be changed. `GetSubscription` calls will always return a valid version, even if the subscription was created without this attribute.
 
-The only supported values for the `  x-goog-version  ` attribute are:
+The only supported values for the `x-goog-version` attribute are:
 
-  - `  v1beta1  ` : uses the push format defined in the v1beta1 Pub/Sub API.
-  - `  v1  ` or `  v1beta2  ` : uses the push format defined in the v1 Pub/Sub API.
+  - `v1beta1` : uses the push format defined in the v1beta1 Pub/Sub API.
+  - `v1` or `v1beta2` : uses the push format defined in the v1 Pub/Sub API.
 
-For example: `  attributes { "x-goog-version": "v1" }  `
+For example: `attributes { "x-goog-version": "v1" }`
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-Union field `  authentication_method  ` . An authentication method used by push endpoints to verify the source of push requests. This can be used with push endpoints that are private by default to allow requests only from the Pub/Sub system, for example. This field is optional and should be set only by users interested in authenticated push. `  authentication_method  ` can be only one of the following:
+Union field `authentication_method` . An authentication method used by push endpoints to verify the source of push requests. This can be used with push endpoints that are private by default to allow requests only from the Pub/Sub system, for example. This field is optional and should be set only by users interested in authenticated push. `authentication_method` can be only one of the following:
 
-`  oidcToken  `
+`oidcToken`
 
-`  object ( OidcToken  ` )
+` object ( OidcToken  ` )
 
-Optional. If specified, Pub/Sub will generate and attach an OIDC JWT token as an `  Authorization  ` header in the HTTP request for every pushed message.
+Optional. If specified, Pub/Sub will generate and attach an OIDC JWT token as an `Authorization` header in the HTTP request for every pushed message.
 
-Union field `  wrapper  ` . The format of the delivered message to the push endpoint is defined by the chosen wrapper. When unset, `  PubsubWrapper  ` is used. `  wrapper  ` can be only one of the following:
+Union field `wrapper` . The format of the delivered message to the push endpoint is defined by the chosen wrapper. When unset, `PubsubWrapper` is used. `wrapper` can be only one of the following:
 
-`  pubsubWrapper  `
+`pubsubWrapper`
 
-`  object ( PubsubWrapper  ` )
+` object ( PubsubWrapper  ` )
 
 Optional. When set, the payload to the push endpoint is in the form of the JSON representation of a PubsubMessage ( <https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage)> .
 
-`  noWrapper  `
+`noWrapper`
 
-`  object ( NoWrapper  ` )
+` object ( NoWrapper  ` )
 
 Optional. When set, the payload to the push endpoint is not wrapped.
 
@@ -476,15 +397,15 @@ Contains information needed for generating an [OpenID Connect token](https://dev
 
 Fields
 
-`  serviceAccountEmail  `
+`serviceAccountEmail`
 
-`  string  `
+`string`
 
 Optional. [Service account email](https://cloud.google.com/iam/docs/service-accounts) used for generating the OIDC token. For more information on setting up authentication, see [Push subscriptions](https://cloud.google.com/pubsub/docs/push) .
 
-`  audience  `
+`audience`
 
-`  string  `
+`string`
 
 Optional. Audience to be used when generating OIDC token. The audience claim identifies the recipients that the JWT is intended for. The audience value is a single case-sensitive string. Having multiple values (array) for the audience field is not supported. More info about the OIDC JWT token audience here: <https://tools.ietf.org/html/rfc7519#section-4.1.3> Note: if not specified, the Push endpoint URL will be used.
 
@@ -496,7 +417,7 @@ The payload to the push endpoint is in the form of the JSON representation of a 
 
 ## NoWrapper
 
-Sets the `  data  ` field as the HTTP body for delivery.
+Sets the `data` field as the HTTP body for delivery.
 
 <table>
 <colgroup>
@@ -518,11 +439,11 @@ Sets the `  data  ` field as the HTTP body for delivery.
 
 Fields
 
-`  writeMetadata  `
+`writeMetadata`
 
-`  boolean  `
+`boolean`
 
-Optional. When true, writes the Pub/Sub message metadata to `  x-goog-pubsub-<KEY>:<VAL>  ` headers of the HTTP request. Writes the Pub/Sub message attributes to `  <KEY>:<VAL>  ` headers of the HTTP request.
+Optional. When true, writes the Pub/Sub message metadata to `x-goog-pubsub-<KEY>:<VAL>` headers of the HTTP request. Writes the Pub/Sub message attributes to `<KEY>:<VAL>` headers of the HTTP request.
 
 ## BigQueryConfig
 
@@ -553,41 +474,41 @@ Configuration for a BigQuery subscription.
 
 Fields
 
-`  table  `
+`table`
 
-`  string  `
+`string`
 
 Optional. The name of the table to which to write data, of the form {projectId}.{datasetId}.{tableId}
 
-`  useTopicSchema  `
+`useTopicSchema`
 
-`  boolean  `
+`boolean`
 
-Optional. When true, use the topic's schema as the columns to write to in BigQuery, if it exists. `  useTopicSchema  ` and `  useTableSchema  ` cannot be enabled at the same time.
+Optional. When true, use the topic's schema as the columns to write to in BigQuery, if it exists. `useTopicSchema` and `useTableSchema` cannot be enabled at the same time.
 
-`  writeMetadata  `
+`writeMetadata`
 
-`  boolean  `
+`boolean`
 
 Optional. When true, write the subscription name, message\_id, publish\_time, attributes, and ordering\_key to additional columns in the table. The subscription name, message\_id, and publish\_time fields are put in their own columns while all other message properties (other than data) are written to a JSON object in the attributes column.
 
-`  dropUnknownFields  `
+`dropUnknownFields`
 
-`  boolean  `
+`boolean`
 
 Optional. When true and useTopicSchema is true, any fields that are a part of the topic schema that are not part of the BigQuery table schema are dropped when writing to BigQuery. Otherwise, the schemas must be kept in sync and any messages with extra fields are not written and remain in the subscription's backlog.
 
-`  useTableSchema  `
+`useTableSchema`
 
-`  boolean  `
+`boolean`
 
-Optional. When true, use the BigQuery table's schema as the columns to write to in BigQuery. `  useTableSchema  ` and `  useTopicSchema  ` cannot be enabled at the same time.
+Optional. When true, use the BigQuery table's schema as the columns to write to in BigQuery. `useTableSchema` and `useTopicSchema` cannot be enabled at the same time.
 
-`  serviceAccountEmail  `
+`serviceAccountEmail`
 
-`  string  `
+`string`
 
-Optional. The service account to use to write to BigQuery. The subscription creator or updater that specifies this field must have `  iam.serviceAccounts.actAs  ` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
+Optional. The service account to use to write to BigQuery. The subscription creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
 
 ## CloudStorageConfig
 
@@ -604,94 +525,76 @@ Configuration for a Cloud Storage subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;bucket&quot;: string,
-  &quot;filenamePrefix&quot;: string,
-  &quot;filenameSuffix&quot;: string,
-  &quot;filenameDatetimeFormat&quot;: string,
-  &quot;maxDuration&quot;: string,
-  &quot;maxBytes&quot;: string,
-  &quot;maxMessages&quot;: string,
-  &quot;serviceAccountEmail&quot;: string,
-
-  // Union field output_format can be only one of the following:
-  &quot;textConfig&quot;: {
-    object (TextConfig)
-  },
-  &quot;avroConfig&quot;: {
-    object (AvroConfig)
-  }
-  // End of list of possible types for union field output_format.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;bucket&quot;: string,&quot;filenamePrefix&quot;: string,&quot;filenameSuffix&quot;: string,&quot;filenameDatetimeFormat&quot;: string,&quot;maxDuration&quot;: string,&quot;maxBytes&quot;: string,&quot;maxMessages&quot;: string,&quot;serviceAccountEmail&quot;: string,// Union field output_format can be only one of the following:&quot;textConfig&quot;: {object (TextConfig)},&quot;avroConfig&quot;: {object (AvroConfig)}// End of list of possible types for union field output_format.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  bucket  `
+`bucket`
 
-`  string  `
+`string`
 
 Required. User-provided name for the Cloud Storage bucket. The bucket must be created by the user. The bucket name must be without any prefix like "gs://". See the [bucket naming requirements](https://cloud.google.com/storage/docs/buckets#naming) .
 
-`  filenamePrefix  `
+`filenamePrefix`
 
-`  string  `
+`string`
 
 Optional. User-provided prefix for Cloud Storage filename. See the [object naming requirements](https://cloud.google.com/storage/docs/objects#naming) .
 
-`  filenameSuffix  `
+`filenameSuffix`
 
-`  string  `
+`string`
 
 Optional. User-provided suffix for Cloud Storage filename. See the [object naming requirements](https://cloud.google.com/storage/docs/objects#naming) . Must not end in "/".
 
-`  filenameDatetimeFormat  `
+`filenameDatetimeFormat`
 
-`  string  `
+`string`
 
 Optional. User-provided format string specifying how to represent datetimes in Cloud Storage filenames. See the [datetime format guidance](https://cloud.google.com/pubsub/docs/create-cloudstorage-subscription#file_names) .
 
-`  maxDuration  `
+`maxDuration`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
 Optional. File batching settings. If no maxDuration setting is specified, a maxDuration of 5 minutes will be set by default. maxDuration is required regardless of whether other file batching settings are specified.
 
 The maximum duration that can elapse before a new Cloud Storage file is created. Min 1 minute, max 10 minutes, default 5 minutes. May not exceed the subscription's acknowledgement deadline.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
-`  maxBytes  `
+`maxBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. The maximum bytes that can be written to a Cloud Storage file before a new file is created. Min 1 KB, max 10 GiB. The maxBytes limit may be exceeded in cases where messages are larger than the limit.
 
-`  maxMessages  `
+`maxMessages`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. The maximum number of messages that can be written to a Cloud Storage file before a new file is created. Min 1000 messages.
 
-`  serviceAccountEmail  `
+`serviceAccountEmail`
 
-`  string  `
+`string`
 
-Optional. The service account to use to write to Cloud Storage. The subscription creator or updater that specifies this field must have `  iam.serviceAccounts.actAs  ` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
+Optional. The service account to use to write to Cloud Storage. The subscription creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
 
-Union field `  output_format  ` . Defaults to text format. `  output_format  ` can be only one of the following:
+Union field `output_format` . Defaults to text format. `output_format` can be only one of the following:
 
-`  textConfig  `
+`textConfig`
 
-`  object ( TextConfig  ` )
+` object ( TextConfig  ` )
 
 Optional. If set, message data will be written to Cloud Storage in text format.
 
-`  avroConfig  `
+`avroConfig`
 
-`  object ( AvroConfig  ` )
+` object ( AvroConfig  ` )
 
 Optional. If set, message data will be written to Cloud Storage in Avro format.
 
@@ -726,15 +629,15 @@ Configuration for writing message data in Avro format. Message payloads and meta
 
 Fields
 
-`  writeMetadata  `
+`writeMetadata`
 
-`  boolean  `
+`boolean`
 
 Optional. When true, write the subscription name, message\_id, publish\_time, attributes, and ordering\_key as additional fields in the output. The subscription name, message\_id, and publish\_time fields are put in their own fields while all other message properties other than data (for example, an ordering\_key, if present) are added as entries in the attributes map.
 
-`  useTopicSchema  `
+`useTopicSchema`
 
-`  boolean  `
+`boolean`
 
 Optional. When true, the output Cloud Storage file will be serialized using the topic schema, if it exists.
 
@@ -762,13 +665,13 @@ A policy that specifies the conditions for resource expiration (i.e., automatic 
 
 Fields
 
-`  ttl  `
+`ttl`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
-Optional. Specifies the "time-to-live" duration for an associated resource. The resource expires if it is not active for a period of `  ttl  ` . The definition of "activity" depends on the type of the associated resource. The minimum and maximum allowed values for `  ttl  ` depend on the type of the associated resource, as well. If `  ttl  ` is not set, the associated resource never expires.
+Optional. Specifies the "time-to-live" duration for an associated resource. The resource expires if it is not active for a period of `ttl` . The definition of "activity" depends on the type of the associated resource. The minimum and maximum allowed values for `ttl` depend on the type of the associated resource, as well. If `ttl` is not set, the associated resource never expires.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
 ## DeadLetterPolicy
 
@@ -797,17 +700,17 @@ If validation on any of the fields fails at subscription creation/updation, the 
 
 Fields
 
-`  deadLetterTopic  `
+`deadLetterTopic`
 
-`  string  `
+`string`
 
-Optional. The name of the topic to which dead letter messages should be published. Format is `  projects/{project}/topics/{topic}  ` .The Pub/Sub service account associated with the enclosing subscription's parent project (i.e., service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com) must have permission to Publish() to this topic.
+Optional. The name of the topic to which dead letter messages should be published. Format is `projects/{project}/topics/{topic}` .The Pub/Sub service account associated with the enclosing subscription's parent project (i.e., service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com) must have permission to Publish() to this topic.
 
 The operation will fail if the topic does not exist. Users should ensure that there is a subscription attached to this topic since messages published to a topic with no subscriptions are lost.
 
-`  maxDeliveryAttempts  `
+`maxDeliveryAttempts`
 
-`  integer  `
+`integer`
 
 Optional. The maximum number of delivery attempts for any message. The value must be between 5 and 100.
 
@@ -850,21 +753,21 @@ Retry Policy is implemented on a best effort basis. At times, the delay between 
 
 Fields
 
-`  minimumBackoff  `
+`minimumBackoff`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
 Optional. The minimum delay between consecutive deliveries of a given message. Value should be between 0 and 600 seconds. Defaults to 10 seconds.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
-`  maximumBackoff  `
+`maximumBackoff`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
 Optional. The maximum delay between consecutive deliveries of a given message. Value should be between 0 and 600 seconds. Defaults to 600 seconds.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
 ## MessageTransform
 
@@ -881,43 +784,34 @@ All supported message transforms types.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;enabled&quot;: boolean,
-  &quot;disabled&quot;: boolean,
-
-  // Union field transform can be only one of the following:
-  &quot;javascriptUdf&quot;: {
-    object (JavaScriptUDF)
-  }
-  // End of list of possible types for union field transform.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;enabled&quot;: boolean,&quot;disabled&quot;: boolean,// Union field transform can be only one of the following:&quot;javascriptUdf&quot;: {object (JavaScriptUDF)}// End of list of possible types for union field transform.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  enabled (deprecated)  `
+` enabled (deprecated)  `
 
-`  boolean  `
+`boolean`
 
 This item is deprecated\!
 
-Optional. This field is deprecated, use the `  disabled  ` field to disable transforms.
+Optional. This field is deprecated, use the `disabled` field to disable transforms.
 
-`  disabled  `
+`disabled`
 
-`  boolean  `
+`boolean`
 
-Optional. If true, the transform is disabled and will not be applied to messages. Defaults to `  false  ` .
+Optional. If true, the transform is disabled and will not be applied to messages. Defaults to `false` .
 
-Union field `  transform  ` . The type of transform to apply to messages. `  transform  ` can be only one of the following:
+Union field `transform` . The type of transform to apply to messages. `transform` can be only one of the following:
 
-`  javascriptUdf  `
+`javascriptUdf`
 
-`  object ( JavaScriptUDF  ` )
+` object ( JavaScriptUDF  ` )
 
-Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's are specified on a resource, each must have a unique `  functionName  ` .
+Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's are specified on a resource, each must have a unique `functionName` .
 
 ## JavaScriptUDF
 
@@ -944,17 +838,17 @@ User-defined JavaScript function that can transform or filter a Pub/Sub message.
 
 Fields
 
-`  functionName  `
+`functionName`
 
-`  string  `
+`string`
 
 Required. Name of the JavasScript function that should applied to Pub/Sub messages.
 
-`  code  `
+`code`
 
-`  string  `
+`string`
 
-Required. JavaScript code that contains a function `  functionName  ` with the below signature:
+Required. JavaScript code that contains a function `functionName` with the below signature:
 
 ``` 
   /**

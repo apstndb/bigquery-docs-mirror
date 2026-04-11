@@ -23,7 +23,7 @@ You must have a read-only private API key to allow the Klaviyo connector to tran
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -32,20 +32,20 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Set up a Klaviyo data transfer
 
@@ -85,7 +85,7 @@ Add Klaviyo data into BigQuery by setting up a transfer configuration using one 
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
 ``` notranslate
 bq mk
@@ -99,19 +99,19 @@ bq mk
 
 Replace the following:
 
-  - `  PROJECT_ID  ` (optional): your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
+  - `PROJECT_ID` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - `  DATA_SOURCE  ` : the data source — `  klaviyo  ` .
+  - `DATA_SOURCE` : the data source — `klaviyo` .
 
-  - `  NAME  ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+  - `NAME` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
-  - `  DATASET  ` : the target dataset for the transfer configuration.
+  - `DATASET` : the target dataset for the transfer configuration.
 
-  - `  PARAMETERS  ` : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a Klaviyo data transfer:
+  - `PARAMETERS` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Klaviyo data transfer:
     
-      - `  assets  ` : the path to the Klaviyo objects to be transferred to BigQuery.
-      - `  connector.authentication.privateApiKey  ` : the private API key for the Klaviyo account.
-      - `  connector.startDate  ` : (Optional) a start date for new records to be included in the data transfer, in the format `  YYYY-MM-DD  ` . Only records created on or after this date are included in the data transfer. The default value is 3 months before the transfer run date.
+      - `assets` : the path to the Klaviyo objects to be transferred to BigQuery.
+      - `connector.authentication.privateApiKey` : the private API key for the Klaviyo account.
+      - `connector.startDate` : (Optional) a start date for new records to be included in the data transfer, in the format `YYYY-MM-DD` . Only records created on or after this date are included in the data transfer. The default value is 3 months before the transfer run date.
 
 The following command creates a Klaviyo data transfer in the default project.
 
@@ -138,14 +138,14 @@ For a list of data that's included in a Klaviyo data transfer, see [Klaviyo data
 
 The following table maps Klaviyo data types to the corresponding BigQuery data types:
 
-| Klaviyo data type                           | BigQuery data type         |
-| ------------------------------------------- | -------------------------- |
-| `        String       `                     | `        STRING       `    |
-| `        Text       `                       | `        STRING       `    |
-| `        Integer       `                    | `        INTEGER       `   |
-| `        Boolean       `                    | `        BOOLEAN       `   |
-| `        Date (YYYY-MM-DD HH:MM:SS)       ` | `        TIMESTAMP       ` |
-| `        List       `                       | `        ARRAY       `     |
+| Klaviyo data type            | BigQuery data type |
+| ---------------------------- | ------------------ |
+| `String`                     | `STRING`           |
+| `Text`                       | `STRING`           |
+| `Integer`                    | `INTEGER`          |
+| `Boolean`                    | `BOOLEAN`          |
+| `Date (YYYY-MM-DD HH:MM:SS)` | `TIMESTAMP`        |
+| `List`                       | `ARRAY`            |
 
 ## Pricing
 

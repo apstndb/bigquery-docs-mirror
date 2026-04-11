@@ -2,7 +2,7 @@ GoogleSQL for BigQuery supports subqueries.
 
 ## About subqueries
 
-A subquery is a [query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) that appears inside another query statement. Subqueries are also referred to as sub- `  SELECT  ` s or nested `  SELECT  ` s. The full `  SELECT  ` syntax is valid in subqueries.
+A subquery is a [query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) that appears inside another query statement. Subqueries are also referred to as sub- `SELECT` s or nested `SELECT` s. The full `SELECT` syntax is valid in subqueries.
 
 ## Expression subqueries
 
@@ -14,17 +14,17 @@ Expression subqueries are used in a query wherever expressions are valid. They r
 
 **Description**
 
-A subquery inside an expression is interpreted as a scalar subquery. Scalar subqueries are often used in the `  SELECT  ` list or `  WHERE  ` clause.
+A subquery inside an expression is interpreted as a scalar subquery. Scalar subqueries are often used in the `SELECT` list or `WHERE` clause.
 
-A scalar subquery must select a single column. Trying to select multiple columns will result in an analysis error. A `  SELECT  ` list with a single expression is the simplest way to select a single column. The result type of the scalar subquery is the type of that expression.
+A scalar subquery must select a single column. Trying to select multiple columns will result in an analysis error. A `SELECT` list with a single expression is the simplest way to select a single column. The result type of the scalar subquery is the type of that expression.
 
-Another possibility is to use `  SELECT AS STRUCT  ` to define a subquery that selects a single `  STRUCT  ` type value whose fields are defined by one or more expressions.
+Another possibility is to use `SELECT AS STRUCT` to define a subquery that selects a single `STRUCT` type value whose fields are defined by one or more expressions.
 
-If the subquery returns exactly one row, that single value is the scalar subquery result. If the subquery returns zero rows, the result is `  NULL  ` . If the subquery returns more than one row, the query fails with a runtime error.
+If the subquery returns exactly one row, that single value is the scalar subquery result. If the subquery returns zero rows, the result is `NULL` . If the subquery returns more than one row, the query fails with a runtime error.
 
 **Examples**
 
-In this example, a correlated scalar subquery returns the mascots for a list of players, using the [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) and [`  Mascots  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) tables:
+In this example, a correlated scalar subquery returns the mascots for a list of players, using the [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) and [`Mascots`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) tables:
 
     SELECT
       username,
@@ -40,7 +40,7 @@ In this example, a correlated scalar subquery returns the mascots for a list of 
      | corba     | parrot        |
      +---------------------------*/
 
-In this example, an aggregate scalar subquery calculates `  avg_level  ` , the average level of a user in the [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table.
+In this example, an aggregate scalar subquery calculates `avg_level` , the average level of a user in the [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table.
 
     SELECT
       username,
@@ -63,17 +63,17 @@ In this example, an aggregate scalar subquery calculates `  avg_level  ` , the a
 
 **Description**
 
-An ARRAY subquery is a special case of expression subquery, in that it returns an ARRAY. If the subquery returns zero rows, returns an empty ARRAY. Never returns a `  NULL  ` ARRAY.
+An ARRAY subquery is a special case of expression subquery, in that it returns an ARRAY. If the subquery returns zero rows, returns an empty ARRAY. Never returns a `NULL` ARRAY.
 
-The `  SELECT  ` list in an ARRAY subquery must have exactly one column of any type, which defines the element type of the array returned by the array subquery. If not, an error is returned. When the subquery is written with `  SELECT AS STRUCT  ` , the `  SELECT  ` list can include multiple columns, and the value returned by the array subquery is an ARRAY of the constructed STRUCTs. Selecting multiple columns without using `  SELECT AS  ` is an error.
+The `SELECT` list in an ARRAY subquery must have exactly one column of any type, which defines the element type of the array returned by the array subquery. If not, an error is returned. When the subquery is written with `SELECT AS STRUCT` , the `SELECT` list can include multiple columns, and the value returned by the array subquery is an ARRAY of the constructed STRUCTs. Selecting multiple columns without using `SELECT AS` is an error.
 
-ARRAY subqueries can use `  SELECT AS STRUCT  ` to build arrays of structs.
+ARRAY subqueries can use `SELECT AS STRUCT` to build arrays of structs.
 
 See [Array functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array) for full semantics.
 
 **Examples**
 
-In this example, an ARRAY subquery returns an array of usernames assigned to the red team in the [`  NPCs  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
+In this example, an ARRAY subquery returns an array of usernames assigned to the red team in the [`NPCs`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
 
     SELECT
       ARRAY(SELECT username FROM NPCs WHERE team = 'red') AS red;
@@ -84,24 +84,24 @@ In this example, an ARRAY subquery returns an array of usernames assigned to the
      | [niles,jujul]   |
      +-----------------*/
 
-### `     IN    ` subqueries
+### `IN` subqueries
 
     value [ NOT ] IN ( subquery )
 
 **Description**
 
-Returns TRUE if `  value  ` is in the set of rows returned by the subquery. Returns FALSE if the subquery returns zero rows.
+Returns TRUE if `value` is in the set of rows returned by the subquery. Returns FALSE if the subquery returns zero rows.
 
-The subquery's SELECT list must have a single column of any type and its type must be comparable to the type for `  value  ` . If not, an error is returned. For full semantics, including `  NULL  ` handling, see the [`  IN  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators) .
+The subquery's SELECT list must have a single column of any type and its type must be comparable to the type for `value` . If not, an error is returned. For full semantics, including `NULL` handling, see the [`IN` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators) .
 
-If you need to use an `  IN  ` subquery with an array, these are equivalent:
+If you need to use an `IN` subquery with an array, these are equivalent:
 
     value [ NOT ] IN ( subquery )
     value [ NOT ] IN UNNEST( ARRAY( subquery ) )
 
 **Examples**
 
-In this example, the `  IN  ` operator that checks to see if a username called `  corba  ` exists within the [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
+In this example, the `IN` operator that checks to see if a username called `corba` exists within the [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
 
     SELECT
       'corba' IN (SELECT username FROM Players) AS result;
@@ -112,17 +112,17 @@ In this example, the `  IN  ` operator that checks to see if a username called `
      | TRUE   |
      +--------*/
 
-### `     EXISTS    ` subqueries
+### `EXISTS` subqueries
 
     EXISTS( subquery )
 
 **Description**
 
-Returns TRUE if the subquery produces one or more rows. Returns FALSE if the subquery produces zero rows. Never returns `  NULL  ` . Unlike all other expression subqueries, there are no rules about the column list. Any number of columns may be selected and it will not affect the query result.
+Returns TRUE if the subquery produces one or more rows. Returns FALSE if the subquery produces zero rows. Never returns `NULL` . Unlike all other expression subqueries, there are no rules about the column list. Any number of columns may be selected and it will not affect the query result.
 
 **Examples**
 
-In this example, the `  EXISTS  ` operator that checks to see if any rows are produced, using the [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
+In this example, the `EXISTS` operator that checks to see if any rows are produced, using the [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
 
     SELECT
       EXISTS(SELECT username FROM Players WHERE team = 'yellow') AS result;
@@ -139,11 +139,11 @@ In this example, the `  EXISTS  ` operator that checks to see if any rows are pr
 
 **Description**
 
-With table subqueries, the outer query treats the result of the subquery as a table. You can only use these in the `  FROM  ` clause.
+With table subqueries, the outer query treats the result of the subquery as a table. You can only use these in the `FROM` clause.
 
 **Examples**
 
-In this example, a subquery returns a table of usernames from the [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
+In this example, a subquery returns a table of usernames from the [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table:
 
     SELECT results.username
     FROM (SELECT * FROM Players) AS results;
@@ -156,7 +156,7 @@ In this example, a subquery returns a table of usernames from the [`  Players  `
      | corba     |
      +-----------*/
 
-In this example, a list of [`  NPCs  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) assigned to the red team are returned.
+In this example, a list of [`NPCs`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) assigned to the red team are returned.
 
     SELECT
       username
@@ -178,7 +178,7 @@ A correlated subquery is a subquery that references a column from outside that s
 
 **Examples**
 
-In this example, a list of mascots that don't have any players assigned to them are returned. The [`  Mascots  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) and [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) tables are referenced.
+In this example, a list of mascots that don't have any players assigned to them are returned. The [`Mascots`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) and [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) tables are referenced.
 
     SELECT mascot
     FROM Mascots
@@ -191,7 +191,7 @@ In this example, a list of mascots that don't have any players assigned to them 
      | sparrow  |
      +----------*/
 
-In this example, a correlated scalar subquery returns the mascots for a list of players, using the [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) and [`  Mascots  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) tables:
+In this example, a correlated scalar subquery returns the mascots for a list of players, using the [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) and [`Mascots`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) tables:
 
     SELECT
       username,
@@ -212,7 +212,7 @@ A volatile subquery is a subquery that doesn't always produce the same result ov
 
 **Examples**
 
-In this example, a random number of usernames are returned from the [`  Players  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table.
+In this example, a random number of usernames are returned from the [`Players`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#example_tables) table.
 
     SELECT
       results.username
@@ -237,7 +237,7 @@ Some subqueries are evaluated once, others more often.
 
 ## Common tables used in examples
 
-Some examples reference a table called `  Players  ` :
+Some examples reference a table called `Players` :
 
     /*-----------------------------+
      | username  | level   | team  |
@@ -247,7 +247,7 @@ Some examples reference a table called `  Players  ` :
      | corba     | 43      | green |
      +-----------------------------*/
 
-Some examples reference a table called `  NPCs  ` :
+Some examples reference a table called `NPCs` :
 
     /*-------------------+
      | username  | team  |
@@ -257,7 +257,7 @@ Some examples reference a table called `  NPCs  ` :
      | effren    | blue  |
      +-------------------*/
 
-Some examples reference a table called `  Mascots  ` :
+Some examples reference a table called `Mascots` :
 
     /*-------------------+
      | mascot   | team   |
@@ -268,7 +268,7 @@ Some examples reference a table called `  Mascots  ` :
      | sparrow  | yellow |
      +-------------------*/
 
-You can use this `  WITH  ` clause to emulate temporary table names for `  Players  ` and `  NPCs  ` in subqueries that support the `  WITH  ` clause.:
+You can use this `WITH` clause to emulate temporary table names for `Players` and `NPCs` in subqueries that support the `WITH` clause.:
 
     WITH
       Players AS (

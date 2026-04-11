@@ -7,18 +7,18 @@ There is no persistent data associated with this resource.
 
 ## Methods
 
-### `             getBiReservation           `
+### `            getBiReservation           `
 
 Retrieves a BI reservation.
 
-### `             searchAllAssignments           `
+### `            searchAllAssignments           `
 
 Looks up assignments for a specified resource for a particular region.
 
-### `             searchAssignments                       (deprecated)           `
+### `            searchAssignments                       (deprecated)           `
 
 Deprecated: Looks up assignments for a specified resource for a particular region.
 
-### `             updateBiReservation           `
+### `            updateBiReservation           `
 
 Updates a BI reservation.

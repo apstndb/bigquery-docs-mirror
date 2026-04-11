@@ -6,9 +6,9 @@ The BigQuery Storage Read API provides fast access to BigQuery-managed storage b
 
 Historically, users of BigQuery have had two mechanisms for accessing BigQuery-managed table data:
 
-  - Record-based paginated access by using the `  tabledata.list  ` or `  jobs.getQueryResults  ` REST API methods. The BigQuery API provides structured row responses in a paginated fashion appropriate for small result sets.
+  - Record-based paginated access by using the `tabledata.list` or `jobs.getQueryResults` REST API methods. The BigQuery API provides structured row responses in a paginated fashion appropriate for small result sets.
 
-  - Bulk data export using BigQuery `  extract  ` jobs that export table data to Cloud Storage in a variety of file formats such as CSV, JSON, and Avro. Table exports are limited by daily quotas and by the batch nature of the export process.
+  - Bulk data export using BigQuery `extract` jobs that export table data to Cloud Storage in a variety of file formats such as CSV, JSON, and Avro. Table exports are limited by daily quotas and by the batch nature of the export process.
 
 The BigQuery Storage Read API provides a third option that represents an improvement over prior options. When you use the Storage Read API, structured data is sent over the wire in a binary serialization format. This allows for additional parallelism among multiple consumers for a set of results.
 
@@ -30,7 +30,7 @@ The Storage Read API is distinct from the BigQuery API, and shows up separately 
 
 ## Permissions
 
-To get the permissions that you need to create and update read sessions, ask your administrator to grant you the Read Session User ( `  bigquery.readSessionUser  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create and update read sessions, ask your administrator to grant you the Read Session User ( `bigquery.readSessionUser` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create and update read sessions. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -38,9 +38,9 @@ This predefined role contains the permissions required to create and update read
 
 The following permissions are required to create and update read sessions:
 
-  - `  bigquery.readsessions.create  ` on the project
-  - `  bigquery.readsessions.getData  ` on the table or higher
-  - `  bigquery.readsessions.update  ` on the table or higher
+  - `bigquery.readsessions.create` on the project
+  - `bigquery.readsessions.getData` on the table or higher
+  - `bigquery.readsessions.update` on the table or higher
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -52,23 +52,23 @@ This section describes the basic flow of using the Storage Read API. For example
 
 ### Create a session
 
-Storage Read API usage begins with the creation of a read session. The maximum number of streams, the snapshot time, the set of columns to return, and the predicate filter are all specified as part of the `  ReadSession  ` message supplied to the `  CreateReadSession  ` RPC.
+Storage Read API usage begins with the creation of a read session. The maximum number of streams, the snapshot time, the set of columns to return, and the predicate filter are all specified as part of the `ReadSession` message supplied to the `CreateReadSession` RPC.
 
-The `  ReadSession  ` response contains a set of `  Stream  ` identifiers. When a read session is created, the server determines the amount of data that can be read in the context of the session and creates one or more streams, each of which represents approximately the same amount of table data to be scanned. This means that, to read all the data from a table, callers must read from all `  Stream  ` identifiers returned in the `  ReadSession  ` response. This is a change from earlier versions of the API, in which no limit existed on the amount of data that could be read in a single stream context.
+The `ReadSession` response contains a set of `Stream` identifiers. When a read session is created, the server determines the amount of data that can be read in the context of the session and creates one or more streams, each of which represents approximately the same amount of table data to be scanned. This means that, to read all the data from a table, callers must read from all `Stream` identifiers returned in the `ReadSession` response. This is a change from earlier versions of the API, in which no limit existed on the amount of data that could be read in a single stream context.
 
-The `  ReadSession  ` response contains a reference schema for the session and a list of available `  Stream  ` identifiers. Sessions expire automatically and do not require any cleanup or finalization. The expiration time is returned as part of the `  ReadSession  ` response and is guaranteed to be at least 6 hours from session creation time.
+The `ReadSession` response contains a reference schema for the session and a list of available `Stream` identifiers. Sessions expire automatically and do not require any cleanup or finalization. The expiration time is returned as part of the `ReadSession` response and is guaranteed to be at least 6 hours from session creation time.
 
 ### Read from a session stream
 
-Data from a given stream is retrieved by invoking the `  ReadRows  ` streaming RPC. Once the read request for a `  Stream  ` is initiated, the backend will begin transmitting blocks of serialized row data. RPC flow control ensures that the server does not transmit more data when the client is not ready to receive. If the client does not request data for more than 1 hour, then the server suspects that the stream is stalled and closes it to free up resources for other streams. If there is an error, you can restart reading a stream at a particular point by supplying the row offset when you call `  ReadRows  ` .
+Data from a given stream is retrieved by invoking the `ReadRows` streaming RPC. Once the read request for a `Stream` is initiated, the backend will begin transmitting blocks of serialized row data. RPC flow control ensures that the server does not transmit more data when the client is not ready to receive. If the client does not request data for more than 1 hour, then the server suspects that the stream is stalled and closes it to free up resources for other streams. If there is an error, you can restart reading a stream at a particular point by supplying the row offset when you call `ReadRows` .
 
-To support dynamic work rebalancing, the Storage Read API provides an additional method to split a `  Stream  ` into two child `  Stream  ` instances whose contents are, together, equal to the contents of the parent `  Stream  ` . For more information, see the [API reference](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc) .
+To support dynamic work rebalancing, the Storage Read API provides an additional method to split a `Stream` into two child `Stream` instances whose contents are, together, equal to the contents of the parent `Stream` . For more information, see the [API reference](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc) .
 
 ### Decode row blocks
 
 Row blocks must be deserialized once they are received. Users of the Storage Read API may specify all data in a session to be serialized using either Apache Avro format, or Apache Arrow.
 
-The reference schema is sent as part of the initial `  ReadSession  ` response, appropriate for the data format selected. In most cases, decoders can be long-lived because the schema and serialization are consistent among all streams and row blocks in a session.
+The reference schema is sent as part of the initial `ReadSession` response, appropriate for the data format selected. In most cases, decoders can be long-lived because the schema and serialization are consistent among all streams and row blocks in a session.
 
 ## Schema conversion
 
@@ -76,7 +76,7 @@ The reference schema is sent as part of the initial `  ReadSession  ` response, 
 
 Due to type system differences between BigQuery and the Avro specification, Avro schemas may include additional annotations that identify how to map the Avro types to BigQuery representations. When compatible, Avro base types and logical types are used. The Avro schema may also include additional annotations for types present in BigQuery that do not have a well defined Avro representation.
 
-To represent nullable columns, unions with the Avro `  NULL  ` type are used.
+To represent nullable columns, unions with the Avro `NULL` type are used.
 
 <table>
 <colgroup>
@@ -95,118 +95,118 @@ To represent nullable columns, unions with the Avro `  NULL  ` type are used.
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td><code dir="ltr" translate="no">BOOLEAN</code></td>
 <td>boolean</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
+<td><code dir="ltr" translate="no">INT64</code></td>
 <td>long</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
+<td><code dir="ltr" translate="no">FLOAT64</code></td>
 <td>double</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td><code dir="ltr" translate="no">BYTES</code></td>
 <td>bytes</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>string</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       DATE      </code></td>
+<td><code dir="ltr" translate="no">DATE</code></td>
 <td>int</td>
 <td>logicalType: date</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+<td><code dir="ltr" translate="no">DATETIME</code></td>
 <td>string</td>
 <td>logicalType: datetime</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>long</td>
 <td>logicalType: timestamp-micros</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       TIME      </code></td>
+<td><code dir="ltr" translate="no">TIME</code></td>
 <td>long</td>
 <td>logicalType: time-micros</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
+<td><code dir="ltr" translate="no">NUMERIC</code></td>
 <td>bytes</td>
 <td>logicalType: decimal (precision = 38, scale = 9)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       NUMERIC(P[, S])      </code></td>
+<td><code dir="ltr" translate="no">NUMERIC(P[, S])</code></td>
 <td>bytes</td>
 <td>logicalType: decimal (precision = P, scale = S)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td><code dir="ltr" translate="no">BIGNUMERIC</code></td>
 <td>bytes</td>
 <td>logicalType: decimal (precision = 77, scale = 38)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       BIGNUMERIC(P[, S])      </code></td>
+<td><code dir="ltr" translate="no">BIGNUMERIC(P[, S])</code></td>
 <td>bytes</td>
 <td>logicalType: decimal (precision = P, scale = S)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
+<td><code dir="ltr" translate="no">GEOGRAPHY</code></td>
 <td>string</td>
 <td>sqlType: GEOGRAPHY</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
+<td><code dir="ltr" translate="no">ARRAY</code></td>
 <td>array</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
+<td><code dir="ltr" translate="no">STRUCT</code></td>
 <td>record</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       JSON      </code></td>
+<td><code dir="ltr" translate="no">JSON</code></td>
 <td>string</td>
 <td>sqlType: JSON</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       RANGE&lt;T&gt;      </code></td>
+<td><code dir="ltr" translate="no">RANGE&lt;T&gt;</code></td>
 <td>record</td>
 <td>sqlType: RANGE</td>
 <td>Contains the following fields:
 <ul>
-<li><code dir="ltr" translate="no">         start        </code> , with union type <code dir="ltr" translate="no">         ["null", AVRO_TYPE(T)]        </code></li>
-<li><code dir="ltr" translate="no">         end        </code> , with union type <code dir="ltr" translate="no">         ["null", AVRO_TYPE(T)]        </code></li>
+<li><code dir="ltr" translate="no">start</code> , with union type <code dir="ltr" translate="no">["null", AVRO_TYPE(T)]</code></li>
+<li><code dir="ltr" translate="no">end</code> , with union type <code dir="ltr" translate="no">["null", AVRO_TYPE(T)]</code></li>
 </ul>
-<p><code dir="ltr" translate="no">        AVRO_TYPE(T)       </code> is the Avro type representation for the range element type <code dir="ltr" translate="no">        T       </code> . A null field denotes an unbounded range boundary.</p>
-<p>The first <code dir="ltr" translate="no">        RANGE       </code> field of type <code dir="ltr" translate="no">        T       </code> (for example, <code dir="ltr" translate="no">        range_date_1       </code> ) specifies the full Avro record structure under the namespace <code dir="ltr" translate="no">        google.sqlType       </code> and with the name <code dir="ltr" translate="no">        RANGE_T       </code> (for example, <code dir="ltr" translate="no">        RANGE_DATE       </code> ). Subsequent <code dir="ltr" translate="no">        RANGE       </code> fields of the same type <code dir="ltr" translate="no">        T       </code> (for example, <code dir="ltr" translate="no">        range_date_2       </code> ) references the corresponding Avro record structure by using the full resolution name, <code dir="ltr" translate="no">        google.sqlType.RANGE_T       </code> (for example, <code dir="ltr" translate="no">        google.sqlType.RANGE_DATE       </code> ).</p>
+<p><code dir="ltr" translate="no">AVRO_TYPE(T)</code> is the Avro type representation for the range element type <code dir="ltr" translate="no">T</code> . A null field denotes an unbounded range boundary.</p>
+<p>The first <code dir="ltr" translate="no">RANGE</code> field of type <code dir="ltr" translate="no">T</code> (for example, <code dir="ltr" translate="no">range_date_1</code> ) specifies the full Avro record structure under the namespace <code dir="ltr" translate="no">google.sqlType</code> and with the name <code dir="ltr" translate="no">RANGE_T</code> (for example, <code dir="ltr" translate="no">RANGE_DATE</code> ). Subsequent <code dir="ltr" translate="no">RANGE</code> fields of the same type <code dir="ltr" translate="no">T</code> (for example, <code dir="ltr" translate="no">range_date_2</code> ) references the corresponding Avro record structure by using the full resolution name, <code dir="ltr" translate="no">google.sqlType.RANGE_T</code> (for example, <code dir="ltr" translate="no">google.sqlType.RANGE_DATE</code> ).</p>
 <pre dir="ltr" data-is-upgraded="" translate="no"><code>{
     &quot;name&quot;: &quot;range_date_1&quot;,
     &quot;type&quot;: {
@@ -262,99 +262,99 @@ Regardless of API version, to access API functions, we recommend that you use th
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td><code dir="ltr" translate="no">BOOLEAN</code></td>
 <td>Boolean</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
+<td><code dir="ltr" translate="no">INT64</code></td>
 <td>Int64</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
+<td><code dir="ltr" translate="no">FLOAT64</code></td>
 <td>Double</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td><code dir="ltr" translate="no">BYTES</code></td>
 <td>Binary</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>Utf8</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       DATE      </code></td>
+<td><code dir="ltr" translate="no">DATE</code></td>
 <td>Date</td>
 <td>32-bit days since epoch</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+<td><code dir="ltr" translate="no">DATETIME</code></td>
 <td>Timestamp</td>
 <td>Microsecond precision, no timezone</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>Timestamp</td>
 <td>Microsecond precision, UTC timezone</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       TIME      </code></td>
+<td><code dir="ltr" translate="no">TIME</code></td>
 <td>Time</td>
 <td>Microsecond precision</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
+<td><code dir="ltr" translate="no">NUMERIC</code></td>
 <td>Decimal</td>
 <td>Precision = 38, scale = 9</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       NUMERIC(P[, S])      </code></td>
+<td><code dir="ltr" translate="no">NUMERIC(P[, S])</code></td>
 <td>Decimal</td>
 <td>Precision = P, scale = S</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td><code dir="ltr" translate="no">BIGNUMERIC</code></td>
 <td>Decimal256</td>
 <td>Precision = 76, scale = 38</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       BIGNUMERIC(P[, S])      </code></td>
+<td><code dir="ltr" translate="no">BIGNUMERIC(P[, S])</code></td>
 <td>Decimal256</td>
 <td>Precision = P, scale = S</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
+<td><code dir="ltr" translate="no">GEOGRAPHY</code></td>
 <td>Utf8</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
+<td><code dir="ltr" translate="no">ARRAY</code></td>
 <td>List</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
+<td><code dir="ltr" translate="no">STRUCT</code></td>
 <td>Struct</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       JSON      </code></td>
+<td><code dir="ltr" translate="no">JSON</code></td>
 <td>Utf8</td>
 <td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       RANGE&lt;T&gt;      </code></td>
+<td><code dir="ltr" translate="no">RANGE&lt;T&gt;</code></td>
 <td>Struct</td>
 <td>Contains the following fields:
 <ul>
-<li><code dir="ltr" translate="no">         start        </code> , with <code dir="ltr" translate="no">         ARROW_TYPE(T)        </code></li>
-<li><code dir="ltr" translate="no">         end        </code> , with <code dir="ltr" translate="no">         ARROW_TYPE(T)        </code></li>
+<li><code dir="ltr" translate="no">start</code> , with <code dir="ltr" translate="no">ARROW_TYPE(T)</code></li>
+<li><code dir="ltr" translate="no">end</code> , with <code dir="ltr" translate="no">ARROW_TYPE(T)</code></li>
 </ul>
-<code dir="ltr" translate="no">       ARROW_TYPE(T)      </code> is the Arrow type representation of the range element type <code dir="ltr" translate="no">       T      </code> . A null field denotes an unbounded range boundary. For example, <code dir="ltr" translate="no">       RANGE&lt;DATE&gt;      </code> is represented as a struct with two Arrow <code dir="ltr" translate="no">       Date      </code> fields.</td>
+<code dir="ltr" translate="no">ARROW_TYPE(T)</code> is the Arrow type representation of the range element type <code dir="ltr" translate="no">T</code> . A null field denotes an unbounded range boundary. For example, <code dir="ltr" translate="no">RANGE&lt;DATE&gt;</code> is represented as a struct with two Arrow <code dir="ltr" translate="no">Date</code> fields.</td>
 </tr>
 </tbody>
 </table>
@@ -379,10 +379,10 @@ BigQuery determines the location to run your load, query, or extract jobs based 
 
 The following are common errors encountered when using the Storage Read API:
 
-  - Error: `  Stream removed  `  
+  - Error: `Stream removed`  
     **Resolution:** Retry the Storage Read API request. This is likely a transient error that can be resolved by retrying the request. If the problem persists, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
-  - Error: `  Stream expired  `  
+  - Error: `Stream expired`  
     **Cause:** This error occurs when the Storage Read API session reaches the [6 hour timeout](https://docs.cloud.google.com/bigquery/docs/reference/storage#create_a_session) .
     
     **Resolution:**
@@ -401,12 +401,12 @@ For Storage Read API quotas and limits, see [Storage Read API limits](https://do
 
 To monitor the data egress and processing associated with the Storage Read API, specific fields are available in the [BigQuery AuditLogs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) . These logs provide a detailed view of the bytes scanned and the bytes returned to the client.
 
-The relevant API method for these logs is `  google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows  ` .
+The relevant API method for these logs is `google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows` .
 
-| Field name                                 | Data type | Notes                                                                                                                                                    |
-| ------------------------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        serialized_response_bytes       ` | INT64     | The total number of bytes sent to the client over the network, after serialization. This field helps you track data egress.                              |
-| `        scanned_bytes       `             | INT64     | The total number of bytes scanned from BigQuery storage to fulfill the request. This value is used to calculate the analysis cost of the read operation. |
+| Field name                  | Data type | Notes                                                                                                                                                    |
+| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `serialized_response_bytes` | INT64     | The total number of bytes sent to the client over the network, after serialization. This field helps you track data egress.                              |
+| `scanned_bytes`             | INT64     | The total number of bytes scanned from BigQuery storage to fulfill the request. This value is used to calculate the analysis cost of the read operation. |
 
 ## Pricing
 

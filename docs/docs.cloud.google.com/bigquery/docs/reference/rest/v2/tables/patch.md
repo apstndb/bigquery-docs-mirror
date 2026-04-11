@@ -10,7 +10,7 @@ Updates information in an existing table. The update method replaces the entire 
 
 ### HTTP request
 
-`  PATCH https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}  `
+`PATCH https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,21 +18,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the table to update
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the table to update
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 Required. Table ID of the table to update
 
@@ -40,9 +40,9 @@ Required. Table ID of the table to update
 
 Parameters
 
-`  autodetectSchema  `
+`autodetectSchema`
 
-`  boolean  `
+`boolean`
 
 Optional. When true will autodetect schema, else will keep original schema.
 
@@ -58,7 +58,7 @@ If successful, the response body contains an instance of `  Table  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -4,7 +4,7 @@
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
-Reservations allow you to assign a dedicated number of slots to a workload. For example, you might not want a production workload to compete with test workloads for slots. You could create a reservation named `  prod  ` and assign your production workloads to this reservation. For more information, see [Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) .
+Reservations allow you to assign a dedicated number of slots to a workload. For example, you might not want a production workload to compete with test workloads for slots. You could create a reservation named `prod` and assign your production workloads to this reservation. For more information, see [Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) .
 
 ## Create reservations
 
@@ -12,13 +12,13 @@ Reservations allow you to assign a dedicated number of slots to a workload. For 
 
 To create a reservation, you need the following Identity and Access Management (IAM) permission:
 
-  - `  bigquery.reservations.create  ` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
+  - `bigquery.reservations.create` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
 
 Each of the following predefined IAM roles includes this permission:
 
-  - `  BigQuery Admin  `
-  - `  BigQuery Resource Admin  `
-  - `  BigQuery Resource Editor  `
+  - `BigQuery Admin`
+  - `BigQuery Resource Admin`
+  - `BigQuery Resource Editor`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -60,7 +60,7 @@ The new reservation is visible in the **Reservations** tab.
 
 ### SQL
 
-To create a reservation, use the [`  CREATE RESERVATION  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
+To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -86,7 +86,7 @@ To create a reservation, use the [`  CREATE RESERVATION  ` DDL statement](https:
         
         It must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
     
-      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `  slot_capacity  ` option and the `  edition  ` option in the same reservation.
+      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `edition` option in the same reservation.
     
       - `  EDITION  ` : the edition of the reservation. Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
     
@@ -98,7 +98,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To create a reservation, use the `  bq mk  ` command with the `  --reservation  ` flag:
+To create a reservation, use the `bq mk` command with the `--reservation` flag:
 
 ``` notranslate
 bq mk \
@@ -124,7 +124,7 @@ Replace the following:
 
   - `  NUMBER_OF_AUTOSCALING_SLOTS  ` : the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots.
 
-For information about the `  --ignore_idle_slots  ` flag, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) . The default value is `  false  ` .
+For information about the `--ignore_idle_slots` flag, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) . The default value is `false` .
 
 ### Python
 
@@ -183,13 +183,13 @@ You can make the following updates to a reservation:
 
 To update a reservation, you need the following Identity and Access Management (IAM) permission:
 
-  - `  bigquery.reservations.update  ` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
+  - `bigquery.reservations.update` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
 
 Each of the following predefined IAM roles includes this permission:
 
-  - `  BigQuery Admin  `
-  - `  BigQuery Resource Admin  `
-  - `  BigQuery Resource Editor  `
+  - `BigQuery Admin`
+  - `BigQuery Resource Admin`
+  - `BigQuery Resource Editor`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -221,7 +221,7 @@ You can add or remove slots from an existing reservation.
 
 ### SQL
 
-To change the size of a reservation, use the [`  ALTER RESERVATION SET OPTIONS  ` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) .
+To change the size of a reservation, use the [`ALTER RESERVATION SET OPTIONS` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -241,7 +241,7 @@ To change the size of a reservation, use the [`  ALTER RESERVATION SET OPTIONS  
     
       - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
     
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `  europe-west9  ` .
+      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `europe-west9` .
     
       - `  RESERVATION_NAME  ` : the name of the reservation. It must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
     
@@ -253,7 +253,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To update the size of a reservation, use the `  bq update  ` command with the `  --reservation  ` flag:
+To update the size of a reservation, use the `bq update` command with the `--reservation` flag:
 
 ``` notranslate
 bq update \
@@ -322,9 +322,9 @@ Install the [google-cloud-bigquery-reservation package](https://docs.cloud.googl
 
 ### Configure whether queries use idle slots
 
-The `  --ignore_idle_slots  ` flag controls whether queries running in a reservation can use idle slots from other reservations. For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) . You can update this configuration on an existing reservation.
+The `--ignore_idle_slots` flag controls whether queries running in a reservation can use idle slots from other reservations. For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) . You can update this configuration on an existing reservation.
 
-To update a reservation, use the `  bq update  ` command with the `  --reservation  ` flag . The following example sets `  --ignore_idle_slots  ` to `  true  ` , meaning the reservation will only use slots allocated to the reservation.
+To update a reservation, use the `bq update` command with the `--reservation` flag . The following example sets `--ignore_idle_slots` to `true` , meaning the reservation will only use slots allocated to the reservation.
 
 ``` notranslate
 bq update \
@@ -346,7 +346,7 @@ To list the [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_
 
 ### SQL
 
-Query the `  ignore_idle_slots  ` column of the [`  INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations#schema) .
+Query the `ignore_idle_slots` column of the [`INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations#schema) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -373,7 +373,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the `  bq ls  ` command with the `  --reservation  ` flag:
+Use the `bq ls` command with the `--reservation` flag:
 
 ``` notranslate
 bq ls --reservation \
@@ -386,7 +386,7 @@ Replace the following:
   - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resources
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservations
 
-The `  ignoreIdleSlots  ` field contains the configuration setting.
+The `ignoreIdleSlots` field contains the configuration setting.
 
 ## Delete reservations
 
@@ -396,13 +396,13 @@ When you delete a reservation, any jobs that are currently executing with slots 
 
 To delete a reservation, you need the following Identity and Access Management (IAM) permission:
 
-  - `  bigquery.reservations.delete  ` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
+  - `bigquery.reservations.delete` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
 
 Each of the following predefined IAM roles includes this permission:
 
-  - `  BigQuery Admin  `
-  - `  BigQuery Resource Admin  `
-  - `  BigQuery Resource Editor  `
+  - `BigQuery Admin`
+  - `BigQuery Resource Admin`
+  - `BigQuery Resource Editor`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -428,7 +428,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 ### SQL
 
-To delete a reservation, use the [`  DROP RESERVATION  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_reservation_statement) .
+To delete a reservation, use the [`DROP RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -453,7 +453,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To delete a reservation, use the `  bq rm  ` command with the `  --reservation  ` flag:
+To delete a reservation, use the `bq rm` command with the `--reservation` flag:
 
 ``` notranslate
 bq rm \

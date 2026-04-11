@@ -2,14 +2,14 @@ The type of action performed on a Binding in a policy.
 
 Enums
 
-`  ACTION_UNSPECIFIED  `
+`ACTION_UNSPECIFIED`
 
 Unspecified.
 
-`  ADD  `
+`ADD`
 
 Addition of a Binding.
 
-`  REMOVE  `
+`REMOVE`
 
 Removal of a Binding.

@@ -10,9 +10,9 @@ Ensure that you have a [Cloud Storage external table](https://docs.cloud.google.
 
 To query Cloud Storage external tables, ensure you have the following roles:
 
-  - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )
-  - BigQuery User ( `  roles/bigquery.user  ` )
-  - Storage Object Viewer ( `  roles/storage.objectViewer  ` )
+  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` )
+  - BigQuery User ( `roles/bigquery.user` )
+  - Storage Object Viewer ( `roles/storage.objectViewer` )
 
 Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles) .
 
@@ -20,16 +20,16 @@ To see the exact BigQuery permissions that are required to query external tables
 
 #### Required permissions
 
-  - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  ` (Only required if you are [reading data with the BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) )
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.getData  `
+  - `bigquery.jobs.create`
+  - `bigquery.readsessions.create` (Only required if you are [reading data with the BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) )
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Query permanent external tables
 
-After creating a Cloud Storage external table, you can [query it using GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/running-queries) , the same as if it were a standard BigQuery table. For example, `  SELECT field1, field2 FROM mydataset.my_cloud_storage_table;  ` .
+After creating a Cloud Storage external table, you can [query it using GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/running-queries) , the same as if it were a standard BigQuery table. For example, `SELECT field1, field2 FROM mydataset.my_cloud_storage_table;` .
 
 ## Query temporary external tables
 
@@ -49,13 +49,13 @@ You can create and query a temporary table linked to an external data source by 
 
 ### bq
 
-You query a temporary table linked to an external data source using the [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command with the [`  --external_table_definition  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query_external_table_definition) . When you use the bq command-line tool to query a temporary table linked to an external data source, you can identify the table's schema using:
+You query a temporary table linked to an external data source using the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command with the [`--external_table_definition` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query_external_table_definition) . When you use the bq command-line tool to query a temporary table linked to an external data source, you can identify the table's schema using:
 
   - A [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition) (stored on your local machine)
   - An inline schema definition
   - A [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) (stored on your local machine)
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 To query a temporary table linked to your external data source using a table definition file, enter the following command.
 
@@ -67,12 +67,12 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - `  TABLE  ` : the name of the temporary table you're creating.
   - `  DEFINITION_FILE  ` : the path to the [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition) on your local machine.
   - `  QUERY  ` : the query you're submitting to the temporary table.
 
-For example, the following command creates and queries a temporary table named `  sales  ` using a table definition file named `  sales_def  ` .
+For example, the following command creates and queries a temporary table named `sales` using a table definition file named `sales_def` .
 
     bq query \
     --external_table_definition=sales::sales_def \
@@ -92,33 +92,33 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
 
   - `  TABLE  ` : the name of the temporary table you're creating.
 
   - `  SCHEMA  ` : the inline schema definition in the format `  field:data_type,field:data_type  ` .
 
-  - `  SOURCE_FORMAT  ` : the format of the external data source, for example, `  CSV  ` .
+  - `  SOURCE_FORMAT  ` : the format of the external data source, for example, `CSV` .
 
-  - `  BUCKET_PATH  ` : the path to the Cloud Storage bucket that contains the data for the table, in the format `  gs://bucket_name/[folder_name/]file_pattern  ` .
+  - `  BUCKET_PATH  ` : the path to the Cloud Storage bucket that contains the data for the table, in the format `gs://bucket_name/[folder_name/]file_pattern` .
     
-    You can select multiple files from the bucket by specifying one asterisk ( `  *  ` ) wildcard character in the `  file_pattern  ` . For example, `  gs://mybucket/file00*.parquet  ` . For more information, see [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#wildcard-support) .
+    You can select multiple files from the bucket by specifying one asterisk ( `*` ) wildcard character in the `file_pattern` . For example, `gs://mybucket/file00*.parquet` . For more information, see [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#wildcard-support) .
     
-    You can specify multiple buckets for the `  uris  ` option by providing multiple paths.
+    You can specify multiple buckets for the `uris` option by providing multiple paths.
     
-    The following examples show valid `  uris  ` values:
+    The following examples show valid `uris` values:
     
-      - `  gs://bucket/path1/myfile.csv  `
-      - `  gs://bucket/path1/*.parquet  `
-      - `  gs://bucket/path1/file1*  ` , `  gs://bucket1/path1/*  `
+      - `gs://bucket/path1/myfile.csv`
+      - `gs://bucket/path1/*.parquet`
+      - `gs://bucket/path1/file1*` , `gs://bucket1/path1/*`
     
-    When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
+    When you specify `uris` values that target multiple files, all of those files must share a compatible schema.
     
     For more information about using Cloud Storage URIs in BigQuery, see [Cloud Storage resource path](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#google-cloud-storage-uri) .
 
   - `  QUERY  ` : the query you're submitting to the temporary table.
 
-For example, the following command creates and queries a temporary table named `  sales  ` linked to a CSV file stored in Cloud Storage with the following schema definition: `  Region:STRING,Quarter:STRING,Total_sales:INTEGER  ` .
+For example, the following command creates and queries a temporary table named `sales` linked to a CSV file stored in Cloud Storage with the following schema definition: `Region:STRING,Quarter:STRING,Total_sales:INTEGER` .
 
     bq query \
     --external_table_definition=sales::Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=gs://mybucket/sales.csv \
@@ -138,31 +138,31 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
 
   - `  SCHEMA_FILE  ` : the path to the JSON schema file on your local machine.
 
-  - `  SOURCE_FORMAT  ` : the format of the external data source, for example, `  CSV  ` .
+  - `  SOURCE_FORMAT  ` : the format of the external data source, for example, `CSV` .
 
-  - `  BUCKET_PATH  ` : the path to the Cloud Storage bucket that contains the data for the table, in the format `  gs://bucket_name/[folder_name/]file_pattern  ` .
+  - `  BUCKET_PATH  ` : the path to the Cloud Storage bucket that contains the data for the table, in the format `gs://bucket_name/[folder_name/]file_pattern` .
     
-    You can select multiple files from the bucket by specifying one asterisk ( `  *  ` ) wildcard character in the `  file_pattern  ` . For example, `  gs://mybucket/file00*.parquet  ` . For more information, see [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#wildcard-support) .
+    You can select multiple files from the bucket by specifying one asterisk ( `*` ) wildcard character in the `file_pattern` . For example, `gs://mybucket/file00*.parquet` . For more information, see [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#wildcard-support) .
     
-    You can specify multiple buckets for the `  uris  ` option by providing multiple paths.
+    You can specify multiple buckets for the `uris` option by providing multiple paths.
     
-    The following examples show valid `  uris  ` values:
+    The following examples show valid `uris` values:
     
-      - `  gs://bucket/path1/myfile.csv  `
-      - `  gs://bucket/path1/*.parquet  `
-      - `  gs://bucket/path1/file1*  ` , `  gs://bucket1/path1/*  `
+      - `gs://bucket/path1/myfile.csv`
+      - `gs://bucket/path1/*.parquet`
+      - `gs://bucket/path1/file1*` , `gs://bucket1/path1/*`
     
-    When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
+    When you specify `uris` values that target multiple files, all of those files must share a compatible schema.
     
     For more information about using Cloud Storage URIs in BigQuery, see [Cloud Storage resource path](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#google-cloud-storage-uri) .
 
   - `  QUERY  ` : the query you're submitting to the temporary table.
 
-For example, the following command creates and queries a temporary table named `  sales  ` linked to a CSV file stored in Cloud Storage using the `  /tmp/sales_schema.json  ` schema file.
+For example, the following command creates and queries a temporary table named `sales` linked to a CSV file stored in Cloud Storage using the `/tmp/sales_schema.json` schema file.
 
 ``` notranslate
   bq query \
@@ -178,11 +178,11 @@ For example, the following command creates and queries a temporary table named `
 
 To run a query using the API, follow these steps:
 
-1.  Create a [`  Job  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) .
-2.  Populate the `  configuration  ` section of the `  Job  ` object with a [`  JobConfiguration  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration) .
-3.  Populate the `  query  ` section of the `  JobConfiguration  ` object with a [`  JobConfigurationQuery  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery) .
-4.  Populate the `  tableDefinitions  ` section of the `  JobConfigurationQuery  ` object with an [`  ExternalDataConfiguration  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
-5.  Call the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) to run the query asynchronously or the [`  jobs.query  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) to run the query synchronously, passing in the `  Job  ` object.
+1.  Create a [`Job` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) .
+2.  Populate the `configuration` section of the `Job` object with a [`JobConfiguration` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration) .
+3.  Populate the `query` section of the `JobConfiguration` object with a [`JobConfigurationQuery` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery) .
+4.  Populate the `tableDefinitions` section of the `JobConfigurationQuery` object with an [`ExternalDataConfiguration` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
+5.  Call the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) to run the query asynchronously or the [`jobs.query` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) to run the query synchronously, passing in the `Job` object.
 
 ### Java
 
@@ -327,23 +327,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     w_states = list(query_job)  # Wait for the job to complete.
     print("There are {} states with names starting with W.".format(len(w_states)))
 
-## Query the `     _FILE_NAME    ` pseudocolumn
+## Query the `_FILE_NAME` pseudocolumn
 
-Tables based on external data sources provide a pseudocolumn named `  _FILE_NAME  ` . This column contains the fully qualified path to the file to which the row belongs. This column is available only for tables that reference external data stored in **Cloud Storage** , **Google Drive** , **Amazon S3** , and **Azure Blob Storage** .
+Tables based on external data sources provide a pseudocolumn named `_FILE_NAME` . This column contains the fully qualified path to the file to which the row belongs. This column is available only for tables that reference external data stored in **Cloud Storage** , **Google Drive** , **Amazon S3** , and **Azure Blob Storage** .
 
-The `  _FILE_NAME  ` column name is reserved, which means that you cannot create a column by that name in any of your tables. To select the value of `  _FILE_NAME  ` , you must use an alias. The following example query demonstrates selecting `  _FILE_NAME  ` by assigning the alias `  fn  ` to the pseudocolumn.
+The `_FILE_NAME` column name is reserved, which means that you cannot create a column by that name in any of your tables. To select the value of `_FILE_NAME` , you must use an alias. The following example query demonstrates selecting `_FILE_NAME` by assigning the alias `fn` to the pseudocolumn.
 
 ``` notranslate
-  bq query \
-  --project_id=PROJECT_ID \
-  --use_legacy_sql=false \
-  'SELECT
-     name,
-     _FILE_NAME AS fn
-   FROM
-     `DATASET.TABLE_NAME`
-   WHERE
-     name contains "Alex"' 
+  bq query \  --project_id=PROJECT_ID \  --use_legacy_sql=false \  'SELECT     name,     _FILE_NAME AS fn   FROM     `DATASET.TABLE_NAME`   WHERE     name contains "Alex"' 
 ```
 
 Replace the following:
@@ -352,7 +343,7 @@ Replace the following:
   - `  DATASET  ` is the name of the dataset that stores the permanent external table
   - `  TABLE_NAME  ` is the name of the permanent external table
 
-When the query has a filter predicate on the `  _FILE_NAME  ` pseudocolumn, BigQuery attempts to skip reading files that do not satisfy the filter. Similar recommendations to [querying ingestion-time partitioned tables using pseudocolumns](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) apply when constructing query predicates with the `  _FILE_NAME  ` pseudocolumn.
+When the query has a filter predicate on the `_FILE_NAME` pseudocolumn, BigQuery attempts to skip reading files that do not satisfy the filter. Similar recommendations to [querying ingestion-time partitioned tables using pseudocolumns](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) apply when constructing query predicates with the `_FILE_NAME` pseudocolumn.
 
 ## Optimize external table queries
 

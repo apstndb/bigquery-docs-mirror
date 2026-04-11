@@ -52,7 +52,7 @@ To create and configure a proxy VM for a Snowflake private transfer, do the foll
 
 1.  [Create one or more Compute Engine VM instances](https://docs.cloud.google.com/compute/docs/instances/create-start-instance#create-instance-methods) within the consumer VPC network.
 2.  Download a TCP proxy software, such as HAProxy or Nginx, and configure the following:
-    1.  Specify a port. For example, `  443  ` .
+    1.  Specify a port. For example, `443` .
     2.  Forward all incoming TCP traffic to the private hostname and port on the Snowflake instance.
 3.  Configure the VMs to resolve the Snowflake private hostname through the DNS configured in the consumer VPC network.
 4.  Set up an internal passthrough load balancer by doing the following:
@@ -65,11 +65,11 @@ To create and configure a proxy VM for a Snowflake private transfer, do the foll
 
 Your service attachment must be in the same region as your BigQuery dataset.
 
-If your service uses explicit approval ( `  connection-preference  ` is set as `  ACCEPT_MANUAL  ` ), then the service account used in your Snowflake private data transfer must have the following IAM permissions:
+If your service uses explicit approval ( `connection-preference` is set as `ACCEPT_MANUAL` ), then the service account used in your Snowflake private data transfer must have the following IAM permissions:
 
-  - `  compute.serviceAttachments.get  `
-  - `  compute.serviceAttachments.update  `
-  - `  compute.regionOperations.get  `
+  - `compute.serviceAttachments.get`
+  - `compute.serviceAttachments.update`
+  - `compute.regionOperations.get`
 
 Once you have created the service attachment, note the service attachment URI. You'll need this URI when you create your Snowflake transfer configuration.
 
@@ -85,7 +85,7 @@ In AWS, create a VPC endpoint that connects to Amazon S3. For more information, 
 
 Configure a Private Endpoint on the Storage Account in Azure. For more information, see [Use private endpoints for Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints) .
 
-Storage Transfer Service requires the `  *.blob.core.microsoft.net  ` endpoint. The `  *.dfs.core.microsoft.net  ` endpoint isn't supported.
+Storage Transfer Service requires the `*.blob.core.microsoft.net` endpoint. The `*.dfs.core.microsoft.net` endpoint isn't supported.
 
 Once created, note the endpoint's IP address. You'll need to specify the IP address when creating your load balancer in the following section.
 
@@ -106,11 +106,11 @@ Note the link to the service directory. You'll need the self-link to the service
 ### Console
 
   - For **Use Private Network** , select **True** .
-  - For **PSC Service Attachment** , enter the service attachment URI. For information about finding the service attachment URI, see [View details for a published service](https://docs.cloud.google.com/vpc/docs/configure-private-service-connect-producer#attachment-details) . The service attachment URI is in the format `  projects/ PROJECT_ID /regions/ REGION /serviceAttachments/ SERVICE_ATTACHMENT  ` .
-  - For **Private Network Service** , enter [the self-link of the NLB service](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#register-your-nlb-with-service-directory) . It uses the format `  projects/ PROJECT_ID /locations/ LOCATION /namespaces/ NAMESPACE /services/ SERVICE_NAME  ` .
+  - For **PSC Service Attachment** , enter the service attachment URI. For information about finding the service attachment URI, see [View details for a published service](https://docs.cloud.google.com/vpc/docs/configure-private-service-connect-producer#attachment-details) . The service attachment URI is in the format ` projects/ PROJECT_ID /regions/ REGION /serviceAttachments/ SERVICE_ATTACHMENT  ` .
+  - For **Private Network Service** , enter [the self-link of the NLB service](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#register-your-nlb-with-service-directory) . It uses the format ` projects/ PROJECT_ID /locations/ LOCATION /namespaces/ NAMESPACE /services/ SERVICE_NAME  ` .
 
 ### bq
 
-  - For the `  use_private_network  ` parameter, set to `  TRUE  ` .
-  - For the `  service_attachment  ` parameter, specify the service attachment URI. For information about finding the service attachment URI, see [View details for a published service](https://docs.cloud.google.com/vpc/docs/configure-private-service-connect-producer#attachment-details) . The service attachment URI is in the format `  projects/ PROJECT_ID /regions/ REGION /serviceAttachments/ SERVICE_ATTACHMENT  ` .
-  - For the `  private_network_service  ` parameter, provide the [the self-link of the NLB service](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#register-your-nlb-with-service-directory) . It uses the format `  projects/ PROJECT_ID /locations/ LOCATION /namespaces/ NAMESPACE /services/ SERVICE_NAME  ` .
+  - For the `use_private_network` parameter, set to `TRUE` .
+  - For the `service_attachment` parameter, specify the service attachment URI. For information about finding the service attachment URI, see [View details for a published service](https://docs.cloud.google.com/vpc/docs/configure-private-service-connect-producer#attachment-details) . The service attachment URI is in the format ` projects/ PROJECT_ID /regions/ REGION /serviceAttachments/ SERVICE_ATTACHMENT  ` .
+  - For the `private_network_service` parameter, provide the [the self-link of the NLB service](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#register-your-nlb-with-service-directory) . It uses the format ` projects/ PROJECT_ID /locations/ LOCATION /namespaces/ NAMESPACE /services/ SERVICE_NAME  ` .

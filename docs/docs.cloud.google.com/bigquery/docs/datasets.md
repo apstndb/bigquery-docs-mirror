@@ -1,28 +1,13 @@
 # Create datasets
 
-This document describes how to create datasets in BigQuery.
+This document describes how to create datasets that store data in BigQuery. Datasets are top-level containers that let you organize and control access to tables and views.
 
-You can create datasets in the following ways:
+To learn how to work with other dataset types, see the following resources:
 
-  - Using the Google Cloud console.
+  - For Spanner external datasets, see [Create Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
+  - For AWS Glue federated datasets, see [Create AWS Glue federated datasets](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) .
 
-  - Using a SQL query.
-
-  - Using the `  bq mk  ` command in the bq command-line tool.
-
-  - Calling the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) API method.
-
-  - Using the client libraries.
-
-  - Copying an existing dataset.
-    
-    To see steps for copying a dataset, including across regions, see [Copying datasets](https://docs.cloud.google.com/bigquery/docs/copying-datasets) .
-    
-    Copying datasets is currently in [beta](https://cloud.google.com/products/#product-launch-stages) .
-
-This document describes how to work with regular datasets that store data in BigQuery. To learn how to work with Spanner external datasets see [Create Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) . To learn how to work with AWS Glue federated datasets see [Create AWS Glue federated datasets](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) .
-
-To learn to query tables in a public dataset, see [Query a public dataset with the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) .
+To learn how to query tables in a public dataset, see [Query a public dataset with the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) .
 
 ## Dataset limitations
 
@@ -48,24 +33,24 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required permissions
 
-To create a dataset, you need the `  bigquery.datasets.create  ` IAM permission.
+To create a dataset, you need the `bigquery.datasets.create` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to create a dataset:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.user`
+  - `roles/bigquery.admin`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-**Note:** The creator of a dataset is automatically assigned the [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` ) role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) on that dataset. So, a user or service account that has the ability to create a dataset also has the ability to delete it, even though that permission wasn't explicitly granted.
+**Note:** The creator of a dataset is automatically assigned the [BigQuery Data Owner ( `roles/bigquery.dataOwner` ) role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) on that dataset. So, a user or service account that has the ability to create a dataset also has the ability to delete it, even though that permission wasn't explicitly granted.
 
 ## Create datasets
 
 When you create a dataset, you typically specify a location where the data is stored. If you don't specify a location, the [default location](https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings) is used. For more information, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
-**Note:** If you choose `  EU  ` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU. Core BigQuery Customer Data is defined in the [Service Specific Terms](https://cloud.google.com/terms/service-terms#13-google-bigquery-service) .
+**Note:** If you choose `EU` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU. Core BigQuery Customer Data is defined in the [Service Specific Terms](https://console.cloud.google.com/terms/service-terms#13-google-bigquery-service) .
 
 To create a dataset:
 
@@ -102,7 +87,7 @@ To apply an existing tag, do the following:
 To manually enter a new tag, do the following:
 
 1.  Click the drop-down arrow beside **Select a scope** and choose **Manually enter IDs** \> **Organization** , **Project** , or **Tags** .
-2.  If you're creating a tag for your project or organization, in the dialog, enter the `  PROJECT_ID  ` or the `  ORGANIZATION_ID  ` , and then click **Save** .
+2.  If you're creating a tag for your project or organization, in the dialog, enter the `PROJECT_ID` or the `ORGANIZATION_ID` , and then click **Save** .
 3.  For **Key 1** and **Value 1** , choose the appropriate values from the lists.
 4.  To add additional tags to the table, click **Add tag** and follow the previous steps.
 
@@ -120,7 +105,7 @@ Click **Create dataset** .
 
 ### SQL
 
-Use the [`  CREATE SCHEMA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) .
+Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) .
 
 To create a dataset in a project other than your default project, add the project ID to the dataset ID in the following format: `  PROJECT_ID . DATASET_ID  ` .
 
@@ -151,7 +136,7 @@ To create a dataset in a project other than your default project, add the projec
     
       - `  KMS_KEY_NAME  ` : the name of the default Cloud Key Management Service key used to protect newly created tables in this dataset unless a different key is supplied at the time of creation. You cannot create a Google-encrypted table in a dataset with this parameter set.
     
-      - `  PARTITION_EXPIRATION  ` : the default lifetime (in days) for partitions in newly created partitioned tables. The default partition expiration has no minimum value. The expiration time evaluates to the partition's date plus the integer value. Any partition created in a partitioned table in the dataset is deleted `  PARTITION_EXPIRATION  ` days after the partition's date. If you supply the `  time_partitioning_expiration  ` option when you create or update a partitioned table, the table-level partition expiration takes precedence over the dataset-level default partition expiration.
+      - `  PARTITION_EXPIRATION  ` : the default lifetime (in days) for partitions in newly created partitioned tables. The default partition expiration has no minimum value. The expiration time evaluates to the partition's date plus the integer value. Any partition created in a partitioned table in the dataset is deleted `  PARTITION_EXPIRATION  ` days after the partition's date. If you supply the `time_partitioning_expiration` option when you create or update a partitioned table, the table-level partition expiration takes precedence over the dataset-level default partition expiration.
     
       - `  TABLE_EXPIRATION  ` : the default lifetime (in days) for newly created tables. The minimum value is 0.042 days (one hour). The expiration time evaluates to the current time plus the integer value. Any table created in the dataset is deleted `  TABLE_EXPIRATION  ` days after its creation time. This value is applied if you do not set a table expiration when you [create the table](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
     
@@ -165,7 +150,7 @@ To create a dataset in a project other than your default project, add the projec
     
       - `  HOURS  ` : the duration in hours of the time travel window for the new dataset. The `  HOURS  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified.
     
-      - `  BILLING_MODEL  ` : sets the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for the dataset. Set the `  BILLING_MODEL  ` value to `  PHYSICAL  ` to use physical bytes when calculating storage charges, or to `  LOGICAL  ` to use logical bytes. `  LOGICAL  ` is the default.
+      - `  BILLING_MODEL  ` : sets the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for the dataset. Set the `  BILLING_MODEL  ` value to `PHYSICAL` to use physical bytes when calculating storage charges, or to `LOGICAL` to use logical bytes. `LOGICAL` is the default.
         
         When you change a dataset's billing model, it takes 24 hours for the change to take effect.
         
@@ -177,7 +162,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag. For a full list of possible parameters, see the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) reference.
+To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag. For a full list of possible parameters, see the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) reference.
 
 To create a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET_ID  ` .
 
@@ -198,11 +183,11 @@ bq --location=LOCATION mk \
 
 Replace the following:
 
-  - `  LOCATION  ` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) . After a dataset is created, the location can't be changed. You can set a default value for the location by using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) . After a dataset is created, the location can't be changed. You can set a default value for the location by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
 
   - `  KMS_KEY_NAME  ` : the name of the default Cloud Key Management Service key used to protect newly created tables in this dataset unless a different key is supplied at the time of creation. You cannot create a Google-encrypted table in a dataset with this parameter set.
 
-  - `  PARTITION_EXPIRATION  ` : the default lifetime (in seconds) for partitions in newly created partitioned tables. The default partition expiration has no minimum value. The expiration time evaluates to the partition's date plus the integer value. Any partition created in a partitioned table in the dataset is deleted `  PARTITION_EXPIRATION  ` seconds after the partition's date. If you supply the `  --time_partitioning_expiration  ` flag when you create or update a partitioned table, the table-level partition expiration takes precedence over the dataset-level default partition expiration.
+  - `  PARTITION_EXPIRATION  ` : the default lifetime (in seconds) for partitions in newly created partitioned tables. The default partition expiration has no minimum value. The expiration time evaluates to the partition's date plus the integer value. Any partition created in a partitioned table in the dataset is deleted `  PARTITION_EXPIRATION  ` seconds after the partition's date. If you supply the `--time_partitioning_expiration` flag when you create or update a partitioned table, the table-level partition expiration takes precedence over the dataset-level default partition expiration.
 
   - `  TABLE_EXPIRATION  ` : the default lifetime (in seconds) for newly created tables. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value. Any table created in the dataset is deleted `  TABLE_EXPIRATION  ` seconds after its creation time. This value is applied if you don't set a table expiration when you [create the table](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
 
@@ -214,7 +199,7 @@ Replace the following:
 
   - `  HOURS  ` : the duration in hours of the time travel window for the new dataset. The `  HOURS  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified.
 
-  - `  BILLING_MODEL  ` : sets the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for the dataset. Set the `  BILLING_MODEL  ` value to `  PHYSICAL  ` to use physical bytes when calculating storage charges, or to `  LOGICAL  ` to use logical bytes. `  LOGICAL  ` is the default.
+  - `  BILLING_MODEL  ` : sets the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for the dataset. Set the `BILLING_MODEL` value to `PHYSICAL` to use physical bytes when calculating storage charges, or to `LOGICAL` to use logical bytes. `LOGICAL` is the default.
     
     When you change a dataset's billing model, it takes 24 hours for the change to take effect.
     
@@ -224,7 +209,7 @@ Replace the following:
 
   - `  DATASET_ID  ` is the ID of the dataset that you're creating.
 
-For example, the following command creates a dataset named `  mydataset  ` with data location set to `  US  ` , a default table expiration of 3600 seconds (1 hour), and a description of `  This is my dataset  ` . Instead of using the `  --dataset  ` flag, the command uses the `  -d  ` shortcut. If you omit `  -d  ` and `  --dataset  ` , the command defaults to creating a dataset.
+For example, the following command creates a dataset named `mydataset` with data location set to `US` , a default table expiration of 3600 seconds (1 hour), and a description of `This is my dataset` . Instead of using the `--dataset` flag, the command uses the `-d` shortcut. If you omit `-d` and `--dataset` , the command defaults to creating a dataset.
 
 ``` notranslate
 bq --location=US mk -d \
@@ -233,11 +218,11 @@ bq --location=US mk -d \
     mydataset
 ```
 
-To confirm that the dataset was created, enter the `  bq ls  ` command. Also, you can create a table when you create a new dataset using the following format: `  bq mk -t dataset . table  ` . For more information about creating tables, see [Creating a table](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
+To confirm that the dataset was created, enter the `bq ls` command. Also, you can create a table when you create a new dataset using the following format: ` bq mk -t dataset . table  ` . For more information about creating tables, see [Creating a table](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
 
 ### Terraform
 
-Use the [`  google_bigquery_dataset  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset) resource.
+Use the [`google_bigquery_dataset`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset) resource.
 
 **Note:** You must enable the Cloud Resource Manager API in order to use Terraform to create BigQuery objects.
 
@@ -245,7 +230,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 **Create a dataset**
 
-The following example creates a dataset named `  mydataset  ` :
+The following example creates a dataset named `mydataset` :
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -263,17 +248,17 @@ resource "google_bigquery_dataset" "default" {
 }
 ```
 
-When you create a dataset using the `  google_bigquery_dataset  ` resource, it automatically grants access to the dataset to all accounts that are members of project-level [basic roles](https://docs.cloud.google.com/iam/docs/roles-overview#basic) . If you run the [`  terraform show  ` command](https://developer.hashicorp.com/terraform/cli/commands/show) after creating the dataset, the [`  access  ` block](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset#nested_access) for the dataset looks similar to the following:
+When you create a dataset using the `google_bigquery_dataset` resource, it automatically grants access to the dataset to all accounts that are members of project-level [basic roles](https://docs.cloud.google.com/iam/docs/roles-overview#basic) . If you run the [`terraform show` command](https://developer.hashicorp.com/terraform/cli/commands/show) after creating the dataset, the [`access` block](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset#nested_access) for the dataset looks similar to the following:
 
 ![Access block for a dataset created by using Terraform.](https://docs.cloud.google.com/static/bigquery/images/dataset-default-access-block.png)
 
-To grant access to the dataset, we recommend that you use one of the [`  google_bigquery_iam  ` resources](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) , as shown in the following example, unless you plan to create authorized objects, such as [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , within the dataset. In that case, use the [`  google_bigquery_dataset_access  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) . Refer to that documentation for examples.
+To grant access to the dataset, we recommend that you use one of the [`google_bigquery_iam` resources](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) , as shown in the following example, unless you plan to create authorized objects, such as [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , within the dataset. In that case, use the [`google_bigquery_dataset_access` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) . Refer to that documentation for examples.
 
 **Create a dataset and grant access to it**
 
-The following example creates a dataset named `  mydataset  ` , then uses the [`  google_bigquery_dataset_iam_policy  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy) resource to grant access to it.
+The following example creates a dataset named `mydataset` , then uses the [`google_bigquery_dataset_iam_policy`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy) resource to grant access to it.
 
-**Note:** Don't use this approach if you want to use authorized objects, such as [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , with this dataset. In that case, use the `  google_bigquery_dataset_access  ` resource. For examples, see [`  google_bigquery_dataset_access  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) .
+**Note:** Don't use this approach if you want to use authorized objects, such as [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , with this dataset. In that case, use the `google_bigquery_dataset_access` resource. For examples, see [`google_bigquery_dataset_access`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) .
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -328,7 +313,7 @@ resource "google_bigquery_dataset_iam_policy" "default" {
 
 **Create a dataset with a customer-managed encryption key**
 
-The following example creates a dataset named `  mydataset  ` , and also uses the [`  google_kms_crypto_key  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`  google_kms_key_ring  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a Cloud Key Management Service key for the dataset. You must [enable the Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&redirect=https://console.cloud.google.com) before running this example.
+The following example creates a dataset named `mydataset` , and also uses the [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a Cloud Key Management Service key for the dataset. You must [enable the Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&redirect=https://console.cloud.google.com) before running this example.
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -393,13 +378,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -411,7 +396,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -423,7 +408,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -435,7 +420,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ### C\#
 
@@ -633,16 +618,16 @@ When you create a dataset in BigQuery, the dataset name must be unique for each 
   - Up to 1,024 characters.
   - Letters (uppercase or lowercase), numbers, and underscores.
 
-Dataset names are case-sensitive by default. `  mydataset  ` and `  MyDataset  ` can coexist in the same project, unless one of them has case-sensitivity turned off. For examples, see [Creating a case-insensitive dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) and [Resource: Dataset](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#resource:-dataset) .
+Dataset names are case-sensitive by default. `mydataset` and `MyDataset` can coexist in the same project, unless one of them has case-sensitivity turned off. For examples, see [Creating a case-insensitive dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) and [Resource: Dataset](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#resource:-dataset) .
 
-Dataset names cannot contain spaces or special characters such as `  -  ` , `  &  ` , `  @  ` , or `  %  ` .
+Dataset names cannot contain spaces or special characters such as `-` , `&` , `@` , or `%` .
 
 ### Hidden datasets
 
 A hidden dataset is a dataset whose name begins with an underscore. You can query tables and views in hidden datasets the same way you would in any other dataset. Hidden datasets have the following restrictions:
 
   - They are hidden from the **Explorer** panel in the Google Cloud console.
-  - They don't appear in any `  INFORMATION_SCHEMA  ` views.
+  - They don't appear in any `INFORMATION_SCHEMA` views.
   - They can't be used with [linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
   - They can't be used as a source dataset with the following authorized resources:
       - [Authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets)

@@ -31,7 +31,7 @@ This document is intended for data analysts, data scientists, and data developer
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -63,7 +63,7 @@ This document is intended for data analysts, data scientists, and data developer
 
 ### Required roles
 
-To get the permissions that you need to write queries with Gemini assistance, ask your administrator to grant you the [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to write queries with Gemini assistance, ask your administrator to grant you the [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to write queries with Gemini assistance. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -71,11 +71,11 @@ This predefined role contains the permissions required to write queries with Gem
 
 The following permissions are required to write queries with Gemini assistance:
 
-  - `  cloudaicompanion.entitlements.get  `
-  - `  cloudaicompanion.instances.completeTask  `
-  - Explain SQL queries: `  cloudaicompanion.companions.generateChat  `
-  - Complete SQL or Python code: `  cloudaicompanion.instances.completeCode  `
-  - Generate SQL or Python code: `  cloudaicompanion.instances.generateCode  `
+  - `cloudaicompanion.entitlements.get`
+  - `cloudaicompanion.instances.completeTask`
+  - Explain SQL queries: `cloudaicompanion.companions.generateChat`
+  - Complete SQL or Python code: `cloudaicompanion.instances.completeCode`
+  - Generate SQL or Python code: `cloudaicompanion.instances.generateCode`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -103,7 +103,7 @@ To use the SQL generation tool, follow these steps:
 
 3.  In the **Generate SQL with Gemini** dialog, you have the following options:
     
-      - Enter a natural language prompt about a table that you recently viewed or queried. For example, if you recently viewed [`  bigquery-public-data.austin_bikeshare.bikeshare_trips  ` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , you might enter the following:
+      - Enter a natural language prompt about a table that you recently viewed or queried. For example, if you recently viewed [`bigquery-public-data.austin_bikeshare.bikeshare_trips` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , you might enter the following:
         
             Show me the duration and subscriber type for the ten longest trips.
     
@@ -130,7 +130,7 @@ To use the SQL generation tool, follow these steps:
       - To edit your prompt, click **Edit** and then modify or replace your initial prompt. After you've edited your prompt, click **Update** to generate a new query.
       - To update the table sources that were used as context to generate the suggested SQL query, click **Edit Table Sources** , select the appropriate checkboxes, and then click **Apply** .
       - To view a natural language summary of the generated query, click **Query Summary** .
-      - To refine the suggested SQL query, enter any refinements in the **Refine** field, and then click send **Refine** . For example, enter `  limit to 1000  ` to limit the number of query results. To compare the changes to your query, select the **Show diff** checkbox.
+      - To refine the suggested SQL query, enter any refinements in the **Refine** field, and then click send **Refine** . For example, enter `limit to 1000` to limit the number of query results. To compare the changes to your query, select the **Show diff** checkbox.
       - To dismiss a suggested query, close the SQL generation tool.
 
 #### Turn off the SQL generation tool
@@ -147,7 +147,7 @@ You can generate SQL in the query editor by describing the query that you want i
 
 2.  In the query editor, click add\_box **SQL query** .
 
-3.  In the query editor, write a SQL comment about a table you have recently viewed or queried. For example, if you recently viewed the [`  bigquery-public-data.austin_bikeshare.bikeshare_trips  ` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , then you might write the following comment:
+3.  In the query editor, write a SQL comment about a table you have recently viewed or queried. For example, if you recently viewed the [`bigquery-public-data.austin_bikeshare.bikeshare_trips` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , then you might write the following comment:
     
         # Show me the duration and subscriber type for the ten longest trips.
 
@@ -227,9 +227,9 @@ Before you can use Gemini Cloud Assist chat to generate SQL, you must enable Gem
 
 The following tips can improve suggestions that Gemini in BigQuery provides:
 
-  - To manually specify which tables to use, you can include the fully qualified table name in backticks ( ``  `  `` ), such as ``  ` PROJECT . DATASET . TABLE `  `` .
+  - To manually specify which tables to use, you can include the fully qualified table name in backticks ( `` ` `` ), such as `` ` PROJECT . DATASET . TABLE ` `` .
   - If the column names or their semantic relationships are unclear or complex, then you can provide context in the prompt to guide Gemini towards the answer that you want. For example, to encourage a generated query to reference a column name, describe the column name and its relevance to the answer that you want. To encourage an answer that references complex terms like *lifetime value* or *gross margin* , describe the concept and its relevance to your data to improve SQL generation results.
-  - When you generate SQL from a comment, you can format your prompt over multiple lines by prefixing each line with the `  #  ` character.
+  - When you generate SQL from a comment, you can format your prompt over multiple lines by prefixing each line with the `#` character.
   - Column descriptions are considered when you generate SQL queries. To improve accuracy, add column descriptions to your schema. For more information about column descriptions, see [Column descriptions](https://docs.cloud.google.com/bigquery/docs/schemas#column_descriptions) in "Specify a schema."
 
 ### Convert comments to SQL
@@ -252,9 +252,9 @@ To use natural language SQL generation, follow these steps:
     
     ![SQL assistant link in BigQuery query editor.](https://docs.cloud.google.com/static/gemini/images/gemini-assistant-link-disabled.png)
 
-3.  In the BigQuery query editor, enter a SQL query containing a natural language prompt enclosed in a comment in the format of `  /* natural language text */  ` about a table that you recently viewed or queried. Gemini in BigQuery uses the metadata of recently queried tables in an effort to find appropriate data, so you can help guide responses by querying a table. For best results, your natural language prompt should be specific to SQL syntax and your data, and not a general expression such as "optimize my query."
+3.  In the BigQuery query editor, enter a SQL query containing a natural language prompt enclosed in a comment in the format of `/* natural language text */` about a table that you recently viewed or queried. Gemini in BigQuery uses the metadata of recently queried tables in an effort to find appropriate data, so you can help guide responses by querying a table. For best results, your natural language prompt should be specific to SQL syntax and your data, and not a general expression such as "optimize my query."
     
-    For example, if you recently queried [`  bigquery-public-data.austin_bikeshare.bikeshare_trips  ` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , you might enter the following:
+    For example, if you recently queried [`bigquery-public-data.austin_bikeshare.bikeshare_trips` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , you might enter the following:
     
         SELECT
             subscriber_type,
@@ -312,9 +312,9 @@ To try SQL completion with Gemini in BigQuery, follow these steps:
         FROM
           `bigquery-public-data.austin_bikeshare.bikeshare_trips`
     
-    An error message states that `  subscriber_type  ` isn't grouped or aggregated. It's not uncommon to need some help getting a query just right.
+    An error message states that `subscriber_type` isn't grouped or aggregated. It's not uncommon to need some help getting a query just right.
 
-3.  At the end of the line for `  subscriber_type  ` , press Space .
+3.  At the end of the line for `subscriber_type` , press Space .
     
     The suggested refinements to the query might end in text that's similar to the following:
     
@@ -379,7 +379,7 @@ You can ask Gemini in BigQuery to generate Python code with a natural language s
 
 ### Use the Python code generation tool
 
-In the following example, you generate code for a BigQuery public dataset, `  bigquery-public-data.ml_datasets.penguins  ` .
+In the following example, you generate code for a BigQuery public dataset, `bigquery-public-data.ml_datasets.penguins` .
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
     
@@ -387,7 +387,7 @@ In the following example, you generate code for a BigQuery public dataset, `  bi
 
 2.  In the tab bar of the query editor, click the arrow\_drop\_down drop-down arrow next to add\_box **SQL query** , and then click **Notebook** .
     
-    The new notebook opens, containing cells that show example queries against the `  bigquery-public-data.ml_datasets.penguins  ` public dataset.
+    The new notebook opens, containing cells that show example queries against the `bigquery-public-data.ml_datasets.penguins` public dataset.
 
 3.  To insert a new code cell, in the toolbar, click add **Code** . The new code cell contains the message **Start coding or generate with AI.**
 
@@ -461,9 +461,9 @@ BigQuery DataFrames provides two libraries:
 
 Gemini code generation is optimized for the bigframes.pandas library.
 
-To learn more about BigQuery DataFrames and the permissions that are required to use BigQuery DataFrames, see [BigQuery DataFrames permissions](https://docs.cloud.google.com/bigquery/docs/use-bigquery-dataframes) . BigQuery DataFrames is an open-source package. You can run `  pip install --upgrade bigframes  ` to install the latest version.
+To learn more about BigQuery DataFrames and the permissions that are required to use BigQuery DataFrames, see [BigQuery DataFrames permissions](https://docs.cloud.google.com/bigquery/docs/use-bigquery-dataframes) . BigQuery DataFrames is an open-source package. You can run `pip install --upgrade bigframes` to install the latest version.
 
-In the following example, you generate code for a BigQuery public dataset, `  bigquery-public-data.ml_datasets.penguins  ` .
+In the following example, you generate code for a BigQuery public dataset, `bigquery-public-data.ml_datasets.penguins` .
 
 1.  In the Google Cloud console, go to the BigQuery Studio page.
     
@@ -494,7 +494,7 @@ In the following example, you generate code for a BigQuery public dataset, `  bi
 
 8.  To preview the results, in the toolbar, click add **Code** to insert a new code cell.
 
-9.  In the new cell, call the `  peek()  ` method—for example, `  result.peek()  ` —and press play\_circle **Run cell** . A number of rows of data are displayed.
+9.  In the new cell, call the `peek()` method—for example, `result.peek()` —and press play\_circle **Run cell** . A number of rows of data are displayed.
 
 ## Complete Python code
 
@@ -508,9 +508,9 @@ To try Python code completion with Gemini in BigQuery, follow these steps:
 
 2.  In the tab bar of the query editor, click the arrow\_drop\_down drop-down arrow next to add\_box **SQL query** , and then click **Notebook** .
     
-    A new notebook opens, containing cells that show example queries against the `  bigquery-public-data.ml_datasets.penguins  ` public dataset.
+    A new notebook opens, containing cells that show example queries against the `bigquery-public-data.ml_datasets.penguins` public dataset.
 
-3.  In the editor, begin typing Python code. For example `  %%bigquery  ` . Gemini in BigQuery suggests code inline while you type.
+3.  In the editor, begin typing Python code. For example `%%bigquery` . Gemini in BigQuery suggests code inline while you type.
 
 4.  To accept the suggestion, press Tab .
 
@@ -570,7 +570,7 @@ To fix or understand the code errors with Gemini assistance, follow these steps:
 
 4.  Click the notebook that you want to open.
 
-5.  In a code cell of your notebook, enter code that contains an error, and then run the cell. For example, you might enter `  print(1  ` , which is missing a closing parenthesis.
+5.  In a code cell of your notebook, enter code that contains an error, and then run the cell. For example, you might enter `print(1` , which is missing a closing parenthesis.
     
     After your code cell runs, the notebook prints an error message below your code cell. If you have Gemini in Python notebooks turned on and Gemini has a suggestion to fix or explain the error, one of the following options appears:
     
@@ -608,9 +608,9 @@ You can ask Gemini Code Assist to generate PySpark code in your notebook. Gemini
 
 To generate Gemini Code Assist code in your notebook, do the following:
 
-1.  Insert a new code cell by clicking **+ Code** in the toolbar. The new code cell displays `  Start coding or generate with AI  ` . Click **generate** .
+1.  Insert a new code cell by clicking **+ Code** in the toolbar. The new code cell displays `Start coding or generate with AI` . Click **generate** .
 
-2.  In the Generate editor, enter a natural language prompt, and then click `  enter  ` . **Make sure to include the keyword `  spark  ` or `  pyspark  ` in your prompt.** .
+2.  In the Generate editor, enter a natural language prompt, and then click `enter` . **Make sure to include the keyword `spark` or `pyspark` in your prompt.** .
     
     Sample prompt:
     
@@ -625,7 +625,7 @@ To generate Gemini Code Assist code in your notebook, do the following:
 
   - To let Gemini Code Assist fetch relevant tables and schemas, turn on [Data Catalog sync](https://docs.cloud.google.com/dataproc-metastore/docs/data-catalog-sync) for Dataproc Metastore instances.
 
-  - Make sure your user account has access to Data Catalog to query tables. To do this, assign the [`  DataCatalog.Viewer  ` role](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) .
+  - Make sure your user account has access to Data Catalog to query tables. To do this, assign the [`DataCatalog.Viewer` role](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) .
 
 ## Turn off Gemini query assistant features
 
@@ -647,7 +647,7 @@ To learn how to turn off Gemini in BigQuery, see [Turn off Gemini in BigQuery](h
 
 To turn off Gemini in Colab Enterprise for a Google Cloud project, an administrator must turn off the Gemini for Google Cloud API. See [Disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable#disabling) .
 
-To turn off Gemini in Colab Enterprise for a specific user, an administrator needs to revoke the [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` ) role for that user. See [Revoke a single IAM role](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#revoke-single-role) .
+To turn off Gemini in Colab Enterprise for a specific user, an administrator needs to revoke the [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` ) role for that user. See [Revoke a single IAM role](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#revoke-single-role) .
 
 ## Provide feedback
 
@@ -679,7 +679,7 @@ To share your prompt data, follow these steps:
 
 4.  In the **Data Use Settings** dialog, update your data use settings.
 
-Data sharing settings apply to the entire project and can only be set by a project administrator with the `  serviceusage.services.enable  ` and `  serviceusage.services.list  ` IAM permissions. For more information about data use in the Trusted Tester Program, see [Gemini for Google Cloud Trusted Tester Program](https://cloud.google.com/trusted-tester/gemini-for-google-cloud-preview) .
+Data sharing settings apply to the entire project and can only be set by a project administrator with the `serviceusage.services.enable` and `serviceusage.services.list` IAM permissions. For more information about data use in the Trusted Tester Program, see [Gemini for Google Cloud Trusted Tester Program](https://cloud.google.com/trusted-tester/gemini-for-google-cloud-preview) .
 
 ## Gemini and BigQuery data
 

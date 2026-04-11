@@ -32,7 +32,7 @@ This structure has several benefits:
 
   - You can move policy tags from one tier to another. For example, you can move **Address** from the **Low** tier to the **Medium** tier to further restrict its access, without needing to reclassify all **Address** columns.
     
-    **Note:** You can move a policy tag only through the Data Catalog `  PolicyTagManager.UpdatePolicyTag  ` method.
+    **Note:** You can move a policy tag only through the Data Catalog `PolicyTagManager.UpdatePolicyTag` method.
 
   - With this fine-grained access, you can manage access to many columns by controlling only a small number of data classification policy tags.
 

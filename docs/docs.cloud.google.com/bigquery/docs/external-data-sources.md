@@ -6,7 +6,7 @@ An external data source is a data source that you can query directly from BigQue
 
 Use cases for external data sources include the following:
 
-  - For extract-load-transform (ELT) workloads, loading and cleaning your data in one pass and writing the cleaned result into BigQuery storage, by using a `  CREATE TABLE ... AS SELECT  ` query.
+  - For extract-load-transform (ELT) workloads, loading and cleaning your data in one pass and writing the cleaned result into BigQuery storage, by using a `CREATE TABLE ... AS SELECT` query.
   - Joining BigQuery tables with frequently changing data from an external data source. By querying the external data source directly, you don't need to reload the data into BigQuery storage every time it changes.
 
 BigQuery has two different mechanisms for querying external data: external tables and federated queries.
@@ -42,16 +42,16 @@ For more information, see [Introduction to object tables](https://docs.cloud.goo
 
 Non-BigLake external tables let you query structured data in external data stores. To query a non-BigLake external table, you must have permissions to both the external table and the external data source. For example, to query a non-BigLake external table that uses a data source in Cloud Storage, you must have the following permissions:
 
-  - `  bigquery.tables.getData  `
-  - `  bigquery.jobs.create  `
-  - `  storage.buckets.get  `
-  - `  storage.objects.get  `
+  - `bigquery.tables.getData`
+  - `bigquery.jobs.create`
+  - `storage.buckets.get`
+  - `storage.objects.get`
 
 For more information, see [Introduction to external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ## Federated queries
 
-Federated queries let you send a query statement to AlloyDB, Spanner, or Cloud SQL databases and get the result back as a temporary table. Federated queries use the BigQuery Connection API to establish a connection with AlloyDB, Spanner, or Cloud SQL. In your query, you use the `  EXTERNAL_QUERY  ` function to send a query statement to the external database, using that database's SQL dialect. The results are converted to GoogleSQL data types.
+Federated queries let you send a query statement to AlloyDB, Spanner, or Cloud SQL databases and get the result back as a temporary table. Federated queries use the BigQuery Connection API to establish a connection with AlloyDB, Spanner, or Cloud SQL. In your query, you use the `EXTERNAL_QUERY` function to send a query statement to the external database, using that database's SQL dialect. The results are converted to GoogleSQL data types.
 
 For more information, see [Introduction to federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
 

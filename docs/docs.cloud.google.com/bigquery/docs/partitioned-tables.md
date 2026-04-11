@@ -40,7 +40,7 @@ This section describes the different ways to partition a table.
 
 ### Integer range partitioning
 
-You can partition a table based on ranges of values in a specific `  INTEGER  ` column. To create an integer-range partitioned table, you provide:
+You can partition a table based on ranges of values in a specific `INTEGER` column. To create an integer-range partitioned table, you provide:
 
   - The partitioning column.
   - The starting value for range partitioning (inclusive).
@@ -49,35 +49,35 @@ You can partition a table based on ranges of values in a specific `  INTEGER  ` 
 
 For example, suppose you create an integer range partition with the following specification:
 
-| Argument    | Value                        |
-| ----------- | ---------------------------- |
-| column name | `        customer_id       ` |
-| start       | 0                            |
-| end         | 100                          |
-| interval    | 10                           |
+| Argument    | Value         |
+| ----------- | ------------- |
+| column name | `customer_id` |
+| start       | 0             |
+| end         | 100           |
+| interval    | 10            |
 
-The table is partitioned on the `  customer_id  ` column into ranges of interval 10. The values 0 to 9 go into one partition, values 10 to 19 go into the next partition, etc., up to 99. Values outside this range go into a partition named `  __UNPARTITIONED__  ` . Any rows where `  customer_id  ` is `  NULL  ` go into a partition named `  __NULL__  ` .
+The table is partitioned on the `customer_id` column into ranges of interval 10. The values 0 to 9 go into one partition, values 10 to 19 go into the next partition, etc., up to 99. Values outside this range go into a partition named `__UNPARTITIONED__` . Any rows where `customer_id` is `NULL` go into a partition named `__NULL__` .
 
 For information about integer-range partitioned tables, see [Create an integer-range partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_an_integer-range_partitioned_table) .
 
 ### Time-unit column partitioning
 
-You can partition a table on a `  DATE  ` , `  TIMESTAMP  ` , or `  DATETIME  ` column in the table. When you write data to the table, BigQuery automatically puts the data into the correct partition, based on the values in the column.
+You can partition a table on a `DATE` , `TIMESTAMP` , or `DATETIME` column in the table. When you write data to the table, BigQuery automatically puts the data into the correct partition, based on the values in the column.
 
-For `  TIMESTAMP  ` and `  DATETIME  ` columns, the partitions can have either hourly, daily, monthly, or yearly granularity. For `  DATE  ` columns, the partitions can have daily, monthly, or yearly granularity. Partitions boundaries are based on UTC time.
+For `TIMESTAMP` and `DATETIME` columns, the partitions can have either hourly, daily, monthly, or yearly granularity. For `DATE` columns, the partitions can have daily, monthly, or yearly granularity. Partitions boundaries are based on UTC time.
 
-For example, suppose that you partition a table on a `  DATETIME  ` column with monthly partitioning. If you insert the following values into the table, the rows are written to the following partitions:
+For example, suppose that you partition a table on a `DATETIME` column with monthly partitioning. If you insert the following values into the table, the rows are written to the following partitions:
 
-| Column value                            | Partition (monthly)     |
-| --------------------------------------- | ----------------------- |
-| `        DATETIME("2019-01-01")       ` | `        201901       ` |
-| `        DATETIME("2019-01-15")       ` | `        201901       ` |
-| `        DATETIME("2019-04-30")       ` | `        201904       ` |
+| Column value             | Partition (monthly) |
+| ------------------------ | ------------------- |
+| `DATETIME("2019-01-01")` | `201901`            |
+| `DATETIME("2019-01-15")` | `201901`            |
+| `DATETIME("2019-04-30")` | `201904`            |
 
 In addition, two special partitions are created:
 
-  - `  __NULL__  ` : Contains rows with `  NULL  ` values in the partitioning column.
-  - `  __UNPARTITIONED__  ` : Contains rows where the value of the partitioning column is earlier than 1960-01-01 or later than 2159-12-31.
+  - `__NULL__` : Contains rows with `NULL` values in the partitioning column.
+  - `__UNPARTITIONED__` : Contains rows where the value of the partitioning column is earlier than 1960-01-01 or later than 2159-12-31.
 
 For information about time-unit column-partitioned tables, see [Create a time-unit column-partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_a_time-unit_column-partitioned_table) .
 
@@ -87,19 +87,19 @@ When you create a table partitioned by ingestion time, BigQuery automatically as
 
 If your data might reach the maximum number of partitions per table when using a finer time granularity, use a coarser granularity instead. For example, you can partition by month instead of day to reduce the number of partitions. You can also [cluster](https://docs.cloud.google.com/bigquery/docs/clustered-tables) the partition column to further improve performance.
 
-An ingestion-time partitioned table has a pseudocolumn named `  _PARTITIONTIME  ` . The value of this column is the ingestion time for each row, truncated to the partition boundary (such as hourly or daily). For example, suppose that you create an ingestion-time partitioned table with hourly partitioning and send data at the following times:
+An ingestion-time partitioned table has a pseudocolumn named `_PARTITIONTIME` . The value of this column is the ingestion time for each row, truncated to the partition boundary (such as hourly or daily). For example, suppose that you create an ingestion-time partitioned table with hourly partitioning and send data at the following times:
 
-| Ingestion time      | `        _PARTITIONTIME       ` | Partition (hourly)          |
-| ------------------- | ------------------------------- | --------------------------- |
-| 2021-05-07 17:22:00 | 2021-05-07 17:00:00             | `        2021050717       ` |
-| 2021-05-07 17:40:00 | 2021-05-07 17:00:00             | `        2021050717       ` |
-| 2021-05-07 18:31:00 | 2021-05-07 18:00:00             | `        2021050718       ` |
+| Ingestion time      | `_PARTITIONTIME`    | Partition (hourly) |
+| ------------------- | ------------------- | ------------------ |
+| 2021-05-07 17:22:00 | 2021-05-07 17:00:00 | `2021050717`       |
+| 2021-05-07 17:40:00 | 2021-05-07 17:00:00 | `2021050717`       |
+| 2021-05-07 18:31:00 | 2021-05-07 18:00:00 | `2021050718`       |
 
-Because the table in this example uses hourly partitioning, the value of `  _PARTITIONTIME  ` is truncated to an hour boundary. BigQuery uses this value to determine the correct partition for the data.
+Because the table in this example uses hourly partitioning, the value of `_PARTITIONTIME` is truncated to an hour boundary. BigQuery uses this value to determine the correct partition for the data.
 
 You can also write data to a specific partition. For example, you might want to load historical data or adjust for time zones. You can use any valid date between 0001-01-01 and 9999-12-31. However, [DML statements](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) cannot reference dates prior to 1970-01-01 or after 2159-12-31. For more information, see [Write data to a specific partition](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables#write-to-partition) .
 
-Instead of using `  _PARTITIONTIME  ` , you can also use [`  _PARTITIONDATE  `](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) . The `  _PARTITIONDATE  ` pseudocolumn contains the UTC date corresponding to the value in the `  _PARTITIONTIME  ` pseudocolumn.
+Instead of using `_PARTITIONTIME` , you can also use [`_PARTITIONDATE`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) . The `_PARTITIONDATE` pseudocolumn contains the UTC date corresponding to the value in the `_PARTITIONTIME` pseudocolumn.
 
 ### Select daily, hourly, monthly, or yearly partitioning
 
@@ -123,7 +123,7 @@ When you create a table that is clustered and partitioned, you can achieve more 
 
 ## Partitioning versus sharding
 
-Table sharding is the practice of storing data in multiple tables, using a naming prefix such as `  [PREFIX]_YYYYMMDD  ` .
+Table sharding is the practice of storing data in multiple tables, using a naming prefix such as `[PREFIX]_YYYYMMDD` .
 
 Partitioning is recommended over table sharding, because partitioned tables perform better. With sharded tables, BigQuery must maintain a copy of the schema and metadata for each table. BigQuery might also need to verify permissions for each queried table. This practice also adds to query overhead and affects query performance.
 
@@ -133,21 +133,21 @@ If you previously created date-sharded tables, you can convert them into an inge
 
 Partition decorators enable you to reference a partition in a table. For example, you can use them to [write data](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables#write-to-partition) to a specific partition.
 
-A partition decorator has the form `  table_name$partition_id  ` where the format of the `  partition_id  ` segment depends on the type of partitioning:
+A partition decorator has the form `table_name$partition_id` where the format of the `partition_id` segment depends on the type of partitioning:
 
-| Partitioning type | Format                       | Example                              |
-| ----------------- | ---------------------------- | ------------------------------------ |
-| Hourly            | `        yyyymmddhh       `  | `        my_table$2021071205       ` |
-| Daily             | `        yyyymmdd       `    | `        my_table$20210712       `   |
-| Monthly           | `        yyyymm       `      | `        my_table$202107       `     |
-| Yearly            | `        yyyy       `        | `        my_table$2021       `       |
-| Integer range     | `        range_start       ` | `        my_table$40       `         |
+| Partitioning type | Format        | Example               |
+| ----------------- | ------------- | --------------------- |
+| Hourly            | `yyyymmddhh`  | `my_table$2021071205` |
+| Daily             | `yyyymmdd`    | `my_table$20210712`   |
+| Monthly           | `yyyymm`      | `my_table$202107`     |
+| Yearly            | `yyyy`        | `my_table$2021`       |
+| Integer range     | `range_start` | `my_table$40`         |
 
 ## Browse the data in a partition
 
-To browse the data in a specified partition, use the [`  bq head  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_head) command with a partition decorator.
+To browse the data in a specified partition, use the [`bq head`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_head) command with a partition decorator.
 
-For example, the following command lists all fields in the first 10 rows of `  my_dataset.my_table  ` in the `  2018-02-24  ` partition:
+For example, the following command lists all fields in the first 10 rows of `my_dataset.my_table` in the `2018-02-24` partition:
 
 ``` 
     bq head --max_rows=10 'my_dataset.my_table$20180224'
@@ -157,7 +157,7 @@ For example, the following command lists all fields in the first 10 rows of `  m
 
 Exporting all data from a partitioned table is the same process as exporting data from a non-partitioned table. For more information, see [Exporting table data](https://docs.cloud.google.com/bigquery/docs/exporting-data) .
 
-To export data from an individual partition, use the `  bq extract  ` command and append the partition decorator to the table name. For example, `  my_table$20160201  ` . You can also export data from the [`  __NULL__  ` and `  __UNPARTITIONED__  `](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) partitions by appending the partition names to the table name. For example, `  my_table$__NULL__  ` or `  my_table$__UNPARTITIONED__  ` .
+To export data from an individual partition, use the `bq extract` command and append the partition decorator to the table name. For example, `my_table$20160201` . You can also export data from the [`__NULL__` and `__UNPARTITIONED__`](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) partitions by appending the partition names to the table name. For example, `my_table$__NULL__` or `my_table$__UNPARTITIONED__` .
 
 ## Limitations
 
@@ -167,19 +167,19 @@ Partitioned tables have the following limitations:
 
   - BigQuery does not support partitioning by multiple columns. Only one column can be used to partition a table.
 
-  - You cannot directly convert an existing non-partitioned table to a partitioned table. The partitioning strategy is defined when the table is created. Instead, use the [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement to create a new partitioned table by querying the data in the existing table.
+  - You cannot directly convert an existing non-partitioned table to a partitioned table. The partitioning strategy is defined when the table is created. Instead, use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement to create a new partitioned table by querying the data in the existing table.
 
   - Time-unit column-partitioned tables are subject to the following limitations:
     
-      - The partitioning column must be either a scalar `  DATE  ` , `  TIMESTAMP  ` , or `  DATETIME  ` column. While the mode of the column can be `  REQUIRED  ` or `  NULLABLE  ` , it cannot be `  REPEATED  ` (array-based).
-      - The partitioning column must be a top-level field. You cannot use a leaf field from a `  RECORD  ` ( `  STRUCT  ` ) as the partitioning column.
+      - The partitioning column must be either a scalar `DATE` , `TIMESTAMP` , or `DATETIME` column. While the mode of the column can be `REQUIRED` or `NULLABLE` , it cannot be `REPEATED` (array-based).
+      - The partitioning column must be a top-level field. You cannot use a leaf field from a `RECORD` ( `STRUCT` ) as the partitioning column.
     
     For information about time-unit column-partitioned tables, see [Create a time-unit column-partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_a_time-unit_column-partitioned_table) .
 
   - Integer-range partitioned tables are subject to the following limitations:
     
-      - The partitioning column must be an `  INTEGER  ` column. While the mode of the column may be `  REQUIRED  ` or `  NULLABLE  ` , it cannot be `  REPEATED  ` (array-based).
-      - The partitioning column must be a top-level field. You cannot use a leaf field from a `  RECORD  ` ( `  STRUCT  ` ) as the partitioning column.
+      - The partitioning column must be an `INTEGER` column. While the mode of the column may be `REQUIRED` or `NULLABLE` , it cannot be `REPEATED` (array-based).
+      - The partitioning column must be a top-level field. You cannot use a leaf field from a `RECORD` ( `STRUCT` ) as the partitioning column.
     
     For information about integer-range partitioned tables, see [Create an integer-range partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_an_integer-range_partitioned_table) .
 
@@ -215,7 +215,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - Use [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables#when_to_use_clustering) instead of partitioning.
 
-  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `  gs://my_path/file_1,gs://my_path/file_2  ` ), or by using wildcards (for example, `  gs://my_path/*  ` ).
+  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `gs://my_path/file_1,gs://my_path/file_2` ), or by using wildcards (for example, `gs://my_path/*` ).
     
     For more information, see [Batch loading data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#permissions-load-data-from-cloud-storage) .
 
@@ -223,7 +223,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - To append data at a high rate, consider using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-  - To monitor the number of modified partitions on a table, use the [`  INFORMATION_SCHEMA  ` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+  - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
   - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 

@@ -21,89 +21,76 @@ A query template is a container for sharing table-valued functions defined by co
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;proposer&quot;: string,
-  &quot;primaryContact&quot;: string,
-  &quot;documentation&quot;: string,
-  &quot;state&quot;: enum (State),
-  &quot;routine&quot;: {
-    object (Routine)
-  },
-  &quot;createTime&quot;: string,
-  &quot;updateTime&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;proposer&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;state&quot;: enum (State),&quot;routine&quot;: {object (Routine)},&quot;createTime&quot;: string,&quot;updateTime&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. The resource name of the QueryTemplate. e.g. `  projects/myproject/locations/us/dataExchanges/123/queryTemplates/456  `
+Output only. The resource name of the QueryTemplate. e.g. `projects/myproject/locations/us/dataExchanges/123/queryTemplates/456`
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 Required. Human-readable display name of the QueryTemplate. The display name must contain only Unicode letters, numbers (0-9), underscores (\_), dashes (-), spaces ( ), ampersands (&) and can't start or end with spaces. Default value is an empty string. Max length: 63 bytes.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. Short description of the QueryTemplate. The description must not contain Unicode non-characters and C0 and C1 control codes except tabs (HT), new lines (LF), carriage returns (CR), and page breaks (FF). Default value is an empty string. Max length: 2000 bytes.
 
-`  proposer  `
+`proposer`
 
-`  string  `
+`string`
 
 Optional. Will be deprecated. Email or URL of the primary point of contact of the QueryTemplate. Max Length: 1000 bytes.
 
-`  primaryContact  `
+`primaryContact`
 
-`  string  `
+`string`
 
 Optional. Email or URL of the primary point of contact of the QueryTemplate. Max Length: 1000 bytes.
 
-`  documentation  `
+`documentation`
 
-`  string  `
+`string`
 
 Optional. Documentation describing the QueryTemplate.
 
-`  state  `
+`state`
 
-`  enum ( State  ` )
+` enum ( State  ` )
 
 Output only. The QueryTemplate lifecycle state.
 
-`  routine  `
+`routine`
 
-`  object ( Routine  ` )
+` object ( Routine  ` )
 
 Optional. The routine associated with the QueryTemplate.
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Timestamp when the QueryTemplate was created.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Timestamp when the QueryTemplate was last modified.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
 ## State
 
@@ -111,23 +98,23 @@ The QueryTemplate lifecycle state.
 
 Enums
 
-`  STATE_UNSPECIFIED  `
+`STATE_UNSPECIFIED`
 
 Default value. This value is unused.
 
-`  DRAFTED  `
+`DRAFTED`
 
 The QueryTemplate is in draft state.
 
-`  PENDING  `
+`PENDING`
 
 The QueryTemplate is in pending state.
 
-`  DELETED  `
+`DELETED`
 
 The QueryTemplate is in deleted state.
 
-`  APPROVED  `
+`APPROVED`
 
 The QueryTemplate is in approved state.
 
@@ -146,25 +133,22 @@ Represents a bigquery routine.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;routineType&quot;: enum (RoutineType),
-  &quot;definitionBody&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;routineType&quot;: enum (RoutineType),&quot;definitionBody&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  routineType  `
+`routineType`
 
-`  enum ( RoutineType  ` )
+` enum ( RoutineType  ` )
 
 Required. The type of routine.
 
-`  definitionBody  `
+`definitionBody`
 
-`  string  `
+`string`
 
 Optional. The definition body of the routine.
 
@@ -174,40 +158,40 @@ Represents the type of a given routine.
 
 Enums
 
-`  ROUTINE_TYPE_UNSPECIFIED  `
+`ROUTINE_TYPE_UNSPECIFIED`
 
 Default value.
 
-`  TABLE_VALUED_FUNCTION  `
+`TABLE_VALUED_FUNCTION`
 
 Non-built-in persistent TVF.
 
 ## Methods
 
-### `             approve           `
+### `            approve           `
 
 Approves a query template.
 
-### `             create           `
+### `            create           `
 
 Creates a new QueryTemplate
 
-### `             delete           `
+### `            delete           `
 
 Deletes a query template.
 
-### `             get           `
+### `            get           `
 
 Gets a QueryTemplate
 
-### `             list           `
+### `            list           `
 
 Lists all QueryTemplates in a given project and location.
 
-### `             patch           `
+### `            patch           `
 
 Updates an existing QueryTemplate
 
-### `             submit           `
+### `            submit           `
 
 Submits a query template for approval.

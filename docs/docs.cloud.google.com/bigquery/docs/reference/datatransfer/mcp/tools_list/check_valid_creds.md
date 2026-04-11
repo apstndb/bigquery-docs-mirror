@@ -1,16 +1,16 @@
-## Tool: `       check_valid_creds      `
+## Tool: `check_valid_creds`
 
 Check for valid credentials for a data source.
 
-The following example shows a MCP call to check for valid credentials for a data source with the ID `  data_source_id  ` in the project `  myproject  ` in the location `  myregion  ` .
+The following example shows a MCP call to check for valid credentials for a data source with the ID `data_source_id` in the project `myproject` in the location `myregion` .
 
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `  US  ` multi-region.
+If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
 
-If `  has_valid_creds  ` is true, then the credentials are valid. Otherwise, the credentials are not valid.
+If `has_valid_creds` is true, then the credentials are valid. Otherwise, the credentials are not valid.
 
-`  check_valid_creds(project_id="myproject", location="myregion", data_source_id="mydatasource")  `
+`check_valid_creds(project_id="myproject", location="myregion", data_source_id="mydatasource")`
 
-The following sample demonstrate how to use `  curl  ` to invoke the `  check_valid_creds  ` MCP tool.
+The following sample demonstrate how to use `curl` to invoke the `check_valid_creds` MCP tool.
 
 <table>
 <colgroup>
@@ -69,17 +69,17 @@ A request to determine whether the user has valid credentials. This method is us
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The name of the data source. If you are using the regionless method, the location must be `  US  ` and the name should be in the following form:
+Required. The name of the data source. If you are using the regionless method, the location must be `US` and the name should be in the following form:
 
-  - `  projects/{project_id}/dataSources/{data_source_id}  `
+  - `projects/{project_id}/dataSources/{data_source_id}`
 
 If you are using the regionalized method, the name should be in the following form:
 
-  - `  projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}  `
+  - `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
 
 ## Output Schema
 
@@ -107,11 +107,11 @@ A response indicating whether the credentials exist and are valid.
 
 Fields
 
-`  hasValidCreds  `
+`hasValidCreds`
 
-`  boolean  `
+`boolean`
 
-If set to `  true  ` , the credentials exist and are valid.
+If set to `true` , the credentials exist and are valid.
 
 ### Tool Annotations
 

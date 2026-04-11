@@ -8,7 +8,7 @@ You can modify a table schema in all the ways described on this page by [exporti
 
 Schema updates in BigQuery don't cause data loss.
 
-**Note:** When you update a schema, the changes might not be immediately reflected in the [`  INFORMATION_SCHEMA.TABLES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`  INFORMATION_SCHEMA.COLUMNS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) views. To view immediate schema changes, call the [`  tables.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) .
+**Note:** When you update a schema, the changes might not be immediately reflected in the [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) views. To view immediate schema changes, call the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) .
 
 ## Add a column
 
@@ -24,7 +24,7 @@ It isn't possible to add columns in the middle of a table schema. New columns an
 
 ### Add an empty column
 
-If you add new columns to an existing table schema, the columns must be `  NULLABLE  ` or `  REPEATED  ` . You cannot add a `  REQUIRED  ` column to an existing table schema. Adding a `  REQUIRED  ` column to an existing table schema in the API or bq command-line tool causes an error. However, you can create a nested `  REQUIRED  ` column as part of a new `  RECORD  ` field. `  REQUIRED  ` columns can be added only when you create a table while loading data, or when you create an empty table with a schema definition.
+If you add new columns to an existing table schema, the columns must be `NULLABLE` or `REPEATED` . You cannot add a `REQUIRED` column to an existing table schema. Adding a `REQUIRED` column to an existing table schema in the API or bq command-line tool causes an error. However, you can create a nested `REQUIRED` column as part of a new `RECORD` field. `REQUIRED` columns can be added only when you create a table while loading data, or when you create an empty table with a schema definition.
 
 To add empty columns to a table's schema definition:
 
@@ -52,7 +52,7 @@ To add empty columns to a table's schema definition:
     
       - For **Name** , type the column name.
       - For **Type** , choose the [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
-      - For [**Mode**](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.mode) , choose `  NULLABLE  ` or `  REPEATED  ` .
+      - For [**Mode**](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.mode) , choose `NULLABLE` or `REPEATED` .
 
 8.  When you are done adding columns, click **Save** .
 
@@ -60,7 +60,7 @@ To add empty columns to a table's schema definition:
 
 ### SQL
 
-Use the [`  ALTER TABLE ADD COLUMN  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) :
+Use the [`ALTER TABLE ADD COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -77,11 +77,11 @@ Use the [`  ALTER TABLE ADD COLUMN  ` DDL statement](https://docs.cloud.google.c
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-**Note:** You can't use the `  ALTER TABLE ADD COLUMN  ` statement to add a column to an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
+**Note:** You can't use the `ALTER TABLE ADD COLUMN` statement to add a column to an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ### bq
 
-Issue the `  bq update  ` command and provide a JSON schema file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
+Issue the `bq update` command and provide a JSON schema file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
 
 ``` notranslate
 bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -94,15 +94,15 @@ Replace the following:
   - `  TABLE  ` : the name of the table you're updating.
   - `  SCHEMA  ` : the path to the JSON schema file on your local machine.
 
-When you specify an inline schema, you cannot specify the column description, mode, and `  RECORD  ` ( [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type. All column modes default to `  NULLABLE  ` . As a result, if you are adding a new nested column to a `  RECORD  ` , you must [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) .
+When you specify an inline schema, you cannot specify the column description, mode, and `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type. All column modes default to `NULLABLE` . As a result, if you are adding a new nested column to a `RECORD` , you must [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) .
 
-If you attempt to add columns using an inline schema definition, you must supply the entire schema definition including the new columns. Because you cannot specify column modes using an inline schema definition, the update changes any existing `  REPEATED  ` column to `  NULLABLE  ` , which produces the following error: `  BigQuery error in update operation: Provided Schema does not match Table PROJECT_ID:dataset.table . Field field has changed mode from REPEATED to NULLABLE.  `
+If you attempt to add columns using an inline schema definition, you must supply the entire schema definition including the new columns. Because you cannot specify column modes using an inline schema definition, the update changes any existing `REPEATED` column to `NULLABLE` , which produces the following error: `BigQuery error in update operation: Provided Schema does not match Table PROJECT_ID:dataset.table . Field field has changed mode from REPEATED to NULLABLE.`
 
 The preferred method of adding columns to an existing table using the bq command-line tool is to [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) .
 
 To add empty columns to a table's schema using a JSON schema file:
 
-1.  First, issue the `  bq show  ` command with the `  --schema  ` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
+1.  First, issue the `bq show` command with the `--schema` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
     
     ``` notranslate
     bq show \
@@ -118,7 +118,7 @@ To add empty columns to a table's schema using a JSON schema file:
       - `  TABLE  ` : the name of the table you're updating.
       - `  SCHEMA  ` : the schema definition file written to your local machine.
     
-    For example, to write the schema definition of `  mydataset.mytable  ` to a file, enter the following command. `  mydataset.mytable  ` is in your default project.
+    For example, to write the schema definition of `mydataset.mytable` to a file, enter the following command. `mydataset.mytable` is in your default project.
     
     ``` 
        bq show \
@@ -147,9 +147,9 @@ To add empty columns to a table's schema using a JSON schema file:
           }
         ]
 
-3.  Add the new columns to the end of the schema definition. If you attempt to add new columns elsewhere in the array, the following error is returned: `  BigQuery error in update operation: Precondition Failed  ` . Modifying schema order after table creation doesn't have an effect on column or nested field order.
+3.  Add the new columns to the end of the schema definition. If you attempt to add new columns elsewhere in the array, the following error is returned: `BigQuery error in update operation: Precondition Failed` . Modifying schema order after table creation doesn't have an effect on column or nested field order.
     
-    Using a JSON file, you can specify descriptions, `  NULLABLE  ` or `  REPEATED  ` modes, and `  RECORD  ` types for new columns. For example, using the schema definition from the previous step, your new JSON array would look like the following. In this example, a new `  NULLABLE  ` column is added named `  column4  ` . `  column4  ` includes a description.
+    Using a JSON file, you can specify descriptions, `NULLABLE` or `REPEATED` modes, and `RECORD` types for new columns. For example, using the schema definition from the previous step, your new JSON array would look like the following. In this example, a new `NULLABLE` column is added named `column4` . `column4` includes a description.
     
     ``` 
       [
@@ -193,13 +193,13 @@ To add empty columns to a table's schema using a JSON schema file:
       - `  TABLE  ` : the name of the table you're updating.
       - `  SCHEMA  ` : the schema definition file written to your local machine.
     
-    For example, enter the following command to update the schema definition of `  mydataset.mytable  ` in your default project. The path to the schema file on your local machine is `  /tmp/myschema.json  ` .
+    For example, enter the following command to update the schema definition of `mydataset.mytable` in your default project. The path to the schema file on your local machine is `/tmp/myschema.json` .
     
         bq update mydataset.mytable /tmp/myschema.json
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `  schema  ` property to add empty columns to your schema definition. Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `schema` property to add empty columns to your schema definition. Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -366,21 +366,21 @@ Append a new [SchemaField](https://docs.cloud.google.com/python/docs/reference/b
     else:
         print("The column has not been added.")
 
-### Add a nested column to a `     RECORD    ` column
+### Add a nested column to a `RECORD` column
 
-In addition to adding new columns to a table's schema, you can also add new nested columns to a `  RECORD  ` column. The process for adding a new nested column is similar to the process for adding a new column.
+In addition to adding new columns to a table's schema, you can also add new nested columns to a `RECORD` column. The process for adding a new nested column is similar to the process for adding a new column.
 
 ### Console
 
-Adding a new nested field to an existing `  RECORD  ` column is not supported by the Google Cloud console.
+Adding a new nested field to an existing `RECORD` column is not supported by the Google Cloud console.
 
 ### SQL
 
-Adding a new nested field to an existing `  RECORD  ` column by using a SQL DDL statement is not supported.
+Adding a new nested field to an existing `RECORD` column by using a SQL DDL statement is not supported.
 
 ### bq
 
-Issue the `  bq update  ` command and provide a JSON schema file that adds the nested field to the existing `  RECORD  ` column's schema definition. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
+Issue the `bq update` command and provide a JSON schema file that adds the nested field to the existing `RECORD` column's schema definition. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
 
 ``` notranslate
 bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -393,11 +393,11 @@ Replace the following:
   - `  TABLE  ` : the name of the table you're updating.
   - `  SCHEMA  ` : the path to the JSON schema file on your local machine.
 
-When you specify an inline schema, you cannot specify the column description, mode, and `  RECORD  ` ( [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type. All column modes default to `  NULLABLE  ` . As a result, if you are adding a new nested column to a `  RECORD  ` , you must [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) .
+When you specify an inline schema, you cannot specify the column description, mode, and `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type. All column modes default to `NULLABLE` . As a result, if you are adding a new nested column to a `RECORD` , you must [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) .
 
-To add a nested column to a `  RECORD  ` using a JSON schema file:
+To add a nested column to a `RECORD` using a JSON schema file:
 
-1.  First, issue the `  bq show  ` command with the `  --schema  ` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET.TABLE  ` .
+1.  First, issue the `bq show` command with the `--schema` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET.TABLE  ` .
     
     ``` notranslate
     bq show \
@@ -413,14 +413,14 @@ To add a nested column to a `  RECORD  ` using a JSON schema file:
       - `  TABLE  ` : the name of the table you're updating.
       - `  SCHEMA  ` : the schema definition file written to your local machine.
     
-    For example, to write the schema definition of `  mydataset.mytable  ` to a file, enter the following command. `  mydataset.mytable  ` is in your default project.
+    For example, to write the schema definition of `mydataset.mytable` to a file, enter the following command. `mydataset.mytable` is in your default project.
     
         bq show \
         --schema \
         --format=prettyjson \
         mydataset.mytable > /tmp/myschema.json
 
-2.  Open the schema file in a text editor. The schema should look like the following. In this example, `  column3  ` is a nested repeated column. The nested columns are `  nested1  ` and `  nested2  ` . The `  fields  ` array lists the fields nested within `  column3  ` .
+2.  Open the schema file in a text editor. The schema should look like the following. In this example, `column3` is a nested repeated column. The nested columns are `nested1` and `nested2` . The `fields` array lists the fields nested within `column3` .
     
         [
           {
@@ -452,7 +452,7 @@ To add a nested column to a `  RECORD  ` using a JSON schema file:
           }
         ]
 
-3.  Add the new nested column to the end of the `  fields  ` array. Nested fields are always added at the end of the field. In this example, `  nested3  ` is the new nested column.
+3.  Add the new nested column to the end of the `fields` array. Nested fields are always added at the end of the field. In this example, `nested3` is the new nested column.
     
     ``` 
       [
@@ -507,13 +507,13 @@ To add a nested column to a `  RECORD  ` using a JSON schema file:
       - `  TABLE  ` : the name of the table you're updating.
       - `  SCHEMA  ` : the path to the JSON schema file on your local machine.
     
-    For example, enter the following command to update the schema definition of `  mydataset.mytable  ` in your default project. The path to the schema file on your local machine is `  /tmp/myschema.json  ` .
+    For example, enter the following command to update the schema definition of `mydataset.mytable` in your default project. The path to the schema file on your local machine is `/tmp/myschema.json` .
     
         bq update mydataset.mytable /tmp/myschema.json
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `  schema  ` property to add the nested columns to your schema definition. Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `schema` property to add the nested columns to your schema definition. Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Add columns when you overwrite or append data
 
@@ -535,23 +535,23 @@ You can add columns to a table when you append data to it in a load job. The new
 
 If you specify the schema in a JSON file, the new columns must be defined in it. If the new column definitions are missing, an error is returned when you attempt to append the data.
 
-When you add new columns during an append operation, the values in the new columns are set to `  NULL  ` for existing rows.
+When you add new columns during an append operation, the values in the new columns are set to `NULL` for existing rows.
 
 To add a new column when you append data to a table during a load job, use one of the following options:
 
 ### bq
 
-Use the `  bq load  ` command to load your data and specify the `  --noreplace  ` flag to indicate that you are appending the data to an existing table.
+Use the `bq load` command to load your data and specify the `--noreplace` flag to indicate that you are appending the data to an existing table.
 
-If the data you're appending is in CSV or newline-delimited JSON format, specify the `  --autodetect  ` flag to use [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) or supply the schema in a JSON schema file. The added columns can be automatically inferred from Avro or Datastore export files.
+If the data you're appending is in CSV or newline-delimited JSON format, specify the `--autodetect` flag to use [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) or supply the schema in a JSON schema file. The added columns can be automatically inferred from Avro or Datastore export files.
 
-Set the `  --schema_update_option  ` flag to `  ALLOW_FIELD_ADDITION  ` to indicate that the data you're appending contains new columns.
+Set the `--schema_update_option` flag to `ALLOW_FIELD_ADDITION` to indicate that the data you're appending contains new columns.
 
 If the table you're appending is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-Enter the `  load  ` command as follows:
+Enter the `load` command as follows:
 
 ``` notranslate
 bq --location=LOCATION load \
@@ -566,17 +566,17 @@ SCHEMA
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  FORMAT  ` : the format of the schema. `  NEWLINE_DELIMITED_JSON  ` , `  CSV  ` , `  AVRO  ` , `  PARQUET  ` , `  ORC  ` , or `  DATASTORE_BACKUP  ` .
+  - `  LOCATION  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  FORMAT  ` : the format of the schema. `NEWLINE_DELIMITED_JSON` , `CSV` , `AVRO` , `PARQUET` , `ORC` , or `DATASTORE_BACKUP` .
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET  ` : the name of the dataset that contains the table you're updating.
   - `  TABLE  ` : the name of the table you're appending.
   - `  PATH_TO_SOURCE  ` : a fully-qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) , a comma-separated list of URIs, or the path to a data file on your local machine.
-  - `  SCHEMA  ` : the path to a local JSON schema file. A schema file is required only for CSV and JSON files when `  --autodetect  ` is unspecified. Avro and Datastore schemas are inferred from the source data.
+  - `  SCHEMA  ` : the path to a local JSON schema file. A schema file is required only for CSV and JSON files when `--autodetect` is unspecified. Avro and Datastore schemas are inferred from the source data.
 
 Examples:
 
-Enter the following command to append a local Avro data file, `  /tmp/mydata.avro  ` , to `  mydataset.mytable  ` using a load job. Because schemas can be automatically inferred from Avro data you don't need to use the `  --autodetect  ` flag. `  mydataset  ` is in your default project.
+Enter the following command to append a local Avro data file, `/tmp/mydata.avro` , to `mydataset.mytable` using a load job. Because schemas can be automatically inferred from Avro data you don't need to use the `--autodetect` flag. `mydataset` is in your default project.
 
     bq load \
     --noreplace \
@@ -585,7 +585,7 @@ Enter the following command to append a local Avro data file, `  /tmp/mydata.avr
     mydataset.mytable \
     /tmp/mydata.avro
 
-Enter the following command append a newline-delimited JSON data file in Cloud Storage to `  mydataset.mytable  ` using a load job. The `  --autodetect  ` flag is used to detect the new columns. `  mydataset  ` is in your default project.
+Enter the following command append a newline-delimited JSON data file in Cloud Storage to `mydataset.mytable` using a load job. The `--autodetect` flag is used to detect the new columns. `mydataset` is in your default project.
 
     bq load \
     --noreplace \
@@ -595,7 +595,7 @@ Enter the following command append a newline-delimited JSON data file in Cloud S
     mydataset.mytable \
     gs://mybucket/mydata.json
 
-Enter the following command append a newline-delimited JSON data file in Cloud Storage to `  mydataset.mytable  ` using a load job. The schema containing the new columns is specified in a local JSON schema file, `  /tmp/myschema.json  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command append a newline-delimited JSON data file in Cloud Storage to `mydataset.mytable` using a load job. The schema containing the new columns is specified in a local JSON schema file, `/tmp/myschema.json` . `mydataset` is in `myotherproject` , not your default project.
 
     bq load \
     --noreplace \
@@ -607,13 +607,13 @@ Enter the following command append a newline-delimited JSON data file in Cloud S
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `  load  ` job and set the following properties:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `load` job and set the following properties:
 
-  - Reference your data in Cloud Storage using the `  sourceUris  ` property.
-  - Specify the data format by setting the `  sourceFormat  ` property.
-  - Specify the schema in the `  schema  ` property.
-  - Specify the schema update option using the `  schemaUpdateOptions  ` property.
-  - Set the write disposition of the destination table to `  WRITE_APPEND  ` using the `  writeDisposition  ` property.
+  - Reference your data in Cloud Storage using the `sourceUris` property.
+  - Specify the data format by setting the `sourceFormat` property.
+  - Specify the schema in the `schema` property.
+  - Specify the schema update option using the `schemaUpdateOptions` property.
+  - Set the write disposition of the destination table to `WRITE_APPEND` using the `writeDisposition` property.
 
 ### Go
 
@@ -889,17 +889,17 @@ To add a new column when you append data to a table during a query job, select o
 
 ### bq
 
-Use the `  bq query  ` command to query your data and specify the `  --destination_table  ` flag to indicate which table you're appending.
+Use the `bq query` command to query your data and specify the `--destination_table` flag to indicate which table you're appending.
 
-To specify that you are appending query results to an existing destination table, specify the `  --append_table  ` flag.
+To specify that you are appending query results to an existing destination table, specify the `--append_table` flag.
 
-Set the `  --schema_update_option  ` flag to `  ALLOW_FIELD_ADDITION  ` to indicate that the query results you're appending contain new columns.
+Set the `--schema_update_option` flag to `ALLOW_FIELD_ADDITION` to indicate that the query results you're appending contain new columns.
 
-Specify the `  use_legacy_sql=false  ` flag to use GoogleSQL syntax for the query.
+Specify the `use_legacy_sql=false` flag to use GoogleSQL syntax for the query.
 
 If the table you're appending is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` . Note that the table you're querying and the destination table must be in the same location.
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ``` notranslate
 bq --location=LOCATION query \
@@ -912,7 +912,7 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) . Note that you cannot append query results to a table in another location.
+  - `  LOCATION  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) . Note that you cannot append query results to a table in another location.
   - `  PROJECT_ID  ` : your project ID.
   - `  dataset  ` : the name of the dataset that contains the table you're appending.
   - `  TABLE  ` : the name of the table you're appending.
@@ -920,7 +920,7 @@ Replace the following:
 
 Examples:
 
-Enter the following command to query `  mydataset.mytable  ` in your default project and to append the query results to `  mydataset.mytable2  ` (also in your default project).
+Enter the following command to query `mydataset.mytable` in your default project and to append the query results to `mydataset.mytable2` (also in your default project).
 
     bq query \
     --destination_table mydataset.mytable2 \
@@ -932,7 +932,7 @@ Enter the following command to query `  mydataset.mytable  ` in your default pro
      FROM
        mydataset.mytable'
 
-Enter the following command to query `  mydataset.mytable  ` in your default project and to append the query results to `  mydataset.mytable2  ` in `  myotherproject  ` .
+Enter the following command to query `mydataset.mytable` in your default project and to append the query results to `mydataset.mytable2` in `myotherproject` .
 
     bq query \
     --destination_table myotherproject:mydataset.mytable2 \
@@ -946,12 +946,12 @@ Enter the following command to query `  mydataset.mytable  ` in your default pro
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `  query  ` job and set the following properties:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `query` job and set the following properties:
 
-  - Specify the destination table using the `  destinationTable  ` property.
-  - Set the write disposition of the destination table to `  WRITE_APPEND  ` using the `  writeDisposition  ` property.
-  - Specify the schema update option using the `  schemaUpdateOptions  ` property.
-  - Specify the GoogleSQL query using the `  query  ` property.
+  - Specify the destination table using the `destinationTable` property.
+  - Set the write disposition of the destination table to `WRITE_APPEND` using the `writeDisposition` property.
+  - Specify the schema update option using the `schemaUpdateOptions` property.
+  - Specify the GoogleSQL query using the `query` property.
 
 ### Go
 
@@ -1190,14 +1190,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Change a column's name
 
-To rename a column on a table, use the [`  ALTER TABLE RENAME COLUMN  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_column_statement) . The following example renames the column `  old_name  ` to `  new_name  ` on `  mytable  ` :
+To rename a column on a table, use the [`ALTER TABLE RENAME COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_column_statement) . The following example renames the column `old_name` to `new_name` on `mytable` :
 
 ``` notranslate
 ALTER TABLE mydataset.mytable
   RENAME COLUMN old_name TO new_name;
 ```
 
-For more information about `  ALTER TABLE RENAME COLUMN  ` statements, see [DDL details](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_15) .
+For more information about `ALTER TABLE RENAME COLUMN` statements, see [DDL details](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_15) .
 
 ## Change a column's data type
 
@@ -1205,9 +1205,9 @@ Changing a column's data type isn't supported by the Google Cloud console, the b
 
 ### Change a column's data type with a DDL statement
 
-You can use GoogleSQL to make certain changes to the data type of a column. For more information and a complete list of supported data type conversions, see the [`  ALTER COLUMN SET DATA TYPE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement) .
+You can use GoogleSQL to make certain changes to the data type of a column. For more information and a complete list of supported data type conversions, see the [`ALTER COLUMN SET DATA TYPE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement) .
 
-The following example creates a table with a column of type `  INT64  ` , then updates the type to `  NUMERIC  ` :
+The following example creates a table with a column of type `INT64` , then updates the type to `NUMERIC` :
 
 ``` notranslate
 CREATE TABLE mydataset.mytable(c1 INT64);
@@ -1216,7 +1216,7 @@ ALTER TABLE mydataset.mytable
 ALTER COLUMN c1 SET DATA TYPE NUMERIC;
 ```
 
-The following example creates a table with a nested column with two fields, and then updates the type of one of the columns from `  INT  ` to `  NUMERIC  ` :
+The following example creates a table with a nested column with two fields, and then updates the type of one of the columns from `INT` to `NUMERIC` :
 
 ``` notranslate
 CREATE TABLE mydataset.mytable(s1 STRUCT<a INT64, b STRING>);
@@ -1227,11 +1227,11 @@ SET DATA TYPE STRUCT<a NUMERIC, b STRING>;
 
 ### Modify nested column types
 
-For complex nested schema changes, like altering a field within an array of STRUCTs, the [`  ALTER TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement) isn't supported. As a workaround you can use the [`  CREATE OR REPLACE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a `  SELECT  ` statement to transform your nested schema changes.
+For complex nested schema changes, like altering a field within an array of STRUCTs, the [`ALTER TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement) isn't supported. As a workaround you can use the [`CREATE OR REPLACE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a `SELECT` statement to transform your nested schema changes.
 
-The following example demonstrates how to transform a column within an array of `  STRUCTS  ` :
+The following example demonstrates how to transform a column within an array of `STRUCTS` :
 
-Consider a table `  samples.test  ` with the following schema and data:
+Consider a table `samples.test` with the following schema and data:
 
 ``` notranslate
 CREATE OR REPLACE TABLE
@@ -1251,7 +1251,7 @@ The result looks similar to the following:
     | {"L":[{"R":"r1","U":"u1","V":"v1"},{"R":"r2","U":"u2","V":"v2"}],"F":"f1"} |
     +----------------------------------------------------------------------------+
 
-Suppose you need to change the type of field `  U  ` within the nested array of `  STRUCT  ` s to `  STRUCT<W STRING>  ` . The following SQL statement demonstrates how to accomplish this:
+Suppose you need to change the type of field `U` within the nested array of `STRUCT` s to `STRUCT<W STRING>` . The following SQL statement demonstrates how to accomplish this:
 
 ``` notranslate
 CREATE OR REPLACE TABLE
@@ -1269,7 +1269,7 @@ FROM
   samples.test AS t
 ```
 
-This statement creates a new table, `  samples.new_table  ` , with the target schema. The `  UNNEST  ` function expands the array of STRUCTs within `  t.D.L  ` . The expression `  STRUCT(tmp.U AS W) AS U  ` constructs the new STRUCT with field W, populated by the value from the original `  U  ` field. The resulting table, `  samples.new_table  ` , has the following schema and data:
+This statement creates a new table, `samples.new_table` , with the target schema. The `UNNEST` function expands the array of STRUCTs within `t.D.L` . The expression `STRUCT(tmp.U AS W) AS U` constructs the new STRUCT with field W, populated by the value from the original `U` field. The resulting table, `samples.new_table` , has the following schema and data:
 
     +----------------------------------------------------------------------------------------+
     |                                           D                                            |
@@ -1281,9 +1281,9 @@ This statement creates a new table, `  samples.new_table  ` , with the target sc
 
 To change a column's data type into a [castable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) type, use a SQL query to select the table data, [cast](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) the relevant column, and [overwrite the table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) . Casting and overwriting is not recommended for very large tables because it requires a full table scan.
 
-The following example shows a SQL query that selects all the data from `  column_two  ` and `  column_three  ` in `  mydataset.mytable  ` and casts `  column_one  ` from `  DATE  ` to `  STRING  ` . The query result is used to overwrite the existing table. The overwritten table stores `  column_one  ` as a `  STRING  ` data type.
+The following example shows a SQL query that selects all the data from `column_two` and `column_three` in `mydataset.mytable` and casts `column_one` from `DATE` to `STRING` . The query result is used to overwrite the existing table. The overwritten table stores `column_one` as a `STRING` data type.
 
-When using `  CAST  ` , a query can fail if BigQuery is unable to perform the cast. For details on casting rules in GoogleSQL, see [Casting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) .
+When using `CAST` , a query can fail if BigQuery is unable to perform the cast. For details on casting rules in GoogleSQL, see [Casting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) .
 
 ### Console
 
@@ -1291,7 +1291,7 @@ When using `  CAST  ` , a query can fail if BigQuery is unable to perform the ca
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the **Query editor** , enter the following query to select all of the data from `  column_two  ` and `  column_three  ` in `  mydataset.mytable  ` and to cast `  column_one  ` from `  DATE  ` to `  STRING  ` . The query uses an alias to cast `  column_one  ` with the same name. `  mydataset.mytable  ` is in your default project.
+2.  In the **Query editor** , enter the following query to select all of the data from `column_two` and `column_three` in `mydataset.mytable` and to cast `column_one` from `DATE` to `STRING` . The query uses an alias to cast `column_one` with the same name. `mydataset.mytable` is in your default project.
     
     ``` notranslate
     SELECT
@@ -1308,13 +1308,13 @@ When using `  CAST  ` , a query can fail if BigQuery is unable to perform the ca
     
     1.  Select **Set a destination table for query results** .
     
-    2.  For **Project name** , leave the value set to your default project. This is the project that contains `  mydataset.mytable  ` .
+    2.  For **Project name** , leave the value set to your default project. This is the project that contains `mydataset.mytable` .
     
-    3.  For **Dataset** , choose `  mydataset  ` .
+    3.  For **Dataset** , choose `mydataset` .
     
-    4.  In the **Table Id** field, enter `  mytable  ` .
+    4.  In the **Table Id** field, enter `mytable` .
     
-    5.  For **Destination table write preference** , select **Overwrite table** . This option overwrites `  mytable  ` using the query results.
+    5.  For **Destination table write preference** , select **Overwrite table** . This option overwrites `mytable` using the query results.
 
 5.  Optionally, choose your data's [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
@@ -1322,15 +1322,15 @@ When using `  CAST  ` , a query can fail if BigQuery is unable to perform the ca
 
 7.  Click play\_circle **Run** .
     
-    When the query job completes, the data type of `  column_one  ` is `  STRING  ` .
+    When the query job completes, the data type of `column_one` is `STRING` .
 
 ### bq
 
-Enter the following `  bq query  ` command to select all of the data from `  column_two  ` and `  column_three  ` in `  mydataset.mytable  ` and to cast `  column_one  ` from `  DATE  ` to `  STRING  ` . The query uses an alias to cast `  column_one  ` with the same name. `  mydataset.mytable  ` is in your default project.
+Enter the following `bq query` command to select all of the data from `column_two` and `column_three` in `mydataset.mytable` and to cast `column_one` from `DATE` to `STRING` . The query uses an alias to cast `column_one` with the same name. `mydataset.mytable` is in your default project.
 
-The query results are written to `  mydataset.mytable  ` using the `  --destination_table  ` flag, and the `  --replace  ` flag is used to overwrite `  mytable  ` . Specify the `  use_legacy_sql=false  ` flag to use GoogleSQL syntax.
+The query results are written to `mydataset.mytable` using the `--destination_table` flag, and the `--replace` flag is used to overwrite `mytable` . Specify the `use_legacy_sql=false` flag to use GoogleSQL syntax.
 
-Optionally, supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+Optionally, supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
     bq query \
         --destination_table mydataset.mytable \
@@ -1345,19 +1345,19 @@ Optionally, supply the `  --location  ` flag and set the value to your [location
 
 ### API
 
-To select all of the data from `  column_two  ` and `  column_three  ` in `  mydataset.mytable  ` and to cast `  column_one  ` from `  DATE  ` to `  STRING  ` , call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and configure a `  query  ` job. Optionally, specify your location in the `  location  ` property in the `  jobReference  ` section.
+To select all of the data from `column_two` and `column_three` in `mydataset.mytable` and to cast `column_one` from `DATE` to `STRING` , call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and configure a `query` job. Optionally, specify your location in the `location` property in the `jobReference` section.
 
-The SQL query used in the query job would be `  SELECT column_two, column_three, CAST(column_one AS STRING) AS column_one FROM mydataset.mytable  ` . The query uses an alias to cast `  column_one  ` with the same name.
+The SQL query used in the query job would be `SELECT column_two, column_three, CAST(column_one AS STRING) AS column_one FROM mydataset.mytable` . The query uses an alias to cast `column_one` with the same name.
 
-To overwrite `  mytable  ` with the query results, include `  mydataset.mytable  ` in the `  configuration.query.destinationTable  ` property, and specify `  WRITE_TRUNCATE  ` in the `  configuration.query.writeDisposition  ` property.
+To overwrite `mytable` with the query results, include `mydataset.mytable` in the `configuration.query.destinationTable` property, and specify `WRITE_TRUNCATE` in the `configuration.query.writeDisposition` property.
 
 ## Change a column's mode
 
-The only supported modification you can make to a column's mode is changing it from `  REQUIRED  ` to `  NULLABLE  ` . Changing a column's mode from `  REQUIRED  ` to `  NULLABLE  ` is also called column relaxation. You can also relax a column when you load data to overwrite an existing table, or when you append data to an existing table. You can't change a column's mode from `  NULLABLE  ` to `  REQUIRED  ` or from `  REPEATED  ` to `  NULLABLE  ` . To change a column's mode from `  NULLABLE  ` to `  REQUIRED  ` or from `  REPEATED  ` to `  NULLABLE  ` , you must recreate the table with the updated column modes.
+The only supported modification you can make to a column's mode is changing it from `REQUIRED` to `NULLABLE` . Changing a column's mode from `REQUIRED` to `NULLABLE` is also called column relaxation. You can also relax a column when you load data to overwrite an existing table, or when you append data to an existing table. You can't change a column's mode from `NULLABLE` to `REQUIRED` or from `REPEATED` to `NULLABLE` . To change a column's mode from `NULLABLE` to `REQUIRED` or from `REPEATED` to `NULLABLE` , you must recreate the table with the updated column modes.
 
-### Make a column `     NULLABLE    ` in an existing table
+### Make a column `NULLABLE` in an existing table
 
-To change a column's mode from `  REQUIRED  ` to `  NULLABLE  ` , select one of the following options:
+To change a column's mode from `REQUIRED` to `NULLABLE` , select one of the following options:
 
 ### Console
 
@@ -1379,7 +1379,7 @@ To change a column's mode from `  REQUIRED  ` to `  NULLABLE  ` , select one of 
 
 7.  In the **Current schema** page, locate the field that you want to change.
 
-8.  In the **Mode** drop-down list for that field, select `  NULLABLE  ` .
+8.  In the **Mode** drop-down list for that field, select `NULLABLE` .
 
 9.  To update the settings, click **Save** .
 
@@ -1387,7 +1387,7 @@ To change a column's mode from `  REQUIRED  ` to `  NULLABLE  ` , select one of 
 
 ### SQL
 
-Use the [`  ALTER COLUMN DROP NOT NULL  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_drop_not_null_statement) . The following example changes the mode of the column `  mycolumn  ` from `  REQUIRED  ` to `  NULLABLE  ` :
+Use the [`ALTER COLUMN DROP NOT NULL` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_drop_not_null_statement) . The following example changes the mode of the column `mycolumn` from `REQUIRED` to `NULLABLE` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1407,7 +1407,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-1.  First, issue the `  bq show  ` command with the `  --schema  ` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
+1.  First, issue the `bq show` command with the `--schema` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
     
     ``` notranslate
     bq show \
@@ -1423,7 +1423,7 @@ For more information about how to run queries, see [Run an interactive query](ht
       - `  TABLE  ` : the name of the table you're updating.
       - `  SCHEMA_FILE  ` : the schema definition file written to your local machine.
     
-    For example, to write the schema definition of `  mydataset.mytable  ` to a file, enter the following command. `  mydataset.mytable  ` is in your default project.
+    For example, to write the schema definition of `mydataset.mytable` to a file, enter the following command. `mydataset.mytable` is in your default project.
     
     ``` 
       bq show \
@@ -1452,7 +1452,7 @@ For more information about how to run queries, see [Run an interactive query](ht
           }
         ]
 
-3.  Change an existing column's mode from `  REQUIRED  ` to `  NULLABLE  ` . In this example, the mode for `  column1  ` is relaxed.
+3.  Change an existing column's mode from `REQUIRED` to `NULLABLE` . In this example, the mode for `column1` is relaxed.
     
         [
           {
@@ -1487,7 +1487,7 @@ For more information about how to run queries, see [Run an interactive query](ht
       - `  TABLE  ` : the name of the table you're updating.
       - `  SCHEMA  ` : the path to the JSON schema file on your local machine.
     
-    For example, enter the following command to update the schema definition of `  mydataset.mytable  ` in your default project. The path to the schema file on your local machine is `  /tmp/myschema.json  ` .
+    For example, enter the following command to update the schema definition of `mydataset.mytable` in your default project. The path to the schema file on your local machine is `/tmp/myschema.json` .
     
     ``` 
       bq update mydataset.mytable /tmp/myschema.json
@@ -1495,7 +1495,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-Call [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) and use the `  schema  ` property to change a `  REQUIRED  ` column to `  NULLABLE  ` in your schema definition. Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+Call [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) and use the `schema` property to change a `REQUIRED` column to `NULLABLE` in your schema definition. Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -1669,7 +1669,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Overwrite the [Table.schema](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_schema) property with a list of [SchemaField](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField) objects with the [mode](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField#google_cloud_bigquery_schema_SchemaField_mode) property set to `  'NULLABLE'  `
+Overwrite the [Table.schema](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_schema) property with a list of [SchemaField](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField) objects with the [mode](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField#google_cloud_bigquery_schema_SchemaField_mode) property set to `'NULLABLE'`
 
     from google.cloud import bigquery
     
@@ -1696,16 +1696,16 @@ Overwrite the [Table.schema](https://docs.cloud.google.com/python/docs/reference
     
     print(f"Updated {table_id} schema: {table.schema}.")
 
-### Make a column `     NULLABLE    ` with an appending load job
+### Make a column `NULLABLE` with an appending load job
 
 You can relax a column's mode when you append data to a table in a load job. Select one of the following based on the type of file:
 
   - When appending data from CSV and JSON files, relax the mode for individual columns by specifying a JSON schema file.
-  - When appending data from Avro, ORC, or Parquet files, relax columns to `  NULL  ` in your schema and let schema inference detect the relaxed columns.
+  - When appending data from Avro, ORC, or Parquet files, relax columns to `NULL` in your schema and let schema inference detect the relaxed columns.
 
-**Note:** Column relaxation does not apply to Datastore export appends. The columns in tables created by loading Datastore export files are always `  NULLABLE  ` .
+**Note:** Column relaxation does not apply to Datastore export appends. The columns in tables created by loading Datastore export files are always `NULLABLE` .
 
-To relax a column from `  REQUIRED  ` to `  NULLABLE  ` when you append data to a table during a load job, select one of the following options:
+To relax a column from `REQUIRED` to `NULLABLE` when you append data to a table during a load job, select one of the following options:
 
 ### Console
 
@@ -1713,19 +1713,19 @@ You cannot relax a column's mode using the Google Cloud console.
 
 ### bq
 
-Use the `  bq load  ` command to load your data and specify the `  --noreplace  ` flag to indicate that you are appending the data to an existing table.
+Use the `bq load` command to load your data and specify the `--noreplace` flag to indicate that you are appending the data to an existing table.
 
-If the data you're appending is in CSV or newline-delimited JSON format, specify the relaxed columns in a local JSON schema file or use the `  --autodetect  ` flag to use [schema detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) to discover relaxed columns in the source data.
+If the data you're appending is in CSV or newline-delimited JSON format, specify the relaxed columns in a local JSON schema file or use the `--autodetect` flag to use [schema detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) to discover relaxed columns in the source data.
 
-Relaxed columns can be automatically inferred from Avro, ORC, and Parquet files. Column relaxation does not apply to Datastore export appends. The columns in tables created by loading Datastore export files are always `  NULLABLE  ` .
+Relaxed columns can be automatically inferred from Avro, ORC, and Parquet files. Column relaxation does not apply to Datastore export appends. The columns in tables created by loading Datastore export files are always `NULLABLE` .
 
-Set the `  --schema_update_option  ` flag to `  ALLOW_FIELD_RELAXATION  ` to indicate that the data you're appending contains relaxed columns.
+Set the `--schema_update_option` flag to `ALLOW_FIELD_RELAXATION` to indicate that the data you're appending contains relaxed columns.
 
 If the table you're appending is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-Enter the `  load  ` command as follows:
+Enter the `load` command as follows:
 
 ``` notranslate
 bq --location=LOCATION load \
@@ -1739,8 +1739,8 @@ SCHEMA
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  FORMAT  ` : `  NEWLINE_DELIMITED_JSON  ` , `  CSV  ` , `  PARQUET  ` , `  ORC  ` , or `  AVRO  ` . `  DATASTORE_BACKUP  ` files don't require column relaxation. The columns in tables created from Datastore export files are always `  NULLABLE  ` .
+  - `  LOCATION  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  FORMAT  ` : `NEWLINE_DELIMITED_JSON` , `CSV` , `PARQUET` , `ORC` , or `AVRO` . `DATASTORE_BACKUP` files don't require column relaxation. The columns in tables created from Datastore export files are always `NULLABLE` .
   - `  PROJECT_ID  ` : your project ID.
   - `  ` dataset is the name of the dataset that contains the table.
   - `  TABLE  ` : the name of the table you're appending.
@@ -1749,7 +1749,7 @@ Replace the following:
 
 Examples:
 
-Enter the following command to append a local Avro data file, `  /tmp/mydata.avro  ` , to `  mydataset.mytable  ` using a load job. Since relaxed columns can be automatically inferred from Avro data you don't need to specify a schema file. `  mydataset  ` is in your default project.
+Enter the following command to append a local Avro data file, `/tmp/mydata.avro` , to `mydataset.mytable` using a load job. Since relaxed columns can be automatically inferred from Avro data you don't need to specify a schema file. `mydataset` is in your default project.
 
     bq load \
         --noreplace \
@@ -1758,7 +1758,7 @@ Enter the following command to append a local Avro data file, `  /tmp/mydata.avr
         mydataset.mytable \
         /tmp/mydata.avro
 
-Enter the following command to append data from a newline-delimited JSON file in Cloud Storage to `  mydataset.mytable  ` using a load job. The schema containing the relaxed columns is in a local JSON schema file — `  /tmp/myschema.json  ` . `  mydataset  ` is in your default project.
+Enter the following command to append data from a newline-delimited JSON file in Cloud Storage to `mydataset.mytable` using a load job. The schema containing the relaxed columns is in a local JSON schema file — `/tmp/myschema.json` . `mydataset` is in your default project.
 
     bq load \
     --noreplace \
@@ -1768,7 +1768,7 @@ Enter the following command to append data from a newline-delimited JSON file in
     gs://mybucket/mydata.json \
     /tmp/myschema.json
 
-Enter the following command to append data in a CSV file on your local machine to `  mydataset.mytable  ` using a load job. The command uses schema auto-detection to discover relaxed columns in the source data. `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to append data in a CSV file on your local machine to `mydataset.mytable` using a load job. The command uses schema auto-detection to discover relaxed columns in the source data. `mydataset` is in `myotherproject` , not your default project.
 
     bq load \
     --noreplace \
@@ -1780,13 +1780,13 @@ Enter the following command to append data in a CSV file on your local machine t
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `  load  ` job and set the following properties:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `load` job and set the following properties:
 
-  - Reference your data in Cloud Storage using the `  sourceUris  ` property.
-  - Specify the data format by setting the `  sourceFormat  ` property.
-  - Specify the schema in the `  schema  ` property.
-  - Specify the schema update option using the `  schemaUpdateOptions  ` property.
-  - Set the write disposition of the destination table to `  WRITE_APPEND  ` using the `  writeDisposition  ` property.
+  - Reference your data in Cloud Storage using the `sourceUris` property.
+  - Specify the data format by setting the `sourceFormat` property.
+  - Specify the schema in the `schema` property.
+  - Specify the schema update option using the `schemaUpdateOptions` property.
+  - Set the write disposition of the destination table to `WRITE_APPEND` using the `writeDisposition` property.
 
 ### Go
 
@@ -2044,9 +2044,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     current_required_fields = sum(field.mode == "REQUIRED" for field in table.schema)
     print("{} fields in the schema are now required.".format(current_required_fields))
 
-### Make all columns `     NULLABLE    ` with an append job
+### Make all columns `NULLABLE` with an append job
 
-You can relax all columns in a table when you append query results to it. You can relax all required fields in the destination table by setting the `  --schema_update_option  ` flag to `  ALLOW_FIELD_RELAXATION  ` . You cannot relax individual columns in a destination table by using a query append. To relax individual columns with a load append job, see [Make a column `  NULLABLE  ` with an append job](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#column_nullable_append) .
+You can relax all columns in a table when you append query results to it. You can relax all required fields in the destination table by setting the `--schema_update_option` flag to `ALLOW_FIELD_RELAXATION` . You cannot relax individual columns in a destination table by using a query append. To relax individual columns with a load append job, see [Make a column `NULLABLE` with an append job](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#column_nullable_append) .
 
 To relax all columns when you append query results to a destination table, select one of the following options:
 
@@ -2056,17 +2056,17 @@ You cannot relax a column's mode using the Google Cloud console.
 
 ### bq
 
-Use the `  bq query  ` command to query your data and specify the `  --destination_table  ` flag to indicate which table you're appending.
+Use the `bq query` command to query your data and specify the `--destination_table` flag to indicate which table you're appending.
 
-To specify that you are appending query results to an existing destination table, specify the `  --append_table  ` flag.
+To specify that you are appending query results to an existing destination table, specify the `--append_table` flag.
 
-Set the `  --schema_update_option  ` flag to `  ALLOW_FIELD_RELAXATION  ` to indicate that all `  REQUIRED  ` columns in the table you're appending should be changed to `  NULLABLE  ` .
+Set the `--schema_update_option` flag to `ALLOW_FIELD_RELAXATION` to indicate that all `REQUIRED` columns in the table you're appending should be changed to `NULLABLE` .
 
-Specify the `  use_legacy_sql=false  ` flag to use GoogleSQL syntax for the query.
+Specify the `use_legacy_sql=false` flag to use GoogleSQL syntax for the query.
 
 If the table you're appending is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ``` notranslate
 bq --location=LOCATION query \
@@ -2079,7 +2079,7 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET  ` : the name of the dataset that contains the table you're appending.
   - `  TABLE  ` : the name of the table you're appending.
@@ -2087,7 +2087,7 @@ Replace the following:
 
 Examples:
 
-Enter the following command query `  mydataset.mytable  ` in your default project to append the query results to `  mydataset.mytable2  ` (also in your default project). The command changes all `  REQUIRED  ` columns in the destination table to `  NULLABLE  ` .
+Enter the following command query `mydataset.mytable` in your default project to append the query results to `mydataset.mytable2` (also in your default project). The command changes all `REQUIRED` columns in the destination table to `NULLABLE` .
 
     bq query \
         --destination_table mydataset.mytable2 \
@@ -2099,7 +2099,7 @@ Enter the following command query `  mydataset.mytable  ` in your default projec
          FROM
            mydataset.mytable'
 
-Enter the following command query `  mydataset.mytable  ` in your default project and to append the query results to `  mydataset.mytable2  ` in `  myotherproject  ` . The command changes all `  REQUIRED  ` columns in the destination table to `  NULLABLE  ` .
+Enter the following command query `mydataset.mytable` in your default project and to append the query results to `mydataset.mytable2` in `myotherproject` . The command changes all `REQUIRED` columns in the destination table to `NULLABLE` .
 
     bq query \
     --destination_table myotherproject:mydataset.mytable2 \
@@ -2113,12 +2113,12 @@ Enter the following command query `  mydataset.mytable  ` in your default projec
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `  query  ` job and set the following properties:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `query` job and set the following properties:
 
-  - Specify the destination table using the `  destinationTable  ` property.
-  - Set the write disposition of the destination table to `  WRITE_APPEND  ` using the `  writeDisposition  ` property.
-  - Specify the schema update option using the `  schemaUpdateOptions  ` property.
-  - Specify the GoogleSQL query using the `  query  ` property.
+  - Specify the destination table using the `destinationTable` property.
+  - Set the write disposition of the destination table to `WRITE_APPEND` using the `writeDisposition` property.
+  - Specify the schema update option using the `schemaUpdateOptions` property.
+  - Specify the GoogleSQL query using the `query` property.
 
 ### Go
 
@@ -2331,7 +2331,7 @@ To change the default value for a column, select one of the following options:
 
 ### SQL
 
-Use the [`  ALTER COLUMN SET DEFAULT  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_default_statement) .
+Use the [`ALTER COLUMN SET DEFAULT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_default_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -2378,7 +2378,7 @@ To change the description for a column, select one of the following options:
 
 ### SQL
 
-Use the [`  ALTER COLUMN SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) .
+Use the [`ALTER COLUMN SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -2436,11 +2436,11 @@ For more information about data insights, including setup steps, required IAM ro
 
 ## Delete a column
 
-You can delete a column from an existing table by using the [`  ALTER TABLE DROP COLUMN  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) .
+You can delete a column from an existing table by using the [`ALTER TABLE DROP COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) .
 
-The statement does not immediately free up the storage that is associated with the dropped column. To learn more about the impact on storage when you drop a column on storage, see [`  ALTER TABLE DROP COLUMN  ` statement details](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_16) . There are two options for immediately reclaiming storage:
+The statement does not immediately free up the storage that is associated with the dropped column. To learn more about the impact on storage when you drop a column on storage, see [`ALTER TABLE DROP COLUMN` statement details](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_16) . There are two options for immediately reclaiming storage:
 
-  - [Overwrite a table](https://docs.cloud.google.com/bigquery/docs/tables#create_a_table_from_a_query_result) with a [`  SELECT * EXCEPT  ` query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_except) :
+  - [Overwrite a table](https://docs.cloud.google.com/bigquery/docs/tables#create_a_table_from_a_query_result) with a [`SELECT * EXCEPT` query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_except) :
     
         CREATE OR REPLACE TABLE mydataset.mytable AS (
           SELECT * EXCEPT (column_to_delete) FROM mydataset.mytable

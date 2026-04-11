@@ -24,17 +24,17 @@ A dataset that has access to another dataset is called an *authorized dataset* .
 
 To authorize a dataset, or to revoke a dataset's authorization, you must have the following [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) , which let you update the access control list of the dataset you are sharing.
 
-| **Permission**                            | **Resource**                 |
-| ----------------------------------------- | ---------------------------- |
-| `        bigquery.datasets.get       `    | The dataset you are sharing. |
-| `        bigquery.datasets.update       ` | The dataset you are sharing. |
+| **Permission**             | **Resource**                 |
+| -------------------------- | ---------------------------- |
+| `bigquery.datasets.get`    | The dataset you are sharing. |
+| `bigquery.datasets.update` | The dataset you are sharing. |
 
 The following predefined [IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) provide the required permissions.
 
-| **Role**                            | **Description**     |
-| ----------------------------------- | ------------------- |
-| `        bigquery.dataOwner       ` | BigQuery Data Owner |
-| `        bigquery.admin       `     | BigQuery Admin      |
+| **Role**             | **Description**     |
+| -------------------- | ------------------- |
+| `bigquery.dataOwner` | BigQuery Data Owner |
+| `bigquery.admin`     | BigQuery Admin      |
 
 After a dataset is authorized, you can create or update views in the authorized dataset. For more information and required permissions, see [Create or update a view in an authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#create_or_update_view) .
 
@@ -72,7 +72,7 @@ You can authorize a dataset's current and future views to access another dataset
     
     For example:
     
-    `  myProject.myDataset  `
+    `myProject.myDataset`
 
 6.  Click **Add Authorization** and then click **Close** .
 
@@ -82,13 +82,13 @@ You can authorize a dataset's current and future views to access another dataset
     
     [Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
-2.  Write the existing metadata (including the access control list) for the dataset you want to share into a JSON file by using the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
+2.  Write the existing metadata (including the access control list) for the dataset you want to share into a JSON file by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
     ``` notranslate
     bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
     ```
 
-3.  Use a text editor to add the dataset that you want to authorize into the existing `  access  ` section of the JSON file that was created at FILE\_PATH .
+3.  Use a text editor to add the dataset that you want to authorize into the existing `access` section of the JSON file that was created at FILE\_PATH .
     
     For example:
     
@@ -107,13 +107,13 @@ You can authorize a dataset's current and future views to access another dataset
     ]
     ```
 
-4.  Update the shared dataset by using the [`  bq update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command. For example:
+4.  Update the shared dataset by using the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command. For example:
     
     ``` notranslate
     bq update --source FILE_PATH PROJECT:SHARED_DATASET
     ```
 
-5.  To verify that the authorized dataset has been added, enter the `  bq show  ` command again. For example:
+5.  To verify that the authorized dataset has been added, enter the `bq show` command again. For example:
     
     ``` notranslate
     bq show --format=prettyjson PROJECT:SHARED_DATASET
@@ -121,15 +121,15 @@ You can authorize a dataset's current and future views to access another dataset
 
 ### API
 
-1.  Get the current metadata for the dataset you want to share by calling the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method, as follows:
+1.  Get the current metadata for the dataset you want to share by calling the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method, as follows:
     
     ``` notranslate
     GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     ```
     
-    The response body returns a [`  Dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource that contains JSON metadata for the dataset.
+    The response body returns a [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource that contains JSON metadata for the dataset.
 
-2.  Add the dataset that you want authorize into the `  access  ` section of the JSON metadata that was returned in the `  Dataset  ` resource as follows:
+2.  Add the dataset that you want authorize into the `access` section of the JSON metadata that was returned in the `Dataset` resource as follows:
     
     ``` notranslate
     "access": [
@@ -146,15 +146,15 @@ You can authorize a dataset's current and future views to access another dataset
     ]
     ```
 
-3.  Use the [`  datasets.update  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update) method to update the dataset with the added authorization:
+3.  Use the [`datasets.update`](https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update) method to update the dataset with the added authorization:
     
     ``` notranslate
     PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     ```
     
-    Include the updated `  Dataset  ` resource in the request body.
+    Include the updated `Dataset` resource in the request body.
 
-4.  You can verify that the authorized dataset has been added by calling the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method again.
+4.  You can verify that the authorized dataset has been added by calling the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method again.
 
 ## Revoke a dataset's authorization
 
@@ -191,13 +191,13 @@ To revoke the access granted to the views in an authorized dataset, remove the a
     
     [Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
-2.  Write the existing metadata (including the access control list) for the shared dataset into a JSON file by using the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
+2.  Write the existing metadata (including the access control list) for the shared dataset into a JSON file by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
     ``` notranslate
     bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
     ```
 
-3.  Use a text editor to remove the authorized dataset from the `  access  ` section of the JSON file that was created at FILE\_PATH , as follows:
+3.  Use a text editor to remove the authorized dataset from the `access` section of the JSON file that was created at FILE\_PATH , as follows:
     
     ``` notranslate
       {
@@ -211,13 +211,13 @@ To revoke the access granted to the views in an authorized dataset, remove the a
       }
     ```
 
-4.  Update the shared dataset by using the [`  bq update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command. For example:
+4.  Update the shared dataset by using the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command. For example:
     
     ``` notranslate
     bq update --source FILE_PATH PROJECT:SHARED_DATASET
     ```
 
-5.  To verify that the authorized dataset has been removed, enter the `  bq show  ` command again. For example:
+5.  To verify that the authorized dataset has been removed, enter the `bq show` command again. For example:
     
     ``` notranslate
     bq show --format=prettyjson PROJECT:SHARED_DATASET
@@ -225,15 +225,15 @@ To revoke the access granted to the views in an authorized dataset, remove the a
 
 ### API
 
-1.  Get the current metadata for the shared dataset by calling the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method, as follows:
+1.  Get the current metadata for the shared dataset by calling the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method, as follows:
     
     ``` notranslate
     GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     ```
     
-    The response body returns a [`  Dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource that contains JSON metadata for the dataset.
+    The response body returns a [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource that contains JSON metadata for the dataset.
 
-2.  Remove the authorized dataset from the `  access  ` section of the JSON that was returned in the `  Dataset  ` resource, for example:
+2.  Remove the authorized dataset from the `access` section of the JSON that was returned in the `Dataset` resource, for example:
     
     ``` notranslate
      {
@@ -247,15 +247,15 @@ To revoke the access granted to the views in an authorized dataset, remove the a
      }
     ```
 
-3.  Use the [`  datasets.update  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update) method to update the dataset with the removed authorization:
+3.  Use the [`datasets.update`](https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update) method to update the dataset with the removed authorization:
     
     ``` notranslate
     PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     ```
     
-    Include the updated `  Dataset  ` resource in the request body.
+    Include the updated `Dataset` resource in the request body.
 
-4.  You can verify that the authorized dataset has been removed by calling the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method again.
+4.  You can verify that the authorized dataset has been removed by calling the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method again.
 
 ## Create or update a view in an authorized dataset
 
@@ -263,16 +263,16 @@ To create or update a view that is in an authorized dataset, you must have the p
 
 The following table summarizes the necessary [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) to create or update a view that is in an authorized dataset:
 
-| **Permission**                           | **Resource**                                                                                                  |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `        bigquery.datasets.get       `   | The dataset you are sharing.                                                                                  |
-| `        bigquery.tables.getData       ` | Any tables or views from the shared dataset that are referenced in the new view you are creating or updating. |
-| `        bigquery.tables.create       `  | The authorized dataset in which you are creating a view.                                                      |
-| `        bigquery.tables.update       `  | The authorized dataset in which you are updating a view.                                                      |
+| **Permission**            | **Resource**                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `bigquery.datasets.get`   | The dataset you are sharing.                                                                                  |
+| `bigquery.tables.getData` | Any tables or views from the shared dataset that are referenced in the new view you are creating or updating. |
+| `bigquery.tables.create`  | The authorized dataset in which you are creating a view.                                                      |
+| `bigquery.tables.update`  | The authorized dataset in which you are updating a view.                                                      |
 
 You don't need any additional permissions to [delete a view](https://docs.cloud.google.com/bigquery/docs/managing-views#delete_views) from an authorized dataset.
 
-**Note:** The `  bigquery.datasets.update  ` permission isn't required on the shared dataset (or any other referenced datasets) to create or update a view within an authorized dataset. This permission is strictly reserved for administrative management of the dataset's authorization list, including the following:
+**Note:** The `bigquery.datasets.update` permission isn't required on the shared dataset (or any other referenced datasets) to create or update a view within an authorized dataset. This permission is strictly reserved for administrative management of the dataset's authorization list, including the following:
 
   - Authorizing a dataset: initially granting a dataset access to a shared dataset.
 
@@ -280,7 +280,7 @@ You don't need any additional permissions to [delete a view](https://docs.cloud.
     
     For more information, see [Required roles](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) .
 
-**Note:** Statements that manage views, such as `  ALTER VIEW  ` , can apply to both regular views and authorized views. Verify that you are managing the correct view when running these statements.
+**Note:** Statements that manage views, such as `ALTER VIEW` , can apply to both regular views and authorized views. Verify that you are managing the correct view when running these statements.
 
 ## Query a view in an authorized dataset
 
@@ -292,23 +292,23 @@ For more information, see [Authorized views](https://docs.cloud.google.com/bigqu
 
 The following example describes how to create and use an authorized dataset.
 
-Assume you have two datasets, named `  private_dataset  ` and `  public_dataset  ` . The `  private_dataset  ` dataset contains a table named `  private_table  ` . The `  public_dataset  ` dataset contains a view named `  private_table_filtered  ` . The `  private_table_filtered  ` view is based on a query that returns some, but not all, of the fields in the `  private_table  ` table.
+Assume you have two datasets, named `private_dataset` and `public_dataset` . The `private_dataset` dataset contains a table named `private_table` . The `public_dataset` dataset contains a view named `private_table_filtered` . The `private_table_filtered` view is based on a query that returns some, but not all, of the fields in the `private_table` table.
 
-You can give a user access to the data returned by the `  private_table_filtered  ` view, but not all of the data in the `  private_table  ` table, as follows:
+You can give a user access to the data returned by the `private_table_filtered` view, but not all of the data in the `private_table` table, as follows:
 
-1.  Grant the `  bigquery.dataViewer  ` role to the user for the `  public_dataset  ` dataset. This role includes the `  bigquery.tables.getData  ` permission, which lets the user query the views in the `  public_dataset  ` dataset. For information about how to grant a role to a user for a dataset, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
+1.  Grant the `bigquery.dataViewer` role to the user for the `public_dataset` dataset. This role includes the `bigquery.tables.getData` permission, which lets the user query the views in the `public_dataset` dataset. For information about how to grant a role to a user for a dataset, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
     
-    The user now has permission to query views in the `  public_dataset  ` , but they still cannot access the `  private_table  ` table in `  private_dataset  ` . If the user tries to query the `  private_table  ` table directly, or if they try to access the `  private_table  ` table indirectly by querying the `  private_table_filtered  ` view, they get an error message similar to the following:
+    The user now has permission to query views in the `public_dataset` , but they still cannot access the `private_table` table in `private_dataset` . If the user tries to query the `private_table` table directly, or if they try to access the `private_table` table indirectly by querying the `private_table_filtered` view, they get an error message similar to the following:
     
-    `  Access Denied: Table PROJECT :private_dataset.private_table: User does not have permission to query table PROJECT :private_dataset.private_table.  `
+    `Access Denied: Table PROJECT :private_dataset.private_table: User does not have permission to query table PROJECT :private_dataset.private_table.`
 
-2.  In the **BigQuery** page of the Google Cloud console, open the `  private_dataset  ` dataset, click **Sharing** , and then select **Authorize Datasets** .
+2.  In the **BigQuery** page of the Google Cloud console, open the `private_dataset` dataset, click **Sharing** , and then select **Authorize Datasets** .
 
-3.  In the **Authorized dataset** pane that appears, enter `  PROJECT .public_dataset  ` in the **Dataset ID** field, and then click **Add Authorization** .
+3.  In the **Authorized dataset** pane that appears, enter `  PROJECT .public_dataset ` in the **Dataset ID** field, and then click **Add Authorization** .
     
-    The `  public_dataset  ` dataset is added to the access control list of the `  private_dataset  ` dataset, authorizing the views in the `  public_dataset  ` dataset to query the data in the `  private_dataset  ` dataset.
+    The `public_dataset` dataset is added to the access control list of the `private_dataset` dataset, authorizing the views in the `public_dataset` dataset to query the data in the `private_dataset` dataset.
     
-    The user can now query the `  private_table_filtered  ` view in the `  public_dataset  ` dataset, which indirectly accesses the `  private_dataset  ` dataset, without having any permissions to directly access data in the `  private_dataset  ` dataset.
+    The user can now query the `private_table_filtered` view in the `public_dataset` dataset, which indirectly accesses the `private_dataset` dataset, without having any permissions to directly access data in the `private_dataset` dataset.
 
 ## Limitations
 

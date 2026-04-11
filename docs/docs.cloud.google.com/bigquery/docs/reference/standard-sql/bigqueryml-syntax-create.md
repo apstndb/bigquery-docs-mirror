@@ -1,6 +1,6 @@
 # The CREATE MODEL statement
 
-To create a model in BigQuery, use the BigQuery ML `  CREATE MODEL  ` statement. This statement is similar to the [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/data-definition-language#create_table_statement) DDL statement. When you run a query that contains a `  CREATE MODEL  ` statement, a [query job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) is generated for you that processes the query. You can also use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+To create a model in BigQuery, use the BigQuery ML `CREATE MODEL` statement. This statement is similar to the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/data-definition-language#create_table_statement) DDL statement. When you run a query that contains a `CREATE MODEL` statement, a [query job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) is generated for you that processes the query. You can also use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 For more information about supported SQL statements and functions for each model type, see the following documents:
 
@@ -12,15 +12,15 @@ For more information about supported SQL statements and functions for each model
 
 ## Required permissions
 
-  - To create a dataset to store the model, you need the `  bigquery.datasets.create  ` IAM permission.
+  - To create a dataset to store the model, you need the `bigquery.datasets.create` IAM permission.
 
   - To create a model, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.connections.delegate  ` (for remote models)
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.connections.delegate` (for remote models)
 
 The following [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) grant these permissions:
 
@@ -29,9 +29,9 @@ The following [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-## `     CREATE MODEL    ` syntax
+## `CREATE MODEL` syntax
 
-**Note:** This syntax statement provides a comprehensive list of model types with their model options. When you create a model, use that model specific `  CREATE MODEL  ` statement for convenience. You can view specific `  CREATE MODEL  ` statements by clicking the `  MODEL_TYPE  ` name in the following list, in the table of contents in the left panel, or in the *create model* link in the [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) .
+**Note:** This syntax statement provides a comprehensive list of model types with their model options. When you create a model, use that model specific `CREATE MODEL` statement for convenience. You can view specific `CREATE MODEL` statements by clicking the `MODEL_TYPE` name in the following list, in the table of contents in the left panel, or in the *create model* link in the [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) .
 
 ``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
@@ -190,30 +190,30 @@ model_option_list:
     [, TOP_K_INSIGHTS_BY_APRIORI_SUPPORT = int64_value ]
 ```
 
-### `     CREATE MODEL    `
+### `CREATE MODEL`
 
-Creates and trains a new model in the specified dataset. If the model name exists, `  CREATE MODEL  ` returns an error.
+Creates and trains a new model in the specified dataset. If the model name exists, `CREATE MODEL` returns an error.
 
-### `     CREATE MODEL IF NOT EXISTS    `
+### `CREATE MODEL IF NOT EXISTS`
 
 Creates and trains a new model only if the model does not exist in the specified dataset.
 
-### `     CREATE OR REPLACE MODEL    `
+### `CREATE OR REPLACE MODEL`
 
 Creates and trains a model and replaces an existing model with the same name in the specified dataset.
 
-### `     model_name    `
+### `model_name`
 
-`  model_name  ` is the name of the model you're creating or replacing. The model name must be unique per dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
+`model_name` is the name of the model you're creating or replacing. The model name must be unique per dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
   - Contain up to 1,024 characters
   - Contain letters (upper or lower case), numbers, and underscores
 
-`  model_name  ` is case-sensitive.
+`model_name` is case-sensitive.
 
-If you don't have a default project configured, prepend the project ID to the model name in following format, including backticks: ``  `[PROJECT_ID].[DATASET].[MODEL]`  `` ; for example, ``  `myproject.mydataset.mymodel`  `` .
+If you don't have a default project configured, prepend the project ID to the model name in following format, including backticks: `` `[PROJECT_ID].[DATASET].[MODEL]` `` ; for example, `` `myproject.mydataset.mymodel` `` .
 
-### `     TRANSFORM    `
+### `TRANSFORM`
 
 TRANSFORM lets you specify all preprocessing during model creation and have it automatically applied during prediction and evaluation.
 
@@ -230,85 +230,85 @@ During prediction, you don't need to preprocess the input again, and the same tr
 
     SELECT * FROM ML.PREDICT(MODEL `myproject.mydataset.mymodel`, (SELECT f1, f2, f3 FROM table))
 
-When the `  TRANSFORM  ` clause is present, only output columns from the `  TRANSFORM  ` clause are used in training. Any results from `  query_statement  ` that don't appear in the `  TRANSFORM  ` clause are ignored.
+When the `TRANSFORM` clause is present, only output columns from the `TRANSFORM` clause are used in training. Any results from `query_statement` that don't appear in the `TRANSFORM` clause are ignored.
 
-The input columns of the `  TRANSFORM  ` clause are the result of `  query_statement  ` . So, the final input used in training is the set of columns generated by the following query:
+The input columns of the `TRANSFORM` clause are the result of `query_statement` . So, the final input used in training is the set of columns generated by the following query:
 
     SELECT (select_list) FROM (query_statement);
 
-Input columns of the `  TRANSFORM  ` clause can be of any SIMPLE type or ARRAY of SIMPLE type. SIMPLE types are non-STRUCT and non-ARRAY data types.
+Input columns of the `TRANSFORM` clause can be of any SIMPLE type or ARRAY of SIMPLE type. SIMPLE types are non-STRUCT and non-ARRAY data types.
 
-In prediction ( `  ML.PREDICT  ` ), users only need to pass in the original columns from the `  query_statement  ` that are used inside the `  TRANSFORM  ` clause. The columns dropped in `  TRANSFORM  ` don't need to be provided during prediction. `  TRANSFORM  ` is automatically applied to the input data during prediction, including the statistics used in ML analytic functions (for example, `  ML.QUANTILE_BUCKETIZE  ` ).
+In prediction ( `ML.PREDICT` ), users only need to pass in the original columns from the `query_statement` that are used inside the `TRANSFORM` clause. The columns dropped in `TRANSFORM` don't need to be provided during prediction. `TRANSFORM` is automatically applied to the input data during prediction, including the statistics used in ML analytic functions (for example, `ML.QUANTILE_BUCKETIZE` ).
 
 To learn more about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) , or try the [Feature Engineering Functions](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/blob/master/notebooks/bqml-preprocessing-functions.ipynb) notebook.
 
-To try using the `  TRANSFORM  ` clause, try the [Use the BigQuery ML `  TRANSFORM  ` clause for feature engineering](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) tutorial or the [Create Model With Inline Transpose](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/blob/master/notebooks/bqml-feature-engineering.ipynb) notebook.
+To try using the `TRANSFORM` clause, try the [Use the BigQuery ML `TRANSFORM` clause for feature engineering](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) tutorial or the [Create Model With Inline Transpose](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/blob/master/notebooks/bqml-feature-engineering.ipynb) notebook.
 
-### `     select_list    `
+### `select_list`
 
-You can pass columns from `  query_statement  ` through to model training without transformation by either using `  *  ` , `  * EXCEPT()  ` , or by listing the column names directly.
+You can pass columns from `query_statement` through to model training without transformation by either using `*` , `* EXCEPT()` , or by listing the column names directly.
 
-Not all columns from `  query_statement  ` are required to appear in the `  TRANSFORM  ` clause, so you can drop columns appearing in `  query_statement  ` by omitting them from the `  TRANSFORM  ` clause.
+Not all columns from `query_statement` are required to appear in the `TRANSFORM` clause, so you can drop columns appearing in `query_statement` by omitting them from the `TRANSFORM` clause.
 
-You can transform inputs from `  query_statement  ` by using expressions in `  select_list  ` . `  select_list  ` is similar to a normal `  SELECT  ` statement. `  select_list  ` supports the following syntax:
+You can transform inputs from `query_statement` by using expressions in `select_list` . `select_list` is similar to a normal `SELECT` statement. `select_list` supports the following syntax:
 
-  - `  *  `
-  - `  * EXCEPT()  `
-  - `  * REPLACE()  `
-  - `  expression  `
-  - `  expression.*  `
+  - `*`
+  - `* EXCEPT()`
+  - `* REPLACE()`
+  - `expression`
+  - `expression.*`
 
-The following cannot appear inside `  select_list  ` :
+The following cannot appear inside `select_list` :
 
   - Aggregation functions.
   - Non-BigQuery ML analytic functions. For more information about supported functions, see [Manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) .
   - UDFs.
   - Subqueries.
-  - Anonymous columns. For example, `  a + b as c  ` is allowed, while `  a + b  ` isn't.
+  - Anonymous columns. For example, `a + b as c` is allowed, while `a + b` isn't.
 
-The output columns of `  select_list  ` can be of any BigQuery supported data type.
+The output columns of `select_list` can be of any BigQuery supported data type.
 
-If present, the following columns must appear in `  select_list  ` without transformation:
+If present, the following columns must appear in `select_list` without transformation:
 
-  - `  label  `
-  - `  data_split_col  `
-  - `  kmeans_init_col  `
-  - `  instance_weight_col  `
+  - `label`
+  - `data_split_col`
+  - `kmeans_init_col`
+  - `instance_weight_col`
 
-If these columns are returned by `  query_statement  ` , you must reference them in `  select_list  ` by column name outside of any expression, or by using `  *  ` . You can't use aliases with these columns.
+If these columns are returned by `query_statement` , you must reference them in `select_list` by column name outside of any expression, or by using `*` . You can't use aliases with these columns.
 
-### `     INPUT    ` and `     OUTPUT    `
+### `INPUT` and `OUTPUT`
 
-`  INPUT  ` and `  OUTPUT  ` clauses are used to specify input and output format for [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) or [XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) .
+`INPUT` and `OUTPUT` clauses are used to specify input and output format for [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) or [XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) .
 
-#### `     field_name    `
+#### `field_name`
 
-For remote models, `  INPUT  ` and `  OUTPUT  ` field names must be identical as the field names of the Vertex AI endpoint request and response. See examples in [remote model `  INPUT  ` and `  OUTPUT  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#in-out-clause) .
+For remote models, `INPUT` and `OUTPUT` field names must be identical as the field names of the Vertex AI endpoint request and response. See examples in [remote model `INPUT` and `OUTPUT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#in-out-clause) .
 
-For XGBoost models, `  INPUT  ` field names must be identical to the names in the `  feature_names  ` field if `  feature_names  ` field is populated in the XGBoost model file. See [XGBoost INPUT OUTPUT clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost#input_output_clause) for more details.
+For XGBoost models, `INPUT` field names must be identical to the names in the `feature_names` field if `feature_names` field is populated in the XGBoost model file. See [XGBoost INPUT OUTPUT clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost#input_output_clause) for more details.
 
-#### `     field_type    `
+#### `field_type`
 
-[Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) support the following BigQuery data types for `  INPUT  ` and `  OUTPUT  ` clauses:
+[Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) support the following BigQuery data types for `INPUT` and `OUTPUT` clauses:
 
   - Simple type: [BOOL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type) , [INT64](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types) , [FLOAT64](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) , [NUMERIC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) , [BIGNUMERIC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) , [STRING](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type)
   - [ARRAY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) \<Simple type\>
 
-[XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) only support [numeric types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) for the `  INPUT  ` field type and [`  FLOAT64  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) for the `  OUTPUT  ` field type.
+[XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) only support [numeric types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) for the `INPUT` field type and [`FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) for the `OUTPUT` field type.
 
-### `     connection_name    `
+### `connection_name`
 
-BigQuery uses a `  CLOUD_RESOURCE  ` [connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with your Vertex AI endpoint. You need to grant [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to connection's service account on your Vertex AI endpoint project.
+BigQuery uses a `CLOUD_RESOURCE` [connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with your Vertex AI endpoint. You need to grant [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to connection's service account on your Vertex AI endpoint project.
 
-See examples in [remote model `  CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#connection) .
+See examples in [remote model `CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#connection) .
 
-To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify specify `  DEFAULT  ` instead of the connection name.
+To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify specify `DEFAULT` instead of the connection name.
 
-### `     model_option_list    `
+### `model_option_list`
 
-`  CREATE MODEL  ` supports the following options:
+`CREATE MODEL` supports the following options:
 
-#### `     MODEL_TYPE    `
+#### `MODEL_TYPE`
 
 **Syntax**
 
@@ -338,37 +338,37 @@ Model specific CREATE MODEL statement
 
 Regression
 
-`  'LINEAR_REG'  `
+`'LINEAR_REG'`
 
 Linear regression for real-valued label prediction; for example, the sales of an item on a given day.
 
 [CREATE MODEL statement for generalized linear models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
 
-`  'BOOSTED_TREE_REGRESSOR'  `
+`'BOOSTED_TREE_REGRESSOR'`
 
 Create a boosted tree regressor model using the XGBoost library.
 
 [CREATE MODEL statement for boosted tree models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
 
-`  'RANDOM_FOREST_REGRESSOR'  `
+`'RANDOM_FOREST_REGRESSOR'`
 
 Create a random forest regressor model using the XGBoost library.
 
 [CREATE MODEL statement for random forest models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
 
-`  'DNN_REGRESSOR'  `
+`'DNN_REGRESSOR'`
 
 Create a Deep Neural Network Regressor model.
 
 [CREATE MODEL statement for DNN models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
 
-`  'DNN_LINEAR_COMBINED_REGRESSOR'  `
+`'DNN_LINEAR_COMBINED_REGRESSOR'`
 
 Create a Wide-and-Deep Regressor model.
 
 [CREATE MODEL statement for Wide-and-Deep models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
 
-`  'AUTOML_REGRESSOR'  `
+`'AUTOML_REGRESSOR'`
 
 Create a regression model using AutoML.
 
@@ -376,37 +376,37 @@ Create a regression model using AutoML.
 
 Classification
 
-`  'LOGISTIC_REG'  `
+`'LOGISTIC_REG'`
 
 Logistic regression for binary-class or multi-class classification; for example, determining whether a customer will make a purchase.
 
 [CREATE MODEL statement for generalized linear models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
 
-`  'BOOSTED_TREE_CLASSIFIER'  `
+`'BOOSTED_TREE_CLASSIFIER'`
 
 Create a boosted tree classifier model using the XGBoost library.
 
 [CREATE MODEL statement for boosted tree models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
 
-`  'RANDOM_FOREST_CLASSIFIER'  `
+`'RANDOM_FOREST_CLASSIFIER'`
 
 Create a random forest classifier model using the XGBoost library.
 
 [CREATE MODEL statement for random forest models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
 
-`  'DNN_CLASSIFIER'  `
+`'DNN_CLASSIFIER'`
 
 Create a Deep Neural Network Classifier model.
 
 [CREATE MODEL statement for DNN models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
 
-`  'DNN_LINEAR_COMBINED_CLASSIFIER'  `
+`'DNN_LINEAR_COMBINED_CLASSIFIER'`
 
 Create a Wide-and-Deep Classifier model.
 
 [CREATE MODEL statement for Wide-and-Deep models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
 
-`  'AUTOML_CLASSIFIER'  `
+`'AUTOML_CLASSIFIER'`
 
 Create a classification model using AutoML.
 
@@ -414,7 +414,7 @@ Create a classification model using AutoML.
 
 Clustering
 
-`  'KMEANS'  `
+`'KMEANS'`
 
 K-means clustering for data segmentation; for example, identifying customer segments.
 
@@ -422,7 +422,7 @@ K-means clustering for data segmentation; for example, identifying customer segm
 
 Collaborative Filtering
 
-`  'MATRIX_FACTORIZATION'  `
+`'MATRIX_FACTORIZATION'`
 
 Matrix factorization for recommendation systems. For example, given a set of users, items, and some ratings for a subset of the items, creates a model to predict a user's rating for items they have not rated.
 
@@ -430,13 +430,13 @@ Matrix factorization for recommendation systems. For example, given a set of use
 
 Dimensionality Reduction
 
-`  'PCA'  `
+`'PCA'`
 
 Principal component analysis for dimensionality reduction.
 
 [CREATE MODEL statement for PCA models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
 
-`  'AUTOENCODER'  `
+`'AUTOENCODER'`
 
 Create an Autoencoder model for anomaly detection, dimensionality reduction, and embedding purposes.
 
@@ -444,13 +444,13 @@ Create an Autoencoder model for anomaly detection, dimensionality reduction, and
 
 Time series forecasting
 
-`  'ARIMA_PLUS'  ` (previously `  'ARIMA'  ` )
+`'ARIMA_PLUS'` (previously `'ARIMA'` )
 
 Univariate time-series forecasting with many modeling components under the hood such as ARIMA model for the trend, STL and ETS for seasonality, and holiday effects.
 
 [CREATE MODEL statement for time series models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
 
-`  'ARIMA_PLUS_XREG'  `
+`'ARIMA_PLUS_XREG'`
 
 Multivariate time-series forecasting using linear regression and ARIMA\_PLUS as the underlying techniques.
 
@@ -458,7 +458,7 @@ Multivariate time-series forecasting using linear regression and ARIMA\_PLUS as 
 
 Augmented analytics
 
-`  'CONTRIBUTION_ANALYSIS'  `
+`'CONTRIBUTION_ANALYSIS'`
 
 Create a contribution analysis model to find key drivers of a change.
 
@@ -466,25 +466,25 @@ Create a contribution analysis model to find key drivers of a change.
 
 Importing models
 
-`  'TENSORFLOW'  `
+`'TENSORFLOW'`
 
 Create a model by importing a TensorFlow model into BigQuery.
 
 [CREATE MODEL statement for TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
 
-`  'TENSORFLOW_LITE'  `
+`'TENSORFLOW_LITE'`
 
 Create a model by importing a TensorFlow Lite model into BigQuery.
 
 [CREATE MODEL statement for TensorFlow Lite models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
 
-`  'ONNX'  `
+`'ONNX'`
 
 Create a model by importing an ONNX model into BigQuery.
 
 [CREATE MODEL statement for ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
 
-`  'XGBOOST'  `
+`'XGBOOST'`
 
 Create a model by importing a XGBoost model into BigQuery.
 
@@ -502,11 +502,11 @@ Create a model by specifying a Cloud AI service, or the endpoint for a Vertex AI
   
 [CREATE MODEL statement for remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
 
-**Note:** We are deprecating `  ARIMA  ` as the model type. While the model training pipelines of `  ARIMA  ` and `  ARIMA_PLUS  ` are the same, `  ARIMA_PLUS  ` supports more capabilities, including support for a new training option, [`  DECOMPOSE_TIME_SERIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#decompose_time_series) , and table-valued functions including [`  ML.ARIMA_EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) and [`  ML.EXPLAIN_FORECAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
+**Note:** We are deprecating `ARIMA` as the model type. While the model training pipelines of `ARIMA` and `ARIMA_PLUS` are the same, `ARIMA_PLUS` supports more capabilities, including support for a new training option, [`DECOMPOSE_TIME_SERIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#decompose_time_series) , and table-valued functions including [`ML.ARIMA_EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) and [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
 
 #### Other model options
 
-The following table provides a comprehensive list of model options, with a brief descriptions and their applicable model types. You can find detailed description in the model specific `  CREATE MODEL  ` statement by clicking the model type in the "Applied model types" column.
+The following table provides a comprehensive list of model options, with a brief descriptions and their applicable model types. You can find detailed description in the model specific `CREATE MODEL` statement by clicking the model type in the "Applied model types" column.
 
 When the applied model types are supervised learning models, unless "regressor" or "classifier" is explicitly listed, it means that model options apply to both the regressor and the classifier. For example, the "boosted tree" means that model option applies to both boosted tree regressor and boosted tree classifier, while the "boosted tree classifier" only applies to the classifier.
 
@@ -1193,12 +1193,12 @@ A weight must be present for every class label. The weights are not required to 
 </tr>
 <tr class="odd">
 <td>DOCUMENT_PROCESSOR</td>
-<td>Identifies the document processor to use when the REMOTE_SERVICE_TYPE option value is <code dir="ltr" translate="no">       CLOUD_AI_DOCUMENT_V1      </code> .</td>
+<td>Identifies the document processor to use when the REMOTE_SERVICE_TYPE option value is <code dir="ltr" translate="no">CLOUD_AI_DOCUMENT_V1</code> .</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#document_processor">Remote models over Cloud AI services</a></td>
 </tr>
 <tr class="even">
 <td>SPEECH_RECOGNIZER</td>
-<td>Identifies the speech recognizer to use when the REMOTE_SERVICE_TYPE option value is <code dir="ltr" translate="no">       CLOUD_AI_SPEECH_TO_TEXT_V2      </code></td>
+<td>Identifies the speech recognizer to use when the REMOTE_SERVICE_TYPE option value is <code dir="ltr" translate="no">CLOUD_AI_SPEECH_TO_TEXT_V2</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer">Remote models over Cloud AI services</a></td>
 </tr>
 <tr class="odd">
@@ -1254,15 +1254,15 @@ A weight must be present for every class label. The weights are not required to 
 </tbody>
 </table>
 
-### `     AS    `
+### `AS`
 
-All model types support the following `  AS  ` clause syntax for specifying the training data:
+All model types support the following `AS` clause syntax for specifying the training data:
 
 ``` lang-googlesql
 AS query_statement
 ```
 
-For time series forecasting models that have a `  DATA_FREQUENCY  ` value of either `  DAILY  ` or `  AUTO_FREQUENCY  ` , you can optionally use the following `  AS  ` clause syntax to perform [custom holiday modeling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) in addition to specifying the training data:
+For time series forecasting models that have a `DATA_FREQUENCY` value of either `DAILY` or `AUTO_FREQUENCY` , you can optionally use the following `AS` clause syntax to perform [custom holiday modeling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) in addition to specifying the training data:
 
 ``` lang-googlesql
 AS (
@@ -1271,33 +1271,33 @@ AS (
 )
 ```
 
-#### `     query_statement    `
+#### `query_statement`
 
-The `  query_statement  ` argument specifies the query that is used to generate the training data. For information about the supported SQL syntax of the `  query_statement  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+The `query_statement` argument specifies the query that is used to generate the training data. For information about the supported SQL syntax of the `query_statement` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
-#### `     holiday_statement    `
+#### `holiday_statement`
 
-The `  holiday_statement  ` argument specifies the query that provides custom holiday modeling information for time series forecast models. This query must return 50,000 rows or less and must contain the following columns:
+The `holiday_statement` argument specifies the query that provides custom holiday modeling information for time series forecast models. This query must return 50,000 rows or less and must contain the following columns:
 
-  - `  region  ` : Required. A `  STRING  ` value that identifies the region to target for holiday modeling. Use one of the following options:
+  - `region` : Required. A `STRING` value that identifies the region to target for holiday modeling. Use one of the following options:
     
-      - An upper-case [holiday region code](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) . Use this option to overwrite or supplement the holidays for the specified region. You can see the holidays for a region by running `  SELECT * FROM bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting WHERE region = region  ` .
-      - An arbitrary string. Use this option to specify a custom region that you want to model holidays for. For example, you could specify `  London  ` if you are only modeling holidays for that city.
+      - An upper-case [holiday region code](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) . Use this option to overwrite or supplement the holidays for the specified region. You can see the holidays for a region by running ` SELECT * FROM bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting WHERE region = region  ` .
+      - An arbitrary string. Use this option to specify a custom region that you want to model holidays for. For example, you could specify `London` if you are only modeling holidays for that city.
     
-    Be sure not to use an existing holiday region code when you are trying to model for a custom region. For example, if you want to model a holiday in California, and specify `  CA  ` as the `  region  ` value, the service recognizes that as the holiday region code for Canada and targets that region. Because the argument is case-sensitive, you could specify `  ca  ` , `  California  ` , or some other value that isn't a holiday region code.
+    Be sure not to use an existing holiday region code when you are trying to model for a custom region. For example, if you want to model a holiday in California, and specify `CA` as the `region` value, the service recognizes that as the holiday region code for Canada and targets that region. Because the argument is case-sensitive, you could specify `ca` , `California` , or some other value that isn't a holiday region code.
 
-  - `  holiday_name  ` : Required. A `  STRING  ` value that identifies the holiday to target for holiday modeling. Use one of the following options:
+  - `holiday_name` : Required. A `STRING` value that identifies the holiday to target for holiday modeling. Use one of the following options:
     
-      - The holiday name as it is represented in the `  bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting  ` public table, including case. Use this option to [overwrite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#change_the_metadata_for_built-in_holidays) or [supplement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#supplement_built-in_holidays_with_additional_custom_holidays) the specified holiday.
-      - A string that represents a custom holiday. The string must be a valid column name so that it can be used in `  ML.EXPLAIN_FORECAST  ` output. For example, it cannot contain space. For more information on column naming, see [Column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) .
+      - The holiday name as it is represented in the `bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting` public table, including case. Use this option to [overwrite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#change_the_metadata_for_built-in_holidays) or [supplement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#supplement_built-in_holidays_with_additional_custom_holidays) the specified holiday.
+      - A string that represents a custom holiday. The string must be a valid column name so that it can be used in `ML.EXPLAIN_FORECAST` output. For example, it cannot contain space. For more information on column naming, see [Column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) .
 
-  - `  primary_date  ` : Required. A `  DATE  ` value that specifies the date the holiday falls on.
+  - `primary_date` : Required. A `DATE` value that specifies the date the holiday falls on.
 
-  - `  preholiday_days  ` : Optional. An `  INT64  ` value that specifies the start of the holiday window around the holiday that is taken into account when modeling. Must be greater than or equal to `  1  ` . Defaults to `  1  ` .
+  - `preholiday_days` : Optional. An `INT64` value that specifies the start of the holiday window around the holiday that is taken into account when modeling. Must be greater than or equal to `1` . Defaults to `1` .
 
-  - `  postholiday_days  ` : Optional. An `  INT64  ` value that specifies the end of the holiday window around the holiday that is taken into account when modeling. Must be greater than or equal to `  1  ` . Defaults to `  1  ` .
+  - `postholiday_days` : Optional. An `INT64` value that specifies the end of the holiday window around the holiday that is taken into account when modeling. Must be greater than or equal to `1` . Defaults to `1` .
 
-The `  preholiday_days  ` and `  postholiday_days  ` arguments together describe the holiday window around the holiday that is taken into account when modeling. The holiday window is defined as `  [primary_date - preholiday_days, primary_date + postholiday_days]  ` and is inclusive of the pre- and post-holiday days. The value for each holiday window must be less than or equal to `  30  ` and must be the same across the given holiday. For example, if you are modeling Arbor Day for several different years, you must specify the same holiday window for all of those years.
+The `preholiday_days` and `postholiday_days` arguments together describe the holiday window around the holiday that is taken into account when modeling. The holiday window is defined as `[primary_date - preholiday_days, primary_date + postholiday_days]` and is inclusive of the pre- and post-holiday days. The value for each holiday window must be less than or equal to `30` and must be the same across the given holiday. For example, if you are modeling Arbor Day for several different years, you must specify the same holiday window for all of those years.
 
 To achieve the best holiday modeling result, provide as much historical and forecast information about the occurrences of each included holiday as possible. For example, if you have time series data from 2018 to 2022 and would like to forecast for 2023, you get the best result by providing the custom holiday information for all of those years, similar to the following:
 
@@ -1330,7 +1330,7 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
 
 ## Supported inputs
 
-The `  CREATE MODEL  ` statement supports the following data types for input label, data split columns and input feature columns.
+The `CREATE MODEL` statement supports the following data types for input label, data split columns and input feature columns.
 
 ### Supported input feature types
 
@@ -1338,7 +1338,7 @@ See [Supported input feature types](https://docs.cloud.google.com/bigquery/docs/
 
 ### Supported data types for input label columns
 
-BigQuery ML supports different GoogleSQL data types depending on the model type. Supported data types for `  input_label_cols  ` include:
+BigQuery ML supports different GoogleSQL data types depending on the model type. Supported data types for `input_label_cols` include:
 
 <table>
 <colgroup>
@@ -1347,20 +1347,20 @@ BigQuery ML supports different GoogleSQL data types depending on the model type.
 </colgroup>
 <thead>
 <tr class="header">
-<th><code dir="ltr" translate="no">       Model type      </code></th>
-<th><code dir="ltr" translate="no">       Supported label types      </code></th>
+<th><code dir="ltr" translate="no">Model type</code></th>
+<th><code dir="ltr" translate="no">Supported label types</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       regression models      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">        NUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">        BIGNUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
+<td><code dir="ltr" translate="no">regression models</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">INT64</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">NUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">BIGNUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">FLOAT64</code></a></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       classification models      </code></td>
+<td><code dir="ltr" translate="no">classification models</code></td>
 <td>Any <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties">groupable</a> data type</td>
 </tr>
 </tbody>
@@ -1368,7 +1368,7 @@ BigQuery ML supports different GoogleSQL data types depending on the model type.
 
 ### Supported data types for data split columns
 
-BigQuery ML supports different GoogleSQL data types depending on the data split method. Supported data types for `  data_split_col  ` include:
+BigQuery ML supports different GoogleSQL data types depending on the data split method. Supported data types for `data_split_col` include:
 
 <table>
 <colgroup>
@@ -1377,43 +1377,43 @@ BigQuery ML supports different GoogleSQL data types depending on the data split 
 </colgroup>
 <thead>
 <tr class="header">
-<th><code dir="ltr" translate="no">       Data split method      </code></th>
-<th><code dir="ltr" translate="no">       Supported column types      </code></th>
+<th><code dir="ltr" translate="no">Data split method</code></th>
+<th><code dir="ltr" translate="no">Supported column types</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       CUSTOM      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">        BOOL       </code></a></td>
+<td><code dir="ltr" translate="no">CUSTOM</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">BOOL</code></a></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       SEQ      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">        NUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">        BIGNUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type"><code dir="ltr" translate="no">        TIMESTAMP       </code></a></td>
+<td><code dir="ltr" translate="no">SEQ</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">INT64</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">NUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">BIGNUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">FLOAT64</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type"><code dir="ltr" translate="no">TIMESTAMP</code></a></td>
 </tr>
 </tbody>
 </table>
 
 ## Limitations
 
-`  CREATE MODEL  ` statements must comply with the following rules:
+`CREATE MODEL` statements must comply with the following rules:
 
-  - Only one `  CREATE  ` statement is allowed.
-  - When you use a `  CREATE MODEL  ` statement, the size of the model must be 90 MB or less or the query fails. Generally, if all categorical variables are short strings, a total feature cardinality (model dimension) of 5-10 million is supported. The dimensionality is dependent on the cardinality and length of the string variables.
-  - The label column cannot contain `  NULL  ` values. If the label column contains `  NULL  ` values, then the query fails.
-  - The `  CREATE MODEL IF NOT EXISTS  ` clause always updates the last modified timestamp of a model.
-  - Query statements used in the `  CREATE MODEL  ` statement cannot contain `  EXTERNAL_QUERY  ` . If you want to use `  EXTERNAL_QUERY  ` , then [materialize the query result](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and then use the `  CREATE MODEL  ` statement with the newly created table.
+  - Only one `CREATE` statement is allowed.
+  - When you use a `CREATE MODEL` statement, the size of the model must be 90 MB or less or the query fails. Generally, if all categorical variables are short strings, a total feature cardinality (model dimension) of 5-10 million is supported. The dimensionality is dependent on the cardinality and length of the string variables.
+  - The label column cannot contain `NULL` values. If the label column contains `NULL` values, then the query fails.
+  - The `CREATE MODEL IF NOT EXISTS` clause always updates the last modified timestamp of a model.
+  - Query statements used in the `CREATE MODEL` statement cannot contain `EXTERNAL_QUERY` . If you want to use `EXTERNAL_QUERY` , then [materialize the query result](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and then use the `CREATE MODEL` statement with the newly created table.
 
 ## Quotas
 
-Troubleshoot quota for `  CREATE MODEL  ` statements.
+Troubleshoot quota for `CREATE MODEL` statements.
 
-### Maximum number of `     CREATE MODEL    ` statements
+### Maximum number of `CREATE MODEL` statements
 
-This error means that you have exceeded the quota for `  CREATE MODEL  ` statements.
+This error means that you have exceeded the quota for `CREATE MODEL` statements.
 
 **Error message**
 
@@ -1422,4 +1422,4 @@ This error means that you have exceeded the quota for `  CREATE MODEL  ` stateme
 
 #### Resolution
 
-If you exceed the [quota](https://docs.cloud.google.com/bigquery/quotas#create_model_statements) for `  CREATE MODEL  ` statements, send an email to <bqml-feedback@google.com> and request a quota increase.
+If you exceed the [quota](https://docs.cloud.google.com/bigquery/quotas#create_model_statements) for `CREATE MODEL` statements, send an email to <bqml-feedback@google.com> and request a quota increase.

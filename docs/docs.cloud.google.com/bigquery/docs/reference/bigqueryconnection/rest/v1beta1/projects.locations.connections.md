@@ -22,67 +22,54 @@ Configuration parameters to establish connection with an external data source, e
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;friendlyName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;creationTime&quot;: string,
-  &quot;lastModifiedTime&quot;: string,
-  &quot;hasCredential&quot;: boolean,
-
-  // Union field properties can be only one of the following:
-  &quot;cloudSql&quot;: {
-    object (CloudSqlProperties)
-  }
-  // End of list of possible types for union field properties.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;friendlyName&quot;: string,&quot;description&quot;: string,&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;hasCredential&quot;: boolean,// Union field properties can be only one of the following:&quot;cloudSql&quot;: {object (CloudSqlProperties)}// End of list of possible types for union field properties.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-The resource name of the connection in the form of: `  projects/{projectId}/locations/{locationId}/connections/{connectionId}  `
+The resource name of the connection in the form of: `projects/{projectId}/locations/{locationId}/connections/{connectionId}`
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
 User provided display name for the connection.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 User provided description.
 
-`  creationTime  `
+`creationTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The creation timestamp of the connection.
 
-`  lastModifiedTime  `
+`lastModifiedTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The last update timestamp of the connection.
 
-`  hasCredential  `
+`hasCredential`
 
-`  boolean  `
+`boolean`
 
 Output only. True, if credential is configured for this connection.
 
-Union field `  properties  ` . Properties specific to the underlying data source. `  properties  ` can be only one of the following:
+Union field `properties` . Properties specific to the underlying data source. `properties` can be only one of the following:
 
-`  cloudSql  `
+`cloudSql`
 
-`  object ( CloudSqlProperties  ` )
+` object ( CloudSqlProperties  ` )
 
 Cloud SQL properties.
 
@@ -101,48 +88,40 @@ Connection properties specific to the Cloud SQL.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;instanceId&quot;: string,
-  &quot;database&quot;: string,
-  &quot;type&quot;: enum (DatabaseType),
-  &quot;credential&quot;: {
-    object (CloudSqlCredential)
-  },
-  &quot;serviceAccountId&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;instanceId&quot;: string,&quot;database&quot;: string,&quot;type&quot;: enum (DatabaseType),&quot;credential&quot;: {object (CloudSqlCredential)},&quot;serviceAccountId&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  instanceId  `
+`instanceId`
 
-`  string  `
+`string`
 
-Cloud SQL instance ID in the form `  project:location:instance  ` .
+Cloud SQL instance ID in the form `project:location:instance` .
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 Database name.
 
-`  type  `
+`type`
 
-`  enum ( DatabaseType  ` )
+` enum ( DatabaseType  ` )
 
 Type of the Cloud SQL database.
 
-`  credential  `
+`credential`
 
-`  object ( CloudSqlCredential  ` )
+` object ( CloudSqlCredential  ` )
 
 Input only. Cloud SQL credential.
 
-`  serviceAccountId  `
+`serviceAccountId`
 
-`  string  `
+`string`
 
 Output only. The account ID of the service used for the purpose of this connection.
 
@@ -154,15 +133,15 @@ Supported Cloud SQL database types.
 
 Enums
 
-`  DATABASE_TYPE_UNSPECIFIED  `
+`DATABASE_TYPE_UNSPECIFIED`
 
 Unspecified database type.
 
-`  POSTGRES  `
+`POSTGRES`
 
 Cloud SQL for PostgreSQL.
 
-`  MYSQL  `
+`MYSQL`
 
 Cloud SQL for MySQL.
 
@@ -191,52 +170,52 @@ Credential info for the Cloud SQL.
 
 Fields
 
-`  username  `
+`username`
 
-`  string  `
+`string`
 
 The username for the credential.
 
-`  password  `
+`password`
 
-`  string  `
+`string`
 
 The password for the credential.
 
 ## Methods
 
-### `             create           `
+### `            create           `
 
 Creates a new connection.
 
-### `             delete           `
+### `            delete           `
 
 Deletes connection and associated credential.
 
-### `             get           `
+### `            get           `
 
 Returns specified connection.
 
-### `             getIamPolicy           `
+### `            getIamPolicy           `
 
 Gets the access control policy for a resource.
 
-### `             list           `
+### `            list           `
 
 Returns a list of connections in the given project.
 
-### `             patch           `
+### `            patch           `
 
 Updates the specified connection.
 
-### `             setIamPolicy           `
+### `            setIamPolicy           `
 
 Sets the access control policy on the specified resource.
 
-### `             testIamPermissions           `
+### `            testIamPermissions           `
 
 Returns permissions that a caller has on the specified resource.
 
-### `             updateCredential           `
+### `            updateCredential           `
 
 Sets the credential for the specified connection.

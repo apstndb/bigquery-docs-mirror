@@ -3,19 +3,19 @@
 This page shows you how to list BigQuery ML models in a dataset. You can list BigQuery ML models by:
 
   - Using the Google Cloud console.
-  - Using the `  bq ls  ` command in the bq command-line tool.
-  - Calling the [`  models.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list) API method directly or by using the client libraries.
+  - Using the `bq ls` command in the bq command-line tool.
+  - Calling the [`models.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list) API method directly or by using the client libraries.
 
 ## Required permissions
 
-To list models in a dataset, you must be assigned the [`  READER  `](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles#dataset-basic-roles) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `  bigquery.models.list  ` permissions. If you are granted `  bigquery.models.list  ` permissions at the project level, you can list models in any dataset in the project. The following predefined, project-level IAM roles include `  bigquery.models.list  ` permissions:
+To list models in a dataset, you must be assigned the [`READER`](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles#dataset-basic-roles) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `bigquery.models.list` permissions. If you are granted `bigquery.models.list` permissions at the project level, you can list models in any dataset in the project. The following predefined, project-level IAM roles include `bigquery.models.list` permissions:
 
-  - `  bigquery.dataViewer  `
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.metadataViewer  `
-  - `  bigquery.user  `
-  - `  bigquery.admin  `
+  - `bigquery.dataViewer`
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.metadataViewer`
+  - `bigquery.user`
+  - `bigquery.admin`
 
 For more information on IAM roles and permissions in BigQuery ML, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) . For more information on dataset-level roles, see [Basic roles for datasets](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles#dataset-basic-roles) .
 
@@ -43,7 +43,7 @@ To list models in a dataset:
 
 ### bq
 
-Issue the `  bq ls  ` command with the `  --models  ` or `  -m  ` flag. The [`  --format  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) flag can be used to control the output. If you are listing models in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+Issue the `bq ls` command with the `--models` or `-m` flag. The [`--format`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) flag can be used to control the output. If you are listing models in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
     bq ls -m --format=pretty PROJECT_ID:DATASET
 
@@ -52,7 +52,7 @@ Replace the following:
   - `  PROJECT_ID  ` is your project ID.
   - `  DATASET  ` is the name of the dataset.
 
-The command output looks like the following when the `  --format=pretty  ` flag is used. `  --format=pretty  ` produces formatted table output. The `  Model Type  ` column displays the model type, for example, `  KMEANS  ` .
+The command output looks like the following when the `--format=pretty` flag is used. `--format=pretty` produces formatted table output. The `Model Type` column displays the model type, for example, `KMEANS` .
 
     +-------------------------+------------+--------+-----------------+
     |           Id            | Model Type | Labels |  Creation Time  |
@@ -62,17 +62,17 @@ The command output looks like the following when the `  --format=pretty  ` flag 
 
 Examples:
 
-Enter the following command to list models in dataset `  mydataset  ` in your default project.
+Enter the following command to list models in dataset `mydataset` in your default project.
 
     bq ls --models --format=pretty mydataset
 
-Enter the following command to list models in dataset `  mydataset  ` in `  myotherproject  ` . This command uses the `  -m  ` shortcut to list models.
+Enter the following command to list models in dataset `mydataset` in `myotherproject` . This command uses the `-m` shortcut to list models.
 
     bq ls -m --format=pretty myotherproject:mydataset
 
 ### API
 
-To list models by using the API, call the [`  models.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list) method and provide the `  projectId  ` and `  datasetId  ` .
+To list models by using the API, call the [`models.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list) method and provide the `projectId` and `datasetId` .
 
 ### Go
 

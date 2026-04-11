@@ -90,7 +90,7 @@ As with any other development or IT team, the DWH team must maintain assets that
     
       - **Data definition language (DDL)** : These assets are used for defining the schema of tables and views.
       - **Data manipulation language (DML)** : These assets are used for manipulating data inside a table. DML commands are also used to create new tables based on existing tables.
-      - **Data control language (DCL)** : These assets are used for controlling permissions and access to tables. Within BigQuery, you can control access by using SQL and the [`  bq  `](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) command-line tool or by using the BigQuery REST API. However, we recommend that you use IAM.
+      - **Data control language (DCL)** : These assets are used for controlling permissions and access to tables. Within BigQuery, you can control access by using SQL and the [`bq`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) command-line tool or by using the BigQuery REST API. However, we recommend that you use IAM.
 
 These assets, and others like Terraform scripts that are used to build components, are maintained inside code repositories. Tools like [Dataform](https://dataform.co/) can help you construct a CI/CD pipeline that validates your SQL scripts and checks predefined validation rules on tables that are created by DDL scripts. These tools let you apply compilation and testing processes for SQL, which in most contexts doesn't have a natural testing environment.
 

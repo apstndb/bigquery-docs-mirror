@@ -8,13 +8,13 @@
 
 Updates a BI reservation.
 
-Only fields specified in the `  field_mask  ` are updated.
+Only fields specified in the `field_mask` are updated.
 
 A singleton BI reservation always exists with default size 0. In order to reserve BI capacity it needs to be updated to an amount greater than 0. In order to release BI capacity reservation size must be set to 0.
 
 ### HTTP request
 
-`  PATCH https://bigqueryreservation.googleapis.com/v1/{biReservation.name=projects/*/locations/*/biReservation}  `
+`PATCH https://bigqueryreservation.googleapis.com/v1/{biReservation.name=projects/*/locations/*/biReservation}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -22,23 +22,23 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  biReservation.name  `
+`biReservation.name`
 
-`  string  `
+`string`
 
-Identifier. The resource name of the singleton BI reservation. Reservation names have the form `  projects/{projectId}/locations/{locationId}/biReservation  ` .
+Identifier. The resource name of the singleton BI reservation. Reservation names have the form `projects/{projectId}/locations/{locationId}/biReservation` .
 
 ### Query parameters
 
 Parameters
 
-`  updateMask  `
+`updateMask`
 
-`  string ( FieldMask  ` format)
+` string ( FieldMask  ` format)
 
 A list of fields to be updated in this request.
 
-This is a comma-separated list of fully qualified names of fields. Example: `  "user.displayName,photo"  ` .
+This is a comma-separated list of fully qualified names of fields. Example: `"user.displayName,photo"` .
 
 ### Request body
 
@@ -52,7 +52,7 @@ If successful, the response body contains an instance of `  BiReservation  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -13,28 +13,21 @@ The returned list of pipelines in the project.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;transferRuns&quot;: [
-    {
-      object (TransferRun)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;transferRuns&quot;: [{object (TransferRun)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  transferRuns[]  `
+`transferRuns[]`
 
-`  object ( TransferRun  ` )
+` object ( TransferRun  ` )
 
 Output only. The stored pipeline transfer runs.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
-Output only. The next-pagination token. For multiple-page list results, this token can be used as the `  ListTransferRunsRequest.page_token  ` to request the next page of list results.
+Output only. The next-pagination token. For multiple-page list results, this token can be used as the `ListTransferRunsRequest.page_token` to request the next page of list results.

@@ -31,190 +31,116 @@ Represents a BigQuery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;kind&quot;: string,
-  &quot;etag&quot;: string,
-  &quot;id&quot;: string,
-  &quot;selfLink&quot;: string,
-  &quot;datasetReference&quot;: {
-    object (DatasetReference)
-  },
-  &quot;friendlyName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;defaultTableExpirationMs&quot;: string,
-  &quot;defaultPartitionExpirationMs&quot;: string,
-  &quot;labels&quot;: {
-    string: string,
-    ...
-  },
-  &quot;access&quot;: [
-    {
-      &quot;role&quot;: string,
-      &quot;userByEmail&quot;: string,
-      &quot;groupByEmail&quot;: string,
-      &quot;domain&quot;: string,
-      &quot;specialGroup&quot;: string,
-      &quot;iamMember&quot;: string,
-      &quot;view&quot;: {
-        object (TableReference)
-      },
-      &quot;routine&quot;: {
-        object (RoutineReference)
-      },
-      &quot;dataset&quot;: {
-        object (DatasetAccessEntry)
-      },
-      &quot;condition&quot;: {
-        object (Expr)
-      }
-    }
-  ],
-  &quot;creationTime&quot;: string,
-  &quot;lastModifiedTime&quot;: string,
-  &quot;location&quot;: string,
-  &quot;defaultEncryptionConfiguration&quot;: {
-    object (EncryptionConfiguration)
-  },
-  &quot;satisfiesPzs&quot;: boolean,
-  &quot;satisfiesPzi&quot;: boolean,
-  &quot;type&quot;: string,
-  &quot;linkedDatasetSource&quot;: {
-    object (LinkedDatasetSource)
-  },
-  &quot;linkedDatasetMetadata&quot;: {
-    object (LinkedDatasetMetadata)
-  },
-  &quot;externalDatasetReference&quot;: {
-    object (ExternalDatasetReference)
-  },
-  &quot;externalCatalogDatasetOptions&quot;: {
-    object (ExternalCatalogDatasetOptions)
-  },
-  &quot;isCaseInsensitive&quot;: boolean,
-  &quot;defaultCollation&quot;: string,
-  &quot;defaultRoundingMode&quot;: enum (RoundingMode),
-  &quot;maxTimeTravelHours&quot;: string,
-  &quot;tags&quot;: [
-    {
-      object (GcpTag)
-    }
-  ],
-  &quot;storageBillingModel&quot;: enum (StorageBillingModel),
-  &quot;resourceTags&quot;: {
-    string: string,
-    ...
-  },
-  &quot;catalogSource&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;etag&quot;: string,&quot;id&quot;: string,&quot;selfLink&quot;: string,&quot;datasetReference&quot;: {object (DatasetReference)},&quot;friendlyName&quot;: string,&quot;description&quot;: string,&quot;defaultTableExpirationMs&quot;: string,&quot;defaultPartitionExpirationMs&quot;: string,&quot;labels&quot;: {string: string,...},&quot;access&quot;: [{&quot;role&quot;: string,&quot;userByEmail&quot;: string,&quot;groupByEmail&quot;: string,&quot;domain&quot;: string,&quot;specialGroup&quot;: string,&quot;iamMember&quot;: string,&quot;view&quot;: {object (TableReference)},&quot;routine&quot;: {object (RoutineReference)},&quot;dataset&quot;: {object (DatasetAccessEntry)},&quot;condition&quot;: {object (Expr)}}],&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;location&quot;: string,&quot;defaultEncryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;satisfiesPzs&quot;: boolean,&quot;satisfiesPzi&quot;: boolean,&quot;type&quot;: string,&quot;linkedDatasetSource&quot;: {object (LinkedDatasetSource)},&quot;linkedDatasetMetadata&quot;: {object (LinkedDatasetMetadata)},&quot;externalDatasetReference&quot;: {object (ExternalDatasetReference)},&quot;externalCatalogDatasetOptions&quot;: {object (ExternalCatalogDatasetOptions)},&quot;isCaseInsensitive&quot;: boolean,&quot;defaultCollation&quot;: string,&quot;defaultRoundingMode&quot;: enum (RoundingMode),&quot;maxTimeTravelHours&quot;: string,&quot;tags&quot;: [{object (GcpTag)}],&quot;storageBillingModel&quot;: enum (StorageBillingModel),&quot;resourceTags&quot;: {string: string,...},&quot;catalogSource&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 Output only. The resource type.
 
-`  etag  `
+`etag`
 
-`  string  `
+`string`
 
 Output only. A hash of the resource.
 
-`  id  `
+`id`
 
-`  string  `
+`string`
 
 Output only. The fully-qualified unique name of the dataset in the format projectId:datasetId. The dataset name without the project name is given in the datasetId field. When creating a new dataset, leave this field blank, and instead specify the datasetId field.
 
-`  selfLink  `
+`selfLink`
 
-`  string  `
+`string`
 
 Output only. A URL that can be used to access the resource again. You can use this URL in Get or Update requests to the resource.
 
-`  datasetReference  `
+`datasetReference`
 
-`  object ( DatasetReference  ` )
+` object ( DatasetReference  ` )
 
 Required. A reference that identifies the dataset.
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
 Optional. A descriptive name for the dataset.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. A user-friendly description of the dataset.
 
-`  defaultTableExpirationMs  `
+`defaultTableExpirationMs`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Optional. The default lifetime of all tables in the dataset, in milliseconds. The minimum lifetime value is 3600000 milliseconds (one hour). To clear an existing default expiration with a PATCH request, set to 0. Once this property is set, all newly-created tables in the dataset will have an expirationTime property set to the creation time plus the value in this property, and changing the value will only affect new tables, not existing ones. When the expirationTime for a given table is reached, that table will be deleted automatically. If a table's expirationTime is modified or removed before the table expires, or if you provide an explicit expirationTime when creating a table, that value takes precedence over the default expiration time indicated by this property.
 
-`  defaultPartitionExpirationMs  `
+`defaultPartitionExpirationMs`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 This default partition expiration, expressed in milliseconds.
 
-When new time-partitioned tables are created in a dataset where this property is set, the table will inherit this value, propagated as the `  TimePartitioning.expirationMs  ` property on the new table. If you set `  TimePartitioning.expirationMs  ` explicitly when creating a table, the `  defaultPartitionExpirationMs  ` of the containing dataset is ignored.
+When new time-partitioned tables are created in a dataset where this property is set, the table will inherit this value, propagated as the `TimePartitioning.expirationMs` property on the new table. If you set `TimePartitioning.expirationMs` explicitly when creating a table, the `defaultPartitionExpirationMs` of the containing dataset is ignored.
 
-When creating a partitioned table, if `  defaultPartitionExpirationMs  ` is set, the `  defaultTableExpirationMs  ` value is ignored and the table will not be inherit a table expiration deadline.
+When creating a partitioned table, if `defaultPartitionExpirationMs` is set, the `defaultTableExpirationMs` value is ignored and the table will not be inherit a table expiration deadline.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See [Creating and Updating Dataset Labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#creating_and_updating_dataset_labels) for more information.
 
-`  access[]  `
+`access[]`
 
-`  object  `
+`object`
 
 Optional. An array of objects that define dataset access for one or more entities. You can set this property when inserting or updating a dataset in order to control who is allowed to access the data. If unspecified at dataset creation time, BigQuery adds default dataset access for the following entities: access.specialGroup: projectReaders; access.role: READER; access.specialGroup: projectWriters; access.role: WRITER; access.specialGroup: projectOwners; access.role: OWNER; access.userByEmail: \[dataset creator email\]; access.role: OWNER; If you patch a dataset, then this field is overwritten by the patched dataset's access field. To add entities, you must supply the entire existing access array in addition to any new entities that you want to add.
 
-`  access[].role  `
+`access[].role`
 
-`  string  `
+`string`
 
 An IAM role ID that should be granted to the user, group, or domain specified in this access entry. The following legacy mappings will be applied:
 
-  - `  OWNER  ` : `  roles/bigquery.dataOwner  `
-  - `  WRITER  ` : `  roles/bigquery.dataEditor  `
-  - `  READER  ` : `  roles/bigquery.dataViewer  `
+  - `OWNER` : `roles/bigquery.dataOwner`
+  - `WRITER` : `roles/bigquery.dataEditor`
+  - `READER` : `roles/bigquery.dataViewer`
 
 This field will accept any of the above formats, but will return only the legacy format. For example, if you set this field to "roles/bigquery.dataOwner", it will be returned back as "OWNER".
 
-`  access[].userByEmail  `
+`access[].userByEmail`
 
-`  string  `
+`string`
 
 \[Pick one\] An email address of a user to grant access to. For example: <fred@example.com> . Maps to IAM policy member "user:EMAIL" or "serviceAccount:EMAIL".
 
-`  access[].groupByEmail  `
+`access[].groupByEmail`
 
-`  string  `
+`string`
 
 \[Pick one\] An email address of a Google Group to grant access to. Maps to IAM policy member "group:GROUP".
 
-`  access[].domain  `
+`access[].domain`
 
-`  string  `
+`string`
 
 \[Pick one\] A domain to grant access to. Any users signed in with the domain specified will be granted the specified access. Example: "example.com". Maps to IAM policy member "domain:DOMAIN".
 
-`  access[].specialGroup  `
+`access[].specialGroup`
 
-`  string  `
+`string`
 
 \[Pick one\] A special group to grant access to. Possible values include:
 
@@ -225,77 +151,77 @@ This field will accept any of the above formats, but will return only the legacy
 
 Maps to similarly-named IAM members.
 
-`  access[].iamMember  `
+`access[].iamMember`
 
-`  string  `
+`string`
 
 \[Pick one\] Some other type of member that appears in the IAM Policy but isn't a user, group, domain, or special group.
 
-`  access[].view  `
+`access[].view`
 
-`  object ( TableReference  ` )
+` object ( TableReference  ` )
 
 \[Pick one\] A view from a different dataset to grant access to. Queries executed against that view will have read access to views/tables/routines in this dataset. The role field is not required when this field is set. If that view is updated by any user, access to the view needs to be granted again via an update operation.
 
-`  access[].routine  `
+`access[].routine`
 
-`  object ( RoutineReference  ` )
+` object ( RoutineReference  ` )
 
 \[Pick one\] A routine from a different dataset to grant access to. Queries executed against that routine will have read access to views/tables/routines in this dataset. Only UDF is supported for now. The role field is not required when this field is set. If that routine is updated by any user, access to the routine needs to be granted again via an update operation.
 
-`  access[].dataset  `
+`access[].dataset`
 
-`  object ( DatasetAccessEntry  ` )
+` object ( DatasetAccessEntry  ` )
 
 \[Pick one\] A grant authorizing all resources of a particular type in a particular dataset access to this dataset. Only views are supported for now. The role field is not required when this field is set. If that dataset is deleted and re-created, its access needs to be granted again via an update operation.
 
-`  access[].condition  `
+`access[].condition`
 
-`  object ( Expr  ` )
+` object ( Expr  ` )
 
 Optional. condition for the binding. If CEL expression in this field is true, this access binding will be considered
 
-`  creationTime  `
+`creationTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The time when this dataset was created, in milliseconds since the epoch.
 
-`  lastModifiedTime  `
+`lastModifiedTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The date when this dataset was last modified, in milliseconds since the epoch.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 The geographic location where the dataset should reside. See <https://cloud.google.com/bigquery/docs/locations> for supported locations.
 
-`  defaultEncryptionConfiguration  `
+`defaultEncryptionConfiguration`
 
-`  object ( EncryptionConfiguration  ` )
+` object ( EncryptionConfiguration  ` )
 
 The default encryption key for all tables in the dataset. After this property is set, the encryption key of all newly-created tables in the dataset is set to this value unless the table creation request or query explicitly overrides the key.
 
-`  satisfiesPzs  `
+`satisfiesPzs`
 
-`  boolean  `
-
-Output only. Reserved for future use.
-
-`  satisfiesPzi  `
-
-`  boolean  `
+`boolean`
 
 Output only. Reserved for future use.
 
-`  type  `
+`satisfiesPzi`
 
-`  string  `
+`boolean`
 
-Output only. Same as `  type  ` in `  ListFormatDataset  ` . The type of the dataset, one of:
+Output only. Reserved for future use.
+
+`type`
+
+`string`
+
+Output only. Same as `type` in `ListFormatDataset` . The type of the dataset, one of:
 
   - DEFAULT - only accessible by owner and authorized accounts,
   - PUBLIC - accessible by everyone,
@@ -304,80 +230,80 @@ Output only. Same as `  type  ` in `  ListFormatDataset  ` . The type of the dat
   - BIGLAKE\_ICEBERG - a Biglake dataset accessible through the Iceberg API,
   - BIGLAKE\_HIVE - a Biglake dataset accessible through the Hive API.
 
-`  linkedDatasetSource  `
+`linkedDatasetSource`
 
-`  object ( LinkedDatasetSource  ` )
+` object ( LinkedDatasetSource  ` )
 
 Optional. The source dataset reference when the dataset is of type LINKED. For all other dataset types it is not set. This field cannot be updated once it is set. Any attempt to update this field using Update and Patch API Operations will be ignored.
 
-`  linkedDatasetMetadata  `
+`linkedDatasetMetadata`
 
-`  object ( LinkedDatasetMetadata  ` )
+` object ( LinkedDatasetMetadata  ` )
 
 Output only. Metadata about the LinkedDataset. Filled out when the dataset type is LINKED.
 
-`  externalDatasetReference  `
+`externalDatasetReference`
 
-`  object ( ExternalDatasetReference  ` )
+` object ( ExternalDatasetReference  ` )
 
 Optional. Reference to a read-only external dataset defined in data catalogs outside of BigQuery. Filled out when the dataset type is EXTERNAL.
 
-`  externalCatalogDatasetOptions  `
+`externalCatalogDatasetOptions`
 
-`  object ( ExternalCatalogDatasetOptions  ` )
+` object ( ExternalCatalogDatasetOptions  ` )
 
 Optional. Options defining open source compatible datasets living in the BigQuery catalog. Contains metadata of open source database, schema or namespace represented by the current dataset.
 
-`  isCaseInsensitive  `
+`isCaseInsensitive`
 
-`  boolean  `
+`boolean`
 
 Optional. TRUE if the dataset and its table names are case-insensitive, otherwise FALSE. By default, this is FALSE, which means the dataset and its table names are case-sensitive. This field does not affect routine references.
 
-`  defaultCollation  `
+`defaultCollation`
 
-`  string  `
+`string`
 
 Optional. Defines the default collation specification of future tables created in the dataset. If a table is created in this dataset without table-level default collation, then the table inherits the dataset default collation, which is applied to the string fields that do not have explicit collation specified. A change to this field affects only tables created afterwards, and does not alter the existing tables. The following values are supported:
 
   - 'und:ci': undetermined locale, case insensitive.
   - '': empty string. Default to case-sensitive behavior.
 
-`  defaultRoundingMode  `
+`defaultRoundingMode`
 
-`  enum ( RoundingMode  ` )
+` enum ( RoundingMode  ` )
 
 Optional. Defines the default rounding mode specification of new tables created within this dataset. During table creation, if this field is specified, the table within this dataset will inherit the default rounding mode of the dataset. Setting the default rounding mode on a table overrides this option. Existing tables in the dataset are unaffected. If columns are defined during that table creation, they will immediately inherit the table's default rounding mode, unless otherwise specified.
 
-`  maxTimeTravelHours  `
+`maxTimeTravelHours`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Optional. Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days). The default value is 168 hours if this is not set.
 
-`  tags[] (deprecated)  `
+` tags[] (deprecated)  `
 
-`  object ( GcpTag  ` )
+` object ( GcpTag  ` )
 
 This item is deprecated\!
 
-Output only. Tags for the dataset. To provide tags as inputs, use the `  resourceTags  ` field.
+Output only. Tags for the dataset. To provide tags as inputs, use the `resourceTags` field.
 
-`  storageBillingModel  `
+`storageBillingModel`
 
-`  enum ( StorageBillingModel  ` )
+` enum ( StorageBillingModel  ` )
 
 Optional. Updates storageBillingModel for the dataset.
 
-`  resourceTags  `
+`resourceTags`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Optional. The [tags](https://cloud.google.com/bigquery/docs/tags) attached to this dataset. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "123456789012/environment" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "Production". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details.
 
-`  catalogSource  `
+`catalogSource`
 
-`  string  `
+`string`
 
 Output only. The origin of the dataset, one of:
 
@@ -409,15 +335,15 @@ Identifier for a dataset.
 
 Fields
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 1,024 characters.
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Optional. The ID of the project containing this dataset.
 
@@ -436,20 +362,16 @@ A dataset source type which refers to another BigQuery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceDataset&quot;: {
-    object (DatasetReference)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceDataset&quot;: {object (DatasetReference)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceDataset  `
+`sourceDataset`
 
-`  object ( DatasetReference  ` )
+` object ( DatasetReference  ` )
 
 The source dataset reference contains project numbers and not project ids.
 
@@ -468,18 +390,16 @@ Metadata about the Linked Dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;linkState&quot;: enum (LinkState)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;linkState&quot;: enum (LinkState)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  linkState  `
+`linkState`
 
-`  enum ( LinkState  ` )
+` enum ( LinkState  ` )
 
 Output only. Specifies whether Linked Dataset is currently in a linked state or not.
 
@@ -489,15 +409,15 @@ Specifies whether Linked Dataset is currently in a linked state or not.
 
 Enums
 
-`  LINK_STATE_UNSPECIFIED  `
+`LINK_STATE_UNSPECIFIED`
 
 The default value. Default to the LINKED state.
 
-`  LINKED  `
+`LINKED`
 
 Normal Linked Dataset state. Data is queryable via the Linked Dataset.
 
-`  UNLINKED  `
+`UNLINKED`
 
 Data publisher or owner has unlinked this Linked Dataset. It means you can no longer query or see the data in the Linked Dataset.
 
@@ -526,15 +446,15 @@ Configures the access a dataset defined in an external metadata storage.
 
 Fields
 
-`  externalSource  `
+`externalSource`
 
-`  string  `
+`string`
 
 Required. External source that backs this dataset.
 
-`  connection  `
+`connection`
 
-`  string  `
+`string`
 
 Required. The connection id that is used to access the externalSource.
 
@@ -568,15 +488,15 @@ Options defining open source compatible datasets living in the BigQuery catalog.
 
 Fields
 
-`  parameters  `
+`parameters`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Optional. A map of key value pairs defining the parameters and properties of the open source schema. Maximum size of 2MiB.
 
-`  defaultStorageLocationUri  `
+`defaultStorageLocationUri`
 
-`  string  `
+`string`
 
 Optional. The storage location URI for all tables in the dataset. Equivalent to hive metastore's database locationUri. Maximum length of 1024 characters.
 
@@ -605,15 +525,15 @@ A global tag managed by Resource Manager. <https://cloud.google.com/iam/docs/tag
 
 Fields
 
-`  tagKey  `
+`tagKey`
 
-`  string  `
+`string`
 
 Required. The namespaced friendly name of the tag key, e.g. "12345/environment" where 12345 is org id.
 
-`  tagValue  `
+`tagValue`
 
-`  string  `
+`string`
 
 Required. The friendly short name of the tag value, e.g. "production".
 
@@ -623,44 +543,44 @@ Indicates the billing model that will be applied to the dataset.
 
 Enums
 
-`  STORAGE_BILLING_MODEL_UNSPECIFIED  `
+`STORAGE_BILLING_MODEL_UNSPECIFIED`
 
 Value not set.
 
-`  LOGICAL  `
+`LOGICAL`
 
 Billing for logical bytes.
 
-`  PHYSICAL  `
+`PHYSICAL`
 
 Billing for physical bytes.
 
 ## Methods
 
-### `             delete           `
+### `            delete           `
 
 Deletes the dataset specified by the datasetId value.
 
-### `             get           `
+### `            get           `
 
 Returns the dataset specified by datasetID.
 
-### `             insert           `
+### `            insert           `
 
 Creates a new empty dataset.
 
-### `             list           `
+### `            list           `
 
 Lists all datasets in the specified project to which the user has been granted the READER dataset role.
 
-### `             patch           `
+### `            patch           `
 
 Updates information in an existing dataset.
 
-### `             undelete           `
+### `            undelete           `
 
 Undeletes a dataset which is within time travel window based on datasetId.
 
-### `             update           `
+### `            update           `
 
 Updates information in an existing dataset.

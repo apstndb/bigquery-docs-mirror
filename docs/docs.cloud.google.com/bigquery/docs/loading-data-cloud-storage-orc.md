@@ -29,26 +29,26 @@ To load data into BigQuery, you need IAM permissions to run a load job and load 
 
 To load data into a new BigQuery table or partition or to append or overwrite an existing table or partition, you need the following IAM permissions:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.tables.updateData  `
-  - `  bigquery.tables.update  `
-  - `  bigquery.jobs.create  `
+  - `bigquery.tables.create`
+  - `bigquery.tables.updateData`
+  - `bigquery.tables.update`
+  - `bigquery.jobs.create`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to load data into a BigQuery table or partition:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.user  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.jobUser  ` (includes the `  bigquery.jobs.create  ` permission)
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.user` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.jobUser` (includes the `bigquery.jobs.create` permission)
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create and update tables using a load job in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can create and update tables using a load job in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### Permissions to load data from Cloud Storage
 
-To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to load data from a Cloud Storage bucket. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -56,9 +56,9 @@ This predefined role contains the permissions required to load data from a Cloud
 
 The following permissions are required to load data from a Cloud Storage bucket:
 
-  - `  storage.buckets.get  `
-  - `  storage.objects.get  `
-  - `  storage.objects.list (required if you are using a URI wildcard )  `
+  - `storage.buckets.get`
+  - `storage.objects.get`
+  - `storage.objects.list (required if you are using a URI wildcard )`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -78,7 +78,7 @@ For example, you have the following ORC files in Cloud Storage:
     gs://mybucket/01/
       b.orc
 
-Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `  mybucket/01/b.orc  ` :
+Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `mybucket/01/b.orc` :
 
 ``` notranslate
 bq load \
@@ -87,34 +87,34 @@ dataset.table \
 "gs://mybucket/00/*.orc","gs://mybucket/01/*.orc"
 ```
 
-When BigQuery detects the schema, some ORC data types are converted to BigQuery data types to make them compatible with GoogleSQL syntax. All fields in the detected schema are [`  NULLABLE  `](https://docs.cloud.google.com/bigquery/docs/schemas#modes) . For more information, see [ORC conversions](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#orc_conversions) .
+When BigQuery detects the schema, some ORC data types are converted to BigQuery data types to make them compatible with GoogleSQL syntax. All fields in the detected schema are [`NULLABLE`](https://docs.cloud.google.com/bigquery/docs/schemas#modes) . For more information, see [ORC conversions](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#orc_conversions) .
 
 When you load multiple ORC files that have different schemas, identical fields (with the same name and same nested level) specified in multiple schemas must map to the same converted BigQuery data type in each schema definition.
 
-To provide a table schema for creating external tables, set the `  referenceFileSchemaUri  ` property in BigQuery API or  
-`  --reference_file_schema_uri  ` parameter in bq command-line tool to the URL of the reference file.
+To provide a table schema for creating external tables, set the `referenceFileSchemaUri` property in BigQuery API or  
+`--reference_file_schema_uri` parameter in bq command-line tool to the URL of the reference file.
 
-For example, `  --reference_file_schema_uri="gs://mybucket/schema.orc"  ` .
+For example, `--reference_file_schema_uri="gs://mybucket/schema.orc"` .
 
 ## ORC compression
 
 BigQuery supports the following compression codecs for ORC file contents:
 
-  - `  Zlib  `
-  - `  Snappy  `
-  - `  LZO  `
-  - `  LZ4  `
-  - `  ZSTD  `
+  - `Zlib`
+  - `Snappy`
+  - `LZO`
+  - `LZ4`
+  - `ZSTD`
 
-Data in ORC files doesn't remain compressed after it is uploaded to BigQuery. Data storage is reported in logical bytes or physical bytes, depending on the [dataset storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) . To get information on storage usage, query the [`  INFORMATION_SCHEMA.TABLE_STORAGE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) .
+Data in ORC files doesn't remain compressed after it is uploaded to BigQuery. Data storage is reported in logical bytes or physical bytes, depending on the [dataset storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) . To get information on storage usage, query the [`INFORMATION_SCHEMA.TABLE_STORAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) .
 
 ## Loading ORC data into a new table
 
 You can load ORC data into a new table by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq load  ` command
-  - Calling the `  jobs.insert  ` API method and configuring a `  load  ` job
+  - Using the bq command-line tool's `bq load` command
+  - Calling the `jobs.insert` API method and configuring a `load` job
   - Using the client libraries
 
 To load ORC data from Cloud Storage into a new BigQuery table:
@@ -154,7 +154,7 @@ After the table is created, you can update the table's expiration, description, 
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads an ORC file into the new table `  mytable  ` :
+Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads an ORC file into the new table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -175,23 +175,23 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the `  bq load  ` command, specify ORC as the `  source_format  ` , and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
+Use the `bq load` command, specify ORC as the `source_format` , and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 Other optional flags include:
 
-  - `  --time_partitioning_type  ` : Enables time-based partitioning on a table and sets the partition type. Possible values are `  HOUR  ` , `  DAY  ` , `  MONTH  ` , and `  YEAR  ` . This flag is optional when you create a table partitioned on a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` column. The default partition type for time-based partitioning is `  DAY  ` . You cannot change the partitioning specification on an existing table.
+  - `--time_partitioning_type` : Enables time-based partitioning on a table and sets the partition type. Possible values are `HOUR` , `DAY` , `MONTH` , and `YEAR` . This flag is optional when you create a table partitioned on a `DATE` , `DATETIME` , or `TIMESTAMP` column. The default partition type for time-based partitioning is `DAY` . You cannot change the partitioning specification on an existing table.
 
-  - `  --time_partitioning_expiration  ` : An integer that specifies (in seconds) when a time-based partition should be deleted. The expiration time evaluates to the partition's UTC date plus the integer value.
+  - `--time_partitioning_expiration` : An integer that specifies (in seconds) when a time-based partition should be deleted. The expiration time evaluates to the partition's UTC date plus the integer value.
 
-  - `  --time_partitioning_field  ` : The `  DATE  ` or `  TIMESTAMP  ` column used to create a partitioned table. If time-based partitioning is enabled without this value, an ingestion-time partitioned table is created.
+  - `--time_partitioning_field` : The `DATE` or `TIMESTAMP` column used to create a partitioned table. If time-based partitioning is enabled without this value, an ingestion-time partitioned table is created.
 
-  - `  --require_partition_filter  ` : When enabled, this option requires users to include a `  WHERE  ` clause that specifies the partitions to query. Requiring a partition filter may reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+  - `--require_partition_filter` : When enabled, this option requires users to include a `WHERE` clause that specifies the partitions to query. Requiring a partition filter may reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-  - `  --clustering_fields  ` : A comma-separated list of up to four column names used to create a [clustered table](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+  - `--clustering_fields` : A comma-separated list of up to four column names used to create a [clustered table](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 
-  - `  --destination_kms_key  ` : The Cloud KMS key for encryption of the table data.
+  - `--destination_kms_key` : The Cloud KMS key for encryption of the table data.
     
     For more information about partitioned tables, see:
     
@@ -216,15 +216,15 @@ path_to_source
 
 Where:
 
-  - location is your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - format is `  ORC  ` .
+  - location is your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - format is `ORC` .
   - dataset is an existing dataset.
   - table is the name of the table into which you're loading data.
   - path\_to\_source is a fully-qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 Examples:
 
-The following command loads data from `  gs://mybucket/mydata.orc  ` into a table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.orc` into a table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -233,7 +233,7 @@ The following command loads data from `  gs://mybucket/mydata.orc  ` into a tabl
     gs://mybucket/mydata.orc
 ```
 
-The following command loads data from `  gs://mybucket/mydata.orc  ` into a new ingestion-time partitioned table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.orc` into a new ingestion-time partitioned table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -243,7 +243,7 @@ The following command loads data from `  gs://mybucket/mydata.orc  ` into a new 
     gs://mybucket/mydata.orc
 ```
 
-The following command loads data from `  gs://mybucket/mydata.orc  ` into a partitioned table named `  mytable  ` in `  mydataset  ` . The table is partitioned on the `  mytimestamp  ` column.
+The following command loads data from `gs://mybucket/mydata.orc` into a partitioned table named `mytable` in `mydataset` . The table is partitioned on the `mytimestamp` column.
 
 ``` 
     bq load \
@@ -253,7 +253,7 @@ The following command loads data from `  gs://mybucket/mydata.orc  ` into a part
     gs://mybucket/mydata.orc
 ```
 
-The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The Cloud Storage URI uses a wildcard.
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard.
 
 ``` 
     bq load \
@@ -262,7 +262,7 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
     gs://mybucket/mydata*.orc
 ```
 
-The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The command includes a comma- separated list of Cloud Storage URIs with wildcards.
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The command includes a comma- separated list of Cloud Storage URIs with wildcards.
 
 ``` 
     bq load --autodetect \
@@ -273,27 +273,27 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
 
 ### API
 
-1.  Create a `  load  ` job that points to the source data in Cloud Storage.
+1.  Create a `load` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully-qualified, in the format `  gs:// bucket / object  ` . Each URI can contain one '\*' [wildcard character](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
+3.  The `source URIs` property must be fully-qualified, in the format ` gs:// bucket / object  ` . Each URI can contain one '\*' [wildcard character](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
-4.  Specify the ORC data format by setting the `  sourceFormat  ` property to `  ORC  ` .
+4.  Specify the ORC data format by setting the `sourceFormat` property to `ORC` .
 
-5.  To check the job status, call [`  jobs.get( job_id *)  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , where job\_id is the ID of the job returned by the initial request.
+5.  To check the job status, call [`jobs.get( job_id *)`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , where job\_id is the ID of the job returned by the initial request.
     
-      - If `  status.state = DONE  ` , the job completed successfully.
-      - If the `  status.errorResult  ` property is present, the request failed, and that object includes information describing what went wrong. When a request fails, no table is created and no data is loaded.
-      - If `  status.errorResult  ` is absent, the job finished successfully, although there might have been some non-fatal errors, such as problems importing a few rows. Non-fatal errors are listed in the returned job object's `  status.errors  ` property.
+      - If `status.state = DONE` , the job completed successfully.
+      - If the `status.errorResult` property is present, the request failed, and that object includes information describing what went wrong. When a request fails, no table is created and no data is loaded.
+      - If `status.errorResult` is absent, the job finished successfully, although there might have been some non-fatal errors, such as problems importing a few rows. Non-fatal errors are listed in the returned job object's `status.errors` property.
 
 **API notes:**
 
   - Load jobs are atomic and consistent; if a load job fails, none of the data is available, and if a load job succeeds, all of the data is available.
 
-  - As a best practice, generate a unique ID and pass it as `  jobReference.jobId  ` when calling `  jobs.insert  ` to create a load job. This approach is more robust to network failure because the client can poll or retry on the known job ID.
+  - As a best practice, generate a unique ID and pass it as `jobReference.jobId` when calling `jobs.insert` to create a load job. This approach is more robust to network failure because the client can poll or retry on the known job ID.
 
-  - Calling `  jobs.insert  ` on a given job ID is idempotent. You can retry as many times as you like on the same job ID, and at most one of those operations succeeds.
+  - Calling `jobs.insert` on a given job ID is idempotent. You can retry as many times as you like on the same job ID, and at most one of those operations succeeds.
 
 ### C\#
 
@@ -596,19 +596,19 @@ In the Google Cloud console, use the **Write preference** option to specify what
 
 You have the following options when you load additional data into a table:
 
-| Console option  | bq tool flag                                                                                                                               | BigQuery API property           | Description                                                                                                                                                              |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Write if empty  | Not supported                                                                                                                              | `        WRITE_EMPTY       `    | Writes the data only if the table is empty.                                                                                                                              |
-| Append to table | `        --noreplace       ` or `        --replace=false       ` ; if `        --[no]replace       ` is unspecified, the default is append | `        WRITE_APPEND       `   | ( [Default](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) ) Appends the data to the end of the table. |
-| Overwrite table | `        --replace       ` or `        --replace=true       `                                                                              | `        WRITE_TRUNCATE       ` | Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.           |
+| Console option  | bq tool flag                                                                                  | BigQuery API property | Description                                                                                                                                                              |
+| --------------- | --------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Write if empty  | Not supported                                                                                 | `WRITE_EMPTY`         | Writes the data only if the table is empty.                                                                                                                              |
+| Append to table | `--noreplace` or `--replace=false` ; if `--[no]replace` is unspecified, the default is append | `WRITE_APPEND`        | ( [Default](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) ) Appends the data to the end of the table. |
+| Overwrite table | `--replace` or `--replace=true`                                                               | `WRITE_TRUNCATE`      | Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.           |
 
 If you load data into an existing table, the load job can append the data or overwrite the table.
 
 You can append or overwrite a table by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq load  ` command
-  - Calling the `  jobs.insert  ` API method and configuring a `  load  ` job
+  - Using the bq command-line tool's `bq load` command
+  - Calling the `jobs.insert` API method and configuring a `load` job
   - Using the client libraries
 
 **Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
@@ -646,7 +646,7 @@ In the **Create table** pane, specify the following details:
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends an ORC file to the table `  mytable  ` :
+Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends an ORC file to the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -667,15 +667,15 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Enter the `  bq load  ` command with the `  --replace  ` flag to overwrite the table. Use the `  --noreplace  ` flag to append data to the table. If no flag is specified, the default is to append data. Supply the `  --source_format  ` flag and set it to `  ORC  ` . Because ORC schemas are automatically retrieved from the self-describing source data, you don't need to provide a schema definition.
+Enter the `bq load` command with the `--replace` flag to overwrite the table. Use the `--noreplace` flag to append data to the table. If no flag is specified, the default is to append data. Supply the `--source_format` flag and set it to `ORC` . Because ORC schemas are automatically retrieved from the self-describing source data, you don't need to provide a schema definition.
 
 **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information about supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 Other optional flags include:
 
-  - `  --destination_kms_key  ` : The Cloud KMS key for encryption of the table data.
+  - `--destination_kms_key` : The Cloud KMS key for encryption of the table data.
 
 <!-- end list -->
 
@@ -689,15 +689,15 @@ path_to_source
 
 Where:
 
-  - location is your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) . The `  --location  ` flag is optional. You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - format is `  ORC  ` .
+  - location is your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) . The `--location` flag is optional. You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - format is `ORC` .
   - dataset is an existing dataset.
   - table is the name of the table into which you're loading data.
   - path\_to\_source is a fully-qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 Examples:
 
-The following command loads data from `  gs://mybucket/mydata.orc  ` and overwrites a table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.orc` and overwrites a table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -707,7 +707,7 @@ The following command loads data from `  gs://mybucket/mydata.orc  ` and overwri
     gs://mybucket/mydata.orc
 ```
 
-The following command loads data from `  gs://mybucket/mydata.orc  ` and appends data to a table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.orc` and appends data to a table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -721,15 +721,15 @@ For information about appending and overwriting partitioned tables using the bq 
 
 ### API
 
-1.  Create a `  load  ` job that points to the source data in Cloud Storage.
+1.  Create a `load` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully-qualified, in the format `  gs:// bucket / object  ` . You can include multiple URIs as a comma-separated list. Note that [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
+3.  The `source URIs` property must be fully-qualified, in the format ` gs:// bucket / object  ` . You can include multiple URIs as a comma-separated list. Note that [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
-4.  Specify the data format by setting the `  configuration.load.sourceFormat  ` property to `  ORC  ` .
+4.  Specify the data format by setting the `configuration.load.sourceFormat` property to `ORC` .
 
-5.  Specify the write preference by setting the `  configuration.load.writeDisposition  ` property to `  WRITE_TRUNCATE  ` or `  WRITE_APPEND  ` .
+5.  Specify the write preference by setting the `configuration.load.writeDisposition` property to `WRITE_TRUNCATE` or `WRITE_APPEND` .
 
 ### C\#
 
@@ -1133,13 +1133,13 @@ BigQuery converts ORC data types to the following BigQuery data types:
 <tr class="even">
 <td>date</td>
 <td>DATE</td>
-<td>An attempt to convert any value in the ORC data that is less than -719162 days or greater than 2932896 days returns an <code dir="ltr" translate="no">       invalid date       value      </code> error. If this affects you, contact <a href="https://cloud.google.com/support-hub">Support</a> to have unsupported values converted to the BigQuery minimum value of <code dir="ltr" translate="no">       0001-01-01      </code> or maximum value of <code dir="ltr" translate="no">       9999-12-31      </code> , as appropriate.</td>
+<td>An attempt to convert any value in the ORC data that is less than -719162 days or greater than 2932896 days returns an <code dir="ltr" translate="no">invalid date value</code> error. If this affects you, contact <a href="https://cloud.google.com/support-hub">Support</a> to have unsupported values converted to the BigQuery minimum value of <code dir="ltr" translate="no">0001-01-01</code> or maximum value of <code dir="ltr" translate="no">9999-12-31</code> , as appropriate.</td>
 </tr>
 <tr class="odd">
 <td>timestamp</td>
 <td>TIMESTAMP</td>
 <td><p>ORC supports nanosecond precision, but BigQuery converts sub-microsecond values to microseconds when the data is read.</p>
-<p>An attempt to convert any value in the ORC data that is less than -719162 days or greater than 2932896 days returns an <code dir="ltr" translate="no">        invalid date          value       </code> error. If this affects you, contact <a href="https://cloud.google.com/support-hub">Support</a> to have unsupported values converted to the BigQuery minimum value of <code dir="ltr" translate="no">        0001-01-01       </code> or maximum value of <code dir="ltr" translate="no">        9999-12-31       </code> , as appropriate.</p></td>
+<p>An attempt to convert any value in the ORC data that is less than -719162 days or greater than 2932896 days returns an <code dir="ltr" translate="no">invalid date value</code> error. If this affects you, contact <a href="https://cloud.google.com/support-hub">Support</a> to have unsupported values converted to the BigQuery minimum value of <code dir="ltr" translate="no">0001-01-01</code> or maximum value of <code dir="ltr" translate="no">9999-12-31</code> , as appropriate.</p></td>
 </tr>
 <tr class="even">
 <td>decimal</td>
@@ -1151,12 +1151,12 @@ BigQuery converts ORC data types to the following BigQuery data types:
 
 #### Decimal type
 
-`  Decimal  ` logical types can be converted to `  NUMERIC  ` , `  BIGNUMERIC  ` , or `  STRING  ` types. The converted type depends on the precision and scale parameters of the `  decimal  ` logical type and the specified decimal target types. Specify the decimal target type as follows:
+`Decimal` logical types can be converted to `NUMERIC` , `BIGNUMERIC` , or `STRING` types. The converted type depends on the precision and scale parameters of the `decimal` logical type and the specified decimal target types. Specify the decimal target type as follows:
 
-  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`  JobConfigurationLoad.decimalTargetTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) field.
-  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  bq load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`  --decimal_target_types  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) flag.
-  - For a query against a [table with external sources](https://docs.cloud.google.com/bigquery/external-data-sources) : use the [`  ExternalDataConfiguration.decimalTargetTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types) field.
-  - For a [persistent external table created with DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) : use the [`  decimal_target_types  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`JobConfigurationLoad.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) field.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`--decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) flag.
+  - For a query against a [table with external sources](https://docs.cloud.google.com/bigquery/external-data-sources) : use the [`ExternalDataConfiguration.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types) field.
+  - For a [persistent external table created with DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) : use the [`decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option.
 
 ### Complex types
 
@@ -1210,25 +1210,25 @@ A column name can contain letters (a-z, A-Z), numbers (0-9), or underscores (\_)
 
 Column names have a maximum length of 300 characters. Column names can't use any of the following prefixes:
 
-  - `  _TABLE_  `
-  - `  _FILE_  `
-  - `  _PARTITION  `
-  - `  _ROW_TIMESTAMP  `
-  - `  __ROOT__  `
-  - `  _COLIDENTIFIER  `
-  - `  _CHANGE_SEQUENCE_NUMBER  `
-  - `  _CHANGE_TYPE  `
-  - `  _CHANGE_TIMESTAMP  `
+  - `_TABLE_`
+  - `_FILE_`
+  - `_PARTITION`
+  - `_ROW_TIMESTAMP`
+  - `__ROOT__`
+  - `_COLIDENTIFIER`
+  - `_CHANGE_SEQUENCE_NUMBER`
+  - `_CHANGE_TYPE`
+  - `_CHANGE_TIMESTAMP`
 
-Duplicate column names are not allowed even if the case differs. For example, a column named `  Column1  ` is considered identical to a column named `  column1  ` . To learn more about column naming rules, see [Column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) in the GoogleSQL reference.
+Duplicate column names are not allowed even if the case differs. For example, a column named `Column1` is considered identical to a column named `column1` . To learn more about column naming rules, see [Column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) in the GoogleSQL reference.
 
-If a table name (for example, `  test  ` ) is the same as one of its column names (for example, `  test  ` ), the `  SELECT  ` expression interprets the `  test  ` column as a `  STRUCT  ` containing all other table columns. To avoid this collision, use one of the following methods:
+If a table name (for example, `test` ) is the same as one of its column names (for example, `test` ), the `SELECT` expression interprets the `test` column as a `STRUCT` containing all other table columns. To avoid this collision, use one of the following methods:
 
   - Avoid using the same name for a table and its columns.
 
-  - Avoid using `  _field_  ` as a column name prefix. System-reserved prefixes cause automatic renaming during queries. For example, the `  SELECT _field_ FROM project1.dataset.test  ` query returns a column named `  _field_1  ` . If you must query a column with this name, use an alias to control the output.
+  - Avoid using `_field_` as a column name prefix. System-reserved prefixes cause automatic renaming during queries. For example, the `SELECT _field_ FROM project1.dataset.test` query returns a column named `_field_1` . If you must query a column with this name, use an alias to control the output.
 
-  - Assign the table a different alias. For example, the following query assigns a table alias `  t  ` to the table `  project1.dataset.test  ` :
+  - Assign the table a different alias. For example, the following query assigns a table alias `t` to the table `project1.dataset.test` :
     
         SELECT test FROM project1.dataset.test AS t;
 
@@ -1238,54 +1238,54 @@ If a table name (for example, `  test  ` ) is the same as one of its column name
 
 ### Flexible column names
 
-You have more flexibility in what you name columns, including expanded access to characters in languages other than English as well as additional symbols. Make sure to use backtick ( ``  `  `` ) characters to enclose flexible column names if they are [Quoted Identifiers](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#quoted_identifiers) .
+You have more flexibility in what you name columns, including expanded access to characters in languages other than English as well as additional symbols. Make sure to use backtick ( `` ` `` ) characters to enclose flexible column names if they are [Quoted Identifiers](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#quoted_identifiers) .
 
 Flexible column names support the following characters:
 
-  - Any letter in any language, as represented by the Unicode regular expression [`  \p{L}  `](https://www.unicode.org/reports/tr44/#General_Category_Values) .
-  - Any numeric character in any language as represented by the Unicode regular expression [`  \p{N}  `](https://www.unicode.org/reports/tr44/#General_Category_Values) .
-  - Any connector punctuation character, including underscores, as represented by the Unicode regular expression [`  \p{Pc}  `](https://www.unicode.org/reports/tr44/#General_Category_Values) .
-  - A hyphen or dash as represented by the Unicode regular expression [`  \p{Pd}  `](https://www.unicode.org/reports/tr44/#General_Category_Values) .
-  - Any mark intended to accompany another character as represented by the Unicode regular expression [`  \p{M}  `](https://www.unicode.org/reports/tr44/#General_Category_Values) . For example, accents, umlauts, or enclosing boxes.
+  - Any letter in any language, as represented by the Unicode regular expression [`\p{L}`](https://www.unicode.org/reports/tr44/#General_Category_Values) .
+  - Any numeric character in any language as represented by the Unicode regular expression [`\p{N}`](https://www.unicode.org/reports/tr44/#General_Category_Values) .
+  - Any connector punctuation character, including underscores, as represented by the Unicode regular expression [`\p{Pc}`](https://www.unicode.org/reports/tr44/#General_Category_Values) .
+  - A hyphen or dash as represented by the Unicode regular expression [`\p{Pd}`](https://www.unicode.org/reports/tr44/#General_Category_Values) .
+  - Any mark intended to accompany another character as represented by the Unicode regular expression [`\p{M}`](https://www.unicode.org/reports/tr44/#General_Category_Values) . For example, accents, umlauts, or enclosing boxes.
   - The following special characters:
-      - An ampersand ( `  &  ` ) as represented by the Unicode regular expression `  \u0026  ` .
-      - A percent sign ( `  %  ` ) as represented by the Unicode regular expression `  \u0025  ` .
-      - An equals sign ( `  =  ` ) as represented by the Unicode regular expression `  \u003D  ` .
-      - A plus sign ( `  +  ` ) as represented by the Unicode regular expression `  \u002B  ` .
-      - A colon ( `  :  ` ) as represented by the Unicode regular expression `  \u003A  ` .
-      - An apostrophe ( `  '  ` ) as represented by the Unicode regular expression `  \u0027  ` .
-      - A less-than sign ( `  <  ` ) as represented by the Unicode regular expression `  \u003C  ` .
-      - A greater-than sign ( `  >  ` ) as represented by the Unicode regular expression `  \u003E  ` .
-      - A number sign ( `  #  ` ) as represented by the Unicode regular expression `  \u0023  ` .
-      - A vertical line ( `  |  ` ) as represented by the Unicode regular expression `  \u007c  ` .
+      - An ampersand ( `&` ) as represented by the Unicode regular expression `\u0026` .
+      - A percent sign ( `%` ) as represented by the Unicode regular expression `\u0025` .
+      - An equals sign ( `=` ) as represented by the Unicode regular expression `\u003D` .
+      - A plus sign ( `+` ) as represented by the Unicode regular expression `\u002B` .
+      - A colon ( `:` ) as represented by the Unicode regular expression `\u003A` .
+      - An apostrophe ( `'` ) as represented by the Unicode regular expression `\u0027` .
+      - A less-than sign ( `<` ) as represented by the Unicode regular expression `\u003C` .
+      - A greater-than sign ( `>` ) as represented by the Unicode regular expression `\u003E` .
+      - A number sign ( `#` ) as represented by the Unicode regular expression `\u0023` .
+      - A vertical line ( `|` ) as represented by the Unicode regular expression `\u007c` .
       - Whitespace.
 
 Flexible column names don't support the following special characters:
 
-  - An exclamation mark ( `  !  ` ) as represented by the Unicode regular expression `  \u0021  ` .
-  - A quotation mark ( `  "  ` ) as represented by the Unicode regular expression `  \u0022  ` .
-  - A dollar sign ( `  $  ` ) as represented by the Unicode regular expression `  \u0024  ` .
-  - A left parenthesis ( `  (  ` ) as represented by the Unicode regular expression `  \u0028  ` .
-  - A right parenthesis ( `  )  ` ) as represented by the Unicode regular expression `  \u0029  ` .
-  - An asterisk ( `  *  ` ) as represented by the Unicode regular expression `  \u002A  ` .
-  - A comma ( `  ,  ` ) as represented by the Unicode regular expression `  \u002C  ` .
-  - A period ( `  .  ` ) as represented by the Unicode regular expression `  \u002E  ` . Periods are *not* replaced by underscores in Parquet file column names when a column name character map is used. For more information, see [flexible column limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) .
-  - A slash ( `  /  ` ) as represented by the Unicode regular expression `  \u002F  ` .
-  - A semicolon ( `  ;  ` ) as represented by the Unicode regular expression `  \u003B  ` .
-  - A question mark ( `  ?  ` ) as represented by the Unicode regular expression `  \u003F  ` .
-  - An at sign ( `  @  ` ) as represented by the Unicode regular expression `  \u0040  ` .
-  - A left square bracket ( `  [  ` ) as represented by the Unicode regular expression `  \u005B  ` .
-  - A backslash ( `  \  ` ) as represented by the Unicode regular expression `  \u005C  ` .
-  - A right square bracket ( `  ]  ` ) as represented by the Unicode regular expression `  \u005D  ` .
-  - A circumflex accent ( `  ^  ` ) as represented by the Unicode regular expression `  \u005E  ` .
-  - A grave accent ( ``  `  `` ) as represented by the Unicode regular expression `  \u0060  ` .
-  - A left curly bracket { `  {  ` ) as represented by the Unicode regular expression `  \u007B  ` .
-  - A right curly bracket ( `  }  ` ) as represented by the Unicode regular expression `  \u007D  ` .
-  - A tilde ( `  ~  ` ) as represented by the Unicode regular expression `  \u007E  ` .
+  - An exclamation mark ( `!` ) as represented by the Unicode regular expression `\u0021` .
+  - A quotation mark ( `"` ) as represented by the Unicode regular expression `\u0022` .
+  - A dollar sign ( `$` ) as represented by the Unicode regular expression `\u0024` .
+  - A left parenthesis ( `(` ) as represented by the Unicode regular expression `\u0028` .
+  - A right parenthesis ( `)` ) as represented by the Unicode regular expression `\u0029` .
+  - An asterisk ( `*` ) as represented by the Unicode regular expression `\u002A` .
+  - A comma ( `,` ) as represented by the Unicode regular expression `\u002C` .
+  - A period ( `.` ) as represented by the Unicode regular expression `\u002E` . Periods are *not* replaced by underscores in Parquet file column names when a column name character map is used. For more information, see [flexible column limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) .
+  - A slash ( `/` ) as represented by the Unicode regular expression `\u002F` .
+  - A semicolon ( `;` ) as represented by the Unicode regular expression `\u003B` .
+  - A question mark ( `?` ) as represented by the Unicode regular expression `\u003F` .
+  - An at sign ( `@` ) as represented by the Unicode regular expression `\u0040` .
+  - A left square bracket ( `[` ) as represented by the Unicode regular expression `\u005B` .
+  - A backslash ( `\` ) as represented by the Unicode regular expression `\u005C` .
+  - A right square bracket ( `]` ) as represented by the Unicode regular expression `\u005D` .
+  - A circumflex accent ( `^` ) as represented by the Unicode regular expression `\u005E` .
+  - A grave accent ( `` ` `` ) as represented by the Unicode regular expression `\u0060` .
+  - A left curly bracket { `{` ) as represented by the Unicode regular expression `\u007B` .
+  - A right curly bracket ( `}` ) as represented by the Unicode regular expression `\u007D` .
+  - A tilde ( `~` ) as represented by the Unicode regular expression `\u007E` .
 
 For additional guidelines, see [Column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) .
 
-The expanded column characters are supported by both the BigQuery Storage Read API and the BigQuery Storage Write API. To use the expanded list of Unicode characters with the BigQuery Storage Read API, you must set a flag. You can use the `  displayName  ` attribute to retrieve the column name. The following example shows how to set a flag with the Python client:
+The expanded column characters are supported by both the BigQuery Storage Read API and the BigQuery Storage Write API. To use the expanded list of Unicode characters with the BigQuery Storage Read API, you must set a flag. You can use the `displayName` attribute to retrieve the column name. The following example shows how to set a flag with the Python client:
 
     from google.cloud.bigquery_storage import types
     requested_session = types.ReadSession()
@@ -1295,7 +1295,7 @@ The expanded column characters are supported by both the BigQuery Storage Read A
     options.enable_display_name_attribute = True
     requested_session.read_options.avro_serialization_options = options
 
-To use the expanded list of Unicode characters with the BigQuery Storage Write API, you must provide the schema with `  column_name  ` notation, unless you are using the `  JsonStreamWriter  ` writer object. The following example shows how to provide the schema:
+To use the expanded list of Unicode characters with the BigQuery Storage Write API, you must provide the schema with `column_name` notation, unless you are using the `JsonStreamWriter` writer object. The following example shows how to provide the schema:
 
     syntax = "proto2";
     package mypackage;
@@ -1309,14 +1309,14 @@ To use the expanded list of Unicode characters with the BigQuery Storage Write A
       [(.google.cloud.bigquery.storage.v1.column_name) = "description-列"];
     }
 
-In this example, `  item_name_column  ` and `  item_description_column  ` are placeholder names which need to be compliant with the [protocol buffer](https://protobuf.dev/) naming convention. Note that `  column_name  ` annotations always take precedence over placeholder names.
+In this example, `item_name_column` and `item_description_column` are placeholder names which need to be compliant with the [protocol buffer](https://protobuf.dev/) naming convention. Note that `column_name` annotations always take precedence over placeholder names.
 
 #### Limitations
 
   - Flexible column names are not supported with [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
-### `     NULL    ` values
+### `NULL` values
 
-Note that for load jobs, BigQuery ignores `  NULL  ` elements for the `  list  ` compound type, since otherwise they would be translated to `  NULL  ` `  ARRAY  ` elements which cannot persist to a table (see [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for details).
+Note that for load jobs, BigQuery ignores `NULL` elements for the `list` compound type, since otherwise they would be translated to `NULL` `ARRAY` elements which cannot persist to a table (see [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for details).
 
 For more information on ORC data types, see the [Apache ORC™ Specification v1](https://orc.apache.org/specification/ORCv1) .

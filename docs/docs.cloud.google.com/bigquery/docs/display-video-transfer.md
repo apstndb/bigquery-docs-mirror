@@ -102,25 +102,25 @@ Review the following prerequisites and information before you create a Display &
       - If you have a contract with Display & Video 360, [contact Display & Video 360 support](https://support.google.com/displayvideo/answer/9026876) to set up Display & Video 360 DTv2 files.
       - If you don't have a contract with Display & Video 360, contact your agency for access to Display & Video 360 DTv2 files.
       - After completing this step, you will receive either of the following Cloud Storage bucket name, depending if your setup is for a partner or an advertiser:
-          - `  gs://dcdt_-dbm_partner PARTNER_ID  `
-          - `  gs://dcdt_-dbm_advertiser ADVERTISER_ID  `
+          - ` gs://dcdt_-dbm_partner PARTNER_ID  `
+          - ` gs://dcdt_-dbm_advertiser ADVERTISER_ID  `
     
     **Note:** The Google Cloud team does not have the ability to generate or grant access to Display & Video 360 DTv2 files on your behalf. Contact Display & Video 360 [support](https://support.google.com/displayvideo/answer/9026876) or your agency for access to Display & Video 360 DTv2 files.
 
-  - To set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - To set up transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Find your Display & Video 360 ID
 
 To retrieve your Display & Video 360 ID, navigate to the Cloud Storage **Buckets** page in the Google Cloud console and examine the files in your Display & Video 360 data transfer Cloud Storage bucket. The Display & Video 360 ID is used to match files in the provided Cloud Storage bucket. The ID is embedded in the filename, not the Cloud Storage bucket name. For example:
 
-  - In a file named `  dbm_partner123_activity_*  ` , the ID is `  123  ` .
-  - In a file named `  dbm_advertiser567_activity_*  ` , the ID is `  567  ` .
+  - In a file named `dbm_partner123_activity_*` , the ID is `123` .
+  - In a file named `dbm_advertiser567_activity_*` , the ID is `567` .
 
 ### Finding your filename prefix
 
 In some cases, the files in your Cloud Storage bucket might have custom, nonstandard file names that were set up for you by the Google Marketing Platform services team. For example:
 
-In a file named `  dbm_partner123456custom_activity_*  ` , the prefix is `  dbm_partner123456custom  ` .
+In a file named `dbm_partner123456custom_activity_*` , the prefix is `dbm_partner123456custom` .
 
 For any assistance regarding filename prefixes, contact [Display & Video 360 support](https://support.google.com/displayvideo/answer/9026876) .
 
@@ -160,12 +160,12 @@ Select one of the following options:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` . The following flags are required:
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are required:
 
-  - `  --data_source  `
-  - `  --target_dataset  `
-  - `  --display_name  `
-  - `  --params  `
+  - `--data_source`
+  - `--target_dataset`
+  - `--display_name`
+  - `--params`
 
 <!-- end list -->
 
@@ -183,10 +183,10 @@ Where:
   - PROJECT\_ID : your project ID.
   - DATASET : the target dataset for the data transfer configuration.
   - NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - PARAMETERS : the parameters for the created data transfer configuration in JSON format. For example— `  --params='{"param":"param_value"}'  ` . For Display & Video 360 transfers, the `  bucket  ` and `  displayvideo_id  ` parameters are required. The `  file_name_prefix  ` parameter is optional and used for rare, custom file names only.
-  - DATA\_SOURCE : the data source — `  displayvideo  ` .
+  - PARAMETERS : the parameters for the created data transfer configuration in JSON format. For example— `--params='{"param":"param_value"}'` . For Display & Video 360 transfers, the `bucket` and `displayvideo_id` parameters are required. The `file_name_prefix` parameter is optional and used for rare, custom file names only.
+  - DATA\_SOURCE : the data source — `displayvideo` .
 
-For example, the following command creates a Display & Video 360 data transfer named `  My Transfer  ` using Display & Video 360 ID `  123456  ` , Cloud Storage bucket `  dcdt_-dbm_partner123456  ` , and target dataset `  mydataset  ` .
+For example, the following command creates a Display & Video 360 data transfer named `My Transfer` using Display & Video 360 ID `123456` , Cloud Storage bucket `dcdt_-dbm_partner123456` , and target dataset `mydataset` .
 
 The data transfer is created in the default project:
 
@@ -200,16 +200,16 @@ The data transfer is created in the default project:
 
 After running the command, you receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions in the message and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ## Query your data
 
 When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-We recommend that you query the auto-generated views instead of querying the tables directly. However, if you want to query your tables directly, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+We recommend that you query the auto-generated views instead of querying the tables directly. However, if you want to query your tables directly, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .

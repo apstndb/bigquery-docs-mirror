@@ -12,7 +12,7 @@ Ensure that you have a [connection to access Amazon S3 data](https://docs.cloud.
 
 ### Required roles
 
-To get the permissions that you need to create an external table, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create an external table, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create an external table. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -20,8 +20,8 @@ This predefined role contains the permissions required to create an external tab
 
 The following permissions are required to create an external table:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.connections.delegate  `
+  - `bigquery.tables.create`
+  - `bigquery.connections.delegate`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -51,7 +51,7 @@ On the **Create dataset** page, specify the following details:
 
 ### SQL
 
-Use the [`  CREATE SCHEMA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) . The following example create a dataset in the `  aws-us-east-1  ` region:
+Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) . The following example create a dataset in the `aws-us-east-1` region:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -71,7 +71,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-In a command-line environment, create a dataset using the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
+In a command-line environment, create a dataset using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
 
 ``` notranslate
 bq --location=LOCATION mk \
@@ -79,13 +79,13 @@ bq --location=LOCATION mk \
 PROJECT_ID:DATASET_NAME
 ```
 
-The `  --project_id  ` parameter overrides the default project.
+The `--project_id` parameter overrides the default project.
 
 Replace the following:
 
   - `  LOCATION  ` : the location of your dataset
     
-    For information about supported regions, see [Locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) . After you create a dataset, you can't change its location. You can set a default value for the location by using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+    For information about supported regions, see [Locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) . After you create a dataset, you can't change its location. You can set a default value for the location by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
 
   - `  PROJECT_ID  ` : your project ID
 
@@ -158,7 +158,7 @@ Select one of the following options:
 5.  On the **Create table** page, in the **Source** section, do the following:
     
     1.  For **Create table from** , select **Amazon S3** .
-    2.  For **Select S3 path** , enter a URI pointing to the Amazon S3 data in the format `  s3:// BUCKET_NAME / PATH  ` . Replace `  BUCKET_NAME  ` with the name of the Amazon S3 bucket; the bucket's region should be the same as the dataset's region. Replace `  PATH  ` with the path that you would like to write the exported file to; it can contain one wildcard `  *  ` .
+    2.  For **Select S3 path** , enter a URI pointing to the Amazon S3 data in the format ` s3:// BUCKET_NAME / PATH  ` . Replace `  BUCKET_NAME  ` with the name of the Amazon S3 bucket; the bucket's region should be the same as the dataset's region. Replace `  PATH  ` with the path that you would like to write the exported file to; it can contain one wildcard `*` .
     3.  For **File format** , select the data format in Amazon S3. Supported formats are **AVRO** , **CSV** , **DELTA\_LAKE** , **ICEBERG** , **JSONL** , **ORC** , and **PARQUET** .
 
 6.  In the **Destination** section, specify the following details:
@@ -178,7 +178,7 @@ Select one of the following options:
 
 ### SQL
 
-To create a BigLake table, use the [`  CREATE EXTERNAL TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) with the `  WITH CONNECTION  ` clause:
+To create a BigLake table, use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) with the `WITH CONNECTION` clause:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -206,21 +206,21 @@ To create a BigLake table, use the [`  CREATE EXTERNAL TABLE  ` statement](https
     
       - `  CONNECTION_NAME  ` : the name of the connection you created
     
-      - `  DATA_FORMAT  ` : any of the supported [BigQuery federated formats](https://docs.cloud.google.com/bigquery/external-data-sources) (such as `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` , `  ICEBERG  ` , or `  PARQUET  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ))
+      - `  DATA_FORMAT  ` : any of the supported [BigQuery federated formats](https://docs.cloud.google.com/bigquery/external-data-sources) (such as `AVRO` , `CSV` , `DELTA_LAKE` , `ICEBERG` , or `PARQUET` ( [preview](https://cloud.google.com/products/#product-launch-stages) ))
     
-      - `  S3_URI  ` : a URI pointing to the Amazon S3 data (for example, `  s3://bucket/path  ` )
+      - `  S3_URI  ` : a URI pointing to the Amazon S3 data (for example, `s3://bucket/path` )
     
       - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
         
         To disable metadata caching, specify 0. This is the default.
         
-        To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
+        To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `INTERVAL 4 HOUR` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
     
       - `  CACHE_MODE  ` : specifies whether the metadata cache is refreshed automatically or manually. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
         
-        Set to `  AUTOMATIC  ` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
+        Set to `AUTOMATIC` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
         
-        Set to `  MANUAL  ` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache.
+        Set to `MANUAL` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache.
         
         You must set `  CACHE_MODE  ` if `  STALENESS_INTERVAL  ` is set to a value greater than 0.
 
@@ -253,21 +253,21 @@ S3_URI > table_def
 
 Replace the following:
 
-  - `  DATA_FORMAT  ` : any of the supported [BigQuery federated formats](https://docs.cloud.google.com/bigquery/external-data-sources) (such as `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` , `  ICEBERG  ` , or `  PARQUET  ` ).
+  - `  DATA_FORMAT  ` : any of the supported [BigQuery federated formats](https://docs.cloud.google.com/bigquery/external-data-sources) (such as `AVRO` , `CSV` , `DELTA_LAKE` , `ICEBERG` , or `PARQUET` ).
 
-  - `  S3_URI  ` : a URI pointing to the Amazon S3 data (for example, `  s3://bucket/path  ` ).
+  - `  S3_URI  ` : a URI pointing to the Amazon S3 data (for example, `s3://bucket/path` ).
 
-  - `  AWS_LOCATION  ` : an AWS location in Google Cloud (for example, `  aws-us-east-1  ` ).
+  - `  AWS_LOCATION  ` : an AWS location in Google Cloud (for example, `aws-us-east-1` ).
 
   - `  CONNECTION_NAME  ` : the name of the connection you created.
 
-  - `  CACHE_MODE  ` : specifies whether the metadata cache is refreshed automatically or manually. You only need to include this flag if you also plan to use the `  --max_staleness  ` flag in the subsequent `  bq mk  ` command to enable metadata caching. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
+  - `  CACHE_MODE  ` : specifies whether the metadata cache is refreshed automatically or manually. You only need to include this flag if you also plan to use the `--max_staleness` flag in the subsequent `bq mk` command to enable metadata caching. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
     
-    Set to `  AUTOMATIC  ` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
+    Set to `AUTOMATIC` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
     
-    Set to `  MANUAL  ` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache. You must set `  CACHE_MODE  ` if `  STALENESS_INTERVAL  ` is set to a value greater than 0.
+    Set to `MANUAL` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache. You must set `  CACHE_MODE  ` if `  STALENESS_INTERVAL  ` is set to a value greater than 0.
 
-**Note:** To override the default project, use the `  --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 Next, create the BigLake table:
 
@@ -281,13 +281,13 @@ Replace the following:
     
     To disable metadata caching, specify 0. This is the default.
     
-    To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
+    To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `INTERVAL 4 HOUR` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
 
   - `  DATASET_NAME  ` : the name of the dataset you created.
 
   - `  TABLE_NAME  ` : the name you want to give to this table.
 
-For example, the following command creates a new BigLake table, `  awsdataset.awstable  ` , which can query your Amazon S3 data that's stored at the path `  s3://s3-bucket/path/file.csv  ` and has a read connection in the location `  aws-us-east-1  ` :
+For example, the following command creates a new BigLake table, `awsdataset.awstable` , which can query your Amazon S3 data that's stored at the path `s3://s3-bucket/path/file.csv` and has a read connection in the location `aws-us-east-1` :
 
 ``` notranslate
 bq mkdef  \
@@ -303,11 +303,11 @@ bq mk --max_staleness=INTERVAL "1" HOUR \
 
 ### API
 
-Call the [`  tables.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) API method, and create an [`  ExternalDataConfiguration  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the [`  Table  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table) that you pass in.
+Call the [`tables.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) API method, and create an [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the [`Table` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table) that you pass in.
 
-Specify the `  schema  ` property or set the `  autodetect  ` property to `  true  ` to enable schema auto detection for supported data sources.
+Specify the `schema` property or set the `autodetect` property to `true` to enable schema auto detection for supported data sources.
 
-Specify the `  connectionId  ` property to identify the connection to use for connecting to Amazon S3.
+Specify the `connectionId` property to identify the connection to use for connecting to Amazon S3.
 
 ### Java
 
@@ -397,7 +397,7 @@ To create a BigLake table based on Hive partitioned data, select one of the foll
     
     1.  For **Create table from** , select **Amazon S3** .
     
-    2.  Provide the path to the folder, using [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) . For example, `  s3://mybucket/*  ` .
+    2.  Provide the path to the folder, using [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) . For example, `s3://mybucket/*` .
         
         The folder must be in the same location as the dataset that contains the table you want to create, append, or overwrite.
     
@@ -405,15 +405,15 @@ To create a BigLake table based on Hive partitioned data, select one of the foll
     
     4.  Select the **Source data partitioning** checkbox, and then specify the following details:
         
-        1.  For **Select Source URI Prefix** , enter the URI prefix. For example, `  s3://mybucket/my_files  ` .
+        1.  For **Select Source URI Prefix** , enter the URI prefix. For example, `s3://mybucket/my_files` .
         
         2.  Optional: To require a partition filter on all queries for this table, select the **Require partition filter** checkbox. Requiring a partition filter can reduce cost and improve performance. For more information, see [Requiring predicate filters on partition keys in queries](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#requiring_predicate_filters_on_partition_keys_in_queries) .
         
         3.  In the **Partition inference mode** section, select one of the following options:
             
-              - **Automatically infer types** : set the partition schema detection mode to `  AUTO  ` .
-              - **All columns are strings** : set the partition schema detection mode to `  STRINGS  ` .
-              - **Provide my own** : set the partition schema detection mode to `  CUSTOM  ` and manually enter the schema information for the partition keys. For more information, see [Custom partition key schema](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#custom_partition_key_schema) .
+              - **Automatically infer types** : set the partition schema detection mode to `AUTO` .
+              - **All columns are strings** : set the partition schema detection mode to `STRINGS` .
+              - **Provide my own** : set the partition schema detection mode to `CUSTOM` and manually enter the schema information for the partition keys. For more information, see [Custom partition key schema](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#custom_partition_key_schema) .
 
 6.  In the **Destination** section, specify the following details:
     
@@ -435,7 +435,7 @@ To create a BigLake table based on Hive partitioned data, select one of the foll
 
 ### SQL
 
-Use the [`  CREATE EXTERNAL TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) :
+Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -461,37 +461,37 @@ Use the [`  CREATE EXTERNAL TABLE  ` DDL statement](https://docs.cloud.google.co
     
     Replace the following:
     
-      - `  PROJECT_ID  ` : the name of your project in which you want to create the table—for example, `  myproject  `
+      - `  PROJECT_ID  ` : the name of your project in which you want to create the table—for example, `myproject`
     
-      - `  DATASET  ` : the name of the BigQuery dataset that you want to create the table in—for example, `  mydataset  `
+      - `  DATASET  ` : the name of the BigQuery dataset that you want to create the table in—for example, `mydataset`
     
-      - `  EXTERNAL_TABLE_NAME  ` : the name of the table that you want to create—for example, `  mytable  `
+      - `  EXTERNAL_TABLE_NAME  ` : the name of the table that you want to create—for example, `mytable`
     
       - `  PARTITION_COLUMN  ` : the name of the partitioning column
     
       - `  PARTITION_COLUMN_TYPE  ` : the type of the partitioning column
     
-      - `  REGION  ` : the region that contains the connection—for example, `  us  `
+      - `  REGION  ` : the region that contains the connection—for example, `us`
     
-      - `  CONNECTION_ID  ` : the name of the connection—for example, `  myconnection  `
+      - `  CONNECTION_ID  ` : the name of the connection—for example, `myconnection`
     
-      - `  HIVE_PARTITION_URI_PREFIX  ` : hive partitioning uri prefix–for example: `  s3://mybucket/  `
+      - `  HIVE_PARTITION_URI_PREFIX  ` : hive partitioning uri prefix–for example: `s3://mybucket/`
     
-      - `  FILE_PATH  ` : path to the data source for the external table that you want to create—for example: `  s3://mybucket/*.parquet  `
+      - `  FILE_PATH  ` : path to the data source for the external table that you want to create—for example: `s3://mybucket/*.parquet`
     
-      - `  TABLE_FORMAT  ` : the format of the table that you want to create—for example, `  PARQUET  `
+      - `  TABLE_FORMAT  ` : the format of the table that you want to create—for example, `PARQUET`
     
       - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
         
         To disable metadata caching, specify 0. This is the default.
         
-        To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
+        To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `INTERVAL 4 HOUR` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
     
       - `  CACHE_MODE  ` : specifies whether the metadata cache is refreshed automatically or manually. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
         
-        Set to `  AUTOMATIC  ` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
+        Set to `AUTOMATIC` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
         
-        Set to `  MANUAL  ` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache.
+        Set to `MANUAL` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache.
         
         You must set `  CACHE_MODE  ` if `  STALENESS_INTERVAL  ` is set to a value greater than 0.
 
@@ -520,7 +520,7 @@ OPTIONS(
 
 ### bq
 
-First, use the [`  bq mkdef  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) command to create a table definition file:
+First, use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) command to create a table definition file:
 
 ``` notranslate
 bq mkdef \
@@ -535,39 +535,39 @@ bq mkdef \
 
 Replace the following:
 
-  - `  SOURCE_FORMAT  ` : the format of the external data source. For example, `  CSV  ` .
+  - `  SOURCE_FORMAT  ` : the format of the external data source. For example, `CSV` .
 
-  - `  REGION  ` : the region that contains the connection—for example, `  us  ` .
+  - `  REGION  ` : the region that contains the connection—for example, `us` .
 
-  - `  CONNECTION_ID  ` : the name of the connection—for example, `  myconnection  ` .
+  - `  CONNECTION_ID  ` : the name of the connection—for example, `myconnection` .
 
   - `  PARTITIONING_MODE  ` : the Hive partitioning mode. Use one of the following values:
     
-      - `  AUTO  ` : Automatically detect the key names and types.
-      - `  STRINGS  ` : Automatically convert the key names to strings.
-      - `  CUSTOM  ` : Encode the key schema in the source URI prefix.
+      - `AUTO` : Automatically detect the key names and types.
+      - `STRINGS` : Automatically convert the key names to strings.
+      - `CUSTOM` : Encode the key schema in the source URI prefix.
 
   - `  URI_SHARED_PREFIX  ` : the source URI prefix.
 
-  - `  BOOLEAN  ` : specifies whether to require a predicate filter at query time. This flag is optional. The default value is `  false  ` .
+  - `  BOOLEAN  ` : specifies whether to require a predicate filter at query time. This flag is optional. The default value is `false` .
 
-  - `  CACHE_MODE  ` : specifies whether the metadata cache is refreshed automatically or manually. You only need to include this flag if you also plan to use the `  --max_staleness  ` flag in the subsequent `  bq mk  ` command to enable metadata caching. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
+  - `  CACHE_MODE  ` : specifies whether the metadata cache is refreshed automatically or manually. You only need to include this flag if you also plan to use the `--max_staleness` flag in the subsequent `bq mk` command to enable metadata caching. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
     
-    Set to `  AUTOMATIC  ` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
+    Set to `AUTOMATIC` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
     
-    Set to `  MANUAL  ` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache. You must set `  CACHE_MODE  ` if `  STALENESS_INTERVAL  ` is set to a value greater than 0.
+    Set to `MANUAL` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache. You must set `  CACHE_MODE  ` if `  STALENESS_INTERVAL  ` is set to a value greater than 0.
 
   - `  URIS  ` : the path to the Amazon S3 folder, using wildcard format.
 
   - `  DEFINITION_FILE  ` : the path to the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) on your local machine.
 
-If `  PARTITIONING_MODE  ` is `  CUSTOM  ` , include the partition key schema in the source URI prefix, using the following format:
+If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the source URI prefix, using the following format:
 
 ``` notranslate
 --hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 ```
 
-After you create the table definition file, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
+After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
 
 ``` notranslate
 bq mk --max_staleness=STALENESS_INTERVAL \
@@ -582,7 +582,7 @@ Replace the following:
     
     To disable metadata caching, specify 0. This is the default.
     
-    To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
+    To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `INTERVAL 4 HOUR` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation retrieves metadata from Amazon S3 instead.
 
   - `  DEFINITION_FILE  ` : the path to the table definition file.
 
@@ -590,11 +590,11 @@ Replace the following:
 
   - `  TABLE_NAME  ` : the name of the table you're creating.
 
-  - `  SCHEMA  ` : specifies a path to a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) , or specifies the schema in the form `  field:data_type,field:data_type,...  ` . To use schema auto-detection, omit this argument.
+  - `  SCHEMA  ` : specifies a path to a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) , or specifies the schema in the form `field:data_type,field:data_type,...` . To use schema auto-detection, omit this argument.
 
 **Examples**
 
-The following example uses `  AUTO  ` Hive partitioning mode for Amazon S3 data:
+The following example uses `AUTO` Hive partitioning mode for Amazon S3 data:
 
     bq mkdef --source_format=CSV \
       --connection_id=us.my-connection \
@@ -608,7 +608,7 @@ The following example uses `  AUTO  ` Hive partitioning mode for Amazon S3 data:
       mydataset.mytable \
       Region:STRING,Quarter:STRING,Total_sales:INTEGER
 
-The following example uses `  STRING  ` Hive partitioning mode for Amazon S3 data:
+The following example uses `STRING` Hive partitioning mode for Amazon S3 data:
 
     bq mkdef --source_format=CSV \
       --connection_id=us.my-connection \
@@ -624,11 +624,11 @@ The following example uses `  STRING  ` Hive partitioning mode for Amazon S3 dat
 
 ### API
 
-To set Hive partitioning using the BigQuery API, include the [`  hivePartitioningOptions  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`  ExternalDataConfiguration  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a BigLake table, you must also specify a value for the `  connectionId  ` field.
+To set Hive partitioning using the BigQuery API, include the [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a BigLake table, you must also specify a value for the `connectionId` field.
 
-If you set the `  hivePartitioningOptions.mode  ` field to `  CUSTOM  ` , you must encode the partition key schema in the `  hivePartitioningOptions.sourceUriPrefix  ` field as follows: `  s3:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...  `
+If you set the `hivePartitioningOptions.mode` field to `CUSTOM` , you must encode the partition key schema in the `hivePartitioningOptions.sourceUriPrefix` field as follows: `s3:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...`
 
-To enforce the use of a predicate filter at query time, set the `  hivePartitioningOptions.requirePartitionFilter  ` field to `  true  ` .
+To enforce the use of a predicate filter at query time, set the `hivePartitioningOptions.requirePartitionFilter` field to `true` .
 
 ## Delta Lake tables
 
@@ -638,7 +638,7 @@ Delta Lake is an open source table format that supports petabyte scale data tabl
 
 Delta Lake maintains a canonical schema as part of its metadata. You can't update a schema using a JSON metadata file. To update the schema:
 
-1.  Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --autodetect_schema  ` flag:
+1.  Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--autodetect_schema` flag:
     
     ``` lang-sh
     bq update --autodetect_schema
@@ -657,24 +657,24 @@ Delta Lake maintains a canonical schema as part of its metadata. You can't updat
 
 BigQuery converts Delta Lake data types to the following BigQuery data types:
 
-| **Delta Lake Type**                               | **BigQuery Type**                                                               |
-| ------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `        boolean       `                          | `        BOOL       `                                                           |
-| `        byte       `                             | `        INT64       `                                                          |
-| `        int       `                              | `        INT64       `                                                          |
-| `        long       `                             | `        INT64       `                                                          |
-| `        float       `                            | `        FLOAT64       `                                                        |
-| `        double       `                           | `        FLOAT64       `                                                        |
-| `        Decimal(P/S)       `                     | `        NUMERIC       ` or `        BIG_NUMERIC       ` depending on precision |
-| `        date       `                             | `        DATE       `                                                           |
-| `        time       `                             | `        TIME       `                                                           |
-| `        timestamp (not partition column)       ` | `        TIMESTAMP       `                                                      |
-| `        timestamp (partition column)       `     | `        DATETIME       `                                                       |
-| `        string       `                           | `        STRING       `                                                         |
-| `        binary       `                           | `        BYTES       `                                                          |
-| `        array<Type>       `                      | `        ARRAY<Type>       `                                                    |
-| `        struct       `                           | `        STRUCT       `                                                         |
-| `        map<KeyType, ValueType>       `          | `        ARRAY<Struct<key KeyType, value ValueType>>       `                    |
+| **Delta Lake Type**                | **BigQuery Type**                                 |
+| ---------------------------------- | ------------------------------------------------- |
+| `boolean`                          | `BOOL`                                            |
+| `byte`                             | `INT64`                                           |
+| `int`                              | `INT64`                                           |
+| `long`                             | `INT64`                                           |
+| `float`                            | `FLOAT64`                                         |
+| `double`                           | `FLOAT64`                                         |
+| `Decimal(P/S)`                     | `NUMERIC` or `BIG_NUMERIC` depending on precision |
+| `date`                             | `DATE`                                            |
+| `time`                             | `TIME`                                            |
+| `timestamp (not partition column)` | `TIMESTAMP`                                       |
+| `timestamp (partition column)`     | `DATETIME`                                        |
+| `string`                           | `STRING`                                          |
+| `binary`                           | `BYTES`                                           |
+| `array<Type>`                      | `ARRAY<Type>`                                     |
+| `struct`                           | `STRUCT`                                          |
+| `map<KeyType, ValueType>`          | `ARRAY<Struct<key KeyType, value ValueType>>`     |
 
 ### Limitations
 
@@ -690,7 +690,7 @@ The following limitations apply to Delta Lake tables:
 
 ### Create a Delta Lake table
 
-The following example creates an external table by using the [`  CREATE EXTERNAL TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) statement with the Delta Lake format:
+The following example creates an external table by using the [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) statement with the Delta Lake format:
 
 ``` lang-googlesql
 CREATE [OR REPLACE] EXTERNAL TABLE table_name
@@ -711,7 +711,7 @@ Replace the following:
 
 ### Cross-cloud transfer with Delta Lake
 
-The following example uses the [`  LOAD DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) statement to load data to the appropriate table:
+The following example uses the [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) statement to load data to the appropriate table:
 
 ``` lang-googlesql
 LOAD DATA [INTO | OVERWRITE] table_name
@@ -734,11 +734,11 @@ For more information, see [Query Amazon S3 data](https://docs.cloud.google.com/b
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-You can view the resource metadata with [`  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) views. When you query the [`  JOBS_BY_*  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , [`  JOBS_TIMELINE_BY_*  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) , and [`  RESERVATION*  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) views, you must [specify the query's processing location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) that is collocated with the table's region. For information about BigQuery Omni locations, see [Locations](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) . For all other system tables, specifying the query job location is *optional* .
+You can view the resource metadata with [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) views. When you query the [`JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , [`JOBS_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) , and [`RESERVATION*`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) views, you must [specify the query's processing location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) that is collocated with the table's region. For information about BigQuery Omni locations, see [Locations](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) . For all other system tables, specifying the query job location is *optional* .
 
 For information about the system tables that BigQuery Omni supports, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
 
-To query `  JOBS_*  ` and `  RESERVATION*  ` system tables, select one of the following methods to specify the processing location:
+To query `JOBS_*` and `RESERVATION*` system tables, select one of the following methods to specify the processing location:
 
 ### Console
 
@@ -750,13 +750,13 @@ To query `  JOBS_*  ` and `  RESERVATION*  ` system tables, select one of the fo
 
 3.  Click **More** \> **Query settings** . The **Query settings** dialog opens.
 
-4.  In the **Query settings** dialog, for **Additional settings** \> **Data location** , select the [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) that is collocated with the BigQuery Omni region. For example, if your BigQuery Omni region is `  aws-us-east-1  ` , specify `  us-east4  ` .
+4.  In the **Query settings** dialog, for **Additional settings** \> **Data location** , select the [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) that is collocated with the BigQuery Omni region. For example, if your BigQuery Omni region is `aws-us-east-1` , specify `us-east4` .
 
 5.  Select the remaining fields and click **Save** .
 
 ### bq
 
-Use the `  --location  ` flag to set the job's processing location to the [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) that is collocated with the BigQuery Omni region. For example, if your BigQuery Omni region is `  aws-us-east-1  ` , specify `  us-east4  ` .
+Use the `--location` flag to set the job's processing location to the [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) that is collocated with the BigQuery Omni region. For example, if your BigQuery Omni region is `aws-us-east-1` , specify `us-east4` .
 
 **Example**
 
@@ -768,7 +768,7 @@ Use the `  --location  ` flag to set the job's processing location to the [BigQu
 
 ### API
 
-If you are [running jobs programmatically](https://docs.cloud.google.com/bigquery/docs/running-jobs) , set the location argument to the [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) that is collocated with the BigQuery Omni region. For example, if your BigQuery Omni region is `  aws-us-east-1  ` , specify `  us-east4  ` .
+If you are [running jobs programmatically](https://docs.cloud.google.com/bigquery/docs/running-jobs) , set the location argument to the [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) that is collocated with the BigQuery Omni region. For example, if your BigQuery Omni region is `aws-us-east-1` , specify `us-east4` .
 
 The following example lists the metadata refresh jobs in last six hours:
 
@@ -814,11 +814,11 @@ Ensure that you have the required permissions to configure service perimeters. T
     
     5.  In the **Add external resource** dialog, for **External resource name** , enter a valid resource name. For example:
         
-          - For Amazon Simple Storage Service (Amazon S3): `  s3:// BUCKET_NAME  `
+          - For Amazon Simple Storage Service (Amazon S3): ` s3:// BUCKET_NAME  `
             
             Replace BUCKET\_NAME with the name of your Amazon S3 bucket.
         
-          - For Azure Blob Storage: `  azure://myaccount.blob.core.windows.net/ CONTAINER_NAME  `
+          - For Azure Blob Storage: ` azure://myaccount.blob.core.windows.net/ CONTAINER_NAME  `
             
             Replace CONTAINER NAME with the name of your Blob Storage container.
         
@@ -845,9 +845,9 @@ An access policy is an organization-wide container for access levels and service
 
 #### Create the egress policy input file
 
-An egress rule block defines the allowed access from within a perimeter to resources outside of that perimeter. For external resources, the `  externalResources  ` property defines the external resource paths allowed access from within your VPC Service Controls perimeter.
+An egress rule block defines the allowed access from within a perimeter to resources outside of that perimeter. For external resources, the `externalResources` property defines the external resource paths allowed access from within your VPC Service Controls perimeter.
 
-Egress rules can be configured using a JSON file, or a YAML file. The following sample uses the `  .yaml  ` format:
+Egress rules can be configured using a JSON file, or a YAML file. The following sample uses the `.yaml` format:
 
     - egressTo:
         operations:
@@ -864,35 +864,35 @@ Egress rules can be configured using a JSON file, or a YAML file. The following 
         identities:
         - serviceAccount:SERVICE_ACCOUNT
 
-  - `  egressTo  ` : lists allowed service operations on Google Cloud resources in specified projects outside the perimeter.
+  - `egressTo` : lists allowed service operations on Google Cloud resources in specified projects outside the perimeter.
 
-  - `  operations  ` : list accessible services and actions or methods that a client satisfying the `  from  ` block conditions is allowed to access.
+  - `operations` : list accessible services and actions or methods that a client satisfying the `from` block conditions is allowed to access.
 
-  - `  serviceName  ` : set `  bigquery.googleapis.com  ` for BigQuery Omni.
+  - `serviceName` : set `bigquery.googleapis.com` for BigQuery Omni.
 
-  - `  methodSelectors  ` : list methods that a client satisfying the `  from  ` conditions can access. For restrictable methods and permissions for services, see [Supported service method restrictions](https://docs.cloud.google.com/vpc-service-controls/docs/supported-method-restrictions) .
+  - `methodSelectors` : list methods that a client satisfying the `from` conditions can access. For restrictable methods and permissions for services, see [Supported service method restrictions](https://docs.cloud.google.com/vpc-service-controls/docs/supported-method-restrictions) .
 
-  - `  method  ` : a valid service method, or `  \"*\"  ` to allow all `  serviceName  ` methods.
+  - `method` : a valid service method, or `\"*\"` to allow all `serviceName` methods.
 
-  - `  permission  ` : a valid service permission, such as `  \"*\"  ` , `  externalResource.read  ` , or `  externalResource.write  ` . Access to resources outside the perimeter is allowed for operations that require this permission.
+  - `permission` : a valid service permission, such as `\"*\"` , `externalResource.read` , or `externalResource.write` . Access to resources outside the perimeter is allowed for operations that require this permission.
 
-  - `  externalResources  ` : lists external resources that clients inside a perimeter can access. Replace EXTERNAL\_RESOURCE\_PATH with either a valid Amazon S3 bucket, such as `  s3://bucket_name  ` , or a Blob Storage container path, such as `  azure://myaccount.blob.core.windows.net/container_name  ` .
+  - `externalResources` : lists external resources that clients inside a perimeter can access. Replace EXTERNAL\_RESOURCE\_PATH with either a valid Amazon S3 bucket, such as `s3://bucket_name` , or a Blob Storage container path, such as `azure://myaccount.blob.core.windows.net/container_name` .
 
-  - `  egressFrom  ` : lists allowed service operations on Google Cloud resources in specified projects within the perimeter.
+  - `egressFrom` : lists allowed service operations on Google Cloud resources in specified projects within the perimeter.
 
-  - `  identityType  ` or `  identities  ` : defines the identity types that can access the specified resources outside the perimeter. Replace IDENTITY\_TYPE with one of the following valid values:
+  - `identityType` or `identities` : defines the identity types that can access the specified resources outside the perimeter. Replace IDENTITY\_TYPE with one of the following valid values:
     
-      - `  ANY_IDENTITY  ` : to allow all identities.
-      - `  ANY_USER_ACCOUNT  ` : to allow all users.
-      - `  ANY_SERVICE_ACCOUNT  ` : to allow all service accounts
+      - `ANY_IDENTITY` : to allow all identities.
+      - `ANY_USER_ACCOUNT` : to allow all users.
+      - `ANY_SERVICE_ACCOUNT` : to allow all service accounts
 
-  - `  identities  ` : lists service accounts that can access the specified resources outside the perimeter.
+  - `identities` : lists service accounts that can access the specified resources outside the perimeter.
 
-  - `  serviceAccount  ` (optional): replace SERVICE\_ACCOUNT with the service account that can access the specified resources outside the perimeter.
+  - `serviceAccount` (optional): replace SERVICE\_ACCOUNT with the service account that can access the specified resources outside the perimeter.
 
 #### Examples
 
-The following example is a policy that allows egress operations from inside the perimeter to the `  s3://mybucket  ` Amazon S3 location in AWS.
+The following example is a policy that allows egress operations from inside the perimeter to the `s3://mybucket` Amazon S3 location in AWS.
 
     - egressTo:
         operations:
@@ -921,7 +921,7 @@ For more information about egress policies, see the [Egress rules reference](htt
 
 #### Add the egress policy
 
-To add the egress policy when you create a new service perimeter, use the [`  gcloud access-context-manager perimeters create  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create) . For example, the following command creates a new perimeter named `  omniPerimeter  ` that includes the project with project number `  12345  ` , restricts the BigQuery API, and adds an egress policy defined in the `  egress.yaml  ` file:
+To add the egress policy when you create a new service perimeter, use the [`gcloud access-context-manager perimeters create` command](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create) . For example, the following command creates a new perimeter named `omniPerimeter` that includes the project with project number `12345` , restricts the BigQuery API, and adds an egress policy defined in the `egress.yaml` file:
 
     gcloud access-context-manager perimeters create omniPerimeter \
         --title="Omni Perimeter" \
@@ -929,20 +929,20 @@ To add the egress policy when you create a new service perimeter, use the [`  gc
         --restricted-services=bigquery.googleapis.com \
         --egress-policies=egress.yaml
 
-To add the egress policy to an existing service perimeter, use the [`  gcloud access-context-manager perimeters update  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/update) . For example, the following command adds an egress policy defined in the `  egress.yaml  ` file to an existing service perimeter named `  omniPerimeter  ` :
+To add the egress policy to an existing service perimeter, use the [`gcloud access-context-manager perimeters update` command](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/update) . For example, the following command adds an egress policy defined in the `egress.yaml` file to an existing service perimeter named `omniPerimeter` :
 
     gcloud access-context-manager perimeters update omniPerimeter
         --set-egress-policies=egress.yaml
 
 ### Verify your perimeter
 
-To verify the perimeter, use the [`  gcloud access-context-manager perimeters describe  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/describe) :
+To verify the perimeter, use the [`gcloud access-context-manager perimeters describe` command](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/describe) :
 
     gcloud access-context-manager perimeters describe PERIMETER_NAME
 
 Replace PERIMETER\_NAME with the name of the perimeter.
 
-For example, the following command describes the perimeter `  omniPerimeter  ` :
+For example, the following command describes the perimeter `omniPerimeter` :
 
     gcloud access-context-manager perimeters describe omniPerimeter
 
@@ -958,7 +958,7 @@ To apply an S3 bucket policy, use the AWS CLI or Terraform:
 
 ### AWS CLI
 
-Run the following command to apply an S3 bucket policy that includes a condition using the `  aws:SourceVpc  ` attribute:
+Run the following command to apply an S3 bucket policy that includes a condition using the `aws:SourceVpc` attribute:
 
 ``` notranslate
   aws s3api put-bucket-policy \

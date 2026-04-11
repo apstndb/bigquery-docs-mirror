@@ -6,37 +6,37 @@ This document describes how your Facebook Ads reports are transformed when you [
 
 When your Facebook Ads reports are transferred to BigQuery, the reports are transformed into the following BigQuery tables and views.
 
-### `     AdAccounts    ` report
+### `AdAccounts` report
 
-| **Meta API field name**                       | **Mapped BigQuery field name** | **Type**   | **Description**                                                                                                                                                |
-| --------------------------------------------- | ------------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        id       `                           | ID \[KEY\]                     | *String*   | The Id of Ad Account.                                                                                                                                          |
-| `  `                                          | Target                         | *String*   | The target used to get ad accounts from. This value is \`null\` - to get all ad accounts.                                                                      |
-| `        account_id       `                   | AccountId                      | *String*   | The Id of the Ad Account when viewed directly in Facebook.                                                                                                     |
-| `        account_status       `               | AccountStatus                  | *Integer*  | Status of the account. 1 = Active, 2 = Disabled, 3 = Unsettled, 7 = Pending Review, 9 = in Grace Period, 101 = temporarily unavailable, 100 = pending closure. |
-| `        age       `                          | Age                            | *Double*   | Amount of time the ad account has been open, in days.                                                                                                          |
-| `        amount_spent       `                 | AmountSpent                    | *Integer*  | Current total amount spent by the account. This can be reset.                                                                                                  |
-| `        balance       `                      | Balance                        | *Integer*  | Bill amount due.                                                                                                                                               |
-| `        business_city       `                | BusinessCity                   | *String*   | City for business address.                                                                                                                                     |
-| `        business_country_code       `        | BusinessCountryCode            | *String*   | Country code for the business address.                                                                                                                         |
-| `        business_name       `                | BusinessName                   | *String*   | The business name for the account.                                                                                                                             |
-| `        business_state       `               | BusinessState                  | *String*   | State abbreviation for business address.                                                                                                                       |
-| `        business_street       `              | BusinessStreet                 | *String*   | First line of the business street address for the account.                                                                                                     |
-| `        business_street2       `             | BusinessStreet2                | *String*   | Second line of the business street address for the account.                                                                                                    |
-| `        business_zip       `                 | BusinessZip                    | *String*   | Zip code for business address.                                                                                                                                 |
-| `        capabilities       `                 | Capabilities                   | *String*   | Capabilities allowed for this ad account.                                                                                                                      |
-| `        created_time       `                 | CreatedTime                    | *Datetime* | The time the account was created.                                                                                                                              |
-| `        currency       `                     | Currency                       | *String*   | The currency used for the account, based on the corresponding value in the account settings.                                                                   |
-| `        min_campaign_group_spend_cap       ` | MinCampaignGroupSpendCap       | *String*   | The minimum campaign group spend limit.                                                                                                                        |
-| `        name       `                         | Name                           | *String*   | Name of the account; note that many accounts are unnamed, so this field may be empty.                                                                          |
-| `        offsite_pixels_tos_accepted       `  | OffsitePixelsTosAccepted       | *String*   | Indicates whether the offsite pixel Terms Of Service contract was signed.                                                                                      |
-| `        owner       `                        | OwnerId                        | *String*   | Facebook ID of the owner for the Ad Account.                                                                                                                   |
-| `        spend_cap       `                    | SpendCap                       | *Integer*  | The maximum that can be spent by this account after which campaigns will be paused. A value of 0 signifies no spending-cap.                                    |
-| `        timezone_id       `                  | TimezoneId                     | *String*   | ID for the timezone.                                                                                                                                           |
-| `        timezone_name       `                | TimezoneName                   | *String*   | Name for the timezone.                                                                                                                                         |
-| `        timezone_offset_hours_utc       `    | TimezoneOffsetHoursUTC         | *Double*   | Time Zone difference from UTC.                                                                                                                                 |
+| **Meta API field name**        | **Mapped BigQuery field name** | **Type**   | **Description**                                                                                                                                                |
+| ------------------------------ | ------------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                           | ID \[KEY\]                     | *String*   | The Id of Ad Account.                                                                                                                                          |
+| `  `                           | Target                         | *String*   | The target used to get ad accounts from. This value is \`null\` - to get all ad accounts.                                                                      |
+| `account_id`                   | AccountId                      | *String*   | The Id of the Ad Account when viewed directly in Facebook.                                                                                                     |
+| `account_status`               | AccountStatus                  | *Integer*  | Status of the account. 1 = Active, 2 = Disabled, 3 = Unsettled, 7 = Pending Review, 9 = in Grace Period, 101 = temporarily unavailable, 100 = pending closure. |
+| `age`                          | Age                            | *Double*   | Amount of time the ad account has been open, in days.                                                                                                          |
+| `amount_spent`                 | AmountSpent                    | *Integer*  | Current total amount spent by the account. This can be reset.                                                                                                  |
+| `balance`                      | Balance                        | *Integer*  | Bill amount due.                                                                                                                                               |
+| `business_city`                | BusinessCity                   | *String*   | City for business address.                                                                                                                                     |
+| `business_country_code`        | BusinessCountryCode            | *String*   | Country code for the business address.                                                                                                                         |
+| `business_name`                | BusinessName                   | *String*   | The business name for the account.                                                                                                                             |
+| `business_state`               | BusinessState                  | *String*   | State abbreviation for business address.                                                                                                                       |
+| `business_street`              | BusinessStreet                 | *String*   | First line of the business street address for the account.                                                                                                     |
+| `business_street2`             | BusinessStreet2                | *String*   | Second line of the business street address for the account.                                                                                                    |
+| `business_zip`                 | BusinessZip                    | *String*   | Zip code for business address.                                                                                                                                 |
+| `capabilities`                 | Capabilities                   | *String*   | Capabilities allowed for this ad account.                                                                                                                      |
+| `created_time`                 | CreatedTime                    | *Datetime* | The time the account was created.                                                                                                                              |
+| `currency`                     | Currency                       | *String*   | The currency used for the account, based on the corresponding value in the account settings.                                                                   |
+| `min_campaign_group_spend_cap` | MinCampaignGroupSpendCap       | *String*   | The minimum campaign group spend limit.                                                                                                                        |
+| `name`                         | Name                           | *String*   | Name of the account; note that many accounts are unnamed, so this field may be empty.                                                                          |
+| `offsite_pixels_tos_accepted`  | OffsitePixelsTosAccepted       | *String*   | Indicates whether the offsite pixel Terms Of Service contract was signed.                                                                                      |
+| `owner`                        | OwnerId                        | *String*   | Facebook ID of the owner for the Ad Account.                                                                                                                   |
+| `spend_cap`                    | SpendCap                       | *Integer*  | The maximum that can be spent by this account after which campaigns will be paused. A value of 0 signifies no spending-cap.                                    |
+| `timezone_id`                  | TimezoneId                     | *String*   | ID for the timezone.                                                                                                                                           |
+| `timezone_name`                | TimezoneName                   | *String*   | Name for the timezone.                                                                                                                                         |
+| `timezone_offset_hours_utc`    | TimezoneOffsetHoursUTC         | *Double*   | Time Zone difference from UTC.                                                                                                                                 |
 
-### `     AdInsights    ` report
+### `AdInsights` report
 
 **Meta API field name**
 
@@ -54,7 +54,7 @@ Target
 
 The Id of the Account to get insights for.
 
-`  date_start  `
+`date_start`
 
 DateStart
 
@@ -62,7 +62,7 @@ DateStart
 
 The starting date to retrieve insights. In the Facebook UI, this is the Report Start field.
 
-`  date_stop  `
+`date_stop`
 
 DateEnd
 
@@ -86,7 +86,7 @@ Level
 
 The level to represent the results at. This value is set to \`ad\`.
 
-`  account_currency  `
+`account_currency`
 
 AccountCurrency
 
@@ -94,7 +94,7 @@ AccountCurrency
 
 The currency that is being used by the ad account.
 
-`  action_attribution_windows  `
+`action_attribution_windows`
 
 ActionAttributionWindows
 
@@ -102,7 +102,7 @@ ActionAttributionWindows
 
 A comma separated list that determines what is the attribution window for the actions. For example, 28d\_click means the API returns all actions that happened 28 days after someone clicked on the ad. This option is set at \[1d\_view,28d\_click\].
 
-`  account_id  `
+`account_id`
 
 AdAccountId
 
@@ -110,7 +110,7 @@ AdAccountId
 
 The Id of the Ad Account that is associated with the report row.
 
-`  account_name  `
+`account_name`
 
 AdAccountName
 
@@ -118,7 +118,7 @@ AdAccountName
 
 The name of the Ad Account that is associated with the report row.
 
-`  campaign_id  `
+`campaign_id`
 
 CampaignId
 
@@ -126,7 +126,7 @@ CampaignId
 
 The Id of the Campaign that is associated with the report row.
 
-`  campaign_name  `
+`campaign_name`
 
 CampaignName
 
@@ -134,7 +134,7 @@ CampaignName
 
 The name of the Campaign that is associated with the report row.
 
-`  adset_id  `
+`adset_id`
 
 AdSetId
 
@@ -142,7 +142,7 @@ AdSetId
 
 The Id of the Ad Set that is associated with the report row.
 
-`  adset_name  `
+`adset_name`
 
 AdSetName
 
@@ -150,7 +150,7 @@ AdSetName
 
 The name of the Ad Set that is associated with the report row.
 
-`  ad_id  `
+`ad_id`
 
 AdId
 
@@ -158,7 +158,7 @@ AdId
 
 The Id of the Ad that is associated with the report row.
 
-`  ad_name  `
+`ad_name`
 
 AdName
 
@@ -166,7 +166,7 @@ AdName
 
 The name of the Ad that is associated with the report row.
 
-`  buying_type  `
+`buying_type`
 
 BuyingType
 
@@ -174,7 +174,7 @@ BuyingType
 
 The method by which target ads are paid for in your campaigns.
 
-`  clicks  `
+`clicks`
 
 Clicks
 
@@ -182,7 +182,7 @@ Clicks
 
 The total number of clicks on your ad. Depending on what you're promoting, this can include Page likes, event responses or app installs. In the Facebook UI, this is the Clicks (All) field.
 
-`  conversion_rate_ranking  `
+`conversion_rate_ranking`
 
 ConversionRateRanking
 
@@ -190,7 +190,7 @@ ConversionRateRanking
 
 The conversion rate ranking.
 
-`  cost_per_estimated_ad_recallers  `
+`cost_per_estimated_ad_recallers`
 
 CostPerEstimatedAdRecallers
 
@@ -198,7 +198,7 @@ CostPerEstimatedAdRecallers
 
 The average cost per additional person that we estimate will recall seeing your ad if asked within 2 days.
 
-`  cost_per_inline_link_click  `
+`cost_per_inline_link_click`
 
 CostPerInlineLinkClick
 
@@ -206,7 +206,7 @@ CostPerInlineLinkClick
 
 The average cost per click on links in the ad.
 
-`  cost_per_inline_post_engagement  `
+`cost_per_inline_post_engagement`
 
 CostPerInlinePostEngagement
 
@@ -214,7 +214,7 @@ CostPerInlinePostEngagement
 
 The average cost per engagement on the post.
 
-`  cost_per_unique_click  `
+`cost_per_unique_click`
 
 CostPerUniqueClick
 
@@ -222,7 +222,7 @@ CostPerUniqueClick
 
 The average cost per unique click for these ads, calculated as the amount spent divided by the number of unique clicks received.
 
-`  cost_per_unique_inline_link_click  `
+`cost_per_unique_inline_link_click`
 
 CostPerUniqueInlineLinkClick
 
@@ -230,7 +230,7 @@ CostPerUniqueInlineLinkClick
 
 The average you paid for each unique inline link click.
 
-`  cpc  `
+`cpc`
 
 CPC
 
@@ -238,7 +238,7 @@ CPC
 
 The average cost per click for these ads, calculated as the amount spent divided by the number of clicks received.
 
-`  cpm  `
+`cpm`
 
 CPM
 
@@ -246,7 +246,7 @@ CPM
 
 The average cost that you've paid to have 1,000 impressions on your ad.
 
-`  cpp  `
+`cpp`
 
 CPP
 
@@ -254,7 +254,7 @@ CPP
 
 The average cost that you've paid to have your ad served to 1,000 unique people.
 
-`  ctr  `
+`ctr`
 
 CTR
 
@@ -262,7 +262,7 @@ CTR
 
 The number of clicks you received divided by the number of impressions. In the Facebook UI, this is the CTR (All) % field.
 
-`  estimated_ad_recall_rate  `
+`estimated_ad_recall_rate`
 
 EstimatedAdRecallRate
 
@@ -270,7 +270,7 @@ EstimatedAdRecallRate
 
 The estimated number of people who recall your ad divided by the number of people your ad reached.
 
-`  estimated_ad_recallers  `
+`estimated_ad_recallers`
 
 EstimatedAdRecallers
 
@@ -278,7 +278,7 @@ EstimatedAdRecallers
 
 The additional number of people that we estimate will remember seeing your ads if asked within 2 days.
 
-`  frequency  `
+`frequency`
 
 Frequency
 
@@ -286,7 +286,7 @@ Frequency
 
 The average number of times that your ad was served to each person.
 
-`  impressions  `
+`impressions`
 
 Impressions
 
@@ -294,7 +294,7 @@ Impressions
 
 The number of times that your ad was served. On mobile apps an ad is counted as served the first time it's viewed. On all other Facebook interfaces, an ad is served the first time it's placed in a person's News Feed or each time it's placed in the right column.
 
-`  inline_link_clicks  `
+`inline_link_clicks`
 
 InlineLinkClicks
 
@@ -302,7 +302,7 @@ InlineLinkClicks
 
 Total number of clicks on links in the ad.
 
-`  inline_link_click_ctr  `
+`inline_link_click_ctr`
 
 InlineLinkClicksCounter
 
@@ -310,7 +310,7 @@ InlineLinkClicksCounter
 
 The click-through rate for inline clicks to link.
 
-`  inline_post_engagement  `
+`inline_post_engagement`
 
 InlinePostEngagement
 
@@ -318,7 +318,7 @@ InlinePostEngagement
 
 The total number of engagements on the post.
 
-`  instant_experience_clicks_to_open  `
+`instant_experience_clicks_to_open`
 
 InstantExperienceClicksToOpen
 
@@ -326,7 +326,7 @@ InstantExperienceClicksToOpen
 
 Corresponds to the instant\_experience\_clicks\_to\_open field from the META API.
 
-`  instant_experience_clicks_to_start  `
+`instant_experience_clicks_to_start`
 
 InstantExperienceClicksToStart
 
@@ -334,7 +334,7 @@ InstantExperienceClicksToStart
 
 Corresponds to the instant\_experience\_clicks\_to\_start field from the META API.
 
-`  instant_experience_outbound_clicks  `
+`instant_experience_outbound_clicks`
 
 InstantExperienceOutboundClicks
 
@@ -342,7 +342,7 @@ InstantExperienceOutboundClicks
 
 Corresponds to the instant\_experience\_outbound\_clicks field from the META API.
 
-`  objective  `
+`objective`
 
 Objective
 
@@ -350,7 +350,7 @@ Objective
 
 The objective you selected for your campaign. Your objective reflects the goal you want to achieve with your advertising.
 
-`  quality_ranking  `
+`quality_ranking`
 
 QualityRanking
 
@@ -358,7 +358,7 @@ QualityRanking
 
 The quality ranking.
 
-`  reach  `
+`reach`
 
 Reach
 
@@ -366,7 +366,7 @@ Reach
 
 The number of people your ad was served to.
 
-`  spend  `
+`spend`
 
 Spend
 
@@ -390,7 +390,7 @@ UniqueCTR
 
 The number of people who clicked on your ad divided by the number of people you reached. For example, if you received 20 unique clicks and your ad was served to 1,000 unique people, your unique click-through rate would be 2%.
 
-`  inline_link_clicks  `
+`inline_link_clicks`
 
 UniqueInlineLinkClicks
 
@@ -430,7 +430,7 @@ EventResponses
 
 The number of event responses attributed to the Ad.
 
-`  inline_link_clicks  `
+`inline_link_clicks`
 
 LinkClicks
 
@@ -446,7 +446,7 @@ OfferSaves
 
 The number of receive offers attributed to the Ad.
 
-`  outbound_clicks  `
+`outbound_clicks`
 
 OutboundClicks
 
@@ -632,7 +632,7 @@ ProductId
 
 The product Id advertised in the Ad.
 
-### `     AdInsightsActions    ` report
+### `AdInsightsActions` report
 
 `  ACTION_COLLECTION  ` refers to the types of actions people have taken in response to your ad. For a full list of action collections, see [Action collections](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#action_collections) .
 
@@ -652,7 +652,7 @@ Target
 
 The Id of the Account to get insights for.
 
-`  date_start  `
+`date_start`
 
 DateStart
 
@@ -660,7 +660,7 @@ DateStart
 
 The starting date to retrieve insights for. In the Facebook UI, this is the Report Start field.
 
-`  date_stop  `
+`date_stop`
 
 DateEnd
 
@@ -682,9 +682,9 @@ Level
 
 *String*
 
-The level to represent the results at. The value is set at `  ad  ` .
+The level to represent the results at. The value is set at `ad` .
 
-`  action_attribution_windows  `
+`action_attribution_windows`
 
 ActionAttributionWindows
 
@@ -700,7 +700,7 @@ ActionCollection
 
 This comes from your choice of Action Collections in the transfer.
 
-`  account_id  `
+`account_id`
 
 AdAccountId
 
@@ -708,7 +708,7 @@ AdAccountId
 
 The Id of the Ad Account associated with the report row.
 
-`  account_name  `
+`account_name`
 
 AdAccountName
 
@@ -716,7 +716,7 @@ AdAccountName
 
 The name of the Ad Account associated with the report row.
 
-`  campaign_id  `
+`campaign_id`
 
 CampaignId
 
@@ -724,7 +724,7 @@ CampaignId
 
 The Id of the Campaign associated with the report row.
 
-`  campaign_name  `
+`campaign_name`
 
 CampaignName
 
@@ -732,7 +732,7 @@ CampaignName
 
 The name of the Campaign associated with the report row.
 
-`  adset_id  `
+`adset_id`
 
 AdSetId
 
@@ -740,7 +740,7 @@ AdSetId
 
 The Id of the Ad Set associated with the report row.
 
-`  adset_name  `
+`adset_name`
 
 AdSetName
 
@@ -748,7 +748,7 @@ AdSetName
 
 The name of the Ad Set associated with the report row.
 
-`  ad_id  `
+`ad_id`
 
 AdId
 
@@ -756,7 +756,7 @@ AdId
 
 The Id of the Ad associated with the report row.
 
-`  ad_name  `
+`ad_name`
 
 AdName
 
@@ -764,7 +764,7 @@ AdName
 
 The name of the Ad associated with the report row.
 
-`  ACTION_COLLECTION .value  `
+`  ACTION_COLLECTION .value `
 
 ActionValue
 
@@ -772,7 +772,7 @@ ActionValue
 
 Metric value of default attribution window.
 
-`  ACTION_COLLECTION .1d_click  `
+`  ACTION_COLLECTION .1d_click `
 
 Action1dClick
 
@@ -780,7 +780,7 @@ Action1dClick
 
 Metric value of attribution window 1 day after clicking the ad.
 
-`  ACTION_COLLECTION .1d_view  `
+`  ACTION_COLLECTION .1d_view `
 
 Action1dView
 
@@ -788,7 +788,7 @@ Action1dView
 
 Metric value of attribution window 1 day after viewing the ad.
 
-`  ACTION_COLLECTION .7d_click  `
+`  ACTION_COLLECTION .7d_click `
 
 Action7dClick
 
@@ -796,7 +796,7 @@ Action7dClick
 
 Metric value of attribution window 7 days after clicking the ad.
 
-`  ACTION_COLLECTION .7d_view  `
+`  ACTION_COLLECTION .7d_view `
 
 Action7dView
 
@@ -804,7 +804,7 @@ Action7dView
 
 Metric value of attribution window 7 days after viewing the ad.
 
-`  ACTION_COLLECTION .28d_click  `
+`  ACTION_COLLECTION .28d_click `
 
 Action28dClick
 
@@ -812,7 +812,7 @@ Action28dClick
 
 Metric value of attribution window 28 days after clicking the ad.
 
-`  ACTION_COLLECTION .28d_view  `
+`  ACTION_COLLECTION .28d_view `
 
 Action28dView
 
@@ -820,7 +820,7 @@ Action28dView
 
 Metric value of attribution window 28 days after viewing the ad.
 
-`  ACTION_COLLECTION .dda  `
+`  ACTION_COLLECTION .dda `
 
 ActionDDA
 

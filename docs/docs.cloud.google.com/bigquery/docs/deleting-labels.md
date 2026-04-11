@@ -4,8 +4,8 @@ You can delete a label from a dataset, table, or view by:
 
   - Using the Google Cloud console
   - Using SQL [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
-  - Using the bq command-line tool's `  bq update  ` command
-  - Calling the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API methods
+  - Using the bq command-line tool's `bq update` command
+  - Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API methods
   - Using the client libraries
 
 ## Before you begin
@@ -20,15 +20,15 @@ The following sections specify the permissions and steps for deleting a dataset 
 
 To delete a dataset label, you need the following IAM permissions:
 
-  - `  bigquery.datasets.get  `
-  - `  bigquery.datasets.update  `
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.update`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to delete a dataset label:
 
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can delete labels of the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can delete labels of the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -51,7 +51,7 @@ To delete a label from a dataset, choose one of the following options:
 
 ### SQL
 
-Use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the labels on an existing dataset. Setting labels overwrites any existing labels on the dataset. The following example deletes all labels on the dataset `  mydataset  ` :
+Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the labels on an existing dataset. Setting labels overwrites any existing labels on the dataset. The following example deletes all labels on the dataset `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -70,7 +70,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To delete a dataset label, issue the `  bq update  ` command with the `  clear_label  ` flag. Repeat the flag to delete multiple labels.
+To delete a dataset label, issue the `bq update` command with the `clear_label` flag. Repeat the flag to delete multiple labels.
 
 If the dataset is in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
@@ -88,19 +88,19 @@ Where:
 
 Examples:
 
-To delete the `  department:shipping  ` label from `  mydataset  ` , enter the `  bq update  ` command with the `  --clear_label  ` flag. `  mydataset  ` is in your default project.
+To delete the `department:shipping` label from `mydataset` , enter the `bq update` command with the `--clear_label` flag. `mydataset` is in your default project.
 
 ``` 
     bq update --clear_label department mydataset
 ```
 
-To delete the `  department:shipping  ` label from `  mydataset  ` in `  myotherproject  ` , enter the `  bq update  ` command with the `  --clear_label  ` flag.
+To delete the `department:shipping` label from `mydataset` in `myotherproject` , enter the `bq update` command with the `--clear_label` flag.
 
 ``` 
     bq update --clear_label department myotherproject:mydataset
 ```
 
-To delete multiple labels from a dataset, repeat the `  clear_label  ` flag and specify each label's key. For example, to delete the `  department:shipping  ` label and `  cost_center:logistics  ` labels from `  mydataset  ` in your default project, enter:
+To delete multiple labels from a dataset, repeat the `clear_label` flag and specify each label's key. For example, to delete the `department:shipping` label and `cost_center:logistics` labels from `mydataset` in your default project, enter:
 
 ``` 
     bq update \
@@ -115,11 +115,11 @@ For each of these examples, the output looks like the following:
 
 ### API
 
-To delete a particular label for an existing dataset, call the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and update the `  labels  ` property for the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) by setting the label's key value to `  null  ` .
+To delete a particular label for an existing dataset, call the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and update the `labels` property for the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) by setting the label's key value to `null` .
 
-To delete all labels from a dataset, call the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and delete the `  labels  ` property.
+To delete all labels from a dataset, call the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and delete the `labels` property.
 
-Because the `  datasets.update  ` method replaces the entire dataset resource, the `  datasets.patch  ` method is preferred.
+Because the `datasets.update` method replaces the entire dataset resource, the `datasets.patch` method is preferred.
 
 ### Go
 
@@ -260,25 +260,25 @@ You can delete a table or view label in the following ways:
 
   - Using the Google Cloud console
   - Using SQL [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
-  - Using the bq command-line tool's `  bq update  ` command
-  - Calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
-      - Because views are treated like table resources, `  tables.patch  ` is used to modify both views and tables.
+  - Using the bq command-line tool's `bq update` command
+  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+      - Because views are treated like table resources, `tables.patch` is used to modify both views and tables.
   - Using the client libraries
 
 ### Required permissions
 
 To delete a table or view label, you need the following IAM permissions:
 
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.update  `
+  - `bigquery.tables.get`
+  - `bigquery.tables.update`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to delete a table or view label:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can delete labels of the tables and views in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can delete labels of the tables and views in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -304,7 +304,7 @@ To delete a label from a table or view, choose one of the following options:
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to set the label on an existing table, or the [`  ALTER VIEW SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) to set the label on an existing view. Setting labels overwrites any existing labels on the table or view. The following example deletes all labels from the table `  mytable  ` :
+Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to set the label on an existing table, or the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) to set the label on an existing view. Setting labels overwrites any existing labels on the table or view. The following example deletes all labels from the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -323,7 +323,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To delete a label from a table or view, issue the `  bq update  ` command with the `  clear_label  ` flag. Repeat the flag to delete multiple labels.
+To delete a label from a table or view, issue the `bq update` command with the `clear_label` flag. Repeat the flag to delete multiple labels.
 
 If the table or view is in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
@@ -342,19 +342,19 @@ Where:
 
 Examples:
 
-To delete the `  department:shipping  ` label from `  mydataset.mytable  ` , enter the `  bq update  ` command with the `  --clear_label  ` flag. `  mydataset  ` is in your default project.
+To delete the `department:shipping` label from `mydataset.mytable` , enter the `bq update` command with the `--clear_label` flag. `mydataset` is in your default project.
 
 ``` 
     bq update --clear_label department mydataset.mytable
 ```
 
-To delete the `  department:shipping  ` label from `  mydataset.myview  ` in `  myotherproject  ` , enter the `  bq update  ` command with the `  --clear_label  ` flag.
+To delete the `department:shipping` label from `mydataset.myview` in `myotherproject` , enter the `bq update` command with the `--clear_label` flag.
 
 ``` 
     bq update --clear_label department myotherproject:mydataset.myview
 ```
 
-To delete multiple labels from a table or view, repeat the `  clear_label  ` flag and specify each label's key. For example, to delete the `  department:shipping  ` label and `  cost_center:logistics  ` label from `  mydataset.mytable  ` in your default project, enter:
+To delete multiple labels from a table or view, repeat the `clear_label` flag and specify each label's key. For example, to delete the `department:shipping` label and `cost_center:logistics` label from `mydataset.mytable` in your default project, enter:
 
 ``` 
     bq update \
@@ -369,11 +369,11 @@ For each of these examples, the output looks like the following:
 
 ### API
 
-To delete a particular label for an existing table or view, call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and update the `  labels  ` property for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) by setting the label's key value to `  null  ` .
+To delete a particular label for an existing table or view, call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and update the `labels` property for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) by setting the label's key value to `null` .
 
-To delete all labels from a table or view, call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and delete the `  labels  ` property.
+To delete all labels from a table or view, call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and delete the `labels` property.
 
-Because views are treated like table resources, you use the `  tables.patch  ` method to modify both views and tables. Also, because the `  tables.update  ` method replaces the entire dataset resource, the `  tables.patch  ` method is preferred.
+Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables. Also, because the `tables.update` method replaces the entire dataset resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -520,9 +520,9 @@ You can delete a reservation label.
 
 ### Required IAM roles
 
-To get the permission that you need to delete a reservation label, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `  roles/bigquery.resourceEditor  ` ) IAM role on the administration project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to delete a reservation label, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `roles/bigquery.resourceEditor` ) IAM role on the administration project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.reservations.delete  ` permission, which is required to delete a reservation label.
+This predefined role contains the `bigquery.reservations.delete` permission, which is required to delete a reservation label.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -532,7 +532,7 @@ To delete a label from a reservation, choose one of the following options:
 
 ### SQL
 
-To delete a reservation label, use the [`  ALTER RESERVATION SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) . To delete the labels on a reservation, set the labels to an empty array. The following example deletes the label on the reservation `  myreservation  ` :
+To delete a reservation label, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) . To delete the labels on a reservation, set the labels to an empty array. The following example deletes the label on the reservation `myreservation` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -552,7 +552,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To delete a reservation label, issue the `  bq update  ` command with the `  clear_label  ` flag and `  --reservation  ` flag. To delete multiple labels, repeat the flag.
+To delete a reservation label, issue the `bq update` command with the `clear_label` flag and `--reservation` flag. To delete multiple labels, repeat the flag.
 
 ``` notranslate
 bq update --clear_label KEY  --reservation RESERVATION_NAME
@@ -560,7 +560,7 @@ bq update --clear_label KEY  --reservation RESERVATION_NAME
 
 Replace the following:
 
-  - `  KEY  ` : a key for a label that you want to delete to the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To delete multiple labels to a reservation, repeat the `  --clear_label  ` flag and specify a unique key for each label.
+  - `  KEY  ` : a key for a label that you want to delete to the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To delete multiple labels to a reservation, repeat the `--clear_label` flag and specify a unique key for each label.
   - `  RESERVATION_NAME  ` : the name of the reservation.
 
 ## Delete job labels

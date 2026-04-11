@@ -10,13 +10,13 @@ You can choose from among three Python libraries in BigQuery, based on your use 
 
 ## Using pandas-gbq and google-cloud-bigquery
 
-The `  pandas-gbq  ` library provides a simple interface for running queries and uploading pandas dataframes to BigQuery. It is a thin wrapper around the [BigQuery client library](https://docs.cloud.google.com/bigquery/docs/reference/libraries) , `  google-cloud-bigquery  ` . Both of these libraries focus on helping you perform data analysis using SQL.
+The `pandas-gbq` library provides a simple interface for running queries and uploading pandas dataframes to BigQuery. It is a thin wrapper around the [BigQuery client library](https://docs.cloud.google.com/bigquery/docs/reference/libraries) , `google-cloud-bigquery` . Both of these libraries focus on helping you perform data analysis using SQL.
 
 ### Install the libraries
 
-To use the code samples in this guide, install the `  pandas-gbq  ` package and the BigQuery Python client libraries.
+To use the code samples in this guide, install the `pandas-gbq` package and the BigQuery Python client libraries.
 
-Install the [`  pandas-gbq  `](https://pypi.org/project/pandas-gbq/) and [`  google-cloud-bigquery  `](https://pypi.org/project/google-cloud-bigquery/) packages.
+Install the [`pandas-gbq`](https://pypi.org/project/pandas-gbq/) and [`google-cloud-bigquery`](https://pypi.org/project/google-cloud-bigquery/) packages.
 
     pip install --upgrade pandas-gbq 'google-cloud-bigquery[bqstorage,pandas]'
 
@@ -24,18 +24,18 @@ Install the [`  pandas-gbq  `](https://pypi.org/project/pandas-gbq/) and [`  goo
 
 Both libraries support querying data stored in BigQuery. Key differences between the libraries include:
 
-|                      | pandas-gbq                                                                                                                                     | google-cloud-bigquery                                                                                                                                                                                                                 |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Default SQL syntax   | GoogleSQL (configurable with `        pandas_gbq.context.dialect       ` )                                                                     | GoogleSQL                                                                                                                                                                                                                             |
-| Query configurations | Sent as dictionary in the format of a [query request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) . | Use the [`         QueryJobConfig        `](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig) class, which contains properties for the various API configuration options. |
+|                      | pandas-gbq                                                                                                                                     | google-cloud-bigquery                                                                                                                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default SQL syntax   | GoogleSQL (configurable with `pandas_gbq.context.dialect` )                                                                                    | GoogleSQL                                                                                                                                                                                                            |
+| Query configurations | Sent as dictionary in the format of a [query request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) . | Use the [`QueryJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig) class, which contains properties for the various API configuration options. |
 
 #### Querying data with the GoogleSQL syntax
 
 The following sample shows how to run a GoogleSQL query with and without explicitly specifying a project. For both libraries, if a project is not specified, the project will be determined from the [default credentials](https://googleapis.dev/python/google-auth/latest/reference/google.auth.html#google.auth.default) .
 
-**Note:** The `  pandas.read_gbq  ` method defaults to legacy SQL. To use standard SQL, you must explicitly set the `  dialect  ` parameter to `  'standard'  ` , as shown.
+**Note:** The `pandas.read_gbq` method defaults to legacy SQL. To use standard SQL, you must explicitly set the `dialect` parameter to `'standard'` , as shown.
 
-**`  pandas-gbq  ` :**
+**`pandas-gbq` :**
 
     import pandas
     
@@ -53,7 +53,7 @@ The following sample shows how to run a GoogleSQL query with and without explici
     project_id = "your-project-id"
     df = pandas.read_gbq(sql, project_id=project_id, dialect="standard")
 
-**`  google-cloud-bigquery  ` :**
+**`google-cloud-bigquery` :**
 
     from google.cloud import bigquery
     
@@ -76,7 +76,7 @@ The following sample shows how to run a GoogleSQL query with and without explici
 
 The following sample shows how to run a query using legacy SQL syntax. See the [GoogleSQL migration guide](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) for guidance on updating your queries to GoogleSQL.
 
-**`  pandas-gbq  ` :**
+**`pandas-gbq` :**
 
     import pandas
     
@@ -89,7 +89,7 @@ The following sample shows how to run a query using legacy SQL syntax. See the [
     
     df = pandas.read_gbq(sql, dialect="legacy")
 
-**`  google-cloud-bigquery  ` :**
+**`google-cloud-bigquery` :**
 
     from google.cloud import bigquery
     
@@ -108,7 +108,7 @@ The following sample shows how to run a query using legacy SQL syntax. See the [
 
 Use the [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) to [speed-up downloads of large results by 15 to 31 times](https://friendliness.dev/2019/07/29/bigquery-arrow/) .
 
-**`  pandas-gbq  ` :**
+**`pandas-gbq` :**
 
     import pandas
     
@@ -117,7 +117,7 @@ Use the [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/refer
     # Use the BigQuery Storage API to download results more quickly.
     df = pandas.read_gbq(sql, dialect="standard", use_bqstorage_api=True)
 
-**`  google-cloud-bigquery  ` :**
+**`google-cloud-bigquery` :**
 
     from google.cloud import bigquery
     
@@ -132,11 +132,11 @@ Use the [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/refer
 
 #### Running a query with a configuration
 
-Sending a configuration with a BigQuery API request is required to perform certain complex operations, such as running a parameterized query or specifying a destination table to store the query results. In `  pandas-gbq  ` , the configuration must be sent as a dictionary in the format of a [query request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) . In `  google-cloud-bigquery  ` , job configuration classes are provided, such as [`  QueryJobConfig  `](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig) , which contain the necessary properties to configure complex jobs.
+Sending a configuration with a BigQuery API request is required to perform certain complex operations, such as running a parameterized query or specifying a destination table to store the query results. In `pandas-gbq` , the configuration must be sent as a dictionary in the format of a [query request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) . In `google-cloud-bigquery` , job configuration classes are provided, such as [`QueryJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig) , which contain the necessary properties to configure complex jobs.
 
 The following sample shows how to run a query with named parameters.
 
-**`  pandas-gbq  ` :**
+**`pandas-gbq` :**
 
     import pandas
     
@@ -166,7 +166,7 @@ The following sample shows how to run a query with named parameters.
     
     df = pandas.read_gbq(sql, configuration=query_config)
 
-**`  google-cloud-bigquery  ` :**
+**`google-cloud-bigquery` :**
 
     from google.cloud import bigquery
     
@@ -190,12 +190,12 @@ The following sample shows how to run a query with named parameters.
 
 Both libraries support uploading data from a pandas DataFrame to a new table in BigQuery. Key differences include:
 
-|                     | pandas-gbq                                                                                                                       | google-cloud-bigquery                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Type support        | Converts the DataFrame to CSV format before sending to the API, which does not support nested or array values.                   | Converts the DataFrame to Parquet or CSV format before sending to the API, which supports nested and array values. Choose Parquet for struct and array values and CSV for date and time serialization flexibility. Parquet is the default choice. Note that `        pyarrow       ` , which is the parquet engine used to send the DataFrame data to the BigQuery API, must be installed to load the DataFrame to a table. |
-| Load configurations | You can optionally specify a [table schema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema) ). | Use the [`         LoadJobConfig        `](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig) class, which contains properties for the various API configuration options.                                                                                                                                                                                         |
+|                     | pandas-gbq                                                                                                                       | google-cloud-bigquery                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Type support        | Converts the DataFrame to CSV format before sending to the API, which does not support nested or array values.                   | Converts the DataFrame to Parquet or CSV format before sending to the API, which supports nested and array values. Choose Parquet for struct and array values and CSV for date and time serialization flexibility. Parquet is the default choice. Note that `pyarrow` , which is the parquet engine used to send the DataFrame data to the BigQuery API, must be installed to load the DataFrame to a table. |
+| Load configurations | You can optionally specify a [table schema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema) ). | Use the [`LoadJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig) class, which contains properties for the various API configuration options.                                                                                                                                                                                           |
 
-**`  pandas-gbq  ` :**
+**`pandas-gbq` :**
 
     import pandas
     
@@ -215,11 +215,11 @@ Both libraries support uploading data from a pandas DataFrame to a new table in 
     
     df.to_gbq(table_id)
 
-**`  google-cloud-bigquery  ` :**
+**`google-cloud-bigquery` :**
 
-The `  google-cloud-bigquery  ` package requires the `  pyarrow  ` library to serialize a pandas DataFrame to a Parquet file.
+The `google-cloud-bigquery` package requires the `pyarrow` library to serialize a pandas DataFrame to a Parquet file.
 
-Install the `  pyarrow  ` package:
+Install the `pyarrow` package:
 
 ``` 
  pip install pyarrow
@@ -257,7 +257,7 @@ Install the `  pyarrow  ` package:
 
 ### Features not supported by pandas-gbq
 
-While the `  pandas-gbq  ` library provides a useful interface for querying data and writing data to tables, it does not cover many of the BigQuery API features, including but not limited to:
+While the `pandas-gbq` library provides a useful interface for querying data and writing data to tables, it does not cover many of the BigQuery API features, including but not limited to:
 
   - [Managing datasets](https://docs.cloud.google.com/bigquery/docs/datasets) , including [creating new datasets](https://docs.cloud.google.com/bigquery/docs/datasets) , [updating dataset properties](https://docs.cloud.google.com/bigquery/docs/updating-datasets) , and [deleting datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets)
   - [Loading data into BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) from formats other than pandas DataFrames or from pandas DataFrames with JSON columns
@@ -266,9 +266,9 @@ While the `  pandas-gbq  ` library provides a useful interface for querying data
 
 ## Troubleshooting connection pool errors
 
-Error string: `  Connection pool is full, discarding connection: bigquery.googleapis.com. Connection pool size: 10  `
+Error string: `Connection pool is full, discarding connection: bigquery.googleapis.com. Connection pool size: 10`
 
-If you use the default BigQuery client object in Python, you are limited to a maximum of 10 threads because the default pool size for the [Python HTTPAdapter](https://docs.python-requests.org/en/latest/api/#requests.adapters.HTTPAdapter) is 10. To use more than 10 connections, create a custom `  requests.adapters.HTTPAdapter  ` object. For example:
+If you use the default BigQuery client object in Python, you are limited to a maximum of 10 threads because the default pool size for the [Python HTTPAdapter](https://docs.python-requests.org/en/latest/api/#requests.adapters.HTTPAdapter) is 10. To use more than 10 connections, create a custom `requests.adapters.HTTPAdapter` object. For example:
 
 ``` notranslate
 client = bigquery.Client()

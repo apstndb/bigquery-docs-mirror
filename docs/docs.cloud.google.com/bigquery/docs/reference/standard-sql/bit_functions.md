@@ -15,40 +15,40 @@ GoogleSQL for BigQuery supports the following bit functions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and"><code dir="ltr" translate="no">        BIT_AND       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and"><code dir="ltr" translate="no">BIT_AND</code></a></td>
 <td>Performs a bitwise AND operation on an expression.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions">Aggregate functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bit_functions#bit_count"><code dir="ltr" translate="no">        BIT_COUNT       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bit_functions#bit_count"><code dir="ltr" translate="no">BIT_COUNT</code></a></td>
 <td>Gets the number of bits that are set in an input expression.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or"><code dir="ltr" translate="no">        BIT_OR       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or"><code dir="ltr" translate="no">BIT_OR</code></a></td>
 <td>Performs a bitwise OR operation on an expression.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions">Aggregate functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor"><code dir="ltr" translate="no">        BIT_XOR       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor"><code dir="ltr" translate="no">BIT_XOR</code></a></td>
 <td>Performs a bitwise XOR operation on an expression.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions">Aggregate functions</a> .</td>
 </tr>
 </tbody>
 </table>
 
-## `     BIT_COUNT    `
+## `BIT_COUNT`
 
     BIT_COUNT(expression)
 
 **Description**
 
-The input, `  expression  ` , must be an integer or `  BYTES  ` .
+The input, `expression` , must be an integer or `BYTES` .
 
-Returns the number of bits that are set in the input `  expression  ` . For signed integers, this is the number of bits in two's complement form.
+Returns the number of bits that are set in the input `expression` . For signed integers, this is the number of bits in two's complement form.
 
 **Return Data Type**
 
-`  INT64  `
+`INT64`
 
 **Example**
 

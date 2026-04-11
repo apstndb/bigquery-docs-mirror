@@ -16,13 +16,13 @@ Before you continue, familiarize yourself with [BigQuery sharing data exchanges]
 To get the permissions that you need to use Cloud Marketplace-integrated listings, ask your administrator to grant you the following IAM roles:
 
   - Create and manage BigQuery sharing listings:
-      - [Analytics Hub Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.admin) ( `  roles/analyticshub.admin  ` )
-      - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` )
-      - [Service Management Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/servicemanagement#servicemanagement.admin) ( `  roles/servicemanagement.admin  ` )
-  - Create and manage data product listings on Cloud Marketplace: [Commerce Producer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/commerceproducer#commerceproducer.admin) ( `  roles/commerceproducer.admin  ` )
+      - [Analytics Hub Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.admin) ( `roles/analyticshub.admin` )
+      - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` )
+      - [Service Management Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/servicemanagement#servicemanagement.admin) ( `roles/servicemanagement.admin` )
+  - Create and manage data product listings on Cloud Marketplace: [Commerce Producer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/commerceproducer#commerceproducer.admin) ( `roles/commerceproducer.admin` )
   - Subscribe to paid BigQuery sharing listings on Cloud Marketplace:
-      - [Billing Account Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/billing#billing.admin) ( `  roles/billing.admin  ` )
-      - [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `  roles/analyticshub.viewer  ` )
+      - [Billing Account Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/billing#billing.admin) ( `roles/billing.admin` )
+      - [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `roles/analyticshub.viewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -40,7 +40,7 @@ Go to the **Analytics Hub API** page and enable the Analytics Hub API for your G
 
 ### gcloud
 
-Run the [`  gcloud services enable  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
+Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
 ``` notranslate
 gcloud services enable analyticshub.googleapis.com
@@ -55,7 +55,7 @@ Cloud Marketplace-integrated listings have the following limitations:
   - All [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
   - BigQuery sharing publishers and subscribers must be located in a supported [Cloud Marketplace Agency Jurisdiction](https://cloud.google.com/terms/marketplace-agency-jurisdictions) .
   - Cloud Marketplace-integrated listings are indexed in [Data Catalog](https://docs.cloud.google.com/bigquery/docs/data-catalog) (deprecated) and [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , but you can't specifically filter for its resource type.
-  - Billing usage metrics for Cloud Marketplace-integrated listings aren't captured in provider usage metrics or in [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+  - Billing usage metrics for Cloud Marketplace-integrated listings aren't captured in provider usage metrics or in [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
   - Data clean rooms and Pub/Sub topics aren't supported for Cloud Marketplace integration.
 
 ## Architecture and terminology

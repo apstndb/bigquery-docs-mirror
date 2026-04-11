@@ -20,7 +20,7 @@ A [Discovery Document](https://developers.google.com/discovery/v1/reference/apis
 
 A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_endpoint) is a base URL that specifies the network address of an API service. One service might have multiple service endpoints. This service has the following service endpoint and all URIs below are relative to this service endpoint:
 
-  - `  https://bigquerymigration.googleapis.com  `
+  - `https://bigquerymigration.googleapis.com`
 
 ## REST Resource: [v2alpha.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows)
 
@@ -28,27 +28,27 @@ Methods
 
 `  create  `
 
-`  POST /v2alpha/{parent=projects/*/locations/*}/workflows  `  
+`POST /v2alpha/{parent=projects/*/locations/*}/workflows`  
 Creates a migration workflow.
 
 `  delete  `
 
-`  DELETE /v2alpha/{name=projects/*/locations/*/workflows/*}  `  
+`DELETE /v2alpha/{name=projects/*/locations/*/workflows/*}`  
 Deletes a migration workflow by name.
 
 `  get  `
 
-`  GET /v2alpha/{name=projects/*/locations/*/workflows/*}  `  
+`GET /v2alpha/{name=projects/*/locations/*/workflows/*}`  
 Gets a previously created migration workflow.
 
 `  list  `
 
-`  GET /v2alpha/{parent=projects/*/locations/*}/workflows  `  
+`GET /v2alpha/{parent=projects/*/locations/*}/workflows`  
 Lists previously created migration workflow.
 
 `  start  `
 
-`  POST /v2alpha/{name=projects/*/locations/*/workflows/*}:start  `  
+`POST /v2alpha/{name=projects/*/locations/*/workflows/*}:start`  
 Starts a previously created migration workflow.
 
 ## REST Resource: [v2alpha.projects.locations.workflows.subtasks](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks)
@@ -57,12 +57,12 @@ Methods
 
 `  get  `
 
-`  GET /v2alpha/{name=projects/*/locations/*/workflows/*/subtasks/*}  `  
+`GET /v2alpha/{name=projects/*/locations/*/workflows/*/subtasks/*}`  
 Gets a previously created migration subtask.
 
 `  list  `
 
-`  GET /v2alpha/{parent=projects/*/locations/*/workflows/*}/subtasks  `  
+`GET /v2alpha/{parent=projects/*/locations/*/workflows/*}/subtasks`  
 Lists previously created migration subtasks.
 
 ## REST Resource: [v2.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows)
@@ -71,27 +71,27 @@ Methods
 
 `  create  `
 
-`  POST /v2/{parent=projects/*/locations/*}/workflows  `  
+`POST /v2/{parent=projects/*/locations/*}/workflows`  
 Creates a migration workflow.
 
 `  delete  `
 
-`  DELETE /v2/{name=projects/*/locations/*/workflows/*}  `  
+`DELETE /v2/{name=projects/*/locations/*/workflows/*}`  
 Deletes a migration workflow by name.
 
 `  get  `
 
-`  GET /v2/{name=projects/*/locations/*/workflows/*}  `  
+`GET /v2/{name=projects/*/locations/*/workflows/*}`  
 Gets a previously created migration workflow.
 
 `  list  `
 
-`  GET /v2/{parent=projects/*/locations/*}/workflows  `  
+`GET /v2/{parent=projects/*/locations/*}/workflows`  
 Lists previously created migration workflow.
 
 `  start  `
 
-`  POST /v2/{name=projects/*/locations/*/workflows/*}:start  `  
+`POST /v2/{name=projects/*/locations/*/workflows/*}:start`  
 Starts a previously created migration workflow.
 
 ## REST Resource: [v2.projects.locations.workflows.subtasks](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows.subtasks)
@@ -100,10 +100,10 @@ Methods
 
 `  get  `
 
-`  GET /v2/{name=projects/*/locations/*/workflows/*/subtasks/*}  `  
+`GET /v2/{name=projects/*/locations/*/workflows/*/subtasks/*}`  
 Gets a previously created migration subtask.
 
 `  list  `
 
-`  GET /v2/{parent=projects/*/locations/*/workflows/*}/subtasks  `  
+`GET /v2/{parent=projects/*/locations/*/workflows/*}/subtasks`  
 Lists previously created migration subtasks.

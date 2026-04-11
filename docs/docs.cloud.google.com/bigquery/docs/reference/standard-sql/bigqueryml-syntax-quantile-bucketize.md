@@ -1,8 +1,8 @@
 # The ML.QUANTILE\_BUCKETIZE function
 
-This document describes the `  ML.QUANTILE_BUCKETIZE  ` function, which lets you break a continuous numerical feature into buckets based on quantiles.
+This document describes the `ML.QUANTILE_BUCKETIZE` function, which lets you break a continuous numerical feature into buckets based on quantiles.
 
-When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the same quantiles are automatically used in prediction.
+When used in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the same quantiles are automatically used in prediction.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
@@ -17,18 +17,18 @@ ML.QUANTILE_BUCKETIZE(numerical_expression, num_buckets [, output_format]) OVER(
 
 ### Arguments
 
-`  ML.QUANTILE_BUCKETIZE  ` takes the following arguments:
+`ML.QUANTILE_BUCKETIZE` takes the following arguments:
 
-  - `  numerical_expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to bucketize.
-  - `  num_buckets  ` : an `  INT64  ` value that specifies the number of buckets to split `  numerical_expression  ` into.
-  - `  output_format  ` : a `  STRING  ` value that specifies the output format of the bucket. Valid output formats are as follows:
-      - `  bucket_names  ` : returns a `  STRING  ` value in the format `  bin_<bucket_index>  ` . For example, `  bin_3  ` . The `  bucket_index  ` value starts at 1. This is the default bucket format.
-      - `  bucket_ranges  ` : returns a `  STRING  ` value in the format `  [lower_bound, upper_bound)  ` in [interval notation](https://en.wikipedia.org/wiki/Interval_\(mathematics\)) . For example, `  (-inf, 2.5)  ` , `  [2.5, 4.6)  ` , `  [4.6, +inf)  ` .
-      - `  bucket_ranges_json  ` : returns a JSON-formatted `  STRING  ` value in the format `  {"start": "lower_bound", "end": "upper_bound"}  ` . For example, `  {"start": "-Infinity", "end": "2.5"}  ` , `  {"start": "2.5", "end": "4.6"}  ` , `  {"start": "4.6", "end": "Infinity"}  ` . The inclusivity and exclusivity of the lower and upper bound follow the same pattern as the `  bucket_ranges  ` option.
+  - `numerical_expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to bucketize.
+  - `num_buckets` : an `INT64` value that specifies the number of buckets to split `numerical_expression` into.
+  - `output_format` : a `STRING` value that specifies the output format of the bucket. Valid output formats are as follows:
+      - `bucket_names` : returns a `STRING` value in the format `bin_<bucket_index>` . For example, `bin_3` . The `bucket_index` value starts at 1. This is the default bucket format.
+      - `bucket_ranges` : returns a `STRING` value in the format `[lower_bound, upper_bound)` in [interval notation](https://en.wikipedia.org/wiki/Interval_\(mathematics\)) . For example, `(-inf, 2.5)` , `[2.5, 4.6)` , `[4.6, +inf)` .
+      - `bucket_ranges_json` : returns a JSON-formatted `STRING` value in the format `{"start": "lower_bound", "end": "upper_bound"}` . For example, `{"start": "-Infinity", "end": "2.5"}` , `{"start": "2.5", "end": "4.6"}` , `{"start": "4.6", "end": "Infinity"}` . The inclusivity and exclusivity of the lower and upper bound follow the same pattern as the `bucket_ranges` option.
 
 ## Output
 
-`  ML.QUANTILE_BUCKETIZE  ` returns a `  STRING  ` value that contains the name of the bucket, in the format specified by the `  output_format  ` argument.
+`ML.QUANTILE_BUCKETIZE` returns a `STRING` value that contains the name of the bucket, in the format specified by the `output_format` argument.
 
 ## Example
 

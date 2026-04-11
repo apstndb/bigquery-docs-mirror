@@ -1,4 +1,4 @@
-This tutorial teaches you how to create a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the customer movie ratings in the [`  movielens1m  `](https://grouplens.org/datasets/movielens/1m/) dataset. You then use the matrix factorization model to generate movie recommendations for users.
+This tutorial teaches you how to create a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the customer movie ratings in the [`movielens1m`](https://grouplens.org/datasets/movielens/1m/) dataset. You then use the matrix factorization model to generate movie recommendations for users.
 
 Using customer-provided ratings to train the model is called training with *explicit feedback* . Matrix factorization models are trained using the [Alternating Least Squares algorithm](https://en.wikipedia.org/wiki/Matrix_completion#Alternating_least_squares_minimization) when you use explicit feedback as training data.
 
@@ -8,9 +8,9 @@ Using customer-provided ratings to train the model is called training with *expl
 
 This tutorial guides you through completing the following tasks:
 
-  - Creating a matrix factorization model by using the `  CREATE MODEL  ` statement.
-  - Evaluating the model by using the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Generating movie recommendations for users by using the model with the [`  ML.RECOMMEND  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
+  - Creating a matrix factorization model by using the `CREATE MODEL` statement.
+  - Evaluating the model by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+  - Generating movie recommendations for users by using the model with the [`ML.RECOMMEND` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
 
 ## Costs
 
@@ -31,25 +31,25 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
-  - To create the dataset, you need the `  bigquery.datasets.create  ` IAM permission.
+  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
   - To create the model, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following permissions:
     
-      - `  bigquery.models.getData  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.models.getData`
+      - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -69,7 +69,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -77,9 +77,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -96,7 +96,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -119,17 +119,17 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Upload the Movielens data
 
-Upload the `  movielens1m  ` data into BigQuery.
+Upload the `movielens1m` data into BigQuery.
 
 ### CLI
 
-Follow these steps to upload the `  movielens1m  ` data using the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) :
+Follow these steps to upload the `movielens1m` data using the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) :
 
 1.  Open Cloud Shell:
     
     [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
-2.  Upload the ratings data into the `  ratings  ` table. On the command line, paste in the following query and hit `  Enter  ` :
+2.  Upload the ratings data into the `ratings` table. On the command line, paste in the following query and hit `Enter` :
     
         curl -O 'http://files.grouplens.org/datasets/movielens/ml-1m.zip'
         unzip ml-1m.zip
@@ -137,7 +137,7 @@ Follow these steps to upload the `  movielens1m  ` data using the [bq command-li
         bq load --source_format=CSV bqml_tutorial.ratings ratings.csv \
           user_id:INT64,item_id:INT64,rating:FLOAT64,timestamp:TIMESTAMP
 
-3.  Upload the movie data into the `  movies  ` table. On the command line, paste in the following query and hit `  Enter  ` :
+3.  Upload the movie data into the `movies` table. On the command line, paste in the following query and hit `Enter` :
     
         sed 's/::/@/g' ml-1m/movies.dat > movie_titles.csv
         bq load --source_format=CSV --field_delimiter=@ \
@@ -150,7 +150,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-First, create a `  Client  ` object with `  bqclient = google.cloud.bigquery.Client()  ` , then load the `  movielens1m  ` data into the dataset you created in the previous step.
+First, create a `Client` object with `bqclient = google.cloud.bigquery.Client()` , then load the `movielens1m` data into the dataset you created in the previous step.
 
     import io
     import zipfile
@@ -207,15 +207,15 @@ First, create a `  Client  ` object with `  bqclient = google.cloud.bigquery.Cli
 
 ## Create the model
 
-Create a matrix factorization model and train it on the data in the `  ratings  ` table. The model is trained to predict a rating for every user-item pair, based on the customer-provided movie ratings.
+Create a matrix factorization model and train it on the data in the `ratings` table. The model is trained to predict a rating for every user-item pair, based on the customer-provided movie ratings.
 
 ### SQL
 
-The following `  CREATE MODEL  ` statement uses these columns to generate recommendations:
+The following `CREATE MODEL` statement uses these columns to generate recommendations:
 
-  - `  user_id  ` —The user ID.
-  - `  item_id  ` —The movie ID.
-  - `  rating  ` —The explicit rating from 1 to 5 that the user gave the item.
+  - `user_id` —The user ID.
+  - `item_id` —The movie ID.
+  - `rating` —The explicit rating from 1 to 5 that the user gave the item.
 
 Follow these steps to create the model:
 
@@ -242,7 +242,7 @@ Follow these steps to create the model:
     FROM `bqml_tutorial.ratings`;
     ```
     
-    The query takes about 10 minutes to complete, after which the `  mf_explicit  ` model appears in the **Explorer** pane. Because the query uses a `  CREATE MODEL  ` statement to create a model, you don't see query results.
+    The query takes about 10 minutes to complete, after which the `mf_explicit` model appears in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
 ### BigQuery DataFrames
 
@@ -272,7 +272,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         your_model_id, replace=True  # For example: "bqml_tutorial.mf_explicit"
     )
 
-The code takes about 10 minutes to complete, after which the `  mf_explicit  ` model appears in the **Explorer** pane.
+The code takes about 10 minutes to complete, after which the `mf_explicit` model appears in the **Explorer** pane.
 
 ## Get training statistics
 
@@ -292,11 +292,11 @@ Follow these steps to view the model's training statistics:
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the `  bqml_tutorial  ` dataset.
+3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the `bqml_tutorial` dataset.
 
 4.  Click the **Models** tab.
 
-5.  Click the `  mf_explicit  ` model and then click the **Training** tab
+5.  Click the `mf_explicit` model and then click the **Training** tab
 
 6.  In the **View as** section, click **Table** . The results should look similar to the following:
     
@@ -316,7 +316,7 @@ Follow these steps to view the model's training statistics:
     
     The **Training Data Loss** column represents the loss metric calculated after the model is trained. Because this is a matrix factorization model, this column shows the [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) .
 
-You can also use the [`  ML.TRAINING_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) to see model training statistics.
+You can also use the [`ML.TRAINING_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) to see model training statistics.
 
 ## Evaluate the model
 
@@ -324,7 +324,7 @@ Evaluate the performance of the model by comparing the predicted movie ratings r
 
 ### SQL
 
-Use the `  ML.EVALUATE  ` function to evaluate the model:
+Use the `ML.EVALUATE` function to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -358,11 +358,11 @@ Use the `  ML.EVALUATE  ` function to evaluate the model:
     +---------------------+---------------------+------------------------+-----------------------+--------------------+--------------------+
     ```
     
-    An important metric in the evaluation results is the [R <sup>2</sup> score](https://en.wikipedia.org/wiki/Coefficient_of_determination) . The R <sup>2</sup> score is a statistical measure that determines if the linear regression predictions approximate the actual data. A value of `  0  ` indicates that the model explains none of the variability of the response data around the mean. A value of `  1  ` indicates that the model explains all the variability of the response data around the mean.
+    An important metric in the evaluation results is the [R <sup>2</sup> score](https://en.wikipedia.org/wiki/Coefficient_of_determination) . The R <sup>2</sup> score is a statistical measure that determines if the linear regression predictions approximate the actual data. A value of `0` indicates that the model explains none of the variability of the response data around the mean. A value of `1` indicates that the model explains all the variability of the response data around the mean.
     
-    For more information about the `  ML.EVALUATE  ` function output, see [Output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
+    For more information about the `ML.EVALUATE` function output, see [Output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
 
-You can also call `  ML.EVALUATE  ` without providing the input data. It will use the evaluation metrics calculated during training.
+You can also call `ML.EVALUATE` without providing the input data. It will use the evaluation metrics calculated during training.
 
 ### BigQuery DataFrames
 
@@ -370,7 +370,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`  model.score()  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.score) to evaluate the model.
+Call [`model.score()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.score) to evaluate the model.
 
     # Evaluate the model using the score() function
     model.score(bq_df)
@@ -384,7 +384,7 @@ Get the predicted rating for each movie for five users.
 
 ### SQL
 
-Use the `  ML.RECOMMEND  ` function to get predicted ratings:
+Use the `ML.RECOMMEND` function to get predicted ratings:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -429,7 +429,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`  model.predict()  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
+Call [`model.predict()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
 
     # Use predict() to get the predicted rating for each movie for 5 users
     subset = bq_df[["user_id"]].head(5)
@@ -522,7 +522,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`  model.predict()  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
+Call [`model.predict()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
 
     # import bigframes.bigquery as bbq
     
@@ -581,7 +581,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
-4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `  bqml_tutorial  ` ) and then click **Delete** .
+4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `bqml_tutorial` ) and then click **Delete** .
 
 ### Delete your project
 
@@ -590,7 +590,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

@@ -10,7 +10,7 @@ Gets the data policy specified by its resource name.
 
 ### HTTP request
 
-`  GET https://bigquerydatapolicy.googleapis.com/v2beta1/{name=projects/*/locations/*/dataPolicies/*}  `
+`GET https://bigquerydatapolicy.googleapis.com/v2beta1/{name=projects/*/locations/*/dataPolicies/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,11 +18,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the requested data policy. Format is `  projects/{projectNumber}/locations/{locationId}/dataPolicies/{id}  ` .
+Required. Resource name of the requested data policy. Format is `projects/{projectNumber}/locations/{locationId}/dataPolicies/{id}` .
 
 ### Request body
 
@@ -36,15 +36,15 @@ If successful, the response body contains an instance of `  DataPolicy  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  bigquery.dataPolicies.get  `
+  - `bigquery.dataPolicies.get`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

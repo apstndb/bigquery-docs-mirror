@@ -127,11 +127,11 @@ p_AudienceConversionStats_ customer_id<br />
 p_AudienceNonClickStats_ customer_id<br />
 p_AudienceBasicStats_ customer_id<br />
 p_AudienceStats_ customer_id</td>
-<td><code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code></td>
+<td><code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code></td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view">Ad Group Audience View</a><br />
 <a href="https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view">Campaign Audience View</a></td>
 <td>Audience_ customer_id<br />
@@ -221,11 +221,11 @@ p_CriteriaBasicStats_ customer_id<br />
 p_CriteriaStats_ customer_id<br />
 p_CriteriaConversionStats_ customer_id<br />
 p_CriteriaNonClickStats_ customer_id</td>
-<td><code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code><br />
-<code dir="ltr" translate="no">        NULL       </code></td>
+<td><code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code></td>
 <td></td>
 <td>Criteria_ customer_id<br />
 CriteriaBasicStats_ customer_id<br />

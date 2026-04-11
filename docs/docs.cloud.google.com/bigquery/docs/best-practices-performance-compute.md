@@ -2,7 +2,7 @@
 
 This document provides the best practices for optimizing your query performance.
 
-When you run a query, you can [view the query plan](https://docs.cloud.google.com/bigquery/docs/query-insights) in the Google Cloud console. You can also request execution details by using the [`  INFORMATION_SCHEMA.JOBS*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) or the [`  jobs.get  ` REST API method](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#api_sample_representation) .
+When you run a query, you can [view the query plan](https://docs.cloud.google.com/bigquery/docs/query-insights) in the Google Cloud console. You can also request execution details by using the [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) or the [`jobs.get` REST API method](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#api_sample_representation) .
 
 The query plan includes details about query stages and steps. These details can help you identify ways to improve query performance. For example, if you notice a stage that writes a lot more output than other stages, it might mean that you need to filter earlier in the query.
 
@@ -17,21 +17,21 @@ To learn more about the query plan and see examples of how the query plan inform
 
 You can reduce data that needs to be processed by using the options described in the following sections.
 
-### Avoid `     SELECT *    `
+### Avoid `SELECT *`
 
 **Best practice:** Control projection by querying only the columns that you need.
 
 Projection refers to the number of columns that are read by your query. Projecting excess columns incurs additional (wasted) I/O and materialization (writing results).
 
-  - **Use the data preview options.** If you are experimenting with data or exploring data, use one of the [data preview options](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#preview-data) instead of `  SELECT *  ` .
-  - **Query specific columns.** Applying a `  LIMIT  ` clause to a `  SELECT *  ` query does not affect the amount of data read. You are billed for reading all bytes in the entire table, and the query counts against your free tier quota. Instead, query only the columns you need. For example, use `  SELECT * EXCEPT  ` to exclude one or more columns from the results.
+  - **Use the data preview options.** If you are experimenting with data or exploring data, use one of the [data preview options](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#preview-data) instead of `SELECT *` .
+  - **Query specific columns.** Applying a `LIMIT` clause to a `SELECT *` query does not affect the amount of data read. You are billed for reading all bytes in the entire table, and the query counts against your free tier quota. Instead, query only the columns you need. For example, use `SELECT * EXCEPT` to exclude one or more columns from the results.
   - **Use partitioned tables.** If you do require queries against every column in a table, but only against a subset of data, consider:
       - Materializing results in a destination table and querying that table instead.
-      - [Partitioning your tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [querying the relevant partition](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) . For example, use `  WHERE _PARTITIONDATE="2017-01-01"  ` to query only the January 1, 2017 partition.
+      - [Partitioning your tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [querying the relevant partition](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) . For example, use `WHERE _PARTITIONDATE="2017-01-01"` to query only the January 1, 2017 partition.
 
 <!-- end list -->
 
-  - **Use `  SELECT * EXCEPT  `** . Querying a subset of data or using `  SELECT * EXCEPT  ` can greatly reduce the amount of data that is read by a query. In addition to the cost savings, performance is improved by reducing the amount of data I/O and the amount of materialization that is required for the query results.
+  - **Use `SELECT * EXCEPT`** . Querying a subset of data or using `SELECT * EXCEPT` can greatly reduce the amount of data that is read by a query. In addition to the cost savings, performance is improved by reducing the amount of data I/O and the amount of materialization that is required for the query results.
     
     ``` notranslate
     SELECT * EXCEPT (col1, col2, col5)
@@ -49,9 +49,9 @@ Use wildcards to query multiple tables by using concise SQL statements. Wildcard
 
 **Note:** If your data allows it, use time-partitioned tables instead of sharded tables. For more information, see [Avoid oversharding tables](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-oversharding-tables) .
 
-When you query a wildcard table, specify a wildcard ( `  *  ` ) after the common table prefix. For example, `  FROM bigquery-public-data.noaa_gsod.gsod194*  ` queries all tables from the 1940s.
+When you query a wildcard table, specify a wildcard ( `*` ) after the common table prefix. For example, `FROM bigquery-public-data.noaa_gsod.gsod194*` queries all tables from the 1940s.
 
-More granular prefixes perform better than shorter prefixes. For example, `  FROM bigquery-public-data.noaa_gsod.gsod194*  ` performs better than `  FROM bigquery-public-data.noaa_gsod.*  ` because fewer tables match the wildcard.
+More granular prefixes perform better than shorter prefixes. For example, `FROM bigquery-public-data.noaa_gsod.gsod194*` performs better than `FROM bigquery-public-data.noaa_gsod.*` because fewer tables match the wildcard.
 
 ### Avoid tables sharded by date
 
@@ -75,10 +75,10 @@ The amount and source of data read by a query can impact query performance and c
 
 **Best practice:** When querying a [partitioned table](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) , to filter with partitions on partitioned tables, use the following columns:
 
-  - For ingestion-time partitioned tables, use the pseudocolumn `  _PARTITIONTIME  `
+  - For ingestion-time partitioned tables, use the pseudocolumn `_PARTITIONTIME`
   - For partitioned tables such as the time-unit column-based and integer-range, use the *partitioning column* .
 
-For time-unit partitioned tables, filtering the data with `  _PARTITIONTIME  ` or *partitioning column* lets you specify a date or range of dates. For example, the following `  WHERE  ` clause uses the `  _PARTITIONTIME  ` pseudocolumn to specify partitions between January 1, 2016 and January 31, 2016:
+For time-unit partitioned tables, filtering the data with `_PARTITIONTIME` or *partitioning column* lets you specify a date or range of dates. For example, the following `WHERE` clause uses the `_PARTITIONTIME` pseudocolumn to specify partitions between January 1, 2016 and January 31, 2016:
 
     WHERE _PARTITIONTIME
     BETWEEN TIMESTAMP("20160101")
@@ -86,13 +86,13 @@ For time-unit partitioned tables, filtering the data with `  _PARTITIONTIME  ` o
 
 The query processes data only in the partitions that are indicated by the date range. Filtering your partitions improves query performance and reduces costs.
 
-### Reduce data before using a `     JOIN    `
+### Reduce data before using a `JOIN`
 
-**Best practice:** Reduce the amount of data that is processed before a `  JOIN  ` clause by performing aggregations.
+**Best practice:** Reduce the amount of data that is processed before a `JOIN` clause by performing aggregations.
 
-Using a [`  GROUP BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) with [aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) is computationally intensive, because these types of queries use [shuffle](https://cloud.google.com/blog/products/bigquery/in-memory-query-execution-in-google-bigquery) . As these queries are computationally intensive, you must use a `  GROUP BY  ` clause only when necessary.
+Using a [`GROUP BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) with [aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) is computationally intensive, because these types of queries use [shuffle](https://cloud.google.com/blog/products/bigquery/in-memory-query-execution-in-google-bigquery) . As these queries are computationally intensive, you must use a `GROUP BY` clause only when necessary.
 
-For queries with `  GROUP BY  ` and `  JOIN  ` , perform aggregation earlier in the query to reduce the amount of data processed. For example, the following query performs a `  JOIN  ` on two large tables without any filtering beforehand:
+For queries with `GROUP BY` and `JOIN` , perform aggregation earlier in the query to reduce the amount of data processed. For example, the following query performs a `JOIN` on two large tables without any filtering beforehand:
 
 ``` notranslate
 WITH
@@ -116,7 +116,7 @@ ORDER BY comments_count DESC
 LIMIT 20;
 ```
 
-This query pre-aggregates the comment counts which reduces the amount of data read for the `  JOIN  ` :
+This query pre-aggregates the comment counts which reduces the amount of data read for the `JOIN` :
 
 ``` notranslate
 WITH
@@ -145,13 +145,13 @@ ON
 ORDER BY comments_count DESC;
 ```
 
-**Note:** `  WITH  ` clauses with common table expressions (CTEs) are used for query readability, not performance. There is no guarantee that adding a `  WITH  ` clause causes BigQuery to materialize temporary intermediate tables and reuse the temporary result for multiple references. The `  WITH  ` clause might be evaluated multiple times within a query, depending on query optimizer decisions.
+**Note:** `WITH` clauses with common table expressions (CTEs) are used for query readability, not performance. There is no guarantee that adding a `WITH` clause causes BigQuery to materialize temporary intermediate tables and reuse the temporary result for multiple references. The `WITH` clause might be evaluated multiple times within a query, depending on query optimizer decisions.
 
-### Use the `     WHERE    ` clause
+### Use the `WHERE` clause
 
-**Best practice:** Use a [`  WHERE  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) to limit the amount of data a query returns. When possible, use `  BOOL  ` , `  INT64  ` , `  FLOAT64  ` , or `  DATE  ` columns in the `  WHERE  ` clause.
+**Best practice:** Use a [`WHERE` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) to limit the amount of data a query returns. When possible, use `BOOL` , `INT64` , `FLOAT64` , or `DATE` columns in the `WHERE` clause.
 
-Operations on `  BOOL  ` , `  INT64  ` , `  FLOAT64  ` , and `  DATE  ` columns are typically faster than operations on `  STRING  ` or `  BYTE  ` columns. When possible, use a column that uses one of these data types in the `  WHERE  ` clause to reduce the amount of data returned by the query.
+Operations on `BOOL` , `INT64` , `FLOAT64` , and `DATE` columns are typically faster than operations on `STRING` or `BYTE` columns. When possible, use a column that uses one of these data types in the `WHERE` clause to reduce the amount of data returned by the query.
 
 ### Use materialized views
 
@@ -163,13 +163,13 @@ Operations on `  BOOL  ` , `  INT64  ` , `  FLOAT64  ` , and `  DATE  ` columns 
 
 **Best practice:** Use BigQuery BI Engine to accelerate queries by caching the data that you use most frequently.
 
-Consider adding a [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-query) reservation to the project where the queries are being computed. BigQuery BI Engine uses a vectorized query engine to accelerate the `  SELECT  ` query performance.
+Consider adding a [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-query) reservation to the project where the queries are being computed. BigQuery BI Engine uses a vectorized query engine to accelerate the `SELECT` query performance.
 
 ### Use search indexes
 
 **Best practice:** Use search indexes for efficient row lookups when you need to find individual rows of data in large tables.
 
-A [search index](https://docs.cloud.google.com/bigquery/docs/search-intro) is a data structure designed to enable very efficient search with the [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) but can also accelerate queries using [other operators and functions](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) , such as the equal ( `  =  ` ), `  IN  ` , or `  LIKE  ` operators and certain string and JSON functions.
+A [search index](https://docs.cloud.google.com/bigquery/docs/search-intro) is a data structure designed to enable very efficient search with the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) but can also accelerate queries using [other operators and functions](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) , such as the equal ( `=` ), `IN` , or `LIKE` operators and certain string and JSON functions.
 
 ## Optimize query operations
 
@@ -203,11 +203,11 @@ Materializing your subquery results improves performance and reduces the overall
 
 **Best practice:** For queries that join data from multiple tables, optimize your join patterns by starting with the largest table.
 
-When you create a query by using a `  JOIN  ` clause, consider the order in which you are merging the data. The GoogleSQL query optimizer determines which table should be on which side of the join. As a best practice, place the table with the largest number of rows first, followed by the table with the fewest rows, and then place the remaining tables by decreasing size.
+When you create a query by using a `JOIN` clause, consider the order in which you are merging the data. The GoogleSQL query optimizer determines which table should be on which side of the join. As a best practice, place the table with the largest number of rows first, followed by the table with the fewest rows, and then place the remaining tables by decreasing size.
 
-When you have a large table as the left side of the `  JOIN  ` and a small one on the right side of the `  JOIN  ` , a broadcast join is created. A broadcast join sends all the data in the smaller table to each slot that processes the larger table. It is advisable to perform the broadcast join first.
+When you have a large table as the left side of the `JOIN` and a small one on the right side of the `JOIN` , a broadcast join is created. A broadcast join sends all the data in the smaller table to each slot that processes the larger table. It is advisable to perform the broadcast join first.
 
-To view the size of the tables in your `  JOIN  ` , see [Get information about tables](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) .
+To view the size of the tables in your `JOIN` , see [Get information about tables](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) .
 
 ### Specify primary key and foreign key constraints
 
@@ -215,15 +215,15 @@ To view the size of the tables in your `  JOIN  ` , see [Get information about t
 
 BigQuery doesn't automatically check for data integrity, so you must ensure that your data meets the constraints specified in the table schema. If you don't maintain data integrity in tables with specified constraints, your query results might be inaccurate.
 
-### Optimize the `     ORDER BY    ` clause
+### Optimize the `ORDER BY` clause
 
-**Best practice:** When you use the `  ORDER BY  ` clause, ensure that you follow the best practices:
+**Best practice:** When you use the `ORDER BY` clause, ensure that you follow the best practices:
 
-  - **Use `  ORDER BY  ` in the outermost query or within [window clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .** Push complex operations to the end of the query. Placing an `  ORDER BY  ` clause in the middle of a query greatly impacts performance unless it is being used in a window function.
+  - **Use `ORDER BY` in the outermost query or within [window clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .** Push complex operations to the end of the query. Placing an `ORDER BY` clause in the middle of a query greatly impacts performance unless it is being used in a window function.
     
     Another technique for ordering your query is to push complex operations, such as regular expressions and mathematical functions, to the end of the query. This technique reduces the data to be processed before the complex operations are performed.
 
-  - **Use a `  LIMIT  ` clause.** If you are ordering a very large number of values but don't need to have all of them returned, use a `  LIMIT  ` clause. For example, the following query orders a very large result set and throws a `  Resources exceeded  ` error. The query sorts by the `  title  ` column in `  mytable  ` . The `  title  ` column contains millions of values.
+  - **Use a `LIMIT` clause.** If you are ordering a very large number of values but don't need to have all of them returned, use a `LIMIT` clause. For example, the following query orders a very large result set and throws a `Resources exceeded` error. The query sorts by the `title` column in `mytable` . The `title` column contains millions of values.
     
     ``` notranslate
     SELECT
@@ -260,7 +260,7 @@ BigQuery doesn't automatically check for data integrity, so you must ensure that
     LIMIT 10;
     ```
     
-    This query takes approximately 15 seconds to run. This query uses `  LIMIT  ` at the end of the query, but not in the `  DENSE_RANK() OVER  ` window function. Because of this, the query requires all of the data to be sorted on a single worker node.
+    This query takes approximately 15 seconds to run. This query uses `LIMIT` at the end of the query, but not in the `DENSE_RANK() OVER` window function. Because of this, the query requires all of the data to be sorted on a single worker node.
     
     Instead, you should limit the dataset before computing the window function in order to improve performance:
     
@@ -284,13 +284,13 @@ BigQuery doesn't automatically check for data integrity, so you must ensure that
     
     This query takes approximately 2 seconds to run, while returning the same results as the previous query.
     
-    One caveat is that the `  DENSE_RANK()  ` function ranks the data within years, so for ranking data that spans across multiple years, these queries don't give identical results.
+    One caveat is that the `DENSE_RANK()` function ranks the data within years, so for ranking data that spans across multiple years, these queries don't give identical results.
 
 ### Split complex queries into smaller ones
 
 **Best practice** : Leverage [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) capabilities and [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) to perform the computations that were designed as one complex query as multiple smaller and simpler queries instead.
 
-Complex queries, `  REGEX  ` functions, and layered subqueries or joins can be slow and resource intensive to run. Trying to fit all computations in one huge `  SELECT  ` statement, for example to make it a view, is sometimes an antipattern, and it can result in a slow, resource-intensive query. In extreme cases, the internal query plan becomes so complex that BigQuery is unable to execute it.
+Complex queries, `REGEX` functions, and layered subqueries or joins can be slow and resource intensive to run. Trying to fit all computations in one huge `SELECT` statement, for example to make it a view, is sometimes an antipattern, and it can result in a slow, resource-intensive query. In extreme cases, the internal query plan becomes so complex that BigQuery is unable to execute it.
 
 Splitting up a complex query allows for materializing intermediate results in variables or [temporary tables](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) . You can then use these intermediate results in other parts of the query. It is increasingly useful when these results are needed in more than one place of the query.
 
@@ -300,11 +300,11 @@ Often it lets you better express the true intent of parts of the query with temp
 
 For information about how to denormalize data storage using nested and repeated fields, see [Use nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nested) .
 
-### Use `     INT64    ` data types in joins
+### Use `INT64` data types in joins
 
-**Best practice:** Use `  INT64  ` data types in joins instead of `  STRING  ` data types to reduce cost and improve comparison performance.
+**Best practice:** Use `INT64` data types in joins instead of `STRING` data types to reduce cost and improve comparison performance.
 
-BigQuery doesn't index primary keys like traditional databases, so the wider the join column is, the longer the comparison takes. Therefore, using `  INT64  ` data types in joins is cheaper and more efficient than using `  STRING  ` data types.
+BigQuery doesn't index primary keys like traditional databases, so the wider the join column is, the longer the comparison takes. Therefore, using `INT64` data types in joins is cheaper and more efficient than using `STRING` data types.
 
 ## Reduce query outputs
 
@@ -314,14 +314,14 @@ You can reduce the query outputs by using the options described in the following
 
 **Best practice:** Consider [materializing large result sets](https://docs.cloud.google.com/bigquery/docs/writing-results#large-results) to a destination table. Writing large result sets has performance and cost impacts.
 
-BigQuery limits cached results to approximately 10 GB compressed. Queries that return larger results overtake this limit and frequently result in the following error: [`  Response too large  `](https://docs.cloud.google.com/bigquery/troubleshooting-errors#responseTooLarge) .
+BigQuery limits cached results to approximately 10 GB compressed. Queries that return larger results overtake this limit and frequently result in the following error: [`Response too large`](https://docs.cloud.google.com/bigquery/troubleshooting-errors#responseTooLarge) .
 
 This error often occurs when you select a large number of fields from a table with a considerable amount of data. Issues writing cached results can also occur in ETL-style queries that normalize data without reduction or aggregation.
 
 You can overcome the limitation on cached result size by using the following options:
 
   - Use filters to limit the result set
-  - Use a `  LIMIT  ` clause to reduce the result set, especially if you are using an `  ORDER BY  ` clause
+  - Use a `LIMIT` clause to reduce the result set, especially if you are using an `ORDER BY` clause
   - Write the output data to a destination table
 
 You can page through the results using the BigQuery REST API. For more information, see [Paging through table data](https://docs.cloud.google.com/bigquery/docs/paging-results) .
@@ -334,21 +334,21 @@ The following best practices provide guidance on avoiding query anti-patterns th
 
 ### Avoid self joins
 
-**Best practice:** Instead of using self-joins, use a [window (analytic) function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/analytic-function-concepts) or the [`  PIVOT  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator) .
+**Best practice:** Instead of using self-joins, use a [window (analytic) function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/analytic-function-concepts) or the [`PIVOT` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator) .
 
 Typically, self-joins are used to compute row-dependent relationships. The result of using a self-join is that it potentially squares the number of output rows. This increase in output data can cause poor performance.
 
 ### Avoid cross joins
 
-**Best practice:** Avoid joins that generate more outputs than inputs. When a `  CROSS JOIN  ` is required, pre-aggregate your data.
+**Best practice:** Avoid joins that generate more outputs than inputs. When a `CROSS JOIN` is required, pre-aggregate your data.
 
 Cross joins are queries where each row from the first table is joined to every row in the second table, with non-unique keys on both sides. The worst case output is the number of rows in the left table multiplied by the number of rows in the right table. In extreme cases, the query might not finish.
 
-If the query job completes, the query plan explanation shows output rows versus input rows. You can confirm a [Cartesian product](https://en.wikipedia.org/wiki/Relational_algebra#Selection_and_cross_product) by modifying the query to print the number of rows on each side of the `  JOIN  ` clause, grouped by the join key. You can also check the performance insights in the query execution graph for a [high cardinality join](https://docs.cloud.google.com/bigquery/docs/query-insights#high_cardinality_join) .
+If the query job completes, the query plan explanation shows output rows versus input rows. You can confirm a [Cartesian product](https://en.wikipedia.org/wiki/Relational_algebra#Selection_and_cross_product) by modifying the query to print the number of rows on each side of the `JOIN` clause, grouped by the join key. You can also check the performance insights in the query execution graph for a [high cardinality join](https://docs.cloud.google.com/bigquery/docs/query-insights#high_cardinality_join) .
 
 To avoid performance issues associated with joins that generate more outputs than inputs:
 
-  - Use a `  GROUP BY  ` clause to [pre-aggregate the data](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce_data_before_using_a_join) .
+  - Use a `GROUP BY` clause to [pre-aggregate the data](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce_data_before_using_a_join) .
   - Use a window function. Window functions are often more efficient than using a cross join. For more information, see [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 ### Avoid DML statements that update or insert single rows
@@ -357,11 +357,11 @@ To avoid performance issues associated with joins that generate more outputs tha
 
 Using point-specific DML statements is an attempt to treat BigQuery like an Online Transaction Processing (OLTP) system. BigQuery focuses on Online Analytical Processing (OLAP) by using table scans and not point lookups. If you need OLTP-like behavior (single-row updates or inserts), consider a database designed to support OLTP use cases such as [Cloud SQL](https://docs.cloud.google.com/sql/docs) .
 
-BigQuery DML statements are intended for bulk updates. `  UPDATE  ` and `  DELETE  ` DML statements in BigQuery are oriented towards periodic rewrites of your data, not single row mutations. The `  INSERT  ` DML statement is intended to be used sparingly. Inserts consume the same modification [quotas](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) as load jobs. If your use case involves frequent single row inserts, consider [streaming](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) your data instead.
+BigQuery DML statements are intended for bulk updates. `UPDATE` and `DELETE` DML statements in BigQuery are oriented towards periodic rewrites of your data, not single row mutations. The `INSERT` DML statement is intended to be used sparingly. Inserts consume the same modification [quotas](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) as load jobs. If your use case involves frequent single row inserts, consider [streaming](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) your data instead.
 
-If batching your `  UPDATE  ` statements yields many tuples in very long queries, you might approach the query length limit of 256 KB. To work around the query length limit, consider whether your updates can be handled based on a logical criteria instead of a series of direct tuple replacements.
+If batching your `UPDATE` statements yields many tuples in very long queries, you might approach the query length limit of 256 KB. To work around the query length limit, consider whether your updates can be handled based on a logical criteria instead of a series of direct tuple replacements.
 
-For example, you could load your set of replacement records into another table, then write the DML statement to update all values in the original table if the non-updated columns match. For example, if the original data is in table `  t  ` and the updates are staged in table `  u  ` , the query would look like the following:
+For example, you could load your set of replacement records into another table, then write the DML statement to update all values in the original table if the non-updated columns match. For example, if the original data is in table `t` and the updates are staged in table `u` , the query would look like the following:
 
 ``` notranslate
 UPDATE

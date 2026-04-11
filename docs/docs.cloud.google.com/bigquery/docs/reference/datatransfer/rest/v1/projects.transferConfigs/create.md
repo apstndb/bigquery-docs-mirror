@@ -12,7 +12,7 @@ Creates a new data transfer configuration.
 
 ### HTTP request
 
-`  POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*}/transferConfigs  `
+`POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*}/transferConfigs`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,51 +20,51 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
 Required. The BigQuery project id where the transfer configuration should be created. Must be in the format projects/{projectId}/locations/{locationId} or projects/{projectId}. If specified location and location of the destination bigquery dataset do not match - the request will fail.
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.transfers.update  `
+  - `bigquery.transfers.update`
 
 ### Query parameters
 
 Parameters
 
-`  authorizationCode (deprecated)  `
+` authorizationCode (deprecated)  `
 
-`  string  `
+`string`
 
-Deprecated: Authorization code was required when `  transferConfig.dataSourceId  ` is 'youtube\_channel' but it is no longer used in any data sources. Use `  versionInfo  ` instead.
+Deprecated: Authorization code was required when `transferConfig.dataSourceId` is 'youtube\_channel' but it is no longer used in any data sources. Use `versionInfo` instead.
 
-Optional OAuth2 authorization code to use with this transfer configuration. This is required only if `  transferConfig.dataSourceId  ` is 'youtube\_channel' and new credentials are needed, as indicated by `  dataSources.checkValidCreds  ` . In order to obtain authorizationCode, make a request to the following URL:
+Optional OAuth2 authorization code to use with this transfer configuration. This is required only if `transferConfig.dataSourceId` is 'youtube\_channel' and new credentials are needed, as indicated by `dataSources.checkValidCreds` . In order to obtain authorizationCode, make a request to the following URL:
 
     https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=clientId&scope=data_source_scopes
 
   - The clientId is the OAuth clientId of the data source as returned by ListDataSources method.
   - data\_source\_scopes are the scopes returned by ListDataSources method.
 
-Note that this should not be set when `  serviceAccountName  ` is used to create the transfer config.
+Note that this should not be set when `serviceAccountName` is used to create the transfer config.
 
-`  versionInfo  `
+`versionInfo`
 
-`  string  `
+`string`
 
-Optional version info. This parameter replaces `  authorizationCode  ` which is no longer used in any data sources. This is required only if `  transferConfig.dataSourceId  ` is 'youtube\_channel' *or* new credentials are needed, as indicated by `  dataSources.checkValidCreds  ` . In order to obtain version info, make a request to the following URL:
+Optional version info. This parameter replaces `authorizationCode` which is no longer used in any data sources. This is required only if `transferConfig.dataSourceId` is 'youtube\_channel' *or* new credentials are needed, as indicated by `dataSources.checkValidCreds` . In order to obtain version info, make a request to the following URL:
 
     https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=clientId&scope=data_source_scopes
 
   - The clientId is the OAuth clientId of the data source as returned by ListDataSources method.
   - data\_source\_scopes are the scopes returned by ListDataSources method.
 
-Note that this should not be set when `  serviceAccountName  ` is used to create the transfer config.
+Note that this should not be set when `serviceAccountName` is used to create the transfer config.
 
-`  serviceAccountName  `
+`serviceAccountName`
 
-`  string  `
+`string`
 
 Optional service account email. If this field is set, the transfer config will be created with this service account's credentials. It requires that the requesting user calling this API has permissions to act as this service account.
 
@@ -82,6 +82,6 @@ If successful, the response body contains a newly created instance of `  Transfe
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

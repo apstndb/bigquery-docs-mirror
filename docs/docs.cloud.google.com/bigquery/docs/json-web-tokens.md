@@ -11,7 +11,7 @@ You can use JWTs to authenticate in the following ways:
 
 ### Scope and Audience
 
-Use [scopes](https://developers.google.com/identity/protocols/oauth2/scopes) with service account when possible. If not possible, you can use an [audience claim](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3) . For the BigQuery APIs, set the audience value to `  https://bigquery.googleapis.com/  ` .
+Use [scopes](https://developers.google.com/identity/protocols/oauth2/scopes) with service account when possible. If not possible, you can use an [audience claim](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3) . For the BigQuery APIs, set the audience value to `https://bigquery.googleapis.com/` .
 
 ### Create JWTs with client libraries
 
@@ -26,7 +26,7 @@ For service account keys created in Google Cloud console or by using the gcloud 
 
 #### Java example
 
-The following example uses the [BigQuery client library for Java](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) to create and sign a JWT. The default scope for BigQuery API is set to `  https://www.googleapis.com/auth/bigquery  ` in the client library.
+The following example uses the [BigQuery client library for Java](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) to create and sign a JWT. The default scope for BigQuery API is set to `https://www.googleapis.com/auth/bigquery` in the client library.
 
     import com.google.auth.oauth2.ServiceAccountCredentials;
     import com.google.cloud.bigquery.BigQuery;
@@ -65,11 +65,11 @@ The following example uses the [BigQuery client library for Java](https://docs.c
 
 ### Create JWTs with REST or the gcloud CLI
 
-For system-managed service accounts, you must manually assemble the JWT, then use the REST method [`  projects.serviceAccounts.signJwt  `](https://docs.cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signJwt) or the Google Cloud CLI command [`  gcloud beta iam service-accounts sign-jwt  `](https://cloud.google.com/sdk/gcloud/reference/beta/iam/service-accounts/sign-jwt) to sign the JWT. To use either of these approaches, you must be a member of the [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) Identity and Access Management role.
+For system-managed service accounts, you must manually assemble the JWT, then use the REST method [`projects.serviceAccounts.signJwt`](https://docs.cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signJwt) or the Google Cloud CLI command [`gcloud beta iam service-accounts sign-jwt`](https://cloud.google.com/sdk/gcloud/reference/beta/iam/service-accounts/sign-jwt) to sign the JWT. To use either of these approaches, you must be a member of the [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) Identity and Access Management role.
 
 #### gcloud CLI example
 
-The following example shows a bash script that assembles a JWT and then uses the `  gcloud beta iam service-accounts sign-jwt  ` command to sign it.
+The following example shows a bash script that assembles a JWT and then uses the `gcloud beta iam service-accounts sign-jwt` command to sign it.
 
     #!/bin/bash
     

@@ -15,8 +15,8 @@ You can [query BigQuery data](https://docs.cloud.google.com/bigquery/docs/runnin
 You can run query jobs by using the following methods:
 
   - Compose and run a query in the [Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui#overview) .
-  - Run the `  bq query  ` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
-  - Programmatically call the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
+  - Run the `bq query` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+  - Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
   - Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
 
 BigQuery saves query results to either a [temporary table (default) or permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) . When you specify a permanent table as the destination table for the results, you can choose whether to append or overwrite an existing table, or create a new table with a unique name.
@@ -27,8 +27,8 @@ BigQuery saves query results to either a [temporary table (default) or permanent
 
 To get the permissions that you need to run a query job, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project.
-  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on all tables and views that your query references. To query views, you also need this role on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project.
+  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on all tables and views that your query references. To query views, you also need this role on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -38,8 +38,8 @@ These predefined roles contain the permissions required to run a query job. To s
 
 The following permissions are required to run a query job:
 
-  - `  bigquery.jobs.create  ` on the project from which the query is being run, regardless of where the data is stored.
-  - `  bigquery.tables.getData  ` on all tables and views that your query references. To query views, you also need this permission on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
+  - `bigquery.jobs.create` on the project from which the query is being run, regardless of where the data is stored.
+  - `bigquery.tables.getData` on all tables and views that your query references. To query views, you also need this permission on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -50,7 +50,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 This error occurs when a principal lacks permission to create a query jobs in the project.
 
-**Resolution** : An administrator must grant you the `  bigquery.jobs.create  ` permission on the project you are querying. This permission is required in addition to any permission required to access the queried data.
+**Resolution** : An administrator must grant you the `bigquery.jobs.create` permission on the project you are querying. This permission is required in addition to any permission required to access the queried data.
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -68,7 +68,7 @@ To run an interactive query, select one of the following options:
 
 3.  In the query editor, enter a valid GoogleSQL query.
     
-    For example, query the [BigQuery public dataset `  usa_names  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+    For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
         SELECT
           name, gender,
@@ -100,9 +100,9 @@ To run an interactive query, select one of the following options:
     
     In the **Visualization configuration** pane, you can change the visualization type and configure the measures and dimensions of the visualization. Fields in this pane are prefilled with the initial configuration inferred from the destination table schema of the query. The configuration is preserved between following query runs in the same query editor.
     
-    For **Line** , **Bar** , or **Scatter** visualizations, the supported dimensions are `  INT64  ` , `  FLOAT64  ` , `  NUMERIC  ` , `  BIGNUMERIC  ` , `  TIMESTAMP  ` , `  DATE  ` , `  DATETIME  ` , `  TIME  ` , and `  STRING  ` data types, while the supported measures are `  INT64  ` , `  FLOAT64  ` , `  NUMERIC  ` , and `  BIGNUMERIC  ` data types.
+    For **Line** , **Bar** , or **Scatter** visualizations, the supported dimensions are `INT64` , `FLOAT64` , `NUMERIC` , `BIGNUMERIC` , `TIMESTAMP` , `DATE` , `DATETIME` , `TIME` , and `STRING` data types, while the supported measures are `INT64` , `FLOAT64` , `NUMERIC` , and `BIGNUMERIC` data types.
     
-    If your query results include the `  GEOGRAPHY  ` type, then **Map** is the default visualization type, which lets you visualize your results on an [interactive map](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio) .
+    If your query results include the `GEOGRAPHY` type, then **Map** is the default visualization type, which lets you visualize your results on an [interactive map](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio) .
 
 9.  Optional: In the **JSON** tab, you can explore the query results in the JSON format, where the key is the column name and the value is the result for that column.
 
@@ -114,7 +114,7 @@ To run an interactive query, select one of the following options:
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use the [`  bq query  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) . In the following example, the `  --use_legacy_sql=false  ` flag lets you use GoogleSQL syntax.
+2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) . In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
     
     ``` notranslate
     bq query \
@@ -122,7 +122,7 @@ To run an interactive query, select one of the following options:
         'QUERY'
     ```
     
-    Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `  usa_names  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+    Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
         bq query \
             --use_legacy_sql=false \
@@ -140,7 +140,7 @@ To run an interactive query, select one of the following options:
     
     The query job writes the output to a temporary (cache) table.
     
-    Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `  --append_table=true  ` ) or overwrite ( `  --replace=true  ` ) the table.
+    Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `--append_table=true` ) or overwrite ( `--replace=true` ) the table.
     
     ``` notranslate
     bq query \
@@ -152,21 +152,21 @@ To run an interactive query, select one of the following options:
     
     Replace the following:
     
-      - LOCATION : the region or multi-region for the destination table—for example, `  US  `
+      - LOCATION : the region or multi-region for the destination table—for example, `US`
         
-        In this example, the `  usa_names  ` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
+        In this example, the `usa_names` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
         
         You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
     
-      - TABLE : a name for the destination table—for example, `  myDataset.myTable  `
+      - TABLE : a name for the destination table—for example, `myDataset.myTable`
         
         If the destination table is a new table, then BigQuery creates the table when you run your query. However, you must specify an existing dataset.
         
-        If the table isn't in your current project, then add the Google Cloud project ID using the format `  PROJECT_ID:DATASET.TABLE  ` —for example, `  myProject:myDataset.myTable  ` . If `  --destination_table  ` is unspecified, a query job is generated that writes the output to a temporary table.
+        If the table isn't in your current project, then add the Google Cloud project ID using the format `  PROJECT_ID:DATASET.TABLE  ` —for example, `myProject:myDataset.myTable` . If `--destination_table` is unspecified, a query job is generated that writes the output to a temporary table.
 
 ### Terraform
 
-Use the [`  google_bigquery_job  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_job) .
+Use the [`google_bigquery_job` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_job) .
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
@@ -214,13 +214,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -232,7 +232,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -244,7 +244,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -256,9 +256,9 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-To run a query using the API, [insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the `  query  ` job configuration property. Optionally specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+To run a query using the API, [insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the `query` job configuration property. Optionally specify your location in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-Poll for results by calling [`  getQueryResults  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) . Poll until `  jobComplete  ` equals `  true  ` . Check for errors and warnings in the `  errors  ` list.
+Poll for results by calling [`getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) . Poll until `jobComplete` equals `true` . Check for errors and warnings in the `errors` list.
 
 ### C\#
 
@@ -534,7 +534,7 @@ To run a batch query, select one of the following options:
 
 3.  In the query editor, enter a valid GoogleSQL query.
     
-    For example, query the [BigQuery public dataset `  usa_names  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+    For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
         SELECT
           name, gender,
@@ -568,7 +568,7 @@ To run a batch query, select one of the following options:
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use the [`  bq query  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `  --batch  ` flag. In the following example, the `  --use_legacy_sql=false  ` flag lets you use GoogleSQL syntax.
+2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `--batch` flag. In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
     
     ``` notranslate
     bq query \
@@ -577,7 +577,7 @@ To run a batch query, select one of the following options:
         'QUERY'
     ```
     
-    Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `  usa_names  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+    Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
         bq query \
             --batch \
@@ -596,7 +596,7 @@ To run a batch query, select one of the following options:
     
     The query job writes the output to a temporary (cache) table.
     
-    Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `  --append_table=true  ` ) or overwrite ( `  --replace=true  ` ) the table.
+    Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `--append_table=true` ) or overwrite ( `--replace=true` ) the table.
     
     ``` notranslate
     bq query \
@@ -609,25 +609,25 @@ To run a batch query, select one of the following options:
     
     Replace the following:
     
-      - LOCATION : the region or multi-region for the destination table—for example, `  US  `
+      - LOCATION : the region or multi-region for the destination table—for example, `US`
         
-        In this example, the `  usa_names  ` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
+        In this example, the `usa_names` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
         
         You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
     
-      - TABLE : a name for the destination table—for example, `  myDataset.myTable  `
+      - TABLE : a name for the destination table—for example, `myDataset.myTable`
         
         If the destination table is a new table, then BigQuery creates the table when you run your query. However, you must specify an existing dataset.
         
-        If the table isn't in your current project, then add the Google Cloud project ID using the format `  PROJECT_ID:DATASET.TABLE  ` —for example, `  myProject:myDataset.myTable  ` . If `  --destination_table  ` is unspecified, a query job is generated that writes the output to a temporary table.
+        If the table isn't in your current project, then add the Google Cloud project ID using the format `  PROJECT_ID:DATASET.TABLE  ` —for example, `myProject:myDataset.myTable` . If `--destination_table` is unspecified, a query job is generated that writes the output to a temporary table.
 
 ### API
 
-To run a query using the API, [insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the `  query  ` job configuration property. Optionally specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+To run a query using the API, [insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the `query` job configuration property. Optionally specify your location in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-When you populate the query job properties, include the `  configuration.query.priority  ` property and set the value to `  BATCH  ` .
+When you populate the query job properties, include the `configuration.query.priority` property and set the value to `BATCH` .
 
-Poll for results by calling [`  getQueryResults  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) . Poll until `  jobComplete  ` equals `  true  ` . Check for errors and warnings in the `  errors  ` list.
+Poll for results by calling [`getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) . Poll until `jobComplete` equals `true` . Check for errors and warnings in the `errors` list.
 
 ### Go
 
@@ -884,17 +884,17 @@ When you run a query, you can specify the following settings:
 
 ## Optional job creation mode
 
-Optional job creation mode can improve the overall latency of queries that run for a short duration, such as those from dashboards or data exploration workloads. This mode executes the query and returns the results inline for `  SELECT  ` statements without requiring the use of [`  jobs.getQueryResults  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) to fetch the results. Queries using optional job creation mode don't create a job when executed unless BigQuery determines that a job creation is necessary to complete the query.
+Optional job creation mode can improve the overall latency of queries that run for a short duration, such as those from dashboards or data exploration workloads. This mode executes the query and returns the results inline for `SELECT` statements without requiring the use of [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) to fetch the results. Queries using optional job creation mode don't create a job when executed unless BigQuery determines that a job creation is necessary to complete the query.
 
-To enable optional job creation mode, set the `  jobCreationMode  ` field of the [QueryRequest](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) instance to `  JOB_CREATION_OPTIONAL  ` in the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) request body.
+To enable optional job creation mode, set the `jobCreationMode` field of the [QueryRequest](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) instance to `JOB_CREATION_OPTIONAL` in the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) request body.
 
-When the value of this field is set to `  JOB_CREATION_OPTIONAL  ` , BigQuery determines if the query can use the optional job creation mode. If so, BigQuery executes the query and returns all results in the `  rows  ` field of the response. Since a job isn't created for this query, BigQuery doesn't return a `  jobReference  ` in the response body. Instead, it returns a `  queryId  ` field, which you can use to get insights about the query using the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#optional-job-creation) . Since no job is created, there is no `  jobReference  ` that can be passed to [`  jobs.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) and [`  jobs.getQueryResults  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) APIs to lookup these queries.
+When the value of this field is set to `JOB_CREATION_OPTIONAL` , BigQuery determines if the query can use the optional job creation mode. If so, BigQuery executes the query and returns all results in the `rows` field of the response. Since a job isn't created for this query, BigQuery doesn't return a `jobReference` in the response body. Instead, it returns a `queryId` field, which you can use to get insights about the query using the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#optional-job-creation) . Since no job is created, there is no `jobReference` that can be passed to [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) and [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) APIs to lookup these queries.
 
-If BigQuery determines that a job is required to complete the query, a `  jobReference  ` is returned. You can inspect the `  job_creation_reason  ` field in [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#optional-job-creation) to determine the reason that a job was created for the query. In this case, you should use [`  jobs.getQueryResults  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) to fetch the results when the query is complete.
+If BigQuery determines that a job is required to complete the query, a `jobReference` is returned. You can inspect the `job_creation_reason` field in [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#optional-job-creation) to determine the reason that a job was created for the query. In this case, you should use [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) to fetch the results when the query is complete.
 
-When you use the `  JOB_CREATION_OPTIONAL  ` value, the `  jobReference  ` field might not be present in the response. Check if the field exists before accessing it.
+When you use the `JOB_CREATION_OPTIONAL` value, the `jobReference` field might not be present in the response. Check if the field exists before accessing it.
 
-When `  JOB_CREATION_OPTIONAL  ` is specified for multi-statement queries (scripts), BigQuery might optimize the execution process. As part of this optimization, BigQuery might determine that it can complete the script by creating fewer job resources than the number of individual statements, potentially even executing the entire script without creating any job at all. This optimization depends on BigQuery's assessment of the script, and the optimization might not be applied in every case. The optimization is fully automated by the system. No user controls or actions are required.
+When `JOB_CREATION_OPTIONAL` is specified for multi-statement queries (scripts), BigQuery might optimize the execution process. As part of this optimization, BigQuery might determine that it can complete the script by creating fewer job resources than the number of individual statements, potentially even executing the entire script without creating any job at all. This optimization depends on BigQuery's assessment of the script, and the optimization might not be applied in every case. The optimization is fully automated by the system. No user controls or actions are required.
 
 To run a query using optional job creation mode, select one of the following options:
 
@@ -908,7 +908,7 @@ To run a query using optional job creation mode, select one of the following opt
 
 3.  In the query editor, enter a valid GoogleSQL query.
     
-    For example, query the [BigQuery public dataset `  usa_names  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+    For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
         SELECT
           name, gender,
@@ -934,7 +934,7 @@ To run a query using optional job creation mode, select one of the following opt
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use the [`  bq query  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `  --job_creation_mode=JOB_CREATION_OPTIONAL  ` flag. In the following example, the `  --use_legacy_sql=false  ` flag lets you use GoogleSQL syntax.
+2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `--job_creation_mode=JOB_CREATION_OPTIONAL` flag. In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
     
     ``` notranslate
     bq query \
@@ -945,7 +945,7 @@ To run a query using optional job creation mode, select one of the following opt
         'QUERY'
     ```
     
-    Replace QUERY with a valid GoogleSQL query, and replace LOCATION with a valid region where the dataset is located. For example, query the [BigQuery public dataset `  usa_names  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+    Replace QUERY with a valid GoogleSQL query, and replace LOCATION with a valid region where the dataset is located. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
         bq query \
             --rpc=true \
@@ -966,15 +966,15 @@ To run a query using optional job creation mode, select one of the following opt
     
     The query job returns the output inline in the response.
     
-    **Note:** you may use `  --apilog=stdout  ` to log API requests and responses to extract the `  queryId  ` if needed.
+    **Note:** you may use `--apilog=stdout` to log API requests and responses to extract the `queryId` if needed.
 
 ### API
 
-To run a query in optional job creation mode using the API, [run a query synchronously](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) and populate the [`  QueryRequest  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) property. Include the `  jobCreationMode  ` property and set its value to `  JOB_CREATION_OPTIONAL  ` .
+To run a query in optional job creation mode using the API, [run a query synchronously](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) and populate the [`QueryRequest`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) property. Include the `jobCreationMode` property and set its value to `JOB_CREATION_OPTIONAL` .
 
-Check the response. If `  jobComplete  ` equals `  true  ` and `  jobReference  ` is empty, read the results from the `  rows  ` field. You can also get the `  queryId  ` from the response.
+Check the response. If `jobComplete` equals `true` and `jobReference` is empty, read the results from the `rows` field. You can also get the `queryId` from the response.
 
-If `  jobReference  ` is present, you can check `  jobCreationReason  ` for why a job was created by BigQuery. Poll for results by calling [`  getQueryResults  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) . Poll until `  jobComplete  ` equals `  true  ` . Check for errors and warnings in the `  errors  ` list.
+If `jobReference` is present, you can check `jobCreationReason` for why a job was created by BigQuery. Poll for results by calling [`getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) . Poll until `jobComplete` equals `true` . Check for errors and warnings in the `errors` list.
 
 ### Java
 
@@ -1220,20 +1220,20 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Available version: JDBC v1.6.1 and up
 
-Requires setting `  JobCreationMode=2  ` in the connection string.
+Requires setting `JobCreationMode=2` in the connection string.
 
 ``` 
     jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;JobCreationMode=2;Location=US;
   
 ```
 
-**Note:** you may append `  LogLevel=6;LogPath=log.txt  ` to the connection string to enable `  TRACE  ` level logging and extract troubleshooting information, including `  queryId  ` , if needed.
+**Note:** you may append `LogLevel=6;LogPath=log.txt` to the connection string to enable `TRACE` level logging and extract troubleshooting information, including `queryId` , if needed.
 
 ### ODBC Driver
 
 Available version: ODBC v3.0.7.1016 and up
 
-Requires setting `  JobCreationMode=2  ` in the `  .ini  ` file.
+Requires setting `JobCreationMode=2` in the `.ini` file.
 
 ``` 
     [ODBC Data Sources]
@@ -1243,7 +1243,7 @@ Requires setting `  JobCreationMode=2  ` in the `  .ini  ` file.
   
 ```
 
-**Note:** you may append `  LogLevel=6  ` and `  LogPath=log.txt  ` to the `  .ini  ` file to enable detailed level logging and extract troubleshooting information, including `  queryId  ` , if needed.
+**Note:** you may append `LogLevel=6` and `LogPath=log.txt` to the `.ini` file to enable detailed level logging and extract troubleshooting information, including `queryId` , if needed.
 
 ## Global queries
 
@@ -1262,7 +1262,7 @@ To troubleshoot quota errors related to queries, see the [BigQuery Troubleshooti
 
 ## Monitor queries
 
-You can get information about queries as they are executing by using the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) or by querying the [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
+You can get information about queries as they are executing by using the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) or by querying the [`INFORMATION_SCHEMA.JOBS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
 ## Dry run
 
@@ -1292,7 +1292,7 @@ To perform a dry run, do the following:
 
 ### bq
 
-Enter a query like the following using the `  --dry_run  ` flag.
+Enter a query like the following using the `--dry_run` flag.
 
 ``` notranslate
 bq query \
@@ -1318,7 +1318,7 @@ For a valid query, the command produces the following response:
 
 ### API
 
-To perform a dry run by using the API, submit a query job with `  dryRun  ` set to `  true  ` in the [JobConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) type.
+To perform a dry run by using the API, submit a query job with `dryRun` set to `true` in the [JobConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) type.
 
 ### Go
 
@@ -1481,7 +1481,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Python
 
-Set the [QueryJobConfig.dry\_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `  True  ` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
+Set the [QueryJobConfig.dry\_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `True` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
 
 Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 

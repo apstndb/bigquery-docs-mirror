@@ -517,25 +517,25 @@ This example shows how to insert a record with two fields using the default stre
         # Change this to your specific BigQuery project, dataset, table details
         BigQueryStorageWriteAppend.append_rows_proto2("PROJECT_ID","DATASET_ID", "TABLE_ID ",data=data)
 
-This code example depends on the compiled protocol module `  sample_data_pb2.py  ` . To create the compiled module, execute the `  protoc --python_out=. sample_data.proto  ` command, where `  protoc  ` is the protocol buffer compiler. The `  sample_data.proto  ` file defines the format of the messages used in the Python example. To install the `  protoc  ` compiler, follow the instructions in [Protocol Buffers - Google's data interchange format](https://github.com/protocolbuffers/protobuf) .
+This code example depends on the compiled protocol module `sample_data_pb2.py` . To create the compiled module, execute the `protoc --python_out=. sample_data.proto` command, where `protoc` is the protocol buffer compiler. The `sample_data.proto` file defines the format of the messages used in the Python example. To install the `protoc` compiler, follow the instructions in [Protocol Buffers - Google's data interchange format](https://github.com/protocolbuffers/protobuf) .
 
-Here are the contents of the `  sample_data.proto  ` file:
+Here are the contents of the `sample_data.proto` file:
 
     message SampleData {
       required string name = 1;
       required int64 age = 2;
     }
 
-This script consumes the `  entries.json  ` file, which contains sample row data to be inserted into the BigQuery table:
+This script consumes the `entries.json` file, which contains sample row data to be inserted into the BigQuery table:
 
     {"name": "Jim", "age": 35}
     {"name": "Jane", "age": 27}
 
 ### Use multiplexing
 
-You enable [multiplexing](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) at the stream writer level for default stream only. To enable multiplexing in Java, call the `  setEnableConnectionPool  ` method when you construct a `  StreamWriter  ` or `  JsonStreamWriter  ` object.
+You enable [multiplexing](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) at the stream writer level for default stream only. To enable multiplexing in Java, call the `setEnableConnectionPool` method when you construct a `StreamWriter` or `JsonStreamWriter` object.
 
-After enabling the connection pool, the Java client library manages your connections in the background, scaling up connections if the existing connections are considered too busy. For automatic scaling up to be more effective, you should consider lowering the `  maxInflightRequests  ` limit.
+After enabling the connection pool, the Java client library manages your connections in the background, scaling up connections if the existing connections are considered too busy. For automatic scaling up to be more effective, you should consider lowering the `maxInflightRequests` limit.
 
 ``` notranslate
 // One possible way for constructing StreamWriter
@@ -557,7 +557,7 @@ To enable multiplexing in Go, see [Connection Sharing (Multiplexing)](https://pk
 
 If you need exactly-once write semantics, create a write stream in committed type. In committed type, records are available for query as soon as the client receives acknowledgment from the backend.
 
-Committed type provides exactly-once delivery within a stream through the use of record offsets. By using record offsets, the application specifies the next append offset in each call to [`  AppendRows  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) . The write operation is only performed if the offset value matches the next append offset. For more information, see [Manage stream offsets to achieve exactly-once semantics](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#manage_stream_offsets_to_achieve_exactly-once_semantics) .
+Committed type provides exactly-once delivery within a stream through the use of record offsets. By using record offsets, the application specifies the next append offset in each call to [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) . The write operation is only performed if the offset value matches the next append offset. For more information, see [Manage stream offsets to achieve exactly-once semantics](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#manage_stream_offsets_to_achieve_exactly-once_semantics) .
 
 If you don't provide an offset, then records are appended to the current end of the stream. In that case, if an append request returns an error, retrying it could result in the record appearing more than once in the stream.
 
@@ -565,15 +565,15 @@ To use committed type, perform the following steps:
 
 ### Java
 
-1.  Call `  CreateWriteStream  ` to create one or more streams in committed type.
-2.  For each stream, call `  AppendRows  ` in a loop to write batches of records.
-3.  Call `  FinalizeWriteStream  ` for each stream to release the stream. After you call this method, you cannot write any more rows to the stream. This step is optional in committed type, but helps to prevent exceeding the limit on active streams. For more information, see [Limit the rate of stream creation](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#limit_the_rate_of_stream_creation) .
+1.  Call `CreateWriteStream` to create one or more streams in committed type.
+2.  For each stream, call `AppendRows` in a loop to write batches of records.
+3.  Call `FinalizeWriteStream` for each stream to release the stream. After you call this method, you cannot write any more rows to the stream. This step is optional in committed type, but helps to prevent exceeding the limit on active streams. For more information, see [Limit the rate of stream creation](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#limit_the_rate_of_stream_creation) .
 
 ### Node.js
 
-1.  Call `  createWriteStreamFullResponse  ` to create one or more streams in committed type.
-2.  For each stream, call `  appendRows  ` in a loop to write batches of records.
-3.  Call `  finalize  ` for each stream to release the stream. After you call this method, you cannot write any more rows to the stream. This step is optional in committed type, but helps to prevent exceeding the limit on active streams. For more information, see [Limit the rate of stream creation](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#limit_the_rate_of_stream_creation) .
+1.  Call `createWriteStreamFullResponse` to create one or more streams in committed type.
+2.  For each stream, call `appendRows` in a loop to write batches of records.
+3.  Call `finalize` for each stream to release the stream. After you call this method, you cannot write any more rows to the stream. This step is optional in committed type, but helps to prevent exceeding the limit on active streams. For more information, see [Limit the rate of stream creation](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#limit_the_rate_of_stream_creation) .
 
 You cannot delete a stream explicitly. Streams follow the system-defined time to live (TTL):
 

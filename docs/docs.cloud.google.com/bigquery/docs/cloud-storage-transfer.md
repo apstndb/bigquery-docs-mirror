@@ -22,7 +22,7 @@ Recurring data transfers from Cloud Storage to BigQuery are subject to the follo
 
   - Unlike [individual loads of data from Cloud Storage to BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage) , for ongoing data transfers you must create the destination table before setting up the transfer. For CSV and JSON files, you must also define the [table schema](https://docs.cloud.google.com/bigquery/docs/schemas) in advance. BigQuery cannot create the table as part of the recurring data transfer process.
 
-  - Data transfers from Cloud Storage set the **Write preference** parameter to `  APPEND  ` by default. In this mode, an unmodified file can only be loaded into BigQuery once. If the file's `  last modification time  ` property is updated, then the file will be reloaded.
+  - Data transfers from Cloud Storage set the **Write preference** parameter to `APPEND` by default. In this mode, an unmodified file can only be loaded into BigQuery once. If the file's `last modification time` property is updated, then the file will be reloaded.
 
   - BigQuery Data Transfer Service does not guarantee all files will be transferred or transferred only once if Cloud Storage files are modified during a data transfer.
 
@@ -52,7 +52,7 @@ When you load data into BigQuery, you need permissions that allow you to load da
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -61,22 +61,22 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Cloud Storage roles
 
-You must have the `  storage.objects.get  ` permissions on the individual bucket or higher. If you are using a URI [wildcard](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#wildcard-support) , you must have `  storage.objects.list  ` permissions. If you would like to delete the source files after each successful transfer, you also need `  storage.objects.delete  ` permissions. The `  storage.objectAdmin  ` predefined [IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) includes all of these permissions.
+You must have the `storage.objects.get` permissions on the individual bucket or higher. If you are using a URI [wildcard](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#wildcard-support) , you must have `storage.objects.list` permissions. If you would like to delete the source files after each successful transfer, you also need `storage.objects.delete` permissions. The `storage.objectAdmin` predefined [IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) includes all of these permissions.
 
 ## Set up a Cloud Storage transfer
 
@@ -94,7 +94,7 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
     
     ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/gcs-transfer-source.png)
 
-4.  In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `  My Transfer  ` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+4.  In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
     
     ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
 
@@ -125,7 +125,7 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
           - **APPEND** to incrementally append new data to your existing destination table. **APPEND** is the default value for **Write preference** .
           - **MIRROR** to overwrite data in the destination table during each data transfer run.
         
-        For more information about how BigQuery Data Transfer Service ingests data using either **APPEND** or **MIRROR** , see [Data ingestion for Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#data-ingestion) . For more information about the `  writeDisposition  ` field, see [`  JobConfigurationLoad  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
+        For more information about how BigQuery Data Transfer Service ingests data using either **APPEND** or **MIRROR** , see [Data ingestion for Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#data-ingestion) . For more information about the `writeDisposition` field, see [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
     
     4.  For **Delete source files after transfer** , check the box if you want to delete the source files after each successful data transfer. Delete jobs are best effort. Delete jobs don't retry if the first effort to delete the source files fails.
     
@@ -133,26 +133,26 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
         
         1.  Under **All Formats** :
             
-            1.  For **Number of errors allowed** , enter the maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an `  invalid  ` error is returned in the job result, and the job fails. The default value is `  0  ` .
+            1.  For **Number of errors allowed** , enter the maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an `invalid` error is returned in the job result, and the job fails. The default value is `0` .
             2.  (Optional) For **Decimal target types** , enter a comma-separated list of possible SQL data types that the source decimal values could be converted to. Which SQL data type is selected for conversion depends on the following conditions:
-                  - The data type selected for conversion will be the first data type in the following list that supports the precision and scale of the source data, in this order: `  NUMERIC  ` , [`  BIGNUMERIC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) , and `  STRING  ` .
+                  - The data type selected for conversion will be the first data type in the following list that supports the precision and scale of the source data, in this order: `NUMERIC` , [`BIGNUMERIC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) , and `STRING` .
                   - If none of the listed data types support the precision and the scale, the data type supporting the widest range in the specified list is selected. If a value exceeds the supported range when reading the source data, an error is thrown.
-                  - The data type `  STRING  ` supports all precision and scale values.
-                  - If this field is left empty, the data type will default to `  NUMERIC,STRING  ` for ORC, and `  NUMERIC  ` for the other file formats.
+                  - The data type `STRING` supports all precision and scale values.
+                  - If this field is left empty, the data type will default to `NUMERIC,STRING` for ORC, and `NUMERIC` for the other file formats.
                   - This field can't contain duplicate data types.
                   - The order of the data types that you list in this field is ignored.
         
         2.  Under **JSON, CSV** , for **Ignore unknown values** , check the box if you want the data transfer to drop data that does not fit the destination table's schema.
         
-        3.  Under **AVRO** , for **Use avro logical types** , check the box if you want the data transfer to convert Avro logical types to their corresponding BigQuery data types. The default behavior is to ignore the `  logicalType  ` attribute for most of the types and use the underlying Avro type instead.
+        3.  Under **AVRO** , for **Use avro logical types** , check the box if you want the data transfer to convert Avro logical types to their corresponding BigQuery data types. The default behavior is to ignore the `logicalType` attribute for most of the types and use the underlying Avro type instead.
         
         4.  Under **CSV** :
             
             1.  For **Field delimiter** , enter the character that separates fields. The default value is a comma.
-            2.  For **Quote character** , enter the character that is used to quote data sections in a CSV file. The default value is a double-quote ( `  "  ` ).
-            3.  For **Header rows to skip** , enter the number of header rows in the source file(s) if you don't want to import them. The default value is `  0  ` .
+            2.  For **Quote character** , enter the character that is used to quote data sections in a CSV file. The default value is a double-quote ( `"` ).
+            3.  For **Header rows to skip** , enter the number of header rows in the source file(s) if you don't want to import them. The default value is `0` .
             4.  For **Allow quoted newlines** , check the box if you want to allow newlines within quoted fields.
-            5.  For **Allow jagged rows** , check the box if you want to allow the data transfer of rows with missing `  NULLABLE  ` columns.
+            5.  For **Allow jagged rows** , check the box if you want to allow the data transfer of rows with missing `NULLABLE` columns.
             
             See [CSV-only options](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) for more information.
 
@@ -172,17 +172,17 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` . The following flags are also required:
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `  --data_source  `
-  - `  --display_name  `
-  - `  --target_dataset  `
-  - `  --params  `
+  - `--data_source`
+  - `--display_name`
+  - `--target_dataset`
+  - `--params`
 
 Optional flags:
 
-  - `  --destination_kms_key  ` : Specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key if you use a customer-managed encryption key (CMEK) for this data transfer. For information about how CMEKs work with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#CMEK) .
-  - `  --service_account_name  ` : Specifies a service account to use for Cloud Storage transfer authentication instead of your user account.
+  - `--destination_kms_key` : Specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key if you use a customer-managed encryption key (CMEK) for this data transfer. For information about how CMEKs work with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#CMEK) .
+  - `--service_account_name` : Specifies a service account to use for Cloud Storage transfer authentication instead of your user account.
 
 When using the bq command-line tool to set up a Cloud Storage data transfer, the following limitations apply:
 
@@ -206,34 +206,34 @@ bq mk \
 
 Replace the following:
 
-  - PROJECT\_ID is your project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
-  - DATA\_SOURCE is the data source, for example, `  google_cloud_storage  ` .
+  - PROJECT\_ID is your project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
+  - DATA\_SOURCE is the data source, for example, `google_cloud_storage` .
   - NAME is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
   - DATASET is the target dataset for the transfer configuration.
-  - DESTINATION\_KEY : the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) —for example, `  projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name  ` .
-  - PARAMETERS contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
-      - `  destination_table_name_template  ` : the name of the destination BigQuery table.
-      - `  data_path_template  ` : the Cloud Storage URI that contains your files to be transferred. [Wildcards](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#wildcard-support) and [parameters](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) are supported.
-      - `  write_disposition  ` : determines if matching files are appended to the destination table or mirrored entirely. The supported values are `  APPEND  ` or `  MIRROR  ` . For information about how the BigQuery Data Transfer Service appends or mirrors data in Cloud Storage transfers, see [Data ingestion for Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#data-ingestion) .
-      - `  file_format  ` : the format of the files that you want to transfer. The format can be `  CSV  ` , `  JSON  ` , `  AVRO  ` , `  PARQUET  ` , or `  ORC  ` . The default value is `  CSV  ` .
-      - `  max_bad_records  ` : for any `  file_format  ` value, the maximum number of bad records that can be ignored. The default value is `  0  ` .
-      - `  decimal_target_types  ` : for any `  file_format  ` value, a comma-separated list of possible SQL data types that the source decimal values could be converted to. If this field is not provided, the data type defaults to `  "NUMERIC,STRING"  ` for `  ORC  ` , and `  "NUMERIC"  ` for the other file formats.
-      - `  ignore_unknown_values  ` : for any `  file_format  ` value, set to `  TRUE  ` to accept rows that contain values that don't match the schema. For more information, see the `  ignoreUnknownvalues  ` field details in the [`  JobConfigurationLoad  ` reference table](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.ignore_unknown_values) .
-      - `  use_avro_logical_types  ` : for `  AVRO  ` `  file_format  ` values, set to `  TRUE  ` to interpret logical types into their corresponding types (for example, `  TIMESTAMP  ` ), instead of only using their raw types (for example, `  INTEGER  ` ).
-      - `  parquet_enum_as_string  ` : for `  PARQUET  ` `  file_format  ` values, set to `  TRUE  ` to infer `  PARQUET  ` `  ENUM  ` logical type as `  STRING  ` instead of the default `  BYTES  ` .
-      - `  parquet_enable_list_inference  ` : for `  PARQUET  ` `  file_format  ` values, set to `  TRUE  ` to use schema inference specifically for `  PARQUET  ` `  LIST  ` logical type.
-      - `  reference_file_schema_uri  ` : a URI path to a reference file with the reader schema.
-      - `  field_delimiter  ` : for `  CSV  ` `  file_format  ` values, a character that separates fields. The default value is a comma.
-      - `  quote  ` : for `  CSV  ` `  file_format  ` values, a character that is used to quote data sections in a CSV file. The default value is a double-quote ( `  "  ` ).
-      - `  skip_leading_rows  ` : for `  CSV  ` `  file_format  ` values, indicate the number of leading header rows that you don't want to import. The default value is 0.
-      - `  allow_quoted_newlines  ` : for `  CSV  ` `  file_format  ` values, set to `  TRUE  ` to allow newlines within quoted fields.
-      - `  allow_jagged_rows  ` : for `  CSV  ` `  file_format  ` values, set to `  TRUE  ` to accept rows that are missing trailing optional columns. The missing values are filled in with `  NULL  ` .
-      - `  preserve_ascii_control_characters  ` : for `  CSV  ` `  file_format  ` values, set to `  TRUE  ` to preserve any embedded ASCII control characters.
-      - `  encoding  ` : specify the `  CSV  ` encoding type. Supported values are `  UTF8  ` , `  ISO_8859_1  ` , `  UTF16BE  ` , `  UTF16LE  ` , `  UTF32BE  ` , and `  UTF32LE  ` .
-      - `  delete_source_files  ` : set to `  TRUE  ` to delete the source files after each successful transfer. Delete jobs don't rerun if the first try to delete the source file fails. The default value is `  FALSE  ` .
-  - SERVICE\_ACCOUNT\_NAME is the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#required_permissions) .
+  - DESTINATION\_KEY : the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) —for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` .
+  - PARAMETERS contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` .
+      - `destination_table_name_template` : the name of the destination BigQuery table.
+      - `data_path_template` : the Cloud Storage URI that contains your files to be transferred. [Wildcards](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#wildcard-support) and [parameters](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) are supported.
+      - `write_disposition` : determines if matching files are appended to the destination table or mirrored entirely. The supported values are `APPEND` or `MIRROR` . For information about how the BigQuery Data Transfer Service appends or mirrors data in Cloud Storage transfers, see [Data ingestion for Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#data-ingestion) .
+      - `file_format` : the format of the files that you want to transfer. The format can be `CSV` , `JSON` , `AVRO` , `PARQUET` , or `ORC` . The default value is `CSV` .
+      - `max_bad_records` : for any `file_format` value, the maximum number of bad records that can be ignored. The default value is `0` .
+      - `decimal_target_types` : for any `file_format` value, a comma-separated list of possible SQL data types that the source decimal values could be converted to. If this field is not provided, the data type defaults to `"NUMERIC,STRING"` for `ORC` , and `"NUMERIC"` for the other file formats.
+      - `ignore_unknown_values` : for any `file_format` value, set to `TRUE` to accept rows that contain values that don't match the schema. For more information, see the `ignoreUnknownvalues` field details in the [`JobConfigurationLoad` reference table](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.ignore_unknown_values) .
+      - `use_avro_logical_types` : for `AVRO` `file_format` values, set to `TRUE` to interpret logical types into their corresponding types (for example, `TIMESTAMP` ), instead of only using their raw types (for example, `INTEGER` ).
+      - `parquet_enum_as_string` : for `PARQUET` `file_format` values, set to `TRUE` to infer `PARQUET` `ENUM` logical type as `STRING` instead of the default `BYTES` .
+      - `parquet_enable_list_inference` : for `PARQUET` `file_format` values, set to `TRUE` to use schema inference specifically for `PARQUET` `LIST` logical type.
+      - `reference_file_schema_uri` : a URI path to a reference file with the reader schema.
+      - `field_delimiter` : for `CSV` `file_format` values, a character that separates fields. The default value is a comma.
+      - `quote` : for `CSV` `file_format` values, a character that is used to quote data sections in a CSV file. The default value is a double-quote ( `"` ).
+      - `skip_leading_rows` : for `CSV` `file_format` values, indicate the number of leading header rows that you don't want to import. The default value is 0.
+      - `allow_quoted_newlines` : for `CSV` `file_format` values, set to `TRUE` to allow newlines within quoted fields.
+      - `allow_jagged_rows` : for `CSV` `file_format` values, set to `TRUE` to accept rows that are missing trailing optional columns. The missing values are filled in with `NULL` .
+      - `preserve_ascii_control_characters` : for `CSV` `file_format` values, set to `TRUE` to preserve any embedded ASCII control characters.
+      - `encoding` : specify the `CSV` encoding type. Supported values are `UTF8` , `ISO_8859_1` , `UTF16BE` , `UTF16LE` , `UTF32BE` , and `UTF32LE` .
+      - `delete_source_files` : set to `TRUE` to delete the source files after each successful transfer. Delete jobs don't rerun if the first try to delete the source file fails. The default value is `FALSE` .
+  - SERVICE\_ACCOUNT\_NAME is the service account name used to authenticate your transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#required_permissions) .
 
-For example, the following command creates a Cloud Storage data transfer named `  My Transfer  ` using a `  data_path_template  ` value of `  gs://mybucket/myfile/*.csv  ` , target dataset `  mydataset  ` , and `  file_format  ` `  CSV  ` . This example includes non-default values for the optional params associated with the `  CSV  ` file\_format.
+For example, the following command creates a Cloud Storage data transfer named `My Transfer` using a `data_path_template` value of `gs://mybucket/myfile/*.csv` , target dataset `mydataset` , and `file_format` `CSV` . This example includes non-default values for the optional params associated with the `CSV` file\_format.
 
 The data transfer is created in the default project:
 
@@ -258,13 +258,13 @@ The data transfer is created in the default project:
 
 After running the command, you receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -376,7 +376,7 @@ To trigger a data transfer:
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the `  --transfer_run  ` flag. You may either use the `  --run_time  ` flag or the `  --start_time  ` and `  --end_time  ` flags.
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the `--transfer_run` flag. You may either use the `--run_time` flag or the `--start_time` and `--end_time` flags.
 
     bq mk \
     --transfer_run \
@@ -391,18 +391,18 @@ Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/refe
 
 Where:
 
-  - START\_TIME and END\_TIME are timestamps that end in `  Z  ` or contain a valid time zone offset. For example:
+  - START\_TIME and END\_TIME are timestamps that end in `Z` or contain a valid time zone offset. For example:
     
-      - `  2017-08-19T12:11:35.00Z  `
-      - `  2017-05-25T00:00:00+00:00  `
+      - `2017-08-19T12:11:35.00Z`
+      - `2017-05-25T00:00:00+00:00`
 
-  - RUN\_TIME is a timestamp that specifies the time to schedule the data transfer run. If you want to run a one-time transfer for the current time, you may use the `  --run_time  ` flag.
+  - RUN\_TIME is a timestamp that specifies the time to schedule the data transfer run. If you want to run a one-time transfer for the current time, you may use the `--run_time` flag.
 
-  - RESOURCE\_NAME is the transfer's resource name (also referred to as the transfer configuration), for example, `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` . If you don't know the transfer's resource name, run the [`  bq ls --transfer_config --transfer_location= LOCATION  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) command to find the resource name.
+  - RESOURCE\_NAME is the transfer's resource name (also referred to as the transfer configuration), for example, `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` . If you don't know the transfer's resource name, run the [` bq ls --transfer_config --transfer_location= LOCATION  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) command to find the resource name.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.startManualRuns  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns) method and provide the transfer configuration resource using the `  parent  ` parameter.
+Use the [`projects.locations.transferConfigs.startManualRuns`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns) method and provide the transfer configuration resource using the `parent` parameter.
 
 ## What's next
 

@@ -70,7 +70,7 @@ One possible disadvantage of using MCAs is that your subsequent query costs are 
 
 **Note:** The BigQuery Data Transfer Service pulls reports for all listed Merchant IDs. If there are no products in Google Shopping for a specific day, you may not see Merchant IDs in the BigQuery table.
 
-If you are using an MCA, the MCA ID is listed under `  aggregator_id  ` and the individual sub-accounts are listed under `  merchant_id  ` . For accounts that don't use an MCA, `  aggregator_id  ` is set to `  null  ` .
+If you are using an MCA, the MCA ID is listed under `aggregator_id` and the individual sub-accounts are listed under `merchant_id` . For accounts that don't use an MCA, `aggregator_id` is set to `null` .
 
 ## Limitations
 
@@ -92,6 +92,6 @@ Not all reports support historical backfills in the same way. The following are 
 
 The Performance report can have latencies in "today's" data. Therefore, when a data export is requested, data might update up to 3 days in the past to account for corrections.
 
-To support this functionality, whenever a transfer is triggered on any report, two more transfer runs are created for `  today - 1  ` and `  today - 2  ` . These transfer runs only affect the Performance table; other tables are not impacted.
+To support this functionality, whenever a transfer is triggered on any report, two more transfer runs are created for `today - 1` and `today - 2` . These transfer runs only affect the Performance table; other tables are not impacted.
 
 The automatic backfills can't be disabled.

@@ -2,11 +2,11 @@
 
 This document demonstrates how to plot various types of graphs by using the BigQuery DataFrames visualization library.
 
-The [`  bigframes.pandas  ` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) provides a full ecosystem of tools for Python. The API supports advanced statistical operations, and you can visualize the aggregations generated from BigQuery DataFrames. You can also switch from BigQuery DataFrames to a `  pandas  ` DataFrame with built-in sampling operations.
+The [`bigframes.pandas` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) provides a full ecosystem of tools for Python. The API supports advanced statistical operations, and you can visualize the aggregations generated from BigQuery DataFrames. You can also switch from BigQuery DataFrames to a `pandas` DataFrame with built-in sampling operations.
 
 ## Histogram
 
-The following example reads data from the `  bigquery-public-data.ml_datasets.penguins  ` table to plot a histogram on the distribution of penguin culmen depths:
+The following example reads data from the `bigquery-public-data.ml_datasets.penguins` table to plot a histogram on the distribution of penguin culmen depths:
 
     import bigframes.pandas as bpd
     
@@ -17,7 +17,7 @@ The following example reads data from the `  bigquery-public-data.ml_datasets.pe
 
 ## Line chart
 
-The following example uses data from the `  bigquery-public-data.noaa_gsod.gsod2021  ` table to plot a line chart of median temperature changes throughout the year:
+The following example uses data from the `bigquery-public-data.noaa_gsod.gsod2021` table to plot a line chart of median temperature changes throughout the year:
 
     import bigframes.pandas as bpd
     
@@ -32,7 +32,7 @@ The following example uses data from the `  bigquery-public-data.noaa_gsod.gsod2
 
 ## Area chart
 
-The following example uses the `  bigquery-public-data.usa_names.usa_1910_2013  ` table to track name popularity in US history and focuses on the names `  Mary  ` , `  Emily  ` , and `  Lisa  ` :
+The following example uses the `bigquery-public-data.usa_names.usa_1910_2013` table to track name popularity in US history and focuses on the names `Mary` , `Emily` , and `Lisa` :
 
     import bigframes.pandas as bpd
     
@@ -54,7 +54,7 @@ The following example uses the `  bigquery-public-data.usa_names.usa_1910_2013  
 
 ## Bar chart
 
-The following example uses the `  bigquery-public-data.ml_datasets.penguins  ` table to visualize the distribution of penguin sexes:
+The following example uses the `bigquery-public-data.ml_datasets.penguins` table to visualize the distribution of penguin sexes:
 
     import bigframes.pandas as bpd
     
@@ -71,7 +71,7 @@ The following example uses the `  bigquery-public-data.ml_datasets.penguins  ` t
 
 ## Scatter plot
 
-The following example uses the `  bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2021  ` table to explore the relationship between taxi fare amounts and trip distances:
+The following example uses the `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2021` table to explore the relationship between taxi fare amounts and trip distances:
 
     import bigframes.pandas as bpd
     
@@ -97,7 +97,7 @@ The following example uses the `  bigquery-public-data.new_york_taxi_trips.tlc_y
 
 BigQuery DataFrames downloads data to your local machine for visualization. The number of data points to be downloaded is capped at 1,000 by default. If the number of data points exceeds the cap, BigQuery DataFrames randomly samples the number of data points equal to the cap.
 
-You can override this cap by setting the `  sampling_n  ` parameter when plotting a graph, as shown in the following example:
+You can override this cap by setting the `sampling_n` parameter when plotting a graph, as shown in the following example:
 
     import bigframes.pandas as bpd
     
@@ -110,7 +110,7 @@ You can override this cap by setting the `  sampling_n  ` parameter when plottin
 
 ![Example of a line chart visualizing a large dataset in BigQuery DataFrames.](https://docs.cloud.google.com/static/bigquery/images/dataframes-visualizing-large-dataset.png)
 
-**Note:** The `  sampling_n  ` parameter has no effect on histograms because BigQuery DataFrames bucketizes the data on the server side for histograms.
+**Note:** The `sampling_n` parameter has no effect on histograms because BigQuery DataFrames bucketizes the data on the server side for histograms.
 
 ## Advanced plotting with pandas and Matplotlib parameters
 
@@ -118,7 +118,7 @@ You can pass in more parameters to fine tune your graph like you can with pandas
 
 ### Name popularity trend with subplots
 
-Using the name history data from the [area chart example](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations#area-chart) , the following example creates individual graphs for each name by setting `  subplots=True  ` in the `  plot.area()  ` function call:
+Using the name history data from the [area chart example](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations#area-chart) , the following example creates individual graphs for each name by setting `subplots=True` in the `plot.area()` function call:
 
     import bigframes.pandas as bpd
     
@@ -140,7 +140,7 @@ Using the name history data from the [area chart example](https://docs.cloud.goo
 
 ### Taxi trip scatter plot with multiple dimensions
 
-Using data from the [scatter plot example](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations#scatter-plot) , the following example renames the labels for the x-axis and y-axis, uses the `  passenger_count  ` parameter for point sizes, uses color points with the `  tip_amount  ` parameter, and resizes the figure:
+Using data from the [scatter plot example](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations#scatter-plot) , the following example renames the labels for the x-axis and y-axis, uses the `passenger_count` parameter for point sizes, uses color points with the `tip_amount` parameter, and resizes the figure:
 
     import bigframes.pandas as bpd
     

@@ -15,7 +15,7 @@ Identifiers are names that are associated with columns, tables, fields, path exp
   - Can contain any characters, including spaces and symbols.
   - Can't be empty.
   - Have the same escape sequences as [string literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) .
-  - If an identifier is the same as a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , the identifier must be quoted. For example, the identifier `  FROM  ` must be quoted. Additional rules apply for [path expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#path_expressions) , [table names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#table_names) , [column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) , and [field names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#field_names) .
+  - If an identifier is the same as a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , the identifier must be quoted. For example, the identifier `FROM` must be quoted. Additional rules apply for [path expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#path_expressions) , [table names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#table_names) , [column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) , and [field names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#field_names) .
 
 ### Identifier examples
 
@@ -108,10 +108,10 @@ A path expression describes how to navigate to an object in a graph of objects a
     subsequent_part:
       { unquoted_identifier | quoted_identifier | number }
 
-  - `  path  ` : A graph of one or more objects.
-  - `  path_expression  ` : An object in a graph of objects.
-  - `  first_part  ` : A path expression can start with a quoted or unquoted identifier. If the path expressions starts with a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , it must be a quoted identifier.
-  - `  subsequent_part  ` : Subsequent parts of a path expression can include non-identifiers, such as reserved keywords. If a subsequent part of a path expressions starts with a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , it may be quoted or unquoted.
+  - `path` : A graph of one or more objects.
+  - `path_expression` : An object in a graph of objects.
+  - `first_part` : A path expression can start with a quoted or unquoted identifier. If the path expressions starts with a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , it must be a quoted identifier.
+  - `subsequent_part` : Subsequent parts of a path expression can include non-identifiers, such as reserved keywords. If a subsequent part of a path expressions starts with a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , it may be quoted or unquoted.
 
 Examples:
 
@@ -128,7 +128,7 @@ A table name represents the name of a table.
 
   - Table names can be quoted identifiers or unquoted identifiers.
 
-  - A table name that's an unquoted identifier can additionally include single dashes if the table name is referenced in a `  FROM  ` or `  TABLE  ` clause. Only the first identifier in the table path (the project ID or the table name) can have dashes. Dashes aren't supported in datasets.
+  - A table name that's an unquoted identifier can additionally include single dashes if the table name is referenced in a `FROM` or `TABLE` clause. Only the first identifier in the table path (the project ID or the table name) can have dashes. Dashes aren't supported in datasets.
 
   - A table name can be a [fully qualified table name (table path)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) that includes up to three quoted or unquoted identifiers:
     
@@ -138,7 +138,7 @@ A table name represents the name of a table.
     
       - A required table name.
     
-    For example: `  myproject.mydataset.mytable  `
+    For example: `myproject.mydataset.mytable`
 
   - Table names can be path expressions.
 
@@ -179,7 +179,7 @@ A literal represents a constant value of a built-in data type. Some, but not all
 
 A string literal represents a constant value of the [string data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type) . A bytes literal represents a constant value of the [bytes data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type) .
 
-Both string and bytes literals must be *quoted* , either with single ( `  '  ` ) or double ( `  "  ` ) quotation marks, or *triple-quoted* with groups of three single ( `  '''  ` ) or three double ( `  """  ` ) quotation marks.
+Both string and bytes literals must be *quoted* , either with single ( `'` ) or double ( `"` ) quotation marks, or *triple-quoted* with groups of three single ( `'''` ) or three double ( `"""` ) quotation marks.
 
 #### Formats for quoted literals
 
@@ -202,59 +202,59 @@ The following table lists all of the ways you can format a quoted literal.
 <tr class="odd">
 <td>Quoted string</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         "abc"        </code></li>
-<li><code dir="ltr" translate="no">         "it's"        </code></li>
-<li><code dir="ltr" translate="no">         'it\'s'        </code></li>
-<li><code dir="ltr" translate="no">         'Title: "Boy"'        </code></li>
+<li><code dir="ltr" translate="no">"abc"</code></li>
+<li><code dir="ltr" translate="no">"it's"</code></li>
+<li><code dir="ltr" translate="no">'it\'s'</code></li>
+<li><code dir="ltr" translate="no">'Title: "Boy"'</code></li>
 </ul></td>
-<td>Quoted strings enclosed by single ( <code dir="ltr" translate="no">       '      </code> ) quotes can contain unescaped double ( <code dir="ltr" translate="no">       "      </code> ) quotes, as well as the inverse.<br />
-Backslashes ( <code dir="ltr" translate="no">       \      </code> ) introduce escape sequences. See the Escape Sequences table below.<br />
-Quoted strings can't contain newlines, even when preceded by a backslash ( <code dir="ltr" translate="no">       \      </code> ).</td>
+<td>Quoted strings enclosed by single ( <code dir="ltr" translate="no">'</code> ) quotes can contain unescaped double ( <code dir="ltr" translate="no">"</code> ) quotes, as well as the inverse.<br />
+Backslashes ( <code dir="ltr" translate="no">\</code> ) introduce escape sequences. See the Escape Sequences table below.<br />
+Quoted strings can't contain newlines, even when preceded by a backslash ( <code dir="ltr" translate="no">\</code> ).</td>
 </tr>
 <tr class="even">
 <td>Triple-quoted string</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         """abc"""        </code></li>
-<li><code dir="ltr" translate="no">         '''it's'''        </code></li>
-<li><code dir="ltr" translate="no">         '''Title:"Boy"'''        </code></li>
-<li><code dir="ltr" translate="no">         '''two                  lines'''        </code></li>
-<li><code dir="ltr" translate="no">         '''why\?'''        </code></li>
+<li><code dir="ltr" translate="no">"""abc"""</code></li>
+<li><code dir="ltr" translate="no">'''it's'''</code></li>
+<li><code dir="ltr" translate="no">'''Title:"Boy"'''</code></li>
+<li><code dir="ltr" translate="no">'''two  lines'''</code></li>
+<li><code dir="ltr" translate="no">'''why\?'''</code></li>
 </ul></td>
 <td>Embedded newlines and quotes are allowed without escaping - see fourth example.<br />
-Backslashes ( <code dir="ltr" translate="no">       \      </code> ) introduce escape sequences. See Escape Sequences table below.<br />
-A trailing unescaped backslash ( <code dir="ltr" translate="no">       \      </code> ) at the end of a line isn't allowed.<br />
+Backslashes ( <code dir="ltr" translate="no">\</code> ) introduce escape sequences. See Escape Sequences table below.<br />
+A trailing unescaped backslash ( <code dir="ltr" translate="no">\</code> ) at the end of a line isn't allowed.<br />
 End the string with three unescaped quotes in a row that match the starting quotes.</td>
 </tr>
 <tr class="odd">
 <td>Raw string</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         r"abc+"        </code></li>
-<li><code dir="ltr" translate="no">         r'''abc+'''        </code></li>
-<li><code dir="ltr" translate="no">         r"""abc+"""        </code></li>
-<li><code dir="ltr" translate="no">         r'f\(abc,(.*),def\)'        </code></li>
+<li><code dir="ltr" translate="no">r"abc+"</code></li>
+<li><code dir="ltr" translate="no">r'''abc+'''</code></li>
+<li><code dir="ltr" translate="no">r"""abc+"""</code></li>
+<li><code dir="ltr" translate="no">r'f\(abc,(.*),def\)'</code></li>
 </ul></td>
-<td>Quoted or triple-quoted literals that have the raw string literal prefix ( <code dir="ltr" translate="no">       r      </code> or <code dir="ltr" translate="no">       R      </code> ) are interpreted as raw strings (sometimes described as regex strings).<br />
-Backslash characters ( <code dir="ltr" translate="no">       \      </code> ) don't act as escape characters. If a backslash followed by another character occurs inside the string literal, both characters are preserved.<br />
+<td>Quoted or triple-quoted literals that have the raw string literal prefix ( <code dir="ltr" translate="no">r</code> or <code dir="ltr" translate="no">R</code> ) are interpreted as raw strings (sometimes described as regex strings).<br />
+Backslash characters ( <code dir="ltr" translate="no">\</code> ) don't act as escape characters. If a backslash followed by another character occurs inside the string literal, both characters are preserved.<br />
 A raw string can't end with an odd number of backslashes.<br />
 Raw strings are useful for constructing regular expressions. The prefix is case-insensitive.</td>
 </tr>
 <tr class="even">
 <td>Bytes</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         B"abc"        </code></li>
-<li><code dir="ltr" translate="no">         B'''abc'''        </code></li>
-<li><code dir="ltr" translate="no">         b"""abc"""        </code></li>
+<li><code dir="ltr" translate="no">B"abc"</code></li>
+<li><code dir="ltr" translate="no">B'''abc'''</code></li>
+<li><code dir="ltr" translate="no">b"""abc"""</code></li>
 </ul></td>
-<td>Quoted or triple-quoted literals that have the bytes literal prefix ( <code dir="ltr" translate="no">       b      </code> or <code dir="ltr" translate="no">       B      </code> ) are interpreted as bytes.</td>
+<td>Quoted or triple-quoted literals that have the bytes literal prefix ( <code dir="ltr" translate="no">b</code> or <code dir="ltr" translate="no">B</code> ) are interpreted as bytes.</td>
 </tr>
 <tr class="odd">
 <td>Raw bytes</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         br'abc+'        </code></li>
-<li><code dir="ltr" translate="no">         RB"abc+"        </code></li>
-<li><code dir="ltr" translate="no">         RB'''abc'''        </code></li>
+<li><code dir="ltr" translate="no">br'abc+'</code></li>
+<li><code dir="ltr" translate="no">RB"abc+"</code></li>
+<li><code dir="ltr" translate="no">RB'''abc'''</code></li>
 </ul></td>
-<td>A bytes literal can be interpreted as raw bytes if both the <code dir="ltr" translate="no">       r      </code> and <code dir="ltr" translate="no">       b      </code> prefixes are present. These prefixes can be combined in any order and are case-insensitive. For example, <code dir="ltr" translate="no">       rb'abc*'      </code> and <code dir="ltr" translate="no">       rB'abc*'      </code> and <code dir="ltr" translate="no">       br'abc*'      </code> are all equivalent. See the description for raw string to learn more about what you can do with a raw literal.</td>
+<td>A bytes literal can be interpreted as raw bytes if both the <code dir="ltr" translate="no">r</code> and <code dir="ltr" translate="no">b</code> prefixes are present. These prefixes can be combined in any order and are case-insensitive. For example, <code dir="ltr" translate="no">rb'abc*'</code> and <code dir="ltr" translate="no">rB'abc*'</code> and <code dir="ltr" translate="no">br'abc*'</code> are all equivalent. See the description for raw string to learn more about what you can do with a raw literal.</td>
 </tr>
 </tbody>
 </table>
@@ -264,15 +264,15 @@ Like in many other languages, such as Python and C++, you can divide a GoogleSQL
 This is useful for a variety of purposes, including readability, organization, formatting and maintainability, for example:
 
   - You can break a literal into multiple chunks fit into a width of 80 characters.
-  - You can break a literal into chunks of different quotings and raw specifications to avoid escaping. For example, a string value inside a `  JSON  ` string.
+  - You can break a literal into chunks of different quotings and raw specifications to avoid escaping. For example, a string value inside a `JSON` string.
   - You can change only one part of a literal through a macro, while the rest of the literal is unchanged.
-  - You can use string literal concatenation in other literals that include strings such as `  DATE  ` , `  TIMESTAMP  ` , `  JSON  ` , etc.
+  - You can use string literal concatenation in other literals that include strings such as `DATE` , `TIMESTAMP` , `JSON` , etc.
 
 The following restrictions apply to these literal concatenations:
 
   - You can't mix string and byte literals.
   - You must ensure there is some separation between the concatenated parts, such as whitespace or comments.
-  - `  r  ` specifiers apply only to the immediate chunk, not the rest of the literal parts.
+  - `r` specifiers apply only to the immediate chunk, not the rest of the literal parts.
   - Quoted identifiers don't concatenate.
 
 Examples:
@@ -300,8 +300,7 @@ Examples:
   RANGE&lt;DATE&gt; &#39;[2014-01-01,&#39; /*comment*/ &quot;2015-01-01)&quot;,
   DATE &#39;2014&#39; &quot;-01-01&quot;,
   DATETIME &#39;2016-01-01 &#39; r&quot;12:00:00&quot;,
-  TIMESTAMP &#39;2018-10-01 &#39; &quot;12:00:00+08&quot;
-</code></pre></td>
+  TIMESTAMP &#39;2018-10-01 &#39; &quot;12:00:00+08&quot;</code></pre></td>
 <td><pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
  &quot;\\n\nbc\&quot;d\&quot;ef&#39;g&#39;h12&quot;,
  b&quot;\\n\nbc\&quot;d\&quot;ef&#39;g&#39;h12&quot;,
@@ -312,8 +311,7 @@ Examples:
   RANGE&lt;DATE&gt; &#39;[2014-01-01 2015-01-01)&#39;,
   DATE &#39;2014-01-01&#39;,
   DATETIME &#39;2016-01-01 12:00:00&#39;,
-  TIMESTAMP &quot;2018-10-01 12:00:00+08&quot;
-</code></pre></td>
+  TIMESTAMP &quot;2018-10-01 12:00:00+08&quot;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -335,73 +333,73 @@ The following table lists all valid escape sequences for representing non-alphan
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \a      </code></td>
+<td><code dir="ltr" translate="no">\a</code></td>
 <td>Bell</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \b      </code></td>
+<td><code dir="ltr" translate="no">\b</code></td>
 <td>Backspace</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \f      </code></td>
+<td><code dir="ltr" translate="no">\f</code></td>
 <td>Formfeed</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \n      </code></td>
+<td><code dir="ltr" translate="no">\n</code></td>
 <td>Newline</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \r      </code></td>
+<td><code dir="ltr" translate="no">\r</code></td>
 <td>Carriage Return</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \t      </code></td>
+<td><code dir="ltr" translate="no">\t</code></td>
 <td>Tab</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \v      </code></td>
+<td><code dir="ltr" translate="no">\v</code></td>
 <td>Vertical Tab</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \\      </code></td>
-<td>Backslash ( <code dir="ltr" translate="no">       \      </code> )</td>
+<td><code dir="ltr" translate="no">\\</code></td>
+<td>Backslash ( <code dir="ltr" translate="no">\</code> )</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \?      </code></td>
-<td>Question Mark ( <code dir="ltr" translate="no">       ?      </code> )</td>
+<td><code dir="ltr" translate="no">\?</code></td>
+<td>Question Mark ( <code dir="ltr" translate="no">?</code> )</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \"      </code></td>
-<td>Double Quote ( <code dir="ltr" translate="no">       "      </code> )</td>
+<td><code dir="ltr" translate="no">\"</code></td>
+<td>Double Quote ( <code dir="ltr" translate="no">"</code> )</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \'      </code></td>
-<td>Single Quote ( <code dir="ltr" translate="no">       '      </code> )</td>
+<td><code dir="ltr" translate="no">\'</code></td>
+<td>Single Quote ( <code dir="ltr" translate="no">'</code> )</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \`      </code></td>
-<td>Backtick ( <code dir="ltr" translate="no">       `      </code> )</td>
+<td><code dir="ltr" translate="no">\`</code></td>
+<td>Backtick ( <code dir="ltr" translate="no">`</code> )</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \ooo      </code></td>
+<td><code dir="ltr" translate="no">\ooo</code></td>
 <td>Octal escape, with exactly 3 digits (in the range 0–7). Decodes to a single Unicode character (in string literals) or byte (in bytes literals).</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \xhh      </code> or <code dir="ltr" translate="no">       \Xhh      </code></td>
+<td><code dir="ltr" translate="no">\xhh</code> or <code dir="ltr" translate="no">\Xhh</code></td>
 <td>Hex escape, with exactly 2 hex digits (0–9 or A–F or a–f). Decodes to a single Unicode character (in string literals) or byte (in bytes literals). Examples:
 <ul>
-<li><code dir="ltr" translate="no">         '\x41'        </code> == <code dir="ltr" translate="no">         'A'        </code></li>
-<li><code dir="ltr" translate="no">         '\x41B'        </code> is <code dir="ltr" translate="no">         'AB'        </code></li>
-<li><code dir="ltr" translate="no">         '\x4'        </code> is an error</li>
+<li><code dir="ltr" translate="no">'\x41'</code> == <code dir="ltr" translate="no">'A'</code></li>
+<li><code dir="ltr" translate="no">'\x41B'</code> is <code dir="ltr" translate="no">'AB'</code></li>
+<li><code dir="ltr" translate="no">'\x4'</code> is an error</li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       \uhhhh      </code></td>
+<td><code dir="ltr" translate="no">\uhhhh</code></td>
 <td>Unicode escape, with lowercase 'u' and exactly 4 hex digits. Valid only in string literals or identifiers.<br />
 Note that the range D800-DFFF isn't allowed, as these are surrogate unicode values.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       \Uhhhhhhhh      </code></td>
+<td><code dir="ltr" translate="no">\Uhhhhhhhh</code></td>
 <td>Unicode escape, with uppercase 'U' and exactly 8 hex digits. Valid only in string literals or identifiers.<br />
 The range D800-DFFF isn't allowed, as these values are surrogate unicode values. Also, values greater than 10FFFF aren't allowed.</td>
 </tr>
@@ -410,19 +408,19 @@ The range D800-DFFF isn't allowed, as these values are surrogate unicode values.
 
 ### Integer literals
 
-Integer literals are either a sequence of decimal digits (0–9) or a hexadecimal value that's prefixed with " `  0x  ` " or " `  0X  ` ". Integers can be prefixed by " `  +  ` " or " `  -  ` " to represent positive and negative values, respectively. Examples:
+Integer literals are either a sequence of decimal digits (0–9) or a hexadecimal value that's prefixed with " `0x` " or " `0X` ". Integers can be prefixed by " `+` " or " `-` " to represent positive and negative values, respectively. Examples:
 
     123
     0xABC
     -123
 
-An integer literal is interpreted as an `  INT64  ` .
+An integer literal is interpreted as an `INT64` .
 
 A integer literal represents a constant value of the [integer data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types) .
 
-### `     NUMERIC    ` literals
+### `NUMERIC` literals
 
-You can construct `  NUMERIC  ` literals using the `  NUMERIC  ` keyword followed by a floating point value in quotes.
+You can construct `NUMERIC` literals using the `NUMERIC` keyword followed by a floating point value in quotes.
 
 Examples:
 
@@ -433,11 +431,11 @@ Examples:
     SELECT NUMERIC '1.23456e05';
     SELECT NUMERIC '-9.876e-3';
 
-A `  NUMERIC  ` literal represents a constant value of the [`  NUMERIC  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
+A `NUMERIC` literal represents a constant value of the [`NUMERIC` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
-### `     BIGNUMERIC    ` literals
+### `BIGNUMERIC` literals
 
-You can construct `  BIGNUMERIC  ` literals using the `  BIGNUMERIC  ` keyword followed by a floating point value in quotes.
+You can construct `BIGNUMERIC` literals using the `BIGNUMERIC` keyword followed by a floating point value in quotes.
 
 Examples:
 
@@ -448,7 +446,7 @@ Examples:
     SELECT BIGNUMERIC '1.23456e05';
     SELECT BIGNUMERIC '-9.876e-3';
 
-A `  BIGNUMERIC  ` literal represents a constant value of the [`  BIGNUMERIC  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
+A `BIGNUMERIC` literal represents a constant value of the [`BIGNUMERIC` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
 ### Floating point literals
 
@@ -458,7 +456,7 @@ Syntax options:
     [+-][DIGITS].DIGITS[e[+-]DIGITS]
     DIGITSe[+-]DIGITS
 
-`  DIGITS  ` represents one or more decimal numbers (0 through 9) and `  e  ` represents the exponent marker (e or E).
+`DIGITS` represents one or more decimal numbers (0 through 9) and `e` represents the exponent marker (e or E).
 
 Examples:
 
@@ -481,7 +479,7 @@ A floating-point literal represents a constant value of the [floating-point data
 
 ### Array literals
 
-Array literals are comma-separated lists of elements enclosed in square brackets. The `  ARRAY  ` keyword is optional, and an explicit element type T is also optional.
+Array literals are comma-separated lists of elements enclosed in square brackets. The `ARRAY` keyword is optional, and an explicit element type T is also optional.
 
 Examples:
 
@@ -499,14 +497,14 @@ A struct literal is a struct whose fields are all literals. Struct literals can 
 
 Note that tuple syntax requires at least two fields, in order to distinguish it from an ordinary parenthesized expression. To write a struct literal with a single field, use typeless struct syntax or typed struct syntax.
 
-| Example                                          | Output Type                                    |
-| ------------------------------------------------ | ---------------------------------------------- |
-| `        (1, 2, 3)       `                       | `        STRUCT<INT64, INT64, INT64>       `   |
-| `        (1, 'abc')       `                      | `        STRUCT<INT64, STRING>       `         |
-| `        STRUCT(1 AS foo, 'abc' AS bar)       `  | `        STRUCT<foo INT64, bar STRING>       ` |
-| `        STRUCT<INT64, STRING>(1, 'abc')       ` | `        STRUCT<INT64, STRING>       `         |
-| `        STRUCT(1)       `                       | `        STRUCT<INT64>       `                 |
-| `        STRUCT<INT64>(1)       `                | `        STRUCT<INT64>       `                 |
+| Example                           | Output Type                     |
+| --------------------------------- | ------------------------------- |
+| `(1, 2, 3)`                       | `STRUCT<INT64, INT64, INT64>`   |
+| `(1, 'abc')`                      | `STRUCT<INT64, STRING>`         |
+| `STRUCT(1 AS foo, 'abc' AS bar)`  | `STRUCT<foo INT64, bar STRING>` |
+| `STRUCT<INT64, STRING>(1, 'abc')` | `STRUCT<INT64, STRING>`         |
+| `STRUCT(1)`                       | `STRUCT<INT64>`                 |
+| `STRUCT<INT64>(1)`                | `STRUCT<INT64>`                 |
 
 A struct literal represents a constant value of the [struct data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) .
 
@@ -516,7 +514,7 @@ Syntax:
 
     DATE 'date_canonical_format'
 
-Date literals contain the `  DATE  ` keyword followed by [`  date_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_date_literals) , a string literal that conforms to the canonical date format, enclosed in single quotation marks. Date literals support a range between the years 1 and 9999, inclusive. Dates outside of this range are invalid.
+Date literals contain the `DATE` keyword followed by [`date_canonical_format`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_date_literals) , a string literal that conforms to the canonical date format, enclosed in single quotation marks. Date literals support a range between the years 1 and 9999, inclusive. Dates outside of this range are invalid.
 
 For example, the following date literal represents September 27, 2014:
 
@@ -526,7 +524,7 @@ String literals in canonical date format also implicitly coerce to DATE type whe
 
     SELECT * FROM foo WHERE date_col = "2014-09-27"
 
-the string literal `  "2014-09-27"  ` will be coerced to a date literal.
+the string literal `"2014-09-27"` will be coerced to a date literal.
 
 A date literal represents a constant value of the [date data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) .
 
@@ -536,7 +534,7 @@ Syntax:
 
     TIME 'time_canonical_format'
 
-Time literals contain the `  TIME  ` keyword and [`  time_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_time_literals) , a string literal that conforms to the canonical time format, enclosed in single quotation marks.
+Time literals contain the `TIME` keyword and [`time_canonical_format`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_time_literals) , a string literal that conforms to the canonical time format, enclosed in single quotation marks.
 
 For example, the following time represents 12:30 p.m.:
 
@@ -550,7 +548,7 @@ Syntax:
 
     DATETIME 'datetime_canonical_format'
 
-Datetime literals contain the `  DATETIME  ` keyword and [`  datetime_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_datetime_literals) , a string literal that conforms to the canonical datetime format, enclosed in single quotation marks.
+Datetime literals contain the `DATETIME` keyword and [`datetime_canonical_format`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_datetime_literals) , a string literal that conforms to the canonical datetime format, enclosed in single quotation marks.
 
 For example, the following datetime represents 12:30 p.m. on September 27, 2014:
 
@@ -565,9 +563,9 @@ For example:
     SELECT * FROM foo
     WHERE datetime_col = "2014-09-27 12:30:00.45"
 
-In the query above, the string literal `  "2014-09-27 12:30:00.45"  ` is coerced to a datetime literal.
+In the query above, the string literal `"2014-09-27 12:30:00.45"` is coerced to a datetime literal.
 
-A datetime literal can also include the optional character `  T  ` or `  t  ` . If you use this character, a space can't be included before or after it. These are valid:
+A datetime literal can also include the optional character `T` or `t` . If you use this character, a space can't be included before or after it. These are valid:
 
     DATETIME '2014-09-27T12:30:00.45'
     DATETIME '2014-09-27t12:30:00.45'
@@ -580,7 +578,7 @@ Syntax:
 
     TIMESTAMP 'timestamp_canonical_format'
 
-Timestamp literals contain the `  TIMESTAMP  ` keyword and [`  timestamp_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_timestamp_literals) , a string literal that conforms to the canonical timestamp format, enclosed in single quotation marks.
+Timestamp literals contain the `TIMESTAMP` keyword and [`timestamp_canonical_format`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_timestamp_literals) , a string literal that conforms to the canonical timestamp format, enclosed in single quotation marks.
 
 Timestamp literals support a range between the years 1 and 9999, inclusive. Timestamps outside of this range are invalid.
 
@@ -596,15 +594,15 @@ For example, the following timestamp represents 12:30 p.m. on September 27, 2014
 
 For more information about time zones, see [Time zone](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timezone) .
 
-String literals with the canonical timestamp format, including those with time zone names, implicitly coerce to a timestamp literal when used where a timestamp expression is expected. For example, in the following query, the string literal `  "2014-09-27 12:30:00.45 America/Los_Angeles"  ` is coerced to a timestamp literal.
+String literals with the canonical timestamp format, including those with time zone names, implicitly coerce to a timestamp literal when used where a timestamp expression is expected. For example, in the following query, the string literal `"2014-09-27 12:30:00.45 America/Los_Angeles"` is coerced to a timestamp literal.
 
     SELECT * FROM foo
     WHERE timestamp_col = "2014-09-27 12:30:00.45 America/Los_Angeles"
 
 A timestamp literal can include these optional characters:
 
-  - `  T  ` or `  t  `
-  - `  Z  ` or `  z  `
+  - `T` or `t`
+  - `Z` or `z`
 
 If you use one of these characters, a space can't be included before or after it. These are valid:
 
@@ -691,7 +689,7 @@ An interval literal represents a constant value of the [interval data type](http
   - [Interval literal with a single datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literal_single)
   - [Interval literal with a datetime part range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literal_range)
 
-An interval literal can be used directly inside of the `  SELECT  ` statement and as an argument in some functions that support the interval data type.
+An interval literal can be used directly inside of the `SELECT` statement and as an argument in some functions that support the interval data type.
 
 #### Interval literal with a single datetime part
 
@@ -699,7 +697,7 @@ Syntax:
 
     INTERVAL int64_expression datetime_part
 
-The single datetime part syntax includes an `  INT64  ` expression and a single [interval-supported datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) . For example:
+The single datetime part syntax includes an `INT64` expression and a single [interval-supported datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) . For example:
 
     -- 0 years, 0 months, 5 days, 0 hours, 0 minutes, 0 seconds (0-0 5 0:0:0)
     INTERVAL 5 DAY
@@ -803,21 +801,21 @@ A JSON literal represents a constant value of the [JSON data type](https://docs.
 
 GoogleSQL follows these rules for case sensitivity:
 
-| Category                       | Case-sensitive? | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ------------------------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Keywords                       | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Built-in Function names        | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| User-Defined Function names    | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Table names                    | See Notes       | Dataset and table names are case-sensitive unless the [`         is_case_insensitive        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list) option is set to `        TRUE       ` .                                                                                                                                                                                                                              |
-| Column names                   | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Field names                    | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Enum type names                | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| String values                  | Yes             | Any value of type `        STRING       ` preserves its case. For example, the result of an expression that produces a `        STRING       ` value or a column value that's of type `        STRING       ` .                                                                                                                                                                                                                                                                      |
-| String comparisons             | Yes             | However, string comparisons are case-insensitive in [collations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) that are case-insensitive. This behavior also applies to operations affected by collation, such as `        GROUP BY       ` and `        DISTINCT       ` clauses.                                                                                                                                                          |
-| Aliases within a query         | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Regular expression matching    | See Notes       | Regular expression matching is case-sensitive by default, unless the expression itself specifies that it should be case-insensitive.                                                                                                                                                                                                                                                                                                                                                 |
-| `        LIKE       ` matching | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Module statements              | See Notes       | In the statement `        MODULE x.y.z;       ` , the identifier path `        x.y.z       ` is case-insensitive. However, some contexts like code linter checks might enforce a specific module name based on the module's source file location. In the statement `        IMPORT MODULE x.y.z;       ` , the identifier path `        x.y.z       ` is case-sensitive in practice because modules are typically loaded from file storage, which treats filenames case-sensitively. |
+| Category                    | Case-sensitive? | Notes                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Keywords                    | No              |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Built-in Function names     | No              |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| User-Defined Function names | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Table names                 | See Notes       | Dataset and table names are case-sensitive unless the [`is_case_insensitive`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list) option is set to `TRUE` .                                                                                                                                                                                                  |
+| Column names                | No              |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Field names                 | No              |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Enum type names             | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| String values               | Yes             | Any value of type `STRING` preserves its case. For example, the result of an expression that produces a `STRING` value or a column value that's of type `STRING` .                                                                                                                                                                                                                                                       |
+| String comparisons          | Yes             | However, string comparisons are case-insensitive in [collations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) that are case-insensitive. This behavior also applies to operations affected by collation, such as `GROUP BY` and `DISTINCT` clauses.                                                                                                                            |
+| Aliases within a query      | No              |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Regular expression matching | See Notes       | Regular expression matching is case-sensitive by default, unless the expression itself specifies that it should be case-insensitive.                                                                                                                                                                                                                                                                                     |
+| `LIKE` matching             | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Module statements           | See Notes       | In the statement `MODULE x.y.z;` , the identifier path `x.y.z` is case-insensitive. However, some contexts like code linter checks might enforce a specific module name based on the module's source file location. In the statement `IMPORT MODULE x.y.z;` , the identifier path `x.y.z` is case-sensitive in practice because modules are typically loaded from file storage, which treats filenames case-sensitively. |
 
 ## Reserved keywords
 
@@ -943,13 +941,13 @@ WITHIN<br />
 
 ## Terminating semicolons
 
-You can optionally use a terminating semicolon ( `  ;  ` ) when you submit a query string statement through an Application Programming Interface (API).
+You can optionally use a terminating semicolon ( `;` ) when you submit a query string statement through an Application Programming Interface (API).
 
 In a request containing multiple statements, you must separate statements with semicolons, but the semicolon is generally optional after the final statement. Some interactive tools require statements to have a terminating semicolon.
 
 ## Trailing commas
 
-You can optionally use a trailing comma ( `  ,  ` ) at the end of a column list in a `  SELECT  ` statement. You might have a trailing comma as the result of programmatically creating a column list.
+You can optionally use a trailing comma ( `,` ) at the end of a column list in a `SELECT` statement. You might have a trailing comma as the result of programmatically creating a column list.
 
 **Example**
 
@@ -961,7 +959,7 @@ You can use query parameters to substitute arbitrary expressions. However, query
 
 Client APIs allow the binding of parameter names to values; the query engine substitutes a bound value for a parameter at execution time.
 
-Query parameters can't be used in the SQL body of these statements: `  CREATE FUNCTION  ` , `  CREATE VIEW  ` , `  CREATE MATERIALIZED VIEW  ` , and `  CREATE PROCEDURE  ` .
+Query parameters can't be used in the SQL body of these statements: `CREATE FUNCTION` , `CREATE VIEW` , `CREATE MATERIALIZED VIEW` , and `CREATE PROCEDURE` .
 
 ### Named query parameters
 
@@ -969,23 +967,23 @@ Syntax:
 
     @parameter_name
 
-A named query parameter is denoted using an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) preceded by the `  @  ` character. Named query parameters can't be used alongside [positional query parameters](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#positional_query_parameters) .
+A named query parameter is denoted using an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) preceded by the `@` character. Named query parameters can't be used alongside [positional query parameters](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#positional_query_parameters) .
 
 A named query parameter can start with an identifier or a reserved keyword. An identifier can be unquoted or quoted.
 
 **Example:**
 
-This example returns all rows where `  LastName  ` is equal to the value of the named query parameter `  myparam  ` .
+This example returns all rows where `LastName` is equal to the value of the named query parameter `myparam` .
 
     SELECT * FROM Roster WHERE LastName = @myparam
 
 ### Positional query parameters
 
-Positional query parameters are denoted using the `  ?  ` character. Positional parameters are evaluated by the order in which they are passed in. Positional query parameters can't be used alongside [named query parameters](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#named_query_parameters) .
+Positional query parameters are denoted using the `?` character. Positional parameters are evaluated by the order in which they are passed in. Positional query parameters can't be used alongside [named query parameters](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#named_query_parameters) .
 
 **Example:**
 
-This query returns all rows where `  LastName  ` and `  FirstName  ` are equal to the values passed into this query. The order in which these values are passed in matters. If the last name is passed in first, followed by the first name, the expected results will not be returned.
+This query returns all rows where `LastName` and `FirstName` are equal to the values passed into this query. The order in which these values are passed in matters. If the last name is passed in first, followed by the first name, the expected results will not be returned.
 
     SELECT * FROM Roster WHERE FirstName = ? and LastName = ?
 
@@ -1014,7 +1012,7 @@ Use a single-line comment if you want the comment to appear on a line by itself.
 
 ### Inline comments
 
-Use an inline comment if you want the comment to appear on the same line as a statement. A comment that's prepended with `  #  ` or `  --  ` must appear to the right of a statement.
+Use an inline comment if you want the comment to appear on the same line as a statement. A comment that's prepended with `#` or `--` must appear to the right of a statement.
 
 **Examples**
 

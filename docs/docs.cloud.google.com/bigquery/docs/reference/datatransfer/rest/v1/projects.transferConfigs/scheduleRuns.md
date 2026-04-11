@@ -14,7 +14,7 @@ Creates transfer runs for a time range \[startTime, endTime\]. For each date - o
 
 ### HTTP request
 
-`  POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/transferConfigs/*}:scheduleRuns  `
+`POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/transferConfigs/*}:scheduleRuns`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -22,21 +22,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Transfer configuration name. If you are using the regionless method, the location must be `  US  ` and the name should be in the following form:
+Required. Transfer configuration name. If you are using the regionless method, the location must be `US` and the name should be in the following form:
 
-  - `  projects/{projectId}/transferConfigs/{configId}  `
+  - `projects/{projectId}/transferConfigs/{configId}`
 
 If you are using the regionalized method, the name should be in the following form:
 
-  - `  projects/{projectId}/locations/{locationId}/transferConfigs/{configId}  `
+  - `projects/{projectId}/locations/{locationId}/transferConfigs/{configId}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.transfers.update  `
+  - `bigquery.transfers.update`
 
 ### Request body
 
@@ -63,17 +63,17 @@ The request body contains data with the following structure:
 
 Fields
 
-`  startTime  `
+`startTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
-Required. Start time of the range of transfer runs. For example, `  "2017-05-25T00:00:00+00:00"  ` .
+Required. Start time of the range of transfer runs. For example, `"2017-05-25T00:00:00+00:00"` .
 
-`  endTime  `
+`endTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
-Required. End time of the range of transfer runs. For example, `  "2017-05-30T00:00:00+00:00"  ` .
+Required. End time of the range of transfer runs. For example, `"2017-05-30T00:00:00+00:00"` .
 
 ### Response body
 
@@ -83,6 +83,6 @@ If successful, the response body contains an instance of `  ScheduleTransferRuns
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

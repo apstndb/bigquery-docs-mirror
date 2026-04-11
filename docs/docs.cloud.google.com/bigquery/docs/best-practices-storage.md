@@ -4,12 +4,12 @@ This page provides best practices for optimizing BigQuery storage for query perf
 
 BigQuery stores data in columnar format. Column-oriented databases are optimized for analytic workloads that aggregate data over a very large number of records. As columns have typically more redundancy than rows, this characteristic allows for greater data compression by using techniques such as run-length encoding. For more information about how BigQuery stores data, see [Overview of BigQuery storage](https://docs.cloud.google.com/bigquery/docs/storage_overview) . Optimizing BigQuery storage improves [query performance](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) and [controls cost](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
 
-BigQuery provides details about the storage consumption of your resources. To view the table storage metadata, query the following `  INFORMATION_SCHEMA  ` views:
+BigQuery provides details about the storage consumption of your resources. To view the table storage metadata, query the following `INFORMATION_SCHEMA` views:
 
-  - [`  INFORMATION_SCHEMA.TABLE_STORAGE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
-  - [`  INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
-  - [`  INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage)
-  - [`  INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-organization)
+  - [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
+  - [`INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
+  - [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage)
+  - [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-organization)
 
 ## Cluster table data
 
@@ -35,7 +35,7 @@ For example, if you set the default table expiration to seven days, older data i
 
 This option is useful if you need access to only the most recent data. It is also useful if you are experimenting with data and don't need to preserve it.
 
-If your tables are partitioned by date, the dataset's default table expiration applies to the individual partitions. You can also control partition expiration using the `  time_partitioning_expiration  ` flag in the bq command-line tool or the `  expirationMs  ` configuration setting in the API. When a partition expires, data in the partition is deleted but the partitioned table is not dropped even if the table is empty.
+If your tables are partitioned by date, the dataset's default table expiration applies to the individual partitions. You can also control partition expiration using the `time_partitioning_expiration` flag in the bq command-line tool or the `expirationMs` configuration setting in the API. When a partition expires, data in the partition is deleted but the partitioned table is not dropped even if the table is empty.
 
 For example, the following command expires partitions after three days:
 

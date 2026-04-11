@@ -86,7 +86,7 @@ Depending on how far you want to go with the evolution, you might stop at an int
 
 5.  Transform upstream processes.
     
-    You can transform some of your upstream processes to write into the new schema. Because views are read only, you create tables based on the new schema, and you then modify the query definition of the facade views. Some views will still query the source schema, while others will query the newly created tables, or perform a SQL `  UNION  ` operation on both, as shown in the following diagram:
+    You can transform some of your upstream processes to write into the new schema. Because views are read only, you create tables based on the new schema, and you then modify the query definition of the facade views. Some views will still query the source schema, while others will query the newly created tables, or perform a SQL `UNION` operation on both, as shown in the following diagram:
     
     ![Upstream processes feed into BigQuery tables, but they no longer feed into downstream processes. Instead, the BigQuery tables feed into facade views, which in turn feed into evolved downstream processes.](https://docs.cloud.google.com/static/bigquery/images/dw-bq-schema-and-data-transfer-overview-evolve-transform-upstream.svg)
     
@@ -170,7 +170,7 @@ If your data needs further transformation as it is loaded into BigQuery, use one
 
   - [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion/docs) . This tool graphically builds fully managed ETL/ELT data pipelines using an open source library of preconfigured connectors and transformations.
   - [Dataflow](https://docs.cloud.google.com/dataflow/docs) . This tool defines and runs complex data transformations and enrichment graphs using the [Apache Beam](https://beam.apache.org/) model. Dataflow is serverless and fully managed by Google, giving you access to virtually limitless processing capacity.
-  - [Dataproc](https://docs.cloud.google.com/dataproc/docs) . This runs Apache Spark and Apache Hadoop cluster on a fully managed cloud service.
+  - [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs) . This runs Apache Spark and Apache Hadoop cluster on a fully managed cloud service.
   - Third-party tools. Contact one of our [partners](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) . They can provide effective choices when you want to externalize the building of a data pipeline.
 
 The following diagram shows the pattern described in this section. The data transfer tool is the [gcloud CLI](https://docs.cloud.google.com/sdk/gcloud/reference/storage) , and there's a transformation step that leverages Dataflow and writes directly to BigQuery, perhaps using the Apache Beam built-in [Google BigQuery I/O connector.](https://beam.apache.org/documentation/io/built-in/google-bigquery/)
@@ -216,7 +216,7 @@ As you move towards doing a final transfer, we recommend that you improve system
 
 #### Partitioning
 
-BigQuery lets you divide your data into segments, called [*partitions*](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , that make it easier and more efficient to manage and query your data. You can partition your tables based on a [`  TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) or [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) column, or BigQuery can add pseudocolumns to automatically partition your data during ingestion. Queries that involve smaller partitions can be more performant because they scan only a subset of the data, and can reduce costs by minimizing the number of bytes being read.
+BigQuery lets you divide your data into segments, called [*partitions*](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , that make it easier and more efficient to manage and query your data. You can partition your tables based on a [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) or [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) column, or BigQuery can add pseudocolumns to automatically partition your data during ingestion. Queries that involve smaller partitions can be more performant because they scan only a subset of the data, and can reduce costs by minimizing the number of bytes being read.
 
 Partitioning does not impact the existing structure of your tables. Therefore, you should consider creating partitioned tables even if your schema is not modified.
 

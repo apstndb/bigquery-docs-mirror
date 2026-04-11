@@ -10,7 +10,7 @@ Gets the specified routine resource by routine ID.
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,21 +18,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the requested routine
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the requested routine
 
-`  routineId  `
+`routineId`
 
-`  string  `
+`string`
 
 Required. Routine ID of the requested routine
 
@@ -40,13 +40,13 @@ Required. Routine ID of the requested routine
 
 Parameters
 
-`  readMask  `
+`readMask`
 
-`  string ( FieldMask  ` format)
+` string ( FieldMask  ` format)
 
 If set, only the Routine fields in the field mask are returned in the response. If unset, all Routine fields are returned.
 
-This is a comma-separated list of fully qualified names of fields. Example: `  "user.displayName,photo"  ` .
+This is a comma-separated list of fully qualified names of fields. Example: `"user.displayName,photo"` .
 
 ### Request body
 
@@ -60,9 +60,9 @@ If successful, the response body contains an instance of `  Routine  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

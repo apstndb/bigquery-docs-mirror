@@ -10,11 +10,11 @@ Merges capacity commitments of the same plan into a single commitment.
 
 The resulting capacity commitment has the greater commitmentEndTime out of the to-be-merged capacity commitments.
 
-Attempting to merge capacity commitments of different plan will fail with the error code `  google.rpc.Code.FAILED_PRECONDITION  ` .
+Attempting to merge capacity commitments of different plan will fail with the error code `google.rpc.Code.FAILED_PRECONDITION` .
 
 ### HTTP request
 
-`  POST https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*}/capacityCommitments:merge  `
+`POST https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*}/capacityCommitments:merge`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -22,15 +22,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Parent resource that identifies admin project and location e.g., `  projects/myproject/locations/us  `
+Parent resource that identifies admin project and location e.g., `projects/myproject/locations/us`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.capacityCommitments.update  `
+  - `bigquery.capacityCommitments.update`
 
 ### Request body
 
@@ -59,15 +59,15 @@ The request body contains data with the following structure:
 
 Fields
 
-`  capacityCommitmentIds[]  `
+`capacityCommitmentIds[]`
 
-`  string  `
+`string`
 
 Ids of capacity commitments to merge. These capacity commitments must exist under admin project and location specified in the parent. ID is the last portion of capacity commitment name e.g., 'abc' for projects/myproject/locations/US/capacityCommitments/abc
 
-`  capacityCommitmentId  `
+`capacityCommitmentId`
 
-`  string  `
+`string`
 
 Optional. The optional resulting capacity commitment ID. Capacity commitment name will be generated automatically if this field is empty. This field must only contain lower case alphanumeric characters or dashes. The first and last character cannot be a dash. Max length is 64 characters.
 
@@ -79,7 +79,7 @@ If successful, the response body contains an instance of `  CapacityCommitment  
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

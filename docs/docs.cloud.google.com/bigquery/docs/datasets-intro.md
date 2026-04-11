@@ -4,21 +4,21 @@ This page provides an overview of datasets in BigQuery.
 
 ## Datasets
 
-A dataset is contained within a specific [project](https://docs.cloud.google.com/docs/overview#projects) . Datasets are top-level containers that are used to organize and control access to your [tables](https://docs.cloud.google.com/bigquery/docs/tables) and [views](https://docs.cloud.google.com/bigquery/docs/views) . A table or view must belong to a dataset, so you need to create at least one dataset before [loading data into BigQuery](https://docs.cloud.google.com/bigquery/loading-data-into-bigquery) . Use the format `  projectname.datasetname  ` to fully qualify a dataset name when using GoogleSQL, or the format `  projectname:datasetname  ` to fully qualify a dataset name when using the bq command-line tool.
+A dataset is contained within a specific [project](https://docs.cloud.google.com/docs/overview#projects) . Datasets are top-level containers that are used to organize and control access to your [tables](https://docs.cloud.google.com/bigquery/docs/tables) and [views](https://docs.cloud.google.com/bigquery/docs/views) . A table or view must belong to a dataset, so you need to create at least one dataset before [loading data into BigQuery](https://docs.cloud.google.com/bigquery/loading-data-into-bigquery) . Use the format `projectname.datasetname` to fully qualify a dataset name when using GoogleSQL, or the format `projectname:datasetname` to fully qualify a dataset name when using the bq command-line tool.
 
 ## Location
 
-You specify a location for storing your BigQuery data when you create a dataset. For a list of BigQuery dataset locations, see [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . BigQuery stores your data in the selected location in accordance with the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . For example, if you choose `  EU  ` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU.
+You specify a location for storing your BigQuery data when you create a dataset. For a list of BigQuery dataset locations, see [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . BigQuery stores your data in the selected location in accordance with the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . For example, if you choose `EU` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU.
 
 After you create the dataset, the location cannot be changed, but you can [copy datasets to different locations](https://docs.cloud.google.com/bigquery/docs/copying-datasets) , or manually [move (recreate) the dataset in a different location](https://docs.cloud.google.com/bigquery/docs/managing-datasets#recreate-dataset) .
 
 If you don't [explicitly specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) , the location is determined in one of the following ways:
 
-  - The location of the datasets referenced in the request. For example, if a query references a table or view in a dataset stored in the `  asia-northeast1  ` region, the query job runs in `  asia-northeast1  ` .
+  - The location of the datasets referenced in the request. For example, if a query references a table or view in a dataset stored in the `asia-northeast1` region, the query job runs in `asia-northeast1` .
   - The region specified for a connection referenced in a request.
   - The location of a destination table.
 
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, the default location is used. If default location isn't set, the job runs in the `  US  ` multi-region.
+If the location isn't explicitly specified, and it can't be determined from the resources in the request, the default location is used. If default location isn't set, the job runs in the `US` multi-region.
 
 ## Data retention
 

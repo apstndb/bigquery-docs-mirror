@@ -40,7 +40,7 @@ The first step is to create a BigQuery dataset to store your BI Engine-managed t
 
 5.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  biengine_tutorial  ` .
+      - For **Dataset ID** , enter `biengine_tutorial` .
     
       - For **Data location** , choose **us (multiple regions in United States)** , the [multi-region location](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) where public datasets are stored.
     
@@ -68,11 +68,11 @@ To create your table, follow these steps:
     
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-3.  In the **Explorer** pane, search for the `  san_francisco_311  ` dataset.
+3.  In the **Explorer** pane, search for the `san_francisco_311` dataset.
 
 4.  Click the dataset, and then click **Overview \> Tables** .
 
-5.  Click the `  311_service_requests  ` table.
+5.  Click the `311_service_requests` table.
 
 6.  In the toolbar, click **Copy** .
     
@@ -84,7 +84,7 @@ To create your table, follow these steps:
     
       - For **Dataset** , select **biengine\_tutorial** .
     
-      - For **Table** , enter `  311_service_requests_copy  ` .
+      - For **Table** , enter `311_service_requests_copy` .
         
         ![The copy table window with destination options](https://docs.cloud.google.com/static/bigquery/images/copy-311-table.png)
 
@@ -116,7 +116,7 @@ To create your table, follow these steps:
 
 5.  In the **Preferred Tables** section, optionally specify tables for acceleration with BI Engine. To find table names, do the following:
     
-    1.  In the **Table Id** field, type part of the name of the table that you want accelerated by BI Engine—for example, `  311  ` .
+    1.  In the **Table Id** field, type part of the name of the table that you want accelerated by BI Engine—for example, `311` .
     
     2.  From the list of suggested names, select your table names.
         

@@ -2,22 +2,22 @@ Table copy job operation type.
 
 Enums
 
-`  OPERATION_TYPE_UNSPECIFIED  `
+`OPERATION_TYPE_UNSPECIFIED`
 
 Unspecified operation type.
 
-`  COPY  `
+`COPY`
 
 The source and the destination table have the same table type.
 
-`  SNAPSHOT  `
+`SNAPSHOT`
 
 The source table type is TABLE and the destination table type is SNAPSHOT.
 
-`  RESTORE  `
+`RESTORE`
 
 The source table type is SNAPSHOT and the destination table type is TABLE.
 
-`  CLONE  `
+`CLONE`
 
 The source and the destination table have the same table type, but with a billing benefit.

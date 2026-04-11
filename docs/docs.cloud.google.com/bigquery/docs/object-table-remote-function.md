@@ -16,18 +16,18 @@ To analyze object table data by using a remote function, you must generate and p
 
   - To create the connection resource used by the remote function, you need the following permissions:
     
-      - `  bigquery.connections.create  `
-      - `  bigquery.connections.get  `
-      - `  bigquery.connections.list  `
-      - `  bigquery.connections.update  `
-      - `  bigquery.connections.use  `
-      - `  bigquery.connections.delete  `
+      - `bigquery.connections.create`
+      - `bigquery.connections.get`
+      - `bigquery.connections.list`
+      - `bigquery.connections.update`
+      - `bigquery.connections.use`
+      - `bigquery.connections.delete`
 
   - To create a remote function, you need the permissions associated with the [Cloud Functions Developer](https://docs.cloud.google.com/functions/docs/reference/iam/roles#cloudfunctions.developer) or [Cloud Run Developer](https://docs.cloud.google.com/iam/docs/roles-permissions/run#run.developer) roles.
 
   - To invoke a remote function, you need the permissions described in [Remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions#grant_permission_on_function) .
 
-  - To analyze an object table with a remote function, you need the `  bigquery.tables.getData  ` permission on the object table.
+  - To analyze an object table with a remote function, you need the `bigquery.tables.getData` permission on the object table.
 
 ## Before you begin
 
@@ -37,7 +37,7 @@ To analyze object table data by using a remote function, you must generate and p
 
 For general instructions on creating a remote function, see [Working with remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
 
-When you create a remote function to analyze object table data, you must pass in [signed URLs](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#signed_urls) that have been generated for the objects in the object table. You can do this by using an input parameter with a `  STRING  ` data type. The signed URLs are made available to the remote function as input data in the [`  calls  ` field of the HTTP `  POST  ` request](https://docs.cloud.google.com/bigquery/docs/remote-functions#input_format) . An example of a request is:
+When you create a remote function to analyze object table data, you must pass in [signed URLs](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#signed_urls) that have been generated for the objects in the object table. You can do this by using an input parameter with a `STRING` data type. The signed URLs are made available to the remote function as input data in the [`calls` field of the HTTP `POST` request](https://docs.cloud.google.com/bigquery/docs/remote-functions#input_format) . An example of a request is:
 
     {
       // Other fields omitted.
@@ -47,9 +47,9 @@ When you create a remote function to analyze object table data, you must pass in
       ]
     }
 
-You can read an object in your remote function by using a method that makes an HTTP `  GET  ` request to the signed URL. The remote function can access the object because the signed URL contains authentication information in its query string.
+You can read an object in your remote function by using a method that makes an HTTP `GET` request to the signed URL. The remote function can access the object because the signed URL contains authentication information in its query string.
 
-When you specify the [`  CREATE FUNCTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) for the remote function, we recommend that you set the `  max_batching_rows  ` option to 1 in order to [avoid Cloud Run functions timeout](https://docs.cloud.google.com/functions/docs/concepts/exec#timeout) and increase processing parallelism.
+When you specify the [`CREATE FUNCTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) for the remote function, we recommend that you set the `max_batching_rows` option to 1 in order to [avoid Cloud Run functions timeout](https://docs.cloud.google.com/functions/docs/concepts/exec#timeout) and increase processing parallelism.
 
 ### Example
 
@@ -68,7 +68,7 @@ The following Cloud Run functions Python code example reads storage objects and 
         replies.append(len(object_content))
       return json.dumps({'replies': replies})
 
-Deployed, this function would have an endpoint similar to `  https://us-central1-myproject.cloudfunctions.net/object_length  ` .
+Deployed, this function would have an endpoint similar to `https://us-central1-myproject.cloudfunctions.net/object_length` .
 
 The following example shows how to create a BigQuery remote function based on this Cloud Run functions function:
 
@@ -85,9 +85,9 @@ For step-by-step guidance, see [Tutorial: Analyze an object table with a remote 
 
 ## Call a remote function
 
-To call a remote function on object table data, reference the remote function in the [`  select_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list) of the query, and then call the [`  EXTERNAL_OBJECT_TRANSFORM  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#external_object_transform) in the [`  FROM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) to generate the signed URLs for the objects.
+To call a remote function on object table data, reference the remote function in the [`select_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list) of the query, and then call the [`EXTERNAL_OBJECT_TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#external_object_transform) in the [`FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) to generate the signed URLs for the objects.
 
-**Note:** When using one of the [AI APIs](https://cloud.google.com/products/ai) , be aware of the relevant quotas for the API you are targeting. Use a `  LIMIT  ` clause to limit the results returned if necessary to stay within quota.
+**Note:** When using one of the [AI APIs](https://cloud.google.com/products/ai) , be aware of the relevant quotas for the API you are targeting. Use a `LIMIT` clause to limit the results returned if necessary to stay within quota.
 
 The following example shows typical statement syntax:
 

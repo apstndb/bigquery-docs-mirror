@@ -1,6 +1,6 @@
 # Update table snapshot metadata
 
-This document describes how to update the description, expiration date, or access policy for a table snapshot by using the Google Cloud console, the [`  bq update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command, or the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API. It is intended for users who are familiar with [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) in BigQuery.
+This document describes how to update the description, expiration date, or access policy for a table snapshot by using the Google Cloud console, the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command, or the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API. It is intended for users who are familiar with [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) in BigQuery.
 
 ## Permissions and roles
 
@@ -10,9 +10,9 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 
 To update a table snapshot's metadata, you need the following permission:
 
-| **Permission**                          | **Resource**       |
-| --------------------------------------- | ------------------ |
-| `        bigquery.tables.update       ` | The table snapshot |
+| **Permission**           | **Resource**       |
+| ------------------------ | ------------------ |
+| `bigquery.tables.update` | The table snapshot |
 
 ### Roles
 
@@ -33,9 +33,9 @@ The predefined BigQuery roles that provide the required permission are as follow
 <tr class="odd">
 <td>Any of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.dataEditor      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataOwner      </code><br />
-<code dir="ltr" translate="no">       biguqery.admin      </code></td>
+<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
+<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
+<code dir="ltr" translate="no">biguqery.admin</code></td>
 <td>The table snapshot</td>
 </tr>
 </tbody>
@@ -89,23 +89,23 @@ PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 
-  - `  DESCRIPTION  ` : text describing the snapshot. For example, `  Snapshot after table schema change X.  ` .
+  - `  DESCRIPTION  ` : text describing the snapshot. For example, `Snapshot after table schema change X.` .
   - `  PROJECT_ID  ` : the project ID of the project that contains the snapshot.
   - `  DATASET_NAME  ` : the name of the dataset that contains the snapshot.
   - `  SNAPSHOT_NAME  ` : the name of the snapshot.
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with the following parameters:
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with the following parameters:
 
-| **Parameter**                                       | **Value**                                                                                              |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `          projectId         `                      | The project ID of the project that contains the snapshot.                                              |
-| `          datasetId         `                      | The name of the dataset that contains the snapshot.                                                    |
-| `          tableId         `                        | The name of the snapshot.                                                                              |
-| Request body `          description         ` field | Text describing the snapshot. For example, `          Snapshot after table schema change X         ` . |
+| **Parameter**                    | **Value**                                                                           |
+| -------------------------------- | ----------------------------------------------------------------------------------- |
+| `projectId`                      | The project ID of the project that contains the snapshot.                           |
+| `datasetId`                      | The name of the dataset that contains the snapshot.                                 |
+| `tableId`                        | The name of the snapshot.                                                           |
+| Request body `description` field | Text describing the snapshot. For example, `Snapshot after table schema change X` . |
 
-Prefer the `  tables.patch  ` method over the `  tables.update  ` method because the `  tables.update  ` method replaces the entire `  Table  ` resource.
+Prefer the `tables.patch` method over the `tables.update` method because the `tables.update` method replaces the entire `Table` resource.
 
 ### Update the expiration
 
@@ -152,16 +152,16 @@ Replace the following:
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with the following parameters:
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with the following parameters:
 
-| **Parameter**                                          | **Value**                                                            |
-| ------------------------------------------------------ | -------------------------------------------------------------------- |
-| `          projectId         `                         | The project ID of the project that contains the snapshot.            |
-| `          datasetId         `                         | The name of the dataset that contains the snapshot.                  |
-| `          tableId         `                           | The name of the snapshot.                                            |
-| Request body `          expirationTime         ` field | The time when the snapshot expires, in milliseconds since the epoch. |
+| **Parameter**                       | **Value**                                                            |
+| ----------------------------------- | -------------------------------------------------------------------- |
+| `projectId`                         | The project ID of the project that contains the snapshot.            |
+| `datasetId`                         | The name of the dataset that contains the snapshot.                  |
+| `tableId`                           | The name of the snapshot.                                            |
+| Request body `expirationTime` field | The time when the snapshot expires, in milliseconds since the epoch. |
 
-Prefer the `  tables.patch  ` method over the `  tables.update  ` method because the `  tables.update  ` method replaces the entire `  Table  ` resource.
+Prefer the `tables.patch` method over the `tables.update` method because the `tables.update` method replaces the entire `Table` resource.
 
 ### Update access
 
@@ -211,7 +211,7 @@ Replace the following:
 
 ### API
 
-Call the [`  tables.setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/setIamPolicy) method with the following parameters:
+Call the [`tables.setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/setIamPolicy) method with the following parameters:
 
 <table>
 <colgroup>
@@ -226,7 +226,7 @@ Call the [`  tables.setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">         Resource        </code></td>
+<td><code dir="ltr" translate="no">Resource</code></td>
 <td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>projects/PROJECT_ID/datasets/DATASET_NAME/tables/SNAPSHOT_NAME</code></pre></td>
 </tr>
 <tr class="even">

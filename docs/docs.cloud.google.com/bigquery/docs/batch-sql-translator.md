@@ -20,39 +20,39 @@ Before you submit a translation job, complete the following steps:
 
 You must have the following permissions on the project to enable the BigQuery Migration Service:
 
-  - `  resourcemanager.projects.get  `
-  - `  serviceusage.services.enable  `
-  - `  serviceusage.services.get  `
+  - `resourcemanager.projects.get`
+  - `serviceusage.services.enable`
+  - `serviceusage.services.get`
 
 You need the following permissions on the project to access and use the BigQuery Migration Service:
 
-  - `  bigquerymigration.workflows.create  `
+  - `bigquerymigration.workflows.create`
 
-  - `  bigquerymigration.workflows.get  `
+  - `bigquerymigration.workflows.get`
 
-  - `  bigquerymigration.workflows.list  `
+  - `bigquerymigration.workflows.list`
 
-  - `  bigquerymigration.workflows.delete  `
+  - `bigquerymigration.workflows.delete`
 
-  - `  bigquerymigration.subtasks.get  `
+  - `bigquerymigration.subtasks.get`
 
-  - `  bigquerymigration.subtasks.list  `
+  - `bigquerymigration.subtasks.list`
     
     Alternatively, you can use the following roles to get the same permissions:
     
-      - `  bigquerymigration.viewer  ` - Read only access.
-      - `  bigquerymigration.editor  ` - Read/write access.
+      - `bigquerymigration.viewer` - Read only access.
+      - `bigquerymigration.editor` - Read/write access.
 
 To access the Cloud Storage buckets for input and output files:
 
-  - `  storage.objects.get  ` on the source Cloud Storage bucket.
-  - `  storage.objects.list  ` on the source Cloud Storage bucket.
-  - `  storage.objects.create  ` on the destination Cloud Storage bucket.
+  - `storage.objects.get` on the source Cloud Storage bucket.
+  - `storage.objects.list` on the source Cloud Storage bucket.
+  - `storage.objects.create` on the destination Cloud Storage bucket.
 
 You can have all the above necessary Cloud Storage permissions from the following roles:
 
-  - `  roles/storage.objectAdmin  `
-  - `  roles/storage.admin  `
+  - `roles/storage.objectAdmin`
+  - `roles/storage.admin`
 
 ### Enable the BigQuery Migration API
 
@@ -74,9 +74,9 @@ Source files must be text files that contain valid SQL for the source dialect. S
 
 To help the service generate more accurate translation results, we recommend that you provide metadata files. However, this isn't mandatory.
 
-You can use the `  dwh-migration-dumper  ` command-line extraction tool to generate the metadata information, or you can provide your own metadata files. Once metadata files are prepared, you can include them along with the source files in the translation source folder. The translator automatically detects them and leverages them to translate source files, you don't need to configure any extra settings to enable this.
+You can use the `dwh-migration-dumper` command-line extraction tool to generate the metadata information, or you can provide your own metadata files. Once metadata files are prepared, you can include them along with the source files in the translation source folder. The translator automatically detects them and leverages them to translate source files, you don't need to configure any extra settings to enable this.
 
-To generate metadata information by using the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
+To generate metadata information by using the `dwh-migration-dumper` tool, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
 To provide your own metadata, collect the data definition language (DDL) statements for the SQL objects in your source system into separate text files.
 
@@ -137,16 +137,16 @@ Additionally, translation of the following SQL dialects is supported in [preview
 
 When translating SQL from a source dialect to BigQuery, some functions might not have a direct equivalent. To address this, the BigQuery Migration Service (and the broader BigQuery community) provide helper user-defined functions (UDFs) that replicate the behavior of these unsupported source dialect functions.
 
-These UDFs are often found in the `  bqutil  ` public dataset, allowing translated queries to initially reference them using the format `  bqutil.<dataset>.<function>()  ` . For example, `  bqutil.fn.cw_count()  ` .
+These UDFs are often found in the `bqutil` public dataset, allowing translated queries to initially reference them using the format `bqutil.<dataset>.<function>()` . For example, `bqutil.fn.cw_count()` .
 
 #### Important considerations for production environments:
 
-While `  bqutil  ` offers convenient access to these helper UDFs for initial translation and testing, direct reliance on `  bqutil  ` for production workloads is not recommended for several reasons:
+While `bqutil` offers convenient access to these helper UDFs for initial translation and testing, direct reliance on `bqutil` for production workloads is not recommended for several reasons:
 
-1.  Version control: The `  bqutil  ` project hosts the latest version of these UDFs, which means their definitions can change over time. Relying directly on `  bqutil  ` could lead to unexpected behavior or breaking changes in your production queries if a UDF's logic is updated.
+1.  Version control: The `bqutil` project hosts the latest version of these UDFs, which means their definitions can change over time. Relying directly on `bqutil` could lead to unexpected behavior or breaking changes in your production queries if a UDF's logic is updated.
 2.  Dependency isolation: Deploying UDFs to your own project isolates your production environment from external changes.
 3.  Customization: You might need to modify or optimize these UDFs to better suit your specific business logic or performance requirements. This is only possible if they are within your own project.
-4.  Security and governance: Your organization's security policies might restrict direct access to public datasets like `  bqutil  ` for production data processing. Copying UDFs to your controlled environment aligns with such policies.
+4.  Security and governance: Your organization's security policies might restrict direct access to public datasets like `bqutil` for production data processing. Copying UDFs to your controlled environment aligns with such policies.
 
 #### Deploying helper UDFs to your project:
 
@@ -166,123 +166,123 @@ The batch SQL translator is available in the following processing locations:
 
 Bangkok
 
-`  asia-southeast3  `
+`asia-southeast3`
 
 Delhi
 
-`  asia-south2  `
+`asia-south2`
 
 Hong Kong
 
-`  asia-east2  `
+`asia-east2`
 
 Jakarta
 
-`  asia-southeast2  `
+`asia-southeast2`
 
 Melbourne
 
-`  australia-southeast2  `
+`australia-southeast2`
 
 Mumbai
 
-`  asia-south1  `
+`asia-south1`
 
 Osaka
 
-`  asia-northeast2  `
+`asia-northeast2`
 
 Seoul
 
-`  asia-northeast3  `
+`asia-northeast3`
 
 Singapore
 
-`  asia-southeast1  `
+`asia-southeast1`
 
 Sydney
 
-`  australia-southeast1  `
+`australia-southeast1`
 
 Taiwan
 
-`  asia-east1  `
+`asia-east1`
 
 Tokyo
 
-`  asia-northeast1  `
+`asia-northeast1`
 
 **Europe**
 
 Belgium
 
-`  europe-west1  `
+`europe-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
-`  europe-west10  `
+`europe-west10`
 
 EU multi-region
 
-`  eu  `
+`eu`
 
 Finland
 
-`  europe-north1  `
+`europe-north1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
-`  europe-west3  `
+`europe-west3`
 
 London
 
-`  europe-west2  `
+`europe-west2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
-`  europe-southwest1  `
+`europe-southwest1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
-`  europe-west8  `
+`europe-west8`
 
 Netherlands
 
-`  europe-west4  `
+`europe-west4`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
-`  europe-west9  `
+`europe-west9`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
-`  europe-north2  `
+`europe-north2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
-`  europe-west12  `
+`europe-west12`
 
 Warsaw
 
-`  europe-central2  `
+`europe-central2`
 
 Zürich
 
-`  europe-west6  `
+`europe-west6`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
@@ -290,97 +290,97 @@ Zürich
 
 Columbus, Ohio
 
-`  us-east5  `
+`us-east5`
 
 Dallas
 
-`  us-south1  `
+`us-south1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
-`  us-central1  `
+`us-central1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
-`  us-west4  `
+`us-west4`
 
 Los Angeles
 
-`  us-west2  `
+`us-west2`
 
 Mexico
 
-`  northamerica-south1  `
+`northamerica-south1`
 
 Northern Virginia
 
-`  us-east4  `
+`us-east4`
 
 Oregon
 
-`  us-west1  `
+`us-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Québec
 
-`  northamerica-northeast1  `
+`northamerica-northeast1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
-`  southamerica-east1  `
+`southamerica-east1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
-`  us-west3  `
+`us-west3`
 
 Santiago
 
-`  southamerica-west1  `
+`southamerica-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
-`  us-east1  `
+`us-east1`
 
 Toronto
 
-`  northamerica-northeast2  `
+`northamerica-northeast2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 US multi-region
 
-`  us  `
+`us`
 
 **Africa**
 
 Johannesburg
 
-`  africa-south1  `
+`africa-south1`
 
 **MiddleEast**
 
 Dammam
 
-`  me-central2  `
+`me-central2`
 
 Doha
 
-`  me-central1  `
+`me-central1`
 
 Israel
 
-`  me-west1  `
+`me-west1`
 
 ## Submit a translation job
 
@@ -399,13 +399,13 @@ These steps assume you have source files uploaded into a Cloud Storage bucket al
 3.  For **Translation configuration** , enter the following:
     
     1.  For **Display name** , type a name for the translation job. The name can contain letters, numbers or underscores.
-    2.  For **Processing location** , select the location where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, select the `  eu  ` region. The translation job performs best when you choose the same location as your source file bucket.
+    2.  For **Processing location** , select the location where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, select the `eu` region. The translation job performs best when you choose the same location as your source file bucket.
     3.  For **Source dialect** , select the SQL dialect that you want to translate.
     4.  For **Target dialect** , select **GoogleSQL** .
 
 4.  Click **Next** .
 
-5.  For **File location details** , specify the Cloud Storage paths to use for translation input and output. You can type the paths in the format `  bucket_name/folder_name/  ` or use the **Browse** option to navigate to a folder.
+5.  For **File location details** , specify the Cloud Storage paths to use for translation input and output. You can type the paths in the format `bucket_name/folder_name/` or use the **Browse** option to navigate to a folder.
     
     1.  For **Output directory location** , specify a path to the destination Cloud Storage folder for the translated files. This serves as a root directory for all translation output.
     2.  Choose one or more **Input directory locations** containing the path to the SQL files to translate.
@@ -429,14 +429,14 @@ Once the translation job is created, you can see its status in the translation j
 
 2.  [Generate a gcloud CLI credential file](https://github.com/google/dwh-migration-tools/blob/main/client/README.md#optional-gcloud-login-and-authentication) .
 
-3.  In the batch translation client installation directory, use the text editor of your choice to open the `  config.yaml  ` file and modify the following settings:
+3.  In the batch translation client installation directory, use the text editor of your choice to open the `config.yaml` file and modify the following settings:
     
-      - `  project_number  ` : Type the project number of the project you want to use for the batch translation job. You can find this in the **Project info** pane on the [Google Cloud console welcome page](https://console.cloud.google.com/welcome) for the project.
-      - `  gcs_bucket  ` : Type the name of the Cloud Storage bucket that the batch translation client uses to store files during translation job processing.
-      - `  input_directory  ` : Type the absolute or relative path to the directory containing the source files and any metadata files.
-      - `  output_directory  ` : Type the absolute or relative path to the target directory for the translated files.
+      - `project_number` : Type the project number of the project you want to use for the batch translation job. You can find this in the **Project info** pane on the [Google Cloud console welcome page](https://console.cloud.google.com/welcome) for the project.
+      - `gcs_bucket` : Type the name of the Cloud Storage bucket that the batch translation client uses to store files during translation job processing.
+      - `input_directory` : Type the absolute or relative path to the directory containing the source files and any metadata files.
+      - `output_directory` : Type the absolute or relative path to the target directory for the translated files.
 
-4.  Save the changes and close the `  config.yaml  ` file.
+4.  Save the changes and close the `config.yaml` file.
 
 5.  Place your source and metadata files in the input directory.
 
@@ -452,7 +452,7 @@ Once the translation job is created, you can see its status in the translation j
         gcloud bq migration-workflows create --location=us --config-file=CONFIG_FILE_NAME.json
         ```
     
-      - The following example shows a command to create and run the workflow with the `  --async  ` flag. The command will create and run the workflow and return immediately with a link to the workflow.
+      - The following example shows a command to create and run the workflow with the `--async` flag. The command will create and run the workflow and return immediately with a link to the workflow.
         
         ``` notranslate
         gcloud bq migration-workflows create --location=LOCATION  --config-file=CONFIG_FILE_NAME.json --async
@@ -467,7 +467,7 @@ Once the translation job is created, you can see its status in the translation j
     Replace the following:
     
       - `  LOCATION  ` : the location of the Google Cloud project that is running this translation job.
-      - `  CONFIG_FILE_NAME  ` : the name of the `  config.yaml  ` file. Once the translation job is created, you can see its status in the translation jobs list in the Google Cloud console.
+      - `  CONFIG_FILE_NAME  ` : the name of the `config.yaml` file. Once the translation job is created, you can see its status in the translation jobs list in the Google Cloud console.
 
 8.  Optional. Once the translation job is completed, delete the files that the job created in the Cloud Storage bucket you specified, in order to avoid storage costs.
 
@@ -545,7 +545,7 @@ You can run the batch SQL translator using the bq command-line tool command-line
     Replace the following:
     
       - `  LOCATION  ` : the location of the Google Cloud project that is running this translation job.
-      - `  CONFIG_FILE_NAME  ` : the name of the `  config.yaml  ` file.
+      - `  CONFIG_FILE_NAME  ` : the name of the `config.yaml` file.
 
 <!-- end list -->
 
@@ -623,22 +623,22 @@ To see the summary file in the Google Cloud console, follow these steps:
 
 The following table describes the summary file columns:
 
-| **Column**          | **Description**                                                                                                                                                                                                 |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Timestamp           | The timestamp at which the issue occurred.                                                                                                                                                                      |
-| FilePath            | The path to the source file that the issue is associated with.                                                                                                                                                  |
-| FileName            | The name of the source file that the issue is associated with.                                                                                                                                                  |
-| ScriptLine          | The line number where the issue occurred.                                                                                                                                                                       |
-| ScriptColumn        | The column number where the issue occurred.                                                                                                                                                                     |
-| TranspilerComponent | The translation engine internal component where the warning or error occurred. This column might be empty.                                                                                                      |
-| Environment         | The translation dialect environment associated with the warning or error. This column might be empty.                                                                                                           |
-| ObjectName          | The SQL object in the source file that is associated with the warning or error. This column might be empty.                                                                                                     |
-| Severity            | The severity of the issue, either warning or error.                                                                                                                                                             |
-| Category            | The translation issue category.                                                                                                                                                                                 |
-| SourceType          | The source of this issue. The value in this column can either be `        SQL       ` , indicating an issue in the input SQL files, or `        METADATA       ` , indicating an issue in the metadata package. |
-| Message             | The translation issue warning or error message.                                                                                                                                                                 |
-| ScriptContext       | The SQL snippet in the source file that is associated with the issue.                                                                                                                                           |
-| Action              | The action we recommend you take to resolve the issue.                                                                                                                                                          |
+| **Column**          | **Description**                                                                                                                                                                   |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp           | The timestamp at which the issue occurred.                                                                                                                                        |
+| FilePath            | The path to the source file that the issue is associated with.                                                                                                                    |
+| FileName            | The name of the source file that the issue is associated with.                                                                                                                    |
+| ScriptLine          | The line number where the issue occurred.                                                                                                                                         |
+| ScriptColumn        | The column number where the issue occurred.                                                                                                                                       |
+| TranspilerComponent | The translation engine internal component where the warning or error occurred. This column might be empty.                                                                        |
+| Environment         | The translation dialect environment associated with the warning or error. This column might be empty.                                                                             |
+| ObjectName          | The SQL object in the source file that is associated with the warning or error. This column might be empty.                                                                       |
+| Severity            | The severity of the issue, either warning or error.                                                                                                                               |
+| Category            | The translation issue category.                                                                                                                                                   |
+| SourceType          | The source of this issue. The value in this column can either be `SQL` , indicating an issue in the input SQL files, or `METADATA` , indicating an issue in the metadata package. |
+| Message             | The translation issue warning or error message.                                                                                                                                   |
+| ScriptContext       | The SQL snippet in the source file that is associated with the issue.                                                                                                             |
+| Action              | The action we recommend you take to resolve the issue.                                                                                                                            |
 
 ### Code tab
 
@@ -757,13 +757,13 @@ Save this placeholder UDF in a text file, and include that file as one of the so
 
 ## Troubleshoot translation errors
 
-### `     RelationNotFound    ` or `     AttributeNotFound    ` translation issues
+### `RelationNotFound` or `AttributeNotFound` translation issues
 
-After translating a querying using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) , you might encounter a failed translation with the `  RelationNotFound  ` or `  AttributeNotFound  ` error.
+After translating a querying using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) , you might encounter a failed translation with the `RelationNotFound` or `AttributeNotFound` error.
 
 You can find failed translations by navigating to the **Translation details** page and opening the **Log Messages** tab.
 
-Translation works best with metadata DDLs. When SQL object definitions cannot be found, the translation engine raises `  RelationNotFound  ` or `  AttributeNotFound  ` issues. We recommend using the metadata extractor to generate metadata packages to make sure all object definitions are present. Adding metadata is the recommended first step to resolve most translation errors, as it often can fix many other errors that are indirectly caused from a lack of metadata.
+Translation works best with metadata DDLs. When SQL object definitions cannot be found, the translation engine raises `RelationNotFound` or `AttributeNotFound` issues. We recommend using the metadata extractor to generate metadata packages to make sure all object definitions are present. Adding metadata is the recommended first step to resolve most translation errors, as it often can fix many other errors that are indirectly caused from a lack of metadata.
 
 For more information, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
@@ -775,11 +775,11 @@ This product or feature is subject to the "Pre-GA Offerings Terms" in the Genera
 
 **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
-To fixed failed translation jobs with the `  RelationNotFound  ` or `  AttributeNotFound  ` errors, you can also use Gemini to try to resolve these issues with the following steps.
+To fixed failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to try to resolve these issues with the following steps.
 
 1.  Navigate to the **Translation details** page and open the **Log Messages** tab.
 
-2.  Click the query that has the message `  RelationNotFound  ` or `  AttributeNotFound  ` in the **Category** column.
+2.  Click the query that has the message `RelationNotFound` or `AttributeNotFound` in the **Category** column.
 
 3.  Click the error message to navigate to the file and line containing the error in the code tab.
 

@@ -17,40 +17,30 @@ Provides details for errors and the corresponding resources.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resourceInfo&quot;: {
-    object (ResourceInfo)
-  },
-  &quot;errorDetails&quot;: [
-    {
-      object (ErrorDetail)
-    }
-  ],
-  &quot;errorCount&quot;: integer
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resourceInfo&quot;: {object (ResourceInfo)},&quot;errorDetails&quot;: [{object (ErrorDetail)}],&quot;errorCount&quot;: integer}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resourceInfo  `
+`resourceInfo`
 
-`  object ( ResourceInfo  ` )
+` object ( ResourceInfo  ` )
 
 Required. Information about the resource where the error is located.
 
-`  errorDetails[]  `
+`errorDetails[]`
 
-`  object ( ErrorDetail  ` )
+` object ( ErrorDetail  ` )
 
 Required. The error details for the resource.
 
-`  errorCount  `
+`errorCount`
 
-`  integer  `
+`integer`
 
-Required. How many errors there are in total for the resource. Truncation can be indicated by having an `  errorCount  ` that is higher than the size of `  errorDetails  ` .
+Required. How many errors there are in total for the resource. Truncation can be indicated by having an `errorCount` that is higher than the size of `errorDetails` .
 
 ## ErrorDetail
 
@@ -67,29 +57,22 @@ Provides details for errors, e.g. issues that where encountered when processing 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;location&quot;: {
-    object (ErrorLocation)
-  },
-  &quot;errorInfo&quot;: {
-    object (ErrorInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;location&quot;: {object (ErrorLocation)},&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  location  `
+`location`
 
-`  object ( ErrorLocation  ` )
+` object ( ErrorLocation  ` )
 
 Optional. The exact location within the resource (if applicable).
 
-`  errorInfo  `
+`errorInfo`
 
-`  object ( ErrorInfo  ` )
+` object ( ErrorInfo  ` )
 
 Required. Describes the cause of the error with structured detail.
 
@@ -118,14 +101,14 @@ Holds information about where the error is located.
 
 Fields
 
-`  line  `
+`line`
 
-`  integer  `
+`integer`
 
 Optional. If applicable, denotes the line where the error occurred. A zero value means that there is no line information.
 
-`  column  `
+`column`
 
-`  integer  `
+`integer`
 
 Optional. If applicable, denotes the column where the error occurred. A zero value means that there is no columns information.

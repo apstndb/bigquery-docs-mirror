@@ -30,16 +30,16 @@ You can create a BigLake table based on multiple external data sources, provided
 
 ## Cross-cloud joins
 
-Cross-cloud joins let you run queries that span both Google Cloud and BigQuery Omni regions. You can use [GoogleSQL `  JOIN  ` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) to analyze data across many different storage solutions, such as AWS, Azure, public datasets, and other Google Cloud services. Cross-cloud joins eliminate the need to copy data across sources before running queries.
+Cross-cloud joins let you run queries that span both Google Cloud and BigQuery Omni regions. You can use [GoogleSQL `JOIN` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) to analyze data across many different storage solutions, such as AWS, Azure, public datasets, and other Google Cloud services. Cross-cloud joins eliminate the need to copy data across sources before running queries.
 
-You can reference BigLake tables anywhere in a `  SELECT  ` statement as if they were standard BigQuery tables, including in [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) and [data definition language (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statements that use subqueries to retrieve data. You can use multiple BigLake tables from different clouds and BigQuery tables in the same query. All BigQuery tables must be from the same region.
+You can reference BigLake tables anywhere in a `SELECT` statement as if they were standard BigQuery tables, including in [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) and [data definition language (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statements that use subqueries to retrieve data. You can use multiple BigLake tables from different clouds and BigQuery tables in the same query. All BigQuery tables must be from the same region.
 
 ### Cross-cloud join required permissions
 
 To get the permissions that you need to run a cross-cloud join, ask your administrator to grant you the following IAM roles on the project where the join is executed:
 
-  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -49,14 +49,14 @@ These predefined roles contain the permissions required to run a cross-cloud joi
 
 The following permissions are required to run a cross-cloud join:
 
-  - `  bigquery.jobs.create  `
-  - `  bigquery.tables.getData  `
+  - `bigquery.jobs.create`
+  - `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Cross-cloud join costs
 
-When you run a cross-cloud join operation, BigQuery parses the query into local and remote parts. The local part is treated as a standard query in the BigQuery region. The remote part is converted into a `  CREATE TABLE AS SELECT  ` (CTAS) operation on the referenced BigLake table in the BigQuery Omni region, which creates a temporary table in your BigQuery region. BigQuery then uses this temporary table to execute your cross-cloud join and deletes the table automatically after eight hours.
+When you run a cross-cloud join operation, BigQuery parses the query into local and remote parts. The local part is treated as a standard query in the BigQuery region. The remote part is converted into a `CREATE TABLE AS SELECT` (CTAS) operation on the referenced BigLake table in the BigQuery Omni region, which creates a temporary table in your BigQuery region. BigQuery then uses this temporary table to execute your cross-cloud join and deletes the table automatically after eight hours.
 
 You incur data transfer costs for data in the referenced BigLake tables. However, BigQuery helps reduce these costs by only transferring columns and rows in the BigLake table that are referenced in the query, rather than the entire table. We recommend specifying a column filter that is as narrow as possible to further reduce transfer costs. The CTAS job appears in your job history and displays information such as the number of transferred bytes. Successful transfers incur costs even if the main query job fails. For more information, see [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
 
@@ -79,23 +79,23 @@ This example has two transfers: one from an employees table (with a level filter
 ### Cross-cloud join limitations
 
   - Cross-cloud joins aren't supported in the BigQuery [free tier](https://cloud.google.com/bigquery/pricing#free-tier) and in the [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) .
-  - Aggregations might not be pushed down to the BigQuery Omni regions if the query contains `  JOIN  ` statements.
+  - Aggregations might not be pushed down to the BigQuery Omni regions if the query contains `JOIN` statements.
   - Each temporary table is only used for a single cross-cloud query and is not reused even if the same query is repeated multiple times.
   - The transfer size limit for each transfer is 60 GB. Specifically, if you apply a filter on a BigLake table and load the result, it must be smaller than 60 GB. If needed, you can [request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) . There is no limit on scanned bytes.
-  - Cross-cloud join queries employ an internal quota on the rate of queries. If the rate of queries exceeds the quota, you might receive an `  All our servers are busy processing data transferred between regions  ` error. Retrying the query should work in most cases. Contact support to increase the internal quota to support a higher rate of queries.
-  - Cross-cloud joins are only supported in [colocated BigQuery regions](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) with their corresponding BigQuery Omni regions and in the `  US  ` and `  EU  ` multi-regions. Cross-cloud joins that are run in the `  US  ` or `  EU  ` multi-regions can only access data in US or EU BigQuery Omni regions respectively.
-  - If a cross-cloud join query references 10 or more datasets from BigQuery Omni regions, it might fail with an error `  Not found: Dataset <BigQuery dataset> was not found in location <BigQuery Omni region>  ` . To avoid this issue, we recommend [explicitly specifying a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) when you run a cross-cloud join that references more than 10 datasets. Be aware that if you explicitly specify a BigQuery region and your query only contains BigLake tables, then your query is run as a cross-cloud query and incurs data transfer costs.
-  - You can't [query the `  _FILE_NAME  ` pseudo-column](https://docs.cloud.google.com/bigquery/docs/query-aws-data#query_the_file_name_pseudo-column) with cross-cloud joins.
-  - When you reference the columns of a BigLake table in a `  WHERE  ` clause, you can't use `  INTERVAL  ` or `  RANGE  ` literals.
+  - Cross-cloud join queries employ an internal quota on the rate of queries. If the rate of queries exceeds the quota, you might receive an `All our servers are busy processing data transferred between regions` error. Retrying the query should work in most cases. Contact support to increase the internal quota to support a higher rate of queries.
+  - Cross-cloud joins are only supported in [colocated BigQuery regions](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) with their corresponding BigQuery Omni regions and in the `US` and `EU` multi-regions. Cross-cloud joins that are run in the `US` or `EU` multi-regions can only access data in US or EU BigQuery Omni regions respectively.
+  - If a cross-cloud join query references 10 or more datasets from BigQuery Omni regions, it might fail with an error `Not found: Dataset <BigQuery dataset> was not found in location <BigQuery Omni region>` . To avoid this issue, we recommend [explicitly specifying a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) when you run a cross-cloud join that references more than 10 datasets. Be aware that if you explicitly specify a BigQuery region and your query only contains BigLake tables, then your query is run as a cross-cloud query and incurs data transfer costs.
+  - You can't [query the `_FILE_NAME` pseudo-column](https://docs.cloud.google.com/bigquery/docs/query-aws-data#query_the_file_name_pseudo-column) with cross-cloud joins.
+  - When you reference the columns of a BigLake table in a `WHERE` clause, you can't use `INTERVAL` or `RANGE` literals.
   - Cross-cloud join jobs don't report the number of bytes that are processed and transferred from other clouds. This information is available in the child CTAS jobs that are created as part of cross-cloud query execution.
   - [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) referencing BigQuery Omni tables or views are only supported in BigQuery Omni regions.
-  - If your cross-cloud query references `  STRUCT  ` or `  JSON  ` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the BigQuery Omni region that filters `  STRUCT  ` and `  JSON  ` columns and returns only the necessary fields as individual columns.
+  - If your cross-cloud query references `STRUCT` or `JSON` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the BigQuery Omni region that filters `STRUCT` and `JSON` columns and returns only the necessary fields as individual columns.
   - [Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) isn't supported by cross-cloud joins.
-  - Cross-cloud joins don't support joining Omni views using the `  ORDER BY  ` clause.
+  - Cross-cloud joins don't support joining Omni views using the `ORDER BY` clause.
 
 ### Cross-cloud join examples
 
-The following query joins an `  orders  ` table in a BigQuery region with a `  lineitem  ` table in a BigQuery Omni region:
+The following query joins an `orders` table in a BigQuery region with a `lineitem` table in a BigQuery Omni region:
 
 ``` notranslate
 SELECT
@@ -134,7 +134,7 @@ AS (
 );
 ```
 
-After the temporary table is created, the `  JOIN  ` operation completes, and the following query is run:
+After the temporary table is created, the `JOIN` operation completes, and the following query is run:
 
 ``` notranslate
 SELECT
@@ -161,7 +161,7 @@ WHERE c_mktsegment = 'FURNITURE'
 LIMIT 10;
 ```
 
-In this query, the `  LIMIT  ` clause is not pushed down to the BigQuery Omni region. All customers in the `  FURNITURE  ` market segment are transferred to the BigQuery region first, and then the limit of 10 is applied.
+In this query, the `LIMIT` clause is not pushed down to the BigQuery Omni region. All customers in the `FURNITURE` market segment are transferred to the BigQuery region first, and then the limit of 10 is applied.
 
 ## Connectors
 
@@ -187,7 +187,7 @@ You can use [external tables](https://docs.cloud.google.com/bigquery/docs/extern
 
   - BigLake tables on object stores are subject to the same limitations as BigQuery tables. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/quotas#external_tables) .
 
-  - BigLake does not support downscoped credentials from [Dataproc Personal Cluster Authentication](https://docs.cloud.google.com/dataproc/docs/concepts/iam/personal-auth) . As a workaround, to use clusters with Personal Cluster Authentication, you must inject your credentials using an empty [Credential Access Boundary](https://cloud.google.com/dataproc/docs/concepts/iam/personal-auth#create_a_cluster_and_enable_an_interactive_session) with the `  --access-boundary=<(echo -n "{}")  ` flag. For example, the following command enables a credential propagation session in a project named `  myproject  ` for the cluster named `  mycluster  ` :
+  - BigLake does not support downscoped credentials from [Managed Service for Apache Spark Personal Cluster Authentication](https://docs.cloud.google.com/dataproc/docs/concepts/iam/personal-auth) . As a workaround, to use clusters with Personal Cluster Authentication, you must inject your credentials using an empty [Credential Access Boundary](https://cloud.google.com/dataproc/docs/concepts/iam/personal-auth#create_a_cluster_and_enable_an_interactive_session) with the `--access-boundary=<(echo -n "{}")` flag. For example, the following command enables a credential propagation session in a project named `myproject` for the cluster named `mycluster` :
     
         gcloud dataproc clusters enable-personal-auth-session \
             --region=us \
@@ -195,9 +195,9 @@ You can use [external tables](https://docs.cloud.google.com/bigquery/docs/extern
             --access-boundary=<(echo -n "{}") \
             mycluster
     
-    **Caution:** Using an empty credential access boundary removes one layer of protection against attacks through stolen credentials from Dataproc clusters. Stolen credentials have a larger blast radius without downscoping.
+    **Caution:** Using an empty credential access boundary removes one layer of protection against attacks through stolen credentials from Managed Service for Apache Spark clusters. Stolen credentials have a larger blast radius without downscoping.
     
-    As an alternative, you can disable Personal Cluster Authentication and use the [Dataproc virtual machine (VM) service account](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts) as a proxy for user groups.
+    As an alternative, you can disable Personal Cluster Authentication and use the [Managed Service for Apache Spark virtual machine (VM) service account](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts) as a proxy for user groups.
 
   - BigLake tables are read-only. You cannot modify BigLake tables using DML statements or other methods.
 
@@ -265,26 +265,26 @@ When you enable metadata caching for BigLake or object tables, BigQuery triggers
 
   - For automatic refreshes, the cache is refreshed at a system defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in the datastore are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
 
-  - For manual refreshes, you run the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on a schedule that meets your requirements. For BigLake tables, you can refresh the metadata selectively by providing subdirectories of the table data directory. This lets you avoid unnecessary metadata processing. Refreshing the cache manually is a good approach if the files in the datastore are added, deleted, or modified at known intervals, for example as the output of a pipeline.
+  - For manual refreshes, you run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on a schedule that meets your requirements. For BigLake tables, you can refresh the metadata selectively by providing subdirectories of the table data directory. This lets you avoid unnecessary metadata processing. Refreshing the cache manually is a good approach if the files in the datastore are added, deleted, or modified at known intervals, for example as the output of a pipeline.
     
     If you issue multiple concurrent manual refreshes, only one will succeed.
 
 The metadata cache expires after 7 days if it isn't refreshed.
 
-Both manual and automatic cache refreshes are executed with [`  INTERACTIVE  `](https://docs.cloud.google.com/bigquery/docs/running-queries) query priority.
+Both manual and automatic cache refreshes are executed with [`INTERACTIVE`](https://docs.cloud.google.com/bigquery/docs/running-queries) query priority.
 
-### Use `     BACKGROUND    ` reservations
+### Use `BACKGROUND` reservations
 
-If you choose to use automatic refreshes, we recommend that you create a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) , and then create an [assignment with a `  BACKGROUND  ` job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) for the project that runs the metadata cache refresh jobs. With `  BACKGROUND  ` reservations, refresh jobs use a dedicated resource pool which prevents the refresh jobs from competing with user queries, and prevents the jobs from potentially failing if there aren't sufficient resources available for them.
+If you choose to use automatic refreshes, we recommend that you create a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) , and then create an [assignment with a `BACKGROUND` job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) for the project that runs the metadata cache refresh jobs. With `BACKGROUND` reservations, refresh jobs use a dedicated resource pool which prevents the refresh jobs from competing with user queries, and prevents the jobs from potentially failing if there aren't sufficient resources available for them.
 
-While using a shared slot pool incurs no extra cost, using `  BACKGROUND  ` reservations instead provides more consistent performance by allocating a dedicated resource pool, and improves the reliability of refresh jobs and overall query efficiency in BigQuery.
+While using a shared slot pool incurs no extra cost, using `BACKGROUND` reservations instead provides more consistent performance by allocating a dedicated resource pool, and improves the reliability of refresh jobs and overall query efficiency in BigQuery.
 
 You should consider how the staleness interval and metadata caching mode values will interact before you set them. Consider the following examples:
 
-  - If you are manually refreshing the metadata cache for a table, and you set the staleness interval to 2 days, you must run the `  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure every 2 days or less if you want operations against the table to use cached metadata.
+  - If you are manually refreshing the metadata cache for a table, and you set the staleness interval to 2 days, you must run the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure every 2 days or less if you want operations against the table to use cached metadata.
   - If you are automatically refreshing the metadata cache for a table, and you set the staleness interval to 30 minutes, it is possible that some of your operations against the table might read from the datastore if the metadata cache refresh takes on the longer side of the usual 30 to 60 minute window.
 
-To find information about metadata refresh jobs, query the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
+To find information about metadata refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
 ``` notranslate
 SELECT *
@@ -354,7 +354,7 @@ Queries</td>
 <td><br />
 You are <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">billed for the bytes processed</a> by user queries.</td>
 <td><br />
-<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">        QUERY       </code> job type</a> are consumed during query time.</td>
+<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">QUERY</code> job type</a> are consumed during query time.</td>
 </tr>
 <tr class="even">
 <td><br />
@@ -362,7 +362,7 @@ Manually refreshing the metadata cache.</td>
 <td><br />
 You are <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">billed for the bytes processed</a> to refresh the cache.</td>
 <td><br />
-<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">        QUERY       </code> job type</a> are consumed during cache refresh.</td>
+<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">QUERY</code> job type</a> are consumed during cache refresh.</td>
 </tr>
 <tr class="odd">
 <td><br />
@@ -370,9 +370,9 @@ Automatically refreshing the metadata cache.</td>
 <td><br />
 You are <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">billed for the bytes processed</a> to refresh the cache.</td>
 <td><br />
-<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">        BACKGROUND       </code> job type</a> are consumed during cache refresh.<br />
+<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">BACKGROUND</code> job type</a> are consumed during cache refresh.<br />
 <br />
-If there are no <code dir="ltr" translate="no">       BACKGROUND      </code> reservations available for refreshing the metadata cache, BigQuery automatically uses slots in <code dir="ltr" translate="no">       QUERY      </code> reservations instead if you are using the Enterprise or Enterprise Plus edition.</td>
+If there are no <code dir="ltr" translate="no">BACKGROUND</code> reservations available for refreshing the metadata cache, BigQuery automatically uses slots in <code dir="ltr" translate="no">QUERY</code> reservations instead if you are using the Enterprise or Enterprise Plus edition.</td>
 </tr>
 </tbody>
 </table>

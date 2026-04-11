@@ -21,19 +21,16 @@ History-based optimizations are only applied when there is high confidence that 
 
 ## Roles and permissions
 
-  - To enable or disable history-based optimizations, you must have the required permissions to create BigQuery default configurations, and then you must use the `  ALTER PROJECT  ` statement to enable history-based optimizations. Once you've enabled history-based optimizations, all jobs in that project use history-based optimizations, regardless of which user created the job. To learn more about required roles and permissions for default configurations, see [Required roles](https://docs.cloud.google.com/bigquery/docs/default-configuration#required_permissions) for default configurations. To enable history-based optimizations, see [Enable history-based optimizations](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations#enable-history-based-optimization) .
+  - To enable or disable history-based optimizations, you must have the required permissions to create BigQuery default configurations, and then you must use the `ALTER PROJECT` statement to enable history-based optimizations. Once you've enabled history-based optimizations, all jobs in that project use history-based optimizations, regardless of which user created the job. To learn more about required roles and permissions for default configurations, see [Required roles](https://docs.cloud.google.com/bigquery/docs/default-configuration#required_permissions) for default configurations. To enable history-based optimizations, see [Enable history-based optimizations](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations#enable-history-based-optimization) .
 
-  - To review the history-based optimizations for a job using the `  INFORMATION_SCHEMA.JOBS  ` view, you must have the required role. For more information, see [Required role](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#required_role) for `  INFORMATION_SCHEMA.JOBS  ` view.
+  - To review the history-based optimizations for a job using the `INFORMATION_SCHEMA.JOBS` view, you must have the required role. For more information, see [Required role](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#required_role) for `INFORMATION_SCHEMA.JOBS` view.
 
 ## Enable history-based optimizations
 
-History-based optimizations are enabled by default. If history-based optimizations have been disabled for a project or organization, you can manually re-enable history-based optimizations by including the `  default_query_optimizer_options = 'adaptive=on'  ` parameter in your [`  ALTER PROJECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
+History-based optimizations are enabled by default. If history-based optimizations have been disabled for a project or organization, you can manually re-enable history-based optimizations by including the `default_query_optimizer_options = 'adaptive=on'` parameter in your [`ALTER PROJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
 
 ``` notranslate
-ALTER PROJECT PROJECT_NAME
-SET OPTIONS (
-  `region-LOCATION.default_query_optimizer_options` = 'adaptive=on'
-);
+ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=on');
 ```
 
 Replace the following:
@@ -41,17 +38,14 @@ Replace the following:
   - `  PROJECT_NAME  ` : the name of the project
   - `  LOCATION  ` : the location in which jobs should attempt to use history-based optimizations
 
-**Note:** After you enable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `  ALTER PROJECT  ` or `  ALTER ORGANIZATION  ` statement: `  ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.  `
+**Note:** After you enable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `ALTER PROJECT` or `ALTER ORGANIZATION` statement: `ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.`
 
 ## Disable history-based optimizations
 
-To disable history-based optimizations in a project, include the `  default_query_optimizer_options = 'adaptive=off'  ` parameter in the [`  ALTER PROJECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
+To disable history-based optimizations in a project, include the `default_query_optimizer_options = 'adaptive=off'` parameter in the [`ALTER PROJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
 
 ``` notranslate
-ALTER PROJECT PROJECT_NAME
-SET OPTIONS (
-  `region-LOCATION.default_query_optimizer_options` = 'adaptive=off'
-);
+ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=off');
 ```
 
 Replace the following:
@@ -59,7 +53,7 @@ Replace the following:
   - `  PROJECT_NAME  ` : the name of the project
   - `  LOCATION  ` : the location in which jobs should not attempt to use history-based optimizations
 
-**Note:** After you disable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `  ALTER PROJECT  ` or `  ALTER ORGANIZATION  ` statement: `  ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.  `
+**Note:** After you disable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `ALTER PROJECT` or `ALTER ORGANIZATION` statement: `ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.`
 
 ## Review history-based optimizations for a job
 
@@ -67,9 +61,9 @@ To review the history-based optimizations for a job, you can use a SQL query or 
 
 ### SQL
 
-You can use a query to get the history-based optimizations for a job. The query must include [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) and the `  query_info.optimization_details  ` column name.
+You can use a query to get the history-based optimizations for a job. The query must include [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) and the `query_info.optimization_details` column name.
 
-In the following example, the optimization details are returned for a job called `  sample_job  ` . If no history-based optimizations were applied, `  NULL  ` is produced for `  optimization_details  ` :
+In the following example, the optimization details are returned for a job called `sample_job` . If no history-based optimizations were applied, `NULL` is produced for `optimization_details` :
 
     SELECT
       job_id,
@@ -107,9 +101,9 @@ The results look similar to the following:
 
 ### API
 
-To get the optimization details for a job, you can call the [`  jobs.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) .
+To get the optimization details for a job, you can call the [`jobs.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) .
 
-In the following example, the `  jobs.get  ` method returns the optimization details ( [`  optimizationDetails  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#queryinfo) ) in the full response:
+In the following example, the `jobs.get` method returns the optimization details ( [`optimizationDetails`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#queryinfo) ) in the full response:
 
     {
       "jobReference": {
@@ -218,4 +212,4 @@ The results of this query is only an estimation of history-based optimization im
 
 If the result of this sample query is empty, then either no jobs have used history-based optimizations, or all queries were optimized more than 30 days ago.
 
-This query can be applied to other query performance metrics such as `  total_slot_ms  ` and `  total_bytes_billed  ` . For more information, see the schema for [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) .
+This query can be applied to other query performance metrics such as `total_slot_ms` and `total_bytes_billed` . For more information, see the schema for [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) .

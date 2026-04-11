@@ -1,10 +1,10 @@
 # Choose a document processing function
 
-This document provides a comparison of the document processing functions available in BigQuery ML, which are [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) and [`  ML.PROCESS_DOCUMENT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) . You can use the information in this document to help you decide which function to use in cases where the functions have overlapping capabilities.
+This document provides a comparison of the document processing functions available in BigQuery ML, which are [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) and [`ML.PROCESS_DOCUMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) . You can use the information in this document to help you decide which function to use in cases where the functions have overlapping capabilities.
 
 At a high level, the difference between these functions is as follows:
 
-  - `  AI.GENERATE_TEXT  ` is a good choice for performing natural language processing (NLP) tasks where some of the content resides in documents. This function offers the following benefits:
+  - `AI.GENERATE_TEXT` is a good choice for performing natural language processing (NLP) tasks where some of the content resides in documents. This function offers the following benefits:
     
       - Lower costs
       - More language support
@@ -14,11 +14,11 @@ At a high level, the difference between these functions is as follows:
     
     For examples of document processing tasks that work best with this approach, see [Explore document processing capabilities with the Gemini API](https://ai.google.dev/gemini-api/docs/document-processing) .
 
-  - `  ML.PROCESS_DOCUMENT  ` is a good choice for performing document processing tasks that require document parsing and a predefined, structured response.
+  - `ML.PROCESS_DOCUMENT` is a good choice for performing document processing tasks that require document parsing and a predefined, structured response.
 
 ## Function comparison
 
-Use the following table to compare the `  AI.GENERATE_TEXT  ` and `  ML.PROCESS_DOCUMENT  ` functions:
+Use the following table to compare the `AI.GENERATE_TEXT` and `ML.PROCESS_DOCUMENT` functions:
 
 <table>
 <colgroup>
@@ -29,15 +29,15 @@ Use the following table to compare the `  AI.GENERATE_TEXT  ` and `  ML.PROCESS_
 <thead>
 <tr class="header">
 <th></th>
-<th><code dir="ltr" translate="no">       AI.GENERATE_TEXT      </code></th>
-<th><code dir="ltr" translate="no">       ML.PROCESS_DOCUMENT      </code></th>
+<th><code dir="ltr" translate="no">AI.GENERATE_TEXT</code></th>
+<th><code dir="ltr" translate="no">ML.PROCESS_DOCUMENT</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Purpose</td>
 <td><p>Perform any document-related NLP task by passing a prompt to a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Gemini or partner model</a> or to an <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open">open model</a> .</p>
-<p>For example, given a financial document for a company, you can retrieve document information by providing a prompt such as <code dir="ltr" translate="no">        What is       the quarterly revenue for each division?       </code> .</p></td>
+<p>For example, given a financial document for a company, you can retrieve document information by providing a prompt such as <code dir="ltr" translate="no">What is the quarterly revenue for each division?</code> .</p></td>
 <td>Use the <a href="https://docs.cloud.google.com/document-ai">Document AI API</a> to perform specialized document processing for different document types, such as invoices, tax forms, and financial statements. You can also perform document chunking.</td>
 </tr>
 <tr class="even">
@@ -71,7 +71,7 @@ Incurs Vertex AI charges for calls to the model. If you are using a Gemini 2.0 o
 <tr class="odd">
 <td>Supported regions</td>
 <td>Supported in all Generative AI for Vertex AI <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#available-regions">regions</a> .</td>
-<td>Supported in the <code dir="ltr" translate="no">       EU      </code> and <code dir="ltr" translate="no">       US      </code> multi-regions for all processors. Some processors are also available in certain single regions. For more information, see <a href="https://docs.cloud.google.com/document-ai/docs/regions">Regional and multi-regional support</a> .</td>
+<td>Supported in the <code dir="ltr" translate="no">EU</code> and <code dir="ltr" translate="no">US</code> multi-regions for all processors. Some processors are also available in certain single regions. For more information, see <a href="https://docs.cloud.google.com/document-ai/docs/regions">Regional and multi-regional support</a> .</td>
 </tr>
 </tbody>
 </table>

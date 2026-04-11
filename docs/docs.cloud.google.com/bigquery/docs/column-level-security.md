@@ -6,11 +6,11 @@ The instructions in this page use both BigQuery and Data Catalog.
 
 You need to update the table schema to set a policy tag on a column. You can use the Google Cloud console, the bq command-line tool, and the BigQuery API to set a policy tag on a column. Additionally, you can create a table, specify the schema, and specify policy tags within one operation, using the following techniques:
 
-  - The bq command-line tool's `  bq mk  ` and `  bq load  ` commands.
-  - The `  tables.insert  ` API method.
+  - The bq command-line tool's `bq mk` and `bq load` commands.
+  - The `tables.insert` API method.
   - The **Create table** page in the Google Cloud console. If you use the Google Cloud console, you must select **Edit as text** when you add or edit the schema.
 
-**Note:** You cannot use the DDL `  CREATE TABLE  ` statement to specify policy tags.
+**Note:** You cannot use the DDL `CREATE TABLE` statement to specify policy tags.
 
 To enhance column-level access control, you can optionally use [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . Data masking lets you mask sensitive data by substituting null, default, or hashed content in place of the column's actual value.
 
@@ -22,7 +22,7 @@ To enhance column-level access control, you can optionally use [dynamic data mas
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&redirect=https://console.cloud.google.com)
 
@@ -41,7 +41,7 @@ For more information about all policy tag-related roles, see [Roles used with co
 
 The Data Catalog Policy Tag Admin role can create and manage data policy tags.
 
-To grant the Policy Tag Admin role, you must have the `  resourcemanager.projects.setIamPolicy  ` permission on the project for which you want to grant the role. If you don't have the `  resourcemanager.projects.setIamPolicy  ` permission, ask a Project Owner to either grant you the permission, or perform the following steps for you.
+To grant the Policy Tag Admin role, you must have the `resourcemanager.projects.setIamPolicy` permission on the project for which you want to grant the role. If you don't have the `resourcemanager.projects.setIamPolicy` permission, ask a Project Owner to either grant you the permission, or perform the following steps for you.
 
 1.  In the Google Cloud console, go to the IAM page.
     
@@ -61,7 +61,7 @@ To grant the Policy Tag Admin role, you must have the `  resourcemanager.project
 
 The BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles can manage data policies.
 
-To grant either of these roles, you must have the `  resourcemanager.projects.setIamPolicy  ` permission on the project for which you want to grant the role. If you don't have the `  resourcemanager.projects.setIamPolicy  ` permission, ask a Project Owner to either grant you the permission, or perform the following steps for you.
+To grant either of these roles, you must have the `resourcemanager.projects.setIamPolicy` permission on the project for which you want to grant the role. If you don't have the `resourcemanager.projects.setIamPolicy` permission, ask a Project Owner to either grant you the permission, or perform the following steps for you.
 
 1.  In the Google Cloud console, go to the IAM page.
     
@@ -79,13 +79,13 @@ To grant either of these roles, you must have the `  resourcemanager.projects.se
 
 ### The Organization Viewer role
 
-The Organization Viewer role lets users view details about their organization resource. To grant this role, you must have the `  resourcemanager.organizations.setIamPolicy  ` permission on the organization.
+The Organization Viewer role lets users view details about their organization resource. To grant this role, you must have the `resourcemanager.organizations.setIamPolicy` permission on the organization.
 
 ### The Data Catalog Fine-Grained Reader role
 
-Users that need access to the data protected with column-level access control need the Data Catalog Fine-Grained Reader role or any other role that is granted the [`  datacatalog.categories.fineGrainedGet  ` permission](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.categories.fineGrainedGet) . This role is assigned to principals as part of configuring a policy tag.
+Users that need access to the data protected with column-level access control need the Data Catalog Fine-Grained Reader role or any other role that is granted the [`datacatalog.categories.fineGrainedGet` permission](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.categories.fineGrainedGet) . This role is assigned to principals as part of configuring a policy tag.
 
-To grant a user the Fine-Grained Reader role on a policy tag, you must have the `  datacatalog.taxonomies.setIamPolicy  ` permission on the project that contains that policy tag's taxonomy. If you don't have `  datacatalog.taxonomies.setIamPolicy  ` permission, ask a Project Owner to either grant you the permission, or to perform the action for you.
+To grant a user the Fine-Grained Reader role on a policy tag, you must have the `datacatalog.taxonomies.setIamPolicy` permission on the project that contains that policy tag's taxonomy. If you don't have `datacatalog.taxonomies.setIamPolicy` permission, ask a Project Owner to either grant you the permission, or to perform the action for you.
 
 For instructions, see [Set permissions on policy tags](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_permissions_on_policy_tags) .
 
@@ -124,10 +124,10 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### API
 
-To use existing taxonomies, call [`  taxonomies.import  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import) in place of the first two steps of the following procedure.
+To use existing taxonomies, call [`taxonomies.import`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import) in place of the first two steps of the following procedure.
 
-1.  Call [`  taxonomies.create  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/create) to create a taxonomy.
-2.  Call [`  taxonomies.policytag.create  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create) to create a policy tag.
+1.  Call [`taxonomies.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/create) to create a taxonomy.
+2.  Call [`taxonomies.policytag.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create) to create a policy tag.
 
 ### Set permissions on policy tags
 
@@ -151,13 +151,13 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### API
 
-Call [`  taxonomies.policytag.setIamPolicy  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/setIamPolicy) to grant access to a policy tag by assigning principals to appropriate roles.
+Call [`taxonomies.policytag.setIamPolicy`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/setIamPolicy) to grant access to a policy tag by assigning principals to appropriate roles.
 
 ### Set policy tags on columns
 
-The user or service account that sets a policy tag needs the `  datacatalog.taxonomies.get  ` and `  bigquery.tables.setCategory  ` permissions. `  datacatalog.taxonomies.get  ` is included in the Data Catalog Policy Tags Admin and Project Viewer roles. `  bigquery.tables.setCategory  ` is included in the BigQuery Admin ( `  roles/bigquery.admin  ` ) and BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` ) roles.
+The user or service account that sets a policy tag needs the `datacatalog.taxonomies.get` and `bigquery.tables.setCategory` permissions. `datacatalog.taxonomies.get` is included in the Data Catalog Policy Tags Admin and Project Viewer roles. `bigquery.tables.setCategory` is included in the BigQuery Admin ( `roles/bigquery.admin` ) and BigQuery Data Owner ( `roles/bigquery.dataOwner` ) roles.
 
-To view taxonomies and policy tags across all projects in an organization in Google Cloud console, users need the `  resourcemanager.organizations.get  ` permission, which is included in the Organization Viewer role.
+To view taxonomies and policy tags across all projects in an organization in Google Cloud console, users need the `resourcemanager.organizations.get` permission, which is included in the Organization Viewer role.
 
 **Note:** You can assign only one policy tag per column.
 
@@ -198,7 +198,7 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
       - dataset is the name of the dataset that contains the table you're updating.
       - table is the name of the table you're updating.
 
-2.  Modify schema.json to set a policy tag on a column. For the value of the `  names  ` field of `  policyTags  ` , use the [policy tag resource name](https://docs.cloud.google.com/bigquery/docs/column-level-security#retrieve_policy_tag_name) .
+2.  Modify schema.json to set a policy tag on a column. For the value of the `names` field of `policyTags` , use the [policy tag resource name](https://docs.cloud.google.com/bigquery/docs/column-level-security#retrieve_policy_tag_name) .
     
     ``` notranslate
     [
@@ -224,16 +224,16 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 
 ### API
 
-For existing tables, call [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) , or for new tables call [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) . Use the `  schema  ` property of the `  Table  ` object that you pass in to set a policy tag in your schema definition. See the command-line example schema to see how to set a policy tag.
+For existing tables, call [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) , or for new tables call [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) . Use the `schema` property of the `Table` object that you pass in to set a policy tag in your schema definition. See the command-line example schema to see how to set a policy tag.
 
-When working with an existing table, the `  tables.patch  ` method is preferred, because the `  tables.update  ` method replaces the entire table resource.
+When working with an existing table, the `tables.patch` method is preferred, because the `tables.update` method replaces the entire table resource.
 
 #### Other ways to set policy tags on columns
 
 You can also set policy tags when you:
 
-  - Use [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) to create a table. Pass in a schema to use for creation of the table.
-  - Use [`  bq load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) to load data to a table. Pass in a schema to use when you load the table.
+  - Use [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) to create a table. Pass in a schema to use for creation of the table.
+  - Use [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) to load data to a table. Pass in a schema to use when you load the table.
 
 For general schema information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
@@ -247,7 +247,7 @@ The principal that enforces access control must have either the BigQuery Admin r
 
 To stop enforcement of access control if it is on, click **Enforce access control** to toggle the control.
 
-If you have data policies associated with any of the policy tags in the taxonomy, you must delete all of the data policies in the taxonomy before you stop enforcement of access control. If you delete the data policies by using the BigQuery Data Policy API, you must delete all data policies with a `  dataPolicyType  ` of `  DATA_MASKING_POLICY  ` . For more information, see [Delete data policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking#delete_data_policies) .
+If you have data policies associated with any of the policy tags in the taxonomy, you must delete all of the data policies in the taxonomy before you stop enforcement of access control. If you delete the data policies by using the BigQuery Data Policy API, you must delete all data policies with a `dataPolicyType` of `DATA_MASKING_POLICY` . For more information, see [Delete data policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking#delete_data_policies) .
 
 #### Create a data policy
 
@@ -267,7 +267,7 @@ To enforce access control, follow these steps:
 
 ### API
 
-Use the [`  create  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create) and pass in a [`  DataPolicy  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) where the `  dataPolicyType  ` field is set to `  COLUMN_LEVEL_SECURITY_POLICY  ` .
+Use the [`create` method](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create) and pass in a [`DataPolicy` resource](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) where the `dataPolicyType` field is set to `COLUMN_LEVEL_SECURITY_POLICY` .
 
 #### Get a data policy
 
@@ -775,7 +775,7 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### API
 
-Call [`  taxonomies.policytag.setIamPolicy  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/setIamPolicy) to grant access to a policy tag by assigning principals to appropriate roles.
+Call [`taxonomies.policytag.setIamPolicy`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/setIamPolicy) to grant access to a policy tag by assigning principals to appropriate roles.
 
 ### Retrieve policy tag resource names
 
@@ -803,7 +803,7 @@ In the **Current schema** page, under **Policy tags** , click **X** .
 
 ### bq
 
-**Note:** To clear a policy tag, you must explicitly set the `  names  ` field of `  policyTags  ` to an empty list, `  []  ` . If you delete the `  policyTags  ` field, it has no effect on existing policy tags. This is by design, to prevent accidental removal of policy tags that would expose sensitive data.
+**Note:** To clear a policy tag, you must explicitly set the `names` field of `policyTags` to an empty list, `[]` . If you delete the `policyTags` field, it has no effect on existing policy tags. This is by design, to prevent accidental removal of policy tags that would expose sensitive data.
 
 1.  Retrieve the schema and save it to a local file.
     
@@ -844,11 +844,11 @@ In the **Current schema** page, under **Policy tags** , click **X** .
 
 ### API
 
-**Note:** To clear a policy tag, you must explicitly set the `  names  ` field of `  policyTags  ` to an empty list, `  []  ` . If you delete the `  policyTags  ` field, it has no effect on existing policy tags. This is by design, to prevent accidental removal of policy tags that would expose sensitive data.
+**Note:** To clear a policy tag, you must explicitly set the `names` field of `policyTags` to an empty list, `[]` . If you delete the `policyTags` field, it has no effect on existing policy tags. This is by design, to prevent accidental removal of policy tags that would expose sensitive data.
 
-Call [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) and use the `  schema  ` property to clear a policy tag in your schema definition. See the command-line example schema to see how to clear a policy tag.
+Call [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) and use the `schema` property to clear a policy tag in your schema definition. See the command-line example schema to see how to clear a policy tag.
 
-Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Delete policy tags
 
@@ -888,15 +888,15 @@ To delete an entire taxonomy, follow these steps:
 
 If a user has dataset access and has the Data Catalog Fine-Grained Reader role, the column data is available to the user. The user runs a query as normal.
 
-If a user has dataset access but does not have the Data Catalog Fine-Grained Reader role, the column data is not available to the user. If such a user runs `  SELECT *  ` , they receive an error which lists the columns that the user cannot access. To resolve the error, you can either:
+If a user has dataset access but does not have the Data Catalog Fine-Grained Reader role, the column data is not available to the user. If such a user runs `SELECT *` , they receive an error which lists the columns that the user cannot access. To resolve the error, you can either:
 
-  - Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `  ssn  ` column, but does have access to the remaining columns, the user can run the following query:
+  - Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `ssn` column, but does have access to the remaining columns, the user can run the following query:
     
     ``` notranslate
     SELECT * EXCEPT (ssn) FROM ...
     ```
     
-    In the preceding example, the `  EXCEPT  ` clause excludes the `  ssn  ` column.
+    In the preceding example, the `EXCEPT` clause excludes the `ssn` column.
 
   - Ask a Data Catalog Administrator to add the user as a Data Catalog Fine-Grained Reader to the relevant data class. The error message provides the full name of the policy tag for which the user would need access.
 
@@ -910,7 +910,7 @@ There are two kinds of views in BigQuery, logical views and authorized views. Bo
 
 For more information, see [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
 
-### Does column-level access control work on `     STRUCT    ` or `     RECORD    ` columns?
+### Does column-level access control work on `STRUCT` or `RECORD` columns?
 
 Yes. You can apply policy tags to the leaf fields only, and only those fields are protected.
 
@@ -930,7 +930,7 @@ Yes. You cannot copy columns if you don't have access to them.
 
 The following operations verify column-level permissions.
 
-  - `  SELECT  ` queries with destination tables
+  - `SELECT` queries with destination tables
   - [Table copy jobs](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table)
   - [Data extract jobs](https://docs.cloud.google.com/bigquery/docs/exporting-data) (for example, to Cloud Storage)
 
@@ -978,7 +978,7 @@ To troubleshoot this issue, confirm the following details:
 
   - On the [**Policy tag taxonomy** page](https://console.cloud.google.com/bigquery/policy-tags) , confirm that the **Enforce access control** toggle is in the **On** position.
 
-  - Ensure that your queries are not using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use `  bq  ` command-line interface tool to test your queries, then you should use the `  --nouse_cache flag  ` to disable the query cache. For example:
+  - Ensure that your queries are not using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use `bq` command-line interface tool to test your queries, then you should use the `--nouse_cache flag` to disable the query cache. For example:
     
     ``` notranslate
     bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"

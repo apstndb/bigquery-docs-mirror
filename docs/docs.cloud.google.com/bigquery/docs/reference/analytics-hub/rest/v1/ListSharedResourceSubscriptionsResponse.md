@@ -13,28 +13,21 @@ Message for response to the listing of shared resource subscriptions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sharedResourceSubscriptions&quot;: [
-    {
-      object (Subscription)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sharedResourceSubscriptions&quot;: [{object (Subscription)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sharedResourceSubscriptions[]  `
+`sharedResourceSubscriptions[]`
 
-`  object ( Subscription  ` )
+` object ( Subscription  ` )
 
 The list of subscriptions.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 Next page token.

@@ -10,7 +10,7 @@ Starts a previously created migration workflow. I.e., the state transitions from
 
 ### HTTP request
 
-`  POST https://bigquerymigration.googleapis.com/v2alpha/{name=projects/*/locations/*/workflows/*}:start  `
+`POST https://bigquerymigration.googleapis.com/v2alpha/{name=projects/*/locations/*/workflows/*}:start`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,11 +18,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The unique identifier for the migration workflow. Example: `  projects/123/locations/us/workflows/1234  `
+Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234`
 
 ### Request body
 
@@ -36,14 +36,14 @@ If successful, the response body is an empty JSON object.
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  bigquerymigration.workflows.update  `
+  - `bigquerymigration.workflows.update`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

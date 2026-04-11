@@ -1,8 +1,8 @@
 # The ML.MIN\_MAX\_SCALER function
 
-This document describes the `  ML.MIN_MAX_SCALER  ` function, which lets you scale a numerical\_expression to the range `  [0, 1]  ` . Negative values are set to `  0  ` , and values above `  1  ` are set to `  1  ` .
+This document describes the `ML.MIN_MAX_SCALER` function, which lets you scale a numerical\_expression to the range `[0, 1]` . Negative values are set to `0` , and values above `1` are set to `1` .
 
-When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the range of `  [0,1]  ` is automatically used in prediction, and predicted values outside that range are similarly capped.
+When used in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the range of `[0,1]` is automatically used in prediction, and predicted values outside that range are similarly capped.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
@@ -17,17 +17,17 @@ ML.MIN_MAX_SCALER(numerical_expression) OVER()
 
 ### Arguments
 
-`  ML.MIN_MAX_SCALER  ` takes the following argument:
+`ML.MIN_MAX_SCALER` takes the following argument:
 
-  - `  numerical_expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
+  - `numerical_expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
 
 ## Output
 
-`  ML.MIN_MAX_SCALER  ` returns a `  FLOAT64  ` value that represents the scaled numerical expression.
+`ML.MIN_MAX_SCALER` returns a `FLOAT64` value that represents the scaled numerical expression.
 
 ## Example
 
-The following example scales a set of numerical expressions to values between `  0  ` and `  1  ` :
+The following example scales a set of numerical expressions to values between `0` and `1` :
 
 ``` notranslate
 SELECT

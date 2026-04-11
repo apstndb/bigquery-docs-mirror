@@ -2,10 +2,10 @@ Describes how the search index was deleted.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  QUERY  `
+`QUERY`
 
 Search index was deleted using a DDL query.

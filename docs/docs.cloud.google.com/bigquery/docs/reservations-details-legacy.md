@@ -57,7 +57,7 @@ For example, suppose you purchased an annual commitment at 6:00 PM on October 5,
 
 ### Expired commitments
 
-If you have flat-rate commitments, they are removed when they expire unless a renewal plan is specified. To make sure you don't lose any capacity, the extra slots are moved to the baseline of a system-created reservation called `  system-created-Enterprise  ` . After the commitments expire, your bill consists of three parts:
+If you have flat-rate commitments, they are removed when they expire unless a renewal plan is specified. To make sure you don't lose any capacity, the extra slots are moved to the baseline of a system-created reservation called `system-created-Enterprise` . After the commitments expire, your bill consists of three parts:
 
 1.  Remaining commitments.
 2.  Baseline slots that are not covered by the remaining commitments.
@@ -75,7 +75,7 @@ The 100 slots are removed and you are charged based on the 100 baseline.
 
 You have one commitment that expires with 200 slots, and one reservation with 100 baseline slots.
 
-The 200 slots are removed and `  system-created-Enterprise  ` is created with 100 baseline. You are charged based on the total 200 baseline.
+The 200 slots are removed and `system-created-Enterprise` is created with 100 baseline. You are charged based on the total 200 baseline.
 
 #### Scenario 3: Commitments with Annual flat-rate renewal plan
 

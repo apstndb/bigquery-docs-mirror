@@ -11,7 +11,7 @@ Requests that a job be cancelled. This call will return immediately, and the cli
 
 ### HTTP request
 
-`  POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs/{jobId}/cancel  `
+`POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs/{jobId}/cancel`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,15 +19,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the job to cancel
 
-`  jobId  `
+`jobId`
 
-`  string  `
+`string`
 
 Required. Job ID of the job to cancel
 
@@ -35,14 +35,14 @@ Required. Job ID of the job to cancel
 
 Parameters
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 The geographic location of the job. You must [specify the location](https://cloud.google.com/bigquery/docs/locations#specify_locations) to run the job for the following scenarios:
 
-  - If the location to run a job is not in the `  us  ` or the `  eu  ` multi-regional location
-  - If the job's location is in a single region (for example, `  us-central1  ` )
+  - If the location to run a job is not in the `us` or the `eu` multi-regional location
+  - If the job's location is in a single region (for example, `us-central1` )
 
 ### Request body
 
@@ -65,27 +65,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;kind&quot;: string,
-  &quot;job&quot;: {
-    object (Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;job&quot;: {object (Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 The resource type of the response.
 
-`  job  `
+`job`
 
-`  object ( Job  ` )
+` object ( Job  ` )
 
 The final state of the job.
 
@@ -93,7 +88,7 @@ The final state of the job.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

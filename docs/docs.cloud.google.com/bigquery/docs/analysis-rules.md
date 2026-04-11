@@ -26,7 +26,7 @@ A view that includes this analysis rule must include the [aggregation threshold 
 
 ### Define an aggregation threshold analysis rule for a view
 
-You can define an aggregation threshold analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `  CREATE VIEW  ` statement:
+You can define an aggregation threshold analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `CREATE VIEW` statement:
 
 ``` notranslate
 CREATE OR REPLACE VIEW VIEW_NAME
@@ -47,7 +47,7 @@ CREATE OR REPLACE VIEW VIEW_NAME
 
 Definitions:
 
-  - `  aggregation_threshold_policy  ` : The aggregation threshold policy for the aggregation threshold analysis rule.
+  - `aggregation_threshold_policy` : The aggregation threshold policy for the aggregation threshold analysis rule.
     
       - VIEW\_NAME : The path and name of the view.
     
@@ -59,17 +59,17 @@ Definitions:
         
         The values in the privacy unit column cannot be directly projected through a query, and you can use only [analysis rule-supported aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_policy_functions) to aggregate the data in this column.
 
-  - `  join_restriction_policy  ` (optional): The optional join restriction policy for the aggregation threshold analysis rule.
+  - `join_restriction_policy` (optional): The optional join restriction policy for the aggregation threshold analysis rule.
     
       - JOIN\_CONDITION : The type of join restriction to enforce on a view. This can be one of the following values:
         
-          - `  JOIN_ALL  ` : All columns in `  join_allowed_columns  ` must be inner joined upon for this view to be queried.
+          - `JOIN_ALL` : All columns in `join_allowed_columns` must be inner joined upon for this view to be queried.
         
-          - `  JOIN_ANY  ` : At least one column in `  join_allowed_columns  ` must be joined upon for this view to be queried.
+          - `JOIN_ANY` : At least one column in `join_allowed_columns` must be joined upon for this view to be queried.
         
-          - `  JOIN_BLOCKED  ` : This view can't be joined along any column. Don't set `  join_allowed_columns  ` in this case.
+          - `JOIN_BLOCKED` : This view can't be joined along any column. Don't set `join_allowed_columns` in this case.
         
-          - `  JOIN_NOT_REQUIRED  ` : A join is not required to query this view. If a join is used, only the columns in `  join_allowed_columns  ` can be used.
+          - `JOIN_NOT_REQUIRED` : A join is not required to query this view. If a join is used, only the columns in `join_allowed_columns` can be used.
     
       - JOIN\_ALLOWED\_COLUMNS : The columns that can be part of a join operation.
 
@@ -77,7 +77,7 @@ Definitions:
 
 Example:
 
-In the following example, an aggregation threshold analysis rule is created on a view called `  ExamView  ` . `  ExamView  ` references a table called [`  ExamTable  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
+In the following example, an aggregation threshold analysis rule is created on a view called `ExamView` . `ExamView` references a table called [`ExamTable`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
 
     CREATE OR REPLACE VIEW mydataset.ExamView
     OPTIONS(
@@ -85,11 +85,11 @@ In the following example, an aggregation threshold analysis rule is created on a
     )
     AS ( SELECT * FROM mydataset.ExamTable );
 
-To review the `  privacy_policy  ` syntax for `  CREATE VIEW  ` , see the `  OPTIONS  ` list in [`  CREATE VIEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) .
+To review the `privacy_policy` syntax for `CREATE VIEW` , see the `OPTIONS` list in [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) .
 
 ### Update an aggregation threshold analysis rule for a view
 
-You can change the aggregation threshold analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `  ALTER VIEW  ` statement:
+You can change the aggregation threshold analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `ALTER VIEW` statement:
 
 ``` notranslate
 ALTER VIEW VIEW_NAME
@@ -107,22 +107,22 @@ For more information about the values you can set for the privacy policies in th
 
 Example:
 
-In the following example, an aggregation threshold analysis rule is updated on a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) .
+In the following example, an aggregation threshold analysis rule is updated on a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) .
 
     ALTER VIEW mydataset.ExamView
     SET OPTIONS (
       privacy_policy= '{"aggregation_threshold_policy": {"threshold": 50, "privacy_unit_column": "last_name"}}'
     );
 
-To review the `  privacy_policy  ` syntax for `  ALTER VIEW  ` , see the `  OPTIONS  ` list in [`  ALTER VIEW SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
+To review the `privacy_policy` syntax for `ALTER VIEW` , see the `OPTIONS` list in [`ALTER VIEW SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
 
 ### Query an aggregation threshold analysis rule–enforced view
 
-You can query a view that has an aggregation threshold analysis rule with the [`  AGGREGATION_THRESHOLD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) clause. The query must include aggregation functions, and you can use only [aggregation threshold-supported aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_policy_functions) in this query.
+You can query a view that has an aggregation threshold analysis rule with the [`AGGREGATION_THRESHOLD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) clause. The query must include aggregation functions, and you can use only [aggregation threshold-supported aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_policy_functions) in this query.
 
 Example:
 
-In the following example, an aggregation threshold analysis rule is queried on a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
+In the following example, an aggregation threshold analysis rule is queried on a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
 
     SELECT WITH AGGREGATION_THRESHOLD
       test_id, COUNT(DISTINCT last_name) AS student_count
@@ -138,7 +138,7 @@ In the following example, an aggregation threshold analysis rule is queried on a
 
 The aggregation threshold analysis rule can also optionally include the join restriction policy. To learn how to use the join restriction policy with an analysis rule, see [Join restriction policy in analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules#join-restriction-policy) .
 
-To review additional examples for the `  AGGREGATION_THRESHOLD  ` clause, see [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+To review additional examples for the `AGGREGATION_THRESHOLD` clause, see [`AGGREGATION_THRESHOLD` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
 ## Differential privacy analysis rule
 
@@ -158,7 +158,7 @@ To provide feedback or request support for features in preview, send an email to
 
 **Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
-You can define a differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `  CREATE VIEW  ` statement:
+You can define a differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `CREATE VIEW` statement:
 
 ``` notranslate
 CREATE OR REPLACE VIEW VIEW_NAME
@@ -183,31 +183,31 @@ CREATE OR REPLACE VIEW VIEW_NAME
 
 Definitions:
 
-  - `  differential_privacy_policy  ` : The differential privacy policy for the differential privacy analysis rule.
+  - `differential_privacy_policy` : The differential privacy policy for the differential privacy analysis rule.
     
       - PRIVACY\_UNIT\_COLUMN : The [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_privacy_unit_id) that identifies the entity in a dataset that is protected using a privacy analysis rule. This value is a JSON string.
     
-      - MAX\_EPSILON\_PER\_QUERY : Determines the amount of noise added to the results per query and prevents the total [epsilon](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_epsilon) from being reached by a single query. This value is a JSON number from `  0.001  ` to `  1e+15  ` .
+      - MAX\_EPSILON\_PER\_QUERY : Determines the amount of noise added to the results per query and prevents the total [epsilon](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_epsilon) from being reached by a single query. This value is a JSON number from `0.001` to `1e+15` .
     
-      - EPSILON\_BUDGET : The [epsilon](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_epsilon) budget that represents the total epsilon that can be used across all differentially private queries on the view. This value must be larger than `  MAX_EPSILON_PER_QUERY  ` , and is a JSON number from `  0.001  ` to `  1e+15  ` .
+      - EPSILON\_BUDGET : The [epsilon](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_epsilon) budget that represents the total epsilon that can be used across all differentially private queries on the view. This value must be larger than `MAX_EPSILON_PER_QUERY` , and is a JSON number from `0.001` to `1e+15` .
     
-      - DELTA\_PER\_QUERY : The probability that any row in the result fails to be epsilon-differentially private. This value is a JSON number from `  1e-15  ` to `  1  ` .
+      - DELTA\_PER\_QUERY : The probability that any row in the result fails to be epsilon-differentially private. This value is a JSON number from `1e-15` to `1` .
     
-      - DELTA\_BUDGET : The [delta](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_delta) budget, which represents the total delta that can be used across all differentially private queries on the view. This value must be larger than `  DELTA_PER_QUERY  ` , and is a JSON number from `  1e-15  ` to `  1000  ` .
+      - DELTA\_BUDGET : The [delta](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_delta) budget, which represents the total delta that can be used across all differentially private queries on the view. This value must be larger than `DELTA_PER_QUERY` , and is a JSON number from `1e-15` to `1000` .
     
       - MAX\_GROUPS\_CONTRIBUTED (optional): Limits the [number of groups](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_max_groups) to which an entity in a privacy unit column can contribute. This value must be a non-negative JSON integer.
 
-  - `  join_restriction_policy  ` (optional): The optional join restriction policy for the differential privacy analysis rule.
+  - `join_restriction_policy` (optional): The optional join restriction policy for the differential privacy analysis rule.
     
       - JOIN\_CONDITION : The type of join restriction to enforce on a view. This can be one of the following values:
         
-          - `  JOIN_ALL  ` : All columns in `  join_allowed_columns  ` must be inner joined upon for this view to be queried.
+          - `JOIN_ALL` : All columns in `join_allowed_columns` must be inner joined upon for this view to be queried.
         
-          - `  JOIN_ANY  ` : At least one column in `  join_allowed_columns  ` must be joined upon for this view to be queried.
+          - `JOIN_ANY` : At least one column in `join_allowed_columns` must be joined upon for this view to be queried.
         
-          - `  JOIN_BLOCKED  ` : This view can't be joined along any column. Don't set `  join_allowed_columns  ` in this case.
+          - `JOIN_BLOCKED` : This view can't be joined along any column. Don't set `join_allowed_columns` in this case.
         
-          - `  JOIN_NOT_REQUIRED  ` : A join is not required to query this view. If a join is used, only the columns in `  join_allowed_columns  ` can be used.
+          - `JOIN_NOT_REQUIRED` : A join is not required to query this view. If a join is used, only the columns in `join_allowed_columns` can be used.
     
       - JOIN\_ALLOWED\_COLUMNS : The columns that can be part of a join operation.
 
@@ -215,7 +215,7 @@ Definitions:
 
 Example:
 
-In the following example, a differential privacy analysis rule is created on a view called `  ExamView  ` . `  ExamView  ` references a table called [`  ExamTable  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
+In the following example, a differential privacy analysis rule is created on a view called `ExamView` . `ExamView` references a table called [`ExamTable`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
 
     CREATE OR REPLACE VIEW mydataset.ExamView
     OPTIONS(
@@ -226,13 +226,13 @@ In the following example, a differential privacy analysis rule is created on a v
     -- NOTE: Delta and epsilon parameters are set very high due to the small
     -- dataset. In practice, these should be much smaller.
 
-To review the `  privacy_policy  ` syntax for `  CREATE VIEW  ` , see the `  OPTIONS  ` list in [`  CREATE VIEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) .
+To review the `privacy_policy` syntax for `CREATE VIEW` , see the `OPTIONS` list in [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) .
 
 ### Update a differential privacy analysis rule for a view
 
 **Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
-You can change the differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `  ALTER VIEW  ` statement:
+You can change the differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `ALTER VIEW` statement:
 
 ``` notranslate
 ALTER VIEW VIEW_NAME
@@ -256,7 +256,7 @@ For more information about the values you can set for the privacy policies in th
 
 Example:
 
-In the following example, a differential privacy analysis rule is updated on a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#dp_define_privacy_view) .
+In the following example, a differential privacy analysis rule is updated on a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#dp_define_privacy_view) .
 
     ALTER VIEW mydataset.ExamView
     SET OPTIONS(
@@ -266,19 +266,19 @@ In the following example, a differential privacy analysis rule is updated on a v
     -- NOTE: Delta and epsilon parameters are set very high due to the small
     -- dataset. In practice, these should be much smaller.
 
-To review the `  privacy_policy  ` syntax for `  ALTER VIEW  ` , see the `  OPTIONS  ` list in [`  ALTER VIEW SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
+To review the `privacy_policy` syntax for `ALTER VIEW` , see the `OPTIONS` list in [`ALTER VIEW SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
 
 ### Query a differential privacy analysis rule–enforced view
 
 **Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
-You can query a view that has a differential privacy analysis rule with the `  DIFFERENTIAL_PRIVACY  ` clause. To review the syntax and additional examples for the `  DIFFERENTIAL_PRIVACY  ` clause, see [`  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
+You can query a view that has a differential privacy analysis rule with the `DIFFERENTIAL_PRIVACY` clause. To review the syntax and additional examples for the `DIFFERENTIAL_PRIVACY` clause, see [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
 
 **Note:** If you've just created a view with a differential privacy analysis rule, briefly wait before running any queries on it.
 
 Example:
 
-In the following example, a differential privacy analysis rule is queried on a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) . The differentially private data should be successfully returned from `  ExamView  ` because `  epsilon  ` , `  delta  ` , and `  max_groups_contributed  ` all satisfy the conditions of the differential analysis rule in `  ExamView  ` .
+In the following example, a differential privacy analysis rule is queried on a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) . The differentially private data should be successfully returned from `ExamView` because `epsilon` , `delta` , and `max_groups_contributed` all satisfy the conditions of the differential analysis rule in `ExamView` .
 
     -- Query an analysis–rule enforced view called ExamView.
     SELECT
@@ -301,11 +301,11 @@ In the following example, a differential privacy analysis rule is queried on a v
 
 #### Block a query with an out-of-bounds epsilon
 
-Epsilon can be used to add or remove noise. More epsilon means less noise will be added. If you want to ensure that a differentially private query has a minimal amount of noise, pay close attention to the value for `  max_epsilon_per_query  ` in your differential privacy analysis rule.
+Epsilon can be used to add or remove noise. More epsilon means less noise will be added. If you want to ensure that a differentially private query has a minimal amount of noise, pay close attention to the value for `max_epsilon_per_query` in your differential privacy analysis rule.
 
 Example:
 
-In the following query, the query is blocked with an error because `  epsilon  ` in the `  DIFFERENTIAL_PRIVACY  ` clause is higher than `  max_epsilon_per_query  ` in [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
+In the following query, the query is blocked with an error because `epsilon` in the `DIFFERENTIAL_PRIVACY` clause is higher than `max_epsilon_per_query` in [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -333,11 +333,11 @@ After you've created your view, briefly wait, and then run the following query:
 
 #### Block queries that have exceeded an epsilon budget
 
-Epsilon can be used to add or remove noise. Less epsilon increases noise, more epsilon reduces noise. Even when noise is high, multiple queries over the same data can eventually reveal the un-noised version of the data. To stop this from happening, you can create an epsilon budget. If you want to add an epsilon budget, review the value for `  epsilon_budget  ` in the differential privacy analysis rule for your view.
+Epsilon can be used to add or remove noise. Less epsilon increases noise, more epsilon reduces noise. Even when noise is high, multiple queries over the same data can eventually reveal the un-noised version of the data. To stop this from happening, you can create an epsilon budget. If you want to add an epsilon budget, review the value for `epsilon_budget` in the differential privacy analysis rule for your view.
 
 Example:
 
-Run the following query three times. On the third time, the query is blocked because the total epsilon used is `  30  ` , but `  epsilon_budget  ` in [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) only allows `  25.6  ` :
+Run the following query three times. On the third time, the query is blocked because the total epsilon used is `30` , but `epsilon_budget` in [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) only allows `25.6` :
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -372,7 +372,7 @@ A view that includes this analysis rule must only include the [join restriction 
 
 ### Define a list overlap analysis rule for a view
 
-You can define a list overlap analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `  CREATE VIEW  ` statement:
+You can define a list overlap analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `CREATE VIEW` statement:
 
 ``` notranslate
 CREATE OR REPLACE VIEW VIEW_NAME
@@ -389,13 +389,13 @@ CREATE OR REPLACE VIEW VIEW_NAME
 
 Definitions:
 
-  - `  join_restriction_policy  ` : The join restriction policy for the list overlap analysis rule.
+  - `join_restriction_policy` : The join restriction policy for the list overlap analysis rule.
     
       - JOIN\_CONDITION : The type of list overlap to enforce on a view. This can be one of the following values:
         
-          - `  JOIN_ALL  ` : All columns in `  join_allowed_columns  ` must be inner joined upon for this view to be queried.
+          - `JOIN_ALL` : All columns in `join_allowed_columns` must be inner joined upon for this view to be queried.
         
-          - `  JOIN_ANY  ` : At least one column in `  join_allowed_columns  ` must be joined upon for this view to be queried.
+          - `JOIN_ANY` : At least one column in `join_allowed_columns` must be joined upon for this view to be queried.
     
       - JOIN\_ALLOWED\_COLUMNS : The columns that can be part of a join operation.
 
@@ -403,7 +403,7 @@ Definitions:
 
 Example:
 
-In the following example, a list overlap analysis rule is created on a view called `  ExamView  ` . `  ExamView  ` references a table called [`  ExamTable  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
+In the following example, a list overlap analysis rule is created on a view called `ExamView` . `ExamView` references a table called [`ExamTable`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -414,7 +414,7 @@ In the following example, a list overlap analysis rule is created on a view call
 
 ### Update a list overlap analysis rule for a view
 
-You can change the list overlap analysis rule for a view with a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `  ALTER VIEW  ` statement:
+You can change the list overlap analysis rule for a view with a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `ALTER VIEW` statement:
 
 ``` notranslate
 ALTER VIEW VIEW_NAME
@@ -432,18 +432,18 @@ For more information about the values you can set for the privacy policy in the 
 
 Example:
 
-In the following example, a list overlap analysis rule is updated on a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_list_overlap_view) .
+In the following example, a list overlap analysis rule is updated on a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_list_overlap_view) .
 
     ALTER VIEW mydataset.ExamView
     SET OPTIONS(
       privacy_policy= '{"join_restriction_policy": {"join_condition": "JOIN_ALL", "join_allowed_columns": ["test_id", "test_score"]}}'
     );
 
-To review the `  privacy_policy  ` syntax for `  ALTER VIEW  ` , see the `  OPTIONS  ` list in [`  ALTER VIEW SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
+To review the `privacy_policy` syntax for `ALTER VIEW` , see the `OPTIONS` list in [`ALTER VIEW SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
 
 ### Query a list overlap analysis rule–enforced view
 
-You can perform a join operation on a view that has a list overlap analysis rule. To review the syntax for the `  JOIN  ` operation, see [Join operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) .
+You can perform a join operation on a view that has a list overlap analysis rule. To review the syntax for the `JOIN` operation, see [Join operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) .
 
 #### Block a join operation with no overlap
 
@@ -451,7 +451,7 @@ You can block a join operation if it doesn't include at least one overlap with a
 
 Example:
 
-In the following query, a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_list_overlap_view) is joined with a table called [`  StudentTable  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) . Because the view contains the `  JOIN_ANY  ` list overlap analysis rule, at least one overlapping row from `  ExamView  ` and `  StudentTable  ` is required. Because there is at least one overlap, the query runs successfully.
+In the following query, a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_list_overlap_view) is joined with a table called [`StudentTable`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) . Because the view contains the `JOIN_ANY` list overlap analysis rule, at least one overlapping row from `ExamView` and `StudentTable` is required. Because there is at least one overlap, the query runs successfully.
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -480,7 +480,7 @@ You can block a join operation if it doesn't include an overlap with all require
 
 Example:
 
-In the following example, a join operation is attempted on a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_list_overlap_view) and a table called [`  StudentTable  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) , but the query fails. The failure occurs because the `  ExamView  ` list overlap analysis rule requires joining on all columns present in the join restriction policy. Because the table called [`  StudentTable  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) doesn't contain these columns, not all rows overlap and an error is produced.
+In the following example, a join operation is attempted on a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_list_overlap_view) and a table called [`StudentTable`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) , but the query fails. The failure occurs because the `ExamView` list overlap analysis rule requires joining on all columns present in the join restriction policy. Because the table called [`StudentTable`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) doesn't contain these columns, not all rows overlap and an error is produced.
 
     -- Create a view that includes ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -522,7 +522,7 @@ You can block a join operation if it doesn't include at least one required colum
 
 Example:
 
-In the following query, the query is blocked with an error because the query does not contain any join operations on the `  test_score  ` or `  test_id  ` column in [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) and [`  StudentTable  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
+In the following query, the query is blocked with an error because the query does not contain any join operations on the `test_score` or `test_id` column in [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) and [`StudentTable`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#example-tables) :
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -536,7 +536,7 @@ In the following query, the query is blocked with an error because the query doe
     SELECT *
     FROM mydataset.ExamView INNER JOIN mydataset.StudentTable USING (last_name);
 
-To get the preceding query to run, in the `  USING  ` clause, replace `  last_name  ` with `  test_score  ` .
+To get the preceding query to run, in the `USING` clause, replace `last_name` with `test_score` .
 
 ### Block a query with no join operation
 
@@ -557,7 +557,7 @@ If the query must have a join operation, you can block the query if no join oper
 
 Example:
 
-In the following query, the query is blocked because there is no join operation with [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) in the query:
+In the following query, the query is blocked because there is no join operation with [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) in the query:
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -584,7 +584,7 @@ If the query must have a join operation and the join operation must have at leas
 
 Example:
 
-In the following query, the query is blocked because the join operation does not include a column in the [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) `  join_allowed_columns  ` array:
+In the following query, the query is blocked because the join operation does not include a column in the [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) `join_allowed_columns` array:
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -597,7 +597,7 @@ In the following query, the query is blocked because the join operation does not
     SELECT *
     FROM mydataset.ExamView INNER JOIN mydataset.StudentTable USING (last_name);
 
-To get the preceding query to run, in the `  USING  ` clause, replace `  last_name  ` with `  test_score  ` .
+To get the preceding query to run, in the `USING` clause, replace `last_name` with `test_score` .
 
 ### Block all join operations
 
@@ -611,7 +611,7 @@ You can block all join operations. To do this, only include the following parts 
 
 Example:
 
-In the following query, the query is blocked because there is a join operation with a view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
+In the following query, the query is blocked because there is a join operation with a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -624,7 +624,7 @@ In the following query, the query is blocked because there is a join operation w
     SELECT *
     FROM mydataset.ExamView INNER JOIN mydataset.StudentTable USING (last_name);
 
-To get the preceding query to run, remove the `  INNER JOIN  ` operation.
+To get the preceding query to run, remove the `INNER JOIN` operation.
 
 ### Block an inner join operation without all required columns
 
@@ -639,7 +639,7 @@ You can block an inner join operation if it doesn't include all required columns
 
 Example:
 
-In the following query, the query is blocked with an error because the query does not include `  test_score  ` in the join operation with the view called [`  ExamView  `](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
+In the following query, the query is blocked with an error because the query does not include `test_score` in the join operation with the view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) :
 
     -- Create a view that includes a table called ExamTable.
     CREATE OR REPLACE VIEW mydataset.ExamView
@@ -653,11 +653,11 @@ In the following query, the query is blocked with an error because the query doe
     SELECT *
     FROM mydataset.ExamView INNER JOIN mydataset.StudentTable USING (last_name);
 
-To get the preceding query to run, replace `  USING (last_name)  ` with `  USING (last_name, test_score)  ` .
+To get the preceding query to run, replace `USING (last_name)` with `USING (last_name, test_score)` .
 
 ## Example tables
 
-Several examples in this document reference two tables called `  ExamTable  ` and `  StudentTable  ` . `  ExamTable  ` contains a list of test scores produced by students and `  StudentTable  ` contains a list of students and their test scores.
+Several examples in this document reference two tables called `ExamTable` and `StudentTable` . `ExamTable` contains a list of test scores produced by students and `StudentTable` contains a list of students and their test scores.
 
 To test the examples in this document, first add the following sample tables to your project:
 
@@ -703,7 +703,7 @@ A differential privacy analysis rule has the following limitations:
 
 A list overlap analysis rule has the following limitations:
 
-  - If you combine an aggregation threshold analysis rule or a differential privacy analysis rule with a list overlap analysis rule and you don't place the `  privacy_unit_column  ` as a `  join_allowed_column  ` in the list overlap analysis rule, you might not be able to join any columns in certain situations.
+  - If you combine an aggregation threshold analysis rule or a differential privacy analysis rule with a list overlap analysis rule and you don't place the `privacy_unit_column` as a `join_allowed_column` in the list overlap analysis rule, you might not be able to join any columns in certain situations.
 
 ## Pricing
 

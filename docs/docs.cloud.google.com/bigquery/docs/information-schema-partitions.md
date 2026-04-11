@@ -4,32 +4,32 @@
 
 This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The `  INFORMATION_SCHEMA.PARTITIONS  ` view contains one row for each partition.
+The `INFORMATION_SCHEMA.PARTITIONS` view contains one row for each partition.
 
-Querying the `  INFORMATION_SCHEMA.PARTITIONS  ` view is limited to 1000 tables. To get the data about partitions at the project level, you can split the query into multiple queries and then join the results. If you exceed the limit, you might encounter an error similar to the following. To narrow down your results, you can use filters with the `  WHERE  ` statement, for example, `  table_name = 'mytable'  ` and `  total_logical_bytes IS NOT NULL  ` .
+Querying the `INFORMATION_SCHEMA.PARTITIONS` view is limited to 1000 tables. To get the data about partitions at the project level, you can split the query into multiple queries and then join the results. If you exceed the limit, you might encounter an error similar to the following. To narrow down your results, you can use filters with the `WHERE` statement, for example, `table_name = 'mytable'` and `total_logical_bytes IS NOT NULL` .
 
     INFORMATION_SCHEMA.PARTITIONS query attempted to read too many tables. Please add more restrictive filters.
 
 ## Required permissions
 
-To query the `  INFORMATION_SCHEMA.PARTITIONS  ` view, you need the following Identity and Access Management (IAM) permissions:
+To query the `INFORMATION_SCHEMA.PARTITIONS` view, you need the following Identity and Access Management (IAM) permissions:
 
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.list  `
+  - `bigquery.tables.get`
+  - `bigquery.tables.list`
 
 Each of the following predefined IAM roles includes the preceding permissions:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataViewer  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataViewer`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.PARTITIONS  ` view, the query results typically contain one row for each partition. The exception is when there is a combination of long-term and active storage tier data in the [`  __UNPARTITIONED__  ` partition](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_data_in_the_streaming_buffer) . In that case, the view returns two rows for the `  __UNPARTITIONED__  ` partition, one for each storage tier.
+When you query the `INFORMATION_SCHEMA.PARTITIONS` view, the query results typically contain one row for each partition. The exception is when there is a combination of long-term and active storage tier data in the [`__UNPARTITIONED__` partition](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_data_in_the_streaming_buffer) . In that case, the view returns two rows for the `__UNPARTITIONED__` partition, one for each storage tier.
 
-The `  INFORMATION_SCHEMA.PARTITIONS  ` view has the following schema:
+The `INFORMATION_SCHEMA.PARTITIONS` view has the following schema:
 
 <table>
 <colgroup>
@@ -46,67 +46,67 @@ The `  INFORMATION_SCHEMA.PARTITIONS  ` view has the following schema:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       table_catalog      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">table_catalog</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The project ID of the project that contains the table.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       table_schema      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the dataset that contains the table, also referred to as the <code dir="ltr" translate="no">       datasetId      </code> .</td>
+<td><code dir="ltr" translate="no">table_schema</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The name of the dataset that contains the table, also referred to as the <code dir="ltr" translate="no">datasetId</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       table_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the table, also referred to as the <code dir="ltr" translate="no">       tableId      </code> .</td>
+<td><code dir="ltr" translate="no">table_name</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The name of the table, also referred to as the <code dir="ltr" translate="no">tableId</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       partition_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>A single partition's ID. For unpartitioned tables, the value is <code dir="ltr" translate="no">       NULL      </code> . For partitioned tables that contain rows with <code dir="ltr" translate="no">       NULL      </code> values in the partitioning column, the value is <code dir="ltr" translate="no">       __NULL__      </code> .</td>
+<td><code dir="ltr" translate="no">partition_id</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>A single partition's ID. For unpartitioned tables, the value is <code dir="ltr" translate="no">NULL</code> . For partitioned tables that contain rows with <code dir="ltr" translate="no">NULL</code> values in the partitioning column, the value is <code dir="ltr" translate="no">__NULL__</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       total_rows      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td><code dir="ltr" translate="no">total_rows</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The total number of rows in the partition.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       total_logical_bytes      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td><code dir="ltr" translate="no">total_logical_bytes</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The total number of logical bytes in the partition.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       total_billable_bytes      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The total number of billable bytes in the partition. If billing for your storage is based on physical (compressed) bytes, this value will not match the <code dir="ltr" translate="no">       TOTAL_LOGICAL_BYTES      </code> number.</td>
+<td><code dir="ltr" translate="no">total_billable_bytes</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
+<td>The total number of billable bytes in the partition. If billing for your storage is based on physical (compressed) bytes, this value will not match the <code dir="ltr" translate="no">TOTAL_LOGICAL_BYTES</code> number.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       last_modified_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">last_modified_time</code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>The most recent time that data was written to the partition. It is used to calculate a partition's eligibility for long-term storage. After 90 days, the partition automatically transitions from active storage to long-term storage. For more information, see <a href="https://cloud.google.com/bigquery/pricing#storage">BigQuery storage pricing</a> . This field is updated when data is inserted, loaded, streamed, or modified within the partition. Modifications that involve record deletions might not be reflected.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       storage_tier      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">storage_tier</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The partition's storage tier:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">         ACTIVE        </code> : the partition is billed as <a href="https://cloud.google.com/bigquery/pricing#storage">active storage</a></li>
-<li><code dir="ltr" translate="no">         LONG_TERM        </code> : the partition is billed as <a href="https://cloud.google.com/bigquery/pricing#storage">long-term storage</a></li>
+<li><code dir="ltr" translate="no">ACTIVE</code> : the partition is billed as <a href="https://cloud.google.com/bigquery/pricing#storage">active storage</a></li>
+<li><code dir="ltr" translate="no">LONG_TERM</code> : the partition is billed as <a href="https://cloud.google.com/bigquery/pricing#storage">long-term storage</a></li>
 </ul></td>
 </tr>
 </tbody>
 </table>
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
 Queries against this view must include a dataset qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-| View name                                                                                                                        | Resource scope | Region scope     |
-| -------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------- |
-| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.PARTITIONS       ` | Dataset level  | Dataset location |
+| View name                                                                                 | Resource scope | Region scope     |
+| ----------------------------------------------------------------------------------------- | -------------- | ---------------- |
+| `[         PROJECT_ID        .]         DATASET_ID        .INFORMATION_SCHEMA.PARTITIONS` | Dataset level  | Dataset location |
 
 Replace the following:
 
@@ -117,7 +117,7 @@ Replace the following:
 
 **Example 1**
 
-The following example calculates the number of logical bytes used by each storage tier in all of the tables in a dataset named `  mydataset  ` :
+The following example calculates the number of logical bytes used by each storage tier in all of the tables in a dataset named `mydataset` :
 
 ``` notranslate
 SELECT
@@ -129,7 +129,7 @@ GROUP BY
   storage_tier;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The results look similar to the following:
 
@@ -142,7 +142,7 @@ The results look similar to the following:
 
 **Example 2**
 
-The following example creates a column that extracts the partition type from the `  partition_id  ` field and aggregates partition information at the table level for the public `  bigquery-public-data.covid19_usafacts  ` dataset:
+The following example creates a column that extracts the partition type from the `partition_id` field and aggregates partition information at the table level for the public `bigquery-public-data.covid19_usafacts` dataset:
 
 ``` notranslate
 SELECT

@@ -9,7 +9,7 @@ Retrieves a BI reservation.
 
 ### HTTP request
 
-`  GET https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/biReservation}  `
+`GET https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/biReservation}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -17,15 +17,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the requested reservation, for example: `  projects/{projectId}/locations/{locationId}/biReservation  `
+Required. Name of the requested reservation, for example: `projects/{projectId}/locations/{locationId}/biReservation`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.bireservations.get  `
+  - `bigquery.bireservations.get`
 
 ### Request body
 
@@ -39,7 +39,7 @@ If successful, the response body contains an instance of `  BiReservation  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

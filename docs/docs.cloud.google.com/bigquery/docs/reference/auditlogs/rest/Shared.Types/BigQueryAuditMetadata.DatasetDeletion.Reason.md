@@ -2,14 +2,14 @@ Describes how the dataset was deleted.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  DELETE  `
+`DELETE`
 
 Dataset was deleted using the datasets.delete API.
 
-`  QUERY  `
+`QUERY`
 
 Dataset was deleted using a query job, e.g., DROP SCHEMA statement.

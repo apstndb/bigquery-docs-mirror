@@ -48,7 +48,7 @@ For a list of data sources supported by Datastream, see <a href="https://docs.cl
 <td><strong>Federation to external data sources</strong></td>
 <td>This method enables access to external data without loading it into BigQuery.<br />
 <br />
-BigQuery supports accessing select <a href="https://docs.cloud.google.com/bigquery/docs/external-data-sources">external data sources</a> through Cloud Storage and federated queries. The advantage of this method is that you don't need to load the data before transforming it for subsequent use. You can perform the transformation by running <code dir="ltr" translate="no">       SELECT      </code> statements over the external data.</td>
+BigQuery supports accessing select <a href="https://docs.cloud.google.com/bigquery/docs/external-data-sources">external data sources</a> through Cloud Storage and federated queries. The advantage of this method is that you don't need to load the data before transforming it for subsequent use. You can perform the transformation by running <code dir="ltr" translate="no">SELECT</code> statements over the external data.</td>
 </tr>
 </tbody>
 </table>
@@ -73,7 +73,7 @@ You can also use the following programmatic methods to load the data:
 <br />
 If your source data changes infrequently, or you don't need continuously updated results, load jobs can be a less expensive, less resource-intensive way to load your data into BigQuery.<br />
 <br />
-The loaded data can be in Avro, CSV, JSON, ORC, or Parquet format. To create the load job, you can also use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements"><code dir="ltr" translate="no">        LOAD DATA       </code></a> SQL statement.<br />
+The loaded data can be in Avro, CSV, JSON, ORC, or Parquet format. To create the load job, you can also use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements"><code dir="ltr" translate="no">LOAD DATA</code></a> SQL statement.<br />
 <br />
 Popular open source systems, such as <a href="https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example">Spark</a> and various <a href="https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#etl-data-integration">ETL partners</a> , also support batch loading data into BigQuery.<br />
 <br />

@@ -8,7 +8,7 @@ Read more about the Cloud Client Libraries and the older Google API Client Libra
 
 ### C++
 
-For more information about installing the C++ library, see the [GitHub `  README  `](https://github.com/googleapis/google-cloud-cpp/tree/master/google/cloud/bigquery/quickstart) .
+For more information about installing the C++ library, see the [GitHub `README`](https://github.com/googleapis/google-cloud-cpp/tree/master/google/cloud/bigquery/quickstart) .
 
 ### C\#
 
@@ -28,7 +28,7 @@ For more information, see [Setting Up a Go Development Environment](https://docs
 
 ### Java
 
-If you are using [Maven](https://maven.apache.org/) , add the following to your `  pom.xml  ` file. For more information about BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/java/docs/bom) .
+If you are using [Maven](https://maven.apache.org/) , add the following to your `pom.xml` file. For more information about BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/java/docs/bom) .
 
     <dependencyManagement>
       <dependencies>
@@ -847,7 +847,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://googleapis.dev/cpp/google-cloud-bigquery/latest/)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/google-cloud-cpp/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D%5Bc%2B%2B%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D%5Bc%2B%2B%5D)
   - [Source code](https://github.com/googleapis/google-cloud-cpp)
 
 ### C\#
@@ -857,7 +857,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Storage.V1/latest)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/google-cloud-dotnet/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bc%23%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bc%23%5D)
   - [Source code](https://github.com/googleapis/google-cloud-dotnet)
 
 ### Go
@@ -867,7 +867,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://pkg.go.dev/cloud.google.com/go/bigquery/storage?tab=doc)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/google-cloud-go/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bgo%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bgo%5D)
   - [Source code](https://github.com/googleapis/google-cloud-go)
 
 ### Java
@@ -877,7 +877,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/com.google.cloud.bigquery.storage.v1)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/java-bigquerystorage/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bjava%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bjava%5D)
   - [Source code](https://github.com/googleapis/java-bigquerystorage)
 
 ### Node.js
@@ -887,7 +887,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://googleapis.dev/nodejs/bigquery/latest/index.html)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/nodejs-bigquery-storage/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bnode.js%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bnode.js%5D)
   - [Source code](https://github.com/googleapis/nodejs-bigquery-storage)
 
 ### PHP
@@ -897,7 +897,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/google-cloud-php/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bphp%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bphp%5D)
   - [Source code](https://github.com/googleapis/google-cloud-php)
 
 ### Python
@@ -907,7 +907,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/google-cloud-python/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bpython%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bpython%5D)
   - [Source code](https://github.com/googleapis/google-cloud-python)
 
 ### Ruby
@@ -917,7 +917,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://googleapis.dev/ruby/google-cloud-bigquery-storage/latest/index.html)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/google-cloud-ruby/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bruby%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bruby%5D)
   - [Source code](https://github.com/googleapis/google-cloud-ruby)
 
 ### What's next?

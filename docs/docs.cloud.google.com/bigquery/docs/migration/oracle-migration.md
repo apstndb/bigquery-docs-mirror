@@ -126,7 +126,7 @@ Oracle provides [Data Guard](https://www.oracle.com/database/data-guard/) as a d
 
 BigQuery is fully managed and different from traditional database systems in its complete backup functionality. You don't need to consider server, storage failures, system bugs, and physical data corruptions. BigQuery replicates data across different data centers depending on the [dataset location](https://docs.cloud.google.com/bigquery/docs/locations) to maximize reliability and availability. BigQuery multi-region functionality replicates data across different regions and protects against unavailability of a single zone within the region. BigQuery single-region functionality replicates data across different zones within the same region.
 
-BigQuery lets you query historical snapshots of tables up to seven days and restore deleted tables within two days by using [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) . You can copy a deleted table (in order to restore it) by using the [snapshot syntax](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) ( `  dataset.table@timestamp  ` ). You can [export](https://docs.cloud.google.com/bigquery/docs/exporting-data) data from BigQuery tables for additional backup needs such as to recover from accidental user operations. Proven backup strategy and schedules used for existing data warehouse (DWH) systems can be used for backups.
+BigQuery lets you query historical snapshots of tables up to seven days and restore deleted tables within two days by using [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) . You can copy a deleted table (in order to restore it) by using the [snapshot syntax](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) ( `dataset.table@timestamp` ). You can [export](https://docs.cloud.google.com/bigquery/docs/exporting-data) data from BigQuery tables for additional backup needs such as to recover from accidental user operations. Proven backup strategy and schedules used for existing data warehouse (DWH) systems can be used for backups.
 
 Batch operations and the snapshotting technique allow different backup strategies for BigQuery, so you don't need to export unchanged tables and partitions frequently. One export backup of the partition or table is enough after the load or ETL operation finishes. To reduce backup cost, you can store export files in Cloud Storage [Nearline Storage or Coldline Storage](https://docs.cloud.google.com/storage/docs/storage-classes) and define a [lifecycle policy](https://docs.cloud.google.com/storage/docs/lifecycle) to delete files after a certain amount of time, depending on the data retention requirements.
 
@@ -241,14 +241,14 @@ Table partitioning is widely used in Oracle data warehouses. In contrast to Orac
 BigQuery implements three types of [table partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) that allow queries to specify predicate filters based on the partitioning column to reduce the amount of data scanned.
 
   - [Tables partitioned by ingestion time](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) : Tables are partitioned based on the data's ingestion time.
-  - [Tables partitioned by column](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables are partitioned based on a `  TIMESTAMP  ` or `  DATE  ` column.
+  - [Tables partitioned by column](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables are partitioned based on a `TIMESTAMP` or `DATE` column.
   - [Tables partitioned by integer range](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) : Tables are partitioned based on an integer column.
 
 For more information about limits and quotas applied to partitioned tables in BigQuery, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
 If the BigQuery restrictions affect the functionality of the migrated database, consider using [sharding](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#dt_partition_shard) instead of partitioning.
 
-Further, BigQuery does not support `  EXCHANGE PARTITION  ` , `  SPLIT PARTITION  ` , or converting a nonpartitioned table to a partitioned one.
+Further, BigQuery does not support `EXCHANGE PARTITION` , `SPLIT PARTITION` , or converting a nonpartitioned table to a partitioned one.
 
 ### Clustering
 
@@ -294,7 +294,7 @@ One of the main goals of relational database normalization is to reduce data red
 
 BigQuery technology leverages a combination of columnar data access and processing, in-memory storage, and distributed processing to provide quality query performance.
 
-When designing a BigQuery DWH schema, creating a fact table in a flat table structure (consolidating all the dimension tables into a single record in the fact table) is better for storage utilization than using multiple DWH dimensions tables. On top of less storage utilization, having a flat table in BigQuery leads to less `  JOIN  ` usage. The following diagram illustrates an example of flattening your schema.
+When designing a BigQuery DWH schema, creating a fact table in a flat table structure (consolidating all the dimension tables into a single record in the fact table) is better for storage utilization than using multiple DWH dimensions tables. On top of less storage utilization, having a flat table in BigQuery leads to less `JOIN` usage. The following diagram illustrates an example of flattening your schema.
 
 ![Sales management database](https://docs.cloud.google.com/static/bigquery/images/oracle-migration-sales-management.png)
 
@@ -307,7 +307,7 @@ Figure 1 shows a fictional sales management database that includes four tables:
   - Location table
   - Customer table
 
-The primary key for the sales table is the `  OrderNum  ` , which also contains foreign keys to the other three tables.
+The primary key for the sales table is the `OrderNum` , which also contains foreign keys to the other three tables.
 
 ![Sample sales data in a star schema](https://docs.cloud.google.com/static/bigquery/images/oracle-migration-sample-data-star-schema.png)
 
@@ -347,7 +347,7 @@ Figure 1: Sample sales data in a star schema
 | 26       | Mountain View | CA    | 90210   |
 | 27       | Chicago       | IL    | 60613   |
 
-#### Query to flatten the data using `     LEFT OUTER JOIN    `
+#### Query to flatten the data using `LEFT OUTER JOIN`
 
     #standardSQL
     INSERT INTO flattened
@@ -373,7 +373,7 @@ Figure 1: Sample sales data in a star schema
     LEFT OUTER JOIN location
       ON location.locationID = orders.locationID
 
-**Note:** BigQuery processes `  JOIN  ` s from left to right (top to bottom). Placing `  JOIN  ` s that reduce the number of records as early as possible in the chain increases query efficiency by reducing response time.
+**Note:** BigQuery processes `JOIN` s from left to right (top to bottom). Placing `JOIN` s that reduce the number of records as early as possible in the chain increases query efficiency by reducing response time.
 
 #### Output of the flattened data
 
@@ -473,15 +473,15 @@ Figure 1: Sample sales data in a star schema
 
 In order to design and create a DWH schema from a relational schema (for example, star and snowflake schemas holding dimension and fact tables), BigQuery presents the nested and repeated fields functionality. Therefore, relationships can be preserved in a similar way as a relational normalized (or partial normalized) DWH schema without affecting the performance. For more information, see [performance best practices](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-input#denormalize_data_whenever_possible) .
 
-To better understand the implementation of nested and repeated fields, look at a simple relational schema of a `  CUSTOMERS  ` table and `  ORDER  ` / `  SALES  ` table. They are two different tables, one for each entity, and the relationships are defined using a key such as a primary key and a foreign key as the link between the tables while querying using `  JOIN  ` s. BigQuery nested and repeated fields let you preserve the same relationship between the entities in one single table. This can be implemented by having all the customer data, while the orders data is nested for each of the customers. For more information, see [Specifying nested and repeated columns](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
+To better understand the implementation of nested and repeated fields, look at a simple relational schema of a `CUSTOMERS` table and `ORDER` / `SALES` table. They are two different tables, one for each entity, and the relationships are defined using a key such as a primary key and a foreign key as the link between the tables while querying using `JOIN` s. BigQuery nested and repeated fields let you preserve the same relationship between the entities in one single table. This can be implemented by having all the customer data, while the orders data is nested for each of the customers. For more information, see [Specifying nested and repeated columns](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 To convert the flat structure into a nested or repeated schema, nest the fields as follows:
 
-  - `  CustomerID  ` , `  FName  ` , `  LName  ` nested into a new field called `  Customer  ` .
-  - `  SalesPersonID  ` , `  FName  ` , `  LName  ` nested into a new field called `  Salesperson  ` .
-  - `  LocationID  ` , `  city  ` , `  state  ` , `  zip code  ` nested into a new field called `  Location  ` .
+  - `CustomerID` , `FName` , `LName` nested into a new field called `Customer` .
+  - `SalesPersonID` , `FName` , `LName` nested into a new field called `Salesperson` .
+  - `LocationID` , `city` , `state` , `zip code` nested into a new field called `Location` .
 
-Fields `  OrderNum  ` and `  amount  ` are not nested, as they represent unique elements.
+Fields `OrderNum` and `amount` are not nested, as they represent unique elements.
 
 You want to make your schema flexible enough to allow for every order to have more than one customer: a primary and a secondary. The customer field is marked as repeated. The resulting schema is shown in Figure 2, which illustrates nested and repeated fields.
 
@@ -493,7 +493,7 @@ In some cases, denormalization using nested and repeated fields does not lead to
 
 #### Surrogate keys
 
-It is common to identify rows with unique keys within the tables. Sequences are commonly used at Oracle to create these keys. In BigQuery you can create surrogate keys by using `  row_number  ` and `  partition by  ` functions. For more information, see [BigQuery and surrogate keys: a practical approach](https://cloud.google.com/blog/products/data-analytics/bigquery-and-surrogate-keys-practical-approach) .
+It is common to identify rows with unique keys within the tables. Sequences are commonly used at Oracle to create these keys. In BigQuery you can create surrogate keys by using `row_number` and `partition by` functions. For more information, see [BigQuery and surrogate keys: a practical approach](https://cloud.google.com/blog/products/data-analytics/bigquery-and-surrogate-keys-practical-approach) .
 
 #### Keeping track of changes and history
 
@@ -527,7 +527,7 @@ It is recommended to perform migration in phases by identifying appropriate use 
 
 Migration of the initial data from the existing Oracle data warehouse to BigQuery might be different from the incremental ETL/ELT pipelines depending on the data size and the network bandwidth. The same ETL/ELT pipelines, can be used if the data size is a couple of terabytes.
 
-If the data is up to a few terabytes, dumping the data and using `  gcloud storage  ` for the transfer can be much more efficient than using [JdbcIO](https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/jdbc/JdbcIO.html) -like programmatic database extraction methodology, because programmatic approaches might need much more granular performance tuning. If the data size is more than a few terabytes and the data is stored in cloud or online storage (such as Amazon Simple Storage Service (Amazon S3)), consider using [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . For large-scale transfers (especially transfers with limited network bandwidth), [Transfer Appliance](https://docs.cloud.google.com/transfer-appliance) is a useful option.
+If the data is up to a few terabytes, dumping the data and using `gcloud storage` for the transfer can be much more efficient than using [JdbcIO](https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/jdbc/JdbcIO.html) -like programmatic database extraction methodology, because programmatic approaches might need much more granular performance tuning. If the data size is more than a few terabytes and the data is stored in cloud or online storage (such as Amazon Simple Storage Service (Amazon S3)), consider using [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . For large-scale transfers (especially transfers with limited network bandwidth), [Transfer Appliance](https://docs.cloud.google.com/transfer-appliance) is a useful option.
 
 #### Constraints for initial load
 
@@ -543,7 +543,7 @@ When planning for data migration, consider the following:
 
 Data transfer using a batch method indicates that the data would be exported consistently in a single process (for example, exporting the Oracle DWH schema data into CSV, Avro, or Parquet files or importing to Cloud Storage to create datasets on BigQuery. All the ETL tools and concepts explained in [ETL/ELT migration](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#etl-elt-migration) can be used for the initial load.
 
-If you do not want to use an ETL/ELT tool for the initial load, you can write custom scripts to export data to files (CSV, Avro, or Parquet) and upload that data to Cloud Storage using `  gcloud storage  ` , BigQuery Data Transfer Service, or Transfer Appliance. For more information about performance tuning large data transfers and transfer options, see [Transferring your large data sets](https://docs.cloud.google.com/solutions/transferring-big-data-sets-to-gcp) . Then load data from Cloud Storage to [BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction) .
+If you do not want to use an ETL/ELT tool for the initial load, you can write custom scripts to export data to files (CSV, Avro, or Parquet) and upload that data to Cloud Storage using `gcloud storage` , BigQuery Data Transfer Service, or Transfer Appliance. For more information about performance tuning large data transfers and transfer options, see [Transferring your large data sets](https://docs.cloud.google.com/solutions/transferring-big-data-sets-to-gcp) . Then load data from Cloud Storage to [BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction) .
 
 Cloud Storage is ideal for handling the initial landing for data. Cloud Storage is a highly available and durable object storage service with no limitations on the number of files, and you pay only for the storage you use. The service is optimized to work with other Google Cloud services such as BigQuery and Dataflow.
 
@@ -565,15 +565,15 @@ No special license is required for [LogMiner](https://docs.oracle.com/en/databas
 
 #### SQL-based CDC
 
-This is the incremental ETL approach in which SQL queries continuously poll the source tables for any changes depending on a monotonically increasing key and a timestamp column that holds the last modified or inserted date. If there is no monotonically increasing key, using the timestamp column (modified date) with a small precision (seconds) can cause duplicate records or missed data depending on the volume and comparison operator, such as `  >  ` or `  >=  ` .
+This is the incremental ETL approach in which SQL queries continuously poll the source tables for any changes depending on a monotonically increasing key and a timestamp column that holds the last modified or inserted date. If there is no monotonically increasing key, using the timestamp column (modified date) with a small precision (seconds) can cause duplicate records or missed data depending on the volume and comparison operator, such as `>` or `>=` .
 
 To overcome such issues, you can use higher precision in timestamp columns such as six fractional digits (microseconds, which is the maximum supported precision in BigQuery, or you can add deduplication tasks in your ETL/ELT pipeline, depending on the business keys and data characteristics.
 
-There should be an index on the key or timestamp column for better extract performance and less impact on the source database. Delete operations are a challenge for this methodology because they should be handled in the source application in a soft delete way, such as puttint a deleted flag and updating `  last_modified_date  ` . An alternative solution can be logging these operations in another table using a trigger.
+There should be an index on the key or timestamp column for better extract performance and less impact on the source database. Delete operations are a challenge for this methodology because they should be handled in the source application in a soft delete way, such as puttint a deleted flag and updating `last_modified_date` . An alternative solution can be logging these operations in another table using a trigger.
 
 #### Triggers
 
-Database triggers can be created on source tables to log changes into shadow journal tables. Journal tables can hold entire rows to keep track of every column change, or they can only keep the primary key with the operation type (insert, update, or delete). Then changed data can be captured with an SQL-based approach described in [SQL-based CDC](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#cdc-streaming-oracle-bigquery) . Using triggers can affect the transaction performance and double the single-row DML operation latency if a full row is stored. Storing only the primary key can reduce this overhead, but in that case, a `  JOIN  ` operation with the original table is required in the SQL-based extraction, which misses the intermediate change.
+Database triggers can be created on source tables to log changes into shadow journal tables. Journal tables can hold entire rows to keep track of every column change, or they can only keep the primary key with the operation type (insert, update, or delete). Then changed data can be captured with an SQL-based approach described in [SQL-based CDC](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#cdc-streaming-oracle-bigquery) . Using triggers can affect the transaction performance and double the single-row DML operation latency if a full row is stored. Storing only the primary key can reduce this overhead, but in that case, a `JOIN` operation with the original table is required in the SQL-based extraction, which misses the intermediate change.
 
 ### ETL/ELT migration
 
@@ -596,7 +596,7 @@ If you want to rearchitect your data pipelines, we recommend that you strongly c
 
 [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion) is a managed [CDAP](https://cdap.io/) on Google Cloud offering a visual interface with many plugins for tasks such as drag-and-drop and pipeline developments. Cloud Data Fusion can be used for capturing data from many different kinds of source systems and offers batch and streaming replication capabilities. Cloud Data Fusion or Oracle plugins can be used to capture data from an Oracle. A BigQuery plugin can be used to load the data to BigQuery and handle schema updates.
 
-No output schema is defined both on source and sink plugins, and `  select * from  ` is used in the source plugin to replicate new columns as well.
+No output schema is defined both on source and sink plugins, and `select * from` is used in the source plugin to replicate new columns as well.
 
 You can use the Cloud Data Fusion Wrangle feature for data cleaning and preparing.
 
@@ -733,9 +733,9 @@ The preceding code is provided for demonstration purposes and cannot be used as 
 
 [Dataprep](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction) is a data service for visually exploring, cleaning, and preparing structured and unstructured data for analysis, reporting, and machine learning. You export the source data into JSON or CSV files, transform the data using Dataprep, and load the data using Dataflow. For an example, see [Oracle data (ETL) to BigQuery using Dataflow and Dataprep](https://medium.com/google-cloud/oracle-data-to-google-bigquery-using-google-cloud-dataflow-and-dataprep-20884571a9e5) .
 
-##### Dataproc
+##### Managed Service for Apache Spark
 
-[Dataproc](https://docs.cloud.google.com/dataproc) is a Google managed Hadoop service. You can use Sqoop to export data from Oracle and many relational databases into Cloud Storage as Avro files, and then you can load Avro files into BigQuery using the `  bq tool  ` . It is very common to install ETL tools like CDAP on Hadoop that use JDBC to extract data and Apache Spark or MapReduce for transformations of the data.
+[Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) is a Google managed Hadoop service. You can use Sqoop to export data from Oracle and many relational databases into Cloud Storage as Avro files, and then you can load Avro files into BigQuery using the `  bq tool  ` . It is very common to install ETL tools like CDAP on Hadoop that use JDBC to extract data and Apache Spark or MapReduce for transformations of the data.
 
 #### Partner tools for data migration
 

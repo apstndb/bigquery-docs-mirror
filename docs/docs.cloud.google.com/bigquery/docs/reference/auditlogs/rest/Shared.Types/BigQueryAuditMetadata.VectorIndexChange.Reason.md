@@ -2,10 +2,10 @@ Describes how the vector index was changed.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  QUERY  `
+`QUERY`
 
 Vector index was changed using a DDL query.

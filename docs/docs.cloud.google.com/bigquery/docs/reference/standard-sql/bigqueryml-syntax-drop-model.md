@@ -1,12 +1,12 @@
 # The DROP MODEL statement
 
-To delete a model in BigQuery ML, use the `  DROP MODEL  ` or the `  DROP MODEL IF EXISTS  ` DDL statement.
+To delete a model in BigQuery ML, use the `DROP MODEL` or the `DROP MODEL IF EXISTS` DDL statement.
 
-The `  DROP MODEL  ` DDL statement deletes a model in the specified dataset. If the model name does not exist in the dataset, the following error is returned:
+The `DROP MODEL` DDL statement deletes a model in the specified dataset. If the model name does not exist in the dataset, the following error is returned:
 
-`  Error: Not found: Model myproject:mydataset.mymodel  `
+`Error: Not found: Model myproject:mydataset.mymodel`
 
-The `  DROP MODEL IF EXISTS  ` DDL statement deletes a model in the specified dataset only if the model exists. If the model name does not exist in the dataset, no error is returned, and no action is taken.
+The `DROP MODEL IF EXISTS` DDL statement deletes a model in the specified dataset only if the model exists. If the model name does not exist in the dataset, no error is returned, and no action is taken.
 
 If you are deleting a model in another project, you must specify the project, dataset, and model in the following format: \`\[PROJECT\].\[DATASET\].\[MODEL\]\` (including the backticks); for example, \`myproject.mydataset.mymodel\`.
 
@@ -24,9 +24,9 @@ For more information about supported SQL statements and functions for different 
 
 Where:
 
-**`  {DROP MODEL | DROP MODEL IF EXISTS}  `** is one of the following statements:
+**`{DROP MODEL | DROP MODEL IF EXISTS}`** is one of the following statements:
 
-  - `  DROP MODEL  ` — deletes a model in the specified dataset
-  - `  DROP MODEL IF EXISTS  ` — deletes a model only if the model exists in the specified dataset
+  - `DROP MODEL` — deletes a model in the specified dataset
+  - `DROP MODEL IF EXISTS` — deletes a model only if the model exists in the specified dataset
 
-**`  model_name  `** is the name of the model you're deleting.
+**`model_name`** is the name of the model you're deleting.

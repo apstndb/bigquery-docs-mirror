@@ -1,6 +1,6 @@
 # The ML.PROCESS\_DOCUMENT function
 
-This document describes the `  ML.PROCESS_DOCUMENT  ` function, which lets you process unstructured documents from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using the [Document AI API](https://docs.cloud.google.com/document-ai) .
+This document describes the `ML.PROCESS_DOCUMENT` function, which lets you process unstructured documents from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using the [Document AI API](https://docs.cloud.google.com/document-ai) .
 
 ## Syntax
 
@@ -14,30 +14,30 @@ ML.PROCESS_DOCUMENT(
 
 ### Arguments
 
-`  ML.PROCESS_DOCUMENT  ` takes the following arguments:
+`ML.PROCESS_DOCUMENT` takes the following arguments:
 
   - `  PROJECT_ID  ` : the project that contains the resource.
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`  REMOTE_SERVICE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_DOCUMENT_V1  ` .
+  - `  MODEL  ` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_DOCUMENT_V1` .
 
   - `  OBJECT_TABLE  ` : the name of the [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains URIs of the documents.
     
     The documents in the object table must be of a [supported type](https://docs.cloud.google.com/document-ai/docs/file-types) . An error is returned for any row that contains a document of an unsupported type.
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL `  SELECT  ` query that only references the object table. The query can't contain `  JOIN  ` operations and can't use aliases to rename columns. You must include the `  uri  ` and `  content_type  ` columns from the object table in the `  SELECT  ` statement. Other columns are optional.
+  - `  QUERY_STATEMENT  ` : a GoogleSQL `SELECT` query that only references the object table. The query can't contain `JOIN` operations and can't use aliases to rename columns. You must include the `uri` and `content_type` columns from the object table in the `SELECT` statement. Other columns are optional.
 
-  - `  PROCESS_OPTIONS  ` : a `  STRING  ` value that contains a [`  ProcessOptions  ` resource](https://docs.cloud.google.com/document-ai/docs/reference/rest/v1/ProcessOptions) in JSON format. Use this option to configure custom processing options corresponding to the document processor for your use case.
+  - `  PROCESS_OPTIONS  ` : a `STRING` value that contains a [`ProcessOptions` resource](https://docs.cloud.google.com/document-ai/docs/reference/rest/v1/ProcessOptions) in JSON format. Use this option to configure custom processing options corresponding to the document processor for your use case.
     
-    For example, you might configure process options when using the [layout parser](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) to perform document chunking. The JSON configuration would look similar to `  '{"layout_config": {"chunking_config": {"chunk_size": 250,"include_ancestor_headings": true}}}'  ` .
+    For example, you might configure process options when using the [layout parser](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) to perform document chunking. The JSON configuration would look similar to `'{"layout_config": {"chunking_config": {"chunk_size": 250,"include_ancestor_headings": true}}}'` .
 
 ## Output
 
-`  ML.PROCESS_DOCUMENT  ` returns the following columns:
+`ML.PROCESS_DOCUMENT` returns the following columns:
 
-  - `  ml_process_document_result  ` : a `  JSON  ` value that contains the entities returned by the Document AI API.
-  - `  ml_process_document_status  ` : a `  STRING  ` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
+  - `ml_process_document_result` : a `JSON` value that contains the entities returned by the Document AI API.
+  - `ml_process_document_status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
   - The fields returned by the processor specified in the model.
   - The columns from the object table or query referenced in the function input.
 
@@ -53,13 +53,13 @@ Sometimes after a query job that uses this function finishes successfully, some 
 
     A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
 
-This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `  resource exhausted  ` error message is returned.
+This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `resource exhausted` error message is returned.
 
 To iterate through inference calls until all rows are successfully processed, you can use the [BigQuery remote inference SQL scripts](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/tree/master/sql_scripts/remote_inference) or the [BigQuery remote inference pipeline Dataform package](https://github.com/dataform-co/dataform-bqml) .
 
 ## Locations
 
-`  ML.PROCESS_DOCUMENT  ` must run in the same region as the remote model that the function references. You can only create models based on Document AI in the `  US  ` and `  EU  ` [multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) .
+`ML.PROCESS_DOCUMENT` must run in the same region as the remote model that the function references. You can only create models based on Document AI in the `US` and `EU` [multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) .
 
 ## Limitations
 
@@ -67,7 +67,7 @@ The function can't process documents with more than 100 pages. Any row that cont
 
 ## Example
 
-The following example uses the [invoice parser](https://docs.cloud.google.com/document-ai/docs/processors-list#processor_invoice-processor) to process the documents represented by the `  documents  ` table.
+The following example uses the [invoice parser](https://docs.cloud.google.com/document-ai/docs/processors-list#processor_invoice-processor) to process the documents represented by the `documents` table.
 
 Create the model:
 
@@ -98,6 +98,6 @@ The result is similar to the following:
 
 ## What's next
 
-  - Get step-by-step instructions on how to [process documents](https://docs.cloud.google.com/bigquery/docs/process-document) using the `  ML.PROCESS_DOCUMENT  ` function.
+  - Get step-by-step instructions on how to [process documents](https://docs.cloud.google.com/bigquery/docs/process-document) using the `ML.PROCESS_DOCUMENT` function.
   - To learn more about model inference, including other functions that you can use to analyze BigQuery data, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

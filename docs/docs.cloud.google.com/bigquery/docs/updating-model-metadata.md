@@ -3,8 +3,8 @@
 This page shows you how to update BigQuery ML model metadata. You can update model metadata by:
 
   - Using the Google Cloud console.
-  - Using the `  bq update  ` command in the bq command-line tool.
-  - Calling the [`  models.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) API method directly or by using the client libraries.
+  - Using the `bq update` command in the bq command-line tool.
+  - Calling the [`models.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) API method directly or by using the client libraries.
 
 The following model metadata can be updated:
 
@@ -14,11 +14,11 @@ The following model metadata can be updated:
 
 ## Required permissions
 
-To update model metadata, you must be assigned the [`  WRITER  `](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `  bigquery.models.updateMetadata  ` permissions. If you are granted `  bigquery.models.updateMetadata  ` permissions at the project level, you can update metadata for models in any dataset in the project. The following predefined, project-level IAM roles include `  bigquery.models.updateMetadata  ` permissions:
+To update model metadata, you must be assigned the [`WRITER`](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `bigquery.models.updateMetadata` permissions. If you are granted `bigquery.models.updateMetadata` permissions at the project level, you can update metadata for models in any dataset in the project. The following predefined, project-level IAM roles include `bigquery.models.updateMetadata` permissions:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
 For more information on IAM roles and permissions in BigQuery ML, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -52,9 +52,9 @@ To update a model's description:
 
 ### bq
 
-To update a model's description, issue the `  bq update  ` command with the `  --model  ` or `  -m  ` flag and the `  --description  ` flag.
+To update a model's description, issue the `bq update` command with the `--model` or `-m` flag and the `--description` flag.
 
-If you are updating a model in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+If you are updating a model in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
     bq update --model --description "[STRING]" PROJECT_ID:DATASET.MODEL
 
@@ -69,23 +69,23 @@ The command output looks like the following:
 
     Model 'myproject.mydataset.mymodel' successfully updated.
 
-You can confirm your changes by issuing the `  bq show  ` command. For more information, see [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) .
+You can confirm your changes by issuing the `bq show` command. For more information, see [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) .
 
 Examples:
 
-Enter the following command to update the description of `  mymodel  ` in `  mydataset  ` in your default project.
+Enter the following command to update the description of `mymodel` in `mydataset` in your default project.
 
     bq update --model --description "My updated description" \
     mydataset.mymodel
 
-Enter the following command to update the description of `  mymodel  ` in `  mydataset  ` in `  myotherproject  ` .
+Enter the following command to update the description of `mymodel` in `mydataset` in `myotherproject` .
 
     bq update --model --description "My updated description" \
     myotherproject:mydataset.mymodel
 
 ### API
 
-To update a model's description by using the API, call the [`  models.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) method and provide the `  projectId  ` , `  datasetId  ` , and `  modelId  ` . To modify the description, add to or update the "description" property for the [model resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) .
+To update a model's description by using the API, call the [`models.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) method and provide the `projectId` , `datasetId` , and `modelId` . To modify the description, add to or update the "description" property for the [model resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) .
 
 ### Go
 
@@ -245,9 +245,9 @@ To update a model's labels:
 
 ### bq
 
-To update a model's labels, issue the `  bq update  ` command with the `  --model  ` or `  -m  ` flag and the `  --set_label  ` flag. Repeat the `  --set_label  ` flag to add or update multiple labels.
+To update a model's labels, issue the `bq update` command with the `--model` or `-m` flag and the `--set_label` flag. Repeat the `--set_label` flag to add or update multiple labels.
 
-If you are updating a model in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+If you are updating a model in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
     bq update --model --set_label KEY:VALUE \
     PROJECT_ID:DATASET.MODEL
@@ -263,18 +263,18 @@ The command output looks like the following.
 
     Model 'myproject.mydataset.mymodel' successfully updated.
 
-You can confirm your changes by issuing the `  bq show  ` command. For more information, see [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) .
+You can confirm your changes by issuing the `bq show` command. For more information, see [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) .
 
 Examples:
 
-To update the `  department  ` label on `  mymodel  ` , enter the `  bq update  ` command and specify `  department  ` as the label key. For example, to update the `  department:shipping  ` label to `  department:logistics  ` , enter the following command. `  mydataset  ` is in `  myotherproject  ` , not your default project.
+To update the `department` label on `mymodel` , enter the `bq update` command and specify `department` as the label key. For example, to update the `department:shipping` label to `department:logistics` , enter the following command. `mydataset` is in `myotherproject` , not your default project.
 
     bq update --model --set_label department:logistics \
     myotherproject:mydataset.mymodel
 
 ### API
 
-To update a model's labels by using the API, call the [`  models.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) method and provide the `  projectId  ` , `  datasetId  ` , and `  modelId  ` . To modify the labels, add to or update the "labels" property for the [model resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) .
+To update a model's labels by using the API, call the [`models.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) method and provide the `projectId` , `datasetId` , and `modelId` . To modify the labels, add to or update the "labels" property for the [model resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) .
 
 ## Update a model's expiration time
 
@@ -297,9 +297,9 @@ Setting or updating the expiration time on a model is not supported by the Googl
 
 ### bq
 
-To update a model's expiration time, issue the `  bq update  ` command with the `  --model  ` or `  -m  ` flag and the `  --expiration  ` flag.
+To update a model's expiration time, issue the `bq update` command with the `--model` or `-m` flag and the `--expiration` flag.
 
-If you are updating a model in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+If you are updating a model in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
     bq update --model --expiration INTEGER \
     PROJECT_ID:DATASET.MODEL
@@ -315,21 +315,21 @@ The command output looks like the following.
 
     Model 'myproject.mydataset.mymodel' successfully updated.
 
-You can confirm your changes by issuing the `  bq show  ` command. For more information, see [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) .
+You can confirm your changes by issuing the `bq show` command. For more information, see [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) .
 
 Examples:
 
-Enter the following command to update the expiration time of `  mymodel  ` in `  mydataset  ` to 5 days (432000 seconds). `  mydataset  ` is in your default project.
+Enter the following command to update the expiration time of `mymodel` in `mydataset` to 5 days (432000 seconds). `mydataset` is in your default project.
 
     bq update --model --expiration 432000 mydataset.mymodel
 
-Enter the following command to update the expiration time of `  mymodel  ` in `  mydataset  ` to 5 days (432000 seconds). `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to update the expiration time of `mymodel` in `mydataset` to 5 days (432000 seconds). `mydataset` is in `myotherproject` , not your default project.
 
     bq update --model --expiration 432000 myotherproject:mydataset.mymodel
 
 ### API
 
-To update a model's expiration by using the API, call the [`  models.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) method and provide the `  projectId  ` , `  datasetId  ` , and `  modelId  ` . To modify the expiration, add to or update the "expirationTime" property for the [model resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) . "expirationTime" is expressed in milliseconds since the epoch.
+To update a model's expiration by using the API, call the [`models.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) method and provide the `projectId` , `datasetId` , and `modelId` . To modify the expiration, add to or update the "expirationTime" property for the [model resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) . "expirationTime" is expressed in milliseconds since the epoch.
 
 ## What's next
 

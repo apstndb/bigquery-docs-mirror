@@ -10,7 +10,7 @@ Contribution analysis is a form of [augmented analytics](https://en.wikipedia.or
 
 ## Contribution analysis with BigQuery ML
 
-To use contribution analysis in BigQuery ML, create a contribution analysis model with the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
+To use contribution analysis in BigQuery ML, create a contribution analysis model with the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
 
 A contribution analysis model detects segments of data that show changes in a given metric by comparing a test set of data to a control set of data. For example, you might use a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of sales data taken at the end of 2023 as your test data and a table snapshot taken at the end of 2022 as your control data, and compare them to see how your sales changed over time. A contribution analysis model could show you which segment of data, such as online customers in a particular region, drove the biggest change in sales from one year to the next.
 
@@ -20,20 +20,20 @@ A *metric* is the numerical value that contribution analysis models use to measu
   - [*Summable ratio*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) : sums the values of two numeric columns that you specify, and determines the ratio between them for each segment of the data.
   - [*Summable by category*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) : sums the value of a numeric column and divides it by the number of distinct values from a categorical column.
 
-A *segment* is a slice of the data identified by a given combination of dimension values. For example, for a contribution analysis model based on the `  store_number  ` , `  customer_id  ` , and `  day  ` dimensions, every unique combination of those dimension values represents a segment. In the following table, each row represents a different segment:
+A *segment* is a slice of the data identified by a given combination of dimension values. For example, for a contribution analysis model based on the `store_number` , `customer_id` , and `day` dimensions, every unique combination of those dimension values represents a segment. In the following table, each row represents a different segment:
 
-| **`         store_number        `** | **`         customer_id        `** | **`         day        `** |
-| ----------------------------------- | ---------------------------------- | -------------------------- |
-| store 1                             |                                    |                            |
-| store 1                             | customer 1                         |                            |
-| store 1                             | customer 1                         | Monday                     |
-| store 1                             | customer 1                         | Tuesday                    |
-| store 1                             | customer 2                         |                            |
-| store 2                             |                                    |                            |
+| **`store_number`** | **`customer_id`** | **`day`** |
+| ------------------ | ----------------- | --------- |
+| store 1            |                   |           |
+| store 1            | customer 1        |           |
+| store 1            | customer 1        | Monday    |
+| store 1            | customer 1        | Tuesday   |
+| store 1            | customer 2        |           |
+| store 2            |                   |           |
 
 To reduce model creation time, specify an [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) . An apriori support threshold lets you prune small and less relevant segments so that the model uses only the largest and most relevant segments.
 
-After you have created a contribution analysis model, you can use the [`  ML.GET_INSIGHTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model. The model output consists of rows of insights, where each insight corresponds to a segment and provides the segment's corresponding metrics.
+After you have created a contribution analysis model, you can use the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model. The model output consists of rows of insights, where each insight corresponds to a segment and provides the segment's corresponding metrics.
 
 ## Contribution analysis user journey
 
@@ -56,9 +56,9 @@ The following table describes the statements and functions you can use with cont
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis"><code dir="ltr" translate="no">        CREATE MODEL       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights"><code dir="ltr" translate="no">        ML.GET_INSIGHTS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights"><code dir="ltr" translate="no">ML.GET_INSIGHTS</code></a></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights">Get data insights from a contribution analysis model using a summable metric</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights-sum-ratio">Get data insights from a contribution analysis model using a summable ratio metric</a></li>

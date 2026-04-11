@@ -1,12 +1,12 @@
 # The CREATE MODEL statement for contribution analysis models
 
-This document describes the `  CREATE MODEL  ` statement for creating [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) models in BigQuery. You can use contribution analysis models to generate insights about changes to key metrics in your multi-dimensional data.
+This document describes the `CREATE MODEL` statement for creating [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) models in BigQuery. You can use contribution analysis models to generate insights about changes to key metrics in your multi-dimensional data.
 
-After you have created a contribution analysis model, you can use the [`  ML.GET_INSIGHTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model.
+After you have created a contribution analysis model, you can use the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model.
 
 For more information about supported SQL statements and functions for this model, see [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey) .
 
-## `     CREATE MODEL    ` syntax
+## `CREATE MODEL` syntax
 
 ``` lang-googlesql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} 
@@ -23,26 +23,26 @@ OPTIONS(
 AS query_statement;
 ```
 
-### `     CREATE MODEL    `
+### `CREATE MODEL`
 
-Creates and trains a new model in the specified dataset. If the model name exists, `  CREATE MODEL  ` returns an error.
+Creates and trains a new model in the specified dataset. If the model name exists, `CREATE MODEL` returns an error.
 
-### `     CREATE MODEL IF NOT EXISTS    `
+### `CREATE MODEL IF NOT EXISTS`
 
 Creates and trains a new model only if the model doesn't exist in the specified dataset.
 
-### `     CREATE OR REPLACE MODEL    `
+### `CREATE OR REPLACE MODEL`
 
 Creates and trains a model and replaces an existing model with the same name in the specified dataset.
 
-### `     model_name    `
+### `model_name`
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
   - Contain up to 1,024 characters
   - Contain letters (upper or lower case), numbers, and underscores
 
-`  model_name  ` is case-sensitive.
+`model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
@@ -50,7 +50,7 @@ If you don't have a default project configured, then you must prepend the projec
 
 For example, \`myproject.mydataset.mymodel\`.
 
-### `     MODEL_TYPE    `
+### `MODEL_TYPE`
 
 **Syntax**
 
@@ -60,101 +60,101 @@ For example, \`myproject.mydataset.mymodel\`.
 
 Specify the model type. This option is required.
 
-### `     CONTRIBUTION_METRIC    `
+### `CONTRIBUTION_METRIC`
 
 **Syntax**
 
-`  CONTRIBUTION_METRIC = ' contribution_metric '  `
+`CONTRIBUTION_METRIC = ' contribution_metric '`
 
 **Description**
 
 Provides the expression to use to calculate the metric you are analyzing.
 
-To calculate a [summable metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) , the expression must be in the form `  SUM(metric_column_name)  ` , where `  metric_column_name  ` is a numeric data type.
+To calculate a [summable metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) , the expression must be in the form `SUM(metric_column_name)` , where `metric_column_name` is a numeric data type.
 
-To calculate a [summable ratio metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) , the expression must be in the form `  SUM(numerator_metric_column_name)/SUM(denominator_metric_column_name)  ` , where `  numerator_metric_column_name  ` and `  denominator_metric_column_name  ` are numeric data types.
+To calculate a [summable ratio metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) , the expression must be in the form `SUM(numerator_metric_column_name)/SUM(denominator_metric_column_name)` , where `numerator_metric_column_name` and `denominator_metric_column_name` are numeric data types.
 
-To calculate a [summable by category metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) , the expression must be in the form `  SUM(metric_sum_column_name)/COUNT(DISTINCT categorical_column_name)  ` . The summed column must be a numeric data type. The categorical column must have type `  BOOL  ` , `  DATE  ` , `  DATETIME  ` , `  TIME  ` , `  TIMESTAMP  ` , `  STRING  ` , or `  INT64  ` .
+To calculate a [summable by category metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) , the expression must be in the form `SUM(metric_sum_column_name)/COUNT(DISTINCT categorical_column_name)` . The summed column must be a numeric data type. The categorical column must have type `BOOL` , `DATE` , `DATETIME` , `TIME` , `TIMESTAMP` , `STRING` , or `INT64` .
 
 The expression is case insensitive.
 
-You can't use any additional numerical computations in the contribution metric expression. For example, neither `  SUM(AVG(metric_col))  ` nor `  AVG(SUM(round(metric_col_numerator))/(SUM(metric_col_denominator))  ` is valid. You can perform additional computations in the [`  query_statement  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#query_statement) if necessary.
+You can't use any additional numerical computations in the contribution metric expression. For example, neither `SUM(AVG(metric_col))` nor `AVG(SUM(round(metric_col_numerator))/(SUM(metric_col_denominator))` is valid. You can perform additional computations in the [`query_statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#query_statement) if necessary.
 
-The values in the metrics columns that you use in the `  CONTRIBUTION_METRIC  ` option must be non-negative, unless you specify `  0  ` for the `  MIN_APRIORI_SUPPORT  ` value.
-
-**Arguments**
-
-A `  STRING  ` value. There is no default value.
-
-### `     IS_TEST_COL    `
-
-**Syntax**
-
-`  IS_TEST_COL = ' is_test_col '  `
-
-**Description**
-
-Provides the name of the column to use to determine whether a given row is test data or control data. The column that you specify must have a `  BOOL  ` data type.
+The values in the metrics columns that you use in the `CONTRIBUTION_METRIC` option must be non-negative, unless you specify `0` for the `MIN_APRIORI_SUPPORT` value.
 
 **Arguments**
 
-A `  STRING  ` value. There is no default value.
+A `STRING` value. There is no default value.
 
-### `     DIMENSION_ID_COLS    `
+### `IS_TEST_COL`
 
 **Syntax**
 
-`  DIMENSION_ID_COLS = dimension_column_array  `
+`IS_TEST_COL = ' is_test_col '`
 
 **Description**
 
-Provides the names of the columns to use as dimensions when summarizing the metric specified in the [`  CONTRIBUTION_METRIC  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric) . The dimension columns that you specify must have an `  INT64  ` , `  BOOL  ` , or `  STRING  ` data type.
+Provides the name of the column to use to determine whether a given row is test data or control data. The column that you specify must have a `BOOL` data type.
 
-Any rows in the dimension columns that contain `  NULL  ` values are removed. If you have `  NULL  ` values in your data, you can preprocess the data to fill in the `  NULL  ` values by using the [`  ML.IMPUTER  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-imputer) , or by using the [`  IFNULL  ` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull) to replace `  NULL  ` values with a custom value.
+**Arguments**
 
-If you want to use a [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) column that has a data type other than `  INT64  ` as a dimension, you can use any function that outputs an `  INT64  ` , `  BOOL  ` , or `  STRING  ` value in the `  query_statement  ` to transform continuous values. For example, you could use one of the [numerical preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing#numerical_functions) , such as [`  ML.BUCKETIZE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-bucketize) .
+A `STRING` value. There is no default value.
+
+### `DIMENSION_ID_COLS`
+
+**Syntax**
+
+` DIMENSION_ID_COLS = dimension_column_array  `
+
+**Description**
+
+Provides the names of the columns to use as dimensions when summarizing the metric specified in the [`CONTRIBUTION_METRIC` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric) . The dimension columns that you specify must have an `INT64` , `BOOL` , or `STRING` data type.
+
+Any rows in the dimension columns that contain `NULL` values are removed. If you have `NULL` values in your data, you can preprocess the data to fill in the `NULL` values by using the [`ML.IMPUTER` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-imputer) , or by using the [`IFNULL` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull) to replace `NULL` values with a custom value.
+
+If you want to use a [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) column that has a data type other than `INT64` as a dimension, you can use any function that outputs an `INT64` , `BOOL` , or `STRING` value in the `query_statement` to transform continuous values. For example, you could use one of the [numerical preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing#numerical_functions) , such as [`ML.BUCKETIZE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-bucketize) .
 
 Using fewer dimensions helps reduce the model creation runtime.
 
 **Arguments**
 
-An `  ARRAY<STRING>  ` value. For example, `  ['dimension_column_1','dimension_column_2','dimension_column_3']  ` . The array can have 13 or fewer array elements when the `  MIN_APRIORI_SUPPORT  ` option value is `  0  ` , and 50 or fewer array elements when the `  MIN_APRIORI_SUPPORT  ` option value is greater than `  0  ` .
+An `ARRAY<STRING>` value. For example, `['dimension_column_1','dimension_column_2','dimension_column_3']` . The array can have 13 or fewer array elements when the `MIN_APRIORI_SUPPORT` option value is `0` , and 50 or fewer array elements when the `MIN_APRIORI_SUPPORT` option value is greater than `0` .
 
-If you omit the `  dimension_id_cols  ` option, then all columns in the query statement that are not specified in the `  contribution_metric  ` or `  is_test_col  ` options are used as `  dimension_id_cols  ` .
+If you omit the `dimension_id_cols` option, then all columns in the query statement that are not specified in the `contribution_metric` or `is_test_col` options are used as `dimension_id_cols` .
 
-### `     MIN_APRIORI_SUPPORT    `
+### `MIN_APRIORI_SUPPORT`
 
 **Syntax**
 
-`  MIN_APRIORI_SUPPORT = min_apriori_support  `
+` MIN_APRIORI_SUPPORT = min_apriori_support  `
 
 **Description**
 
-Provide the minimum [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) for including segments in the model output. All segments whose [`  apriori_support  ` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output) is less than the `  MIN_APRIORI_SUPPORT  ` value that you specify are excluded. The `  MIN_APRIORI_SUPPORT  ` option can't be used together with `  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT  ` .
+Provide the minimum [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) for including segments in the model output. All segments whose [`apriori_support` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output) is less than the `MIN_APRIORI_SUPPORT` value that you specify are excluded. The `MIN_APRIORI_SUPPORT` option can't be used together with `TOP_K_INSIGHTS_BY_APRIORI_SUPPORT` .
 
 **Arguments**
 
-A `  FLOAT64  ` value in the range `  [0, 1]  ` . The default value is `  0.1  ` .
+A `FLOAT64` value in the range `[0, 1]` . The default value is `0.1` .
 
-### `     TOP_K_INSIGHTS_BY_APRIORI_SUPPORT    `
+### `TOP_K_INSIGHTS_BY_APRIORI_SUPPORT`
 
 **Syntax**
 
-`  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT = top_k_insights_by_apriori_support  `
+` TOP_K_INSIGHTS_BY_APRIORI_SUPPORT = top_k_insights_by_apriori_support  `
 
 **Description**
 
-Provide the maximum number of insights to output with the highest apriori support value. The model automatically retrieves the insights with the highest apriori support values and prunes insights with low apriori support, decreasing query runtime compared to using no apriori support thresholding. The `  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT  ` option can't be used together with `  MIN_APRIORI_SUPPORT  ` .
+Provide the maximum number of insights to output with the highest apriori support value. The model automatically retrieves the insights with the highest apriori support values and prunes insights with low apriori support, decreasing query runtime compared to using no apriori support thresholding. The `TOP_K_INSIGHTS_BY_APRIORI_SUPPORT` option can't be used together with `MIN_APRIORI_SUPPORT` .
 
 **Arguments**
 
-An `  INT64  ` value between 1 and 1,000,000. There is no default value. If no `  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT  ` is specified, a `  MIN_APRIORI_SUPPORT  ` threshold of 0.1 is applied.
+An `INT64` value between 1 and 1,000,000. There is no default value. If no `TOP_K_INSIGHTS_BY_APRIORI_SUPPORT` is specified, a `MIN_APRIORI_SUPPORT` threshold of 0.1 is applied.
 
-### `     PRUNING_METHOD    `
+### `PRUNING_METHOD`
 
 **Syntax**
 
-`  PRUNING_METHOD = {'NO_PRUNING' | 'PRUNE_REDUNDANT_INSIGHTS'}  `
+`PRUNING_METHOD = {'NO_PRUNING' | 'PRUNE_REDUNDANT_INSIGHTS'}`
 
 **Description**
 
@@ -162,20 +162,20 @@ The pruning method used to filter insights generated by the model.
 
 **Arguments**
 
-  - `  NO_PRUNING  ` : All insights are returned, respecting any apriori support thresholds specified by `  MIN_APRIORI_SUPPORT  ` or `  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT  ` .
+  - `NO_PRUNING` : All insights are returned, respecting any apriori support thresholds specified by `MIN_APRIORI_SUPPORT` or `TOP_K_INSIGHTS_BY_APRIORI_SUPPORT` .
 
-  - `  PRUNE_REDUNDANT_INSIGHTS  ` : Redundant insights are pruned from the model. Two rows are considered to be redundant insights if the following conditions are met:
+  - `PRUNE_REDUNDANT_INSIGHTS` : Redundant insights are pruned from the model. Two rows are considered to be redundant insights if the following conditions are met:
     
       - Their metric values are equal.
       - The dimension IDs and corresponding values of one row are a subset of the dimension IDs and corresponding values of the other. In this case, the row with more dimension IDs (the more descriptive row) is kept.
     
-    The `  all  ` insight row is never pruned.
+    The `all` insight row is never pruned.
 
-The default value is `  NO_PRUNING  ` .
+The default value is `NO_PRUNING` .
 
-### `     query_statement    `
+### `query_statement`
 
-The [GoogleSQL query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) that contains the test and control data to analyze. The table of input data that you specify in the query must contain exactly the columns that you reference in the `  CONTRIBUTION_METRIC  ` , `  DIMENSION_ID_COLS  ` , and `  IS_TEST_COL  ` options.
+The [GoogleSQL query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) that contains the test and control data to analyze. The table of input data that you specify in the query must contain exactly the columns that you reference in the `CONTRIBUTION_METRIC` , `DIMENSION_ID_COLS` , and `IS_TEST_COL` options.
 
 ## Choose test and control data
 
@@ -203,7 +203,7 @@ An example input dataset for a summable metric contribution analysis model might
 | shoe\_1     | store\_3  | Sunnyvale     | 150         | false        |
 | shoe\_2     | store\_1  | San Francisco | 175         | false        |
 
-In this example, the numerical `  revenue  ` column provides the metric to analyze. The `  product  ` , `  store  ` , and `  city  ` columns are the dimensions to analyze as contributors to total revenue. The `  is_test  ` column value indicates whether the row belongs to the test set or the control set. Your `  CREATE MODEL  ` statement would include the following:
+In this example, the numerical `revenue` column provides the metric to analyze. The `product` , `store` , and `city` columns are the dimensions to analyze as contributors to total revenue. The `is_test` column value indicates whether the row belongs to the test set or the control set. Your `CREATE MODEL` statement would include the following:
 
     CONTRIBUTION_METRIC = 'SUM(revenue)',
     DIMENSION_ID_COLS = ['product', 'store', 'city'],
@@ -223,7 +223,7 @@ An example input dataset for a summable ratio metric contribution analysis model
 | Chrome      | iPad       | 100.00   | 40         | false        |
 | Firefox     | Pixel      | 50.00    | 5          | false        |
 
-In this case, the numerical `  cost  ` and `  clicks  ` columns provide the metrics to analyze. The `  browser  ` and `  device  ` columns are the dimensions to analyze as contributors to the cost and click values. The `  is_test  ` column value indicates whether the row belongs to the test set or the control set. Your `  CREATE MODEL  ` statement would include the following:
+In this case, the numerical `cost` and `clicks` columns provide the metrics to analyze. The `browser` and `device` columns are the dimensions to analyze as contributors to the cost and click values. The `is_test` column value indicates whether the row belongs to the test set or the control set. Your `CREATE MODEL` statement would include the following:
 
     CONTRIBUTION_METRIC = 'SUM(cost)/SUM(clicks)',
     DIMENSION_ID_COLS = ['browser', 'device'],
@@ -233,15 +233,15 @@ In this case, the numerical `  cost  ` and `  clicks  ` columns provide the metr
 
 A summable by category metric contribution analysis model sums the value of a numeric column and divides it by the number of distinct values from a categorical column, defined as a column of one of the following types:
 
-  - `  BOOL  `
-  - `  DATE  `
-  - `  DATETIME  `
-  - `  TIME  `
-  - `  TIMESTAMP  `
-  - `  STRING  `
-  - `  INT64  ` .
+  - `BOOL`
+  - `DATE`
+  - `DATETIME`
+  - `TIME`
+  - `TIMESTAMP`
+  - `STRING`
+  - `INT64` .
 
-For example, if `  sales  ` is your numeric column and `  month  ` is your categorical column, then the metric would analyze the contributions of each segment to monthly sales.
+For example, if `sales` is your numeric column and `month` is your categorical column, then the metric would analyze the contributions of each segment to monthly sales.
 
 An example input dataset for the summable by category metric contribution analysis model might look similar to the following table:
 
@@ -254,7 +254,7 @@ An example input dataset for the summable by category metric contribution analys
 | 4            | hats         | 10        | February  | false        |
 | 2            | jackets      | 75        | November  | false        |
 
-In this case, the numerical sales and categorical month columns provide the metrics to analyze. The `  item_id  ` and `  category  ` columns are the dimensions to analyze as contributors to the sales per month values. The `  is_test  ` column value indicates whether the row belongs to the test set or the control set. Your `  CREATE MODEL  ` statement would include the following:
+In this case, the numerical sales and categorical month columns provide the metrics to analyze. The `item_id` and `category` columns are the dimensions to analyze as contributors to the sales per month values. The `is_test` column value indicates whether the row belongs to the test set or the control set. Your `CREATE MODEL` statement would include the following:
 
     CONTRIBUTION_METRIC = 'SUM(sales)/COUNT(DISTINCT month)',
     DIMENSION_ID_COLS = ['item_id', 'category'],
@@ -264,8 +264,8 @@ In this case, the numerical sales and categorical month columns provide the metr
 
 You can optimize a contribution analysis model by specifying an apriori support threshold. The model uses the threshold value that you specify to prune the search space and include only larger segments. Apriori support is measured by comparing the size of each segment relative to the rest of the population, and dropping the segments where this ratio is less than the model's apriori support threshold value. This pruning lets you analyze only the segments of data that are large enough to be of interest, and also reduces model creation time. There are two ways that you can use an apriori support threshold in a contribution analysis model:
 
-1.  Tune your own apriori support value with `  MIN_APRIORI_SUPPORT  ` .
-2.  Provide the maximum number of insights to retrieve using `  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT  ` , which automatically fetches the `  k  ` insights with the highest apriori support values.
+1.  Tune your own apriori support value with `MIN_APRIORI_SUPPORT` .
+2.  Provide the maximum number of insights to retrieve using `TOP_K_INSIGHTS_BY_APRIORI_SUPPORT` , which automatically fetches the `k` insights with the highest apriori support values.
 
 ## Examples
 
@@ -325,5 +325,5 @@ FROM mydataset.regional_sales;
 
 ## What's next
 
-  - Learn how to call the [`  ML.GET_INSIGHTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to get insights from your contribution analysis model.
+  - Learn how to call the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to get insights from your contribution analysis model.
   - Try a tutorial on how to [Get data insights from a contribution analysis model using a summable metric](https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights) .

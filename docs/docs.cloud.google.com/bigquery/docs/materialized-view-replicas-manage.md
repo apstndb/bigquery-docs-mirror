@@ -23,16 +23,16 @@ You can list materialized view replicas through the Google Cloud console.
 
 ### Required permissions
 
-To list materialized view replicas in a dataset, you need the `  bigquery.tables.list  ` IAM permission.
+To list materialized view replicas in a dataset, you need the `bigquery.tables.list` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to list materialized view replicas in a dataset:
 
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.user`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
 For more information on IAM roles and permissions in IAM, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -56,16 +56,16 @@ You can get information about a materialized view replica by using SQL, the bq c
 
 To query information about a materialized view replica, you need the following Identity and Access Management (IAM) permissions:
 
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.list  `
-  - `  bigquery.routines.get  `
-  - `  bigquery.routines.list  `
+  - `bigquery.tables.get`
+  - `bigquery.tables.list`
+  - `bigquery.routines.get`
+  - `bigquery.routines.list`
 
 Each of the following predefined IAM roles includes the preceding permissions:
 
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.admin`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -73,7 +73,7 @@ To get information about a materialized view replica, including the source [mate
 
 ### SQL
 
-To get information about materialized view replicas, query the [`  INFORMATION_SCHEMA.TABLES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) :
+To get information about materialized view replicas, query the [`INFORMATION_SCHEMA.TABLES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -97,7 +97,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
 
 ``` notranslate
 bq show --project=project_id --format=prettyjson dataset.materialized_view_replica
@@ -111,13 +111,13 @@ Replace the following:
 
 Example:
 
-Enter the following command to show information about the materialized view replica `  my_mv_replica  ` in the `  report_views  ` dataset in the `  myproject  ` project.
+Enter the following command to show information about the materialized view replica `my_mv_replica` in the `report_views` dataset in the `myproject` project.
 
     bq show --project=myproject --format=prettyjson report_views.my_mv_replica
 
 ### API
 
-To get materialized view replica information by using the API, call the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method.
+To get materialized view replica information by using the API, call the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method.
 
 ## Delete materialized view replicas
 
@@ -127,13 +127,13 @@ You can delete a materialized view replica through the Google Cloud console.
 
 ### Required permissions
 
-To delete materialized view replicas, you need the `  bigquery.tables.delete  ` IAM permission.
+To delete materialized view replicas, you need the `bigquery.tables.delete` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to delete a materialized view replica:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
 For more information about BigQuery Identity and Access Management (IAM), see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -147,4 +147,4 @@ For more information about BigQuery Identity and Access Management (IAM), see [P
 
 4.  Click **Delete** .
 
-5.  In the **Delete materialized view?** dialog, type `  delete  ` into the field, and then click **Delete** .
+5.  In the **Delete materialized view?** dialog, type `delete` into the field, and then click **Delete** .

@@ -2,10 +2,10 @@ Describes how the vector index was deleted.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  QUERY  `
+`QUERY`
 
 Vector index was deleted using a DDL query.

@@ -1,10 +1,10 @@
 # The ML.VALIDATE\_DATA\_SKEW function
 
-This document describes the `  ML.VALIDATE_DATA_SKEW  ` function, which you can use to compute the data skew between a model's training and serving data. This function computes the statistics for the serving data, compares them to the statistics that were computed for the training data at the time the model was created, and identifies where there are anomalous differences between the two data sets.
+This document describes the `ML.VALIDATE_DATA_SKEW` function, which you can use to compute the data skew between a model's training and serving data. This function computes the statistics for the serving data, compares them to the statistics that were computed for the training data at the time the model was created, and identifies where there are anomalous differences between the two data sets.
 
 You can optionally visualize the function output by using [Vertex AI model monitoring](https://docs.cloud.google.com/vertex-ai/docs/model-monitoring/overview) . For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
 
-Statistics are only computed for feature columns in the serving data that match feature columns in the training data, in order to achieve better performance and lower cost. For models that were created with use of the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the statistics are based on the raw feature data before feature preprocessing within the `  TRANSFORM  ` clause.
+Statistics are only computed for feature columns in the serving data that match feature columns in the training data, in order to achieve better performance and lower cost. For models that were created with use of the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the statistics are based on the raw feature data before feature preprocessing within the `TRANSFORM` clause.
 
 ## Syntax
 
@@ -22,7 +22,7 @@ Statistics are only computed for feature columns in the serving data that match 
 
 ### Arguments
 
-`  ML.VALIDATE_DATA_SKEW  ` takes the following arguments:
+`ML.VALIDATE_DATA_SKEW` takes the following arguments:
 
   - `  PROJECT_ID  ` : the BigQuery project that contains the resource.
 
@@ -32,40 +32,40 @@ Statistics are only computed for feature columns in the serving data that match 
 
   - `  TABLE_NAME  ` : the name of the input table that contains the serving data to calculate statistics for.
 
-  - `  QUERY_STATEMENT  ` : a query that generates the serving data to calculate statistics for. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a query that generates the serving data to calculate statistics for. For the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
-  - `  CATEGORICAL_DEFAULT_THRESHOLD  ` : a `  FLOAT64  ` value that specifies the custom threshold to use for anomaly detection for categorical and `  ARRAY<categorical>  ` features. The value must be in the range `  [0, 1)  ` . The default value is `  0.3  ` .
+  - `  CATEGORICAL_DEFAULT_THRESHOLD  ` : a `FLOAT64` value that specifies the custom threshold to use for anomaly detection for categorical and `ARRAY<categorical>` features. The value must be in the range `[0, 1)` . The default value is `0.3` .
 
-  - `  CATEGORICAL_METRIC_TYPE  ` : a `  STRING  ` value that specifies the metric used to compare statistics for categorical and `  ARRAY<categorical>  ` features. Valid values are as follows:
+  - `  CATEGORICAL_METRIC_TYPE  ` : a `STRING` value that specifies the metric used to compare statistics for categorical and `ARRAY<categorical>` features. Valid values are as follows:
     
-      - `  L_INFTY  ` : use [L-infinity distance](https://en.wikipedia.org/wiki/Chebyshev_distance) . This value is the default.
-      - `  JENSEN_SHANNON_DIVERGENCE  ` : use [Jensen–Shannon divergence](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) .
+      - `L_INFTY` : use [L-infinity distance](https://en.wikipedia.org/wiki/Chebyshev_distance) . This value is the default.
+      - `JENSEN_SHANNON_DIVERGENCE` : use [Jensen–Shannon divergence](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) .
 
-  - `  NUMERICAL_DEFAULT_THRESHOLD  ` : a `  FLOAT64  ` value that specifies the custom threshold to use for anomaly detection for numerical, `  ARRAY<numerical>  ` , and `  ARRAY<STRUCT<INT64, numerical>>  ` features. The value must be in the range `  [0, 1)  ` . The default value is `  0.3  ` .
+  - `  NUMERICAL_DEFAULT_THRESHOLD  ` : a `FLOAT64` value that specifies the custom threshold to use for anomaly detection for numerical, `ARRAY<numerical>` , and `ARRAY<STRUCT<INT64, numerical>>` features. The value must be in the range `[0, 1)` . The default value is `0.3` .
 
-  - `  NUMERICAL_METRIC_TYPE  ` : a `  STRING  ` value that specifies the metric used to compare statistics for numerical, `  ARRAY<numerical>  ` , and `  ARRAY<STRUCT<INT64, numerical>>  ` features. The only valid value is `  JENSEN_SHANNON_DIVERGENCE  ` .
+  - `  NUMERICAL_METRIC_TYPE  ` : a `STRING` value that specifies the metric used to compare statistics for numerical, `ARRAY<numerical>` , and `ARRAY<STRUCT<INT64, numerical>>` features. The only valid value is `JENSEN_SHANNON_DIVERGENCE` .
 
-  - `  THRESHOLDS  ` : an `  ARRAY<STRUCT<STRING, FLOAT64>>  ` value that specifies the anomaly detection thresholds for one or more columns for which you don't want to use the default threshold. The `  STRING  ` value in the struct specifies the column name, and the `  FLOAT64  ` value specifies the threshold. The `  FLOAT64  ` value must be in the range `  [0, 1)  ` . For example, `  [('col_a', 0.1), ('col_b', 0.8)]  ` .
+  - `  THRESHOLDS  ` : an `ARRAY<STRUCT<STRING, FLOAT64>>` value that specifies the anomaly detection thresholds for one or more columns for which you don't want to use the default threshold. The `STRING` value in the struct specifies the column name, and the `FLOAT64` value specifies the threshold. The `FLOAT64` value must be in the range `[0, 1)` . For example, `[('col_a', 0.1), ('col_b', 0.8)]` .
 
-  - `  ENABLE_VISUALIZATION_LINK  ` : a `  BOOL  ` value that determines whether to return links to the visualized function output. When you specify `  TRUE  ` for this argument, the `  ML.VALIDATE_DATA_DRIFT  ` output includes the `  visualization_link  ` column. The `  visualization_link  ` column provides URLs that link to visualizations of the function results in Vertex AI monitoring.
+  - `  ENABLE_VISUALIZATION_LINK  ` : a `BOOL` value that determines whether to return links to the visualized function output. When you specify `TRUE` for this argument, the `ML.VALIDATE_DATA_DRIFT` output includes the `visualization_link` column. The `visualization_link` column provides URLs that link to visualizations of the function results in Vertex AI monitoring.
     
-    When you specify `  TRUE  ` for this argument, the `  model  ` argument value must refer to a BigQuery ML model that is [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Vertex AI. If the model isn't registered, an invalid query error is returned.
+    When you specify `TRUE` for this argument, the `model` argument value must refer to a BigQuery ML model that is [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Vertex AI. If the model isn't registered, an invalid query error is returned.
 
 ## Output
 
-`  ML.VALIDATE_DATA_SKEW  ` returns one row for each column in the input data. `  ML.VALIDATE_DATA_SKEW  ` output contains the following columns:
+`ML.VALIDATE_DATA_SKEW` returns one row for each column in the input data. `ML.VALIDATE_DATA_SKEW` output contains the following columns:
 
-  - `  input  ` : a `  STRING  ` column that contains the input column name.
+  - `input` : a `STRING` column that contains the input column name.
 
-  - `  metric  ` : a `  STRING  ` column that contains the metric used to compare the `  input  ` column statistical value between the training and serving data sets. This column value is `  JENSEN_SHANNON_DIVERGENCE  ` for numerical features, and either `  L_INFTY  ` or `  JENSEN_SHANNON_DIVERGENCE  ` for categorical features.
+  - `metric` : a `STRING` column that contains the metric used to compare the `input` column statistical value between the training and serving data sets. This column value is `JENSEN_SHANNON_DIVERGENCE` for numerical features, and either `L_INFTY` or `JENSEN_SHANNON_DIVERGENCE` for categorical features.
 
-  - `  threshold  ` : a `  FLOAT64  ` column that contains the threshold used to determine whether the statistical difference in the `  input  ` column value between the training and serving data is anomalous.
+  - `threshold` : a `FLOAT64` column that contains the threshold used to determine whether the statistical difference in the `input` column value between the training and serving data is anomalous.
 
-  - `  value  ` : a `  FLOAT64  ` column that contains the statistical difference in the `  input  ` column value between the serving and the training data sets.
+  - `value` : a `FLOAT64` column that contains the statistical difference in the `input` column value between the serving and the training data sets.
 
-  - `  is_anomaly  ` : a `  BOOL  ` column that indicates whether the `  value  ` value is higher than the `  threshold  ` value.
+  - `is_anomaly` : a `BOOL` column that indicates whether the `value` value is higher than the `threshold` value.
 
-  - `  visualization_link  ` : a URL that links to a Vertex AI visualization of the results for the given feature. The URL is formatted as follows:
+  - `visualization_link` : a URL that links to a Vertex AI visualization of the results for the given feature. The URL is formatted as follows:
     
     ``` console
     https://console.cloud.google.com/vertex-ai/model-monitoring/locations/region/model-monitors/vertex_model_monitor_id/model-monitoring-jobs/vertex_model_monitoring_job_id/feature-drift?project=project_id&featureName=feature_name
@@ -75,17 +75,17 @@ Statistics are only computed for feature columns in the serving data that match 
     
         https://console.cloud.google.com/vertex-ai/model-monitoring/locations/us-central1/model-monitors/bq123456789012345647/model-monitoring-jobs/bqjob890123456789012/feature-drift?project=myproject&featureName=petal_length
     
-    This column is only returned when the `  enable_visualization_link  ` argument value is `  TRUE  ` .
+    This column is only returned when the `enable_visualization_link` argument value is `TRUE` .
     
     For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
 
 ## Examples
 
-The following examples demonstrate how to use the `  ML.VALIDATE_DATA_SKEW  ` function.
+The following examples demonstrate how to use the `ML.VALIDATE_DATA_SKEW` function.
 
-### Run `     ML.VALIDATE_DATA_SKEW    `
+### Run `ML.VALIDATE_DATA_SKEW`
 
-The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `  0.2  ` :
+The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `0.2` :
 
 ``` notranslate
 SELECT *
@@ -106,9 +106,9 @@ The output looks similar to the following:
     | payment_type     | L_INTFY                  | 0.3       | 0.2    | false      |
     +------------------+--------------------------+-----------+--------+------------+
 
-### Run `     ML.VALIDATE_DATA_SKEW    ` and visualize the results
+### Run `ML.VALIDATE_DATA_SKEW` and visualize the results
 
-The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `  0.2  ` :
+The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `0.2` :
 
 ``` notranslate
 SELECT *
@@ -207,28 +207,28 @@ END IF;
 
 ## Limitations
 
-  - `  ML.VALIDATE_DATA_SKEW  ` doesn't support the following types of models:
+  - `ML.VALIDATE_DATA_SKEW` doesn't support the following types of models:
     
       - [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
       - [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
-      - [`  ARIMA_PLUS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+      - [`ARIMA_PLUS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
       - Remote models over [LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , [Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) , or [Vertex AI endpoints](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
       - Imported [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) , [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) , [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) , or [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) models
 
-  - `  ML.VALIDATE_DATA_SKEW  ` doesn't support models created before March 28, 2024, or models that use the [`  WARM START  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#warm_start) . To enable use of `  ML.VALIDATE_DATA_SKEW  ` , retrain the model by running the [`  CREATE OR REPLACE model  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_or_replace_model) .
+  - `ML.VALIDATE_DATA_SKEW` doesn't support models created before March 28, 2024, or models that use the [`WARM START` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#warm_start) . To enable use of `ML.VALIDATE_DATA_SKEW` , retrain the model by running the [`CREATE OR REPLACE model` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_or_replace_model) .
 
-  - Running the `  ML.VALIDATE_DATA_SKEW  ` function on a large amount of input data can cause the query to return the error `  Dry run query timed out  ` . To resolve the error, [disable retrieval of cached results for the query](https://docs.cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results) .
+  - Running the `ML.VALIDATE_DATA_SKEW` function on a large amount of input data can cause the query to return the error `Dry run query timed out` . To resolve the error, [disable retrieval of cached results for the query](https://docs.cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results) .
 
-  - `  ML.VALIDATE_DATA_SKEW  ` doesn't conduct schema validation between the two sets of input data, and so handles data type mismatches as follows:
+  - `ML.VALIDATE_DATA_SKEW` doesn't conduct schema validation between the two sets of input data, and so handles data type mismatches as follows:
     
-      - If you specify `  JENSEN_SHANNON_DIVERGENCE  ` for the `  categorical_default_threshold  ` or `  numerical_default_threshold  ` argument, the feature isn't included in the final anomaly report.
-      - If you specify `  L_INFTY  ` for the `  categorical_default_threshold  ` argument, the function outputs the computed feature distance as expected.
+      - If you specify `JENSEN_SHANNON_DIVERGENCE` for the `categorical_default_threshold` or `numerical_default_threshold` argument, the feature isn't included in the final anomaly report.
+      - If you specify `L_INFTY` for the `categorical_default_threshold` argument, the function outputs the computed feature distance as expected.
     
-    However, when you run inference on the serving data, the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) handles schema validation.
+    However, when you run inference on the serving data, the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) handles schema validation.
 
 ## Pricing
 
-The `  ML.VALIDATE_DATA_SKEW  ` function uses [BigQuery on-demand compute pricing](https://cloud.google.com/bigquery/pricing#on-demand-compute-pricing) .
+The `ML.VALIDATE_DATA_SKEW` function uses [BigQuery on-demand compute pricing](https://cloud.google.com/bigquery/pricing#on-demand-compute-pricing) .
 
 ## What's next
 

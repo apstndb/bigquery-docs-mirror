@@ -18,7 +18,7 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,geminidataanalytics.googleapis.com,cloudaicompanion.googleapis.com)
 
@@ -26,19 +26,19 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 
 To work with data agents, you must have one of the following [Conversational Analytics API Identity and Access Management roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) :
 
-  - Create, edit, share, and delete all data agents in the project: Gemini Data Analytics Data Agent Owner ( `  roles/geminidataanalytics.dataAgentOwner  ` ) on the project.
-  - Create, edit, share, and delete your own data agents in the project: Gemini Data Analytics Data Agent Creator ( `  roles/geminidataanalytics.dataAgentCreator  ` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
-  - View and edit all data agents in the project: Gemini Data Analytics Data Agent Editor ( `  roles/geminidataanalytics.dataAgentEditor  ` ) at the project level.
-  - View all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `  roles/geminidataanalytics.dataAgentViewer  ` ).
+  - Create, edit, share, and delete all data agents in the project: Gemini Data Analytics Data Agent Owner ( `roles/geminidataanalytics.dataAgentOwner` ) on the project.
+  - Create, edit, share, and delete your own data agents in the project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
+  - View and edit all data agents in the project: Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ) at the project level.
+  - View all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ).
 
 Additionally, you must have the following roles to create or edit a data agent:
 
-  - Gemini Data Analytics Stateless Chat User ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` ).
-  - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` ) on any table that the data agent uses as a knowledge source.
-  - Data Catalog Viewer ( `  roles/datacatalog.catalogViewer  ` ) on the project
-  - If a data table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , Fine-Grained Reader ( `  roles/datacatalog.categoryFineGrainedReader  ` ) on the appropriate policy tag. For more information, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
+  - Gemini Data Analytics Stateless Chat User ( `roles/geminidataanalytics.dataAgentStatelessUser` ).
+  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` ) on any table that the data agent uses as a knowledge source.
+  - Data Catalog Viewer ( `roles/datacatalog.catalogViewer` ) on the project
+  - If a data table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , Fine-Grained Reader ( `roles/datacatalog.categoryFineGrainedReader` ) on the appropriate policy tag. For more information, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
   - If a data table uses [row-level access control](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , you must have the row-level access policy on that table. For more information, see [Create or update row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) .
-  - If a data table uses [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , Masked Reader ( `  roles/bigquerydatapolicy.maskedReader  ` ) on the appropriate data policy. For more information, see [Roles for querying masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
+  - If a data table uses [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , Masked Reader ( `roles/bigquerydatapolicy.maskedReader` ) on the appropriate data policy. For more information, see [Roles for querying masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
 
 To work with BigQuery resources, such as viewing tables or running queries, see [BigQuery roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery-roles) .
 
@@ -92,9 +92,9 @@ After you create an agent, you can [edit its settings](https://docs.cloud.google
 
 3.  Click **New agent** . The **New agent** page opens.
 
-4.  In the **Editor** section, in the **Agent name** field, type a descriptive name for the data agent—for example, `  Q4 sales data  ` or `  User activity logs  ` .
+4.  In the **Editor** section, in the **Agent name** field, type a descriptive name for the data agent—for example, `Q4 sales data` or `User activity logs` .
 
-5.  In the **Agent description** field, type a description of the data agent. A good description explains what the agent does, what data it uses, and helps you know when this is the right data agent to chat with—for example, `  Ask questions about customer orders and revenue  ` .
+5.  In the **Agent description** field, type a description of the data agent. A good description explains what the agent does, what data it uses, and helps you know when this is the right data agent to chat with—for example, `Ask questions about customer orders and revenue` .
 
 6.  In the **Knowledge sources** section, click **Add source** . The **Add knowledge source** page opens.
 
@@ -197,9 +197,9 @@ For even more examples of instructions, click **Show examples** .
 <td>How two or more tables are related to each other, and which columns are used to join them. The agent must use standard SQL JOINs on column pairs to combine data. See the example column.</td>
 <td><strong>Customer Activity</strong>
 <ul>
-<li><code dir="ltr" translate="no">         order_items.user_id        </code> = <code dir="ltr" translate="no">         users.id        </code><br />
+<li><code dir="ltr" translate="no">order_items.user_id</code> = <code dir="ltr" translate="no">users.id</code><br />
 (to link sales to customers)</li>
-<li><code dir="ltr" translate="no">         events.user_id        </code> = <code dir="ltr" translate="no">         users.id        </code><br />
+<li><code dir="ltr" translate="no">events.user_id</code> = <code dir="ltr" translate="no">users.id</code><br />
 (to link website activity to logged-in customers)</li>
 </ul></td>
 </tr>
@@ -272,7 +272,7 @@ In the **Settings** section, you can configure the following optional settings:
     5.  To delete a label, click **Delete** .
     6.  When you're finished, click **Add** . The new agent page reopens.
 
-2.  Optional: Set a size limit for the queries processed by the data agent. In the **Settings** section, type a value in the **Maximum bytes billed** field. You must set this limit to `  10485760  ` or higher, otherwise you receive the following error message:
+2.  Optional: Set a size limit for the queries processed by the data agent. In the **Settings** section, type a value in the **Maximum bytes billed** field. You must set this limit to `10485760` or higher, otherwise you receive the following error message:
 
 <!-- end list -->
 
@@ -281,7 +281,7 @@ In the **Settings** section, you can configure the following optional settings:
     per query. So, max bytes billed must be set to greater or equal to
     10485760.
 
-If you don't specify a value, `  maximum bytes billed  ` defaults to the project's [query usage per day quota](https://docs.cloud.google.com/bigquery/quotas#query_jobs) . The usage per day quota is unlimited unless you have specified a [custom quota](https://docs.cloud.google.com/bigquery/docs/custom-quotas) .
+If you don't specify a value, `maximum bytes billed` defaults to the project's [query usage per day quota](https://docs.cloud.google.com/bigquery/quotas#query_jobs) . The usage per day quota is unlimited unless you have specified a [custom quota](https://docs.cloud.google.com/bigquery/docs/custom-quotas) .
 
 Continue to the next section to place the agent in draft mode or publish the agent.
 
@@ -307,9 +307,9 @@ Continue to the next section to place the agent in draft mode or publish the age
     
     4.  In the **Role** list, select one of the following roles:
         
-          - Gemini Data Analytics Data Agent User ( `  roles/geminidataanalytics.dataAgentUser  ` ): grants permission to chat with the data agent.
-          - Gemini Data Analytics Data Agent Editor ( `  roles/geminidataanalytics.dataAgentEditor  ` ): grants permission to edit the data agent.
-          - Gemini Data Analytics Data Agent Viewer ( `  roles/geminidataanalytics.dataAgentViewer  ` ): grants permission to view the data agent.
+          - Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ): grants permission to chat with the data agent.
+          - Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ): grants permission to edit the data agent.
+          - Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ): grants permission to view the data agent.
 
 6.  Click **Save** .
 
@@ -371,9 +371,9 @@ Follow these steps to share a published data agent. You can't share draft agents
 
 9.  In the **Role** list, select one of the following roles:
     
-      - Gemini Data Analytics Data Agent User ( `  roles/geminidataanalytics.dataAgentUser  ` ): gives permission to chat with the data agent.
-      - Gemini Data Analytics Data Agent Editor ( `  roles/geminidataanalytics.dataAgentEditor  ` ): gives permission to edit the data agent.
-      - Gemini Data Analytics Data Agent Viewer ( `  roles/geminidataanalytics.dataAgentViewer  ` ): gives permission to view the data agent.
+      - Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ): gives permission to chat with the data agent.
+      - Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ): gives permission to edit the data agent.
+      - Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ): gives permission to view the data agent.
 
 10. Click **Save** .
 
@@ -406,4 +406,4 @@ Conversational analytics operates globally; you can't choose which region to use
   - Learn more about [conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/ca/conversational-analytics) .
   - Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
   - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/ca/create-conversations) .
-  - Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `  roles/geminidataanalytics.dataAgentViewer  ` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.
+  - Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.

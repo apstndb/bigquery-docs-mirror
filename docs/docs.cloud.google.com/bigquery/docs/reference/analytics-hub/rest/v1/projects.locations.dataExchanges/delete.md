@@ -10,7 +10,7 @@ Deletes an existing data exchange.
 
 ### HTTP request
 
-`  DELETE https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*}  `
+`DELETE https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,11 +18,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The full name of the data exchange resource that you want to delete. For example, `  projects/myproject/locations/us/dataExchanges/123  ` .
+Required. The full name of the data exchange resource that you want to delete. For example, `projects/myproject/locations/us/dataExchanges/123` .
 
 ### Request body
 
@@ -36,15 +36,15 @@ If successful, the response body is an empty JSON object.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  analyticshub.dataExchanges.delete  `
+  - `analyticshub.dataExchanges.delete`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

@@ -6,10 +6,10 @@ This document describes how to work with data stored outside of BigQuery in exte
 
 Non-BigLake external tables let you query structured data in external data stores. To query a non-BigLake external table, you must have permissions to both the external table and the external data source. For example, to query a non-BigLake external table that uses a data source in Cloud Storage, you must have the following permissions:
 
-  - `  bigquery.tables.getData  `
-  - `  bigquery.jobs.create  `
-  - `  storage.buckets.get  `
-  - `  storage.objects.get  `
+  - `bigquery.tables.getData`
+  - `bigquery.jobs.create`
+  - `storage.buckets.get`
+  - `storage.objects.get`
 
 ## Supported data stores
 
@@ -36,7 +36,7 @@ The following limitations apply to external tables:
   - BigQuery does not guarantee data consistency for external data tables. Changes to the underlying data while a query is running can result in unexpected behavior.
   - Query performance for external tables might be slow compared to querying data in a standard BigQuery table. If query speed is a priority, [load the data into BigQuery](https://docs.cloud.google.com/bigquery/loading-data) instead of setting up an external data source. The performance of a query that includes an external table depends on the external storage type. For example, querying data stored in Cloud Storage is faster than querying data stored in Google Drive. In general, the query performance for an external table should be equivalent to reading the data directly from the data source.
   - You cannot modify external data tables using DML or other methods. External tables are read-only for BigQuery.
-  - You cannot use the `  TableDataList  ` JSON API method to retrieve data from external tables. For more information, see [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) . To work around this limitation, you can save query results in a destination table. You can then use the `  TableDataList  ` method on the results table.
+  - You cannot use the `TableDataList` JSON API method to retrieve data from external tables. For more information, see [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) . To work around this limitation, you can save query results in a destination table. You can then use the `TableDataList` method on the results table.
   - You cannot run a BigQuery job that exports data from an external table. To work around this limitation, you can save query results in a destination table. Then, run an extract job against the results table.
   - You cannot copy an external table.
   - You cannot reference an external table in a [wildcard table](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) query.
@@ -44,12 +44,12 @@ The following limitations apply to external tables:
   - When you query an external data source other than Cloud Storage, the results are not [cached](https://docs.cloud.google.com/bigquery/docs/cached-results) . (GoogleSQL queries on Cloud Storage are supported.) You are charged for each query against an external table even if you issue the same query multiple times. If you need to repeatedly issue a query against an external table that does not change frequently, consider [writing the query results to a permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) and run the queries against the permanent table instead.
   - You are limited to 16 concurrent queries against a Bigtable external data source.
   - A dry run of a federated query that uses an external table might report a lower bound of 0 bytes of data, even if rows are returned. This is because the amount of data processed from the external table can't be determined until the actual query completes. Running the federated query incurs a cost for processing this data.
-  - You can't use `  _object_metadata  ` as a column name in external tables. It is reserved for internal use.
+  - You can't use `_object_metadata` as a column name in external tables. It is reserved for internal use.
   - BigQuery doesn't support the display of table storage statistics for external tables.
   - External tables don't support [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) .
   - BI Engine doesn't support queries to external tables.
   - BigQuery doesn't support [Data Boost for Spanner](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#data_boost) for [reading Bigtable data from BigQuery](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) .
-  - BigQuery doesn't support [time travel or fail-safe data retention windows](https://docs.cloud.google.com/bigquery/docs/time-travel) for external tables. However, for Apache Iceberg external tables, you can use the [`  FOR SYSTEM_TIME AS OF  ` clause](https://docs.cloud.google.com/bigquery/docs/access-historical-data#query_data_at_a_point_in_time) to access snapshots that are retained in your Iceberg metadata.
+  - BigQuery doesn't support [time travel or fail-safe data retention windows](https://docs.cloud.google.com/bigquery/docs/time-travel) for external tables. However, for Apache Iceberg external tables, you can use the [`FOR SYSTEM_TIME AS OF` clause](https://docs.cloud.google.com/bigquery/docs/access-historical-data#query_data_at_a_point_in_time) to access snapshots that are retained in your Iceberg metadata.
   - All format specific limitations apply:
       - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
       - [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
@@ -69,29 +69,29 @@ When you query data in Cloud Storage by using a [BigLake](https://docs.cloud.goo
 
   - [Single region buckets](https://docs.cloud.google.com/storage/docs/locations#location-r)
     
-    If your Cloud Storage bucket is in the `  us-central1  ` (Iowa) region, your BigQuery dataset must be in the `  us-central1  ` (Iowa) region or the `  US  ` multi-region.
+    If your Cloud Storage bucket is in the `us-central1` (Iowa) region, your BigQuery dataset must be in the `us-central1` (Iowa) region or the `US` multi-region.
     
-    If your Cloud Storage bucket is in the `  europe-west4  ` (Netherlands) region, your BigQuery dataset must in the `  europe-west4  ` (Netherlands) or the `  EU  ` multi-region.
+    If your Cloud Storage bucket is in the `europe-west4` (Netherlands) region, your BigQuery dataset must in the `europe-west4` (Netherlands) or the `EU` multi-region.
     
-    If your Cloud Storage bucket is in the `  europe-west1  ` (Belgium) region, the corresponding BigQuery dataset must also be in the `  europe-west1  ` (Belgium) or the `  EU  ` multi-region.
+    If your Cloud Storage bucket is in the `europe-west1` (Belgium) region, the corresponding BigQuery dataset must also be in the `europe-west1` (Belgium) or the `EU` multi-region.
 
   - [Dual-region buckets](https://docs.cloud.google.com/storage/docs/locations#location-dr)
     
-    If your Cloud Storage bucket is in the `  NAM4  ` predefined dual-region or any configurable dual-region that includes the `  us-central1  ` (Iowa) region, the corresponding BigQuery dataset must be in the `  us-central1  ` (Iowa) region *or* the `  US  ` multi-region.
+    If your Cloud Storage bucket is in the `NAM4` predefined dual-region or any configurable dual-region that includes the `us-central1` (Iowa) region, the corresponding BigQuery dataset must be in the `us-central1` (Iowa) region *or* the `US` multi-region.
     
-    If your Cloud Storage bucket is in the `  EUR4  ` predefined dual-region or any configurable dual-region that includes the `  europe-west4  ` (Netherlands) region, the corresponding BigQuery dataset must be in the `  europe-west4  ` (Netherlands) region *or* the `  EU  ` multi-region.
+    If your Cloud Storage bucket is in the `EUR4` predefined dual-region or any configurable dual-region that includes the `europe-west4` (Netherlands) region, the corresponding BigQuery dataset must be in the `europe-west4` (Netherlands) region *or* the `EU` multi-region.
     
-    If your Cloud Storage bucket is in the `  ASIA1  ` predefined dual-region, the corresponding BigQuery dataset must be in the `  asia-northeast1  ` (Tokyo) *or* the `  asia-northeast2  ` (Osaka) region.
+    If your Cloud Storage bucket is in the `ASIA1` predefined dual-region, the corresponding BigQuery dataset must be in the `asia-northeast1` (Tokyo) *or* the `asia-northeast2` (Osaka) region.
     
-    If your Cloud Storage bucket uses a configurable dual-region that includes the `  australia-southeast1  ` (Sydney) and the `  australia-southeast2  ` (Melbourne) region, the corresponding BigQuery bucket must be in either the `  australia-southeast1  ` (Sydney) *or* the `  australia-southeast2  ` (Melbourne) region.
+    If your Cloud Storage bucket uses a configurable dual-region that includes the `australia-southeast1` (Sydney) and the `australia-southeast2` (Melbourne) region, the corresponding BigQuery bucket must be in either the `australia-southeast1` (Sydney) *or* the `australia-southeast2` (Melbourne) region.
 
   - [Multi-region buckets](https://docs.cloud.google.com/storage/docs/locations#location-mr)
     
     Using multi-region dataset locations with multi-region Cloud Storage buckets is *not* recommended for external tables, because external query performance depends on minimal latency and optimal network bandwidth.
     
-    If your BigQuery dataset is in the `  US  ` multi-region, the corresponding Cloud Storage bucket must be in the `  US  ` multi-region, in the single region `  us-central1  ` (Iowa), or in a dual-region that includes `  us-central1  ` (Iowa), like the `  NAM4  ` dual-region, or in a configurable dual-region that includes `  us-central1  ` .
+    If your BigQuery dataset is in the `US` multi-region, the corresponding Cloud Storage bucket must be in the `US` multi-region, in the single region `us-central1` (Iowa), or in a dual-region that includes `us-central1` (Iowa), like the `NAM4` dual-region, or in a configurable dual-region that includes `us-central1` .
     
-    If your BigQuery dataset is in the `  EU  ` multi-region, the corresponding Cloud Storage bucket must be in the `  EU  ` multi-region, in the single region `  europe-west1  ` (Belgium) or `  europe-west4  ` (Netherlands), or a dual-region that includes `  europe-west1  ` (Belgium) or `  europe-west4  ` (Netherlands), like the `  EUR4  ` dual-region, or in a configurable dual-region that includes `  europe-west1  ` or `  europe-west4  ` .
+    If your BigQuery dataset is in the `EU` multi-region, the corresponding Cloud Storage bucket must be in the `EU` multi-region, in the single region `europe-west1` (Belgium) or `europe-west4` (Netherlands), or a dual-region that includes `europe-west1` (Belgium) or `europe-west4` (Netherlands), like the `EUR4` dual-region, or in a configurable dual-region that includes `europe-west1` or `europe-west4` .
 
 For more information about supported Cloud Storage locations, see [Bucket locations](https://docs.cloud.google.com/storage/docs/bucket-locations) in the Cloud Storage documentation.
 
@@ -99,7 +99,7 @@ For more information about supported Cloud Storage locations, see [Bucket locati
 
 When you [query data in Bigtable](https://docs.cloud.google.com/bigquery/docs/external-data-bigtable) through a BigQuery external table, your Bigtable instance must be in the same location as your BigQuery dataset:
 
-  - Single region: If your BigQuery dataset is in the Belgium ( `  europe-west1  ` ) regional location, the corresponding Bigtable instance must be in the Belgium region.
+  - Single region: If your BigQuery dataset is in the Belgium ( `europe-west1` ) regional location, the corresponding Bigtable instance must be in the Belgium region.
   - Multi-region: Because external query performance depends on minimal latency and optimal network bandwidth, using multi-region dataset locations is *not* recommended for external tables on Bigtable.
 
 For more information about supported Bigtable locations, see [Bigtable locations](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#supported_regions_and_zones) .
@@ -116,7 +116,7 @@ To manually move a dataset from one location to another, follow these steps:
     
     There are no charges for exporting data from BigQuery, but you do incur charges for [storing the exported data](https://docs.cloud.google.com/storage/pricing#storage-pricing) in Cloud Storage. BigQuery exports are subject to the limits on [extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
 
-2.  Copy or move the data from your export Cloud Storage bucket to a new bucket you created in the destination location. For example, if you are moving your data from the `  US  ` multi-region to the `  asia-northeast1  ` Tokyo region, you would transfer the data to a bucket that you created in Tokyo. For information about transferring Cloud Storage objects, see [Copy, rename, and move objects](https://docs.cloud.google.com/storage/docs/copying-renaming-moving-objects) in the Cloud Storage documentation.
+2.  Copy or move the data from your export Cloud Storage bucket to a new bucket you created in the destination location. For example, if you are moving your data from the `US` multi-region to the `asia-northeast1` Tokyo region, you would transfer the data to a bucket that you created in Tokyo. For information about transferring Cloud Storage objects, see [Copy, rename, and move objects](https://docs.cloud.google.com/storage/docs/copying-renaming-moving-objects) in the Cloud Storage documentation.
     
     Transferring data between regions incurs [network egress charges](https://docs.cloud.google.com/storage/pricing#network-pricing) in Cloud Storage.
 

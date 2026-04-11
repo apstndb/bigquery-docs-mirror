@@ -159,304 +159,204 @@ BigQueryAuditMetaData is exposed as part of the new AuditData.metadata messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;firstPartyAppMetadata&quot;: {
-    object (BigQueryAuditMetadata.FirstPartyAppMetadata)
-  },
-
-  // Union field event can be only one of the following:
-  &quot;jobInsertion&quot;: {
-    object (BigQueryAuditMetadata.JobInsertion)
-  },
-  &quot;jobChange&quot;: {
-    object (BigQueryAuditMetadata.JobChange)
-  },
-  &quot;jobDeletion&quot;: {
-    object (BigQueryAuditMetadata.JobDeletion)
-  },
-  &quot;datasetCreation&quot;: {
-    object (BigQueryAuditMetadata.DatasetCreation)
-  },
-  &quot;datasetChange&quot;: {
-    object (BigQueryAuditMetadata.DatasetChange)
-  },
-  &quot;datasetDeletion&quot;: {
-    object (BigQueryAuditMetadata.DatasetDeletion)
-  },
-  &quot;tableCreation&quot;: {
-    object (BigQueryAuditMetadata.TableCreation)
-  },
-  &quot;tableChange&quot;: {
-    object (BigQueryAuditMetadata.TableChange)
-  },
-  &quot;tableDeletion&quot;: {
-    object (BigQueryAuditMetadata.TableDeletion)
-  },
-  &quot;tableDataRead&quot;: {
-    object (BigQueryAuditMetadata.TableDataRead)
-  },
-  &quot;tableDataChange&quot;: {
-    object (BigQueryAuditMetadata.TableDataChange)
-  },
-  &quot;modelDeletion&quot;: {
-    object (BigQueryAuditMetadata.ModelDeletion)
-  },
-  &quot;modelCreation&quot;: {
-    object (BigQueryAuditMetadata.ModelCreation)
-  },
-  &quot;modelMetadataChange&quot;: {
-    object (BigQueryAuditMetadata.ModelMetadataChange)
-  },
-  &quot;modelDataChange&quot;: {
-    object (BigQueryAuditMetadata.ModelDataChange)
-  },
-  &quot;modelDataRead&quot;: {
-    object (BigQueryAuditMetadata.ModelDataRead)
-  },
-  &quot;routineCreation&quot;: {
-    object (BigQueryAuditMetadata.RoutineCreation)
-  },
-  &quot;routineChange&quot;: {
-    object (BigQueryAuditMetadata.RoutineChange)
-  },
-  &quot;routineDeletion&quot;: {
-    object (BigQueryAuditMetadata.RoutineDeletion)
-  },
-  &quot;rowAccessPolicyCreation&quot;: {
-    object (BigQueryAuditMetadata.RowAccessPolicyCreation)
-  },
-  &quot;rowAccessPolicyChange&quot;: {
-    object (BigQueryAuditMetadata.RowAccessPolicyChange)
-  },
-  &quot;rowAccessPolicyDeletion&quot;: {
-    object (BigQueryAuditMetadata.RowAccessPolicyDeletion)
-  },
-  &quot;unlinkDataset&quot;: {
-    object (BigQueryAuditMetadata.UnlinkDataset)
-  },
-  &quot;searchIndexCreation&quot;: {
-    object (BigQueryAuditMetadata.SearchIndexCreation)
-  },
-  &quot;searchIndexChange&quot;: {
-    object (BigQueryAuditMetadata.SearchIndexChange)
-  },
-  &quot;searchIndexDeletion&quot;: {
-    object (BigQueryAuditMetadata.SearchIndexDeletion)
-  },
-  &quot;vectorIndexCreation&quot;: {
-    object (BigQueryAuditMetadata.VectorIndexCreation)
-  },
-  &quot;vectorIndexChange&quot;: {
-    object (BigQueryAuditMetadata.VectorIndexChange)
-  },
-  &quot;vectorIndexDeletion&quot;: {
-    object (BigQueryAuditMetadata.VectorIndexDeletion)
-  },
-  &quot;connectionChange&quot;: {
-    object (BigQueryAuditMetadata.ConnectionChange)
-  },
-  &quot;analyticsHubSubscribeListing&quot;: {
-    object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)
-  }
-  // End of list of possible types for union field event.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;firstPartyAppMetadata&quot;: {object (BigQueryAuditMetadata.FirstPartyAppMetadata)},// Union field event can be only one of the following:&quot;jobInsertion&quot;: {object (BigQueryAuditMetadata.JobInsertion)},&quot;jobChange&quot;: {object (BigQueryAuditMetadata.JobChange)},&quot;jobDeletion&quot;: {object (BigQueryAuditMetadata.JobDeletion)},&quot;datasetCreation&quot;: {object (BigQueryAuditMetadata.DatasetCreation)},&quot;datasetChange&quot;: {object (BigQueryAuditMetadata.DatasetChange)},&quot;datasetDeletion&quot;: {object (BigQueryAuditMetadata.DatasetDeletion)},&quot;tableCreation&quot;: {object (BigQueryAuditMetadata.TableCreation)},&quot;tableChange&quot;: {object (BigQueryAuditMetadata.TableChange)},&quot;tableDeletion&quot;: {object (BigQueryAuditMetadata.TableDeletion)},&quot;tableDataRead&quot;: {object (BigQueryAuditMetadata.TableDataRead)},&quot;tableDataChange&quot;: {object (BigQueryAuditMetadata.TableDataChange)},&quot;modelDeletion&quot;: {object (BigQueryAuditMetadata.ModelDeletion)},&quot;modelCreation&quot;: {object (BigQueryAuditMetadata.ModelCreation)},&quot;modelMetadataChange&quot;: {object (BigQueryAuditMetadata.ModelMetadataChange)},&quot;modelDataChange&quot;: {object (BigQueryAuditMetadata.ModelDataChange)},&quot;modelDataRead&quot;: {object (BigQueryAuditMetadata.ModelDataRead)},&quot;routineCreation&quot;: {object (BigQueryAuditMetadata.RoutineCreation)},&quot;routineChange&quot;: {object (BigQueryAuditMetadata.RoutineChange)},&quot;routineDeletion&quot;: {object (BigQueryAuditMetadata.RoutineDeletion)},&quot;rowAccessPolicyCreation&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyCreation)},&quot;rowAccessPolicyChange&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyChange)},&quot;rowAccessPolicyDeletion&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyDeletion)},&quot;unlinkDataset&quot;: {object (BigQueryAuditMetadata.UnlinkDataset)},&quot;searchIndexCreation&quot;: {object (BigQueryAuditMetadata.SearchIndexCreation)},&quot;searchIndexChange&quot;: {object (BigQueryAuditMetadata.SearchIndexChange)},&quot;searchIndexDeletion&quot;: {object (BigQueryAuditMetadata.SearchIndexDeletion)},&quot;vectorIndexCreation&quot;: {object (BigQueryAuditMetadata.VectorIndexCreation)},&quot;vectorIndexChange&quot;: {object (BigQueryAuditMetadata.VectorIndexChange)},&quot;vectorIndexDeletion&quot;: {object (BigQueryAuditMetadata.VectorIndexDeletion)},&quot;connectionChange&quot;: {object (BigQueryAuditMetadata.ConnectionChange)},&quot;analyticsHubSubscribeListing&quot;: {object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)}// End of list of possible types for union field event.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  firstPartyAppMetadata  `
+`firstPartyAppMetadata`
 
-`  object ( BigQueryAuditMetadata.FirstPartyAppMetadata  ` )
+` object ( BigQueryAuditMetadata.FirstPartyAppMetadata  ` )
 
 First party (Google) application specific metadata.
 
-Union field `  event  ` . BigQuery event information. `  event  ` can be only one of the following:
+Union field `event` . BigQuery event information. `event` can be only one of the following:
 
-`  jobInsertion  `
+`jobInsertion`
 
-`  object ( BigQueryAuditMetadata.JobInsertion  ` )
+` object ( BigQueryAuditMetadata.JobInsertion  ` )
 
 Job insertion event.
 
-`  jobChange  `
+`jobChange`
 
-`  object ( BigQueryAuditMetadata.JobChange  ` )
+` object ( BigQueryAuditMetadata.JobChange  ` )
 
 Job state change event.
 
-`  jobDeletion  `
+`jobDeletion`
 
-`  object ( BigQueryAuditMetadata.JobDeletion  ` )
+` object ( BigQueryAuditMetadata.JobDeletion  ` )
 
 Job deletion event.
 
-`  datasetCreation  `
+`datasetCreation`
 
-`  object ( BigQueryAuditMetadata.DatasetCreation  ` )
+` object ( BigQueryAuditMetadata.DatasetCreation  ` )
 
 Dataset creation event.
 
-`  datasetChange  `
+`datasetChange`
 
-`  object ( BigQueryAuditMetadata.DatasetChange  ` )
+` object ( BigQueryAuditMetadata.DatasetChange  ` )
 
 Dataset change event.
 
-`  datasetDeletion  `
+`datasetDeletion`
 
-`  object ( BigQueryAuditMetadata.DatasetDeletion  ` )
+` object ( BigQueryAuditMetadata.DatasetDeletion  ` )
 
 Dataset deletion event.
 
-`  tableCreation  `
+`tableCreation`
 
-`  object ( BigQueryAuditMetadata.TableCreation  ` )
+` object ( BigQueryAuditMetadata.TableCreation  ` )
 
 Table creation event.
 
-`  tableChange  `
+`tableChange`
 
-`  object ( BigQueryAuditMetadata.TableChange  ` )
+` object ( BigQueryAuditMetadata.TableChange  ` )
 
 Table metadata change event.
 
-`  tableDeletion  `
+`tableDeletion`
 
-`  object ( BigQueryAuditMetadata.TableDeletion  ` )
+` object ( BigQueryAuditMetadata.TableDeletion  ` )
 
 Table deletion event.
 
-`  tableDataRead  `
+`tableDataRead`
 
-`  object ( BigQueryAuditMetadata.TableDataRead  ` )
+` object ( BigQueryAuditMetadata.TableDataRead  ` )
 
 Table data read event.
 
-`  tableDataChange  `
+`tableDataChange`
 
-`  object ( BigQueryAuditMetadata.TableDataChange  ` )
+` object ( BigQueryAuditMetadata.TableDataChange  ` )
 
 Table data change event.
 
-`  modelDeletion  `
+`modelDeletion`
 
-`  object ( BigQueryAuditMetadata.ModelDeletion  ` )
+` object ( BigQueryAuditMetadata.ModelDeletion  ` )
 
 Model deletion event.
 
-`  modelCreation  `
+`modelCreation`
 
-`  object ( BigQueryAuditMetadata.ModelCreation  ` )
+` object ( BigQueryAuditMetadata.ModelCreation  ` )
 
 Model creation event.
 
-`  modelMetadataChange  `
+`modelMetadataChange`
 
-`  object ( BigQueryAuditMetadata.ModelMetadataChange  ` )
+` object ( BigQueryAuditMetadata.ModelMetadataChange  ` )
 
 Model metadata change event.
 
-`  modelDataChange  `
+`modelDataChange`
 
-`  object ( BigQueryAuditMetadata.ModelDataChange  ` )
+` object ( BigQueryAuditMetadata.ModelDataChange  ` )
 
 Model data change event.
 
-`  modelDataRead  `
+`modelDataRead`
 
-`  object ( BigQueryAuditMetadata.ModelDataRead  ` )
+` object ( BigQueryAuditMetadata.ModelDataRead  ` )
 
 Model data read event.
 
-`  routineCreation  `
+`routineCreation`
 
-`  object ( BigQueryAuditMetadata.RoutineCreation  ` )
+` object ( BigQueryAuditMetadata.RoutineCreation  ` )
 
 Routine creation event.
 
-`  routineChange  `
+`routineChange`
 
-`  object ( BigQueryAuditMetadata.RoutineChange  ` )
+` object ( BigQueryAuditMetadata.RoutineChange  ` )
 
 Routine change event.
 
-`  routineDeletion  `
+`routineDeletion`
 
-`  object ( BigQueryAuditMetadata.RoutineDeletion  ` )
+` object ( BigQueryAuditMetadata.RoutineDeletion  ` )
 
 Routine deletion event.
 
-`  rowAccessPolicyCreation  `
+`rowAccessPolicyCreation`
 
-`  object ( BigQueryAuditMetadata.RowAccessPolicyCreation  ` )
+` object ( BigQueryAuditMetadata.RowAccessPolicyCreation  ` )
 
 Row access policy create event.
 
-`  rowAccessPolicyChange  `
+`rowAccessPolicyChange`
 
-`  object ( BigQueryAuditMetadata.RowAccessPolicyChange  ` )
+` object ( BigQueryAuditMetadata.RowAccessPolicyChange  ` )
 
 Row access policy change event.
 
-`  rowAccessPolicyDeletion  `
+`rowAccessPolicyDeletion`
 
-`  object ( BigQueryAuditMetadata.RowAccessPolicyDeletion  ` )
+` object ( BigQueryAuditMetadata.RowAccessPolicyDeletion  ` )
 
 Row access policy deletion event.
 
-`  unlinkDataset  `
+`unlinkDataset`
 
-`  object ( BigQueryAuditMetadata.UnlinkDataset  ` )
+` object ( BigQueryAuditMetadata.UnlinkDataset  ` )
 
 Unlink linked dataset from its source dataset event
 
-`  searchIndexCreation  `
+`searchIndexCreation`
 
-`  object ( BigQueryAuditMetadata.SearchIndexCreation  ` )
+` object ( BigQueryAuditMetadata.SearchIndexCreation  ` )
 
 Search index creation event.
 
-`  searchIndexChange  `
+`searchIndexChange`
 
-`  object ( BigQueryAuditMetadata.SearchIndexChange  ` )
+` object ( BigQueryAuditMetadata.SearchIndexChange  ` )
 
 Search index change event.
 
-`  searchIndexDeletion  `
+`searchIndexDeletion`
 
-`  object ( BigQueryAuditMetadata.SearchIndexDeletion  ` )
+` object ( BigQueryAuditMetadata.SearchIndexDeletion  ` )
 
 Search index deletion event.
 
-`  vectorIndexCreation  `
+`vectorIndexCreation`
 
-`  object ( BigQueryAuditMetadata.VectorIndexCreation  ` )
+` object ( BigQueryAuditMetadata.VectorIndexCreation  ` )
 
 Vector index creation event.
 
-`  vectorIndexChange  `
+`vectorIndexChange`
 
-`  object ( BigQueryAuditMetadata.VectorIndexChange  ` )
+` object ( BigQueryAuditMetadata.VectorIndexChange  ` )
 
 Vector index change event.
 
-`  vectorIndexDeletion  `
+`vectorIndexDeletion`
 
-`  object ( BigQueryAuditMetadata.VectorIndexDeletion  ` )
+` object ( BigQueryAuditMetadata.VectorIndexDeletion  ` )
 
 Vector index deletion event.
 
-`  connectionChange  `
+`connectionChange`
 
-`  object ( BigQueryAuditMetadata.ConnectionChange  ` )
+` object ( BigQueryAuditMetadata.ConnectionChange  ` )
 
 Connection change event.
 
-`  analyticsHubSubscribeListing  `
+`analyticsHubSubscribeListing`
 
-`  object ( BigQueryAuditMetadata.AnalyticsHubSubscribeListing  ` )
+` object ( BigQueryAuditMetadata.AnalyticsHubSubscribeListing  ` )
 
 Subscribe listing event.
 
@@ -475,27 +375,22 @@ Job insertion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;job&quot;: {
-    object (BigQueryAuditMetadata.Job)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.JobInsertion.Reason)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;job&quot;: {object (BigQueryAuditMetadata.Job)},&quot;reason&quot;: enum (BigQueryAuditMetadata.JobInsertion.Reason)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  job  `
+`job`
 
-`  object ( BigQueryAuditMetadata.Job  ` )
+` object ( BigQueryAuditMetadata.Job  ` )
 
 Job metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.JobInsertion.Reason  ` )
+` enum ( BigQueryAuditMetadata.JobInsertion.Reason  ` )
 
 Describes how the job was inserted.
 
@@ -514,47 +409,36 @@ BigQuery job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;jobName&quot;: string,
-  &quot;jobConfig&quot;: {
-    object (BigQueryAuditMetadata.JobConfig)
-  },
-  &quot;jobStatus&quot;: {
-    object (BigQueryAuditMetadata.JobStatus)
-  },
-  &quot;jobStats&quot;: {
-    object (BigQueryAuditMetadata.JobStats)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;jobName&quot;: string,&quot;jobConfig&quot;: {object (BigQueryAuditMetadata.JobConfig)},&quot;jobStatus&quot;: {object (BigQueryAuditMetadata.JobStatus)},&quot;jobStats&quot;: {object (BigQueryAuditMetadata.JobStats)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 Job URI.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  jobConfig  `
+`jobConfig`
 
-`  object ( BigQueryAuditMetadata.JobConfig  ` )
+` object ( BigQueryAuditMetadata.JobConfig  ` )
 
 Job configuration.
 
-`  jobStatus  `
+`jobStatus`
 
-`  object ( BigQueryAuditMetadata.JobStatus  ` )
+` object ( BigQueryAuditMetadata.JobStatus  ` )
 
 Job status.
 
-`  jobStats  `
+`jobStats`
 
-`  object ( BigQueryAuditMetadata.JobStats  ` )
+` object ( BigQueryAuditMetadata.JobStats  ` )
 
 Job statistics.
 
@@ -573,78 +457,56 @@ Job configuration. See the [Jobs](https://cloud.google.com/bigquery/docs/referen
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;type&quot;: enum (BigQueryAuditMetadata.JobConfig.Type),
-  &quot;labels&quot;: {
-    string: string,
-    ...
-  },
-  &quot;reservation&quot;: string,
-
-  // Union field config can be only one of the following:
-  &quot;queryConfig&quot;: {
-    object (BigQueryAuditMetadata.JobConfig.Query)
-  },
-  &quot;loadConfig&quot;: {
-    object (BigQueryAuditMetadata.JobConfig.Load)
-  },
-  &quot;extractConfig&quot;: {
-    object (BigQueryAuditMetadata.JobConfig.Extract)
-  },
-  &quot;tableCopyConfig&quot;: {
-    object (BigQueryAuditMetadata.JobConfig.TableCopy)
-  }
-  // End of list of possible types for union field config.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;type&quot;: enum (BigQueryAuditMetadata.JobConfig.Type),&quot;labels&quot;: {string: string,...},&quot;reservation&quot;: string,// Union field config can be only one of the following:&quot;queryConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Query)},&quot;loadConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Load)},&quot;extractConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Extract)},&quot;tableCopyConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.TableCopy)}// End of list of possible types for union field config.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  type  `
+`type`
 
-`  enum ( BigQueryAuditMetadata.JobConfig.Type  ` )
+` enum ( BigQueryAuditMetadata.JobConfig.Type  ` )
 
 Job type.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Labels provided for the job.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-`  reservation  `
+`reservation`
 
-`  string  `
+`string`
 
 User specified reservation for the job.
 
-Union field `  config  ` . Job configuration information. `  config  ` can be only one of the following:
+Union field `config` . Job configuration information. `config` can be only one of the following:
 
-`  queryConfig  `
+`queryConfig`
 
-`  object ( BigQueryAuditMetadata.JobConfig.Query  ` )
+` object ( BigQueryAuditMetadata.JobConfig.Query  ` )
 
 Query job information.
 
-`  loadConfig  `
+`loadConfig`
 
-`  object ( BigQueryAuditMetadata.JobConfig.Load  ` )
+` object ( BigQueryAuditMetadata.JobConfig.Load  ` )
 
 Load job information.
 
-`  extractConfig  `
+`extractConfig`
 
-`  object ( BigQueryAuditMetadata.JobConfig.Extract  ` )
+` object ( BigQueryAuditMetadata.JobConfig.Extract  ` )
 
 Extract job information.
 
-`  tableCopyConfig  `
+`tableCopyConfig`
 
-`  object ( BigQueryAuditMetadata.JobConfig.TableCopy  ` )
+` object ( BigQueryAuditMetadata.JobConfig.TableCopy  ` )
 
 TableCopy job information.
 
@@ -663,87 +525,70 @@ Query job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;query&quot;: string,
-  &quot;queryTruncated&quot;: boolean,
-  &quot;destinationTable&quot;: string,
-  &quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),
-  &quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),
-  &quot;defaultDataset&quot;: string,
-  &quot;tableDefinitions&quot;: [
-    {
-      object (BigQueryAuditMetadata.TableDefinition)
-    }
-  ],
-  &quot;priority&quot;: enum (BigQueryAuditMetadata.JobConfig.Query.Priority),
-  &quot;destinationTableEncryption&quot;: {
-    object (BigQueryAuditMetadata.EncryptionInfo)
-  },
-  &quot;statementType&quot;: enum (BigQueryAuditMetadata.QueryStatementType)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;queryTruncated&quot;: boolean,&quot;destinationTable&quot;: string,&quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),&quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),&quot;defaultDataset&quot;: string,&quot;tableDefinitions&quot;: [{object (BigQueryAuditMetadata.TableDefinition)}],&quot;priority&quot;: enum (BigQueryAuditMetadata.JobConfig.Query.Priority),&quot;destinationTableEncryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)},&quot;statementType&quot;: enum (BigQueryAuditMetadata.QueryStatementType)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  query  `
+`query`
 
-`  string  `
+`string`
 
 The SQL query to run. Truncated if exceeds 50K.
 
-`  queryTruncated  `
+`queryTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the query field was truncated.
 
-`  destinationTable  `
+`destinationTable`
 
-`  string  `
+`string`
 
 The destination table for the query results.
 
-`  createDisposition  `
+`createDisposition`
 
-`  enum ( BigQueryAuditMetadata.CreateDisposition  ` )
+` enum ( BigQueryAuditMetadata.CreateDisposition  ` )
 
 Destination table create disposition.
 
-`  writeDisposition  `
+`writeDisposition`
 
-`  enum ( BigQueryAuditMetadata.WriteDisposition  ` )
+` enum ( BigQueryAuditMetadata.WriteDisposition  ` )
 
 Destination table write disposition.
 
-`  defaultDataset  `
+`defaultDataset`
 
-`  string  `
+`string`
 
 Default dataset for the query.
 
-`  tableDefinitions[]  `
+`tableDefinitions[]`
 
-`  object ( BigQueryAuditMetadata.TableDefinition  ` )
+` object ( BigQueryAuditMetadata.TableDefinition  ` )
 
 External data sources used in the query.
 
-`  priority  `
+`priority`
 
-`  enum ( BigQueryAuditMetadata.JobConfig.Query.Priority  ` )
+` enum ( BigQueryAuditMetadata.JobConfig.Query.Priority  ` )
 
 Priority given to the query.
 
-`  destinationTableEncryption  `
+`destinationTableEncryption`
 
-`  object ( BigQueryAuditMetadata.EncryptionInfo  ` )
+` object ( BigQueryAuditMetadata.EncryptionInfo  ` )
 
 Result table encryption information. Set when non-default encryption is used.
 
-`  statementType  `
+`statementType`
 
-`  enum ( BigQueryAuditMetadata.QueryStatementType  ` )
+` enum ( BigQueryAuditMetadata.QueryStatementType  ` )
 
 Type of the query.
 
@@ -774,15 +619,15 @@ Definition of an external data source used in a query.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Name of the table, used in queries.
 
-`  sourceUris[]  `
+`sourceUris[]`
 
-`  string  `
+`string`
 
 URIs for the data.
 
@@ -810,13 +655,13 @@ Encryption properties for a table or a job
 
 Fields
 
-`  kmsKeyName  `
+`kmsKeyName`
 
-`  string  `
+`string`
 
 Cloud kms key identifier.
 
-Format: `  projects/<projectId>/locations/<location>/keyRings/<key_ring_name>/cryptoKeys/<key_name>  `
+Format: `projects/<projectId>/locations/<location>/keyRings/<key_ring_name>/cryptoKeys/<key_name>`
 
 ## BigQueryAuditMetadata.JobConfig.Load
 
@@ -833,71 +678,58 @@ Load job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceUris&quot;: [
-    string
-  ],
-  &quot;sourceUrisTruncated&quot;: boolean,
-  &quot;schemaJson&quot;: string,
-  &quot;schemaJsonTruncated&quot;: boolean,
-  &quot;destinationTable&quot;: string,
-  &quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),
-  &quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),
-  &quot;destinationTableEncryption&quot;: {
-    object (BigQueryAuditMetadata.EncryptionInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceUris&quot;: [string],&quot;sourceUrisTruncated&quot;: boolean,&quot;schemaJson&quot;: string,&quot;schemaJsonTruncated&quot;: boolean,&quot;destinationTable&quot;: string,&quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),&quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),&quot;destinationTableEncryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceUris[]  `
+`sourceUris[]`
 
-`  string  `
+`string`
 
 URIs for the data to be imported. Entire list is truncated if exceeds 40K.
 
-`  sourceUrisTruncated  `
+`sourceUrisTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the source\_URIs field was truncated.
 
-`  schemaJson  `
+`schemaJson`
 
-`  string  `
+`string`
 
 The table schema in JSON format. Entire field is truncated if exceeds 40K.
 
-`  schemaJsonTruncated  `
+`schemaJsonTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the schemaJson field was truncated.
 
-`  destinationTable  `
+`destinationTable`
 
-`  string  `
+`string`
 
 The destination table for the import.
 
-`  createDisposition  `
+`createDisposition`
 
-`  enum ( BigQueryAuditMetadata.CreateDisposition  ` )
+` enum ( BigQueryAuditMetadata.CreateDisposition  ` )
 
 Destination table create disposition.
 
-`  writeDisposition  `
+`writeDisposition`
 
-`  enum ( BigQueryAuditMetadata.WriteDisposition  ` )
+` enum ( BigQueryAuditMetadata.WriteDisposition  ` )
 
 Destination table write disposition.
 
-`  destinationTableEncryption  `
+`destinationTableEncryption`
 
-`  object ( BigQueryAuditMetadata.EncryptionInfo  ` )
+` object ( BigQueryAuditMetadata.EncryptionInfo  ` )
 
 Result table encryption information. Set when non-default encryption is used.
 
@@ -916,48 +748,38 @@ Extract job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;destinationUris&quot;: [
-    string
-  ],
-  &quot;destinationUrisTruncated&quot;: boolean,
-
-  // Union field source can be only one of the following:
-  &quot;sourceTable&quot;: string,
-  &quot;sourceModel&quot;: string
-  // End of list of possible types for union field source.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destinationUris&quot;: [string],&quot;destinationUrisTruncated&quot;: boolean,// Union field source can be only one of the following:&quot;sourceTable&quot;: string,&quot;sourceModel&quot;: string// End of list of possible types for union field source.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  destinationUris[]  `
+`destinationUris[]`
 
-`  string  `
+`string`
 
 URIs where extracted data should be written. Entire list is truncated if exceeds 50K.
 
-`  destinationUrisTruncated  `
+`destinationUrisTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the destination\_URIs field was truncated.
 
-Union field `  source  ` .
+Union field `source` .
 
-`  source  ` can be only one of the following:
+`source` can be only one of the following:
 
-`  sourceTable  `
+`sourceTable`
 
-`  string  `
+`string`
 
 The source table.
 
-`  sourceModel  `
+`sourceModel`
 
-`  string  `
+`string`
 
 The source model.
 
@@ -976,75 +798,62 @@ Table copy job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceTables&quot;: [
-    string
-  ],
-  &quot;sourceTablesTruncated&quot;: boolean,
-  &quot;destinationTable&quot;: string,
-  &quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),
-  &quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),
-  &quot;destinationTableEncryption&quot;: {
-    object (BigQueryAuditMetadata.EncryptionInfo)
-  },
-  &quot;operationType&quot;: enum (BigQueryAuditMetadata.OperationType),
-  &quot;destinationExpirationTime&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceTables&quot;: [string],&quot;sourceTablesTruncated&quot;: boolean,&quot;destinationTable&quot;: string,&quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),&quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),&quot;destinationTableEncryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)},&quot;operationType&quot;: enum (BigQueryAuditMetadata.OperationType),&quot;destinationExpirationTime&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceTables[]  `
+`sourceTables[]`
 
-`  string  `
+`string`
 
 Source tables. Entire list is truncated if exceeds 50K.
 
-`  sourceTablesTruncated  `
+`sourceTablesTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the sourceTables field was truncated.
 
-`  destinationTable  `
+`destinationTable`
 
-`  string  `
+`string`
 
 Destination table.
 
-`  createDisposition  `
+`createDisposition`
 
-`  enum ( BigQueryAuditMetadata.CreateDisposition  ` )
+` enum ( BigQueryAuditMetadata.CreateDisposition  ` )
 
 Destination table create disposition.
 
-`  writeDisposition  `
+`writeDisposition`
 
-`  enum ( BigQueryAuditMetadata.WriteDisposition  ` )
+` enum ( BigQueryAuditMetadata.WriteDisposition  ` )
 
 Destination table write disposition.
 
-`  destinationTableEncryption  `
+`destinationTableEncryption`
 
-`  object ( BigQueryAuditMetadata.EncryptionInfo  ` )
+` object ( BigQueryAuditMetadata.EncryptionInfo  ` )
 
 Result table encryption information. Set when non-default encryption is used.
 
-`  operationType  `
+`operationType`
 
-`  enum ( BigQueryAuditMetadata.OperationType  ` )
+` enum ( BigQueryAuditMetadata.OperationType  ` )
 
 Supported operation types in the table copy job.
 
-`  destinationExpirationTime  `
+`destinationExpirationTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Expiration time set on the destination table. Expired tables will be deleted and their storage reclaimed.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
 ## BigQueryAuditMetadata.JobStatus
 
@@ -1061,38 +870,28 @@ Status of a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;jobState&quot;: enum (BigQueryAuditMetadata.JobState),
-  &quot;errorResult&quot;: {
-    object (Status)
-  },
-  &quot;errors&quot;: [
-    {
-      object (Status)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;jobState&quot;: enum (BigQueryAuditMetadata.JobState),&quot;errorResult&quot;: {object (Status)},&quot;errors&quot;: [{object (Status)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  jobState  `
+`jobState`
 
-`  enum ( BigQueryAuditMetadata.JobState  ` )
+` enum ( BigQueryAuditMetadata.JobState  ` )
 
 State of the job.
 
-`  errorResult  `
+`errorResult`
 
-`  object ( Status  ` )
+` object ( Status  ` )
 
 Job error, if the job failed.
 
-`  errors[]  `
+`errors[]`
 
-`  object ( Status  ` )
+` object ( Status  ` )
 
 Errors encountered during the running of the job. Does not necessarily mean that the job has completed or was unsuccessful.
 
@@ -1111,104 +910,80 @@ Job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;createTime&quot;: string,
-  &quot;startTime&quot;: string,
-  &quot;endTime&quot;: string,
-  &quot;totalSlotMs&quot;: string,
-  &quot;reservationUsage&quot;: [
-    {
-      object (BigQueryAuditMetadata.JobStats.ReservationResourceUsage)
-    }
-  ],
-  &quot;reservation&quot;: string,
-  &quot;parentJobName&quot;: string,
-
-  // Union field extended can be only one of the following:
-  &quot;queryStats&quot;: {
-    object (BigQueryAuditMetadata.JobStats.Query)
-  },
-  &quot;loadStats&quot;: {
-    object (BigQueryAuditMetadata.JobStats.Load)
-  },
-  &quot;extractStats&quot;: {
-    object (BigQueryAuditMetadata.JobStats.Extract)
-  }
-  // End of list of possible types for union field extended.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (BigQueryAuditMetadata.JobStats.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;parentJobName&quot;: string,// Union field extended can be only one of the following:&quot;queryStats&quot;: {object (BigQueryAuditMetadata.JobStats.Query)},&quot;loadStats&quot;: {object (BigQueryAuditMetadata.JobStats.Load)},&quot;extractStats&quot;: {object (BigQueryAuditMetadata.JobStats.Extract)}// End of list of possible types for union field extended.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Job creation time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  startTime  `
+`startTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Job execution start time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  endTime  `
+`endTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Job completion time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  totalSlotMs  `
+`totalSlotMs`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The total number of slot-ms consumed by the query job.
 
-`  reservationUsage[] (deprecated)  `
+` reservationUsage[] (deprecated)  `
 
-`  object ( BigQueryAuditMetadata.JobStats.ReservationResourceUsage  ` )
+` object ( BigQueryAuditMetadata.JobStats.ReservationResourceUsage  ` )
 
 This item is deprecated\!
 
 Deprecated: Reservation usage attributed from each tier of a reservation hierarchy. This field is empty because the provided reservation usage statistics are not accurate. Use the INFORMATION\_SCHEMA.JOBS view to find the average slot usage for a given period of time.
 
-`  reservation  `
+`reservation`
 
-`  string  `
+`string`
 
 Reservation name. The value is "unreserved" for on-demand resource usage or parent jobs.
 
-`  parentJobName  `
+`parentJobName`
 
-`  string  `
+`string`
 
 Parent job name. Only present for child jobs.
 
-Union field `  extended  ` . Statistics specific to the job type. `  extended  ` can be only one of the following:
+Union field `extended` . Statistics specific to the job type. `extended` can be only one of the following:
 
-`  queryStats  `
+`queryStats`
 
-`  object ( BigQueryAuditMetadata.JobStats.Query  ` )
+` object ( BigQueryAuditMetadata.JobStats.Query  ` )
 
 Query job statistics.
 
-`  loadStats  `
+`loadStats`
 
-`  object ( BigQueryAuditMetadata.JobStats.Load  ` )
+` object ( BigQueryAuditMetadata.JobStats.Load  ` )
 
 Load job statistics.
 
-`  extractStats  `
+`extractStats`
 
-`  object ( BigQueryAuditMetadata.JobStats.Extract  ` )
+` object ( BigQueryAuditMetadata.JobStats.Extract  ` )
 
 Extract job statistics.
 
@@ -1227,82 +1002,64 @@ Query job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;totalProcessedBytes&quot;: string,
-  &quot;totalBilledBytes&quot;: string,
-  &quot;billingTier&quot;: integer,
-  &quot;referencedTables&quot;: [
-    string
-  ],
-  &quot;referencedViews&quot;: [
-    string
-  ],
-  &quot;referencedRoutines&quot;: [
-    string
-  ],
-  &quot;outputRowCount&quot;: string,
-  &quot;cacheHit&quot;: boolean,
-  &quot;authorizationResult&quot;: {
-    object (BigQueryAuditMetadata.AuthorizationResult)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;totalProcessedBytes&quot;: string,&quot;totalBilledBytes&quot;: string,&quot;billingTier&quot;: integer,&quot;referencedTables&quot;: [string],&quot;referencedViews&quot;: [string],&quot;referencedRoutines&quot;: [string],&quot;outputRowCount&quot;: string,&quot;cacheHit&quot;: boolean,&quot;authorizationResult&quot;: {object (BigQueryAuditMetadata.AuthorizationResult)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  totalProcessedBytes  `
+`totalProcessedBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total bytes processed by the query job.
 
-`  totalBilledBytes  `
+`totalBilledBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total bytes billed by the query job.
 
-`  billingTier  `
+`billingTier`
 
-`  integer  `
+`integer`
 
 The tier assigned by the CPU-based billing.
 
-`  referencedTables[]  `
+`referencedTables[]`
 
-`  string  `
+`string`
 
 Tables accessed by the query job.
 
-`  referencedViews[]  `
+`referencedViews[]`
 
-`  string  `
+`string`
 
 Views accessed by the query job.
 
-`  referencedRoutines[]  `
+`referencedRoutines[]`
 
-`  string  `
+`string`
 
 Routines accessed by the query job.
 
-`  outputRowCount  `
+`outputRowCount`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of output rows produced by the query job.
 
-`  cacheHit  `
+`cacheHit`
 
-`  boolean  `
+`boolean`
 
 True if the query job results were read from the query cache.
 
-`  authorizationResult  `
+`authorizationResult`
 
-`  object ( BigQueryAuditMetadata.AuthorizationResult  ` )
+` object ( BigQueryAuditMetadata.AuthorizationResult  ` )
 
 Populated when the destination table is modified by the query job using authorized resource
 
@@ -1331,15 +1088,15 @@ Authorization result for authorized resource
 
 Fields
 
-`  authorizedResource  `
+`authorizedResource`
 
-`  string  `
+`string`
 
 The authorized resource which was used for authorization
 
-`  permission  `
+`permission`
 
-`  string  `
+`string`
 
 The permission which was checked for authorization
 
@@ -1367,9 +1124,9 @@ Load job statistics.
 
 Fields
 
-`  totalOutputBytes  `
+`totalOutputBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total bytes loaded by the import job.
 
@@ -1398,15 +1155,15 @@ Extract job statistics.
 
 Fields
 
-`  totalInputBytes  `
+`totalInputBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total bytes exported by the extract job.This is the byte count as computed by BigQuery for billing purposes and doesn't have any relationship with the number of actual result bytes extracted in the desired format.
 
-`  totalBytesExtracted  `
+`totalBytesExtracted`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Bytes extracted in output, that will always be populated for exports (even if the byte count for billing is 0)
 
@@ -1435,15 +1192,15 @@ Job resource usage breakdown by reservation.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Reservation name or "unreserved" for on-demand resources usage.
 
-`  slotMs  `
+`slotMs`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total slot milliseconds used by the reservation for a particular job.
 
@@ -1462,34 +1219,28 @@ Job state change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;before&quot;: enum (BigQueryAuditMetadata.JobState),
-  &quot;after&quot;: enum (BigQueryAuditMetadata.JobState),
-  &quot;job&quot;: {
-    object (BigQueryAuditMetadata.Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;before&quot;: enum (BigQueryAuditMetadata.JobState),&quot;after&quot;: enum (BigQueryAuditMetadata.JobState),&quot;job&quot;: {object (BigQueryAuditMetadata.Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  before  `
+`before`
 
-`  enum ( BigQueryAuditMetadata.JobState  ` )
+` enum ( BigQueryAuditMetadata.JobState  ` )
 
 Job state before the job state change.
 
-`  after  `
+`after`
 
-`  enum ( BigQueryAuditMetadata.JobState  ` )
+` enum ( BigQueryAuditMetadata.JobState  ` )
 
 Job state after the job state change.
 
-`  job  `
+`job`
 
-`  object ( BigQueryAuditMetadata.Job  ` )
+` object ( BigQueryAuditMetadata.Job  ` )
 
 Job metadata.
 
@@ -1508,27 +1259,24 @@ Job deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;jobName&quot;: string,
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.JobDeletion.Reason)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;jobName&quot;: string,&quot;reason&quot;: enum (BigQueryAuditMetadata.JobDeletion.Reason)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 Job URI.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.JobDeletion.Reason  ` )
+` enum ( BigQueryAuditMetadata.JobDeletion.Reason  ` )
 
 Describes how the job was deleted.
 
@@ -1547,38 +1295,32 @@ Dataset creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataset&quot;: {
-    object (BigQueryAuditMetadata.Dataset)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.DatasetCreation.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataset&quot;: {object (BigQueryAuditMetadata.Dataset)},&quot;reason&quot;: enum (BigQueryAuditMetadata.DatasetCreation.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dataset  `
+`dataset`
 
-`  object ( BigQueryAuditMetadata.Dataset  ` )
+` object ( BigQueryAuditMetadata.Dataset  ` )
 
 Dataset metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.DatasetCreation.Reason  ` )
+` enum ( BigQueryAuditMetadata.DatasetCreation.Reason  ` )
 
 Describes how the dataset was created.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created the dataset. Present if the reason is QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.Dataset
 
@@ -1595,95 +1337,76 @@ BigQuery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;datasetName&quot;: string,
-  &quot;datasetInfo&quot;: {
-    object (BigQueryAuditMetadata.EntityInfo)
-  },
-  &quot;createTime&quot;: string,
-  &quot;updateTime&quot;: string,
-  &quot;acl&quot;: {
-    object (BigQueryAuditMetadata.BigQueryAcl)
-  },
-  &quot;defaultTableExpireDuration&quot;: string,
-  &quot;defaultEncryption&quot;: {
-    object (BigQueryAuditMetadata.EncryptionInfo)
-  },
-  &quot;defaultCollation&quot;: string,
-  &quot;tags&quot;: {
-    string: string,
-    ...
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;datasetName&quot;: string,&quot;datasetInfo&quot;: {object (BigQueryAuditMetadata.EntityInfo)},&quot;createTime&quot;: string,&quot;updateTime&quot;: string,&quot;acl&quot;: {object (BigQueryAuditMetadata.BigQueryAcl)},&quot;defaultTableExpireDuration&quot;: string,&quot;defaultEncryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)},&quot;defaultCollation&quot;: string,&quot;tags&quot;: {string: string,...}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  datasetName  `
+`datasetName`
 
-`  string  `
+`string`
 
 Dataset URI.
 
-Format: `  projects/<projectId>/datasets/<datasetId>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>` .
 
-`  datasetInfo  `
+`datasetInfo`
 
-`  object ( BigQueryAuditMetadata.EntityInfo  ` )
+` object ( BigQueryAuditMetadata.EntityInfo  ` )
 
 User-provided metadata for the dataset.
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Dataset creation time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Dataset metadata last update time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  acl  `
+`acl`
 
-`  object ( BigQueryAuditMetadata.BigQueryAcl  ` )
+` object ( BigQueryAuditMetadata.BigQueryAcl  ` )
 
 The access control list for the dataset.
 
-`  defaultTableExpireDuration  `
+`defaultTableExpireDuration`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
 Default expiration time for tables in the dataset.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
-`  defaultEncryption  `
+`defaultEncryption`
 
-`  object ( BigQueryAuditMetadata.EncryptionInfo  ` )
+` object ( BigQueryAuditMetadata.EncryptionInfo  ` )
 
 Default encryption for tables in the dataset.
 
-`  defaultCollation  `
+`defaultCollation`
 
-`  string  `
+`string`
 
 Default collation for the dataset.
 
-`  tags  `
+`tags`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 IAM Tags attached to this entity.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
 ## BigQueryAuditMetadata.EntityInfo
 
@@ -1714,25 +1437,25 @@ User-provided metadata for an entity, e.g. dataset, table or model.
 
 Fields
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
 A short name for the entity.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 A long description for the entity.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Labels provided for the entity.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
 ## BigQueryAuditMetadata.BigQueryAcl
 
@@ -1749,33 +1472,26 @@ An access control list.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;policy&quot;: {
-    object (Policy)
-  },
-  &quot;authorizedViews&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;policy&quot;: {object (Policy)},&quot;authorizedViews&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  policy  `
+`policy`
 
-`  object ( Policy  ` )
+` object ( Policy  ` )
 
 IAM policy for the resource.
 
-`  authorizedViews[]  `
+`authorizedViews[]`
 
-`  string  `
+`string`
 
 List of authorized views for a dataset.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/tables/<view_id>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>/tables/<view_id>` .
 
 ## BigQueryAuditMetadata.DatasetChange
 
@@ -1792,58 +1508,42 @@ Dataset change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataset&quot;: {
-    object (BigQueryAuditMetadata.Dataset)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.DatasetChange.Reason),
-  &quot;jobName&quot;: string,
-  &quot;bindingDeltas&quot;: [
-    {
-      object (BindingDelta)
-    }
-  ],
-  &quot;accessChanges&quot;: [
-    {
-      object (BigQueryAuditMetadata.AccessChange)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataset&quot;: {object (BigQueryAuditMetadata.Dataset)},&quot;reason&quot;: enum (BigQueryAuditMetadata.DatasetChange.Reason),&quot;jobName&quot;: string,&quot;bindingDeltas&quot;: [{object (BindingDelta)}],&quot;accessChanges&quot;: [{object (BigQueryAuditMetadata.AccessChange)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dataset  `
+`dataset`
 
-`  object ( BigQueryAuditMetadata.Dataset  ` )
+` object ( BigQueryAuditMetadata.Dataset  ` )
 
 Dataset metadata after the change.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.DatasetChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.DatasetChange.Reason  ` )
 
 Describes how the dataset was changed.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that updated the dataset. Present if the reason is QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  bindingDeltas[]  `
+`bindingDeltas[]`
 
-`  object ( BindingDelta  ` )
+` object ( BindingDelta  ` )
 
 List of IAM policy deltas. This field contains the difference between the original policy and the new policy when the IAM policy is updated via SetIamPolicy API.
 
-`  accessChanges[]  `
+`accessChanges[]`
 
-`  object ( BigQueryAuditMetadata.AccessChange  ` )
+` object ( BigQueryAuditMetadata.AccessChange  ` )
 
 List of access changes. This field contains the difference between the original ACLs and the new ACLs when the ACLs are updated via datasets.update API.
 
@@ -1862,41 +1562,34 @@ One delta entry for Binding. Each individual change (only one member in each ent
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;action&quot;: enum (BindingDelta.Action),
-  &quot;role&quot;: string,
-  &quot;member&quot;: string,
-  &quot;condition&quot;: {
-    object (Expr)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;action&quot;: enum (BindingDelta.Action),&quot;role&quot;: string,&quot;member&quot;: string,&quot;condition&quot;: {object (Expr)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  action  `
+`action`
 
-`  enum ( BindingDelta.Action  ` )
+` enum ( BindingDelta.Action  ` )
 
 The action that was performed on a Binding. Required
 
-`  role  `
+`role`
 
-`  string  `
+`string`
 
-Role that is assigned to `  members  ` . For example, `  roles/viewer  ` , `  roles/editor  ` , or `  roles/owner  ` . Required
+Role that is assigned to `members` . For example, `roles/viewer` , `roles/editor` , or `roles/owner` . Required
 
-`  member  `
+`member`
 
-`  string  `
+`string`
 
 A single identity requesting access for a Google Cloud resource. Follows the same format of Binding.members. Required
 
-`  condition  `
+`condition`
 
-`  object ( Expr  ` )
+` object ( Expr  ` )
 
 The condition that is associated with this binding.
 
@@ -1915,80 +1608,58 @@ One change entry for Access.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;action&quot;: enum (BigQueryAuditMetadata.AccessChange.Action),
-  &quot;access&quot;: {
-    &quot;role&quot;: string,
-    &quot;userByEmail&quot;: string,
-    &quot;groupByEmail&quot;: string,
-    &quot;domain&quot;: string,
-    &quot;specialGroup&quot;: string,
-    &quot;iamMember&quot;: string,
-    &quot;view&quot;: {
-      object (TableReference)
-    },
-    &quot;routine&quot;: {
-      object (RoutineReference)
-    },
-    &quot;dataset&quot;: {
-      object (DatasetAccessEntry)
-    },
-    &quot;condition&quot;: {
-      object (Expr)
-    }
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;action&quot;: enum (BigQueryAuditMetadata.AccessChange.Action),&quot;access&quot;: {&quot;role&quot;: string,&quot;userByEmail&quot;: string,&quot;groupByEmail&quot;: string,&quot;domain&quot;: string,&quot;specialGroup&quot;: string,&quot;iamMember&quot;: string,&quot;view&quot;: {object (TableReference)},&quot;routine&quot;: {object (RoutineReference)},&quot;dataset&quot;: {object (DatasetAccessEntry)},&quot;condition&quot;: {object (Expr)}}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  action  `
+`action`
 
-`  enum ( BigQueryAuditMetadata.AccessChange.Action  ` )
+` enum ( BigQueryAuditMetadata.AccessChange.Action  ` )
 
 The action that was performed on an access.
 
-`  access  `
+`access`
 
-`  object  `
+`object`
 
 Access entry.
 
-`  access.role  `
+`access.role`
 
-`  string  `
+`string`
 
 An IAM role ID that should be granted to the user, group, or domain specified in this access entry. The following legacy mappings will be applied:
 
-  - `  OWNER  ` : `  roles/bigquery.dataOwner  `
-  - `  WRITER  ` : `  roles/bigquery.dataEditor  `
-  - `  READER  ` : `  roles/bigquery.dataViewer  `
+  - `OWNER` : `roles/bigquery.dataOwner`
+  - `WRITER` : `roles/bigquery.dataEditor`
+  - `READER` : `roles/bigquery.dataViewer`
 
 This field will accept any of the above formats, but will return only the legacy format. For example, if you set this field to "roles/bigquery.dataOwner", it will be returned back as "OWNER".
 
-`  access.userByEmail  `
+`access.userByEmail`
 
-`  string  `
+`string`
 
 \[Pick one\] An email address of a user to grant access to. For example: <fred@example.com> . Maps to IAM policy member "user:EMAIL" or "serviceAccount:EMAIL".
 
-`  access.groupByEmail  `
+`access.groupByEmail`
 
-`  string  `
+`string`
 
 \[Pick one\] An email address of a Google Group to grant access to. Maps to IAM policy member "group:GROUP".
 
-`  access.domain  `
+`access.domain`
 
-`  string  `
+`string`
 
 \[Pick one\] A domain to grant access to. Any users signed in with the domain specified will be granted the specified access. Example: "example.com". Maps to IAM policy member "domain:DOMAIN".
 
-`  access.specialGroup  `
+`access.specialGroup`
 
-`  string  `
+`string`
 
 \[Pick one\] A special group to grant access to. Possible values include:
 
@@ -1999,33 +1670,33 @@ This field will accept any of the above formats, but will return only the legacy
 
 Maps to similarly-named IAM members.
 
-`  access.iamMember  `
+`access.iamMember`
 
-`  string  `
+`string`
 
 \[Pick one\] Some other type of member that appears in the IAM Policy but isn't a user, group, domain, or special group.
 
-`  access.view  `
+`access.view`
 
-`  object ( TableReference  ` )
+` object ( TableReference  ` )
 
 \[Pick one\] A view from a different dataset to grant access to. Queries executed against that view will have read access to views/tables/routines in this dataset. The role field is not required when this field is set. If that view is updated by any user, access to the view needs to be granted again via an update operation.
 
-`  access.routine  `
+`access.routine`
 
-`  object ( RoutineReference  ` )
+` object ( RoutineReference  ` )
 
 \[Pick one\] A routine from a different dataset to grant access to. Queries executed against that routine will have read access to views/tables/routines in this dataset. Only UDF is supported for now. The role field is not required when this field is set. If that routine is updated by any user, access to the routine needs to be granted again via an update operation.
 
-`  access.dataset  `
+`access.dataset`
 
-`  object ( DatasetAccessEntry  ` )
+` object ( DatasetAccessEntry  ` )
 
 \[Pick one\] A grant authorizing all resources of a particular type in a particular dataset access to this dataset. Only views are supported for now. The role field is not required when this field is set. If that dataset is deleted and re-created, its access needs to be granted again via an update operation.
 
-`  access.condition  `
+`access.condition`
 
-`  object ( Expr  ` )
+` object ( Expr  ` )
 
 Optional. condition for the binding. If CEL expression in this field is true, this access binding will be considered
 
@@ -2044,29 +1715,26 @@ Dataset deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.DatasetDeletion.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;reason&quot;: enum (BigQueryAuditMetadata.DatasetDeletion.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.DatasetDeletion.Reason  ` )
+` enum ( BigQueryAuditMetadata.DatasetDeletion.Reason  ` )
 
 Describes how the dataset was deleted.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that deleted the dataset. Present if the reason is QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.TableCreation
 
@@ -2083,43 +1751,36 @@ Table creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;table&quot;: {
-    object (BigQueryAuditMetadata.Table)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.TableCreation.Reason),
-  &quot;jobName&quot;: string,
-  &quot;metadataLocation&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;table&quot;: {object (BigQueryAuditMetadata.Table)},&quot;reason&quot;: enum (BigQueryAuditMetadata.TableCreation.Reason),&quot;jobName&quot;: string,&quot;metadataLocation&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  table  `
+`table`
 
-`  object ( BigQueryAuditMetadata.Table  ` )
+` object ( BigQueryAuditMetadata.Table  ` )
 
 Table metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.TableCreation.Reason  ` )
+` enum ( BigQueryAuditMetadata.TableCreation.Reason  ` )
 
 Describes how the table was created.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created a table. Present if the reason is JOB or QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  metadataLocation  `
+`metadataLocation`
 
-`  string  `
+`string`
 
 The metadata location of the Apache Iceberg table. Present for OSS compatible tables hosted in the BigQuery catalog. This is the full Google Cloud Storage URI pointing to the metadata file.
 
@@ -2138,168 +1799,130 @@ BigQuery table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;tableName&quot;: string,
-  &quot;tableInfo&quot;: {
-    object (BigQueryAuditMetadata.EntityInfo)
-  },
-  &quot;schemaJson&quot;: string,
-  &quot;schemaJsonTruncated&quot;: boolean,
-  &quot;view&quot;: {
-    object (BigQueryAuditMetadata.TableViewDefinition)
-  },
-  &quot;expireTime&quot;: string,
-  &quot;createTime&quot;: string,
-  &quot;updateTime&quot;: string,
-  &quot;truncateTime&quot;: string,
-  &quot;encryption&quot;: {
-    object (BigQueryAuditMetadata.EncryptionInfo)
-  },
-  &quot;defaultCollation&quot;: string,
-  &quot;tableConstraints&quot;: {
-    object (BigQueryAuditMetadata.TableConstraints)
-  },
-  &quot;tags&quot;: {
-    string: string,
-    ...
-  },
-  &quot;timePartitioning&quot;: {
-    object (TimePartitioning)
-  },
-  &quot;rangePartitioning&quot;: {
-    object (RangePartitioning)
-  },
-  &quot;clustering&quot;: {
-    object (Clustering)
-  },
-  &quot;requirePartitionFilter&quot;: boolean,
-  &quot;partitionDefinition&quot;: {
-    object (PartitioningDefinition)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;tableName&quot;: string,&quot;tableInfo&quot;: {object (BigQueryAuditMetadata.EntityInfo)},&quot;schemaJson&quot;: string,&quot;schemaJsonTruncated&quot;: boolean,&quot;view&quot;: {object (BigQueryAuditMetadata.TableViewDefinition)},&quot;expireTime&quot;: string,&quot;createTime&quot;: string,&quot;updateTime&quot;: string,&quot;truncateTime&quot;: string,&quot;encryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)},&quot;defaultCollation&quot;: string,&quot;tableConstraints&quot;: {object (BigQueryAuditMetadata.TableConstraints)},&quot;tags&quot;: {string: string,...},&quot;timePartitioning&quot;: {object (TimePartitioning)},&quot;rangePartitioning&quot;: {object (RangePartitioning)},&quot;clustering&quot;: {object (Clustering)},&quot;requirePartitionFilter&quot;: boolean,&quot;partitionDefinition&quot;: {object (PartitioningDefinition)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  tableName  `
+`tableName`
 
-`  string  `
+`string`
 
 Table URI.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/tables/<tableId>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>/tables/<tableId>` .
 
-`  tableInfo  `
+`tableInfo`
 
-`  object ( BigQueryAuditMetadata.EntityInfo  ` )
+` object ( BigQueryAuditMetadata.EntityInfo  ` )
 
 User-provided metadata for the table.
 
-`  schemaJson  `
+`schemaJson`
 
-`  string  `
+`string`
 
 A JSON representation of the table's schema. Entire field is truncated if exceeds 40K.
 
-`  schemaJsonTruncated  `
+`schemaJsonTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the schemaJson field was truncated.
 
-`  view  `
+`view`
 
-`  object ( BigQueryAuditMetadata.TableViewDefinition  ` )
+` object ( BigQueryAuditMetadata.TableViewDefinition  ` )
 
 View metadata. Only present for views.
 
-`  expireTime  `
+`expireTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Table expiration time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The table creation time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The last time metadata update time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  truncateTime  `
+`truncateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The last table truncation time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  encryption  `
+`encryption`
 
-`  object ( BigQueryAuditMetadata.EncryptionInfo  ` )
+` object ( BigQueryAuditMetadata.EncryptionInfo  ` )
 
 Table encryption information. Set when non-default encryption is used.
 
-`  defaultCollation  `
+`defaultCollation`
 
-`  string  `
+`string`
 
 The default collation of the table.
 
-`  tableConstraints  `
+`tableConstraints`
 
-`  object ( BigQueryAuditMetadata.TableConstraints  ` )
+` object ( BigQueryAuditMetadata.TableConstraints  ` )
 
 The table constraints.
 
-`  tags  `
+`tags`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 IAM Tags attached to this entity.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-`  timePartitioning  `
+`timePartitioning`
 
-`  object ( TimePartitioning  ` )
+` object ( TimePartitioning  ` )
 
 Time-based partitioning specifications for this table if specified.
 
-`  rangePartitioning  `
+`rangePartitioning`
 
-`  object ( RangePartitioning  ` )
+` object ( RangePartitioning  ` )
 
 Range partitioning specification for this table if specified.
 
-`  clustering  `
+`clustering`
 
-`  object ( Clustering  ` )
+` object ( Clustering  ` )
 
 Clustering specification for the table.
 
-`  requirePartitionFilter  `
+`requirePartitionFilter`
 
-`  boolean  `
+`boolean`
 
 If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified.
 
-`  partitionDefinition  `
+`partitionDefinition`
 
-`  object ( PartitioningDefinition  ` )
+` object ( PartitioningDefinition  ` )
 
 The partitioning information, which includes managed table, external table and metastore partitioned table partition information.
 
@@ -2318,34 +1941,28 @@ View definition.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;query&quot;: string,
-  &quot;queryTruncated&quot;: boolean,
-  &quot;privacyPolicy&quot;: {
-    object (PrivacyPolicy)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;queryTruncated&quot;: boolean,&quot;privacyPolicy&quot;: {object (PrivacyPolicy)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  query  `
+`query`
 
-`  string  `
+`string`
 
 SQL query defining the view. Truncated if exceeds 40K.
 
-`  queryTruncated  `
+`queryTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the schemaJson field was truncated.
 
-`  privacyPolicy  `
+`privacyPolicy`
 
-`  object ( PrivacyPolicy  ` )
+` object ( PrivacyPolicy  ` )
 
 Privacy Policy for view.
 
@@ -2364,43 +1981,30 @@ Represents privacy policy that contains the privacy requirements specified by th
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field privacy_policy can be only one of the following:
-  &quot;aggregationThresholdPolicy&quot;: {
-    object (AggregationThresholdPolicy)
-  },
-  &quot;differentialPrivacyPolicy&quot;: {
-    object (DifferentialPrivacyPolicy)
-  }
-  // End of list of possible types for union field privacy_policy.
-  &quot;joinRestrictionPolicy&quot;: {
-    object (JoinRestrictionPolicy)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field privacy_policy can be only one of the following:&quot;aggregationThresholdPolicy&quot;: {object (AggregationThresholdPolicy)},&quot;differentialPrivacyPolicy&quot;: {object (DifferentialPrivacyPolicy)}// End of list of possible types for union field privacy_policy.&quot;joinRestrictionPolicy&quot;: {object (JoinRestrictionPolicy)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  privacy_policy  ` . Privacy policy associated with this requirement specification. Only one of the privacy methods is allowed per data source object. `  privacy_policy  ` can be only one of the following:
+Union field `privacy_policy` . Privacy policy associated with this requirement specification. Only one of the privacy methods is allowed per data source object. `privacy_policy` can be only one of the following:
 
-`  aggregationThresholdPolicy  `
+`aggregationThresholdPolicy`
 
-`  object ( AggregationThresholdPolicy  ` )
+` object ( AggregationThresholdPolicy  ` )
 
 Optional. Policy used for aggregation thresholds.
 
-`  differentialPrivacyPolicy  `
+`differentialPrivacyPolicy`
 
-`  object ( DifferentialPrivacyPolicy  ` )
+` object ( DifferentialPrivacyPolicy  ` )
 
 Optional. Policy used for differential privacy.
 
-`  joinRestrictionPolicy  `
+`joinRestrictionPolicy`
 
-`  object ( JoinRestrictionPolicy  ` )
+` object ( JoinRestrictionPolicy  ` )
 
 Optional. Join restriction policy is outside of the one of policies, since this policy can be set along with other policies. This policy gives data providers the ability to enforce joins on the 'joinAllowedColumns' when data is queried from a privacy protected view.
 
@@ -2431,15 +2035,15 @@ Represents privacy policy associated with "aggregation threshold" method.
 
 Fields
 
-`  privacyUnitColumns[]  `
+`privacyUnitColumns[]`
 
-`  string  `
+`string`
 
 Optional. The privacy unit column(s) associated with this policy. For now, only one column per data source object (table, view) is allowed as a privacy unit column. Representing as a repeated field in metadata for extensibility to multiple columns in future. Duplicates and Repeated struct fields are not allowed. For nested fields, use dot notation ("outer.inner")
 
-`  threshold  `
+`threshold`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. The threshold for the "aggregation threshold" policy.
 
@@ -2474,51 +2078,51 @@ Represents privacy policy associated with "differential privacy" method.
 
 Fields
 
-`  maxEpsilonPerQuery  `
+`maxEpsilonPerQuery`
 
-`  number  `
+`number`
 
 Optional. The maximum epsilon value that a query can consume. If the subscriber specifies epsilon as a parameter in a SELECT query, it must be less than or equal to this value. The epsilon parameter controls the amount of noise that is added to the groups — a higher epsilon means less noise.
 
-`  deltaPerQuery  `
+`deltaPerQuery`
 
-`  number  `
+`number`
 
 Optional. The delta value that is used per query. Delta represents the probability that any row will fail to be epsilon differentially private. Indicates the risk associated with exposing aggregate rows in the result of a query.
 
-`  maxGroupsContributed  `
+`maxGroupsContributed`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. The maximum groups contributed value that is used per query. Represents the maximum number of groups to which each protected entity can contribute. Changing this value does not improve or worsen privacy. The best value for accuracy and utility depends on the query and data.
 
-`  privacyUnitColumn  `
+`privacyUnitColumn`
 
-`  string  `
+`string`
 
 Optional. The privacy unit column associated with this policy. Differential privacy policies can only have one privacy unit column per data source object (table, view).
 
-`  epsilonBudget  `
+`epsilonBudget`
 
-`  number  `
+`number`
 
 Optional. The total epsilon budget for all queries against the privacy-protected view. Each subscriber query against this view charges the amount of epsilon they request in their query. If there is sufficient budget, then the subscriber query attempts to complete. It might still fail due to other reasons, in which case the charge is refunded. If there is insufficient budget the query is rejected. There might be multiple charge attempts if a single query references multiple views. In this case there must be sufficient budget for all charges or the query is rejected and charges are refunded in best effort. The budget does not have a refresh policy and can only be updated via ALTER VIEW or circumvented by creating a new view that can be queried with a fresh budget.
 
-`  deltaBudget  `
+`deltaBudget`
 
-`  number  `
+`number`
 
 Optional. The total delta budget for all queries against the privacy-protected view. Each subscriber query against this view charges the amount of delta that is pre-defined by the contributor through the privacy policy deltaPerQuery field. If there is sufficient budget, then the subscriber query attempts to complete. It might still fail due to other reasons, in which case the charge is refunded. If there is insufficient budget the query is rejected. There might be multiple charge attempts if a single query references multiple views. In this case there must be sufficient budget for all charges or the query is rejected and charges are refunded in best effort. The budget does not have a refresh policy and can only be updated via ALTER VIEW or circumvented by creating a new view that can be queried with a fresh budget.
 
-`  epsilonBudgetRemaining  `
+`epsilonBudgetRemaining`
 
-`  number  `
+`number`
 
 Output only. The epsilon budget remaining. If budget is exhausted, no more queries are allowed. Note that the budget for queries that are in progress is deducted before the query executes. If the query fails or is cancelled then the budget is refunded. In this case the amount of budget remaining can increase.
 
-`  deltaBudgetRemaining  `
+`deltaBudgetRemaining`
 
-`  number  `
+`number`
 
 Output only. The delta budget remaining. If budget is exhausted, no more queries are allowed. Note that the budget for queries that are in progress is deducted before the query executes. If the query fails or is cancelled then the budget is refunded. In this case the amount of budget remaining can increase.
 
@@ -2537,27 +2141,22 @@ Represents privacy policy associated with "join restrictions". Join restriction 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;joinAllowedColumns&quot;: [
-    string
-  ],
-  &quot;joinCondition&quot;: enum (JoinRestrictionPolicy.JoinCondition)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;joinAllowedColumns&quot;: [string],&quot;joinCondition&quot;: enum (JoinRestrictionPolicy.JoinCondition)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  joinAllowedColumns[]  `
+`joinAllowedColumns[]`
 
-`  string  `
+`string`
 
 Optional. The only columns that joins are allowed on. This field is must be specified for join\_conditions JOIN\_ANY and JOIN\_ALL and it cannot be set for JOIN\_BLOCKED.
 
-`  joinCondition  `
+`joinCondition`
 
-`  enum ( JoinRestrictionPolicy.JoinCondition  ` )
+` enum ( JoinRestrictionPolicy.JoinCondition  ` )
 
 Optional. Specifies if a join is required or not on queries for the view. Default is JOIN\_CONDITION\_UNSPECIFIED.
 
@@ -2576,31 +2175,22 @@ Describes constraints defined on a BigQuery table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;primaryKey&quot;: {
-    object (BigQueryAuditMetadata.TableConstraints.PrimaryKey)
-  },
-  &quot;foreignKeys&quot;: [
-    {
-      object (BigQueryAuditMetadata.TableConstraints.ForeignKey)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;primaryKey&quot;: {object (BigQueryAuditMetadata.TableConstraints.PrimaryKey)},&quot;foreignKeys&quot;: [{object (BigQueryAuditMetadata.TableConstraints.ForeignKey)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  primaryKey  `
+`primaryKey`
 
-`  object ( BigQueryAuditMetadata.TableConstraints.PrimaryKey  ` )
+` object ( BigQueryAuditMetadata.TableConstraints.PrimaryKey  ` )
 
 The primary key of the table.
 
-`  foreignKeys[]  `
+`foreignKeys[]`
 
-`  object ( BigQueryAuditMetadata.TableConstraints.ForeignKey  ` )
+` object ( BigQueryAuditMetadata.TableConstraints.ForeignKey  ` )
 
 Foreign keys of the table.
 
@@ -2630,9 +2220,9 @@ Describes a primary key defined on a table.
 
 Fields
 
-`  columns[]  `
+`columns[]`
 
-`  string  `
+`string`
 
 Table columns that are part of the primary key.
 
@@ -2669,39 +2259,39 @@ Describes a foreign key defined on a table.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 The name of the foreign key.
 
-`  referencingColumns[]  `
+`referencingColumns[]`
 
-`  string  `
+`string`
 
 Table columns that are part of the foreign key.
 
-`  referencedColumns[]  `
+`referencedColumns[]`
 
-`  string  `
+`string`
 
 Columns that are part of the referenced key.
 
-`  referencedTableId  `
+`referencedTableId`
 
-`  string  `
+`string`
 
 The referenced table id.
 
-`  referencedDatasetId  `
+`referencedDatasetId`
 
-`  string  `
+`string`
 
 The dataset of the referenced table.
 
-`  referencedProjectId  `
+`referencedProjectId`
 
-`  string  `
+`string`
 
 The project of the referenced table.
 
@@ -2730,27 +2320,27 @@ The project of the referenced table.
 
 Fields
 
-`  type  `
+`type`
 
-`  string  `
+`string`
 
 Required. The supported types are DAY, HOUR, MONTH, and YEAR, which will generate one partition per day, hour, month, and year, respectively.
 
-`  expirationMs  `
+`expirationMs`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Optional. Number of milliseconds for which to keep the storage for a partition. A wrapper is used here because 0 is an invalid value.
 
-`  field  `
+`field`
 
-`  string  `
+`string`
 
 Optional. If not set, the table is partitioned by pseudo column '\_PARTITIONTIME'; if set, the table is partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or REQUIRED. A wrapper is used here because an empty string is an invalid value.
 
-`  requirePartitionFilter (deprecated)  `
+` requirePartitionFilter (deprecated)  `
 
-`  boolean  `
+`boolean`
 
 This item is deprecated\!
 
@@ -2783,33 +2373,33 @@ If set to true, queries over this table require a partition filter that can be u
 
 Fields
 
-`  field  `
+`field`
 
-`  string  `
+`string`
 
 Required. The name of the column to partition the table on. It must be a top-level, INT64 column whose mode is NULLABLE or REQUIRED.
 
-`  range  `
+`range`
 
-`  object  `
+`object`
 
 Defines the ranges for range partitioning.
 
-`  range.start  `
+`range.start`
 
-`  string  `
+`string`
 
 Required. The start of range partitioning, inclusive. This field is an INT64 value represented as a string.
 
-`  range.end  `
+`range.end`
 
-`  string  `
+`string`
 
 Required. The end of range partitioning, exclusive. This field is an INT64 value represented as a string.
 
-`  range.interval  `
+`range.interval`
 
-`  string  `
+`string`
 
 Required. The width of each interval. This field is an INT64 value represented as a string.
 
@@ -2839,9 +2429,9 @@ Configures table clustering.
 
 Fields
 
-`  fields[]  `
+`fields[]`
 
-`  string  `
+`string`
 
 One or more fields on which data should be clustered. Only top-level, non-repeated, simple-type fields are supported. The ordering of the clustering fields should be prioritized from most to least important for filtering purposes.
 
@@ -2862,22 +2452,16 @@ The partitioning information, which includes managed table, external table and m
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;partitionedColumn&quot;: [
-    {
-      object (PartitionedColumn)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;partitionedColumn&quot;: [{object (PartitionedColumn)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  partitionedColumn[]  `
+`partitionedColumn[]`
 
-`  object ( PartitionedColumn  ` )
+` object ( PartitionedColumn  ` )
 
 Optional. Details about each partitioning column. This field is output only for all partitioning types other than metastore partitioned tables. BigQuery native tables only support 1 partitioning column. Other table types may support 0, 1 or more partitioning columns. For metastore partitioned tables, the order must match the definition order in the Hive Metastore, where it must match the physical layout of the table. For example,
 
@@ -2909,9 +2493,9 @@ The partitioning column information.
 
 Fields
 
-`  field  `
+`field`
 
-`  string  `
+`string`
 
 Required. The name of the partition column.
 
@@ -2930,79 +2514,60 @@ Table metadata change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;table&quot;: {
-    object (BigQueryAuditMetadata.Table)
-  },
-  &quot;truncated&quot;: boolean,
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.TableChange.Reason),
-  &quot;jobName&quot;: string,
-  &quot;bindingDeltas&quot;: [
-    {
-      object (BindingDelta)
-    }
-  ],
-  &quot;alterTableStats&quot;: {
-    object (BigQueryAuditMetadata.TableChange.AlterTableStats)
-  },
-  &quot;replicaTable&quot;: {
-    object (BigQueryAuditMetadata.Table)
-  },
-  &quot;metadataLocation&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;table&quot;: {object (BigQueryAuditMetadata.Table)},&quot;truncated&quot;: boolean,&quot;reason&quot;: enum (BigQueryAuditMetadata.TableChange.Reason),&quot;jobName&quot;: string,&quot;bindingDeltas&quot;: [{object (BindingDelta)}],&quot;alterTableStats&quot;: {object (BigQueryAuditMetadata.TableChange.AlterTableStats)},&quot;replicaTable&quot;: {object (BigQueryAuditMetadata.Table)},&quot;metadataLocation&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  table  `
+`table`
 
-`  object ( BigQueryAuditMetadata.Table  ` )
+` object ( BigQueryAuditMetadata.Table  ` )
 
 Updated table metadata.
 
-`  truncated  `
+`truncated`
 
-`  boolean  `
+`boolean`
 
 True if the table was truncated.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.TableChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.TableChange.Reason  ` )
 
 Describes how the table metadata was changed.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that changed a table. Present if the reason is JOB or QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  bindingDeltas[]  `
+`bindingDeltas[]`
 
-`  object ( BindingDelta  ` )
+` object ( BindingDelta  ` )
 
 List of IAM policy deltas.
 
-`  alterTableStats  `
+`alterTableStats`
 
-`  object ( BigQueryAuditMetadata.TableChange.AlterTableStats  ` )
+` object ( BigQueryAuditMetadata.TableChange.AlterTableStats  ` )
 
 Statistics for ALTER TABLE sql statement.
 
-`  replicaTable  `
+`replicaTable`
 
-`  object ( BigQueryAuditMetadata.Table  ` )
+` object ( BigQueryAuditMetadata.Table  ` )
 
 The replica table which the updated table is replicated to.
 
-`  metadataLocation  `
+`metadataLocation`
 
-`  string  `
+`string`
 
 The metadata location of the change. Present for OSS compatible tables hosted in the BigQuery catalog. This is the full Google Cloud Storage URI pointing to the metadata file.
 
@@ -3033,27 +2598,27 @@ Statistics for ALTER TABLE sql statement.
 
 Fields
 
-`  addedColumns  `
+`addedColumns`
 
-`  integer  `
+`integer`
 
 Number of columns added during sql execution.
 
-`  droppedColumns  `
+`droppedColumns`
 
-`  integer  `
+`integer`
 
 Number of columns dropped during sql execution.
 
-`  updatedColumns  `
+`updatedColumns`
 
-`  integer  `
+`integer`
 
 Number of columns modified during sql execution. There can be multiple type of modifications like SET OPTION, SET DATA TYPE etc.
 
-`  renamedColumns  `
+`renamedColumns`
 
-`  integer  `
+`integer`
 
 Number of columns renamed during sql execution.
 
@@ -3072,29 +2637,26 @@ Table deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.TableDeletion.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;reason&quot;: enum (BigQueryAuditMetadata.TableDeletion.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.TableDeletion.Reason  ` )
+` enum ( BigQueryAuditMetadata.TableDeletion.Reason  ` )
 
 Describes how table was deleted.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that deleted a table. Present if the reason is QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.TableDataRead
 
@@ -3111,133 +2673,112 @@ Table data read event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;fields&quot;: [
-    string
-  ],
-  &quot;fieldsTruncated&quot;: boolean,
-  &quot;policyTags&quot;: [
-    string
-  ],
-  &quot;policyTagsTruncated&quot;: boolean,
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.TableDataRead.Reason),
-  &quot;jobName&quot;: string,
-  &quot;sessionName&quot;: string,
-  &quot;readStream&quot;: string,
-  &quot;offset&quot;: string,
-  &quot;rowCount&quot;: string,
-  &quot;serializedResponseBytes&quot;: string,
-  &quot;scannedBytes&quot;: string,
-  &quot;fraction&quot;: number,
-  &quot;primaryStream&quot;: string,
-  &quot;remainderStream&quot;: string,
-  &quot;writeStream&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;fields&quot;: [string],&quot;fieldsTruncated&quot;: boolean,&quot;policyTags&quot;: [string],&quot;policyTagsTruncated&quot;: boolean,&quot;reason&quot;: enum (BigQueryAuditMetadata.TableDataRead.Reason),&quot;jobName&quot;: string,&quot;sessionName&quot;: string,&quot;readStream&quot;: string,&quot;offset&quot;: string,&quot;rowCount&quot;: string,&quot;serializedResponseBytes&quot;: string,&quot;scannedBytes&quot;: string,&quot;fraction&quot;: number,&quot;primaryStream&quot;: string,&quot;remainderStream&quot;: string,&quot;writeStream&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  fields[]  `
+`fields[]`
 
-`  string  `
+`string`
 
 List of the accessed fields. Entire list is truncated if the record size exceeds 100K.
 
-`  fieldsTruncated  `
+`fieldsTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the fields list was truncated.
 
-`  policyTags[]  `
+`policyTags[]`
 
-`  string  `
+`string`
 
-List of the referenced policy tags. That is, policy tags attached to the accessed fields or their ancestors. Policy tag resource name is a string of the format: `  projects/<projectId>/locations/<locationId>/taxonomies/<taxonomyId>/policyTags/<policy_tag_id>  `
+List of the referenced policy tags. That is, policy tags attached to the accessed fields or their ancestors. Policy tag resource name is a string of the format: `projects/<projectId>/locations/<locationId>/taxonomies/<taxonomyId>/policyTags/<policy_tag_id>`
 
-`  policyTagsTruncated  `
+`policyTagsTruncated`
 
-`  boolean  `
+`boolean`
 
 True if the policy tag list was truncated. At most 100 policy tags can be saved.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.TableDataRead.Reason  ` )
+` enum ( BigQueryAuditMetadata.TableDataRead.Reason  ` )
 
 Describes how the table data was read.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that read a table. Present if the reason is JOB but can be reducted for privacy reasons.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  sessionName  `
+`sessionName`
 
-`  string  `
+`string`
 
 The URI of the read session that read a table. Present if the reason is CREATE\_READ\_SESSION.
 
-Format: `  projects/<projectId>/locations/<location>/sessions/<session_id>  ` .
+Format: `projects/<projectId>/locations/<location>/sessions/<session_id>` .
 
-`  readStream  `
+`readStream`
 
-`  string  `
+`string`
 
-The name of the read stream that is being read OR split. Present if the reason is READ\_ROWS or SPLIT\_READ\_STREAM. This will be of the form `  projects/{projectId}/locations/{location}/sessions/{session_id}/streams/{stream_id}  ` .
+The name of the read stream that is being read OR split. Present if the reason is READ\_ROWS or SPLIT\_READ\_STREAM. This will be of the form `projects/{projectId}/locations/{location}/sessions/{session_id}/streams/{stream_id}` .
 
-`  offset  `
+`offset`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The offset requested in a READ\_ROWS call.
 
-`  rowCount  `
+`rowCount`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of serialized rows in the rows block. Present if the reason is READ\_ROWS.
 
-`  serializedResponseBytes  `
+`serializedResponseBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of serialized bytes returned in the rows block. Present if the reason is READ\_ROWS.
 
-`  scannedBytes  `
+`scannedBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of logical bytes scanned during by the operation. Present if the reason is READ\_ROWS.
 
-`  fraction  `
+`fraction`
 
-`  number  `
+`number`
 
 A value in the range (0.0, 1.0) that specifies the fractional point at which the original stream should be split. Present iff the reason is SPLIT\_READ\_STREAM.
 
-`  primaryStream  `
+`primaryStream`
 
-`  string  `
+`string`
 
 Primary stream name, which contains the beginning portion of |readStream|. An empty value indicates that the original stream can no longer be split. Present iff the reason is SPLIT\_READ\_STREAM.
 
-`  remainderStream  `
+`remainderStream`
 
-`  string  `
+`string`
 
 Remainder stream name, which contains the tail of |readStream|. An empty value indicates that the original stream can no longer be split. Present iff the reason is SPLIT\_READ\_STREAM.
 
-`  writeStream  `
+`writeStream`
 
-`  string  `
+`string`
 
-The name of the write stream that is being used for the table data read. This will be of the form `  projects/{projectId}/datasets/{datasetId}/tables/{tableName}/streams/_default  ` if it's a default write stream or in the form of `  projects/{projectId}/datasets/{datasetId}/tables/{tableName}/streams/{streamId}  ` if it's an exclusive write stream.
+The name of the write stream that is being used for the table data read. This will be of the form `projects/{projectId}/datasets/{datasetId}/tables/{tableName}/streams/_default` if it's a default write stream or in the form of `projects/{projectId}/datasets/{datasetId}/tables/{tableName}/streams/{streamId}` if it's an exclusive write stream.
 
 ## BigQueryAuditMetadata.TableDataChange
 
@@ -3254,70 +2795,60 @@ Table data change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;deletedRowsCount&quot;: string,
-  &quot;insertedRowsCount&quot;: string,
-  &quot;truncated&quot;: boolean,
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.TableDataChange.Reason),
-  &quot;jobName&quot;: string,
-  &quot;streamName&quot;: string,
-  &quot;batchCommitStreamNames&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;deletedRowsCount&quot;: string,&quot;insertedRowsCount&quot;: string,&quot;truncated&quot;: boolean,&quot;reason&quot;: enum (BigQueryAuditMetadata.TableDataChange.Reason),&quot;jobName&quot;: string,&quot;streamName&quot;: string,&quot;batchCommitStreamNames&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  deletedRowsCount  `
+`deletedRowsCount`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of deleted rows.
 
-`  insertedRowsCount  `
+`insertedRowsCount`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of inserted rows.
 
-`  truncated  `
+`truncated`
 
-`  boolean  `
+`boolean`
 
 True if the table was truncated.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.TableDataChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.TableDataChange.Reason  ` )
 
 Describes how the table data was changed.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that changed a table.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  streamName  `
+`streamName`
 
-`  string  `
+`string`
 
 If written from WRITE\_API, the name of the stream.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/tables/<tableId>/streams/<stream_id>  `
+Format: `projects/<projectId>/datasets/<datasetId>/tables/<tableId>/streams/<stream_id>`
 
-`  batchCommitStreamNames[]  `
+`batchCommitStreamNames[]`
 
-`  string  `
+`string`
 
 During batch commits, multiple stream names would be involved.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/tables/<tableId>/streams/<stream_id>  `
+Format: `projects/<projectId>/datasets/<datasetId>/tables/<tableId>/streams/<stream_id>`
 
 ## BigQueryAuditMetadata.ModelDeletion
 
@@ -3334,29 +2865,26 @@ Model deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDeletion.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDeletion.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.ModelDeletion.Reason  ` )
+` enum ( BigQueryAuditMetadata.ModelDeletion.Reason  ` )
 
 Describes how the model was deleted.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that deleted a model. Present if the reason is QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.ModelCreation
 
@@ -3373,38 +2901,32 @@ Model creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;model&quot;: {
-    object (BigQueryAuditMetadata.Model)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelCreation.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;model&quot;: {object (BigQueryAuditMetadata.Model)},&quot;reason&quot;: enum (BigQueryAuditMetadata.ModelCreation.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  model  `
+`model`
 
-`  object ( BigQueryAuditMetadata.Model  ` )
+` object ( BigQueryAuditMetadata.Model  ` )
 
 Model metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.ModelCreation.Reason  ` )
+` enum ( BigQueryAuditMetadata.ModelCreation.Reason  ` )
 
 Describes how the model was created.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created the model.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.Model
 
@@ -3421,65 +2943,54 @@ Trained BigQuery ML model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;modelName&quot;: string,
-  &quot;modelInfo&quot;: {
-    object (BigQueryAuditMetadata.EntityInfo)
-  },
-  &quot;expireTime&quot;: string,
-  &quot;createTime&quot;: string,
-  &quot;updateTime&quot;: string,
-  &quot;encryption&quot;: {
-    object (BigQueryAuditMetadata.EncryptionInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;modelName&quot;: string,&quot;modelInfo&quot;: {object (BigQueryAuditMetadata.EntityInfo)},&quot;expireTime&quot;: string,&quot;createTime&quot;: string,&quot;updateTime&quot;: string,&quot;encryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  modelName  `
+`modelName`
 
-`  string  `
+`string`
 
 Model URI.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/models/<model_id>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>/models/<model_id>` .
 
-`  modelInfo  `
+`modelInfo`
 
-`  object ( BigQueryAuditMetadata.EntityInfo  ` )
+` object ( BigQueryAuditMetadata.EntityInfo  ` )
 
 User-provided metadata for the model.
 
-`  expireTime  `
+`expireTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Model expiration time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Model creation time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Model last update time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  encryption  `
+`encryption`
 
-`  object ( BigQueryAuditMetadata.EncryptionInfo  ` )
+` object ( BigQueryAuditMetadata.EncryptionInfo  ` )
 
 Model encryption information. Set when non-default encryption is used.
 
@@ -3498,38 +3009,32 @@ Model metadata change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;model&quot;: {
-    object (BigQueryAuditMetadata.Model)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelMetadataChange.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;model&quot;: {object (BigQueryAuditMetadata.Model)},&quot;reason&quot;: enum (BigQueryAuditMetadata.ModelMetadataChange.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  model  `
+`model`
 
-`  object ( BigQueryAuditMetadata.Model  ` )
+` object ( BigQueryAuditMetadata.Model  ` )
 
 Updated model.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.ModelMetadataChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.ModelMetadataChange.Reason  ` )
 
 Describes how the model metadata was changed.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that changed the model metadata. Present if and only if the reason is QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.ModelDataChange
 
@@ -3546,29 +3051,26 @@ Model data change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDataChange.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDataChange.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.ModelDataChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.ModelDataChange.Reason  ` )
 
 Describes how the model data was changed.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that changed the model data.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.ModelDataRead
 
@@ -3585,29 +3087,26 @@ Model data read event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDataRead.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDataRead.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.ModelDataRead.Reason  ` )
+` enum ( BigQueryAuditMetadata.ModelDataRead.Reason  ` )
 
 Describes how the model data was read.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that read the model data.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.RoutineCreation
 
@@ -3624,38 +3123,32 @@ Routine creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;routine&quot;: {
-    object (BigQueryAuditMetadata.Routine)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.RoutineCreation.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;routine&quot;: {object (BigQueryAuditMetadata.Routine)},&quot;reason&quot;: enum (BigQueryAuditMetadata.RoutineCreation.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  routine  `
+`routine`
 
-`  object ( BigQueryAuditMetadata.Routine  ` )
+` object ( BigQueryAuditMetadata.Routine  ` )
 
 Created routine.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.RoutineCreation.Reason  ` )
+` enum ( BigQueryAuditMetadata.RoutineCreation.Reason  ` )
 
 Describes how the routine was created.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created the routine.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.Routine
 
@@ -3683,29 +3176,29 @@ User Defined Function (UDF) or Stored Procedure.
 
 Fields
 
-`  routineName  `
+`routineName`
 
-`  string  `
+`string`
 
 Routine URI.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/routines/<routineId>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>/routines/<routineId>` .
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Routine creation time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Routine last update time.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
 ## BigQueryAuditMetadata.RoutineChange
 
@@ -3722,38 +3215,32 @@ Routine change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;routine&quot;: {
-    object (BigQueryAuditMetadata.Routine)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.RoutineChange.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;routine&quot;: {object (BigQueryAuditMetadata.Routine)},&quot;reason&quot;: enum (BigQueryAuditMetadata.RoutineChange.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  routine  `
+`routine`
 
-`  object ( BigQueryAuditMetadata.Routine  ` )
+` object ( BigQueryAuditMetadata.Routine  ` )
 
 Updated routine.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.RoutineChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.RoutineChange.Reason  ` )
 
 Describes how the routine was updated.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that updated the routine.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.RoutineDeletion
 
@@ -3770,38 +3257,32 @@ Routine deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;routine&quot;: {
-    object (BigQueryAuditMetadata.Routine)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.RoutineDeletion.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;routine&quot;: {object (BigQueryAuditMetadata.Routine)},&quot;reason&quot;: enum (BigQueryAuditMetadata.RoutineDeletion.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  routine  `
+`routine`
 
-`  object ( BigQueryAuditMetadata.Routine  ` )
+` object ( BigQueryAuditMetadata.Routine  ` )
 
 Deleted routine.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.RoutineDeletion.Reason  ` )
+` enum ( BigQueryAuditMetadata.RoutineDeletion.Reason  ` )
 
 Describes how the routine was deleted.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that deleted the routine. Present if the reason is QUERY.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.RowAccessPolicyCreation
 
@@ -3818,31 +3299,26 @@ Row access policy creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;rowAccessPolicy&quot;: {
-    object (BigQueryAuditMetadata.RowAccessPolicy)
-  },
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;rowAccessPolicy&quot;: {object (BigQueryAuditMetadata.RowAccessPolicy)},&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  rowAccessPolicy  `
+`rowAccessPolicy`
 
-`  object ( BigQueryAuditMetadata.RowAccessPolicy  ` )
+` object ( BigQueryAuditMetadata.RowAccessPolicy  ` )
 
 The row access policy created by this event.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created this row access policy.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.RowAccessPolicy
 
@@ -3868,13 +3344,13 @@ BigQuery row access policy.
 
 Fields
 
-`  rowAccessPolicyName  `
+`rowAccessPolicyName`
 
-`  string  `
+`string`
 
 Row access policy URI.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/tables/<tableId>/rowAccessPolicies/<row_access_policy_id>  `
+Format: `projects/<projectId>/datasets/<datasetId>/tables/<tableId>/rowAccessPolicies/<row_access_policy_id>`
 
 ## BigQueryAuditMetadata.RowAccessPolicyChange
 
@@ -3891,31 +3367,26 @@ Row access policy change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;rowAccessPolicy&quot;: {
-    object (BigQueryAuditMetadata.RowAccessPolicy)
-  },
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;rowAccessPolicy&quot;: {object (BigQueryAuditMetadata.RowAccessPolicy)},&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  rowAccessPolicy  `
+`rowAccessPolicy`
 
-`  object ( BigQueryAuditMetadata.RowAccessPolicy  ` )
+` object ( BigQueryAuditMetadata.RowAccessPolicy  ` )
 
 The row access policy that was changed by this event.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created this row access policy.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.RowAccessPolicyDeletion
 
@@ -3932,38 +3403,30 @@ Row access policy deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;rowAccessPolicies&quot;: [
-    {
-      object (BigQueryAuditMetadata.RowAccessPolicy)
-    }
-  ],
-  &quot;jobName&quot;: string,
-  &quot;allRowAccessPoliciesDropped&quot;: boolean
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;rowAccessPolicies&quot;: [{object (BigQueryAuditMetadata.RowAccessPolicy)}],&quot;jobName&quot;: string,&quot;allRowAccessPoliciesDropped&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  rowAccessPolicies[]  `
+`rowAccessPolicies[]`
 
-`  object ( BigQueryAuditMetadata.RowAccessPolicy  ` )
+` object ( BigQueryAuditMetadata.RowAccessPolicy  ` )
 
 The row access policies that were deleted. At present, only populated when a single policy is dropped.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The job that deleted these row access policies.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
-`  allRowAccessPoliciesDropped  `
+`allRowAccessPoliciesDropped`
 
-`  boolean  `
+`boolean`
 
 This field is set to true when a DROP ALL command has been executed, thus removing all row access policies on the table.
 
@@ -3982,36 +3445,32 @@ Unlink linked dataset from its source dataset event
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;linkedDataset&quot;: string,
-  &quot;sourceDataset&quot;: string,
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.UnlinkDataset.Reason)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;linkedDataset&quot;: string,&quot;sourceDataset&quot;: string,&quot;reason&quot;: enum (BigQueryAuditMetadata.UnlinkDataset.Reason)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  linkedDataset  `
+`linkedDataset`
 
-`  string  `
+`string`
 
 The linked dataset URI which is unlinked from its source.
 
-Format: `  projects/<projectId>/datasets/<datasetId>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>` .
 
-`  sourceDataset  `
+`sourceDataset`
 
-`  string  `
+`string`
 
 The source dataset URI from which the linked dataset is unlinked.
 
-Format: `  projects/<projectId>/datasets/<datasetId>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>` .
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.UnlinkDataset.Reason  ` )
+` enum ( BigQueryAuditMetadata.UnlinkDataset.Reason  ` )
 
 Reason for unlinking linked dataset
 
@@ -4030,38 +3489,32 @@ Search index creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;searchIndex&quot;: {
-    object (BigQueryAuditMetadata.SearchIndex)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.SearchIndexCreation.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;searchIndex&quot;: {object (BigQueryAuditMetadata.SearchIndex)},&quot;reason&quot;: enum (BigQueryAuditMetadata.SearchIndexCreation.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  searchIndex  `
+`searchIndex`
 
-`  object ( BigQueryAuditMetadata.SearchIndex  ` )
+` object ( BigQueryAuditMetadata.SearchIndex  ` )
 
 Search index metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.SearchIndexCreation.Reason  ` )
+` enum ( BigQueryAuditMetadata.SearchIndexCreation.Reason  ` )
 
 Describes how the search index was created.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created the search index.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.SearchIndex
 
@@ -4087,13 +3540,13 @@ BigQuery Search Index.
 
 Fields
 
-`  searchIndexName  `
+`searchIndexName`
 
-`  string  `
+`string`
 
 Search index URI.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/tables/<tableId>/searchIndexes/<index_name>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>/tables/<tableId>/searchIndexes/<index_name>` .
 
 ## BigQueryAuditMetadata.SearchIndexChange
 
@@ -4110,38 +3563,32 @@ Search index configuration change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;searchIndex&quot;: {
-    object (BigQueryAuditMetadata.SearchIndex)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.SearchIndexChange.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;searchIndex&quot;: {object (BigQueryAuditMetadata.SearchIndex)},&quot;reason&quot;: enum (BigQueryAuditMetadata.SearchIndexChange.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  searchIndex  `
+`searchIndex`
 
-`  object ( BigQueryAuditMetadata.SearchIndex  ` )
+` object ( BigQueryAuditMetadata.SearchIndex  ` )
 
 Updated search index metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.SearchIndexChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.SearchIndexChange.Reason  ` )
 
 Describes how the search index was changed.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that changed the search index.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.SearchIndexDeletion
 
@@ -4158,38 +3605,32 @@ Search index deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;searchIndex&quot;: {
-    object (BigQueryAuditMetadata.SearchIndex)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.SearchIndexDeletion.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;searchIndex&quot;: {object (BigQueryAuditMetadata.SearchIndex)},&quot;reason&quot;: enum (BigQueryAuditMetadata.SearchIndexDeletion.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  searchIndex  `
+`searchIndex`
 
-`  object ( BigQueryAuditMetadata.SearchIndex  ` )
+` object ( BigQueryAuditMetadata.SearchIndex  ` )
 
 Search index metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.SearchIndexDeletion.Reason  ` )
+` enum ( BigQueryAuditMetadata.SearchIndexDeletion.Reason  ` )
 
 Describes how the search index was deleted.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that deleted the search index.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.VectorIndexCreation
 
@@ -4206,38 +3647,32 @@ Vector index creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;vectorIndex&quot;: {
-    object (BigQueryAuditMetadata.VectorIndex)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.VectorIndexCreation.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;vectorIndex&quot;: {object (BigQueryAuditMetadata.VectorIndex)},&quot;reason&quot;: enum (BigQueryAuditMetadata.VectorIndexCreation.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  vectorIndex  `
+`vectorIndex`
 
-`  object ( BigQueryAuditMetadata.VectorIndex  ` )
+` object ( BigQueryAuditMetadata.VectorIndex  ` )
 
 Vector index metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.VectorIndexCreation.Reason  ` )
+` enum ( BigQueryAuditMetadata.VectorIndexCreation.Reason  ` )
 
 Describes how the vector index was created.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that created the vector index.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.VectorIndex
 
@@ -4263,13 +3698,13 @@ BigQuery Vector Index.
 
 Fields
 
-`  vectorIndexName  `
+`vectorIndexName`
 
-`  string  `
+`string`
 
 Vector index URI.
 
-Format: `  projects/<projectId>/datasets/<datasetId>/tables/<tableId>/vectorIndexes/<index_name>  ` .
+Format: `projects/<projectId>/datasets/<datasetId>/tables/<tableId>/vectorIndexes/<index_name>` .
 
 ## BigQueryAuditMetadata.VectorIndexChange
 
@@ -4286,38 +3721,32 @@ Vector index change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;vectorIndex&quot;: {
-    object (BigQueryAuditMetadata.VectorIndex)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.VectorIndexChange.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;vectorIndex&quot;: {object (BigQueryAuditMetadata.VectorIndex)},&quot;reason&quot;: enum (BigQueryAuditMetadata.VectorIndexChange.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  vectorIndex  `
+`vectorIndex`
 
-`  object ( BigQueryAuditMetadata.VectorIndex  ` )
+` object ( BigQueryAuditMetadata.VectorIndex  ` )
 
 Updated vector index metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.VectorIndexChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.VectorIndexChange.Reason  ` )
 
 Describes how the vector index was changed.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that changed the vector index.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.VectorIndexDeletion
 
@@ -4334,38 +3763,32 @@ Vector index deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;vectorIndex&quot;: {
-    object (BigQueryAuditMetadata.VectorIndex)
-  },
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.VectorIndexDeletion.Reason),
-  &quot;jobName&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;vectorIndex&quot;: {object (BigQueryAuditMetadata.VectorIndex)},&quot;reason&quot;: enum (BigQueryAuditMetadata.VectorIndexDeletion.Reason),&quot;jobName&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  vectorIndex  `
+`vectorIndex`
 
-`  object ( BigQueryAuditMetadata.VectorIndex  ` )
+` object ( BigQueryAuditMetadata.VectorIndex  ` )
 
 Vector index metadata.
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.VectorIndexDeletion.Reason  ` )
+` enum ( BigQueryAuditMetadata.VectorIndexDeletion.Reason  ` )
 
 Describes how the vector index was deleted.
 
-`  jobName  `
+`jobName`
 
-`  string  `
+`string`
 
 The URI of the job that deleted the vector index.
 
-Format: `  projects/<projectId>/jobs/<jobId>  ` .
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.ConnectionChange
 
@@ -4382,29 +3805,22 @@ Connection metadata change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.ConnectionChange.Reason),
-  &quot;bindingDeltas&quot;: [
-    {
-      object (BindingDelta)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;reason&quot;: enum (BigQueryAuditMetadata.ConnectionChange.Reason),&quot;bindingDeltas&quot;: [{object (BindingDelta)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.ConnectionChange.Reason  ` )
+` enum ( BigQueryAuditMetadata.ConnectionChange.Reason  ` )
 
 Describes how the connection metadata was changed.
 
-`  bindingDeltas[]  `
+`bindingDeltas[]`
 
-`  object ( BindingDelta  ` )
+` object ( BindingDelta  ` )
 
 List of deltas between two policies.
 
@@ -4423,27 +3839,24 @@ Listing subscription event. This won't be logged for subscriptions created using
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: string,
-  &quot;reason&quot;: enum (BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: string,&quot;reason&quot;: enum (BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  string  `
+`string`
 
 The resource name of the listing.
 
-Format: `  projects/<projectId>/locations/<locationId>/dataExchanges/<data_exchange_id>/listings/<listing_id>  ` .
+Format: `projects/<projectId>/locations/<locationId>/dataExchanges/<data_exchange_id>/listings/<listing_id>` .
 
-`  reason  `
+`reason`
 
-`  enum ( BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason  ` )
+` enum ( BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason  ` )
 
 Describes how the subscription was created.
 
@@ -4462,27 +3875,20 @@ First party (Google) application specific request metadata.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field metadata can be only one of the following:
-  &quot;sheetsMetadata&quot;: {
-    object (BigQueryAuditMetadata.SheetsMetadata)
-  }
-  // End of list of possible types for union field metadata.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field metadata can be only one of the following:&quot;sheetsMetadata&quot;: {object (BigQueryAuditMetadata.SheetsMetadata)}// End of list of possible types for union field metadata.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  metadata  ` .
+Union field `metadata` .
 
-`  metadata  ` can be only one of the following:
+`metadata` can be only one of the following:
 
-`  sheetsMetadata  `
+`sheetsMetadata`
 
-`  object ( BigQueryAuditMetadata.SheetsMetadata  ` )
+` object ( BigQueryAuditMetadata.SheetsMetadata  ` )
 
 Google Sheets metadata.
 
@@ -4510,8 +3916,8 @@ Google Sheets specific request metadata.
 
 Fields
 
-`  docId  `
+`docId`
 
-`  string  `
+`string`
 
 The ID of the spreadsheet from which the request is sent.

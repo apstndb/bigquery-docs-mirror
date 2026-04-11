@@ -4,27 +4,27 @@ The BigQuery Storage Write API is a unified data-ingestion API for BigQuery. It 
 
 ## Advantages of using the Storage Write API
 
-**Exactly-once delivery semantics.** The Storage Write API supports exactly-once semantics through the use of stream offsets. Unlike the `  tabledata.insertAll  ` method, the Storage Write API never writes two messages that have the same offset within a stream, if the client provides stream offsets when appending records.
+**Exactly-once delivery semantics.** The Storage Write API supports exactly-once semantics through the use of stream offsets. Unlike the `tabledata.insertAll` method, the Storage Write API never writes two messages that have the same offset within a stream, if the client provides stream offsets when appending records.
 
 **Stream-level transactions.** You can write data to a stream and commit the data as a single transaction. If the commit operation fails, you can safely retry the operation.
 
 **Transactions across streams.** Multiple workers can create their own streams to process data independently. When all the workers have finished, you can commit all of the streams as a transaction.
 
-**Efficient protocol.** The Storage Write API is more efficient than the legacy `  insertAll  ` method because it uses gRPC streaming rather than REST over HTTP. The Storage Write API also supports the [protocol buffer](https://protobuf.dev/) binary format and the [Apache Arrow](https://arrow.apache.org/) columnar format, which are a more efficient wire format than JSON. Write requests are asynchronous with guaranteed ordering.
+**Efficient protocol.** The Storage Write API is more efficient than the legacy `insertAll` method because it uses gRPC streaming rather than REST over HTTP. The Storage Write API also supports the [protocol buffer](https://protobuf.dev/) binary format and the [Apache Arrow](https://arrow.apache.org/) columnar format, which are a more efficient wire format than JSON. Write requests are asynchronous with guaranteed ordering.
 
 **Schema update detection.** If the underlying table schema changes while the client is streaming, then the Storage Write API notifies the client. The client can decide whether to reconnect using the updated schema, or continue to write to the existing connection.
 
-**Lower cost** . The Storage Write API has a significantly lower cost than the older `  insertAll  ` streaming API. In addition, you can ingest up to 2 TiB per month for free.
+**Lower cost** . The Storage Write API has a significantly lower cost than the older `insertAll` streaming API. In addition, you can ingest up to 2 TiB per month for free.
 
 ## Required permissions
 
-To use the Storage Write API, you must have `  bigquery.tables.updateData  ` permissions.
+To use the Storage Write API, you must have `bigquery.tables.updateData` permissions.
 
-The following predefined Identity and Access Management (IAM) roles include `  bigquery.tables.updateData  ` permissions:
+The following predefined Identity and Access Management (IAM) roles include `bigquery.tables.updateData` permissions:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -32,9 +32,9 @@ For more information about IAM roles and permissions in BigQuery, see [Predefine
 
 Using the Storage Write API requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.insertdata  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.insertdata`
 
 For more information, see the [Authentication Overview](https://cloud.google.com/docs/authentication/) .
 
@@ -50,11 +50,11 @@ The Storage Write API provides a *default stream* , designed for streaming scena
   - The default stream supports at-least-once semantics.
   - You don't need to explicitly create the default stream.
 
-If you are migrating from the legacy [`  tabledata.insertall  `](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) API, consider using the default stream. It has similar write semantics, with greater data resiliency and fewer scaling restrictions.
+If you are migrating from the legacy [`tabledata.insertall`](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) API, consider using the default stream. It has similar write semantics, with greater data resiliency and fewer scaling restrictions.
 
 API flow:
 
-1.  [`  AppendRows  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) (loop)
+1.  [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) (loop)
 
 For more information and example code, see [Use the default stream for at-least-once semantics](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) .
 
@@ -75,10 +75,10 @@ In *pending type* , records are buffered in a pending state until you *commit* t
 
 API flow:
 
-1.  [`  CreateWriteStream  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream)
-2.  [`  AppendRows  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) (loop)
-3.  [`  FinalizeWriteStream  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream)
-4.  [`  BatchCommitWriteStreams  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.BatchCommitWriteStreams)
+1.  [`CreateWriteStream`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream)
+2.  [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) (loop)
+3.  [`FinalizeWriteStream`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream)
+4.  [`BatchCommitWriteStreams`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.BatchCommitWriteStreams)
 
 #### Committed type
 
@@ -86,9 +86,9 @@ In *committed type* , records are available for reading immediately as you write
 
 API flow:
 
-1.  [`  CreateWriteStream  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream)
-2.  [`  AppendRows  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) (loop)
-3.  [`  FinalizeWriteStream  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream) (optional)
+1.  [`CreateWriteStream`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream)
+2.  [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) (loop)
+3.  [`FinalizeWriteStream`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream) (optional)
 
 #### Buffered type
 
@@ -96,9 +96,9 @@ API flow:
 
 API flow:
 
-1.  [`  CreateWriteStream  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream)
-2.  [`  AppendRows  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) ⇒ [`  FlushRows  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FlushRows) (loop)
-3.  [`  FinalizeWriteStream  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream) (optional)
+1.  [`CreateWriteStream`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream)
+2.  [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) ⇒ [`FlushRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FlushRows) (loop)
+3.  [`FinalizeWriteStream`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream) (optional)
 
 #### Selecting a type
 
@@ -112,39 +112,39 @@ Consider the following when you use the Storage Write API:
 
 #### AppendRows
 
-The `  AppendRows  ` method appends one or more records to the stream. The first call to `  AppendRows  ` must contain a stream name along with the data schema, specified as a [`  DescriptorProto  `](https://googleapis.dev/nodejs/memcache/latest/google.protobuf.DescriptorProto.html) . Alternatively, you can add a serialized arrow schema in the first call to `  AppendRows  ` if you are ingesting data in the Apache Arrow format. As a best practice, send a batch of rows in each `  AppendRows  ` call. Don't send one row at a time.
+The `AppendRows` method appends one or more records to the stream. The first call to `AppendRows` must contain a stream name along with the data schema, specified as a [`DescriptorProto`](https://googleapis.dev/nodejs/memcache/latest/google.protobuf.DescriptorProto.html) . Alternatively, you can add a serialized arrow schema in the first call to `AppendRows` if you are ingesting data in the Apache Arrow format. As a best practice, send a batch of rows in each `AppendRows` call. Don't send one row at a time.
 
 ##### Proto Buffer Handling
 
 Protocol buffers provide a language-neutral, platform-neutral, extensible mechanism for serializing structured data in a forward-compatible and backward-compatible way. They are advantageous in that they provide compact data storage with fast and efficient parsing. To learn more about protocol buffers, see [Protocol Buffer Overview](https://developers.google.com/protocol-buffers/docs/overview) .
 
-If you are going to consume the API directly with a pre-defined protocol buffer message, the protocol buffer message cannot use a `  package  ` specifier, and all nested or enumeration types must be defined within the top-level root message. References to external messages are not allowed. For an example, see [sample\_data.proto](https://github.com/googleapis/google-cloud-python/blob/main/packages/google-cloud-bigquery-storage/samples/snippets/sample_data.proto) .
+If you are going to consume the API directly with a pre-defined protocol buffer message, the protocol buffer message cannot use a `package` specifier, and all nested or enumeration types must be defined within the top-level root message. References to external messages are not allowed. For an example, see [sample\_data.proto](https://github.com/googleapis/google-cloud-python/blob/main/packages/google-cloud-bigquery-storage/samples/snippets/sample_data.proto) .
 
 The Java and Go clients support arbitrary protocol buffers, because the client library normalizes the protocol buffer schema.
 
 ##### Apache Arrow Handling
 
-[Apache Arrow](https://arrow.apache.org/docs/index.html) is a universal columnar format and multi-language toolbox for data processing. Apache Arrow provides a language-independent, column-oriented memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. The Storage Write API supports Arrow ingestion using serialized arrow schema and data in the [`  AppendRowsRequest  ` class](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest/google.cloud.bigquery_storage_v1.types.AppendRowsRequest) . The Python and Java client libraries include built-in support for Apache Arrow ingestion.
+[Apache Arrow](https://arrow.apache.org/docs/index.html) is a universal columnar format and multi-language toolbox for data processing. Apache Arrow provides a language-independent, column-oriented memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. The Storage Write API supports Arrow ingestion using serialized arrow schema and data in the [`AppendRowsRequest` class](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest/google.cloud.bigquery_storage_v1.types.AppendRowsRequest) . The Python and Java client libraries include built-in support for Apache Arrow ingestion.
 
 #### FinalizeWriteStream
 
-The `  FinalizeWriteStream  ` method finalizes the stream so that no new data can be appended to it. This method is required in [`  Pending  `](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) type and optional in [`  Committed  `](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) and [`  Buffered  `](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) types. The default stream does not support this method.
+The `FinalizeWriteStream` method finalizes the stream so that no new data can be appended to it. This method is required in [`Pending`](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) type and optional in [`Committed`](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) and [`Buffered`](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) types. The default stream does not support this method.
 
 #### Error handling
 
-If an error occurs, the returned `  google.rpc.Status  ` can include a [`  StorageError  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError) in the [error details](https://docs.cloud.google.com/apis/design/errors#error_details) . Review the [`  StorageErrorCode  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode) for find the specific error type. For more information about the Google API error model, see [Errors](https://docs.cloud.google.com/apis/design/errors) .
+If an error occurs, the returned `google.rpc.Status` can include a [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError) in the [error details](https://docs.cloud.google.com/apis/design/errors#error_details) . Review the [`StorageErrorCode`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode) for find the specific error type. For more information about the Google API error model, see [Errors](https://docs.cloud.google.com/apis/design/errors) .
 
-**Important:** When using the gRPC API directly, if you write data to any region except the `  US  ` multiregion, you must include the following header in your requests: `  x-goog-request-params: write_stream=<stream_name>  ` , where `  <stream_name>  ` is the name of the write stream. You don't need to add this header when using the client libraries.
+**Important:** When using the gRPC API directly, if you write data to any region except the `US` multiregion, you must include the following header in your requests: `x-goog-request-params: write_stream=<stream_name>` , where `<stream_name>` is the name of the write stream. You don't need to add this header when using the client libraries.
 
 ### Connections
 
-The Storage Write API is a gRPC API that uses bidirectional connections. The `  AppendRows  ` method creates a connection to a stream. You can open multiple connections on the default stream. These appends are asynchronous, which lets you send a series of writes simultaneously. Response messages on each bidirectional connection arrive in the same order as the requests were sent.
+The Storage Write API is a gRPC API that uses bidirectional connections. The `AppendRows` method creates a connection to a stream. You can open multiple connections on the default stream. These appends are asynchronous, which lets you send a series of writes simultaneously. Response messages on each bidirectional connection arrive in the same order as the requests were sent.
 
 Application-created streams can only have a single active connection. As a best practice, [limit the number of active connections](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) , and use one connection for as many data writes as possible. When using the default stream in Java or Go, you can use [Storage Write API multiplexing](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) to write to multiple destination tables with shared connections.
 
 Generally, a single connection supports at least 1 MBps of throughput. The upper bound depends on several factors, such as network bandwidth, the schema of the data, and server load. When a connection reaches the throughput limit, incoming requests might be rejected or queued until the number of inflight requests goes down. If you require more throughput, create more connections.
 
-BigQuery closes the gRPC connection if the connection remains idle for too long. If this happens, the response code is `  HTTP 409  ` . The gRPC connection can also be closed in the event of a server restart or for other reasons. If a connection error occurs, create a new connection. The Java and Go client libraries automatically reconnect if the connection is closed.
+BigQuery closes the gRPC connection if the connection remains idle for too long. If this happens, the response code is `HTTP 409` . The gRPC connection can also be closed in the event of a server restart or for other reasons. If a connection error occurs, create a new connection. The Java and Go client libraries automatically reconnect if the connection is closed.
 
 ## Client library support
 
@@ -158,9 +158,9 @@ To see code samples related to the Storage Write API, see [All BigQuery code sam
 
 The Java client library provides two writer objects:
 
-  - `  StreamWriter  ` : Accepts data in protocol buffer format.
+  - `StreamWriter` : Accepts data in protocol buffer format.
 
-  - `  JsonStreamWriter  ` : Accepts data in JSON format and converts it to protocol buffers before sending it over the wire. The `  JsonStreamWriter  ` also supports automatic schema updates. If the table schema changes, the writer automatically reconnects with the new schema, allowing the client to send data using the new schema.
+  - `JsonStreamWriter` : Accepts data in JSON format and converts it to protocol buffers before sending it over the wire. The `JsonStreamWriter` also supports automatic schema updates. If the table schema changes, the writer automatically reconnects with the new schema, allowing the client to send data using the new schema.
 
 The programming model is similar for both writers. The main difference is how you format the payload.
 
@@ -198,15 +198,15 @@ One common way to deal with persistent errors is to publish the rows to a Pub/Su
 
 The Storage Write API supports streaming data into [partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-When the data is streamed, it is initially placed in the `  __UNPARTITIONED__  ` partition. After enough unpartitioned data is collected, BigQuery repartitions the data, placing it into the appropriate partition. However, there is no service level agreement (SLA) that defines how long it might take for that data to move out of the `  __UNPARTITIONED__  ` partition.
+When the data is streamed, it is initially placed in the `__UNPARTITIONED__` partition. After enough unpartitioned data is collected, BigQuery repartitions the data, placing it into the appropriate partition. However, there is no service level agreement (SLA) that defines how long it might take for that data to move out of the `__UNPARTITIONED__` partition.
 
-For [ingestion-time partitioned](https://docs.cloud.google.com/bigquery/docs/write-api#ingestion-time_partitioning) and [time-unit column partitioned](https://docs.cloud.google.com/bigquery/docs/write-api#time-unit_column_partitioning) tables, unpartitioned data can be excluded from a query by filtering out the `  NULL  ` values from the `  __UNPARTITIONED__  ` partition by using one of the pseudocolumns ( [`  _PARTITIONTIME  ` or `  _PARTITIONDATE  `](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) depending on your preferred data type).
+For [ingestion-time partitioned](https://docs.cloud.google.com/bigquery/docs/write-api#ingestion-time_partitioning) and [time-unit column partitioned](https://docs.cloud.google.com/bigquery/docs/write-api#time-unit_column_partitioning) tables, unpartitioned data can be excluded from a query by filtering out the `NULL` values from the `__UNPARTITIONED__` partition by using one of the pseudocolumns ( [`_PARTITIONTIME` or `_PARTITIONDATE`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) depending on your preferred data type).
 
 ### Ingestion-time partitioning
 
 When you stream to an [ingestion-time partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time) , the Storage Write API infers the destination partition from the current system UTC time.
 
-If you're streaming data into a daily partitioned table, then you can override the date inference by supplying a partition decorator as part of the request. Include the decorator in the `  tableID  ` parameter. For example, you can stream to the partition corresponding to 2025-06-01 for table `  table1  ` using the `  table1$20250601  ` partition decorator.
+If you're streaming data into a daily partitioned table, then you can override the date inference by supplying a partition decorator as part of the request. Include the decorator in the `tableID` parameter. For example, you can stream to the partition corresponding to 2025-06-01 for table `table1` using the `table1$20250601` partition decorator.
 
 When streaming with a partition decorator, you can stream to partitions from 31 days in the past to 16 days in the future. To write to partitions for dates outside these bounds, use a load or query job instead, as described in [Write data to a specific partition](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables#write-to-partition) .
 
@@ -214,11 +214,11 @@ Streaming using a partition decorator is only supported for daily partitioned ta
 
 ### Time-unit column partitioning
 
-When you stream to a [time-unit column partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) , BigQuery automatically puts the data into the correct partition based on the values of the table's predefined `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` partitioning column. You can stream data into a time-unit column partitioned table if the data referenced by the partitioning column is between 10 years in the past and 1 year in the future.
+When you stream to a [time-unit column partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) , BigQuery automatically puts the data into the correct partition based on the values of the table's predefined `DATE` , `DATETIME` , or `TIMESTAMP` partitioning column. You can stream data into a time-unit column partitioned table if the data referenced by the partitioning column is between 10 years in the past and 1 year in the future.
 
 ### Integer-range partitioning
 
-When you stream to an [integer-range partitioned](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#integer_range) table, BigQuery automatically puts the data into the correct partition based on the values of the table's predefined `  INTEGER  ` partitioning column.
+When you stream to an [integer-range partitioned](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#integer_range) table, BigQuery automatically puts the data into the correct partition based on the values of the table's predefined `INTEGER` partitioning column.
 
 ## Fluent Bit Storage Write API output plugin
 
@@ -232,13 +232,13 @@ This plugin supports the following:
 
 ## Storage Write API project metrics
 
-For metrics to monitor your data ingestion with the Storage Write API, use the [`  INFORMATION_SCHEMA.WRITE_API_TIMELINE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api) or see [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) .
+For metrics to monitor your data ingestion with the Storage Write API, use the [`INFORMATION_SCHEMA.WRITE_API_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api) or see [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) .
 
-**Note:** The latency dashboard for the `  AppendRows  ` method in the Google Cloud console doesn't reflect bi-directional streaming request level latency, it reflects the length of the bi-directional streaming connection. Also, the errors dashboard for `  AppendRows  ` reflects the bi-directional streaming connection level error instead of the request level error. For request level metrics, you should use [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) .
+**Note:** The latency dashboard for the `AppendRows` method in the Google Cloud console doesn't reflect bi-directional streaming request level latency, it reflects the length of the bi-directional streaming connection. Also, the errors dashboard for `AppendRows` reflects the bi-directional streaming connection level error instead of the request level error. For request level metrics, you should use [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) .
 
 ## Use data manipulation language (DML) with recently streamed data
 
-You can use data manipulation language (DML), such as the `  UPDATE  ` , `  DELETE  ` , `  MERGE  ` , or `  TRUNCATE  ` statements, to modify rows that were recently written to a BigQuery table by the BigQuery Storage Write API. Recent writes are those that occurred within the last 30 minutes.
+You can use data manipulation language (DML), such as the `UPDATE` , `DELETE` , `MERGE` , or `TRUNCATE` statements, to modify rows that were recently written to a BigQuery table by the BigQuery Storage Write API. Recent writes are those that occurred within the last 30 minutes.
 
 For more information about using DML to modify your streamed data, see [Using data manipulation language](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) .
 
@@ -255,7 +255,7 @@ You can monitor your concurrent connections and throughput quota usage in the [G
 
 ### Calculate throughput
 
-Suppose your goal is to collect logs from 100 million endpoints creating a 1,500 log record per minute. Then, you can estimate the throughput as `  100 million * 1,500 / 60 seconds = 2.5 GB per second  ` . You must ensure in advance that you have adequate quota to serve this throughput.
+Suppose your goal is to collect logs from 100 million endpoints creating a 1,500 log record per minute. Then, you can estimate the throughput as `100 million * 1,500 / 60 seconds = 2.5 GB per second` . You must ensure in advance that you have adequate quota to serve this throughput.
 
 ## Storage Write API pricing
 
@@ -275,7 +275,7 @@ If exactly-once guarantees are not required, [writing to the default stream](htt
 
 [Estimate the throughput of your network](https://docs.cloud.google.com/bigquery/docs/write-api#calculate-throughput) and ensure in advance that you have an adequate quota to serve the throughput.
 
-If your workload is generating or processing data at a very uneven rate, then try to smooth out any load spikes on the client and stream into BigQuery with a constant throughput. This can simplify your capacity planning. If that is not possible, ensure you are prepared to handle `  429  ` (resource exhausted) errors if and when your throughput goes over quota during short spikes.
+If your workload is generating or processing data at a very uneven rate, then try to smooth out any load spikes on the client and stream into BigQuery with a constant throughput. This can simplify your capacity planning. If that is not possible, ensure you are prepared to handle `429` (resource exhausted) errors if and when your throughput goes over quota during short spikes.
 
 For a detailed example of how to use the Storage Write API, see [Stream data using the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) .
 

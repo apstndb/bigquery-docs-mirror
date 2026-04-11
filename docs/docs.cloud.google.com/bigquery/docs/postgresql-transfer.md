@@ -15,23 +15,23 @@ PostgreSQL data transfers are subject to following limitations:
   - During a data transfer, the PostgreSQL connector identifies indexed and partitioned key columns to transfer your data in parallel batches. For this reason, we recommend that you specify primary key columns or use indexed columns in your table to improve the performance and reduce the error rate in your data transfers. Consider the following:
     
       - If you have indexed or primary key constraints, only the following column types are supported for creating parallel batches:
-          - `  INTEGER  `
-          - `  TINYINT  `
-          - `  SMALLINT  `
-          - `  FLOAT  `
-          - `  REAL  `
-          - `  DOUBLE  `
-          - `  NUMERIC  `
-          - `  BIGINT  `
-          - `  DECIMAL  `
-          - `  DATE  `
+          - `INTEGER`
+          - `TINYINT`
+          - `SMALLINT`
+          - `FLOAT`
+          - `REAL`
+          - `DOUBLE`
+          - `NUMERIC`
+          - `BIGINT`
+          - `DECIMAL`
+          - `DATE`
       - PostgreSQL data transfers that don't use primary key or indexed columns can't support more than 2,000,000 records per table.
 
 ### Incremental transfer limitations
 
 Incremental PostgreSQL transfers are subject to the following limitations:
 
-  - You can only choose `  TIMESTAMP  ` columns as watermark columns.
+  - You can only choose `TIMESTAMP` columns as watermark columns.
 
   - Incremental ingestion is only supported for assets with valid watermark columns.
 
@@ -41,7 +41,7 @@ Incremental PostgreSQL transfers are subject to the following limitations:
 
   - A single transfer configuration can only support either incremental or full ingestion.
 
-  - You cannot update objects in the `  asset  ` list after the first incremental ingestion run.
+  - You cannot update objects in the `asset` list after the first incremental ingestion run.
 
   - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
 
@@ -103,7 +103,7 @@ You can specify how data is loaded into BigQuery by selecting either the *Full* 
 
 You can configure a *full* data transfer to transfer all data from your PostgreSQL datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Append write mode
 
@@ -111,7 +111,7 @@ The append write mode only inserts new rows to your destination table. This opti
 
 When you select the append mode, you must select a watermark column. A watermark column is required for the PostgreSQL connector to track changes in the source table.
 
-For PostgreSQL transfers, we recommend selecting a column that is only updated when the record was created, and won't change with subsequent updates. For example, the `  CREATED_AT  ` column.
+For PostgreSQL transfers, we recommend selecting a column that is only updated when the record was created, and won't change with subsequent updates. For example, the `CREATED_AT` column.
 
 #### Upsert write mode
 
@@ -120,7 +120,7 @@ The upsert write mode either updates a row or inserts a new row in your destinat
 When you select the upsert mode, you must select a watermark column and a primary key:
 
   - A watermark column is required for the PostgreSQL connector to track changes in the source table.
-      - Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
+      - Select a watermark column that updates every time a row is modified. We recommend columns similar to the `UPDATED_AT` or `LAST_MODIFIED` column.
 
 <!-- end list -->
 
@@ -156,7 +156,7 @@ When you make changes to the table schema in your data source, incremental data 
 </tr>
 <tr class="odd">
 <td>Changing the data type in a column</td>
-<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">ALTER COLUMN</code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
 <p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
 </tr>
 <tr class="even">
@@ -175,9 +175,9 @@ When you make changes to the table schema in your data source, incremental data 
 
 ### Required roles
 
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -186,18 +186,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Network connections
 
@@ -272,7 +272,7 @@ Add PostgreSQL data into BigQuery by setting up a transfer configuration using o
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
 ``` notranslate
 bq mk
@@ -286,36 +286,36 @@ bq mk
 
 Replace the following:
 
-  - PROJECT\_ID (optional): your Google Cloud project ID. If the `  --project_id  ` flag isn't supplied to specify a particular project, the default project is used.
+  - PROJECT\_ID (optional): your Google Cloud project ID. If the `--project_id` flag isn't supplied to specify a particular project, the default project is used.
 
-  - DATA\_SOURCE : the data source, which is `  postgresql  ` .
+  - DATA\_SOURCE : the data source, which is `postgresql` .
 
   - DISPLAY\_NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
   - DATASET : the target dataset for the data transfer configuration.
 
-  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a PostgreSQL transfer:
+  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a PostgreSQL transfer:
     
-      - `  connector.networkAttachment  ` (optional): the name of the network attachment to connect to the PostgreSQL database.
-      - `  connector.database  ` : the name of the PostgreSQL database.
-      - `  connector.endpoint.host  ` : the hostname or IP address of the database.
-      - `  connector.endpoint.port  ` : the port number of the database.
-      - `  connector.authentication.username  ` : the username of the database user.
-      - `  connector.authentication.password  ` : the password of the database user.
-      - `  connector.tls.mode  ` : specify a [TLS configuration](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#tls_configuration) to use with this transfer:
-          - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
-          - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only
-          - `  ENCRYPT_VERIFY_NONE  ` for data encryption only
-          - `  DISABLE  ` for no encryption or verification
-      - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#trusted_server_certificate_pem) . Required only if `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
-      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#full_or_incremental_transfers) .
-      - `  writeMode  ` : specify either `  WRITE_MODE_APPEND  ` or `  WRITE_MODE_UPSERT  ` .
-      - `  watermarkColumns  ` : specify columns in your table as watermark columns. This field is required for incremental transfers.
-      - `  primaryKeys  ` : specify columns in your table as primary keys. This field is required for incremental transfers.
-      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. If you are making an incremental transfer, this value must be `  false  ` . For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-postgresql) .
-      - `  assets  ` : a list of the names of the PostgreSQL tables to be transferred from the PostgreSQL database as part of the transfer.
+      - `connector.networkAttachment` (optional): the name of the network attachment to connect to the PostgreSQL database.
+      - `connector.database` : the name of the PostgreSQL database.
+      - `connector.endpoint.host` : the hostname or IP address of the database.
+      - `connector.endpoint.port` : the port number of the database.
+      - `connector.authentication.username` : the username of the database user.
+      - `connector.authentication.password` : the password of the database user.
+      - `connector.tls.mode` : specify a [TLS configuration](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#tls_configuration) to use with this transfer:
+          - `ENCRYPT_VERIFY_CA_AND_HOST` to encrypt data, and verify CA and hostname
+          - `ENCRYPT_VERIFY_CA` to encrypt data, and verify CA only
+          - `ENCRYPT_VERIFY_NONE` for data encryption only
+          - `DISABLE` for no encryption or verification
+      - `connector.tls.trustedServerCertificate` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#trusted_server_certificate_pem) . Required only if `connector.tls.mode` is `ENCRYPT_VERIFY_CA_AND_HOST` or `ENCRYPT_VERIFY_CA` .
+      - `ingestionType` : specify either `FULL` or `INCREMENTAL` . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#full_or_incremental_transfers) .
+      - `writeMode` : specify either `WRITE_MODE_APPEND` or `WRITE_MODE_UPSERT` .
+      - `watermarkColumns` : specify columns in your table as watermark columns. This field is required for incremental transfers.
+      - `primaryKeys` : specify columns in your table as primary keys. This field is required for incremental transfers.
+      - `connector.legacyMapping` : set to `true` (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#data_type_mapping) . Set to `false` to use the updated data type mapping. If you are making an incremental transfer, this value must be `false` . For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-postgresql) .
+      - `assets` : a list of the names of the PostgreSQL tables to be transferred from the PostgreSQL database as part of the transfer.
 
-For example, the following command creates a PostgreSQL transfer called `  My Transfer  ` :
+For example, the following command creates a PostgreSQL transfer called `My Transfer` :
 
 ``` notranslate
 bq mk
@@ -337,7 +337,7 @@ bq mk
         "connector.tls.trustedServerCertificate": "PEM-encoded certificate"}'
 ```
 
-When you specify multiple assets during an incremental transfer, the values of the `  watermarkColumns  ` and `  primaryKeys  ` fields correspond to the position of values in the `  assets  ` field. In the following example, `  dep_id  ` corresponds to the table `  DB1/USER1/DEPARTMENT  ` , while `  report_by  ` and `  report_title  ` corresponds to the table `  DB1/USER1/EMPLOYEES  ` .
+When you specify multiple assets during an incremental transfer, the values of the `watermarkColumns` and `primaryKeys` fields correspond to the position of values in the `assets` field. In the following example, `dep_id` corresponds to the table `DB1/USER1/DEPARTMENT` , while `report_by` and `report_title` corresponds to the table `DB1/USER1/EMPLOYEES` .
 
 ``` notranslate
       "primaryKeys":[['dep_id'], ['report_by','report_title']],
@@ -347,7 +347,7 @@ When you specify multiple assets during an incremental transfer, the values of t
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  ` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`  TransferConfig  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
+Use the [`projects.locations.transferConfigs.create` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`TransferConfig` resource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
 
 When you save the transfer configuration, the PostgreSQL connector automatically triggers a transfer run according to your schedule option. With every transfer run, the PostgreSQL connector transfers all available data from PostgreSQL into BigQuery.
 
@@ -359,64 +359,64 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 The following table maps PostgreSQL data types to the corresponding BigQuery data types.
 
-| PostgreSQL data type                                                 | BigQuery data type         | [Updated BigQuery data type](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-postgresql) |
-| -------------------------------------------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `        array       `                                               | `        STRING       `    |                                                                                                             |
-| `        bigint       `                                              | `        INTEGER       `   |                                                                                                             |
-| `        bigserial       `                                           | `        INTEGER       `   |                                                                                                             |
-| `        bit(n)       `                                              | `        STRING       `    |                                                                                                             |
-| `        bit varying(n)       `                                      | `        STRING       `    |                                                                                                             |
-| `        boolean       `                                             | `        BOOLEAN       `   |                                                                                                             |
-| `        box       `                                                 | `        STRING       `    |                                                                                                             |
-| `        bytea       `                                               | `        BYTES       `     |                                                                                                             |
-| `        character       `                                           | `        STRING       `    |                                                                                                             |
-| `        character varying       `                                   | `        STRING       `    |                                                                                                             |
-| `        cidr       `                                                | `        STRING       `    |                                                                                                             |
-| `        circle       `                                              | `        STRING       `    |                                                                                                             |
-| `        circularstring       `                                      | `        STRING       `    |                                                                                                             |
-| `        compoundcurve       `                                       | `        STRING       `    |                                                                                                             |
-| `        curvepolygon       `                                        | `        STRING       `    |                                                                                                             |
-| `        date       `                                                | `        DATE       `      |                                                                                                             |
-| `        double precision       `                                    | `        FLOAT       `     |                                                                                                             |
-| `        enum       `                                                | `        STRING       `    |                                                                                                             |
-| `        geometrycollection       `                                  | `        STRING       `    |                                                                                                             |
-| `        inet       `                                                | `        STRING       `    |                                                                                                             |
-| `        integer       `                                             | `        INTEGER       `   |                                                                                                             |
-| `        interval       `                                            | `        STRING       `    |                                                                                                             |
-| `        json       `                                                | `        STRING       `    | `        JSON       `                                                                                       |
-| `        jsonb       `                                               | `        STRING       `    | `        JSON       `                                                                                       |
-| `        line       `                                                | `        STRING       `    |                                                                                                             |
-| `        linestring       `                                          | `        STRING       `    |                                                                                                             |
-| `        lseg       `                                                | `        STRING       `    |                                                                                                             |
-| `        macaddr       `                                             | `        STRING       `    |                                                                                                             |
-| `        macaddr8       `                                            | `        STRING       `    |                                                                                                             |
-| `        money       `                                               | `        STRING       `    |                                                                                                             |
-| `        multicurve       `                                          | `        STRING       `    |                                                                                                             |
-| `        multilinestring       `                                     | `        STRING       `    |                                                                                                             |
-| `        multipoint       `                                          | `        STRING       `    |                                                                                                             |
-| `        multipolygon       `                                        | `        STRING       `    |                                                                                                             |
-| `        multisurface       `                                        | `        STRING       `    |                                                                                                             |
-| `        numeric(precision, scale)/decimal(precision, scale)       ` | `        NUMERIC       `   |                                                                                                             |
-| `        path       `                                                | `        STRING       `    |                                                                                                             |
-| `        point       `                                               | `        STRING       `    |                                                                                                             |
-| `        polygon       `                                             | `        STRING       `    |                                                                                                             |
-| `        polyhedralsurface       `                                   | `        STRING       `    |                                                                                                             |
-| `        range       `                                               | `        STRING       `    |                                                                                                             |
-| `        real       `                                                | `        FLOAT       `     |                                                                                                             |
-| `        serial       `                                              | `        INTEGER       `   |                                                                                                             |
-| `        smallint       `                                            | `        INTEGER       `   |                                                                                                             |
-| `        smallserial       `                                         | `        INTEGER       `   |                                                                                                             |
-| `        text       `                                                | `        STRING       `    |                                                                                                             |
-| `        time [ (p) ] [ without timezone ]       `                   | `        TIMESTAMP       ` |                                                                                                             |
-| `        time [ (p) ] with time zone       `                         | `        TIMESTAMP       ` |                                                                                                             |
-| `        tin       `                                                 | `        STRING       `    |                                                                                                             |
-| `        timestamp [ (p) ] [ without timezone ]       `              | `        TIMESTAMP       ` | `        DATETIME       `                                                                                   |
-| `        timestamp [ (p) ] with time zone       `                    | `        TIMESTAMP       ` |                                                                                                             |
-| `        triangle       `                                            | `        STRING       `    |                                                                                                             |
-| `        tsquery       `                                             | `        STRING       `    |                                                                                                             |
-| `        tsvector       `                                            | `        STRING       `    |                                                                                                             |
-| `        uuid       `                                                | `        STRING       `    |                                                                                                             |
-| `        xml       `                                                 | `        STRING       `    |                                                                                                             |
+| PostgreSQL data type                                  | BigQuery data type | [Updated BigQuery data type](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-postgresql) |
+| ----------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `array`                                               | `STRING`           |                                                                                                             |
+| `bigint`                                              | `INTEGER`          |                                                                                                             |
+| `bigserial`                                           | `INTEGER`          |                                                                                                             |
+| `bit(n)`                                              | `STRING`           |                                                                                                             |
+| `bit varying(n)`                                      | `STRING`           |                                                                                                             |
+| `boolean`                                             | `BOOLEAN`          |                                                                                                             |
+| `box`                                                 | `STRING`           |                                                                                                             |
+| `bytea`                                               | `BYTES`            |                                                                                                             |
+| `character`                                           | `STRING`           |                                                                                                             |
+| `character varying`                                   | `STRING`           |                                                                                                             |
+| `cidr`                                                | `STRING`           |                                                                                                             |
+| `circle`                                              | `STRING`           |                                                                                                             |
+| `circularstring`                                      | `STRING`           |                                                                                                             |
+| `compoundcurve`                                       | `STRING`           |                                                                                                             |
+| `curvepolygon`                                        | `STRING`           |                                                                                                             |
+| `date`                                                | `DATE`             |                                                                                                             |
+| `double precision`                                    | `FLOAT`            |                                                                                                             |
+| `enum`                                                | `STRING`           |                                                                                                             |
+| `geometrycollection`                                  | `STRING`           |                                                                                                             |
+| `inet`                                                | `STRING`           |                                                                                                             |
+| `integer`                                             | `INTEGER`          |                                                                                                             |
+| `interval`                                            | `STRING`           |                                                                                                             |
+| `json`                                                | `STRING`           | `JSON`                                                                                                      |
+| `jsonb`                                               | `STRING`           | `JSON`                                                                                                      |
+| `line`                                                | `STRING`           |                                                                                                             |
+| `linestring`                                          | `STRING`           |                                                                                                             |
+| `lseg`                                                | `STRING`           |                                                                                                             |
+| `macaddr`                                             | `STRING`           |                                                                                                             |
+| `macaddr8`                                            | `STRING`           |                                                                                                             |
+| `money`                                               | `STRING`           |                                                                                                             |
+| `multicurve`                                          | `STRING`           |                                                                                                             |
+| `multilinestring`                                     | `STRING`           |                                                                                                             |
+| `multipoint`                                          | `STRING`           |                                                                                                             |
+| `multipolygon`                                        | `STRING`           |                                                                                                             |
+| `multisurface`                                        | `STRING`           |                                                                                                             |
+| `numeric(precision, scale)/decimal(precision, scale)` | `NUMERIC`          |                                                                                                             |
+| `path`                                                | `STRING`           |                                                                                                             |
+| `point`                                               | `STRING`           |                                                                                                             |
+| `polygon`                                             | `STRING`           |                                                                                                             |
+| `polyhedralsurface`                                   | `STRING`           |                                                                                                             |
+| `range`                                               | `STRING`           |                                                                                                             |
+| `real`                                                | `FLOAT`            |                                                                                                             |
+| `serial`                                              | `INTEGER`          |                                                                                                             |
+| `smallint`                                            | `INTEGER`          |                                                                                                             |
+| `smallserial`                                         | `INTEGER`          |                                                                                                             |
+| `text`                                                | `STRING`           |                                                                                                             |
+| `time [ (p) ] [ without timezone ]`                   | `TIMESTAMP`        |                                                                                                             |
+| `time [ (p) ] with time zone`                         | `TIMESTAMP`        |                                                                                                             |
+| `tin`                                                 | `STRING`           |                                                                                                             |
+| `timestamp [ (p) ] [ without timezone ]`              | `TIMESTAMP`        | `DATETIME`                                                                                                  |
+| `timestamp [ (p) ] with time zone`                    | `TIMESTAMP`        |                                                                                                             |
+| `triangle`                                            | `STRING`           |                                                                                                             |
+| `tsquery`                                             | `STRING`           |                                                                                                             |
+| `tsvector`                                            | `STRING`           |                                                                                                             |
+| `uuid`                                                | `STRING`           |                                                                                                             |
+| `xml`                                                 | `STRING`           |                                                                                                             |
 
 ## Troubleshoot
 

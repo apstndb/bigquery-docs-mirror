@@ -13,29 +13,29 @@
 
 ## Distribution
 
-`  Distribution  ` contains summary statistics for a population of values. It optionally contains a histogram representing the distribution of those values across a set of buckets.
+`Distribution` contains summary statistics for a population of values. It optionally contains a histogram representing the distribution of those values across a set of buckets.
 
 The summary statistics are the count, mean, sum of the squared deviation from the mean, the minimum, and the maximum of the set of population of values. The histogram is based on a sequence of buckets and gives a count of values that fall into each bucket. The boundaries of the buckets are given either explicitly or by formulas for buckets of fixed or exponentially increasing widths.
 
-Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the `  mean  ` and `  sum_of_squared_deviation  ` fields meaningless.
+Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the `mean` and `sum_of_squared_deviation` fields meaningless.
 
 Fields
 
-`  count  `
+`count`
 
-`  int64  `
+`int64`
 
-The number of values in the population. Must be non-negative. This value must equal the sum of the values in `  bucket_counts  ` if a histogram is provided.
+The number of values in the population. Must be non-negative. This value must equal the sum of the values in `bucket_counts` if a histogram is provided.
 
-`  mean  `
+`mean`
 
-`  double  `
+`double`
 
-The arithmetic mean of the values in the population. If `  count  ` is zero then this field must be zero.
+The arithmetic mean of the values in the population. If `count` is zero then this field must be zero.
 
-`  sum_of_squared_deviation  `
+`sum_of_squared_deviation`
 
-`  double  `
+`double`
 
 The sum of squared deviations from the mean of the values in the population. For values x\_i this is:
 
@@ -43,59 +43,59 @@ The sum of squared deviations from the mean of the values in the population. For
 
 Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition describes Welford's method for accumulating this sum in one pass.
 
-If `  count  ` is zero then this field must be zero.
+If `count` is zero then this field must be zero.
 
-`  range  `
+`range`
 
 `  Range  `
 
-If specified, contains the range of the population values. The field must not be present if the `  count  ` is zero.
+If specified, contains the range of the population values. The field must not be present if the `count` is zero.
 
-`  bucket_options  `
+`bucket_options`
 
 `  BucketOptions  `
 
 Defines the histogram bucket boundaries. If the distribution does not contain a histogram, then omit this field.
 
-`  bucket_counts[]  `
+`bucket_counts[]`
 
-`  int64  `
+`int64`
 
-The number of values in each bucket of the histogram, as described in `  bucket_options  ` . If the distribution does not have a histogram, then omit this field. If there is a histogram, then the sum of the values in `  bucket_counts  ` must equal the value in the `  count  ` field of the distribution.
+The number of values in each bucket of the histogram, as described in `bucket_options` . If the distribution does not have a histogram, then omit this field. If there is a histogram, then the sum of the values in `bucket_counts` must equal the value in the `count` field of the distribution.
 
-If present, `  bucket_counts  ` should contain N values, where N is the number of buckets specified in `  bucket_options  ` . If you supply fewer than N values, the remaining values are assumed to be 0.
+If present, `bucket_counts` should contain N values, where N is the number of buckets specified in `bucket_options` . If you supply fewer than N values, the remaining values are assumed to be 0.
 
-The order of the values in `  bucket_counts  ` follows the bucket numbering schemes described for the three bucket types. The first value must be the count for the underflow bucket (number 0). The next N-2 values are the counts for the finite buckets (number 1 through N-2). The N'th value in `  bucket_counts  ` is the count for the overflow bucket (number N-1).
+The order of the values in `bucket_counts` follows the bucket numbering schemes described for the three bucket types. The first value must be the count for the underflow bucket (number 0). The next N-2 values are the counts for the finite buckets (number 1 through N-2). The N'th value in `bucket_counts` is the count for the overflow bucket (number N-1).
 
-`  exemplars[]  `
+`exemplars[]`
 
 `  Exemplar  `
 
-Must be in increasing order of `  value  ` field.
+Must be in increasing order of `value` field.
 
 ## BucketOptions
 
-`  BucketOptions  ` describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. `  BucketOptions  ` does not include the number of values in each bucket.
+`BucketOptions` describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. `BucketOptions` does not include the number of values in each bucket.
 
 A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i \> 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.
 
 Fields
 
-Union field `  options  ` . Exactly one of these three fields must be set. `  options  ` can be only one of the following:
+Union field `options` . Exactly one of these three fields must be set. `options` can be only one of the following:
 
-`  linear_buckets  `
+`linear_buckets`
 
 `  Linear  `
 
 The linear bucket.
 
-`  exponential_buckets  `
+`exponential_buckets`
 
 `  Exponential  `
 
 The exponential buckets.
 
-`  explicit_buckets  `
+`explicit_buckets`
 
 `  Explicit  `
 
@@ -105,17 +105,17 @@ The explicit buckets.
 
 Specifies a set of buckets with arbitrary widths.
 
-There are `  size(bounds) + 1  ` (= N) buckets. Bucket `  i  ` has the following boundaries:
+There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following boundaries:
 
 Upper bound (0 \<= i \< N-1): bounds\[i\] Lower bound (1 \<= i \< N); bounds\[i - 1\]
 
-The `  bounds  ` field must contain at least one element. If `  bounds  ` has only one element, then there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.
+The `bounds` field must contain at least one element. If `bounds` has only one element, then there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.
 
 Fields
 
-`  bounds[]  `
+`bounds[]`
 
-`  double  `
+`double`
 
 The values must be monotonically increasing.
 
@@ -123,7 +123,7 @@ The values must be monotonically increasing.
 
 Specifies an exponential sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.
 
-There are `  num_finite_buckets + 2  ` (= N) buckets. Bucket `  i  ` has the following boundaries:
+There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the following boundaries:
 
 Upper bound (0 \<= i \< N-1): scale \* (growth\_factor ^ i).
 
@@ -131,21 +131,21 @@ Lower bound (1 \<= i \< N): scale \* (growth\_factor ^ (i - 1)).
 
 Fields
 
-`  num_finite_buckets  `
+`num_finite_buckets`
 
-`  int32  `
+`int32`
 
 Must be greater than 0.
 
-`  growth_factor  `
+`growth_factor`
 
-`  double  `
+`double`
 
 Must be greater than 1.
 
-`  scale  `
+`scale`
 
-`  double  `
+`double`
 
 Must be greater than 0.
 
@@ -153,7 +153,7 @@ Must be greater than 0.
 
 Specifies a linear sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.
 
-There are `  num_finite_buckets + 2  ` (= N) buckets. Bucket `  i  ` has the following boundaries:
+There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the following boundaries:
 
 Upper bound (0 \<= i \< N-1): offset + (width \* i).
 
@@ -161,21 +161,21 @@ Lower bound (1 \<= i \< N): offset + (width \* (i - 1)).
 
 Fields
 
-`  num_finite_buckets  `
+`num_finite_buckets`
 
-`  int32  `
-
-Must be greater than 0.
-
-`  width  `
-
-`  double  `
+`int32`
 
 Must be greater than 0.
 
-`  offset  `
+`width`
 
-`  double  `
+`double`
+
+Must be greater than 0.
+
+`offset`
+
+`double`
 
 Lower bound of the first bucket.
 
@@ -185,19 +185,19 @@ Exemplars are example points that may be used to annotate aggregated distributio
 
 Fields
 
-`  value  `
+`value`
 
-`  double  `
+`double`
 
 Value of the exemplar point. This value determines to which bucket the exemplar belongs.
 
-`  timestamp  `
+`timestamp`
 
 `  Timestamp  `
 
 The observation (sampling) time of the above value.
 
-`  attachments[]  `
+`attachments[]`
 
 `  Any  `
 
@@ -217,15 +217,15 @@ The range of the population values.
 
 Fields
 
-`  min  `
+`min`
 
-`  double  `
+`double`
 
 The minimum of the population values.
 
-`  max  `
+`max`
 
-`  double  `
+`double`
 
 The maximum of the population values.
 
@@ -241,19 +241,19 @@ The kind of measurement. It describes how the data is reported. For information 
 
 Enums
 
-`  METRIC_KIND_UNSPECIFIED  `
+`METRIC_KIND_UNSPECIFIED`
 
 Do not use this default value.
 
-`  GAUGE  `
+`GAUGE`
 
 An instantaneous measurement of a value.
 
-`  DELTA  `
+`DELTA`
 
 The change in a value during a time interval.
 
-`  CUMULATIVE  `
+`CUMULATIVE`
 
 A value accumulated over a time interval. Cumulative measurements in a time series should have the same start time and increasing end times, until an event resets the cumulative value to zero and sets a new start time for the following points.
 
@@ -263,30 +263,30 @@ The value type of a metric.
 
 Enums
 
-`  VALUE_TYPE_UNSPECIFIED  `
+`VALUE_TYPE_UNSPECIFIED`
 
 Do not use this default value.
 
-`  BOOL  `
+`BOOL`
 
-The value is a boolean. This value type can be used only if the metric kind is `  GAUGE  ` .
+The value is a boolean. This value type can be used only if the metric kind is `GAUGE` .
 
-`  INT64  `
+`INT64`
 
 The value is a signed 64-bit integer.
 
-`  DOUBLE  `
+`DOUBLE`
 
 The value is a double precision floating point number.
 
-`  STRING  `
+`STRING`
 
-The value is a text string. This value type can be used only if the metric kind is `  GAUGE  ` .
+The value is a text string. This value type can be used only if the metric kind is `GAUGE` .
 
-`  DISTRIBUTION  `
+`DISTRIBUTION`
 
-The value is a `  Distribution  ` .
+The value is a `  Distribution ` .
 
-`  MONEY  `
+`MONEY`
 
 The value is money.

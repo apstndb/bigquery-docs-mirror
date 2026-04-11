@@ -11,7 +11,7 @@ Lists all the reservation groups for the project in the specified location.
 
 ### HTTP request
 
-`  GET https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*}/reservationGroups  `
+`GET https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*}/reservationGroups`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,29 +19,29 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The parent resource name containing project and location, e.g.: `  projects/myproject/locations/US  `
+Required. The parent resource name containing project and location, e.g.: `projects/myproject/locations/US`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.reservationGroups.list  `
+  - `bigquery.reservationGroups.list`
 
 ### Query parameters
 
 Parameters
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 The maximum number of items to return per page.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 The nextPageToken value returned from a previous List request, if any.
 
@@ -66,29 +66,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reservationGroups&quot;: [
-    {
-      object (ReservationGroup)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;reservationGroups&quot;: [{object (ReservationGroup)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  reservationGroups[]  `
+`reservationGroups[]`
 
-`  object ( ReservationGroup  ` )
+` object ( ReservationGroup  ` )
 
 List of reservations visible to the user.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 Token to retrieve the next page of results, or empty if there are no more results in the list.
 
@@ -96,7 +89,7 @@ Token to retrieve the next page of results, or empty if there are no more result
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

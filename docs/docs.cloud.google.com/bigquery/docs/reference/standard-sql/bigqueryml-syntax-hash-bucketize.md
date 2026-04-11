@@ -1,6 +1,6 @@
 # The ML.HASH\_BUCKETIZE function
 
-This document describes the `  ML.HASH_BUCKETIZE  ` function, which lets you convert a string expression to a deterministic hash and then bucketize it by the modulo value of that hash.
+This document describes the `ML.HASH_BUCKETIZE` function, which lets you convert a string expression to a deterministic hash and then bucketize it by the modulo value of that hash.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
@@ -15,14 +15,14 @@ ML.HASH_BUCKETIZE(string_expression, hash_bucket_size)
 
 ### Arguments
 
-`  ML.HASH_BUCKETIZE  ` takes the following arguments:
+`ML.HASH_BUCKETIZE` takes the following arguments:
 
-  - `  string_expression  ` : the `  STRING  ` expression to bucketize.
-  - `  hash_bucket_size  ` : an `  INT64  ` value that specifies the number of buckets to create. This value must be greater than or equal to `  0  ` . If `  hash_bucket_size  ` equals `  0  ` , the function only hashes the string without bucketizing the hashed value.
+  - `string_expression` : the `STRING` expression to bucketize.
+  - `hash_bucket_size` : an `INT64` value that specifies the number of buckets to create. This value must be greater than or equal to `0` . If `hash_bucket_size` equals `0` , the function only hashes the string without bucketizing the hashed value.
 
 ## Output
 
-`  ML.HASH_BUCKETIZE  ` returns an `  INT64  ` value that identifies the bucket.
+`ML.HASH_BUCKETIZE` returns an `INT64` value that identifies the bucket.
 
 ## Example
 

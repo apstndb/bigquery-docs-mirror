@@ -79,14 +79,14 @@ Before you create a Google Play data transfer:
   - Find your Cloud Storage bucket:
     1.  In the [Google Play console](https://play.google.com/apps/publish/) , click file\_download **Download reports** and select **Reviews** , **Statistics** , or **Financial** .
     
-    2.  To copy the ID for your Cloud Storage bucket, click content\_copy **Copy Cloud Storage URI** . Your bucket ID begins with `  gs://  ` . For example, for the reviews report, your ID is similar to the following:
+    2.  To copy the ID for your Cloud Storage bucket, click content\_copy **Copy Cloud Storage URI** . Your bucket ID begins with `gs://` . For example, for the reviews report, your ID is similar to the following:
         
             gs://pubsite_prod_rev_01234567890987654321/reviews
     
-    3.  For the Google Play data transfer, you need to copy only the unique ID that comes between `  gs://  ` and `  /reviews  ` :
+    3.  For the Google Play data transfer, you need to copy only the unique ID that comes between `gs://` and `/reviews` :
         
             pubsite_prod_rev_01234567890987654321
-  - If you intend to setup transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -94,7 +94,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -103,18 +103,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Google Play roles
 
@@ -128,7 +128,7 @@ Ensure that you have the following permissions in Google Play:
 
 Setting up a Google Play data transfer requires a:
 
-  - **Cloud Storage bucket** . Steps for locating your Cloud Storage bucket are described in [Before you begin](https://docs.cloud.google.com/bigquery/docs/play-transfer#before_you_begin) . Your Cloud Storage bucket begins with `  pubsite_prod_rev  ` . For example: `  pubsite_prod_rev_01234567890987654321  ` .
+  - **Cloud Storage bucket** . Steps for locating your Cloud Storage bucket are described in [Before you begin](https://docs.cloud.google.com/bigquery/docs/play-transfer#before_you_begin) . Your Cloud Storage bucket begins with `pubsite_prod_rev` . For example: `pubsite_prod_rev_01234567890987654321` .
   - **Table suffix** : A user-friendly name for all data sources loading into the same dataset. The suffix is used to prevent separate transfers from writing to the same tables. The table suffix must be unique across all transfers that load data into the same dataset, and the suffix should be short to minimize the length of the resulting table name.
 
 To set up a Google Play data transfer:
@@ -147,7 +147,7 @@ To set up a Google Play data transfer:
         
         ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/play-transfer-source.png)
     
-      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `  My Transfer  ` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
         
         ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
     
@@ -163,7 +163,7 @@ To set up a Google Play data transfer:
       - In the **Data source details** section:
         
           - For **Cloud Storage bucket** , enter the ID for your Cloud Storage bucket.
-          - For **Table suffix** , enter a suffix such as `  MT  ` (for `  My Transfer  ` ).
+          - For **Table suffix** , enter a suffix such as `MT` (for `My Transfer` ).
         
         ![Google Play source details](https://docs.cloud.google.com/static/bigquery/images/play-source-details.png)
     
@@ -181,12 +181,12 @@ To set up a Google Play data transfer:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` . The following flags are also required:
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `  --target_dataset  `
-  - `  --display_name  `
-  - `  --params  `
-  - `  --data_source  `
+  - `--target_dataset`
+  - `--display_name`
+  - `--params`
+  - `--data_source`
 
 <!-- end list -->
 
@@ -203,16 +203,16 @@ bq mk \
 
 Where:
 
-  - project\_id is your project ID. If `  --project_id  ` isn't specified, the default project is used.
+  - project\_id is your project ID. If `--project_id` isn't specified, the default project is used.
   - dataset is the target dataset for the transfer configuration.
   - name is the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . For Google Play, you must supply the `  bucket  ` and `  table_suffix  ` , parameters. `  bucket  ` is the Cloud Storage bucket that contains your Play report files.
-  - data\_source is the data source: `  play  ` .
-  - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/play-transfer#required_permissions) .
+  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For Google Play, you must supply the `bucket` and `table_suffix` , parameters. `bucket` is the Cloud Storage bucket that contains your Play report files.
+  - data\_source is the data source: `play` .
+  - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/play-transfer#required_permissions) .
 
 **Caution:** You cannot configure notifications using the command-line tool.
 
-For example, the following command creates a Google Play data transfer named `  My Transfer  ` using Cloud Storage bucket `  pubsite_prod_rev_01234567890987654321  ` and target dataset `  mydataset  ` . The data transfer is created in the default project:
+For example, the following command creates a Google Play data transfer named `My Transfer` using Cloud Storage bucket `pubsite_prod_rev_01234567890987654321` and target dataset `mydataset` . The data transfer is created in the default project:
 
     bq mk \
     --transfer_config \
@@ -223,7 +223,7 @@ For example, the following command creates a Google Play data transfer named `  
 
 The first time you run the command, you will receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions in the message and paste the authentication code on the command line.
 
@@ -231,7 +231,7 @@ Follow the instructions in the message and paste the authentication code on the 
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -299,7 +299,7 @@ If you are having issues setting up your data transfer, see [Troubleshooting Big
 
 When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 ## Pricing
 

@@ -2,30 +2,30 @@
 
 This tutorial shows you how to do the following tasks:
 
-  - Create an [`  ARIMA_PLUS  ` time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) that uses only built-in holidays.
-  - Create an `  ARIMA_PLUS  ` time-series forecasting model that uses custom holidays in addition to built-in holidays.
+  - Create an [`ARIMA_PLUS` time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) that uses only built-in holidays.
+  - Create an `ARIMA_PLUS` time-series forecasting model that uses custom holidays in addition to built-in holidays.
   - Visualize the forecasted results from these models.
   - Inspect a model to see which holidays it models.
   - Evaluate the effects of the custom holidays on the forecasted results.
   - Compare the performance of the model that uses only built-in holidays to the performance of the model that uses custom holidays in addition to built-in holidays.
 
-This tutorial uses the `  bigquery-public-data.wikipedia.pageviews_*  ` public tables.
+This tutorial uses the `bigquery-public-data.wikipedia.pageviews_*` public tables.
 
 ## Required permissions
 
-  - To create the dataset, you need the `  bigquery.datasets.create  ` IAM permission.
+  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
   - To create the model, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following permissions:
     
-      - `  bigquery.models.getData  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.models.getData`
+      - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -59,7 +59,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -67,9 +67,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -86,7 +86,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -152,7 +152,7 @@ Create a model that forecasts daily page views for the Wikipedia "Google I/O" pa
 
 ## Visualize the forecasted results
 
-After you create the model using built-in holidays, join the original data from the `  bqml_tutorial.googleio_page_views  ` table with the forecasted value from the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
+After you create the model using built-in holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
     
@@ -255,7 +255,7 @@ As you can see in [Google I/O history](https://en.wikipedia.org/wiki/Google_I/O#
 
 ## Visualize the forecasted results
 
-After you create the model using custom holidays, join the original data from the `  bqml_tutorial.googleio_page_views  ` table with the forecasted value from the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
+After you create the model using custom holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
     
@@ -302,7 +302,7 @@ After you create the model using custom holidays, join the original data from th
 
 ## Inspect holiday information
 
-Inspect the list of holidays that were taken into account during modeling by using the [`  ML.HOLIDAY_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info) :
+Inspect the list of holidays that were taken into account during modeling by using the [`ML.HOLIDAY_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info) :
 
 1.  Go to the **BigQuery** page.
     
@@ -323,7 +323,7 @@ Inspect the list of holidays that were taken into account during modeling by usi
 
 ## Evaluate the effects of the custom holidays
 
-Evaluate the effects of the custom holidays on the forecasted results by using the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) :
+Evaluate the effects of the custom holidays on the forecasted results by using the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) :
 
 1.  Go to the **BigQuery** page.
     
@@ -352,7 +352,7 @@ Evaluate the effects of the custom holidays on the forecasted results by using t
 
 ## Compare model performance
 
-Use the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to compare the performance of the first model created without custom holidays and the second model created with custom holidays. To see how the second model performs when it comes to forecasting a future custom holiday, set the time range to the week of Google I/O in 2022:
+Use the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to compare the performance of the first model created without custom holidays and the second model created with custom holidays. To see how the second model performs when it comes to forecasting a future custom holiday, set the time range to the week of Google I/O in 2022:
 
 1.  Go to the **BigQuery** page.
     
@@ -410,7 +410,7 @@ Use the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

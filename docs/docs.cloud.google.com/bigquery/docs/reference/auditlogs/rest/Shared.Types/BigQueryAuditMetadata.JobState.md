@@ -2,18 +2,18 @@ State of a job.
 
 Enums
 
-`  JOB_STATE_UNSPECIFIED  `
+`JOB_STATE_UNSPECIFIED`
 
 State unknown.
 
-`  PENDING  `
+`PENDING`
 
 Job is waiting for the resources.
 
-`  RUNNING  `
+`RUNNING`
 
 Job is running.
 
-`  DONE  `
+`DONE`
 
 Job is done.

@@ -8,18 +8,18 @@
 
 Gets the access control policy for a resource. May return:
 
-  - A `  NOT_FOUND  ` error if the resource doesn't exist or you don't have the permission to view it.
+  - A `NOT_FOUND` error if the resource doesn't exist or you don't have the permission to view it.
   - An empty policy if the resource exists but doesn't have a set policy.
 
 Supported resources are: - Reservations - ReservationAssignments
 
 To call this method, you must have the following Google IAM permissions:
 
-  - `  bigqueryreservation.reservations.getIamPolicy  ` to get policies on reservations.
+  - `bigqueryreservation.reservations.getIamPolicy` to get policies on reservations.
 
 ### HTTP request
 
-`  GET https://bigqueryreservation.googleapis.com/v1/{resource=projects/*/locations/*/reservations/*}:getIamPolicy  `
+`GET https://bigqueryreservation.googleapis.com/v1/{resource=projects/*/locations/*/reservations/*}:getIamPolicy`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -27,9 +27,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  resource  `
+`resource`
 
-`  string  `
+`string`
 
 REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
 
@@ -37,11 +37,11 @@ REQUIRED: The resource for which the policy is being requested. See [Resource na
 
 Parameters
 
-`  options  `
+`options`
 
-`  object ( GetPolicyOptions  ` )
+` object ( GetPolicyOptions  ` )
 
-OPTIONAL: A `  GetPolicyOptions  ` object for specifying options to `  reservations.getIamPolicy  ` .
+OPTIONAL: A `GetPolicyOptions` object for specifying options to `reservations.getIamPolicy` .
 
 ### Request body
 
@@ -55,7 +55,7 @@ If successful, the response body contains an instance of `  Policy  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

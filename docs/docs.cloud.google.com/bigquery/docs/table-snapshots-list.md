@@ -1,6 +1,6 @@
 # List table snapshots
 
-This document describes how to get a list of the table snapshots in a BigQuery dataset in the Google Cloud console, by querying the [`  INFORMATION_SCHEMA.TABLE_SNAPSHOTS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) table, by using the [`  bq ls  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command, or by calling the [`  tables.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) API. It also describes how to list all of the table snapshots of a specified base table by querying the `  INFORMATION_SCHEMA.TABLE_SNAPSHOTS  ` table. This document is intended for users who are familiar with BigQuery [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+This document describes how to get a list of the table snapshots in a BigQuery dataset in the Google Cloud console, by querying the [`INFORMATION_SCHEMA.TABLE_SNAPSHOTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) table, by using the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command, or by calling the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) API. It also describes how to list all of the table snapshots of a specified base table by querying the `INFORMATION_SCHEMA.TABLE_SNAPSHOTS` table. This document is intended for users who are familiar with BigQuery [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
@@ -10,9 +10,9 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 
 To list the table snapshots in a dataset, you need the following permission:
 
-| **Permission**                        | **Resource**                                   |
-| ------------------------------------- | ---------------------------------------------- |
-| `        bigquery.tables.list       ` | The dataset that contains the table snapshots. |
+| **Permission**         | **Resource**                                   |
+| ---------------------- | ---------------------------------------------- |
+| `bigquery.tables.list` | The dataset that contains the table snapshots. |
 
 ### Roles
 
@@ -33,11 +33,11 @@ The predefined BigQuery roles that provide the required permission are as follow
 <tr class="odd">
 <td>Any of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.dataUser      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataViewer      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataEditor      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataOwner      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<code dir="ltr" translate="no">bigquery.dataUser</code><br />
+<code dir="ltr" translate="no">bigquery.dataViewer</code><br />
+<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
+<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code></td>
 <td>The dataset that contains the table snapshots.</td>
 </tr>
 </tbody>
@@ -45,7 +45,7 @@ The predefined BigQuery roles that provide the required permission are as follow
 
 ## List the table snapshots in a dataset
 
-Getting a list of table snapshots in a dataset is similar to listing other types of tables. The table snapshots have the type `  SNAPSHOT  ` .
+Getting a list of table snapshots in a dataset is similar to listing other types of tables. The table snapshots have the type `SNAPSHOT` .
 
 You can list table snapshots by using one of the following options:
 
@@ -63,11 +63,11 @@ You can list table snapshots by using one of the following options:
 
 3.  In the **Explorer** pane, expand the project, click **Datasets** , and then select the dataset that contains the table snapshots that you want to list.
 
-4.  Click **Overview \> Tables** . To find snapshots from the list, check for the **`  SNAPSHOT  `** value in the **Type** column.
+4.  Click **Overview \> Tables** . To find snapshots from the list, check for the **`SNAPSHOT`** value in the **Type** column.
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.TABLE_SNAPSHOTS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) :
+Query the [`INFORMATION_SCHEMA.TABLE_SNAPSHOTS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -125,16 +125,16 @@ The output looks similar to the following:
 
 ### API
 
-Call the [`  tables.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) method with the following parameters:
+Call the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) method with the following parameters:
 
-| **Parameter**                  | **Value**                                                                   |
-| ------------------------------ | --------------------------------------------------------------------------- |
-| `          projectId         ` | The project ID of the project that contains the snapshots you want to list. |
-| `          datasetId         ` | The name of the dataset that contains the snapshots you want to list.       |
+| **Parameter** | **Value**                                                                   |
+| ------------- | --------------------------------------------------------------------------- |
+| `projectId`   | The project ID of the project that contains the snapshots you want to list. |
+| `datasetId`   | The name of the dataset that contains the snapshots you want to list.       |
 
 ## List the table snapshots of a specified base table
 
-You can list the table snapshots of a specified base table by querying the `  INFORMATION_SCHEMA.TABLE_SNAPSHOTS  ` view:
+You can list the table snapshots of a specified base table by querying the `INFORMATION_SCHEMA.TABLE_SNAPSHOTS` view:
 
 ``` notranslate
 SELECT

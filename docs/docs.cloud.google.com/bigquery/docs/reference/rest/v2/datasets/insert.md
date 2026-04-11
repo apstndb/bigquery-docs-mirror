@@ -10,7 +10,7 @@ Creates a new empty dataset.
 
 ### HTTP request
 
-`  POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets  `
+`POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,9 +18,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the new dataset
 
@@ -28,9 +28,9 @@ Required. Project ID of the new dataset
 
 Parameters
 
-`  accessPolicyVersion  `
+`accessPolicyVersion`
 
-`  integer  `
+`integer`
 
 Optional. The version of the provided access policy schema. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.
 
@@ -50,7 +50,7 @@ If successful, the response body contains a newly created instance of `  Dataset
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

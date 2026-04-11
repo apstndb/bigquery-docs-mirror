@@ -42,9 +42,9 @@ Consider the following query example:
         FROM revenue)
     ORDER BY s_suppkey
 
-This query example shows information about the top supplier. The query contains a common table expression (CTE) named `  revenue  ` which represents the total revenue per every supplier ( `  l_suppkey  ` ). `  revenue  ` is joined with the supplier table on the condition that the supplier's `  total_revenue  ` matches `  max(total_revenue)  ` across all suppliers. As a result, the query computes information ( `  l_suppkey  ` , `  s_name  ` , `  s_address  ` , `  s_phone  ` , `  total_revenue  ` ) about the supplier with the maximum total revenue.
+This query example shows information about the top supplier. The query contains a common table expression (CTE) named `revenue` which represents the total revenue per every supplier ( `l_suppkey` ). `revenue` is joined with the supplier table on the condition that the supplier's `total_revenue` matches `max(total_revenue)` across all suppliers. As a result, the query computes information ( `l_suppkey` , `s_name` , `s_address` , `s_phone` , `total_revenue` ) about the supplier with the maximum total revenue.
 
-The whole query itself is too complicated to be put into an incremental materialized view. However, the `  supplier  ` CTE is an aggregation over a single table — a query pattern which is supported by incremental materialized views. The `  supplier  ` CTE is also the most computationally expensive part of the query. Therefore, if the example query was run repeatedly over constantly changing source tables, then the materialized view recommender might suggest putting the `  supplier  ` CTE into a materialized view. The materialized view recommendation for the preceding sample query might look similar to the following:
+The whole query itself is too complicated to be put into an incremental materialized view. However, the `supplier` CTE is an aggregation over a single table — a query pattern which is supported by incremental materialized views. The `supplier` CTE is also the most computationally expensive part of the query. Therefore, if the example query was run repeatedly over constantly changing source tables, then the materialized view recommender might suggest putting the `supplier` CTE into a materialized view. The materialized view recommendation for the preceding sample query might look similar to the following:
 
     CREATE MATERIALIZED VIEW mv AS
     SELECT l_suppkey as supplier_no,
@@ -68,7 +68,7 @@ Before you can view or apply materialized view recommendations, you need to [ena
 
 ### Required permissions
 
-To get the permissions that you need to access materialized view recommendations, ask your administrator to grant you the [BigQuery Materialized View Recommender Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/recommender#recommender.bigqueryMaterializedViewViewer) ( `  roles/recommender.bigqueryMaterializedViewViewer  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to access materialized view recommendations, ask your administrator to grant you the [BigQuery Materialized View Recommender Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/recommender#recommender.bigqueryMaterializedViewViewer) ( `roles/recommender.bigqueryMaterializedViewViewer` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to access materialized view recommendations. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -76,8 +76,8 @@ This predefined role contains the permissions required to access materialized vi
 
 The following permissions are required to access materialized view recommendations:
 
-  - `  recommender.bigqueryMaterializedViewRecommendations.get  `
-  - `  recommender.bigqueryMaterializedViewRecommendations.list  `
+  - `recommender.bigqueryMaterializedViewRecommendations.get`
+  - `recommender.bigqueryMaterializedViewRecommendations.list`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -107,7 +107,7 @@ Alternatively, you can view all recommendations available for your project or or
 
 ### gcloud
 
-To view materialized view recommendations for a specific project, use the [`  gcloud recommender recommendations list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/recommender/recommendations/list) :
+To view materialized view recommendations for a specific project, use the [`gcloud recommender recommendations list` command](https://docs.cloud.google.com/sdk/gcloud/reference/recommender/recommendations/list) :
 
     gcloud recommender recommendations list \
         --project=PROJECT_NAME \
@@ -123,18 +123,18 @@ Replace the following:
 
 The following table describes the important fields from the \`recommendations\` response:
 
-| Property                                                 | Relevant for subtype                          | Description                                                        |
-| -------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------ |
-| `          recommenderSubtype         `                  | `          CREATE_MATERIALIZED_VIEW         ` | The type of recommendation.                                        |
-| `          content.overview.sql         `                | `          CREATE_MATERIALIZED_VIEW         ` | Suggested DDL statement that creates a materialized view.          |
-| `          content.overview.slotMsSavedMonthly         ` | `          CREATE_MATERIALIZED_VIEW         ` | Estimated slot milliseconds to be saved monthly by suggested view. |
-| `          content.overview.bytesSavedMonthly         `  | `          CREATE_MATERIALIZED_VIEW         ` | Estimated bytes scanned to be saved monthly by suggested view.     |
-| `          content.overview.baseTables         `         | `          CREATE_MATERIALIZED_VIEW         ` | Reserved for future use.                                           |
+| Property                              | Relevant for subtype       | Description                                                        |
+| ------------------------------------- | -------------------------- | ------------------------------------------------------------------ |
+| `recommenderSubtype`                  | `CREATE_MATERIALIZED_VIEW` | The type of recommendation.                                        |
+| `content.overview.sql`                | `CREATE_MATERIALIZED_VIEW` | Suggested DDL statement that creates a materialized view.          |
+| `content.overview.slotMsSavedMonthly` | `CREATE_MATERIALIZED_VIEW` | Estimated slot milliseconds to be saved monthly by suggested view. |
+| `content.overview.bytesSavedMonthly`  | `CREATE_MATERIALIZED_VIEW` | Estimated bytes scanned to be saved monthly by suggested view.     |
+| `content.overview.baseTables`         | `CREATE_MATERIALIZED_VIEW` | Reserved for future use.                                           |
 
-  - For more information about other fields in the `  recommendations  ` response, see [REST Resource: `  projects.locations.recommenders.recommendation  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
+  - For more information about other fields in the `recommendations` response, see [REST Resource: `projects.locations.recommenders.recommendation`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
   - For more information about using the Recommender API, see [Using the API - Recommendations](https://docs.cloud.google.com/recommender/docs/using-api) .
 
-To view insights that prompted materialized view recommendations using the gcloud CLI, use the [`  gcloud recommender insights list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/recommender/insights/list) :
+To view insights that prompted materialized view recommendations using the gcloud CLI, use the [`gcloud recommender insights list` command](https://docs.cloud.google.com/sdk/gcloud/reference/recommender/insights/list) :
 
     gcloud recommender insights list \
         --project=PROJECT_NAME \
@@ -150,18 +150,18 @@ Replace the following:
 
 The following table describes the important fields from the insights API response:
 
-| Property                                | Relevant for subtype                          | Description                                                                                                        |
-| --------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `          content.queryCount         ` | `          CREATE_MATERIALIZED_VIEW         ` | Number of queries in the observation period with repetitive pattern that can be optimized using materialized view. |
+| Property             | Relevant for subtype       | Description                                                                                                        |
+| -------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `content.queryCount` | `CREATE_MATERIALIZED_VIEW` | Number of queries in the observation period with repetitive pattern that can be optimized using materialized view. |
 
-  - For more information about other fields in the insights response, see [REST Resource: `  projects.locations.insightTypes.insights  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
+  - For more information about other fields in the insights response, see [REST Resource: `projects.locations.insightTypes.insights`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
   - For more information about using insights, see [Using the API - Insights](https://docs.cloud.google.com/recommender/docs/insights/using-api) .
 
 ### REST API
 
 To view materialized view recommendations for a specific project, use the REST API. With each command, you must provide an authentication token, which you can get using the gcloud CLI. For more information about getting an authentication token, see [Methods for getting an ID token](https://docs.cloud.google.com/docs/authentication/get-id-token) .
 
-You can use the `  curl list  ` request to view all recommendations for a specific project:
+You can use the `curl list` request to view all recommendations for a specific project:
 
     $ curl
     -H "Authorization: Bearer $(gcloud auth print-access-token)"
@@ -174,15 +174,15 @@ Replace the following:
 
 The following table describes the important fields from the \`recommendations\` response:
 
-| Property                                                 | Relevant for subtype                          | Description                                                        |
-| -------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------ |
-| `          recommenderSubtype         `                  | `          CREATE_MATERIALIZED_VIEW         ` | The type of recommendation.                                        |
-| `          content.overview.sql         `                | `          CREATE_MATERIALIZED_VIEW         ` | Suggested DDL statement that creates a materialized view.          |
-| `          content.overview.slotMsSavedMonthly         ` | `          CREATE_MATERIALIZED_VIEW         ` | Estimated slot milliseconds to be saved monthly by suggested view. |
-| `          content.overview.bytesSavedMonthly         `  | `          CREATE_MATERIALIZED_VIEW         ` | Estimated bytes scanned to be saved monthly by suggested view.     |
-| `          content.overview.baseTables         `         | `          CREATE_MATERIALIZED_VIEW         ` | Reserved for future use.                                           |
+| Property                              | Relevant for subtype       | Description                                                        |
+| ------------------------------------- | -------------------------- | ------------------------------------------------------------------ |
+| `recommenderSubtype`                  | `CREATE_MATERIALIZED_VIEW` | The type of recommendation.                                        |
+| `content.overview.sql`                | `CREATE_MATERIALIZED_VIEW` | Suggested DDL statement that creates a materialized view.          |
+| `content.overview.slotMsSavedMonthly` | `CREATE_MATERIALIZED_VIEW` | Estimated slot milliseconds to be saved monthly by suggested view. |
+| `content.overview.bytesSavedMonthly`  | `CREATE_MATERIALIZED_VIEW` | Estimated bytes scanned to be saved monthly by suggested view.     |
+| `content.overview.baseTables`         | `CREATE_MATERIALIZED_VIEW` | Reserved for future use.                                           |
 
-  - For more information about other fields in the `  recommendations  ` response, see [REST Resource: `  projects.locations.recommenders.recommendation  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
+  - For more information about other fields in the `recommendations` response, see [REST Resource: `projects.locations.recommenders.recommendation`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
   - For more information about using the Recommender API, see [Using the API - Recommendations](https://docs.cloud.google.com/recommender/docs/using-api) .
 
 To view insights that prompted materialized view recommendations using REST API run the following command:
@@ -198,16 +198,16 @@ Replace the following:
 
 The following table describes the important fields from the insights API response:
 
-| Property                                | Relevant for subtype                          | Description                                                                                                        |
-| --------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `          content.queryCount         ` | `          CREATE_MATERIALIZED_VIEW         ` | Number of queries in the observation period with repetitive pattern that can be optimized using materialized view. |
+| Property             | Relevant for subtype       | Description                                                                                                        |
+| -------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `content.queryCount` | `CREATE_MATERIALIZED_VIEW` | Number of queries in the observation period with repetitive pattern that can be optimized using materialized view. |
 
-  - For more information about other fields in the insights response, see [REST Resource: `  projects.locations.insightTypes.insights  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
+  - For more information about other fields in the insights response, see [REST Resource: `projects.locations.insightTypes.insights`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
   - For more information about using insights, see [Using the API - Insights](https://docs.cloud.google.com/recommender/docs/insights/using-api) .
 
-### View recommendations with `     INFORMATION_SCHEMA    `
+### View recommendations with `INFORMATION_SCHEMA`
 
-You can also view your recommendations and insights using `  INFORMATION_SCHEMA  ` views. For example, you can use the `  INFORMATION_SCHEMA.RECOMMENDATIONS  ` view to view your top three recommendations based on slots savings, as seen in the following example:
+You can also view your recommendations and insights using `INFORMATION_SCHEMA` views. For example, you can use the `INFORMATION_SCHEMA.RECOMMENDATIONS` view to view your top three recommendations based on slots savings, as seen in the following example:
 
     SELECT
        recommender,
@@ -225,7 +225,7 @@ You can also view your recommendations and insights using `  INFORMATION_SCHEMA 
        slot_hours_saved_monthly DESC
     LIMIT 3;
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case sensitive.
 
 The result is similar to the following:
 
@@ -239,15 +239,15 @@ The result is similar to the following:
 
 For more information, see the following resources:
 
-  - [`  INFORMATION_SCHEMA.RECOMMENDATIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations)
-  - [`  INFORMATION_SCHEMA.RECOMMENDATIONS_BY_ORGANIZATION  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org)
-  - [`  INFORMATION_SCHEMA.INSIGHTS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-insights)
+  - [`INFORMATION_SCHEMA.RECOMMENDATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations)
+  - [`INFORMATION_SCHEMA.RECOMMENDATIONS_BY_ORGANIZATION` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org)
+  - [`INFORMATION_SCHEMA.INSIGHTS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-insights)
 
 ## Apply materialized view recommendations
 
-You can apply a recommendation to create a materialized view by executing the suggested `  CREATE MATERIALIZED VIEW  ` type DDL statement in the Google Cloud console.
+You can apply a recommendation to create a materialized view by executing the suggested `CREATE MATERIALIZED VIEW` type DDL statement in the Google Cloud console.
 
-**Note:** To execute the suggested `  CREATE MATERIALIZED VIEW  ` DDL statement, you must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#required_permissions) in all the following locations:
+**Note:** To execute the suggested `CREATE MATERIALIZED VIEW` DDL statement, you must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#required_permissions) in all the following locations:
 
   - The query project
   - The dataset containing the source tables
@@ -267,11 +267,11 @@ You can apply a recommendation to create a materialized view by executing the su
 
 4.  A recommendation list appears, showing all recommendations generated for the current project or organization, depending on the selected scope. Locate a materialized view recommendation and click **Details** .
 
-5.  Click **View in BigQuery Studio** . A SQL editor opens containing a `  CREATE MATERIALIZED VIEW  ` DDL statement.
+5.  Click **View in BigQuery Studio** . A SQL editor opens containing a `CREATE MATERIALIZED VIEW` DDL statement.
 
-6.  In the provided `  CREATE MATERIALIZED VIEW  ` statement, modify the `  MATERIALIZED_VIEW  ` placeholder with a unique materialized view name.
+6.  In the provided `CREATE MATERIALIZED VIEW` statement, modify the `MATERIALIZED_VIEW` placeholder with a unique materialized view name.
 
-7.  Run the `  CREATE MATERIALIZED VIEW  ` DDL statement to create a recommended materialized view.
+7.  Run the `CREATE MATERIALIZED VIEW` DDL statement to create a recommended materialized view.
 
 ## Troubleshoot recommendation issues
 

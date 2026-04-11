@@ -1,6 +1,6 @@
 # Create table snapshots
 
-This document describes how to create a snapshot of a table by using the Google Cloud console, the [`  CREATE SNAPSHOT TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) SQL statement, the [`  bq cp --snapshot  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command, or the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API. This document is intended for users who are familiar with BigQuery [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+This document describes how to create a snapshot of a table by using the Google Cloud console, the [`CREATE SNAPSHOT TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) SQL statement, the [`bq cp --snapshot`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command, or the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API. This document is intended for users who are familiar with BigQuery [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
@@ -27,17 +27,17 @@ To create a table snapshot, you need the following permissions:
 <tr class="odd">
 <td>All of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.tables.get      </code><br />
-<code dir="ltr" translate="no">       bigquery.tables.getData      </code><br />
-<code dir="ltr" translate="no">       bigquery.tables.createSnapshot      </code><br />
-<code dir="ltr" translate="no">       bigquery.datasets.get      </code><br />
-<code dir="ltr" translate="no">       bigquery.jobs.create      </code></td>
+<code dir="ltr" translate="no">bigquery.tables.get</code><br />
+<code dir="ltr" translate="no">bigquery.tables.getData</code><br />
+<code dir="ltr" translate="no">bigquery.tables.createSnapshot</code><br />
+<code dir="ltr" translate="no">bigquery.datasets.get</code><br />
+<code dir="ltr" translate="no">bigquery.jobs.create</code></td>
 <td>The table that you want to snapshot.</td>
-<td>Because snapshot expiration deletes the snapshot at a later time, to create a snapshot with an expiration time you must have the <code dir="ltr" translate="no">       bigquery.tables.deleteSnapshot      </code> permission.</td>
+<td>Because snapshot expiration deletes the snapshot at a later time, to create a snapshot with an expiration time you must have the <code dir="ltr" translate="no">bigquery.tables.deleteSnapshot</code> permission.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code><br />
-<code dir="ltr" translate="no">       bigquery.tables.updateData      </code></td>
+<td><code dir="ltr" translate="no">bigquery.tables.create</code><br />
+<code dir="ltr" translate="no">bigquery.tables.updateData</code></td>
 <td>The dataset that contains the table snapshot.</td>
 <td></td>
 </tr>
@@ -65,27 +65,27 @@ The predefined BigQuery roles that provide the required permissions are as follo
 <tr class="odd">
 <td>At least one of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.dataViewer      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataEditor      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataOwner      </code><br />
+<code dir="ltr" translate="no">bigquery.dataViewer</code><br />
+<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
+<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
 <br />
 And at least one of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.jobUser      </code><br />
-<code dir="ltr" translate="no">       bigquery.studioUser      </code><br />
-<code dir="ltr" translate="no">       bigquery.user      </code><br />
-<code dir="ltr" translate="no">       bigquery.studioAdmin      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<code dir="ltr" translate="no">bigquery.jobUser</code><br />
+<code dir="ltr" translate="no">bigquery.studioUser</code><br />
+<code dir="ltr" translate="no">bigquery.user</code><br />
+<code dir="ltr" translate="no">bigquery.studioAdmin</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code></td>
 <td>The table that you want to snapshot.</td>
-<td>Only <code dir="ltr" translate="no">       bigquery.dataOwner      </code> , <code dir="ltr" translate="no">       bigquery.admin      </code> , and <code dir="ltr" translate="no">       bigquery.studioAdmin      </code> can be used for creating a snapshot with an expiration time.</td>
+<td>Only <code dir="ltr" translate="no">bigquery.dataOwner</code> , <code dir="ltr" translate="no">bigquery.admin</code> , and <code dir="ltr" translate="no">bigquery.studioAdmin</code> can be used for creating a snapshot with an expiration time.</td>
 </tr>
 <tr class="even">
 <td>At least one of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.dataEditor      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataOwner      </code><br />
-<code dir="ltr" translate="no">       bigquery.studioAdmin      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
+<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
+<code dir="ltr" translate="no">bigquery.studioAdmin</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code></td>
 <td>The dataset that contains the new table snapshot.</td>
 <td></td>
 </tr>
@@ -142,7 +142,7 @@ You can create a snapshot of a table that expires after 24 hours by using one of
 
 ### SQL
 
-Use the [`  CREATE SNAPSHOT TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) :
+Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -197,13 +197,13 @@ Replace the following:
   - `  SNAPSHOT_DATASET_NAME  ` : the name of the dataset in which to create the snapshot.
   - `  SNAPSHOT_NAME  ` : the name of the snapshot you are creating.
 
-The `  --no_clobber  ` flag is required.
+The `--no_clobber` flag is required.
 
 **Note:** The snapshot inherits the destination dataset's default encryption key.
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
 
 <table>
 <colgroup>
@@ -218,7 +218,7 @@ Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/referen
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">         projectId        </code></td>
+<td><code dir="ltr" translate="no">projectId</code></td>
 <td>The project ID of the project to bill for this operation.</td>
 </tr>
 <tr class="even">
@@ -260,7 +260,7 @@ Replace the following:
 
 As with tables, if an expiration is not specified, then the table snapshot expires after the [default table expiration time](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time) or the dataset that contains the table snapshot.
 
-**Note:** Because expiring a snapshot is the same as deleting it at a later time, creating a snapshot with an expiration time requires the `  bigquery.tables.deleteSnapshot  ` permission.
+**Note:** Because expiring a snapshot is the same as deleting it at a later time, creating a snapshot with an expiration time requires the `bigquery.tables.deleteSnapshot` permission.
 
 ### Create a table snapshot using time travel
 
@@ -292,7 +292,7 @@ You can create a table snapshot of a table as it was one hour ago by using one o
 
 ### SQL
 
-Use the [`  CREATE SNAPSHOT TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) with a [`  FOR SYSTEM_TIME AS OF  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) :
+Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) with a [`FOR SYSTEM_TIME AS OF` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -343,11 +343,11 @@ Replace the following:
   - `  SNAPSHOT_DATASET_NAME  ` : the name of the dataset in which to create the snapshot.
   - `  SNAPSHOT_NAME  ` : the name of the snapshot you are creating.
 
-The `  --no_clobber  ` flag is required.
+The `--no_clobber` flag is required.
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
 
 <table>
 <colgroup>
@@ -362,7 +362,7 @@ Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/referen
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">         projectId        </code></td>
+<td><code dir="ltr" translate="no">projectId</code></td>
 <td>The project ID of the project to bill for this operation.</td>
 </tr>
 <tr class="even">

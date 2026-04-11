@@ -40,11 +40,11 @@ To replicate a taxonomy across locations:
 
 ### API
 
-Call the [`  projects.locations.taxonomies.import  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import) method of the Data Catalog API, supplying a `  POST  ` request and the name of the destination project and location in the HTTP string.
+Call the [`projects.locations.taxonomies.import`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import) method of the Data Catalog API, supplying a `POST` request and the name of the destination project and location in the HTTP string.
 
-`  POST https://datacatalog.googleapis.com/{parent}/taxonomies:import  `
+`POST https://datacatalog.googleapis.com/{parent}/taxonomies:import`
 
-The `  parent  ` path parameter is the destination project and location that you want to copy the taxonomy to. Example: `  projects/MyProject/locations/eu  `
+The `parent` path parameter is the destination project and location that you want to copy the taxonomy to. Example: `projects/MyProject/locations/eu`
 
 **Key Point:** To sync the replicated taxonomy across locations in the future, repeat the same steps.
 
@@ -117,12 +117,12 @@ Syntax:
 
 Replace the following:
 
-1.  `  ${JOB_ID}  ` is a name for the job. It must be unique in the project. Note that you cannot re-use a job name in a project even if you delete its associated job.
-2.  `  ${FREQUENCY}  ` is the schedule, also called *job interval* , of how often the job should run. For example, "every 3 hours". The string that you supply here can be any crontab-compatible string. Alternatively, developers familiar with legacy App Engine cron can use [App Engine Cron](https://docs.cloud.google.com/appengine/docs/standard/python/config/cronref) syntax.
-3.  `  ${URI}  ` is the fully qualified URL of the endpoint.
-4.  `  --oauth-service-account-email  ` defines the token type. Note that Google APIs hosted on `  *.googleapis.com  ` expect an OAuth token.
-5.  `  ${CLIENT_SERVICE_ACCOUNT_EMAIL}  ` is the email of the client service account.
-6.  `  ${MESSAGE_BODY}  ` is the path to the file that contains the POST request body.
+1.  `${JOB_ID}` is a name for the job. It must be unique in the project. Note that you cannot re-use a job name in a project even if you delete its associated job.
+2.  `${FREQUENCY}` is the schedule, also called *job interval* , of how often the job should run. For example, "every 3 hours". The string that you supply here can be any crontab-compatible string. Alternatively, developers familiar with legacy App Engine cron can use [App Engine Cron](https://docs.cloud.google.com/appengine/docs/standard/python/config/cronref) syntax.
+3.  `${URI}` is the fully qualified URL of the endpoint.
+4.  `--oauth-service-account-email` defines the token type. Note that Google APIs hosted on `*.googleapis.com` expect an OAuth token.
+5.  `${CLIENT_SERVICE_ACCOUNT_EMAIL}` is the email of the client service account.
+6.  `${MESSAGE_BODY}` is the path to the file that contains the POST request body.
 
 Other option parameters are available, which are described in the [Google Cloud CLI reference](https://docs.cloud.google.com/sdk/gcloud/reference/scheduler/jobs/create/http) .
 

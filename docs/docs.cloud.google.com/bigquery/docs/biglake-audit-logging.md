@@ -12,7 +12,7 @@ This document describes audit logging for BigLake. Google Cloud services generat
 
 ## Service name
 
-BigLake audit logs use the service name `  biglake.googleapis.com  ` . Filter for this service:
+BigLake audit logs use the service name `biglake.googleapis.com` . Filter for this service:
 
 ``` 
     protoPayload.serviceName="biglake.googleapis.com"
@@ -21,7 +21,7 @@ BigLake audit logs use the service name `  biglake.googleapis.com  ` . Filter fo
 
 ## Methods by permission type
 
-Each IAM permission has a `  type  ` property, whose value is an enum that can be one of four values: `  ADMIN_READ  ` , `  ADMIN_WRITE  ` , `  DATA_READ  ` , or `  DATA_WRITE  ` . When you call a method, BigLake generates an audit log whose category is dependent on the `  type  ` property of the permission required to perform the method. Methods that require an IAM permission with the `  type  ` property value of `  DATA_READ  ` , `  DATA_WRITE  ` , or `  ADMIN_READ  ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `  type  ` property value of `  ADMIN_WRITE  ` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
+Each IAM permission has a `type` property, whose value is an enum that can be one of four values: `ADMIN_READ` , `ADMIN_WRITE` , `DATA_READ` , or `DATA_WRITE` . When you call a method, BigLake generates an audit log whose category is dependent on the `type` property of the permission required to perform the method. Methods that require an IAM permission with the `type` property value of `DATA_READ` , `DATA_WRITE` , or `ADMIN_READ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `type` property value of `ADMIN_WRITE` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
 
 API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro) .
 
@@ -38,44 +38,44 @@ API methods in the following list that are marked with (LRO) are long-running op
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ADMIN_READ      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.GetTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.ListTables      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_READ</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.GetTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.ListTables</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ADMIN_WRITE      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_WRITE</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable</code></td>
 </tr>
 </tbody>
 </table>
@@ -84,316 +84,316 @@ API methods in the following list that are marked with (LRO) are long-running op
 
 For information about how and which permissions are evaluated for each method, see the Identity and Access Management documentation for BigLake.
 
-### `     google.cloud.bigquery.biglake.v1.MetastoreService    `
+### `google.cloud.bigquery.biglake.v1.MetastoreService`
 
-The following audit logs are associated with methods belonging to `  google.cloud.bigquery.biglake.v1.MetastoreService  ` .
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.biglake.v1.MetastoreService` .
 
-#### `     CreateCatalog    `
+#### `CreateCatalog`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.catalogs.create - ADMIN_WRITE  `
+      - `biglake.catalogs.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog"`  
 
-#### `     CreateDatabase    `
+#### `CreateDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.databases.create - ADMIN_WRITE  `
+      - `biglake.databases.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase"`  
 
-#### `     CreateTable    `
+#### `CreateTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.create - ADMIN_WRITE  `
+      - `biglake.tables.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable"`  
 
-#### `     DeleteCatalog    `
+#### `DeleteCatalog`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.catalogs.delete - ADMIN_WRITE  `
+      - `biglake.catalogs.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog"`  
 
-#### `     DeleteDatabase    `
+#### `DeleteDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.databases.delete - ADMIN_WRITE  `
+      - `biglake.databases.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase"`  
 
-#### `     DeleteTable    `
+#### `DeleteTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.delete - ADMIN_WRITE  `
+      - `biglake.tables.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable"`  
 
-#### `     GetCatalog    `
+#### `GetCatalog`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.catalogs.get - ADMIN_READ  `
+      - `biglake.catalogs.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog"`  
 
-#### `     GetDatabase    `
+#### `GetDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.databases.get - ADMIN_READ  `
+      - `biglake.databases.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase"`  
 
-#### `     GetTable    `
+#### `GetTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.GetTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.GetTable`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.tables.get - ADMIN_READ  `
+      - `biglake.tables.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.GetTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.GetTable"`  
 
-#### `     ListCatalogs    `
+#### `ListCatalogs`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.catalogs.list - ADMIN_READ  `
+      - `biglake.catalogs.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs"`  
 
-#### `     ListDatabases    `
+#### `ListDatabases`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.databases.list - ADMIN_READ  `
+      - `biglake.databases.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases"`  
 
-#### `     ListTables    `
+#### `ListTables`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.ListTables  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.ListTables`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.tables.list - ADMIN_READ  `
+      - `biglake.tables.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.ListTables"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.ListTables"`  
 
-#### `     RenameTable    `
+#### `RenameTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.update - ADMIN_WRITE  `
+      - `biglake.tables.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable"`  
 
-#### `     UpdateDatabase    `
+#### `UpdateDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.databases.update - ADMIN_WRITE  `
+      - `biglake.databases.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase"`  
 
-#### `     UpdateTable    `
+#### `UpdateTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.update - ADMIN_WRITE  `
+      - `biglake.tables.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable"`  
 
-### `     google.cloud.bigquery.biglake.v1alpha1.MetastoreService    `
+### `google.cloud.bigquery.biglake.v1alpha1.MetastoreService`
 
-The following audit logs are associated with methods belonging to `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService  ` .
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.biglake.v1alpha1.MetastoreService` .
 
-#### `     CheckLock    `
+#### `CheckLock`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.locks.check - ADMIN_WRITE  `
+      - `biglake.locks.check - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock"`  
 
-#### `     CreateCatalog    `
+#### `CreateCatalog`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.catalogs.create - ADMIN_WRITE  `
+      - `biglake.catalogs.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog"`  
 
-#### `     CreateDatabase    `
+#### `CreateDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.databases.create - ADMIN_WRITE  `
+      - `biglake.databases.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase"`  
 
-#### `     CreateLock    `
+#### `CreateLock`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.locks.create - ADMIN_WRITE  `
+      - `biglake.locks.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock"`  
 
-#### `     CreateTable    `
+#### `CreateTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.create - ADMIN_WRITE  `
+      - `biglake.tables.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable"`  
 
-#### `     DeleteCatalog    `
+#### `DeleteCatalog`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.catalogs.delete - ADMIN_WRITE  `
+      - `biglake.catalogs.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog"`  
 
-#### `     DeleteDatabase    `
+#### `DeleteDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.databases.delete - ADMIN_WRITE  `
+      - `biglake.databases.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase"`  
 
-#### `     DeleteLock    `
+#### `DeleteLock`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.locks.delete - ADMIN_WRITE  `
+      - `biglake.locks.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock"`  
 
-#### `     DeleteTable    `
+#### `DeleteTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.delete - ADMIN_WRITE  `
+      - `biglake.tables.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable"`  
 
-#### `     GetCatalog    `
+#### `GetCatalog`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.catalogs.get - ADMIN_READ  `
+      - `biglake.catalogs.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog"`  
 
-#### `     GetDatabase    `
+#### `GetDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.databases.get - ADMIN_READ  `
+      - `biglake.databases.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase"`  
 
-#### `     GetTable    `
+#### `GetTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.tables.get - ADMIN_READ  `
+      - `biglake.tables.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable"`  
 
-#### `     ListCatalogs    `
+#### `ListCatalogs`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.catalogs.list - ADMIN_READ  `
+      - `biglake.catalogs.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs"`  
 
-#### `     ListDatabases    `
+#### `ListDatabases`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.databases.list - ADMIN_READ  `
+      - `biglake.databases.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases"`  
 
-#### `     ListLocks    `
+#### `ListLocks`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.locks.list - ADMIN_READ  `
+      - `biglake.locks.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks"`  
 
-#### `     ListTables    `
+#### `ListTables`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  biglake.tables.list - ADMIN_READ  `
+      - `biglake.tables.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables"`  
 
-#### `     RenameTable    `
+#### `RenameTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.update - ADMIN_WRITE  `
+      - `biglake.tables.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable"`  
 
-#### `     UpdateDatabase    `
+#### `UpdateDatabase`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.databases.update - ADMIN_WRITE  `
+      - `biglake.databases.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase"`  
 
-#### `     UpdateTable    `
+#### `UpdateTable`
 
-  - **Method** : `  google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable  `  
+  - **Method** : `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  biglake.tables.update - ADMIN_WRITE  `
+      - `biglake.tables.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable"  `
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable"`

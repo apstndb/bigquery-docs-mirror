@@ -1,34 +1,34 @@
 # Understand text with the ML.UNDERSTAND\_TEXT function
 
-This document describes how to use the [`  ML.UNDERSTAND_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to perform a natural language text analysis function on text from a [BigQuery standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+This document describes how to use the [`ML.UNDERSTAND_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to perform a natural language text analysis function on text from a [BigQuery standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
 ## Required roles
 
 To create a remote model and analyze text, you need the following Identity and Access Management (IAM) roles at the project level:
 
-  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )
+  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` )
 
-  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` )
+  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` )
     
-    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
+    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` )
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` )
 
-  - Create BigQuery jobs: BigQuery Job User ( `  roles/bigquery.jobUser  ` )
+  - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` )
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
 
@@ -67,7 +67,7 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
     ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
@@ -122,7 +122,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -158,7 +158,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -296,13 +296,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -336,13 +336,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -354,7 +354,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -366,7 +366,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -402,7 +402,7 @@ Select one of the following options:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
 
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/serviceusage.serviceUsageConsumer' --condition=None
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/bigquery.connectionUser' --condition=None
@@ -416,7 +416,7 @@ Failure to grant the permission results in an error.
 
 ## Create a model
 
-Create a remote model with a [`  REMOTE_SERVICE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_NATURAL_LANGUAGE_V1  ` :
+Create a remote model with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_NATURAL_LANGUAGE_V1` :
 
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
@@ -433,13 +433,13 @@ Replace the following:
 
   - `  REGION  ` : the region used by the connection.
 
-  - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
+  - `  CONNECTION_ID  ` : the connection ID—for example, `myconnection` .
     
-    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
 
 ## Understand text
 
-Understand text with the `  ML.UNDERSTAND_TEXT  ` function:
+Understand text with the `ML.UNDERSTAND_TEXT` function:
 
     SELECT *
     FROM ML.UNDERSTAND_TEXT(
@@ -455,15 +455,15 @@ Replace the following:
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET_ID  ` : the ID of the dataset that contains the model.
   - `  MODEL_NAME  ` : the name of the model.
-  - `  TABLE_NAME  ` : the name of the table that contains the text to analyze in a column named `  text_content  ` . If the text is in a column with a different name, specify `  text_content  ` as an alias for that column.
-  - `  QUERY  ` : a query that contains the text to describe in a column named `  text_content  ` . If the text is in a column with a different name, specify `  text_content  ` as an alias for that column.
+  - `  TABLE_NAME  ` : the name of the table that contains the text to analyze in a column named `text_content` . If the text is in a column with a different name, specify `text_content` as an alias for that column.
+  - `  QUERY  ` : a query that contains the text to describe in a column named `text_content` . If the text is in a column with a different name, specify `text_content` as an alias for that column.
   - `  FEATURE_NAME  ` : the name of a supported [Natural Language API feature](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text#nlp-syntax) .
-  - `  FLATTEN_JSON_OUTPUT  ` : a `  BOOL  ` value that determines whether the JSON content returned by the function is parsed into separate columns.
-  - `  ENCODING_TYPE  ` : a `  STRING  ` value that specifies the encoding that the Cloud Natural Language API uses to determine encoding-dependent information such as the [`  beginOffset  `](https://docs.cloud.google.com/natural-language/docs/reference/rest/v2/TextSpan) value. For more information, see [`  EncodingType  `](https://docs.cloud.google.com/natural-language/docs/reference/rest/v1/EncodingType) .
+  - `  FLATTEN_JSON_OUTPUT  ` : a `BOOL` value that determines whether the JSON content returned by the function is parsed into separate columns.
+  - `  ENCODING_TYPE  ` : a `STRING` value that specifies the encoding that the Cloud Natural Language API uses to determine encoding-dependent information such as the [`beginOffset`](https://docs.cloud.google.com/natural-language/docs/reference/rest/v2/TextSpan) value. For more information, see [`EncodingType`](https://docs.cloud.google.com/natural-language/docs/reference/rest/v1/EncodingType) .
 
 **Example 1**
 
-The following example inspects the text in the table's `  text_content  ` column and identifies the prevailing emotional opinion within the text:
+The following example inspects the text in the table's `text_content` column and identifies the prevailing emotional opinion within the text:
 
     SELECT * FROM ML.UNDERSTAND_TEXT(
       MODEL `mydataset.mynlpmodel`,
@@ -473,7 +473,7 @@ The following example inspects the text in the table's `  text_content  ` column
 
 **Example 2**
 
-The following example inspects the text in the table's `  comment  ` column and provides syntactic information about the text:
+The following example inspects the text in the table's `comment` column and provides syntactic information about the text:
 
     SELECT * FROM ML.UNDERSTAND_TEXT(
       MODEL `mydataset.mynlpmodel`,

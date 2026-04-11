@@ -11,7 +11,7 @@ Streams data into BigQuery one record at a time without needing to run a load jo
 
 ### HTTP request
 
-`  POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll  `
+`POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,21 +19,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the destination.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the destination.
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 Required. Table ID of the destination.
 
@@ -73,51 +73,51 @@ The request body contains data with the following structure:
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 Optional. The resource type of the response. The value is not checked at the backend. Historically, it has been set to "bigquery\#tableDataInsertAllRequest" but you are not required to set it.
 
-`  skipInvalidRows  `
+`skipInvalidRows`
 
-`  boolean  `
+`boolean`
 
 Optional. Insert all valid rows of a request, even if invalid rows exist. The default value is false, which causes the entire request to fail if any invalid rows exist.
 
-`  ignoreUnknownValues  `
+`ignoreUnknownValues`
 
-`  boolean  `
+`boolean`
 
 Optional. Accept rows that contain values that do not match the schema. The unknown values are ignored. Default is false, which treats unknown values as errors.
 
-`  templateSuffix  `
+`templateSuffix`
 
-`  string  `
+`string`
 
 Optional. If specified, treats the destination table as a base template, and inserts the rows into an instance table named "{destination}{templateSuffix}". BigQuery will manage creation of the instance table, using the schema of the base template table.
 
 See <https://cloud.google.com/bigquery/streaming-data-into-bigquery#template-tables> for considerations when working with templates tables.
 
-`  rows[]  `
+`rows[]`
 
-`  object  `
+`object`
 
-`  rows[].insertId  `
+`rows[].insertId`
 
-`  string  `
+`string`
 
 Insertion ID for best-effort deduplication. This feature is not recommended, and users seeking stronger insertion semantics are encouraged to use other mechanisms such as the BigQuery Write API.
 
-`  rows[].json  `
+`rows[].json`
 
-`  object ( Struct  ` format)
+` object ( Struct  ` format)
 
 Data for a single row.
 
-`  traceId  `
+`traceId`
 
-`  string  `
+`string`
 
 Optional. Unique request trace id. Used for debugging purposes only. It is case-sensitive, limited to up to 36 ASCII characters. A UUID is recommended.
 
@@ -138,46 +138,34 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;kind&quot;: string,
-  &quot;insertErrors&quot;: [
-    {
-      &quot;index&quot;: integer,
-      &quot;errors&quot;: [
-        {
-          object (ErrorProto)
-        }
-      ]
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;insertErrors&quot;: [{&quot;index&quot;: integer,&quot;errors&quot;: [{object (ErrorProto)}]}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 Returns "bigquery\#tableDataInsertAllResponse".
 
-`  insertErrors[]  `
+`insertErrors[]`
 
-`  object  `
+`object`
 
 Describes specific errors encountered while processing the request.
 
-`  insertErrors[].index  `
+`insertErrors[].index`
 
-`  integer ( uint32 format)  `
+`integer ( uint32 format)`
 
 The index of the row that error applies to.
 
-`  insertErrors[].errors[]  `
+`insertErrors[].errors[]`
 
-`  object ( ErrorProto  ` )
+` object ( ErrorProto  ` )
 
 Error information for the row indicated by the index property.
 
@@ -185,8 +173,8 @@ Error information for the row indicated by the index property.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.insertdata  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.insertdata`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

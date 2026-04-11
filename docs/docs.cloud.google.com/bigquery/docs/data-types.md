@@ -50,8 +50,8 @@ Your data can include the following data types:
 <tr class="odd">
 <td>BOOLEAN</td>
 <td><ul>
-<li><strong>CSV format:</strong> <code dir="ltr" translate="no">         1        </code> or <code dir="ltr" translate="no">         0        </code> , <code dir="ltr" translate="no">         true        </code> or <code dir="ltr" translate="no">         false        </code> , <code dir="ltr" translate="no">         t        </code> or <code dir="ltr" translate="no">         f        </code> , <code dir="ltr" translate="no">         yes        </code> or <code dir="ltr" translate="no">         no        </code> , or <code dir="ltr" translate="no">         y        </code> or <code dir="ltr" translate="no">         n        </code> (all case-insensitive).</li>
-<li><strong>JSON format:</strong> <code dir="ltr" translate="no">         true        </code> or <code dir="ltr" translate="no">         false        </code> (case-insensitive).</li>
+<li><strong>CSV format:</strong> <code dir="ltr" translate="no">1</code> or <code dir="ltr" translate="no">0</code> , <code dir="ltr" translate="no">true</code> or <code dir="ltr" translate="no">false</code> , <code dir="ltr" translate="no">t</code> or <code dir="ltr" translate="no">f</code> , <code dir="ltr" translate="no">yes</code> or <code dir="ltr" translate="no">no</code> , or <code dir="ltr" translate="no">y</code> or <code dir="ltr" translate="no">n</code> (all case-insensitive).</li>
+<li><strong>JSON format:</strong> <code dir="ltr" translate="no">true</code> or <code dir="ltr" translate="no">false</code> (case-insensitive).</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -64,7 +64,7 @@ Your data can include the following data types:
 <p><strong>UNIX timestamps</strong></p>
 <p>A positive or negative decimal number. A positive number specifies the number of seconds since the epoch (1970-01-01 00:00:00 UTC), and a negative number specifies the number of seconds before the epoch. Up to 6 decimal places (microsecond precision) are preserved.</p>
 <p><strong>Date and time strings</strong></p>
-<p>A date and time string in the format <code dir="ltr" translate="no">        YYYY-MM-DD HH:MM:SS       </code> . The <code dir="ltr" translate="no">        UTC       </code> and <code dir="ltr" translate="no">        Z       </code> specifiers are supported.</p>
+<p>A date and time string in the format <code dir="ltr" translate="no">YYYY-MM-DD HH:MM:SS</code> . The <code dir="ltr" translate="no">UTC</code> and <code dir="ltr" translate="no">Z</code> specifiers are supported.</p>
 <p>You can supply a timezone offset in your date and time strings, but BigQuery doesn't preserve the offset after converting the value to its internal format. If you need to preserve the original timezone data, store the timezone offset in a separate column. The leading zero is required when you specify a single-digit timezone offset.</p>
 <p>Date and time strings must be quoted when using JSON format.</p>
 <p><strong>Examples</strong></p>
@@ -126,27 +126,27 @@ Your data can include the following data types:
 
 ## Exact numeric in legacy SQL
 
-You can read NUMERIC or BIGNUMERIC values in non-modifying clauses such as `  SELECT list (with aliases)  ` , `  GROUP BY keys  ` , and pass-through fields in window functions, and so on. However, any computation over NUMERIC or BIGNUMERIC values, including comparisons, produces undefined results.
+You can read NUMERIC or BIGNUMERIC values in non-modifying clauses such as `SELECT list (with aliases)` , `GROUP BY keys` , and pass-through fields in window functions, and so on. However, any computation over NUMERIC or BIGNUMERIC values, including comparisons, produces undefined results.
 
 The following cast and conversion functions are supported in legacy SQL:
 
-  - `  CAST(<numeric> AS STRING)  `
-  - `  CAST(<bignumeric> AS STRING)  `
-  - `  CAST(<string> AS NUMERIC)  `
-  - `  CAST(<string> AS BIGNUMERIC)  `
+  - `CAST(<numeric> AS STRING)`
+  - `CAST(<bignumeric> AS STRING)`
+  - `CAST(<string> AS NUMERIC)`
+  - `CAST(<string> AS BIGNUMERIC)`
 
 ## Civil time in legacy SQL
 
-You can read civil time data types—DATE, TIME, and DATETIME—and process them with non-modifying operators such as `  SELECT list (with aliases)  ` , `  GROUP BY keys  ` , and pass-through fields in window functions, etc. However, any other computation over civil time values, including comparisons, produces undefined results.
+You can read civil time data types—DATE, TIME, and DATETIME—and process them with non-modifying operators such as `SELECT list (with aliases)` , `GROUP BY keys` , and pass-through fields in window functions, etc. However, any other computation over civil time values, including comparisons, produces undefined results.
 
 The following casts and conversion functions are supported in legacy SQL:
 
-  - `  CAST(<date> AS STRING)  `
-  - `  CAST(<time> AS STRING)  `
-  - `  CAST(<datetime> AS STRING)  `
-  - `  CAST(<string> AS DATE)  `
-  - `  CAST(<string> AS TIME)  `
-  - `  CAST(<string> AS DATETIME)  `
+  - `CAST(<date> AS STRING)`
+  - `CAST(<time> AS STRING)`
+  - `CAST(<datetime> AS STRING)`
+  - `CAST(<string> AS DATE)`
+  - `CAST(<string> AS TIME)`
+  - `CAST(<string> AS DATETIME)`
 
 In practice, legacy SQL interprets civil time values as integers, and operations on integers that you think are civil time values produce unexpected results.
 
@@ -154,5 +154,5 @@ To compute values using civil time data types, consider [GoogleSQL](https://docs
 
 ## What's next
 
-  - To set a field's data type using the API, see [`  schema.fields.type  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.type) .
+  - To set a field's data type using the API, see [`schema.fields.type`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.type) .
   - For GoogleSQL data types, see [data types](https://docs.cloud.google.com/bigquery/sql-reference/data-types) .

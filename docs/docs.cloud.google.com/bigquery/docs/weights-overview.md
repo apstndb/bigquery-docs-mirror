@@ -72,7 +72,7 @@ BigQuery ML doesn't support model weight functions for the following types of mo
 
 To see the weights of all of these model types except for AutoML Tables models, export the model from BigQuery ML to Cloud Storage. You can then use the XGBoost library to visualize the tree structure for boosted tree and random forest models, or the TensorFlow library to visualize the graph structure for DNN and wide-and-deep models. There is no method for getting model weight information for AutoML Tables models.
 
-For more information about exporting a model, see [`  EXPORT MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-export-model) and [Export a BigQuery ML model for online prediction](https://docs.cloud.google.com/bigquery/docs/export-model-tutorial) .
+For more information about exporting a model, see [`EXPORT MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-export-model) and [Export a BigQuery ML model for online prediction](https://docs.cloud.google.com/bigquery/docs/export-model-tutorial) .
 
 ## What's next
 

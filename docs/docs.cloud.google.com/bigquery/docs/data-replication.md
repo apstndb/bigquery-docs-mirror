@@ -63,28 +63,28 @@ Querying data on Cloud Storage requires that the Cloud Storage bucket is co-loca
 
 BigQuery dataset replication is subject to the following limitations:
 
-  - Streaming data written to the primary replica from the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) or the [`  tabledata.insertAll  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll) method, which is then replicated into the secondary replica, is best-effort and may see high replication delay.
-  - Streaming upserts written to the primary replica from [Datastream](https://cloud.google.com/datastream-for-bigquery) or [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , which is then replicated into the secondary replica, is best-effort and may see high replication delay. Once replicated, the upserts in the secondary replica are merged into the secondary replica's table baseline as per the table's configured [`  max_staleness  `](https://docs.cloud.google.com/bigquery/docs/change-data-capture#manage_table_staleness) value.
+  - Streaming data written to the primary replica from the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) or the [`tabledata.insertAll`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll) method, which is then replicated into the secondary replica, is best-effort and may see high replication delay.
+  - Streaming upserts written to the primary replica from [Datastream](https://cloud.google.com/datastream-for-bigquery) or [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , which is then replicated into the secondary replica, is best-effort and may see high replication delay. Once replicated, the upserts in the secondary replica are merged into the secondary replica's table baseline as per the table's configured [`max_staleness`](https://docs.cloud.google.com/bigquery/docs/change-data-capture#manage_table_staleness) value.
   - You can't enable [fine-grained DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained_dml) on a table in a replicated dataset, and you can't replicate a dataset that contains a table with fine-grained DML enabled.
   - Replication and switchover can be managed through the Google Cloud console or SQL [data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) .
   - You are limited to one replica of each dataset for each region or multi-region. You cannot create two secondary replicas of the same dataset in the same destination region.
   - Resources within replicas are subject to the limitations as described in [Resource behavior](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
-  - [Policy tags](https://docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations) and associated data policies are not replicated to the secondary replica. Any queries that reference columns with policy tags in regions other than the original region fail, even if that replica is promoted, unless the user has the `  roles/datacatalog.categoryFineGrainedReader  ` role at the project, folder, or organization level.
+  - [Policy tags](https://docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations) and associated data policies are not replicated to the secondary replica. Any queries that reference columns with policy tags in regions other than the original region fail, even if that replica is promoted, unless the user has the `roles/datacatalog.categoryFineGrainedReader` role at the project, folder, or organization level.
   - [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) is only available in the secondary replica after the creation of the secondary replica is completed.
-  - The destination region size limit (in logical bytes) for enabling cross-region replication on a dataset is 10 PB for `  us  ` and `  eu  ` [multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) and 500 TB for other [regions](https://docs.cloud.google.com/bigquery/docs/locations#regions) by default. These limits are configurable. For more information, reach out to [Google Cloud Support](https://cloud.google.com/support-hub) .
+  - The destination region size limit (in logical bytes) for enabling cross-region replication on a dataset is 10 PB for `us` and `eu` [multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) and 500 TB for other [regions](https://docs.cloud.google.com/bigquery/docs/locations#regions) by default. These limits are configurable. For more information, reach out to [Google Cloud Support](https://cloud.google.com/support-hub) .
   - The quota applies to logical resources.
   - You can only replicate a dataset with fewer than 100,000 tables.
   - You are limited to a maximum of 4 replicas added (then dropped) to the same region per dataset per day.
   - You are limited by [bandwidth](https://docs.cloud.google.com/bigquery/quotas#bandwidth_limits) .
-  - Tables with [Customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) (CMEK) applied are not queryable in the secondary region if the `  replica_kms_key  ` value is not configured.
+  - Tables with [Customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) (CMEK) applied are not queryable in the secondary region if the `replica_kms_key` value is not configured.
   - BigLake tables are not supported.
   - You can't replicate external or federated datasets.
   - [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) aren't supported.
   - You can't configure the following region pairs if you are configuring data replication for [disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) :
-      - `  us-central1  ` - `  us  ` multi-region
-      - `  us-west1  ` - `  us  ` multi-region
-      - `  eu-west1  ` - `  eu  ` multi-region
-      - `  eu-west4  ` - `  eu  ` multi-region
+      - `us-central1` - `us` multi-region
+      - `us-west1` - `us` multi-region
+      - `eu-west1` - `eu` multi-region
+      - `eu-west4` - `eu` multi-region
   - Routine-level access controls can't be replicated, but you can replicate dataset-level access controls for routines.
   - The following behavior applies to search indexes:
       - Only the search index metadata is replicated to the secondary region, not index data itself.
@@ -223,7 +223,7 @@ This section describes how to replicate a dataset, promote the secondary replica
 
 ### Required permissions
 
-To get the permissions that you need to manage replicas, ask your administrator to grant you `  bigquery.datasets.update  ` permission.
+To get the permissions that you need to manage replicas, ask your administrator to grant you `bigquery.datasets.update` permission.
 
 ### Replicate a dataset
 
@@ -251,11 +251,11 @@ To replicate a dataset, select one of the following options:
 
 ### SQL
 
-To replicate a dataset, use the [`  ALTER SCHEMA ADD REPLICA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_add_replica_statement) .
+To replicate a dataset, use the [`ALTER SCHEMA ADD REPLICA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_add_replica_statement) .
 
 You can add a replica to any dataset that's located in a region or multi-region that is not already replicated in that region or multi-region. After you add a replica, it takes time for the initial copy operation to complete. You can still run queries referencing the primary replica while the data is being replicated, with no reduction in query processing capacity. You can't replicate data within the geo-locations within a multi-region.
 
-The following example creates a dataset named `  my_dataset  ` in the `  us-central1  ` region and then adds a replica in the `  us-east4  ` region:
+The following example creates a dataset named `my_dataset` in the `us-central1` region and then adds a replica in the `us-east4` region:
 
 ``` notranslate
 -- Create the primary replica in the us-central1 region.
@@ -267,7 +267,7 @@ ADD REPLICA `my_replica`
 OPTIONS(location='us-east4');
 ```
 
-To confirm when the secondary replica has successfully been created, you can query the `  creation_complete  ` column in the [`  INFORMATION_SCHEMA.SCHEMATA_REPLICAS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
+To confirm when the secondary replica has successfully been created, you can query the `creation_complete` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
 After the secondary replica has been created, you can query it by explicitly [setting the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) of the query to the secondary region. If a location is not explicitly set, BigQuery uses the region of the primary replica of the dataset.
 
@@ -294,23 +294,23 @@ To promote a replica to be the primary replica, select one of the following opti
 
 4.  In the **Replicas** section, find the replica that you want to promote, and then click **Make primary** .
 
-5.  In the **Promote replica** dialog, type `  confirm  ` in the text field, and then click **Confirm** .
+5.  In the **Promote replica** dialog, type `confirm` in the text field, and then click **Confirm** .
 
 ### SQL
 
-To promote a replica to be the primary replica, use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) and set the `  primary_replica  ` option.
+To promote a replica to be the primary replica, use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) and set the `primary_replica` option.
 
 Note the following:
 
   - You must explicitly set the job location to the secondary region in query settings. For more information, see [BigQuery specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
-The following example promotes the `  us-east4  ` replica to be the primary:
+The following example promotes the `us-east4` replica to be the primary:
 
 ``` notranslate
 ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4');
 ```
 
-To confirm when the secondary replica has successfully been promoted, you can query the `  replica_primary_assignment_complete  ` column in the [`  INFORMATION_SCHEMA.SCHEMATA_REPLICAS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
+To confirm when the secondary replica has successfully been promoted, you can query the `replica_primary_assignment_complete` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
 ### Remove a dataset replica
 
@@ -328,20 +328,20 @@ To remove a replica and stop replicating the dataset, select one of the followin
 
 4.  In the **Replicas** section, find the replica that you want to remove, click more\_vert **More actions** , and then click **Delete** .
 
-5.  In the **Delete dataset replica?** dialog, type `  delete  ` in the text field, and then click **Delete** .
+5.  In the **Delete dataset replica?** dialog, type `delete` in the text field, and then click **Delete** .
 
 ### SQL
 
-To remove a replica and stop replicating the dataset, use the [`  ALTER SCHEMA DROP REPLICA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_drop_replica_statement) .
+To remove a replica and stop replicating the dataset, use the [`ALTER SCHEMA DROP REPLICA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_drop_replica_statement) .
 
-The following example removes the `  us  ` replica:
+The following example removes the `us` replica:
 
 ``` notranslate
 ALTER SCHEMA my_dataset
 DROP REPLICA IF EXISTS `us`;
 ```
 
-You must first drop any secondary replicas to delete the entire dataset. If you delete the entire dataset—for example, by using the [`  DROP SCHEMA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement) —without dropping all secondary replicas, you receive the following error:
+You must first drop any secondary replicas to delete the entire dataset. If you delete the entire dataset—for example, by using the [`DROP SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement) —without dropping all secondary replicas, you receive the following error:
 
     The dataset replica of the cross region dataset 'project_id:dataset_id' in region 'REGION' is not yet writable because the primary assignment is not yet complete.
 
@@ -349,7 +349,7 @@ For more information, see [Promote the secondary replica](https://docs.cloud.goo
 
 ## Monitor replication
 
-You can monitor the status of your dataset replicas through BigQuery, Cloud Monitoring, or `  INFORMATION_SCHEMA  ` views.
+You can monitor the status of your dataset replicas through BigQuery, Cloud Monitoring, or `INFORMATION_SCHEMA` views.
 
 For information about creating alerts on these metrics, see [Create dashboards, charts, and alerts](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard) .
 
@@ -386,7 +386,7 @@ To view these metrics in Monitoring, do the following:
 
 3.  In the **Select a metric** field, search for and select **BigQuery Dataset** .
 
-4.  Select **Replication latency** ( `  bigquery.googleapis.com/storage/replication/dataset_staleness  ` ) or **Network egress bytes** ( `  bigquery.googleapis.com/storage/replication/network_egress_bytes_count  ` ).
+4.  Select **Replication latency** ( `bigquery.googleapis.com/storage/replication/dataset_staleness` ) or **Network egress bytes** ( `bigquery.googleapis.com/storage/replication/network_egress_bytes_count` ).
 
 5.  Click **Apply** .
 
@@ -394,17 +394,17 @@ To view these metrics in Monitoring, do the following:
 
 7.  Optional: To view metrics for a specific dataset or secondary region, click **Add filter** , select the **dataset\_id** or **location** option, and then enter a value. If you replicate data to multiple secondary regions, you can group by location to view metrics for each region.
 
-### View replication status with `     INFORMATION_SCHEMA    `
+### View replication status with `INFORMATION_SCHEMA`
 
-To list the dataset replicas in a project, query the [`  INFORMATION_SCHEMA.SCHEMATA_REPLICAS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
+To list the dataset replicas in a project, query the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
 ## Migrate datasets
 
-You can use cross-region dataset replication to migrate your datasets from one region to another. The following example demonstrates the process of migrating the existing `  my_migration  ` dataset from the `  US  ` multi-region to the `  EU  ` multi-region using cross-region replication.
+You can use cross-region dataset replication to migrate your datasets from one region to another. The following example demonstrates the process of migrating the existing `my_migration` dataset from the `US` multi-region to the `EU` multi-region using cross-region replication.
 
 ### Replicate the dataset
 
-To begin the migration process, first replicate the dataset in the region that you want to migrate the data to. In this scenario, you are migrating the `  my_migration  ` dataset to the `  EU  ` multi-region.
+To begin the migration process, first replicate the dataset in the region that you want to migrate the data to. In this scenario, you are migrating the `my_migration` dataset to the `EU` multi-region.
 
 ``` notranslate
 -- Create a replica in the secondary region.
@@ -413,56 +413,56 @@ ADD REPLICA `eu`
 OPTIONS(location='eu');
 ```
 
-This creates a secondary replica named `  eu  ` in the `  EU  ` multi-region. The primary replica is the `  my_migration  ` dataset in the `  US  ` multi-region.
+This creates a secondary replica named `eu` in the `EU` multi-region. The primary replica is the `my_migration` dataset in the `US` multi-region.
 
 ### Promote the secondary replica
 
-To continue migrating the dataset to the `  EU  ` multi-region, promote the secondary replica:
+To continue migrating the dataset to the `EU` multi-region, promote the secondary replica:
 
 ``` notranslate
 ALTER SCHEMA my_migration SET OPTIONS(primary_replica = 'eu')
 ```
 
-After the promotion is complete, `  eu  ` is the primary replica. It is a writable replica.
+After the promotion is complete, `eu` is the primary replica. It is a writable replica.
 
 ### Complete the migration
 
-To complete the migration from the `  US  ` multi-region to the `  EU  ` multi-region, delete the `  us  ` replica. This step is not required but is useful if you don't need a dataset replica beyond your migration needs.
+To complete the migration from the `US` multi-region to the `EU` multi-region, delete the `us` replica. This step is not required but is useful if you don't need a dataset replica beyond your migration needs.
 
 ``` notranslate
 ALTER SCHEMA my_migration
 DROP REPLICA IF EXISTS us;
 ```
 
-Your dataset is located in the `  EU  ` multi-region and there are no replicas of the `  my_migration  ` dataset. You have successfully migrated your dataset to the `  EU  ` multi-region. The complete list of resources that are migrated can be found in [Resource behavior](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
+Your dataset is located in the `EU` multi-region and there are no replicas of the `my_migration` dataset. You have successfully migrated your dataset to the `EU` multi-region. The complete list of resources that are migrated can be found in [Resource behavior](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
 
 ## Customer-managed encryption keys (CMEK)
 
-[Customer-managed Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) are not automatically replicated when you create a secondary replica. In order to maintain the encryption on your replicated dataset, you must set the `  replica_kms_key  ` for the location of the added replica. You can set the `  replica_kms_key  ` using the [`  ALTER SCHEMA ADD REPLICA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_add_replica_statement) .
+[Customer-managed Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) are not automatically replicated when you create a secondary replica. In order to maintain the encryption on your replicated dataset, you must set the `replica_kms_key` for the location of the added replica. You can set the `replica_kms_key` using the [`ALTER SCHEMA ADD REPLICA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_add_replica_statement) .
 
 Replicating datasets with CMEK behaves as described in the following scenarios:
 
-  - If the source dataset has a `  default_kms_key  ` , you must provide a `  replica_kms_key  ` that was created in the replica dataset's region when using the `  ALTER SCHEMA ADD REPLICA  ` DDL statement.
+  - If the source dataset has a `default_kms_key` , you must provide a `replica_kms_key` that was created in the replica dataset's region when using the `ALTER SCHEMA ADD REPLICA` DDL statement.
 
-  - If the source dataset doesn't have a value set for `  default_kms_key  ` , you can't set the `  replica_kms_key  ` .
+  - If the source dataset doesn't have a value set for `default_kms_key` , you can't set the `replica_kms_key` .
 
-  - If you are using [Cloud KMS key rotation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_rotation) on either (or both) of the `  default_kms_key  ` or the `  replica_kms_key  ` the replicated dataset is still queryable after the key rotation.
+  - If you are using [Cloud KMS key rotation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_rotation) on either (or both) of the `default_kms_key` or the `replica_kms_key` the replicated dataset is still queryable after the key rotation.
     
       - Key rotation in the primary region updates the key version only in tables created after the rotation, tables that existed prior to the key rotation still use the key version that was set prior to the rotation.
       - Key rotation in the secondary region updates all tables in the secondary replica to the new key version.
       - Switching the primary replica to secondary replica updates all tables in the secondary replica (formerly the primary replica) to the new key version.
       - If the key version set on tables in the primary replica prior to key rotation is deleted, any tables still using the key version set prior to key rotation cannot be queried until the key version is updated. In order to update the key version, the old key version must be active (not disabled or deleted).
 
-  - If the source dataset doesn't have a value set for `  default_kms_key  ` , but there are individual tables in the source dataset with CMEK applied, those tables aren't queryable in the replicated dataset. To query the tables, do the following:
+  - If the source dataset doesn't have a value set for `default_kms_key` , but there are individual tables in the source dataset with CMEK applied, those tables aren't queryable in the replicated dataset. To query the tables, do the following:
     
-      - Add a `  default_kms_key  ` value for the source dataset.
-      - When you create a new replica using the `  ALTER SCHEMA ADD REPLICA  ` DDL statement, set a value for the `  replica_kms_key  ` option. The CMEK tables are queryable in the destination region.
+      - Add a `default_kms_key` value for the source dataset.
+      - When you create a new replica using the `ALTER SCHEMA ADD REPLICA` DDL statement, set a value for the `replica_kms_key` option. The CMEK tables are queryable in the destination region.
     
-    All the CMEK tables in the destination region use the same `  replica_kms_key  ` , regardless of the key used in the source region.
+    All the CMEK tables in the destination region use the same `replica_kms_key` , regardless of the key used in the source region.
 
 ### Create a replica with CMEK
 
-The following example creates a replica in the `  us-west1  ` region with a `  replica_kms_key  ` value set. For CMEK key, grant the [BigQuery service account permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) to encrypt and decrypt.
+The following example creates a replica in the `us-west1` region with a `replica_kms_key` value set. For CMEK key, grant the [BigQuery service account permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) to encrypt and decrypt.
 
 ``` notranslate
 -- Create a replica in the secondary region.
@@ -478,9 +478,9 @@ Replicating datasets with CMEK applied are subject to the following limitations:
 
   - You can't update the replicated Cloud KMS key after the replica is created.
 
-  - You can't update the `  default_kms_key  ` value on the source dataset after the dataset replicas have been created.
+  - You can't update the `default_kms_key` value on the source dataset after the dataset replicas have been created.
 
-  - If the provided `  replica_kms_key  ` is not valid in the destination region, the dataset won't be replicated.
+  - If the provided `replica_kms_key` is not valid in the destination region, the dataset won't be replicated.
 
 ## Data policies assigned to a column
 
@@ -494,7 +494,7 @@ Replicated data policies are read-only in secondary regions. You can't [update t
 
 ### Naming conflicts
 
-The data policy resource is the same between the primary and secondary regions, except for the location. For a data policy and its replica in the secondary regions, the IDs in the format of `  projects/ PROJECT_NUMBER /locations/ LOCATION_ID /dataPolicies/ DATA_POLICY_ID  ` are identical, except for the value of `  LOCATION_ID  ` . Replication fails if a data policy with a conflicting ID already exists in the secondary region. You must resolve the naming conflict in either the primary or secondary region before replication proceeds.
+The data policy resource is the same between the primary and secondary regions, except for the location. For a data policy and its replica in the secondary regions, the IDs in the format of ` projects/ PROJECT_NUMBER /locations/ LOCATION_ID /dataPolicies/ DATA_POLICY_ID  ` are identical, except for the value of `  LOCATION_ID  ` . Replication fails if a data policy with a conflicting ID already exists in the secondary region. You must resolve the naming conflict in either the primary or secondary region before replication proceeds.
 
 ### Custom masking policies
 

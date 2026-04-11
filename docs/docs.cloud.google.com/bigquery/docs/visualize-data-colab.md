@@ -6,7 +6,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 Use this quickstart to run SQL and visualize your results in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) :
 
-  - Run a query using the `  bigquery-public-data.ml_datasets.penguins  ` public dataset.
+  - Run a query using the `bigquery-public-data.ml_datasets.penguins` public dataset.
   - Use a SQL cell to iterate on your query results.
   - Use a visualization cell to display the average culmen length and depth of female penguins for each species.
 
@@ -24,8 +24,8 @@ Use this quickstart to run SQL and visualize your results in a [BigQuery noteboo
 
 To create and run notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
-  - [Colab Enterprise User ( `  roles/aiplatform.colabEnterpriseUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.colabEnterpriseUser)
+  - [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
+  - [Colab Enterprise User ( `roles/aiplatform.colabEnterpriseUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.colabEnterpriseUser)
 
 ## Create a notebook
 
@@ -43,9 +43,9 @@ To run a SQL query in a notebook, follow these steps:
 
 3.  Click play\_circle **Run cell** .
     
-    The results of the query are automatically saved in a DataFrame called `  df  ` .
+    The results of the query are automatically saved in a DataFrame called `df` .
 
-4.  Create another SQL cell and change the title to `  female_penguins  ` .
+4.  Create another SQL cell and change the title to `female_penguins` .
 
 5.  Enter the following query, which references the DataFrame you just created and filters the results to only include female penguins:
     
@@ -53,19 +53,19 @@ To run a SQL query in a notebook, follow these steps:
 
 6.  Click play\_circle **Run cell** .
     
-    The results of the query are automatically saved in a DataFrame called `  female_penguins  ` .
+    The results of the query are automatically saved in a DataFrame called `female_penguins` .
 
 ## Visualize results
 
 1.  To create a new visualization cell in your notebook, click add **Visualization** .
 
-2.  Click **Choose a dataframe** and then select `  female_penguins  ` .
+2.  Click **Choose a dataframe** and then select `female_penguins` .
     
     A chart interface appears.
 
 3.  Click **Scatter chart** to open a chart menu, then select the bar\_chart **Vertical bar chart** .
 
-4.  In the **Metric** section, check that `  culmen_length_mm  ` and `  culmen_depth_mm  ` appear. If a metric is missing, click add\_circle\_outline **Add metric** and select it. To remove a metric, hold the pointer over the metric name and then click close **Close** .
+4.  In the **Metric** section, check that `culmen_length_mm` and `culmen_depth_mm` appear. If a metric is missing, click add\_circle\_outline **Add metric** and select it. To remove a metric, hold the pointer over the metric name and then click close **Close** .
 
 5.  For each metric, click edit **Edit** . For **Aggregation** select **Average** .
 
@@ -80,7 +80,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

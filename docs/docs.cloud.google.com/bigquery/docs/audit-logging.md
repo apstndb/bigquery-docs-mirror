@@ -10,7 +10,7 @@ This document describes audit logging for BigQuery Data Transfer Service. Google
 
 ## Service name
 
-BigQuery Data Transfer Service audit logs use the service name `  bigquerydatatransfer.googleapis.com  ` . Filter for this service:
+BigQuery Data Transfer Service audit logs use the service name `bigquerydatatransfer.googleapis.com` . Filter for this service:
 
 ``` 
     protoPayload.serviceName="bigquerydatatransfer.googleapis.com"
@@ -19,7 +19,7 @@ BigQuery Data Transfer Service audit logs use the service name `  bigquerydatatr
 
 ## Methods by permission type
 
-Each IAM permission has a `  type  ` property, whose value is an enum that can be one of four values: `  ADMIN_READ  ` , `  ADMIN_WRITE  ` , `  DATA_READ  ` , or `  DATA_WRITE  ` . When you call a method, BigQuery Data Transfer Service generates an audit log whose category is dependent on the `  type  ` property of the permission required to perform the method. Methods that require an IAM permission with the `  type  ` property value of `  DATA_READ  ` , `  DATA_WRITE  ` , or `  ADMIN_READ  ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `  type  ` property value of `  ADMIN_WRITE  ` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
+Each IAM permission has a `type` property, whose value is an enum that can be one of four values: `ADMIN_READ` , `ADMIN_WRITE` , `DATA_READ` , or `DATA_WRITE` . When you call a method, BigQuery Data Transfer Service generates an audit log whose category is dependent on the `type` property of the permission required to perform the method. Methods that require an IAM permission with the `type` property value of `DATA_READ` , `DATA_WRITE` , or `ADMIN_READ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `type` property value of `ADMIN_WRITE` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
 
 API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro) .
 
@@ -36,28 +36,28 @@ API methods in the following list that are marked with (LRO) are long-running op
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ADMIN_READ      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns      </code><br />
-<code dir="ltr" translate="no">       google.cloud.location.Locations.GetLocation      </code><br />
-<code dir="ltr" translate="no">       google.cloud.location.Locations.ListLocations      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_READ</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns</code><br />
+<code dir="ltr" translate="no">google.cloud.location.Locations.GetLocation</code><br />
+<code dir="ltr" translate="no">google.cloud.location.Locations.ListLocations</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ADMIN_WRITE      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_WRITE</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig</code></td>
 </tr>
 </tbody>
 </table>
@@ -66,172 +66,172 @@ API methods in the following list that are marked with (LRO) are long-running op
 
 For information about how and which permissions are evaluated for each method, see the Identity and Access Management documentation for BigQuery Data Transfer Service.
 
-### `     google.cloud.bigquery.datatransfer.v1.DataTransferService    `
+### `google.cloud.bigquery.datatransfer.v1.DataTransferService`
 
-The following audit logs are associated with methods belonging to `  google.cloud.bigquery.datatransfer.v1.DataTransferService  ` .
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.datatransfer.v1.DataTransferService` .
 
-#### `     CheckValidCreds    `
+#### `CheckValidCreds`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds"`  
 
-#### `     CreateTransferConfig    `
+#### `CreateTransferConfig`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.transfers.update - ADMIN_WRITE  `
+      - `bigquery.transfers.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig"`  
 
-#### `     DeleteTransferConfig    `
+#### `DeleteTransferConfig`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.transfers.update - ADMIN_WRITE  `
+      - `bigquery.transfers.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig"`  
 
-#### `     DeleteTransferRun    `
+#### `DeleteTransferRun`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.transfers.update - ADMIN_WRITE  `
+      - `bigquery.transfers.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun"`  
 
-#### `     EnrollDataSources    `
+#### `EnrollDataSources`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  resourcemanager.projects.update - ADMIN_WRITE  `
+      - `resourcemanager.projects.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources"`  
 
-#### `     GetDataSource    `
+#### `GetDataSource`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource"`  
 
-#### `     GetTransferConfig    `
+#### `GetTransferConfig`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig"`  
 
-#### `     GetTransferRun    `
+#### `GetTransferRun`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun"`  
 
-#### `     ListDataSources    `
+#### `ListDataSources`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources"`  
 
-#### `     ListTransferConfigs    `
+#### `ListTransferConfigs`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs"`  
 
-#### `     ListTransferLogs    `
+#### `ListTransferLogs`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs"`  
 
-#### `     ListTransferRuns    `
+#### `ListTransferRuns`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns"`  
 
-#### `     ScheduleTransferRuns    `
+#### `ScheduleTransferRuns`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.transfers.update - ADMIN_WRITE  `
+      - `bigquery.transfers.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns"`  
 
-#### `     StartManualTransferRuns    `
+#### `StartManualTransferRuns`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.transfers.update - ADMIN_WRITE  `
+      - `bigquery.transfers.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns"`  
 
-#### `     UnenrollDataSources    `
+#### `UnenrollDataSources`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  resourcemanager.projects.update - ADMIN_WRITE  `
+      - `resourcemanager.projects.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources"`  
 
-#### `     UpdateTransferConfig    `
+#### `UpdateTransferConfig`
 
-  - **Method** : `  google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig  `  
+  - **Method** : `google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.transfers.update - ADMIN_WRITE  `
+      - `bigquery.transfers.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig"`  
 
-### `     google.cloud.location.Locations    `
+### `google.cloud.location.Locations`
 
-The following audit logs are associated with methods belonging to `  google.cloud.location.Locations  ` .
+The following audit logs are associated with methods belonging to `google.cloud.location.Locations` .
 
-#### `     GetLocation    `
+#### `GetLocation`
 
-  - **Method** : `  google.cloud.location.Locations.GetLocation  `  
+  - **Method** : `google.cloud.location.Locations.GetLocation`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.location.Locations.GetLocation"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.location.Locations.GetLocation"`  
 
-#### `     ListLocations    `
+#### `ListLocations`
 
-  - **Method** : `  google.cloud.location.Locations.ListLocations  `  
+  - **Method** : `google.cloud.location.Locations.ListLocations`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.transfers.get - ADMIN_READ  `
+      - `bigquery.transfers.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.location.Locations.ListLocations"  `
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.location.Locations.ListLocations"`

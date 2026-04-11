@@ -34,7 +34,7 @@ When you finish the tasks that are described in this document, you can avoid con
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
 
@@ -62,7 +62,7 @@ To create your source dataset, choose one of the following options:
 
 4.  On the **Create dataset** page, do the following:
     
-    1.  For **Dataset ID** , enter `  github_source_data  ` .
+    1.  For **Dataset ID** , enter `github_source_data` .
     
     2.  For **Location type** , verify that **Multi-region** is selected.
     
@@ -72,7 +72,7 @@ To create your source dataset, choose one of the following options:
 
 ### SQL
 
-Use the [`  CREATE SCHEMA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
+Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -142,19 +142,19 @@ After you create the source dataset, you populate a table in it by saving the re
 
 4.  For **Destination** , select **Set a destination table for query results** .
 
-5.  For **Dataset** , enter `  PROJECT_ID .github_source_data  ` .
+5.  For **Dataset** , enter `  PROJECT_ID .github_source_data ` .
     
     Replace `  PROJECT_ID  ` with your project ID.
 
-6.  For **Table Id** , enter `  github_contributors  ` .
+6.  For **Table Id** , enter `github_contributors` .
 
 7.  Click **Save** .
 
 8.  Click **Run** .
 
-9.  When the query completes, in the **Explorer** pane, click **Datasets** , and then click the **`  github_source_data  `** dataset.
+9.  When the query completes, in the **Explorer** pane, click **Datasets** , and then click the **`github_source_data`** dataset.
 
-10. Click **Overview \> Tables** , and then click the **`  github_contributors  `** table.
+10. Click **Overview \> Tables** , and then click the **`github_contributors`** table.
 
 11. To verify the data was written to the table, click the **Preview** tab.
 
@@ -221,7 +221,7 @@ To create a dataset to store your view, choose one of the following options:
 
 5.  On the **Create dataset** page, do the following:
     
-    1.  For **Dataset ID** , enter `  shared_views  ` .
+    1.  For **Dataset ID** , enter `shared_views` .
     
     2.  For **Location type** , verify that **Multi-region** is selected.
     
@@ -231,7 +231,7 @@ To create a dataset to store your view, choose one of the following options:
 
 ### SQL
 
-Use the [`  CREATE SCHEMA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
+Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -274,7 +274,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 In the new dataset, you create the view you intend to authorize. This is the view you share with your data analysts. This view is created using a SQL query that excludes the columns you don't want the data analysts to see.
 
-The `  github_contributors  ` source table contains two fields of type [`  RECORD  `](https://docs.cloud.google.com/bigquery/docs/nested-repeated#define_nested_and_repeated_columns) : `  author  ` and `  committer  ` . For this tutorial, your authorized view excludes all of the author data except for the author's name, and it excludes all of the committer data except for the committer's name.
+The `github_contributors` source table contains two fields of type [`RECORD`](https://docs.cloud.google.com/bigquery/docs/nested-repeated#define_nested_and_repeated_columns) : `author` and `committer` . For this tutorial, your authorized view excludes all of the author data except for the author's name, and it excludes all of the committer data except for the committer's name.
 
 To create the view in the new dataset, choose one of the following options:
 
@@ -304,15 +304,15 @@ To create the view in the new dataset, choose one of the following options:
     
     1.  For **Project** , verify your project is selected.
     
-    2.  For **Dataset** , enter `  shared_views  ` .
+    2.  For **Dataset** , enter `shared_views` .
     
-    3.  For **Table** , enter `  github_analyst_view  ` .
+    3.  For **Table** , enter `github_analyst_view` .
     
     4.  Click **Save** .
 
 ### SQL
 
-Use the [`  CREATE VIEW  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) :
+Use the [`CREATE VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -378,9 +378,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Grant your data analysts permission to run query jobs
 
-To query the view, your data analysts need the `  bigquery.jobs.create  ` permission so they can run query jobs, and they need to be granted access to the view. In this section, you grant the `  bigquery.user  ` role to your data analysts. The `  bigquery.user  ` role includes `  bigquery.jobs.create  ` permission. In a later step, you grant your data analysts permission to access the view.
+To query the view, your data analysts need the `bigquery.jobs.create` permission so they can run query jobs, and they need to be granted access to the view. In this section, you grant the `bigquery.user` role to your data analysts. The `bigquery.user` role includes `bigquery.jobs.create` permission. In a later step, you grant your data analysts permission to access the view.
 
-To assign the data analysts group to the `  bigquery.user  ` role at the project level, do the following:
+To assign the data analysts group to the `bigquery.user` role at the project level, do the following:
 
 1.  In the Google Cloud console, go to the **IAM** page.
     
@@ -392,7 +392,7 @@ To assign the data analysts group to the `  bigquery.user  ` role at the project
 
 4.  In the **Grant access to** dialog, do the following:
     
-    1.  In the **New principals** field, enter the group that contains your data analysts. For example, `  data_analysts@example.com  ` .
+    1.  In the **New principals** field, enter the group that contains your data analysts. For example, `data_analysts@example.com` .
     
     2.  In the **Select a role** field, search for the **BigQuery User** role and select it.
     
@@ -400,11 +400,11 @@ To assign the data analysts group to the `  bigquery.user  ` role at the project
 
 ## Grant your data analysts permission to query the authorized view
 
-For your data analysts to query the view, they need to be granted the `  bigquery.dataViewer  ` role at either the dataset level or the view level. Granting this role at the dataset level gives your analysts access to all tables and views in the dataset. Because the dataset created in this tutorial contains a single authorized view, you're granting access at the dataset level. If you have a collection of authorized views that you need to grant access to, consider using an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) instead.
+For your data analysts to query the view, they need to be granted the `bigquery.dataViewer` role at either the dataset level or the view level. Granting this role at the dataset level gives your analysts access to all tables and views in the dataset. Because the dataset created in this tutorial contains a single authorized view, you're granting access at the dataset level. If you have a collection of authorized views that you need to grant access to, consider using an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) instead.
 
-The `  bigquery.user  ` role you granted to your data analysts previously gives them the permissions required to create query jobs. However, they cannot successfully query the view unless they also have `  bigquery.dataViewer  ` access to the authorized view or to the dataset that contains the view.
+The `bigquery.user` role you granted to your data analysts previously gives them the permissions required to create query jobs. However, they cannot successfully query the view unless they also have `bigquery.dataViewer` access to the authorized view or to the dataset that contains the view.
 
-To give your data analysts `  bigquery.dataViewer  ` access to the dataset that contains the authorized view, do the following:
+To give your data analysts `bigquery.dataViewer` access to the dataset that contains the authorized view, do the following:
 
 ### Console
 
@@ -416,13 +416,13 @@ To give your data analysts `  bigquery.dataViewer  ` access to the dataset that 
     
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-3.  In the **Explorer** pane, click **Datasets** , and then select the `  shared_views  ` dataset to open the **Details** tab.
+3.  In the **Explorer** pane, click **Datasets** , and then select the `shared_views` dataset to open the **Details** tab.
 
 4.  Click person\_add **Sharing** \> **Permissions** .
 
 5.  In the **Share permissions** pane, click **Add principal** .
 
-6.  For **New principals** , enter the group that contains your data analysts—for example, `  data_analysts@example.com  ` .
+6.  For **New principals** , enter the group that contains your data analysts—for example, `data_analysts@example.com` .
 
 7.  Click **Select a role** and select **BigQuery** \> **BigQuery Data Viewer** .
 
@@ -473,11 +473,11 @@ To grant the authorized view access the source data, choose one of these options
     
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-3.  In the **Explorer** pane, click **Datasets** , and then select the `  github_source_data  ` dataset to open the **Details** tab.
+3.  In the **Explorer** pane, click **Datasets** , and then select the `github_source_data` dataset to open the **Details** tab.
 
 4.  Click **Sharing** \> **Authorize views** .
 
-5.  In the **Authorized views** pane, for **Authorized view** enter `  PROJECT_ID .shared_views.github_analyst_view  ` .
+5.  In the **Authorized views** pane, for **Authorized view** enter `  PROJECT_ID .shared_views.github_analyst_view ` .
     
     Replace PROJECT\_ID with your project ID.
 
@@ -511,7 +511,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Verify the configuration
 
-When your configuration is complete, a member of your data analysts group (for example, `  data_analysts  ` ) can verify the configuration by querying the view.
+When your configuration is complete, a member of your data analysts group (for example, `data_analysts` ) can verify the configuration by querying the view.
 
 To verify the configuration, a data analyst should run the following query:
 
@@ -522,10 +522,7 @@ To verify the configuration, a data analyst should run the following query:
 2.  In the query editor, enter the following statement:
     
     ``` notranslate
-    SELECT
-      *
-    FROM
-      `PROJECT_ID.shared_views.github_analyst_view`;
+    SELECT  *FROM  `PROJECT_ID.shared_views.github_analyst_view`;
     ```
     
     Replace `  PROJECT_ID  ` with your project ID.
@@ -679,7 +676,7 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -696,7 +693,7 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

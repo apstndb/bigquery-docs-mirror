@@ -11,7 +11,7 @@ Lists all data exchanges from projects in a given organization and location.
 
 ### HTTP request
 
-`  GET https://analyticshub.googleapis.com/v1/{organization=organizations/*/locations/*}/dataExchanges  `
+`GET https://analyticshub.googleapis.com/v1/{organization=organizations/*/locations/*}/dataExchanges`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,25 +19,25 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  organization  `
+`organization`
 
-`  string  `
+`string`
 
-Required. The organization resource path of the projects containing DataExchanges. e.g. `  organizations/myorg/locations/us  ` .
+Required. The organization resource path of the projects containing DataExchanges. e.g. `organizations/myorg/locations/us` .
 
 ### Query parameters
 
 Parameters
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token, returned by a previous call, to request the next page of results.
 
@@ -62,29 +62,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataExchanges&quot;: [
-    {
-      object (DataExchange)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataExchanges&quot;: [{object (DataExchange)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dataExchanges[]  `
+`dataExchanges[]`
 
-`  object ( DataExchange  ` )
+` object ( DataExchange  ` )
 
 The list of data exchanges.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 A token to request the next page of results.
 
@@ -92,7 +85,7 @@ A token to request the next page of results.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

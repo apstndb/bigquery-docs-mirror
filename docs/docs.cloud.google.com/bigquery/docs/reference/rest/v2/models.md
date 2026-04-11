@@ -125,193 +125,138 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;etag&quot;: string,
-  &quot;modelReference&quot;: {
-    object (ModelReference)
-  },
-  &quot;creationTime&quot;: string,
-  &quot;lastModifiedTime&quot;: string,
-  &quot;description&quot;: string,
-  &quot;friendlyName&quot;: string,
-  &quot;labels&quot;: {
-    string: string,
-    ...
-  },
-  &quot;expirationTime&quot;: string,
-  &quot;location&quot;: string,
-  &quot;encryptionConfiguration&quot;: {
-    object (EncryptionConfiguration)
-  },
-  &quot;modelType&quot;: enum (ModelType),
-  &quot;trainingRuns&quot;: [
-    {
-      object (TrainingRun)
-    }
-  ],
-  &quot;featureColumns&quot;: [
-    {
-      object (StandardSqlField)
-    }
-  ],
-  &quot;labelColumns&quot;: [
-    {
-      object (StandardSqlField)
-    }
-  ],
-  &quot;transformColumns&quot;: [
-    {
-      object (TransformColumn)
-    }
-  ],
-  &quot;hparamSearchSpaces&quot;: {
-    object (HparamSearchSpaces)
-  },
-  &quot;bestTrialId&quot;: string,
-  &quot;defaultTrialId&quot;: string,
-  &quot;hparamTrials&quot;: [
-    {
-      object (HparamTuningTrial)
-    }
-  ],
-  &quot;optimalTrialIds&quot;: [
-    string
-  ],
-  &quot;remoteModelInfo&quot;: {
-    object (RemoteModelInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;etag&quot;: string,&quot;modelReference&quot;: {object (ModelReference)},&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;description&quot;: string,&quot;friendlyName&quot;: string,&quot;labels&quot;: {string: string,...},&quot;expirationTime&quot;: string,&quot;location&quot;: string,&quot;encryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;modelType&quot;: enum (ModelType),&quot;trainingRuns&quot;: [{object (TrainingRun)}],&quot;featureColumns&quot;: [{object (StandardSqlField)}],&quot;labelColumns&quot;: [{object (StandardSqlField)}],&quot;transformColumns&quot;: [{object (TransformColumn)}],&quot;hparamSearchSpaces&quot;: {object (HparamSearchSpaces)},&quot;bestTrialId&quot;: string,&quot;defaultTrialId&quot;: string,&quot;hparamTrials&quot;: [{object (HparamTuningTrial)}],&quot;optimalTrialIds&quot;: [string],&quot;remoteModelInfo&quot;: {object (RemoteModelInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  etag  `
+`etag`
 
-`  string  `
+`string`
 
 Output only. A hash of this resource.
 
-`  modelReference  `
+`modelReference`
 
-`  object ( ModelReference  ` )
+` object ( ModelReference  ` )
 
 Required. Unique identifier for this model.
 
-`  creationTime  `
+`creationTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The time when this model was created, in millisecs since the epoch.
 
-`  lastModifiedTime  `
+`lastModifiedTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The time when this model was last modified, in millisecs since the epoch.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. A user-friendly description of this model.
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
 Optional. A descriptive name for this model.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 The labels associated with this model. You can use these to organize and group your models. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.
 
-`  expirationTime  `
+`expirationTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. The time when this model expires, in milliseconds since the epoch. If not present, the model will persist indefinitely. Expired models will be deleted and their storage reclaimed. The defaultTableExpirationMs property of the encapsulating dataset can be used to set a default expirationTime on newly created models.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 Output only. The geographic location where the model resides. This value is inherited from the dataset.
 
-`  encryptionConfiguration  `
+`encryptionConfiguration`
 
-`  object ( EncryptionConfiguration  ` )
+` object ( EncryptionConfiguration  ` )
 
 Custom encryption configuration (e.g., Cloud KMS keys). This shows the encryption configuration of the model data while stored in BigQuery storage. This field can be used with models.patch to update encryption key for an already encrypted model.
 
-`  modelType  `
+`modelType`
 
-`  enum ( ModelType  ` )
+` enum ( ModelType  ` )
 
 Output only. Type of the model resource.
 
-`  trainingRuns[]  `
+`trainingRuns[]`
 
-`  object ( TrainingRun  ` )
+` object ( TrainingRun  ` )
 
 Information for all training runs in increasing order of startTime.
 
-`  featureColumns[]  `
+`featureColumns[]`
 
-`  object ( StandardSqlField  ` )
+` object ( StandardSqlField  ` )
 
 Output only. Input feature columns for the model inference. If the model is trained with TRANSFORM clause, these are the input of the TRANSFORM clause.
 
-`  labelColumns[]  `
+`labelColumns[]`
 
-`  object ( StandardSqlField  ` )
+` object ( StandardSqlField  ` )
 
 Output only. Label columns that were used to train this model. The output of the model will have a "predicted\_" prefix to these columns.
 
-`  transformColumns[]  `
+`transformColumns[]`
 
-`  object ( TransformColumn  ` )
+` object ( TransformColumn  ` )
 
 Output only. This field will be populated if a TRANSFORM clause was used to train a model. TRANSFORM clause (if used) takes featureColumns as input and outputs transformColumns. transformColumns then are used to train the model.
 
-`  hparamSearchSpaces  `
+`hparamSearchSpaces`
 
-`  object ( HparamSearchSpaces  ` )
+` object ( HparamSearchSpaces  ` )
 
 Output only. All hyperparameter search spaces in this model.
 
-`  bestTrialId (deprecated)  `
+` bestTrialId (deprecated)  `
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 This item is deprecated\!
 
 The best trialId across all training runs.
 
-`  defaultTrialId  `
+`defaultTrialId`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The default trialId to use in TVFs when the trialId is not passed in. For single-objective [hyperparameter tuning](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, this is the best trial ID. For multi-objective [hyperparameter tuning](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, this is the smallest trial ID among all Pareto optimal trials.
 
-`  hparamTrials[]  `
+`hparamTrials[]`
 
-`  object ( HparamTuningTrial  ` )
+` object ( HparamTuningTrial  ` )
 
 Output only. Trials of a [hyperparameter tuning](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) model sorted by trialId.
 
-`  optimalTrialIds[]  `
+`optimalTrialIds[]`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. For single-objective [hyperparameter tuning](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, it only contains the best trial. For multi-objective [hyperparameter tuning](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, it contains all Pareto optimal trials sorted by trialId.
 
-`  remoteModelInfo  `
+`remoteModelInfo`
 
-`  object ( RemoteModelInfo  ` )
+` object ( RemoteModelInfo  ` )
 
 Output only. Remote model info
 
@@ -341,21 +286,21 @@ Id path of a model.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. The ID of the project containing this model.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. The ID of the dataset containing this model.
 
-`  modelId  `
+`modelId`
 
-`  string  `
+`string`
 
 Required. The ID of the model. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 1,024 characters.
 
@@ -365,107 +310,107 @@ Indicates the type of the Model.
 
 Enums
 
-`  MODEL_TYPE_UNSPECIFIED  `
+`MODEL_TYPE_UNSPECIFIED`
 
 Default value.
 
-`  LINEAR_REGRESSION  `
+`LINEAR_REGRESSION`
 
 Linear regression model.
 
-`  LOGISTIC_REGRESSION  `
+`LOGISTIC_REGRESSION`
 
 Logistic regression based classification model.
 
-`  KMEANS  `
+`KMEANS`
 
 K-means clustering model.
 
-`  MATRIX_FACTORIZATION  `
+`MATRIX_FACTORIZATION`
 
 Matrix factorization model.
 
-`  DNN_CLASSIFIER  `
+`DNN_CLASSIFIER`
 
 DNN classifier model.
 
-`  TENSORFLOW  `
+`TENSORFLOW`
 
 An imported TensorFlow model.
 
-`  DNN_REGRESSOR  `
+`DNN_REGRESSOR`
 
 DNN regressor model.
 
-`  XGBOOST  `
+`XGBOOST`
 
 An imported XGBoost model.
 
-`  BOOSTED_TREE_REGRESSOR  `
+`BOOSTED_TREE_REGRESSOR`
 
 Boosted tree regressor model.
 
-`  BOOSTED_TREE_CLASSIFIER  `
+`BOOSTED_TREE_CLASSIFIER`
 
 Boosted tree classifier model.
 
-`  ARIMA  `
+`ARIMA`
 
 ARIMA model.
 
-`  AUTOML_REGRESSOR  `
+`AUTOML_REGRESSOR`
 
 AutoML Tables regression model.
 
-`  AUTOML_CLASSIFIER  `
+`AUTOML_CLASSIFIER`
 
 AutoML Tables classification model.
 
-`  PCA  `
+`PCA`
 
 Prinpical Component Analysis model.
 
-`  DNN_LINEAR_COMBINED_CLASSIFIER  `
+`DNN_LINEAR_COMBINED_CLASSIFIER`
 
 Wide-and-deep classifier model.
 
-`  DNN_LINEAR_COMBINED_REGRESSOR  `
+`DNN_LINEAR_COMBINED_REGRESSOR`
 
 Wide-and-deep regressor model.
 
-`  AUTOENCODER  `
+`AUTOENCODER`
 
 Autoencoder model.
 
-`  ARIMA_PLUS  `
+`ARIMA_PLUS`
 
 New name for the ARIMA model.
 
-`  ARIMA_PLUS_XREG  `
+`ARIMA_PLUS_XREG`
 
 ARIMA with external regressors.
 
-`  RANDOM_FOREST_REGRESSOR  `
+`RANDOM_FOREST_REGRESSOR`
 
 Random forest regressor model.
 
-`  RANDOM_FOREST_CLASSIFIER  `
+`RANDOM_FOREST_CLASSIFIER`
 
 Random forest classifier model.
 
-`  TENSORFLOW_LITE  `
+`TENSORFLOW_LITE`
 
 An imported TensorFlow Lite model.
 
-`  ONNX  `
+`ONNX`
 
 An imported ONNX model.
 
-`  TRANSFORM_ONLY  `
+`TRANSFORM_ONLY`
 
 Model to capture the columns and logic in the TRANSFORM clause along with statistics useful for ML analytic functions.
 
-`  CONTRIBUTION_ANALYSIS  `
+`CONTRIBUTION_ANALYSIS`
 
 The contribution analysis model.
 
@@ -484,99 +429,72 @@ Information about a single training query run for the model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;trainingOptions&quot;: {
-    object (TrainingOptions)
-  },
-  &quot;trainingStartTime&quot;: string,
-  &quot;startTime&quot;: string,
-  &quot;results&quot;: [
-    {
-      object (IterationResult)
-    }
-  ],
-  &quot;evaluationMetrics&quot;: {
-    object (EvaluationMetrics)
-  },
-  &quot;dataSplitResult&quot;: {
-    object (DataSplitResult)
-  },
-  &quot;modelLevelGlobalExplanation&quot;: {
-    object (GlobalExplanation)
-  },
-  &quot;classLevelGlobalExplanations&quot;: [
-    {
-      object (GlobalExplanation)
-    }
-  ],
-  &quot;vertexAiModelId&quot;: string,
-  &quot;vertexAiModelVersion&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;trainingOptions&quot;: {object (TrainingOptions)},&quot;trainingStartTime&quot;: string,&quot;startTime&quot;: string,&quot;results&quot;: [{object (IterationResult)}],&quot;evaluationMetrics&quot;: {object (EvaluationMetrics)},&quot;dataSplitResult&quot;: {object (DataSplitResult)},&quot;modelLevelGlobalExplanation&quot;: {object (GlobalExplanation)},&quot;classLevelGlobalExplanations&quot;: [{object (GlobalExplanation)}],&quot;vertexAiModelId&quot;: string,&quot;vertexAiModelVersion&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  trainingOptions  `
+`trainingOptions`
 
-`  object ( TrainingOptions  ` )
+` object ( TrainingOptions  ` )
 
 Output only. Options that were used for this training run, includes user specified and default options that were used.
 
-`  trainingStartTime (deprecated)  `
+` trainingStartTime (deprecated)  `
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 This item is deprecated\!
 
 Output only. The start time of this training run, in milliseconds since epoch.
 
-`  startTime  `
+`startTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. The start time of this training run.
 
-`  results[]  `
+`results[]`
 
-`  object ( IterationResult  ` )
+` object ( IterationResult  ` )
 
 Output only. Output of each iteration run, results.size() \<= maxIterations.
 
-`  evaluationMetrics  `
+`evaluationMetrics`
 
-`  object ( EvaluationMetrics  ` )
+` object ( EvaluationMetrics  ` )
 
 Output only. The evaluation metrics over training/eval data that were computed at the end of training.
 
-`  dataSplitResult  `
+`dataSplitResult`
 
-`  object ( DataSplitResult  ` )
+` object ( DataSplitResult  ` )
 
 Output only. Data split result of the training run. Only set when the input data is actually split.
 
-`  modelLevelGlobalExplanation  `
+`modelLevelGlobalExplanation`
 
-`  object ( GlobalExplanation  ` )
+` object ( GlobalExplanation  ` )
 
 Output only. Global explanation contains the explanation of top features on the model level. Applies to both regression and classification models.
 
-`  classLevelGlobalExplanations[]  `
+`classLevelGlobalExplanations[]`
 
-`  object ( GlobalExplanation  ` )
+` object ( GlobalExplanation  ` )
 
 Output only. Global explanation contains the explanation of top features on the class level. Applies to classification models only.
 
-`  vertexAiModelId  `
+`vertexAiModelId`
 
-`  string  `
+`string`
 
 The model id in the [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction) for this training run.
 
-`  vertexAiModelVersion  `
+`vertexAiModelVersion`
 
-`  string  `
+`string`
 
 Output only. The model version in the [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction) for this training run.
 
@@ -595,667 +513,556 @@ Options used in model training.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;maxIterations&quot;: string,
-  &quot;lossType&quot;: enum (LossType),
-  &quot;learnRate&quot;: number,
-  &quot;l1Regularization&quot;: number,
-  &quot;l2Regularization&quot;: number,
-  &quot;minRelativeProgress&quot;: number,
-  &quot;warmStart&quot;: boolean,
-  &quot;earlyStop&quot;: boolean,
-  &quot;inputLabelColumns&quot;: [
-    string
-  ],
-  &quot;dataSplitMethod&quot;: enum (DataSplitMethod),
-  &quot;dataSplitEvalFraction&quot;: number,
-  &quot;dataSplitColumn&quot;: string,
-  &quot;learnRateStrategy&quot;: enum (LearnRateStrategy),
-  &quot;initialLearnRate&quot;: number,
-  &quot;labelClassWeights&quot;: {
-    string: number,
-    ...
-  },
-  &quot;userColumn&quot;: string,
-  &quot;itemColumn&quot;: string,
-  &quot;distanceType&quot;: enum (DistanceType),
-  &quot;numClusters&quot;: string,
-  &quot;modelUri&quot;: string,
-  &quot;optimizationStrategy&quot;: enum (OptimizationStrategy),
-  &quot;hiddenUnits&quot;: [
-    string
-  ],
-  &quot;batchSize&quot;: string,
-  &quot;dropout&quot;: number,
-  &quot;maxTreeDepth&quot;: string,
-  &quot;subsample&quot;: number,
-  &quot;minSplitLoss&quot;: number,
-  &quot;boosterType&quot;: enum (BoosterType),
-  &quot;numParallelTree&quot;: string,
-  &quot;dartNormalizeType&quot;: enum (DartNormalizeType),
-  &quot;treeMethod&quot;: enum (TreeMethod),
-  &quot;minTreeChildWeight&quot;: string,
-  &quot;colsampleBytree&quot;: number,
-  &quot;colsampleBylevel&quot;: number,
-  &quot;colsampleBynode&quot;: number,
-  &quot;numFactors&quot;: string,
-  &quot;feedbackType&quot;: enum (FeedbackType),
-  &quot;walsAlpha&quot;: number,
-  &quot;kmeansInitializationMethod&quot;: enum (KmeansInitializationMethod),
-  &quot;kmeansInitializationColumn&quot;: string,
-  &quot;timeSeriesTimestampColumn&quot;: string,
-  &quot;timeSeriesDataColumn&quot;: string,
-  &quot;autoArima&quot;: boolean,
-  &quot;nonSeasonalOrder&quot;: {
-    object (ArimaOrder)
-  },
-  &quot;dataFrequency&quot;: enum (DataFrequency),
-  &quot;calculatePValues&quot;: boolean,
-  &quot;includeDrift&quot;: boolean,
-  &quot;holidayRegion&quot;: enum (HolidayRegion),
-  &quot;holidayRegions&quot;: [
-    enum (HolidayRegion)
-  ],
-  &quot;timeSeriesIdColumn&quot;: string,
-  &quot;timeSeriesIdColumns&quot;: [
-    string
-  ],
-  &quot;forecastLimitLowerBound&quot;: number,
-  &quot;forecastLimitUpperBound&quot;: number,
-  &quot;horizon&quot;: string,
-  &quot;autoArimaMaxOrder&quot;: string,
-  &quot;autoArimaMinOrder&quot;: string,
-  &quot;numTrials&quot;: string,
-  &quot;maxParallelTrials&quot;: string,
-  &quot;hparamTuningObjectives&quot;: [
-    enum (HparamTuningObjective)
-  ],
-  &quot;decomposeTimeSeries&quot;: boolean,
-  &quot;cleanSpikesAndDips&quot;: boolean,
-  &quot;adjustStepChanges&quot;: boolean,
-  &quot;enableGlobalExplain&quot;: boolean,
-  &quot;sampledShapleyNumPaths&quot;: string,
-  &quot;integratedGradientsNumSteps&quot;: string,
-  &quot;categoryEncodingMethod&quot;: enum (EncodingMethod),
-  &quot;tfVersion&quot;: string,
-  &quot;instanceWeightColumn&quot;: string,
-  &quot;trendSmoothingWindowSize&quot;: string,
-  &quot;timeSeriesLengthFraction&quot;: number,
-  &quot;minTimeSeriesLength&quot;: string,
-  &quot;maxTimeSeriesLength&quot;: string,
-  &quot;xgboostVersion&quot;: string,
-  &quot;approxGlobalFeatureContrib&quot;: boolean,
-  &quot;fitIntercept&quot;: boolean,
-  &quot;numPrincipalComponents&quot;: string,
-  &quot;pcaExplainedVarianceRatio&quot;: number,
-  &quot;scaleFeatures&quot;: boolean,
-  &quot;pcaSolver&quot;: enum (PcaSolver),
-  &quot;autoClassWeights&quot;: boolean,
-  &quot;activationFn&quot;: string,
-  &quot;optimizer&quot;: string,
-  &quot;budgetHours&quot;: number,
-  &quot;standardizeFeatures&quot;: boolean,
-  &quot;l1RegActivation&quot;: number,
-  &quot;modelRegistry&quot;: enum (ModelRegistry),
-  &quot;vertexAiModelVersionAliases&quot;: [
-    string
-  ],
-  &quot;dimensionIdColumns&quot;: [
-    string
-  ],
-  &quot;contributionMetric&quot;: string,
-  &quot;isTestColumn&quot;: string,
-  &quot;minAprioriSupport&quot;: number
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;maxIterations&quot;: string,&quot;lossType&quot;: enum (LossType),&quot;learnRate&quot;: number,&quot;l1Regularization&quot;: number,&quot;l2Regularization&quot;: number,&quot;minRelativeProgress&quot;: number,&quot;warmStart&quot;: boolean,&quot;earlyStop&quot;: boolean,&quot;inputLabelColumns&quot;: [string],&quot;dataSplitMethod&quot;: enum (DataSplitMethod),&quot;dataSplitEvalFraction&quot;: number,&quot;dataSplitColumn&quot;: string,&quot;learnRateStrategy&quot;: enum (LearnRateStrategy),&quot;initialLearnRate&quot;: number,&quot;labelClassWeights&quot;: {string: number,...},&quot;userColumn&quot;: string,&quot;itemColumn&quot;: string,&quot;distanceType&quot;: enum (DistanceType),&quot;numClusters&quot;: string,&quot;modelUri&quot;: string,&quot;optimizationStrategy&quot;: enum (OptimizationStrategy),&quot;hiddenUnits&quot;: [string],&quot;batchSize&quot;: string,&quot;dropout&quot;: number,&quot;maxTreeDepth&quot;: string,&quot;subsample&quot;: number,&quot;minSplitLoss&quot;: number,&quot;boosterType&quot;: enum (BoosterType),&quot;numParallelTree&quot;: string,&quot;dartNormalizeType&quot;: enum (DartNormalizeType),&quot;treeMethod&quot;: enum (TreeMethod),&quot;minTreeChildWeight&quot;: string,&quot;colsampleBytree&quot;: number,&quot;colsampleBylevel&quot;: number,&quot;colsampleBynode&quot;: number,&quot;numFactors&quot;: string,&quot;feedbackType&quot;: enum (FeedbackType),&quot;walsAlpha&quot;: number,&quot;kmeansInitializationMethod&quot;: enum (KmeansInitializationMethod),&quot;kmeansInitializationColumn&quot;: string,&quot;timeSeriesTimestampColumn&quot;: string,&quot;timeSeriesDataColumn&quot;: string,&quot;autoArima&quot;: boolean,&quot;nonSeasonalOrder&quot;: {object (ArimaOrder)},&quot;dataFrequency&quot;: enum (DataFrequency),&quot;calculatePValues&quot;: boolean,&quot;includeDrift&quot;: boolean,&quot;holidayRegion&quot;: enum (HolidayRegion),&quot;holidayRegions&quot;: [enum (HolidayRegion)],&quot;timeSeriesIdColumn&quot;: string,&quot;timeSeriesIdColumns&quot;: [string],&quot;forecastLimitLowerBound&quot;: number,&quot;forecastLimitUpperBound&quot;: number,&quot;horizon&quot;: string,&quot;autoArimaMaxOrder&quot;: string,&quot;autoArimaMinOrder&quot;: string,&quot;numTrials&quot;: string,&quot;maxParallelTrials&quot;: string,&quot;hparamTuningObjectives&quot;: [enum (HparamTuningObjective)],&quot;decomposeTimeSeries&quot;: boolean,&quot;cleanSpikesAndDips&quot;: boolean,&quot;adjustStepChanges&quot;: boolean,&quot;enableGlobalExplain&quot;: boolean,&quot;sampledShapleyNumPaths&quot;: string,&quot;integratedGradientsNumSteps&quot;: string,&quot;categoryEncodingMethod&quot;: enum (EncodingMethod),&quot;tfVersion&quot;: string,&quot;instanceWeightColumn&quot;: string,&quot;trendSmoothingWindowSize&quot;: string,&quot;timeSeriesLengthFraction&quot;: number,&quot;minTimeSeriesLength&quot;: string,&quot;maxTimeSeriesLength&quot;: string,&quot;xgboostVersion&quot;: string,&quot;approxGlobalFeatureContrib&quot;: boolean,&quot;fitIntercept&quot;: boolean,&quot;numPrincipalComponents&quot;: string,&quot;pcaExplainedVarianceRatio&quot;: number,&quot;scaleFeatures&quot;: boolean,&quot;pcaSolver&quot;: enum (PcaSolver),&quot;autoClassWeights&quot;: boolean,&quot;activationFn&quot;: string,&quot;optimizer&quot;: string,&quot;budgetHours&quot;: number,&quot;standardizeFeatures&quot;: boolean,&quot;l1RegActivation&quot;: number,&quot;modelRegistry&quot;: enum (ModelRegistry),&quot;vertexAiModelVersionAliases&quot;: [string],&quot;dimensionIdColumns&quot;: [string],&quot;contributionMetric&quot;: string,&quot;isTestColumn&quot;: string,&quot;minAprioriSupport&quot;: number}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  maxIterations  `
+`maxIterations`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The maximum number of iterations in training. Used only for iterative training algorithms.
 
-`  lossType  `
+`lossType`
 
-`  enum ( LossType  ` )
+` enum ( LossType  ` )
 
 Type of loss function used during training run.
 
-`  learnRate  `
+`learnRate`
 
-`  number  `
+`number`
 
 Learning rate in training. Used only for iterative training algorithms.
 
-`  l1Regularization  `
+`l1Regularization`
 
-`  number  `
+`number`
 
 L1 regularization coefficient.
 
-`  l2Regularization  `
+`l2Regularization`
 
-`  number  `
+`number`
 
 L2 regularization coefficient.
 
-`  minRelativeProgress  `
+`minRelativeProgress`
 
-`  number  `
+`number`
 
 When earlyStop is true, stops training when accuracy improvement is less than 'minRelativeProgress'. Used only for iterative training algorithms.
 
-`  warmStart  `
+`warmStart`
 
-`  boolean  `
+`boolean`
 
 Whether to train a model from the last checkpoint.
 
-`  earlyStop  `
+`earlyStop`
 
-`  boolean  `
+`boolean`
 
 Whether to stop early when the loss doesn't improve significantly any more (compared to minRelativeProgress). Used only for iterative training algorithms.
 
-`  inputLabelColumns[]  `
+`inputLabelColumns[]`
 
-`  string  `
+`string`
 
 Name of input label columns in training data.
 
-`  dataSplitMethod  `
+`dataSplitMethod`
 
-`  enum ( DataSplitMethod  ` )
+` enum ( DataSplitMethod  ` )
 
 The data split type for training and evaluation, e.g. RANDOM.
 
-`  dataSplitEvalFraction  `
+`dataSplitEvalFraction`
 
-`  number  `
+`number`
 
 The fraction of evaluation data over the whole input data. The rest of data will be used as training data. The format should be double. Accurate to two decimal places. Default value is 0.2.
 
-`  dataSplitColumn  `
+`dataSplitColumn`
 
-`  string  `
+`string`
 
 The column to split data with. This column won't be used as a feature. 1. When dataSplitMethod is CUSTOM, the corresponding column should be boolean. The rows with true value tag are eval data, and the false are training data. 2. When dataSplitMethod is SEQ, the first DATA\_SPLIT\_EVAL\_FRACTION rows (from smallest to largest) in the corresponding column are used as training data, and the rest are eval data. It respects the order in Orderable data types: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties>
 
-`  learnRateStrategy  `
+`learnRateStrategy`
 
-`  enum ( LearnRateStrategy  ` )
+` enum ( LearnRateStrategy  ` )
 
 The strategy to determine learn rate for the current iteration.
 
-`  initialLearnRate  `
+`initialLearnRate`
 
-`  number  `
+`number`
 
 Specifies the initial learning rate for the line search learn rate strategy.
 
-`  labelClassWeights  `
+`labelClassWeights`
 
-`  map (key: string, value: number)  `
+`map (key: string, value: number)`
 
 Weights associated with each label class, for rebalancing the training data. Only applicable for classification models.
 
-`  userColumn  `
+`userColumn`
 
-`  string  `
+`string`
 
 User column specified for matrix factorization models.
 
-`  itemColumn  `
+`itemColumn`
 
-`  string  `
+`string`
 
 Item column specified for matrix factorization models.
 
-`  distanceType  `
+`distanceType`
 
-`  enum ( DistanceType  ` )
+` enum ( DistanceType  ` )
 
 Distance type for clustering models.
 
-`  numClusters  `
+`numClusters`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of clusters for clustering models.
 
-`  modelUri  `
+`modelUri`
 
-`  string  `
+`string`
 
 Google Cloud Storage URI from which the model was imported. Only applicable for imported models.
 
-`  optimizationStrategy  `
+`optimizationStrategy`
 
-`  enum ( OptimizationStrategy  ` )
+` enum ( OptimizationStrategy  ` )
 
 Optimization strategy for training linear regression models.
 
-`  hiddenUnits[]  `
+`hiddenUnits[]`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Hidden units for dnn models.
 
-`  batchSize  `
+`batchSize`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Batch size for dnn models.
 
-`  dropout  `
+`dropout`
 
-`  number  `
+`number`
 
 Dropout probability for dnn models.
 
-`  maxTreeDepth  `
+`maxTreeDepth`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Maximum depth of a tree for boosted tree models.
 
-`  subsample  `
+`subsample`
 
-`  number  `
+`number`
 
 Subsample fraction of the training data to grow tree to prevent overfitting for boosted tree models.
 
-`  minSplitLoss  `
+`minSplitLoss`
 
-`  number  `
+`number`
 
 Minimum split loss for boosted tree models.
 
-`  boosterType  `
+`boosterType`
 
-`  enum ( BoosterType  ` )
+` enum ( BoosterType  ` )
 
 Booster type for boosted tree models.
 
-`  numParallelTree  `
+`numParallelTree`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Number of parallel trees constructed during each iteration for boosted tree models.
 
-`  dartNormalizeType  `
+`dartNormalizeType`
 
-`  enum ( DartNormalizeType  ` )
+` enum ( DartNormalizeType  ` )
 
 Type of normalization algorithm for boosted tree models using dart booster.
 
-`  treeMethod  `
+`treeMethod`
 
-`  enum ( TreeMethod  ` )
+` enum ( TreeMethod  ` )
 
 Tree construction algorithm for boosted tree models.
 
-`  minTreeChildWeight  `
+`minTreeChildWeight`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Minimum sum of instance weight needed in a child for boosted tree models.
 
-`  colsampleBytree  `
+`colsampleBytree`
 
-`  number  `
+`number`
 
 Subsample ratio of columns when constructing each tree for boosted tree models.
 
-`  colsampleBylevel  `
+`colsampleBylevel`
 
-`  number  `
+`number`
 
 Subsample ratio of columns for each level for boosted tree models.
 
-`  colsampleBynode  `
+`colsampleBynode`
 
-`  number  `
+`number`
 
 Subsample ratio of columns for each node(split) for boosted tree models.
 
-`  numFactors  `
+`numFactors`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Num factors specified for matrix factorization models.
 
-`  feedbackType  `
+`feedbackType`
 
-`  enum ( FeedbackType  ` )
+` enum ( FeedbackType  ` )
 
 Feedback type that specifies which algorithm to run for matrix factorization.
 
-`  walsAlpha  `
+`walsAlpha`
 
-`  number  `
+`number`
 
 Hyperparameter for matrix factoration when implicit feedback type is specified.
 
-`  kmeansInitializationMethod  `
+`kmeansInitializationMethod`
 
-`  enum ( KmeansInitializationMethod  ` )
+` enum ( KmeansInitializationMethod  ` )
 
 The method used to initialize the centroids for kmeans algorithm.
 
-`  kmeansInitializationColumn  `
+`kmeansInitializationColumn`
 
-`  string  `
+`string`
 
 The column used to provide the initial centroids for kmeans algorithm when kmeansInitializationMethod is CUSTOM.
 
-`  timeSeriesTimestampColumn  `
+`timeSeriesTimestampColumn`
 
-`  string  `
+`string`
 
 Column to be designated as time series timestamp for ARIMA model.
 
-`  timeSeriesDataColumn  `
+`timeSeriesDataColumn`
 
-`  string  `
+`string`
 
 Column to be designated as time series data for ARIMA model.
 
-`  autoArima  `
+`autoArima`
 
-`  boolean  `
+`boolean`
 
 Whether to enable auto ARIMA or not.
 
-`  nonSeasonalOrder  `
+`nonSeasonalOrder`
 
-`  object ( ArimaOrder  ` )
+` object ( ArimaOrder  ` )
 
 A specification of the non-seasonal part of the ARIMA model: the three components (p, d, q) are the AR order, the degree of differencing, and the MA order.
 
-`  dataFrequency  `
+`dataFrequency`
 
-`  enum ( DataFrequency  ` )
+` enum ( DataFrequency  ` )
 
 The data frequency of a time series.
 
-`  calculatePValues  `
+`calculatePValues`
 
-`  boolean  `
+`boolean`
 
 Whether or not p-value test should be computed for this model. Only available for linear and logistic regression models.
 
-`  includeDrift  `
+`includeDrift`
 
-`  boolean  `
+`boolean`
 
 Include drift when fitting an ARIMA model.
 
-`  holidayRegion  `
+`holidayRegion`
 
-`  enum ( HolidayRegion  ` )
+` enum ( HolidayRegion  ` )
 
 The geographical region based on which the holidays are considered in time series modeling. If a valid value is specified, then holiday effects modeling is enabled.
 
-`  holidayRegions[]  `
+`holidayRegions[]`
 
-`  enum ( HolidayRegion  ` )
+` enum ( HolidayRegion  ` )
 
 A list of geographical regions that are used for time series modeling.
 
-`  timeSeriesIdColumn  `
+`timeSeriesIdColumn`
 
-`  string  `
+`string`
 
 The time series id column that was used during ARIMA model training.
 
-`  timeSeriesIdColumns[]  `
+`timeSeriesIdColumns[]`
 
-`  string  `
+`string`
 
 The time series id columns that were used during ARIMA model training.
 
-`  forecastLimitLowerBound  `
+`forecastLimitLowerBound`
 
-`  number  `
+`number`
 
 The forecast limit lower bound that was used during ARIMA model training with limits. To see more details of the algorithm: <https://otexts.com/fpp2/limits.html>
 
-`  forecastLimitUpperBound  `
+`forecastLimitUpperBound`
 
-`  number  `
+`number`
 
 The forecast limit upper bound that was used during ARIMA model training with limits.
 
-`  horizon  `
+`horizon`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The number of periods ahead that need to be forecasted.
 
-`  autoArimaMaxOrder  `
+`autoArimaMaxOrder`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The max value of the sum of non-seasonal p and q.
 
-`  autoArimaMinOrder  `
+`autoArimaMinOrder`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The min value of the sum of non-seasonal p and q.
 
-`  numTrials  `
+`numTrials`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of trials to run this hyperparameter tuning job.
 
-`  maxParallelTrials  `
+`maxParallelTrials`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Maximum number of trials to run in parallel.
 
-`  hparamTuningObjectives[]  `
+`hparamTuningObjectives[]`
 
-`  enum ( HparamTuningObjective  ` )
+` enum ( HparamTuningObjective  ` )
 
 The target evaluation metrics to optimize the hyperparameters for.
 
-`  decomposeTimeSeries  `
+`decomposeTimeSeries`
 
-`  boolean  `
+`boolean`
 
 If true, perform decompose time series and save the results.
 
-`  cleanSpikesAndDips  `
+`cleanSpikesAndDips`
 
-`  boolean  `
+`boolean`
 
 If true, clean spikes and dips in the input time series.
 
-`  adjustStepChanges  `
+`adjustStepChanges`
 
-`  boolean  `
+`boolean`
 
 If true, detect step changes and make data adjustment in the input time series.
 
-`  enableGlobalExplain  `
+`enableGlobalExplain`
 
-`  boolean  `
+`boolean`
 
 If true, enable global explanation during training.
 
-`  sampledShapleyNumPaths  `
+`sampledShapleyNumPaths`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of paths for the sampled Shapley explain method.
 
-`  integratedGradientsNumSteps  `
+`integratedGradientsNumSteps`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of integral steps for the integrated gradients explain method.
 
-`  categoryEncodingMethod  `
+`categoryEncodingMethod`
 
-`  enum ( EncodingMethod  ` )
+` enum ( EncodingMethod  ` )
 
 Categorical feature encoding method.
 
-`  tfVersion  `
+`tfVersion`
 
-`  string  `
+`string`
 
 Based on the selected TF version, the corresponding docker image is used to train external models.
 
-`  instanceWeightColumn  `
+`instanceWeightColumn`
 
-`  string  `
+`string`
 
 Name of the instance weight column for training data. This column isn't be used as a feature.
 
-`  trendSmoothingWindowSize  `
+`trendSmoothingWindowSize`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Smoothing window size for the trend component. When a positive value is specified, a center moving average smoothing is applied on the history trend. When the smoothing window is out of the boundary at the beginning or the end of the trend, the first element or the last element is padded to fill the smoothing window before the average is applied.
 
-`  timeSeriesLengthFraction  `
+`timeSeriesLengthFraction`
 
-`  number  `
+`number`
 
-The fraction of the interpolated length of the time series that's used to model the time series trend component. All of the time points of the time series are used to model the non-trend component. This training option accelerates modeling training without sacrificing much forecasting accuracy. You can use this option with `  minTimeSeriesLength  ` but not with `  maxTimeSeriesLength  ` .
+The fraction of the interpolated length of the time series that's used to model the time series trend component. All of the time points of the time series are used to model the non-trend component. This training option accelerates modeling training without sacrificing much forecasting accuracy. You can use this option with `minTimeSeriesLength` but not with `maxTimeSeriesLength` .
 
-`  minTimeSeriesLength  `
+`minTimeSeriesLength`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
-The minimum number of time points in a time series that are used in modeling the trend component of the time series. If you use this option you must also set the `  timeSeriesLengthFraction  ` option. This training option ensures that enough time points are available when you use `  timeSeriesLengthFraction  ` in trend modeling. This is particularly important when forecasting multiple time series in a single query using `  timeSeriesIdColumn  ` . If the total number of time points is less than the `  minTimeSeriesLength  ` value, then the query uses all available time points.
+The minimum number of time points in a time series that are used in modeling the trend component of the time series. If you use this option you must also set the `timeSeriesLengthFraction` option. This training option ensures that enough time points are available when you use `timeSeriesLengthFraction` in trend modeling. This is particularly important when forecasting multiple time series in a single query using `timeSeriesIdColumn` . If the total number of time points is less than the `minTimeSeriesLength` value, then the query uses all available time points.
 
-`  maxTimeSeriesLength  `
+`maxTimeSeriesLength`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
-The maximum number of time points in a time series that can be used in modeling the trend component of the time series. Don't use this option with the `  timeSeriesLengthFraction  ` or `  minTimeSeriesLength  ` options.
+The maximum number of time points in a time series that can be used in modeling the trend component of the time series. Don't use this option with the `timeSeriesLengthFraction` or `minTimeSeriesLength` options.
 
-`  xgboostVersion  `
+`xgboostVersion`
 
-`  string  `
+`string`
 
 User-selected XGBoost versions for training of XGBoost models.
 
-`  approxGlobalFeatureContrib  `
+`approxGlobalFeatureContrib`
 
-`  boolean  `
+`boolean`
 
 Whether to use approximate feature contribution method in XGBoost model explanation for global explain.
 
-`  fitIntercept  `
+`fitIntercept`
 
-`  boolean  `
+`boolean`
 
 Whether the model should include intercept during model training.
 
-`  numPrincipalComponents  `
+`numPrincipalComponents`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of principal components to keep in the PCA model. Must be \<= the number of features.
 
-`  pcaExplainedVarianceRatio  `
+`pcaExplainedVarianceRatio`
 
-`  number  `
+`number`
 
 The minimum ratio of cumulative explained variance that needs to be given by the PCA model.
 
-`  scaleFeatures  `
+`scaleFeatures`
 
-`  boolean  `
+`boolean`
 
 If true, scale the feature values by dividing the feature standard deviation. Currently only apply to PCA.
 
-`  pcaSolver  `
+`pcaSolver`
 
-`  enum ( PcaSolver  ` )
+` enum ( PcaSolver  ` )
 
 The solver for PCA.
 
-`  autoClassWeights  `
+`autoClassWeights`
 
-`  boolean  `
+`boolean`
 
 Whether to calculate class weights automatically based on the popularity of each label.
 
-`  activationFn  `
+`activationFn`
 
-`  string  `
+`string`
 
 Activation function of the neural nets.
 
-`  optimizer  `
+`optimizer`
 
-`  string  `
+`string`
 
 Optimizer used for training the neural nets.
 
-`  budgetHours  `
+`budgetHours`
 
-`  number  `
+`number`
 
 Budget in hours for AutoML training.
 
-`  standardizeFeatures  `
+`standardizeFeatures`
 
-`  boolean  `
+`boolean`
 
 Whether to standardize numerical features. Default to true.
 
-`  l1RegActivation  `
+`l1RegActivation`
 
-`  number  `
+`number`
 
 L1 regularization coefficient to activations.
 
-`  modelRegistry  `
+`modelRegistry`
 
-`  enum ( ModelRegistry  ` )
+` enum ( ModelRegistry  ` )
 
 The model registry.
 
-`  vertexAiModelVersionAliases[]  `
+`vertexAiModelVersionAliases[]`
 
-`  string  `
+`string`
 
 The version aliases to apply in Vertex AI model registry. Always overwrite if the version aliases exists in a existing model.
 
-`  dimensionIdColumns[]  `
+`dimensionIdColumns[]`
 
-`  string  `
+`string`
 
 Optional. Names of the columns to slice on. Applies to contribution analysis models.
 
-`  contributionMetric  `
+`contributionMetric`
 
-`  string  `
+`string`
 
-The contribution metric. Applies to contribution analysis models. Allowed formats supported are for summable and summable ratio contribution metrics. These include expressions such as `  SUM(x)  ` or `  SUM(x)/SUM(y)  ` , where x and y are column names from the base table.
+The contribution metric. Applies to contribution analysis models. Allowed formats supported are for summable and summable ratio contribution metrics. These include expressions such as `SUM(x)` or `SUM(x)/SUM(y)` , where x and y are column names from the base table.
 
-`  isTestColumn  `
+`isTestColumn`
 
-`  string  `
+`string`
 
 Name of the column used to determine the rows corresponding to control and test. Applies to contribution analysis models.
 
-`  minAprioriSupport  `
+`minAprioriSupport`
 
-`  number  `
+`number`
 
 The apriori support minimum. Applies to contribution analysis models.
 
@@ -1265,15 +1072,15 @@ Loss metric to evaluate model training performance.
 
 Enums
 
-`  LOSS_TYPE_UNSPECIFIED  `
+`LOSS_TYPE_UNSPECIFIED`
 
 Default value.
 
-`  MEAN_SQUARED_LOSS  `
+`MEAN_SQUARED_LOSS`
 
 Mean squared loss, used for linear regression.
 
-`  MEAN_LOG_LOSS  `
+`MEAN_LOG_LOSS`
 
 Mean log loss, used for logistic regression.
 
@@ -1283,27 +1090,27 @@ Indicates the method to split input data into multiple tables.
 
 Enums
 
-`  DATA_SPLIT_METHOD_UNSPECIFIED  `
+`DATA_SPLIT_METHOD_UNSPECIFIED`
 
 Default value.
 
-`  RANDOM  `
+`RANDOM`
 
 Splits data randomly.
 
-`  CUSTOM  `
+`CUSTOM`
 
 Splits data with the user provided tags.
 
-`  SEQUENTIAL  `
+`SEQUENTIAL`
 
 Splits data sequentially.
 
-`  NO_SPLIT  `
+`NO_SPLIT`
 
 Data split will be skipped.
 
-`  AUTO_SPLIT  `
+`AUTO_SPLIT`
 
 Splits data automatically: Uses NO\_SPLIT if the data size is small. Otherwise uses RANDOM.
 
@@ -1313,15 +1120,15 @@ Indicates the learning rate optimization strategy to use.
 
 Enums
 
-`  LEARN_RATE_STRATEGY_UNSPECIFIED  `
+`LEARN_RATE_STRATEGY_UNSPECIFIED`
 
 Default value.
 
-`  LINE_SEARCH  `
+`LINE_SEARCH`
 
 Use line search to determine learning rate.
 
-`  CONSTANT  `
+`CONSTANT`
 
 Use a constant learning rate.
 
@@ -1331,15 +1138,15 @@ Distance metric used to compute the distance between two points.
 
 Enums
 
-`  DISTANCE_TYPE_UNSPECIFIED  `
+`DISTANCE_TYPE_UNSPECIFIED`
 
 Default value.
 
-`  EUCLIDEAN  `
+`EUCLIDEAN`
 
 Eculidean distance.
 
-`  COSINE  `
+`COSINE`
 
 Cosine distance.
 
@@ -1349,15 +1156,15 @@ Indicates the optimization strategy used for training.
 
 Enums
 
-`  OPTIMIZATION_STRATEGY_UNSPECIFIED  `
+`OPTIMIZATION_STRATEGY_UNSPECIFIED`
 
 Default value.
 
-`  BATCH_GRADIENT_DESCENT  `
+`BATCH_GRADIENT_DESCENT`
 
 Uses an iterative batch gradient descent algorithm.
 
-`  NORMAL_EQUATION  `
+`NORMAL_EQUATION`
 
 Uses a normal equation to solve linear regression problem.
 
@@ -1367,15 +1174,15 @@ Booster types supported. Refer to booster parameter in XGBoost.
 
 Enums
 
-`  BOOSTER_TYPE_UNSPECIFIED  `
+`BOOSTER_TYPE_UNSPECIFIED`
 
 Unspecified booster type.
 
-`  GBTREE  `
+`GBTREE`
 
 Gbtree booster.
 
-`  DART  `
+`DART`
 
 Dart booster.
 
@@ -1385,15 +1192,15 @@ Type of normalization algorithm for boosted tree models using dart booster. Refe
 
 Enums
 
-`  DART_NORMALIZE_TYPE_UNSPECIFIED  `
+`DART_NORMALIZE_TYPE_UNSPECIFIED`
 
 Unspecified dart normalize type.
 
-`  TREE  `
+`TREE`
 
 New trees have the same weight of each of dropped trees.
 
-`  FOREST  `
+`FOREST`
 
 New trees have the same weight of sum of dropped trees.
 
@@ -1403,23 +1210,23 @@ Tree construction algorithm used in boosted tree models. Refer to treeMethod in 
 
 Enums
 
-`  TREE_METHOD_UNSPECIFIED  `
+`TREE_METHOD_UNSPECIFIED`
 
 Unspecified tree method.
 
-`  AUTO  `
+`AUTO`
 
 Use heuristic to choose the fastest method.
 
-`  EXACT  `
+`EXACT`
 
 Exact greedy algorithm.
 
-`  APPROX  `
+`APPROX`
 
 Approximate greedy algorithm using quantile sketch and gradient histogram.
 
-`  HIST  `
+`HIST`
 
 Fast histogram optimized approximate greedy algorithm.
 
@@ -1429,15 +1236,15 @@ Indicates the training algorithm to use for matrix factorization models.
 
 Enums
 
-`  FEEDBACK_TYPE_UNSPECIFIED  `
+`FEEDBACK_TYPE_UNSPECIFIED`
 
 Default value.
 
-`  IMPLICIT  `
+`IMPLICIT`
 
 Use weighted-als for implicit feedback problems.
 
-`  EXPLICIT  `
+`EXPLICIT`
 
 Use nonweighted-als for explicit feedback problems.
 
@@ -1447,19 +1254,19 @@ Indicates the method used to initialize the centroids for KMeans clustering algo
 
 Enums
 
-`  KMEANS_INITIALIZATION_METHOD_UNSPECIFIED  `
+`KMEANS_INITIALIZATION_METHOD_UNSPECIFIED`
 
 Unspecified initialization method.
 
-`  RANDOM  `
+`RANDOM`
 
 Initializes the centroids randomly.
 
-`  CUSTOM  `
+`CUSTOM`
 
 Initializes the centroids using data specified in kmeansInitializationColumn.
 
-`  KMEANS_PLUS_PLUS  `
+`KMEANS_PLUS_PLUS`
 
 Initializes with kmeans++.
 
@@ -1489,21 +1296,21 @@ Arima order, can be used for both non-seasonal and seasonal parts.
 
 Fields
 
-`  p  `
+`p`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Order of the autoregressive part.
 
-`  d  `
+`d`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Order of the differencing part.
 
-`  q  `
+`q`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Order of the moving-average part.
 
@@ -1513,39 +1320,39 @@ Type of supported data frequency for time series forecasting models.
 
 Enums
 
-`  DATA_FREQUENCY_UNSPECIFIED  `
+`DATA_FREQUENCY_UNSPECIFIED`
 
 Default value.
 
-`  AUTO_FREQUENCY  `
+`AUTO_FREQUENCY`
 
 Automatically inferred from timestamps.
 
-`  YEARLY  `
+`YEARLY`
 
 Yearly data.
 
-`  QUARTERLY  `
+`QUARTERLY`
 
 Quarterly data.
 
-`  MONTHLY  `
+`MONTHLY`
 
 Monthly data.
 
-`  WEEKLY  `
+`WEEKLY`
 
 Weekly data.
 
-`  DAILY  `
+`DAILY`
 
 Daily data.
 
-`  HOURLY  `
+`HOURLY`
 
 Hourly data.
 
-`  PER_MINUTE  `
+`PER_MINUTE`
 
 Per-minute data.
 
@@ -1555,279 +1362,279 @@ Type of supported holiday regions for time series forecasting models.
 
 Enums
 
-`  HOLIDAY_REGION_UNSPECIFIED  `
+`HOLIDAY_REGION_UNSPECIFIED`
 
 Holiday region unspecified.
 
-`  GLOBAL  `
+`GLOBAL`
 
 Global.
 
-`  NA  `
+`NA`
 
 North America.
 
-`  JAPAC  `
+`JAPAC`
 
 Japan and Asia Pacific: Korea, Greater China, India, Australia, and New Zealand.
 
-`  EMEA  `
+`EMEA`
 
 Europe, the Middle East and Africa.
 
-`  LAC  `
+`LAC`
 
 Latin America and the Caribbean.
 
-`  AE  `
+`AE`
 
 United Arab Emirates
 
-`  AR  `
+`AR`
 
 Argentina
 
-`  AT  `
+`AT`
 
 Austria
 
-`  AU  `
+`AU`
 
 Australia
 
-`  BE  `
+`BE`
 
 Belgium
 
-`  BR  `
+`BR`
 
 Brazil
 
-`  CA  `
+`CA`
 
 Canada
 
-`  CH  `
+`CH`
 
 Switzerland
 
-`  CL  `
+`CL`
 
 Chile
 
-`  CN  `
+`CN`
 
 China
 
-`  CO  `
+`CO`
 
 Colombia
 
-`  CS  `
+`CS`
 
 Czechoslovakia
 
-`  CZ  `
+`CZ`
 
 Czech Republic
 
-`  DE  `
+`DE`
 
 Germany
 
-`  DK  `
+`DK`
 
 Denmark
 
-`  DZ  `
+`DZ`
 
 Algeria
 
-`  EC  `
+`EC`
 
 Ecuador
 
-`  EE  `
+`EE`
 
 Estonia
 
-`  EG  `
+`EG`
 
 Egypt
 
-`  ES  `
+`ES`
 
 Spain
 
-`  FI  `
+`FI`
 
 Finland
 
-`  FR  `
+`FR`
 
 France
 
-`  GB  `
+`GB`
 
 Great Britain (United Kingdom)
 
-`  GR  `
+`GR`
 
 Greece
 
-`  HK  `
+`HK`
 
 Hong Kong
 
-`  HU  `
+`HU`
 
 Hungary
 
-`  ID  `
+`ID`
 
 Indonesia
 
-`  IE  `
+`IE`
 
 Ireland
 
-`  IL  `
+`IL`
 
 Israel
 
-`  IN  `
+`IN`
 
 India
 
-`  IR  `
+`IR`
 
 Iran
 
-`  IT  `
+`IT`
 
 Italy
 
-`  JP  `
+`JP`
 
 Japan
 
-`  KR  `
+`KR`
 
 Korea (South)
 
-`  LV  `
+`LV`
 
 Latvia
 
-`  MA  `
+`MA`
 
 Morocco
 
-`  MX  `
+`MX`
 
 Mexico
 
-`  MY  `
+`MY`
 
 Malaysia
 
-`  NG  `
+`NG`
 
 Nigeria
 
-`  NL  `
+`NL`
 
 Netherlands
 
-`  NO  `
+`NO`
 
 Norway
 
-`  NZ  `
+`NZ`
 
 New Zealand
 
-`  PE  `
+`PE`
 
 Peru
 
-`  PH  `
+`PH`
 
 Philippines
 
-`  PK  `
+`PK`
 
 Pakistan
 
-`  PL  `
+`PL`
 
 Poland
 
-`  PT  `
+`PT`
 
 Portugal
 
-`  RO  `
+`RO`
 
 Romania
 
-`  RS  `
+`RS`
 
 Serbia
 
-`  RU  `
+`RU`
 
 Russian Federation
 
-`  SA  `
+`SA`
 
 Saudi Arabia
 
-`  SE  `
+`SE`
 
 Sweden
 
-`  SG  `
+`SG`
 
 Singapore
 
-`  SI  `
+`SI`
 
 Slovenia
 
-`  SK  `
+`SK`
 
 Slovakia
 
-`  TH  `
+`TH`
 
 Thailand
 
-`  TR  `
+`TR`
 
 Turkey
 
-`  TW  `
+`TW`
 
 Taiwan
 
-`  UA  `
+`UA`
 
 Ukraine
 
-`  US  `
+`US`
 
 United States
 
-`  VE  `
+`VE`
 
 Venezuela
 
-`  VN  `
+`VN`
 
 Vietnam
 
-`  ZA  `
+`ZA`
 
 South Africa
 
@@ -1837,71 +1644,71 @@ Available evaluation metrics used as hyperparameter tuning objectives.
 
 Enums
 
-`  HPARAM_TUNING_OBJECTIVE_UNSPECIFIED  `
+`HPARAM_TUNING_OBJECTIVE_UNSPECIFIED`
 
 Unspecified evaluation metric.
 
-`  MEAN_ABSOLUTE_ERROR  `
+`MEAN_ABSOLUTE_ERROR`
 
 Mean absolute error. meanAbsoluteError = AVG(ABS(label - predicted))
 
-`  MEAN_SQUARED_ERROR  `
+`MEAN_SQUARED_ERROR`
 
 Mean squared error. meanSquaredError = AVG(POW(label - predicted, 2))
 
-`  MEAN_SQUARED_LOG_ERROR  `
+`MEAN_SQUARED_LOG_ERROR`
 
 Mean squared log error. meanSquaredLogError = AVG(POW(LN(1 + label) - LN(1 + predicted), 2))
 
-`  MEDIAN_ABSOLUTE_ERROR  `
+`MEDIAN_ABSOLUTE_ERROR`
 
 Mean absolute error. medianAbsoluteError = APPROX\_QUANTILES(absolute\_error, 2)\[OFFSET(1)\]
 
-`  R_SQUARED  `
+`R_SQUARED`
 
 R^2 score. This corresponds to r2\_score in ML.EVALUATE. rSquared = 1 - SUM(squared\_error)/(COUNT(label)\*VAR\_POP(label))
 
-`  EXPLAINED_VARIANCE  `
+`EXPLAINED_VARIANCE`
 
 Explained variance. explainedVariance = 1 - VAR\_POP(label\_error)/VAR\_POP(label)
 
-`  PRECISION  `
+`PRECISION`
 
 Precision is the fraction of actual positive predictions that had positive actual labels. For multiclass this is a macro-averaged metric treating each class as a binary classifier.
 
-`  RECALL  `
+`RECALL`
 
 Recall is the fraction of actual positive labels that were given a positive prediction. For multiclass this is a macro-averaged metric.
 
-`  ACCURACY  `
+`ACCURACY`
 
 Accuracy is the fraction of predictions given the correct label. For multiclass this is a globally micro-averaged metric.
 
-`  F1_SCORE  `
+`F1_SCORE`
 
 The F1 score is an average of recall and precision. For multiclass this is a macro-averaged metric.
 
-`  LOG_LOSS  `
+`LOG_LOSS`
 
 Logarithmic Loss. For multiclass this is a macro-averaged metric.
 
-`  ROC_AUC  `
+`ROC_AUC`
 
 Area Under an ROC Curve. For multiclass this is a macro-averaged metric.
 
-`  DAVIES_BOULDIN_INDEX  `
+`DAVIES_BOULDIN_INDEX`
 
 Davies-Bouldin Index.
 
-`  MEAN_AVERAGE_PRECISION  `
+`MEAN_AVERAGE_PRECISION`
 
 Mean Average Precision.
 
-`  NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN  `
+`NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN`
 
 Normalized Discounted Cumulative Gain.
 
-`  AVERAGE_RANK  `
+`AVERAGE_RANK`
 
 Average Rank.
 
@@ -1911,19 +1718,19 @@ Supported encoding methods for categorical features.
 
 Enums
 
-`  ENCODING_METHOD_UNSPECIFIED  `
+`ENCODING_METHOD_UNSPECIFIED`
 
 Unspecified encoding method.
 
-`  ONE_HOT_ENCODING  `
+`ONE_HOT_ENCODING`
 
 Applies one-hot encoding.
 
-`  LABEL_ENCODING  `
+`LABEL_ENCODING`
 
 Applies label encoding.
 
-`  DUMMY_ENCODING  `
+`DUMMY_ENCODING`
 
 Applies dummy encoding.
 
@@ -1933,19 +1740,19 @@ Enums for supported PCA solvers.
 
 Enums
 
-`  UNSPECIFIED  `
+`UNSPECIFIED`
 
 Default value.
 
-`  FULL  `
+`FULL`
 
 Full eigen-decoposition.
 
-`  RANDOMIZED  `
+`RANDOMIZED`
 
 Randomized SVD.
 
-`  AUTO  `
+`AUTO`
 
 Auto.
 
@@ -1955,11 +1762,11 @@ Enums for supported model registries.
 
 Enums
 
-`  MODEL_REGISTRY_UNSPECIFIED  `
+`MODEL_REGISTRY_UNSPECIFIED`
 
 Default value.
 
-`  VERTEX_AI  `
+`VERTEX_AI`
 
 Vertex AI.
 
@@ -1978,77 +1785,58 @@ Information about a single iteration of the training run.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;index&quot;: integer,
-  &quot;durationMs&quot;: string,
-  &quot;trainingLoss&quot;: number,
-  &quot;evalLoss&quot;: number,
-  &quot;learnRate&quot;: number,
-  &quot;clusterInfos&quot;: [
-    {
-      object (ClusterInfo)
-    }
-  ],
-  &quot;arimaResult&quot;: {
-    object (ArimaResult)
-  },
-  &quot;principalComponentInfos&quot;: [
-    {
-      object (PrincipalComponentInfo)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;index&quot;: integer,&quot;durationMs&quot;: string,&quot;trainingLoss&quot;: number,&quot;evalLoss&quot;: number,&quot;learnRate&quot;: number,&quot;clusterInfos&quot;: [{object (ClusterInfo)}],&quot;arimaResult&quot;: {object (ArimaResult)},&quot;principalComponentInfos&quot;: [{object (PrincipalComponentInfo)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  index  `
+`index`
 
-`  integer  `
+`integer`
 
 Index of the iteration, 0 based.
 
-`  durationMs  `
+`durationMs`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Time taken to run the iteration in milliseconds.
 
-`  trainingLoss  `
+`trainingLoss`
 
-`  number  `
+`number`
 
 Loss computed on the training data at the end of iteration.
 
-`  evalLoss  `
+`evalLoss`
 
-`  number  `
+`number`
 
 Loss computed on the eval data at the end of iteration.
 
-`  learnRate  `
+`learnRate`
 
-`  number  `
+`number`
 
 Learn rate used for this iteration.
 
-`  clusterInfos[]  `
+`clusterInfos[]`
 
-`  object ( ClusterInfo  ` )
+` object ( ClusterInfo  ` )
 
 Information about top clusters for clustering models.
 
-`  arimaResult  `
+`arimaResult`
 
-`  object ( ArimaResult  ` )
+` object ( ArimaResult  ` )
 
 Arima result.
 
-`  principalComponentInfos[]  `
+`principalComponentInfos[]`
 
-`  object ( PrincipalComponentInfo  ` )
+` object ( PrincipalComponentInfo  ` )
 
 The information of the principal components.
 
@@ -2078,21 +1866,21 @@ Information about a single cluster for clustering model.
 
 Fields
 
-`  centroidId  `
+`centroidId`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Centroid id.
 
-`  clusterRadius  `
+`clusterRadius`
 
-`  number  `
+`number`
 
 Cluster radius, the average distance from centroid to each point assigned to the cluster.
 
-`  clusterSize  `
+`clusterSize`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Cluster size, the total number of points assigned to the cluster.
 
@@ -2111,31 +1899,22 @@ Cluster size, the total number of points assigned to the cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;arimaModelInfo&quot;: [
-    {
-      object (ArimaModelInfo)
-    }
-  ],
-  &quot;seasonalPeriods&quot;: [
-    enum (SeasonalPeriodType)
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;arimaModelInfo&quot;: [{object (ArimaModelInfo)}],&quot;seasonalPeriods&quot;: [enum (SeasonalPeriodType)]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  arimaModelInfo[]  `
+`arimaModelInfo[]`
 
-`  object ( ArimaModelInfo  ` )
+` object ( ArimaModelInfo  ` )
 
 This message is repeated because there are multiple arima models fitted in auto-arima. For non-auto-arima model, its size is one.
 
-`  seasonalPeriods[]  `
+`seasonalPeriods[]`
 
-`  enum ( SeasonalPeriodType  ` )
+` enum ( SeasonalPeriodType  ` )
 
 Seasonal periods. Repeated because multiple periods are supported for one time series.
 
@@ -2154,91 +1933,70 @@ Arima model information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;nonSeasonalOrder&quot;: {
-    object (ArimaOrder)
-  },
-  &quot;arimaCoefficients&quot;: {
-    object (ArimaCoefficients)
-  },
-  &quot;arimaFittingMetrics&quot;: {
-    object (ArimaFittingMetrics)
-  },
-  &quot;hasDrift&quot;: boolean,
-  &quot;timeSeriesId&quot;: string,
-  &quot;timeSeriesIds&quot;: [
-    string
-  ],
-  &quot;seasonalPeriods&quot;: [
-    enum (SeasonalPeriodType)
-  ],
-  &quot;hasHolidayEffect&quot;: boolean,
-  &quot;hasSpikesAndDips&quot;: boolean,
-  &quot;hasStepChanges&quot;: boolean
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;nonSeasonalOrder&quot;: {object (ArimaOrder)},&quot;arimaCoefficients&quot;: {object (ArimaCoefficients)},&quot;arimaFittingMetrics&quot;: {object (ArimaFittingMetrics)},&quot;hasDrift&quot;: boolean,&quot;timeSeriesId&quot;: string,&quot;timeSeriesIds&quot;: [string],&quot;seasonalPeriods&quot;: [enum (SeasonalPeriodType)],&quot;hasHolidayEffect&quot;: boolean,&quot;hasSpikesAndDips&quot;: boolean,&quot;hasStepChanges&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  nonSeasonalOrder  `
+`nonSeasonalOrder`
 
-`  object ( ArimaOrder  ` )
+` object ( ArimaOrder  ` )
 
 Non-seasonal order.
 
-`  arimaCoefficients  `
+`arimaCoefficients`
 
-`  object ( ArimaCoefficients  ` )
+` object ( ArimaCoefficients  ` )
 
 Arima coefficients.
 
-`  arimaFittingMetrics  `
+`arimaFittingMetrics`
 
-`  object ( ArimaFittingMetrics  ` )
+` object ( ArimaFittingMetrics  ` )
 
 Arima fitting metrics.
 
-`  hasDrift  `
+`hasDrift`
 
-`  boolean  `
+`boolean`
 
 Whether Arima model fitted with drift or not. It is always false when d is not 1.
 
-`  timeSeriesId  `
+`timeSeriesId`
 
-`  string  `
+`string`
 
 The timeSeriesId value for this time series. It will be one of the unique values from the timeSeriesIdColumn specified during ARIMA model training. Only present when timeSeriesIdColumn training option was used.
 
-`  timeSeriesIds[]  `
+`timeSeriesIds[]`
 
-`  string  `
+`string`
 
 The tuple of timeSeriesIds identifying this time series. It will be one of the unique tuples of values present in the timeSeriesIdColumns specified during ARIMA model training. Only present when timeSeriesIdColumns training option was used and the order of values here are same as the order of timeSeriesIdColumns.
 
-`  seasonalPeriods[]  `
+`seasonalPeriods[]`
 
-`  enum ( SeasonalPeriodType  ` )
+` enum ( SeasonalPeriodType  ` )
 
 Seasonal periods. Repeated because multiple periods are supported for one time series.
 
-`  hasHolidayEffect  `
+`hasHolidayEffect`
 
-`  boolean  `
+`boolean`
 
 If true, holiday\_effect is a part of time series decomposition result.
 
-`  hasSpikesAndDips  `
+`hasSpikesAndDips`
 
-`  boolean  `
+`boolean`
 
 If true, spikes\_and\_dips is a part of time series decomposition result.
 
-`  hasStepChanges  `
+`hasStepChanges`
 
-`  boolean  `
+`boolean`
 
 If true, step\_changes is a part of time series decomposition result.
 
@@ -2272,21 +2030,21 @@ Arima coefficients.
 
 Fields
 
-`  autoRegressiveCoefficients[]  `
+`autoRegressiveCoefficients[]`
 
-`  number  `
+`number`
 
 Auto-regressive coefficients, an array of double.
 
-`  movingAverageCoefficients[]  `
+`movingAverageCoefficients[]`
 
-`  number  `
+`number`
 
 Moving-average coefficients, an array of double.
 
-`  interceptCoefficient  `
+`interceptCoefficient`
 
-`  number  `
+`number`
 
 Intercept coefficient, just a double not an array.
 
@@ -2316,21 +2074,21 @@ ARIMA model fitting metrics.
 
 Fields
 
-`  logLikelihood  `
+`logLikelihood`
 
-`  number  `
+`number`
 
 Log-likelihood.
 
-`  aic  `
+`aic`
 
-`  number  `
+`number`
 
 AIC.
 
-`  variance  `
+`variance`
 
-`  number  `
+`number`
 
 Variance.
 
@@ -2340,31 +2098,31 @@ Seasonal period type.
 
 Enums
 
-`  SEASONAL_PERIOD_TYPE_UNSPECIFIED  `
+`SEASONAL_PERIOD_TYPE_UNSPECIFIED`
 
 Unspecified seasonal period.
 
-`  NO_SEASONALITY  `
+`NO_SEASONALITY`
 
 No seasonality
 
-`  DAILY  `
+`DAILY`
 
 Daily period, 24 hours.
 
-`  WEEKLY  `
+`WEEKLY`
 
 Weekly period, 7 days.
 
-`  MONTHLY  `
+`MONTHLY`
 
 Monthly period, 30 days or irregular.
 
-`  QUARTERLY  `
+`QUARTERLY`
 
 Quarterly period, 90 days or irregular.
 
-`  YEARLY  `
+`YEARLY`
 
 Yearly period, 365 days or irregular.
 
@@ -2395,27 +2153,27 @@ Principal component infos, used only for eigen decomposition based models, e.g.,
 
 Fields
 
-`  principalComponentId  `
+`principalComponentId`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Id of the principal component.
 
-`  explainedVariance  `
+`explainedVariance`
 
-`  number  `
+`number`
 
 Explained variance by this principal component, which is simply the eigenvalue.
 
-`  explainedVarianceRatio  `
+`explainedVarianceRatio`
 
-`  number  `
+`number`
 
 Explained\_variance over the total explained variance.
 
-`  cumulativeExplainedVarianceRatio  `
+`cumulativeExplainedVarianceRatio`
 
-`  number  `
+`number`
 
 The explainedVariance is pre-ordered in the descending order to compute the cumulative explained variance ratio.
 
@@ -2434,79 +2192,54 @@ Evaluation metrics of a model. These are either computed on all training data or
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field metrics can be only one of the following:
-  &quot;regressionMetrics&quot;: {
-    object (RegressionMetrics)
-  },
-  &quot;binaryClassificationMetrics&quot;: {
-    object (BinaryClassificationMetrics)
-  },
-  &quot;multiClassClassificationMetrics&quot;: {
-    object (MultiClassClassificationMetrics)
-  },
-  &quot;clusteringMetrics&quot;: {
-    object (ClusteringMetrics)
-  },
-  &quot;rankingMetrics&quot;: {
-    object (RankingMetrics)
-  },
-  &quot;arimaForecastingMetrics&quot;: {
-    object (ArimaForecastingMetrics)
-  },
-  &quot;dimensionalityReductionMetrics&quot;: {
-    object (DimensionalityReductionMetrics)
-  }
-  // End of list of possible types for union field metrics.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field metrics can be only one of the following:&quot;regressionMetrics&quot;: {object (RegressionMetrics)},&quot;binaryClassificationMetrics&quot;: {object (BinaryClassificationMetrics)},&quot;multiClassClassificationMetrics&quot;: {object (MultiClassClassificationMetrics)},&quot;clusteringMetrics&quot;: {object (ClusteringMetrics)},&quot;rankingMetrics&quot;: {object (RankingMetrics)},&quot;arimaForecastingMetrics&quot;: {object (ArimaForecastingMetrics)},&quot;dimensionalityReductionMetrics&quot;: {object (DimensionalityReductionMetrics)}// End of list of possible types for union field metrics.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  metrics  ` . Metrics. `  metrics  ` can be only one of the following:
+Union field `metrics` . Metrics. `metrics` can be only one of the following:
 
-`  regressionMetrics  `
+`regressionMetrics`
 
-`  object ( RegressionMetrics  ` )
+` object ( RegressionMetrics  ` )
 
 Populated for regression models and explicit feedback type matrix factorization models.
 
-`  binaryClassificationMetrics  `
+`binaryClassificationMetrics`
 
-`  object ( BinaryClassificationMetrics  ` )
+` object ( BinaryClassificationMetrics  ` )
 
 Populated for binary classification/classifier models.
 
-`  multiClassClassificationMetrics  `
+`multiClassClassificationMetrics`
 
-`  object ( MultiClassClassificationMetrics  ` )
+` object ( MultiClassClassificationMetrics  ` )
 
 Populated for multi-class classification/classifier models.
 
-`  clusteringMetrics  `
+`clusteringMetrics`
 
-`  object ( ClusteringMetrics  ` )
+` object ( ClusteringMetrics  ` )
 
 Populated for clustering models.
 
-`  rankingMetrics  `
+`rankingMetrics`
 
-`  object ( RankingMetrics  ` )
+` object ( RankingMetrics  ` )
 
 Populated for implicit feedback type matrix factorization models.
 
-`  arimaForecastingMetrics  `
+`arimaForecastingMetrics`
 
-`  object ( ArimaForecastingMetrics  ` )
+` object ( ArimaForecastingMetrics  ` )
 
 Populated for ARIMA models.
 
-`  dimensionalityReductionMetrics  `
+`dimensionalityReductionMetrics`
 
-`  object ( DimensionalityReductionMetrics  ` )
+` object ( DimensionalityReductionMetrics  ` )
 
 Evaluation metrics when the model is a dimensionality reduction model, which currently includes PCA.
 
@@ -2538,33 +2271,33 @@ Evaluation metrics for regression and explicit feedback type matrix factorizatio
 
 Fields
 
-`  meanAbsoluteError  `
+`meanAbsoluteError`
 
-`  number  `
+`number`
 
 Mean absolute error.
 
-`  meanSquaredError  `
+`meanSquaredError`
 
-`  number  `
+`number`
 
 Mean squared error.
 
-`  meanSquaredLogError  `
+`meanSquaredLogError`
 
-`  number  `
+`number`
 
 Mean squared log error.
 
-`  medianAbsoluteError  `
+`medianAbsoluteError`
 
-`  number  `
+`number`
 
 Median absolute error.
 
-`  rSquared  `
+`rSquared`
 
-`  number  `
+`number`
 
 R^2 score. This corresponds to r2\_score in ML.EVALUATE.
 
@@ -2583,45 +2316,34 @@ Evaluation metrics for binary classification/classifier models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;aggregateClassificationMetrics&quot;: {
-    object (AggregateClassificationMetrics)
-  },
-  &quot;binaryConfusionMatrixList&quot;: [
-    {
-      object (BinaryConfusionMatrix)
-    }
-  ],
-  &quot;positiveLabel&quot;: string,
-  &quot;negativeLabel&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;aggregateClassificationMetrics&quot;: {object (AggregateClassificationMetrics)},&quot;binaryConfusionMatrixList&quot;: [{object (BinaryConfusionMatrix)}],&quot;positiveLabel&quot;: string,&quot;negativeLabel&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  aggregateClassificationMetrics  `
+`aggregateClassificationMetrics`
 
-`  object ( AggregateClassificationMetrics  ` )
+` object ( AggregateClassificationMetrics  ` )
 
 Aggregate classification metrics.
 
-`  binaryConfusionMatrixList[]  `
+`binaryConfusionMatrixList[]`
 
-`  object ( BinaryConfusionMatrix  ` )
+` object ( BinaryConfusionMatrix  ` )
 
 Binary confusion matrix at multiple thresholds.
 
-`  positiveLabel  `
+`positiveLabel`
 
-`  string  `
+`string`
 
 Label representing the positive class.
 
-`  negativeLabel  `
+`negativeLabel`
 
-`  string  `
+`string`
 
 Label representing the negative class.
 
@@ -2655,45 +2377,45 @@ Aggregate metrics for classification/classifier models. For multi-class models, 
 
 Fields
 
-`  precision  `
+`precision`
 
-`  number  `
+`number`
 
 Precision is the fraction of actual positive predictions that had positive actual labels. For multiclass this is a macro-averaged metric treating each class as a binary classifier.
 
-`  recall  `
+`recall`
 
-`  number  `
+`number`
 
 Recall is the fraction of actual positive labels that were given a positive prediction. For multiclass this is a macro-averaged metric.
 
-`  accuracy  `
+`accuracy`
 
-`  number  `
+`number`
 
 Accuracy is the fraction of predictions given the correct label. For multiclass this is a micro-averaged metric.
 
-`  threshold  `
+`threshold`
 
-`  number  `
+`number`
 
 Threshold at which the metrics are computed. For binary classification models this is the positive class threshold. For multi-class classification models this is the confidence threshold.
 
-`  f1Score  `
+`f1Score`
 
-`  number  `
+`number`
 
 The F1 score is an average of recall and precision. For multiclass this is a macro-averaged metric.
 
-`  logLoss  `
+`logLoss`
 
-`  number  `
+`number`
 
 Logarithmic Loss. For multiclass this is a macro-averaged metric.
 
-`  rocAuc  `
+`rocAuc`
 
-`  number  `
+`number`
 
 Area Under a ROC Curve. For multiclass this is a macro-averaged metric.
 
@@ -2729,57 +2451,57 @@ Confusion matrix for binary classification models.
 
 Fields
 
-`  positiveClassThreshold  `
+`positiveClassThreshold`
 
-`  number  `
+`number`
 
 Threshold value used when computing each of the following metric.
 
-`  truePositives  `
+`truePositives`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Number of true samples predicted as true.
 
-`  falsePositives  `
+`falsePositives`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Number of false samples predicted as true.
 
-`  trueNegatives  `
+`trueNegatives`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Number of true samples predicted as false.
 
-`  falseNegatives  `
+`falseNegatives`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Number of false samples predicted as false.
 
-`  precision  `
+`precision`
 
-`  number  `
+`number`
 
 The fraction of actual positive predictions that had positive actual labels.
 
-`  recall  `
+`recall`
 
-`  number  `
+`number`
 
 The fraction of actual positive labels that were given a positive prediction.
 
-`  f1Score  `
+`f1Score`
 
-`  number  `
+`number`
 
 The equally weighted average of recall and precision.
 
-`  accuracy  `
+`accuracy`
 
-`  number  `
+`number`
 
 The fraction of predictions given the correct label.
 
@@ -2798,31 +2520,22 @@ Evaluation metrics for multi-class classification/classifier models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;aggregateClassificationMetrics&quot;: {
-    object (AggregateClassificationMetrics)
-  },
-  &quot;confusionMatrixList&quot;: [
-    {
-      object (ConfusionMatrix)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;aggregateClassificationMetrics&quot;: {object (AggregateClassificationMetrics)},&quot;confusionMatrixList&quot;: [{object (ConfusionMatrix)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  aggregateClassificationMetrics  `
+`aggregateClassificationMetrics`
 
-`  object ( AggregateClassificationMetrics  ` )
+` object ( AggregateClassificationMetrics  ` )
 
 Aggregate classification metrics.
 
-`  confusionMatrixList[]  `
+`confusionMatrixList[]`
 
-`  object ( ConfusionMatrix  ` )
+` object ( ConfusionMatrix  ` )
 
 Confusion matrix at different thresholds.
 
@@ -2841,29 +2554,22 @@ Confusion matrix for multi-class classification models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;confidenceThreshold&quot;: number,
-  &quot;rows&quot;: [
-    {
-      object (Row)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;confidenceThreshold&quot;: number,&quot;rows&quot;: [{object (Row)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  confidenceThreshold  `
+`confidenceThreshold`
 
-`  number  `
+`number`
 
 Confidence threshold used when computing the entries of the confusion matrix.
 
-`  rows[]  `
+`rows[]`
 
-`  object ( Row  ` )
+` object ( Row  ` )
 
 One row per actual label.
 
@@ -2882,29 +2588,22 @@ A single row in the confusion matrix.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;actualLabel&quot;: string,
-  &quot;entries&quot;: [
-    {
-      object (Entry)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;actualLabel&quot;: string,&quot;entries&quot;: [{object (Entry)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  actualLabel  `
+`actualLabel`
 
-`  string  `
+`string`
 
 The original label of this row.
 
-`  entries[]  `
+`entries[]`
 
-`  object ( Entry  ` )
+` object ( Entry  ` )
 
 Info describing predicted label distribution.
 
@@ -2933,15 +2632,15 @@ A single entry in the confusion matrix.
 
 Fields
 
-`  predictedLabel  `
+`predictedLabel`
 
-`  string  `
+`string`
 
 The predicted label. For confidenceThreshold \> 0, we will also add an entry indicating the number of items under the confidence threshold.
 
-`  itemCount  `
+`itemCount`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Number of items being predicted as this label.
 
@@ -2960,36 +2659,28 @@ Evaluation metrics for clustering models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;daviesBouldinIndex&quot;: number,
-  &quot;meanSquaredDistance&quot;: number,
-  &quot;clusters&quot;: [
-    {
-      object (Cluster)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;daviesBouldinIndex&quot;: number,&quot;meanSquaredDistance&quot;: number,&quot;clusters&quot;: [{object (Cluster)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  daviesBouldinIndex  `
+`daviesBouldinIndex`
 
-`  number  `
+`number`
 
 Davies-Bouldin index.
 
-`  meanSquaredDistance  `
+`meanSquaredDistance`
 
-`  number  `
+`number`
 
 Mean of squared distances between each sample to its cluster centroid.
 
-`  clusters[]  `
+`clusters[]`
 
-`  object ( Cluster  ` )
+` object ( Cluster  ` )
 
 Information for all clusters.
 
@@ -3008,36 +2699,28 @@ Message containing the information about one cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;centroidId&quot;: string,
-  &quot;featureValues&quot;: [
-    {
-      object (FeatureValue)
-    }
-  ],
-  &quot;count&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;centroidId&quot;: string,&quot;featureValues&quot;: [{object (FeatureValue)}],&quot;count&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  centroidId  `
+`centroidId`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Centroid id.
 
-`  featureValues[]  `
+`featureValues[]`
 
-`  object ( FeatureValue  ` )
+` object ( FeatureValue  ` )
 
 Values of highly variant features for this cluster.
 
-`  count  `
+`count`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Count of training data rows that were assigned to this cluster.
 
@@ -3056,39 +2739,30 @@ Representative value of a single feature within the cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;featureColumn&quot;: string,
-
-  // Union field value can be only one of the following:
-  &quot;numericalValue&quot;: number,
-  &quot;categoricalValue&quot;: {
-    object (CategoricalValue)
-  }
-  // End of list of possible types for union field value.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;featureColumn&quot;: string,// Union field value can be only one of the following:&quot;numericalValue&quot;: number,&quot;categoricalValue&quot;: {object (CategoricalValue)}// End of list of possible types for union field value.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  featureColumn  `
+`featureColumn`
 
-`  string  `
+`string`
 
 The feature column name.
 
-Union field `  value  ` . Value. `  value  ` can be only one of the following:
+Union field `value` . Value. `value` can be only one of the following:
 
-`  numericalValue  `
+`numericalValue`
 
-`  number  `
+`number`
 
 The numerical feature value. This is the centroid value for this feature.
 
-`  categoricalValue  `
+`categoricalValue`
 
-`  object ( CategoricalValue  ` )
+` object ( CategoricalValue  ` )
 
 The categorical feature value.
 
@@ -3107,22 +2781,16 @@ Representative value of a categorical feature.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;categoryCounts&quot;: [
-    {
-      object (CategoryCount)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;categoryCounts&quot;: [{object (CategoryCount)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  categoryCounts[]  `
+`categoryCounts[]`
 
-`  object ( CategoryCount  ` )
+` object ( CategoryCount  ` )
 
 Counts of all categories for the categorical feature. If there are more than ten categories, we return top ten (by count) and return one more CategoryCount with category "\_OTHER\_" and count as aggregate counts of remaining categories.
 
@@ -3151,15 +2819,15 @@ Represents the count of a single category within the cluster.
 
 Fields
 
-`  category  `
+`category`
 
-`  string  `
+`string`
 
 The name of category.
 
-`  count  `
+`count`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 The count of training samples matching the category within the cluster.
 
@@ -3190,27 +2858,27 @@ Evaluation metrics used by weighted-ALS models specified by feedbackType=implici
 
 Fields
 
-`  meanAveragePrecision  `
+`meanAveragePrecision`
 
-`  number  `
+`number`
 
 Calculates a precision per user for all the items by ranking them and then averages all the precisions across all the users.
 
-`  meanSquaredError  `
+`meanSquaredError`
 
-`  number  `
+`number`
 
 Similar to the mean squared error computed in regression and explicit recommendation models except instead of computing the rating directly, the output from evaluate is computed against a preference which is 1 or 0 depending on if the rating exists or not.
 
-`  normalizedDiscountedCumulativeGain  `
+`normalizedDiscountedCumulativeGain`
 
-`  number  `
+`number`
 
 A metric to determine the goodness of a ranking calculated from the predicted confidence by comparing it to an ideal rank measured by the original ratings.
 
-`  averageRank  `
+`averageRank`
 
-`  number  `
+`number`
 
 Determines the goodness of a ranking by computing the percentile rank from the predicted confidence and dividing it by the original rank.
 
@@ -3229,81 +2897,56 @@ Model evaluation metrics for ARIMA forecasting models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;nonSeasonalOrder&quot;: [
-    {
-      object (ArimaOrder)
-    }
-  ],
-  &quot;arimaFittingMetrics&quot;: [
-    {
-      object (ArimaFittingMetrics)
-    }
-  ],
-  &quot;seasonalPeriods&quot;: [
-    enum (SeasonalPeriodType)
-  ],
-  &quot;hasDrift&quot;: [
-    boolean
-  ],
-  &quot;timeSeriesId&quot;: [
-    string
-  ],
-  &quot;arimaSingleModelForecastingMetrics&quot;: [
-    {
-      object (ArimaSingleModelForecastingMetrics)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;nonSeasonalOrder&quot;: [{object (ArimaOrder)}],&quot;arimaFittingMetrics&quot;: [{object (ArimaFittingMetrics)}],&quot;seasonalPeriods&quot;: [enum (SeasonalPeriodType)],&quot;hasDrift&quot;: [boolean],&quot;timeSeriesId&quot;: [string],&quot;arimaSingleModelForecastingMetrics&quot;: [{object (ArimaSingleModelForecastingMetrics)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  nonSeasonalOrder[] (deprecated)  `
+` nonSeasonalOrder[] (deprecated)  `
 
-`  object ( ArimaOrder  ` )
+` object ( ArimaOrder  ` )
 
 This item is deprecated\!
 
 Non-seasonal order.
 
-`  arimaFittingMetrics[] (deprecated)  `
+` arimaFittingMetrics[] (deprecated)  `
 
-`  object ( ArimaFittingMetrics  ` )
+` object ( ArimaFittingMetrics  ` )
 
 This item is deprecated\!
 
 Arima model fitting metrics.
 
-`  seasonalPeriods[] (deprecated)  `
+` seasonalPeriods[] (deprecated)  `
 
-`  enum ( SeasonalPeriodType  ` )
+` enum ( SeasonalPeriodType  ` )
 
 This item is deprecated\!
 
 Seasonal periods. Repeated because multiple periods are supported for one time series.
 
-`  hasDrift[] (deprecated)  `
+` hasDrift[] (deprecated)  `
 
-`  boolean  `
+`boolean`
 
 This item is deprecated\!
 
 Whether Arima model fitted with drift or not. It is always false when d is not 1.
 
-`  timeSeriesId[] (deprecated)  `
+` timeSeriesId[] (deprecated)  `
 
-`  string  `
+`string`
 
 This item is deprecated\!
 
 Id to differentiate different time series for the large-scale case.
 
-`  arimaSingleModelForecastingMetrics[]  `
+`arimaSingleModelForecastingMetrics[]`
 
-`  object ( ArimaSingleModelForecastingMetrics  ` )
+` object ( ArimaSingleModelForecastingMetrics  ` )
 
 Repeated as there can be many metric sets (one for each model) in auto-arima and the large-scale case.
 
@@ -3322,82 +2965,64 @@ Model evaluation metrics for a single ARIMA forecasting model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;nonSeasonalOrder&quot;: {
-    object (ArimaOrder)
-  },
-  &quot;arimaFittingMetrics&quot;: {
-    object (ArimaFittingMetrics)
-  },
-  &quot;hasDrift&quot;: boolean,
-  &quot;timeSeriesId&quot;: string,
-  &quot;timeSeriesIds&quot;: [
-    string
-  ],
-  &quot;seasonalPeriods&quot;: [
-    enum (SeasonalPeriodType)
-  ],
-  &quot;hasHolidayEffect&quot;: boolean,
-  &quot;hasSpikesAndDips&quot;: boolean,
-  &quot;hasStepChanges&quot;: boolean
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;nonSeasonalOrder&quot;: {object (ArimaOrder)},&quot;arimaFittingMetrics&quot;: {object (ArimaFittingMetrics)},&quot;hasDrift&quot;: boolean,&quot;timeSeriesId&quot;: string,&quot;timeSeriesIds&quot;: [string],&quot;seasonalPeriods&quot;: [enum (SeasonalPeriodType)],&quot;hasHolidayEffect&quot;: boolean,&quot;hasSpikesAndDips&quot;: boolean,&quot;hasStepChanges&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  nonSeasonalOrder  `
+`nonSeasonalOrder`
 
-`  object ( ArimaOrder  ` )
+` object ( ArimaOrder  ` )
 
 Non-seasonal order.
 
-`  arimaFittingMetrics  `
+`arimaFittingMetrics`
 
-`  object ( ArimaFittingMetrics  ` )
+` object ( ArimaFittingMetrics  ` )
 
 Arima fitting metrics.
 
-`  hasDrift  `
+`hasDrift`
 
-`  boolean  `
+`boolean`
 
 Is arima model fitted with drift or not. It is always false when d is not 1.
 
-`  timeSeriesId  `
+`timeSeriesId`
 
-`  string  `
+`string`
 
 The timeSeriesId value for this time series. It will be one of the unique values from the timeSeriesIdColumn specified during ARIMA model training. Only present when timeSeriesIdColumn training option was used.
 
-`  timeSeriesIds[]  `
+`timeSeriesIds[]`
 
-`  string  `
+`string`
 
 The tuple of timeSeriesIds identifying this time series. It will be one of the unique tuples of values present in the timeSeriesIdColumns specified during ARIMA model training. Only present when timeSeriesIdColumns training option was used and the order of values here are same as the order of timeSeriesIdColumns.
 
-`  seasonalPeriods[]  `
+`seasonalPeriods[]`
 
-`  enum ( SeasonalPeriodType  ` )
+` enum ( SeasonalPeriodType  ` )
 
 Seasonal periods. Repeated because multiple periods are supported for one time series.
 
-`  hasHolidayEffect  `
+`hasHolidayEffect`
 
-`  boolean  `
+`boolean`
 
 If true, holiday\_effect is a part of time series decomposition result.
 
-`  hasSpikesAndDips  `
+`hasSpikesAndDips`
 
-`  boolean  `
+`boolean`
 
 If true, spikes\_and\_dips is a part of time series decomposition result.
 
-`  hasStepChanges  `
+`hasStepChanges`
 
-`  boolean  `
+`boolean`
 
 If true, step\_changes is a part of time series decomposition result.
 
@@ -3425,9 +3050,9 @@ Model evaluation metrics for dimensionality reduction models.
 
 Fields
 
-`  totalExplainedVarianceRatio  `
+`totalExplainedVarianceRatio`
 
-`  number  `
+`number`
 
 Total percentage of variance explained by the selected principal components.
 
@@ -3446,38 +3071,28 @@ Data split result. This contains references to the training and evaluation data 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;trainingTable&quot;: {
-    object (TableReference)
-  },
-  &quot;evaluationTable&quot;: {
-    object (TableReference)
-  },
-  &quot;testTable&quot;: {
-    object (TableReference)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;trainingTable&quot;: {object (TableReference)},&quot;evaluationTable&quot;: {object (TableReference)},&quot;testTable&quot;: {object (TableReference)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  trainingTable  `
+`trainingTable`
 
-`  object ( TableReference  ` )
+` object ( TableReference  ` )
 
 Table reference of the training data after split.
 
-`  evaluationTable  `
+`evaluationTable`
 
-`  object ( TableReference  ` )
+` object ( TableReference  ` )
 
 Table reference of the evaluation data after split.
 
-`  testTable  `
+`testTable`
 
-`  object ( TableReference  ` )
+` object ( TableReference  ` )
 
 Table reference of the test data after split.
 
@@ -3496,29 +3111,22 @@ Global explanations containing the top most important features after training.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;explanations&quot;: [
-    {
-      object (Explanation)
-    }
-  ],
-  &quot;classLabel&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;explanations&quot;: [{object (Explanation)}],&quot;classLabel&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  explanations[]  `
+`explanations[]`
 
-`  object ( Explanation  ` )
+` object ( Explanation  ` )
 
 A list of the top global explanations. Sorted by absolute value of attribution in descending order.
 
-`  classLabel  `
+`classLabel`
 
-`  string  `
+`string`
 
 Class label for this set of global explanations. Will be empty/null for binary logistic and linear regression models. Sorted alphabetically in descending order.
 
@@ -3547,15 +3155,15 @@ Explanation for a single feature.
 
 Fields
 
-`  featureName  `
+`featureName`
 
-`  string  `
+`string`
 
-The full feature name. For non-numerical features, will be formatted like `  <column_name>.<encoded_feature_name>  ` . Overall size of feature name will always be truncated to first 120 characters.
+The full feature name. For non-numerical features, will be formatted like `<column_name>.<encoded_feature_name>` . Overall size of feature name will always be truncated to first 120 characters.
 
-`  attribution  `
+`attribution`
 
-`  number  `
+`number`
 
 Attribution of feature.
 
@@ -3574,34 +3182,28 @@ Information about a single transform column.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;type&quot;: {
-    object (StandardSqlDataType)
-  },
-  &quot;transformSql&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: {object (StandardSqlDataType)},&quot;transformSql&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Output only. Name of the column.
 
-`  type  `
+`type`
 
-`  object ( StandardSqlDataType  ` )
+` object ( StandardSqlDataType  ` )
 
 Output only. Data type of the column after the transform.
 
-`  transformSql  `
+`transformSql`
 
-`  string  `
+`string`
 
 Output only. The SQL expression used in the column transform.
 
@@ -3620,209 +3222,142 @@ Hyperparameter search spaces. These should be a subset of trainingOptions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;learnRate&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;l1Reg&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;l2Reg&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;numClusters&quot;: {
-    object (IntHparamSearchSpace)
-  },
-  &quot;numFactors&quot;: {
-    object (IntHparamSearchSpace)
-  },
-  &quot;hiddenUnits&quot;: {
-    object (IntArrayHparamSearchSpace)
-  },
-  &quot;batchSize&quot;: {
-    object (IntHparamSearchSpace)
-  },
-  &quot;dropout&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;maxTreeDepth&quot;: {
-    object (IntHparamSearchSpace)
-  },
-  &quot;subsample&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;minSplitLoss&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;walsAlpha&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;boosterType&quot;: {
-    object (StringHparamSearchSpace)
-  },
-  &quot;numParallelTree&quot;: {
-    object (IntHparamSearchSpace)
-  },
-  &quot;dartNormalizeType&quot;: {
-    object (StringHparamSearchSpace)
-  },
-  &quot;treeMethod&quot;: {
-    object (StringHparamSearchSpace)
-  },
-  &quot;minTreeChildWeight&quot;: {
-    object (IntHparamSearchSpace)
-  },
-  &quot;colsampleBytree&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;colsampleBylevel&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;colsampleBynode&quot;: {
-    object (DoubleHparamSearchSpace)
-  },
-  &quot;activationFn&quot;: {
-    object (StringHparamSearchSpace)
-  },
-  &quot;optimizer&quot;: {
-    object (StringHparamSearchSpace)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;learnRate&quot;: {object (DoubleHparamSearchSpace)},&quot;l1Reg&quot;: {object (DoubleHparamSearchSpace)},&quot;l2Reg&quot;: {object (DoubleHparamSearchSpace)},&quot;numClusters&quot;: {object (IntHparamSearchSpace)},&quot;numFactors&quot;: {object (IntHparamSearchSpace)},&quot;hiddenUnits&quot;: {object (IntArrayHparamSearchSpace)},&quot;batchSize&quot;: {object (IntHparamSearchSpace)},&quot;dropout&quot;: {object (DoubleHparamSearchSpace)},&quot;maxTreeDepth&quot;: {object (IntHparamSearchSpace)},&quot;subsample&quot;: {object (DoubleHparamSearchSpace)},&quot;minSplitLoss&quot;: {object (DoubleHparamSearchSpace)},&quot;walsAlpha&quot;: {object (DoubleHparamSearchSpace)},&quot;boosterType&quot;: {object (StringHparamSearchSpace)},&quot;numParallelTree&quot;: {object (IntHparamSearchSpace)},&quot;dartNormalizeType&quot;: {object (StringHparamSearchSpace)},&quot;treeMethod&quot;: {object (StringHparamSearchSpace)},&quot;minTreeChildWeight&quot;: {object (IntHparamSearchSpace)},&quot;colsampleBytree&quot;: {object (DoubleHparamSearchSpace)},&quot;colsampleBylevel&quot;: {object (DoubleHparamSearchSpace)},&quot;colsampleBynode&quot;: {object (DoubleHparamSearchSpace)},&quot;activationFn&quot;: {object (StringHparamSearchSpace)},&quot;optimizer&quot;: {object (StringHparamSearchSpace)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  learnRate  `
+`learnRate`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Learning rate of training jobs.
 
-`  l1Reg  `
+`l1Reg`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 L1 regularization coefficient.
 
-`  l2Reg  `
+`l2Reg`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 L2 regularization coefficient.
 
-`  numClusters  `
+`numClusters`
 
-`  object ( IntHparamSearchSpace  ` )
+` object ( IntHparamSearchSpace  ` )
 
 Number of clusters for k-means.
 
-`  numFactors  `
+`numFactors`
 
-`  object ( IntHparamSearchSpace  ` )
+` object ( IntHparamSearchSpace  ` )
 
 Number of latent factors to train on.
 
-`  hiddenUnits  `
+`hiddenUnits`
 
-`  object ( IntArrayHparamSearchSpace  ` )
+` object ( IntArrayHparamSearchSpace  ` )
 
 Hidden units for neural network models.
 
-`  batchSize  `
+`batchSize`
 
-`  object ( IntHparamSearchSpace  ` )
+` object ( IntHparamSearchSpace  ` )
 
 Mini batch sample size.
 
-`  dropout  `
+`dropout`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Dropout probability for dnn model training and boosted tree models using dart booster.
 
-`  maxTreeDepth  `
+`maxTreeDepth`
 
-`  object ( IntHparamSearchSpace  ` )
+` object ( IntHparamSearchSpace  ` )
 
 Maximum depth of a tree for boosted tree models.
 
-`  subsample  `
+`subsample`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Subsample the training data to grow tree to prevent overfitting for boosted tree models.
 
-`  minSplitLoss  `
+`minSplitLoss`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Minimum split loss for boosted tree models.
 
-`  walsAlpha  `
+`walsAlpha`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Hyperparameter for matrix factoration when implicit feedback type is specified.
 
-`  boosterType  `
+`boosterType`
 
-`  object ( StringHparamSearchSpace  ` )
+` object ( StringHparamSearchSpace  ` )
 
 Booster type for boosted tree models.
 
-`  numParallelTree  `
+`numParallelTree`
 
-`  object ( IntHparamSearchSpace  ` )
+` object ( IntHparamSearchSpace  ` )
 
 Number of parallel trees for boosted tree models.
 
-`  dartNormalizeType  `
+`dartNormalizeType`
 
-`  object ( StringHparamSearchSpace  ` )
+` object ( StringHparamSearchSpace  ` )
 
 Dart normalization type for boosted tree models.
 
-`  treeMethod  `
+`treeMethod`
 
-`  object ( StringHparamSearchSpace  ` )
+` object ( StringHparamSearchSpace  ` )
 
 Tree construction algorithm for boosted tree models.
 
-`  minTreeChildWeight  `
+`minTreeChildWeight`
 
-`  object ( IntHparamSearchSpace  ` )
+` object ( IntHparamSearchSpace  ` )
 
 Minimum sum of instance weight needed in a child for boosted tree models.
 
-`  colsampleBytree  `
+`colsampleBytree`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Subsample ratio of columns when constructing each tree for boosted tree models.
 
-`  colsampleBylevel  `
+`colsampleBylevel`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Subsample ratio of columns for each level for boosted tree models.
 
-`  colsampleBynode  `
+`colsampleBynode`
 
-`  object ( DoubleHparamSearchSpace  ` )
+` object ( DoubleHparamSearchSpace  ` )
 
 Subsample ratio of columns for each node(split) for boosted tree models.
 
-`  activationFn  `
+`activationFn`
 
-`  object ( StringHparamSearchSpace  ` )
+` object ( StringHparamSearchSpace  ` )
 
 Activation functions of neural network models.
 
-`  optimizer  `
+`optimizer`
 
-`  object ( StringHparamSearchSpace  ` )
+` object ( StringHparamSearchSpace  ` )
 
 Optimizer of TF models.
 
@@ -3841,34 +3376,24 @@ Search space for a double hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field search_space can be only one of the following:
-  &quot;range&quot;: {
-    object (DoubleRange)
-  },
-  &quot;candidates&quot;: {
-    object (DoubleCandidates)
-  }
-  // End of list of possible types for union field search_space.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field search_space can be only one of the following:&quot;range&quot;: {object (DoubleRange)},&quot;candidates&quot;: {object (DoubleCandidates)}// End of list of possible types for union field search_space.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  search_space  ` . Search space. `  search_space  ` can be only one of the following:
+Union field `search_space` . Search space. `search_space` can be only one of the following:
 
-`  range  `
+`range`
 
-`  object ( DoubleRange  ` )
+` object ( DoubleRange  ` )
 
 Range of the double hyperparameter.
 
-`  candidates  `
+`candidates`
 
-`  object ( DoubleCandidates  ` )
+` object ( DoubleCandidates  ` )
 
 Candidates of the double hyperparameter.
 
@@ -3897,15 +3422,15 @@ Range of a double hyperparameter.
 
 Fields
 
-`  min  `
+`min`
 
-`  number  `
+`number`
 
 Min value of the double parameter.
 
-`  max  `
+`max`
 
-`  number  `
+`number`
 
 Max value of the double parameter.
 
@@ -3935,9 +3460,9 @@ Discrete candidates of a double hyperparameter.
 
 Fields
 
-`  candidates[]  `
+`candidates[]`
 
-`  number  `
+`number`
 
 Candidates for the double parameter in increasing order.
 
@@ -3956,34 +3481,24 @@ Search space for an int hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field search_space can be only one of the following:
-  &quot;range&quot;: {
-    object (IntRange)
-  },
-  &quot;candidates&quot;: {
-    object (IntCandidates)
-  }
-  // End of list of possible types for union field search_space.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field search_space can be only one of the following:&quot;range&quot;: {object (IntRange)},&quot;candidates&quot;: {object (IntCandidates)}// End of list of possible types for union field search_space.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  search_space  ` . Search space. `  search_space  ` can be only one of the following:
+Union field `search_space` . Search space. `search_space` can be only one of the following:
 
-`  range  `
+`range`
 
-`  object ( IntRange  ` )
+` object ( IntRange  ` )
 
 Range of the int hyperparameter.
 
-`  candidates  `
+`candidates`
 
-`  object ( IntCandidates  ` )
+` object ( IntCandidates  ` )
 
 Candidates of the int hyperparameter.
 
@@ -4012,15 +3527,15 @@ Range of an int hyperparameter.
 
 Fields
 
-`  min  `
+`min`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Min value of the int parameter.
 
-`  max  `
+`max`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Max value of the int parameter.
 
@@ -4050,9 +3565,9 @@ Discrete candidates of an int hyperparameter.
 
 Fields
 
-`  candidates[]  `
+`candidates[]`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Candidates for the int parameter in increasing order.
 
@@ -4071,22 +3586,16 @@ Search space for int array.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;candidates&quot;: [
-    {
-      object (IntArray)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;candidates&quot;: [{object (IntArray)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  candidates[]  `
+`candidates[]`
 
-`  object ( IntArray  ` )
+` object ( IntArray  ` )
 
 Candidates for the int array parameter.
 
@@ -4116,9 +3625,9 @@ An array of int.
 
 Fields
 
-`  elements[]  `
+`elements[]`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Elements in the int array.
 
@@ -4148,9 +3657,9 @@ Search space for string and enum.
 
 Fields
 
-`  candidates[]  `
+`candidates[]`
 
-`  string  `
+`string`
 
 Canididates for the string or enum parameter in lower case.
 
@@ -4169,87 +3678,70 @@ Training info of a trial in [hyperparameter tuning](https://cloud.google.com/big
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;trialId&quot;: string,
-  &quot;startTimeMs&quot;: string,
-  &quot;endTimeMs&quot;: string,
-  &quot;hparams&quot;: {
-    object (TrainingOptions)
-  },
-  &quot;evaluationMetrics&quot;: {
-    object (EvaluationMetrics)
-  },
-  &quot;status&quot;: enum (TrialStatus),
-  &quot;errorMessage&quot;: string,
-  &quot;trainingLoss&quot;: number,
-  &quot;evalLoss&quot;: number,
-  &quot;hparamTuningEvaluationMetrics&quot;: {
-    object (EvaluationMetrics)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;trialId&quot;: string,&quot;startTimeMs&quot;: string,&quot;endTimeMs&quot;: string,&quot;hparams&quot;: {object (TrainingOptions)},&quot;evaluationMetrics&quot;: {object (EvaluationMetrics)},&quot;status&quot;: enum (TrialStatus),&quot;errorMessage&quot;: string,&quot;trainingLoss&quot;: number,&quot;evalLoss&quot;: number,&quot;hparamTuningEvaluationMetrics&quot;: {object (EvaluationMetrics)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  trialId  `
+`trialId`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 1-based index of the trial.
 
-`  startTimeMs  `
+`startTimeMs`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Starting time of the trial.
 
-`  endTimeMs  `
+`endTimeMs`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Ending time of the trial.
 
-`  hparams  `
+`hparams`
 
-`  object ( TrainingOptions  ` )
+` object ( TrainingOptions  ` )
 
 The hyperprameters selected for this trial.
 
-`  evaluationMetrics  `
+`evaluationMetrics`
 
-`  object ( EvaluationMetrics  ` )
+` object ( EvaluationMetrics  ` )
 
 Evaluation metrics of this trial calculated on the test data. Empty in Job API.
 
-`  status  `
+`status`
 
-`  enum ( TrialStatus  ` )
+` enum ( TrialStatus  ` )
 
 The status of the trial.
 
-`  errorMessage  `
+`errorMessage`
 
-`  string  `
+`string`
 
 Error message for FAILED and INFEASIBLE trial.
 
-`  trainingLoss  `
+`trainingLoss`
 
-`  number  `
+`number`
 
 Loss computed on the training data at the end of trial.
 
-`  evalLoss  `
+`evalLoss`
 
-`  number  `
+`number`
 
 Loss computed on the eval data at the end of trial.
 
-`  hparamTuningEvaluationMetrics  `
+`hparamTuningEvaluationMetrics`
 
-`  object ( EvaluationMetrics  ` )
+` object ( EvaluationMetrics  ` )
 
 Hyperparameter tuning evaluation metrics of this trial calculated on the eval data. Unlike evaluationMetrics, only the fields corresponding to the hparamTuningObjectives are set.
 
@@ -4259,31 +3751,31 @@ Current status of the trial.
 
 Enums
 
-`  TRIAL_STATUS_UNSPECIFIED  `
+`TRIAL_STATUS_UNSPECIFIED`
 
 Default value.
 
-`  NOT_STARTED  `
+`NOT_STARTED`
 
 Scheduled but not started.
 
-`  RUNNING  `
+`RUNNING`
 
 Running state.
 
-`  SUCCEEDED  `
+`SUCCEEDED`
 
 The trial succeeded.
 
-`  FAILED  `
+`FAILED`
 
 The trial failed.
 
-`  INFEASIBLE  `
+`INFEASIBLE`
 
 The trial is infeasible due to the invalid params.
 
-`  STOPPED_EARLY  `
+`STOPPED_EARLY`
 
 Trial stopped early because it's not promising.
 
@@ -4302,51 +3794,42 @@ Remote Model Info
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;connection&quot;: string,
-  &quot;maxBatchingRows&quot;: string,
-  &quot;remoteModelVersion&quot;: string,
-
-  // Union field remote_service can be only one of the following:
-  &quot;endpoint&quot;: string,
-  &quot;remoteServiceType&quot;: enum (RemoteServiceType)
-  // End of list of possible types for union field remote_service.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;connection&quot;: string,&quot;maxBatchingRows&quot;: string,&quot;remoteModelVersion&quot;: string,// Union field remote_service can be only one of the following:&quot;endpoint&quot;: string,&quot;remoteServiceType&quot;: enum (RemoteServiceType)// End of list of possible types for union field remote_service.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  connection  `
+`connection`
 
-`  string  `
+`string`
 
-Output only. Fully qualified name of the user-provided connection object of the remote model. Format: `  "projects/{projectId}/locations/{locationId}/connections/{connectionId}"  `
+Output only. Fully qualified name of the user-provided connection object of the remote model. Format: `"projects/{projectId}/locations/{locationId}/connections/{connectionId}"`
 
-`  maxBatchingRows  `
+`maxBatchingRows`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. Max number of rows in each batch sent to the remote service. If unset, the number of rows in each batch is set dynamically.
 
-`  remoteModelVersion  `
+`remoteModelVersion`
 
-`  string  `
+`string`
 
 Output only. The model version for LLM.
 
-Union field `  remote_service  ` . Remote services are services outside of BigQuery used by remote models for predictions. A remote service is backed by either an arbitrary endpoint or a selected remote service type, but not both. `  remote_service  ` can be only one of the following:
+Union field `remote_service` . Remote services are services outside of BigQuery used by remote models for predictions. A remote service is backed by either an arbitrary endpoint or a selected remote service type, but not both. `remote_service` can be only one of the following:
 
-`  endpoint  `
+`endpoint`
 
-`  string  `
+`string`
 
 Output only. The endpoint for remote model.
 
-`  remoteServiceType  `
+`remoteServiceType`
 
-`  enum ( RemoteServiceType  ` )
+` enum ( RemoteServiceType  ` )
 
 Output only. The remote service type for remote model.
 
@@ -4356,36 +3839,36 @@ Supported service type for remote model.
 
 Enums
 
-`  REMOTE_SERVICE_TYPE_UNSPECIFIED  `
+`REMOTE_SERVICE_TYPE_UNSPECIFIED`
 
 Unspecified remote service type.
 
-`  CLOUD_AI_TRANSLATE_V3  `
+`CLOUD_AI_TRANSLATE_V3`
 
 V3 Cloud AI Translation API. See more details at [Cloud Translation API](https://cloud.google.com/translate/docs/reference/rest) .
 
-`  CLOUD_AI_VISION_V1  `
+`CLOUD_AI_VISION_V1`
 
 V1 Cloud AI Vision API See more details at [Cloud Vision API](https://cloud.google.com/vision/docs/reference/rest) .
 
-`  CLOUD_AI_NATURAL_LANGUAGE_V1  `
+`CLOUD_AI_NATURAL_LANGUAGE_V1`
 
 V1 Cloud AI Natural Language API. See more details at [REST Resource: documents](https://cloud.google.com/natural-language/docs/reference/rest/v1/documents) .
 
 ## Methods
 
-### `             delete           `
+### `            delete           `
 
 Deletes the model specified by modelId from the dataset.
 
-### `             get           `
+### `            get           `
 
 Gets the specified model resource by model ID.
 
-### `             list           `
+### `            list           `
 
 Lists all models in the specified dataset.
 
-### `             patch           `
+### `            patch           `
 
 Patch specific fields in the specified model.

@@ -2,10 +2,10 @@ Describes how the subscription was created.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  CLOUD_MARKETPLACE_ORDER  `
+`CLOUD_MARKETPLACE_ORDER`
 
 Subscription was created using the Marketplace flow.

@@ -10,7 +10,7 @@ For more information about differential privacy, see [Use differential privacy](
 
 ## Differential privacy with BigQuery Omni
 
-BigQuery differential privacy supports calls to multi-cloud data sources like AWS S3. The following example queries an external source of data, `  foo.wikidata  ` , and applies differential privacy. For more information about the syntax of the differential privacy clause, see [Differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
+BigQuery differential privacy supports calls to multi-cloud data sources like AWS S3. The following example queries an external source of data, `foo.wikidata` , and applies differential privacy. For more information about the syntax of the differential privacy clause, see [Differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
 
 ``` notranslate
 SELECT
@@ -57,9 +57,9 @@ Before you begin, ensure you have installed Docker on your local machine and set
 
 To create and push a Docker image with required dependencies, follow these steps:
 
-1.  Create a local folder `  DIR  ` .
+1.  Create a local folder `DIR` .
 
-2.  Download the [Miniconda installer](https://docs.conda.io/en/latest/miniconda.html#linux-installers) , with the Python 3.9 version, to `  DIR  ` .
+2.  Download the [Miniconda installer](https://docs.conda.io/en/latest/miniconda.html#linux-installers) , with the Python 3.9 version, to `DIR` .
 
 3.  Save the following text to the [Dockerfile](https://docs.docker.com/engine/reference/builder/#:%7E:text=A%20Dockerfile%20is%20a%20text,can%20use%20in%20a%20Dockerfile%20) .
     

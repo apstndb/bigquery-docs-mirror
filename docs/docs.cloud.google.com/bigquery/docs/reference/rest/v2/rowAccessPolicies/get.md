@@ -9,7 +9,7 @@ Gets the specified row access policy by policy ID.
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -17,27 +17,27 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the table to get the row access policy.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the table to get the row access policy.
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 Required. Table ID of the table to get the row access policy.
 
-`  policyId  `
+`policyId`
 
-`  string  `
+`string`
 
 Required. Policy ID of the row access policy.
 
@@ -53,9 +53,9 @@ If successful, the response body contains an instance of `  RowAccessPolicy  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

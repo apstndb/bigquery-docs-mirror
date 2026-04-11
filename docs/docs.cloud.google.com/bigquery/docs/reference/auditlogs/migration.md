@@ -1,10 +1,10 @@
 # Audit logs migration guide
 
-BigQuery provides two versions of audit logs: an older version that uses `  AuditData  ` payload, and a new version that uses `  BigQueryAuditMetadata  ` . This document describes migrating logs interface filters, BigQuery exports, and changes in queries over the exported logs from the old format to the new format.
+BigQuery provides two versions of audit logs: an older version that uses `AuditData` payload, and a new version that uses `BigQueryAuditMetadata` . This document describes migrating logs interface filters, BigQuery exports, and changes in queries over the exported logs from the old format to the new format.
 
 ## Logs interface filters
 
-Changing filters might require changing the paths to the fields you want to filter on. [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) lists the changes between the old logs and the new logs. The changes include the `  resource  ` , `  resourceName  ` , and `  methodName  ` fields.
+Changing filters might require changing the paths to the fields you want to filter on. [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) lists the changes between the old logs and the new logs. The changes include the `resource` , `resourceName` , and `methodName` fields.
 
 For example, the filter to select all the BigQuery-related records changes from:
 
@@ -38,13 +38,13 @@ changes to:
 
     protoPayload.methodName = ("google.cloud.bigquery.v2.TableService.UpdateTable" OR "google.cloud.bigquery.v2.TableService.PatchTable")
 
-However, you can find all the table updates by using the `  protoPayload.metadata.tableChange.reason  ` field.
+However, you can find all the table updates by using the `protoPayload.metadata.tableChange.reason` field.
 
-Finally, with the new logs you can find all the records for a specific table by using the `  protoPayload.methodName  ` field. For example:
+Finally, with the new logs you can find all the records for a specific table by using the `protoPayload.methodName` field. For example:
 
     protoPayload.resourceName = "projects/myproject/datasets/mydataset/tables/mytable"
 
-If you're using a `  resourceName  ` filter with the old logs to find all the side effects for a specific job ID, with the new logs you'll need to filter on a specific event instead. To find all the source tables read records for a specific job:
+If you're using a `resourceName` filter with the old logs to find all the side effects for a specific job ID, with the new logs you'll need to filter on a specific event instead. To find all the source tables read records for a specific job:
 
     protoPayload.metadata.tableDataRead.jobName = "projects/myproject/jobs/myjob"
 
@@ -54,7 +54,7 @@ Or to find the destination table change:
 
 Resources representations, such as Job or Table, in the new logs have the structure similar to the old logs. Hovewer, new logs represent events while the old logs focus more on the request and response.
 
-You can compare the new [BigQueryAuditMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) and the old [AuditData](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData) formats. BigQuery-specific information moved from the `  serviceData  ` to the `  metadata  ` field.
+You can compare the new [BigQueryAuditMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) and the old [AuditData](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData) formats. BigQuery-specific information moved from the `serviceData` to the `metadata` field.
 
 For example, to migrate a filter that finds all completed "CREATE TABLE AS SELECT" DDL jobs, change the filter from:
 
@@ -73,7 +73,7 @@ For exporting all records for core BigQuery operations, use the metadata type fi
 
 ## Querying logs exported to BigQuery
 
-In addition to the basic structure changes described earlier, there are additional changes in the exported data structure that need to be addressed. The `  metadata  ` field is exported as a single JSON column. To query the contents, you must use [BigQuery JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions) .
+In addition to the basic structure changes described earlier, there are additional changes in the exported data structure that need to be addressed. The `metadata` field is exported as a single JSON column. To query the contents, you must use [BigQuery JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions) .
 
 ### Example: DDL queries
 

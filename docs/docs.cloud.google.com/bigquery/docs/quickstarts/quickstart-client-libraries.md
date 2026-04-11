@@ -43,7 +43,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -63,21 +63,21 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     
     If you do not enable billing for a project, you automatically work in the BigQuery sandbox. The BigQuery sandbox lets you learn BigQuery with a limited set of BigQuery features at no charge. If you do not plan to use your project beyond this document, we recommend that you use the BigQuery sandbox.
 
-3.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `  roles/serviceusage.serviceUsageAdmin, roles/bigquery.jobUser  `
+3.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/serviceusage.serviceUsageAdmin, roles/bigquery.jobUser`
     
         gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
     
     Replace the following:
     
       - `  PROJECT_ID  ` : Your project ID.
-      - `  USER_IDENTIFIER  ` : The identifier for your user account. For example, `  myemail@example.com  ` .
+      - `  USER_IDENTIFIER  ` : The identifier for your user account. For example, `myemail@example.com` .
       - `  ROLE  ` : The IAM role that you grant to your user account.
 
 4.  Enable the BigQuery API:
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
         gcloud services enable bigquery
     
@@ -122,7 +122,7 @@ Select one of the following languages:
     ...
     ```
     
-    This command creates a C\# project that's named `  BigQueryCsharpDemo  ` and a file that's named `  Program.cs  ` .
+    This command creates a C\# project that's named `BigQueryCsharpDemo` and a file that's named `Program.cs` .
 
 2.  Open the Cloud Shell Editor:
     
@@ -154,7 +154,7 @@ Select one of the following languages:
     ...
     ```
 
-6.  Set the variable `  GOOGLE_PROJECT_ID  ` to the value `  GOOGLE_CLOUD_PROJECT  ` and export the variable:
+6.  Set the variable `GOOGLE_PROJECT_ID` to the value `GOOGLE_CLOUD_PROJECT` and export the variable:
     
     ``` notranslate
     export GOOGLE_PROJECT_ID=$GOOGLE_CLOUD_PROJECT
@@ -162,11 +162,11 @@ Select one of the following languages:
 
 7.  Click **Open Editor** .
 
-8.  In the **Explorer** pane, locate your `  BIGQUERYCSHARPDEMO  ` project.
+8.  In the **Explorer** pane, locate your `BIGQUERYCSHARPDEMO` project.
 
-9.  Click the `  Program.cs  ` file to open it.
+9.  Click the `Program.cs` file to open it.
 
-10. To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, replace the contents of the file with the following code:
+10. To create a query against the `bigquery-public-data.stackoverflow` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, replace the contents of the file with the following code:
     
         using System;
         using Google.Cloud.BigQuery.V2;
@@ -199,7 +199,7 @@ Select one of the following languages:
 
 11. Click **Open Terminal** .
 
-12. In the terminal, run the `  Program.cs  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
+12. In the terminal, run the `Program.cs` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
     ``` notranslate
     dotnet run
@@ -234,7 +234,7 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
         bigquery-go-quickstart/app.go
     ```
     
-    This command creates a Go project that's named `  bigquery-go-quickstart  ` and a file that's named `  app.go  ` .
+    This command creates a Go project that's named `bigquery-go-quickstart` and a file that's named `app.go` .
 
 2.  Open the Cloud Shell Editor:
     
@@ -250,7 +250,7 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
     cd bigquery-go-quickstart
     ```
 
-5.  Create a `  go.mod  ` file:
+5.  Create a `go.mod` file:
     
     ``` notranslate
     go mod init quickstart
@@ -282,11 +282,11 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 7.  Click **Open Editor** .
 
-8.  In the **Explorer** pane, locate your `  BIGQUERY-GO-QUICKSTART  ` project.
+8.  In the **Explorer** pane, locate your `BIGQUERY-GO-QUICKSTART` project.
 
-9.  Click the `  app.go  ` file to open it.
+9.  Click the `app.go` file to open it.
 
-10. To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.go  ` file:
+10. To create a query against the `bigquery-public-data.stackoverflow` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `app.go` file:
     
         // Command simpleapp queries the Stack Overflow public dataset in Google BigQuery.
         package main
@@ -366,7 +366,7 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 11. Click **Open Terminal** .
 
-12. In the terminal, run the `  app.go  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
+12. In the terminal, run the `app.go` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
     ``` notranslate
     go run app.go
@@ -400,7 +400,7 @@ You have successfully queried a public dataset with the BigQuery Go client libra
         -DinteractiveMode=false
     ```
     
-    This command creates a Maven project that's named `  bigquery-java-quickstart  ` .
+    This command creates a Maven project that's named `bigquery-java-quickstart` .
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
@@ -415,7 +415,7 @@ You have successfully queried a public dataset with the BigQuery Go client libra
     
     There are many dependency management systems that you can use other than Maven. For more information, learn how to [set up a Java development environment](https://docs.cloud.google.com/java/docs/setup) to use with client libraries.
 
-2.  Rename the `  App.java  ` file that Maven creates by default:
+2.  Rename the `App.java` file that Maven creates by default:
     
     ``` notranslate
     mv \
@@ -437,18 +437,18 @@ You have successfully queried a public dataset with the BigQuery Go client libra
     2.  Click **Extensions \> Java** .
     3.  Scroll to **Configuration: Update Build Configuration** and select **automatic** .
 
-5.  In the **Explorer** pane, locate your `  BIGQUERY-JAVA-QUICKSTART  ` project.
+5.  In the **Explorer** pane, locate your `BIGQUERY-JAVA-QUICKSTART` project.
 
-6.  Click the `  pom.xml  ` file to open it.
+6.  Click the `pom.xml` file to open it.
 
-7.  Inside the `  <dependencies>  ` tag, add the following dependency after any existing ones. Do not replace any existing dependencies.
+7.  Inside the `<dependencies>` tag, add the following dependency after any existing ones. Do not replace any existing dependencies.
     
         <dependency>
           <groupId>com.google.cloud</groupId>
           <artifactId>google-cloud-bigquery</artifactId>
         </dependency>
 
-8.  On the line following the closing tag ( `  </dependencies>  ` ), add the following:
+8.  On the line following the closing tag ( `</dependencies>` ), add the following:
     
         <dependencyManagement>
           <dependencies>
@@ -462,9 +462,9 @@ You have successfully queried a public dataset with the BigQuery Go client libra
           </dependencies>
         </dependencyManagement>
 
-9.  In the **Explorer** pane, in your `  BIGQUERY-JAVA-QUICKSTART  ` project, click **src \> main/java/com/google/app \> SimpleApp.java** . The file opens.
+9.  In the **Explorer** pane, in your `BIGQUERY-JAVA-QUICKSTART` project, click **src \> main/java/com/google/app \> SimpleApp.java** . The file opens.
 
-10. To create a query against the `  bigquery-public-data.stackoverflow  ` dataset, leave the first line of the file ( `  package com.google.app;  ` ), and replace the remaining contents of the file with the following code:
+10. To create a query against the `bigquery-public-data.stackoverflow` dataset, leave the first line of the file ( `package com.google.app;` ), and replace the remaining contents of the file with the following code:
     
         import com.google.cloud.bigquery.BigQuery;
         import com.google.cloud.bigquery.BigQueryException;
@@ -565,7 +565,7 @@ You have successfully queried a public dataset with the BigQuery Java client lib
         bigquery-node-quickstart/app.js
     ```
     
-    This command creates a Node.js project that's named `  bigquery-node-quickstart  ` and a file that's named `  app.js  ` .
+    This command creates a Node.js project that's named `bigquery-node-quickstart` and a file that's named `app.js` .
 
 2.  Open the Cloud Shell Editor:
     
@@ -595,11 +595,11 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 6.  Click **Open Editor** .
 
-7.  In the **Explorer** pane, locate your `  BIGQUERY-NODE-QUICKSTART  ` project.
+7.  In the **Explorer** pane, locate your `BIGQUERY-NODE-QUICKSTART` project.
 
-8.  Click the `  app.js  ` file to open it.
+8.  Click the `app.js` file to open it.
 
-9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.js  ` file:
+9.  To create a query against the `bigquery-public-data.stackoverflow` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `app.js` file:
     
         // Import the Google Cloud client library
         const {BigQuery} = require('@google-cloud/bigquery');
@@ -641,7 +641,7 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 10. Click **Open Terminal** .
 
-11. In the terminal, run the `  app.js  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
+11. In the terminal, run the `app.js` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
     ``` notranslate
     node app.js
@@ -675,7 +675,7 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
         bigquery-php-quickstart/app.php
     ```
     
-    This command creates a PHP project that's named `  bigquery-php-quickstart  ` and a file that's named `  app.php  ` .
+    This command creates a PHP project that's named `bigquery-php-quickstart` and a file that's named `app.php` .
 
 2.  Open the Cloud Shell Editor:
     
@@ -710,11 +710,11 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 6.  Click **Open Editor** .
 
-7.  In the **Explorer** pane, locate your `  BIGQUERY-PHP-QUICKSTART  ` project.
+7.  In the **Explorer** pane, locate your `BIGQUERY-PHP-QUICKSTART` project.
 
-8.  Click the `  app.php  ` file to open it.
+8.  Click the `app.php` file to open it.
 
-9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.php  ` file:
+9.  To create a query against the `bigquery-public-data.stackoverflow` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `app.php` file:
     
         <?php
         # ...
@@ -753,7 +753,7 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 10. Click **Open Terminal** .
 
-11. In the terminal, run the `  app.php  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
+11. In the terminal, run the `app.php` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
     ``` notranslate
     php app.php
@@ -797,7 +797,7 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
         bigquery-python-quickstart/app.py
     ```
     
-    This command creates a Python project that's named `  bigquery-python-quickstart  ` and a file that's named `  app.py  ` .
+    This command creates a Python project that's named `bigquery-python-quickstart` and a file that's named `app.py` .
 
 2.  Open the Cloud Shell Editor:
     
@@ -830,11 +830,11 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 6.  Click **Open Editor** .
 
-7.  In the **Explorer** pane, locate your `  BIGQUERY-PYTHON-QUICKSTART  ` project.
+7.  In the **Explorer** pane, locate your `BIGQUERY-PYTHON-QUICKSTART` project.
 
-8.  Click the `  app.py  ` file to open it.
+8.  Click the `app.py` file to open it.
 
-9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.py  ` file:
+9.  To create a query against the `bigquery-public-data.stackoverflow` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `app.py` file:
     
         from google.cloud import bigquery
         
@@ -864,7 +864,7 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 10. Click **Open Terminal** .
 
-11. In the terminal, run the `  app.py  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
+11. In the terminal, run the `app.py` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
     ``` notranslate
     python app.py
@@ -897,7 +897,7 @@ You have successfully queried a public dataset with the BigQuery Python client l
         bigquery-ruby-quickstart/app.rb
     ```
     
-    This command creates a Ruby project that's named `  bigquery-ruby-quickstart  ` and a file that's named `  app.rb  ` .
+    This command creates a Ruby project that's named `bigquery-ruby-quickstart` and a file that's named `app.rb` .
 
 2.  Open the Cloud Shell Editor:
     
@@ -927,11 +927,11 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 6.  Click **Open Editor** .
 
-7.  In the **Explorer** pane, locate your `  BIGQUERY-RUBY-QUICKSTART  ` project.
+7.  In the **Explorer** pane, locate your `BIGQUERY-RUBY-QUICKSTART` project.
 
-8.  Click the `  app.rb  ` file to open it.
+8.  Click the `app.rb` file to open it.
 
-9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.rb  ` file:
+9.  To create a query against the `bigquery-public-data.stackoverflow` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `app.rb` file:
     
         require "google/cloud/bigquery"
         
@@ -952,7 +952,7 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 10. Click **Open Terminal** .
 
-11. In the terminal, run the `  app.rb  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
+11. In the terminal, run the `app.rb` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
     ``` notranslate
     ruby app.rb
@@ -988,7 +988,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -1012,13 +1012,13 @@ If you used an existing project, delete the resources that you created:
     cd ..
     ```
 
-2.  Delete the `  BigQueryCsharpDemo  ` folder that you created:
+2.  Delete the `BigQueryCsharpDemo` folder that you created:
     
     ``` notranslate
     rm -R BigQueryCsharpDemo
     ```
     
-    The `  -R  ` flag deletes all assets in a folder.
+    The `-R` flag deletes all assets in a folder.
 
 ### Go
 
@@ -1028,13 +1028,13 @@ If you used an existing project, delete the resources that you created:
     cd ..
     ```
 
-2.  Delete the `  bigquery-go-quickstart  ` folder that you created:
+2.  Delete the `bigquery-go-quickstart` folder that you created:
     
     ``` notranslate
     rm -R bigquery-go-quickstart
     ```
     
-    The `  -R  ` flag deletes all assets in a folder.
+    The `-R` flag deletes all assets in a folder.
 
 ### Java
 
@@ -1044,13 +1044,13 @@ If you used an existing project, delete the resources that you created:
     cd ..
     ```
 
-2.  Delete the `  bigquery-java-quickstart  ` folder that you created:
+2.  Delete the `bigquery-java-quickstart` folder that you created:
     
     ``` notranslate
     rm -R bigquery-java-quickstart
     ```
     
-    The `  -R  ` flag deletes all assets in a folder.
+    The `-R` flag deletes all assets in a folder.
 
 ### Node.js
 
@@ -1060,13 +1060,13 @@ If you used an existing project, delete the resources that you created:
     cd ..
     ```
 
-2.  Delete the `  bigquery-node-quickstart  ` folder that you created:
+2.  Delete the `bigquery-node-quickstart` folder that you created:
     
     ``` notranslate
     rm -R bigquery-node-quickstart
     ```
     
-    The `  -R  ` flag deletes all assets in a folder.
+    The `-R` flag deletes all assets in a folder.
 
 ### PHP
 
@@ -1076,13 +1076,13 @@ If you used an existing project, delete the resources that you created:
     cd ..
     ```
 
-2.  Delete the `  bigquery-php-quickstart  ` folder that you created:
+2.  Delete the `bigquery-php-quickstart` folder that you created:
     
     ``` notranslate
     rm -R bigquery-php-quickstart
     ```
     
-    The `  -R  ` flag deletes all assets in a folder.
+    The `-R` flag deletes all assets in a folder.
 
 ### Python
 
@@ -1092,13 +1092,13 @@ If you used an existing project, delete the resources that you created:
     cd ..
     ```
 
-2.  Delete the `  bigquery-python-quickstart  ` folder that you created:
+2.  Delete the `bigquery-python-quickstart` folder that you created:
     
     ``` notranslate
     rm -R bigquery-python-quickstart
     ```
     
-    The `  -R  ` flag deletes all assets in a folder.
+    The `-R` flag deletes all assets in a folder.
 
 ### Ruby
 
@@ -1108,13 +1108,13 @@ If you used an existing project, delete the resources that you created:
     cd ..
     ```
 
-2.  Delete the `  bigquery-ruby-quickstart  ` folder that you created:
+2.  Delete the `bigquery-ruby-quickstart` folder that you created:
     
     ``` notranslate
     rm -R bigquery-ruby-quickstart
     ```
     
-    The `  -R  ` flag deletes all assets in a folder.
+    The `-R` flag deletes all assets in a folder.
 
 ## What's next
 

@@ -44,7 +44,7 @@ Supervised learning
 
 Linear & logistic regression
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -52,13 +52,13 @@ Linear & logistic regression
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
-[`  ML.WEIGHTS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights)
+[`ML.WEIGHTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights)
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 [Use linear regression to predict penguin weight](https://docs.cloud.google.com/bigquery/docs/linear-regression-tutorial)  
   
@@ -66,7 +66,7 @@ Linear & logistic regression
 
 Deep neural networks (DNN)
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -74,19 +74,19 @@ Deep neural networks (DNN)
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
 N/A <sup>2</sup>
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 N/A
 
 Wide & Deep networks
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -94,19 +94,19 @@ Wide & Deep networks
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
 N/A <sup>2</sup>
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 N/A
 
 Boosted trees
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -114,19 +114,19 @@ Boosted trees
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
 N/A <sup>2</sup>
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 [Perform classification with a boosted trees model](https://docs.cloud.google.com/bigquery/docs/boosted-tree-classifier-tutorial)
 
 Random forest
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -134,19 +134,19 @@ Random forest
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
 N/A <sup>2</sup>
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 N/A
 
 AutoML classification & regression
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
 
 AutoML automatically performs feature engineering
 
@@ -154,9 +154,9 @@ AutoML automatically performs hyperparameter tuning
 
 N/A <sup>2</sup>
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 N/A
 
@@ -164,7 +164,7 @@ Unsupervised learning
 
 K-means
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -172,31 +172,31 @@ K-means
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
-[`  ML.CENTROIDS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-centroids)
+[`ML.CENTROIDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-centroids)
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 [Find clusters in bike station data](https://docs.cloud.google.com/bigquery/docs/kmeans-tutorial)
 
 Matrix factorization
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
 
 N/A
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
-[`  ML.WEIGHTS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights)
+[`ML.WEIGHTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights)
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 [Generate movie recommendations using explicit feedback](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial)  
   
@@ -204,7 +204,7 @@ N/A
 
 Principal component analysis (PCA)
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -212,19 +212,19 @@ Principal component analysis (PCA)
 
 N/A
 
-[`  ML.PRINCIPAL _COMPONENTS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-components)  
+[`ML.PRINCIPAL _COMPONENTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-components)  
   
-[`  ML.PRINCIPAL _COMPONENT _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-component-info)
+[`ML.PRINCIPAL _COMPONENT _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-component-info)
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 N/A
 
 Autoencoder
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
 [Automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing)  
   
@@ -232,13 +232,13 @@ Autoencoder
 
 [Hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview)  
   
-[`  ML.TRIAL _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
+[`ML.TRIAL _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info)
 
 N/A <sup>2</sup>
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)  
   
-[`  ML.TRAINING _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
+[`ML.TRAINING _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 
 N/A
 
@@ -246,7 +246,7 @@ Transform-only
 
 Transform-only
 
-[`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-transform)
+[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-transform)
 
 [Manual preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing)
 
@@ -254,13 +254,13 @@ N/A
 
 N/A
 
-[`  ML.FEATURE _INFO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)
+[`ML.FEATURE _INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature)
 
 N/A
 
 <sup>1</sup> For a step-by-step example of using hyperparameter tuning, see [Improve model performance with hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
 
-<sup>2</sup> BigQuery ML doesn't offer a function to retrieve the weights for this model. To see the weights of the model, you can export the model from BigQuery ML to Cloud Storage and then use the XGBoost library or the TensorFlow library to visualize the tree structure for tree models or the graph structure for neural networks. For more information, see [`  EXPORT MODEL  `](https://docs.cloud.google.com/bigquery/docs/exporting-models) and [Export a BigQuery ML model for online prediction](https://docs.cloud.google.com/bigquery/docs/export-model-tutorial) .
+<sup>2</sup> BigQuery ML doesn't offer a function to retrieve the weights for this model. To see the weights of the model, you can export the model from BigQuery ML to Cloud Storage and then use the XGBoost library or the TensorFlow library to visualize the tree structure for tree models or the graph structure for neural networks. For more information, see [`EXPORT MODEL`](https://docs.cloud.google.com/bigquery/docs/exporting-models) and [Export a BigQuery ML model for online prediction](https://docs.cloud.google.com/bigquery/docs/export-model-tutorial) .
 
 ## Model use user journeys
 
@@ -282,196 +282,196 @@ Supervised learning
 
 Linear & logistic regression
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
   
-[`  ML.CONFUSION _MATRIX  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
+[`ML.CONFUSION _MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
   
-[`  ML.ROC_CURVE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
+[`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
+[`ML.EXPLAIN_PREDICT` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
   
-[`  ML.GLOBAL_EXPLAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
+[`ML.GLOBAL_EXPLAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
   
-[`  ML.ADVANCED_WEIGHTS  ` <sup>5</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
+[`ML.ADVANCED_WEIGHTS` <sup>5</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Deep neural networks (DNN)
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
   
-[`  ML.CONFUSION _MATRIX  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
+[`ML.CONFUSION _MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
   
-[`  ML.ROC_CURVE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
+[`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
+[`ML.EXPLAIN_PREDICT` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
   
-[`  ML.GLOBAL_EXPLAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
+[`ML.GLOBAL_EXPLAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
   
-[`  ML.ADVANCED_WEIGHTS  ` <sup>5</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
+[`ML.ADVANCED_WEIGHTS` <sup>5</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Wide & Deep networks
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
   
-[`  ML.CONFUSION _MATRIX  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
+[`ML.CONFUSION _MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
   
-[`  ML.ROC_CURVE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
+[`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
+[`ML.EXPLAIN_PREDICT` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
   
-[`  ML.GLOBAL_EXPLAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
+[`ML.GLOBAL_EXPLAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
   
-[`  ML.ADVANCED_WEIGHTS  ` <sup>5</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
+[`ML.ADVANCED_WEIGHTS` <sup>5</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Boosted trees
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
   
-[`  ML.CONFUSION _MATRIX  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
+[`ML.CONFUSION _MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
   
-[`  ML.ROC_CURVE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
+[`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
+[`ML.EXPLAIN_PREDICT` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
   
-[`  ML.GLOBAL_EXPLAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
+[`ML.GLOBAL_EXPLAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
   
-[`  ML.FEATURE_IMPORTANCE  ` <sup>4</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance)
+[`ML.FEATURE_IMPORTANCE` <sup>4</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance)
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Random forest
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
   
-[`  ML.CONFUSION _MATRIX  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
+[`ML.CONFUSION _MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
   
-[`  ML.ROC_CURVE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
+[`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
+[`ML.EXPLAIN_PREDICT` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)  
   
-[`  ML.GLOBAL_EXPLAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
+[`ML.GLOBAL_EXPLAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)  
   
-[`  ML.FEATURE_IMPORTANCE  ` <sup>4</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance)
+[`ML.FEATURE_IMPORTANCE` <sup>4</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance)
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 AutoML classification & regression
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)  
   
-[`  ML.CONFUSION _MATRIX  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
+[`ML.CONFUSION _MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion) <sup>1</sup>  
   
-[`  ML.ROC_CURVE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
+[`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc) <sup>2</sup>
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)
 
-[`  ML.GLOBAL_EXPLAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
+[`ML.GLOBAL_EXPLAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Unsupervised learning
 
 K-means
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
-[`  ML.DETECT _ANOMALIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.DETECT _ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
 N/A
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Matrix factorization
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
 
-[`  ML.RECOMMEND  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend)  
+[`ML.RECOMMEND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend)  
   
-[`  ML.GENERATE _EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding)
+[`ML.GENERATE _EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding)
 
 N/A
 
@@ -479,50 +479,50 @@ N/A
 
 Principal component analysis (PCA)
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
-[`  ML.GENERATE _EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding)  
-[`  ML.DETECT _ANOMALIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.GENERATE _EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding)  
+[`ML.DETECT _ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
 N/A
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Autoencoder
 
-[`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
+[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
 
-[`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
+[`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)  
   
-[`  ML.GENERATE _EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding)  
-[`  ML.DETECT _ANOMALIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies)  
+[`ML.GENERATE _EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding)  
+[`ML.DETECT _ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies)  
   
-[`  ML.RECONSTRUCTION _LOSS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-reconstruction-loss)  
+[`ML.RECONSTRUCTION _LOSS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-reconstruction-loss)  
   
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
 N/A
 
-[`  ML.DESCRIBE_DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
+[`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)  
   
-[`  ML.VALIDATE_DATA _DRIFT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
+[`ML.VALIDATE_DATA _DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift)  
   
-[`  ML.VALIDATE_DATA _SKEW  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
+[`ML.VALIDATE_DATA _SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew)  
   
-[`  ML.TFDV_DESCRIBE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
+[`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe)  
   
-[`  ML.TFDV_VALIDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
+[`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate)
 
 Transform-only
 
@@ -530,18 +530,18 @@ Transform-only
 
 N/A
 
-[`  ML.TRANSFORM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
+[`ML.TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform)
 
 N/A
 
 N/A
 
-<sup>1</sup> `  ML.CONFUSION_MATRIX  ` is only applicable to classification models.
+<sup>1</sup> `ML.CONFUSION_MATRIX` is only applicable to classification models.
 
-<sup>2</sup> `  ML.ROC_CURVE  ` is only applicable to binary classification models.
+<sup>2</sup> `ML.ROC_CURVE` is only applicable to binary classification models.
 
-<sup>3</sup> The `  ML.EXPLAIN_PREDICT  ` function encompasses the `  ML.PREDICT  ` function because its output is a superset of the results of `  ML.PREDICT  ` .
+<sup>3</sup> The `ML.EXPLAIN_PREDICT` function encompasses the `ML.PREDICT` function because its output is a superset of the results of `ML.PREDICT` .
 
-<sup>4</sup> To understand the difference between `  ML.GLOBAL_EXPLAIN  ` and `  ML.FEATURE_IMPORTANCE  ` , see the [Explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
+<sup>4</sup> To understand the difference between `ML.GLOBAL_EXPLAIN` and `ML.FEATURE_IMPORTANCE` , see the [Explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
 
-<sup>5</sup> The `  ML.ADVANCED_WEIGHTS  ` function encompasses the `  ML.WEIGHTS  ` function because its output is a superset of the results of `  ML.WEIGHTS  ` .
+<sup>5</sup> The `ML.ADVANCED_WEIGHTS` function encompasses the `ML.WEIGHTS` function because its output is a superset of the results of `ML.WEIGHTS` .

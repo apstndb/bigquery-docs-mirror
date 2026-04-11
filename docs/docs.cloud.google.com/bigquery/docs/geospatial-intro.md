@@ -1,6 +1,6 @@
 # Introduction to geospatial analytics
 
-In a data warehouse like BigQuery, location information is common and can influence critical business decisions. You can use geospatial analytics to analyze and visualize geospatial data in BigQuery by using the [`  GEOGRAPHY  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) and [GoogleSQL geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
+In a data warehouse like BigQuery, location information is common and can influence critical business decisions. You can use geospatial analytics to analyze and visualize geospatial data in BigQuery by using the [`GEOGRAPHY` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) and [GoogleSQL geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
 
 For example, you might record the latitude and longitude of your delivery vehicles or packages over time. You might also record customer transactions and join the data to another table with store location data. You can use this type of location data to do the following:
 
@@ -13,7 +13,7 @@ For example, you might record the latitude and longitude of your delivery vehicl
 Geospatial analytics is subject to the following limitations:
 
   - [Geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) are available only in GoogleSQL.
-  - Only the BigQuery client library for Python supports the `  GEOGRAPHY  ` data type. For other client libraries, convert `  GEOGRAPHY  ` values to strings by using the `  ST_ASTEXT  ` or `  ST_ASGEOJSON  ` function. Converting to text using `  ST_ASTEXT  ` stores only one value, and converting to WKT means that the data is annotated as a `  STRING  ` type instead of a `  GEOGRAPHY  ` type.
+  - Only the BigQuery client library for Python supports the `GEOGRAPHY` data type. For other client libraries, convert `GEOGRAPHY` values to strings by using the `ST_ASTEXT` or `ST_ASGEOJSON` function. Converting to text using `ST_ASTEXT` stores only one value, and converting to WKT means that the data is annotated as a `STRING` type instead of a `GEOGRAPHY` type.
 
 ## Quotas
 

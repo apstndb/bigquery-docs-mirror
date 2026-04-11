@@ -10,15 +10,15 @@ You can load data from Mailchimp to BigQuery using the [BigQuery Data Transfer S
 
 ## Limitations
 
-  - The Mailchimp marketing API only supports a maximum of 10 simultaneous connections per user. Exceeding this limit results in the error `  429: TooManyRequests: You have exceeded the limit of 10 simultaneous connections  `
+  - The Mailchimp marketing API only supports a maximum of 10 simultaneous connections per user. Exceeding this limit results in the error `429: TooManyRequests: You have exceeded the limit of 10 simultaneous connections`
       - To avoid reaching this rate limit, we recommend only running one data transfer per Mailchimp account.
       - For more information, see [Error glossary](https://mailchimp.com/developer/marketing/docs/errors/#error-glossary) .
-  - The `  Integer  ` data type in Mailchimp has a maximum supported value of 2,147,483,647 across all objects.
-      - However, some Mailchimp fields support higher values, such as the `  Quantity  ` field in `  EcommerceOrderLines  ` and `  EcommerceCartLines  ` .
+  - The `Integer` data type in Mailchimp has a maximum supported value of 2,147,483,647 across all objects.
+      - However, some Mailchimp fields support higher values, such as the `Quantity` field in `EcommerceOrderLines` and `EcommerceCartLines` .
 
 ### Array field limitations
 
-Mailchimp connector doesn't support `  ARRAY  ` fields in the following Mailchimp objects:
+Mailchimp connector doesn't support `ARRAY` fields in the following Mailchimp objects:
 
 <table>
 <colgroup>
@@ -28,66 +28,66 @@ Mailchimp connector doesn't support `  ARRAY  ` fields in the following Mailchim
 <thead>
 <tr class="header">
 <th>Mailchimp Object</th>
-<th>Unsupported <code dir="ltr" translate="no">       ARRAY      </code> fields</th>
+<th>Unsupported <code dir="ltr" translate="no">ARRAY</code> fields</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       Campaigns      </code></td>
-<td><code dir="ltr" translate="no">       VariateSettings_SubjectLines      </code><br />
-<code dir="ltr" translate="no">       VariateSettings_SendTimes      </code><br />
-<code dir="ltr" translate="no">       VariateSettings_FromNames      </code><br />
-<code dir="ltr" translate="no">       VariateSettings_ReplyToAddresses      </code><br />
-<code dir="ltr" translate="no">       VariateSettings_Contents      </code><br />
-<code dir="ltr" translate="no">       VariateSettings_Combinations      </code></td>
+<td><code dir="ltr" translate="no">Campaigns</code></td>
+<td><code dir="ltr" translate="no">VariateSettings_SubjectLines</code><br />
+<code dir="ltr" translate="no">VariateSettings_SendTimes</code><br />
+<code dir="ltr" translate="no">VariateSettings_FromNames</code><br />
+<code dir="ltr" translate="no">VariateSettings_ReplyToAddresses</code><br />
+<code dir="ltr" translate="no">VariateSettings_Contents</code><br />
+<code dir="ltr" translate="no">VariateSettings_Combinations</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       EcommerceCarts      </code></td>
-<td><code dir="ltr" translate="no">       Lines      </code></td>
+<td><code dir="ltr" translate="no">EcommerceCarts</code></td>
+<td><code dir="ltr" translate="no">Lines</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       EcommerceProducts      </code></td>
-<td><code dir="ltr" translate="no">       Variants      </code></td>
+<td><code dir="ltr" translate="no">EcommerceProducts</code></td>
+<td><code dir="ltr" translate="no">Variants</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ListMembers      </code></td>
-<td><code dir="ltr" translate="no">       TagsAggregate      </code></td>
+<td><code dir="ltr" translate="no">ListMembers</code></td>
+<td><code dir="ltr" translate="no">TagsAggregate</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ListMergeFields      </code></td>
-<td><code dir="ltr" translate="no">       Options_Choices      </code></td>
+<td><code dir="ltr" translate="no">ListMergeFields</code></td>
+<td><code dir="ltr" translate="no">Options_Choices</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       Lists      </code></td>
-<td><code dir="ltr" translate="no">       Modules      </code></td>
+<td><code dir="ltr" translate="no">Lists</code></td>
+<td><code dir="ltr" translate="no">Modules</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       AuthorizedApps      </code></td>
-<td><code dir="ltr" translate="no">       Users      </code></td>
+<td><code dir="ltr" translate="no">AuthorizedApps</code></td>
+<td><code dir="ltr" translate="no">Users</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       AutomationEmails      </code></td>
-<td><code dir="ltr" translate="no">       Settings_AutoFbPost      </code></td>
+<td><code dir="ltr" translate="no">AutomationEmails</code></td>
+<td><code dir="ltr" translate="no">Settings_AutoFbPost</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       CampaignOpenEmailDetails      </code></td>
-<td><code dir="ltr" translate="no">       Opens      </code></td>
+<td><code dir="ltr" translate="no">CampaignOpenEmailDetails</code></td>
+<td><code dir="ltr" translate="no">Opens</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       EcommerceProductImages      </code></td>
-<td><code dir="ltr" translate="no">       VariantIds      </code></td>
+<td><code dir="ltr" translate="no">EcommerceProductImages</code></td>
+<td><code dir="ltr" translate="no">VariantIds</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ListSignupForms      </code></td>
-<td><code dir="ltr" translate="no">       Contents      </code> , <code dir="ltr" translate="no">       Styles      </code></td>
+<td><code dir="ltr" translate="no">ListSignupForms</code></td>
+<td><code dir="ltr" translate="no">Contents</code> , <code dir="ltr" translate="no">Styles</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ReportEmailActivity      </code></td>
-<td><code dir="ltr" translate="no">       Activity      </code></td>
+<td><code dir="ltr" translate="no">ReportEmailActivity</code></td>
+<td><code dir="ltr" translate="no">Activity</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       Reports      </code></td>
-<td><code dir="ltr" translate="no">       Timewarp      </code></td>
+<td><code dir="ltr" translate="no">Reports</code></td>
+<td><code dir="ltr" translate="no">Timewarp</code></td>
 </tr>
 </tbody>
 </table>
@@ -107,7 +107,7 @@ To enable data transfers from Mailchimp to BigQuery, you must have a Mailchimp A
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -116,20 +116,20 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Set up a Mailchimp data transfer
 
@@ -149,7 +149,7 @@ Add Mailchimp data into BigQuery by setting up a transfer configuration using on
     
       - For **API Key** , enter your Mailchimp API key. For more information, see [Mailchimp prerequisites](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer#mailchimp-prerequisites) .
       - Optional: For **Start Date** , specify a start date for new records to be included in the data transfer. Only records created on or after this date are included in the data transfer.
-          - Enter a data in the format `  YYYY-MM-DD  ` . The minimum value is `  2001-01-01  ` .
+          - Enter a data in the format `YYYY-MM-DD` . The minimum value is `2001-01-01` .
       - For **Mailchimp objects to transfer** , click **Browse** to select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
 
 5.  In the **Destination settings** section, for **Dataset** , choose the dataset that you created to store your data.
@@ -170,7 +170,7 @@ Add Mailchimp data into BigQuery by setting up a transfer configuration using on
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
 ``` notranslate
 bq mk
@@ -184,19 +184,19 @@ bq mk
 
 Replace the following:
 
-  - `  PROJECT_ID  ` (optional): your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
+  - `PROJECT_ID` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - `  DATA_SOURCE  ` : the data source — `  mailchimp  ` .
+  - `DATA_SOURCE` : the data source — `mailchimp` .
 
-  - `  NAME  ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+  - `NAME` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
-  - `  DATASET  ` : the target dataset for the transfer configuration.
+  - `DATASET` : the target dataset for the transfer configuration.
 
-  - `  PARAMETERS  ` : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a Mailchimp data transfer:
+  - `PARAMETERS` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Mailchimp data transfer:
     
-      - `  assets  ` : the path to the Mailchimp objects to be transferred to BigQuery.
-      - `  connector.authentication.apiKey  ` : the Mailchimp API key.
-      - `  connector.startDate  ` : (Optional) a start date for new records to be included in the data transfer, in the format `  YYYY-MM-DD  ` . Only records created on or after this date are included in the data transfer.
+      - `assets` : the path to the Mailchimp objects to be transferred to BigQuery.
+      - `connector.authentication.apiKey` : the Mailchimp API key.
+      - `connector.startDate` : (Optional) a start date for new records to be included in the data transfer, in the format `YYYY-MM-DD` . Only records created on or after this date are included in the data transfer.
 
 The following command creates a Mailchimp data transfer in the default project.
 
@@ -219,14 +219,14 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 The following table maps Mailchimp data types to the corresponding BigQuery data types:
 
-| Mailchimp data type                         | BigQuery data type          | Description                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        String       `                     | `        STRING       `     |                                                                                                                                                                                                                                                                                                                                                          |
-| `        Integer       `                    | `        INT64       `      |                                                                                                                                                                                                                                                                                                                                                          |
-| `        Number       `                     | `        BIGNUMERIC       ` | Mailchimp `        Number       ` data objects are mapped to either the `        BIGNUMERIC       ` data type for financial-related fields such as `        Price       ` and `        OrderTotal       ` , or the `        FLOAT64       ` data type, for other fields such as `        Stats_OpenRate       ` and `        Location_Latitude       ` . |
-| `        Number       `                     | `        FLOAT64       `    |                                                                                                                                                                                                                                                                                                                                                          |
-| `        Boolean       `                    | `        BOOLEAN       `    |                                                                                                                                                                                                                                                                                                                                                          |
-| `        String       ` in date-time format | `        TIMESTAMP       `  | `        STRING       ` data types in date-time format are represented in ISO 8601 format. For example, `        2019-08-24T14:15:22Z       ` .                                                                                                                                                                                                          |
+| Mailchimp data type          | BigQuery data type | Description                                                                                                                                                                                                                                     |
+| ---------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `String`                     | `STRING`           |                                                                                                                                                                                                                                                 |
+| `Integer`                    | `INT64`            |                                                                                                                                                                                                                                                 |
+| `Number`                     | `BIGNUMERIC`       | Mailchimp `Number` data objects are mapped to either the `BIGNUMERIC` data type for financial-related fields such as `Price` and `OrderTotal` , or the `FLOAT64` data type, for other fields such as `Stats_OpenRate` and `Location_Latitude` . |
+| `Number`                     | `FLOAT64`          |                                                                                                                                                                                                                                                 |
+| `Boolean`                    | `BOOLEAN`          |                                                                                                                                                                                                                                                 |
+| `String` in date-time format | `TIMESTAMP`        | `STRING` data types in date-time format are represented in ISO 8601 format. For example, `2019-08-24T14:15:22Z` .                                                                                                                               |
 
 ## Pricing
 

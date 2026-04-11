@@ -12,7 +12,7 @@ This document shows you how to install and use the BigQuery JupyterLab plugin to
   - Use the BigQuery DataFrames API.
   - Deploy a BigQuery DataFrames notebook to [Cloud Composer](https://docs.cloud.google.com/composer/docs/concepts/overview) .
 
-The BigQuery JupyterLab plugin includes all the functionality of the [Dataproc JupyterLab plugin](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions) , such as creating a Dataproc Serverless runtime template, launching and managing notebooks, developing with Apache Spark, deploying your code, and managing your resources.
+The BigQuery JupyterLab plugin includes all the functionality of the [Managed Service for Apache Spark JupyterLab plugin](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions) , such as creating a Managed Service for Apache Spark Serverless runtime template, launching and managing notebooks, developing with Apache Spark, deploying your code, and managing your resources.
 
 ## Install the BigQuery JupyterLab plugin
 
@@ -54,11 +54,11 @@ To install and use the BigQuery JupyterLab plugin, follow these steps:
     
     JupyterLab opens in your browser.
 
-**Note:** On macOS, if you receive an `  SSL: CERTIFICATE_VERIFY_FAILED  ` error in your terminal when you launch JupyterLab, update your Python SSL certificate by executing `  /Applications/Python 3.11/Install Certificates.command  ` . This file is located in the Python home directory.
+**Note:** On macOS, if you receive an `SSL: CERTIFICATE_VERIFY_FAILED` error in your terminal when you launch JupyterLab, update your Python SSL certificate by executing `/Applications/Python 3.11/Install Certificates.command` . This file is located in the Python home directory.
 
 ## Update your project and region settings
 
-By default, your session runs in the project and region that you set when you ran `  gcloud init  ` . To change the project and region settings for your session, do the following:
+By default, your session runs in the project and region that you set when you ran `gcloud init` . To change the project and region settings for your session, do the following:
 
   - In the JupyterLab menu, click **Settings \> Google BigQuery Settings** .
 
@@ -94,7 +94,7 @@ BigQuery DataFrames notebooks support Python development in a local Python kerne
 
 ## Deploy a BigQuery DataFrames notebook
 
-You can deploy a BigQuery DataFrames notebook to Cloud Composer by using a [Dataproc Serverless runtime template](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions#create_a_serverless_runtime_template) . You must use runtime version 2.1 or later.
+You can deploy a BigQuery DataFrames notebook to Cloud Composer by using a [Managed Service for Apache Spark Serverless runtime template](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions#create_a_serverless_runtime_template) . You must use runtime version 2.1 or later.
 
 1.  In your JupyterLab notebook, click calendar\_month **Job Scheduler** .
 
@@ -122,4 +122,4 @@ When you successfully schedule your notebook, it appears on the list of schedule
 
   - Try the [BigQuery DataFrames quickstart](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .
   - Learn more about the [BigQuery DataFrames Python API](https://docs.cloud.google.com/bigquery/docs/reference/bigquery-dataframes) .
-  - Use the JupyterLab for [serverless batch and notebook sessions](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions) with Dataproc.
+  - Use the JupyterLab for [serverless batch and notebook sessions](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions) with Managed Service for Apache Spark.

@@ -1,8 +1,8 @@
-## Tool: `       list_table_ids      `
+## Tool: `list_table_ids`
 
 List table ids in a BigQuery dataset.
 
-The following sample demonstrate how to use `  curl  ` to invoke the `  list_table_ids  ` MCP tool.
+The following sample demonstrate how to use `curl` to invoke the `list_table_ids` MCP tool.
 
 <table>
 <colgroup>
@@ -62,15 +62,15 @@ Request for a list of tables in a dataset.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the table request.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the table request.
 
@@ -91,22 +91,16 @@ Response for a list of tables.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;tables&quot;: [
-    {
-      object (ListFormatTable)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;tables&quot;: [{object (ListFormatTable)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  tables[]  `
+`tables[]`
 
-`  object ( ListFormatTable  ` )
+` object ( ListFormatTable  ` )
 
 The tables that matched the request.
 
@@ -132,9 +126,9 @@ The tables that matched the request.
 
 Fields
 
-`  id  `
+`id`
 
-`  string  `
+`string`
 
 The ID of the table.
 

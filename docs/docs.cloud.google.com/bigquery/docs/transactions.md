@@ -13,12 +13,12 @@ Transactions guarantee [ACID](https://en.wikipedia.org/wiki/ACID) properties and
 
 ## Transaction scope
 
-A transaction must be contained in a single SQL query, except when in [`  Session mode  `](https://docs.cloud.google.com/bigquery/docs/sessions-intro) . A query can contain multiple transactions, but they cannot be nested. You can run [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#multi_transactions) over multiple queries in a session.
+A transaction must be contained in a single SQL query, except when in [`Session mode`](https://docs.cloud.google.com/bigquery/docs/sessions-intro) . A query can contain multiple transactions, but they cannot be nested. You can run [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#multi_transactions) over multiple queries in a session.
 
-To start a transaction, use the [`  BEGIN TRANSACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin_transaction) statement. The transaction ends when any of the following occur:
+To start a transaction, use the [`BEGIN TRANSACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin_transaction) statement. The transaction ends when any of the following occur:
 
-  - The query executes a [`  COMMIT TRANSACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#commit_transaction) statement. This statement atomically commits all changes made inside the transaction.
-  - The query executes a [`  ROLLBACK TRANSACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) statement. This statement abandons all changes made inside the transaction.
+  - The query executes a [`COMMIT TRANSACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#commit_transaction) statement. This statement atomically commits all changes made inside the transaction.
+  - The query executes a [`ROLLBACK TRANSACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) statement. This statement abandons all changes made inside the transaction.
   - The query ends before reaching either of these two statements. In that case, BigQuery automatically rolls back the transaction.
 
 If an error occurs during a transaction and the query has an [exception handler](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#beginexceptionend) , then BigQuery transfers control to the exception handler. Inside the exception block, can choose whether to commit or roll back the transaction.
@@ -46,16 +46,16 @@ The following example shows an exception handler that rolls back a transaction:
 
 The following statement types are supported in transactions:
 
-  - Query statements: `  SELECT  `
+  - Query statements: `SELECT`
 
-  - DML statements: `  INSERT  ` , `  UPDATE  ` , `  DELETE  ` , `  MERGE  ` , and `  TRUNCATE TABLE  `
+  - DML statements: `INSERT` , `UPDATE` , `DELETE` , `MERGE` , and `TRUNCATE TABLE`
 
   - DDL statements on temporary entities:
     
-      - `  CREATE TEMP TABLE  `
-      - `  CREATE TEMP FUNCTION  `
-      - `  DROP TABLE  ` on a temporary table
-      - `  DROP FUNCTION  ` on a temporary function
+      - `CREATE TEMP TABLE`
+      - `CREATE TEMP FUNCTION`
+      - `DROP TABLE` on a temporary table
+      - `DROP FUNCTION` on a temporary function
 
 DDL statements that create or drop permanent entities, such as datasets, tables, and functions, are not supported inside transactions.
 
@@ -63,13 +63,13 @@ DDL statements that create or drop permanent entities, such as datasets, tables,
 
 Within a transaction, the following date/time functions have special behaviors:
 
-  - The [`  CURRENT_TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp) , [`  CURRENT_DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date) , and [`  CURRENT_TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#current_time) functions return the timestamp when the transaction started.
+  - The [`CURRENT_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp) , [`CURRENT_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date) , and [`CURRENT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#current_time) functions return the timestamp when the transaction started.
 
-  - You cannot use the [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause to read a table beyond the timestamp when the transaction started. Doing so returns an error.
+  - You cannot use the [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause to read a table beyond the timestamp when the transaction started. Doing so returns an error.
 
 ## Example of a transaction
 
-This example assumes there are two tables named `  Inventory  ` and `  NewArrivals  ` , created as follows:
+This example assumes there are two tables named `Inventory` and `NewArrivals` , created as follows:
 
     CREATE OR REPLACE TABLE mydataset.Inventory
     (
@@ -98,9 +98,9 @@ This example assumes there are two tables named `  Inventory  ` and `  NewArriva
          ('dryer', 200, 'warehouse #2'),
          ('oven', 300, 'warehouse #1');
 
-The `  Inventory  ` table contains information about current inventory, and `  NewArrivals  ` contains information about newly arrived items.
+The `Inventory` table contains information about current inventory, and `NewArrivals` contains information about newly arrived items.
 
-The following transaction updates `  Inventory  ` with new arrivals and deletes the corresponding records from `  NewArrivals  ` . Assuming that all statements complete successfully, the changes in both tables are committed atomically as a single transaction.
+The following transaction updates `Inventory` with new arrivals and deletes the corresponding records from `NewArrivals` . Assuming that all statements complete successfully, the changes in both tables are committed atomically as a single transaction.
 
     BEGIN TRANSACTION;
     
@@ -132,20 +132,20 @@ If a transaction mutates (update or deletes) rows in a table, then other transac
 
 Operations that read or append new rows can run concurrently with the transaction. For example, any of the following operations can be performed concurrently on a table while a transaction mutates data in the same table:
 
-  - `  SELECT  ` statements
+  - `SELECT` statements
   - BigQuery Storage Read API read operations
   - Queries from BigQuery BI Engine
-  - `  INSERT  ` statements
-  - Load jobs that use `  WRITE_APPEND  ` disposition to append rows
+  - `INSERT` statements
+  - Load jobs that use `WRITE_APPEND` disposition to append rows
   - Streaming writes
 
 If a transaction only reads a table or appends new rows to it, any operation can be performed concurrently on that table.
 
 ## Viewing transaction information
 
-BigQuery assigns a transaction ID to each multi-statement transaction. The transaction ID is attached to each query that executes inside the transaction. To view the transaction IDs for your jobs, query the [`  INFORMATION_SCHEMA.JOBS*  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) views for the `  transaction_id  ` column.
+BigQuery assigns a transaction ID to each multi-statement transaction. The transaction ID is attached to each query that executes inside the transaction. To view the transaction IDs for your jobs, query the [`INFORMATION_SCHEMA.JOBS*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) views for the `transaction_id` column.
 
-When a multi-statement transaction runs, BigQuery creates a child job for each statement in the transaction. For a given transaction, every child job that is associated with that transaction has the same `  transaction_id  ` value.
+When a multi-statement transaction runs, BigQuery creates a child job for each statement in the transaction. For a given transaction, every child job that is associated with that transaction has the same `transaction_id` value.
 
 The following examples show how to find information about your transactions.
 
@@ -177,7 +177,7 @@ The following query returns the starting and ending times for a specified transa
 
 ### Find the transaction in which a job is running
 
-The following query gets the transaction associated with a specified job ID. It returns `  NULL  ` if the job is not running within a multi-statement transaction.
+The following query gets the transaction associated with a specified job ID. It returns `NULL` if the job is not running within a multi-statement transaction.
 
     SELECT transaction_id
     FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT

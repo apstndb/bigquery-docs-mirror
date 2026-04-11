@@ -1,12 +1,12 @@
 # SESSIONS\_BY\_PROJECT view
 
-The `  INFORMATION_SCHEMA.SESSIONS_BY_PROJECT  ` view contains real-time metadata about all BigQuery sessions in the current project.
+The `INFORMATION_SCHEMA.SESSIONS_BY_PROJECT` view contains real-time metadata about all BigQuery sessions in the current project.
 
-**Note:** The view names `  INFORMATION_SCHEMA.SESSIONS  ` and `  INFORMATION_SCHEMA.SESSIONS_BY_PROJECT  ` are synonymous and can be used interchangeably.
+**Note:** The view names `INFORMATION_SCHEMA.SESSIONS` and `INFORMATION_SCHEMA.SESSIONS_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required permissions
 
-To query the `  INFORMATION_SCHEMA.SESSIONS_BY_PROJECT  ` view, you need the `  bigquery.jobs.listAll  ` Identity and Access Management (IAM) permission for the project. Each of the following predefined IAM roles includes the required permission:
+To query the `INFORMATION_SCHEMA.SESSIONS_BY_PROJECT` view, you need the `bigquery.jobs.listAll` Identity and Access Management (IAM) permission for the project. Each of the following predefined IAM roles includes the required permission:
 
   - Project Owner
   - BigQuery Admin
@@ -15,24 +15,24 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.SESSIONS_BY_*  ` views, the query results contain one row for each BigQuery session.
+When you query the `INFORMATION_SCHEMA.SESSIONS_BY_*` views, the query results contain one row for each BigQuery session.
 
-The `  INFORMATION_SCHEMA.SESSIONS_BY_*  ` view has the following schema:
+The `INFORMATION_SCHEMA.SESSIONS_BY_*` view has the following schema:
 
-**Note:** The underlying data is partitioned by the `  creation_time  ` column and clustered by `  project_id  ` and `  user_email  ` .
+**Note:** The underlying data is partitioned by the `creation_time` column and clustered by `project_id` and `user_email` .
 
-| Column name                         | Data type                  | Value                                                                                                                       |
-| ----------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `        creation_time       `      | `        TIMESTAMP       ` | ( *Partitioning column* ) Creation time of this session. Partitioning is based on the UTC time of this timestamp.           |
-| `        expiration_time       `    | `        TIMESTAMP       ` | ( *Partitioning column* ) Expiration time of this session. Partitioning is based on the UTC time of this timestamp.         |
-| `        is_active       `          | `        BOOL       `      | Is the session is still active? `        TRUE       ` if yes, otherwise `        FALSE       ` .                            |
-| `        last_modified_time       ` | `        TIMESTAMP       ` | ( *Partitioning column* ) Time when the session was last modified. Partitioning is based on the UTC time of this timestamp. |
-| `        project_id       `         | `        STRING       `    | ( *Clustering column* ) ID of the project.                                                                                  |
-| `        project_number       `     | `        INTEGER       `   | Number of the project.                                                                                                      |
-| `        session_id       `         | `        STRING       `    | ID of the session. For example, `        bquxsession_1234       ` .                                                         |
-| `        user_email       `         | `        STRING       `    | ( *Clustering column* ) Email address or service account of the user who ran the session.                                   |
+| Column name          | Data type   | Value                                                                                                                       |
+| -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `creation_time`      | `TIMESTAMP` | ( *Partitioning column* ) Creation time of this session. Partitioning is based on the UTC time of this timestamp.           |
+| `expiration_time`    | `TIMESTAMP` | ( *Partitioning column* ) Expiration time of this session. Partitioning is based on the UTC time of this timestamp.         |
+| `is_active`          | `BOOL`      | Is the session is still active? `TRUE` if yes, otherwise `FALSE` .                                                          |
+| `last_modified_time` | `TIMESTAMP` | ( *Partitioning column* ) Time when the session was last modified. Partitioning is based on the UTC time of this timestamp. |
+| `project_id`         | `STRING`    | ( *Clustering column* ) ID of the project.                                                                                  |
+| `project_number`     | `INTEGER`   | Number of the project.                                                                                                      |
+| `session_id`         | `STRING`    | ID of the session. For example, `bquxsession_1234` .                                                                        |
+| `user_email`         | `STRING`    | ( *Clustering column* ) Email address or service account of the user who ran the session.                                   |
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Data retention
 
@@ -42,15 +42,15 @@ This view contains currently running sessions and the history of sessions comple
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-| View name                                                                                                                                        | Resource scope | Region scope               |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | -------------------------- |
-| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT       `` | Project level  | `          REGION        ` |
+| View name                                                                                                 | Resource scope | Region scope              |
+| --------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
+| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT`` | Project level  | `         REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
@@ -58,7 +58,7 @@ To run the query against a project other than your default project, add the proj
 
     `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT
 
-For example, ``  `myproject`.`region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT  `` . The following example lists all users or service accounts that created sessions for a given project within the last day:
+For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT `` . The following example lists all users or service accounts that created sessions for a given project within the last day:
 
 ``` notranslate
 SELECT
@@ -70,7 +70,7 @@ WHERE
   AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY);
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

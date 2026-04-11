@@ -2,30 +2,30 @@
 
 This tutorial shows you how to do the following tasks:
 
-  - Create an [`  ARIMA_PLUS_XREG  ` time series forecasting model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
-  - Detect anomalies in the time series data by running the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) against the model.
+  - Create an [`ARIMA_PLUS_XREG` time series forecasting model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
+  - Detect anomalies in the time series data by running the [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) against the model.
 
-This tutorial uses the following tables from the public `  epa_historical_air_quality  ` dataset, which contains daily PM 2.5, temperature, and wind speed information collected from multiple US cities:
+This tutorial uses the following tables from the public `epa_historical_air_quality` dataset, which contains daily PM 2.5, temperature, and wind speed information collected from multiple US cities:
 
-  - [`  epa_historical_air_quality.pm25_nonfrm_daily_summary  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=epa_historical_air_quality&t=pm25_nonfrm_daily_summary&page=table)
-  - [`  epa_historical_air_quality.wind_daily_summary  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=epa_historical_air_quality&t=wind_daily_summary&page=table)
-  - [`  epa_historical_air_quality.temperature_daily_summary  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=epa_historical_air_quality&t=temperature_daily_summary&page=table)
+  - [`epa_historical_air_quality.pm25_nonfrm_daily_summary`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=epa_historical_air_quality&t=pm25_nonfrm_daily_summary&page=table)
+  - [`epa_historical_air_quality.wind_daily_summary`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=epa_historical_air_quality&t=wind_daily_summary&page=table)
+  - [`epa_historical_air_quality.temperature_daily_summary`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=epa_historical_air_quality&t=temperature_daily_summary&page=table)
 
 ## Required permissions
 
-  - To create the dataset, you need the `  bigquery.datasets.create  ` IAM permission.
+  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
   - To create the model, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following permissions:
     
-      - `  bigquery.models.getData  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.models.getData`
+      - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -59,7 +59,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -67,9 +67,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -86,7 +86,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -98,12 +98,12 @@ Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/ref
 
 ## Prepare the training data
 
-The PM2.5, temperature, and wind speed data are in separate tables. Create the `  bqml_tutorial.seattle_air_quality_daily  ` table of training data by combining the data in these public tables. `  bqml_tutorial.seattle_air_quality_daily  ` contains the following columns:
+The PM2.5, temperature, and wind speed data are in separate tables. Create the `bqml_tutorial.seattle_air_quality_daily` table of training data by combining the data in these public tables. `bqml_tutorial.seattle_air_quality_daily` contains the following columns:
 
-  - `  date  ` : the date of the observation
-  - `  PM2.5  ` : the average PM2.5 value for each day
-  - `  wind_speed  ` : the average wind speed for each day
-  - `  temperature  ` : the highest temperature for each day
+  - `date` : the date of the observation
+  - `PM2.5` : the average PM2.5 value for each day
+  - `wind_speed` : the average wind speed for each day
+  - `temperature` : the highest temperature for each day
 
 The new table has daily data from August 11, 2009 to January 31, 2022.
 
@@ -154,7 +154,7 @@ The new table has daily data from August 11, 2009 to January 31, 2022.
 
 ## Create the model
 
-Create a multivariate time series model, using the data from `  bqml_tutorial.seattle_air_quality_daily  ` as training data.
+Create a multivariate time series model, using the data from `bqml_tutorial.seattle_air_quality_daily` as training data.
 
 1.  Go to the **BigQuery** page.
     
@@ -179,9 +179,9 @@ Create a multivariate time series model, using the data from `  bqml_tutorial.se
       date < "2023-02-01";
     ```
     
-    The query takes several seconds to complete, after which the model `  arimax_model  ` appears in the `  bqml_tutorial  ` dataset and can be accessed in the **Explorer** pane.
+    The query takes several seconds to complete, after which the model `arimax_model` appears in the `bqml_tutorial` dataset and can be accessed in the **Explorer** pane.
     
-    Because the query uses a `  CREATE MODEL  ` statement to create a model, there are no query results.
+    Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
 ## Perform anomaly detection on historical data
 
@@ -274,7 +274,7 @@ Run anomaly detection on the new data that you generate.
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

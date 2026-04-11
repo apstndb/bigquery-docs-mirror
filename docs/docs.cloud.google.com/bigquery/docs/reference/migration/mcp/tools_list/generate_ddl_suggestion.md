@@ -1,8 +1,8 @@
-## Tool: `       generate_ddl_suggestion      `
+## Tool: `generate_ddl_suggestion`
 
 Generates DDL statement suggestions for a given input query.
 
-The following sample demonstrate how to use `  curl  ` to invoke the `  generate_ddl_suggestion  ` MCP tool.
+The following sample demonstrate how to use `curl` to invoke the `generate_ddl_suggestion` MCP tool.
 
 <table>
 <colgroup>
@@ -37,7 +37,7 @@ curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
 
 ## Input Schema
 
-Request message for `  GenerateDdlSuggestion  ` .
+Request message for `GenerateDdlSuggestion` .
 
 ### GenerateDdlSuggestionRequest
 
@@ -63,27 +63,27 @@ Request message for `  GenerateDdlSuggestion  ` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The parent resource name where the DDL suggestion is generated. Format: `  projects/PROJECT_ID/locations/LOCATION  ` .
+Required. The parent resource name where the DDL suggestion is generated. Format: `projects/PROJECT_ID/locations/LOCATION` .
 
-`  inputQuery  `
+`inputQuery`
 
-`  string  `
+`string`
 
 Required. The query string for which the DDL suggestion is generated.
 
-`  sourceDialect  `
+`sourceDialect`
 
-`  string  `
+`string`
 
 Required. The dialect of the source query. Supported dialects are Teradata, Bteq, Redshift, Oracle, HiveQL, Impala, SparkSQL, Snowflake, Netezza, AzureSynapse, Vertica, SQLServer, Presto, MySQL, Postgresql, BigQuery, Db2, Greenplum, and SQLite.
 
 ## Output Schema
 
-Response message for `  GenerateDdlSuggestion  ` .
+Response message for `GenerateDdlSuggestion` .
 
 ### GenerateDdlSuggestionResponse
 
@@ -98,45 +98,34 @@ Response message for `  GenerateDdlSuggestion  ` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;suggestionId&quot;: string,
-  &quot;suggestionState&quot;: string,
-  &quot;logs&quot;: [
-    {
-      object (Log)
-    }
-  ],
-  &quot;errorInfo&quot;: {
-    object (ErrorInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;suggestionId&quot;: string,&quot;suggestionState&quot;: string,&quot;logs&quot;: [{object (Log)}],&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  suggestionId  `
+`suggestionId`
 
-`  string  `
+`string`
 
-The suggestion ID of the DDL suggestion. Use this ID to fetch the DDL suggestion. Format: `  projects/PROJECT_ID/locations/LOCATION/suggestions/SUGGESTION_ID  ` .
+The suggestion ID of the DDL suggestion. Use this ID to fetch the DDL suggestion. Format: `projects/PROJECT_ID/locations/LOCATION/suggestions/SUGGESTION_ID` .
 
-`  suggestionState  `
+`suggestionState`
 
-`  string  `
+`string`
 
-The current state of the DDL suggestion, for example, `  RUNNING  ` , `  SUCCEEDED  ` or `  FAILED  ` .
+The current state of the DDL suggestion, for example, `RUNNING` , `SUCCEEDED` or `FAILED` .
 
-`  logs[]  `
+`logs[]`
 
-`  object ( Log  ` )
+` object ( Log  ` )
 
 A list of logs generated during the DDL suggestion process.
 
-`  errorInfo  `
+`errorInfo`
 
-`  object ( ErrorInfo  ` )
+` object ( ErrorInfo  ` )
 
 The error information.
 
@@ -167,39 +156,39 @@ The error information.
 
 Fields
 
-`  severity  `
+`severity`
 
-`  string  `
+`string`
 
-Severity of the translation record, for example, `  INFO  ` , `  WARNING  ` , or `  ERROR  ` .
+Severity of the translation record, for example, `INFO` , `WARNING` , or `ERROR` .
 
-`  category  `
+`category`
 
-`  string  `
+`string`
 
-Category of the error or warning, for example, `  SyntaxError  ` .
+Category of the error or warning, for example, `SyntaxError` .
 
-`  message  `
+`message`
 
-`  string  `
+`string`
 
 Detailed message of the record.
 
-`  action  `
+`action`
 
-`  string  `
+`string`
 
 Recommended action to address the log.
 
-`  effect  `
+`effect`
 
-`  string  `
+`string`
 
-The effect or impact of the issue noted in the log. Effect can be one of the following values: `  CORRECTNESS  ` : Errors with this effect indicate that the translation service couldn't meaningfully process the translation. This is caused by issues in the user's input such as incorrect language or formatting, or using an unsupported file type. `  COMPLETENESS  ` : Errors with this effect indicate that the translation service doesn't have sufficient information to complete the translation. This can be caused by missing information in the user's input such as missing metadata for name resolution. `  COMPATIBILITY  ` : Errors with this effect indicate that the translation service encountered compatibility issues when it processed the translation. This can happen when the target platform doesn't support a feature used in the input script, and the translation service tries to make a semantic approximation for the target platform. `  NONE  ` : Errors with this effect are purely informational messages that have no effect on the output. Effects are ordered by their stage in the translation process. For example, `  CORRECTNESS  ` issues are identified before `  COMPLETENESS  ` issues.
+The effect or impact of the issue noted in the log. Effect can be one of the following values: `CORRECTNESS` : Errors with this effect indicate that the translation service couldn't meaningfully process the translation. This is caused by issues in the user's input such as incorrect language or formatting, or using an unsupported file type. `COMPLETENESS` : Errors with this effect indicate that the translation service doesn't have sufficient information to complete the translation. This can be caused by missing information in the user's input such as missing metadata for name resolution. `COMPATIBILITY` : Errors with this effect indicate that the translation service encountered compatibility issues when it processed the translation. This can happen when the target platform doesn't support a feature used in the input script, and the translation service tries to make a semantic approximation for the target platform. `NONE` : Errors with this effect are purely informational messages that have no effect on the output. Effects are ordered by their stage in the translation process. For example, `CORRECTNESS` issues are identified before `COMPLETENESS` issues.
 
-`  impactedObject  `
+`impactedObject`
 
-`  string  `
+`string`
 
 Name of the object that is impacted by the log message.
 
@@ -230,27 +219,27 @@ Name of the object that is impacted by the log message.
 
 Fields
 
-`  reason  `
+`reason`
 
-`  string  `
+`string`
 
-The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match a regular expression of `  [A-Z][A-Z0-9_]+[A-Z0-9]  ` , which represents UPPER\_SNAKE\_CASE.
+The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match a regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]` , which represents UPPER\_SNAKE\_CASE.
 
-`  domain  `
+`domain`
 
-`  string  `
+`string`
 
 The logical grouping to which the "reason" belongs. The error domain is typically the registered service name of the tool or product that generates the error. Example: "pubsub.googleapis.com". If the error is generated by some common infrastructure, the error domain must be a globally unique value that identifies the infrastructure. For Google API infrastructure, the error domain is "googleapis.com".
 
-`  metadata  `
+`metadata`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Additional structured details about this error.
 
-Keys must match a regular expression of `  [a-z][a-zA-Z0-9-_]+  ` but should ideally be lowerCamelCase. Also, they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than `  {"instanceLimit": "100/request"}  ` , should be returned as, `  {"instanceLimitPerRequest": "100"}  ` , if the client exceeds the number of instances that can be created in a single (batch) request.
+Keys must match a regular expression of `[a-z][a-zA-Z0-9-_]+` but should ideally be lowerCamelCase. Also, they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than `{"instanceLimit": "100/request"}` , should be returned as, `{"instanceLimitPerRequest": "100"}` , if the client exceeds the number of instances that can be created in a single (batch) request.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
 ### MetadataEntry
 
@@ -275,13 +264,13 @@ An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "
 
 Fields
 
-`  key  `
+`key`
 
-`  string  `
+`string`
 
-`  value  `
+`value`
 
-`  string  `
+`string`
 
 ### Tool Annotations
 

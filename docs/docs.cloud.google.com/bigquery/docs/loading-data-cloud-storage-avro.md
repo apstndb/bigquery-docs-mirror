@@ -19,13 +19,13 @@ The following limitations also apply when loading Avro files into BigQuery:
 
   - BigQuery doesn't support loading standalone Avro schema (.avsc) files.
   - Nested array formatting isn't supported in BigQuery. Avro files that use this format must be converted before importing.
-  - In an Avro file, names and namespaces for a fullname can only contain alphanumeric characters and the underscore character `  _  ` . The following regular expression shows the allowed characters: `  [A-Za-z_][A-Za-z0-9_]*  ` .
+  - In an Avro file, names and namespaces for a fullname can only contain alphanumeric characters and the underscore character `_` . The following regular expression shows the allowed characters: `[A-Za-z_][A-Za-z0-9_]*` .
 
 For information about BigQuery load job limits, see [Load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) .
 
 ## Input file requirements
 
-To avoid `  resourcesExceeded  ` errors when loading Avro files into BigQuery, follow these guidelines:
+To avoid `resourcesExceeded` errors when loading Avro files into BigQuery, follow these guidelines:
 
   - Keep row sizes to 50 MB or less.
   - If the row contains many array fields, or any very long array fields, break the array values into separate fields.
@@ -42,26 +42,26 @@ To load data into BigQuery, you need IAM permissions to run a load job and load 
 
 To load data into a new BigQuery table or partition or to append or overwrite an existing table or partition, you need the following IAM permissions:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.tables.updateData  `
-  - `  bigquery.tables.update  `
-  - `  bigquery.jobs.create  `
+  - `bigquery.tables.create`
+  - `bigquery.tables.updateData`
+  - `bigquery.tables.update`
+  - `bigquery.jobs.create`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to load data into a BigQuery table or partition:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.user  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.jobUser  ` (includes the `  bigquery.jobs.create  ` permission)
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.user` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.jobUser` (includes the `bigquery.jobs.create` permission)
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create and update tables using a load job in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can create and update tables using a load job in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### Permissions to load data from Cloud Storage
 
-To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to load data from a Cloud Storage bucket. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -69,9 +69,9 @@ This predefined role contains the permissions required to load data from a Cloud
 
 The following permissions are required to load data from a Cloud Storage bucket:
 
-  - `  storage.buckets.get  `
-  - `  storage.objects.get  `
-  - `  storage.objects.list (required if you are using a URI wildcard )  `
+  - `storage.buckets.get`
+  - `storage.objects.get`
+  - `storage.objects.list (required if you are using a URI wildcard )`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -101,7 +101,7 @@ For example, you have the following Avro files in Cloud Storage:
     gs://mybucket/01/
       b.avro
 
-Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `  mybucket/01/b.avro  ` :
+Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `mybucket/01/b.avro` :
 
 ``` notranslate
 bq load \
@@ -114,10 +114,10 @@ When importing multiple Avro files with different Avro schemas, all schemas must
 
 When BigQuery detects the schema, some Avro data types are converted to BigQuery data types to make them compatible with GoogleSQL syntax. For more information, see [Avro conversions](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#avro_conversions) .
 
-To provide a table schema for creating external tables, set the `  referenceFileSchemaUri  ` property in BigQuery API or  
-`  --reference_file_schema_uri  ` parameter in bq command-line tool to the URL of the reference file.
+To provide a table schema for creating external tables, set the `referenceFileSchemaUri` property in BigQuery API or  
+`--reference_file_schema_uri` parameter in bq command-line tool to the URL of the reference file.
 
-For example, `  --reference_file_schema_uri="gs://mybucket/schema.avro"  ` .
+For example, `--reference_file_schema_uri="gs://mybucket/schema.avro"` .
 
 You can also import schema into BigQuery, by [specifying a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) .
 
@@ -125,9 +125,9 @@ You can also import schema into BigQuery, by [specifying a JSON schema file](htt
 
 BigQuery supports the following compression codecs for Avro file contents:
 
-  - `  Snappy  `
-  - `  DEFLATE  `
-  - `  ZSTD  `
+  - `Snappy`
+  - `DEFLATE`
+  - `ZSTD`
 
 ## Loading Avro data into a new table
 
@@ -169,7 +169,7 @@ To load Avro data from Cloud Storage into a new BigQuery table, select one of th
 
 8.  (Optional) To partition the table, choose your options in the **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
 
-9.  (Optional) For **Partitioning filter** , click the **Require partition filter** box to require users to include a `  WHERE  ` clause that specifies the partitions to query. Requiring a partition filter may reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#require_a_partition_filter_in_queries) . This option is unavailable if **No partitioning** is selected.
+9.  (Optional) For **Partitioning filter** , click the **Require partition filter** box to require users to include a `WHERE` clause that specifies the partitions to query. Requiring a partition filter may reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#require_a_partition_filter_in_queries) . This option is unavailable if **No partitioning** is selected.
 
 10. (Optional) To [cluster](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) the table, in the **Clustering order** box, enter between one and four field names.
 
@@ -187,7 +187,7 @@ After the table is created, you can update the table's expiration, description, 
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads an Avro file into the new table `  mytable  ` :
+Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads an Avro file into the new table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -208,23 +208,23 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the `  bq load  ` command, specify `  AVRO  ` using the `  --source_format  ` flag, and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
+Use the `bq load` command, specify `AVRO` using the `--source_format` flag, and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 Other optional flags include:
 
-  - `  --time_partitioning_type  ` : Enables time-based partitioning on a table and sets the partition type. Possible values are `  HOUR  ` , `  DAY  ` , `  MONTH  ` , and `  YEAR  ` . This flag is optional when you create a table partitioned on a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` column. The default partition type for time-based partitioning is `  DAY  ` . You cannot change the partitioning specification on an existing table.
+  - `--time_partitioning_type` : Enables time-based partitioning on a table and sets the partition type. Possible values are `HOUR` , `DAY` , `MONTH` , and `YEAR` . This flag is optional when you create a table partitioned on a `DATE` , `DATETIME` , or `TIMESTAMP` column. The default partition type for time-based partitioning is `DAY` . You cannot change the partitioning specification on an existing table.
 
-  - `  --time_partitioning_expiration  ` : An integer that specifies (in seconds) when a time-based partition should be deleted. The expiration time evaluates to the partition's UTC date plus the integer value.
+  - `--time_partitioning_expiration` : An integer that specifies (in seconds) when a time-based partition should be deleted. The expiration time evaluates to the partition's UTC date plus the integer value.
 
-  - `  --time_partitioning_field  ` : The `  DATE  ` or `  TIMESTAMP  ` column used to create a partitioned table. If time-based partitioning is enabled without this value, an ingestion-time partitioned table is created.
+  - `--time_partitioning_field` : The `DATE` or `TIMESTAMP` column used to create a partitioned table. If time-based partitioning is enabled without this value, an ingestion-time partitioned table is created.
 
-  - `  --require_partition_filter  ` : When enabled, this option requires users to include a `  WHERE  ` clause that specifies the partitions to query. Requiring a partition filter may reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#require_a_partition_filter_in_queries) .
+  - `--require_partition_filter` : When enabled, this option requires users to include a `WHERE` clause that specifies the partitions to query. Requiring a partition filter may reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#require_a_partition_filter_in_queries) .
 
-  - `  --clustering_fields  ` : A comma-separated list of up to four column names used to create a [clustered table](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+  - `--clustering_fields` : A comma-separated list of up to four column names used to create a [clustered table](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 
-  - `  --destination_kms_key  ` : The Cloud KMS key for encryption of the table data.
+  - `--destination_kms_key` : The Cloud KMS key for encryption of the table data.
     
     For more information on partitioned tables, see:
     
@@ -249,15 +249,15 @@ path_to_source
 
 Replace the following:
 
-  - location is your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - format is `  AVRO  ` .
+  - location is your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - format is `AVRO` .
   - dataset is an existing dataset.
   - table is the name of the table into which you're loading data.
   - path\_to\_source is a fully-qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 Examples:
 
-The following command loads data from `  gs://mybucket/mydata.avro  ` into a table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.avro` into a table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -266,7 +266,7 @@ The following command loads data from `  gs://mybucket/mydata.avro  ` into a tab
     gs://mybucket/mydata.avro
 ```
 
-The following command loads data from `  gs://mybucket/mydata.avro  ` into an ingestion-time partitioned table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.avro` into an ingestion-time partitioned table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -276,7 +276,7 @@ The following command loads data from `  gs://mybucket/mydata.avro  ` into an in
     gs://mybucket/mydata.avro
 ```
 
-The following command loads data from `  gs://mybucket/mydata.avro  ` into a new partitioned table named `  mytable  ` in `  mydataset  ` . The table is partitioned on the `  mytimestamp  ` column.
+The following command loads data from `gs://mybucket/mydata.avro` into a new partitioned table named `mytable` in `mydataset` . The table is partitioned on the `mytimestamp` column.
 
 ``` 
     bq load \
@@ -286,7 +286,7 @@ The following command loads data from `  gs://mybucket/mydata.avro  ` into a new
     gs://mybucket/mydata.avro
 ```
 
-The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The Cloud Storage URI uses a wildcard.
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard.
 
 ``` 
     bq load \
@@ -295,7 +295,7 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
     gs://mybucket/mydata*.avro
 ```
 
-The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The command includes a comma- separated list of Cloud Storage URIs with wildcards.
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The command includes a comma- separated list of Cloud Storage URIs with wildcards.
 
 ``` 
     bq load \
@@ -306,27 +306,27 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
 
 ### API
 
-1.  Create a `  load  ` job that points to the source data in Cloud Storage.
+1.  Create a `load` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully-qualified, in the format `  gs:// bucket / object  ` . Each URI can contain one '\*' [wildcard character](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
+3.  The `source URIs` property must be fully-qualified, in the format ` gs:// bucket / object  ` . Each URI can contain one '\*' [wildcard character](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
-4.  Specify the Avro data format by setting the `  sourceFormat  ` property to `  AVRO  ` .
+4.  Specify the Avro data format by setting the `sourceFormat` property to `AVRO` .
 
-5.  To check the job status, call [`  jobs.get( job_id *)  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , where job\_id is the ID of the job returned by the initial request.
+5.  To check the job status, call [`jobs.get( job_id *)`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , where job\_id is the ID of the job returned by the initial request.
     
-      - If `  status.state = DONE  ` , the job completed successfully.
-      - If the `  status.errorResult  ` property is present, the request failed, and that object will include information describing what went wrong. When a request fails, no table is created and no data is loaded.
-      - If `  status.errorResult  ` is absent, the job finished successfully, although there might have been some non-fatal errors, such as problems importing a few rows. Non-fatal errors are listed in the returned job object's `  status.errors  ` property.
+      - If `status.state = DONE` , the job completed successfully.
+      - If the `status.errorResult` property is present, the request failed, and that object will include information describing what went wrong. When a request fails, no table is created and no data is loaded.
+      - If `status.errorResult` is absent, the job finished successfully, although there might have been some non-fatal errors, such as problems importing a few rows. Non-fatal errors are listed in the returned job object's `status.errors` property.
 
 **API notes:**
 
   - Load jobs are atomic and consistent; if a load job fails, none of the data is available, and if a load job succeeds, all of the data is available.
 
-  - As a best practice, generate a unique ID and pass it as `  jobReference.jobId  ` when calling `  jobs.insert  ` to create a load job. This approach is more robust to network failure because the client can poll or retry on the known job ID.
+  - As a best practice, generate a unique ID and pass it as `jobReference.jobId` when calling `jobs.insert` to create a load job. This approach is more robust to network failure because the client can poll or retry on the known job ID.
 
-  - Calling `  jobs.insert  ` on a given job ID is idempotent. You can retry as many times as you like on the same job ID, and at most one of those operations will succeed.
+  - Calling `jobs.insert` on a given job ID is idempotent. You can retry as many times as you like on the same job ID, and at most one of those operations will succeed.
 
 ### Go
 
@@ -507,9 +507,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Extract JSON data from Avro data
 
-There are two ways to ensure that Avro data is loaded into BigQuery as [`  JSON  ` data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) :
+There are two ways to ensure that Avro data is loaded into BigQuery as [`JSON` data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) :
 
-1.  Annotate your Avro schema with `  sqlType  ` set to `  JSON  ` . For example, if you load data with the following Avro schema, then the `  json_field  ` column is read as a `  JSON  ` type:
+1.  Annotate your Avro schema with `sqlType` set to `JSON` . For example, if you load data with the following Avro schema, then the `json_field` column is read as a `JSON` type:
     
     ``` notranslate
     {
@@ -518,9 +518,9 @@ There are two ways to ensure that Avro data is loaded into BigQuery as [`  JSON 
     }
     ```
 
-2.  Specify the BigQuery destination table schema explicitly and set the column type to `  JSON  ` . For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+2.  Specify the BigQuery destination table schema explicitly and set the column type to `JSON` . For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
-If you do not specify JSON as the type in either the Avro schema or the BigQuery table schema, then the data will be read as a `  STRING  ` .
+If you do not specify JSON as the type in either the Avro schema or the BigQuery table schema, then the data will be read as a `STRING` .
 
 ## Appending to or overwriting a table with Avro data
 
@@ -530,11 +530,11 @@ In the Google Cloud console, use the **Write preference** option to specify what
 
 You have the following options when you load additional data into a table:
 
-| Console option  | bq tool flag                                                                                                                               | BigQuery API property           | Description                                                                                                                                                              |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Write if empty  | Not supported                                                                                                                              | `        WRITE_EMPTY       `    | Writes the data only if the table is empty.                                                                                                                              |
-| Append to table | `        --noreplace       ` or `        --replace=false       ` ; if `        --[no]replace       ` is unspecified, the default is append | `        WRITE_APPEND       `   | ( [Default](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) ) Appends the data to the end of the table. |
-| Overwrite table | `        --replace       ` or `        --replace=true       `                                                                              | `        WRITE_TRUNCATE       ` | Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.           |
+| Console option  | bq tool flag                                                                                  | BigQuery API property | Description                                                                                                                                                              |
+| --------------- | --------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Write if empty  | Not supported                                                                                 | `WRITE_EMPTY`         | Writes the data only if the table is empty.                                                                                                                              |
+| Append to table | `--noreplace` or `--replace=false` ; if `--[no]replace` is unspecified, the default is append | `WRITE_APPEND`        | ( [Default](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) ) Appends the data to the end of the table. |
+| Overwrite table | `--replace` or `--replace=true`                                                               | `WRITE_TRUNCATE`      | Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.           |
 
 If you load data into an existing table, the load job can append the data or overwrite the table.
 
@@ -592,7 +592,7 @@ To append or overwrite a table with Avro data:
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends an Avro file to the table `  mytable  ` :
+Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends an Avro file to the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -613,15 +613,15 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Enter the `  bq load  ` command with the `  --replace  ` flag to overwrite the table. Use the `  --noreplace  ` flag to append data to the table. If no flag is specified, the default is to append data. Supply the `  --source_format  ` flag and set it to `  AVRO  ` . Because Avro schemas are automatically retrieved from the self-describing source data, you do not need to provide a schema definition.
+Enter the `bq load` command with the `--replace` flag to overwrite the table. Use the `--noreplace` flag to append data to the table. If no flag is specified, the default is to append data. Supply the `--source_format` flag and set it to `AVRO` . Because Avro schemas are automatically retrieved from the self-describing source data, you do not need to provide a schema definition.
 
 **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 Other optional flags include:
 
-  - `  --destination_kms_key  ` : The Cloud KMS key for encryption of the table data.
+  - `--destination_kms_key` : The Cloud KMS key for encryption of the table data.
 
 <!-- end list -->
 
@@ -635,15 +635,15 @@ path_to_source
 
 Replace the following:
 
-  - location is your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) . The `  --location  ` flag is optional. You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - format is `  AVRO  ` .
+  - location is your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) . The `--location` flag is optional. You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - format is `AVRO` .
   - dataset is an existing dataset.
   - table is the name of the table into which you're loading data.
   - path\_to\_source is a fully-qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 Examples:
 
-The following command loads data from `  gs://mybucket/mydata.avro  ` and overwrites a table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.avro` and overwrites a table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -653,7 +653,7 @@ The following command loads data from `  gs://mybucket/mydata.avro  ` and overwr
     gs://mybucket/mydata.avro
 ```
 
-The following command loads data from `  gs://mybucket/mydata.avro  ` and appends data to a table named `  mytable  ` in `  mydataset  ` .
+The following command loads data from `gs://mybucket/mydata.avro` and appends data to a table named `mytable` in `mydataset` .
 
 ``` 
     bq load \
@@ -667,15 +667,15 @@ For information on appending and overwriting partitioned tables using the bq com
 
 ### API
 
-1.  Create a `  load  ` job that points to the source data in Cloud Storage.
+1.  Create a `load` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully-qualified, in the format `  gs:// bucket / object  ` . You can include multiple URIs as a comma-separated list. Note that [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
+3.  The `source URIs` property must be fully-qualified, in the format ` gs:// bucket / object  ` . You can include multiple URIs as a comma-separated list. Note that [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
-4.  Specify the data format by setting the `  configuration.load.sourceFormat  ` property to `  AVRO  ` .
+4.  Specify the data format by setting the `configuration.load.sourceFormat` property to `AVRO` .
 
-5.  Specify the write preference by setting the `  configuration.load.writeDisposition  ` property to `  WRITE_TRUNCATE  ` or `  WRITE_APPEND  ` .
+5.  Specify the write preference by setting the `configuration.load.writeDisposition` property to `WRITE_TRUNCATE` or `WRITE_APPEND` .
 
 ### Go
 
@@ -909,7 +909,7 @@ BigQuery converts Avro data types to the following BigQuery data types:
 
 ### Logical types
 
-By default, BigQuery ignores the `  logicalType  ` attribute for most of the types and uses the underlying Avro type instead. To convert Avro logical types to their corresponding BigQuery data types, set the `  --use_avro_logical_types  ` flag to `  true  ` using the bq command-line tool, or set the `  useAvroLogicalTypes  ` property in the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) when you call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method to create a load job.
+By default, BigQuery ignores the `logicalType` attribute for most of the types and uses the underlying Avro type instead. To convert Avro logical types to their corresponding BigQuery data types, set the `--use_avro_logical_types` flag to `true` using the bq command-line tool, or set the `useAvroLogicalTypes` property in the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) when you call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method to create a load job.
 
 The table below shows the conversion of Avro logical types to BigQuery data types.
 
@@ -922,12 +922,12 @@ The table below shows the conversion of Avro logical types to BigQuery data type
 | timestamp-micros       | INTEGER (converted from LONG)                                                                                                                                  | TIMESTAMP                                                                                                                                                      |
 | local-timestamp-millis | INTEGER (converted from LONG)                                                                                                                                  | DATETIME                                                                                                                                                       |
 | local-timestamp-micros | INTEGER (converted from LONG)                                                                                                                                  | DATETIME                                                                                                                                                       |
-| duration               | BYTES (converted from `        fixed       ` type of size 12)                                                                                                  | BYTES (converted from `        fixed       ` type of size 12)                                                                                                  |
+| duration               | BYTES (converted from `fixed` type of size 12)                                                                                                                 | BYTES (converted from `fixed` type of size 12)                                                                                                                 |
 | decimal                | NUMERIC, BIGNUMERIC, or STRING (see [Decimal logical type](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#decimal_logical_type) ) | NUMERIC, BIGNUMERIC, or STRING (see [Decimal logical type](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#decimal_logical_type) ) |
 
 For more information on Avro data types, see the [Apache Avro™ 1.8.2 Specification](https://avro.apache.org/docs/1.8.2/spec.html) .
 
-**Note:** When exporting to Avro from BigQuery, `  DATETIME  ` is exported as a `  STRING  ` with a custom logical time that is not recognized as a `  DATETIME  ` upon importing back into BigQuery.
+**Note:** When exporting to Avro from BigQuery, `DATETIME` is exported as a `STRING` with a custom logical time that is not recognized as a `DATETIME` upon importing back into BigQuery.
 
 #### Date logical type
 
@@ -940,16 +940,16 @@ In any Avro file you intend to load, you must specify date logical types in the 
 
 #### Decimal logical type
 
-`  Decimal  ` logical types can be converted to `  NUMERIC  ` , `  BIGNUMERIC  ` , or `  STRING  ` types. The converted type depends on the precision and scale parameters of the `  decimal  ` logical type and the specified decimal target types. Specify the decimal target type as follows:
+`Decimal` logical types can be converted to `NUMERIC` , `BIGNUMERIC` , or `STRING` types. The converted type depends on the precision and scale parameters of the `decimal` logical type and the specified decimal target types. Specify the decimal target type as follows:
 
-  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`  JobConfigurationLoad.decimalTargetTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) field.
-  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  bq load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`  --decimal_target_types  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) flag.
-  - For a query against a [table with external sources](https://docs.cloud.google.com/bigquery/external-data-sources) : use the [`  ExternalDataConfiguration.decimalTargetTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types) field.
-  - For a [persistent external table created with DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) : use the [`  decimal_target_types  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`JobConfigurationLoad.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) field.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`--decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) flag.
+  - For a query against a [table with external sources](https://docs.cloud.google.com/bigquery/external-data-sources) : use the [`ExternalDataConfiguration.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types) field.
+  - For a [persistent external table created with DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) : use the [`decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option.
 
-For backward compatibility, if the decimal target types are not specified, you can load an Avro file containing a `  bytes  ` column with the `  decimal  ` logical type into a `  BYTES  ` column of an existing table. In this case, the `  decimal  ` logical type on the column in the Avro file is ignored. This conversion mode is deprecated and might be removed in the future.
+For backward compatibility, if the decimal target types are not specified, you can load an Avro file containing a `bytes` column with the `decimal` logical type into a `BYTES` column of an existing table. In this case, the `decimal` logical type on the column in the Avro file is ignored. This conversion mode is deprecated and might be removed in the future.
 
-For more information on the Avro `  decimal  ` logical type, see the [Apache Avro™ 1.8.2 Specification](https://avro.apache.org/docs/1.8.2/spec.html#Decimal) .
+For more information on the Avro `decimal` logical type, see the [Apache Avro™ 1.8.2 Specification](https://avro.apache.org/docs/1.8.2/spec.html#Decimal) .
 
 #### Time logical type
 

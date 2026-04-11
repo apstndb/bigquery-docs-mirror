@@ -10,7 +10,7 @@ This document describes audit logging for BigQuery sharing. Google Cloud service
 
 ## Service name
 
-BigQuery sharing audit logs use the service name `  analyticshub.googleapis.com  ` . Filter for this service:
+BigQuery sharing audit logs use the service name `analyticshub.googleapis.com` . Filter for this service:
 
 ``` 
     protoPayload.serviceName="analyticshub.googleapis.com"
@@ -19,7 +19,7 @@ BigQuery sharing audit logs use the service name `  analyticshub.googleapis.com 
 
 ## Methods by permission type
 
-Each IAM permission has a `  type  ` property, whose value is an enum that can be one of four values: `  ADMIN_READ  ` , `  ADMIN_WRITE  ` , `  DATA_READ  ` , or `  DATA_WRITE  ` . When you call a method, BigQuery sharing generates an audit log whose category is dependent on the `  type  ` property of the permission required to perform the method. Methods that require an IAM permission with the `  type  ` property value of `  DATA_READ  ` , `  DATA_WRITE  ` , or `  ADMIN_READ  ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `  type  ` property value of `  ADMIN_WRITE  ` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
+Each IAM permission has a `type` property, whose value is an enum that can be one of four values: `ADMIN_READ` , `ADMIN_WRITE` , `DATA_READ` , or `DATA_WRITE` . When you call a method, BigQuery sharing generates an audit log whose category is dependent on the `type` property of the permission required to perform the method. Methods that require an IAM permission with the `type` property value of `DATA_READ` , `DATA_WRITE` , or `ADMIN_READ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `type` property value of `ADMIN_WRITE` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
 
 API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro) .
 
@@ -36,45 +36,45 @@ API methods in the following list that are marked with (LRO) are long-running op
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ADMIN_READ      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_READ</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ADMIN_WRITE      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription      </code> (LRO)<br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription      </code> (LRO)<br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange      </code> (LRO)<br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_WRITE</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription</code> (LRO)<br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription</code> (LRO)<br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange</code> (LRO)<br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing</code></td>
 </tr>
 </tbody>
 </table>
@@ -83,331 +83,331 @@ API methods in the following list that are marked with (LRO) are long-running op
 
 For information about how and which permissions are evaluated for each method, see the Identity and Access Management documentation for BigQuery sharing.
 
-### `     google.cloud.bigquery.analyticshub.v1.AnalyticsHubService    `
+### `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService`
 
-The following audit logs are associated with methods belonging to `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService  ` .
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService` .
 
-#### `     CreateDataExchange    `
+#### `CreateDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.create - ADMIN_WRITE  `
+      - `analyticshub.dataExchanges.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange"`  
 
-#### `     CreateListing    `
+#### `CreateListing`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.create - ADMIN_WRITE  `
+      - `analyticshub.listings.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing"`  
 
-#### `     DeleteDataExchange    `
+#### `DeleteDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.delete - ADMIN_WRITE  `
+      - `analyticshub.dataExchanges.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange"`  
 
-#### `     DeleteListing    `
+#### `DeleteListing`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.delete - ADMIN_WRITE  `
+      - `analyticshub.listings.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing"`  
 
-#### `     DeleteSubscription    `
+#### `DeleteSubscription`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.subscriptions.delete - ADMIN_WRITE  `
+      - `analyticshub.subscriptions.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription"`  
 
-#### `     GetDataExchange    `
+#### `GetDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.get - ADMIN_READ  `
+      - `analyticshub.dataExchanges.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange"`  
 
-#### `     GetIamPolicy    `
+#### `GetIamPolicy`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.getIamPolicy - ADMIN_READ  `
-      - `  analyticshub.listings.getIamPolicy - ADMIN_READ  `
+      - `analyticshub.dataExchanges.getIamPolicy - ADMIN_READ`
+      - `analyticshub.listings.getIamPolicy - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy"`  
 
-#### `     GetListing    `
+#### `GetListing`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.listings.get - ADMIN_READ  `
+      - `analyticshub.listings.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing"`  
 
-#### `     GetSubscription    `
+#### `GetSubscription`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.subscriptions.get - ADMIN_READ  `
+      - `analyticshub.subscriptions.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription"`  
 
-#### `     ListDataExchanges    `
+#### `ListDataExchanges`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.list - ADMIN_READ  `
+      - `analyticshub.dataExchanges.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges"`  
 
-#### `     ListListings    `
+#### `ListListings`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.listings.list - ADMIN_READ  `
+      - `analyticshub.listings.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings"`  
 
-#### `     ListOrgDataExchanges    `
+#### `ListOrgDataExchanges`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.get - ADMIN_READ  `
+      - `analyticshub.dataExchanges.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges"`  
 
-#### `     ListSharedResourceSubscriptions    `
+#### `ListSharedResourceSubscriptions`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.listings.viewSubscriptions - ADMIN_READ  `
+      - `analyticshub.listings.viewSubscriptions - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions"`  
 
-#### `     ListSubscriptions    `
+#### `ListSubscriptions`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.subscriptions.list - ADMIN_READ  `
+      - `analyticshub.subscriptions.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions"`  
 
-#### `     RefreshSubscription    `
+#### `RefreshSubscription`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.subscriptions.update - ADMIN_WRITE  `
+      - `analyticshub.subscriptions.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription"`  
 
-#### `     RevokeSubscription    `
+#### `RevokeSubscription`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.update - ADMIN_WRITE  `
-      - `  analyticshub.listings.update - ADMIN_WRITE  `
+      - `analyticshub.dataExchanges.update - ADMIN_WRITE`
+      - `analyticshub.listings.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription"`  
 
-#### `     SetIamPolicy    `
+#### `SetIamPolicy`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.setIamPolicy - ADMIN_WRITE  `
+      - `analyticshub.listings.setIamPolicy - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy"`  
 
-#### `     SubscribeDataExchange    `
+#### `SubscribeDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.subscriptions.create - ADMIN_WRITE  `
+      - `analyticshub.subscriptions.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange"`  
 
-#### `     SubscribeListing    `
+#### `SubscribeListing`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.listings.subscribe - ADMIN_WRITE  `
+      - `analyticshub.listings.subscribe - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing"`  
 
-#### `     UpdateDataExchange    `
+#### `UpdateDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.update - ADMIN_WRITE  `
+      - `analyticshub.dataExchanges.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange"`  
 
-#### `     UpdateListing    `
+#### `UpdateListing`
 
-  - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing  `  
+  - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.update - ADMIN_WRITE  `
+      - `analyticshub.listings.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing"`  
 
-### `     google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService    `
+### `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService`
 
-The following audit logs are associated with methods belonging to `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService  ` .
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService` .
 
-#### `     CreateDataExchange    `
+#### `CreateDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.create - ADMIN_WRITE  `
+      - `analyticshub.dataExchanges.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange"`  
 
-#### `     CreateListing    `
+#### `CreateListing`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.create - ADMIN_WRITE  `
+      - `analyticshub.listings.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing"`  
 
-#### `     DeleteDataExchange    `
+#### `DeleteDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.delete - ADMIN_WRITE  `
+      - `analyticshub.dataExchanges.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange"`  
 
-#### `     DeleteListing    `
+#### `DeleteListing`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.delete - ADMIN_WRITE  `
+      - `analyticshub.listings.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing"`  
 
-#### `     GetDataExchange    `
+#### `GetDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.get - ADMIN_READ  `
+      - `analyticshub.dataExchanges.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange"`  
 
-#### `     GetIamPolicy    `
+#### `GetIamPolicy`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.getIamPolicy - ADMIN_READ  `
-      - `  analyticshub.listings.getIamPolicy - ADMIN_READ  `
+      - `analyticshub.dataExchanges.getIamPolicy - ADMIN_READ`
+      - `analyticshub.listings.getIamPolicy - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy"`  
 
-#### `     GetListing    `
+#### `GetListing`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.listings.get - ADMIN_READ  `
+      - `analyticshub.listings.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing"`  
 
-#### `     ListDataExchanges    `
+#### `ListDataExchanges`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.list - ADMIN_READ  `
+      - `analyticshub.dataExchanges.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges"`  
 
-#### `     ListListings    `
+#### `ListListings`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.listings.list - ADMIN_READ  `
+      - `analyticshub.listings.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings"`  
 
-#### `     ListOrgDataExchanges    `
+#### `ListOrgDataExchanges`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.get - ADMIN_READ  `
+      - `analyticshub.dataExchanges.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges"`  
 
-#### `     SetIamPolicy    `
+#### `SetIamPolicy`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.setIamPolicy - ADMIN_WRITE  `
+      - `analyticshub.listings.setIamPolicy - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy"`  
 
-#### `     SubscribeListing    `
+#### `SubscribeListing`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  analyticshub.listings.subscribe - ADMIN_READ  `
+      - `analyticshub.listings.subscribe - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing"`  
 
-#### `     UpdateDataExchange    `
+#### `UpdateDataExchange`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.dataExchanges.update - ADMIN_WRITE  `
+      - `analyticshub.dataExchanges.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange"`  
 
-#### `     UpdateListing    `
+#### `UpdateListing`
 
-  - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing  `  
+  - **Method** : `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  analyticshub.listings.update - ADMIN_WRITE  `
+      - `analyticshub.listings.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing"`  
 
 ## Methods that don't produce audit logs
 
@@ -419,5 +419,5 @@ A method might not produce audit logs for one or more of the following reasons:
 
 The following methods don't produce audit logs:
 
-  - `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.TestIamPermissions  `
-  - `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.TestIamPermissions  `
+  - `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.TestIamPermissions`
+  - `google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.TestIamPermissions`

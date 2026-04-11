@@ -19,13 +19,13 @@ The following sections describe the steps that you need to take before you creat
 
 You must have the following information when creating a Salesforce Marketing Cloud data transfer:
 
-| Parameter Name                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                         |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        subdomain       `                                      | The API subdomain, found in the base URI. For example, in the authentication base URI `        https://               SUBDOMAIN              .auth.marketingcloudapis.com/       ` , SUBDOMAIN is your subdomain value.                                                                                                                                                                                             |
-| `        instance       `                                       | The API server instance, found in the URL after you sign into the Salesforce Marketing Cloud application. The instance value includes \`s\` followed by a numeric value. For example, in the URL \`https://mc.s4.exacttarget.com/\`, the instance value is \`s4\`. For more information, see [Find the stack location for a Marketing Cloud account](https://help.salesforce.com/s/articleView?id=000383566&type=1) |
-| `        clientId       `                                       | The client ID from the API integration. Navigate to **Setup** \> **Apps** \> **Installed Packages** , and then click the package name. The client ID is listed under **Components** .                                                                                                                                                                                                                               |
-| `        clientSecret       `                                   | The app integration client secret. Navigate to **Setup** \> **Apps** \> **Installed Packages** , and then click the package name. The client secret is listed under **Components** .                                                                                                                                                                                                                                |
-| `        Salesforce Marketing Cloud objects to transfer       ` | Compile a list of Salesforce Marketing Cloud objects to include in this transfer. You can select objects when you [set up a transfer configuration](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-transfer-setup) . For a list of supported objects, see [Supported tables](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#supported-tables) .                                          |
+| Parameter Name                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `subdomain`                                      | The API subdomain, found in the base URI. For example, in the authentication base URI `https://         SUBDOMAIN        .auth.marketingcloudapis.com/` , SUBDOMAIN is your subdomain value.                                                                                                                                                                                                                        |
+| `instance`                                       | The API server instance, found in the URL after you sign into the Salesforce Marketing Cloud application. The instance value includes \`s\` followed by a numeric value. For example, in the URL \`https://mc.s4.exacttarget.com/\`, the instance value is \`s4\`. For more information, see [Find the stack location for a Marketing Cloud account](https://help.salesforce.com/s/articleView?id=000383566&type=1) |
+| `clientId`                                       | The client ID from the API integration. Navigate to **Setup** \> **Apps** \> **Installed Packages** , and then click the package name. The client ID is listed under **Components** .                                                                                                                                                                                                                               |
+| `clientSecret`                                   | The app integration client secret. Navigate to **Setup** \> **Apps** \> **Installed Packages** , and then click the package name. The client secret is listed under **Components** .                                                                                                                                                                                                                                |
+| `Salesforce Marketing Cloud objects to transfer` | Compile a list of Salesforce Marketing Cloud objects to include in this transfer. You can select objects when you [set up a transfer configuration](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-transfer-setup) . For a list of supported objects, see [Supported tables](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#supported-tables) .                                          |
 
 #### Set up IP allowlist for Salesforce Marketing Cloud transfers
 
@@ -44,9 +44,9 @@ Once you have set up the IP ranges, you can now specify the static IP when you [
 
 To include data extension objects in your data transfer, the object must meet the following requirements:
 
-  - The name of the data extension object must include the `  DataExtensionObject  ` prefix followed by the object name. For example, `  DataExtensionObject_ DATA_EXTENSION_NAME  ` .
-  - You must enable the `  Read  ` scope for the data extension object.
-  - The file locations of the data extension object must have the `  Read  ` and `  Write  ` scopes.
+  - The name of the data extension object must include the `DataExtensionObject` prefix followed by the object name. For example, ` DataExtensionObject_ DATA_EXTENSION_NAME  ` .
+  - You must enable the `Read` scope for the data extension object.
+  - The file locations of the data extension object must have the `Read` and `Write` scopes.
 
 ### Install and configure Salesforce Marketing Cloud API integration package
 
@@ -54,27 +54,27 @@ You must install a server-to-server API integration package in Salesforce Market
 
 Once you've installed the API integration package, you must add the following permissions scopes:
 
-  - Access: `  Offline Access  `
-  - Email: `  Read  `
-  - OTT: `  Read  `
-  - Push: `  Read  `
-  - SMS: `  Read  `
-  - Web: `  Read  `
-  - Documents and images: `  Read  `
-  - Saved Content: `  Read  `
-  - Journeys: `  Read  `
-  - Audiences: `  Read  `
-  - List and Subscribers: `  Read  `
-  - Date Extensions: `  Read  `
-  - File Locations `  Read  `
-  - Tracking Events: `  Read  `
-  - Callbacks: `  Read  `
-  - Subscriptions: `  Read  `
-  - Campaign: `  Read  `
-  - Assets: `  Read  `
-  - Accounts: `  Read  `
-  - OTT Channels: `  Read  `
-  - Users: `  Read  `
+  - Access: `Offline Access`
+  - Email: `Read`
+  - OTT: `Read`
+  - Push: `Read`
+  - SMS: `Read`
+  - Web: `Read`
+  - Documents and images: `Read`
+  - Saved Content: `Read`
+  - Journeys: `Read`
+  - Audiences: `Read`
+  - List and Subscribers: `Read`
+  - Date Extensions: `Read`
+  - File Locations `Read`
+  - Tracking Events: `Read`
+  - Callbacks: `Read`
+  - Subscriptions: `Read`
+  - Campaign: `Read`
+  - Assets: `Read`
+  - Accounts: `Read`
+  - OTT Channels: `Read`
+  - Users: `Read`
 
 For more information, see [API Integration Permission Scopes](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html) .
 
@@ -82,11 +82,11 @@ For more information, see [API Integration Permission Scopes](https://developer.
 
   - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -95,18 +95,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ## Set up a Salesforce Marketing Cloud data transfer
 
@@ -148,7 +148,7 @@ Add Salesforce Marketing Cloud data into BigQuery by setting up a transfer confi
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) and supply the transfer creation flag — `  --transfer_config  ` .
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) and supply the transfer creation flag — `--transfer_config` .
 
 ``` notranslate
 bq mk
@@ -162,16 +162,16 @@ bq mk
 
 Replace the following:
 
-  - PROJECT\_ID (optional): your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
-  - DATA\_SOURCE : the data source (for example, `  saphana  ` ).
+  - PROJECT\_ID (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
+  - DATA\_SOURCE : the data source (for example, `saphana` ).
   - DISPLAY\_NAME : the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
   - DATASET : the target dataset for the transfer configuration.
-  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a Salesforce Marketing Cloud transfer:
-      - `  connector.subdomain  ` : The API subdomain.
-      - `  connector.instance  ` : The API instance value.
-      - `  connector.authentication.oauth.clientId  ` : The app ID name for the OAuth client.
-      - `  connector.authentication.oauth.clientSecret  ` : The app secret for the OAuth client.
-      - `  assets  ` : a list of the names of the Salesforce Marketing Cloud tables to be transferred from Salesforce Marketing Cloud as part of the transfer.
+  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Salesforce Marketing Cloud transfer:
+      - `connector.subdomain` : The API subdomain.
+      - `connector.instance` : The API instance value.
+      - `connector.authentication.oauth.clientId` : The app ID name for the OAuth client.
+      - `connector.authentication.oauth.clientSecret` : The app secret for the OAuth client.
+      - `assets` : a list of the names of the Salesforce Marketing Cloud tables to be transferred from Salesforce Marketing Cloud as part of the transfer.
 
 For example, the following command creates a Salesforce Marketing Cloud data transfer in the default project with all the required parameters:
 
@@ -189,7 +189,7 @@ For example, the following command creates a Salesforce Marketing Cloud data tra
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  ` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`  TransferConfig  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
+Use the [`projects.locations.transferConfigs.create` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`TransferConfig` resource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
 
 When you save the transfer configuration, the Salesforce Marketing Cloud connector automatically triggers a transfer run according to your schedule option.
 
@@ -197,25 +197,25 @@ When you save the transfer configuration, the Salesforce Marketing Cloud connect
 
 With every transfer run, the Salesforce Marketing Cloud connector transfers all available data from Salesforce Marketing Cloud into BigQuery into the following tables based on the REST interface:
 
-  - `  Assets  `
-  - `  CampaignAssets  `
-  - `  Campaigns  `
-  - `  Categories  `
-  - `  EventDefinitions  `
-  - `  FacebookMessengerProperties  `
-  - `  JourneyActivities  `
-  - `  Journeys  `
-  - `  LineMessengerProperties  `
-  - `  SendDefinitions  `
-  - `  Subscriptions  `
-  - `  DataExtension  `
-  - `  DataExtensionObject_ DATA_EXTENSION_NAME  `
-  - `  Email  `
-  - `  LinkSend  `
-  - `  List  `
-  - `  ListSubscriber  `
-  - `  Subscriber  `
-  - `  TriggeredSendDefinition  `
+  - `Assets`
+  - `CampaignAssets`
+  - `Campaigns`
+  - `Categories`
+  - `EventDefinitions`
+  - `FacebookMessengerProperties`
+  - `JourneyActivities`
+  - `Journeys`
+  - `LineMessengerProperties`
+  - `SendDefinitions`
+  - `Subscriptions`
+  - `DataExtension`
+  - ` DataExtensionObject_ DATA_EXTENSION_NAME  `
+  - `Email`
+  - `LinkSend`
+  - `List`
+  - `ListSubscriber`
+  - `Subscriber`
+  - `TriggeredSendDefinition`
 
 To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
@@ -223,17 +223,17 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 The following table maps Salesforce Marketing Cloud data types to the corresponding BigQuery data types.
 
-| Salesforce Marketing Cloud data type | BigQuery data type         |
-| ------------------------------------ | -------------------------- |
-| `        Boolean       `             | `        BOOLEAN       `   |
-| `        Number       `              | `        INTEGER       `   |
-| `        Text       `                | `        STRING       `    |
-| `        Decimal       `             | `        FLOAT       `     |
-| `        EmailAddress       `        | `        STRING       `    |
-| `        Phone       `               | `        STRING       `    |
-| `        Date       `                | `        DATE       `      |
-| `        DateTime       `            | `        TIMESTAMP       ` |
-| `        Locale       `              | `        STRING       `    |
+| Salesforce Marketing Cloud data type | BigQuery data type |
+| ------------------------------------ | ------------------ |
+| `Boolean`                            | `BOOLEAN`          |
+| `Number`                             | `INTEGER`          |
+| `Text`                               | `STRING`           |
+| `Decimal`                            | `FLOAT`            |
+| `EmailAddress`                       | `STRING`           |
+| `Phone`                              | `STRING`           |
+| `Date`                               | `DATE`             |
+| `DateTime`                           | `TIMESTAMP`        |
+| `Locale`                             | `STRING`           |
 
 ## Troubleshoot transfer setup
 
@@ -244,16 +244,16 @@ If you are having issues setting up a Salesforce Marketing Cloud data transfer, 
 
 ### Error messages
 
-  - Error: `  invalid_grant. The client's IP address is unauthorized for this account. Allowlist the client's IP address in Marketing Cloud Administration.  `  
+  - Error: `invalid_grant. The client's IP address is unauthorized for this account. Allowlist the client's IP address in Marketing Cloud Administration.`  
     **Resolution:** Try one of the following steps:
     
       - Enable [all available IP addresses for Google Cloud resources](https://www.gstatic.com/ipranges/goog.json) .
       - Configure your Google Cloud environment and your Salesforce Marketing Cloud account to add static IP addresses to the allowlist. For more information, see [Set up IP allowlist for Salesforce Marketing Cloud transfers](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-allowlist) .
 
-  - Error: `  INVALID_ARGUMENT. Table tableName does not exist in asset TableName  `  
+  - Error: `INVALID_ARGUMENT. Table tableName does not exist in asset TableName`  
     **Resolution:** Ensure that you have the correct scope permissions configured in the Salesforce Marketing Cloud application. For more information, see [Salesforce Marketing Cloud prerequisites](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-prereqs) .
 
-  - Error: `  FAILED_PRECONDITION: There was an issue connecting to API.  `  
+  - Error: `FAILED_PRECONDITION: There was an issue connecting to API.`  
     **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allowlist. To resolve this error, follow the steps in [Create a network attachment](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) and follow the steps to create your network attachment by defining a static IP address.
 
 ## Pricing

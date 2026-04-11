@@ -18,29 +18,29 @@ Before creating folders, learn how BigQuery folders work by reading [Organize co
 
 To get the permissions that you need to complete the tasks in this document, ask your administrator to grant you the appropriate IAM roles on the project, folder, or resource.
 
-To get the permissions that you need to use the BigQuery file browser, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `  roles/bigquery.user  ` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` ) role on the project.
+To get the permissions that you need to use the BigQuery file browser, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` ) role on the project.
 
 Permissions granted on a folder propagate to all the files and folders contained within it.
 
 The following apply to files and the folders that contain them:
 
-| Role                                                                                                                                                         | Granted on     | Permissions and use cases                                                                                                                                                                                                        |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `        roles/dataform.codeOwner       ` )             | File or folder | Grants full control over a resource in the files and folders system. A user with this role can perform all actions, including deleting the resource, setting its IAM policy, and moving it.                                      |
-| [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `        roles/dataform.codeEditor       ` )          | File or folder | Allows for editing and managing content. A user with this role can add content to folders, edit files, and get the IAM policy for a file or folder. This role is also required on the destination folder when moving a resource. |
-| [Code Commenter](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCommenter) ( `        roles/dataform.codeCommenter       ` ) | File or folder | Allows for commenting on code assets or folders.                                                                                                                                                                                 |
-| [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `        roles/dataform.codeViewer       ` )          | File or folder | Provides read-only access. A user with this role can query the contents of files and folders.                                                                                                                                    |
-| [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `        roles/dataform.codeCreator       ` )       | Project        | Grants permission to create new files and folders within a project.                                                                                                                                                              |
+| Role                                                                                                                                          | Granted on     | Permissions and use cases                                                                                                                                                                                                        |
+| :-------------------------------------------------------------------------------------------------------------------------------------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` )             | File or folder | Grants full control over a resource in the files and folders system. A user with this role can perform all actions, including deleting the resource, setting its IAM policy, and moving it.                                      |
+| [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` )          | File or folder | Allows for editing and managing content. A user with this role can add content to folders, edit files, and get the IAM policy for a file or folder. This role is also required on the destination folder when moving a resource. |
+| [Code Commenter](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCommenter) ( `roles/dataform.codeCommenter` ) | File or folder | Allows for commenting on code assets or folders.                                                                                                                                                                                 |
+| [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `roles/dataform.codeViewer` )          | File or folder | Provides read-only access. A user with this role can query the contents of files and folders.                                                                                                                                    |
+| [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` )       | Project        | Grants permission to create new files and folders within a project.                                                                                                                                                              |
 
 The following roles are specific to managing team folders:
 
-| Role                                                                                                                                                                                  | Granted on  | Permissions and use cases                                                                                                                        |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `        roles/dataform.teamFolderOwner       ` )                   | Team folder | Grants full control over a team folder in the files and folders system. A user with this role can delete the team folder and set its IAM policy. |
-| [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `        roles/dataform.teamFolderContributor       ` ) | Team folder | Allows for content management within a team folder. A user with this role can update a team folder.                                              |
-| [Team Folder Commenter](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderCommenter) ( `        roles/dataform.teamFolderCommenter       ` )       | Team folder | Allows for commenting on a team folder and the code assets that it contains.                                                                     |
-| [Team Folder Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderViewer) ( `        roles/dataform.teamFolderViewer       ` )                | Team folder | Provides read-only access to a team folder and its contents. A user with this role can view a team folder and get its IAM policy.                |
-| [Team Folder Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderCreator) ( `        roles/dataform.teamFolderCreator       ` )             | Project     | Grants permission to create new team folders within a project.                                                                                   |
+| Role                                                                                                                                                                   | Granted on  | Permissions and use cases                                                                                                                        |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` )                   | Team folder | Grants full control over a team folder in the files and folders system. A user with this role can delete the team folder and set its IAM policy. |
+| [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) | Team folder | Allows for content management within a team folder. A user with this role can update a team folder.                                              |
+| [Team Folder Commenter](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderCommenter) ( `roles/dataform.teamFolderCommenter` )       | Team folder | Allows for commenting on a team folder and the code assets that it contains.                                                                     |
+| [Team Folder Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderViewer) ( `roles/dataform.teamFolderViewer` )                | Team folder | Provides read-only access to a team folder and its contents. A user with this role can view a team folder and get its IAM policy.                |
+| [Team Folder Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderCreator) ( `roles/dataform.teamFolderCreator` )             | Project     | Grants permission to create new team folders within a project.                                                                                   |
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -49,31 +49,31 @@ These predefined roles contain the permissions required to complete the tasks in
 #### Required permissions
 
   - Create a folder:
-      - `  folders.create  ` on the parent user folder, team folder, or project
-      - `  folders.addContents  ` on the parent folder or team folder
-  - Retrieve the properties of a folder: `  folders.get  ` on the folder
-  - Query the contents of a folder or team folder: `  folders.queryContents  ` on the folder
-  - Update a folder: `  folders.update  ` on the folder
-  - Delete a folder: `  folders.delete  ` on the folder
-  - Get the IAM policy for a folder: `  folders.getIamPolicy  ` on the folder
-  - Set the IAM policy for a folder: `  folders.setIamPolicy  ` on the folder
+      - `folders.create` on the parent user folder, team folder, or project
+      - `folders.addContents` on the parent folder or team folder
+  - Retrieve the properties of a folder: `folders.get` on the folder
+  - Query the contents of a folder or team folder: `folders.queryContents` on the folder
+  - Update a folder: `folders.update` on the folder
+  - Delete a folder: `folders.delete` on the folder
+  - Get the IAM policy for a folder: `folders.getIamPolicy` on the folder
+  - Set the IAM policy for a folder: `folders.setIamPolicy` on the folder
   - Move a folder:
-      - `  folders.move  ` on the folder being moved
-      - `  folders.addContents  ` on the destination folder or team folder (not needed if moving to a root folder)
-  - Create a team folder: `  teamFolders.create  ` on the project
-  - Delete a team folder: `  teamFolders.delete  ` on the team folder
-  - Get the IAM policy for a team folder: `  teamFolders.getIamPolicy  ` on the team folder
-  - Set the IAM policy for a team folder: `  teamFolders.setIamPolicy  ` on the team folder
-  - Retrieve the properties of a team folder: `  teamFolders.get  ` on the team folder
-  - Update a team folder: `  teamFolders.update  ` on the team folder
+      - `folders.move` on the folder being moved
+      - `folders.addContents` on the destination folder or team folder (not needed if moving to a root folder)
+  - Create a team folder: `teamFolders.create` on the project
+  - Delete a team folder: `teamFolders.delete` on the team folder
+  - Get the IAM policy for a team folder: `teamFolders.getIamPolicy` on the team folder
+  - Set the IAM policy for a team folder: `teamFolders.setIamPolicy` on the team folder
+  - Retrieve the properties of a team folder: `teamFolders.get` on the team folder
+  - Update a team folder: `teamFolders.update` on the team folder
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 To gain full access to all the folders and files in your project, ask your administrator to grant you the following IAM roles on the project:
 
-  - [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` )
-  - [Dataform Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.editor) ( `  roles/dataform.editor  ` )
-  - [Dataform Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.viewer) ( `  roles/dataform.viewer  ` )
+  - [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` )
+  - [Dataform Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.editor) ( `roles/dataform.editor` )
+  - [Dataform Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.viewer) ( `roles/dataform.viewer` )
 
 ## View resources
 
@@ -246,17 +246,17 @@ Follow these steps to share a folder or code asset in BigQuery:
     
       - In the **Role** list, select one of the following roles to share a code asset, including a user folder:
         
-          - [`  roles/dataform.codeOwner  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the code asset, including deleting or sharing it.
-          - [`  roles/dataform.codeEditor  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can perform any action on the code asset except for deleting or sharing it.
-          - [`  roles/dataform.codeCommenter  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCommenter) : Can view and comment on the code asset.
-          - [`  roles/dataform.codeViewer  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the code asset.
+          - [`roles/dataform.codeOwner`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the code asset, including deleting or sharing it.
+          - [`roles/dataform.codeEditor`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can perform any action on the code asset except for deleting or sharing it.
+          - [`roles/dataform.codeCommenter`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCommenter) : Can view and comment on the code asset.
+          - [`roles/dataform.codeViewer`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the code asset.
     
       - In the **Role** list, select one of the following roles to share a team folder:
         
-          - [`  roles/dataform.teamFolderOwner  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderOwner) : Can perform any action on the team folder, including deleting or sharing it.
-          - [`  roles/dataform.teamFolderContributor  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderContributor) : Can perform any action on the team folder except for deleting or sharing it.
-          - [`  roles/dataform.teamFolderCommenter  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderCommenter) : Can view and comment on the team folder and the code assets that it contains.
-          - [`  roles/dataform.teamFolderViewer  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderViewer) : Can view the team folder and the code assets that it contains.
+          - [`roles/dataform.teamFolderOwner`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderOwner) : Can perform any action on the team folder, including deleting or sharing it.
+          - [`roles/dataform.teamFolderContributor`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderContributor) : Can perform any action on the team folder except for deleting or sharing it.
+          - [`roles/dataform.teamFolderCommenter`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderCommenter) : Can view and comment on the team folder and the code assets that it contains.
+          - [`roles/dataform.teamFolderViewer`](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderViewer) : Can view the team folder and the code assets that it contains.
 
 7.  Click **Save** .
 

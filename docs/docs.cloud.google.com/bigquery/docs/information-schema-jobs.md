@@ -1,14 +1,14 @@
 # JOBS view
 
-The `  INFORMATION_SCHEMA.JOBS  ` view contains near real-time metadata about all BigQuery jobs in the current project.
+The `INFORMATION_SCHEMA.JOBS` view contains near real-time metadata about all BigQuery jobs in the current project.
 
-**Note:** The view names `  INFORMATION_SCHEMA.JOBS  ` and `  INFORMATION_SCHEMA.JOBS_BY_PROJECT  ` are synonymous and can be used interchangeably.
+**Note:** The view names `INFORMATION_SCHEMA.JOBS` and `INFORMATION_SCHEMA.JOBS_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required role
 
-To get the permission that you need to query the `  INFORMATION_SCHEMA.JOBS  ` view, ask your administrator to grant you the [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `  roles/bigquery.resourceViewer  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to query the `INFORMATION_SCHEMA.JOBS` view, ask your administrator to grant you the [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.jobs.listAll  ` permission, which is required to query the `  INFORMATION_SCHEMA.JOBS  ` view.
+This predefined role contains the `bigquery.jobs.listAll` permission, which is required to query the `INFORMATION_SCHEMA.JOBS` view.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -16,9 +16,9 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 
 ## Schema
 
-The underlying data is partitioned by the `  creation_time  ` column and clustered by `  project_id  ` and `  user_email  ` . The `  query_info  ` column contains additional information about your query jobs.
+The underlying data is partitioned by the `creation_time` column and clustered by `project_id` and `user_email` . The `query_info` column contains additional information about your query jobs.
 
-The `  INFORMATION_SCHEMA.JOBS  ` view has the following schema:
+The `INFORMATION_SCHEMA.JOBS` view has the following schema:
 
 <table>
 <colgroup>
@@ -35,310 +35,310 @@ The `  INFORMATION_SCHEMA.JOBS  ` view has the following schema:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       bi_engine_statistics      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>If the project is configured to use the <a href="https://cloud.google.com/bigquery/docs/bi-engine-intro">BI Engine</a> , then this field contains <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics">BiEngineStatistics</a> . Otherwise <code dir="ltr" translate="no">       NULL      </code> .</td>
+<td><code dir="ltr" translate="no">bi_engine_statistics</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
+<td>If the project is configured to use the <a href="https://cloud.google.com/bigquery/docs/bi-engine-intro">BI Engine</a> , then this field contains <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics">BiEngineStatistics</a> . Otherwise <code dir="ltr" translate="no">NULL</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       cache_hit      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td>Whether the query results of this job were from a cache. If you have a <a href="https://docs.cloud.google.com/bigquery/docs/multi-statement-queries">multi-query statement job</a> , <code dir="ltr" translate="no">       cache_hit      </code> for your parent query is <code dir="ltr" translate="no">       NULL      </code> .</td>
+<td><code dir="ltr" translate="no">cache_hit</code></td>
+<td><code dir="ltr" translate="no">BOOLEAN</code></td>
+<td>Whether the query results of this job were from a cache. If you have a <a href="https://docs.cloud.google.com/bigquery/docs/multi-statement-queries">multi-query statement job</a> , <code dir="ltr" translate="no">cache_hit</code> for your parent query is <code dir="ltr" translate="no">NULL</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       creation_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">creation_time</code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>( <em>Partitioning column</em> ) Creation time of this job. Partitioning is based on the UTC time of this timestamp.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       destination_table      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">destination_table</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td>Destination <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/TableReference">table</a> for results, if any.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       dml_statistics      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">dml_statistics</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td>If the job is a query with a DML statement, the value is a record with the following fields:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">         inserted_row_count        </code> : The number of rows that were inserted.</li>
-<li><code dir="ltr" translate="no">         deleted_row_count        </code> : The number of rows that were deleted.</li>
-<li><code dir="ltr" translate="no">         updated_row_count        </code> : The number of rows that were updated.</li>
+<li><code dir="ltr" translate="no">inserted_row_count</code> : The number of rows that were inserted.</li>
+<li><code dir="ltr" translate="no">deleted_row_count</code> : The number of rows that were deleted.</li>
+<li><code dir="ltr" translate="no">updated_row_count</code> : The number of rows that were updated.</li>
 </ul>
-For all other jobs, the value is <code dir="ltr" translate="no">       NULL      </code> .<br />
-This column is present in the <code dir="ltr" translate="no">       INFORMATION_SCHEMA.JOBS_BY_USER      </code> and <code dir="ltr" translate="no">       INFORMATION_SCHEMA.JOBS_BY_PROJECT      </code> views.</td>
+For all other jobs, the value is <code dir="ltr" translate="no">NULL</code> .<br />
+This column is present in the <code dir="ltr" translate="no">INFORMATION_SCHEMA.JOBS_BY_USER</code> and <code dir="ltr" translate="no">INFORMATION_SCHEMA.JOBS_BY_PROJECT</code> views.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       end_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>The end time of this job, in milliseconds since the epoch. This field represents the time when the job enters the <code dir="ltr" translate="no">       DONE      </code> state.</td>
+<td><code dir="ltr" translate="no">end_time</code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td>The end time of this job, in milliseconds since the epoch. This field represents the time when the job enters the <code dir="ltr" translate="no">DONE</code> state.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       error_result      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">error_result</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td>Details of any errors as <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> objects.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       job_creation_reason.code      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">job_creation_reason.code</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>Specifies the high level reason why a job was created.<br />
 Possible values are:
 <ul>
-<li><code dir="ltr" translate="no">         REQUESTED        </code> : job creation was requested.</li>
-<li><code dir="ltr" translate="no">         LONG_RUNNING        </code> : the query request ran beyond a system defined timeout specified by the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest">timeoutMs field in the <code dir="ltr" translate="no">          QueryRequest         </code></a> . As a result it was considered a long running operation for which a job was created.</li>
-<li><code dir="ltr" translate="no">         LARGE_RESULTS        </code> : the results from the query cannot fit in the in-line response.</li>
-<li><code dir="ltr" translate="no">         OTHER        </code> : the system has determined that the query needs to be executed as a job.</li>
+<li><code dir="ltr" translate="no">REQUESTED</code> : job creation was requested.</li>
+<li><code dir="ltr" translate="no">LONG_RUNNING</code> : the query request ran beyond a system defined timeout specified by the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest">timeoutMs field in the <code dir="ltr" translate="no">QueryRequest</code></a> . As a result it was considered a long running operation for which a job was created.</li>
+<li><code dir="ltr" translate="no">LARGE_RESULTS</code> : the results from the query cannot fit in the in-line response.</li>
+<li><code dir="ltr" translate="no">OTHER</code> : the system has determined that the query needs to be executed as a job.</li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       job_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The ID of the job if a job was created. Otherwise, the query ID of a query using optional job creation mode. For example, <code dir="ltr" translate="no">       bquxjob_1234      </code> .</td>
+<td><code dir="ltr" translate="no">job_id</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The ID of the job if a job was created. Otherwise, the query ID of a query using optional job creation mode. For example, <code dir="ltr" translate="no">bquxjob_1234</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       job_stages      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">job_stages</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       job_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The type of the job. Can be <code dir="ltr" translate="no">       QUERY      </code> , <code dir="ltr" translate="no">       LOAD      </code> , <code dir="ltr" translate="no">       EXTRACT      </code> , <code dir="ltr" translate="no">       COPY      </code> , or <code dir="ltr" translate="no">       NULL      </code> . A <code dir="ltr" translate="no">       NULL      </code> value indicates a background job.</td>
+<td><code dir="ltr" translate="no">job_type</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The type of the job. Can be <code dir="ltr" translate="no">QUERY</code> , <code dir="ltr" translate="no">LOAD</code> , <code dir="ltr" translate="no">EXTRACT</code> , <code dir="ltr" translate="no">COPY</code> , or <code dir="ltr" translate="no">NULL</code> . A <code dir="ltr" translate="no">NULL</code> value indicates a background job.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       labels      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">labels</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td>Array of labels applied to the job as key-value pairs.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       parent_job_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">parent_job_id</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>ID of the parent job, if any.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       priority      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The priority of this job. Valid values include <code dir="ltr" translate="no">       INTERACTIVE      </code> and <code dir="ltr" translate="no">       BATCH      </code> .</td>
+<td><code dir="ltr" translate="no">priority</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The priority of this job. Valid values include <code dir="ltr" translate="no">INTERACTIVE</code> and <code dir="ltr" translate="no">BATCH</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       project_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">project_id</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>( <em>Clustering column</em> ) The ID of the project.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       project_number      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td><code dir="ltr" translate="no">project_number</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The number of the project.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       query      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">query</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>SQL query text.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       referenced_tables      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>Array of <code dir="ltr" translate="no">       STRUCT      </code> values that contain the following <code dir="ltr" translate="no">       STRING      </code> fields for each table referenced by the query: <code dir="ltr" translate="no">       project_id      </code> , <code dir="ltr" translate="no">       dataset_id      </code> , and <code dir="ltr" translate="no">       table_id      </code> . Only populated for query jobs that are not cache hits.</td>
+<td><code dir="ltr" translate="no">referenced_tables</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
+<td>Array of <code dir="ltr" translate="no">STRUCT</code> values that contain the following <code dir="ltr" translate="no">STRING</code> fields for each table referenced by the query: <code dir="ltr" translate="no">project_id</code> , <code dir="ltr" translate="no">dataset_id</code> , and <code dir="ltr" translate="no">table_id</code> . Only populated for query jobs that are not cache hits.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       reservation_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Name of the primary reservation assigned to this job, in the format <code dir="ltr" translate="no">       RESERVATION_ADMIN_PROJECT:RESERVATION_LOCATION.RESERVATION_NAME      </code> .<br />
+<td><code dir="ltr" translate="no">reservation_id</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>Name of the primary reservation assigned to this job, in the format <code dir="ltr" translate="no">RESERVATION_ADMIN_PROJECT:RESERVATION_LOCATION.RESERVATION_NAME</code> .<br />
 In this output:
 <ul>
-<li><code dir="ltr" translate="no">         RESERVATION_ADMIN_PROJECT        </code> : the name of the Google Cloud project that administers the reservation</li>
-<li><code dir="ltr" translate="no">         RESERVATION_LOCATION        </code> : the location of the reservation</li>
-<li><code dir="ltr" translate="no">         RESERVATION_NAME        </code> : the name of the reservation</li>
+<li><code dir="ltr" translate="no">RESERVATION_ADMIN_PROJECT</code> : the name of the Google Cloud project that administers the reservation</li>
+<li><code dir="ltr" translate="no">RESERVATION_LOCATION</code> : the location of the reservation</li>
+<li><code dir="ltr" translate="no">RESERVATION_NAME</code> : the name of the reservation</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       edition      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">edition</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The edition associated with the reservation assigned to this job. For more information about editions, see <a href="https://docs.cloud.google.com/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       session_info      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">session_info</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td>Details about the <a href="https://cloud.google.com/bigquery/docs/sessions-intro">session</a> in which this job ran, if any.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       start_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>The start time of this job, in milliseconds since the epoch. This field represents the time when the job transitions from the <code dir="ltr" translate="no">       PENDING      </code> state to either <code dir="ltr" translate="no">       RUNNING      </code> or <code dir="ltr" translate="no">       DONE      </code> .</td>
+<td><code dir="ltr" translate="no">start_time</code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td>The start time of this job, in milliseconds since the epoch. This field represents the time when the job transitions from the <code dir="ltr" translate="no">PENDING</code> state to either <code dir="ltr" translate="no">RUNNING</code> or <code dir="ltr" translate="no">DONE</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       state      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Running state of the job. Valid states include <code dir="ltr" translate="no">       PENDING      </code> , <code dir="ltr" translate="no">       RUNNING      </code> , and <code dir="ltr" translate="no">       DONE      </code> .</td>
+<td><code dir="ltr" translate="no">state</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>Running state of the job. Valid states include <code dir="ltr" translate="no">PENDING</code> , <code dir="ltr" translate="no">RUNNING</code> , and <code dir="ltr" translate="no">DONE</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       statement_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The type of query statement. For example, <code dir="ltr" translate="no">       DELETE      </code> , <code dir="ltr" translate="no">       INSERT      </code> , <code dir="ltr" translate="no">       SCRIPT      </code> , <code dir="ltr" translate="no">       SELECT      </code> , or <code dir="ltr" translate="no">       UPDATE      </code> . See <a href="https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType">QueryStatementType</a> for list of valid values.</td>
+<td><code dir="ltr" translate="no">statement_type</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The type of query statement. For example, <code dir="ltr" translate="no">DELETE</code> , <code dir="ltr" translate="no">INSERT</code> , <code dir="ltr" translate="no">SCRIPT</code> , <code dir="ltr" translate="no">SELECT</code> , or <code dir="ltr" translate="no">UPDATE</code> . See <a href="https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType">QueryStatementType</a> for list of valid values.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       timeline      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">timeline</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample">Query timeline</a> of the job. Contains snapshots of query execution.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       total_bytes_billed      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td><code dir="ltr" translate="no">total_bytes_billed</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>If the project is configured to use <a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">on-demand pricing</a> , then this field contains the total bytes billed for the job. If the project is configured to use <a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">flat-rate pricing</a> , then you are not billed for bytes and this field is informational only.
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       total_bytes_processed      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td><code dir="ltr" translate="no">total_bytes_processed</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
 <td><p>Total bytes processed by the job.</p>
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       total_modified_partitions      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The total number of partitions the job modified. This field is populated for <code dir="ltr" translate="no">       LOAD      </code> and <code dir="ltr" translate="no">       QUERY      </code> jobs.</td>
+<td><code dir="ltr" translate="no">total_modified_partitions</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
+<td>The total number of partitions the job modified. This field is populated for <code dir="ltr" translate="no">LOAD</code> and <code dir="ltr" translate="no">QUERY</code> jobs.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       total_slot_ms      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Slot milliseconds for the job over its entire duration in the <code dir="ltr" translate="no">       RUNNING      </code> state, including retries.</td>
+<td><code dir="ltr" translate="no">total_slot_ms</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
+<td>Slot milliseconds for the job over its entire duration in the <code dir="ltr" translate="no">RUNNING</code> state, including retries.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       total_services_sku_slot_ms      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Total slot milliseconds for the job that runs on external services and is billed on the services SKU. This field is only populated for jobs that have external service costs, and is the total of the usage for costs whose billing method is <code dir="ltr" translate="no">       "SERVICES_SKU"      </code> .</td>
+<td><code dir="ltr" translate="no">total_services_sku_slot_ms</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
+<td>Total slot milliseconds for the job that runs on external services and is billed on the services SKU. This field is only populated for jobs that have external service costs, and is the total of the usage for costs whose billing method is <code dir="ltr" translate="no">"SERVICES_SKU"</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       transaction_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">transaction_id</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>ID of the <a href="https://cloud.google.com/bigquery/docs/transactions">transaction</a> in which this job ran, if any.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       user_email      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">user_email</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>( <em>Clustering column</em> ) Email address or service account of the user who ran the job.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       principal_subject      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">principal_subject</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>A string representation of the identity of the principal that ran the job.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       query_info.resource_warning      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">query_info.resource_warning</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The warning message that appears if the resource usage during query processing is above the internal threshold of the system.<br />
-A successful query job can have the <code dir="ltr" translate="no">       resource_warning      </code> field populated. With <code dir="ltr" translate="no">       resource_warning      </code> , you get additional data points to optimize your queries and to set up monitoring for performance trends of an equivalent set of queries by using <code dir="ltr" translate="no">       query_hashes      </code> .</td>
+A successful query job can have the <code dir="ltr" translate="no">resource_warning</code> field populated. With <code dir="ltr" translate="no">resource_warning</code> , you get additional data points to optimize your queries and to set up monitoring for performance trends of an equivalent set of queries by using <code dir="ltr" translate="no">query_hashes</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       query_info.query_hashes.normalized_literals      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Contains the hash value of the query. <code dir="ltr" translate="no">       normalized_literals      </code> is a hexadecimal <code dir="ltr" translate="no">       STRING      </code> hash that ignores comments, parameter values, UDFs, and literals. The hash value will differ when underlying views change, or if the query implicitly references columns, such as <code dir="ltr" translate="no">       SELECT *      </code> , and the table schema changes.<br />
+<td><code dir="ltr" translate="no">query_info.query_hashes.normalized_literals</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>Contains the hash value of the query. <code dir="ltr" translate="no">normalized_literals</code> is a hexadecimal <code dir="ltr" translate="no">STRING</code> hash that ignores comments, parameter values, UDFs, and literals. The hash value will differ when underlying views change, or if the query implicitly references columns, such as <code dir="ltr" translate="no">SELECT *</code> , and the table schema changes.<br />
 This field appears for successful <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax">GoogleSQL</a> queries that are not cache hits.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       query_info.performance_insights      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">query_info.performance_insights</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights">Performance insights</a> for the job.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       query_info.optimization_details      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/history-based-optimizations">history-based optimizations</a> for the job. Only the <code dir="ltr" translate="no">       JOBS_BY_PROJECT      </code> view has this column.</td>
+<td><code dir="ltr" translate="no">query_info.optimization_details</code></td>
+<td><code dir="ltr" translate="no">STRUCT</code></td>
+<td>The <a href="https://docs.cloud.google.com/bigquery/docs/history-based-optimizations">history-based optimizations</a> for the job. Only the <code dir="ltr" translate="no">JOBS_BY_PROJECT</code> view has this column.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       transferred_bytes      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td><code dir="ltr" translate="no">transferred_bytes</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>Total bytes transferred for cross-cloud queries, such as BigQuery Omni cross-cloud transfer jobs.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       materialized_view_statistics      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">materialized_view_statistics</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MaterializedViewStatistics">Statistics of materialized views</a> considered in a query job. ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       metadata_cache_statistics      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">metadata_cache_statistics</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics">Statistics for metadata column index usage for tables</a> referenced in a query job.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       search_statistics      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">search_statistics</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SearchStatistics">Statistics for a search query.</a></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       query_dialect      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">query_dialect</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>This field will be available sometime in May, 2025. The query dialect used for the job. Valid values include:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">         GOOGLE_SQL        </code> : Job was requested to use GoogleSQL.</li>
-<li><code dir="ltr" translate="no">         LEGACY_SQL        </code> : Job was requested to use LegacySQL.</li>
-<li><code dir="ltr" translate="no">         DEFAULT_LEGACY_SQL        </code> : No query dialect was specified in the job request. BigQuery used the default value of LegacySQL.</li>
-<li><code dir="ltr" translate="no">         DEFAULT_GOOGLE_SQL        </code> : No query dialect was specified in the job request. BigQuery used the default value of GoogleSQL.</li>
+<li><code dir="ltr" translate="no">GOOGLE_SQL</code> : Job was requested to use GoogleSQL.</li>
+<li><code dir="ltr" translate="no">LEGACY_SQL</code> : Job was requested to use LegacySQL.</li>
+<li><code dir="ltr" translate="no">DEFAULT_LEGACY_SQL</code> : No query dialect was specified in the job request. BigQuery used the default value of LegacySQL.</li>
+<li><code dir="ltr" translate="no">DEFAULT_GOOGLE_SQL</code> : No query dialect was specified in the job request. BigQuery used the default value of GoogleSQL.</li>
 </ul>
 <br />
 This field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       continuous      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td><code dir="ltr" translate="no">continuous</code></td>
+<td><code dir="ltr" translate="no">BOOLEAN</code></td>
 <td>Whether the job is a <a href="https://cloud.google.com/bigquery/docs/continuous-queries-introduction">continuous query</a> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       continuous_query_info.output_watermark      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">continuous_query_info.output_watermark</code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>Represents the point up to which the continuous query has successfully processed data.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       vector_search_statistics      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">vector_search_statistics</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#VectorSearchStatistics">Statistics for a vector search query.</a></td>
 </tr>
 </tbody>
 </table>
 
-When you query `  INFORMATION_SCHEMA.JOBS  ` to find a summary cost of query jobs, exclude the `  SCRIPT  ` statement type, otherwise some values might be counted twice. The `  SCRIPT  ` row includes summary values for all child jobs that were executed as part of this job.
+When you query `INFORMATION_SCHEMA.JOBS` to find a summary cost of query jobs, exclude the `SCRIPT` statement type, otherwise some values might be counted twice. The `SCRIPT` row includes summary values for all child jobs that were executed as part of this job.
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Multi-statement query jobs
 
-A multi-statement query job is a query job that uses the [procedural language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) . Multi-statement query jobs often define variables with `  DECLARE  ` or have control flow statements such as `  IF  ` or `  WHILE  ` . When you query `  INFORMATION_SCHEMA.JOBS  ` , you might need to recognize the difference between a multi-statement query job and other jobs. A multi-statement query job has the following traits:
+A multi-statement query job is a query job that uses the [procedural language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) . Multi-statement query jobs often define variables with `DECLARE` or have control flow statements such as `IF` or `WHILE` . When you query `INFORMATION_SCHEMA.JOBS` , you might need to recognize the difference between a multi-statement query job and other jobs. A multi-statement query job has the following traits:
 
-  - `  statement_type  ` = `  SCRIPT  `
-  - `  reservation_id  ` = `  NULL  `
+  - `statement_type` = `SCRIPT`
+  - `reservation_id` = `NULL`
 
 ### Child jobs
 
-Each of a multi-statement query job's child jobs has a `  parent_job_id  ` pointing to the multi-statement query job itself. This includes summary values for all child jobs that were executed as part of this job.
+Each of a multi-statement query job's child jobs has a `parent_job_id` pointing to the multi-statement query job itself. This includes summary values for all child jobs that were executed as part of this job.
 
-If you query `  INFORMATION_SCHEMA.JOBS  ` to find a summary cost of query jobs, then you should exclude the `  SCRIPT  ` statement type. Otherwise, some values such as `  total_slot_ms  ` might be counted twice.
+If you query `INFORMATION_SCHEMA.JOBS` to find a summary cost of query jobs, then you should exclude the `SCRIPT` statement type. Otherwise, some values such as `total_slot_ms` might be counted twice.
 
 ## Data retention
 
-This view displays running jobs along with job history for the past 180 days. If a project migrates to an organization (either from having no organization or from a different one), job information predating the migration date isn't accessible through the `  INFORMATION_SCHEMA.JOBS  ` view, as the view only retains data starting from the migration date.
+This view displays running jobs along with job history for the past 180 days. If a project migrates to an organization (either from having no organization or from a different one), job information predating the migration date isn't accessible through the `INFORMATION_SCHEMA.JOBS` view, as the view only retains data starting from the migration date.
 
 ## Scope and syntax
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-| View name                                                                                                                                      | Resource scope | Region scope               |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
-| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.JOBS[_BY_PROJECT]       `` | Project level  | `          REGION        ` |
+| View name                                                                                               | Resource scope | Region scope              |
+| ------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
+| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.JOBS[_BY_PROJECT]`` | Project level  | `         REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Dry run query estimates
 
-When you perform a dry run of a query that references the `  INFORMATION_SCHEMA.JOBS  ` view, the estimated bytes processed might be significantly higher than the actual bytes processed during query execution.
+When you perform a dry run of a query that references the `INFORMATION_SCHEMA.JOBS` view, the estimated bytes processed might be significantly higher than the actual bytes processed during query execution.
 
-This overestimation occurs because the dry run calculation only accounts for filters on the `  creation_time  ` partitioning column of the underlying data. It doesn't account for filters on [clustering columns](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) —like the implicit `  project_id  ` filter or the `  user_email  ` filter—if specified in the `  WHERE  ` clause. The actual data scanned can be significantly less than the dry run estimate, especially for projects or users with fewer jobs.
+This overestimation occurs because the dry run calculation only accounts for filters on the `creation_time` partitioning column of the underlying data. It doesn't account for filters on [clustering columns](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) —like the implicit `project_id` filter or the `user_email` filter—if specified in the `WHERE` clause. The actual data scanned can be significantly less than the dry run estimate, especially for projects or users with fewer jobs.
 
-If you don't specify a filter on `  creation_time  ` , partition pruning doesn't occur, and the dry run estimate reflects a scan of all partitions of the underlying data. However, data clustering might still reduce the actual bytes processed compared to this estimate.
+If you don't specify a filter on `creation_time` , partition pruning doesn't occur, and the dry run estimate reflects a scan of all partitions of the underlying data. However, data clustering might still reduce the actual bytes processed compared to this estimate.
 
 ## Examples
 
@@ -351,15 +351,15 @@ Replace the following:
   - `  PROJECT_ID  ` : the ID of the project.
   - `  REGION_NAME  ` : the region for your project.
 
-For example, ``  `myproject`.`region-us-central1`.INFORMATION_SCHEMA.JOBS  `` .
+For example, `` `myproject`.`region-us-central1`.INFORMATION_SCHEMA.JOBS `` .
 
-**Note:** For maximum query efficiency, filter on the `  creation_time  ` column whenever possible. This allows BigQuery to prune partitions, which improves query performance and reduces costs.
+**Note:** For maximum query efficiency, filter on the `creation_time` column whenever possible. This allows BigQuery to prune partitions, which improves query performance and reduces costs.
 
 ### Compare on-demand job usage to billing data
 
-For projects using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , you can use the `  INFORMATION_SCHEMA.JOBS  ` view to review compute charges over a given period.
+For projects using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , you can use the `INFORMATION_SCHEMA.JOBS` view to review compute charges over a given period.
 
-For projects using [capacity-based (slots) pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , you can use the [`  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline) to review compute charges over a given period.
+For projects using [capacity-based (slots) pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , you can use the [`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline) to review compute charges over a given period.
 
 The following query produces daily estimated aggregates of your billed TiB and the resulting charges. The [limitations](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#limitations) section explains when these estimates may not match your bill.
 
@@ -432,11 +432,11 @@ ORDER BY billing_date;
 
 #### Limitations
 
-  - BigQuery [hides some statistics](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#limit-side-channel-attacks) for queries over tables with row-level security. The provided query counts the number of jobs impacted as `  jobs_using_row_level_security  ` , but does not have access to the billable usage.
+  - BigQuery [hides some statistics](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#limit-side-channel-attacks) for queries over tables with row-level security. The provided query counts the number of jobs impacted as `jobs_using_row_level_security` , but does not have access to the billable usage.
 
-  - BigQuery ML [pricing for on-demand queries](https://cloud.google.com/bigquery/pricing#ml_on_demand_pricing) depends on the type of model being created. `  INFORMATION_SCHEMA.JOBS  ` does not track which type of model was created, so the provided query assumes all CREATE\_MODEL statements were creating the higher billed model types.
+  - BigQuery ML [pricing for on-demand queries](https://cloud.google.com/bigquery/pricing#ml_on_demand_pricing) depends on the type of model being created. `INFORMATION_SCHEMA.JOBS` does not track which type of model was created, so the provided query assumes all CREATE\_MODEL statements were creating the higher billed model types.
 
-  - Apache Spark procedures use a [similar pricing model](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pricing) , but charges are reported as [BigQuery Enterprise edition pay-as-you-go SKU](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . `  INFORMATION_SCHEMA.JOBS  ` tracks this usage as `  total_bytes_billed  ` , but cannot determine which SKU the usage represents.
+  - Apache Spark procedures use a [similar pricing model](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pricing) , but charges are reported as [BigQuery Enterprise edition pay-as-you-go SKU](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . `INFORMATION_SCHEMA.JOBS` tracks this usage as `total_bytes_billed` , but cannot determine which SKU the usage represents.
 
 ### Calculate average slot utilization
 
@@ -458,7 +458,7 @@ WHERE
   AND end_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP();
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -468,9 +468,9 @@ The result is similar to the following:
     | 3879.1534  |
     +------------+
 
-You can check usage for a particular reservation with `  WHERE reservation_id = "…"  ` . This can be helpful to determine percentage use of a reservation over a period of time. For script jobs, the parent job also reports the total slot usage from its children jobs. To avoid double counting, use `  WHERE statement_type != "SCRIPT"  ` to exclude the parent job.
+You can check usage for a particular reservation with `WHERE reservation_id = "…"` . This can be helpful to determine percentage use of a reservation over a period of time. For script jobs, the parent job also reports the total slot usage from its children jobs. To avoid double counting, use `WHERE statement_type != "SCRIPT"` to exclude the parent job.
 
-If instead you would like to check the average slot utilization for individual jobs, use `  total_slot_ms / TIMESTAMP_DIFF(end_time, start_time, MILLISECOND)  ` .
+If instead you would like to check the average slot utilization for individual jobs, use `total_slot_ms / TIMESTAMP_DIFF(end_time, start_time, MILLISECOND)` .
 
 ### Count recent active queries by query priority
 
@@ -497,7 +497,7 @@ The result is similar to the following:
     | BATCH       |           3 |
     +-------------+-------------+
 
-The `  priority  ` field indicates whether a query is `  INTERACTIVE  ` or `  BATCH  ` .
+The `priority` field indicates whether a query is `INTERACTIVE` or `BATCH` .
 
 ### View load job history
 
@@ -515,7 +515,7 @@ GROUP BY
   user_email;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -550,7 +550,7 @@ The following example returns the number of jobs by day, dataset, and table so t
     ORDER BY
         day DESC;
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -592,7 +592,7 @@ The results should look similar to the following:
 
 ### Query the list of long running jobs
 
-The following example shows the list of long running jobs that are in the `  RUNNING  ` or `  PENDING  ` state for more than 30 minutes:
+The following example shows the list of long running jobs that are in the `RUNNING` or `PENDING` state for more than 30 minutes:
 
 ``` notranslate
 SELECT
@@ -666,7 +666,7 @@ WHERE
  AND job_id = '2Lm09bHxDEsoVK8zwzWJomLHU_Ud%1910479b151' -- queryId
 ```
 
-**Note** : The `  job_id  ` field contains the `  queryId  ` of the query when a job was not created for this query.
+**Note** : The `job_id` field contains the `queryId` of the query when a job was not created for this query.
 
 The results should look like the following:
 
@@ -718,7 +718,7 @@ GROUP BY
   user_email;
 ```
 
-**Note** : See the caveat for the `  total_bytes_billed  ` column in the schema documentation for the `  JOBS  ` views.
+**Note** : See the caveat for the `total_bytes_billed` column in the schema documentation for the `JOBS` views.
 
 The results should look like the following:
 
@@ -757,9 +757,9 @@ If you don't have organization-level permissions or only need to monitor a speci
     LIMIT
       10;
 
-Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
+Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -793,9 +793,9 @@ If you don't have organization-level permissions or only need to monitor a speci
     ORDER BY
       creation_time DESC;
 
-Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
+Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -838,7 +838,7 @@ The result is similar to the following:
 
 ### Query jobs per table
 
-The following example shows how many times each table queried in `  my_project  ` was referenced by a query job:
+The following example shows how many times each table queried in `my_project` was referenced by a query job:
 
 ``` notranslate
 SELECT
@@ -892,7 +892,7 @@ ORDER BY
 
 ### Number of partitions modified by query and load jobs per table
 
-The following example shows the number of partitions modified by queries with DML statements and load jobs, per table. Note that this query doesn't show the `  total_modified_partitions  ` for copy jobs.
+The following example shows the number of partitions modified by queries with DML statements and load jobs, per table. Note that this query doesn't show the `total_modified_partitions` for copy jobs.
 
 ``` notranslate
 SELECT
@@ -920,9 +920,9 @@ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
 WHERE job_id = 'JOB_ID'
 ```
 
-Replace `  JOB_ID  ` with the `  job_id  ` you are investigating.
+Replace `  JOB_ID  ` with the `job_id` you are investigating.
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result will be similar to the following:
 
@@ -934,7 +934,7 @@ The result will be similar to the following:
 
 ### Most expensive queries by project
 
-The following example lists the most expensive queries in `  my_project  ` by slot usage time:
+The following example lists the most expensive queries in `my_project` by slot usage time:
 
 ``` notranslate
 SELECT
@@ -1014,9 +1014,9 @@ ORDER BY creation_date DESC;
 
 ### Estimate slot usage and cost for queries
 
-The following example computes the average slots and max slots for each job by using `  estimated_runnable_units  ` .
+The following example computes the average slots and max slots for each job by using `estimated_runnable_units` .
 
-The `  reservation_id  ` is `  NULL  ` if you don't have any reservations.
+The `reservation_id` is `NULL` if you don't have any reservations.
 
 ``` notranslate
 SELECT
@@ -1152,7 +1152,7 @@ ORDER BY 5 DESC
 LIMIT 3;
 ```
 
-Replace `  JOB_ID  ` with any `  job_id  ` that ran the query you are analyzing.
+Replace `  JOB_ID  ` with any `job_id` that ran the query you are analyzing.
 
 ### View jobs with slot contention insights
 
@@ -1208,7 +1208,7 @@ ORDER BY
   j.creation_time DESC;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -1254,7 +1254,7 @@ concurrent_jobs AS (
 SELECT ROUND(AVG(concurrent_jobs_count),1) as average_concurrent_jobs FROM concurrent_jobs
 ```
 
-**Note:** The granularity for metadata aggregation is set to seconds. If you require a more precise granularity for shorter running jobs, replace `  SECOND  ` with `  MILLISECOND  ` in the query body for milliseconds sampling.
+**Note:** The granularity for metadata aggregation is set to seconds. If you require a more precise granularity for shorter running jobs, replace `SECOND` with `MILLISECOND` in the query body for milliseconds sampling.
 
 Replace the following:
 
@@ -1272,7 +1272,7 @@ The result is similar to the following:
 
 ### Get bytes processed by extract jobs
 
-The following example computes the `  total_bytes_processed  ` value for `  EXTRACT  ` job types. For information about quotas for extract jobs, see [Quota policy for extract jobs](https://docs.cloud.google.com/bigquery/docs/exporting-data#quota_policy) . The total bytes processed can be used to monitor the aggregate usage and verify that extract jobs stays below the 50 TiB per-day limit:
+The following example computes the `total_bytes_processed` value for `EXTRACT` job types. For information about quotas for extract jobs, see [Quota policy for extract jobs](https://docs.cloud.google.com/bigquery/docs/exporting-data#quota_policy) . The total bytes processed can be used to monitor the aggregate usage and verify that extract jobs stays below the 50 TiB per-day limit:
 
 ``` notranslate
 SELECT
@@ -1330,7 +1330,7 @@ WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
 
 ### Get usage of BigLake Iceberg table in BigQuery export table metadata
 
-The following example provides the usage of Iceberg `  EXPORT TABLE METADATA FROM  ` .
+The following example provides the usage of Iceberg `EXPORT TABLE METADATA FROM` .
 
 ``` notranslate
 SELECT
@@ -1361,4 +1361,4 @@ SELECT
 
 ### Match slot usage behavior from administrative resource charts
 
-To explore slot usage behavior similar to the information in administrative resource charts, query the [`  INFORMATION_SCHEMA.JOBS_TIMELINE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#charts_example) .
+To explore slot usage behavior similar to the information in administrative resource charts, query the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#charts_example) .

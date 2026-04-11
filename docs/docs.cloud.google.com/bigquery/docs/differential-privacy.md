@@ -35,7 +35,7 @@ The goal of [differential privacy](https://www.cis.upenn.edu/%7Eaaroth/Papers/pr
 
 With GoogleSQL for BigQuery, you can transform the results of a query with differentially private aggregations. When the query is executed, it performs the following:
 
-1.  Computes per-entity aggregations for each group if groups are specified with a `  GROUP BY  ` clause. Limits the number of groups each entity can contribute to, based on the `  max_groups_contributed  ` differential privacy parameter.
+1.  Computes per-entity aggregations for each group if groups are specified with a `GROUP BY` clause. Limits the number of groups each entity can contribute to, based on the `max_groups_contributed` differential privacy parameter.
 2.  [Clamps](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamping) each per-entity aggregate contribution to be within the clamping bounds. If the clamping bounds aren't specified, they are implicitly calculated in a differentially private way.
 3.  Aggregates the clamped per-entity aggregate contributions for each group.
 4.  Adds noise to the final aggregate value for each group. The scale of random noise is a function of all of the clamped bounds and privacy parameters.
@@ -58,8 +58,8 @@ For additional context on what differential privacy is and its use cases, see th
 The following rules must be met for the differentially private query to be valid:
 
   - A [privacy unit column](https://docs.cloud.google.com/bigquery/docs/differential-privacy#dp_define_privacy_unit_id) is defined.
-  - The `  SELECT  ` list contains a [differentially private clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
-  - Only [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) are in the `  SELECT  ` list with the differentially private clause.
+  - The `SELECT` list contains a [differentially private clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
+  - Only [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) are in the `SELECT` list with the differentially private clause.
 
 ## Define a privacy unit column
 
@@ -67,9 +67,9 @@ A privacy unit is the entity in a dataset that's being protected, using differen
 
 A differentially private query must include one and only one *privacy unit column* . A privacy unit column is a unique identifier for a privacy unit and can exist within multiple groups. Because multiple groups are supported, the data type for the privacy unit column must be [groupable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#groupable_data_types) .
 
-You can define a privacy unit column in the `  OPTIONS  ` clause of a differential privacy clause with the unique identifier `  privacy_unit_column  ` .
+You can define a privacy unit column in the `OPTIONS` clause of a differential privacy clause with the unique identifier `privacy_unit_column` .
 
-In the following examples, a privacy unit column is added to a differential privacy clause. `  id  ` represents a column that originates from a table called `  students  ` .
+In the following examples, a privacy unit column is added to a differential privacy clause. `id` represents a column that originates from a table called `students` .
 
     SELECT WITH DIFFERENTIAL_PRIVACY
       OPTIONS (epsilon=10, delta=.01, privacy_unit_column=id)
@@ -101,7 +101,7 @@ This section describes limitations of differential privacy.
 
 ### Performance implications of differential privacy
 
-Differentially private queries execute more slowly than standard queries because per-entity aggregation is performed and the `  max_groups_contributed  ` limitation is applied. Limiting contribution bounds can help improve the performance of your differentially private queries.
+Differentially private queries execute more slowly than standard queries because per-entity aggregation is performed and the `max_groups_contributed` limitation is applied. Limiting contribution bounds can help improve the performance of your differentially private queries.
 
 The performance profiles of the following queries aren't similar:
 

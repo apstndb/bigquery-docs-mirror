@@ -10,7 +10,7 @@ Revokes a given subscription.
 
 ### HTTP request
 
-`  POST https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/subscriptions/*}:revoke  `
+`POST https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/subscriptions/*}:revoke`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,9 +18,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Required. Resource name of the subscription to revoke. e.g. projects/123/locations/us/subscriptions/456
 
@@ -48,9 +48,9 @@ The request body contains data with the following structure:
 
 Fields
 
-`  revokeCommercial  `
+`revokeCommercial`
 
-`  boolean  `
+`boolean`
 
 Optional. If the subscription is commercial then this field must be set to true, otherwise a failure is thrown. This acts as a safety guard to avoid revoking commercial subscriptions accidentally.
 
@@ -62,7 +62,7 @@ If successful, the response body is empty.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

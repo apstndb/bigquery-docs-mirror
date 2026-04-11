@@ -8,13 +8,13 @@ As a BigQuery administrator, you can create a [connection](https://docs.cloud.go
     
     [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
-  - To get the permissions that you need to create a Spark connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+  - To get the permissions that you need to create a Spark connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
   - Optional: To manage your metadata using [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) , ensure that you have [created a Dataproc Metastore service](https://docs.cloud.google.com/dataproc-metastore/docs/create-service) .
 
-  - Optional: To [view job history using Spark History Server web interfaces](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#spark_history_server_web_interface) , ensure that you have [created a Dataproc Persistent History Server (PHS)](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) .
+  - Optional: To [view job history using Spark History Server web interfaces](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#spark_history_server_web_interface) , ensure that you have [created a Managed Service for Apache Spark Persistent History Server (PHS)](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) .
 
 ### Location considerations
 
@@ -24,13 +24,13 @@ When you choose a location for your data, consider the following:
 
 You must specify Google Cloud resources located in the same large geographic area:
 
-  - A connection in the BigQuery US multi-region can reference a [Spark History Server](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server) or a [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) in any single region in the US geographic area, such as `  us-central1  ` , `  us-east4  ` , or `  us-west2  ` .
+  - A connection in the BigQuery US multi-region can reference a [Spark History Server](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server) or a [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) in any single region in the US geographic area, such as `us-central1` , `us-east4` , or `us-west2` .
 
-  - A connection in the BigQuery EU multi-region can reference a Spark History Server or a Dataproc Metastore in [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union, such as `  europe-north1  ` or `  europe-west3  ` .
+  - A connection in the BigQuery EU multi-region can reference a Spark History Server or a Dataproc Metastore in [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union, such as `europe-north1` or `europe-west3` .
 
 #### Single regions
 
-A connection in a single region can only reference Google Cloud resources in the same region. For example, a connection in the single region `  us-east4  ` can only reference a Spark History Server or a Dataproc Metastore in `  us-east4  ` .
+A connection in a single region can only reference Google Cloud resources in the same region. For example, a connection in the single region `us-east4` can only reference a Spark History Server or a Dataproc Metastore in `us-east4` .
 
 ## Create connections
 
@@ -48,7 +48,7 @@ Select one of the following options:
 
 3.  In the **Filter By** pane, in the **Data Source Type** section, select **Business Applications** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `  Spark  ` .
+    Alternatively, in the **Search for data sources** field, you can enter `Spark` .
 
 4.  In the **Featured data sources** section, click **Apache Spark** .
 
@@ -58,7 +58,7 @@ Select one of the following options:
     
       - In the **Connection type** list, select **Apache Spark** .
     
-      - In the **Connection ID** field, enter a name for your connection—for example, `  spark_connection  ` .
+      - In the **Connection ID** field, enter a name for your connection—for example, `spark_connection` .
     
       - In the **Data location** list, select a region.
     
@@ -66,7 +66,7 @@ Select one of the following options:
     
       - Optional: From the **Metastore service** list, select a [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) .
     
-      - Optional: In the **History server cluster** field, enter a [Dataproc Persistent History Server](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) .
+      - Optional: In the **History server cluster** field, enter a [Managed Service for Apache Spark Persistent History Server](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) .
 
 7.  Click **Create connection** .
 
@@ -76,7 +76,7 @@ Select one of the following options:
 
 ### bq
 
-1.  In a command-line environment, use the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) to create a connection:
+1.  In a command-line environment, use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) to create a connection:
     
         bq mk --connection --connection_type='SPARK' \
          --properties=PROPERTIES \
@@ -97,21 +97,21 @@ Select one of the following options:
         
         Replace the following:
         
-          - `  METASTORE_SERVICE_NAME  ` : the [Dataproc Metastore with a gRPC network configuration](https://docs.cloud.google.com/dataproc-metastore/docs/endpoint-protocol#grpc_network_configuration) —for example, `  projects/my-project-id/locations/us-central1/services/my-service  `
+          - `  METASTORE_SERVICE_NAME  ` : the [Dataproc Metastore with a gRPC network configuration](https://docs.cloud.google.com/dataproc-metastore/docs/endpoint-protocol#grpc_network_configuration) —for example, `projects/my-project-id/locations/us-central1/services/my-service`
             
             For more information, see how to access the [stored Hive metastore metadata using an endpoint protocol](https://docs.cloud.google.com/dataproc-metastore/docs/endpoint-protocol) .
         
-          - `  DATAPROC_CLUSTER_NAME  ` : the Spark History Server configuration—for example, `  projects/my-project-id/regions/us-central1/clusters/my-cluster  `
+          - `  DATAPROC_CLUSTER_NAME  ` : the Spark History Server configuration—for example, `projects/my-project-id/regions/us-central1/clusters/my-cluster`
             
             For more information, see [Create a Persistent History Server cluster](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) .
     
       - `  PROJECT_ID  ` : your Google Cloud project ID
     
-      - `  LOCATION  ` : the location where you want to store the connection—for example, `  US  `
+      - `  LOCATION  ` : the location where you want to store the connection—for example, `US`
     
-      - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  `
+      - `  CONNECTION_ID  ` : the connection ID—for example, `myconnection`
         
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/.../locations/.../connections/ myconnection  `
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/.../locations/.../connections/ myconnection  `
 
 2.  Retrieve and copy the service account ID because you need it in another step:
     
@@ -133,37 +133,37 @@ To let a stored procedure for Apache Spark access your Google Cloud resources, y
 
   - To read and write data from and to BigQuery, you need to give the service account the following IAM permissions:
     
-      - `  bigquery.tables.*  ` on your BigQuery tables
-      - `  bigquery.readsessions.*  ` on your project
+      - `bigquery.tables.*` on your BigQuery tables
+      - `bigquery.readsessions.*` on your project
     
-    The `  roles/bigquery.admin  ` IAM role includes the permissions that the service account needs in order to read and write data from and to BigQuery.
+    The `roles/bigquery.admin` IAM role includes the permissions that the service account needs in order to read and write data from and to BigQuery.
     
-    **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) , then you need to give the service account the `  bigquery.jobs.create  ` permission on your project. For more information about IAM roles and permissions in BigQuery, see [Access control with IAM](https://docs.cloud.google.com/bigquery/access-control) .
+    **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) , then you need to give the service account the `bigquery.jobs.create` permission on your project. For more information about IAM roles and permissions in BigQuery, see [Access control with IAM](https://docs.cloud.google.com/bigquery/access-control) .
 
-  - To read and write data from and to Cloud Storage, you need to give the service account the `  storage.objects.*  ` permission on your Cloud Storage objects.
+  - To read and write data from and to Cloud Storage, you need to give the service account the `storage.objects.*` permission on your Cloud Storage objects.
     
-    The `  roles/storage.objectAdmin  ` IAM role includes the permissions that the service account needs in order to read and write data from and to Cloud Storage.
+    The `roles/storage.objectAdmin` IAM role includes the permissions that the service account needs in order to read and write data from and to Cloud Storage.
 
-  - If you specify Dataproc Metastore when you create a connection, then for BigQuery to retrieve details about the metastore configuration, you need to give the service account the `  metastore.services.get  ` permission on your Dataproc Metastore.
+  - If you specify Dataproc Metastore when you create a connection, then for BigQuery to retrieve details about the metastore configuration, you need to give the service account the `metastore.services.get` permission on your Dataproc Metastore.
     
-    The predefined `  roles/metastore.metadataViewer  ` role includes the permission that the service account needs in order to retrieve details about the metastore configuration.
+    The predefined `roles/metastore.metadataViewer` role includes the permission that the service account needs in order to retrieve details about the metastore configuration.
     
-    You also need to grant the service account the `  roles/storage.objectAdmin  ` role on the Cloud Storage bucket so that your stored procedure can access the Hive warehouse directory of your Dataproc Metastore ( `  hive.metastore.warehouse.dir  ` ). If your stored procedure performs operations on the metastore, you might need to give additional permissions. For more information about IAM roles and permissions in Dataproc Metastore, see [Dataproc Metastore predefined roles and permissions](https://docs.cloud.google.com/dataproc-metastore/docs/iam-roles) .
+    You also need to grant the service account the `roles/storage.objectAdmin` role on the Cloud Storage bucket so that your stored procedure can access the Hive warehouse directory of your Dataproc Metastore ( `hive.metastore.warehouse.dir` ). If your stored procedure performs operations on the metastore, you might need to give additional permissions. For more information about IAM roles and permissions in Dataproc Metastore, see [Dataproc Metastore predefined roles and permissions](https://docs.cloud.google.com/dataproc-metastore/docs/iam-roles) .
 
-  - If you specify a Dataproc Persistent History Server when you create a connection, then you need to grant the service account the following roles:
+  - If you specify a Managed Service for Apache Spark Persistent History Server when you create a connection, then you need to grant the service account the following roles:
     
-      - The `  roles/dataproc.viewer  ` role on your Dataproc Persistent History Server that contains the `  dataproc.clusters.get  ` permission.
-      - The `  roles/storage.objectAdmin  ` role on the Cloud Storage bucket that you specify for the property `  spark:spark.history.fs.logDirectory  ` when you create the Dataproc Persistent History Server.
+      - The `roles/dataproc.viewer` role on your Managed Service for Apache Spark Persistent History Server that contains the `dataproc.clusters.get` permission.
+      - The `roles/storage.objectAdmin` role on the Cloud Storage bucket that you specify for the property `spark:spark.history.fs.logDirectory` when you create the Managed Service for Apache Spark Persistent History Server.
     
-    For more information, see [Dataproc Persistent History Server](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) and [Dataproc roles and permissions](https://docs.cloud.google.com/dataproc/docs/concepts/iam/iam) .
+    For more information, see [Managed Service for Apache Spark Persistent History Server](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) and [Managed Service for Apache Spark roles and permissions](https://docs.cloud.google.com/dataproc/docs/concepts/iam/iam) .
 
 ## Share connections with users
 
 You can grant the following roles to let users query data and manage connections:
 
-  - `  roles/bigquery.connectionUser  ` : enables users to use connections to connect with external data sources and run queries on them.
+  - `roles/bigquery.connectionUser` : enables users to use connections to connect with external data sources and run queries on them.
 
-  - `  roles/bigquery.connectionAdmin  ` : enables users to manage connections.
+  - `roles/bigquery.connectionAdmin` : enables users to manage connections.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -197,7 +197,7 @@ You cannot share a connection with the bq command-line tool. To share a connecti
 
 ### API
 
-Use the [`  projects.locations.connections.setIAM  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `  policy  ` resource.
+Use the [`projects.locations.connections.setIAM` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `policy` resource.
 
 ### Java
 

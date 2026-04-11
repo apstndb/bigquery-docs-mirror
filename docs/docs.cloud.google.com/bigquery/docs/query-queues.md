@@ -24,11 +24,11 @@ When you delete a reservation, all queued queries time out. When a project assig
 
 ## Control queue timeout
 
-To control the queue timeout for interactive or batch queries, use the [`  ALTER PROJECT SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or the [`  ALTER ORGANIZATION SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) to set the `  default_interactive_query_queue_timeout_ms  ` or `  default_batch_query_queue_timeout_ms  ` fields in your project's or organization's [default configuration](https://docs.cloud.google.com/bigquery/docs/default-configuration) .
+To control the queue timeout for interactive or batch queries, use the [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or the [`ALTER ORGANIZATION SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) to set the `default_interactive_query_queue_timeout_ms` or `default_batch_query_queue_timeout_ms` fields in your project's or organization's [default configuration](https://docs.cloud.google.com/bigquery/docs/default-configuration) .
 
-To view the queue timeout for interactive or batch queries in your project, query the [`  INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-effective-project-options) .
+To view the queue timeout for interactive or batch queries in your project, query the [`INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-effective-project-options) .
 
-To turn off queuing, set the queue timeout to -1. If you reach your maximum query concurrency, then additional queries fail with an `  ADMISSION_DENIED  ` error.
+To turn off queuing, set the queue timeout to -1. If you reach your maximum query concurrency, then additional queries fail with an `ADMISSION_DENIED` error.
 
 ## Set the maximum concurrency target
 
@@ -38,9 +38,9 @@ Increasing the maximum concurrency target doesn't guarantee that more queries ex
 
 ### Required roles
 
-To get the permission that you need to set the concurrency in a new reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `  roles/bigquery.resourceEditor  ` ) IAM role on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to set the concurrency in a new reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `roles/bigquery.resourceEditor` ) IAM role on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.reservations.create  ` permission, which is required to set the concurrency in a new reservation.
+This predefined role contains the `bigquery.reservations.create` permission, which is required to set the concurrency in a new reservation.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -70,7 +70,7 @@ Select one of the following options:
 
 ### SQL
 
-To set the maximum concurrency target for a new reservation, use the [`  CREATE RESERVATION  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) and set the [`  target_job_concurrency  ` field](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list) .
+To set the maximum concurrency target for a new reservation, use the [`CREATE RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) and set the [`target_job_concurrency` field](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -87,7 +87,7 @@ To set the maximum concurrency target for a new reservation, use the [`  CREATE 
     Replace the following:
     
       - `  ADMIN_PROJECT_ID  ` : the project that owns the reservation
-      - `  LOCATION  ` : the location of the reservation, such as `  region-us  `
+      - `  LOCATION  ` : the location of the reservation, such as `region-us`
       - `  RESERVATION_NAME  ` : the name of the reservation
       - `  CONCURRENCY  ` : the maximum concurrency target
 
@@ -97,7 +97,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To set the maximum concurrency target for a new reservation, run the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) :
+To set the maximum concurrency target for a new reservation, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) :
 
 ``` notranslate
 bq mk \
@@ -117,7 +117,7 @@ Replace the following:
 
 ### API
 
-To set the maximum concurrency target in the [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) , set the `  concurrency  ` field in the [reservation resource](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#reservation) and call the [`  CreateReservationRequest  ` method](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#createreservationrequest) .
+To set the maximum concurrency target in the [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) , set the `concurrency` field in the [reservation resource](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#reservation) and call the [`CreateReservationRequest` method](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#createreservationrequest) .
 
 ## Update the maximum concurrency target
 
@@ -127,9 +127,9 @@ If you set the maximum concurrency target to 0, BigQuery dynamically determines 
 
 ### Required roles
 
-To get the permission that you need to update the maximum concurrency target for a reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `  roles/bigquery.resourceEditor  ` ) IAM role on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to update the maximum concurrency target for a reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `roles/bigquery.resourceEditor` ) IAM role on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.reservations.update  ` permission, which is required to update the maximum concurrency target for a reservation.
+This predefined role contains the `bigquery.reservations.update` permission, which is required to update the maximum concurrency target for a reservation.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -163,7 +163,7 @@ Select one of the following options:
 
 ### SQL
 
-To update the maximum concurrency target for an existing reservation, use the [`  ALTER RESERVATION  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) and set the [`  target_job_concurrency  ` field](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_option_list) .
+To update the maximum concurrency target for an existing reservation, use the [`ALTER RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) and set the [`target_job_concurrency` field](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_option_list) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -180,7 +180,7 @@ To update the maximum concurrency target for an existing reservation, use the [`
     Replace the following:
     
       - `  ADMIN_PROJECT_ID  ` : the project that owns the reservation
-      - `  LOCATION  ` : the location of the reservation, such as `  region-us  `
+      - `  LOCATION  ` : the location of the reservation, such as `region-us`
       - `  RESERVATION_NAME  ` : the name of the reservation
       - `  CONCURRENCY  ` : the maximum concurrency target
 
@@ -190,7 +190,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To update the maximum concurrency target for an existing reservation, run the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) :
+To update the maximum concurrency target for an existing reservation, run the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) :
 
 ``` notranslate
 bq update \
@@ -210,11 +210,11 @@ Replace the following:
 
 ### API
 
-To update the maximum concurrency target in the [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) , set the `  concurrency  ` field in the [reservation resource](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#reservation) and call the [`  UpdateReservationRequest  ` method](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#updatereservationrequest) .
+To update the maximum concurrency target in the [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) , set the `concurrency` field in the [reservation resource](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#reservation) and call the [`UpdateReservationRequest` method](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#updatereservationrequest) .
 
 ## Monitoring
 
-To find out which queries are running and which are queued, look at the [`  INFORMATION_SCHEMA.JOBS_BY_*  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [`  INFORMATION_SCHEMA.JOBS_TIMELINE_BY_*  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) views. The `  state  ` field is set to `  RUNNING  ` for actively running queries and to `  PENDING  ` for queued queries.
+To find out which queries are running and which are queued, look at the [`INFORMATION_SCHEMA.JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [`INFORMATION_SCHEMA.JOBS_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) views. The `state` field is set to `RUNNING` for actively running queries and to `PENDING` for queued queries.
 
 To view how many concurrent queries ran when the dynamic concurrency threshold was reached for each second over the last day, run the following query:
 
@@ -277,14 +277,14 @@ You can also monitor the queue length in Cloud Monitoring by viewing the [job co
 
 ## Troubleshooting long queue times
 
-A query job might appear slow because it spends a significant amount of time waiting in a queue before execution starts. This duration is the *queue time* . Queued jobs show a `  PENDING  ` state.
+A query job might appear slow because it spends a significant amount of time waiting in a queue before execution starts. This duration is the *queue time* . Queued jobs show a `PENDING` state.
 
 ### Identify long queue times
 
 You can identify long queue times using the following methods:
 
-  - **`  INFORMATION_SCHEMA  `** : The [`  INFORMATION_SCHEMA.JOBS*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) can provide insights into query queue times. For example, you can calculate the queue time for specific jobs by subtracting `  creation_time  ` from `  start_time  ` , or identify jobs that have `  state="PENDING"  ` for an extended duration. The [sample query](https://docs.cloud.google.com/bigquery/docs/query-queues#monitoring) can serve as a starting point to observe your query load and identify when the dynamic concurrency threshold is reached.
-  - **Monitoring** : Use the [`  bigquery.googleapis.com/job/num_in_flight  `](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#bigquery/job/num_in_flight) metric in Monitoring, filtered by `  state=pending  ` , to monitor the queue length over time.
+  - **`INFORMATION_SCHEMA`** : The [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) can provide insights into query queue times. For example, you can calculate the queue time for specific jobs by subtracting `creation_time` from `start_time` , or identify jobs that have `state="PENDING"` for an extended duration. The [sample query](https://docs.cloud.google.com/bigquery/docs/query-queues#monitoring) can serve as a starting point to observe your query load and identify when the dynamic concurrency threshold is reached.
+  - **Monitoring** : Use the [`bigquery.googleapis.com/job/num_in_flight`](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#bigquery/job/num_in_flight) metric in Monitoring, filtered by `state=pending` , to monitor the queue length over time.
   - You can also use [BigQuery administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) , as described in the [Monitoring](https://docs.cloud.google.com/bigquery/docs/query-queues#monitoring) section.
 
 ### Common causes

@@ -4,8 +4,8 @@ BigQuery ML lets you build and operationalize machine learning (ML) models over 
 
 A typical model development workflow in BigQuery ML looks similar to the following:
 
-1.  Create the model using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) .
-2.  Perform feature preprocessing. Some preprocessing happens [automatically](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-auto-preprocessing) , plus you can use [manual preprocessing functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-preprocessing-functions) inside the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to do additional preprocessing.
+1.  Create the model using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) .
+2.  Perform feature preprocessing. Some preprocessing happens [automatically](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-auto-preprocessing) , plus you can use [manual preprocessing functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-preprocessing-functions) inside the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to do additional preprocessing.
 3.  Refine the model by performing [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) to fit the model to the training data.
 4.  [Evaluate the model](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) to assess how it might perform on data outside of the training set, and also to compare it to other models if appropriate.
 5.  [Perform inference](https://docs.cloud.google.com/bigquery/docs/inference-overview) to analyze data by using the model.

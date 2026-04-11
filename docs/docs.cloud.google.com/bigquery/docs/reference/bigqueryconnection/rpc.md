@@ -2,9 +2,9 @@ Allows users to manage BigQuery connections to external data sources.
 
 ## Service: bigqueryconnection.googleapis.com
 
-The Service name `  bigqueryconnection.googleapis.com  ` is needed to create RPC client stubs.
+The Service name `bigqueryconnection.googleapis.com` is needed to create RPC client stubs.
 
-## `         google.cloud.bigquery.connection.v1.ConnectionService       `
+## `        google.cloud.bigquery.connection.v1.ConnectionService       `
 
 Methods
 
@@ -40,7 +40,7 @@ Returns permissions that a caller has on the specified resource.
 
 Updates the specified connection.
 
-## `         google.cloud.bigquery.connection.v1beta1.ConnectionService       `
+## `        google.cloud.bigquery.connection.v1beta1.ConnectionService       `
 
 Methods
 

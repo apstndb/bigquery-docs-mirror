@@ -72,17 +72,17 @@ To retrieve data outside the refresh window, such as historical data, or to reco
 
 Tables that are created from Google Ad Manager data transfer (Google Ad Manager DT) files can be updated incrementally. Google Ad Manager adds the Google Ad Manager DT files into the Cloud Storage bucket. A transfer run then incrementally loads the new Google Ad Manager DT files from the Cloud Storage bucket into the BigQuery table without reloading files that have already been transferred to the BigQuery table.
 
-For example, Google Ad Manager adds `  file1  ` into the bucket at 1:00 AM and `  file2  ` at 2:00 AM. A transfer run begins at 3:30 AM and loads `  file1  ` and `  file2  ` to BigQuery. Google Ad Manager then adds `  file3  ` at 5:00 AM and `  file4  ` at 6:00 AM. A second transfer run begins at 7:30AM and appends `  file3  ` and `  file4  ` into BigQuery, instead of overwriting the table by loading all four files.
+For example, Google Ad Manager adds `file1` into the bucket at 1:00 AM and `file2` at 2:00 AM. A transfer run begins at 3:30 AM and loads `file1` and `file2` to BigQuery. Google Ad Manager then adds `file3` at 5:00 AM and `file4` at 6:00 AM. A second transfer run begins at 7:30AM and appends `file3` and `file4` into BigQuery, instead of overwriting the table by loading all four files.
 
 ### Updates to match tables
 
 Match tables provide a lookup mechanism for the raw values contained within data transfer files. For a list of match tables, see [Google Ad Manager report transformation](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation) . Different match tables are updated with different ingestion methods. The match tables and their ingestion methods are listed in the following table:
 
-| Ingestion method      | Description                                                                                                                                                                                                                                                 | Match table                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Incremental update    | Incremental updates are appended in every run. For example, a first transfer run of the day loads all data modified before the transfer run, the second transfer run in the same day loads data modified after the previous run and before the current run. | `        Company       ` , `        Order       ` , `        Placement       ` , `        LineItem       ` , `        AdUnit       `                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Whole table update    | Whole table updates loads the whole table once a day. For example, a first transfer run of the day loads all available data for a table. A second transfer run on the same day skips loading these tables.                                                  | `        AdCategory       ` , `        AudienceSegmentCategory       ` , `        BandwidthGroup       ` , `        Browser       ` , `        BrowserLanguage       ` , `        DeviceCapability       ` , `        DeviceCategory       ` , `        DeviceManufacturer       ` , `        GeoTarget       ` , `        MobileCarrier       ` , `        MobileDevice       ` , `        MobileDeviceSubmodel       ` , `        OperatingSystem       ` , `        OperatingSystemVersion       ` , `        ThirdPartyCompany       ` , `        TimeZone       ` , `        User       ` , `        ProgrammaticBuyer       ` |
-| Whole table overwrite | The whole table is overwritten with every transfer run.                                                                                                                                                                                                     | `        AudienceSegment       `                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Ingestion method      | Description                                                                                                                                                                                                                                                 | Match table                                                                                                                                                                                                                                                                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Incremental update    | Incremental updates are appended in every run. For example, a first transfer run of the day loads all data modified before the transfer run, the second transfer run in the same day loads data modified after the previous run and before the current run. | `Company` , `Order` , `Placement` , `LineItem` , `AdUnit`                                                                                                                                                                                                                                                                                             |
+| Whole table update    | Whole table updates loads the whole table once a day. For example, a first transfer run of the day loads all available data for a table. A second transfer run on the same day skips loading these tables.                                                  | `AdCategory` , `AudienceSegmentCategory` , `BandwidthGroup` , `Browser` , `BrowserLanguage` , `DeviceCapability` , `DeviceCategory` , `DeviceManufacturer` , `GeoTarget` , `MobileCarrier` , `MobileDevice` , `MobileDeviceSubmodel` , `OperatingSystem` , `OperatingSystemVersion` , `ThirdPartyCompany` , `TimeZone` , `User` , `ProgrammaticBuyer` |
+| Whole table overwrite | The whole table is overwritten with every transfer run.                                                                                                                                                                                                     | `AudienceSegment`                                                                                                                                                                                                                                                                                                                                     |
 
 ## Before you begin
 
@@ -105,7 +105,7 @@ Before you create a Google Ad Manager data transfer:
 
   - [Enable API access](https://support.google.com/admanager/answer/3088588) to your Google Ad Manager network.
 
-  - If you intend to set up data transfer notifications, you must have `  pubsub.topics.setIamPolicy  ` permissions for Pub/Sub. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up data transfer notifications, you must have `pubsub.topics.setIamPolicy` permissions for Pub/Sub. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -113,7 +113,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -122,18 +122,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Google Ad Manager roles
 
@@ -147,7 +147,7 @@ Setting up a BigQuery data transfer for Google Ad Manager requires a:
     
         gdfp-12345678
 
-  - **Network Code** : You'll find the Google Ad Manager network code in the URL when you are logged into your network. For example, in the URL `  https://admanager.google.com/2032576#delivery  ` , `  2032576  ` is your network code. For more information, see [Get started with Google Ad Manager](https://developers.google.com/doubleclick-publishers/docs/start) .
+  - **Network Code** : You'll find the Google Ad Manager network code in the URL when you are logged into your network. For example, in the URL `https://admanager.google.com/2032576#delivery` , `2032576` is your network code. For more information, see [Get started with Google Ad Manager](https://developers.google.com/doubleclick-publishers/docs/start) .
 
 To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
 
@@ -165,7 +165,7 @@ To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
     
     ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/dfp-transfer-source.png)
     
-      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `  My Transfer  ` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
     
     ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
     
@@ -174,7 +174,7 @@ To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
     ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
     
       - In the **Data source details** section:
-          - For **Cloud Storage bucket** , enter the name of the Cloud Storage bucket that stores your data transfer files. When you enter the bucket name, don't include `  gs://  ` .
+          - For **Cloud Storage bucket** , enter the name of the Cloud Storage bucket that stores your data transfer files. When you enter the bucket name, don't include `gs://` .
           - For **Network code** , enter your network code.
     
     ![Google Ad Manager source details](https://docs.cloud.google.com/static/bigquery/images/dfp-source-details-console.png)
@@ -192,16 +192,16 @@ To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` . The following flags are also required:
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `  --data_source  `
-  - `  --target_dataset  `
-  - `  --display_name  `
-  - `  --params  `
+  - `--data_source`
+  - `--target_dataset`
+  - `--display_name`
+  - `--params`
 
 Optional flags:
 
-  - `  --service_account_name  ` - Specifies a service account to use for Google Ad Manager transfer authentication instead of your user account.
+  - `--service_account_name` - Specifies a service account to use for Google Ad Manager transfer authentication instead of your user account.
 
 <!-- end list -->
 
@@ -220,18 +220,18 @@ Where:
   - project\_id is your project ID.
   - dataset is the target dataset for the transfer configuration.
   - name is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the data transfer if you need to modify it later.
-  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . For Google Ad Manager, you must supply the `  bucket  ` and `  network_code  ` parameters.
-      - `  bucket  ` : The Cloud Storage bucket that contains your Google Ad Manager DT files.
-      - `  network_code  ` : Network code
-      - `  load_match_tables  ` : Whether to load match tables. By default set to `  True  `
-  - data\_source is the data source — `  dfp_dt  ` (Google Ad Manager).
-  - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#required_permissions) .
+  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For Google Ad Manager, you must supply the `bucket` and `network_code` parameters.
+      - `bucket` : The Cloud Storage bucket that contains your Google Ad Manager DT files.
+      - `network_code` : Network code
+      - `load_match_tables` : Whether to load match tables. By default set to `True`
+  - data\_source is the data source — `dfp_dt` (Google Ad Manager).
+  - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#required_permissions) .
 
 **Caution:** You cannot configure notifications using the command-line tool.
 
-You can also supply the `  --project_id  ` flag to specify a particular project. If `  --project_id  ` isn't specified, the default project is used.
+You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
-For example, the following command creates a Google Ad Manager data transfer named `  My Transfer  ` using network code `  12345678  ` , Cloud Storage bucket `  gdfp-12345678  ` , and target dataset `  mydataset  ` . The data transfer is created in the default project:
+For example, the following command creates a Google Ad Manager data transfer named `My Transfer` using network code `12345678` , Cloud Storage bucket `gdfp-12345678` , and target dataset `mydataset` . The data transfer is created in the default project:
 
     bq mk --transfer_config \
     --target_dataset=mydataset \
@@ -241,13 +241,13 @@ For example, the following command creates a Google Ad Manager data transfer nam
 
 After running the command, you receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -316,13 +316,13 @@ If you are having issues setting up your data transfer, see [Google Ad Manager t
 
 When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 ## Sample queries
 
 You can use the following Google Ad Manager sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Google Ad Manager data with BigQuery. For additional questions on what you can do with these reports, contact your Google Ad Manager technical representative.
 
-**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 In each of the following queries, replace variables like dataset with your values. For example, replace network\_code with your Google Ad Manager network code.
 

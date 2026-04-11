@@ -69,11 +69,11 @@ You can create and manage conversations in BigQuery using the Google Cloud conso
 
 Conversational analytics supports the following BigQuery ML functions in response to chats with data agents and data sources, and in verified SQL queries that you create.
 
-  - [`  AI.FORECAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
-  - [`  AI.DETECT_ANOMALIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
-  - [`  AI.GENERATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
+  - [`AI.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
+  - [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
+  - [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
 
-To use the supported `  AI.GENERATE  ` function, you must have [the required permissions](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
+To use the supported `AI.GENERATE` function, you must have [the required permissions](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
 
 ### BigQuery ML use cases
 
@@ -84,11 +84,11 @@ To activate supported BigQuery ML functions, use them in the following ways:
 
 The following table shows examples of one-shot prompts that activate the use of BigQuery ML:
 
-| Use case            | Sample usage                                                                             | [Public dataset](https://docs.cloud.google.com/bigquery/public-data)                                                                                                                                       |
-| :------------------ | :--------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Forecasting         | "Predict the number of trips for the next month."                                        | [`         bigquery-public-data.san_francisco_bikeshare.bikeshare_trips        `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
-| Anomaly detection   | "Find outliers in trips per day for 2018 using 2017 as a baseline."                      | [`         bigquery-public-data.san_francisco_bikeshare.bikeshare_trips        `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
-| LLM text generation | "For each article in the 'sports' category, summarize the body column in 1-2 sentences." | [`         bigquery-public-data.bbc_news.fulltext        `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news.fulltext)                                                          |
+| Use case            | Sample usage                                                                             | [Public dataset](https://docs.cloud.google.com/bigquery/public-data)                                                                                                                      |
+| :------------------ | :--------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Forecasting         | "Predict the number of trips for the next month."                                        | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
+| Anomaly detection   | "Find outliers in trips per day for 2018 using 2017 as a baseline."                      | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
+| LLM text generation | "For each article in the 'sports' category, summarize the body column in 1-2 sentences." | [`bigquery-public-data.bbc_news.fulltext`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news.fulltext)                                                          |
 
 ## Security
 
@@ -116,7 +116,7 @@ To prevent this issue, consider size when selecting knowledge sources, and when 
 
 Dynamic Shared Quota (DSQ) in Vertex AI manages capacity for the Gemini model. Unlike conventional quotas, DSQ lets you access a large shared pool of resources without a fixed per-project limit for model throughput.
 
-Performance, such as latency, can vary depending on the overall system load. During times of high demand across the shared pool, you might occasionally experience temporary `  429 Resource Exhausted  ` errors. These errors indicate that the shared pool capacity is momentarily constrained, but not that you have reached a specific quota limit on your project. To check on the capacity, retry the request after a short delay.
+Performance, such as latency, can vary depending on the overall system load. During times of high demand across the shared pool, you might occasionally experience temporary `429 Resource Exhausted` errors. These errors indicate that the shared pool capacity is momentarily constrained, but not that you have reached a specific quota limit on your project. To check on the capacity, retry the request after a short delay.
 
 ## What's next
 

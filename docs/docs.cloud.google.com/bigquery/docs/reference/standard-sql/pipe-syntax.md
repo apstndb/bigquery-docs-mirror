@@ -6,17 +6,17 @@ For more background and details on pipe syntax design, see the research paper [S
 
 Pipe syntax has the following key characteristics:
 
-  - Each pipe operator in pipe syntax consists of the pipe symbol, `  |>  ` , an operator name, and any arguments:  
-    `  |> operator_name argument_list  `
+  - Each pipe operator in pipe syntax consists of the pipe symbol, `|>` , an operator name, and any arguments:  
+    `|> operator_name argument_list`
   - Pipe operators can be added to the end of any valid query.
   - Pipe syntax works anywhere standard syntax is supported: in queries, views, table-valued functions (TVFs), and other contexts.
   - Pipe syntax can be mixed with standard syntax in the same query. For example, subqueries can use different syntax from the parent query.
   - A pipe operator can see every alias that exists in the table preceding the pipe.
-  - A query can [start with a `  FROM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) , and pipe operators can optionally be added after the `  FROM  ` clause.
+  - A query can [start with a `FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) , and pipe operators can optionally be added after the `FROM` clause.
 
 ### Query comparison
 
-Consider the following table called `  Produce  ` :
+Consider the following table called `Produce` :
 
     CREATE OR REPLACE TABLE Produce AS (
       SELECT 'apples' AS item, 2 AS sales, 'fruit' AS category
@@ -39,7 +39,7 @@ Consider the following table called `  Produce  ` :
      | bananas | 5     | fruit     |
      +---------+-------+-----------*/
 
-Compare the following equivalent queries that compute the number and total amount of sales for each item in the `  Produce  ` table:
+Compare the following equivalent queries that compute the number and total amount of sales for each item in the `Produce` table:
 
 **Standard syntax**
 
@@ -78,18 +78,18 @@ Compare the following equivalent queries that compute the number and total amoun
 Pipe operators have the following semantic behavior:
 
   - Each pipe operator performs a self-contained operation.
-  - A pipe operator consumes the input table passed to it through the pipe symbol, `  |>  ` , and produces a new table as output.
+  - A pipe operator consumes the input table passed to it through the pipe symbol, `|>` , and produces a new table as output.
   - A pipe operator can reference only columns from its immediate input table. Columns from earlier in the same query aren't visible. Inside subqueries, correlated references to outer columns are still allowed.
 
-## `     FROM    ` queries
+## `FROM` queries
 
-In pipe syntax, a query can start with a standard [`  FROM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) and use any standard `  FROM  ` syntax, including tables, joins, subqueries, and table-valued functions (TVFs). Table aliases can be assigned to each input item using the [`  AS alias  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#using_aliases) .
+In pipe syntax, a query can start with a standard [`FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) and use any standard `FROM` syntax, including tables, joins, subqueries, and table-valued functions (TVFs). Table aliases can be assigned to each input item using the [`AS alias` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#using_aliases) .
 
-A query with only a `  FROM  ` clause, like `  FROM table_name  ` , is allowed in pipe syntax and returns all rows from the table. For tables with columns, `  FROM table_name  ` in pipe syntax is similar to [`  SELECT * FROM table_name  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax.
+A query with only a `FROM` clause, like `FROM table_name` , is allowed in pipe syntax and returns all rows from the table. For tables with columns, `FROM table_name` in pipe syntax is similar to [`SELECT * FROM table_name`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax.
 
 **Examples**
 
-The following queries use the [`  Produce  ` table](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#query_comparison) :
+The following queries use the [`Produce` table](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#query_comparison) :
 
     FROM Produce;
     
@@ -122,31 +122,31 @@ GoogleSQL supports the following pipe operators. For operators that correspond o
 
 ### Pipe operator list
 
-| Name                                                                                                                                               | Summary                                                                                                                                                      |
-| -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`         SELECT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#select_pipe_operator)                   | Produces a new table with the listed columns.                                                                                                                |
-| [`         EXTEND        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator)                   | Propagates the existing table and adds computed columns.                                                                                                     |
-| [`         SET        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#set_pipe_operator)                         | Replaces the values of columns in the input table.                                                                                                           |
-| [`         DROP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#drop_pipe_operator)                       | Removes listed columns from the input table.                                                                                                                 |
-| [`         RENAME        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator)                   | Renames specified columns.                                                                                                                                   |
-| [`         AS        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator)                           | Introduces a table alias for the input table.                                                                                                                |
-| [`         WHERE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#where_pipe_operator)                     | Filters the results of the input table.                                                                                                                      |
-| [`         AGGREGATE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator)             | Performs aggregation on data across groups of rows or the full input table.                                                                                  |
-| [`         DISTINCT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#distinct_pipe_operator)               | Returns distinct rows from the input table, while preserving table aliases.                                                                                  |
-| [`         JOIN        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#join_pipe_operator)                       | Joins rows from the input table with rows from a second table provided as an argument.                                                                       |
-| [`         CALL        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#call_pipe_operator)                       | Calls a table-valued function (TVF), passing the pipe input table as a table argument.                                                                       |
-| [`         ORDER BY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#order_by_pipe_operator)               | Sorts results by a list of expressions.                                                                                                                      |
-| [`         LIMIT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#limit_pipe_operator)                     | Limits the number of rows to return in a query, with an optional `        OFFSET       ` clause to skip over rows.                                           |
-| [`         UNION        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#union_pipe_operator)                     | Returns the combined results of the input queries to the left and right of the pipe operator.                                                                |
-| [`         INTERSECT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#intersect_pipe_operator)             | Returns rows that are found in the results of both the input query to the left of the pipe operator and all input queries to the right of the pipe operator. |
-| [`         EXCEPT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#except_pipe_operator)                   | Returns rows from the input query to the left of the pipe operator that aren't present in any input queries to the right of the pipe operator.               |
-| [`         TABLESAMPLE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#tablesample_pipe_operator)         | Selects a random sample of rows from the input table.                                                                                                        |
-| [`         WITH        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#with_pipe_operator)                       | Introduces one or more common table expressions (CTEs).                                                                                                      |
-| [`         PIVOT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#pivot_pipe_operator)                     | Rotates rows into columns.                                                                                                                                   |
-| [`         UNPIVOT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#unpivot_pipe_operator)                 | Rotates columns into rows.                                                                                                                                   |
-| [`         MATCH_RECOGNIZE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#match_recognize_pipe_operator) | Filters and aggregates rows based on matches.                                                                                                                |
+| Name                                                                                                                              | Summary                                                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`SELECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#select_pipe_operator)                   | Produces a new table with the listed columns.                                                                                                                |
+| [`EXTEND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator)                   | Propagates the existing table and adds computed columns.                                                                                                     |
+| [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#set_pipe_operator)                         | Replaces the values of columns in the input table.                                                                                                           |
+| [`DROP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#drop_pipe_operator)                       | Removes listed columns from the input table.                                                                                                                 |
+| [`RENAME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator)                   | Renames specified columns.                                                                                                                                   |
+| [`AS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator)                           | Introduces a table alias for the input table.                                                                                                                |
+| [`WHERE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#where_pipe_operator)                     | Filters the results of the input table.                                                                                                                      |
+| [`AGGREGATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator)             | Performs aggregation on data across groups of rows or the full input table.                                                                                  |
+| [`DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#distinct_pipe_operator)               | Returns distinct rows from the input table, while preserving table aliases.                                                                                  |
+| [`JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#join_pipe_operator)                       | Joins rows from the input table with rows from a second table provided as an argument.                                                                       |
+| [`CALL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#call_pipe_operator)                       | Calls a table-valued function (TVF), passing the pipe input table as a table argument.                                                                       |
+| [`ORDER BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#order_by_pipe_operator)               | Sorts results by a list of expressions.                                                                                                                      |
+| [`LIMIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#limit_pipe_operator)                     | Limits the number of rows to return in a query, with an optional `OFFSET` clause to skip over rows.                                                          |
+| [`UNION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#union_pipe_operator)                     | Returns the combined results of the input queries to the left and right of the pipe operator.                                                                |
+| [`INTERSECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#intersect_pipe_operator)             | Returns rows that are found in the results of both the input query to the left of the pipe operator and all input queries to the right of the pipe operator. |
+| [`EXCEPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#except_pipe_operator)                   | Returns rows from the input query to the left of the pipe operator that aren't present in any input queries to the right of the pipe operator.               |
+| [`TABLESAMPLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#tablesample_pipe_operator)         | Selects a random sample of rows from the input table.                                                                                                        |
+| [`WITH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#with_pipe_operator)                       | Introduces one or more common table expressions (CTEs).                                                                                                      |
+| [`PIVOT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#pivot_pipe_operator)                     | Rotates rows into columns.                                                                                                                                   |
+| [`UNPIVOT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#unpivot_pipe_operator)                 | Rotates columns into rows.                                                                                                                                   |
+| [`MATCH_RECOGNIZE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#match_recognize_pipe_operator) | Filters and aggregates rows based on matches.                                                                                                                |
 
-### `     SELECT    ` pipe operator
+### `SELECT` pipe operator
 
 ``` no-copy
 |> SELECT expression [[AS] alias] [, ...]
@@ -155,18 +155,18 @@ GoogleSQL supports the following pipe operators. For operators that correspond o
 
 **Description**
 
-Produces a new table with the listed columns, similar to the outermost [`  SELECT  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list) in a table subquery in standard syntax. The `  SELECT  ` operator supports standard output modifiers like `  SELECT AS STRUCT  ` and `  SELECT DISTINCT  ` . The `  SELECT  ` operator also supports [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , including [named windows](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window) . Named windows are defined using the `  WINDOW  ` keyword and are only visible to the current pipe `  SELECT  ` operator. The `  SELECT  ` operator doesn't support aggregations or anonymization.
+Produces a new table with the listed columns, similar to the outermost [`SELECT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list) in a table subquery in standard syntax. The `SELECT` operator supports standard output modifiers like `SELECT AS STRUCT` and `SELECT DISTINCT` . The `SELECT` operator also supports [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , including [named windows](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window) . Named windows are defined using the `WINDOW` keyword and are only visible to the current pipe `SELECT` operator. The `SELECT` operator doesn't support aggregations or anonymization.
 
-In pipe syntax, the `  SELECT  ` operator in a query is optional. The `  SELECT  ` operator can be used near the end of a query to specify the list of output columns. The final query result contains the columns returned from the last pipe operator. If the `  SELECT  ` operator isn't used to select specific columns, the output includes the full row, similar to what the [`  SELECT *  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax produces.
+In pipe syntax, the `SELECT` operator in a query is optional. The `SELECT` operator can be used near the end of a query to specify the list of output columns. The final query result contains the columns returned from the last pipe operator. If the `SELECT` operator isn't used to select specific columns, the output includes the full row, similar to what the [`SELECT *` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax produces.
 
-In pipe syntax, the `  SELECT  ` clause doesn't perform aggregation. Use the [`  AGGREGATE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) instead.
+In pipe syntax, the `SELECT` clause doesn't perform aggregation. Use the [`AGGREGATE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) instead.
 
-For cases where `  SELECT  ` would be used in standard syntax to rearrange columns, pipe syntax supports other operators:
+For cases where `SELECT` would be used in standard syntax to rearrange columns, pipe syntax supports other operators:
 
-  - The [`  EXTEND  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) adds columns.
-  - The [`  SET  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#set_pipe_operator) updates the value of an existing column.
-  - The [`  DROP  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#drop_pipe_operator) removes columns.
-  - The [`  RENAME  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator) renames columns.
+  - The [`EXTEND` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) adds columns.
+  - The [`SET` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#set_pipe_operator) updates the value of an existing column.
+  - The [`DROP` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#drop_pipe_operator) removes columns.
+  - The [`RENAME` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator) renames columns.
 
 **Examples**
 
@@ -193,7 +193,7 @@ For cases where `  SELECT  ` would be used in standard syntax to rearrange colum
      | carrots | 8     | vegetable | 8              |
      +---------+-------+-----------+----------------*/
 
-### `     EXTEND    ` pipe operator
+### `EXTEND` pipe operator
 
 ``` no-copy
 |> EXTEND expression [[AS] alias] [, ...]
@@ -202,7 +202,7 @@ For cases where `  SELECT  ` would be used in standard syntax to rearrange colum
 
 **Description**
 
-Propagates the existing table and adds computed columns, similar to [`  SELECT *, new_column  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax. The `  EXTEND  ` operator supports [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , including [named windows](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window) . Named windows are defined using the `  WINDOW  ` keyword and are only visible to the current `  EXTEND  ` operator.
+Propagates the existing table and adds computed columns, similar to [`SELECT *, new_column`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax. The `EXTEND` operator supports [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , including [named windows](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window) . Named windows are defined using the `WINDOW` keyword and are only visible to the current `EXTEND` operator.
 
 **Examples**
 
@@ -252,7 +252,7 @@ Propagates the existing table and adds computed columns, similar to [`  SELECT *
      | carrots   | vegetable | 8              |
      +----------------------------------------*/
 
-### `     SET    ` pipe operator
+### `SET` pipe operator
 
 ``` no-copy
 |> SET column = expression [, ...]
@@ -260,9 +260,9 @@ Propagates the existing table and adds computed columns, similar to [`  SELECT *
 
 **Description**
 
-Replaces the value of a column in the input table, similar to [`  SELECT * REPLACE (expression AS column)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_replace) in standard syntax. Each referenced column must exist exactly once in the input table.
+Replaces the value of a column in the input table, similar to [`SELECT * REPLACE (expression AS column)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_replace) in standard syntax. Each referenced column must exist exactly once in the input table.
 
-After a `  SET  ` operation, the referenced top-level columns (like `  x  ` ) are updated, but table aliases (like `  t  ` ) still refer to the original row values. Therefore, `  t.x  ` will still refer to the original value.
+After a `SET` operation, the referenced top-level columns (like `x` ) are updated, but table aliases (like `t` ) still refer to the original row values. Therefore, `t.x` will still refer to the original value.
 
 **Example**
 
@@ -290,7 +290,7 @@ After a `  SET  ` operation, the referenced top-level columns (like `  x  ` ) ar
      | 2          | 4 | 8 |
      +------------+---+---*/
 
-### `     DROP    ` pipe operator
+### `DROP` pipe operator
 
 ``` no-copy
 |> DROP column [, ...]
@@ -298,9 +298,9 @@ After a `  SET  ` operation, the referenced top-level columns (like `  x  ` ) ar
 
 **Description**
 
-Removes listed columns from the input table, similar to [`  SELECT * EXCEPT (column)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_except) in standard syntax. Each referenced column must exist at least once in the input table.
+Removes listed columns from the input table, similar to [`SELECT * EXCEPT (column)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_except) in standard syntax. Each referenced column must exist at least once in the input table.
 
-After a `  DROP  ` operation, the referenced top-level columns (like `  x  ` ) are removed, but table aliases (like `  t  ` ) still refer to the original row values. Therefore, `  t.x  ` will still refer to the original value.
+After a `DROP` operation, the referenced top-level columns (like `x` ) are removed, but table aliases (like `t` ) still refer to the original row values. Therefore, `t.x` will still refer to the original value.
 
 **Example**
 
@@ -323,7 +323,7 @@ After a `  DROP  ` operation, the referenced top-level columns (like `  x  ` ) a
      | 1          | 2 |
      +------------+---*/
 
-### `     RENAME    ` pipe operator
+### `RENAME` pipe operator
 
 ``` no-copy
 |> RENAME old_column_name [AS] new_column_name [, ...]
@@ -331,9 +331,9 @@ After a `  DROP  ` operation, the referenced top-level columns (like `  x  ` ) a
 
 **Description**
 
-Renames specified columns. Each column to be renamed must exist exactly once in the input table. The `  RENAME  ` operator can't rename value table fields, pseudo-columns, range variables, or objects that aren't columns in the input table.
+Renames specified columns. Each column to be renamed must exist exactly once in the input table. The `RENAME` operator can't rename value table fields, pseudo-columns, range variables, or objects that aren't columns in the input table.
 
-After a `  RENAME  ` operation, the referenced top-level columns (like `  x  ` ) are renamed, but table aliases (like `  t  ` ) still refer to the original row values. Therefore, `  t.x  ` will still refer to the original value.
+After a `RENAME` operation, the referenced top-level columns (like `x` ) are renamed, but table aliases (like `t` ) still refer to the original row values. Therefore, `t.x` will still refer to the original value.
 
 **Example**
 
@@ -348,7 +348,7 @@ After a `  RENAME  ` operation, the referenced top-level columns (like `  x  ` )
      | 1 | 2         | 3 | 2   |
      +---+-----------+---+-----*/
 
-### `     AS    ` pipe operator
+### `AS` pipe operator
 
 ``` no-copy
 |> AS alias
@@ -356,9 +356,9 @@ After a `  RENAME  ` operation, the referenced top-level columns (like `  x  ` )
 
 **Description**
 
-Introduces a table alias for the input table, similar to applying the [`  AS alias  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#using_aliases) on a table subquery in standard syntax. Any existing table aliases are removed and the new alias becomes the table alias for all columns in the row.
+Introduces a table alias for the input table, similar to applying the [`AS alias` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#using_aliases) on a table subquery in standard syntax. Any existing table aliases are removed and the new alias becomes the table alias for all columns in the row.
 
-The `  AS  ` operator can be useful after operators like [`  SELECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#select_pipe_operator) , [`  EXTEND  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) , or [`  AGGREGATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) that add columns but can't give table aliases to them. You can use the table alias to disambiguate columns after the `  JOIN  ` operator.
+The `AS` operator can be useful after operators like [`SELECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#select_pipe_operator) , [`EXTEND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) , or [`AGGREGATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) that add columns but can't give table aliases to them. You can use the table alias to disambiguate columns after the `JOIN` operator.
 
 **Example**
 
@@ -381,7 +381,7 @@ The `  AS  ` operator can be useful after operators like [`  SELECT  `](https://
      | 456 | 5           | yellow |
      +-----+-------------+--------*/
 
-### `     WHERE    ` pipe operator
+### `WHERE` pipe operator
 
 ``` no-copy
 |> WHERE boolean_expression
@@ -389,9 +389,9 @@ The `  AS  ` operator can be useful after operators like [`  SELECT  `](https://
 
 **Description**
 
-Filters the results of the input table. The `  WHERE  ` operator behaves the same as the [`  WHERE  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) in standard syntax.
+Filters the results of the input table. The `WHERE` operator behaves the same as the [`WHERE` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) in standard syntax.
 
-In pipe syntax, the `  WHERE  ` operator also replaces the [`  HAVING  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#having_clause) and [`  QUALIFY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) in standard syntax. For example, after performing aggregation with the [`  AGGREGATE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) , use the `  WHERE  ` operator instead of the `  HAVING  ` clause. For [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) inside a `  QUALIFY  ` clause, use window functions inside a `  WHERE  ` clause instead.
+In pipe syntax, the `WHERE` operator also replaces the [`HAVING` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#having_clause) and [`QUALIFY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) in standard syntax. For example, after performing aggregation with the [`AGGREGATE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) , use the `WHERE` operator instead of the `HAVING` clause. For [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) inside a `QUALIFY` clause, use window functions inside a `WHERE` clause instead.
 
 **Example**
 
@@ -411,7 +411,7 @@ In pipe syntax, the `  WHERE  ` operator also replaces the [`  HAVING  ` clause]
      | carrots | 8     |
      +---------+-------*/
 
-### `     AGGREGATE    ` pipe operator
+### `AGGREGATE` pipe operator
 
 ``` no-copy
 -- Full-table aggregation
@@ -432,21 +432,21 @@ In pipe syntax, the `  WHERE  ` operator also replaces the [`  HAVING  ` clause]
 
 **Description**
 
-Performs aggregation on data across grouped rows or an entire table. The `  AGGREGATE  ` operator is similar to a query in standard syntax that contains a [`  GROUP BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) or a `  SELECT  ` list with [aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) or both. In pipe syntax, the `  GROUP BY  ` clause is part of the `  AGGREGATE  ` operator. Pipe syntax doesn't support a standalone `  GROUP BY  ` operator.
+Performs aggregation on data across grouped rows or an entire table. The `AGGREGATE` operator is similar to a query in standard syntax that contains a [`GROUP BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) or a `SELECT` list with [aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) or both. In pipe syntax, the `GROUP BY` clause is part of the `AGGREGATE` operator. Pipe syntax doesn't support a standalone `GROUP BY` operator.
 
-Without the `  GROUP BY  ` clause, the `  AGGREGATE  ` operator performs full-table aggregation and produces one output row.
+Without the `GROUP BY` clause, the `AGGREGATE` operator performs full-table aggregation and produces one output row.
 
-With the `  GROUP BY  ` clause, the `  AGGREGATE  ` operator performs aggregation with grouping, producing one row for each set of distinct values for the grouping expressions.
+With the `GROUP BY` clause, the `AGGREGATE` operator performs aggregation with grouping, producing one row for each set of distinct values for the grouping expressions.
 
-The `  AGGREGATE  ` expression list corresponds to the aggregated expressions in a `  SELECT  ` list in standard syntax. Each expression in the `  AGGREGATE  ` list must include an aggregate function. Aggregate expressions can also include scalar expressions (for example, `  sqrt(SUM(x*x))  ` ). Column aliases can be assigned using the [`  AS  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator) . Window functions aren't allowed, but the [`  EXTEND  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) can be used before the `  AGGREGATE  ` operator to compute window functions.
+The `AGGREGATE` expression list corresponds to the aggregated expressions in a `SELECT` list in standard syntax. Each expression in the `AGGREGATE` list must include an aggregate function. Aggregate expressions can also include scalar expressions (for example, `sqrt(SUM(x*x))` ). Column aliases can be assigned using the [`AS` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator) . Window functions aren't allowed, but the [`EXTEND` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) can be used before the `AGGREGATE` operator to compute window functions.
 
-The `  GROUP BY  ` clause in the `  AGGREGATE  ` operator corresponds to the `  GROUP BY  ` clause in standard syntax. Unlike in standard syntax, aliases can be assigned to `  GROUP BY  ` items. Standard grouping operators like `  GROUPING SETS  ` , `  ROLLUP  ` , and `  CUBE  ` are supported.
+The `GROUP BY` clause in the `AGGREGATE` operator corresponds to the `GROUP BY` clause in standard syntax. Unlike in standard syntax, aliases can be assigned to `GROUP BY` items. Standard grouping operators like `GROUPING SETS` , `ROLLUP` , and `CUBE` are supported.
 
-The output columns from the `  AGGREGATE  ` operator include all grouping columns first, followed by all aggregate columns, using their assigned aliases as the column names.
+The output columns from the `AGGREGATE` operator include all grouping columns first, followed by all aggregate columns, using their assigned aliases as the column names.
 
-Unlike in standard syntax, grouping expressions aren't repeated across `  SELECT  ` and `  GROUP BY  ` clauses. In pipe syntax, the grouping expressions are listed once, in the `  GROUP BY  ` clause, and are automatically included as output columns for the `  AGGREGATE  ` operator.
+Unlike in standard syntax, grouping expressions aren't repeated across `SELECT` and `GROUP BY` clauses. In pipe syntax, the grouping expressions are listed once, in the `GROUP BY` clause, and are automatically included as output columns for the `AGGREGATE` operator.
 
-Because output columns are fully specified by the `  AGGREGATE  ` operator, the `  SELECT  ` operator isn't needed after the `  AGGREGATE  ` operator unless you want to produce a list of columns different from the default.
+Because output columns are fully specified by the `AGGREGATE` operator, the `SELECT` operator isn't needed after the `AGGREGATE` operator unless you want to produce a list of columns different from the default.
 
 **Standard syntax**
 
@@ -498,9 +498,9 @@ Because output columns are fully specified by the `  AGGREGATE  ` operator, the 
      | bananas | 1         | 5           |
      +---------+-----------+-------------*/
 
-#### Shorthand ordering syntax with `     AGGREGATE    `
+#### Shorthand ordering syntax with `AGGREGATE`
 
-The `  AGGREGATE  ` operator supports a shorthand ordering syntax, which is equivalent to applying the [`  ORDER BY  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#order_by_pipe_operator) as part of the `  AGGREGATE  ` operator without repeating the column list:
+The `AGGREGATE` operator supports a shorthand ordering syntax, which is equivalent to applying the [`ORDER BY` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#order_by_pipe_operator) as part of the `AGGREGATE` operator without repeating the column list:
 
     -- Aggregation with grouping and shorthand ordering syntax
     |> AGGREGATE [aggregate_expression [[AS] alias] [order_suffix] [, ...]]
@@ -508,15 +508,15 @@ The `  AGGREGATE  ` operator supports a shorthand ordering syntax, which is equi
     
     order_suffix: {ASC | DESC} [{NULLS FIRST | NULLS LAST}]
 
-The `  GROUP AND ORDER BY  ` clause is equivalent to an `  ORDER BY  ` clause on all `  groupable_items  ` . By default, each `  groupable_item  ` is sorted in ascending order with `  NULL  ` values first. Other ordering suffixes like `  DESC  ` or `  NULLS LAST  ` can be used for other orders.
+The `GROUP AND ORDER BY` clause is equivalent to an `ORDER BY` clause on all `groupable_items` . By default, each `groupable_item` is sorted in ascending order with `NULL` values first. Other ordering suffixes like `DESC` or `NULLS LAST` can be used for other orders.
 
-Without the `  GROUP AND ORDER BY  ` clause, the `  ASC  ` or `  DESC  ` suffixes can be added on individual columns in the `  GROUP BY  ` list or `  AGGREGATE  ` list or both. The `  NULLS FIRST  ` and `  NULLS LAST  ` suffixes can be used to further modify `  NULL  ` sorting.
+Without the `GROUP AND ORDER BY` clause, the `ASC` or `DESC` suffixes can be added on individual columns in the `GROUP BY` list or `AGGREGATE` list or both. The `NULLS FIRST` and `NULLS LAST` suffixes can be used to further modify `NULL` sorting.
 
-Adding these suffixes is equivalent to adding an `  ORDER BY  ` clause that includes all of the suffixed columns with the suffixed grouping columns first, matching the left-to-right output column order.
+Adding these suffixes is equivalent to adding an `ORDER BY` clause that includes all of the suffixed columns with the suffixed grouping columns first, matching the left-to-right output column order.
 
 **Examples**
 
-Consider the following table called `  Produce  ` :
+Consider the following table called `Produce` :
 
     /*---------+-------+-----------+
      | item    | sales | category  |
@@ -527,7 +527,7 @@ Consider the following table called `  Produce  ` :
      | bananas | 5     | fruit     |
      +---------+-------+-----------*/
 
-The following two equivalent examples show you how to order by all grouping columns using the `  GROUP AND ORDER BY  ` clause or a separate `  ORDER BY  ` clause:
+The following two equivalent examples show you how to order by all grouping columns using the `GROUP AND ORDER BY` clause or a separate `ORDER BY` clause:
 
     -- Order by all grouping columns using GROUP AND ORDER BY.
     FROM Produce
@@ -548,7 +548,7 @@ The following two equivalent examples show you how to order by all grouping colu
        GROUP BY category, item
     |> ORDER BY category, item DESC;
 
-You can add an ordering suffix to a column in the `  AGGREGATE  ` list. Although the `  AGGREGATE  ` list appears before the `  GROUP BY  ` list in the query, ordering suffixes on columns in the `  GROUP BY  ` list are applied first.
+You can add an ordering suffix to a column in the `AGGREGATE` list. Although the `AGGREGATE` list appears before the `GROUP BY` list in the query, ordering suffixes on columns in the `GROUP BY` list are applied first.
 
     FROM Produce
     |> AGGREGATE SUM(sales) AS total_sales ASC
@@ -570,7 +570,7 @@ The previous query is equivalent to the following:
        GROUP BY item, category
     |> ORDER BY category DESC, total_sales;
 
-### `     DISTINCT    ` pipe operator
+### `DISTINCT` pipe operator
 
 ``` no-copy
 |> DISTINCT
@@ -580,9 +580,9 @@ The previous query is equivalent to the following:
 
 Returns distinct rows from the input table, while preserving table aliases.
 
-Using the `  DISTINCT  ` operator after a `  SELECT  ` or `  UNION ALL  ` clause is similar to using a [`  SELECT DISTINCT  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct) or [`  UNION DISTINCT  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#union) in standard syntax, but the `  DISTINCT  ` pipe operator can be applied anywhere. The `  DISTINCT  ` operator computes distinct rows based on the values of all visible columns. Pseudo-columns are ignored while computing distinct rows and are dropped from the output.
+Using the `DISTINCT` operator after a `SELECT` or `UNION ALL` clause is similar to using a [`SELECT DISTINCT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct) or [`UNION DISTINCT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#union) in standard syntax, but the `DISTINCT` pipe operator can be applied anywhere. The `DISTINCT` operator computes distinct rows based on the values of all visible columns. Pseudo-columns are ignored while computing distinct rows and are dropped from the output.
 
-The `  DISTINCT  ` operator is similar to using a `  |> SELECT DISTINCT *  ` clause, but doesn't expand value table fields, and preserves table aliases from the input.
+The `DISTINCT` operator is similar to using a `|> SELECT DISTINCT *` clause, but doesn't expand value table fields, and preserves table aliases from the input.
 
 **Examples**
 
@@ -605,7 +605,7 @@ The `  DISTINCT  ` operator is similar to using a `  |> SELECT DISTINCT *  ` cla
      | carrots | 8     |
      +---------+-------*/
 
-In the following example, the table alias `  Produce  ` can be used in expressions after the `  DISTINCT  ` pipe operator.
+In the following example, the table alias `Produce` can be used in expressions after the `DISTINCT` pipe operator.
 
     (
       SELECT 'apples' AS item, 2 AS sales
@@ -628,7 +628,7 @@ In the following example, the table alias `  Produce  ` can be used in expressio
      | carrots |
      +---------*/
 
-By contrast, the table alias isn't visible after a `  |> SELECT DISTINCT *  ` clause.
+By contrast, the table alias isn't visible after a `|> SELECT DISTINCT *` clause.
 
     -- Error, unrecognized name: Produce
     (
@@ -644,7 +644,7 @@ By contrast, the table alias isn't visible after a `  |> SELECT DISTINCT *  ` cl
     |> SELECT DISTINCT *
     |> SELECT Produce.item;
 
-In the following examples, the `  DISTINCT  ` operator doesn't expand value table fields and retains the `  STRUCT  ` type in the result. By contrast, the `  |> SELECT DISTINCT *  ` clause expands the `  STRUCT  ` type into two columns.
+In the following examples, the `DISTINCT` operator doesn't expand value table fields and retains the `STRUCT` type in the result. By contrast, the `|> SELECT DISTINCT *` clause expands the `STRUCT` type into two columns.
 
     SELECT AS STRUCT 1 x, 2 y
     |> DISTINCT;
@@ -667,7 +667,7 @@ In the following examples, the `  DISTINCT  ` operator doesn't expand value tabl
      | 1 | 2 |
      +---+---*/
 
-The following examples show equivalent ways to generate the same results with distinct values from columns `  a  ` , `  b  ` , and `  c  ` .
+The following examples show equivalent ways to generate the same results with distinct values from columns `a` , `b` , and `c` .
 
     FROM table
     |> SELECT DISTINCT a, b, c;
@@ -680,7 +680,7 @@ The following examples show equivalent ways to generate the same results with di
     |> AGGREGATE
        GROUP BY a, b, c;
 
-### `     JOIN    ` pipe operator
+### `JOIN` pipe operator
 
 ``` no-copy
 |> [join_type] JOIN from_item [[AS] alias] [{on_clause | using_clause}]
@@ -688,9 +688,9 @@ The following examples show equivalent ways to generate the same results with di
 
 **Description**
 
-Joins rows from the input table with rows from a second table provided as an argument. The `  JOIN  ` operator behaves the same as the [`  JOIN  ` operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) in standard syntax. The input table is the left side of the join and the `  JOIN  ` argument is the right side of the join. Standard join inputs are supported, including tables, subqueries, `  UNNEST  ` operations, and table-valued function (TVF) calls. Standard join modifiers like `  LEFT  ` , `  INNER  ` , and `  CROSS  ` are allowed before the `  JOIN  ` keyword.
+Joins rows from the input table with rows from a second table provided as an argument. The `JOIN` operator behaves the same as the [`JOIN` operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) in standard syntax. The input table is the left side of the join and the `JOIN` argument is the right side of the join. Standard join inputs are supported, including tables, subqueries, `UNNEST` operations, and table-valued function (TVF) calls. Standard join modifiers like `LEFT` , `INNER` , and `CROSS` are allowed before the `JOIN` keyword.
 
-An alias can be assigned to the input table on the right side of the join, but not to the input table on the left side of the join. If an alias on the input table is needed, perhaps to disambiguate columns in an [`  ON  ` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#on_clause) , then an alias can be added using the [`  AS  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator) before the `  JOIN  ` arguments.
+An alias can be assigned to the input table on the right side of the join, but not to the input table on the left side of the join. If an alias on the input table is needed, perhaps to disambiguate columns in an [`ON` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#on_clause) , then an alias can be added using the [`AS` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator) before the `JOIN` arguments.
 
 **Example**
 
@@ -714,7 +714,7 @@ An alias can be assigned to the input table on the right side of the join, but n
      | bananas | 5     | NULL |
      +---------+-------+------*/
 
-### `     CALL    ` pipe operator
+### `CALL` pipe operator
 
 ``` no-copy
 |> CALL table_function (argument [, ...]) [[AS] alias]
@@ -724,9 +724,9 @@ An alias can be assigned to the input table on the right side of the join, but n
 
 Calls a [table-valued function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions#tvfs) (TVF) that accepts at least one table as an argument, similar to [table function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#table_function_calls) in standard syntax.
 
-TVFs in standard syntax can be called in the `  FROM  ` clause or in a `  JOIN  ` operation. These are both allowed in pipe syntax as well.
+TVFs in standard syntax can be called in the `FROM` clause or in a `JOIN` operation. These are both allowed in pipe syntax as well.
 
-In pipe syntax, TVFs that take a table argument can also be called with the `  CALL  ` operator. The first table argument comes from the input table and must be omitted in the arguments. An optional table alias can be added for the output table.
+In pipe syntax, TVFs that take a table argument can also be called with the `CALL` operator. The first table argument comes from the input table and must be omitted in the arguments. An optional table alias can be added for the output table.
 
 Multiple TVFs can be called sequentially without using nested subqueries.
 
@@ -734,10 +734,10 @@ Multiple TVFs can be called sequentially without using nested subqueries.
 
 Suppose you have TVFs with the following parameters:
 
-  - `  tvf1(inputTable1, arg1 ANY TYPE)  ` and
-  - `  tvf2(arg2 ANY TYPE, arg3 ANY TYPE, inputTable2)  ` .
+  - `tvf1(inputTable1, arg1 ANY TYPE)` and
+  - `tvf2(arg2 ANY TYPE, arg3 ANY TYPE, inputTable2)` .
 
-The following examples compare calling both TVFs on an input table by using standard syntax and by using the `  CALL  ` pipe operator:
+The following examples compare calling both TVFs on an input table by using standard syntax and by using the `CALL` pipe operator:
 
     -- Call the TVFs without using the CALL operator.
     SELECT *
@@ -749,7 +749,7 @@ The following examples compare calling both TVFs on an input table by using stan
     |> CALL tvf1(arg1)
     |> CALL tvf2(arg2, arg3);
 
-### `     ORDER BY    ` pipe operator
+### `ORDER BY` pipe operator
 
 ``` no-copy
 |> ORDER BY expression [sort_options] [, ...]
@@ -757,9 +757,9 @@ The following examples compare calling both TVFs on an input table by using stan
 
 **Description**
 
-Sorts results by a list of expressions. The `  ORDER BY  ` operator behaves the same as the [`  ORDER BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in standard syntax. Suffixes like `  ASC  ` , `  DESC  ` , and `  NULLS LAST  ` are supported for customizing the ordering for each expression.
+Sorts results by a list of expressions. The `ORDER BY` operator behaves the same as the [`ORDER BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in standard syntax. Suffixes like `ASC` , `DESC` , and `NULLS LAST` are supported for customizing the ordering for each expression.
 
-In pipe syntax, the [`  AGGREGATE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) also supports [shorthand ordering suffixes](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#shorthand_order_pipe_syntax) to apply `  ORDER BY  ` behavior more concisely as part of aggregation.
+In pipe syntax, the [`AGGREGATE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) also supports [shorthand ordering suffixes](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#shorthand_order_pipe_syntax) to apply `ORDER BY` behavior more concisely as part of aggregation.
 
 **Example**
 
@@ -780,7 +780,7 @@ In pipe syntax, the [`  AGGREGATE  ` operator](https://docs.cloud.google.com/big
      | 1 |
      +---*/
 
-### `     LIMIT    ` pipe operator
+### `LIMIT` pipe operator
 
 ``` no-copy
 |> LIMIT count [OFFSET skip_rows]
@@ -788,7 +788,7 @@ In pipe syntax, the [`  AGGREGATE  ` operator](https://docs.cloud.google.com/big
 
 **Description**
 
-Limits the number of rows to return in a query, with an optional `  OFFSET  ` clause to skip over rows. The `  LIMIT  ` operator behaves the same as the [`  LIMIT  ` and `  OFFSET  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in standard syntax.
+Limits the number of rows to return in a query, with an optional `OFFSET` clause to skip over rows. The `LIMIT` operator behaves the same as the [`LIMIT` and `OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in standard syntax.
 
 **Examples**
 
@@ -824,7 +824,7 @@ Limits the number of rows to return in a query, with an optional `  OFFSET  ` cl
      | carrots | 8     |
      +---------+-------*/
 
-### `     UNION    ` pipe operator
+### `UNION` pipe operator
 
 ``` no-copy
 query
@@ -835,7 +835,7 @@ query
 
 Returns the combined results of the input queries to the left and right of the pipe operator. Columns are matched and rows are concatenated vertically.
 
-The `  UNION  ` pipe operator behaves the same as the [`  UNION  ` set operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#union) in standard syntax. However, in pipe syntax, the `  UNION  ` pipe operator can include multiple comma-separated queries without repeating the `  UNION  ` syntax. Queries following the operator are enclosed in parentheses.
+The `UNION` pipe operator behaves the same as the [`UNION` set operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#union) in standard syntax. However, in pipe syntax, the `UNION` pipe operator can include multiple comma-separated queries without repeating the `UNION` syntax. Queries following the operator are enclosed in parentheses.
 
 For example, compare the following equivalent queries:
 
@@ -852,7 +852,7 @@ For example, compare the following equivalent queries:
         (SELECT 1),
         (SELECT 2);
 
-The `  UNION  ` pipe operator supports the same modifiers as the `  UNION  ` set operator in standard syntax, such as the `  BY NAME  ` modifier (or `  CORRESPONDING  ` ) and `  LEFT | FULL [OUTER]  ` mode prefixes.
+The `UNION` pipe operator supports the same modifiers as the `UNION` set operator in standard syntax, such as the `BY NAME` modifier (or `CORRESPONDING` ) and `LEFT | FULL [OUTER]` mode prefixes.
 
 **Examples**
 
@@ -894,7 +894,7 @@ The following example shows multiple input queries to the right of the pipe oper
      | 3      |
      +--------*/
 
-The following example uses the `  BY NAME  ` modifier to match results by column name instead of in the order that the columns are given in the input queries.
+The following example uses the `BY NAME` modifier to match results by column name instead of in the order that the columns are given in the input queries.
 
     SELECT 1 AS one_digit, 10 AS two_digit
     |> UNION ALL BY NAME
@@ -907,7 +907,7 @@ The following example uses the `  BY NAME  ` modifier to match results by column
      | 2         | 20        |
      +-----------+-----------*/
 
-Without the `  BY NAME  ` modifier, the results are matched by column position in the input query and the column names are ignored.
+Without the `BY NAME` modifier, the results are matched by column position in the input query and the column names are ignored.
 
     SELECT 1 AS one_digit, 10 AS two_digit
     |> UNION ALL
@@ -921,7 +921,7 @@ Without the `  BY NAME  ` modifier, the results are matched by column position i
      | 20        | 2         |
      +-----------+-----------*/
 
-### `     INTERSECT    ` pipe operator
+### `INTERSECT` pipe operator
 
 ``` no-copy
 query
@@ -932,7 +932,7 @@ query
 
 Returns rows that are found in the results of both the input query to the left of the pipe operator and all input queries to the right of the pipe operator.
 
-The `  INTERSECT  ` pipe operator behaves the same as the [`  INTERSECT  ` set operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#intersect) in standard syntax. However, in pipe syntax, the `  INTERSECT  ` pipe operator can include multiple comma-separated queries without repeating the `  INTERSECT  ` syntax. Queries following the operator are enclosed in parentheses.
+The `INTERSECT` pipe operator behaves the same as the [`INTERSECT` set operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#intersect) in standard syntax. However, in pipe syntax, the `INTERSECT` pipe operator can include multiple comma-separated queries without repeating the `INTERSECT` syntax. Queries following the operator are enclosed in parentheses.
 
 For example, compare the following equivalent queries:
 
@@ -949,7 +949,7 @@ For example, compare the following equivalent queries:
         (SELECT 1),
         (SELECT 2);
 
-The `  INTERSECT  ` pipe operator supports the same modifiers as the `  INTERSECT  ` set operator in standard syntax, such as the `  BY NAME  ` modifier (or `  CORRESPONDING  ` ) and `  LEFT | FULL [OUTER]  ` mode prefixes.
+The `INTERSECT` pipe operator supports the same modifiers as the `INTERSECT` set operator in standard syntax, such as the `BY NAME` modifier (or `CORRESPONDING` ) and `LEFT | FULL [OUTER]` mode prefixes.
 
 **Examples**
 
@@ -977,7 +977,7 @@ The following example shows multiple input queries to the right of the pipe oper
      | 3      |
      +--------*/
 
-The following example uses the `  BY NAME  ` modifier to return the intersecting row from the columns despite the differing column order in the input queries.
+The following example uses the `BY NAME` modifier to return the intersecting row from the columns despite the differing column order in the input queries.
 
     WITH
       NumbersTable AS (
@@ -997,7 +997,7 @@ The following example uses the `  BY NAME  ` modifier to return the intersecting
      | 1         | 10        |
      +-----------+-----------*/
 
-Without the `  BY NAME  ` modifier, the same columns in differing order are considered different columns, so the query doesn't detect any intersecting row values.
+Without the `BY NAME` modifier, the same columns in differing order are considered different columns, so the query doesn't detect any intersecting row values.
 
     WITH
       NumbersTable AS (
@@ -1016,7 +1016,7 @@ Without the `  BY NAME  ` modifier, the same columns in differing order are cons
     
      +-----------+-----------*/
 
-### `     EXCEPT    ` pipe operator
+### `EXCEPT` pipe operator
 
 ``` no-copy
 query
@@ -1027,7 +1027,7 @@ query
 
 Returns rows from the input query to the left of the pipe operator that aren't present in any input queries to the right of the pipe operator.
 
-The `  EXCEPT  ` pipe operator behaves the same as the [`  EXCEPT  ` set operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#except) in standard syntax. However, in pipe syntax, the `  EXCEPT  ` pipe operator can include multiple comma-separated queries without repeating the `  EXCEPT  ` syntax. Queries following the operator are enclosed in parentheses.
+The `EXCEPT` pipe operator behaves the same as the [`EXCEPT` set operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#except) in standard syntax. However, in pipe syntax, the `EXCEPT` pipe operator can include multiple comma-separated queries without repeating the `EXCEPT` syntax. Queries following the operator are enclosed in parentheses.
 
 For example, compare the following equivalent queries:
 
@@ -1044,7 +1044,7 @@ For example, compare the following equivalent queries:
         (SELECT 1),
         (SELECT 2);
 
-Parentheses can be used to group set operations and control order of operations. In `  EXCEPT  ` set operations, query results can vary depending on the operation grouping.
+Parentheses can be used to group set operations and control order of operations. In `EXCEPT` set operations, query results can vary depending on the operation grouping.
 
     -- Default operation grouping
     (
@@ -1072,7 +1072,7 @@ Parentheses can be used to group set operations and control order of operations.
       |> EXCEPT DISTINCT (SELECT 2)
     );
 
-The `  EXCEPT  ` pipe operator supports the same modifiers as the `  EXCEPT  ` set operator in standard syntax, such as the `  BY NAME  ` modifier (or `  CORRESPONDING  ` ) and `  LEFT | FULL [OUTER]  ` mode prefixes.
+The `EXCEPT` pipe operator supports the same modifiers as the `EXCEPT` set operator in standard syntax, such as the `BY NAME` modifier (or `CORRESPONDING` ) and `LEFT | FULL [OUTER]` mode prefixes.
 
 **Examples**
 
@@ -1118,7 +1118,7 @@ The following example groups the set operations to modify the order of operation
      | 4      |
      +--------*/
 
-The following example uses the `  BY NAME  ` modifier to return unique rows from the input query to the left of the pipe operator despite the differing column order in the input queries.
+The following example uses the `BY NAME` modifier to return unique rows from the input query to the left of the pipe operator despite the differing column order in the input queries.
 
     WITH
       NumbersTable AS (
@@ -1139,7 +1139,7 @@ The following example uses the `  BY NAME  ` modifier to return unique rows from
      | 3         | 30        |
      +-----------+-----------*/
 
-Without the `  BY NAME  ` modifier, the same columns in differing order are considered different columns, so the query doesn't detect any common rows that should be excluded.
+Without the `BY NAME` modifier, the same columns in differing order are considered different columns, so the query doesn't detect any common rows that should be excluded.
 
     WITH
       NumbersTable AS (
@@ -1162,7 +1162,7 @@ Without the `  BY NAME  ` modifier, the same columns in differing order are cons
      | 3         | 30        |
      +-----------+-----------*/
 
-### `     TABLESAMPLE    ` pipe operator
+### `TABLESAMPLE` pipe operator
 
 **Preview**
 
@@ -1176,16 +1176,16 @@ This product or feature is subject to the "Pre-GA Offerings Terms" in the Genera
 
 **Description**
 
-Selects a random sample of rows from the input table. The `  TABLESAMPLE  ` pipe operator behaves the same as [`  TABLESAMPLE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#tablesample_operator) in standard syntax.
+Selects a random sample of rows from the input table. The `TABLESAMPLE` pipe operator behaves the same as [`TABLESAMPLE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#tablesample_operator) in standard syntax.
 
 **Example**
 
-The following example samples approximately 1% of data from a table called `  LargeTable  ` :
+The following example samples approximately 1% of data from a table called `LargeTable` :
 
     FROM LargeTable
     |> TABLESAMPLE SYSTEM (1 PERCENT);
 
-### `     WITH    ` pipe operator
+### `WITH` pipe operator
 
 ``` no-copy
 |> WITH alias AS query, ...
@@ -1193,7 +1193,7 @@ The following example samples approximately 1% of data from a table called `  La
 
 **Description**
 
-Defines one or more common table expressions (CTEs) that the rest of the query can reference, similar to standard [`  WITH  ` clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) . Ignores the pipe input table and passes it through as the input to the next pipe operation.
+Defines one or more common table expressions (CTEs) that the rest of the query can reference, similar to standard [`WITH` clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) . Ignores the pipe input table and passes it through as the input to the next pipe operation.
 
 **Examples**
 
@@ -1226,7 +1226,7 @@ Defines one or more common table expressions (CTEs) that the rest of the query c
      | 3   |
      +-----*/
 
-The pipe `  WITH  ` operator allows a trailing comma:
+The pipe `WITH` operator allows a trailing comma:
 
     SELECT 1 AS key
     |> WITH t1 AS (
@@ -1244,7 +1244,7 @@ The pipe `  WITH  ` operator allows a trailing comma:
      | 3   |
      +-----*/
 
-### `     PIVOT    ` pipe operator
+### `PIVOT` pipe operator
 
 ``` no-copy
 |> PIVOT (aggregate_expression FOR input_column IN (pivot_column [, ...])) [[AS] alias]
@@ -1252,7 +1252,7 @@ The pipe `  WITH  ` operator allows a trailing comma:
 
 **Description**
 
-Rotates rows into columns. The `  PIVOT  ` pipe operator behaves the same as the [`  PIVOT  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator) in standard syntax.
+Rotates rows into columns. The `PIVOT` pipe operator behaves the same as the [`PIVOT` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator) in standard syntax.
 
 **Example**
 
@@ -1276,7 +1276,7 @@ Rotates rows into columns. The `  PIVOT  ` pipe operator behaves the same as the
      | apple   | 8  | 10   |
      +---------+----+------*/
 
-### `     UNPIVOT    ` pipe operator
+### `UNPIVOT` pipe operator
 
 ``` no-copy
 |> UNPIVOT (values_column FOR name_column IN (column_to_unpivot [, ...])) [[AS] alias]
@@ -1284,7 +1284,7 @@ Rotates rows into columns. The `  PIVOT  ` pipe operator behaves the same as the
 
 **Description**
 
-Rotates columns into rows. The `  UNPIVOT  ` pipe operator behaves the same as the [`  UNPIVOT  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator) in standard syntax.
+Rotates columns into rows. The `UNPIVOT` pipe operator behaves the same as the [`UNPIVOT` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator) in standard syntax.
 
 **Example**
 
@@ -1304,7 +1304,7 @@ Rotates columns into rows. The `  UNPIVOT  ` pipe operator behaves the same as t
      | apple   | 10    | Q2      |
      +---------+-------+---------*/
 
-### `     MATCH_RECOGNIZE    ` pipe operator
+### `MATCH_RECOGNIZE` pipe operator
 
 ``` no-copy
 |> MATCH_RECOGNIZE (
@@ -1320,7 +1320,7 @@ Rotates columns into rows. The `  UNPIVOT  ` pipe operator behaves the same as t
 
 **Description**
 
-Filters and aggregates rows based on matches. A *match* is an ordered sequence of rows that match a pattern that you specify. Matching rows works similarly to matching with regular expressions, but instead of matching characters in a string, the `  MATCH_RECOGNIZE  ` operator finds matches across rows in a table. The `  MATCH_RECOGNIZE  ` pipe operator behaves the same as the [`  MATCH_RECOGNIZE  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#match_recognize_clause) in standard syntax.
+Filters and aggregates rows based on matches. A *match* is an ordered sequence of rows that match a pattern that you specify. Matching rows works similarly to matching with regular expressions, but instead of matching characters in a string, the `MATCH_RECOGNIZE` operator finds matches across rows in a table. The `MATCH_RECOGNIZE` pipe operator behaves the same as the [`MATCH_RECOGNIZE` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#match_recognize_clause) in standard syntax.
 
 **Example**
 

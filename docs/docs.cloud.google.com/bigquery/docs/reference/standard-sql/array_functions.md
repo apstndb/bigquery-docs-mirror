@@ -15,129 +15,129 @@ GoogleSQL for BigQuery supports the following array functions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array"><code dir="ltr" translate="no">        ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array"><code dir="ltr" translate="no">ARRAY</code></a></td>
 <td>Produces an array with one element for each row in a subquery.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg"><code dir="ltr" translate="no">        ARRAY_AGG       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg"><code dir="ltr" translate="no">ARRAY_AGG</code></a></td>
 <td>Gets an array of values.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions">Aggregate functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_concat"><code dir="ltr" translate="no">        ARRAY_CONCAT       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_concat"><code dir="ltr" translate="no">ARRAY_CONCAT</code></a></td>
 <td>Concatenates one or more arrays with the same element type into a single array.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg"><code dir="ltr" translate="no">        ARRAY_CONCAT_AGG       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg"><code dir="ltr" translate="no">ARRAY_CONCAT_AGG</code></a></td>
 <td>Concatenates arrays and returns a single array as a result.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions">Aggregate functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_first"><code dir="ltr" translate="no">        ARRAY_FIRST       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_first"><code dir="ltr" translate="no">ARRAY_FIRST</code></a></td>
 <td>Gets the first element in an array.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_last"><code dir="ltr" translate="no">        ARRAY_LAST       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_last"><code dir="ltr" translate="no">ARRAY_LAST</code></a></td>
 <td>Gets the last element in an array.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_length"><code dir="ltr" translate="no">        ARRAY_LENGTH       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_length"><code dir="ltr" translate="no">ARRAY_LENGTH</code></a></td>
 <td>Gets the number of elements in an array.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_reverse"><code dir="ltr" translate="no">        ARRAY_REVERSE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_reverse"><code dir="ltr" translate="no">ARRAY_REVERSE</code></a></td>
 <td>Reverses the order of elements in an array.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_slice"><code dir="ltr" translate="no">        ARRAY_SLICE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_slice"><code dir="ltr" translate="no">ARRAY_SLICE</code></a></td>
 <td>Produces an array containing zero or more consecutive elements from an input array.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_to_string"><code dir="ltr" translate="no">        ARRAY_TO_STRING       </code></a></td>
-<td>Produces a concatenation of the elements in an array as a <code dir="ltr" translate="no">       STRING      </code> value.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_to_string"><code dir="ltr" translate="no">ARRAY_TO_STRING</code></a></td>
+<td>Produces a concatenation of the elements in an array as a <code dir="ltr" translate="no">STRING</code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_array"><code dir="ltr" translate="no">        GENERATE_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_array"><code dir="ltr" translate="no">GENERATE_ARRAY</code></a></td>
 <td>Generates an array of values in a range.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_date_array"><code dir="ltr" translate="no">        GENERATE_DATE_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_date_array"><code dir="ltr" translate="no">GENERATE_DATE_ARRAY</code></a></td>
 <td>Generates an array of dates in a range.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#generate_range_array"><code dir="ltr" translate="no">        GENERATE_RANGE_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#generate_range_array"><code dir="ltr" translate="no">GENERATE_RANGE_ARRAY</code></a></td>
 <td>Splits a range into an array of subranges.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions">Range functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_timestamp_array"><code dir="ltr" translate="no">        GENERATE_TIMESTAMP_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_timestamp_array"><code dir="ltr" translate="no">GENERATE_TIMESTAMP_ARRAY</code></a></td>
 <td>Generates an array of timestamps in a range.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_array"><code dir="ltr" translate="no">        JSON_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_array"><code dir="ltr" translate="no">JSON_ARRAY</code></a></td>
 <td>Creates a JSON array.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions">JSON functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_array_append"><code dir="ltr" translate="no">        JSON_ARRAY_APPEND       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_array_append"><code dir="ltr" translate="no">JSON_ARRAY_APPEND</code></a></td>
 <td>Appends JSON data to the end of a JSON array.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions">JSON functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_array_insert"><code dir="ltr" translate="no">        JSON_ARRAY_INSERT       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_array_insert"><code dir="ltr" translate="no">JSON_ARRAY_INSERT</code></a></td>
 <td>Inserts JSON data into a JSON array.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions">JSON functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract_array"><code dir="ltr" translate="no">        JSON_EXTRACT_ARRAY       </code></a></td>
-<td>(Deprecated) Extracts a JSON array and converts it to a SQL <code dir="ltr" translate="no">       ARRAY&lt;JSON-formatted STRING&gt;      </code> or <code dir="ltr" translate="no">       ARRAY&lt;JSON&gt;      </code> value.<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract_array"><code dir="ltr" translate="no">JSON_EXTRACT_ARRAY</code></a></td>
+<td>(Deprecated) Extracts a JSON array and converts it to a SQL <code dir="ltr" translate="no">ARRAY&lt;JSON-formatted STRING&gt;</code> or <code dir="ltr" translate="no">ARRAY&lt;JSON&gt;</code> value.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions">JSON functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract_string_array"><code dir="ltr" translate="no">        JSON_EXTRACT_STRING_ARRAY       </code></a></td>
-<td>(Deprecated) Extracts a JSON array of scalar values and converts it to a SQL <code dir="ltr" translate="no">       ARRAY&lt;STRING&gt;      </code> value.<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract_string_array"><code dir="ltr" translate="no">JSON_EXTRACT_STRING_ARRAY</code></a></td>
+<td>(Deprecated) Extracts a JSON array of scalar values and converts it to a SQL <code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code> value.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions">JSON functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query_array"><code dir="ltr" translate="no">        JSON_QUERY_ARRAY       </code></a></td>
-<td>Extracts a JSON array and converts it to a SQL <code dir="ltr" translate="no">       ARRAY&lt;JSON-formatted STRING&gt;      </code> or <code dir="ltr" translate="no">       ARRAY&lt;JSON&gt;      </code> value.<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query_array"><code dir="ltr" translate="no">JSON_QUERY_ARRAY</code></a></td>
+<td>Extracts a JSON array and converts it to a SQL <code dir="ltr" translate="no">ARRAY&lt;JSON-formatted STRING&gt;</code> or <code dir="ltr" translate="no">ARRAY&lt;JSON&gt;</code> value.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions">JSON functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value_array"><code dir="ltr" translate="no">        JSON_VALUE_ARRAY       </code></a></td>
-<td>Extracts a JSON array of scalar values and converts it to a SQL <code dir="ltr" translate="no">       ARRAY&lt;STRING&gt;      </code> value.<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value_array"><code dir="ltr" translate="no">JSON_VALUE_ARRAY</code></a></td>
+<td>Extracts a JSON array of scalar values and converts it to a SQL <code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code> value.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions">JSON functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket"><code dir="ltr" translate="no">        RANGE_BUCKET       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket"><code dir="ltr" translate="no">RANGE_BUCKET</code></a></td>
 <td>Scans through a sorted array and returns the 0-based position of a point's upper bound.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions">Mathematical functions</a> .</td>
 </tr>
 </tbody>
 </table>
 
-## `     ARRAY    `
+## `ARRAY`
 
     ARRAY(subquery)
 
 **Description**
 
-The `  ARRAY  ` function returns an `  ARRAY  ` with one element for each row in a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) .
+The `ARRAY` function returns an `ARRAY` with one element for each row in a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) .
 
-If `  subquery  ` produces a SQL table, the table must have exactly one column. Each element in the output `  ARRAY  ` is the value of the single column of a row in the table.
+If `subquery` produces a SQL table, the table must have exactly one column. Each element in the output `ARRAY` is the value of the single column of a row in the table.
 
-If `  subquery  ` produces a value table, then each element in the output `  ARRAY  ` is the entire corresponding row of the value table.
+If `subquery` produces a value table, then each element in the output `ARRAY` is the entire corresponding row of the value table.
 
 **Constraints**
 
-  - Subqueries are unordered, so the elements of the output `  ARRAY  ` aren't guaranteed to preserve any order in the source table for the subquery. However, if the subquery includes an `  ORDER BY  ` clause, the `  ARRAY  ` function will return an `  ARRAY  ` that honors that clause.
-  - If the subquery returns more than one column, the `  ARRAY  ` function returns an error.
-  - If the subquery returns an `  ARRAY  ` typed column or `  ARRAY  ` typed rows, the `  ARRAY  ` function returns an error that GoogleSQL doesn't support `  ARRAY  ` s with elements of type [`  ARRAY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) .
-  - If the subquery returns zero rows, the `  ARRAY  ` function returns an empty `  ARRAY  ` . It never returns a `  NULL  ` `  ARRAY  ` .
+  - Subqueries are unordered, so the elements of the output `ARRAY` aren't guaranteed to preserve any order in the source table for the subquery. However, if the subquery includes an `ORDER BY` clause, the `ARRAY` function will return an `ARRAY` that honors that clause.
+  - If the subquery returns more than one column, the `ARRAY` function returns an error.
+  - If the subquery returns an `ARRAY` typed column or `ARRAY` typed rows, the `ARRAY` function returns an error that GoogleSQL doesn't support `ARRAY` s with elements of type [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) .
+  - If the subquery returns zero rows, the `ARRAY` function returns an empty `ARRAY` . It never returns a `NULL` `ARRAY` .
 
 **Return type**
 
-`  ARRAY  `
+`ARRAY`
 
 **Examples**
 
@@ -152,7 +152,7 @@ If `  subquery  ` produces a value table, then each element in the output `  ARR
      | [1, 2, 3] |
      +-----------*/
 
-To construct an `  ARRAY  ` from a subquery that contains multiple columns, change the subquery to use `  SELECT AS STRUCT  ` . Now the `  ARRAY  ` function will return an `  ARRAY  ` of `  STRUCT  ` s. The `  ARRAY  ` will contain one `  STRUCT  ` for each row in the subquery, and each of these `  STRUCT  ` s will contain a field for each column in that row.
+To construct an `ARRAY` from a subquery that contains multiple columns, change the subquery to use `SELECT AS STRUCT` . Now the `ARRAY` function will return an `ARRAY` of `STRUCT` s. The `ARRAY` will contain one `STRUCT` for each row in the subquery, and each of these `STRUCT` s will contain a field for each column in that row.
 
     SELECT
       ARRAY
@@ -165,7 +165,7 @@ To construct an `  ARRAY  ` from a subquery that contains multiple columns, chan
      | [{1, 2, 3}, {4, 5, 6}] |
      +------------------------*/
 
-Similarly, to construct an `  ARRAY  ` from a subquery that contains one or more `  ARRAY  ` s, change the subquery to use `  SELECT AS STRUCT  ` .
+Similarly, to construct an `ARRAY` from a subquery that contains one or more `ARRAY` s, change the subquery to use `SELECT AS STRUCT` .
 
     SELECT ARRAY
       (SELECT AS STRUCT [1, 2, 3] UNION ALL
@@ -177,7 +177,7 @@ Similarly, to construct an `  ARRAY  ` from a subquery that contains one or more
      | [{[1, 2, 3]}, {[4, 5, 6]}] |
      +----------------------------*/
 
-## `     ARRAY_CONCAT    `
+## `ARRAY_CONCAT`
 
     ARRAY_CONCAT(array_expression[, ...])
 
@@ -185,13 +185,13 @@ Similarly, to construct an `  ARRAY  ` from a subquery that contains one or more
 
 Concatenates one or more arrays with the same element type into a single array.
 
-The function returns `  NULL  ` if any input argument is `  NULL  ` .
+The function returns `NULL` if any input argument is `NULL` .
 
 **Note:** You can also use the [|| concatenation operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators) to concatenate arrays.
 
 **Return type**
 
-`  ARRAY  `
+`ARRAY`
 
 **Examples**
 
@@ -203,7 +203,7 @@ The function returns `  NULL  ` if any input argument is `  NULL  ` .
      | [1, 2, 3, 4, 5, 6]                               |
      +--------------------------------------------------*/
 
-## `     ARRAY_FIRST    `
+## `ARRAY_FIRST`
 
     ARRAY_FIRST(array_expression)
 
@@ -213,13 +213,13 @@ Takes an array and returns the first element in the array.
 
 Produces an error if the array is empty.
 
-Returns `  NULL  ` if `  array_expression  ` is `  NULL  ` .
+Returns `NULL` if `array_expression` is `NULL` .
 
-**Note:** To get the last element in an array, see [`  ARRAY_LAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_last) .
+**Note:** To get the last element in an array, see [`ARRAY_LAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_last) .
 
 **Return type**
 
-Matches the data type of elements in `  array_expression  ` .
+Matches the data type of elements in `array_expression` .
 
 **Example**
 
@@ -231,7 +231,7 @@ Matches the data type of elements in `  array_expression  ` .
      | a             |
      +---------------*/
 
-## `     ARRAY_LAST    `
+## `ARRAY_LAST`
 
     ARRAY_LAST(array_expression)
 
@@ -241,13 +241,13 @@ Takes an array and returns the last element in the array.
 
 Produces an error if the array is empty.
 
-Returns `  NULL  ` if `  array_expression  ` is `  NULL  ` .
+Returns `NULL` if `array_expression` is `NULL` .
 
-**Note:** To get the first element in an array, see [`  ARRAY_FIRST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_first) .
+**Note:** To get the first element in an array, see [`ARRAY_FIRST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_first) .
 
 **Return type**
 
-Matches the data type of elements in `  array_expression  ` .
+Matches the data type of elements in `array_expression` .
 
 **Example**
 
@@ -259,17 +259,17 @@ Matches the data type of elements in `  array_expression  ` .
      | d             |
      +---------------*/
 
-## `     ARRAY_LENGTH    `
+## `ARRAY_LENGTH`
 
     ARRAY_LENGTH(array_expression)
 
 **Description**
 
-Returns the size of the array. Returns 0 for an empty array. Returns `  NULL  ` if the `  array_expression  ` is `  NULL  ` .
+Returns the size of the array. Returns 0 for an empty array. Returns `NULL` if the `array_expression` is `NULL` .
 
 **Return type**
 
-`  INT64  `
+`INT64`
 
 **Examples**
 
@@ -283,17 +283,17 @@ Returns the size of the array. Returns 0 for an empty array. Returns `  NULL  ` 
      | 3      | 2      |
      +--------+--------*/
 
-## `     ARRAY_REVERSE    `
+## `ARRAY_REVERSE`
 
     ARRAY_REVERSE(value)
 
 **Description**
 
-Returns the input `  ARRAY  ` with elements in reverse order.
+Returns the input `ARRAY` with elements in reverse order.
 
 **Return type**
 
-`  ARRAY  `
+`ARRAY`
 
 **Examples**
 
@@ -305,7 +305,7 @@ Returns the input `  ARRAY  ` with elements in reverse order.
      | [3, 2, 1]   |
      +-------------*/
 
-## `     ARRAY_SLICE    `
+## `ARRAY_SLICE`
 
     ARRAY_SLICE(array_to_slice, start_offset, end_offset)
 
@@ -313,32 +313,32 @@ Returns the input `  ARRAY  ` with elements in reverse order.
 
 Returns an array containing zero or more consecutive elements from the input array.
 
-  - `  array_to_slice  ` : The array that contains the elements you want to slice.
-  - `  start_offset  ` : The inclusive starting offset.
-  - `  end_offset  ` : The inclusive ending offset.
+  - `array_to_slice` : The array that contains the elements you want to slice.
+  - `start_offset` : The inclusive starting offset.
+  - `end_offset` : The inclusive ending offset.
 
 An offset can be positive or negative. A positive offset starts from the beginning of the input array and is 0-based. A negative offset starts from the end of the input array. Out-of-bounds offsets are supported. Here are some examples:
 
-| Input offset | Final offset in array        | Notes                                                                                                                                                       |
-| ------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0            | \[ **'a'** , 'b', 'c', 'd'\] | The final offset is `        0       ` .                                                                                                                    |
-| 3            | \['a', 'b', 'c', **'d'** \]  | The final offset is `        3       ` .                                                                                                                    |
-| 5            | \['a', 'b', 'c', **'d'** \]  | Because the input offset is out of bounds, the final offset is `        3       ` ( `        array length - 1       ` ).                                    |
-| \-1          | \['a', 'b', 'c', **'d'** \]  | Because a negative offset is used, the offset starts at the end of the array. The final offset is `        3       ` ( `        array length - 1       ` ). |
-| \-2          | \['a', 'b', **'c'** , 'd'\]  | Because a negative offset is used, the offset starts at the end of the array. The final offset is `        2       ` ( `        array length - 2       ` ). |
-| \-4          | \[ **'a'** , 'b', 'c', 'd'\] | Because a negative offset is used, the offset starts at the end of the array. The final offset is `        0       ` ( `        array length - 4       ` ). |
-| \-5          | \[ **'a'** , 'b', 'c', 'd'\] | Because the offset is negative and out of bounds, the final offset is `        0       ` ( `        array length - array length       ` ).                  |
+| Input offset | Final offset in array        | Notes                                                                                                                         |
+| ------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| 0            | \[ **'a'** , 'b', 'c', 'd'\] | The final offset is `0` .                                                                                                     |
+| 3            | \['a', 'b', 'c', **'d'** \]  | The final offset is `3` .                                                                                                     |
+| 5            | \['a', 'b', 'c', **'d'** \]  | Because the input offset is out of bounds, the final offset is `3` ( `array length - 1` ).                                    |
+| \-1          | \['a', 'b', 'c', **'d'** \]  | Because a negative offset is used, the offset starts at the end of the array. The final offset is `3` ( `array length - 1` ). |
+| \-2          | \['a', 'b', **'c'** , 'd'\]  | Because a negative offset is used, the offset starts at the end of the array. The final offset is `2` ( `array length - 2` ). |
+| \-4          | \[ **'a'** , 'b', 'c', 'd'\] | Because a negative offset is used, the offset starts at the end of the array. The final offset is `0` ( `array length - 4` ). |
+| \-5          | \[ **'a'** , 'b', 'c', 'd'\] | Because the offset is negative and out of bounds, the final offset is `0` ( `array length - array length` ).                  |
 
 Additional details:
 
-  - The input array can contain `  NULL  ` elements. `  NULL  ` elements are included in the resulting array.
-  - Returns `  NULL  ` if `  array_to_slice  ` , `  start_offset  ` , or `  end_offset  ` is `  NULL  ` .
-  - Returns an empty array if `  array_to_slice  ` is empty.
-  - Returns an empty array if the position of the `  start_offset  ` in the array is after the position of the `  end_offset  ` .
+  - The input array can contain `NULL` elements. `NULL` elements are included in the resulting array.
+  - Returns `NULL` if `array_to_slice` , `start_offset` , or `end_offset` is `NULL` .
+  - Returns an empty array if `array_to_slice` is empty.
+  - Returns an empty array if the position of the `start_offset` in the array is after the position of the `end_offset` .
 
 **Return type**
 
-`  ARRAY  `
+`ARRAY`
 
 **Examples**
 
@@ -446,22 +446,22 @@ Additional details:
      | NULL      |
      +-----------*/
 
-## `     ARRAY_TO_STRING    `
+## `ARRAY_TO_STRING`
 
     ARRAY_TO_STRING(array_expression, delimiter[, null_text])
 
 **Description**
 
-Returns a concatenation of the elements in `  array_expression  ` as a `  STRING  ` or `  BYTES  ` value. The value for `  array_expression  ` can either be an array of `  STRING  ` or `  BYTES  ` data type.
+Returns a concatenation of the elements in `array_expression` as a `STRING` or `BYTES` value. The value for `array_expression` can either be an array of `STRING` or `BYTES` data type.
 
-If the `  null_text  ` parameter is used, the function replaces any `  NULL  ` values in the array with the value of `  null_text  ` .
+If the `null_text` parameter is used, the function replaces any `NULL` values in the array with the value of `null_text` .
 
-If the `  null_text  ` parameter isn't used, the function omits the `  NULL  ` value and its preceding delimiter.
+If the `null_text` parameter isn't used, the function omits the `NULL` value and its preceding delimiter.
 
 **Return type**
 
-  - `  STRING  ` for a function signature with `  STRING  ` input.
-  - `  BYTES  ` for a function signature with `  BYTES  ` input.
+  - `STRING` for a function signature with `STRING` input.
+  - `BYTES` for a function signature with `BYTES` input.
 
 **Examples**
 
@@ -489,30 +489,30 @@ If the `  null_text  ` parameter isn't used, the function omits the `  NULL  ` v
      | prefix--middle--suffix--\x00   |
      +--------------------------------*/
 
-## `     GENERATE_ARRAY    `
+## `GENERATE_ARRAY`
 
     GENERATE_ARRAY(start_expression, end_expression[, step_expression])
 
 **Description**
 
-Returns an array of values. The `  start_expression  ` and `  end_expression  ` parameters determine the inclusive start and end of the array.
+Returns an array of values. The `start_expression` and `end_expression` parameters determine the inclusive start and end of the array.
 
-The `  GENERATE_ARRAY  ` function accepts the following data types as inputs:
+The `GENERATE_ARRAY` function accepts the following data types as inputs:
 
-  - `  INT64  `
-  - `  NUMERIC  `
-  - `  BIGNUMERIC  `
-  - `  FLOAT64  `
+  - `INT64`
+  - `NUMERIC`
+  - `BIGNUMERIC`
+  - `FLOAT64`
 
-The `  step_expression  ` parameter determines the increment used to generate array values. The default value for this parameter is `  1  ` .
+The `step_expression` parameter determines the increment used to generate array values. The default value for this parameter is `1` .
 
-This function returns an error if `  step_expression  ` is set to 0, or if any input is `  NaN  ` .
+This function returns an error if `step_expression` is set to 0, or if any input is `NaN` .
 
-If any argument is `  NULL  ` , the function will return a `  NULL  ` array.
+If any argument is `NULL` , the function will return a `NULL` array.
 
 **Return Data Type**
 
-`  ARRAY  `
+`ARRAY`
 
 **Examples**
 
@@ -536,7 +536,7 @@ The following returns an array using a user-specified step size.
      | [0, 3, 6, 9]  |
      +---------------*/
 
-The following returns an array using a negative value, `  -3  ` for its step size.
+The following returns an array using a negative value, `-3` for its step size.
 
     SELECT GENERATE_ARRAY(10, 0, -3) AS example_array;
     
@@ -546,7 +546,7 @@ The following returns an array using a negative value, `  -3  ` for its step siz
      | [10, 7, 4, 1] |
      +---------------*/
 
-The following returns an array using the same value for the `  start_expression  ` and `  end_expression  ` .
+The following returns an array using the same value for the `start_expression` and `end_expression` .
 
     SELECT GENERATE_ARRAY(4, 4, 10) AS example_array;
     
@@ -556,7 +556,7 @@ The following returns an array using the same value for the `  start_expression 
      | [4]           |
      +---------------*/
 
-The following returns an empty array, because the `  start_expression  ` is greater than the `  end_expression  ` , and the `  step_expression  ` value is positive.
+The following returns an empty array, because the `start_expression` is greater than the `end_expression` , and the `step_expression` value is positive.
 
     SELECT GENERATE_ARRAY(10, 0, 3) AS example_array;
     
@@ -566,7 +566,7 @@ The following returns an empty array, because the `  start_expression  ` is grea
      | []            |
      +---------------*/
 
-The following returns a `  NULL  ` array because `  end_expression  ` is `  NULL  ` .
+The following returns a `NULL` array because `end_expression` is `NULL` .
 
     SELECT GENERATE_ARRAY(5, NULL, 1) AS example_array;
     
@@ -589,28 +589,28 @@ The following returns multiple arrays.
      | [5]           |
      +---------------*/
 
-## `     GENERATE_DATE_ARRAY    `
+## `GENERATE_DATE_ARRAY`
 
     GENERATE_DATE_ARRAY(start_date, end_date[, INTERVAL INT64_expr date_part])
 
 **Description**
 
-Returns an array of dates. The `  start_date  ` and `  end_date  ` parameters determine the inclusive start and end of the array.
+Returns an array of dates. The `start_date` and `end_date` parameters determine the inclusive start and end of the array.
 
-The `  GENERATE_DATE_ARRAY  ` function accepts the following data types as inputs:
+The `GENERATE_DATE_ARRAY` function accepts the following data types as inputs:
 
-  - `  start_date  ` must be a `  DATE  ` .
-  - `  end_date  ` must be a `  DATE  ` .
-  - `  INT64_expr  ` must be an `  INT64  ` .
-  - `  date_part  ` must be either DAY, WEEK, MONTH, QUARTER, or YEAR.
+  - `start_date` must be a `DATE` .
+  - `end_date` must be a `DATE` .
+  - `INT64_expr` must be an `INT64` .
+  - `date_part` must be either DAY, WEEK, MONTH, QUARTER, or YEAR.
 
-The `  INT64_expr  ` parameter determines the increment used to generate dates. The default value for this parameter is 1 day.
+The `INT64_expr` parameter determines the increment used to generate dates. The default value for this parameter is 1 day.
 
-This function returns an error if `  INT64_expr  ` is set to 0.
+This function returns an error if `INT64_expr` is set to 0.
 
 **Return Data Type**
 
-`  ARRAY  ` containing 0 or more `  DATE  ` values.
+`ARRAY` containing 0 or more `DATE` values.
 
 **Examples**
 
@@ -635,7 +635,7 @@ The following returns an array using a user-specified step size.
      | [2016-10-05, 2016-10-07, 2016-10-09] |
      +--------------------------------------*/
 
-The following returns an array using a negative value, `  -3  ` for its step size.
+The following returns an array using a negative value, `-3` for its step size.
 
     SELECT GENERATE_DATE_ARRAY('2016-10-05',
       '2016-10-01', INTERVAL -3 DAY) AS example;
@@ -646,7 +646,7 @@ The following returns an array using a negative value, `  -3  ` for its step siz
      | [2016-10-05, 2016-10-02] |
      +--------------------------*/
 
-The following returns an array using the same value for the `  start_date  ` and `  end_date  ` .
+The following returns an array using the same value for the `start_date` and `end_date` .
 
     SELECT GENERATE_DATE_ARRAY('2016-10-05',
       '2016-10-05', INTERVAL 8 DAY) AS example;
@@ -657,7 +657,7 @@ The following returns an array using the same value for the `  start_date  ` and
      | [2016-10-05] |
      +--------------*/
 
-The following returns an empty array, because the `  start_date  ` is greater than the `  end_date  ` , and the `  step  ` value is positive.
+The following returns an empty array, because the `start_date` is greater than the `end_date` , and the `step` value is positive.
 
     SELECT GENERATE_DATE_ARRAY('2016-10-05',
       '2016-10-01', INTERVAL 1 DAY) AS example;
@@ -668,7 +668,7 @@ The following returns an empty array, because the `  start_date  ` is greater th
      | []      |
      +---------*/
 
-The following returns a `  NULL  ` array, because one of its inputs is `  NULL  ` .
+The following returns a `NULL` array, because one of its inputs is `NULL` .
 
     SELECT GENERATE_DATE_ARRAY('2016-10-05', NULL) AS example;
     
@@ -678,7 +678,7 @@ The following returns a `  NULL  ` array, because one of its inputs is `  NULL  
      | NULL    |
      +---------*/
 
-The following returns an array of dates, using MONTH as the `  date_part  ` interval:
+The following returns an array of dates, using MONTH as the `date_part` interval:
 
     SELECT GENERATE_DATE_ARRAY('2016-01-01',
       '2016-12-31', INTERVAL 2 MONTH) AS example;
@@ -708,31 +708,31 @@ The following uses non-constant dates to generate an array.
      | [2016-10-01, 2016-10-08, 2016-10-15, 2016-10-22, 2016-10-29] |
      +--------------------------------------------------------------*/
 
-## `     GENERATE_TIMESTAMP_ARRAY    `
+## `GENERATE_TIMESTAMP_ARRAY`
 
     GENERATE_TIMESTAMP_ARRAY(start_timestamp, end_timestamp,
                              INTERVAL step_expression date_part)
 
 **Description**
 
-Returns an `  ARRAY  ` of `  TIMESTAMPS  ` separated by a given interval. The `  start_timestamp  ` and `  end_timestamp  ` parameters determine the inclusive lower and upper bounds of the `  ARRAY  ` .
+Returns an `ARRAY` of `TIMESTAMPS` separated by a given interval. The `start_timestamp` and `end_timestamp` parameters determine the inclusive lower and upper bounds of the `ARRAY` .
 
-The `  GENERATE_TIMESTAMP_ARRAY  ` function accepts the following data types as inputs:
+The `GENERATE_TIMESTAMP_ARRAY` function accepts the following data types as inputs:
 
-  - `  start_timestamp  ` : `  TIMESTAMP  `
-  - `  end_timestamp  ` : `  TIMESTAMP  `
-  - `  step_expression  ` : `  INT64  `
-  - Allowed `  date_part  ` values are: `  MICROSECOND  ` , `  MILLISECOND  ` , `  SECOND  ` , `  MINUTE  ` , `  HOUR  ` , or `  DAY  ` .
+  - `start_timestamp` : `TIMESTAMP`
+  - `end_timestamp` : `TIMESTAMP`
+  - `step_expression` : `INT64`
+  - Allowed `date_part` values are: `MICROSECOND` , `MILLISECOND` , `SECOND` , `MINUTE` , `HOUR` , or `DAY` .
 
-The `  step_expression  ` parameter determines the increment used to generate timestamps.
+The `step_expression` parameter determines the increment used to generate timestamps.
 
 **Return Data Type**
 
-An `  ARRAY  ` containing 0 or more `  TIMESTAMP  ` values.
+An `ARRAY` containing 0 or more `TIMESTAMP` values.
 
 **Examples**
 
-The following example returns an `  ARRAY  ` of `  TIMESTAMP  ` s at intervals of 1 day.
+The following example returns an `ARRAY` of `TIMESTAMP` s at intervals of 1 day.
 
     SELECT GENERATE_TIMESTAMP_ARRAY('2016-10-05 00:00:00', '2016-10-07 00:00:00',
                                     INTERVAL 1 DAY) AS timestamp_array;
@@ -743,7 +743,7 @@ The following example returns an `  ARRAY  ` of `  TIMESTAMP  ` s at intervals o
      | [2016-10-05 00:00:00+00, 2016-10-06 00:00:00+00, 2016-10-07 00:00:00+00] |
      +--------------------------------------------------------------------------*/
 
-The following example returns an `  ARRAY  ` of `  TIMESTAMP  ` s at intervals of 1 second.
+The following example returns an `ARRAY` of `TIMESTAMP` s at intervals of 1 second.
 
     SELECT GENERATE_TIMESTAMP_ARRAY('2016-10-05 00:00:00', '2016-10-05 00:00:02',
                                     INTERVAL 1 SECOND) AS timestamp_array;
@@ -754,7 +754,7 @@ The following example returns an `  ARRAY  ` of `  TIMESTAMP  ` s at intervals o
      | [2016-10-05 00:00:00+00, 2016-10-05 00:00:01+00, 2016-10-05 00:00:02+00] |
      +--------------------------------------------------------------------------*/
 
-The following example returns an `  ARRAY  ` of `  TIMESTAMPS  ` with a negative interval.
+The following example returns an `ARRAY` of `TIMESTAMPS` with a negative interval.
 
     SELECT GENERATE_TIMESTAMP_ARRAY('2016-10-06 00:00:00', '2016-10-01 00:00:00',
                                     INTERVAL -2 DAY) AS timestamp_array;
@@ -765,7 +765,7 @@ The following example returns an `  ARRAY  ` of `  TIMESTAMPS  ` with a negative
      | [2016-10-06 00:00:00+00, 2016-10-04 00:00:00+00, 2016-10-02 00:00:00+00] |
      +--------------------------------------------------------------------------*/
 
-The following example returns an `  ARRAY  ` with a single element, because `  start_timestamp  ` and `  end_timestamp  ` have the same value.
+The following example returns an `ARRAY` with a single element, because `start_timestamp` and `end_timestamp` have the same value.
 
     SELECT GENERATE_TIMESTAMP_ARRAY('2016-10-05 00:00:00', '2016-10-05 00:00:00',
                                     INTERVAL 1 HOUR) AS timestamp_array;
@@ -776,7 +776,7 @@ The following example returns an `  ARRAY  ` with a single element, because `  s
      | [2016-10-05 00:00:00+00] |
      +--------------------------*/
 
-The following example returns an empty `  ARRAY  ` , because `  start_timestamp  ` is later than `  end_timestamp  ` .
+The following example returns an empty `ARRAY` , because `start_timestamp` is later than `end_timestamp` .
 
     SELECT GENERATE_TIMESTAMP_ARRAY('2016-10-06 00:00:00', '2016-10-05 00:00:00',
                                     INTERVAL 1 HOUR) AS timestamp_array;
@@ -787,7 +787,7 @@ The following example returns an empty `  ARRAY  ` , because `  start_timestamp 
      | []              |
      +-----------------*/
 
-The following example returns a null `  ARRAY  ` , because one of the inputs is `  NULL  ` .
+The following example returns a null `ARRAY` , because one of the inputs is `NULL` .
 
     SELECT GENERATE_TIMESTAMP_ARRAY('2016-10-05 00:00:00', NULL, INTERVAL 1 HOUR)
       AS timestamp_array;
@@ -798,7 +798,7 @@ The following example returns a null `  ARRAY  ` , because one of the inputs is 
      | NULL            |
      +-----------------*/
 
-The following example generates `  ARRAY  ` s of `  TIMESTAMP  ` s from columns containing values for `  start_timestamp  ` and `  end_timestamp  ` .
+The following example generates `ARRAY` s of `TIMESTAMP` s from columns containing values for `start_timestamp` and `end_timestamp` .
 
     SELECT GENERATE_TIMESTAMP_ARRAY(start_timestamp, end_timestamp, INTERVAL 1 HOUR)
       AS timestamp_array
@@ -827,4 +827,4 @@ The following example generates `  ARRAY  ` s of `  TIMESTAMP  ` s from columns 
 
 ### OFFSET and ORDINAL
 
-For information about using `  OFFSET  ` and `  ORDINAL  ` with arrays, see [Array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator) and [Accessing array elements](https://docs.cloud.google.com/bigquery/docs/arrays#accessing_array_elements) .
+For information about using `OFFSET` and `ORDINAL` with arrays, see [Array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator) and [Accessing array elements](https://docs.cloud.google.com/bigquery/docs/arrays#accessing_array_elements) .

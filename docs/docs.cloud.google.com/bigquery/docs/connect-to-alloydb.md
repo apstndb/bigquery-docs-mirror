@@ -14,7 +14,7 @@ To connect to AlloyDB, you must perform the following steps:
     
     [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
-2.  To get the permissions that you need to create an AlloyDB connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+2.  To get the permissions that you need to create an AlloyDB connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -36,7 +36,7 @@ Select one of the following options to create an AlloyDB connection:
 
 3.  In the **Filter By** pane, in the **Data Source Type** section, select **Databases** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `  alloydb  ` .
+    Alternatively, in the **Search for data sources** field, you can enter `alloydb` .
 
 4.  In the **Featured data sources** section, click **Google Cloud AlloyDB** .
 
@@ -46,11 +46,11 @@ Select one of the following options to create an AlloyDB connection:
     
       - For **Connection type** , select **AlloyDB** .
     
-      - For **Connection ID** , enter an identifier for the connection resource. Letters, numbers, and underscores are allowed. For example, `  bq_alloydb_connection  ` .
+      - For **Connection ID** , enter an identifier for the connection resource. Letters, numbers, and underscores are allowed. For example, `bq_alloydb_connection` .
     
       - For **Data location** , select a BigQuery location (or region) that is [compatible with your external data source region](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#supported_regions) .
     
-      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `  My connection resource  ` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
+      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `My connection resource` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
     
       - Optional: For **Description** , enter a description for this connection resource.
     
@@ -66,7 +66,7 @@ Select one of the following options to create an AlloyDB connection:
     
       - For **AlloyDB Instance** , enter the connection URI of the AlloyDB primary or read instance with the **//alloydb.googleapis.com** prefix.
         
-          - Sample URI: `  //alloydb.googleapis.com/projects/ PROJECT_ID /locations/ REGION_ID /clusters/ CLUSTER_NAME /instances/ INSTANCE_ID  `
+          - Sample URI: ` //alloydb.googleapis.com/projects/ PROJECT_ID /locations/ REGION_ID /clusters/ CLUSTER_NAME /instances/ INSTANCE_ID  `
         
         **Note:** If the same user credentials are valid for other databases in the external data source, that user can query those databases through the same connection resource.
 
@@ -78,7 +78,7 @@ Select one of the following options to create an AlloyDB connection:
 
 ### bq
 
-Enter the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command with the following flags:
+Enter the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command with the following flags:
 
 ``` 
   bq mk \
@@ -109,28 +109,28 @@ Replace the following:
   - `  PROJECT_ID  ` : Enter your Google Cloud project ID.
   - `  DATABASE  ` : Enter the database name.
   - `  RESOURCE_PATH  ` : Enter the connection URI of the AlloyDB primary or read instance with the **//alloydb.googleapis.com** prefix.
-      - Sample URI: `  //alloydb.googleapis.com/projects/ PROJECT_ID /locations/ REGION_ID /clusters/ CLUSTER_NAME /instances/ INSTANCE_ID  `
+      - Sample URI: ` //alloydb.googleapis.com/projects/ PROJECT_ID /locations/ REGION_ID /clusters/ CLUSTER_NAME /instances/ INSTANCE_ID  `
   - `  USERNAME  ` : Enter the database user's name.
   - `  PASSWORD  ` : Enter the database user's password.
   - `  CONNECTION_ID  ` : Enter a connection ID to identify this connection.
 
 Optional flag:
 
-  - `  --kms_key_name  ` : A customer-managed encryption key. If omitted, credentials are protected by the default Google-owned and Google-managed encryption key.
+  - `--kms_key_name` : A customer-managed encryption key. If omitted, credentials are protected by the default Google-owned and Google-managed encryption key.
 
 ### API
 
-Within the BigQuery Connection API, you can invoke `  CreateConnection  ` within the `  ConnectionService  ` to instantiate a connection. See the [client library page](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection) for more details.
+Within the BigQuery Connection API, you can invoke `CreateConnection` within the `ConnectionService` to instantiate a connection. See the [client library page](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection) for more details.
 
 ## Grant access to the service account
 
 A [service account](https://docs.cloud.google.com/iam/docs/service-agents) is automatically created when you create the first connection within a project. The service account's name is **BigQuery Connection Service Agent** . The service account ID is of the following format:
 
-`  service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` .
+`service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com` .
 
 To connect to AlloyDB, you must give the new connection access to AlloyDB so that BigQuery can access data on behalf of users. The service account must have the following permission:
 
-  - `  alloydb.instances.connect  `
+  - `alloydb.instances.connect`
 
 You can grant the service account associated with the connection the [AlloyDB Client IAM role](https://docs.cloud.google.com/alloydb/docs/reference/iam-roles-permissions#roles) , which already has this permission assigned. You can omit this step if the service account already has the required permission.
 
@@ -152,14 +152,14 @@ You can grant the service account associated with the connection the [AlloyDB Cl
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  `](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) command:
+Use the [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) command:
 
     gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVICE_ACCOUNT_ID --role=roles/alloydb.client
 
 Provide the following values:
 
   - `  PROJECT_ID  ` : Your Google Cloud project ID.
-  - `  SERVICE_ACCOUNT_ID  ` : Replace project number in `  service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` and use it.
+  - `  SERVICE_ACCOUNT_ID  ` : Replace project number in `service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com` and use it.
 
 **Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#view-access) .
 
@@ -167,9 +167,9 @@ Provide the following values:
 
 You can grant the following roles to let users query data and manage connections:
 
-  - `  roles/bigquery.connectionUser  ` : enables users to use connections to connect with external data sources and run queries on them.
+  - `roles/bigquery.connectionUser` : enables users to use connections to connect with external data sources and run queries on them.
 
-  - `  roles/bigquery.connectionAdmin  ` : enables users to manage connections.
+  - `roles/bigquery.connectionAdmin` : enables users to manage connections.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -201,7 +201,7 @@ Select one of the following options:
 
 ### bq
 
-Use the following [`  set-iam-policy  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) :
+Use the following [`set-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) :
 
 ``` 
   bq set-iam-policy RESOURCE FILE_NAME
@@ -209,14 +209,14 @@ Use the following [`  set-iam-policy  ` command](https://docs.cloud.google.com/b
 
 Replace the following:
 
-  - `  RESOURCE  ` : Enter the resource name in the `  project_id.region.connection_id  ` or `  region.connection_id  ` format.
+  - `  RESOURCE  ` : Enter the resource name in the `project_id.region.connection_id` or `region.connection_id` format.
   - `  FILE_NAME  ` : Enter the filename that contains the IAM policy in a JSON format.
 
 For more information about the set-iam-policy command, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#bq) .
 
 ### API
 
-Use the [`  projects.locations.connections.setIAM  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section and supply an instance of the `  policy  ` resource.
+Use the [`projects.locations.connections.setIAM` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section and supply an instance of the `policy` resource.
 
 ## What's next
 

@@ -2,22 +2,22 @@
 
 You can monitor BigQuery [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) by using the following BigQuery tools:
 
-  - [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro)
+  - [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro)
   - [Query execution graphs](https://docs.cloud.google.com/bigquery/docs/query-insights#view_query_performance_insights)
   - [Job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job)
   - [Administrative jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer)
 
 Due to the long running nature of a BigQuery continuous query, metrics that are usually generated upon the completion of a SQL query might be absent or inaccurate.
 
-## Use `     INFORMATION_SCHEMA    ` views
+## Use `INFORMATION_SCHEMA` views
 
-You can use a number of the `  INFORMATION_SCHEMA  ` views to monitor continuous queries and continuous query reservations.
+You can use a number of the `INFORMATION_SCHEMA` views to monitor continuous queries and continuous query reservations.
 
-**Note:** Data for a running continuous query is only retained for two days by the `  JOBS* INFORMATION_SCHEMA  ` views.
+**Note:** Data for a running continuous query is only retained for two days by the `JOBS* INFORMATION_SCHEMA` views.
 
 ### View job details
 
-You can use the [`  JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view to get continuous query job metadata.
+You can use the [`JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view to get continuous query job metadata.
 
 The following query returns the metadata for all active continuous queries. The metadata includes the output watermark timestamp, which represents the point up to which the continuous query has successfully processed data.
 
@@ -48,11 +48,11 @@ The following query returns the metadata for all active continuous queries. The 
     Replace the following:
     
       - `  PROJECT_ID  ` : the ID of the project.
-      - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  region-us  ` .
+      - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `region-us` .
 
 ### View reservation assignment details
 
-You can use the [`  ASSIGNMENTS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) and [`  RESERVATIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) views to get continuous query reservation assignment details.
+You can use the [`ASSIGNMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) and [`RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) views to get continuous query reservation assignment details.
 
 Return reservation assignment details for continuous queries:
 
@@ -86,7 +86,7 @@ Return reservation assignment details for continuous queries:
 
 ### View slot consumption information
 
-You can use the [`  ASSIGNMENTS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) , [`  RESERVATIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) , and [`  JOBS_TIMELINE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) views to get continuous query slot consumption information.
+You can use the [`ASSIGNMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) , [`RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) , and [`JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) views to get continuous query slot consumption information.
 
 Return slot consumption information for continuous queries:
 
@@ -154,7 +154,7 @@ You can view metrics specific to BigQuery continuous queries by using Cloud Moni
 
 Instead of routinely checking whether your continuous queries have failed, it can be helpful to create an alert to notify you of failure. One way to do this is to create a custom [Cloud Logging log-based metric](https://docs.cloud.google.com/logging/docs/logs-based-metrics/counter-metrics) with a filter for your jobs, and a [Cloud Monitoring alerting policy](https://docs.cloud.google.com/monitoring/alerts/using-alerting-ui) based on that metric:
 
-1.  When you create a continuous query, use a [custom job ID prefix](https://docs.cloud.google.com/bigquery/docs/continuous-queries#custom-job-id) . Multiple continuous queries can share the same prefix. For example, you might use the prefix `  prod-  ` to indicate a production query.
+1.  When you create a continuous query, use a [custom job ID prefix](https://docs.cloud.google.com/bigquery/docs/continuous-queries#custom-job-id) . Multiple continuous queries can share the same prefix. For example, you might use the prefix `prod-` to indicate a production query.
 
 2.  In the Google Cloud console, go to the **Log-based Metrics** page.
     
@@ -164,7 +164,7 @@ Instead of routinely checking whether your continuous queries have failed, it ca
 
 4.  For **Metric type** , select **Counter** .
 
-5.  In the **Details** section, give your metric a name. For example, `  CUSTOM_JOB_ID_PREFIX -metric  ` .
+5.  In the **Details** section, give your metric a name. For example, `  CUSTOM_JOB_ID_PREFIX -metric ` .
 
 6.  In the **Filter selection** section, enter the following into the **Build filter** editor:
     

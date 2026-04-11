@@ -10,7 +10,7 @@ This document describes audit logging for BigQuery Connection API. Google Cloud 
 
 ## Service name
 
-BigQuery Connection API audit logs use the service name `  bigqueryconnection.googleapis.com  ` . Filter for this service:
+BigQuery Connection API audit logs use the service name `bigqueryconnection.googleapis.com` . Filter for this service:
 
 ``` 
     protoPayload.serviceName="bigqueryconnection.googleapis.com"
@@ -19,7 +19,7 @@ BigQuery Connection API audit logs use the service name `  bigqueryconnection.go
 
 ## Methods by permission type
 
-Each IAM permission has a `  type  ` property, whose value is an enum that can be one of four values: `  ADMIN_READ  ` , `  ADMIN_WRITE  ` , `  DATA_READ  ` , or `  DATA_WRITE  ` . When you call a method, BigQuery Connection API generates an audit log whose category is dependent on the `  type  ` property of the permission required to perform the method. Methods that require an IAM permission with the `  type  ` property value of `  DATA_READ  ` , `  DATA_WRITE  ` , or `  ADMIN_READ  ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `  type  ` property value of `  ADMIN_WRITE  ` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
+Each IAM permission has a `type` property, whose value is an enum that can be one of four values: `ADMIN_READ` , `ADMIN_WRITE` , `DATA_READ` , or `DATA_WRITE` . When you call a method, BigQuery Connection API generates an audit log whose category is dependent on the `type` property of the permission required to perform the method. Methods that require an IAM permission with the `type` property value of `DATA_READ` , `DATA_WRITE` , or `ADMIN_READ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `type` property value of `ADMIN_WRITE` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
 
 API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro) .
 
@@ -36,17 +36,17 @@ API methods in the following list that are marked with (LRO) are long-running op
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ADMIN_READ      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.connection.v1.ConnectionService.GetConnection      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.connection.v1.ConnectionService.GetIamPolicy      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.connection.v1.ConnectionService.ListConnections      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.connection.v1.ConnectionService.SetIamPolicy      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_READ</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.connection.v1.ConnectionService.GetConnection</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.connection.v1.ConnectionService.GetIamPolicy</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.connection.v1.ConnectionService.ListConnections</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.connection.v1.ConnectionService.SetIamPolicy</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ADMIN_WRITE      </code></td>
-<td><code dir="ltr" translate="no">       google.cloud.bigquery.connection.v1.ConnectionService.CreateConnection      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.connection.v1.ConnectionService.DeleteConnection      </code><br />
-<code dir="ltr" translate="no">       google.cloud.bigquery.connection.v1.ConnectionService.UpdateConnection      </code></td>
+<td><code dir="ltr" translate="no">ADMIN_WRITE</code></td>
+<td><code dir="ltr" translate="no">google.cloud.bigquery.connection.v1.ConnectionService.CreateConnection</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.connection.v1.ConnectionService.DeleteConnection</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.connection.v1.ConnectionService.UpdateConnection</code></td>
 </tr>
 </tbody>
 </table>
@@ -55,72 +55,72 @@ API methods in the following list that are marked with (LRO) are long-running op
 
 For information about how and which permissions are evaluated for each method, see the Identity and Access Management documentation for BigQuery Connection API.
 
-### `     google.cloud.bigquery.connection.v1.ConnectionService    `
+### `google.cloud.bigquery.connection.v1.ConnectionService`
 
-The following audit logs are associated with methods belonging to `  google.cloud.bigquery.connection.v1.ConnectionService  ` .
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.connection.v1.ConnectionService` .
 
-#### `     CreateConnection    `
+#### `CreateConnection`
 
-  - **Method** : `  google.cloud.bigquery.connection.v1.ConnectionService.CreateConnection  `  
+  - **Method** : `google.cloud.bigquery.connection.v1.ConnectionService.CreateConnection`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.connections.create - ADMIN_WRITE  `
+      - `bigquery.connections.create - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.CreateConnection"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.CreateConnection"`  
 
-#### `     DeleteConnection    `
+#### `DeleteConnection`
 
-  - **Method** : `  google.cloud.bigquery.connection.v1.ConnectionService.DeleteConnection  `  
+  - **Method** : `google.cloud.bigquery.connection.v1.ConnectionService.DeleteConnection`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.connections.delete - ADMIN_WRITE  `
+      - `bigquery.connections.delete - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.DeleteConnection"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.DeleteConnection"`  
 
-#### `     GetConnection    `
+#### `GetConnection`
 
-  - **Method** : `  google.cloud.bigquery.connection.v1.ConnectionService.GetConnection  `  
+  - **Method** : `google.cloud.bigquery.connection.v1.ConnectionService.GetConnection`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.connections.get - ADMIN_READ  `
+      - `bigquery.connections.get - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.GetConnection"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.GetConnection"`  
 
-#### `     GetIamPolicy    `
+#### `GetIamPolicy`
 
-  - **Method** : `  google.cloud.bigquery.connection.v1.ConnectionService.GetIamPolicy  `  
+  - **Method** : `google.cloud.bigquery.connection.v1.ConnectionService.GetIamPolicy`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.connections.getIamPolicy - ADMIN_READ  `
+      - `bigquery.connections.getIamPolicy - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.GetIamPolicy"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.GetIamPolicy"`  
 
-#### `     ListConnections    `
+#### `ListConnections`
 
-  - **Method** : `  google.cloud.bigquery.connection.v1.ConnectionService.ListConnections  `  
+  - **Method** : `google.cloud.bigquery.connection.v1.ConnectionService.ListConnections`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.connections.list - ADMIN_READ  `
+      - `bigquery.connections.list - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.ListConnections"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.ListConnections"`  
 
-#### `     SetIamPolicy    `
+#### `SetIamPolicy`
 
-  - **Method** : `  google.cloud.bigquery.connection.v1.ConnectionService.SetIamPolicy  `  
+  - **Method** : `google.cloud.bigquery.connection.v1.ConnectionService.SetIamPolicy`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-      - `  bigquery.connections.setIamPolicy - ADMIN_READ  `
+      - `bigquery.connections.setIamPolicy - ADMIN_READ`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.SetIamPolicy"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.SetIamPolicy"`  
 
-#### `     UpdateConnection    `
+#### `UpdateConnection`
 
-  - **Method** : `  google.cloud.bigquery.connection.v1.ConnectionService.UpdateConnection  `  
+  - **Method** : `google.cloud.bigquery.connection.v1.ConnectionService.UpdateConnection`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `  bigquery.connections.update - ADMIN_WRITE  `
+      - `bigquery.connections.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.UpdateConnection"  `  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.connection.v1.ConnectionService.UpdateConnection"`  
 
 ## Methods that don't produce audit logs
 
@@ -132,13 +132,13 @@ A method might not produce audit logs for one or more of the following reasons:
 
 The following methods don't produce audit logs:
 
-  - `  google.cloud.bigquery.connection.v1.ConnectionService.TestIamPermissions  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.CreateConnection  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.DeleteConnection  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.GetConnection  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.GetIamPolicy  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.ListConnections  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.SetIamPolicy  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.TestIamPermissions  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnection  `
-  - `  google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCredential  `
+  - `google.cloud.bigquery.connection.v1.ConnectionService.TestIamPermissions`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.CreateConnection`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.DeleteConnection`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.GetConnection`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.GetIamPolicy`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.ListConnections`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.SetIamPolicy`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.TestIamPermissions`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnection`
+  - `google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCredential`

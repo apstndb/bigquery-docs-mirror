@@ -166,27 +166,27 @@ It also reports other information about seasonality, holiday effects, and spikes
   
 This function doesn't require new data as input.
 
-## Automatic evaluation in `     CREATE MODEL    ` statements
+## Automatic evaluation in `CREATE MODEL` statements
 
 BigQuery ML supports automatic evaluation during model creation. Depending on the model type, the data split training options, and whether you're using hyperparameter tuning, the evaluation metrics are calculated upon the reserved evaluation dataset, the reserved test dataset, or the entire input dataset.
 
   - For k-means, PCA, autoencoder, and ARIMA\_PLUS models, BigQuery ML uses all of the input data as training data, and evaluation metrics are calculated against the entire input dataset.
 
-  - For linear and logistic regression, boosted tree, random forest, DNN, Wide-and-deep, and matrix factorization models, evaluation metrics are calculated against the dataset that's specified by the following `  CREATE MODEL  ` options:
+  - For linear and logistic regression, boosted tree, random forest, DNN, Wide-and-deep, and matrix factorization models, evaluation metrics are calculated against the dataset that's specified by the following `CREATE MODEL` options:
     
-      - [`  DATA_SPLIT_METHOD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_method)
-      - [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction)
-      - [`  DATA_SPLIT_COL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_col)
+      - [`DATA_SPLIT_METHOD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_method)
+      - [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction)
+      - [`DATA_SPLIT_COL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_col)
     
-    When you train these types of models using hyperparameter tuning, the [`  DATA_SPLIT_TEST_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#data_split) option also helps define the dataset that the evaluation metrics are calculated against. For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#data_split) .
+    When you train these types of models using hyperparameter tuning, the [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#data_split) option also helps define the dataset that the evaluation metrics are calculated against. For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#data_split) .
 
   - For AutoML Tables models, see [About data splits for AutoML models](https://docs.cloud.google.com/vertex-ai/docs/general/ml-use) .
 
-To get evaluation metrics calculated during model creation, use evaluation functions such as `  ML.EVALUATE  ` on the model with no input data specified. For an example, see [`  ML.EVALUATE  ` with no input data specified](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#mlevaluate_with_no_input_data_specified) .
+To get evaluation metrics calculated during model creation, use evaluation functions such as `ML.EVALUATE` on the model with no input data specified. For an example, see [`ML.EVALUATE` with no input data specified](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#mlevaluate_with_no_input_data_specified) .
 
 ## Evaluation with a new dataset
 
-After model creation, you can specify new datasets for evaluation. To provide a new dataset, use evaluation functions like `  ML.EVALUATE  ` on the model with input data specified. For an example, see [`  ML.EVALUATE  ` with a custom threshold and input data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#mlevaluate_with_a_custom_threshold_and_input_data) .
+After model creation, you can specify new datasets for evaluation. To provide a new dataset, use evaluation functions like `ML.EVALUATE` on the model with input data specified. For an example, see [`ML.EVALUATE` with a custom threshold and input data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#mlevaluate_with_a_custom_threshold_and_input_data) .
 
 ## What's next
 

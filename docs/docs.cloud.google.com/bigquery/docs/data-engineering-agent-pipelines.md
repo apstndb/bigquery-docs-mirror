@@ -36,8 +36,8 @@ The Data Engineering Agent has the following limitations:
   - The Data Engineering Agent cannot execute pipelines. Users need to review and run or schedule pipelines.
   - The Data Engineering Agent cannot validate SQL that's dependent on non-existent intermediary resources without full pipeline invocation (user-triggered).
   - The Data Engineering Agent cannot search any web links or URLs provided through instructions or direct prompts.
-  - When importing files in an [agent instruction file](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#create_agent_instructions_for_the_data_engineering_agent) , the `  @  ` import syntax only supports paths that begin with `  ./  ` , `  /  ` , or a letter.
-  - The [data preview](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is only supported for tables, declarations, or queries with the `  hasOutput  ` flag set to `  true  ` .
+  - When importing files in an [agent instruction file](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#create_agent_instructions_for_the_data_engineering_agent) , the `@` import syntax only supports paths that begin with `./` , `/` , or a letter.
+  - The [data preview](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is only supported for tables, declarations, or queries with the `hasOutput` flag set to `true` .
 
 ## Supported regions
 
@@ -45,12 +45,12 @@ Gemini in BigQuery is served from the following regions:
 
 ### Americas
 
-  - Iowa ( `  us-central1  ` )
+  - Iowa ( `us-central1` )
 
 ### Europe
 
-  - Finland ( `  europe-north1  ` )
-  - Frankfurt ( `  europe-west3  ` )
+  - Finland ( `europe-north1` )
+  - Frankfurt ( `europe-west3` )
 
 ### Change processing region
 
@@ -64,9 +64,9 @@ If the default region is not set, then the Data Engineering Agent processes your
 
 ### Dataform
 
-If you are using Dataform, you can update your processing region by changing the `  defaultLocation  ` value in your Dataform workflow settings file, or `  workflow_settings.yaml  ` . For more information, see [Configure Dataform workflow settings](https://docs.cloud.google.com/dataform/docs/manage-repository#configure-workflow-settings) .
+If you are using Dataform, you can update your processing region by changing the `defaultLocation` value in your Dataform workflow settings file, or `workflow_settings.yaml` . For more information, see [Configure Dataform workflow settings](https://docs.cloud.google.com/dataform/docs/manage-repository#configure-workflow-settings) .
 
-If the `  defaultLocation  ` value is not set, then the Data Engineering Agent processes your data globally.
+If the `defaultLocation` value is not set, then the Data Engineering Agent processes your data globally.
 
 ## How the Data Engineering Agent uses your data
 
@@ -80,7 +80,7 @@ You must also enable the Gemini Data Analytics API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=geminidataanalytics.googleapis.com&redirect=https://console.cloud.google.com)
 
@@ -88,13 +88,13 @@ To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusag
 
 To get the permission that you need to use the Data Engineering Agent, ask your administrator to grant you the following IAM roles on the project:
 
-  - [Dataform Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobuser) ( `  roles/bigquery.jobuser  ` )
-  - [Gemini Data Analytics Stateless Chat User](https://docs.cloud.google.com/iam/docs/roles-permissions/geminidataanalytics#geminidataanalytics.dataAgentStatelessUser) ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` )
+  - [Dataform Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` )
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobuser) ( `roles/bigquery.jobuser` )
+  - [Gemini Data Analytics Stateless Chat User](https://docs.cloud.google.com/iam/docs/roles-permissions/geminidataanalytics#geminidataanalytics.dataAgentStatelessUser) ( `roles/geminidataanalytics.dataAgentStatelessUser` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  geminidataanalytics.locations.useDataEngineeringAgent  ` permission, which is required to use the Data Engineering Agent.
+This predefined role contains the `geminidataanalytics.locations.useDataEngineeringAgent` permission, which is required to use the Data Engineering Agent.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -179,7 +179,7 @@ You can also edit a SQLX query manually by selecting a pipeline node and then cl
 
 Agent instructions are natural-language instructions for the data engineering agent that let you store persistent instructions so that the agent follows a set of custom, predefined rules. Use agent instructions if you want the results of your agent to be consistent across your organization, for example with naming conventions or to enforce a style guide.
 
-You can create a [`  GEMINI.MD  ` context file](https://docs.cloud.google.com/gemini/docs/codeassist/use-agentic-chat-pair-programmer#create-context-file) as an agent instruction file for the Data Engineering Agent. You can create agent instruction files to use in your local workspace, or you can use the same instruction files across multiple data pipelines using an external repository.
+You can create a [`GEMINI.MD` context file](https://docs.cloud.google.com/gemini/docs/codeassist/use-agentic-chat-pair-programmer#create-context-file) as an agent instruction file for the Data Engineering Agent. You can create agent instruction files to use in your local workspace, or you can use the same instruction files across multiple data pipelines using an external repository.
 
 Create agent instructions by doing the following:
 
@@ -187,7 +187,7 @@ Create agent instructions by doing the following:
 
 2.  In the **Instructions for pipeline pane** , click **Create instructions file** .
 
-3.  In the `  GEMINI.MD  ` file that appears, enter your instructions in natural language.
+3.  In the `GEMINI.MD` file that appears, enter your instructions in natural language.
     
     The following example shows an agent instruction file with several rules:
     
@@ -212,7 +212,7 @@ You can specify a set of agent instructions to be reused across multiple data pi
 
 ### Import additional local files as agent instructions
 
-You can also import other instruction files for the Data Engineering Agent into the `  GEMINI.md  ` file using `  @file.md  ` syntax. For more information, see [Memory Import Processor](https://geminicli.com/docs/reference/memport/) .
+You can also import other instruction files for the Data Engineering Agent into the `GEMINI.md` file using `@file.md` syntax. For more information, see [Memory Import Processor](https://geminicli.com/docs/reference/memport/) .
 
 ## Troubleshoot data pipeline errors
 
@@ -359,15 +359,15 @@ The following sections suggest best practices for working with the Data Engineer
 
 [Create agent instruction files](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#create_agent_instructions_for_the_data_engineering_agent) to customize the Data Engineering Agent to suit your needs. When using agent instructions, we recommend that you do the following:
 
-  - All file paths in Dataform are relative to the root of the repository. Use relative paths for any `  @file.md  ` syntax to properly import instructions to `  GEMINI.md  ` .
-  - Files imported in `  GEMINI.md  ` can themselves contain imports, which can create a nested structure. To prevent infinite recursion, `  GEMINI.md  ` has a maximum import depth of five levels.
+  - All file paths in Dataform are relative to the root of the repository. Use relative paths for any `@file.md` syntax to properly import instructions to `GEMINI.md` .
+  - Files imported in `GEMINI.md` can themselves contain imports, which can create a nested structure. To prevent infinite recursion, `GEMINI.md` has a maximum import depth of five levels.
   - To share instructions across data pipelines, store instructions in a central Dataform repository and link them to the working Dataform repository. You can use local instructions to override central rules for pipeline-specific behavior.
   - Use headings and lists in the agent instruction file can help organize and clarify instructions for the Data Engineering Agent.
   - Give meaningful filenames and group similar instructions together in a file. Organize rules logically by category, feature, or functionality using Markdown headings.
   - To avoid conflicting instructions, clearly define the specific conditions under which each instruction applies.
   - Iterate and refine your prompts and workflow. Agent behavior changes over time with agent rollouts and model upgrades, so we recommend iterating on your rules with different prompts to identify areas that might need improvement. Keep your rules file in sync with any changes to your data pipeline.
 
-The following example shows an agent instruction file named `  GEMINI.md  ` that utilizes our best practices for effective use of the Data Engineering Agent:
+The following example shows an agent instruction file named `GEMINI.md` that utilizes our best practices for effective use of the Data Engineering Agent:
 
 ``` 
   ### Naming Conventions

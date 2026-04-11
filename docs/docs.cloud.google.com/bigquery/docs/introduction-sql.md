@@ -49,7 +49,7 @@ The default dialect for the Google Cloud console is GoogleSQL. To change the dia
 
 ### SQL
 
-The default SQL dialect is GoogleSQL. You can set the SQL dialect by including the prefix `  #standardSQL  ` or `  #legacySQL  ` as part of your query. These query prefixes are not case-sensitive, must precede the query, and must be separated from the query by a newline character. The following example sets the dialect to legacy SQL and queries the natality dataset:
+The default SQL dialect is GoogleSQL. You can set the SQL dialect by including the prefix `#standardSQL` or `#legacySQL` as part of your query. These query prefixes are not case-sensitive, must precede the query, and must be separated from the query by a newline character. The following example sets the dialect to legacy SQL and queries the natality dataset:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -75,11 +75,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-The default query dialect in the `  bq  ` command-line tool is legacy SQL. To switch to the GoogleSQL dialect, add the `  --use_legacy_sql=false  ` or `  --nouse_legacy_sql  ` flag to your command-line statement.
+The default query dialect in the `bq` command-line tool is legacy SQL. To switch to the GoogleSQL dialect, add the `--use_legacy_sql=false` or `--nouse_legacy_sql` flag to your command-line statement.
 
 **Switch to the GoogleSQL dialect**
 
-To use GoogleSQL syntax in a query job, set the `  use_legacy_sql  ` parameter to `  false  ` .
+To use GoogleSQL syntax in a query job, set the `use_legacy_sql` parameter to `false` .
 
 ``` 
   bq query \
@@ -92,15 +92,15 @@ To use GoogleSQL syntax in a query job, set the `  use_legacy_sql  ` parameter t
 
 **Set GoogleSQL as the default dialect**
 
-You can set GoogleSQL as the default dialect for the command-line tool and the interactive shell by editing the command-line tool's configuration file: `  .bigqueryrc  ` .
+You can set GoogleSQL as the default dialect for the command-line tool and the interactive shell by editing the command-line tool's configuration file: `.bigqueryrc` .
 
-For more information on `  .bigqueryrc  ` , see [Setting default values for command-specific flags](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+For more information on `.bigqueryrc` , see [Setting default values for command-specific flags](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
 
-To set `  --use_legacy_sql=false  ` in `  .bigqueryrc  ` :
+To set `--use_legacy_sql=false` in `.bigqueryrc` :
 
-1.  Open `  .bigqueryrc  ` in a text editor. By default, `  .bigqueryrc  ` should be in your user directory, for example, `  $HOME/.bigqueryrc  ` .
+1.  Open `.bigqueryrc` in a text editor. By default, `.bigqueryrc` should be in your user directory, for example, `$HOME/.bigqueryrc` .
 
-2.  Add the following text to the file. This example sets GoogleSQL as the default syntax for queries and for the `  mk  ` command (used when you create a view). If you have already configured default values for `  query  ` or `  mk  ` command flags, you do not need to add `  [query]  ` or `  [mk]  ` again.
+2.  Add the following text to the file. This example sets GoogleSQL as the default syntax for queries and for the `mk` command (used when you create a view). If you have already configured default values for `query` or `mk` command flags, you do not need to add `[query]` or `[mk]` again.
     
         [query]
         --use_legacy_sql=false
@@ -123,7 +123,7 @@ By default, the C\# library uses GoogleSQL.
 
 **Switch to the legacy SQL dialect**
 
-To use legacy SQL syntax in a query job, set the `  UseLegacySql  ` parameter to `  true  ` .
+To use legacy SQL syntax in a query job, set the `UseLegacySql` parameter to `true` .
 
     using Google.Cloud.BigQuery.V2;
     using System;
@@ -163,7 +163,7 @@ By default, the Go client library uses GoogleSQL.
 
 **Switch to the legacy SQL dialect**
 
-To use legacy SQL syntax in a query job, set the `  UseLegacySQL  ` property within the query configuration to `  true  ` .
+To use legacy SQL syntax in a query job, set the `UseLegacySQL` property within the query configuration to `true` .
 
     import (
      "context"
@@ -217,7 +217,7 @@ By default, the Java client library uses GoogleSQL.
 
 **Switch to the legacy SQL dialect**
 
-To use legacy SQL syntax in a query job, set the `  useLegacySql  ` parameter to `  true  ` .
+To use legacy SQL syntax in a query job, set the `useLegacySql` parameter to `true` .
 
     import com.google.cloud.bigquery.BigQuery;
     import com.google.cloud.bigquery.BigQueryException;
@@ -266,7 +266,7 @@ By default, the Node.js client library uses GoogleSQL.
 
 **Switch to the legacy SQL dialect**
 
-To use legacy SQL syntax in a query job, set the `  useLegacySql  ` parameter to `  true  ` .
+To use legacy SQL syntax in a query job, set the `useLegacySql` parameter to `true` .
 
     // Import the Google Cloud client library
     const {BigQuery} = require('@google-cloud/bigquery');
@@ -308,7 +308,7 @@ By default, the PHP client library uses GoogleSQL.
 
 **Switch to the legacy SQL dialect**
 
-To use legacy SQL syntax in a query job, set the `  useLegacySql  ` parameter to `  true  ` .
+To use legacy SQL syntax in a query job, set the `useLegacySql` parameter to `true` .
 
     use Google\Cloud\BigQuery\BigQueryClient;
     
@@ -348,7 +348,7 @@ By default, the Python client library uses GoogleSQL.
 
 **Switch to the legacy SQL dialect**
 
-To use legacy SQL syntax in a query job, set the `  use_legacy_sql  ` parameter to `  True  ` .
+To use legacy SQL syntax in a query job, set the `use_legacy_sql` parameter to `True` .
 
     from google.cloud import bigquery
     
@@ -383,7 +383,7 @@ By default, the Ruby client library uses GoogleSQL.
 
 **Switch to the legacy SQL dialect**
 
-To use legacy SQL syntax in a query job, pass the option `  legacy_sql: true  ` with your query.
+To use legacy SQL syntax in a query job, pass the option `legacy_sql: true` with your query.
 
     require "google/cloud/bigquery"
     

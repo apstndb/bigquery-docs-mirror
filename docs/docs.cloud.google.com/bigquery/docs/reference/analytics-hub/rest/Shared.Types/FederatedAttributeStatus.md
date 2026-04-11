@@ -2,12 +2,12 @@ Explicit indication of why a particular federated attribute is not included in a
 
 Enums
 
-`  FEDERATION_STATUS_UNSET  `
+`FEDERATION_STATUS_UNSET`
 
-`  NOT_FEDERATED  `
+`NOT_FEDERATED`
 
 This attribute is not provided in the request and instead should be read from IAM central storage.
 
-`  FEDERATED_AND_EMPTY  `
+`FEDERATED_AND_EMPTY`
 
 This attribute is stored by the calling service, but is empty or unset for this particular resource.

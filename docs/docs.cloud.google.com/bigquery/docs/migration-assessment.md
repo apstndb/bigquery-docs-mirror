@@ -10,9 +10,9 @@ To prepare and run a BigQuery migration assessment, follow these steps:
 
 1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
     
-    **Note:** [Use the `  --pap  ` flag](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
+    **Note:** [Use the `--pap` flag](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
 
-2.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse using the `  dwh-migration-dumper  ` tool.
+2.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse using the `dwh-migration-dumper` tool.
 
 3.  [Upload your metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload) to your Cloud Storage bucket.
 
@@ -40,17 +40,17 @@ To extract the metadata and query logs necessary to run the assessment, select y
 
 #### Requirement: Enable logging
 
-The `  dwh-migration-dumper  ` tool extracts three types of logs: query logs, utility logs, and resource usage logs. You need to enable logging for the following types of logs to view more thorough insights:
+The `dwh-migration-dumper` tool extracts three types of logs: query logs, utility logs, and resource usage logs. You need to enable logging for the following types of logs to view more thorough insights:
 
-  - **Query logs:** Extracted from the view `  dbc.QryLogV  ` and from the table `  dbc.DBQLSqlTbl  ` . Enable logging by [specifying the `  WITH SQL  ` option](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Administration/Tracking-Query-Behavior-with-Database-Query-Logging-Operational-DBAs/SQL-Statements-to-Control-Logging/WITH-Logging-Options) .
-  - **Utility logs:** Extracted from the table `  dbc.DBQLUtilityTbl  ` . Enable logging by [specifying the `  WITH UTILITYINFO  ` option](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Administration/Tracking-Query-Behavior-with-Database-Query-Logging-Operational-DBAs/SQL-Statements-to-Control-Logging/WITH-Logging-Options) .
-  - **Resource usage logs:** Extracted from the tables `  dbc.ResUsageScpu  ` and `  dbc.ResUsageSpma  ` . [Enable RSS logging](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Resource-Usage-Macros-and-Tables/Resource-Usage-and-Procedures/Enabling-RSS-Logging) for these two tables.
+  - **Query logs:** Extracted from the view `dbc.QryLogV` and from the table `dbc.DBQLSqlTbl` . Enable logging by [specifying the `WITH SQL` option](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Administration/Tracking-Query-Behavior-with-Database-Query-Logging-Operational-DBAs/SQL-Statements-to-Control-Logging/WITH-Logging-Options) .
+  - **Utility logs:** Extracted from the table `dbc.DBQLUtilityTbl` . Enable logging by [specifying the `WITH UTILITYINFO` option](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Administration/Tracking-Query-Behavior-with-Database-Query-Logging-Operational-DBAs/SQL-Statements-to-Control-Logging/WITH-Logging-Options) .
+  - **Resource usage logs:** Extracted from the tables `dbc.ResUsageScpu` and `dbc.ResUsageSpma` . [Enable RSS logging](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Resource-Usage-Macros-and-Tables/Resource-Usage-and-Procedures/Enabling-RSS-Logging) for these two tables.
 
-### Run the `       dwh-migration-dumper      ` tool
+### Run the `dwh-migration-dumper` tool
 
-Download the [`  dwh-migration-dumper  ` tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+Download the [`dwh-migration-dumper` tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
+Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
 
 ### Bash
 
@@ -64,11 +64,11 @@ sha256sum --check SHA256SUMS.txt
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
-Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `  dwh-migration-dumper  ` command-line extraction tool release—for example, `  dwh-migration-tools-v1.0.52.zip  `
+Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
-The `  True  ` result confirms successful checksum verification.
+The `True` result confirms successful checksum verification.
 
-The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
+The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
 For details about how to set up and use the extraction tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
@@ -87,7 +87,7 @@ dwh-migration-dumper \
   --password PASSWORD
 ```
 
-**Note:** The `  --database  ` flag is optional for the `  teradata  ` connector. If omitted, then the metadata for all of the databases is extracted. This flag is only valid for the `  teradata  ` connector and can't be used with `  teradata-logs  ` .
+**Note:** The `--database` flag is optional for the `teradata` connector. If omitted, then the metadata for all of the databases is extracted. This flag is only valid for the `teradata` connector and can't be used with `teradata-logs` .
 
 Generate the zip file containing query logs:
 
@@ -101,7 +101,7 @@ dwh-migration-dumper \
   --password PASSWORD
 ```
 
-**Note:** The `  --database  ` flag isn't used when extracting query logs with the `  teradata-logs  ` connector. Query logs are always extracted for all databases.
+**Note:** The `--database` flag isn't used when extracting query logs with the `teradata-logs` connector. Query logs are always extracted for all databases.
 
 Replace the following:
 
@@ -112,13 +112,13 @@ Replace the following:
   - `  DATABASES  ` : (Optional) the comma-separated list of database names to extract. If not provided, all databases are extracted.
   - `  PASSWORD  ` : (Optional) the password to use for the database connection. If left empty, the user is prompted for their password.
 
-By default, the query logs are extracted from the view `  dbc.QryLogV  ` and from the table `  dbc.DBQLSqlTbl  ` . If you need to extract the query logs from an alternative location, you can specify the names of the tables or views by using the `  -Dteradata-logs.query-logs-table  ` and `  -Dteradata-logs.sql-logs-table  ` flags.
+By default, the query logs are extracted from the view `dbc.QryLogV` and from the table `dbc.DBQLSqlTbl` . If you need to extract the query logs from an alternative location, you can specify the names of the tables or views by using the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags.
 
-**Tip:** To improve performance of joining tables that are specified by the `  -Dteradata-logs.query-logs-table  ` and `  -Dteradata-logs.sql-logs-table  ` flags, you can include an additional column of type `  DATE  ` in the `  JOIN  ` condition. This column must be defined in both tables and it must be part of the Partitioned Primary Index. To include this column, use the `  -Dteradata-logs.log-date-column  ` flag.
+**Tip:** To improve performance of joining tables that are specified by the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags, you can include an additional column of type `DATE` in the `JOIN` condition. This column must be defined in both tables and it must be part of the Partitioned Primary Index. To include this column, use the `-Dteradata-logs.log-date-column` flag.
 
-By default, the utility logs are extracted from the table `  dbc.DBQLUtilityTbl  ` . If you need to extract the utility logs from an alternative location, you can specify the name of the table using the `  -Dteradata-logs.utility-logs-table  ` flag.
+By default, the utility logs are extracted from the table `dbc.DBQLUtilityTbl` . If you need to extract the utility logs from an alternative location, you can specify the name of the table using the `-Dteradata-logs.utility-logs-table` flag.
 
-By default, the resource usage logs are extracted from the tables `  dbc.ResUsageScpu  ` and `  dbc.ResUsageSpma  ` . If you need to extract the resource usage logs from an alternative location, you can specify the names of the tables using the `  -Dteradata-logs.res-usage-scpu-table  ` and `  -Dteradata-logs.res-usage-spma-table  ` flags.
+By default, the resource usage logs are extracted from the tables `dbc.ResUsageScpu` and `dbc.ResUsageSpma` . If you need to extract the resource usage logs from an alternative location, you can specify the names of the tables using the `-Dteradata-logs.res-usage-scpu-table` and `-Dteradata-logs.res-usage-spma-table` flags.
 
 For example:
 
@@ -158,7 +158,7 @@ dwh-migration-dumper `
   "-Dteradata-logs.res-usage-spma-table=pdcrdata.ResUsageSpma_hst"
 ```
 
-By default, the `  dwh-migration-dumper  ` tool extracts the last seven days of query logs. Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You can specify a custom time range by using the `  --query-log-start  ` and `  --query-log-end  ` flags. For example:
+By default, the `dwh-migration-dumper` tool extracts the last seven days of query logs. Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You can specify a custom time range by using the `--query-log-start` and `--query-log-end` flags. For example:
 
 ``` notranslate
 dwh-migration-dumper \
@@ -184,11 +184,11 @@ You can also generate multiple zip files containing query logs covering differen
   - Read permissions on the dataset to view the results
   - Recommended: Super user access to the database when using the extraction tool to access system tables
 
-### Run the `       dwh-migration-dumper      ` tool
+### Run the `dwh-migration-dumper` tool
 
-Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
+Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
 
 ### Bash
 
@@ -202,15 +202,15 @@ sha256sum --check SHA256SUMS.txt
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
-Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `  dwh-migration-dumper  ` command-line extraction tool release—for example, `  dwh-migration-tools-v1.0.52.zip  `
+Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
-The `  True  ` result confirms successful checksum verification.
+The `True` result confirms successful checksum verification.
 
-The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
+The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
+For details about how to use the `dwh-migration-dumper` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
-Use the `  dwh-migration-dumper  ` tool to extract logs and metadata from your Amazon Redshift data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
+Use the `dwh-migration-dumper` tool to extract logs and metadata from your Amazon Redshift data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
 
 Generate the metadata zip file:
 
@@ -248,9 +248,9 @@ Replace the following:
 
 By default, Amazon Redshift stores three to five days of query logs.
 
-By default, the `  dwh-migration-dumper  ` tool extracts the last seven days of query logs.
+By default, the `dwh-migration-dumper` tool extracts the last seven days of query logs.
 
-Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You might need to run the extraction tool a few times over the course of two weeks to get the best results. You can specify a custom range by using the `  --query-log-start  ` and `  --query-log-end  ` flags. For example:
+Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You might need to run the extraction tool a few times over the course of two weeks to get the best results. You can specify a custom range by using the `--query-log-start` and `--query-log-end` flags. For example:
 
 ``` notranslate
 dwh-migration-dumper \
@@ -267,7 +267,7 @@ dwh-migration-dumper \
 
 You can also generate multiple zip files containing query logs covering different periods and provide all of them for assessment.
 
-**Note:** Earlier versions of the `  dwh-migration-dumper  ` tool preferred the `  --password  ` option over `  --iam-profile  ` . This option still works, but it is deprecated, and it might lead to some gaps in the report.
+**Note:** Earlier versions of the `dwh-migration-dumper` tool preferred the `--password` option over `--iam-profile` . This option still works, but it is deprecated, and it might lead to some gaps in the report.
 
 ### Redshift Serverless
 
@@ -281,13 +281,13 @@ You can also generate multiple zip files containing query logs covering differen
   - Read permissions on the dataset to view the results
   - Recommended: Super user access to the database when using the extraction tool to access system tables
 
-### Run the `       dwh-migration-dumper      ` tool
+### Run the `dwh-migration-dumper` tool
 
-Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [Generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
+For details about how to use the `dwh-migration-dumper` tool, see the [Generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
-Use the `  dwh-migration-dumper  ` tool to extract usage logs and metadata from your Amazon Redshift Serverless namespace as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
+Use the `dwh-migration-dumper` tool to extract usage logs and metadata from your Amazon Redshift Serverless namespace as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
 
 Generate the metadata zip file:
 
@@ -334,16 +334,16 @@ You must meet the following requirements in order to extract metadata and query 
   - A machine that can connect to your Snowflake instance(s).
   - A Google Cloud account with a Cloud Storage bucket to store the data.
   - An empty BigQuery dataset to store the results. Alternatively, you can create a BigQuery dataset when you create the assessment job using the Google Cloud console UI.
-  - Snowflake user with `  IMPORTED PRIVILEGES  ` access on the database `  Snowflake  ` . We recommend creating a [`  SERVICE  `](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) user with a key-pair based authentication. This provides the secure method for accessing Snowflake data platform without a need to generate MFA tokens.
+  - Snowflake user with `IMPORTED PRIVILEGES` access on the database `Snowflake` . We recommend creating a [`SERVICE`](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) user with a key-pair based authentication. This provides the secure method for accessing Snowflake data platform without a need to generate MFA tokens.
       - To create a new service user follow the [official Snowflake guide](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication) . You will have to generate the RSA key-pair and assign public key to the Snowflake user.
-      - Service user should have the `  ACCOUNTADMIN  ` role, or be [granted a role with the `  IMPORTED PRIVILEGES  ` privileges on the database `  Snowflake  `](https://docs.snowflake.com/en/sql-reference/account-usage#enabling-snowflake-database-usage-for-other-roles) by an account administrator.
+      - Service user should have the `ACCOUNTADMIN` role, or be [granted a role with the `IMPORTED PRIVILEGES` privileges on the database `Snowflake`](https://docs.snowflake.com/en/sql-reference/account-usage#enabling-snowflake-database-usage-for-other-roles) by an account administrator.
       - Alternatively to key-pair authentication, you can use the password-based authentication. However, starting from August 2025, Snowflake enforces MFA on all password-based users. This requires you to approve the MFA push notification when using our extraction tool.
 
-### Run the `       dwh-migration-dumper      ` tool
+### Run the `dwh-migration-dumper` tool
 
-Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
+Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
 
 ### Bash
 
@@ -357,15 +357,15 @@ sha256sum --check SHA256SUMS.txt
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
-Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `  dwh-migration-dumper  ` command-line extraction tool release—for example, `  dwh-migration-tools-v1.0.52.zip  `
+Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
-The `  True  ` result confirms successful checksum verification.
+The `True` result confirms successful checksum verification.
 
-The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
+The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
+For details about how to use the `dwh-migration-dumper` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
-Use the `  dwh-migration-dumper  ` tool to extract logs and metadata from your Snowflake data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
+Use the `dwh-migration-dumper` tool to extract logs and metadata from your Snowflake data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
 
 Generate the metadata zip file:
 
@@ -403,10 +403,10 @@ Replace the following:
   - `  USER_NAME  ` : the username to use for the database connection, where the user must have the access permissions as detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) .
   - `  PRIVATE_KEY_PATH  ` : the path to the RSA private key used for authentication.
   - `  PRIVATE_KEY_PASSWORD  ` : (Optional) the password that was used when creating the RSA private key. It is required only if private key is encrypted.
-  - `  ROLE_NAME  ` : (Optional) the user role when running the `  dwh-migration-dumper  ` tool—for example, `  ACCOUNTADMIN  ` .
+  - `  ROLE_NAME  ` : (Optional) the user role when running the `dwh-migration-dumper` tool—for example, `ACCOUNTADMIN` .
   - `  WAREHOUSE  ` : the warehouse used to execute the dumping operations. If you have multiple virtual warehouses, you can specify any warehouse to execute this query. Running this query with the access permissions detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) extracts all warehouse artefacts in this account.
-  - `  STARTING_DATE  ` : (Optional) used to indicate the start date in a date range of query logs, written in the format `  YYYY-MM-DD  ` .
-  - `  ENDING_DATE  ` : (Optional) used to indicate the end date in a date range of query logs, written in the format `  YYYY-MM-DD  ` .
+  - `  STARTING_DATE  ` : (Optional) used to indicate the start date in a date range of query logs, written in the format `YYYY-MM-DD` .
+  - `  ENDING_DATE  ` : (Optional) used to indicate the end date in a date range of query logs, written in the format `YYYY-MM-DD` .
 
 You can also generate multiple zip files containing query logs covering non-overlapping periods and provide all of them for assessment.
 
@@ -429,21 +429,21 @@ You must meet the following requirements in order to extract metadata and query 
   - An empty BigQuery dataset to store the results. Alternatively, you can create a BigQuery dataset when you create the assessment job using the Google Cloud console UI.
   - An Oracle common user with SYSDBA privileges.
 
-### Run the `       dwh-migration-dumper      ` tool
+### Run the `dwh-migration-dumper` tool
 
-Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
+Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
 
 ``` notranslate
 sha256sum --check SHA256SUMS.txt
 ```
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
+For details about how to use the `dwh-migration-dumper` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
-Use the `  dwh-migration-dumper  ` tool to extract metadata and performance statistics to the zip file. By default, statistics are extracted from the Oracle AWR that requires the Oracle Tuning and Diagnostics Pack. If this data is not available, `  dwh-migration-dumper  ` uses STATSPACK instead.
+Use the `dwh-migration-dumper` tool to extract metadata and performance statistics to the zip file. By default, statistics are extracted from the Oracle AWR that requires the Oracle Tuning and Diagnostics Pack. If this data is not available, `dwh-migration-dumper` uses STATSPACK instead.
 
-For multitenant databases, the `  dwh-migration-dumper  ` tool must be executed in the root container. Running it in one of the pluggable databases results in missing performance statistics and metadata about other pluggable databases.
+For multitenant databases, the `dwh-migration-dumper` tool must be executed in the root container. Running it in one of the pluggable databases results in missing performance statistics and metadata about other pluggable databases.
 
 Generate the metadata zip file:
 
@@ -483,11 +483,11 @@ You must have the following to extract metadata from Cloudera:
   - A Google Cloud account with a Cloud Storage bucket to store the data.
   - An empty BigQuery dataset to store the results. Alternatively, you can create a BigQuery dataset when you create the assessment job.
 
-### Run the `       dwh-migration-dumper      ` tool
+### Run the `dwh-migration-dumper` tool
 
-1.  Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+1.  Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-2.  Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) .
+2.  Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) .
 
 3.  In your command-line environment, verify zip correctness:
     
@@ -496,9 +496,9 @@ You must have the following to extract metadata from Cloudera:
       
     ```
     
-    For details about how to use the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
+    For details about how to use the `dwh-migration-dumper` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
-4.  Use the `  dwh-migration-dumper  ` tool to extract metadata and performance statistics to the zip file:
+4.  Use the `dwh-migration-dumper` tool to extract metadata and performance statistics to the zip file:
     
     ``` notranslate
     dwh-migration-dumper \
@@ -516,14 +516,14 @@ You must have the following to extract metadata from Cloudera:
     
     Replace the following:
     
-      - `  USER_NAME  ` : the name of the user to connect to your Cloudera Manager instance.
-      - `  PASSWORD  ` : the password for your Cloudera Manager instance.
-      - `  URL_PATH  ` : the URL path to the Cloudera Manager API, for example, `  https://localhost:7183/api/v55/  ` .
-      - `  APP_TYPES  ` (optional): the comma-separated YARN application types that are dumped from the cluster. The default value is `  MAPREDUCE,SPARK,Oozie Launcher  ` .
-      - `  SPARK_HISTORY_SERVICE_NAMES  ` (optional): the comma-separated list of service names for your Spark History Server, used to query Spark event logs through Apache Knox for application metadata extraction. If not provided, the default value is `  sparkhistory,spark3history  ` .
-      - `  PAGE_SIZE  ` (optional): the number of records per Cloudera response. The default value is `  1000  ` .
-      - `  START_DATE  ` (optional): the start date for your history dump in ISO 8601 format, for example `  2025-05-29  ` . The default value is 90 days before the current date.
-      - `  END_DATE  ` (optional): the end date for your history dump in ISO 8601 format, for example `  2025-05-30  ` . The default value is the current date.
+      - `USER_NAME` : the name of the user to connect to your Cloudera Manager instance.
+      - `PASSWORD` : the password for your Cloudera Manager instance.
+      - `URL_PATH` : the URL path to the Cloudera Manager API, for example, `https://localhost:7183/api/v55/` .
+      - `APP_TYPES` (optional): the comma-separated YARN application types that are dumped from the cluster. The default value is `MAPREDUCE,SPARK,Oozie Launcher` .
+      - `SPARK_HISTORY_SERVICE_NAMES` (optional): the comma-separated list of service names for your Spark History Server, used to query Spark event logs through Apache Knox for application metadata extraction. If not provided, the default value is `sparkhistory,spark3history` .
+      - `PAGE_SIZE` (optional): the number of records per Cloudera response. The default value is `1000` .
+      - `START_DATE` (optional): the start date for your history dump in ISO 8601 format, for example `2025-05-29` . The default value is 90 days before the current date.
+      - `END_DATE` (optional): the end date for your history dump in ISO 8601 format, for example `2025-05-30` . The default value is the current date.
 
 #### Use Oozie in your Cloudera cluster
 
@@ -541,7 +541,7 @@ dwh-migration-dumper \
 
 Replace the following:
 
-  - `  URL_PATH  ` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `  OOZIE_URL  ` environment variable.
+  - `URL_PATH` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `OOZIE_URL` environment variable.
 
 For basic authentication, run the following:
 
@@ -556,9 +556,9 @@ dwh-migration-dumper \
 
 Replace the following:
 
-  - `  USER_NAME  ` : the name of the Oozie user.
-  - `  PASSWORD  ` : the user password.
-  - `  URL_PATH  ` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `  OOZIE_URL  ` environment variable.
+  - `USER_NAME` : the name of the Oozie user.
+  - `PASSWORD` : the user password.
+  - `URL_PATH` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `OOZIE_URL` environment variable.
 
 #### Use Airflow in your Cloudera cluster
 
@@ -578,12 +578,12 @@ dwh-migration-dumper \
 
 Replace the following:
 
-  - `  USER_NAME  ` : the name of the Airflow user
-  - `  PASSWORD  ` : the user password
-  - `  URL  ` : the JDBC string to the Airflow database
-  - `  DRIVER_PATH  ` : the path to the JDBC driver
-  - `  START_DATE  ` (optional): the start date for your history dump in ISO 8601 format
-  - `  END_DATE  ` (optional): the end date for your history dump in ISO 8601 format
+  - `USER_NAME` : the name of the Airflow user
+  - `PASSWORD` : the user password
+  - `URL` : the JDBC string to the Airflow database
+  - `DRIVER_PATH` : the path to the JDBC driver
+  - `START_DATE` (optional): the start date for your history dump in ISO 8601 format
+  - `END_DATE` (optional): the end date for your history dump in ISO 8601 format
 
 #### Use Hive in your Cloudera cluster
 
@@ -604,13 +604,13 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
   - Access to your source Apache Hive data warehouse to configure query logs extraction
   - Up to date tables, partitions, and columns statistics
 
-The BigQuery migration assessment uses tables, partitions, and columns statistics to understand your Apache Hive data warehouse better and provide thorough insights. If the `  hive.stats.autogather  ` configuration setting is set to `  false  ` in your source Apache Hive data warehouse, Google recommends enabling it or updating statistics manually before running the `  dwh-migration-dumper  ` tool.
+The BigQuery migration assessment uses tables, partitions, and columns statistics to understand your Apache Hive data warehouse better and provide thorough insights. If the `hive.stats.autogather` configuration setting is set to `false` in your source Apache Hive data warehouse, Google recommends enabling it or updating statistics manually before running the `dwh-migration-dumper` tool.
 
-### Run the `       dwh-migration-dumper      ` tool
+### Run the `dwh-migration-dumper` tool
 
-Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
+Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
 
 ### Bash
 
@@ -624,15 +624,15 @@ sha256sum --check SHA256SUMS.txt
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
-Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `  dwh-migration-dumper  ` command-line extraction tool release—for example, `  dwh-migration-tools-v1.0.52.zip  `
+Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
-The `  True  ` result confirms successful checksum verification.
+The `True` result confirms successful checksum verification.
 
-The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
+The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
+For details about how to use the `dwh-migration-dumper` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
-Use the `  dwh-migration-dumper  ` tool to generate metadata from your Hive data warehouse as a zip file.
+Use the `dwh-migration-dumper` tool to generate metadata from your Hive data warehouse as a zip file.
 
 #### Without Authentication
 
@@ -668,61 +668,61 @@ Replace the following:
   - `  DATABASES  ` : the comma-separated list of database names to extract. If not provided, all databases are extracted.
   - `  PRINCIPAL  ` : the kerberos principal that the ticket is issued to
   - `  HOST  ` : the kerberos hostname that the ticket is issued to
-  - `  hadoop.rpc.protection  ` : the Quality of Protection (QOP) of the Simple Authentication and Security Layer (SASL) configuration level, equal to the value of `  hadoop.rpc.protection  ` parameter inside the `  /etc/hadoop/conf/core-site.xml  ` file, with one of the following values:
-      - `  authentication  `
-      - `  integrity  `
-      - `  privacy  `
+  - `  hadoop.rpc.protection  ` : the Quality of Protection (QOP) of the Simple Authentication and Security Layer (SASL) configuration level, equal to the value of `hadoop.rpc.protection` parameter inside the `/etc/hadoop/conf/core-site.xml` file, with one of the following values:
+      - `authentication`
+      - `integrity`
+      - `privacy`
 
-### Extract query logs with the `       hadoop-migration-assessment      ` logging hook
+### Extract query logs with the `hadoop-migration-assessment` logging hook
 
 To extract query logs, follow these steps:
 
-1.  [Upload the `  hadoop-migration-assessment  ` logging hook](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload-hadoop-hive-hook) .
+1.  [Upload the `hadoop-migration-assessment` logging hook](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload-hadoop-hive-hook) .
 2.  [Configure the logging hook properties](https://docs.cloud.google.com/bigquery/docs/migration-assessment#configure-properties) .
 3.  [Verify the logging hook](https://docs.cloud.google.com/bigquery/docs/migration-assessment#verify-hive-hook) .
 
-#### Upload the `       hadoop-migration-assessment      ` logging hook
+#### Upload the `hadoop-migration-assessment` logging hook
 
-1.  Download the [`  hadoop-migration-assessment  ` query logs extraction logging hook](https://github.com/google/hadoop-migration-assessment-tools/releases/latest) that contains the Hive logging hook JAR file.
+1.  Download the [`hadoop-migration-assessment` query logs extraction logging hook](https://github.com/google/hadoop-migration-assessment-tools/releases/latest) that contains the Hive logging hook JAR file.
 
 2.  Extract the JAR file.
     
-    If you need to audit the tool to ensure that it meets compliance requirements, review the source code from the [`  hadoop-migration-assessment  ` logging hook GitHub repository](https://github.com/google/hadoop-migration-assessment-tools) , and compile your own binary.
+    If you need to audit the tool to ensure that it meets compliance requirements, review the source code from the [`hadoop-migration-assessment` logging hook GitHub repository](https://github.com/google/hadoop-migration-assessment-tools) , and compile your own binary.
 
 3.  Copy the JAR file into the auxiliary library folder on all clusters where you plan to enable the query logging. Depending on your vendor, you need to locate the auxiliary library folder in cluster settings and transfer the JAR file to the auxiliary library folder on the Hive cluster.
 
-4.  Set up configuration properties for `  hadoop-migration-assessment  ` logging hook. Depending on your Hadoop vendor, you need to use the UI console to edit cluster settings. Modify the `  /etc/hive/conf/hive-site.xml  ` file or apply the configuration with the configuration manager.
+4.  Set up configuration properties for `hadoop-migration-assessment` logging hook. Depending on your Hadoop vendor, you need to use the UI console to edit cluster settings. Modify the `/etc/hive/conf/hive-site.xml` file or apply the configuration with the configuration manager.
 
 #### Configure properties
 
-If you already have other values for the following configuration keys, append the settings using a comma ( `  ,  ` ). To set up `  hadoop-migration-assessment  ` logging hook, the following configuration settings are required:
+If you already have other values for the following configuration keys, append the settings using a comma ( `,` ). To set up `hadoop-migration-assessment` logging hook, the following configuration settings are required:
 
-  - `  hive.exec.failure.hooks  ` : `  com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook  `
+  - `hive.exec.failure.hooks` : `com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook`
 
-  - `  hive.exec.post.hooks  ` : `  com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook  `
+  - `hive.exec.post.hooks` : `com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook`
 
-  - `  hive.exec.pre.hooks  ` : `  com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook  `
+  - `hive.exec.pre.hooks` : `com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook`
 
-  - `  hive.aux.jars.path  ` : include the path to the logging hook JAR file, for example `  file:// /HiveMigrationAssessmentQueryLogsHooks_deploy.jar  ` .
+  - `hive.aux.jars.path` : include the path to the logging hook JAR file, for example ` file:// /HiveMigrationAssessmentQueryLogsHooks_deploy.jar  ` .
 
-  - `  dwhassessment.hook.base-directory  ` : path to the query logs output folder. For example, `  hdfs://tmp/logs/  ` .
+  - `dwhassessment.hook.base-directory` : path to the query logs output folder. For example, `hdfs://tmp/logs/` .
 
   - You can also set the following optional configurations:
     
-      - `  dwhassessment.hook.queue.capacity  ` : the queue capacity for the query events logging threads. The default value is `  64  ` .
-      - `  dwhassessment.hook.rollover-interval  ` : the frequency at which the file rollover must be performed. For example, `  600s  ` . The default value is 3600 seconds (1 hour).
-      - `  dwhassessment.hook.rollover-eligibility-check-interval  ` : the frequency at which the file rollover eligibility check is triggered in the background. For example, `  600s  ` . The default value is 600 seconds (10 minutes).
+      - `dwhassessment.hook.queue.capacity` : the queue capacity for the query events logging threads. The default value is `64` .
+      - `dwhassessment.hook.rollover-interval` : the frequency at which the file rollover must be performed. For example, `600s` . The default value is 3600 seconds (1 hour).
+      - `dwhassessment.hook.rollover-eligibility-check-interval` : the frequency at which the file rollover eligibility check is triggered in the background. For example, `600s` . The default value is 600 seconds (10 minutes).
 
 **Important:** To apply the configuration changes, you must restart Hive services.
 
 #### Verify the logging hook
 
-After you restart the `  hive-server2  ` process, run a test query and analyze your debug logs. You can see the following message:
+After you restart the `hive-server2` process, run a test query and analyze your debug logs. You can see the following message:
 
     Logger successfully started, waiting for query events. Log directory is '[dwhassessment.hook.base-directory value]'; rollover interval is '60' minutes;
     rollover eligibility check is '10' minutes
 
-The logging hook creates a date-partitioned subfolder in the configured folder. The Avro file with query events appears in that folder after the `  dwhassessment.hook.rollover-interval  ` interval or `  hive-server2  ` process termination. You can look for similar messages in your debug logs to see the status of the rollover operation:
+The logging hook creates a date-partitioned subfolder in the configured folder. The Avro file with query events appears in that folder after the `dwhassessment.hook.rollover-interval` interval or `hive-server2` process termination. You can look for similar messages in your debug logs to see the status of the rollover operation:
 
     Updated rollover time for logger ID 'my_logger_id' to '2023-12-25T10:15:30'
 
@@ -753,9 +753,9 @@ To request feedback or support for this feature, send an email to <bq-edw-migrat
 
 You can use the Informatica PowerCenter Repository Manager GUI to export your object files. For information, see [Steps to Export Objects](https://docs.informatica.com/data-integration/powercenter/10-5-8/repository-guide/exporting-and-importing-objects/steps-to-export-objects.html)
 
-Alternatively, you can also run the `  pmrep  ` command to export your object files with the following steps:
+Alternatively, you can also run the `pmrep` command to export your object files with the following steps:
 
-1.  Run the [`  pmrep connect  `](https://docs.informatica.com/data-integration/common-content-for-data-integration/10-5-6/command-reference/pmrep-command-reference/connect.html) command to connect to the repository:
+1.  Run the [`pmrep connect`](https://docs.informatica.com/data-integration/common-content-for-data-integration/10-5-6/command-reference/pmrep-command-reference/connect.html) command to connect to the repository:
 
 <!-- end list -->
 
@@ -772,7 +772,7 @@ Replace the following:
 
 <!-- end list -->
 
-1.  Once connected to the repository, use the [`  pmrep objectexport  `](https://docs.informatica.com/data-integration/common-content-for-data-integration/10-5-6/command-reference/pmrep-command-reference/objectexport.html) command to export the required objects:
+1.  Once connected to the repository, use the [`pmrep objectexport`](https://docs.informatica.com/data-integration/common-content-for-data-integration/10-5-6/command-reference/pmrep-command-reference/objectexport.html) command to export the required objects:
 
 <!-- end list -->
 
@@ -797,12 +797,12 @@ Upload the metadata and one or more zip files containing query logs to your Clou
 
 The entries in all the zip files containing query logs are divided into the following:
 
-  - Query history files with the `  query_history_  ` prefix.
-  - Time series files with the `  utility_logs_  ` , `  dbc.ResUsageScpu_  ` , and `  dbc.ResUsageSpma_  ` prefixes.
+  - Query history files with the `query_history_` prefix.
+  - Time series files with the `utility_logs_` , `dbc.ResUsageScpu_` , and `dbc.ResUsageSpma_` prefixes.
 
 The limit for the total uncompressed size of all the query history files is 5 TB. The limit for the total uncompressed size of all the time series files is 1 TB.
 
-In case the query logs are archived in a different database, see the description of the `  -Dteradata-logs.query-logs-table  ` and `  -Dteradata-logs.sql-logs-table  ` flags earlier in this section, which explains how to provide an alternative location for the query logs.
+In case the query logs are archived in a different database, see the description of the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags earlier in this section, which explains how to provide an alternative location for the query logs.
 
 ### Redshift
 
@@ -810,8 +810,8 @@ Upload the metadata and one or more zip files containing query logs to your Clou
 
 The entries in all the zip files containing query logs are divided into the following:
 
-  - Query history files with the `  querytext_  ` and `  ddltext_  ` prefixes.
-  - Time series files with the `  query_queue_info_  ` , `  wlm_query_  ` , and `  querymetrics_  ` prefixes.
+  - Query history files with the `querytext_` and `ddltext_` prefixes.
+  - Time series files with the `query_queue_info_` , `wlm_query_` , and `querymetrics_` prefixes.
 
 The limit for the total uncompressed size of all the query history files is 5 TB. The limit for the total uncompressed size of all the time series files is 1 TB.
 
@@ -828,7 +828,7 @@ Upload the metadata and the zip file(s) containing query logs and usage historie
   - The total uncompressed size of all the files inside the metadata zip file must be less than 50 GB.
   - The metadata zip file and the zip file containing query logs must be uploaded to a Cloud Storage folder. If you have multiple zip files containing non-overlapping query logs, you can upload all of them.
   - You must upload all the files to the same Cloud Storage folder.
-  - You must upload all of the metadata and query logs zip files exactly as they are output by `  dwh-migration-dumper  ` tool. Don't extract, combine, or otherwise modify them.
+  - You must upload all of the metadata and query logs zip files exactly as they are output by `dwh-migration-dumper` tool. Don't extract, combine, or otherwise modify them.
   - The total uncompressed size of all the query history files must be less than 5 TB.
 
 For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
@@ -841,7 +841,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
-Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `  dwh-migration-oracle-stats.zip  ` , but you can customize this by specifying it in the `  --output  ` flag. The limit for the total uncompressed size of all the files inside the zip file is 50 GB.
+Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `dwh-migration-oracle-stats.zip` , but you can customize this by specifying it in the `--output` flag. The limit for the total uncompressed size of all the files inside the zip file is 50 GB.
 
 For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
@@ -853,7 +853,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
-Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `  dwh-migration-cloudera-manager- RUN_DATE .zip  ` (for example `  dwh-migration-cloudera-manager-20250312T145808.zip  ` ), but you can customize it with the `  --output  ` flag. The limit for the total uncompressed size of all files inside the zip file is 50 GB.
+Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `dwh-migration-cloudera-manager- RUN_DATE .zip` (for example `dwh-migration-cloudera-manager-20250312T145808.zip` ), but you can customize it with the `--output` flag. The limit for the total uncompressed size of all files inside the zip file is 50 GB.
 
 For more information about creating buckets and uploading files to Cloud Storage, see [Create a bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a file system](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
@@ -869,7 +869,7 @@ The limit for the total uncompressed size of all the files inside the metadata z
 
 You can use [Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage#non-clusters) to copy query logs directly to the Cloud Storage folder. The folders containing subfolders with query logs must be uploaded to the same Cloud Storage folder, where the metadata zip file is uploaded.
 
-Query logs folders have query history files with the `  dwhassessment_  ` prefix. The limit for the total uncompressed size of all the query history files is 5 TB.
+Query logs folders have query history files with the `dwhassessment_` prefix. The limit for the total uncompressed size of all the query history files is 5 TB.
 
 ### Informatica
 
@@ -879,7 +879,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
-Upload a zip file containing your Informatica XML repository objects to a Cloud Storage bucket. This zip file must also include a `  compilerworks-metadata.yaml  ` file that contains the following:
+Upload a zip file containing your Informatica XML repository objects to a Cloud Storage bucket. This zip file must also include a `compilerworks-metadata.yaml` file that contains the following:
 
 ``` notranslate
   product:
@@ -898,54 +898,54 @@ Follow these steps to run the BigQuery migration assessment. These steps assume 
 
 To enable the BigQuery Migration Service, you need the following Identity and Access Management (IAM) permissions:
 
-  - `  resourcemanager.projects.get  `
-  - `  resourcemanager.projects.update  `
-  - `  serviceusage.services.enable  `
-  - `  serviceusage.services.get  `
+  - `resourcemanager.projects.get`
+  - `resourcemanager.projects.update`
+  - `serviceusage.services.enable`
+  - `serviceusage.services.get`
 
 To access and use the BigQuery Migration Service, you need the following permissions on the project:
 
-  - `  bigquerymigration.workflows.create  `
-  - `  bigquerymigration.workflows.get  `
-  - `  bigquerymigration.workflows.list  `
-  - `  bigquerymigration.workflows.delete  `
-  - `  bigquerymigration.subtasks.get  `
-  - `  bigquerymigration.subtasks.list  `
+  - `bigquerymigration.workflows.create`
+  - `bigquerymigration.workflows.get`
+  - `bigquerymigration.workflows.list`
+  - `bigquerymigration.workflows.delete`
+  - `bigquerymigration.subtasks.get`
+  - `bigquerymigration.subtasks.list`
 
-**Note:** You can only set the permissions and roles with the `  bigquerymigration.*  ` prefix using the Google Cloud CLI. For information on how to set up and use the Google Cloud CLI, see the [gcloud CLI tool overview](https://docs.cloud.google.com/sdk/gcloud) .
+**Note:** You can only set the permissions and roles with the `bigquerymigration.*` prefix using the Google Cloud CLI. For information on how to set up and use the Google Cloud CLI, see the [gcloud CLI tool overview](https://docs.cloud.google.com/sdk/gcloud) .
 
 To run the BigQuery Migration Service, you need the following additional permissions.
 
   - Permission to access the Cloud Storage buckets for input and output files:
     
-      - `  storage.objects.get  ` on the source Cloud Storage bucket
-      - `  storage.objects.list  ` on the source Cloud Storage bucket
-      - `  storage.objects.create  ` on the destination Cloud Storage bucket
-      - `  storage.objects.delete  ` on the destination Cloud Storage bucket
-      - `  storage.objects.update  ` on the destination Cloud Storage bucket
-      - `  storage.buckets.get  `
-      - `  storage.buckets.list  `
+      - `storage.objects.get` on the source Cloud Storage bucket
+      - `storage.objects.list` on the source Cloud Storage bucket
+      - `storage.objects.create` on the destination Cloud Storage bucket
+      - `storage.objects.delete` on the destination Cloud Storage bucket
+      - `storage.objects.update` on the destination Cloud Storage bucket
+      - `storage.buckets.get`
+      - `storage.buckets.list`
 
   - Permission to read and update the BigQuery dataset where the BigQuery Migration Service writes the results:
     
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.create  `
-      - `  bigquery.datasets.delete  `
-      - `  bigquery.jobs.create  `
-      - `  bigquery.jobs.delete  `
-      - `  bigquery.jobs.list  `
-      - `  bigquery.jobs.update  `
-      - `  bigquery.tables.create  `
-      - `  bigquery.tables.get  `
-      - `  bigquery.tables.getData  `
-      - `  bigquery.tables.list  `
-      - `  bigquery.tables.updateData  `
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.create`
+      - `bigquery.datasets.delete`
+      - `bigquery.jobs.create`
+      - `bigquery.jobs.delete`
+      - `bigquery.jobs.list`
+      - `bigquery.jobs.update`
+      - `bigquery.tables.create`
+      - `bigquery.tables.get`
+      - `bigquery.tables.getData`
+      - `bigquery.tables.list`
+      - `bigquery.tables.updateData`
 
 To share the Looker Studio report with a user, you need to grant the following roles:
 
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.jobUser  `
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.jobUser`
 
 The following example shows you how to grant the required roles to a user that you want to share the report with:
 
@@ -1024,7 +1024,7 @@ Replace the following:
 
   - `  PROJECT_ID  ` : the name of a new project ID
   - `  RUNNER_EMAIL  ` : the email of the user running the migration assessment
-  - `  ORGANIZATION_ID  ` : the organization ID. For example, `  123456789012  `
+  - `  ORGANIZATION_ID  ` : the organization ID. For example, `123456789012`
 
 ### Supported locations
 
@@ -1058,7 +1058,7 @@ The BigQuery migration assessment writes the assessment results to tables in Big
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the navigation menu under `  Migration  ` , click **Services** .
+2.  In the navigation menu under `Migration` , click **Services** .
 
 3.  Click **Start Assessment** .
 
@@ -1073,7 +1073,7 @@ The BigQuery migration assessment writes the assessment results to tables in Big
     4.  To choose how your assessment results are stored, do one of the following options:
         
           - Keep the **Automatically create the new BigQuery dataset** checkbox selected to have the BigQuery dataset created automatically. The name of the dataset is generated automatically.
-          - Clear the **Automatically create the new BigQuery dataset** checkbox and either choose the existing empty BigQuery dataset using the format `  projectId.datasetId  ` , or create a new dataset name. In this option you can choose the BigQuery dataset name.
+          - Clear the **Automatically create the new BigQuery dataset** checkbox and either choose the existing empty BigQuery dataset using the format `projectId.datasetId` , or create a new dataset name. In this option you can choose the BigQuery dataset name.
         
         **Important:** The Cloud Storage bucket location and the BigQuery dataset location must be in the same multi-region or in the location inside this multi-region. For more information on location constraints, see [Location considerations](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#data-locations) .
     
@@ -1095,9 +1095,9 @@ The BigQuery migration assessment writes the assessment results to tables in Big
 
 ### API
 
-Call the [`  create  `](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) method with a defined [workflow](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows) .
+Call the [`create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) method with a defined [workflow](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows) .
 
-Then call the [`  start  `](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/start) method to start the assessment workflow.
+Then call the [`start`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/start) method to start the assessment workflow.
 
 The assessment creates tables in the BigQuery dataset you created earlier. You can query these for information about the tables and queries used in your existing data warehouse. For information about the output files of the translation, see [Batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output) .
 
@@ -1107,7 +1107,7 @@ The assessment creates tables in the BigQuery dataset you created earlier. You c
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-For Amazon Redshift, Teradata, and Snowflake assessments, in addition to the previously created BigQuery dataset, the workflow creates another lightweight dataset with the same name, plus the `  _shareableRedactedAggregate  ` suffix. This dataset contains highly aggregated data that is derived from the output dataset, and contains no personally identifiable information (PII).
+For Amazon Redshift, Teradata, and Snowflake assessments, in addition to the previously created BigQuery dataset, the workflow creates another lightweight dataset with the same name, plus the `_shareableRedactedAggregate` suffix. This dataset contains highly aggregated data that is derived from the output dataset, and contains no personally identifiable information (PII).
 
 To find, inspect, and securely share the dataset with other users, see [Query the migration assessment output tables](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) .
 
@@ -1175,7 +1175,7 @@ The details of each section include the following:
   - Clustering and partitioning candidates based on metadata and usage
   - Low latency queries identified as candidates for BigQuery BI Engine
   - Columns configured with default values that use the column description feature to store default values
-  - Unique indexes in Teradata (to prevent rows with non-unique keys in a table) use staging tables and a `  MERGE  ` statement to insert only unique records into the target tables and then discard duplicates
+  - Unique indexes in Teradata (to prevent rows with non-unique keys in a table) use staging tables and a `MERGE` statement to insert only unique records into the target tables and then discard duplicates
   - Remaining queries and schema translated as-is
 
 **Migration plan**
@@ -1226,13 +1226,13 @@ The **BigQuery steady state** section contains the following views:
     
     The Metadata suggestions are achieved by analyzing the source data warehouse schema (like Partitioning and Primary Key in the source table) and finding the closest BigQuery equivalent to achieve similar optimization characteristics.
     
-    The Workload suggestions are achieved by analyzing the source query logs. The recommendation is determined by analyzing the workloads, especially `  WHERE  ` or `  JOIN  ` clauses in the analyzed query logs.
+    The Workload suggestions are achieved by analyzing the source query logs. The recommendation is determined by analyzing the workloads, especially `WHERE` or `JOIN` clauses in the analyzed query logs.
 
   - Clustering Recommendation  
     The Partitioning view displays tables which might have greater than 10,000 partitions, based on their partitioning constraint definition. These tables tend to be good candidates for BigQuery clustering, which enables fine-grained table partitions.
 
   - Unique Constraints  
-    The Unique Constraints view displays both `  SET  ` tables and unique indexes defined within the source data warehouse. In BigQuery, it's recommended to use staging tables and a `  MERGE  ` statement to insert only unique records into a target table. Use the contents of this view to help determine which tables you might need to adjust ETL for during the migration.
+    The Unique Constraints view displays both `SET` tables and unique indexes defined within the source data warehouse. In BigQuery, it's recommended to use staging tables and a `MERGE` statement to insert only unique records into a target table. Use the contents of this view to help determine which tables you might need to adjust ETL for during the migration.
 
   - Default Values / Check Constraints  
     This view shows tables that use check constraints to set default column values. In BigQuery, see [Specify default column values](https://docs.cloud.google.com/bigquery/docs/default-values) .
@@ -1244,7 +1244,7 @@ The **Migration path** section of the report contains the following views:
   - Offline Effort  
     The Offline Effort view captures the areas that need manual intervention, including specific UDFs and potential lexical structure and syntax violations for tables or columns.
   - BigQuery Reserved Keywords  
-    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( ``  `  `` ) characters.
+    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( `` ` `` ) characters.
   - Table Updates Schedule  
     The Table Updates Schedule view shows when and how frequently tables are updated to help you plan how and when to move them.
   - Data Migration to BigQuery  
@@ -1287,7 +1287,7 @@ The **Existing System** section contains the following views:
   - Table Usage  
     The Table Usage view provides statistics on which tables are heavily used within the source data warehouse system. Heavily used tables can be leveraged to understand tables which might have many dependencies and warrant additional planning during the migration process.
   - Importers & Exporters  
-    The Importers & Exporters view provides information on data and users involved in data import (using `  COPY  ` queries) and data export (using `  UNLOAD  ` queries). This view helps to identify staging layer and processes related to ingestion and exports.
+    The Importers & Exporters view provides information on data and users involved in data import (using `COPY` queries) and data export (using `UNLOAD` queries). This view helps to identify staging layer and processes related to ingestion and exports.
   - Cluster Utilization  
     The Cluster Utilization view provides general information about all available clusters and displays CPU utilization for each cluster. This view can help you understand system capacity reserve.
 
@@ -1298,11 +1298,11 @@ The **BigQuery steady state** section contains the following views:
     
     The Metadata suggestions are achieved by analyzing the source data warehouse schema (like Sort Key and Dist Key in the source table) and finding the closest BigQuery equivalent to achieve similar optimization characteristics.
     
-    The Workload suggestions are achieved by analyzing the source query logs. The recommendation is determined by analyzing the workloads, especially `  WHERE  ` or `  JOIN  ` clauses in the analyzed query logs.
+    The Workload suggestions are achieved by analyzing the source query logs. The recommendation is determined by analyzing the workloads, especially `WHERE` or `JOIN` clauses in the analyzed query logs.
     
-    At the bottom of the page, there is a translated create table statement with all optimizations provided. All translated DDL statements can be also extracted from the dataset. Translated DDL statements are stored in `  SchemaConversion  ` table in `  CreateTableDDL  ` column.
+    At the bottom of the page, there is a translated create table statement with all optimizations provided. All translated DDL statements can be also extracted from the dataset. Translated DDL statements are stored in `SchemaConversion` table in `CreateTableDDL` column.
     
-    The recommendations in the report are provided only for tables larger than 1 GB because small tables won't benefit from clustering and partitioning. However, DDL for all tables (including tables smaller than 1GB) are available in `  SchemaConversion  ` table.
+    The recommendations in the report are provided only for tables larger than 1 GB because small tables won't benefit from clustering and partitioning. However, DDL for all tables (including tables smaller than 1GB) are available in `SchemaConversion` table.
 
   - Tables With No Usage  
     The Tables With No Usage view displays tables where the BigQuery migration assessment did not identify any usage during the analyzed logs period. A lack of usage might indicate that you don't need to transfer that table to BigQuery during migration or that the costs of storing data in BigQuery could be lower (billed as [Long-term storage](https://cloud.google.com/bigquery/pricing#storage) ). We recommend validating the list of unused tables because they could have usage outside of the logs period, such as a table that is only used once every three or six months.
@@ -1334,7 +1334,7 @@ The **Migration path** section contains the following views:
     The Lexical Structure & Syntax Violations view displays names of columns, tables, functions, and procedures that violate BigQuery syntax.
 
   - BigQuery Reserved Keywords  
-    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( ``  `  `` ) characters.
+    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( `` ` `` ) characters.
 
   - Schema Coupling  
     The Schema Coupling view provides a high-level view on databases, schemas, and tables that are accessed together in a single query. This view can show what tables, schemas, and databases are referenced often and what you can use for migration planning.
@@ -1441,7 +1441,7 @@ The **Migration Plan** section of the report contains the following views:
   - SQL Warnings - To Review  
     The Warnings To Review view captures the areas that are mostly translated but requires some human inspection.
   - BigQuery Reserved Keywords  
-    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( ``  `  `` ) characters.
+    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( `` ` `` ) characters.
   - Database and Table Coupling  
     The Database Coupling view provides a high-level view on databases and tables that are accessed together in a single query. This view can show what tables and databases are often referenced and what can be used for migration planning.
   - Table Updates Schedule  
@@ -1590,7 +1590,7 @@ The **BigQuery Steady State** section contains the following views:
     
     The Metadata suggestions are achieved by analyzing the source data warehouse schema (like Partitioning and Primary Key in the source table) and finding the closest BigQuery equivalent to achieve similar optimization characteristics.
     
-    The Workload suggestions are achieved by analyzing the source query logs. The recommendation is determined by analyzing the workloads, especially `  WHERE  ` or `  JOIN  ` clauses in the analyzed query logs.
+    The Workload suggestions are achieved by analyzing the source query logs. The recommendation is determined by analyzing the workloads, especially `WHERE` or `JOIN` clauses in the analyzed query logs.
 
   - Partitions converted to Clusters  
     This view displays tables that have more than 10,000 partitions, based on their partitioning constraint definition. These tables tend to be good candidates for BigQuery clustering, which enables fine-grained table partitions.
@@ -1610,7 +1610,7 @@ The **Migration Plan** section of the report contains the following views:
   - SQL Warnings  
     The SQL Warnings view captures areas that are successfully translated, but require a review.
   - BigQuery Reserved Keywords  
-    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language. These keywords can't be used as identifiers unless enclosed by backtick ( ``  `  `` ) characters.
+    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language. These keywords can't be used as identifiers unless enclosed by backtick ( `` ` `` ) characters.
   - Table Updates Schedule  
     The Table Updates Schedule view shows when and how frequently tables are updated to help you plan how and when to move them.
   - BigLake External Tables  
@@ -1701,25 +1701,25 @@ After inspecting the dataset, if you would like to share it with a user that is 
 
 This section explains some common issues and troubleshooting techniques for migrating your data warehouse to BigQuery.
 
-### `     dwh-migration-dumper    ` tool errors
+### `dwh-migration-dumper` tool errors
 
-To troubleshoot errors and warnings in the `  dwh-migration-dumper  ` tool terminal output that occurred during metadata or query logs extraction, see [generate metadata troubleshooting](https://docs.cloud.google.com/bigquery/docs/generate-metadata#troubleshooting) .
+To troubleshoot errors and warnings in the `dwh-migration-dumper` tool terminal output that occurred during metadata or query logs extraction, see [generate metadata troubleshooting](https://docs.cloud.google.com/bigquery/docs/generate-metadata#troubleshooting) .
 
 ### Hive migration errors
 
 This section describes common issues that you might run into when you plan to migrate your data warehouse from Hive to BigQuery.
 
-The logging hook writes debug log messages in your `  hive-server2  ` logs. If you run into any issues, review the logging hook debug logs, which contains the `  MigrationAssessmentLoggingHook  ` string.
+The logging hook writes debug log messages in your `hive-server2` logs. If you run into any issues, review the logging hook debug logs, which contains the `MigrationAssessmentLoggingHook` string.
 
-#### Handle the `     ClassNotFoundException    ` error
+#### Handle the `ClassNotFoundException` error
 
-The error might be caused by the logging hook JAR file misplacement. Ensure that you added the JAR file to the auxlib folder on the Hive cluster. Alternatively, you can specify full path to the JAR file in the `  hive.aux.jars.path  ` property, for example, `  file:// /HiveMigrationAssessmentQueryLogsHooks_deploy.jar  ` .
+The error might be caused by the logging hook JAR file misplacement. Ensure that you added the JAR file to the auxlib folder on the Hive cluster. Alternatively, you can specify full path to the JAR file in the `hive.aux.jars.path` property, for example, ` file:// /HiveMigrationAssessmentQueryLogsHooks_deploy.jar  ` .
 
 #### Subfolders don't appear in the configured folder
 
 This issue might be caused by the misconfiguration or problems during logging hook initialization.
 
-Search your `  hive-server2  ` debug logs for the following logging hook messages:
+Search your `hive-server2` debug logs for the following logging hook messages:
 
     Unable to initialize logger, logging disabled
 
@@ -1734,7 +1734,7 @@ Review the issue details and see if there is anything that you need to correct t
 
 This issue might be caused by the problems encountered during an event processing or while writing to a file.
 
-Search in your `  hive-server2  ` debug logs for the following logging hook messages:
+Search in your `hive-server2` debug logs for the following logging hook messages:
 
     Failed to close writer for file
 
@@ -1748,15 +1748,15 @@ Review the issue details and see if there is anything that you need to correct t
 
 This issue might be caused by the logging hook thread queue overflow.
 
-Search in your `  hive-server2  ` debug logs for the following logging hook message:
+Search in your `hive-server2` debug logs for the following logging hook message:
 
     Writer queue is full. Ignoring event
 
-If there are such messages, consider increasing the `  dwhassessment.hook.queue.capacity  ` parameter.
+If there are such messages, consider increasing the `dwhassessment.hook.queue.capacity` parameter.
 
 ## What's next
 
-For more information about the `  dwh-migration-dumper  ` tool, see [dwh-migration-tools](https://github.com/google/dwh-migration-tools) .
+For more information about the `dwh-migration-dumper` tool, see [dwh-migration-tools](https://github.com/google/dwh-migration-tools) .
 
 You can also learn more about the following steps in data warehouse migration:
 

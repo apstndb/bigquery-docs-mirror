@@ -2,7 +2,7 @@
 
 This page shows you how to use Organization Policy Service custom constraints to restrict specific operations on the following Google Cloud resources:
 
-  - `  bigquerymigration.googleapis.com/MigrationWorkflow  `
+  - `bigquerymigration.googleapis.com/MigrationWorkflow`
 
 To learn more about Organization Policy, see [Custom organization policies](https://docs.cloud.google.com/organization-policy/overview#custom-organization-policies) .
 
@@ -22,7 +22,7 @@ By default, organization policies are inherited by the descendants of the resour
 
 ### Required roles
 
-To get the permissions that you need to manage custom organization policies, ask your administrator to grant you the [Organization Policy Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `  roles/orgpolicy.policyAdmin  ` ) IAM role on the organization resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to manage custom organization policies, ask your administrator to grant you the [Organization Policy Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `roles/orgpolicy.policyAdmin` ) IAM role on the organization resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -44,19 +44,19 @@ Click add **Custom constraint** .
 
 In the **Display name** box, enter a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use personally identifiable information (PII) or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
 
-In the **Constraint ID** box, enter the ID that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example `  custom.requireAssessmentTask  ` . This field can contain up to 70 characters, not counting the prefix ( `  custom.  ` ), for example, `  organizations/123456789/customConstraints/custom  ` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
+In the **Constraint ID** box, enter the ID that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example `custom.requireAssessmentTask` . This field can contain up to 70 characters, not counting the prefix ( `custom.` ), for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
 
 In the **Description** box, enter a human-readable description of the constraint. This description is used as an error message when the policy is violated. Include details about why the policy violation occurred and how to resolve the policy violation. Don't include PII or sensitive data in your description, because it could be exposed in error messages. This field can contain up to 2000 characters.
 
-In the **Resource type** box, select the name of the Google Cloud REST resource containing the object and field that you want to restrict—for example, `  container.googleapis.com/NodePool  ` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
+In the **Resource type** box, select the name of the Google Cloud REST resource containing the object and field that you want to restrict—for example, `container.googleapis.com/NodePool` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
 
-Under **Enforcement method** , select whether to enforce the constraint on a REST `  CREATE  ` method or both `  CREATE  ` and `  UPDATE  ` methods. If you enforce the constraint with the `  UPDATE  ` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
+Under **Enforcement method** , select whether to enforce the constraint on a REST `CREATE` method or both `CREATE` and `UPDATE` methods. If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
 
 To see supported methods for each service, find the service in [Services that support custom constraints](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services) .
 
 To define a condition, click edit **Edit condition** .
 
-1.  In the **Add condition** panel, create a CEL condition that refers to a supported service resource, for example, `  resource.management.autoUpgrade == false  ` . This field can contain up to 1000 characters. For details about CEL usage, see [Common Expression Language](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) . For more information about the service resources you can use in your custom constraints, see [Custom constraint supported services](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services) .
+1.  In the **Add condition** panel, create a CEL condition that refers to a supported service resource, for example, `resource.management.autoUpgrade == false` . This field can contain up to 1000 characters. For details about CEL usage, see [Common Expression Language](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) . For more information about the service resources you can use in your custom constraints, see [Custom constraint supported services](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services) .
 2.  Click **Save** .
 
 Under **Action** , select whether to allow or deny the evaluated method if the condition is met.
@@ -85,24 +85,24 @@ To create a custom constraint, create a YAML file using the following format:
 
 Replace the following:
 
-  - `  ORGANIZATION_ID  ` : your organization ID, such as `  123456789  ` .
-  - `  CONSTRAINT_NAME  ` : the name that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example, `  custom.requireAssessmentTask  ` . This field can contain up to 70 characters, not counting the prefix ( `  custom.  ` )— for example, `  organizations/123456789/customConstraints/custom  ` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
-  - `  RESOURCE_NAME  ` : the fully qualified name of the Google Cloud resource containing the object and field that you want to restrict. For example, `  bigquerymigration.googleapis.com/MigrationWorkflow  ` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
-  - `  methodTypes  ` : the REST methods that the constraint is enforced on. Can be `  CREATE  ` or both `  CREATE  ` and `  UPDATE  ` . If you enforce the constraint with the `  UPDATE  ` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
-  - `  CONDITION  ` : a [CEL condition](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) that is written against a representation of a supported service resource. This field can contain up to 1000 characters. For example, `  resource.tasks.all(k, resource.tasks[k].type.startsWith('Assessment'))  ` .
-  - `  ACTION  ` : the action to take if the `  condition  ` is met. Possible values are `  ALLOW  ` and `  DENY  ` .
+  - `  ORGANIZATION_ID  ` : your organization ID, such as `123456789` .
+  - `  CONSTRAINT_NAME  ` : the name that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example, `custom.requireAssessmentTask` . This field can contain up to 70 characters, not counting the prefix ( `custom.` )— for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
+  - `  RESOURCE_NAME  ` : the fully qualified name of the Google Cloud resource containing the object and field that you want to restrict. For example, `bigquerymigration.googleapis.com/MigrationWorkflow` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
+  - `methodTypes` : the REST methods that the constraint is enforced on. Can be `CREATE` or both `CREATE` and `UPDATE` . If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
+  - `  CONDITION  ` : a [CEL condition](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) that is written against a representation of a supported service resource. This field can contain up to 1000 characters. For example, `resource.tasks.all(k, resource.tasks[k].type.startsWith('Assessment'))` .
+  - `  ACTION  ` : the action to take if the `condition` is met. Possible values are `ALLOW` and `DENY` .
   - `  DISPLAY_NAME  ` : a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use PII or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
   - `  DESCRIPTION  ` : a human-friendly description of the constraint to display as an error message when the policy is violated. This field can contain up to 2000 characters.
 
-After you have created the YAML file for a new custom constraint, you must set it up to make it available for organization policies in your organization. To set up a custom constraint, use the [`  gcloud org-policies set-custom-constraint  `](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint) command:
+After you have created the YAML file for a new custom constraint, you must set it up to make it available for organization policies in your organization. To set up a custom constraint, use the [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint) command:
 
     gcloud org-policies set-custom-constraint CONSTRAINT_PATH
 
-Replace `  CONSTRAINT_PATH  ` with the full path to your custom constraint file. For example, `  /home/user/customconstraint.yaml  ` .
+Replace `  CONSTRAINT_PATH  ` with the full path to your custom constraint file. For example, `/home/user/customconstraint.yaml` .
 
 After this operation is complete, your custom constraints are available as organization policies in your list of Google Cloud organization policies.
 
-To verify that the custom constraint exists, use the [`  gcloud org-policies list-custom-constraints  `](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints) command:
+To verify that the custom constraint exists, use the [`gcloud org-policies list-custom-constraints`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints) command:
 
     gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
 
@@ -156,15 +156,15 @@ To create an organization policy with boolean rules, create a policy YAML file t
 Replace the following:
 
   - `  PROJECT_ID  ` : the project that you want to enforce your constraint on.
-  - `  CONSTRAINT_NAME  ` : the name you defined for your custom constraint. For example, `  custom.requireAssessmentTask  ` .
+  - `  CONSTRAINT_NAME  ` : the name you defined for your custom constraint. For example, `custom.requireAssessmentTask` .
 
-To enforce the organization policy in [dry-run mode](https://docs.cloud.google.com/organization-policy/test-policies) , run the following command with the `  dryRunSpec  ` flag:
+To enforce the organization policy in [dry-run mode](https://docs.cloud.google.com/organization-policy/test-policies) , run the following command with the `dryRunSpec` flag:
 
     gcloud org-policies set-policy POLICY_PATH --update-mask=dryRunSpec
 
 Replace `  POLICY_PATH  ` with the full path to your organization policy YAML file. The policy requires up to 15 minutes to take effect.
 
-After you verify that the organization policy in dry-run mode works as intended, set the live policy with the `  org-policies set-policy  ` command and the `  spec  ` flag:
+After you verify that the organization policy in dry-run mode works as intended, set the live policy with the `org-policies set-policy` command and the `spec` flag:
 
     gcloud org-policies set-policy POLICY_PATH --update-mask=spec
 
@@ -172,7 +172,7 @@ Replace `  POLICY_PATH  ` with the full path to your organization policy YAML fi
 
 ## Test the custom organization policy
 
-The following example creates a custom constraint and policy that require all new migration workflows in a specific project to have a task type starting with `  Assessment  ` . Use this custom organization policy if you want to specify that a project should only be used for migration assessments.
+The following example creates a custom constraint and policy that require all new migration workflows in a specific project to have a task type starting with `Assessment` . Use this custom organization policy if you want to specify that a project should only be used for migration assessments.
 
 Before you begin, have the following information:
 
@@ -181,7 +181,7 @@ Before you begin, have the following information:
 
 ### Create the constraint
 
-1.  Save the following file as `  constraint-assessment-tasks.yaml  ` :
+1.  Save the following file as `constraint-assessment-tasks.yaml` :
     
         name: organizations/ORGANIZATION_ID/customConstraints/custom.requireAssessmentTask
         resourceTypes:
@@ -210,7 +210,7 @@ Before you begin, have the following information:
 
 ### Create the policy
 
-1.  Save the following file as `  policy-assessment-tasks.yaml  ` :
+1.  Save the following file as `policy-assessment-tasks.yaml` :
     
         name: projects/PROJECT_ID/policies/custom.requireAssessmentTask
         spec:
@@ -236,7 +236,7 @@ After you apply the policy, wait about two minutes for Google Cloud to start enf
 
 ### Test the policy
 
-To test the custom organization policy, you can try to create a non-assessment workflow. To do this, first create a `  workflow.json  ` file\`, similar to the following example:
+To test the custom organization policy, you can try to create a non-assessment workflow. To do this, first create a `workflow.json` file\`, similar to the following example:
 
     {
       "tasks": {
@@ -263,11 +263,11 @@ To test the custom organization policy, you can try to create a non-assessment w
       "display_name": "Translation request"
     }
 
-Once you have created a `  workflow.json  ` file, try to create the workflow with the following command:
+Once you have created a `workflow.json` file, try to create the workflow with the following command:
 
     bq mk --migration_workflow --location=us --config_file=workflow.json --project_id="PROJECT_ID"
 
-Replace `  PROJECT_ID  ` with your project ID.
+Replace `PROJECT_ID` with your project ID.
 
 If you see a permission denied error, then your policy is successfully applied.
 
@@ -281,79 +281,79 @@ Field
 
 bigquerymigration.googleapis.com/MigrationWorkflow
 
-`  resource.displayName  `
+`resource.displayName`
 
-`  resource.tasks[*].assessmentTaskDetails.dataSource  `
+`resource.tasks[*].assessmentTaskDetails.dataSource`
 
-`  resource.tasks[*].assessmentTaskDetails.featureHandle.addShareableDataset  `
+`resource.tasks[*].assessmentTaskDetails.featureHandle.addShareableDataset`
 
-`  resource.tasks[*].assessmentTaskDetails.inputPath  `
+`resource.tasks[*].assessmentTaskDetails.inputPath`
 
-`  resource.tasks[*].assessmentTaskDetails.outputDataset  `
+`resource.tasks[*].assessmentTaskDetails.outputDataset`
 
-`  resource.tasks[*].assessmentTaskDetails.querylogsPath  `
+`resource.tasks[*].assessmentTaskDetails.querylogsPath`
 
-`  resource.tasks[*].translationConfigDetails.gcsSourcePath  `
+`resource.tasks[*].translationConfigDetails.gcsSourcePath`
 
-`  resource.tasks[*].translationConfigDetails.gcsTargetPath  `
+`resource.tasks[*].translationConfigDetails.gcsTargetPath`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.attribute  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.attribute`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.database  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.database`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.relation  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.relation`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.schema  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.schema`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.type  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.type`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.attribute  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.attribute`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.database  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.database`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.relation  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.relation`
 
-`  resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.schema  `
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.schema`
 
-`  resource.tasks[*].translationConfigDetails.requestSource  `
+`resource.tasks[*].translationConfigDetails.requestSource`
 
-`  resource.tasks[*].translationConfigDetails.sourceDialect.teradataDialect.mode  `
+`resource.tasks[*].translationConfigDetails.sourceDialect.teradataDialect.mode`
 
-`  resource.tasks[*].translationConfigDetails.sourceEnv.defaultDatabase  `
+`resource.tasks[*].translationConfigDetails.sourceEnv.defaultDatabase`
 
-`  resource.tasks[*].translationConfigDetails.sourceEnv.metadataStoreDataset  `
+`resource.tasks[*].translationConfigDetails.sourceEnv.metadataStoreDataset`
 
-`  resource.tasks[*].translationConfigDetails.sourceEnv.schemaSearchPath  `
+`resource.tasks[*].translationConfigDetails.sourceEnv.schemaSearchPath`
 
-`  resource.tasks[*].translationConfigDetails.targetDialect.teradataDialect.mode  `
+`resource.tasks[*].translationConfigDetails.targetDialect.teradataDialect.mode`
 
-`  resource.tasks[*].translationConfigDetails.targetTypes  `
+`resource.tasks[*].translationConfigDetails.targetTypes`
 
-`  resource.tasks[*].translationDetails.sourceEnvironment.defaultDatabase  `
+`resource.tasks[*].translationDetails.sourceEnvironment.defaultDatabase`
 
-`  resource.tasks[*].translationDetails.sourceEnvironment.metadataStoreDataset  `
+`resource.tasks[*].translationDetails.sourceEnvironment.metadataStoreDataset`
 
-`  resource.tasks[*].translationDetails.sourceEnvironment.schemaSearchPath  `
+`resource.tasks[*].translationDetails.sourceEnvironment.schemaSearchPath`
 
-`  resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.baseUri  `
+`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.baseUri`
 
-`  resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.encoding  `
+`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.encoding`
 
-`  resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.literal.relativePath  `
+`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.literal.relativePath`
 
-`  resource.tasks[*].translationDetails.sourceTargetMapping.targetSpec.relativePath  `
+`resource.tasks[*].translationDetails.sourceTargetMapping.targetSpec.relativePath`
 
-`  resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.rewriteTarget  `
+`resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.rewriteTarget`
 
-`  resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.suggestionType  `
+`resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.suggestionType`
 
-`  resource.tasks[*].translationDetails.targetBaseUri  `
+`resource.tasks[*].translationDetails.targetBaseUri`
 
-`  resource.tasks[*].translationDetails.targetReturnLiterals  `
+`resource.tasks[*].translationDetails.targetReturnLiterals`
 
-`  resource.tasks[*].translationDetails.targetTypes  `
+`resource.tasks[*].translationDetails.targetTypes`
 
-`  resource.tasks[*].type  `
+`resource.tasks[*].type`
 
 ## What's next
 

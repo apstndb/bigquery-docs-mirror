@@ -1,22 +1,22 @@
 GoogleSQL for BigQuery supports navigation functions. Navigation functions are a subset of window functions. To create a window function call and learn about the syntax for window functions, see [Window function\_calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
-Navigation functions generally compute some `  value_expression  ` over a different row in the window frame from the current row. The `  OVER  ` clause syntax varies across navigation functions.
+Navigation functions generally compute some `value_expression` over a different row in the window frame from the current row. The `OVER` clause syntax varies across navigation functions.
 
-For all navigation functions, the result data type is the same type as `  value_expression  ` .
+For all navigation functions, the result data type is the same type as `value_expression` .
 
 ## Function list
 
-| Name                                                                                                                                          | Summary                                                                    |
-| --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| [`         FIRST_VALUE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#first_value)         | Gets a value for the first row in the current window frame.                |
-| [`         LAG        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lag)                         | Gets a value for a preceding row.                                          |
-| [`         LAST_VALUE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#last_value)           | Gets a value for the last row in the current window frame.                 |
-| [`         LEAD        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lead)                       | Gets a value for a subsequent row.                                         |
-| [`         NTH_VALUE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#nth_value)             | Gets a value for the Nth row of the current window frame.                  |
-| [`         PERCENTILE_CONT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont) | Computes the specified percentile for a value, using linear interpolation. |
-| [`         PERCENTILE_DISC        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc) | Computes the specified percentile for a discrete value.                    |
+| Name                                                                                                                         | Summary                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| [`FIRST_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#first_value)         | Gets a value for the first row in the current window frame.                |
+| [`LAG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lag)                         | Gets a value for a preceding row.                                          |
+| [`LAST_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#last_value)           | Gets a value for the last row in the current window frame.                 |
+| [`LEAD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lead)                       | Gets a value for a subsequent row.                                         |
+| [`NTH_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#nth_value)             | Gets a value for the Nth row of the current window frame.                  |
+| [`PERCENTILE_CONT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont) | Computes the specified percentile for a value, using linear interpolation. |
+| [`PERCENTILE_DISC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc) | Computes the specified percentile for a discrete value.                    |
 
-## `     FIRST_VALUE    `
+## `FIRST_VALUE`
 
     FIRST_VALUE (value_expression [{RESPECT | IGNORE} NULLS])
     OVER over_clause
@@ -32,19 +32,19 @@ For all navigation functions, the result data type is the same type as `  value_
 
 **Description**
 
-Returns the value of the `  value_expression  ` for the first row in the current window frame.
+Returns the value of the `value_expression` for the first row in the current window frame.
 
-This function includes `  NULL  ` values in the calculation unless `  IGNORE NULLS  ` is present. If `  IGNORE NULLS  ` is present, the function excludes `  NULL  ` values from the calculation.
+This function includes `NULL` values in the calculation unless `IGNORE NULLS` is present. If `IGNORE NULLS` is present, the function excludes `NULL` values from the calculation.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Supported Argument Types**
 
-`  value_expression  ` can be any data type that an expression can return.
+`value_expression` can be any data type that an expression can return.
 
 **Return Data Type**
 
-Same type as `  value_expression  ` .
+Same type as `value_expression` .
 
 **Examples**
 
@@ -92,7 +92,7 @@ The following example computes the fastest time for each division.
      | Suzy Slane      | 03:06:24    | F35-39   | 02:54:11     | 733              |
      +-----------------+-------------+----------+--------------+------------------*/
 
-## `     LAG    `
+## `LAG`
 
     LAG (value_expression[, offset [, default_expression]])
     OVER over_clause
@@ -107,25 +107,25 @@ The following example computes the fastest time for each division.
 
 **Description**
 
-Returns the value of the `  value_expression  ` on a preceding row. Changing the `  offset  ` value changes which preceding row is returned; the default value is `  1  ` , indicating the previous row in the window frame. An error occurs if `  offset  ` is NULL or a negative value.
+Returns the value of the `value_expression` on a preceding row. Changing the `offset` value changes which preceding row is returned; the default value is `1` , indicating the previous row in the window frame. An error occurs if `offset` is NULL or a negative value.
 
-The optional `  default_expression  ` is used if there isn't a row in the window frame at the specified offset. This expression must be a constant expression and its type must be implicitly coercible to the type of `  value_expression  ` . If left unspecified, `  default_expression  ` defaults to NULL.
+The optional `default_expression` is used if there isn't a row in the window frame at the specified offset. This expression must be a constant expression and its type must be implicitly coercible to the type of `value_expression` . If left unspecified, `default_expression` defaults to NULL.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Supported Argument Types**
 
-  - `  value_expression  ` can be any data type that can be returned from an expression.
-  - `  offset  ` must be a non-negative integer literal or parameter.
-  - `  default_expression  ` must be compatible with the value expression type.
+  - `value_expression` can be any data type that can be returned from an expression.
+  - `offset` must be a non-negative integer literal or parameter.
+  - `default_expression` must be compatible with the value expression type.
 
 **Return Data Type**
 
-Same type as `  value_expression  ` .
+Same type as `value_expression` .
 
 **Examples**
 
-The following example illustrates a basic use of the `  LAG  ` function.
+The following example illustrates a basic use of the `LAG` function.
 
     WITH finishers AS
      (SELECT 'Sophia Liu' as name,
@@ -162,7 +162,7 @@ The following example illustrates a basic use of the `  LAG  ` function.
      | Suzy Slane      | 03:06:24    | F35-39   | Desiree Berry    |
      +-----------------+-------------+----------+------------------*/
 
-This next example uses the optional `  offset  ` parameter.
+This next example uses the optional `offset` parameter.
 
     WITH finishers AS
      (SELECT 'Sophia Liu' as name,
@@ -236,7 +236,7 @@ The following example replaces NULL values with a default value.
      | Suzy Slane      | 03:06:24    | F35-39   | Lauren Matthews   |
      +-----------------+-------------+----------+-------------------*/
 
-## `     LAST_VALUE    `
+## `LAST_VALUE`
 
     LAST_VALUE (value_expression [{RESPECT | IGNORE} NULLS])
     OVER over_clause
@@ -252,19 +252,19 @@ The following example replaces NULL values with a default value.
 
 **Description**
 
-Returns the value of the `  value_expression  ` for the last row in the current window frame.
+Returns the value of the `value_expression` for the last row in the current window frame.
 
-This function includes `  NULL  ` values in the calculation unless `  IGNORE NULLS  ` is present. If `  IGNORE NULLS  ` is present, the function excludes `  NULL  ` values from the calculation.
+This function includes `NULL` values in the calculation unless `IGNORE NULLS` is present. If `IGNORE NULLS` is present, the function excludes `NULL` values from the calculation.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Supported Argument Types**
 
-`  value_expression  ` can be any data type that an expression can return.
+`value_expression` can be any data type that an expression can return.
 
 **Return Data Type**
 
-Same type as `  value_expression  ` .
+Same type as `value_expression` .
 
 **Examples**
 
@@ -312,7 +312,7 @@ The following example computes the slowest time for each division.
      | Suzy Slane      | 03:06:24    | F35-39   | 03:06:24     | 0                |
      +-----------------+-------------+----------+--------------+------------------*/
 
-## `     LEAD    `
+## `LEAD`
 
     LEAD (value_expression[, offset [, default_expression]])
     OVER over_clause
@@ -327,25 +327,25 @@ The following example computes the slowest time for each division.
 
 **Description**
 
-Returns the value of the `  value_expression  ` on a subsequent row. Changing the `  offset  ` value changes which subsequent row is returned; the default value is `  1  ` , indicating the next row in the window frame. An error occurs if `  offset  ` is NULL or a negative value.
+Returns the value of the `value_expression` on a subsequent row. Changing the `offset` value changes which subsequent row is returned; the default value is `1` , indicating the next row in the window frame. An error occurs if `offset` is NULL or a negative value.
 
-The optional `  default_expression  ` is used if there isn't a row in the window frame at the specified offset. This expression must be a constant expression and its type must be implicitly coercible to the type of `  value_expression  ` . If left unspecified, `  default_expression  ` defaults to NULL.
+The optional `default_expression` is used if there isn't a row in the window frame at the specified offset. This expression must be a constant expression and its type must be implicitly coercible to the type of `value_expression` . If left unspecified, `default_expression` defaults to NULL.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Supported Argument Types**
 
-  - `  value_expression  ` can be any data type that can be returned from an expression.
-  - `  offset  ` must be a non-negative integer literal or parameter.
-  - `  default_expression  ` must be compatible with the value expression type.
+  - `value_expression` can be any data type that can be returned from an expression.
+  - `offset` must be a non-negative integer literal or parameter.
+  - `default_expression` must be compatible with the value expression type.
 
 **Return Data Type**
 
-Same type as `  value_expression  ` .
+Same type as `value_expression` .
 
 **Examples**
 
-The following example illustrates a basic use of the `  LEAD  ` function.
+The following example illustrates a basic use of the `LEAD` function.
 
     WITH finishers AS
      (SELECT 'Sophia Liu' as name,
@@ -382,7 +382,7 @@ The following example illustrates a basic use of the `  LEAD  ` function.
      | Suzy Slane      | 03:06:24    | F35-39   | NULL            |
      +-----------------+-------------+----------+-----------------*/
 
-This next example uses the optional `  offset  ` parameter.
+This next example uses the optional `offset` parameter.
 
     WITH finishers AS
      (SELECT 'Sophia Liu' as name,
@@ -456,7 +456,7 @@ The following example replaces NULL values with a default value.
      | Suzy Slane      | 03:06:24    | F35-39   | Nobody           |
      +-----------------+-------------+----------+------------------*/
 
-## `     NTH_VALUE    `
+## `NTH_VALUE`
 
     NTH_VALUE (value_expression, constant_integer_expression [{RESPECT | IGNORE} NULLS])
     OVER over_clause
@@ -472,20 +472,20 @@ The following example replaces NULL values with a default value.
 
 **Description**
 
-Returns the value of `  value_expression  ` at the Nth row of the current window frame, where Nth is defined by `  constant_integer_expression  ` . Returns NULL if there is no such row.
+Returns the value of `value_expression` at the Nth row of the current window frame, where Nth is defined by `constant_integer_expression` . Returns NULL if there is no such row.
 
-This function includes `  NULL  ` values in the calculation unless `  IGNORE NULLS  ` is present. If `  IGNORE NULLS  ` is present, the function excludes `  NULL  ` values from the calculation.
+This function includes `NULL` values in the calculation unless `IGNORE NULLS` is present. If `IGNORE NULLS` is present, the function excludes `NULL` values from the calculation.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Supported Argument Types**
 
-  - `  value_expression  ` can be any data type that can be returned from an expression.
-  - `  constant_integer_expression  ` can be any constant expression that returns an integer.
+  - `value_expression` can be any data type that can be returned from an expression.
+  - `constant_integer_expression` can be any constant expression that returns an integer.
 
 **Return Data Type**
 
-Same type as `  value_expression  ` .
+Same type as `value_expression` .
 
 **Examples**
 
@@ -535,7 +535,7 @@ Same type as `  value_expression  ` .
      | Suzy Slane      | 03:06:24    | F35-39   | 02:54:11     | 03:01:17       |
      +-----------------+-------------+----------+--------------+----------------*/
 
-## `     PERCENTILE_CONT    `
+## `PERCENTILE_CONT`
 
     PERCENTILE_CONT (value_expression, percentile [{RESPECT | IGNORE} NULLS])
     OVER over_clause
@@ -551,32 +551,32 @@ Same type as `  value_expression  ` .
 
 Computes the specified percentile value for the value\_expression, with linear interpolation.
 
-This function ignores NULL values if `  RESPECT NULLS  ` is absent. If `  RESPECT NULLS  ` is present:
+This function ignores NULL values if `RESPECT NULLS` is absent. If `RESPECT NULLS` is present:
 
-  - Interpolation between two `  NULL  ` values returns `  NULL  ` .
-  - Interpolation between a `  NULL  ` value and a non- `  NULL  ` value returns the non- `  NULL  ` value.
+  - Interpolation between two `NULL` values returns `NULL` .
+  - Interpolation between a `NULL` value and a non- `NULL` value returns the non- `NULL` value.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
-`  PERCENTILE_CONT  ` can be used with differential privacy. To learn more, see [Differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .
+`PERCENTILE_CONT` can be used with differential privacy. To learn more, see [Differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .
 
 **Supported Argument Types**
 
-  - `  value_expression  ` and `  percentile  ` must have one of the following types:
-      - `  NUMERIC  `
-      - `  BIGNUMERIC  `
-      - `  FLOAT64  `
-  - `  percentile  ` must be a literal in the range `  [0, 1]  ` .
+  - `value_expression` and `percentile` must have one of the following types:
+      - `NUMERIC`
+      - `BIGNUMERIC`
+      - `FLOAT64`
+  - `percentile` must be a literal in the range `[0, 1]` .
 
 **Return Data Type**
 
 The return data type is determined by the argument types with the following table.
 
-| INPUT                       | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| --------------------------- | --------------------------- | --------------------------- | ------------------------ |
-| `        NUMERIC       `    | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       ` |
+| INPUT        | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| ------------ | ------------ | ------------ | --------- |
+| `NUMERIC`    | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| `BIGNUMERIC` | `BIGNUMERIC` | `BIGNUMERIC` | `FLOAT64` |
+| `FLOAT64`    | `FLOAT64`    | `FLOAT64`    | `FLOAT64` |
 
 **Examples**
 
@@ -612,7 +612,7 @@ The following example computes the value for some percentiles from a column of v
      | NULL | 0           | 1      | 2.6          | 3   |
      +------+-------------+--------+--------------+-----*/
 
-## `     PERCENTILE_DISC    `
+## `PERCENTILE_DISC`
 
     PERCENTILE_DISC (value_expression, percentile [{RESPECT | IGNORE} NULLS])
     OVER over_clause
@@ -626,25 +626,25 @@ The following example computes the value for some percentiles from a column of v
 
 **Description**
 
-Computes the specified percentile value for a discrete `  value_expression  ` . The returned value is the first sorted value of `  value_expression  ` with cumulative distribution greater than or equal to the given `  percentile  ` value.
+Computes the specified percentile value for a discrete `value_expression` . The returned value is the first sorted value of `value_expression` with cumulative distribution greater than or equal to the given `percentile` value.
 
-This function ignores `  NULL  ` values unless `  RESPECT NULLS  ` is present.
+This function ignores `NULL` values unless `RESPECT NULLS` is present.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Note:** If you're querying a large dataset, you can compute results faster and save resources by using [KLL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions) for approximate percentile values. For more information, see [Sketches](https://docs.cloud.google.com/bigquery/docs/sketches) .
 
 **Supported Argument Types**
 
-  - `  value_expression  ` can be any orderable type.
-  - `  percentile  ` must be a literal in the range `  [0, 1]  ` , with one of the following types:
-      - `  NUMERIC  `
-      - `  BIGNUMERIC  `
-      - `  FLOAT64  `
+  - `value_expression` can be any orderable type.
+  - `percentile` must be a literal in the range `[0, 1]` , with one of the following types:
+      - `NUMERIC`
+      - `BIGNUMERIC`
+      - `FLOAT64`
 
 **Return Data Type**
 
-Same type as `  value_expression  ` .
+Same type as `value_expression` .
 
 **Examples**
 

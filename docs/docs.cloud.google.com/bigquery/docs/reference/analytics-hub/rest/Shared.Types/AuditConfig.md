@@ -4,7 +4,7 @@
 
 Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.
 
-If there are AuditConfigs for both `  allServices  ` and a specific service, the union of the two AuditConfigs is used for that service: the log\_types specified in each AuditConfig are enabled, and the exemptedMembers in each AuditLogConfig are exempted.
+If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log\_types specified in each AuditConfig are enabled, and the exemptedMembers in each AuditLogConfig are exempted.
 
 Example Policy with multiple AuditConfigs:
 
@@ -44,7 +44,7 @@ Example Policy with multiple AuditConfigs:
       ]
     }
 
-For sampleservice, this policy enables DATA\_READ, DATA\_WRITE and ADMIN\_READ logging. It also exempts `  jose@example.com  ` from DATA\_READ logging, and `  aliya@example.com  ` from DATA\_WRITE logging.
+For sampleservice, this policy enables DATA\_READ, DATA\_WRITE and ADMIN\_READ logging. It also exempts `jose@example.com` from DATA\_READ logging, and `aliya@example.com` from DATA\_WRITE logging.
 
 <table>
 <colgroup>
@@ -57,29 +57,22 @@ For sampleservice, this policy enables DATA\_READ, DATA\_WRITE and ADMIN\_READ l
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;service&quot;: string,
-  &quot;auditLogConfigs&quot;: [
-    {
-      object (AuditLogConfig)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;service&quot;: string,&quot;auditLogConfigs&quot;: [{object (AuditLogConfig)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  service  `
+`service`
 
-`  string  `
+`string`
 
-Specifies a service that will be enabled for audit logging. For example, `  storage.googleapis.com  ` , `  cloudsql.googleapis.com  ` . `  allServices  ` is a special value that covers all services.
+Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com` , `cloudsql.googleapis.com` . `allServices` is a special value that covers all services.
 
-`  auditLogConfigs[]  `
+`auditLogConfigs[]`
 
-`  object ( AuditLogConfig  ` )
+` object ( AuditLogConfig  ` )
 
 The configuration for logging of each type of permission.
 
@@ -114,26 +107,21 @@ This enables 'DATA\_READ' and 'DATA\_WRITE' logging, while exempting <jose@examp
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;logType&quot;: enum (LogType),
-  &quot;exemptedMembers&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;logType&quot;: enum (LogType),&quot;exemptedMembers&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  logType  `
+`logType`
 
-`  enum ( LogType  ` )
+` enum ( LogType  ` )
 
 The log type that this config enables.
 
-`  exemptedMembers[]  `
+`exemptedMembers[]`
 
-`  string  `
+`string`
 
 Specifies the identities that do not cause logging for this type of permission. Follows the same format of `  Binding.members  ` .

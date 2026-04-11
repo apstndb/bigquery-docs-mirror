@@ -10,7 +10,7 @@ Updates information in an existing dataset. The update method replaces the entir
 
 ### HTTP request
 
-`  PUT https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}  `
+`PUT https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,15 +18,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the dataset being updated
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the dataset being updated
 
@@ -34,15 +34,15 @@ Required. Dataset ID of the dataset being updated
 
 Parameters
 
-`  updateMode  `
+`updateMode`
 
-`  enum ( UpdateMode  ` )
+` enum ( UpdateMode  ` )
 
 Optional. Specifies the fields of dataset that update/patch operation is targeting By default, both metadata and ACL fields are updated.
 
-`  accessPolicyVersion  `
+`accessPolicyVersion`
 
-`  integer  `
+`integer`
 
 Optional. The version of the provided access policy schema. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.
 
@@ -62,7 +62,7 @@ If successful, the response body contains an instance of `  Dataset  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

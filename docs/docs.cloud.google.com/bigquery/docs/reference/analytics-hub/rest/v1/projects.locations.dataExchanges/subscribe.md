@@ -11,7 +11,7 @@ Creates a Subscription to a Data Clean Room. This is a long-running operation as
 
 ### HTTP request
 
-`  POST https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*}:subscribe  `
+`POST https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*}:subscribe`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,11 +19,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the Data Exchange. e.g. `  projects/publisherproject/locations/us/dataExchanges/123  `
+Required. Resource name of the Data Exchange. e.g. `projects/publisherproject/locations/us/dataExchanges/123`
 
 ### Request body
 
@@ -40,41 +40,34 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;destination&quot;: string,
-  &quot;destinationDataset&quot;: {
-    object (DestinationDataset)
-  },
-  &quot;subscription&quot;: string,
-  &quot;subscriberContact&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destination&quot;: string,&quot;destinationDataset&quot;: {object (DestinationDataset)},&quot;subscription&quot;: string,&quot;subscriberContact&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  destination  `
+`destination`
 
-`  string  `
+`string`
 
-Required. The parent resource path of the Subscription. e.g. `  projects/subscriberproject/locations/us  `
+Required. The parent resource path of the Subscription. e.g. `projects/subscriberproject/locations/us`
 
-`  destinationDataset  `
+`destinationDataset`
 
-`  object ( DestinationDataset  ` )
+` object ( DestinationDataset  ` )
 
 Optional. BigQuery destination dataset to create for the subscriber.
 
-`  subscription  `
+`subscription`
 
-`  string  `
+`string`
 
-Required. Name of the subscription to create. e.g. `  subscription1  `
+Required. Name of the subscription to create. e.g. `subscription1`
 
-`  subscriberContact  `
+`subscriberContact`
 
-`  string  `
+`string`
 
 Email of the subscriber.
 
@@ -86,19 +79,19 @@ If successful, the response body contains an instance of `  Operation  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  destination  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `destination` resource:
 
-  - `  analyticshub.subscriptions.create  `
+  - `analyticshub.subscriptions.create`
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  analyticshub.dataExchanges.subscribe  `
+  - `analyticshub.dataExchanges.subscribe`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

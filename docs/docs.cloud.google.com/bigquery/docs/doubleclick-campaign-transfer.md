@@ -77,11 +77,11 @@ Before you create a Campaign Manager data transfer:
     
     After completing this step, you will receive a Cloud Storage bucket name similar to the following:
     
-    `  dcdt_-dcm_account123456  `
+    `dcdt_-dcm_account123456`
     
     The Google Cloud team doesn't have the ability to generate or grant access to Campaign Manager DTv2 files on your behalf. Contact Campaign Manager [support](https://support.google.com/campaignmanager/answer/9026876?&ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2) , your agency, or your Campaign Manager reseller for access to Campaign Manager DTv2 files.
 
-  - If you intend to set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -89,7 +89,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -98,18 +98,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Campaign Manager roles
 
@@ -121,7 +121,7 @@ Setting up a Campaign Manager data transfer requires a:
 
   - **Cloud Storage bucket** : The Cloud Storage bucket URI for your Campaign Manager DTv2 files as described in [Before you begin](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#before_you_begin) . The bucket name should look like the following:
     
-    `  dcdt_-dcm_account123456  `
+    `dcdt_-dcm_account123456`
 
   - **Campaign Manager ID** : Your Campaign Manager Network, Advertiser, or Floodlight ID. Network ID is the parent in the hierarchy.
 
@@ -131,9 +131,9 @@ To retrieve your Campaign Manager ID, you can use the Cloud Storage [console](ht
 
 For example:
 
-  - In a file named `  dcm_account 123456 _activity_*  ` , the ID is **123456** .
-  - In a file named `  dcm_floodlight 7890 _activity_*  ` , the ID is **7890** .
-  - In a file named `  dcm_advertiser 567 _activity_*  ` , the ID is **567** .
+  - In a file named `dcm_account 123456 _activity_*` , the ID is **123456** .
+  - In a file named `dcm_floodlight 7890 _activity_*` , the ID is **7890** .
+  - In a file named `dcm_advertiser 567 _activity_*` , the ID is **567** .
 
 ### Finding your filename prefix
 
@@ -141,7 +141,7 @@ In rare cases, the files in your Cloud Storage bucket may have custom, nonstanda
 
 For example:
 
-  - In a file named `  dcm_account123456 custom _activity_*  ` , the prefix is **dcm\_account123456custom** — everything before `  _activity  ` .
+  - In a file named `dcm_account123456 custom _activity_*` , the prefix is **dcm\_account123456custom** — everything before `_activity` .
 
 Contact [Campaign Manager support](https://support.google.com/campaignmanager/answer/9026876?&ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2) if you need help.
 
@@ -161,7 +161,7 @@ Contact [Campaign Manager support](https://support.google.com/campaignmanager/an
         
         ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/dcm-transfer-source.png)
     
-      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `  My Transfer  ` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
         
         ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
     
@@ -176,7 +176,7 @@ Contact [Campaign Manager support](https://support.google.com/campaignmanager/an
     
       - In the **Data source details** section:
         
-          - For **Cloud Storage bucket** , enter or browse for the name of the Cloud Storage bucket that stores your Data Transfer V2.0 files. When you enter the bucket name, don't include `  gs://  ` .
+          - For **Cloud Storage bucket** , enter or browse for the name of the Cloud Storage bucket that stores your Data Transfer V2.0 files. When you enter the bucket name, don't include `gs://` .
           - For **DoubleClick ID** , enter the appropriate Campaign Manager ID.
           - (Optional) If your files have [standard names like these examples](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#find-id) , leave the **File name prefix** field blank. Specify a [filename prefix](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#filename-prefix) if the files in your Cloud Storage bucket have custom file names.
         
@@ -191,12 +191,12 @@ Contact [Campaign Manager support](https://support.google.com/campaignmanager/an
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` . The following flags are also required:
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `  --data_source  `
-  - `  --target_dataset  `
-  - `  --display_name  `
-  - `  --params  `
+  - `--data_source`
+  - `--target_dataset`
+  - `--display_name`
+  - `--params`
 
 <!-- end list -->
 
@@ -214,14 +214,14 @@ Where:
   - project\_id is your project ID.
   - dataset is the target dataset for the data transfer configuration.
   - name is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - parameters contains the parameters for the created data transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . For Campaign Manager, you must supply the `  bucket  ` and `  network_id  ` parameters. `  bucket  ` is the Cloud Storage bucket that contains your Campaign Manager DTv2 files. `  network_id  ` is your network, floodlight, or advertiser ID.
-  - data\_source is the data source — `  dcm_dt  ` (Campaign Manager).
+  - parameters contains the parameters for the created data transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For Campaign Manager, you must supply the `bucket` and `network_id` parameters. `bucket` is the Cloud Storage bucket that contains your Campaign Manager DTv2 files. `network_id` is your network, floodlight, or advertiser ID.
+  - data\_source is the data source — `dcm_dt` (Campaign Manager).
 
 **Caution:** You cannot configure notifications using the command-line tool.
 
-You can also supply the `  --project_id  ` flag to specify a particular project. If `  --project_id  ` isn't specified, the default project is used.
+You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
-For example, the following command creates a Campaign Manager data transfer named `  My Transfer  ` using Campaign Manager ID `  123456  ` , Cloud Storage bucket `  dcdt_-dcm_account123456  ` , and target dataset `  mydataset  ` . The parameter `  file_name_prefix  ` is optional and used for rare, custom file names only.
+For example, the following command creates a Campaign Manager data transfer named `My Transfer` using Campaign Manager ID `123456` , Cloud Storage bucket `dcdt_-dcm_account123456` , and target dataset `mydataset` . The parameter `file_name_prefix` is optional and used for rare, custom file names only.
 
 The data transfer is created in the default project:
 
@@ -233,7 +233,7 @@ The data transfer is created in the default project:
 
 After running the command, you receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions and paste the authentication code on the command line.
 
@@ -241,7 +241,7 @@ Follow the instructions and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -312,13 +312,13 @@ If you are having issues setting up your data transfer, see [Campaign Manager tr
 
 When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 ## Campaign Manager sample queries
 
 You can use the following Campaign Manager sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Campaign Manager data with BigQuery. For additional questions on what you can do with these reports, contact your Campaign Manager technical representative.
 
-**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 In each of the following queries, replace the variables like dataset with your values.
 

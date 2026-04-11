@@ -12,16 +12,16 @@ Choose one of the following options to create a stored procedure:
 
 ### SQL
 
-To create a procedure, use the [`  CREATE PROCEDURE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) statement.
+To create a procedure, use the [`CREATE PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) statement.
 
-In the following conceptual example, `  procedure_name  ` represents the procedure and the body of the procedure appears between [`  BEGIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin) and `  END  ` statements:
+In the following conceptual example, `procedure_name` represents the procedure and the body of the procedure appears between [`BEGIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin) and `END` statements:
 
     CREATE PROCEDURE dataset_name.procedure_name()
     BEGIN
     -- statements here
     END
 
-The following example shows a procedure that contains a multi-statement query. The multi-statement query sets a variable, runs an `  INSERT  ` statement, and displays the result as a formatted text string.
+The following example shows a procedure that contains a multi-statement query. The multi-statement query sets a variable, runs an `INSERT` statement, and displays the result as a formatted text string.
 
     CREATE OR REPLACE PROCEDURE mydataset.create_customer()
     BEGIN
@@ -32,21 +32,21 @@ The following example shows a procedure that contains a multi-statement query. T
       SELECT FORMAT("Created customer %s", id);
     END
 
-In the preceding example, the name of the procedure is `  mydataset.create_customer  ` , and the body of procedure appears between [`  BEGIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin) and `  END  ` statements.
+In the preceding example, the name of the procedure is `mydataset.create_customer` , and the body of procedure appears between [`BEGIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin) and `END` statements.
 
-To call the procedure, use the [`  CALL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call) statement:
+To call the procedure, use the [`CALL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call) statement:
 
     CALL mydataset.create_customer();
 
 ### Terraform
 
-Use the [`  google_bigquery_routine  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_routine) .
+Use the [`google_bigquery_routine` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_routine) .
 
 **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a stored procedure named `  my_stored_procedure  ` :
+The following example creates a stored procedure named `my_stored_procedure` :
 
 ``` lang-terraform
 # Creates a SQL stored procedure.
@@ -84,13 +84,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -102,7 +102,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -114,7 +114,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -139,9 +139,9 @@ A procedure can have input parameters. An input parameter allows input for a pro
 
 ### Pass a value out with an output parameter
 
-A procedure can have output parameters. An output parameter returns a value from the procedure, but does not allow input for the procedure. To create an output parameter, use the `  OUT  ` keyword before the name of the parameter.
+A procedure can have output parameters. An output parameter returns a value from the procedure, but does not allow input for the procedure. To create an output parameter, use the `OUT` keyword before the name of the parameter.
 
-For example, this version of the procedure returns the new customer ID through the `  id  ` parameter:
+For example, this version of the procedure returns the new customer ID through the `id` parameter:
 
     CREATE OR REPLACE PROCEDURE mydataset.create_customer(name STRING, OUT id STRING)
     BEGIN
@@ -163,7 +163,7 @@ To call this procedure, you must use a variable to receive the output value:
 
 ### Pass a value in and out with an input/output parameter
 
-A procedure can also have input/output parameters. An input/output parameter returns a value from the procedure and also accepts input for the procedure. To create an input/output parameter, use the `  INOUT  ` keyword before the name of the parameter. For more information, see [Argument mode](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#argument_mode) .
+A procedure can also have input/output parameters. An input/output parameter returns a value from the procedure and also accepts input for the procedure. To create an input/output parameter, use the `INOUT` keyword before the name of the parameter. For more information, see [Argument mode](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#argument_mode) .
 
 ## Authorize routines
 
@@ -175,7 +175,7 @@ For more information, see [Authorized routines](https://docs.cloud.google.com/bi
 
 ## Call a stored procedure
 
-To call a stored procedure after it's been created, use the `  CALL  ` statement. For example, the following statement calls the stored procedure `  create_customer  ` :
+To call a stored procedure after it's been created, use the `CALL` statement. For example, the following statement calls the stored procedure `create_customer` :
 
     CALL mydataset.create_customer();
 
@@ -183,6 +183,6 @@ To call a stored procedure after it's been created, use the `  CALL  ` statement
 
 ## Call a system procedure
 
-To call a built-in system procedure, use the `  CALL  ` statement. For example, the following statement calls the system procedure `  BQ.REFRESH_MATERIALIZED_VIEW  ` :
+To call a built-in system procedure, use the `CALL` statement. For example, the following statement calls the system procedure `BQ.REFRESH_MATERIALIZED_VIEW` :
 
     CALL BQ.REFRESH_MATERIALIZED_VIEW;

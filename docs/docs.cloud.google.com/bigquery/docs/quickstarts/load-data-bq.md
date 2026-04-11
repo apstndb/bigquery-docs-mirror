@@ -1,8 +1,8 @@
 # Use the bq tool
 
-In this tutorial, you learn how to use `  bq  ` , the Python-based command-line interface (CLI) tool for BigQuery to create a dataset, load sample data, and query tables. After completing this tutorial, you'll be familiar with `  bq  ` and how to work with BigQuery by using a CLI.
+In this tutorial, you learn how to use `bq` , the Python-based command-line interface (CLI) tool for BigQuery to create a dataset, load sample data, and query tables. After completing this tutorial, you'll be familiar with `bq` and how to work with BigQuery by using a CLI.
 
-For a complete reference of all `  bq  ` commands and flags, see the [bq command-line tool reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
+For a complete reference of all `bq` commands and flags, see the [bq command-line tool reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 -----
 
@@ -18,7 +18,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
@@ -32,8 +32,8 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 
 To get the permissions that you need to create a dataset, create a table, load data, and query data, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run load jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
+  - Run load jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -51,15 +51,15 @@ For more information about the data, see the Social Security Administration's [B
 
 2.  Extract the file.
     
-    For more information about the dataset schema, see the `  NationalReadMe.pdf  ` file you extracted.
+    For more information about the dataset schema, see the `NationalReadMe.pdf` file you extracted.
 
-3.  To see what the data looks like, open the `  yob2024.txt  ` file. This file contains comma-separated values for name, assigned sex at birth, and number of children with that name. The file has no header row.
+3.  To see what the data looks like, open the `yob2024.txt` file. This file contains comma-separated values for name, assigned sex at birth, and number of children with that name. The file has no header row.
 
 4.  Move the file to your working directory.
     
-      - If you're working in Cloud Shell, click more\_vert **More** **Upload** , click **Choose Files** , choose the `  yob2024.txt  ` file, and then click **Upload** .
+      - If you're working in Cloud Shell, click more\_vert **More** **Upload** , click **Choose Files** , choose the `yob2024.txt` file, and then click **Upload** .
     
-      - If you're working in a local shell, copy or move the file `  yob2024.txt  ` into the directory where you're running the bq tool.
+      - If you're working in a local shell, copy or move the file `yob2024.txt` into the directory where you're running the bq tool.
 
 ## Create a dataset
 
@@ -71,7 +71,7 @@ For more information about the data, see the Social Security Administration's [B
 
 <!-- end list -->
 
-1.  Enter the following command to create a dataset named `  babynames  ` :
+1.  Enter the following command to create a dataset named `babynames` :
     
         bq mk --dataset babynames
     
@@ -79,7 +79,7 @@ For more information about the data, see the Social Security Administration's [B
     
         Dataset 'babynames' successfully created.
 
-2.  Confirm that the dataset `  babynames  ` now appears in your project:
+2.  Confirm that the dataset `babynames` now appears in your project:
     
         bq ls --datasets=true
     
@@ -93,7 +93,7 @@ For more information about the data, see the Social Security Administration's [B
 
 ## Load data into a table
 
-1.  In the `  babynames  ` dataset, load the source file `  yob2024.txt  ` into a new table named `  names2024  ` :
+1.  In the `babynames` dataset, load the source file `yob2024.txt` into a new table named `names2024` :
     
         bq load babynames.names2024 yob2024.txt name:string,assigned_sex_at_birth:string,count:integer
     
@@ -102,7 +102,7 @@ For more information about the data, see the Social Security Administration's [B
         Upload complete.
         Waiting on bqjob_r3c045d7cbe5ca6d2_0000018292f0815f_1 ... (1s) Current status: DONE
 
-2.  Confirm that the table `  names2024  ` now appears in the `  babynames  ` dataset:
+2.  Confirm that the table `names2024` now appears in the `babynames` dataset:
     
         bq ls --format=pretty babynames
     
@@ -114,7 +114,7 @@ For more information about the data, see the Social Security Administration's [B
         | names2024 | TABLE |
         +-----------+-------+
 
-3.  Confirm that the table schema of your new `  names2024  ` table is `  name: string  ` , `  assigned_sex_at_birth: string  ` , and `  count: integer  ` :
+3.  Confirm that the table schema of your new `names2024` table is `name: string` , `assigned_sex_at_birth: string` , and `count: integer` :
     
         bq show babynames.names2024
     
@@ -199,7 +199,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -215,17 +215,17 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 
 If you used an existing project, delete the resources that you created:
 
-1.  Delete the `  babynames  ` dataset:
+1.  Delete the `babynames` dataset:
     
         bq rm --recursive=true babynames
     
-    The `  --recursive  ` flag deletes all tables in the dataset, including the `  names2024  ` table.
+    The `--recursive` flag deletes all tables in the dataset, including the `names2024` table.
     
     The output is similar to the following:
     
         rm: remove dataset 'myproject:babynames'? (y/N)
 
-2.  To confirm the delete command, enter `  y  ` .
+2.  To confirm the delete command, enter `y` .
 
 ## What's next
 

@@ -23,7 +23,7 @@ Before you begin this tutorial, use the Google Cloud console to create or select
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
@@ -43,7 +43,7 @@ The historical positions and intensities along the tracks of global tropical cyc
 
 IBTrACS collects data about TCs reported by international monitoring centers who have a responsibility to forecast and report on TCs (and also includes some important historical datasets). IBTrACS includes data from 9 different countries. Historically, the data describing these systems has included best estimates of their track and intensity (hence the term, best track).
 
-You can start exploring this data in the Google Cloud console by viewing the details of the `  hurricanes  ` table:
+You can start exploring this data in the Google Cloud console by viewing the details of the `hurricanes` table:
 
 [Go to hurricanes schema](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=noaa_hurricanes&t=hurricanes&page=table)
 
@@ -79,17 +79,17 @@ ORDER BY
 
 The query clauses do the following:
 
-  -   - `  SELECT ST_GeogPoint(longitude, latitude) AS point, name, iso_time, dist2land, usa_wind, usa_pressure, usa_sshs, (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt, (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt  `  
-        The `  SELECT  ` clause selects all the storm's weather data and uses the `  ST_GeogPoint  ` function to convert the values in the `  latitude  ` and `  longitude  ` columns to `  GEOGRAPHY  ` types (points).
+  -   - `SELECT ST_GeogPoint(longitude, latitude) AS point, name, iso_time, dist2land, usa_wind, usa_pressure, usa_sshs, (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt, (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt`  
+        The `SELECT` clause selects all the storm's weather data and uses the `ST_GeogPoint` function to convert the values in the `latitude` and `longitude` columns to `GEOGRAPHY` types (points).
 
-  -   - `  FROM bigquery-public-data.noaa_hurricanes.hurricanes  `  
-        The `  FROM  ` clause specifies the table being queried: `  hurricanes  ` .
+  -   - `FROM bigquery-public-data.noaa_hurricanes.hurricanes`  
+        The `FROM` clause specifies the table being queried: `hurricanes` .
 
-  -   - `  WHERE name LIKE '%MARIA%' AND season = '2017' AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'), ST_GeogPoint(longitude, latitude), 10)  `  
-        The `  WHERE  ` clause filters the data to just the points in the Atlantic corresponding to hurricane Maria in the 2017 hurricane season.
+  -   - `WHERE name LIKE '%MARIA%' AND season = '2017' AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'), ST_GeogPoint(longitude, latitude), 10)`  
+        The `WHERE` clause filters the data to just the points in the Atlantic corresponding to hurricane Maria in the 2017 hurricane season.
 
-  -   - `  ORDER BY iso_time ASC  `  
-        The `  ORDER BY  ` clause orders the points to form a chronological storm path.
+  -   - `ORDER BY iso_time ASC`  
+        The `ORDER BY` clause orders the points to form a chronological storm path.
 
 ### Run the query
 
@@ -135,7 +135,7 @@ To visualize your results in BigQuery, follow these steps:
 
 1.  To visualize your results in BigQuery, in the **Query results** pane, click **Visualization** .
 
-2.  For **Data column** , select `  usa_wind  ` .
+2.  For **Data column** , select `usa_wind` .
     
     A map appears with points for the hurricane's location over time, styled by a color gradient for wind speed.
 
@@ -225,11 +225,11 @@ To format your map:
     
     2.  For **Function** , choose **linear** .
     
-    3.  For **Field** , choose **`  usa_wind  `** .
+    3.  For **Field** , choose **`usa_wind`** .
     
-    4.  For **Domain** , enter **`  0  `** in the first box and **`  150  `** in the second.
+    4.  For **Domain** , enter **`0`** in the first box and **`150`** in the second.
     
-    5.  For **Range** , click the first box and enter **`  #0006ff  `** in the **Hex** box. Click the second box and enter **`  #ff0000  `** . This changes the color of the point based on the wind speed. Blue for lighter winds and red for stronger winds.
+    5.  For **Range** , click the first box and enter **`#0006ff`** in the **Hex** box. Click the second box and enter **`#ff0000`** . This changes the color of the point based on the wind speed. Blue for lighter winds and red for stronger winds.
         
         ![Add fill color in BigQuery Geo Viz](https://docs.cloud.google.com/static/bigquery/images/geo-viz-hurricane-color.png)
 
@@ -253,11 +253,11 @@ To format your map:
     
     2.  For **Function** , choose **linear** .
     
-    3.  For **Field** , choose **`  radius_50kt  `** .
+    3.  For **Field** , choose **`radius_50kt`** .
     
-    4.  For **Domain** , enter **`  0  `** in the first box and **`  135  `** in the second.
+    4.  For **Domain** , enter **`0`** in the first box and **`135`** in the second.
     
-    5.  For **Range** , enter **`  5  `** in the first box and **`  135000  `** in the second.
+    5.  For **Range** , enter **`5`** in the first box and **`135000`** in the second.
         
         ![Add circle radius in BigQuery Geo Viz](https://docs.cloud.google.com/static/bigquery/images/geo-viz-hurricane-radius.png)
 
@@ -279,7 +279,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

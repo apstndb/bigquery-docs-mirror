@@ -1,6 +1,6 @@
 # The ML.BAG\_OF\_WORDS function
 
-Use the `  ML.BAG_OF_WORDS  ` function to compute a representation of tokenized documents as the bag (multiset) of its words, disregarding word ordering and grammar.
+Use the `ML.BAG_OF_WORDS` function to compute a representation of tokenized documents as the bag (multiset) of its words, disregarding word ordering and grammar.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
@@ -20,24 +20,24 @@ OVER()
 
 ### Arguments
 
-`  ML.BAG_OF_WORDS  ` takes the following arguments:
+`ML.BAG_OF_WORDS` takes the following arguments:
 
-  - `  tokenized_document  ` : `  ARRAY<STRING>  ` value that represents a document that has been tokenized. A tokenized document is a collection of terms (tokens), which are used for text analysis. For more information about tokenization in BigQuery, see [`  TEXT_ANALYZE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) .
-  - `  top_k  ` : Optional argument. Takes an `  INT64  ` value, which represents the size of the dictionary, excluding the unknown term. The `  top_k  ` terms that appear in the most documents are added to the dictionary until this threshold is met. For example, if this value is `  20  ` , the top 20 unique terms that appear in the most documents are added and then no additional terms are added.
-  - `  frequency_threshold  ` : Optional argument. Takes an `  INT64  ` value that represents the minimum number of documents a term must appear in to be included in the dictionary. For example, if this value is `  3  ` , a term must appear at least three times in the tokenized document to be added to the dictionary.
+  - `tokenized_document` : `ARRAY<STRING>` value that represents a document that has been tokenized. A tokenized document is a collection of terms (tokens), which are used for text analysis. For more information about tokenization in BigQuery, see [`TEXT_ANALYZE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) .
+  - `top_k` : Optional argument. Takes an `INT64` value, which represents the size of the dictionary, excluding the unknown term. The `top_k` terms that appear in the most documents are added to the dictionary until this threshold is met. For example, if this value is `20` , the top 20 unique terms that appear in the most documents are added and then no additional terms are added.
+  - `frequency_threshold` : Optional argument. Takes an `INT64` value that represents the minimum number of documents a term must appear in to be included in the dictionary. For example, if this value is `3` , a term must appear at least three times in the tokenized document to be added to the dictionary.
 
-Terms are added to a dictionary of terms if they satisfy the criteria for `  top_k  ` and `  frequency_threshold  ` , otherwise they are considered the *unknown term* . The unknown term is always the first term in the dictionary and represented as `  0  ` . The rest of the dictionary is ordered alphabetically.
+Terms are added to a dictionary of terms if they satisfy the criteria for `top_k` and `frequency_threshold` , otherwise they are considered the *unknown term* . The unknown term is always the first term in the dictionary and represented as `0` . The rest of the dictionary is ordered alphabetically.
 
 ## Output
 
-`  ML.BAG_OF_WORDS  ` returns a value for every row in the input. Each value has the following type:
+`ML.BAG_OF_WORDS` returns a value for every row in the input. Each value has the following type:
 
-`  ARRAY<STRUCT<index INT64, value FLOAT64>>  `
+`ARRAY<STRUCT<index INT64, value FLOAT64>>`
 
 Definitions:
 
-  - `  index  ` : The index of the term that was added to the dictionary. Unknown terms have an index of `  0  ` .
-  - `  value  ` : The corresponding counts in the document.
+  - `index` : The index of the term that was added to the dictionary. Unknown terms have an index of `0` .
+  - `value` : The corresponding counts in the document.
 
 ## Quotas
 
@@ -45,7 +45,7 @@ See [Cloud AI service functions quotas and limits](https://docs.cloud.google.com
 
 ## Example
 
-The following example calls the `  ML.BAG_OF_WORDS  ` function on an input column `  f  ` , with no unknown terms:
+The following example calls the `ML.BAG_OF_WORDS` function on an input column `f` , with no unknown terms:
 
     WITH ExampleTable AS (
       SELECT 1 AS id, ['a', 'b', 'b', 'c'] AS f
@@ -66,9 +66,9 @@ The output is similar to the following:
     |  2 |                             [{"index":"1","value":"1.0"},{"index":"3","value":"1.0"}] |
     +----+---------------------------------------------------------------------------------------+
 
-Notice that there is no index `  0  ` in the result, as there are no unknown terms.
+Notice that there is no index `0` in the result, as there are no unknown terms.
 
-The following example calls the `  ML.BAG_OF_WORDS  ` function on an input column `  f  ` :
+The following example calls the `ML.BAG_OF_WORDS` function on an input column `f` :
 
     WITH ExampleTable AS (
       SELECT 1 AS id, ['a', 'b', 'b', 'b', 'c', 'c', 'c', 'c', 'd', 'd'] AS f
@@ -92,9 +92,9 @@ The output is similar to the following:
  
 ```
 
-Notice that the values for `  b  ` and `  d  ` are not returned as they appear in only one document when the value of `  frequency_threshold  ` is set to `  2  ` .
+Notice that the values for `b` and `d` are not returned as they appear in only one document when the value of `frequency_threshold` is set to `2` .
 
-The following example calls the `  ML.BAG_OF_WORDS  ` function with a lower value of `  top_k  ` :
+The following example calls the `ML.BAG_OF_WORDS` function with a lower value of `top_k` :
 
     WITH ExampleTable AS (
       SELECT 1 AS id, ['a', 'b', 'b', 'c'] AS f
@@ -118,7 +118,7 @@ The output is similar to the following:
  
 ```
 
-Notice how the value for `  b  ` is not returned since we specify we want the top two terms, and `  b  ` only appears in one document.
+Notice how the value for `b` is not returned since we specify we want the top two terms, and `b` only appears in one document.
 
 The following example contains two terms with the same frequency. One of the terms is excluded from the results due to the alphabetical order.
 
@@ -143,4 +143,4 @@ The results look like the following:
 
 ## What's next
 
-  - Learn about the [`  BAG_OF_WORDS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#bag_of_words) outside of machine learning.
+  - Learn about the [`BAG_OF_WORDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#bag_of_words) outside of machine learning.

@@ -19,36 +19,28 @@ A parameter given to a query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;parameterType&quot;: {
-    object (QueryParameterType)
-  },
-  &quot;parameterValue&quot;: {
-    object (QueryParameterValue)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;parameterType&quot;: {object (QueryParameterType)},&quot;parameterValue&quot;: {object (QueryParameterValue)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Optional. If unset, this is a positional parameter. Otherwise, should be unique within a query.
 
-`  parameterType  `
+`parameterType`
 
-`  object ( QueryParameterType  ` )
+` object ( QueryParameterType  ` )
 
 Required. The type of this parameter.
 
-`  parameterValue  `
+`parameterValue`
 
-`  object ( QueryParameterValue  ` )
+` object ( QueryParameterValue  ` )
 
 Required. The value of this parameter.
 
@@ -67,69 +59,52 @@ The type of a query parameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;type&quot;: string,
-  &quot;arrayType&quot;: {
-    object (QueryParameterType)
-  },
-  &quot;structTypes&quot;: [
-    {
-      &quot;name&quot;: string,
-      &quot;type&quot;: {
-        object (QueryParameterType)
-      },
-      &quot;description&quot;: string
-    }
-  ],
-  &quot;rangeElementType&quot;: {
-    object (QueryParameterType)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;type&quot;: string,&quot;arrayType&quot;: {object (QueryParameterType)},&quot;structTypes&quot;: [{&quot;name&quot;: string,&quot;type&quot;: {object (QueryParameterType)},&quot;description&quot;: string}],&quot;rangeElementType&quot;: {object (QueryParameterType)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  type  `
+`type`
 
-`  string  `
+`string`
 
 Required. The top level type of this field.
 
-`  arrayType  `
+`arrayType`
 
-`  object ( QueryParameterType  ` )
+` object ( QueryParameterType  ` )
 
 Optional. The type of the array's elements, if this is an array.
 
-`  structTypes[]  `
+`structTypes[]`
 
-`  object  `
+`object`
 
 Optional. The types of the fields of this struct, in order, if this is a struct.
 
-`  structTypes[].name  `
+`structTypes[].name`
 
-`  string  `
+`string`
 
 Optional. The name of this field.
 
-`  structTypes[].type  `
+`structTypes[].type`
 
-`  object ( QueryParameterType  ` )
+` object ( QueryParameterType  ` )
 
 Required. The type of this field.
 
-`  structTypes[].description  `
+`structTypes[].description`
 
-`  string  `
+`string`
 
 Optional. Human-oriented description of the field.
 
-`  rangeElementType  `
+`rangeElementType`
 
-`  object ( QueryParameterType  ` )
+` object ( QueryParameterType  ` )
 
 Optional. The element type of the range, if this is a range.
 
@@ -148,50 +123,34 @@ The value of a query parameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;value&quot;: string,
-  &quot;arrayValues&quot;: [
-    {
-      object (QueryParameterValue)
-    }
-  ],
-  &quot;structValues&quot;: {
-    string: {
-      object (QueryParameterValue)
-    },
-    ...
-  },
-  &quot;rangeValue&quot;: {
-    object (RangeValue)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;value&quot;: string,&quot;arrayValues&quot;: [{object (QueryParameterValue)}],&quot;structValues&quot;: {string: {object (QueryParameterValue)},...},&quot;rangeValue&quot;: {object (RangeValue)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  value  `
+`value`
 
-`  string  `
+`string`
 
 Optional. The value of this value, if a simple scalar type.
 
-`  arrayValues[]  `
+`arrayValues[]`
 
-`  object ( QueryParameterValue  ` )
+` object ( QueryParameterValue  ` )
 
 Optional. The array values, if this is an array type.
 
-`  structValues  `
+`structValues`
 
-`  map (key: string, value: object ( QueryParameterValue  ` ))
+` map (key: string, value: object ( QueryParameterValue  ` ))
 
 The struct field values.
 
-`  rangeValue  `
+`rangeValue`
 
-`  object ( RangeValue  ` )
+` object ( RangeValue  ` )
 
 Optional. The range value, if this is a range type.
 
@@ -210,28 +169,21 @@ Represents the value of a range.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;start&quot;: {
-    object (QueryParameterValue)
-  },
-  &quot;end&quot;: {
-    object (QueryParameterValue)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;start&quot;: {object (QueryParameterValue)},&quot;end&quot;: {object (QueryParameterValue)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  start  `
+`start`
 
-`  object ( QueryParameterValue  ` )
+` object ( QueryParameterValue  ` )
 
 Optional. The start value of the range. A missing value represents an unbounded start.
 
-`  end  `
+`end`
 
-`  object ( QueryParameterValue  ` )
+` object ( QueryParameterValue  ` )
 
 Optional. The end value of the range. A missing value represents an unbounded end.

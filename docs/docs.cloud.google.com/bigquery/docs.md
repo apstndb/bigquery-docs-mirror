@@ -116,9 +116,9 @@ Training
 
 Training and tutorials
 
-### [Preprocessing BigQuery Data with PySpark on Dataproc](https://codelabs.developers.google.com/codelabs/pyspark-bigquery/)
+### [Preprocessing BigQuery Data with PySpark on Managed Service for Apache Spark](https://codelabs.developers.google.com/codelabs/pyspark-bigquery/)
 
-Learn to create a data processing pipeline using Apache Spark with Dataproc on Google Cloud. It is a common use case in data science and data engineering to read data from one storage location, perform transformations on it and write it into another storage location.
+Learn to create a data processing pipeline using Apache Spark with Managed Service for Apache Spark on Google Cloud. It is a common use case in data science and data engineering to read data from one storage location, perform transformations on it and write it into another storage location.
 
 Training
 
@@ -200,7 +200,7 @@ Code Samples
 
 ### [Node.js samples](https://github.com/googleapis/nodejs-bigquery/tree/main/samples)
 
-Samples for the Node.js client library sfor BigQuery
+Samples for the Node.js client library for BigQuery
 
 Code sample
 

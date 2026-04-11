@@ -97,8 +97,8 @@ BigQuery only supports partitioning by dates and integers. For strings, use clus
 </tr>
 <tr class="even">
 <td>Query Logging/history</td>
-<td>Query history, <code dir="ltr" translate="no">       INFORMATION_SCHEMA.JOBS      </code></td>
-<td>BigQuery maintains a history of executed queries, allowing you to review past queries, analyze performance, and troubleshoot issues. <code dir="ltr" translate="no">       INFORMATION_SCHEMA.JOBS      </code> maintains the history of all jobs submitted in the last 6 months.</td>
+<td>Query history, <code dir="ltr" translate="no">INFORMATION_SCHEMA.JOBS</code></td>
+<td>BigQuery maintains a history of executed queries, allowing you to review past queries, analyze performance, and troubleshoot issues. <code dir="ltr" translate="no">INFORMATION_SCHEMA.JOBS</code> maintains the history of all jobs submitted in the last 6 months.</td>
 </tr>
 <tr class="odd">
 <td>Security features (Access control, Encryption)</td>

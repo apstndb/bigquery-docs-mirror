@@ -1,45 +1,45 @@
 # Process documents with the ML.PROCESS\_DOCUMENT function
 
-This document describes how to use the [`  ML.PROCESS_DOCUMENT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to extract useful insights from documents in an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+This document describes how to use the [`ML.PROCESS_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to extract useful insights from documents in an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 ## Supported locations
 
-You must create the remote model used in this procedure in either the `  US  ` or `  EU  ` [multi-region](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . You must run the `  ML.PROCESS_DOCUMENT  ` function in the same region as the remote model.
+You must create the remote model used in this procedure in either the `US` or `EU` [multi-region](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . You must run the `ML.PROCESS_DOCUMENT` function in the same region as the remote model.
 
 ## Required roles
 
 To create a remote model and process documents, you need the following Identity and Access Management (IAM) roles at the project level:
 
-  - Create a document processor: Document AI Editor ( `  roles/documentai.editor  ` )
+  - Create a document processor: Document AI Editor ( `roles/documentai.editor` )
 
-  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )
+  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` )
 
-  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` )
+  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` )
     
-    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
+    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` )
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` )
 
-  - Create BigQuery jobs: BigQuery Job User ( `  roles/bigquery.jobUser  ` )
+  - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` )
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
-  - Create an object table: `  bigquery.tables.create  ` and `  bigquery.tables.update  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
+  - Create an object table: `bigquery.tables.create` and `bigquery.tables.update`
   - Create a document processor:
-      - `  documentai.processors.create  `
-      - `  documentai.processors.update  `
-      - `  documentai.processors.delete  `
+      - `documentai.processors.create`
+      - `documentai.processors.update`
+      - `documentai.processors.delete`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
 
@@ -84,7 +84,7 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
     ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
@@ -139,7 +139,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -175,7 +175,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -313,13 +313,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -353,13 +353,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -371,7 +371,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -383,7 +383,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -419,7 +419,7 @@ Select one of the following options:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
 
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/documentai.viewer' --condition=None
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/storage.objectViewer' --condition=None
@@ -429,7 +429,7 @@ Replace the following:
   - `  PROJECT_NUMBER  ` : your project number.
   - `  MEMBER  ` : the service account ID that you copied earlier.
 
-Failure to grant the permission results in a `  Permission denied  ` error.
+Failure to grant the permission results in a `Permission denied` error.
 
 **Note:** If you create the processor in a different project than the Cloud Storage bucket used by the object table, grant the service account Identity and Access Management (IAM) roles as follows:
 
@@ -438,7 +438,7 @@ Failure to grant the permission results in a `  Permission denied  ` error.
 
 ## Create a model
 
-Create a remote model with a [`  REMOTE_SERVICE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_DOCUMENT_V1  ` :
+Create a remote model with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_DOCUMENT_V1` :
 
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
@@ -458,9 +458,9 @@ Replace the following:
 
   - `  REGION  ` : the region used by the connection.
 
-  - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
+  - `  CONNECTION_ID  ` : the connection ID—for example, `myconnection` .
     
-    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
 
   - `  PROCESSOR_ID  ` : the document processor ID. To find this value, [view the processor details](https://docs.cloud.google.com/document-ai/docs/create-processor#get-processor) , and then look at the **ID** row in the **Basic Information** section.
 
@@ -474,7 +474,7 @@ To see the model output columns, click **Go to model** in the query result after
 
 ## Process documents
 
-Process all the documents with the `  ML.PROCESS_DOCUMENT  ` :
+Process all the documents with the `ML.PROCESS_DOCUMENT` :
 
     SELECT *
     FROM ML.PROCESS_DOCUMENT(
@@ -491,7 +491,7 @@ Replace the following:
   - `  OBJECT_TABLE_NAME  ` : the name of the object table that contains the URIs of the documents to process.
   - `  PROCESS_OPTIONS  ` : the json configuration that specifies how to process documents. For example, you use this to specify document chunking for the layout parser
 
-Alternatively, process some of the documents with the `  ML.PROCESS_DOCUMENT  ` :
+Alternatively, process some of the documents with the `ML.PROCESS_DOCUMENT` :
 
     SELECT *
     FROM ML.PROCESS_DOCUMENT(
@@ -518,7 +518,7 @@ Replace the following:
 
 **Example 1**
 
-The following example uses the [expense parser](https://docs.cloud.google.com/document-ai/docs/processors-list#processor_expense-parser) to process the documents represented by the `  documents  ` table:
+The following example uses the [expense parser](https://docs.cloud.google.com/document-ai/docs/processors-list#processor_expense-parser) to process the documents represented by the `documents` table:
 
     SELECT *
     FROM ML.PROCESS_DOCUMENT(
@@ -526,7 +526,7 @@ The following example uses the [expense parser](https://docs.cloud.google.com/do
       TABLE `myproject.mydataset.documents`
     );
 
-This query returns the parsed expense reports, including the currency, total amount, receipt date, and line items on the expense reports. The `  ml_process_document_result  ` column contains the raw output of the expense parser, and the `  ml_process_document_status  ` column contains any errors returned by the document processing.
+This query returns the parsed expense reports, including the currency, total amount, receipt date, and line items on the expense reports. The `ml_process_document_result` column contains the raw output of the expense parser, and the `ml_process_document_status` column contains any errors returned by the document processing.
 
 **Example 2**
 

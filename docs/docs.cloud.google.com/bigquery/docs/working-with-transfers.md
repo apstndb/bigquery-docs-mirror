@@ -10,11 +10,11 @@ View your existing transfer configurations by viewing information about each tra
 
 ### Required roles
 
-To get the permissions that you need to view transfer details, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to view transfer details, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-Additionally, to view log messages through Google Cloud console, you must have permissions to view Cloud Logging data. The Logs Viewer role ( `  roles/logging.viewer  ` ) gives you read-only access to all features of Logging. For more information about the Identity and Access Management (IAM) permissions and roles that apply to cloud logs data, see the Cloud Logging [access control guide](https://docs.cloud.google.com/logging/docs/access-control) .
+Additionally, to view log messages through Google Cloud console, you must have permissions to view Cloud Logging data. The Logs Viewer role ( `roles/logging.viewer` ) gives you read-only access to all features of Logging. For more information about the Identity and Access Management (IAM) permissions and roles that apply to cloud logs data, see the Cloud Logging [access control guide](https://docs.cloud.google.com/logging/docs/access-control) .
 
 For more information about IAM roles in BigQuery Data Transfer Service, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -38,15 +38,15 @@ To get information about a transfer configuration:
 
 ### bq
 
-Enter the `  bq show  ` command and provide the transfer configuration's resource name. The `  --format  ` flag can be used to control the output format.
+Enter the `bq show` command and provide the transfer configuration's resource name. The `--format` flag can be used to control the output format.
 
     bq show \
     --format=prettyjson \
     --transfer_config resource_name
 
-Replace `  resource_name  ` with the transfer's resource name (also referred to as the transfer configuration). If you do not know the transfer's resource name, find the resource name with: [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
+Replace `  resource_name  ` with the transfer's resource name (also referred to as the transfer configuration). If you do not know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
 
-For example, enter the following command to display transfer configuration for `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` .
+For example, enter the following command to display transfer configuration for `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` .
 
     bq show \
     --format=prettyjson \
@@ -54,7 +54,7 @@ For example, enter the following command to display transfer configuration for `
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.get  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/get) method and supply the transfer configuration using the `  name  ` parameter.
+Use the [`projects.locations.transferConfigs.get`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/get) method and supply the transfer configuration using the `name` parameter.
 
 ### Java
 
@@ -105,11 +105,11 @@ To list all existing transfer configurations in a project:
 
 ### bq
 
-To list all transfer configurations for a project by location, enter the `  bq ls  ` command and supply the `  --transfer_location  ` and `  --transfer_config  ` flags. You can also supply the `  --project_id  ` flag to specify a particular project. If `  --project_id  ` isn't specified, the default project is used. The `  --format  ` flag can be used to control the output format.
+To list all transfer configurations for a project by location, enter the `bq ls` command and supply the `--transfer_location` and `--transfer_config` flags. You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used. The `--format` flag can be used to control the output format.
 
-To list transfer configurations for particular data sources, supply the `  --filter  ` flag.
+To list transfer configurations for particular data sources, supply the `--filter` flag.
 
-To view a particular number of transfer configurations in paginated format, supply the `  --max_results  ` flag to specify the number of transfers. The command returns a page token you supply using the `  --page_token  ` flag to see the next n configurations. There is a limit of 1000 configurations that will be returned if `  --max_results  ` is omitted, and `  --max_results  ` will not accept values greater than 1000. If your project has more than 1000 configurations, use `  --max_results  ` and `  --page_token  ` to iterate through them all.
+To view a particular number of transfer configurations in paginated format, supply the `--max_results` flag to specify the number of transfers. The command returns a page token you supply using the `--page_token` flag to see the next n configurations. There is a limit of 1000 configurations that will be returned if `--max_results` is omitted, and `--max_results` will not accept values greater than 1000. If your project has more than 1000 configurations, use `--max_results` and `--page_token` to iterate through them all.
 
     bq ls \
     --transfer_config \
@@ -124,34 +124,34 @@ Replace the following:
   - `  project_id  ` is your project ID.
   - `  integer  ` is the number of results to show per page.
   - `  data_sources  ` is one or more of the following:
-      - `  amazon_s3  ` - [Amazon S3 data transfer](https://docs.cloud.google.com/bigquery/docs/s3-transfer#bq)
-      - `  azure_blob_storage  ` - [Azure Blob Storage data transfer](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer#bq)
-      - `  dcm_dt  ` - [Campaign Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
-      - `  google_cloud_storage  ` - [Cloud Storage data transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
-      - `  cross_region_copy  ` - [Dataset Copy](https://docs.cloud.google.com/bigquery/docs/copying-datasets)
-      - `  dfp_dt  ` - [Google Ad Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
-      - `  displayvideo  ` - [Display & Video 360 data transfer](https://docs.cloud.google.com/bigquery/docs/display-video-transfer)
-      - `  google_ads  ` - [Google Ads data transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer)
-      - `  merchant_center  ` - [Google Merchant Center data transfer](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers)
-      - `  mysql  ` - [MySQL data transfer](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#set-up-a-mysql-data-transfer)
-      - `  play  ` - [Google Play data transfer](https://docs.cloud.google.com/bigquery/docs/play-transfer#setup-transfer)
-      - `  scheduled_query  ` - [Scheduled queries data transfer](https://docs.cloud.google.com/bigquery/docs/scheduling-queries)
-      - `  search_ads  ` - [Search Ads 360 data transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer)
-      - `  youtube_channel  ` - [YouTube Channel data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
-      - `  youtube_content_owner  ` - [YouTube Content Owner data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
-      - `  redshift  ` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
-      - `  on_premises  ` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
+      - `amazon_s3` - [Amazon S3 data transfer](https://docs.cloud.google.com/bigquery/docs/s3-transfer#bq)
+      - `azure_blob_storage` - [Azure Blob Storage data transfer](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer#bq)
+      - `dcm_dt` - [Campaign Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
+      - `google_cloud_storage` - [Cloud Storage data transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
+      - `cross_region_copy` - [Dataset Copy](https://docs.cloud.google.com/bigquery/docs/copying-datasets)
+      - `dfp_dt` - [Google Ad Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
+      - `displayvideo` - [Display & Video 360 data transfer](https://docs.cloud.google.com/bigquery/docs/display-video-transfer)
+      - `google_ads` - [Google Ads data transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer)
+      - `merchant_center` - [Google Merchant Center data transfer](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers)
+      - `mysql` - [MySQL data transfer](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#set-up-a-mysql-data-transfer)
+      - `play` - [Google Play data transfer](https://docs.cloud.google.com/bigquery/docs/play-transfer#setup-transfer)
+      - `scheduled_query` - [Scheduled queries data transfer](https://docs.cloud.google.com/bigquery/docs/scheduling-queries)
+      - `search_ads` - [Search Ads 360 data transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer)
+      - `youtube_channel` - [YouTube Channel data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
+      - `youtube_content_owner` - [YouTube Content Owner data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
+      - `redshift` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
+      - `on_premises` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
 
 Examples:
 
-Enter the following command to display all transfer configurations in the US for your default project. The output is controlled using the `  --format  ` flag.
+Enter the following command to display all transfer configurations in the US for your default project. The output is controlled using the `--format` flag.
 
     bq ls \
     --format=prettyjson \
     --transfer_config \
     --transfer_location=us
 
-Enter the following command to display all transfer configurations in the US for project ID `  myproject  ` .
+Enter the following command to display all transfer configurations in the US for project ID `myproject` .
 
     bq ls \
     --transfer_config \
@@ -166,7 +166,7 @@ Enter the following command to list the 3 most recent transfer configurations.
     --project_id=myproject \
     --max_results=3
 
-The command returns a next page token. Copy the page token and supply it in the `  bq ls  ` command to see the next 3 results.
+The command returns a next page token. Copy the page token and supply it in the `bq ls` command to see the next 3 results.
 
     bq ls \
     --transfer_config \
@@ -175,7 +175,7 @@ The command returns a next page token. Copy the page token and supply it in the 
     --max_results=3 \
     --page_token=AB1CdEfg_hIJKL
 
-Enter the following command to list Ads and Campaign Manager transfer configurations for project ID `  myproject  ` .
+Enter the following command to list Ads and Campaign Manager transfer configurations for project ID `myproject` .
 
     bq ls \
     --transfer_config \
@@ -185,7 +185,7 @@ Enter the following command to list Ads and Campaign Manager transfer configurat
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.list  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) method and supply the project ID using the `  parent  ` parameter.
+Use the [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) method and supply the project ID using the `parent` parameter.
 
 ### Java
 
@@ -287,11 +287,11 @@ To view the run history for a transfer configuration:
 
 ### bq
 
-To list transfer runs for a particular transfer configuration, enter the `  bq ls  ` command and supply the `  --transfer_run  ` flag. You can also supply the `  --project_id  ` flag to specify a particular project. If resource\_name doesn't contain project information, the `  --project_id  ` value is used. If `  --project_id  ` isn't specified, the default project is used. The `  --format  ` flag can be used to control the output format.
+To list transfer runs for a particular transfer configuration, enter the `bq ls` command and supply the `--transfer_run` flag. You can also supply the `--project_id` flag to specify a particular project. If resource\_name doesn't contain project information, the `--project_id` value is used. If `--project_id` isn't specified, the default project is used. The `--format` flag can be used to control the output format.
 
-To view a particular number of transfer runs, supply the `  --max_results  ` flag. The command returns a page token you supply using the `  --page_token  ` flag to see the next n configurations.
+To view a particular number of transfer runs, supply the `--max_results` flag. The command returns a page token you supply using the `--page_token` flag to see the next n configurations.
 
-To list transfer runs based on run state, supply the `  --filter  ` flag.
+To list transfer runs based on run state, supply the `--filter` flag.
 
     bq ls \
     --transfer_run \
@@ -307,16 +307,16 @@ Replace the following:
   - `  location  ` is the location of the transfer configurations. The [location](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_regions) is specified when you create a transfer.
   - `  project_id  ` is your project ID.
   - `  state, ...  ` is one of the following or a comma-separated list:
-      - `  SUCCEEDED  `
-      - `  FAILED  `
-      - `  PENDING  `
-      - `  RUNNING  `
-      - `  CANCELLED  `
-  - `  resource_name  ` is the transfer's resource name (also referred to as the transfer configuration). If you do not know the transfer's resource name, find the resource name with: [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
+      - `SUCCEEDED`
+      - `FAILED`
+      - `PENDING`
+      - `RUNNING`
+      - `CANCELLED`
+  - `  resource_name  ` is the transfer's resource name (also referred to as the transfer configuration). If you do not know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
 
 Examples:
 
-Enter the following command to display the 3 latest runs for transfer configuration `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` . The output is controlled using the `  --format  ` flag.
+Enter the following command to display the 3 latest runs for transfer configuration `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` . The output is controlled using the `--format` flag.
 
     bq ls \
     --format=prettyjson \
@@ -325,7 +325,7 @@ Enter the following command to display the 3 latest runs for transfer configurat
     --transfer_location=us \
     projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7
 
-The command returns a next page token. Copy the page token and supply it in the `  bq ls  ` command to see the next 3 results.
+The command returns a next page token. Copy the page token and supply it in the `bq ls` command to see the next 3 results.
 
     bq ls \
     --format=prettyjson \
@@ -335,7 +335,7 @@ The command returns a next page token. Copy the page token and supply it in the 
     --transfer_location=us \
     projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7
 
-Enter the following command to display all failed runs for transfer configuration `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` .
+Enter the following command to display all failed runs for transfer configuration `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` .
 
     bq ls \
     --format=prettyjson \
@@ -346,7 +346,7 @@ Enter the following command to display all failed runs for transfer configuratio
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.runs.list  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs/list) method and specify the project ID using the `  parent  ` parameter.
+Use the [`projects.locations.transferConfigs.runs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs/list) method and specify the project ID using the `parent` parameter.
 
 ### Java
 
@@ -408,26 +408,26 @@ To view transfer run details:
 
 ### bq
 
-To view transfer run details, enter the `  bq show  ` command and provide the transfer run's Run Name using the `  --transfer_run  ` flag. The `  --format  ` flag can be used to control the output format.
+To view transfer run details, enter the `bq show` command and provide the transfer run's Run Name using the `--transfer_run` flag. The `--format` flag can be used to control the output format.
 
     bq show \
     --format=prettyjson \
     --transfer_run run_name
 
-Replace `  run_name  ` with the transfer run's Run Name. You can retrieve the Run Name by using the [`  bq ls  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#view_the_run_history) command.
+Replace `  run_name  ` with the transfer run's Run Name. You can retrieve the Run Name by using the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#view_the_run_history) command.
 
 Example:
 
-Enter the following command to display details for transfer run `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g  ` .
+Enter the following command to display details for transfer run `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g` .
 
     bq show \
     --format=prettyjson \
     --transfer_run \
     projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g
 
-To view transfer log messages for a transfer run, enter the `  bq ls  ` command with the `  --transfer_log  ` flag. You can filter log messages by type using the `  --message_type  ` flag.
+To view transfer log messages for a transfer run, enter the `bq ls` command with the `--transfer_log` flag. You can filter log messages by type using the `--message_type` flag.
 
-To view a particular number of log messages, supply the `  --max_results  ` flag. The command returns a page token you supply using the `  --page_token  ` flag to see the next n messages.
+To view a particular number of log messages, supply the `--max_results` flag. The command returns a page token you supply using the `--page_token` flag to see the next n messages.
 
     bq ls \
     --transfer_log \
@@ -439,21 +439,21 @@ Replace the following:
 
   - `  integer  ` is the number of log messages to return.
   - `  message_type  ` is the type of log message to view (a single value or a comma-separated list):
-      - `  INFO  `
-      - `  WARNING  `
-      - `  ERROR  `
-  - `  run_name  ` is the transfer run's Run Name. You can retrieve the Run Name using the [`  bq ls  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#view_the_run_history) command.
+      - `INFO`
+      - `WARNING`
+      - `ERROR`
+  - `  run_name  ` is the transfer run's Run Name. You can retrieve the Run Name using the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#view_the_run_history) command.
 
 Examples:
 
-Enter the following command to view the first 2 log messages for transfer run `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g  ` .
+Enter the following command to view the first 2 log messages for transfer run `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g` .
 
     bq ls \
     --transfer_log \
     --max_results=2 \
     projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g
 
-The command returns a next page token. Copy the page token and supply it in the `  bq ls  ` command to see the next 2 results.
+The command returns a next page token. Copy the page token and supply it in the `bq ls` command to see the next 2 results.
 
     bq ls \
     --transfer_log \
@@ -461,7 +461,7 @@ The command returns a next page token. Copy the page token and supply it in the 
     --page_token=AB1CdEfg_hIJKL \
     projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g
 
-Enter the following command to view only error messages for transfer run `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g  ` .
+Enter the following command to view only error messages for transfer run `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g` .
 
     bq ls \
     --transfer_log \
@@ -470,7 +470,7 @@ Enter the following command to view only error messages for transfer run `  proj
 
 ### API
 
-Use the [`  projects.transferConfigs.runs.transferLogs.list  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs.transferLogs/list) method and supply the transfer run's Run Name using the `  parent  ` parameter.
+Use the [`projects.transferConfigs.runs.transferLogs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs.transferLogs/list) method and supply the transfer run's Run Name using the `parent` parameter.
 
 ### Java
 
@@ -513,7 +513,7 @@ You can modify existing transfers by editing information on the transfer configu
 
 ### Required roles
 
-To get the permissions that you need to modify transfers, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to modify transfers, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -543,7 +543,7 @@ To update a transfer:
 
 ### bq
 
-Enter the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) , provide the transfer configuration's resource name using the `  --transfer_config  ` flag, and supply the `  --display_name  ` , `  --params  ` , `  --refresh_window_days  ` , `  --schedule  ` , or `  --target_dataset  ` flags. You can optionally supply a `  --destination_kms_key  ` flag for [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) transfers.
+Enter the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) , provide the transfer configuration's resource name using the `--transfer_config` flag, and supply the `--display_name` , `--params` , `--refresh_window_days` , `--schedule` , or `--target_dataset` flags. You can optionally supply a `--destination_kms_key` flag for [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) transfers.
 
     bq update \
     --display_name='NAME' \
@@ -559,19 +559,19 @@ Enter the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/
 Replace the following:
 
   - `  NAME  ` : the display name for the transfer configuration.
-  - `  PARAMETERS  ` : the parameters for the transfer configuration in JSON format. For example: `  --params='{"param1":"param_value1"}'  ` . For information about supported parameters, see the transfer guide for your data source.
+  - `  PARAMETERS  ` : the parameters for the transfer configuration in JSON format. For example: `--params='{"param1":"param_value1"}'` . For information about supported parameters, see the transfer guide for your data source.
   - `  INTEGER  ` : a value from 0 to 30. For information on setting the refresh window, see the documentation for your transfer type.
-  - `  SCHEDULE  ` : a recurring schedule, such as `  --schedule="every 3 hours"  ` . For a description of the `  schedule  ` syntax, see [Formatting the `  schedule  `](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
+  - `  SCHEDULE  ` : a recurring schedule, such as `--schedule="every 3 hours"` . For a description of the `schedule` syntax, see [Formatting the `schedule`](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
   - DATASET\_ID : the target dataset for the transfer configuration.
-  - DESTINATION\_KEY : the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) —for example, `  projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name  ` . CMEK is only available for [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) transfers.
+  - DESTINATION\_KEY : the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) —for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` . CMEK is only available for [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) transfers.
   - SERVICE\_ACCOUNT : specify a service account to use with this transfer.
-  - RESOURCE\_NAME : the transfer's resource name (also referred to as the transfer configuration). If you don't know the transfer's resource name, find the resource name with: [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
+  - RESOURCE\_NAME : the transfer's resource name (also referred to as the transfer configuration). If you don't know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
 
 **Note:** You cannot update notification settings using the bq tool.
 
 Examples:
 
-The following command updates the display name, target dataset, refresh window, and parameters for Google Ads transfer `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` :
+The following command updates the display name, target dataset, refresh window, and parameters for Google Ads transfer `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` :
 
     bq update \
     --display_name='My changed transfer' \
@@ -581,7 +581,7 @@ The following command updates the display name, target dataset, refresh window, 
     --transfer_config \
      projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7
 
-The following command updates the parameters and schedule for Scheduled Query transfer `  projects/myproject/locations/us/transferConfigs/5678z567-5678-5z67-5yx9-56zy3c866vw9  ` :
+The following command updates the parameters and schedule for Scheduled Query transfer `projects/myproject/locations/us/transferConfigs/5678z567-5678-5z67-5yx9-56zy3c866vw9` :
 
     bq update \
     --params='{"destination_table_name_template":"test", "write_disposition":"APPEND"}' \
@@ -591,7 +591,7 @@ The following command updates the parameters and schedule for Scheduled Query tr
 
 ### API
 
-Use the [`  projects.transferConfigs.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch) method and supply the transfer's resource name using the `  transferConfig.name  ` parameter. If you do not know the transfer's resource name, find the resource name with: [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) . You can also call the following method and supply the project ID using the `  parent  ` parameter to list all transfers: [`  projects.locations.transferConfigs.list  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) .
+Use the [`projects.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch) method and supply the transfer's resource name using the `transferConfig.name` parameter. If you do not know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) . You can also call the following method and supply the project ID using the `parent` parameter to list all transfers: [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) .
 
 ### Java
 
@@ -711,7 +711,7 @@ To update the credentials for a transfer:
 
 ### bq
 
-Enter the `  bq update  ` command, provide the transfer configuration's resource name using the `  --transfer_config  ` flag, and supply the `  --update_credentials  ` flag.
+Enter the `bq update` command, provide the transfer configuration's resource name using the `--transfer_config` flag, and supply the `--update_credentials` flag.
 
     bq update \
     --update_credentials=boolean \
@@ -721,11 +721,11 @@ Enter the `  bq update  ` command, provide the transfer configuration's resource
 Replace the following:
 
   - `  boolean  ` is a boolean value indicating whether the credentials should be updated for the transfer configuration.
-  - `  resource_name  ` is the transfer's resource name (also referred to as the transfer configuration). If you do not know the transfer's resource name, find the resource name with: [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
+  - `  resource_name  ` is the transfer's resource name (also referred to as the transfer configuration). If you do not know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
 
 Examples:
 
-Enter the following command to update the credentials for Google Ads transfer `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` .
+Enter the following command to update the credentials for Google Ads transfer `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` .
 
     bq update \
     --update_credentials=true \
@@ -734,7 +734,7 @@ Enter the following command to update the credentials for Google Ads transfer ` 
 
 ### API
 
-Use the [`  projects.transferConfigs.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch) method and supply the `  authorizationCode  ` and `  updateMask  ` parameters.
+Use the [`projects.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch) method and supply the `authorizationCode` and `updateMask` parameters.
 
 ### Java
 
@@ -832,7 +832,7 @@ Disabling a transfer is not supported by the CLI.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/patch) method and set `  disabled  ` to `  true  ` in the `  projects.locations.transferConfig  ` resource.
+Use the [`projects.locations.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/patch) method and set `disabled` to `true` in the `projects.locations.transferConfig` resource.
 
 ### Java
 
@@ -960,7 +960,7 @@ To delete a transfer:
 
 ### bq
 
-Enter the `  bq rm  ` command and provide the transfer configuration's resource name. You can use the `  -f  ` flag to delete a transfer config without confirmation.
+Enter the `bq rm` command and provide the transfer configuration's resource name. You can use the `-f` flag to delete a transfer config without confirmation.
 
     bq rm \
     -f \
@@ -969,9 +969,9 @@ Enter the `  bq rm  ` command and provide the transfer configuration's resource 
 
 Where:
 
-  - resource\_name is the transfer's Resource Name which is also referred to as the transfer configuration). If you do not know the transfer's Resource Name, issue the [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#listing_transfer_configurations) command to list all transfers.
+  - resource\_name is the transfer's Resource Name which is also referred to as the transfer configuration). If you do not know the transfer's Resource Name, issue the [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#listing_transfer_configurations) command to list all transfers.
 
-For example, enter the following command to delete transfer configuration `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` .
+For example, enter the following command to delete transfer configuration `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` .
 
     bq rm \
     --transfer_config \
@@ -979,7 +979,7 @@ For example, enter the following command to delete transfer configuration `  pro
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/delete) method and supply the resource you're deleting using the `  name  ` parameter.
+Use the [`projects.locations.transferConfigs.delete`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/delete) method and supply the resource you're deleting using the `name` parameter.
 
 ### Java
 
@@ -1064,7 +1064,7 @@ For information on how much data is available for backfill, see the transfer gui
 
 ### Required roles
 
-To get the permissions that you need to modify transfers, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to modify transfers, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -1073,8 +1073,8 @@ You might also be able to get the required permissions through [custom roles](ht
 You can manually trigger a transfer or backfill run with the following methods:
 
   - Select your transfer run using the Google Cloud console, then clicking **Run transfer now** or **Schedule backfill** .
-  - Use the `  bq mk –transfer run  ` command using the `  bq  ` command-line tool
-  - Call the `  projects.locations.transferConfigs.startManualRuns method  ` API method
+  - Use the `bq mk –transfer run` command using the `bq` command-line tool
+  - Call the `projects.locations.transferConfigs.startManualRuns method` API method
 
 For detailed instructions about each method, select the corresponding tab:
 
@@ -1100,7 +1100,7 @@ For detailed instructions about each method, select the corresponding tab:
 
 ### bq
 
-To manually start a transfer run, enter the `  bq mk  ` command with the `  --transfer_run  ` flag:
+To manually start a transfer run, enter the `bq mk` command with the `--transfer_run` flag:
 
     bq mk \
     --transfer_run \
@@ -1109,13 +1109,13 @@ To manually start a transfer run, enter the `  bq mk  ` command with the `  --tr
 
 Replace the following:
 
-  - `  RUN_TIME  ` is a timestamp that specifies the date of a past transfer. Use timestamps that end in Z or contain a valid time zone offset—for example, `  2022-08-19T12:11:35.00Z  ` or `  2022-05-25T00:00:00+00:00  ` .
+  - `  RUN_TIME  ` is a timestamp that specifies the date of a past transfer. Use timestamps that end in Z or contain a valid time zone offset—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00` .
       - If your transfer does not have a runtime parameter, or you just want to trigger a transfer now without specifying a past transfer, input your current time in this field.
-  - `  RESOURCE_NAME  ` is the resource name listed on your transfer configuration—for example, `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` .
+  - `  RESOURCE_NAME  ` is the resource name listed on your transfer configuration—for example, `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` .
       - To find the resource name of a transfer configuration, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details) .
       - The resource name uses the [Relative resource name](https://docs.cloud.google.com/apis/design/resource_names#relative_resource_name) format.
 
-To manually start a transfer run for a range of dates, enter the `  bq mk  ` command with the `  --transfer_run  ` flag along with a date range:
+To manually start a transfer run for a range of dates, enter the `bq mk` command with the `--transfer_run` flag along with a date range:
 
     bq mk \
     --transfer_run \
@@ -1125,14 +1125,14 @@ To manually start a transfer run for a range of dates, enter the `  bq mk  ` com
 
 Replace the following:
 
-  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specifies the time range containing the previous transfer runs that you want to backfill from—for example, `  2022-08-19T12:11:35.00Z  ` or `  2022-05-25T00:00:00+00:00  `
-  - `  RESOURCE_NAME  ` is the resource name listed on your transfer configuration—for example, `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  `
+  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specifies the time range containing the previous transfer runs that you want to backfill from—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00`
+  - `  RESOURCE_NAME  ` is the resource name listed on your transfer configuration—for example, `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7`
       - To find the resource name of a transfer configuration, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details) .
       - The resource name uses the [Relative resource name](https://docs.cloud.google.com/apis/design/resource_names#relative_resource_name) format.
 
 ### API
 
-To manually start a transfer run, use the [`  projects.locations.transferConfigs.startManualRuns  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns) method and provide the transfer configuration resource name using the parent parameter. To find the resource name of a transfer configuration, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details)
+To manually start a transfer run, use the [`projects.locations.transferConfigs.startManualRuns`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns) method and provide the transfer configuration resource name using the parent parameter. To find the resource name of a transfer configuration, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details)
 
 ``` 
   "requestedRunTime": "RUN_TIME"
@@ -1140,7 +1140,7 @@ To manually start a transfer run, use the [`  projects.locations.transferConfigs
 
 Replace the following:
 
-  - `  RUN_TIME  ` is a timestamp that specifies the date of a past transfer. Use timestamps that end in Z or contain a valid time zone offset—for example, `  2022-08-19T12:11:35.00Z  ` or `  2022-05-25T00:00:00+00:00  ` .
+  - `  RUN_TIME  ` is a timestamp that specifies the date of a past transfer. Use timestamps that end in Z or contain a valid time zone offset—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00` .
       - If your transfer does not have a runtime parameter, or you just want to trigger a transfer now without specifying a past transfer, input your current time in this field.
 
 To manually start a transfer run for a range of dates, provide a date range:
@@ -1152,7 +1152,7 @@ To manually start a transfer run for a range of dates, provide a date range:
 
 Replace the following:
 
-  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specifies the time range containing the previous transfer runs that you want to backfill from—for example, `  2022-08-19T12:11:35.00Z  ` or `  2022-05-25T00:00:00+00:00  `
+  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specifies the time range containing the previous transfer runs that you want to backfill from—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00`
 
 ### Java
 

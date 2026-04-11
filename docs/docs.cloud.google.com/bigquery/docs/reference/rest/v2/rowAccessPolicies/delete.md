@@ -10,7 +10,7 @@ Deletes a row access policy.
 
 ### HTTP request
 
-`  DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `
+`DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,27 +18,27 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the table to delete the row access policy.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the table to delete the row access policy.
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 Required. Table ID of the table to delete the row access policy.
 
-`  policyId  `
+`policyId`
 
-`  string  `
+`string`
 
 Required. Policy ID of the row access policy.
 
@@ -46,9 +46,9 @@ Required. Policy ID of the row access policy.
 
 Parameters
 
-`  force  `
+`force`
 
-`  boolean  `
+`boolean`
 
 If set to true, it deletes the row access policy even if it's the last row access policy on the table and the deletion will widen the access rather narrowing it.
 
@@ -64,7 +64,7 @@ If successful, the response body is an empty JSON object.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

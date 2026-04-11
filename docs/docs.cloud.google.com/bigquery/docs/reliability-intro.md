@@ -81,8 +81,8 @@ There are two types of failures, soft failures and hard failures.
 
 When you create a BigQuery dataset, you select a location in which to store your data. This location is one of the following:
 
-  - A region: a specific geographical location, such as Iowa ( `  us-central1  ` ) or Montréal ( `  northamerica-northeast1  ` ).
-  - A multi-region: a large geographic area that contains two or more geographic places, such as the United States ( `  US  ` ) or Europe ( `  EU  ` ).
+  - A region: a specific geographical location, such as Iowa ( `us-central1` ) or Montréal ( `northamerica-northeast1` ).
+  - A multi-region: a large geographic area that contains two or more geographic places, such as the United States ( `US` ) or Europe ( `EU` ).
 
 In either case, BigQuery automatically stores copies of your data in two different Google Cloud [zones](https://docs.cloud.google.com/docs/geography-and-regions#regions_and_zones) within a single region in the selected location.
 
@@ -148,17 +148,17 @@ Exponential backoff logic retries a query or request by increasing the wait time
 
 4.  If the request fails, wait 4 + random\_number\_milliseconds seconds and retry the request.
 
-5.  And so on, up to a ( `  maximum_backoff  ` ) time.
+5.  And so on, up to a ( `maximum_backoff` ) time.
 
 6.  Continue to wait and retry up to a maximum number of retries, but don't increase the wait period between retries.
 
 Note the following:
 
-  - The wait time is `  min(((2^n)+random_number_milliseconds), maximum_backoff)  ` , with `  n  ` incremented by 1 for each iteration (request).
+  - The wait time is `min(((2^n)+random_number_milliseconds), maximum_backoff)` , with `n` incremented by 1 for each iteration (request).
 
-  - `  random_number_milliseconds  ` is a random number of milliseconds less than or equal to 1000. This randomization helps to avoid situations where many clients are synchronized and all retry simultaneously, sending requests in synchronized waves. The value of `  random_number_milliseconds  ` is recalculated after each retry request.
+  - `random_number_milliseconds` is a random number of milliseconds less than or equal to 1000. This randomization helps to avoid situations where many clients are synchronized and all retry simultaneously, sending requests in synchronized waves. The value of `random_number_milliseconds` is recalculated after each retry request.
 
-  - The maximum backoff interval ( `  maximum_backoff  ` ) is typically 32 or 64 seconds. The appropriate value for `  maximum_backoff  ` depends on the use case.
+  - The maximum backoff interval ( `maximum_backoff` ) is typically 32 or 64 seconds. The appropriate value for `maximum_backoff` depends on the use case.
 
 The client can continue retrying after it reaches the maximum backoff time. Retries after this point don't need to continue increasing backoff time. For example, if the client uses a maximum backoff time of 64 seconds, then after reaching this value the client can continue to retry every 64 seconds. At some point, clients should be prevented from retrying indefinitely.
 
@@ -168,11 +168,11 @@ The wait time between retries and the number of retries depend on your use case 
 
 If exactly-once insertion semantics are important for your application, there are additional considerations when it comes to inserting jobs. How to achieve at most once semantics depends on which [WriteDisposition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) you specify. The write disposition tells BigQuery what it should do when encountering existing data in a table: fail, overwrite or append.
 
-With a `  WRITE_EMPTY  ` or `  WRITE_TRUNCATE  ` disposition, this is achieved by simply retrying any failed job insertion or execution. This is because all rows ingested by a job are atomically written to the table.
+With a `WRITE_EMPTY` or `WRITE_TRUNCATE` disposition, this is achieved by simply retrying any failed job insertion or execution. This is because all rows ingested by a job are atomically written to the table.
 
-With a `  WRITE_APPEND  ` disposition, the client needs to specify the job ID to guard against a retry appending the same data a second time. This works because BigQuery rejects job creation requests that attempt to use an ID from a previous job. This achieves at-most-once semantics for any given job ID. You can then achieve exactly-once by retrying under a new predictable job ID once you've confirmed with BigQuery that all previous attempts have failed.
+With a `WRITE_APPEND` disposition, the client needs to specify the job ID to guard against a retry appending the same data a second time. This works because BigQuery rejects job creation requests that attempt to use an ID from a previous job. This achieves at-most-once semantics for any given job ID. You can then achieve exactly-once by retrying under a new predictable job ID once you've confirmed with BigQuery that all previous attempts have failed.
 
-In some cases, the API client or HTTP client might not receive the confirmation that the job is inserted due to transient issues or network interruptions. When the insertion is retried, that request fails with `  status=ALREADY_EXISTS  ` ( `  code=409  ` and `  reason="duplicate"  ` ). The existing job status can be retrieved with a call to `  jobs.get  ` . After the status of the existing job is `  retrieved  ` , the caller can determine whether a new job with a new JOB ID should be created.
+In some cases, the API client or HTTP client might not receive the confirmation that the job is inserted due to transient issues or network interruptions. When the insertion is retried, that request fails with `status=ALREADY_EXISTS` ( `code=409` and `reason="duplicate"` ). The existing job status can be retrieved with a call to `jobs.get` . After the status of the existing job is `retrieved` , the caller can determine whether a new job with a new JOB ID should be created.
 
 ## Use cases and reliability requirements
 

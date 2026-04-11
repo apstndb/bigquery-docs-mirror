@@ -9,15 +9,15 @@ For more information, see the following:
 
 ## Before you begin
 
-To get information about tables, you must have the `  bigquery.tables.get  ` permission. The following predefined IAM roles include `  bigquery.tables.get  ` permissions:
+To get information about tables, you must have the `bigquery.tables.get` permission. The following predefined IAM roles include `bigquery.tables.get` permissions:
 
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
-In addition, if a user has the `  bigquery.datasets.create  ` permission, when that user creates a dataset, they are granted `  bigquery.dataOwner  ` access to it. `  bigquery.dataOwner  ` access gives the user the ability to get information about tables in a dataset.
+In addition, if a user has the `bigquery.datasets.create` permission, when that user creates a dataset, they are granted `bigquery.dataOwner` access to it. `bigquery.dataOwner` access gives the user the ability to get information about tables in a dataset.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -67,7 +67,7 @@ Select one of the following options:
 
 ### SQL
 
-For clustered tables, you can query the `  CLUSTERING_ORDINAL_POSITION  ` column in the [`  INFORMATION_SCHEMA.COLUMNS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) to find the 1-indexed offset of the column within the table's clustering columns:
+For clustered tables, you can query the `CLUSTERING_ORDINAL_POSITION` column in the [`INFORMATION_SCHEMA.COLUMNS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) to find the 1-indexed offset of the column within the table's clustering columns:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -88,11 +88,11 @@ For clustered tables, you can query the `  CLUSTERING_ORDINAL_POSITION  ` column
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The clustering ordinal position is 1 for `  column1  ` and 2 for `  column2  ` . More table metadata is available through the `  TABLES  ` , `  TABLE_OPTIONS  ` , `  COLUMNS  ` , and `  COLUMN_FIELD_PATH  ` views in [`  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+The clustering ordinal position is 1 for `column1` and 2 for `column2` . More table metadata is available through the `TABLES` , `TABLE_OPTIONS` , `COLUMNS` , and `COLUMN_FIELD_PATH` views in [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
 
 ### bq
 
-Issue the `  bq show  ` command to display all table information. Use the `  --schema  ` flag to display only table schema information. The `  --format  ` flag can be used to control the output.
+Issue the `bq show` command to display all table information. Use the `--schema` flag to display only table schema information. The `--format` flag can be used to control the output.
 
 If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
@@ -111,7 +111,7 @@ Replace the following:
 
 Examples:
 
-Enter the following command to display all information about `  myclusteredtable  ` in `  mydataset  ` . `  mydataset  ` in your default project.
+Enter the following command to display all information about `myclusteredtable` in `mydataset` . `mydataset` in your default project.
 
     bq show --format=prettyjson mydataset.myclusteredtable
 
@@ -130,7 +130,7 @@ The output should look like the following:
 
 ### API
 
-Call the [`  bigquery.tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and provide any relevant parameters.
+Call the [`bigquery.tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and provide any relevant parameters.
 
 ## List clustered tables in a dataset
 
@@ -150,13 +150,13 @@ Follow these steps to apply a new clustering specification to unpartitioned or p
     
     Replace the following:
     
-      - `  CLUSTER_COLUMN  ` : the column you are clustering on—for example, `  mycolumn  `
-      - `  DATASET  ` : the name of the dataset containing the table—for example, `  mydataset  `
-      - `  ORIGINAL_TABLE  ` : the name of your original table—for example, `  mytable  `
+      - `  CLUSTER_COLUMN  ` : the column you are clustering on—for example, `mycolumn`
+      - `  DATASET  ` : the name of the dataset containing the table—for example, `mydataset`
+      - `  ORIGINAL_TABLE  ` : the name of your original table—for example, `mytable`
     
-    You can also call the `  tables.update  ` or `  tables.patch  ` API method to [modify the clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
+    You can also call the `tables.update` or `tables.patch` API method to [modify the clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
 
-2.  To cluster all rows according to the new clustering specification, run the following `  UPDATE  ` statement:
+2.  To cluster all rows according to the new clustering specification, run the following `UPDATE` statement:
     
     ``` notranslate
     UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true

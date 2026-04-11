@@ -1,4 +1,4 @@
-This tutorial teaches you how to create a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the Google Analytics 360 user session data in the public [`  GA360_test.ga_sessions_sample  ` table](https://console.cloud.google.com/bigquery?p=cloud-training-demos&d=GA360_test&t=ga_sessions_sample&page=table) . You then use the matrix factorization model to generate content recommendations for site users.
+This tutorial teaches you how to create a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the Google Analytics 360 user session data in the public [`GA360_test.ga_sessions_sample` table](https://console.cloud.google.com/bigquery?p=cloud-training-demos&d=GA360_test&t=ga_sessions_sample&page=table) . You then use the matrix factorization model to generate content recommendations for site users.
 
 Using indirect customer preference information, like user session duration, to train the model is called training with *implicit feedback* . Matrix factorization models are trained using the [Weighted-Alternating Least Squares algorithm](http://yifanhu.net/PUB/cf.pdf) when you use implicit feedback as training data.
 
@@ -8,9 +8,9 @@ Using indirect customer preference information, like user session duration, to t
 
 This tutorial guides you through completing the following tasks:
 
-  - Creating a matrix factorization model by using the `  CREATE MODEL  ` statement.
-  - Evaluating the model by using the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Generating content recommendations for users by using the model with the [`  ML.RECOMMEND  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
+  - Creating a matrix factorization model by using the `CREATE MODEL` statement.
+  - Evaluating the model by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+  - Generating content recommendations for users by using the model with the [`ML.RECOMMEND` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
 
 ## Costs
 
@@ -31,25 +31,25 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
-  - To create the dataset, you need the `  bigquery.datasets.create  ` IAM permission.
+  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
   - To create the model, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following permissions:
     
-      - `  bigquery.models.getData  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.models.getData`
+      - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -69,7 +69,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -77,9 +77,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -96,7 +96,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -108,7 +108,7 @@ Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/ref
 
 ## Prepare the sample data
 
-Transform the data from the `  GA360_test.ga_sessions_sample  ` table into a better structure for model training, and then write this data to a BigQuery table. The following query calculates the session duration for each user for each piece of content, which you can then use as implicit feedback to infer the user's preference for that content.
+Transform the data from the `GA360_test.ga_sessions_sample` table into a better structure for model training, and then write this data to a BigQuery table. The following query calculates the session duration for each user for each piece of content, which you can then use as implicit feedback to infer the user's preference for that content.
 
 Follow these steps to create the training data table:
 
@@ -192,13 +192,13 @@ Follow these steps to create the training data table:
 
 ## Create the model
 
-Create a matrix factorization model and train it on the data in the `  analytics_session_data  ` table. The model is trained to predict a confidence rating for every `  visitorId  ` - `  contentId  ` pair. The confidence rating is created with centering and scaling by the median session duration. Records where the session duration is more than 3.33 times the median are filtered out as outliers.
+Create a matrix factorization model and train it on the data in the `analytics_session_data` table. The model is trained to predict a confidence rating for every `visitorId` - `contentId` pair. The confidence rating is created with centering and scaling by the median session duration. Records where the session duration is more than 3.33 times the median are filtered out as outliers.
 
-The following `  CREATE MODEL  ` statement uses these columns to generate recommendations:
+The following `CREATE MODEL` statement uses these columns to generate recommendations:
 
-  - `  visitorId  ` —The visitor ID.
-  - `  contentId  ` —The content ID.
-  - `  rating  ` —The implicit rating from 0 to 1 calculated for each visitor-content pair, centered and scaled.
+  - `visitorId` —The visitor ID.
+  - `contentId` —The content ID.
+  - `rating` —The implicit rating from 0 to 1 calculated for each visitor-content pair, centered and scaled.
 
 <!-- end list -->
 
@@ -227,7 +227,7 @@ The following `  CREATE MODEL  ` statement uses these columns to generate recomm
     WHERE 0.3 * (1 + (session_duration - 57937) / 57937) < 1;
     ```
     
-    The query takes about 10 minutes to complete, after which the `  mf_implicit  ` model appears in the **Explorer** pane. Because the query uses a `  CREATE MODEL  ` statement to create a model, you don't see query results.
+    The query takes about 10 minutes to complete, after which the `mf_implicit` model appears in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
 ## Get training statistics
 
@@ -249,11 +249,11 @@ Follow these steps to view the model's training statistics:
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
-4.  Click the `  bqml_tutorial  ` dataset. You can also use the search feature or filters to find the dataset.
+4.  Click the `bqml_tutorial` dataset. You can also use the search feature or filters to find the dataset.
 
 5.  Click the **Models** tab.
 
-6.  Click the `  mf_implicit  ` model and then click the **Training** tab
+6.  Click the `mf_implicit` model and then click the **Training** tab
 
 7.  In the **View as** section, click **Table** . The results should look similar to the following:
     
@@ -275,7 +275,7 @@ Follow these steps to view the model's training statistics:
 
 ## Evaluate the model
 
-Evaluate the performance of the model by using the `  ML.EVALUATE  ` function. The `  ML.EVALUATE  ` function evaluates the predicted content ratings returned by the model against the evaluation metrics calculated during training.
+Evaluate the performance of the model by using the `ML.EVALUATE` function. The `ML.EVALUATE` function evaluates the predicted content ratings returned by the model against the evaluation metrics calculated during training.
 
 Follow these steps to evaluate the model:
 
@@ -302,11 +302,11 @@ Follow these steps to evaluate the model:
     +------------------------+-----------------------+---------------------------------------+---------------------+
     ```
     
-    For more information about the `  ML.EVALUATE  ` function output, see [Output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
+    For more information about the `ML.EVALUATE` function output, see [Output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
 
 ## Get the predicted ratings for a subset of visitor-content pairs
 
-Use the `  ML.RECOMMEND  ` to get the predicted rating for each piece of content for five site visitors.
+Use the `ML.RECOMMEND` to get the predicted rating for each piece of content for five site visitors.
 
 Follow these steps to get predicted ratings:
 
@@ -424,7 +424,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
-4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `  bqml_tutorial  ` ) and then click **Delete** .
+4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `bqml_tutorial` ) and then click **Delete** .
 
 ### Delete your project
 
@@ -433,7 +433,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

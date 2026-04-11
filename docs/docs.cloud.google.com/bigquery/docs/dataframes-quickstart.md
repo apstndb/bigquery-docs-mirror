@@ -2,7 +2,7 @@
 
 Use this quickstart to perform the following analysis and machine learning (ML) tasks by using the [BigQuery DataFrames API](https://dataframes.bigquery.dev/reference/index.html) in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) :
 
-  - Create a DataFrame over the `  bigquery-public-data.ml_datasets.penguins  ` public dataset.
+  - Create a DataFrame over the `bigquery-public-data.ml_datasets.penguins` public dataset.
   - Calculate the average body mass of a penguin.
   - Create a [linear regression model](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.html) .
   - Create a DataFrame over a subset of the penguin data to use as training data.
@@ -25,9 +25,9 @@ Use this quickstart to perform the following analysis and machine learning (ML) 
 
 To create and run notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
-  - [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser)
-  - [Code Creator ( `  roles/dataform.codeCreator  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator)
+  - [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
+  - [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser)
+  - [Code Creator ( `roles/dataform.codeCreator` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator)
 
 ## Create a notebook
 
@@ -62,11 +62,11 @@ Try BigQuery DataFrames by following these steps:
         # Efficiently preview the results using the .peek() method.
         df.peek()
 
-3.  Modify the `  bpd.options.bigquery.project = your_gcp_project_id  ` line to specify your Google Cloud project ID. For example, `  bpd.options.bigquery.project = "myProjectID"  ` .
+3.  Modify the `bpd.options.bigquery.project = your_gcp_project_id` line to specify your Google Cloud project ID. For example, `bpd.options.bigquery.project = "myProjectID"` .
 
 4.  Run the code cell.
     
-    The code returns a `  DataFrame  ` object with data about penguins.
+    The code returns a `DataFrame` object with data about penguins.
 
 5.  Create a new code cell in the notebook and add the following code:
     
@@ -122,7 +122,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

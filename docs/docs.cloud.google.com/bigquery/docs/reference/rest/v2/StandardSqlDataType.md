@@ -5,7 +5,7 @@
 
 The data type of a variable such as a function argument. Examples include:
 
-  - INT64: `  {"typeKind": "INT64"}  `
+  - INT64: `{"typeKind": "INT64"}`
 
   - ARRAY :
 
@@ -62,50 +62,36 @@ The data type of a variable such as a function argument. Examples include:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;typeKind&quot;: enum (TypeKind),
-
-  // Union field sub_type can be only one of the following:
-  &quot;arrayElementType&quot;: {
-    object (StandardSqlDataType)
-  },
-  &quot;structType&quot;: {
-    object (StandardSqlStructType)
-  },
-  &quot;rangeElementType&quot;: {
-    object (StandardSqlDataType)
-  }
-  // End of list of possible types for union field sub_type.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;typeKind&quot;: enum (TypeKind),// Union field sub_type can be only one of the following:&quot;arrayElementType&quot;: {object (StandardSqlDataType)},&quot;structType&quot;: {object (StandardSqlStructType)},&quot;rangeElementType&quot;: {object (StandardSqlDataType)}// End of list of possible types for union field sub_type.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  typeKind  `
+`typeKind`
 
-`  enum ( TypeKind  ` )
+` enum ( TypeKind  ` )
 
 Required. The top level type of this field. Can be any GoogleSQL data type (e.g., "INT64", "DATE", "ARRAY").
 
-Union field `  sub_type  ` . For complex types, the sub type information. `  sub_type  ` can be only one of the following:
+Union field `sub_type` . For complex types, the sub type information. `sub_type` can be only one of the following:
 
-`  arrayElementType  `
+`arrayElementType`
 
-`  object ( StandardSqlDataType  ` )
+` object ( StandardSqlDataType  ` )
 
 The type of the array's elements, if typeKind = "ARRAY".
 
-`  structType  `
+`structType`
 
-`  object ( StandardSqlStructType  ` )
+` object ( StandardSqlStructType  ` )
 
 The fields of this struct, in order, if typeKind = "STRUCT".
 
-`  rangeElementType  `
+`rangeElementType`
 
-`  object ( StandardSqlDataType  ` )
+` object ( StandardSqlDataType  ` )
 
 The type of the range's elements, if typeKind = "RANGE".
 
@@ -115,71 +101,71 @@ The kind of the datatype.
 
 Enums
 
-`  TYPE_KIND_UNSPECIFIED  `
+`TYPE_KIND_UNSPECIFIED`
 
 Invalid type.
 
-`  INT64  `
+`INT64`
 
 Encoded as a string in decimal format.
 
-`  BOOL  `
+`BOOL`
 
 Encoded as a boolean "false" or "true".
 
-`  FLOAT64  `
+`FLOAT64`
 
 Encoded as a number, or string "NaN", "Infinity" or "-Infinity".
 
-`  STRING  `
+`STRING`
 
 Encoded as a string value.
 
-`  BYTES  `
+`BYTES`
 
 Encoded as a base64 string per RFC 4648, section 4.
 
-`  TIMESTAMP  `
+`TIMESTAMP`
 
 Encoded as an RFC 3339 timestamp with mandatory "Z" time zone string: 1985-04-12T23:20:50.52Z
 
-`  DATE  `
+`DATE`
 
 Encoded as RFC 3339 full-date format string: 1985-04-12
 
-`  TIME  `
+`TIME`
 
 Encoded as RFC 3339 partial-time format string: 23:20:50.52
 
-`  DATETIME  `
+`DATETIME`
 
 Encoded as RFC 3339 full-date "T" partial-time: 1985-04-12T23:20:50.52
 
-`  GEOGRAPHY  `
+`GEOGRAPHY`
 
 Encoded as WKT
 
-`  NUMERIC  `
+`NUMERIC`
 
 Encoded as a decimal string.
 
-`  BIGNUMERIC  `
+`BIGNUMERIC`
 
 Encoded as a decimal string.
 
-`  JSON  `
+`JSON`
 
 Encoded as a string.
 
-`  ARRAY  `
+`ARRAY`
 
 Encoded as a list with types matching Type.array\_type.
 
-`  STRUCT  `
+`STRUCT`
 
 Encoded as a list with fields of type Type.struct\_type\[i\]. tabledata.list is used because a JSON object cannot have duplicate field names.
 
-`  RANGE  `
+`RANGE`
 
 Encoded as a pair with types matching rangeElementType. Pairs must begin with "\[", end with ")", and be separated by ", ".
 
@@ -198,21 +184,15 @@ The representation of a SQL STRUCT type.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;fields&quot;: [
-    {
-      object (StandardSqlField)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;fields&quot;: [{object (StandardSqlField)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  fields[]  `
+`fields[]`
 
-`  object ( StandardSqlField  ` )
+` object ( StandardSqlField  ` )
 
 Fields within the struct.

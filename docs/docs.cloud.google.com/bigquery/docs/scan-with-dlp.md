@@ -24,7 +24,7 @@ To learn more about Sensitive Data Protection, see the [Sensitive Data Protectio
 
 3.  Ensure that the user creating your Sensitive Data Protection jobs is granted an appropriate predefined Sensitive Data Protection [IAM role](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-roles) or sufficient [permissions](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions) to run Sensitive Data Protection jobs.
 
-**Note:** When you enable the DLP API, a service account is created with a name similar to `  service- project_number @dlp-api.iam.gserviceaccount.com  ` . This service account is granted the DLP API Service Agent role, which lets the service account authenticate with the BigQuery API. For more information, see [Service account](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions#service_account) on the Sensitive Data Protection IAM permissions page.
+**Note:** When you enable the DLP API, a service account is created with a name similar to `service- project_number @dlp-api.iam.gserviceaccount.com` . This service account is granted the DLP API Service Agent role, which lets the service account authenticate with the BigQuery API. For more information, see [Service account](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions#service_account) on the Sensitive Data Protection IAM permissions page.
 
 ## Scanning BigQuery data using the Google Cloud console
 
@@ -52,24 +52,24 @@ To scan a BigQuery table using Sensitive Data Protection:
 
 7.  Click **Continue** .
 
-8.  Optional: For **Step 2: Configure detection** , you can configure what types of data to look for, called `  infoTypes  ` .
+8.  Optional: For **Step 2: Configure detection** , you can configure what types of data to look for, called `infoTypes` .
     
     Do one of the following:
     
-      - To select from the list of predefined `  infoTypes  ` , click **Manage infoTypes** . Then, select the infoTypes you want to search for.
+      - To select from the list of predefined `infoTypes` , click **Manage infoTypes** . Then, select the infoTypes you want to search for.
       - To use an existing [inspection template](https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-inspect) , in the **Template name** field, enter the template's full resource name.
     
-    For more information on `  infoTypes  ` , see [InfoTypes and infoType detectors](https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-infotypes) in the Sensitive Data Protection documentation.
+    For more information on `infoTypes` , see [InfoTypes and infoType detectors](https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-infotypes) in the Sensitive Data Protection documentation.
 
 9.  Click **Continue** .
 
-10. Optional: For **Step 3: Add actions** , turn on **Save to BigQuery** to publish your Sensitive Data Protection findings to a BigQuery table. If you don't store findings, the completed job contains only statistics about the number of findings and their `  infoTypes  ` . Saving findings to BigQuery saves details about the precise location and confidence of each individual finding.
+10. Optional: For **Step 3: Add actions** , turn on **Save to BigQuery** to publish your Sensitive Data Protection findings to a BigQuery table. If you don't store findings, the completed job contains only statistics about the number of findings and their `infoTypes` . Saving findings to BigQuery saves details about the precise location and confidence of each individual finding.
 
 11. Optional: If you turned on **Save to BigQuery** , in the **Save to BigQuery** section, enter the following information:
     
       - **Project ID** : the project ID where your results are stored.
       - **Dataset ID** : the name of the dataset that stores your results.
-      - Optional: **Table ID** : the name of the table that stores your results. If no table ID is specified, a default name is assigned to a new table similar to the following: `  dlp_googleapis_ date _1234567890  ` . If you specify an existing table, findings are appended to it.
+      - Optional: **Table ID** : the name of the table that stores your results. If no table ID is specified, a default name is assigned to a new table similar to the following: `dlp_googleapis_ date _1234567890` . If you specify an existing table, findings are appended to it.
     
     To include the actual content that was detected, turn on **Include quote** .
 

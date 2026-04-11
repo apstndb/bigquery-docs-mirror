@@ -30,15 +30,15 @@ When you have metadata caching enabled, you specify the maximum interval of meta
 You can choose to refresh the cache either automatically or manually:
 
   - For automatic refreshes, the cache is refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in the datastore are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
-  - For manual refreshes, you run the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on whatever schedule you determine. For BigLake tables, you can refresh the metadata selectively by providing subdirectories of the table data directory. This approach lets you avoid unnecessary metadata processing. Refreshing the cache manually is a good approach if the files in the datastore are added, deleted, or modified at known intervals—for example, as the output of a pipeline.
+  - For manual refreshes, you run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on whatever schedule you determine. For BigLake tables, you can refresh the metadata selectively by providing subdirectories of the table data directory. This approach lets you avoid unnecessary metadata processing. Refreshing the cache manually is a good approach if the files in the datastore are added, deleted, or modified at known intervals—for example, as the output of a pipeline.
 
-Both manual and automatic cache refreshes are executed with [`  INTERACTIVE  `](https://docs.cloud.google.com/bigquery/docs/running-queries) query priority.
+Both manual and automatic cache refreshes are executed with [`INTERACTIVE`](https://docs.cloud.google.com/bigquery/docs/running-queries) query priority.
 
-If you choose to use automatic refreshes, we recommend that you create a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) , and then create an [assignment with a `  BACKGROUND  ` job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) for the project that runs the metadata cache refresh jobs. This prevents the refresh jobs from competing with user queries for resources, and potentially failing if there aren't sufficient resources available for them.
+If you choose to use automatic refreshes, we recommend that you create a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) , and then create an [assignment with a `BACKGROUND` job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) for the project that runs the metadata cache refresh jobs. This prevents the refresh jobs from competing with user queries for resources, and potentially failing if there aren't sufficient resources available for them.
 
 You should consider how the staleness interval and metadata caching mode values will interact before you set them. Consider the following examples:
 
-  - If a table's metadata cache is set to require manual refreshes, and the staleness interval is set to 2 days, you must run the `  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure every 2 days or less if you want operations against the table to use cached metadata.
+  - If a table's metadata cache is set to require manual refreshes, and the staleness interval is set to 2 days, you must run the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure every 2 days or less if you want operations against the table to use cached metadata.
   - If a table's metadata cache is set to refresh automatically, and the staleness interval is set to 30 minutes, some of the operations against the table might read from the datastore if the metadata cache refresh takes on the longer side of the usual 30- to 60-minute window.
 
 For more information on setting metadata caching options for BigLake tables, see [Create Amazon S3 BigLake external tables](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) or [Create BigLake external tables for Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
@@ -47,7 +47,7 @@ For more information on setting metadata caching options for object tables, see 
 
 ## Get information on metadata cache refresh jobs
 
-To find information about metadata cache refresh jobs, query the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
+To find information about metadata cache refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
 ``` notranslate
 SELECT *
@@ -68,7 +68,7 @@ CMEKs created in BigQuery don't apply to the Cloud Storage files that are used b
 
 ## Get information on metadata cache usage by query jobs
 
-To get information about metadata cache usage for a query job, call the [`  jobs.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) for that job and look at the [`  MetadataCacheStatistics  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics) in the [`  JobStatistics2  ` section](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) of the `  Job  ` resource. This field provides information on which metadata cache-enabled tables were used by the query, whether the metadata cache was used by the query, and if not, the reason why not.
+To get information about metadata cache usage for a query job, call the [`jobs.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) for that job and look at the [`MetadataCacheStatistics` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics) in the [`JobStatistics2` section](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) of the `Job` resource. This field provides information on which metadata cache-enabled tables were used by the query, whether the metadata cache was used by the query, and if not, the reason why not.
 
 ## Table statistics
 
@@ -86,7 +86,7 @@ The following limitations apply to the metadata cache:
 
   - If you update the source URI for a table, the metadata cache is not automatically refreshed, and subsequent queries return data from the outdated cache. To avoid this, refresh the metadata cache manually. If the table's metadata cache is set to refresh automatically, you must change the table's refresh mode to manual, perform the manual refresh, then set the table's refresh mode back to automatic again.
 
-  - If you are manually refreshing the metadata cache, and your target dataset and Cloud Storage bucket are in a [regional](https://docs.cloud.google.com/bigquery/docs/locations#regions) location, you must explicitly specify this location when you run the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  `](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) procedure call. You can do this one of the following ways:
+  - If you are manually refreshing the metadata cache, and your target dataset and Cloud Storage bucket are in a [regional](https://docs.cloud.google.com/bigquery/docs/locations#regions) location, you must explicitly specify this location when you run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE`](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) procedure call. You can do this one of the following ways:
     
     ### Console
     
@@ -102,11 +102,11 @@ The following limitations apply to the metadata cache:
     
     5.  Click **Save** .
     
-    6.  Run the query containing the `  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` procedure call in that Editor tab.
+    6.  Run the query containing the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` procedure call in that Editor tab.
     
     ### bq
     
-    If you run the query containing the `  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` procedure call by using [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) , be sure to specify the [`  --location  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) .
+    If you run the query containing the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` procedure call by using [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) , be sure to specify the [`--location` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) .
 
 ## What's next
 

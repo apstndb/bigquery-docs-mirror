@@ -12,8 +12,8 @@ In this tutorial, you use Google Ads as your data source, but you can use any of
 
 To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles on the project:
 
-  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` )
-  - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `  roles/dataform.admin  ` )
+  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
+  - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `roles/dataform.admin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -37,16 +37,16 @@ In this tutorial, you use Google Ads as the example data source. For a full list
     
     1.  For **Customer ID** , enter your Google Ads customer ID.
     2.  For **Report type** , select **Standard** . The standard report includes the standard set of reports and fields as detailed in [Google Ads report transformation](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation) .
-          - For **Refresh window** , enter `  5  ` .
+          - For **Refresh window** , enter `5` .
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data.
 
-6.  In the **Transfer config name** section, for **Display name** , enter `  Marketing tutorial  ` .
+6.  In the **Transfer config name** section, for **Display name** , enter `Marketing tutorial` .
 
 7.  In the **Schedule options** section:
     
       - For **Repeat frequency** , select **Days** .
-      - For **At** , enter `  08:00  ` .
+      - For **At** , enter `08:00` .
 
 8.  Click **Save** .
 
@@ -58,7 +58,7 @@ You can [monitor ongoing transfer jobs](https://docs.cloud.google.com/bigquery/d
 
 When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 The following sections show sample queries that you can use to examine your transferred data.
 
@@ -121,12 +121,12 @@ ORDER BY
 
 Replace the following:
 
-  - `  DATASET  ` : the name of the dataset that you created to store the transferred table
-  - `  CUSTOMER_ID  ` : your Google Ads Customer ID.
+  - `DATASET` : the name of the dataset that you created to store the transferred table
+  - `CUSTOMER_ID` : your Google Ads Customer ID.
 
 ### Count of keywords
 
-The following sample query analyzes keywords by campaign, ad group, and keyword status. This query uses the `  KeywordMatchType  ` function. Keyword match types help control which searches can trigger your ad. For more information about keyword matching options, see [About keyword matching options](https://support.google.com/google-ads/answer/2497836) .
+The following sample query analyzes keywords by campaign, ad group, and keyword status. This query uses the `KeywordMatchType` function. Keyword match types help control which searches can trigger your ad. For more information about keyword matching options, see [About keyword matching options](https://support.google.com/google-ads/answer/2497836) .
 
 ### Console
 
@@ -181,8 +181,8 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 Replace the following:
 
-  - `  DATASET  ` : the name of the dataset that you created to store the transferred table
-  - `  CUSTOMER_ID  ` : your Google Ads Customer ID.
+  - `DATASET` : the name of the dataset that you created to store the transferred table
+  - `CUSTOMER_ID` : your Google Ads Customer ID.
 
 ## Create a Dataform repository
 
@@ -198,11 +198,11 @@ Create a Dataform repository to store the [SQLX queries](https://docs.cloud.goog
 
 3.  On the **Create repository** page, do the following:
     
-    1.  In the **Repository ID** field, enter `  marketing-tutorial-repository  ` .
+    1.  In the **Repository ID** field, enter `marketing-tutorial-repository` .
     2.  In the **Region** list, select a region.
     3.  Click **Create** .
 
-The `  marketing-tutorial-repository  ` repository now appears in your Dataform repositories list.
+The `marketing-tutorial-repository` repository now appears in your Dataform repositories list.
 
 For more information about Dataform repositories, see [About Dataform repositories](https://docs.cloud.google.com/dataform/docs/create-repository#about-repositories) .
 
@@ -214,20 +214,20 @@ Create a Dataform development workspace so that you can work on the transformati
     
     [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
-2.  Click `  marketing-tutorial-repository  ` .
+2.  Click `marketing-tutorial-repository` .
 
 3.  Click add **Create development workspace** .
 
 4.  In the **Create development workspace** window, do the following:
     
-    1.  In the **Workspace ID** field, enter `  marketing-tutorial-workspace  ` .
+    1.  In the **Workspace ID** field, enter `marketing-tutorial-workspace` .
     2.  Click **Create** .
     
     The development workspace page appears.
 
 5.  Click **Initialize workspace** .
 
-The `  marketing-tutorial-workspace  ` development workspace now appears in your `  marketing-tutorial-repository  ` repository under the **Development Workspaces** tab, along with two example files in the `  definitions  ` directory called `  *first_view.sqlx  ` and `  *second_view.sqlx  ` .
+The `marketing-tutorial-workspace` development workspace now appears in your `marketing-tutorial-repository` repository under the **Development Workspaces** tab, along with two example files in the `definitions` directory called `*first_view.sqlx` and `*second_view.sqlx` .
 
 For more information about Dataform development workspaces, see [Overview of development workspaces](https://docs.cloud.google.com/dataform/docs/create-workspace#overview-workspaces) .
 
@@ -237,28 +237,28 @@ Connect your newly-transferred Google Ads table to Dataform by declaring it as a
 
 ### Create a SQLX file for data source declaration
 
-In Dataform, you declare a data source destination by creating a SQLX file in the `  definitions/  ` directory:
+In Dataform, you declare a data source destination by creating a SQLX file in the `definitions/` directory:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
     
     [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
-2.  Select `  marketing-tutorial-repository  ` .
+2.  Select `marketing-tutorial-repository` .
 
-3.  Select `  marketing-tutorial-workspace  ` .
+3.  Select `marketing-tutorial-workspace` .
 
-4.  In the **Files** pane, next to `  definitions/  ` , click the **More** menu.
+4.  In the **Files** pane, next to `definitions/` , click the **More** menu.
 
 5.  Click **Create file** .
 
 6.  In the **Create new file** pane, do the following:
     
-    1.  In the **Add a file path** field, after `  definitions/  ` , enter the name `  definitions/googleads-declaration.sqlx  ` .
+    1.  In the **Add a file path** field, after `definitions/` , enter the name `definitions/googleads-declaration.sqlx` .
     2.  Click **Create file** .
 
 ### Declare a data source
 
-Edit the `  definitions/googleads-declaration.sqlx  ` to declare a transferred Google Ads table as a data source. This example declares the `  ads_Campaign  ` table as a data source:
+Edit the `definitions/googleads-declaration.sqlx` to declare a transferred Google Ads table as a data source. This example declares the `ads_Campaign` table as a data source:
 
 1.  In your development workspace, in the **Files** pane, click your SQLX file for data source declaration.
 
@@ -275,19 +275,19 @@ Edit the `  definitions/googleads-declaration.sqlx  ` to declare a transferred G
 
 ## Define your transformation
 
-Define your data transformations by create a SQLX file in the `  definitions/  ` directory. In this tutorial, you create a daily transformation that aggregates metrics like clicks, impressions, costs, and conversions using a file named `  daily_performance.sqlx  ` .
+Define your data transformations by create a SQLX file in the `definitions/` directory. In this tutorial, you create a daily transformation that aggregates metrics like clicks, impressions, costs, and conversions using a file named `daily_performance.sqlx` .
 
 ### Create the transformation SQLX file
 
-1.  In the **Files** pane, next to `  definitions/  ` , click the more\_vert **More** menu, and then select **Create file** .
-2.  In the **Add a file path** field, enter `  definitions/daily_performance.sqlx  ` .
+1.  In the **Files** pane, next to `definitions/` , click the more\_vert **More** menu, and then select **Create file** .
+2.  In the **Add a file path** field, enter `definitions/daily_performance.sqlx` .
 3.  Click **Create file** .
 
 ### Define the transformation SQLX file
 
-1.  In the **Files** pane, expand the `  definitions/  ` directory.
+1.  In the **Files** pane, expand the `definitions/` directory.
 
-2.  Select `  daily_performance.sqlx  ` , then enter the following query:
+2.  Select `daily_performance.sqlx` , then enter the following query:
     
     ``` 
         config {
@@ -314,10 +314,10 @@ Define your data transformations by create a SQLX file in the `  definitions/  `
 
 After you have made your changes in your development workspace, you can commit and push these changes to your repository by following these steps:
 
-1.  In the `  marketing-tutorial-workspace  ` workspace, click **Commit 1 change** .
+1.  In the `marketing-tutorial-workspace` workspace, click **Commit 1 change** .
 2.  In the **New commit** pane, enter a commit description in the **Add a commit message** field.
 3.  Click **Commit all changes** .
-4.  In the `  marketing-tutorial-workspace  ` workspace, click **Push to default branch** .
+4.  In the `marketing-tutorial-workspace` workspace, click **Push to default branch** .
 
 After your changes are successfully pushed to your repository, the **Workspace is up to date** message appears.
 
@@ -327,13 +327,13 @@ After you have defined your data transformation file, schedule the data transfor
 
 ### Create a production release
 
-A production release in Dataform ensures that your environment is consistently updated with the results of your data transformations. The following steps show you how to specify the `  main  ` branch of the `  marketing-tutorial-repository  ` repository to store your data transformations:
+A production release in Dataform ensures that your environment is consistently updated with the results of your data transformations. The following steps show you how to specify the `main` branch of the `marketing-tutorial-repository` repository to store your data transformations:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
     
     [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
-2.  Select `  marketing-tutorial-repository  ` .
+2.  Select `marketing-tutorial-repository` .
 
 3.  Click the **Releases & scheduling** tab.
 
@@ -341,29 +341,29 @@ A production release in Dataform ensures that your environment is consistently u
 
 5.  In the **Create release configuration** pane, configure the following settings:
     
-    1.  In the **Release ID** field, enter `  transformations  ` .
-    2.  In the **Git commitish** field, leave the default value `  main  ` .
+    1.  In the **Release ID** field, enter `transformations` .
+    2.  In the **Git commitish** field, leave the default value `main` .
     3.  In the **Schedule frequency** section, select **On-demand** .
 
 6.  Click **Create** .
 
 ### Create a workflow configuration
 
-Once you have created a production release, you can then create a workflow configuration that runs your data transformations on a specified schedule in your repository. The following steps show you how to schedule daily transformations from the `  transformations  ` file:
+Once you have created a production release, you can then create a workflow configuration that runs your data transformations on a specified schedule in your repository. The following steps show you how to schedule daily transformations from the `transformations` file:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
     
     [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
-2.  Select `  marketing-tutorial-repository  ` .
+2.  Select `marketing-tutorial-repository` .
 
 3.  Click the **Releases & scheduling** tab.
 
 4.  In the **Workflow configurations** section, click **Create** .
 
-5.  In the **Create workflow configuration** pane, in the **Configuration ID** field, enter `  transformations  ` .
+5.  In the **Create workflow configuration** pane, in the **Configuration ID** field, enter `transformations` .
 
-6.  In the **Release configuration** menu, select `  transformations  ` .
+6.  In the **Release configuration** menu, select `transformations` .
 
 7.  Under **Authentication** , select **Execute with user credentials**
 
@@ -380,7 +380,7 @@ Once you have created a production release, you can then create a workflow confi
 
 11. Click **Create** .
 
-The workflow configuration that you have created runs the entire latest compilation result created by the `  transformations  ` release configuration.
+The workflow configuration that you have created runs the entire latest compilation result created by the `transformations` release configuration.
 
 ## Clean up
 
@@ -388,17 +388,17 @@ To avoid incurring charges to your Google Cloud account for the resources used o
 
 ### Delete the dataset created in BigQuery
 
-To avoid incurring charges for BigQuery assets, delete the dataset called `  dataform  ` .
+To avoid incurring charges for BigQuery assets, delete the dataset called `dataform` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the **Explorer** panel, expand your project and select `  dataform  ` .
+2.  In the **Explorer** panel, expand your project and select `dataform` .
 
 3.  Click the more\_vert **Actions** menu, and then select **Delete** .
 
-4.  In the **Delete dataset** dialog, enter `  delete  ` into the field, and then click **Delete** .
+4.  In the **Delete dataset** dialog, enter `delete` into the field, and then click **Delete** .
 
 ### Delete the Dataform development workspace and configurations
 
@@ -408,15 +408,15 @@ Dataform development workspace creation incurs no costs, but to delete the devel
     
     [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
-2.  Click `  quickstart-repository  ` .
+2.  Click `quickstart-repository` .
 
 3.  Click the **Release & scheduling** tab.
 
-4.  Under the **Release configurations** section, click the more\_vert **More** menu next to the `  production  ` configuration, and then click **Delete** .
+4.  Under the **Release configurations** section, click the more\_vert **More** menu next to the `production` configuration, and then click **Delete** .
 
-5.  Under the **Workflow configurations** section, click the more\_vert **More** menu next to the `  transformations  ` configuration, and then click **Delete** .
+5.  Under the **Workflow configurations** section, click the more\_vert **More** menu next to the `transformations` configuration, and then click **Delete** .
 
-6.  In the **Development workspaces** tab, click the more\_vert **More** menu by `  quickstart-workspace  ` , and then select **Delete** .
+6.  In the **Development workspaces** tab, click the more\_vert **More** menu by `quickstart-workspace` , and then select **Delete** .
 
 7.  To confirm, click **Delete** .
 
@@ -428,7 +428,7 @@ Dataform repository creation incurs no costs, but to delete the repository you c
     
     [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
-2.  By `  quickstart-repository  ` , click the more\_vert **More** menu, and then select **Delete** .
+2.  By `quickstart-repository` , click the more\_vert **More** menu, and then select **Delete** .
 
 3.  In the **Delete repository** window, enter the name of the repository to confirm deletion.
 

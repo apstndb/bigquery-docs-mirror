@@ -11,7 +11,7 @@ Returns the dataset specified by datasetID.
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,15 +19,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the requested dataset
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the requested dataset
 
@@ -35,15 +35,15 @@ Required. Dataset ID of the requested dataset
 
 Parameters
 
-`  datasetView  `
+`datasetView`
 
-`  enum ( DatasetView  ` )
+` enum ( DatasetView  ` )
 
 Optional. Specifies the view that determines which dataset information is returned. By default, metadata and ACL information are returned.
 
-`  accessPolicyVersion  `
+`accessPolicyVersion`
 
-`  integer  `
+`integer`
 
 Optional. The version of the access policy schema to fetch. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.
 
@@ -65,10 +65,10 @@ If successful, the response body contains an instance of `  Dataset  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
@@ -78,18 +78,18 @@ DatasetView specifies which dataset information is returned.
 
 Enums
 
-`  DATASET_VIEW_UNSPECIFIED  `
+`DATASET_VIEW_UNSPECIFIED`
 
 The default value. Default to the FULL view.
 
-`  METADATA  `
+`METADATA`
 
 View metadata information for the dataset, such as friendlyName, description, labels, etc.
 
-`  ACL  `
+`ACL`
 
 View ACL information for the dataset, which defines dataset access for one or more entities.
 
-`  FULL  `
+`FULL`
 
 View both dataset metadata and ACL information.

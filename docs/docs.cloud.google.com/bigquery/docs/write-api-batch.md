@@ -4,7 +4,7 @@ This document describes how to use the [BigQuery Storage Write API](https://docs
 
 In batch-load scenarios, an application writes data and commits it as a single atomic transaction. When using the Storage Write API to batch load data, create one or more streams in *pending type* . Pending type supports stream-level transactions. Records are buffered in a pending state until you commit the stream.
 
-For batch workloads, also consider using the Storage Write API through the [Apache Spark SQL connector for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery) using Dataproc, rather than writing custom Storage Write API code.
+For batch workloads, also consider using the Storage Write API through the [Apache Spark SQL connector for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery) using Managed Service for Apache Spark, rather than writing custom Storage Write API code.
 
 The Storage Write API is well-suited to a *data pipeline* architecture. A main process creates a number of streams. For each stream, it assigns a worker thread or a separate process to write a portion of the batch data. Each worker creates a connection to its stream, writes data, and finalizes its stream when it's done. After all of the workers signal successful completion to the main process, the main process commits the data. If a worker fails, its assigned portion of the data will not show up in the final results, and the whole worker can be safely retried. In a more sophisticated pipeline, workers checkpoint their progress by reporting the last offset written to the main process. This approach can result in a robust pipeline that is resilient to failures.
 
@@ -12,10 +12,10 @@ The Storage Write API is well-suited to a *data pipeline* architecture. A main p
 
 To use pending type, the application does the following:
 
-1.  Call `  CreateWriteStream  ` to create one or more streams in pending type.
-2.  For each stream, call `  AppendRows  ` in a loop to write batches of records.
-3.  For each stream, call `  FinalizeWriteStream  ` . After you call this method, you cannot write any more rows to the stream. If you call `  AppendRows  ` after calling `  FinalizeWriteStream  ` , it returns a [`  StorageError  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError) with `  StorageErrorCode.STREAM_FINALIZED  ` in the `  google.rpc.Status  ` error. For more information the `  google.rpc.Status  ` error model, see [Errors](https://docs.cloud.google.com/apis/design/errors) .
-4.  Call `  BatchCommitWriteStreams  ` to commit the streams. After you call this method, the data becomes available for reading. If there is an error committing any of the streams, the error is returned in the `  stream_errors  ` field of the [`  BatchCommitWriteStreamsResponse  `](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#batchcommitwritestreamsresponse) .
+1.  Call `CreateWriteStream` to create one or more streams in pending type.
+2.  For each stream, call `AppendRows` in a loop to write batches of records.
+3.  For each stream, call `FinalizeWriteStream` . After you call this method, you cannot write any more rows to the stream. If you call `AppendRows` after calling `FinalizeWriteStream` , it returns a [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError) with `StorageErrorCode.STREAM_FINALIZED` in the `google.rpc.Status` error. For more information the `google.rpc.Status` error model, see [Errors](https://docs.cloud.google.com/apis/design/errors) .
+4.  Call `BatchCommitWriteStreams` to commit the streams. After you call this method, the data becomes available for reading. If there is an error committing any of the streams, the error is returned in the `stream_errors` field of the [`BatchCommitWriteStreamsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#batchcommitwritestreamsresponse) .
 
 Committing is an atomic operation, and you can commit multiple streams at once. A stream can only be committed once, so if the commit operation fails, it is safe to retry it. Until you commit a stream, the data is pending and not visible to reads.
 
@@ -730,7 +730,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Python
 
-This example shows a simple record with two fields. For a longer example that shows how to send different data types, including `  STRUCT  ` types, see the [append\_rows\_proto2 sample](https://github.com/googleapis/google-cloud-python/blob/main/packages/google-cloud-bigquery-storage/samples/snippets/append_rows_proto2.py) on GitHub.
+This example shows a simple record with two fields. For a longer example that shows how to send different data types, including `STRUCT` types, see the [append\_rows\_proto2 sample](https://github.com/googleapis/google-cloud-python/blob/main/packages/google-cloud-bigquery-storage/samples/snippets/append_rows_proto2.py) on GitHub.
 
 To learn how to install and use the client library for BigQuery, see [BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest) .
 
@@ -852,7 +852,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
         print(f"Writes to stream: '{write_stream.name}' have been committed.")
 
-This code example depends on a compiled protocol module, `  customer_record_pb2.py  ` . To create the compiled module, execute `  protoc --python_out=. customer_record.proto  ` , where `  protoc  ` is the protocol buffer compiler. The `  customer_record.proto  ` file defines the format of the messages used in the Python example.
+This code example depends on a compiled protocol module, `customer_record_pb2.py` . To create the compiled module, execute `protoc --python_out=. customer_record.proto` , where `protoc` is the protocol buffer compiler. The `customer_record.proto` file defines the format of the messages used in the Python example.
 
     // The BigQuery Storage API expects protocol buffer data to be encoded in the
     // proto2 wire format. This allows it to disambiguate missing optional fields

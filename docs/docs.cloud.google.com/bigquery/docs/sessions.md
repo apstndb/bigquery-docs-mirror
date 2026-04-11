@@ -30,7 +30,7 @@ In the Google Cloud console, each session is assigned to an editor tab.
 
 ### bq
 
-Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
+Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
 
 ``` notranslate
 bq query \
@@ -49,7 +49,7 @@ Your session ID is returned with the results of the query.
 
 ### API
 
-Call the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
+Call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
 
 ``` notranslate
 {
@@ -94,7 +94,7 @@ After you create a session, you can run queries in that session:
 
 ### bq
 
-Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
+Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
 
 ``` notranslate
 bq query \
@@ -110,18 +110,18 @@ where:
 
 The results of the query are followed by your session ID.
 
-If you are going to run lots of queries with the Cloud Shell, you can add your session ID to `  [query]  ` in [`  .bigqueryrc  `](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#adding_flags_to_bigqueryrc) so that you don't need to copy and paste the session ID into each command.
+If you are going to run lots of queries with the Cloud Shell, you can add your session ID to `[query]` in [`.bigqueryrc`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#adding_flags_to_bigqueryrc) so that you don't need to copy and paste the session ID into each command.
 
-This is what a session ID looks like in `  .bigqueryrc  ` :
+This is what a session ID looks like in `.bigqueryrc` :
 
     [query]
     --session_id=CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 
-After you've added the session ID to `  .bigqueryrc  ` , you can omit the `  --session_id  ` flag from the `  bq query  ` command. If you want to use a different session or if a session terminates, you must update your `  .bigqueryrc  ` file.
+After you've added the session ID to `.bigqueryrc` , you can omit the `--session_id` flag from the `bq query` command. If you want to use a different session or if a session terminates, you must update your `.bigqueryrc` file.
 
 ### API
 
-Call the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
+Call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
 
 ``` notranslate
 {
@@ -264,23 +264,15 @@ To get a list of your three most recent sessions including the active and termin
 2.  In the query editor, enter the following statement:
     
     ``` notranslate
-    SELECT
-      session_id,
-      MAX(creation_time) AS last_modified_time
-    FROM region-us.INFORMATION_SCHEMA.VIEW
-    WHERE
-      session_id IS NOT NULL
-      AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)
-    GROUP BY session_id
-    ORDER BY last_modified_time DESC;
+    SELECT  session_id,  MAX(creation_time) AS last_modified_timeFROM region-us.INFORMATION_SCHEMA.VIEWWHERE  session_id IS NOT NULL  AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)GROUP BY session_idORDER BY last_modified_time DESC;
     ```
     
     Replace the following:
     
-      - `  VIEW  ` : the `  INFORMATION_SCHEMA  ` view:
-          - [`  JOBS_BY_USER  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user#schema) : returns only the jobs created by the current user in the current project
-          - [`  SESSIONS_BY_USER  `](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user#schema) : returns only the sessions created by the current user in the current project
-          - [`  SESSIONS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project#schema) : returns all sessions in the current project
+      - `  VIEW  ` : the `INFORMATION_SCHEMA` view:
+          - [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user#schema) : returns only the jobs created by the current user in the current project
+          - [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user#schema) : returns only the sessions created by the current user in the current project
+          - [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project#schema) : returns all sessions in the current project
 
 3.  Click play\_circle **Run** .
 
@@ -346,13 +338,13 @@ To view historical data for a specific session, first [get your session ID](http
     
     Replace the following:
     
-      - VIEW : the `  INFORMATION_SCHEMA  ` view to work with
+      - VIEW : the `INFORMATION_SCHEMA` view to work with
         
         Select one of the following views:
         
-          - [`  JOBS_BY_USER  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) : returns only the jobs created by the current user in the current project
-          - [`  SESSIONS_BY_USER  `](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user#schema) : returns only the sessions created by the current user in the current project
-          - [`  SESSIONS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project#schema) : returns all sessions in the current project
+          - [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) : returns only the jobs created by the current user in the current project
+          - [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user#schema) : returns only the sessions created by the current user in the current project
+          - [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project#schema) : returns all sessions in the current project
     
       - SESSION\_ID : the ID of the session for which to retrieve historical data
 
@@ -362,7 +354,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 #### Example
 
-The following returns the history for a session that has the session ID `  CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0  ` . You can replace this session ID with your own.
+The following returns the history for a session that has the session ID `CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0` . You can replace this session ID with your own.
 
 ``` notranslate
 SELECT

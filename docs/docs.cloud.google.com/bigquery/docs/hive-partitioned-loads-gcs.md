@@ -23,13 +23,13 @@ Click more\_vert **Actions** , and then click **Create table** . This opens the 
 In the **Source** section, specify the following details:
 
 1.  For **Create table from** , select **Google Cloud Storage** .
-2.  For **Select file from Cloud Storage bucket** , enter the path to the Cloud Storage folder, using [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) . For example, `  my_bucket/my_files*  ` . The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite.
+2.  For **Select file from Cloud Storage bucket** , enter the path to the Cloud Storage folder, using [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) . For example, `my_bucket/my_files*` . The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite.
 3.  From the **File format** list, select the file type.
-4.  Select the **Source data partitioning** checkbox, and then for **Select Source URI Prefix** , enter the Cloud Storage URI prefix. For example, `  gs://my_bucket/my_files  ` .
+4.  Select the **Source data partitioning** checkbox, and then for **Select Source URI Prefix** , enter the Cloud Storage URI prefix. For example, `gs://my_bucket/my_files` .
 5.  In the **Partition inference mode** section, select one of the following options:
-      - **Automatically infer types** : set the partition schema detection mode to `  AUTO  ` .
-      - **All columns are strings** : set the partition schema detection mode to `  STRINGS  ` .
-      - **Provide my own** : set the partition schema detection mode to `  CUSTOM  ` and manually enter the schema information for the partition keys. For more information, see [Provide a custom partition key schema](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#custom_partition_key_schema) .
+      - **Automatically infer types** : set the partition schema detection mode to `AUTO` .
+      - **All columns are strings** : set the partition schema detection mode to `STRINGS` .
+      - **Provide my own** : set the partition schema detection mode to `CUSTOM` and manually enter the schema information for the partition keys. For more information, see [Provide a custom partition key schema](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#custom_partition_key_schema) .
 6.  Optional: To require a partition filter on all queries for this table, select the **Require partition filter** checkbox. Requiring a partition filter can reduce cost and improve performance. For more information, see [Requiring predicate filters on partition keys in queries](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#requiring_predicate_filters_on_partition_keys_in_queries) .
 
 In the **Destination** section, specify the following details:
@@ -49,7 +49,7 @@ Click **Create table** .
 
 ### SQL
 
-To create an externally partitioned table, use the `  WITH PARTITION COLUMNS  ` clause of the [`  LOAD DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_data_statement) to specify the partition schema details.
+To create an externally partitioned table, use the `WITH PARTITION COLUMNS` clause of the [`LOAD DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_data_statement) to specify the partition schema details.
 
 For an example, see [Load a file that is externally partitioned](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_a_file_that_is_externally_partitioned) .
 
@@ -72,7 +72,7 @@ bq load --source_format=CSV --autodetect \
 dataset.table gcs_uris
 ```
 
-Load Hive partitioned data using a custom partition key schema that is encoded using the `  source\_uri\_prefix  ` field:
+Load Hive partitioned data using a custom partition key schema that is encoded using the `source\_uri\_prefix` field:
 
 ``` notranslate
 bq load --source_format=JSON --hive_partitioning_mode=CUSTOM \
@@ -80,7 +80,7 @@ bq load --source_format=JSON --hive_partitioning_mode=CUSTOM \
 dataset.table gcs_uris file_schema
 ```
 
-The partition key schema is encoded immediately following the source URI prefix. Use the following format to specify `  --hive_partitioning_source_uri_prefix  ` :
+The partition key schema is encoded immediately following the source URI prefix. Use the following format to specify `--hive_partitioning_source_uri_prefix` :
 
 ``` notranslate
 --hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix/{key1:TYPE1}/{key2:TYPE2}/{key3:TYPE3}
@@ -88,9 +88,9 @@ The partition key schema is encoded immediately following the source URI prefix.
 
 ### API
 
-Support for Hive partitioning exists by setting the [`  HivePartitioningOptions  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) on the [`  JobConfigurationLoad  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
+Support for Hive partitioning exists by setting the [`HivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) on the [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
 
-**Note:** When `  hivePartitioningOptions.mode  ` is set to `  CUSTOM  ` , you must encode the partition key schema in the `  hivePartitioningOptions.sourceUriPrefix  ` field as follows: `  gs:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...  `
+**Note:** When `hivePartitioningOptions.mode` is set to `CUSTOM` , you must encode the partition key schema in the `hivePartitioningOptions.sourceUriPrefix` field as follows: `gs:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...`
 
 ## Perform incremental loads
 
@@ -103,17 +103,17 @@ Consider the following data layout:
 
 To load only data from 2019-10-31, do the following:
 
-  - Set the [Hive partitioning mode](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#partition_schema_detection_modes) to `  AUTO  ` , `  STRINGS  ` , or `  CUSTOM  ` .
-  - Set the source URI prefix to `  gs://my_bucket/my_table/  ` for `  AUTO  ` or `  STRINGS  ` Hive partitioning modes. For CUSTOM, provide `  gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}  ` .
-  - Use the URI `  gs://my_bucket/my_table/dt=2019-10-31/*  ` .
-  - Data is loaded with `  dt  ` and `  val  ` columns included, with values `  2019-10-31  ` and `  1  ` , respectively.
+  - Set the [Hive partitioning mode](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#partition_schema_detection_modes) to `AUTO` , `STRINGS` , or `CUSTOM` .
+  - Set the source URI prefix to `gs://my_bucket/my_table/` for `AUTO` or `STRINGS` Hive partitioning modes. For CUSTOM, provide `gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}` .
+  - Use the URI `gs://my_bucket/my_table/dt=2019-10-31/*` .
+  - Data is loaded with `dt` and `val` columns included, with values `2019-10-31` and `1` , respectively.
 
 To load only data from specific files, do the following:
 
-  - Set the [Hive partitioning mode](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#partition_schema_detection_modes) to `  AUTO  ` , `  STRINGS  ` , or `  CUSTOM  ` .
-  - Set the source URI prefix to `  gs://my_bucket/my_table/  ` for `  AUTO  ` or `  STRINGS  ` Hive partitioning modes. For `  CUSTOM  ` , provide `  gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}  ` .
-  - Use the URIs `  gs://my_bucket/my_table/dt=2017-10-31/val=3/file3,gs://my_bucket/my_table/dt=2016-10-31/val=4/file4  ` .
-  - Data is loaded from both files with the `  dt  ` and `  val  ` columns filled in.
+  - Set the [Hive partitioning mode](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#partition_schema_detection_modes) to `AUTO` , `STRINGS` , or `CUSTOM` .
+  - Set the source URI prefix to `gs://my_bucket/my_table/` for `AUTO` or `STRINGS` Hive partitioning modes. For `CUSTOM` , provide `gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}` .
+  - Use the URIs `gs://my_bucket/my_table/dt=2017-10-31/val=3/file3,gs://my_bucket/my_table/dt=2016-10-31/val=4/file4` .
+  - Data is loaded from both files with the `dt` and `val` columns filled in.
 
 ## Partition schema
 
@@ -126,7 +126,7 @@ Hive partition keys appear as normal columns when you query data from Cloud Stor
     gs://my_bucket/my_table/dt=2019-10-31/lang=en/my_filename
     gs://my_bucket/my_table/dt=2018-10-31/lang=fr/my_filename
 
-The common source URI prefix in this example is `  gs://my_bucket/my_table  ` .
+The common source URI prefix in this example is `gs://my_bucket/my_table` .
 
 ### Unsupported data layouts
 
@@ -143,7 +143,7 @@ Files where the schema is not in a consistent order also fail detection. For exa
 
 BigQuery supports three modes of Hive partition schema detection:
 
-  - `  AUTO  ` : Key names and types are automatically detected. The following types can be detected:
+  - `AUTO` : Key names and types are automatically detected. The following types can be detected:
     
       - [STRING](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type)
     
@@ -151,25 +151,25 @@ BigQuery supports three modes of Hive partition schema detection:
     
       - [DATE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type)
         
-        For example, `  /date=2018-10-18/  ` .
+        For example, `/date=2018-10-18/` .
     
       - [TIMESTAMP](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type)
         
-        For example, `  /time=2018-10-18 16:00:00+00/  ` .
+        For example, `/time=2018-10-18 16:00:00+00/` .
 
-  - `  STRINGS  ` : Key names are automatically converted to `  STRING  ` type.
+  - `STRINGS` : Key names are automatically converted to `STRING` type.
 
-  - `  CUSTOM  ` : Partition key schema is encoded as specified in the source URI prefix.
+  - `CUSTOM` : Partition key schema is encoded as specified in the source URI prefix.
 
 #### Custom partition key schema
 
-To use a `  CUSTOM  ` schema, you must specify the schema in the source URI prefix field. Using a `  CUSTOM  ` schema lets you specify the type for each partition key. The values must validly parse as the specified type or the query fails.
+To use a `CUSTOM` schema, you must specify the schema in the source URI prefix field. Using a `CUSTOM` schema lets you specify the type for each partition key. The values must validly parse as the specified type or the query fails.
 
-For example, if you set the `  source_uri_prefix  ` flag to `  gs://my_bucket/my_table/{dt:DATE}/{val:STRING}  ` , BigQuery treats `  val  ` as a STRING, `  dt  ` as a DATE, and uses `  gs://my_bucket/my_table  ` as the source URI prefix for the matched files.
+For example, if you set the `source_uri_prefix` flag to `gs://my_bucket/my_table/{dt:DATE}/{val:STRING}` , BigQuery treats `val` as a STRING, `dt` as a DATE, and uses `gs://my_bucket/my_table` as the source URI prefix for the matched files.
 
 ## Limitations
 
-  - Hive partitioning support is built assuming a common source URI prefix for all URIs that ends immediately before partition encoding, as follows: `  gs:// BUCKET / PATH_TO_TABLE /  ` .
+  - Hive partitioning support is built assuming a common source URI prefix for all URIs that ends immediately before partition encoding, as follows: `gs:// BUCKET / PATH_TO_TABLE /` .
 
   - The directory structure of a Hive partitioned table is assumed to have the same partitioning keys appear in the same order, with a maximum of ten partition keys per table.
 

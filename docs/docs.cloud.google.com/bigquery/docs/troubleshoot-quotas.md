@@ -10,7 +10,7 @@ If your error message is not listed in this document, then refer to [the list of
 
 ## Overview
 
-If a BigQuery operation fails because of exceeding a quota, the API returns the HTTP `  403 Forbidden  ` status code. The response body contains more information about the quota that was reached. The response body looks similar to the following:
+If a BigQuery operation fails because of exceeding a quota, the API returns the HTTP `403 Forbidden` status code. The response body contains more information about the quota that was reached. The response body looks similar to the following:
 
     {
       "code" : 403,
@@ -22,17 +22,17 @@ If a BigQuery operation fails because of exceeding a quota, the API returns the 
       "message" : "Quota exceeded: ..."
     }
 
-The `  message  ` field in the payload describes which limit was exceeded. For example, the `  message  ` field might say `  Exceeded rate limits: too many table update operations for this table  ` .
+The `message` field in the payload describes which limit was exceeded. For example, the `message` field might say `Exceeded rate limits: too many table update operations for this table` .
 
-In general, quota limits fall into two categories, indicated by the `  reason  ` field in the response payload.
+In general, quota limits fall into two categories, indicated by the `reason` field in the response payload.
 
-  - **`  rateLimitExceeded  ` .** This value indicates a short-term limit. To resolve these limit issues, retry the operation after a few seconds. Use *exponential backoff* between retry attempts. That is, exponentially increase the delay between each retry.
+  - **`rateLimitExceeded` .** This value indicates a short-term limit. To resolve these limit issues, retry the operation after a few seconds. Use *exponential backoff* between retry attempts. That is, exponentially increase the delay between each retry.
 
-  - **`  quotaExceeded  ` .** This value indicates a longer-term limit. If you reach a longer-term quota limit, you should wait 10 minutes or longer before trying the operation again. If you consistently reach one of these longer-term quota limits, you should analyze your workload for ways to mitigate the issue. Mitigations can include optimizing your workload or requesting a quota increase.
+  - **`quotaExceeded` .** This value indicates a longer-term limit. If you reach a longer-term quota limit, you should wait 10 minutes or longer before trying the operation again. If you consistently reach one of these longer-term quota limits, you should analyze your workload for ways to mitigate the issue. Mitigations can include optimizing your workload or requesting a quota increase.
 
 **Note:** Some quotas are expressed as daily quotas. For example, there is a daily quota on the number of [load jobs per table](https://docs.cloud.google.com/bigquery/quotas#load_jobs) . However, these quotas replenish incrementally over a 24-hour period, so you don't need to wait a full 24 hours after reaching the limit.
 
-For `  quotaExceeded  ` errors, examine the error message to understand which quota limit was exceeded. Then, analyze your workload to see if you can avoid reaching the quota.
+For `quotaExceeded` errors, examine the error message to understand which quota limit was exceeded. Then, analyze your workload to see if you can avoid reaching the quota.
 
 In some cases, the quota can be raised by [contacting BigQuery support](https://docs.cloud.google.com/bigquery/docs/getting-support) or [contacting Google Cloud sales](https://cloud.google.com/contact) , but we recommend trying the suggestions in this document first.
 
@@ -40,9 +40,9 @@ In some cases, the quota can be raised by [contacting BigQuery support](https://
 
 To diagnose issues, do the following:
 
-  - Use [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) along with a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to analyze the underlying issue. These views contain metadata about your BigQuery resources, including jobs, reservations, and streaming inserts.
+  - Use [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) along with a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to analyze the underlying issue. These views contain metadata about your BigQuery resources, including jobs, reservations, and streaming inserts.
     
-    For example, the following query uses the [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view to list all quota-related errors within the past day:
+    For example, the following query uses the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view to list all quota-related errors within the past day:
     
     ``` notranslate
     SELECT
@@ -54,17 +54,17 @@ To diagnose issues, do the following:
         error_result.reason IN ('rateLimitExceeded', 'quotaExceeded')
     ```
     
-    Replace `  REGION_NAME  ` with the region of the project. It must be preceded by `  region-  ` . For example, for the `  US  ` multi-region, use `  region-us  ` .
+    Replace `  REGION_NAME  ` with the region of the project. It must be preceded by `region-` . For example, for the `US` multi-region, use `region-us` .
 
   - View errors in Cloud Audit Logs.
     
-    For example, using [Logs Explorer](https://docs.cloud.google.com/logging/docs/view/logs-explorer-summary) , the following query returns errors with either `  Quota exceeded  ` or `  limit  ` in the message string:
+    For example, using [Logs Explorer](https://docs.cloud.google.com/logging/docs/view/logs-explorer-summary) , the following query returns errors with either `Quota exceeded` or `limit` in the message string:
     
         resource.type = ("bigquery_project" OR "bigquery_dataset")
         protoPayload.status.code ="7"
         protoPayload.status.message: ("Quota exceeded" OR "limit")
     
-    In this example, the status code `  7  ` indicates [`  PERMISSION_DENIED  `](https://docs.cloud.google.com/tasks/docs/reference/rpc/google.rpc#code) , which corresponds to the HTTP `  403  ` status code.
+    In this example, the status code `7` indicates [`PERMISSION_DENIED`](https://docs.cloud.google.com/tasks/docs/reference/rpc/google.rpc#code) , which corresponds to the HTTP `403` status code.
     
     For additional Cloud Audit Logs query samples, see [BigQuery queries](https://docs.cloud.google.com/logging/docs/view/query-library-preview#bigquery-filters) .
 
@@ -88,17 +88,17 @@ To continue using BigQuery, you need to [upgrade the account to a paid Cloud Bil
 
 This section provides tips for troubleshooting quota errors related to streaming data into BigQuery.
 
-In certain regions, streaming inserts have a higher quota if you don't populate the `  insertId  ` field for each row. For more information about quotas for streaming inserts, see [Streaming inserts](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) . The quota-related errors for BigQuery streaming depend on the presence or absence of `  insertId  ` .
+In certain regions, streaming inserts have a higher quota if you don't populate the `insertId` field for each row. For more information about quotas for streaming inserts, see [Streaming inserts](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) . The quota-related errors for BigQuery streaming depend on the presence or absence of `insertId` .
 
 **Error message**
 
-If the `  insertId  ` field is empty, the following quota error is possible:
+If the `insertId` field is empty, the following quota error is possible:
 
 | Quota limit                  | Error message                                                                                                            |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | Bytes per second per project | Your entity with gaia\_id: GAIA\_ID , project: PROJECT\_ID in region: REGION exceeded quota for insert bytes per second. |
 
-If the `  insertId  ` field is populated, the following quota errors are possible:
+If the `insertId` field is populated, the following quota errors are possible:
 
 | Quota limit                 | Error message                                                                            |
 | --------------------------- | ---------------------------------------------------------------------------------------- |
@@ -106,15 +106,15 @@ If the `  insertId  ` field is populated, the following quota errors are possibl
 | Rows per second per table   | Your table: TABLE\_ID exceeded quota for streaming insert rows per second.               |
 | Bytes per second per table  | Your table: TABLE\_ID exceeded quota for streaming insert bytes per second.              |
 
-The purpose of the `  insertId  ` field is to deduplicate inserted rows. If multiple inserts with the same `  insertId  ` arrive within a few minutes' window, BigQuery writes a single version of the record. However, this automatic deduplication is not guaranteed. For maximum streaming throughput, we recommend that you don't include `  insertId  ` and instead use [manual deduplication](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) . For more information, see [Ensuring data consistency](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataconsistency) .
+The purpose of the `insertId` field is to deduplicate inserted rows. If multiple inserts with the same `insertId` arrive within a few minutes' window, BigQuery writes a single version of the record. However, this automatic deduplication is not guaranteed. For maximum streaming throughput, we recommend that you don't include `insertId` and instead use [manual deduplication](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) . For more information, see [Ensuring data consistency](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataconsistency) .
 
 When you encounter this error, [diagnose the issue](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota-diagnose) the issue and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota-resolution) to resolve it.
 
 #### Diagnosis
 
-Use the [`  STREAMING_TIMELINE_BY_*  `](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) views to analyze the streaming traffic. These views aggregate streaming statistics over one-minute intervals, grouped by `  error_code  ` . Quota errors appear in the results with `  error_code  ` equal to `  RATE_LIMIT_EXCEEDED  ` or `  QUOTA_EXCEEDED  ` .
+Use the [`STREAMING_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) views to analyze the streaming traffic. These views aggregate streaming statistics over one-minute intervals, grouped by `error_code` . Quota errors appear in the results with `error_code` equal to `RATE_LIMIT_EXCEEDED` or `QUOTA_EXCEEDED` .
 
-Depending on the specific quota limit that was reached, look at `  total_rows  ` or `  total_input_bytes  ` . If the error is a table-level quota, filter by `  table_id  ` .
+Depending on the specific quota limit that was reached, look at `total_rows` or `total_input_bytes` . If the error is a table-level quota, filter by `table_id` .
 
 For example, the following query shows total bytes ingested per minute, and the total number of quota errors:
 
@@ -139,15 +139,15 @@ ORDER BY 1 DESC
 
 To resolve this quota error, do the following:
 
-  - If you are using the `  insertId  ` field for deduplication, and your project is in a region that supports the higher streaming quota, we recommend removing the `  insertId  ` field. This solution might require some additional steps to manually deduplicate the data. For more information, see [Manually removing duplicates](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) .
+  - If you are using the `insertId` field for deduplication, and your project is in a region that supports the higher streaming quota, we recommend removing the `insertId` field. This solution might require some additional steps to manually deduplicate the data. For more information, see [Manually removing duplicates](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) .
 
-  - If you are not using `  insertId  ` , or if it's not feasible to remove it, monitor your streaming traffic over a 24-hour period and analyze the quota errors:
+  - If you are not using `insertId` , or if it's not feasible to remove it, monitor your streaming traffic over a 24-hour period and analyze the quota errors:
     
-      - If you see mostly `  RATE_LIMIT_EXCEEDED  ` errors rather than `  QUOTA_EXCEEDED  ` errors, and your overall traffic is less than 80% of quota, the errors probably indicate temporary spikes. You can address these errors by retrying the operation using exponential backoff between retries.
+      - If you see mostly `RATE_LIMIT_EXCEEDED` errors rather than `QUOTA_EXCEEDED` errors, and your overall traffic is less than 80% of quota, the errors probably indicate temporary spikes. You can address these errors by retrying the operation using exponential backoff between retries.
     
       - If you are using a Dataflow job to insert data, consider using load jobs instead of streaming inserts. For more information, see [Setting the insertion method](https://beam.apache.org/documentation/io/built-in/google-bigquery/#setting-the-insertion-method) . If you are using Dataflow with a custom I/O connector, consider using a built-in I/O connector instead. For more information, see [Custom I/O patterns](https://beam.apache.org/documentation/patterns/custom-io/) .
     
-      - If you see `  QUOTA_EXCEEDED  ` errors or the overall traffic consistently exceeds 80% of the quota, submit a request for a quota increase. For more information, see [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
+      - If you see `QUOTA_EXCEEDED` errors or the overall traffic consistently exceeds 80% of the quota, submit a request for a quota increase. For more information, see [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
     
       - You might also want to consider replacing streaming inserts with the newer [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which has higher throughput, lower price, and many useful features.
 
@@ -175,9 +175,9 @@ To see limits for concurrent queries that contain [remote functions](https://doc
   - When using remote functions, adhere to [best practices for remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions#best_practices_for_remote_functions) .
   - You can request a quota increase by contacting [support](https://docs.cloud.google.com/bigquery/docs/getting-support) or [sales](https://cloud.google.com/contact) . It might take several days to review and process the request. We recommend stating the priority, use case, and the project ID in the request.
 
-### Maximum number of `     CREATE MODEL    ` statements
+### Maximum number of `CREATE MODEL` statements
 
-This error means that you have exceeded the quota for `  CREATE MODEL  ` statements.
+This error means that you have exceeded the quota for `CREATE MODEL` statements.
 
 **Error message**
 
@@ -186,7 +186,7 @@ This error means that you have exceeded the quota for `  CREATE MODEL  ` stateme
 
 #### Resolution
 
-If you exceed the [quota](https://docs.cloud.google.com/bigquery/quotas#create_model_statements) for `  CREATE MODEL  ` statements, send an email to <bqml-feedback@google.com> and request a quota increase.
+If you exceed the [quota](https://docs.cloud.google.com/bigquery/quotas#create_model_statements) for `CREATE MODEL` statements, send an email to <bqml-feedback@google.com> and request a quota increase.
 
 ### Maximum number of copy jobs per day per project quota errors
 
@@ -200,7 +200,7 @@ BigQuery returns this error when the number of copy jobs running in a project ha
 
 If you'd like to gather more data about where the copy jobs are coming from, you can try the following:
 
-  - If your copy jobs are located in a single or only a few regions, you can try querying the [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
+  - If your copy jobs are located in a single or only a few regions, you can try querying the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
     
     ``` notranslate
     SELECT
@@ -239,9 +239,9 @@ If you are exporting a table that is larger than 50 TiB, the export fails becaus
 
 If you would like to gather usages of exports data over recent days, you can try the following:
 
-  - [View the quotas for your project](https://docs.cloud.google.com/docs/quotas/view-manage#view_project_quotas) with filter criteria such as `  Name: Extract bytes per day  ` or `  Metric: bigquery.googleapis.com/quota/extract/bytes  ` along with the Show usage chart to see your usage trend over a few days.
+  - [View the quotas for your project](https://docs.cloud.google.com/docs/quotas/view-manage#view_project_quotas) with filter criteria such as `Name: Extract bytes per day` or `Metric: bigquery.googleapis.com/quota/extract/bytes` along with the Show usage chart to see your usage trend over a few days.
 
-  - Alternatively you can query [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see your total extract bytes over a few days. For example, the following query returns the daily total bytes processed by `  EXTRACT  ` jobs in the past seven days.
+  - Alternatively you can query [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see your total extract bytes over a few days. For example, the following query returns the daily total bytes processed by `EXTRACT` jobs in the past seven days.
     
     ``` notranslate
     SELECT
@@ -256,7 +256,7 @@ If you would like to gather usages of exports data over recent days, you can try
     ORDER BY 2 DESC
     ```
 
-  - You can then further refine the results by identifying the specific jobs that are consuming more bytes than expected. The following example returns the top 100 `  EXTRACT  ` jobs which are consuming more than 100 GB processed over the past seven days.
+  - You can then further refine the results by identifying the specific jobs that are consuming more bytes than expected. The following example returns the top 100 `EXTRACT` jobs which are consuming more than 100 GB processed over the past seven days.
     
     ``` notranslate
     SELECT
@@ -274,17 +274,17 @@ If you would like to gather usages of exports data over recent days, you can try
     LIMIT 100
     ```
 
-You can alternatively use the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) with filters like `  Bytes processed more than  ` to filter for high processing jobs for a specified period of time.
+You can alternatively use the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) with filters like `Bytes processed more than` to filter for high processing jobs for a specified period of time.
 
 #### Resolution
 
-One method of resolving this quota error is to create a slot [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) and [assign](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) your project into the reservation with the `  PIPELINE  ` job type. This method can bypass the limit check since it uses your dedicated reservations rather than a free shared slot pool. If needed, the reservation can be deleted if you want to use a shared slot pool later on.
+One method of resolving this quota error is to create a slot [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) and [assign](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) your project into the reservation with the `PIPELINE` job type. This method can bypass the limit check since it uses your dedicated reservations rather than a free shared slot pool. If needed, the reservation can be deleted if you want to use a shared slot pool later on.
 
 For alternative approaches that allow exporting more *than* 50 TiB, see the notes section in [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
 
-### Maximum `     tabledata.list    ` bytes per second per project quota errors
+### Maximum `tabledata.list` bytes per second per project quota errors
 
-BigQuery returns this error when the project number mentioned in the error message reaches the maximum size of data that can be read through the `  tabledata.list  ` API call in a project per second. For more information, see [Maximum `  tabledata.list  ` bytes per minute](https://docs.cloud.google.com/bigquery/quotas#tabledata_list_bytes_per_minute) .
+BigQuery returns this error when the project number mentioned in the error message reaches the maximum size of data that can be read through the `tabledata.list` API call in a project per second. For more information, see [Maximum `tabledata.list` bytes per minute](https://docs.cloud.google.com/bigquery/quotas#tabledata_list_bytes_per_minute) .
 
 **Error message**
 
@@ -296,19 +296,19 @@ To resolve this error, do the following:
 
   - In general, we recommend trying to stay under this limit. For example, by spacing out requests over a longer period with delays. If the error doesn't happen frequently, implementing retries with exponential backoff solves this issue.
 
-  - If the use case expects fast and frequent reading of a large amount of data from a table, we recommend using [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) instead of the `  tabledata.list  ` API.
+  - If the use case expects fast and frequent reading of a large amount of data from a table, we recommend using [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) instead of the `tabledata.list` API.
 
   - If the preceding suggestions don't work, you can request a quota increase from Google Cloud console API dashboard by doing the following:
     
     1.  Go to the [Google Cloud console API dashboard](https://console.cloud.google.com/apis/dashboard) .
-    2.  In the dashboard, filter for Quota: `  Tabledata list bytes per minute (default quota)  ` .
+    2.  In the dashboard, filter for Quota: `Tabledata list bytes per minute (default quota)` .
     3.  Select the quota and follow the instruction in [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
     
     It might take several days to review and process the request.
 
 ### Maximum number of API requests limit errors
 
-BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`  tables.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email. For more information, see the [**Maximum number of API requests per second per user per method** rate limit](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
+BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email. For more information, see the [**Maximum number of API requests per second per user per method** rate limit](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
 
 **Note:** The BigQuery API rate limits don't apply to streaming inserts API requests.
 
@@ -369,11 +369,11 @@ To resolve this quota error, do the following:
 
   - If you frequently insert data, consider using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) . Streaming data with this API isn't affected by the BigQuery API quota.
 
-  - While loading data to BigQuery using Dataflow with the [BigQuery I/O connector](https://beam.apache.org/documentation/io/built-in/google-bigquery/) , you might encounter this error for the [`  tables.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) . To resolve this issue, do the following:
+  - While loading data to BigQuery using Dataflow with the [BigQuery I/O connector](https://beam.apache.org/documentation/io/built-in/google-bigquery/) , you might encounter this error for the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) . To resolve this issue, do the following:
     
-      - Set the destination table's create disposition to `  CREATE_NEVER  ` . For more information, see [Create disposition](https://beam.apache.org/documentation/io/built-in/google-bigquery/#create-disposition) .
+      - Set the destination table's create disposition to `CREATE_NEVER` . For more information, see [Create disposition](https://beam.apache.org/documentation/io/built-in/google-bigquery/#create-disposition) .
     
-      - Use the Apache Beam SDK version 2.24.0 or higher. In the previous versions of the SDK, the `  CREATE_IF_NEEDED  ` disposition calls the `  tables.get  ` method to check if the table exists.
+      - Use the Apache Beam SDK version 2.24.0 or higher. In the previous versions of the SDK, the `CREATE_IF_NEEDED` disposition calls the `tables.get` method to check if the table exists.
     
       - For additional quota, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) . Requesting a quota increase might take several days to process. To provide more information for your request, we recommend that your request includes the priority of the job, the user running the query, and the affected method.
 
@@ -400,7 +400,7 @@ This limit [can't be increased](https://docs.cloud.google.com/bigquery/quotas#jo
 
   - **Optimize queries and the data model.** Often, a query can be rewritten so that it runs more efficiently.
     
-    For example, if your query contains a *Common table expression (CTE)* –a `  WITH  ` clause–which is referenced in more than one place in the query, then this computation is done multiple times. It is better to persist calculations done by the CTE in a temporary table, and then reference it in the query.
+    For example, if your query contains a *Common table expression (CTE)* –a `WITH` clause–which is referenced in more than one place in the query, then this computation is done multiple times. It is better to persist calculations done by the CTE in a temporary table, and then reference it in the query.
     
     Multiple joins can also be the source of lack of efficiency. In this case, you might want to consider using [nested and repeated columns](https://docs.cloud.google.com/bigquery/docs/nested-repeated) . Using this often improves locality of the data, eliminates the need for some joins, and overall reduces resource consumption and the query runtime.
     
@@ -410,7 +410,7 @@ This limit [can't be increased](https://docs.cloud.google.com/bigquery/quotas#jo
     
     Use the recommendations in the following list to optimize the query model to avoid reaching the query queue limit.
     
-      - **Persist data (saved tables).** Pre-process the data in BigQuery and store that data in additional tables. For example, if you execute many similar, computationally intensive queries using different `  WHERE  ` conditions, then their results are not cached. Such queries also consume resources each time they run. You can improve the performance of such queries and decrease their processing time by pre-computing the data and storing it in a table. This pre-computed data in the table can be queried by `  SELECT  ` queries. It can often be done during ingestion within the ETL process, or by using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
+      - **Persist data (saved tables).** Pre-process the data in BigQuery and store that data in additional tables. For example, if you execute many similar, computationally intensive queries using different `WHERE` conditions, then their results are not cached. Such queries also consume resources each time they run. You can improve the performance of such queries and decrease their processing time by pre-computing the data and storing it in a table. This pre-computed data in the table can be queried by `SELECT` queries. It can often be done during ingestion within the ETL process, or by using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
       - **Use dry run mode.** Run queries in [dry run mode](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) , which estimates the number of bytes read but does not actually process the query.
       - **Preview table data.** To experiment with or explore data rather than running queries, preview table data with the [table preview capability](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#preview-data) in BigQuery.
       - **Use [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .** All query results, including both interactive and batch queries, are cached in temporary tables for approximately 24 hours with some [exceptions](https://docs.cloud.google.com/bigquery/docs/cached-results#cache-exceptions) . While running a cached query does still count against your concurrent query limit, queries that use cached results are significantly faster than queries that don't use cached results because BigQuery does not need to compute the result set.
@@ -436,7 +436,7 @@ If you run high-volume interactive queries, especially in scenarios that involve
 
 BigQuery returns this error when your project exceeds the maximum disk and memory size limit available for shuffle operations.
 
-This quota is computed per-reservation and sliced across projects for the reservations. The quota cannot be modified by Cloud Customer Care. You can learn more about your usage by querying the [`  INFORMATION_SCHEMA.JOBS_TIMELINE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#schema) .
+This quota is computed per-reservation and sliced across projects for the reservations. The quota cannot be modified by Cloud Customer Care. You can learn more about your usage by querying the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#schema) .
 
 **Error message**
 
@@ -481,7 +481,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - Use [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables#when_to_use_clustering) instead of partitioning.
 
-  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `  gs://my_path/file_1,gs://my_path/file_2  ` ), or by using wildcards (for example, `  gs://my_path/*  ` ).
+  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `gs://my_path/file_1,gs://my_path/file_2` ), or by using wildcards (for example, `gs://my_path/*` ).
     
     For more information, see [Batch loading data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#permissions-load-data-from-cloud-storage) .
 
@@ -489,13 +489,13 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - To append data at a high rate, consider using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-  - To monitor the number of modified partitions on a table, use the [`  INFORMATION_SCHEMA  ` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+  - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
   - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 
 ### Maximum rate of table metadata update operations limit errors
 
-BigQuery returns this error when your table reaches the limit for maximum rate of table metadata update operations per table for standard tables. Table operations include the combined total of all [load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) , [copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) , and [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) that append to or overwrite a destination table or that use a [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) `  DELETE  ` , `  INSERT  ` , `  MERGE  ` , `  TRUNCATE TABLE  ` , or `  UPDATE  ` to write data to a table.
+BigQuery returns this error when your table reaches the limit for maximum rate of table metadata update operations per table for standard tables. Table operations include the combined total of all [load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) , [copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) , and [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) that append to or overwrite a destination table or that use a [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) `DELETE` , `INSERT` , `MERGE` , `TRUNCATE TABLE` , or `UPDATE` to write data to a table.
 
 To see the value of the **Maximum rate of table metadata update operations per table** limit, see [Standard tables](https://docs.cloud.google.com/bigquery/quotas#standard_tables) .
 
@@ -528,7 +528,7 @@ Metadata table updates can originate from *API calls* that modify a table's meta
 
 ##### Identify jobs
 
-The following query returns a list of jobs that modify the affected table in the project within the past day. If you expect multiple projects in an organization to write to the table, replace `  JOBS_BY_PROJECT  ` with `  JOBS_BY_ORGANIZATION  ` .
+The following query returns a list of jobs that modify the affected table in the project within the past day. If you expect multiple projects in an organization to write to the table, replace `JOBS_BY_PROJECT` with `JOBS_BY_ORGANIZATION` .
 
 ``` notranslate
 SELECT
@@ -556,7 +556,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
     
     DML operations have other [limits](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) and quotas. For more information, see [Using data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language) .
 
-  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `  gs://my_path/file_1,gs://my_path/file_2  ` ), or by using wildcards (for example, `  gs://my_path/*  ` ).
+  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `gs://my_path/file_1,gs://my_path/file_2` ), or by using wildcards (for example, `gs://my_path/*` ).
     
     For more information, see [Batch loading data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#permissions-load-data-from-cloud-storage) .
 
@@ -564,7 +564,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - To append data at a high rate, consider using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-  - To monitor the number of modified partitions on a table, use the [`  INFORMATION_SCHEMA  ` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+  - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
   - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 
@@ -586,9 +586,9 @@ If you have not identified the source from where most table operations are origi
 
 1.  Make a note of the project, dataset, and table that the failed query, load, or the copy job is writing to.
 
-2.  Use `  INFORMATION_SCHEMA.JOBS_BY_*  ` tables to learn more about jobs that modify the table.
+2.  Use `INFORMATION_SCHEMA.JOBS_BY_*` tables to learn more about jobs that modify the table.
     
-    The following example finds the hourly count of jobs grouped by job type for the last 24-hour period using `  JOBS_BY_PROJECT  ` . If you expect multiple projects to write to the table, replace `  JOBS_BY_PROJECT  ` with `  JOBS_BY_ORGANIZATION  ` .
+    The following example finds the hourly count of jobs grouped by job type for the last 24-hour period using `JOBS_BY_PROJECT` . If you expect multiple projects to write to the table, replace `JOBS_BY_PROJECT` with `JOBS_BY_ORGANIZATION` .
     
     ``` notranslate
     SELECT
@@ -608,7 +608,7 @@ If you have not identified the source from where most table operations are origi
 
 This quota cannot be increased. To resolve this quota error, do the following:
 
-  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `  gs://my_path/file_1,gs://my_path/file_2  ` ), or by using wildcards (for example, `  gs://my_path/*  ` ).
+  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `gs://my_path/file_1,gs://my_path/file_2` ), or by using wildcards (for example, `gs://my_path/*` ).
     
     For more information, see [Batch loading data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#permissions-load-data-from-cloud-storage) .
 
@@ -616,7 +616,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - To append data at a high rate, consider using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-  - To monitor the number of modified partitions on a table, use the [`  INFORMATION_SCHEMA  ` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+  - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
   - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 
@@ -634,7 +634,7 @@ A dataset's access control list can have up to 2,500 total authorized resources,
 
 ### Too many DML statements outstanding against table
 
-This error means that the number of [concurrent mutating DML statements](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) ( `  UPDATE  ` , `  DELETE  ` , `  MERGE  ` ) running against the same table has exceeded the [data manipulation language (DML) quota limit](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) . This quota limit is per table, and applies to mutating DML statements only, which does not include `  INSERT  ` .
+This error means that the number of [concurrent mutating DML statements](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) ( `UPDATE` , `DELETE` , `MERGE` ) running against the same table has exceeded the [data manipulation language (DML) quota limit](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) . This quota limit is per table, and applies to mutating DML statements only, which does not include `INSERT` .
 
 #### Resolution
 
@@ -642,7 +642,7 @@ Batch the DML jobs by following [Best practices for DML statements](https://docs
 
 ### Loading CSV files quota errors
 
-If you load a large CSV file using the `  bq load  ` command with the [`  --allow_quoted_newlines  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) , you might encounter this error.
+If you load a large CSV file using the `bq load` command with the [`--allow_quoted_newlines` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) , you might encounter this error.
 
 **Error message**
 
@@ -653,14 +653,14 @@ If you load a large CSV file using the `  bq load  ` command with the [`  --allo
 
 To resolve this quota error, do the following:
 
-  - Set the `  --allow_quoted_newlines  ` flag to `  false  ` .
+  - Set the `--allow_quoted_newlines` flag to `false` .
   - Split the CSV file into smaller chunks that are each less than 4 GB.
 
 For more information about limits that apply when you load data into BigQuery, see [Load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) .
 
-### Your user exceeded quota for concurrent `     project.lists    ` requests
+### Your user exceeded quota for concurrent `project.lists` requests
 
-This error occurs when Microsoft Power BI jobs that communicate with BigQuery through a Simba ODBC driver or DataHub fail because they exceed the `  project.list  ` API limit. To resolve this issue, use the short-term or long-term workarounds described in this section.
+This error occurs when Microsoft Power BI jobs that communicate with BigQuery through a Simba ODBC driver or DataHub fail because they exceed the `project.list` API limit. To resolve this issue, use the short-term or long-term workarounds described in this section.
 
 **Error message**
 
@@ -683,20 +683,20 @@ For long-term fixes, see [Long-term resolution](https://docs.cloud.google.com/bi
     1.  In the Power BI service, go to **Settings** for your dataset.
     2.  Expand the **Scheduled refresh** section. Under **Retry** , configure Power BI to automatically rerun a failed refresh.
 
-3.  **For earlier versions of the Simba driver, specify the project ID in the ODBC connection** . This action prevents the driver from performing the `  projects.list  ` discovery call. Instead, the driver connects directly to the specified project, which prevents unnecessary API calls and resolves the quota issue.
+3.  **For earlier versions of the Simba driver, specify the project ID in the ODBC connection** . This action prevents the driver from performing the `projects.list` discovery call. Instead, the driver connects directly to the specified project, which prevents unnecessary API calls and resolves the quota issue.
     
-    Newer drivers fail immediately if the project isn't specified with a message similar to `  Unable to establish connection with data source. Missing settings: {[Catalog]}  ` .
+    Newer drivers fail immediately if the project isn't specified with a message similar to `Unable to establish connection with data source. Missing settings: {[Catalog]}` .
     
     To make this fix, do the following:
     
     1.  On the machine running the Power BI Gateway or Power BI Desktop, open the **ODBC Data Sources (64-bit)** application.
-    2.  On the main setup screen for the Simba ODBC driver for BigQuery, fill the **Catalog (Project)** field with your specific Google Cloud project ID—for example, `  my-gcp-project-id  ` .
+    2.  On the main setup screen for the Simba ODBC driver for BigQuery, fill the **Catalog (Project)** field with your specific Google Cloud project ID—for example, `my-gcp-project-id` .
 
 4.  **For earlier versions of DataHub, specify the project ID in the DataHub ingestion configuration** . Make this fix if you are using DataHub instead of the Simba driver. Similar to Simba, later versions of DataHub require you to specify the project ID or they won't connect to BigQuery.
     
     To avoid exceeding DataHub limits, modify your DataHub ingestion configuration to provide an explicit list of project IDs to scan. This prevents the DataHub configuration from finding all projects that the service account can see.
     
-    In your BigQuery source recipe file (typically a YAML file), use the `  project_ids  ` configuration to enumerate the projects that you want to ingest. Then, redeploy the DataHub ingestion recipe with the new configuration. See the following example and [this longer example](https://github.com/datahub-project/datahub/blob/master/metadata-ingestion/examples/recipes/bigquery_to_datahub.dhub.yaml) provided by DataHub.
+    In your BigQuery source recipe file (typically a YAML file), use the `project_ids` configuration to enumerate the projects that you want to ingest. Then, redeploy the DataHub ingestion recipe with the new configuration. See the following example and [this longer example](https://github.com/datahub-project/datahub/blob/master/metadata-ingestion/examples/recipes/bigquery_to_datahub.dhub.yaml) provided by DataHub.
     
     The following is an example of a DataHub configuration snippet:
     
@@ -723,7 +723,7 @@ Use the action plan in the following sections to resolve long-term quota errors 
 ##### Phase 1: Preparation
 
 1.  Inform owners of the Power BI gateways and DataHub configuration that you will make coordinated changes to resolve ongoing job failures.
-2.  In the Google Cloud console, [create](https://docs.cloud.google.com/iam/docs/service-accounts-create) two new service accounts—for example, `  sa-powerbi-gateway@...  ` and `  sa-datahub-ingestion@...  ` .
+2.  In the Google Cloud console, [create](https://docs.cloud.google.com/iam/docs/service-accounts-create) two new service accounts—for example, `sa-powerbi-gateway@...` and `sa-datahub-ingestion@...` .
 3.  [Create](https://docs.cloud.google.com/iam/docs/keys-create-delete) service account keys for the Power BI and DataHub service accounts.
 4.  [Grant](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts) each new service account least-privilege permissions by assigning the following Identity and Access Management roles that enable it to perform its tasks in relevant Identity and Access Management (IAM). Avoid assigning overly broad roles—for example, **ProjectEditor** .
 
@@ -742,11 +742,11 @@ The service account for DataHub ingestion only needs to read metadata, such as t
 
 During a low-usage period, the Power BI administrator updates the ODBC DSN configurations on the gateway machines by performing the following steps:
 
-1.  Changes the authentication method to use the new `  sa-powerbi-gateway@...  ` service account key created in a previous step.
+1.  Changes the authentication method to use the new `sa-powerbi-gateway@...` service account key created in a previous step.
 2.  If not already performed as a short-term fix, enters the Google Cloud project ID in the **Catalog (Project)** field of the ODBC driver.
 3.  Has the DataHub owner update the BigQuery source configuration YAML file.
-4.  Points to the new `  sa-datahub-ingestion@...  ` service account key created in a previous step.
-5.  If not already performed as a short-term fix, uses the `  project_ids  ` parameter to explicitly list the projects to be scanned.
+4.  Points to the new `sa-datahub-ingestion@...` service account key created in a previous step.
+5.  If not already performed as a short-term fix, uses the `project_ids` parameter to explicitly list the projects to be scanned.
 6.  Redeploys the DataHub ingestion recipe with the new configuration.
 
 ##### Phase 3: Verification and monitoring
@@ -756,6 +756,6 @@ To verify and monitor effects of the fixes, the Power BI and DataHub administrat
 1.  Manually trigger a refresh for a few key Power BI reports and a new ingestion run in DataHub. Confirm that these jobs complete successfully without incurring quota errors.
 2.  In the Google Cloud console, navigate to the **IAM & Admin \> Quotas** page.
 3.  Filter for the **BigQuery API** service.
-4.  Find the quota named **Concurrent `  project.lists  ` requests** and click the graph icon to view usage over time.
+4.  Find the quota named **Concurrent `project.lists` requests** and click the graph icon to view usage over time.
 
 Administrators should see a dramatic and permanent drop in the usage of this specific API call, confirming that the fix was successful.

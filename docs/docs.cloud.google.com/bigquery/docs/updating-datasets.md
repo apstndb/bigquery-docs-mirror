@@ -18,12 +18,12 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To update dataset properties, you need the following IAM permissions:
 
-  - `  bigquery.datasets.update  `
-  - `  bigquery.datasets.setIamPolicy  ` (only required when updating dataset access controls in the Google Cloud console)
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy` (only required when updating dataset access controls in the Google Cloud console)
 
-The `  roles/bigquery.dataOwner  ` predefined IAM role includes the permissions that you need to update dataset properties.
+The `roles/bigquery.dataOwner` predefined IAM role includes the permissions that you need to update dataset properties.
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can update properties of the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can update properties of the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -32,8 +32,8 @@ For more information on IAM roles and permissions in BigQuery, see [Predefined r
 You can update a dataset's description in the following ways:
 
   - Using the Google Cloud console.
-  - Using the bq command-line tool's `  bq update  ` command.
-  - Calling the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method.
+  - Using the bq command-line tool's `bq update` command.
+  - Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method.
   - Using the client libraries.
 
 To update a dataset's description:
@@ -57,9 +57,9 @@ To update a dataset's description:
 
 ### SQL
 
-To update a dataset's description, use the [`  ALTER SCHEMA SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the `  description  ` option.
+To update a dataset's description, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the `description` option.
 
-The following example sets the description on a dataset named `  mydataset  ` :
+The following example sets the description on a dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -80,7 +80,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Issue the `  bq update  ` command with the `  --description  ` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
+Issue the `bq update` command with the `--description` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
 
 ``` notranslate
 bq update \
@@ -96,11 +96,11 @@ Replace the following:
 
 Examples:
 
-Enter the following command to change the description of `  mydataset  ` to "Description of mydataset." `  mydataset  ` is in your default project.
+Enter the following command to change the description of `mydataset` to "Description of mydataset." `mydataset` is in your default project.
 
     bq update --description "Description of mydataset" mydataset
 
-Enter the following command to change the description of `  mydataset  ` to "Description of mydataset." The dataset is in `  myotherproject  ` , not your default project.
+Enter the following command to change the description of `mydataset` to "Description of mydataset." The dataset is in `myotherproject` , not your default project.
 
     bq update \
     --description "Description of mydataset" \
@@ -108,7 +108,7 @@ Enter the following command to change the description of `  mydataset  ` to "Des
 
 ### API
 
-Call [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and update the `  description  ` property in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . Because the `  datasets.update  ` method replaces the entire dataset resource, the `  datasets.patch  ` method is preferred.
+Call [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and update the `description` property in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . Because the `datasets.update` method replaces the entire dataset resource, the `datasets.patch` method is preferred.
 
 ### Go
 
@@ -245,15 +245,15 @@ Configure the [Dataset.description](https://docs.cloud.google.com/python/docs/re
 You can update a dataset's default table expiration time in the following ways:
 
   - Using the Google Cloud console.
-  - Using the bq command-line tool's `  bq update  ` command.
-  - Calling the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method.
+  - Using the bq command-line tool's `bq update` command.
+  - Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method.
   - Using the client libraries.
 
 You can set a default table expiration time at the dataset level, or you can set a table's expiration time when the table is created. If you set the expiration when the table is created, the dataset's default table expiration is ignored. If you don't set a default table expiration at the dataset level, and you don't set a table expiration when the table is created, the table never expires and you must [delete the table](https://docs.cloud.google.com/bigquery/docs/managing-tables#deleting_tables) manually. When a table expires, it's deleted along with all of the data it contains.
 
 When you update a dataset's default table expiration setting:
 
-  - If you change the value from `  Never  ` to a defined expiration time, any tables that already exist in the dataset won't expire unless the expiration time was set on the table when it was created.
+  - If you change the value from `Never` to a defined expiration time, any tables that already exist in the dataset won't expire unless the expiration time was set on the table when it was created.
   - If you are changing the value for the default table expiration, any tables that already exist expire according to the original table expiration setting. Any new tables created in the dataset have the new table expiration setting applied unless you specify a different table expiration on the table when it is created.
 
 The value for default table expiration is expressed differently depending on where the value is set. Use the method that gives you the appropriate level of granularity:
@@ -280,9 +280,9 @@ To update the default expiration time for a dataset:
 
 ### SQL
 
-To update the default table expiration time, use the [`  ALTER SCHEMA SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the `  default_table_expiration_days  ` option.
+To update the default table expiration time, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the `default_table_expiration_days` option.
 
-The following example updates the default table expiration for a dataset named `  mydataset  ` .
+The following example updates the default table expiration for a dataset named `mydataset` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -303,7 +303,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To update the default expiration time for newly created tables in a dataset, enter the `  bq update  ` command with the `  --default_table_expiration  ` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
+To update the default expiration time for newly created tables in a dataset, enter the `bq update` command with the `--default_table_expiration` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
 
 ``` notranslate
 bq update \
@@ -313,23 +313,23 @@ project_id:dataset
 
 Replace the following:
 
-  - `  integer  ` : the default lifetime, in seconds, for newly created tables. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current UTC time plus the integer value. Specify `  0  ` to remove the existing expiration time. Any table created in the dataset is deleted `  integer  ` seconds after its creation time. This value is applied if you do not set a table expiration when the table is [created](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
+  - `  integer  ` : the default lifetime, in seconds, for newly created tables. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current UTC time plus the integer value. Specify `0` to remove the existing expiration time. Any table created in the dataset is deleted `  integer  ` seconds after its creation time. This value is applied if you do not set a table expiration when the table is [created](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
   - `  project_id  ` : your project ID.
   - `  dataset  ` : the name of the dataset that you're updating.
 
 Examples:
 
-Enter the following command to set the default table expiration for new tables created in `  mydataset  ` to two hours (7200 seconds) from the current time. The dataset is in your default project.
+Enter the following command to set the default table expiration for new tables created in `mydataset` to two hours (7200 seconds) from the current time. The dataset is in your default project.
 
     bq update --default_table_expiration 7200 mydataset
 
-Enter the following command to set the default table expiration for new tables created in `  mydataset  ` to two hours (7200 seconds) from the current time. The dataset is in `  myotherproject  ` , not your default project.
+Enter the following command to set the default table expiration for new tables created in `mydataset` to two hours (7200 seconds) from the current time. The dataset is in `myotherproject` , not your default project.
 
     bq update --default_table_expiration 7200 myotherproject:mydataset
 
 ### API
 
-Call [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and update the `  defaultTableExpirationMs  ` property in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . The expiration is expressed in milliseconds in the API. Because the `  datasets.update  ` method replaces the entire dataset resource, the `  datasets.patch  ` method is preferred.
+Call [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and update the `defaultTableExpirationMs` property in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . The expiration is expressed in milliseconds in the API. Because the `datasets.update` method replaces the entire dataset resource, the `datasets.patch` method is preferred.
 
 ### Go
 
@@ -479,8 +479,8 @@ Configure the [Dataset.default\_table\_expiration\_ms](https://docs.cloud.google
 
 You can update a dataset's default partition expiration in the following ways:
 
-  - Using the bq command-line tool's `  bq update  ` command.
-  - Calling the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method.
+  - Using the bq command-line tool's `bq update` command.
+  - Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method.
   - Using the client libraries.
 
 Setting or updating a dataset's default partition expiration isn't supported by the Google Cloud console.
@@ -495,7 +495,7 @@ When you set a default partition expiration on a dataset, the expiration applies
 
 When you update a dataset's default partition expiration setting:
 
-  - If you change the value from `  never  ` to a defined expiration time, any partitions that already exist in partitioned tables in the dataset will not expire unless the partition expiration time was set on the table when it was created.
+  - If you change the value from `never` to a defined expiration time, any partitions that already exist in partitioned tables in the dataset will not expire unless the partition expiration time was set on the table when it was created.
   - If you are changing the value for the default partition expiration, any partitions in existing partitioned tables expire according to the original default partition expiration. Any new partitioned tables created in the dataset have the new default partition expiration setting applied unless you specify a different partition expiration on the table when it is created.
 
 The value for default partition expiration is expressed differently depending on where the value is set. Use the method that gives you the appropriate level of granularity:
@@ -511,9 +511,9 @@ Updating a dataset's default partition expiration is not supported by the Google
 
 ### SQL
 
-To update the default partition expiration time, use the [`  ALTER SCHEMA SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the `  default_partition_expiration_days  ` option.
+To update the default partition expiration time, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the `default_partition_expiration_days` option.
 
-The following example updates the default partition expiration for a dataset named `  mydataset  ` :
+The following example updates the default partition expiration for a dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -534,7 +534,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To update the default expiration time for a dataset, enter the `  bq update  ` command with the `  --default_partition_expiration  ` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
+To update the default expiration time for a dataset, enter the `bq update` command with the `--default_partition_expiration` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
 
 ``` notranslate
 bq update \
@@ -544,27 +544,27 @@ project_id:dataset
 
 Replace the following:
 
-  - `  integer  ` : the default lifetime, in seconds, for partitions in newly created partitioned tables. This flag has no minimum value. Specify `  0  ` to remove the existing expiration time. Any partitions in newly created partitioned tables are deleted `  integer  ` seconds after the partition's UTC date. This value is applied if you do not set a partition expiration on the table when it is created.
+  - `  integer  ` : the default lifetime, in seconds, for partitions in newly created partitioned tables. This flag has no minimum value. Specify `0` to remove the existing expiration time. Any partitions in newly created partitioned tables are deleted `  integer  ` seconds after the partition's UTC date. This value is applied if you do not set a partition expiration on the table when it is created.
   - `  project_id  ` : your project ID.
   - `  dataset  ` : the name of the dataset that you're updating.
 
 Examples:
 
-Enter the following command to set the default partition expiration for new partitioned tables created in `  mydataset  ` to 26 hours (93,600 seconds). The dataset is in your default project.
+Enter the following command to set the default partition expiration for new partitioned tables created in `mydataset` to 26 hours (93,600 seconds). The dataset is in your default project.
 
     bq update --default_partition_expiration 93600 mydataset
 
-Enter the following command to set the default partition expiration for new partitioned tables created in `  mydataset  ` to 26 hours (93,600 seconds). The dataset is in `  myotherproject  ` , not your default project.
+Enter the following command to set the default partition expiration for new partitioned tables created in `mydataset` to 26 hours (93,600 seconds). The dataset is in `myotherproject` , not your default project.
 
     bq update --default_partition_expiration 93600 myotherproject:mydataset
 
 ### API
 
-Call [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and update the `  defaultPartitionExpirationMs  ` property in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . The expiration is expressed in milliseconds. Because the `  datasets.update  ` method replaces the entire dataset resource, the `  datasets.patch  ` method is preferred.
+Call [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and update the `defaultPartitionExpirationMs` property in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . The expiration is expressed in milliseconds. Because the `datasets.update` method replaces the entire dataset resource, the `datasets.patch` method is preferred.
 
 ## Update rounding mode
 
-You can update a dataset's default [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) by using the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) . The following example updates the default rounding mode for `  mydataset  ` to `  ROUND_HALF_EVEN  ` .
+You can update a dataset's default [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) by using the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) . The following example updates the default rounding mode for `mydataset` to `ROUND_HALF_EVEN` .
 
 ``` notranslate
 ALTER SCHEMA mydataset
@@ -579,9 +579,9 @@ This sets the default rounding mode for new tables created in the dataset. It ha
 You can update a dataset's time travel window in the following ways:
 
   - Using the Google Cloud console.
-  - Using the [`  ALTER SCHEMA SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) statement.
-  - Using the bq command-line tool's [`  bq update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command.
-  - Calling the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`  datasets.update  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) API method. The `  update  ` method replaces the entire dataset resource, whereas the `  patch  ` method only replaces fields that are provided in the submitted dataset resource.
+  - Using the [`ALTER SCHEMA SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) statement.
+  - Using the bq command-line tool's [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command.
+  - Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`datasets.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) API method. The `update` method replaces the entire dataset resource, whereas the `patch` method only replaces fields that are provided in the submitted dataset resource.
 
 For more information on the time travel window, see [Configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) .
 
@@ -603,7 +603,7 @@ To update the time travel window for a dataset:
 
 ### SQL
 
-Use the [`  ALTER SCHEMA SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) statement with the `  max_time_travel_hours  ` option to specify the time travel window when altering a dataset. The `  max_time_travel_hours  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
+Use the [`ALTER SCHEMA SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) statement with the `max_time_travel_hours` option to specify the time travel window when altering a dataset. The `max_time_travel_hours` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -628,7 +628,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command with the `  --max_time_travel_hours  ` flag to specify the time travel window when altering a dataset. The `  --max_time_travel_hours  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
+Use the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command with the `--max_time_travel_hours` flag to specify the time travel window when altering a dataset. The `--max_time_travel_hours` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
 
     bq update \
     --dataset=true --max_time_travel_hours=HOURS \
@@ -642,11 +642,11 @@ Replace the following:
 
 ### API
 
-Call the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`  datasets.update  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) in which you have specified a value for the `  maxTimeTravelHours  ` field. The `  maxTimeTravelHours  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
+Call the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`datasets.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) in which you have specified a value for the `maxTimeTravelHours` field. The `maxTimeTravelHours` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
 
 ## Update storage billing models
 
-You can alter the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for a dataset. Set the `  storage_billing_model  ` value to `  PHYSICAL  ` to use physical bytes when calculating storage changes, or to `  LOGICAL  ` to use logical bytes. `  LOGICAL  ` is the default.
+You can alter the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for a dataset. Set the `storage_billing_model` value to `PHYSICAL` to use physical bytes when calculating storage changes, or to `LOGICAL` to use logical bytes. `LOGICAL` is the default.
 
 When you change a dataset's billing model, it takes 24 hours for the change to take effect.
 
@@ -670,7 +670,7 @@ Once you change a dataset's storage billing model, you must wait 14 days before 
 
 ### SQL
 
-To update the billing model for a dataset, use the [`  ALTER SCHEMA SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) and set the `  storage_billing_model  ` option:
+To update the billing model for a dataset, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) and set the `storage_billing_model` option:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -687,7 +687,7 @@ To update the billing model for a dataset, use the [`  ALTER SCHEMA SET OPTIONS 
     Replace the following:
     
       - `  DATASET_NAME  ` with the name of the dataset that you are changing
-      - `  BILLING_MODEL  ` with the type of storage you want to use, either `  LOGICAL  ` or `  PHYSICAL  `
+      - `  BILLING_MODEL  ` with the type of storage you want to use, either `LOGICAL` or `PHYSICAL`
 
 3.  Click play\_circle **Run** .
 
@@ -709,11 +709,11 @@ Replace the following:
 
   - `  PROJECT_ID  ` with your project ID
   - `  REGION  ` with a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier)
-  - `  BILLING_MODEL  ` with the type of storage you want to use, either `  LOGICAL  ` or `  PHYSICAL  `
+  - `  BILLING_MODEL  ` with the type of storage you want to use, either `LOGICAL` or `PHYSICAL`
 
 ### bq
 
-To update the billing model for a dataset, use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and set the `  --storage_billing_model  ` flag:
+To update the billing model for a dataset, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and set the `--storage_billing_model` flag:
 
 ``` notranslate
 bq update -d --storage_billing_model=BILLING_MODEL PROJECT_ID:DATASET_NAME
@@ -723,13 +723,13 @@ Replace the following:
 
   - `  PROJECT_ID  ` : your project ID
   - `  DATASET_NAME  ` : the name of the dataset that you're updating
-  - `  BILLING_MODEL  ` : the type of storage you want to use, either `  LOGICAL  ` or `  PHYSICAL  `
+  - `  BILLING_MODEL  ` : the type of storage you want to use, either `LOGICAL` or `PHYSICAL`
 
 ### API
 
-Call the [`  datasets.update  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) where the `  storageBillingModel  ` field is set.
+Call the [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) where the `storageBillingModel` field is set.
 
-The following example shows how to call `  datasets.update  ` using `  curl  ` :
+The following example shows how to call `datasets.update` using `curl` :
 
 ``` notranslate
 curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID -d '{"datasetReference": {"projectId": "PROJECT_ID", "datasetId": "DATASET_NAME"}, "storageBillingModel": "BILLING_MODEL"}'
@@ -739,7 +739,7 @@ Replace the following:
 
   - `  PROJECT_ID  ` : your project ID
   - `  DATASET_NAME  ` : the name of the dataset that you're updating
-  - `  BILLING_MODEL  ` : the type of storage you want to use, either `  LOGICAL  ` or `  PHYSICAL  `
+  - `  BILLING_MODEL  ` : the type of storage you want to use, either `LOGICAL` or `PHYSICAL`
 
 ## Update access controls
 

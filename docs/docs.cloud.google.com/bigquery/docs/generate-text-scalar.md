@@ -1,6 +1,6 @@
 # Generate text with the AI.GENERATE function
 
-This tutorial shows you how to generate text from text or multimodal data by using the [`  AI.GENERATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) . With the `  AI.GENERATE  ` function, you use a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to a hosted Gemini model so that you don't have to create and maintain a model of your own.
+This tutorial shows you how to generate text from text or multimodal data by using the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) . With the `AI.GENERATE` function, you use a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to a hosted Gemini model so that you don't have to create and maintain a model of your own.
 
 This tutorial shows you how to complete the following tasks:
 
@@ -32,27 +32,27 @@ For more information about Vertex AI generative AI pricing, see the [Vertex AI p
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ### Required roles
 
-To use the `  AI.GENERATE  ` function, you need the following Identity and Access Management (IAM) roles:
+To use the `AI.GENERATE` function, you need the following Identity and Access Management (IAM) roles:
 
-  - Create and use BigQuery datasets and tables: BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) on your project.
-  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` ) on your project.
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` ) on the project that contains the Vertex AI endpoint.
-  - Create BigQuery jobs: BigQuery Job User ( `  roles/bigquery.jobUser  ` ) on your project.
+  - Create and use BigQuery datasets and tables: BigQuery Data Editor ( `roles/bigquery.dataEditor` ) on your project.
+  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` ) on your project.
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Vertex AI endpoint.
+  - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` ) on your project.
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
-  - Query table data: `  bigquery.tables.getData  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
+  - Query table data: `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -72,7 +72,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -80,9 +80,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -99,7 +99,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -127,7 +127,7 @@ Follow these steps to create a connection:
 
 3.  In the **Filter By** pane, in the **Data Source Type** section, select **Business Applications** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `  Vertex AI  ` .
+    Alternatively, in the **Search for data sources** field, you can enter `Vertex AI` .
 
 4.  In the **Featured data sources** section, click **Vertex AI** .
 
@@ -135,7 +135,7 @@ Follow these steps to create a connection:
 
 6.  In the **Connection type** list, select **Vertex AI remote models, remote functions, BigLake and Spanner (Cloud Resource)** .
 
-7.  In the **Connection ID** field, type `  test_connection  ` .
+7.  In the **Connection ID** field, type `test_connection` .
 
 8.  Click **Create connection** .
 
@@ -169,7 +169,7 @@ To grant the role, follow these steps:
 
 ## Summarize text and use the default output format
 
-Follow these steps to generate text using the `  AI.GENERATE  ` function, and output the results in the `  AI.GENERATE  ` function's default format:
+Follow these steps to generate text using the `AI.GENERATE` function, and output the results in the `AI.GENERATE` function's default format:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -203,7 +203,7 @@ Follow these steps to generate text using the `  AI.GENERATE  ` function, and ou
 
 ## Summarize text and output structured results
 
-Follow these steps to generate text using the `  AI.GENERATE  ` function, and use the `  AI.GENERATE  ` function's `  output_schema  ` argument to format the output:
+Follow these steps to generate text using the `AI.GENERATE` function, and use the `AI.GENERATE` function's `output_schema` argument to format the output:
 
 1.  In the Google Cloud console, go to the BigQuery page.
     
@@ -263,7 +263,7 @@ Follow these steps to create an object table over public video content, and then
         ['gs://cloud-samples-data/generative-ai/video/*']);
     ```
 
-3.  In the query editor, run the following query to transcribe and translate the `  pixel8.mp4  ` file:
+3.  In the query editor, run the following query to transcribe and translate the `pixel8.mp4` file:
     
     ``` notranslate
     SELECT
@@ -355,7 +355,7 @@ Follow these steps to create an object table over public audio content, and then
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

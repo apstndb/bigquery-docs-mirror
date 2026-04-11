@@ -11,7 +11,7 @@ Lists all datasets in the specified project to which the user has been granted t
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,9 +19,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the datasets to be listed
 
@@ -29,29 +29,29 @@ Required. Project ID of the datasets to be listed
 
 Parameters
 
-`  maxResults  `
+`maxResults`
 
-`  integer  `
+`integer`
 
 The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token, returned by a previous call, to request the next page of results
 
-`  all  `
+`all`
 
-`  boolean  `
+`boolean`
 
 Whether to list all datasets, including hidden ones
 
-`  filter  `
+`filter`
 
-`  string  `
+`string`
 
-An expression for filtering the results of the request by label. The syntax is `  labels.<name>[:<value>]  ` . Multiple filters can be AND-ed together by connecting with a space. Example: `  labels.department:receiving labels.active  ` . See [Filtering datasets using labels](https://cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels) for details.
+An expression for filtering the results of the request by label. The syntax is `labels.<name>[:<value>]` . Multiple filters can be AND-ed together by connecting with a space. Example: `labels.department:receiving labels.active` . See [Filtering datasets using labels](https://cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels) for details.
 
 ### Request body
 
@@ -74,105 +74,78 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;kind&quot;: string,
-  &quot;etag&quot;: string,
-  &quot;nextPageToken&quot;: string,
-  &quot;datasets&quot;: [
-    {
-      &quot;kind&quot;: string,
-      &quot;id&quot;: string,
-      &quot;datasetReference&quot;: {
-        object (DatasetReference)
-      },
-      &quot;labels&quot;: {
-        string: string,
-        ...
-      },
-      &quot;friendlyName&quot;: string,
-      &quot;location&quot;: string,
-      &quot;type&quot;: string,
-      &quot;catalogSource&quot;: string,
-      &quot;externalDatasetReference&quot;: {
-        object (ExternalDatasetReference)
-      }
-    }
-  ],
-  &quot;unreachable&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;etag&quot;: string,&quot;nextPageToken&quot;: string,&quot;datasets&quot;: [{&quot;kind&quot;: string,&quot;id&quot;: string,&quot;datasetReference&quot;: {object (DatasetReference)},&quot;labels&quot;: {string: string,...},&quot;friendlyName&quot;: string,&quot;location&quot;: string,&quot;type&quot;: string,&quot;catalogSource&quot;: string,&quot;externalDatasetReference&quot;: {object (ExternalDatasetReference)}}],&quot;unreachable&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 Output only. The resource type. This property always returns the value "bigquery\#datasetList"
 
-`  etag  `
+`etag`
 
-`  string  `
+`string`
 
 Output only. A hash value of the results page. You can use this property to determine if the page has changed since the last request.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 A token that can be used to request the next results page. This property is omitted on the final results page.
 
-`  datasets[]  `
+`datasets[]`
 
-`  object  `
+`object`
 
 An array of the dataset resources in the project. Each resource contains basic information. For full information about a particular dataset resource, use the Datasets: get method. This property is omitted when there are no datasets in the project.
 
-`  datasets[].kind  `
+`datasets[].kind`
 
-`  string  `
+`string`
 
 The resource type. This property always returns the value "bigquery\#dataset"
 
-`  datasets[].id  `
+`datasets[].id`
 
-`  string  `
+`string`
 
 The fully-qualified, unique, opaque ID of the dataset.
 
-`  datasets[].datasetReference  `
+`datasets[].datasetReference`
 
-`  object ( DatasetReference  ` )
+` object ( DatasetReference  ` )
 
 The dataset reference. Use this property to access specific parts of the dataset's ID, such as project ID or dataset ID.
 
-`  datasets[].labels  `
+`datasets[].labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 The labels associated with this dataset. You can use these to organize and group your datasets.
 
-`  datasets[].friendlyName  `
+`datasets[].friendlyName`
 
-`  string  `
+`string`
 
 An alternate name for the dataset. The friendly name is purely decorative in nature.
 
-`  datasets[].location  `
+`datasets[].location`
 
-`  string  `
+`string`
 
 The geographic location where the dataset resides.
 
-`  datasets[].type  `
+`datasets[].type`
 
-`  string  `
+`string`
 
-Output only. Same as `  type  ` in `  Dataset  ` . The type of the dataset, one of:
+Output only. Same as `type` in `Dataset` . The type of the dataset, one of:
 
   - DEFAULT - only accessible by owner and authorized accounts,
   - PUBLIC - accessible by everyone,
@@ -181,24 +154,24 @@ Output only. Same as `  type  ` in `  Dataset  ` . The type of the dataset, one 
   - BIGLAKE\_ICEBERG - a Biglake dataset accessible through the Iceberg API,
   - BIGLAKE\_HIVE - a Biglake dataset accessible through the Hive API.
 
-`  datasets[].catalogSource  `
+`datasets[].catalogSource`
 
-`  string  `
+`string`
 
 Output only. The origin of the dataset, one of:
 
   - (Unset) - Native BigQuery Dataset.
   - BIGLAKE - Dataset is backed by a namespace stored natively in Biglake.
 
-`  datasets[].externalDatasetReference  `
+`datasets[].externalDatasetReference`
 
-`  object ( ExternalDatasetReference  ` )
+` object ( ExternalDatasetReference  ` )
 
 Output only. Reference to a read-only external dataset defined in data catalogs outside of BigQuery. Filled out when the dataset type is EXTERNAL.
 
-`  unreachable[]  `
+`unreachable[]`
 
-`  string  `
+`string`
 
 A list of skipped locations that were unreachable. For more information about BigQuery locations, see: <https://cloud.google.com/bigquery/docs/locations> . Example: "europe-west5"
 
@@ -206,9 +179,9 @@ A list of skipped locations that were unreachable. For more information about Bi
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

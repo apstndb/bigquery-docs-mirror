@@ -7,7 +7,7 @@ BigQuery Spanner federation enables BigQuery to query data residing in Spanner i
 You can query Spanner data in two ways:
 
   - Create a Spanner external dataset.
-  - Use an [`  EXTERNAL_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function.
+  - Use an [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function.
 
 ## Use external datasets
 
@@ -15,34 +15,34 @@ The simplest way to query Spanner tables is to [create an external dataset](http
 
 You don't need to create a connection to query Spanner data if you create an external dataset.
 
-## Use `     EXTERNAL_QUERY    ` function
+## Use `EXTERNAL_QUERY` function
 
-Like for other federated databases, you can also query Spanner data with an [`  EXTERNAL_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function. This may be useful if you want to have more control over the connection parameters.
+Like for other federated databases, you can also query Spanner data with an [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function. This may be useful if you want to have more control over the connection parameters.
 
 ### Before you begin
 
   - Ensure that your BigQuery administrator has created a [Spanner connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner#create-spanner-connection) and [shared](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner#share_connections) it with you. See [Choose the right connection](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#right-connection) .
 
-  - To get the permissions that you need to query a Spanner instance, ask your administrator to grant you the BigQuery Connection User ( `  roles/bigquery.connectionUser  ` ) Identity and Access Management (IAM) role. You also need to ask your administrator to grant you one of the following:
+  - To get the permissions that you need to query a Spanner instance, ask your administrator to grant you the BigQuery Connection User ( `roles/bigquery.connectionUser` ) Identity and Access Management (IAM) role. You also need to ask your administrator to grant you one of the following:
     
-      - If you are a fine-grained access control user, you need access to a database role that has the `  SELECT  ` privilege on all Spanner schema objects in your queries.
-      - If you aren't a fine-grained access control user, you need the Cloud Spanner Database Reader ( `  roles/spanner.databaseReader  ` ) IAM role.
+      - If you are a fine-grained access control user, you need access to a database role that has the `SELECT` privilege on all Spanner schema objects in your queries.
+      - If you aren't a fine-grained access control user, you need the Cloud Spanner Database Reader ( `roles/spanner.databaseReader` ) IAM role.
     
     For information about granting IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) . For information about fine-grained access control, see [About fine-grained access control](https://docs.cloud.google.com/spanner/docs/fgac-about) .
 
 ### Choose the right connection
 
-If you are a Spanner fine-grained access control user, when you run a federated query with an [`  EXTERNAL_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function, you must use a Spanner connection that specifies a database role. Then all queries that you run with this connection use that database role.
+If you are a Spanner fine-grained access control user, when you run a federated query with an [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function, you must use a Spanner connection that specifies a database role. Then all queries that you run with this connection use that database role.
 
 If you use a connection that doesn't specify a database role, you must have the IAM roles indicated in [Before you begin](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#begin) .
 
 ### Query data
 
-To send a federated query to Spanner from a GoogleSQL query, use the [`  EXTERNAL_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function.
+To send a federated query to Spanner from a GoogleSQL query, use the [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function.
 
 Formulate your Spanner query in either GoogleSQL or PostgreSQL, depending on the specified dialect of the database.
 
-The following example makes a federated query to a Spanner database named `  orders  ` and joins the results with a BigQuery table named `  mydataset.customers  ` .
+The following example makes a federated query to a Spanner database named `orders` and joins the results with a BigQuery table named `mydataset.customers` .
 
 ``` notranslate
 SELECT c.customer_id, c.name, rq.first_order_date
@@ -62,9 +62,9 @@ Data Boost is a fully managed, serverless feature that provides independent comp
 
 ### Before you begin
 
-To get the permission that you need to enable access to Data Boost, ask your administrator to grant you the [Cloud Spanner Database Reader with DataBoost](https://docs.cloud.google.com/iam/docs/roles-permissions/spanner#spanner.databaseReaderWithDataBoost) ( `  roles/spanner.databaseReaderWithDataBoost  ` ) IAM role on the Spanner database. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to enable access to Data Boost, ask your administrator to grant you the [Cloud Spanner Database Reader with DataBoost](https://docs.cloud.google.com/iam/docs/roles-permissions/spanner#spanner.databaseReaderWithDataBoost) ( `roles/spanner.databaseReaderWithDataBoost` ) IAM role on the Spanner database. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  spanner.databases.useDataBoost  ` permission, which is required to enable access to Data Boost.
+This predefined role contains the `spanner.databases.useDataBoost` permission, which is required to enable access to Data Boost.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -72,7 +72,7 @@ You might also be able to get this permission with [custom roles](https://docs.c
 
 When using external datasets, Data Boost is always used and you don't have to enable it manually.
 
-If you want to use Data Boost for your `  EXTERNAL_QUERY  ` queries, you must enable it when [creating a connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner) that is used by your query.
+If you want to use Data Boost for your `EXTERNAL_QUERY` queries, you must enable it when [creating a connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner) that is used by your query.
 
 ## Read data in parallel
 
@@ -82,11 +82,11 @@ To view the query execution plan for a Spanner query, see [Understand how Spanne
 
 When running federated queries with external datasets, the "Read data in parallel" option is always used.
 
-To enable parallel reads when using the [`  EXTERNAL_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) , enable it when you [create the Connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner) .
+To enable parallel reads when using the [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) , enable it when you [create the Connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner) .
 
 ## Manage query execution priority
 
-When you run federated queries with an `  EXTERNAL_QUERY  ` function, you can assign priority ( `  high  ` , `  medium  ` , or `  low  ` ) to individual queries by specifying the `  query_execution_priority  ` option:
+When you run federated queries with an `EXTERNAL_QUERY` function, you can assign priority ( `high` , `medium` , or `low` ) to individual queries by specifying the `query_execution_priority` option:
 
 ``` notranslate
 SELECT *
@@ -98,19 +98,19 @@ FROM EXTERNAL_QUERY(
   '{"query_execution_priority":"high"}');
 ```
 
-The default priority is `  medium  ` .
+The default priority is `medium` .
 
-Queries with priority `  high  ` will compete with transactional traffic. Queries with priority `  low  ` are best-effort, and might get preempted by background load, for example scheduled backups.
+Queries with priority `high` will compete with transactional traffic. Queries with priority `low` are best-effort, and might get preempted by background load, for example scheduled backups.
 
-**Caution:** Queries with `  low  ` priority fall below queries like backup jobs which might never complete within the timeouts for BigQuery.
+**Caution:** Queries with `low` priority fall below queries like backup jobs which might never complete within the timeouts for BigQuery.
 
-When running federated queries with external datasets, all queries have always `  medium  ` priority.
+When running federated queries with external datasets, all queries have always `medium` priority.
 
 ## View a Spanner table schema
 
 If you use external datasets, your Spanner tables are visible directly in BigQuery Studio and you can see their schemas.
 
-However, you can also see the schemas without defining external datasets. You can use `  EXTERNAL_QUERY  ` function also to query information\_schema views to access database metadata. The following example returns information about the columns in the table `  MyTable  ` :
+However, you can also see the schemas without defining external datasets. You can use `EXTERNAL_QUERY` function also to query information\_schema views to access database metadata. The following example returns information about the columns in the table `MyTable` :
 
 ### Google SQL database
 
@@ -163,15 +163,15 @@ You are charged for the data transfer, based on the following [SKUs](https://doc
 
 Data transfer is charged based on the BigQuery region you run the query in and the nearest Spanner region that has read-write or read-only replicas.
 
-For BigQuery multi-region configurations ( `  US  ` or `  EU  ` ), data transfer costs from Spanner are determined as follows:
+For BigQuery multi-region configurations ( `US` or `EU` ), data transfer costs from Spanner are determined as follows:
 
-  - BigQuery `  US  ` multi-region: Spanner region `  us-central1  `
-  - BigQuery `  EU  ` multi-region: Spanner region `  europe-west1  `
+  - BigQuery `US` multi-region: Spanner region `us-central1`
+  - BigQuery `EU` multi-region: Spanner region `europe-west1`
 
 For example:
 
-  - BigQuery ( `  US  ` multi-region) and Spanner ( `  us-central1  ` ): Costs apply for data transfer within the same region.
-  - BigQuery ( `  US  ` multi-region) and Spanner ( `  us-west4  ` ): Costs apply for Data transfer between regions within the same continent.
+  - BigQuery ( `US` multi-region) and Spanner ( `us-central1` ): Costs apply for data transfer within the same region.
+  - BigQuery ( `US` multi-region) and Spanner ( `us-west4` ): Costs apply for Data transfer between regions within the same continent.
 
 ## Troubleshooting
 

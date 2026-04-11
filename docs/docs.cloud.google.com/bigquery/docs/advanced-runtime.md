@@ -4,7 +4,7 @@ BigQuery advanced runtime is a set of performance enhancements designed to autom
 
 ## Roles and permissions
 
-To get the permissions that you need to specify a configuration setting, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project or organization. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to specify a configuration setting, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project or organization. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -70,7 +70,7 @@ To estimate the impact of the advanced runtime, you can use the following SQL qu
     ORDER BY percent_execution_time_saved DESC
     LIMIT 10;
 
-**Note:** You can only compare queries created on or after January 30, 2026, which is when the advanced runtime optimization indicators ( `  enhanced_vectorization  ` and `  short_query_optimization  ` ) became consistently available in the `  INFORMATION_SCHEMA.JOBS  ` view. The previous query ensures this by restricting the queried time range.
+**Note:** You can only compare queries created on or after January 30, 2026, which is when the advanced runtime optimization indicators ( `enhanced_vectorization` and `short_query_optimization` ) became consistently available in the `INFORMATION_SCHEMA.JOBS` view. The previous query ensures this by restricting the queried time range.
 
 Replace the following:
 
@@ -97,4 +97,4 @@ The results of this query are only an estimate of the advanced runtime's impact.
 
 If the results of this query are empty, then either no jobs have used advanced runtime, or all jobs were optimized more than 30 days ago.
 
-This query can be applied to other query performance metrics such as `  total_slot_ms  ` and `  total_bytes_billed  ` . For more information, see the schema for [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) .
+This query can be applied to other query performance metrics such as `total_slot_ms` and `total_bytes_billed` . For more information, see the schema for [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) .

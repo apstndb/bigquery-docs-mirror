@@ -8,15 +8,15 @@ Common types of objects when working with geospatial data include the following:
   - A *spatial feature* represents a logical spatial object. It combines a geometry with additional attributes that are application-specific.
   - A *spatial feature collection* is a set of spatial features.
 
-In BigQuery, the [`  GEOGRAPHY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) data type represents a geometry value or geometry collection. To represent spatial features, create a table with a `  GEOGRAPHY  ` column for the geometry plus additional columns for the attributes. Each row of the table is a spatial feature, and the entire table represents a spatial feature collection.
+In BigQuery, the [`GEOGRAPHY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) data type represents a geometry value or geometry collection. To represent spatial features, create a table with a `GEOGRAPHY` column for the geometry plus additional columns for the attributes. Each row of the table is a spatial feature, and the entire table represents a spatial feature collection.
 
-The `  GEOGRAPHY  ` data type describes a *point set* on the Earth's surface. A point set is a set of points, lines, and polygons on the [WGS84](https://earth-info.nga.mil/GandG/update/index.php?action=home#tab_wgs84-data) reference spheroid, with geodesic edges. You can use the `  GEOGRAPHY  ` data type by calling one of the GoogleSQL [geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
+The `GEOGRAPHY` data type describes a *point set* on the Earth's surface. A point set is a set of points, lines, and polygons on the [WGS84](https://earth-info.nga.mil/GandG/update/index.php?action=home#tab_wgs84-data) reference spheroid, with geodesic edges. You can use the `GEOGRAPHY` data type by calling one of the GoogleSQL [geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
 
 ## Loading geospatial data
 
-Single points on Earth can be described by just a longitude, latitude pair. For example, you can load a CSV file that contains longitude and latitude values and then use the [`  ST_GEOGPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) function to convert them into `  GEOGRAPHY  ` values.
+Single points on Earth can be described by just a longitude, latitude pair. For example, you can load a CSV file that contains longitude and latitude values and then use the [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) function to convert them into `GEOGRAPHY` values.
 
-For more complex geographies, you can load the following geospatial data formats into a `  GEOGRAPHY  ` column:
+For more complex geographies, you can load the following geospatial data formats into a `GEOGRAPHY` column:
 
   - Well-known text (WKT)
   - Well-known binary (WKB)
@@ -31,9 +31,9 @@ For example, the following defines a point in WKT:
 
     POINT(-121 41)
 
-To describe a spatial feature, WKT is usually embedded in a container file format, such as a CSV file, or in a database table. A file row or a table row usually corresponds to the spatial feature. The whole file or the whole table corresponds to the feature collection. To load WKT data into BigQuery, provide a [schema](https://docs.cloud.google.com/bigquery/docs/schemas) that specifies a `  GEOGRAPHY  ` column for the geospatial data.
+To describe a spatial feature, WKT is usually embedded in a container file format, such as a CSV file, or in a database table. A file row or a table row usually corresponds to the spatial feature. The whole file or the whole table corresponds to the feature collection. To load WKT data into BigQuery, provide a [schema](https://docs.cloud.google.com/bigquery/docs/schemas) that specifies a `GEOGRAPHY` column for the geospatial data.
 
-**Note:** You can't use schema auto-detection to load WKT data as a `  GEOGRAPHY  ` value. If auto-detection is enabled, then BigQuery loads the data as a `  STRING  ` value.
+**Note:** You can't use schema auto-detection to load WKT data as a `GEOGRAPHY` value. If auto-detection is enabled, then BigQuery loads the data as a `STRING` value.
 
 For example, you might have a CSV file that contains the following data:
 
@@ -41,7 +41,7 @@ For example, you might have a CSV file that contains the following data:
     "POLYGON((-85.6 31.66,-85.6 24.29,-78.22 24.29,-78.22 31.66,-85.6 31.66))",poly2
     "POINT(1 2)",point1
 
-You can load this file by running the bq command-line tool `  load  ` command:
+You can load this file by running the bq command-line tool `load` command:
 
     bq load --source_format=CSV \
       --schema="geography:GEOGRAPHY,name:STRING" \
@@ -49,11 +49,11 @@ You can load this file by running the bq command-line tool `  load  ` command:
 
 For more information about loading data in BigQuery, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .
 
-To stream WKT data to an existing BigQuery table with a `  GEOGRAPHY  ` column, serialize the data as a string in the API request.
+To stream WKT data to an existing BigQuery table with a `GEOGRAPHY` column, serialize the data as a string in the API request.
 
 ### bq
 
-Run the bq command-line tool `  insert  ` command:
+Run the bq command-line tool `insert` command:
 
     echo '{"geo": "LINESTRING (-118.4085 33.9416, -73.7781 40.6413)"}' \
         | bq insert my_dataset.geo_table
@@ -94,7 +94,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 For more information about streaming data in BigQuery, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
-You can also convert a WKT text string into a `  GEOGRAPHY  ` value by using the [`  ST_GEOGFROMTEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) function.
+You can also convert a WKT text string into a `GEOGRAPHY` value by using the [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) function.
 
 ### Loading GeoJSON data
 
@@ -117,17 +117,17 @@ There are two ways to load GeoJSON data into BigQuery:
 
 A newline-delimited GeoJSON file contains a list of GeoJSON feature objects, one per line in the file. A GeoJSON feature object is a JSON object with the following members:
 
-  - `  type  ` . For feature objects, the value must be `  Feature  ` . BigQuery validates the value but does not include it in the table schema.
+  - `type` . For feature objects, the value must be `Feature` . BigQuery validates the value but does not include it in the table schema.
 
-  - `  geometry  ` . The value is a GeoJSON `  Geometry  ` object or `  null  ` . BigQuery converts this member into a `  GEOGRAPHY  ` value.
+  - `geometry` . The value is a GeoJSON `Geometry` object or `null` . BigQuery converts this member into a `GEOGRAPHY` value.
 
-  - `  properties  ` . The value is any JSON object or null. If the value isn't `  null  ` , then BigQuery loads each member of the JSON object as a separate table column. For more information about how BigQuery parses JSON data types, see [Details of loading JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#details_of_loading_json_data) .
+  - `properties` . The value is any JSON object or null. If the value isn't `null` , then BigQuery loads each member of the JSON object as a separate table column. For more information about how BigQuery parses JSON data types, see [Details of loading JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#details_of_loading_json_data) .
 
-  - `  id  ` . Optional. If present, the value is either a string or a number. BigQuery loads this value into a column named `  id  ` .
+  - `id` . Optional. If present, the value is either a string or a number. BigQuery loads this value into a column named `id` .
 
 If the feature object contains other members that are not listed here, then BigQuery converts those members directly into table columns.
 
-You can load a newline-delimited GeoJSON file by using the bq command-line tool's `  bq load  ` command, as follows:
+You can load a newline-delimited GeoJSON file by using the bq command-line tool's `bq load` command, as follows:
 
 ``` notranslate
 bq load \
@@ -144,15 +144,15 @@ Replace the following:
   - `  TABLE  ` is the name of the destination table.
   - `  FILE_PATH_OR_URI  ` is a path to a local file or a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) .
 
-The previous example enables [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) . For more control over how BigQuery converts the values inside the `  properties  ` object, you can provide an explicit schema instead. For more information, see [Specify schemas](https://docs.cloud.google.com/bigquery/docs/schemas#specify_schemas) . If you provide an explicit schema, then don't include a top-level `  type  ` column in the schema definition. For each member of the `  properties  ` member, define separate columns, not a single nested column.
+The previous example enables [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) . For more control over how BigQuery converts the values inside the `properties` object, you can provide an explicit schema instead. For more information, see [Specify schemas](https://docs.cloud.google.com/bigquery/docs/schemas#specify_schemas) . If you provide an explicit schema, then don't include a top-level `type` column in the schema definition. For each member of the `properties` member, define separate columns, not a single nested column.
 
-As defined by [RFC 7946](https://tools.ietf.org/html/rfc7946) , a complete GeoJSON data structure is a single JSON object. Many systems export GeoJSON data as a single `  FeatureCollection  ` object that contains all of the geometries. To load this format into BigQuery, you must convert the file by removing the root-level `  FeatureCollection  ` object and splitting the individual feature objects into separate lines. For example, the following command uses the `  jq  ` command-line tool to split a GeoJSON file into newline-delimited format:
+As defined by [RFC 7946](https://tools.ietf.org/html/rfc7946) , a complete GeoJSON data structure is a single JSON object. Many systems export GeoJSON data as a single `FeatureCollection` object that contains all of the geometries. To load this format into BigQuery, you must convert the file by removing the root-level `FeatureCollection` object and splitting the individual feature objects into separate lines. For example, the following command uses the `jq` command-line tool to split a GeoJSON file into newline-delimited format:
 
     cat ~/file1.json | jq -c '.features[]' > converted.json
 
 #### Creating an external table from a newline-delimited GeoJSON file
 
-You can query a newline-delimited GeoJSON file stored in Cloud Storage by creating an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) . To create the external table, use the [`  CREATE EXTERNAL TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) DDL statement. In the `  OPTIONS  ` clause, set the `  format  ` option to `  NEWLINE_DELIMITED_JSON  ` and the `  json_extension  ` option to `  GEOJSON  ` .
+You can query a newline-delimited GeoJSON file stored in Cloud Storage by creating an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) . To create the external table, use the [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) DDL statement. In the `OPTIONS` clause, set the `format` option to `NEWLINE_DELIMITED_JSON` and the `json_extension` option to `GEOJSON` .
 
 Example:
 
@@ -166,15 +166,15 @@ Example:
 
 Geospatial analytics supports loading individual GeoJSON geometry objects that are embedded as text strings in other file types. For example, you can load a CSV file where one of the columns contains a GeoJSON geometry object.
 
-To load this type of GeoJSON data into BigQuery, provide a [schema](https://docs.cloud.google.com/bigquery/docs/schemas) that specifies a `  GEOGRAPHY  ` column for the GeoJSON data. You must manually provide the schema. Otherwise, if auto-detection is enabled, then BigQuery loads the data as a `  STRING  ` value.
+To load this type of GeoJSON data into BigQuery, provide a [schema](https://docs.cloud.google.com/bigquery/docs/schemas) that specifies a `GEOGRAPHY` column for the GeoJSON data. You must manually provide the schema. Otherwise, if auto-detection is enabled, then BigQuery loads the data as a `STRING` value.
 
 Geospatial analytics does not support loading GeoJSON feature objects or feature collections using this approach. If you need to load feature objects, then consider using newline-delimited GeoJSON files.
 
-To stream GeoJSON data to an existing BigQuery table with a `  GEOGRAPHY  ` column, serialize the data as a string in the API request.
+To stream GeoJSON data to an existing BigQuery table with a `GEOGRAPHY` column, serialize the data as a string in the API request.
 
 ### bq
 
-Run the bq command-line tool `  insert  ` command:
+Run the bq command-line tool `insert` command:
 
     echo '{"geo": "{\"type\": \"LineString\", \"coordinates\": [[-118.4085, 33.9416], [-73.7781, 40.6413]]}"}' \
       | bq insert my_dataset.geo_table
@@ -211,21 +211,21 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     else:
         print(f"wrote 1 row to {table_id}")
 
-You can also convert a GeoJSON geometry object into a `  GEOGRAPHY  ` value by using the [`  ST_GEOGFROMGEOJSON  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) function. For example, you can store the geometries as `  STRING  ` values and then run a query that calls `  ST_GEOGFROMGEOJSON  ` .
+You can also convert a GeoJSON geometry object into a `GEOGRAPHY` value by using the [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) function. For example, you can store the geometries as `STRING` values and then run a query that calls `ST_GEOGFROMGEOJSON` .
 
 ### Loading GeoParquet files
 
 [GeoParquet](https://geoparquet.org) is a specification that adds geospatial types to the [Parquet](https://parquet.apache.org/) file format. GeoParquet includes metadata that provides definite semantics to the contained geospatial data, avoiding the [interpretation issues](https://docs.cloud.google.com/bigquery/docs/geospatial-data#coordinate_systems_and_edges) that occur with other geospatial data formats.
 
-When loading Parquet files, BigQuery checks for GeoParquet metadata. If GeoParquet metadata exists, BigQuery loads all of the columns it describes into a corresponding `  GEOGRAPHY  ` column by default. For more information about loading Parquet files, see [Loading Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
+When loading Parquet files, BigQuery checks for GeoParquet metadata. If GeoParquet metadata exists, BigQuery loads all of the columns it describes into a corresponding `GEOGRAPHY` column by default. For more information about loading Parquet files, see [Loading Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
 
-**Note:** GeoParquet support is disabled for a few projects to avoid breaking existing workflows. If your GeoParquet files aren't loaded directly to `  GEOGRAPHY  ` columns, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+**Note:** GeoParquet support is disabled for a few projects to avoid breaking existing workflows. If your GeoParquet files aren't loaded directly to `GEOGRAPHY` columns, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 #### Creating an external table from GeoParquet data
 
-[External tables](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) that reference GeoParquet files map relevant columns to the `  GEOGRAPHY  ` type.
+[External tables](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) that reference GeoParquet files map relevant columns to the `GEOGRAPHY` type.
 
-Statistics available in the GeoParquet file ( `  bbox  ` , `  covering  ` ) aren't used to accelerate queries over an external table.
+Statistics available in the GeoParquet file ( `bbox` , `covering` ) aren't used to accelerate queries over an external table.
 
 ### Coordinate systems and edges
 
@@ -235,7 +235,7 @@ The WKT format does not provide a coordinate system. When loading WKT data, geos
 
 GeoJSON explicitly uses WGS84 coordinates with planar edges. When loading GeoJSON data, geospatial analytics converts planar edges to spherical edges. Geospatial analytics adds additional points to the line as necessary, so that the converted sequence of edges remains within 10 meters of the original line. This process is known as *tessellation* or *non-uniform densification* . You cannot directly control the tessellation process.
 
-To load geographies with spherical edges, use WKT. To load geographies with planar edges, often called *geometries* , it's simplest to use GeoJSON. However, if your geometry data is already in WKT format, another option is to load the data as a `  STRING  ` type and then use the [`  ST_GEOGFROMTEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext_signature2) function to convert to `  GEOGRAPHY  ` values. Set the `  planar  ` parameter to `  TRUE  ` to interpret the data as planar.
+To load geographies with spherical edges, use WKT. To load geographies with planar edges, often called *geometries* , it's simplest to use GeoJSON. However, if your geometry data is already in WKT format, another option is to load the data as a `STRING` type and then use the [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext_signature2) function to convert to `GEOGRAPHY` values. Set the `planar` parameter to `TRUE` to interpret the data as planar.
 
 GeoParquet files include metadata about the coordinate system and edges that were used to create the data. When reading GeoParquet files with planar edges, geospatial analytics converts planar edges to spherical edges. GeoParquet files with coordinate systems other than WGS84 are rejected.
 
@@ -249,21 +249,21 @@ On a sphere, every polygon has a complementary polygon. For example, a polygon t
 
 When you load WKT and WKB strings from files or by using streaming ingestion, geospatial analytics assumes the polygons in the input are oriented as follows: If you traverse the boundary of the polygon in the order of the input vertices, the interior of the polygon is on the left. Geospatial analytics uses the same rule when exporting geography objects to WKT and WKB strings.
 
-If you use the [`  ST_GEOGFROMTEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) function to convert a WKT string to a `  GEOGRAPHY  ` value, the `  oriented  ` parameter specifies how the function determines the polygon:
+If you use the [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) function to convert a WKT string to a `GEOGRAPHY` value, the `oriented` parameter specifies how the function determines the polygon:
 
-  - `  FALSE  ` : Interpret the input as the polygon with the smaller area. This is the default behavior.
+  - `FALSE` : Interpret the input as the polygon with the smaller area. This is the default behavior.
 
-  - `  TRUE  ` : Use the left-hand orientation rule described previously. This option allows you to load polygons with an area larger than a hemisphere.
+  - `TRUE` : Use the left-hand orientation rule described previously. This option allows you to load polygons with an area larger than a hemisphere.
 
 Because GeoJSON strings are defined on a planar map, the orientation can be determined without ambiguity, even if the input does not follow the orientation rule defined in the GeoJSON format specification, [RFC 7946](https://tools.ietf.org/html/rfc7946) .
 
 ### Handling improperly formatted spatial data
 
-When you load spatial data from other tools into BigQuery, you might encounter conversion errors due to invalid WKT or GeoJSON data. For example, an error such as `  Edge K has duplicate vertex with edge N  ` indicates that the polygon has duplicate vertices (besides the first and last).
+When you load spatial data from other tools into BigQuery, you might encounter conversion errors due to invalid WKT or GeoJSON data. For example, an error such as `Edge K has duplicate vertex with edge N` indicates that the polygon has duplicate vertices (besides the first and last).
 
-To avoid formatting issues, you can use a function that generates standards-compliant output. For example, when you export data from PostGIS, you can use the PostGIS `  ST_MakeValid  ` function to standardize the output. Alternatively, import your data as text and then convert it by calling [`  ST_GEOGFROMTEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext_signature2) or [`  ST_GEOGFROMGEOJSON  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) with the `  make_valid  ` parameter. When `  make_valid  ` is `  TRUE  ` , these functions attempt to repair invalid polygons.
+To avoid formatting issues, you can use a function that generates standards-compliant output. For example, when you export data from PostGIS, you can use the PostGIS `ST_MakeValid` function to standardize the output. Alternatively, import your data as text and then convert it by calling [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext_signature2) or [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) with the `make_valid` parameter. When `make_valid` is `TRUE` , these functions attempt to repair invalid polygons.
 
-To find or to ignore the improperly formatted data, use the `  SAFE  ` function prefix to output the problematic data. For example, the following query uses the `  SAFE  ` prefix to retrieve improperly formatted spatial data.
+To find or to ignore the improperly formatted data, use the `SAFE` function prefix to output the problematic data. For example, the following query uses the `SAFE` prefix to retrieve improperly formatted spatial data.
 
 ``` notranslate
 SELECT
@@ -283,17 +283,17 @@ Geospatial analytics does not support the following features in geospatial forma
   - Linear reference systems. This includes the "M" suffix in WKT format.
   - WKT geometry objects other than geometry primitives or multipart geometries. In particular, geospatial analytics supports only Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, and GeometryCollection.
 
-See [`  ST_GEOGFROMGEOJSON  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) and [`  ST_GEOGFROMTEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) for constraints specific to GeoJSON and WKT input formats.
+See [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) and [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) for constraints specific to GeoJSON and WKT input formats.
 
 ## Integrate geospatial raster data with Google Earth Engine
 
-Geospatial insights are often presented as grid-based, or *raster* , data. Raster data organizes regionally continuous data, such as satellite imagery, weather forecasts, and land cover, into a grid of pixels. Although BigQuery primarily specializes in tabular vector data, representing features with boundaries and points, you can integrate raster data into your BigQuery analyses by using the [`  ST_REGIONSTATS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) . This function uses Earth Engine, Google's raster analysis platform, to perform computations and aggregations on raster data for enhanced geospatial analysis. For more information, see [Work with raster data](https://docs.cloud.google.com/bigquery/docs/raster-data) .
+Geospatial insights are often presented as grid-based, or *raster* , data. Raster data organizes regionally continuous data, such as satellite imagery, weather forecasts, and land cover, into a grid of pixels. Although BigQuery primarily specializes in tabular vector data, representing features with boundaries and points, you can integrate raster data into your BigQuery analyses by using the [`ST_REGIONSTATS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) . This function uses Earth Engine, Google's raster analysis platform, to perform computations and aggregations on raster data for enhanced geospatial analysis. For more information, see [Work with raster data](https://docs.cloud.google.com/bigquery/docs/raster-data) .
 
 For information about exporting Earth Engine data to BigQuery, see [Exporting to BigQuery](https://developers.google.com/earth-engine/guides/exporting_to_bigquery) . For more information about integrations between Earth Engine and BigQuery, see [BigQuery integration](https://developers.google.com/earth-engine/guides/bigquery_integrations) in the Earth Engine documentation.
 
 ## Transforming geospatial data
 
-If your table contains separate columns for longitude and latitude, you can transform the values into geographies by using GoogleSQL [geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) such as [`  ST_GEOGPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) . For example, if you have two `  DOUBLE  ` columns for longitude and latitude, you can create a geography column with the following query:
+If your table contains separate columns for longitude and latitude, you can transform the values into geographies by using GoogleSQL [geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) such as [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) . For example, if you have two `DOUBLE` columns for longitude and latitude, you can create a geography column with the following query:
 
 ``` notranslate
 SELECT
@@ -303,13 +303,13 @@ FROM
   mytable
 ```
 
-BigQuery can convert WKT and GeoJSON strings to geography types. If your data is in another format such as Shapefiles, use an external tool to convert the data to a supported input file format, such as a CSV file, with `  GEOGRAPHY  ` columns encoded as WKT or GeoJSON strings.
+BigQuery can convert WKT and GeoJSON strings to geography types. If your data is in another format such as Shapefiles, use an external tool to convert the data to a supported input file format, such as a CSV file, with `GEOGRAPHY` columns encoded as WKT or GeoJSON strings.
 
 ## Partitioning and clustering geospatial data
 
-You can [partition](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [cluster](https://docs.cloud.google.com/bigquery/docs/clustered-tables) tables that contain `  GEOGRAPHY  ` columns. You can use a `  GEOGRAPHY  ` column as a clustering column, but you cannot use a `  GEOGRAPHY  ` column as a partitioning column.
+You can [partition](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [cluster](https://docs.cloud.google.com/bigquery/docs/clustered-tables) tables that contain `GEOGRAPHY` columns. You can use a `GEOGRAPHY` column as a clustering column, but you cannot use a `GEOGRAPHY` column as a partitioning column.
 
-If you store `  GEOGRAPHY  ` data in a table and your queries filter data by using a spatial predicate, ensure that the table is clustered by the `  GEOGRAPHY  ` column. This typically improves query performance and might reduce cost. A spatial predicate calls a boolean geography function and has a `  GEOGRAPHY  ` column as one of the arguments. The following sample shows a spatial predicate that uses the `  ST_DWITHIN  ` function:
+If you store `GEOGRAPHY` data in a table and your queries filter data by using a spatial predicate, ensure that the table is clustered by the `GEOGRAPHY` column. This typically improves query performance and might reduce cost. A spatial predicate calls a boolean geography function and has a `GEOGRAPHY` column as one of the arguments. The following sample shows a spatial predicate that uses the `ST_DWITHIN` function:
 
 ``` notranslate
 WHERE ST_DWITHIN(geo, ST_GeogPoint(longitude, latitude), 100)
@@ -317,7 +317,7 @@ WHERE ST_DWITHIN(geo, ST_GeogPoint(longitude, latitude), 100)
 
 ## Using JOINs with spatial data
 
-Spatial JOINs are joins of two tables with a predicate geographic function in the `  WHERE  ` clause. For example:
+Spatial JOINs are joins of two tables with a predicate geographic function in the `WHERE` clause. For example:
 
 ``` notranslate
 -- how many stations within 1 mile range of each zip code?
@@ -350,30 +350,30 @@ FROM
 
 BigQuery implements optimized spatial JOINs for INNER JOIN and CROSS JOIN operators with the following GoogleSQL predicate functions:
 
-  - [`  ST_DWITHIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_dwithin)
-  - [`  ST_INTERSECTS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_intersects)
-  - [`  ST_CONTAINS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_contains)
-  - [`  ST_WITHIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_within)
-  - [`  ST_COVERS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_covers)
-  - [`  ST_COVEREDBY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_coveredby)
-  - [`  ST_EQUALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_equals)
-  - [`  ST_TOUCHES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_touches)
+  - [`ST_DWITHIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_dwithin)
+  - [`ST_INTERSECTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_intersects)
+  - [`ST_CONTAINS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_contains)
+  - [`ST_WITHIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_within)
+  - [`ST_COVERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_covers)
+  - [`ST_COVEREDBY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_coveredby)
+  - [`ST_EQUALS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_equals)
+  - [`ST_TOUCHES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_touches)
 
 Spatial joins are not optimized:
 
-  - For `  LEFT  ` , `  RIGHT  ` or `  FULL OUTER  ` joins
+  - For `LEFT` , `RIGHT` or `FULL OUTER` joins
   - In cases involving anti-joins
   - When the spatial predicate is negated
 
-A `  JOIN  ` that uses the `  ST_DWITHIN  ` predicate is optimized only when the distance parameter is a constant expression.
+A `JOIN` that uses the `ST_DWITHIN` predicate is optimized only when the distance parameter is a constant expression.
 
 ## Exporting spatial data
 
-When you export spatial data from BigQuery, `  GEOGRAPHY  ` column values are always formatted as WKT strings. To export data in GeoJSON format, use the [`  ST_ASGEOJSON  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_asgeojson) function.
+When you export spatial data from BigQuery, `GEOGRAPHY` column values are always formatted as WKT strings. To export data in GeoJSON format, use the [`ST_ASGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_asgeojson) function.
 
-If the tools you're using to analyze the exported data don't understand the `  GEOGRAPHY  ` data type, you can convert the column values to strings using a geographic function such as [`  ST_ASTEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_astext) or [`  ST_ASGEOJSON  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_asgeojson) . Geospatial analytics adds additional points to the line where necessary so that the converted sequence of edges remains within 10 meters of the original geodesic line.
+If the tools you're using to analyze the exported data don't understand the `GEOGRAPHY` data type, you can convert the column values to strings using a geographic function such as [`ST_ASTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_astext) or [`ST_ASGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_asgeojson) . Geospatial analytics adds additional points to the line where necessary so that the converted sequence of edges remains within 10 meters of the original geodesic line.
 
-For example, the following query uses `  ST_ASGEOJSON  ` to convert GeoJSON values to strings.
+For example, the following query uses `ST_ASGEOJSON` to convert GeoJSON values to strings.
 
 ``` notranslate
 SELECT

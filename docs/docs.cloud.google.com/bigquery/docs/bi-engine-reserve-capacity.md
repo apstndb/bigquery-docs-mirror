@@ -8,7 +8,7 @@ When you use BI Engine, your charges are based on the BI Engine capacity you pur
 
 ## Required roles
 
-To get the permissions that you need to create and delete reservations, ask your administrator to grant you the [BigQuery Resource Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceAdmin) ( `  roles/bigquery.resourceAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create and delete reservations, ask your administrator to grant you the [BigQuery Resource Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceAdmin) ( `roles/bigquery.resourceAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -56,7 +56,7 @@ After you confirm your reservation, the details are displayed on the **Reservati
 
 ### SQL
 
-Use the [`  ALTER BI_CAPACITY SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_bi_capacity_set_options_statement) to create or modify a BI Engine reservation.
+Use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_bi_capacity_set_options_statement) to create or modify a BI Engine reservation.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -76,8 +76,8 @@ Use the [`  ALTER BI_CAPACITY SET OPTIONS  ` DDL statement](https://docs.cloud.g
     Replace the following:
     
       - `  PROJECT_ID  ` : the optional ID of the project that will benefit from BI Engine acceleration. If omitted, the default project is used.
-      - `  LOCATION_ID  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `  region-  ` . Examples: `  region-us  ` , `  region-us-central1  ` .
-      - `  VALUE  ` : the `  INT64  ` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `  VALUE  ` replaces the existing value if there is one. Setting to `  NULL  ` clears the value for that option.
+      - `  LOCATION_ID  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `region-` . Examples: `region-us` , `region-us-central1` .
+      - `  VALUE  ` : the `INT64` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `VALUE` replaces the existing value if there is one. Setting to `NULL` clears the value for that option.
       - `  TABLE_PROJECT_ID . DATASET . TABLE  ` : the optional list of [preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) to which acceleration should be applied. Format: `  TABLE_PROJECT_ID . DATASET . TABLE or DATASET . TABLE  ` . If the project is omitted, then the default project is used.
 
 3.  Click play\_circle **Run** .
@@ -86,7 +86,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and supply the data definition language (DDL) statement as the query parameter:
+Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and supply the data definition language (DDL) statement as the query parameter:
 
     bq --project_id=PROJECT_ID update \
         --bi_reservation_size=SIZE \
@@ -103,7 +103,7 @@ Replace the following:
 
 To estimate capacity requirements for a BI Engine reservation, follow these steps:
 
-1.  View the [`  TOTAL_LOGICAL_BYTES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to determine the logical size of the table, and use that for your initial BI Engine reservation. For example:
+1.  View the [`TOTAL_LOGICAL_BYTES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to determine the logical size of the table, and use that for your initial BI Engine reservation. For example:
     
     ``` notranslate
     SELECT
@@ -118,7 +118,7 @@ To estimate capacity requirements for a BI Engine reservation, follow these step
 
 2.  Run all of the queries that need optimization and that were created in the same project and region as the BI Engine reservation. The goal is to approximate the workload that you need to optimize. The increased load requires more memory to handle queries. Data is loaded into BI Engine after the query is received.
 
-3.  Compare your BI Engine RAM reservation to the number of bytes used, `  reservation/used_bytes  ` in the [Cloud Monitoring `  bigquerybiengine  ` metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerybiengine) .
+3.  Compare your BI Engine RAM reservation to the number of bytes used, `reservation/used_bytes` in the [Cloud Monitoring `bigquerybiengine` metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerybiengine) .
 
 4.  Adjust your reservation capacity based upon the results. In many use cases, a smaller reservation can accelerate the majority of your queries, conserving money and resources. For more information about Monitoring for BI Engine, see [BI Engine monitoring](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor) .
 
@@ -166,7 +166,7 @@ To specify a set of tables for acceleration in an existing reservation, follow t
 
 ### SQL
 
-You can use the [`  ALTER BI_CAPACITY SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_bi_capacity_set_options_statement) to create or modify a BI Engine reservation.
+You can use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_bi_capacity_set_options_statement) to create or modify a BI Engine reservation.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -186,9 +186,9 @@ You can use the [`  ALTER BI_CAPACITY SET OPTIONS  ` DDL statement](https://docs
     Replace the following:
     
       - `  PROJECT_ID  ` : optional ID of the project that will benefit from BI Engine acceleration. If omitted, the default project is used.
-      - `  LOCATION_ID  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `  region-  ` . Examples: `  region-us  ` , `  region-us-central1  ` .
-      - `  VALUE  ` : the `  INT64  ` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `  VALUE  ` replaces the existing value if there is one. Setting to `  NULL  ` clears the value for that option.
-      - `  TABLE_PROJECT_ID. DATASET . TABLE  ` : optional list of [preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) to which acceleration should be applied. Format: `  TABLE_PROJECT_ID . DATASET . TABLE or DATASET . TABLE  ` . If the project is omitted, then the default project is used.
+      - `  LOCATION_ID  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `region-` . Examples: `region-us` , `region-us-central1` .
+      - `  VALUE  ` : the `INT64` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `VALUE` replaces the existing value if there is one. Setting to `NULL` clears the value for that option.
+      - ` TABLE_PROJECT_ID. DATASET . TABLE  ` : optional list of [preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) to which acceleration should be applied. Format: `  TABLE_PROJECT_ID . DATASET . TABLE or DATASET . TABLE  ` . If the project is omitted, then the default project is used.
 
 3.  Click play\_circle **Run** .
 
@@ -229,7 +229,7 @@ Sets the options on BI Engine capacity.
     Replace the following:
     
       - `  PROJECT_ID  ` : optional ID of the project that will benefit from BI Engine acceleration. If omitted, the default project is used.
-      - `  LOCATION_ID  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `  region-  ` . Examples: `  region-us  ` , `  region-us-central1  ` .
+      - `  LOCATION_ID  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `region-` . Examples: `region-us` , `region-us-central1` .
     
     When you delete all capacity reservations in a project, BI Engine is disabled for that project.
 
@@ -239,7 +239,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and supply the DDL statement as the query parameter.
+Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and supply the DDL statement as the query parameter.
 
     bq --project_id="PROJECT_ID" \
     update --reservation
@@ -253,11 +253,11 @@ Replace the following:
 
 ## Verify BI Engine information
 
-You can get information about your BI Engine capacity by querying the [`  INFORMATION_SCHEMA  ` tables](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+You can get information about your BI Engine capacity by querying the [`INFORMATION_SCHEMA` tables](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
 
 ### Verify reservation status
 
-To verify the status of your reservation, including a set of preferred tables, view the `  INFORMATION_SCHEMA.BI_CAPACITIES  ` view using a SQL query. For example:
+To verify the status of your reservation, including a set of preferred tables, view the `INFORMATION_SCHEMA.BI_CAPACITIES` view using a SQL query. For example:
 
 ``` notranslate
 SELECT
@@ -272,7 +272,7 @@ In the Google Cloud console, the result of this SQL query looks similar to the f
 
 ### View reservation changes
 
-To view the history of changes for a particular reservation, use the `  INFORMATION_SCHEMA.BI_CAPACITY_CHANGES  ` view using a SQL query. For example:
+To view the history of changes for a particular reservation, use the `INFORMATION_SCHEMA.BI_CAPACITY_CHANGES` view using a SQL query. For example:
 
 ``` notranslate
 SELECT

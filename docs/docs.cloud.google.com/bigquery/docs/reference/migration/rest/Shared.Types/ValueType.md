@@ -2,30 +2,30 @@ The value type of a metric.
 
 Enums
 
-`  VALUE_TYPE_UNSPECIFIED  `
+`VALUE_TYPE_UNSPECIFIED`
 
 Do not use this default value.
 
-`  BOOL  `
+`BOOL`
 
-The value is a boolean. This value type can be used only if the metric kind is `  GAUGE  ` .
+The value is a boolean. This value type can be used only if the metric kind is `GAUGE` .
 
-`  INT64  `
+`INT64`
 
 The value is a signed 64-bit integer.
 
-`  DOUBLE  `
+`DOUBLE`
 
 The value is a double precision floating point number.
 
-`  STRING  `
+`STRING`
 
-The value is a text string. This value type can be used only if the metric kind is `  GAUGE  ` .
+The value is a text string. This value type can be used only if the metric kind is `GAUGE` .
 
-`  DISTRIBUTION  `
+`DISTRIBUTION`
 
-The value is a `  Distribution  ` .
+The value is a `  Distribution ` .
 
-`  MONEY  `
+`MONEY`
 
 The value is money.

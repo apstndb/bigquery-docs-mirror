@@ -9,7 +9,7 @@ Returns information about the reservation group.
 
 ### HTTP request
 
-`  GET https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/reservationGroups/*}  `
+`GET https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/reservationGroups/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -17,15 +17,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the reservation group to retrieve. E.g., `  projects/myproject/locations/US/reservationGroups/team1-prod  `
+Required. Resource name of the reservation group to retrieve. E.g., `projects/myproject/locations/US/reservationGroups/team1-prod`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.reservationGroups.get  `
+  - `bigquery.reservationGroups.get`
 
 ### Request body
 
@@ -39,7 +39,7 @@ If successful, the response body contains an instance of `  ReservationGroup  ` 
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -19,59 +19,48 @@ Represents access on a subset of rows on the specified table, defined by its fil
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;etag&quot;: string,
-  &quot;rowAccessPolicyReference&quot;: {
-    object (RowAccessPolicyReference)
-  },
-  &quot;filterPredicate&quot;: string,
-  &quot;creationTime&quot;: string,
-  &quot;lastModifiedTime&quot;: string,
-  &quot;grantees&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;etag&quot;: string,&quot;rowAccessPolicyReference&quot;: {object (RowAccessPolicyReference)},&quot;filterPredicate&quot;: string,&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;grantees&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  etag  `
+`etag`
 
-`  string  `
+`string`
 
 Output only. A hash of this resource.
 
-`  rowAccessPolicyReference  `
+`rowAccessPolicyReference`
 
-`  object ( RowAccessPolicyReference  ` )
+` object ( RowAccessPolicyReference  ` )
 
 Required. Reference describing the ID of this row access policy.
 
-`  filterPredicate  `
+`filterPredicate`
 
-`  string  `
+`string`
 
 Required. A SQL boolean expression that represents the rows defined by this row access policy, similar to the boolean expression in a WHERE clause of a SELECT query on a table. References to other tables, routines, and temporary functions are not supported.
 
 Examples: region="EU" date\_field = CAST('2019-9-27' as DATE) nullable\_field is not NULL numeric\_field BETWEEN 1.0 AND 5.0
 
-`  creationTime  `
+`creationTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. The time when this row access policy was created, in milliseconds since the epoch.
 
-`  lastModifiedTime  `
+`lastModifiedTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. The time when this row access policy was last modified, in milliseconds since the epoch.
 
-`  grantees[]  `
+`grantees[]`
 
-`  string  `
+`string`
 
 Optional. Input only. The optional list of iamMember users or groups that specifies the initial members that the row-level access policy should be created with.
 
@@ -111,60 +100,60 @@ Id path of a row access policy.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. The ID of the project containing this row access policy.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. The ID of the dataset containing this row access policy.
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 Required. The ID of the table containing this row access policy.
 
-`  policyId  `
+`policyId`
 
-`  string  `
+`string`
 
 Required. The ID of the row access policy. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 256 characters.
 
 ## Methods
 
-### `             batchDelete           `
+### `            batchDelete           `
 
 Deletes provided row access policies.
 
-### `             delete           `
+### `            delete           `
 
 Deletes a row access policy.
 
-### `             get           `
+### `            get           `
 
 Gets the specified row access policy by policy ID.
 
-### `             getIamPolicy           `
+### `            getIamPolicy           `
 
 Gets the access control policy for a resource.
 
-### `             insert           `
+### `            insert           `
 
 Creates a row access policy.
 
-### `             list           `
+### `            list           `
 
 Lists all row access policies on the specified table.
 
-### `             testIamPermissions           `
+### `            testIamPermissions           `
 
 Returns permissions that a caller has on the specified resource.
 
-### `             update           `
+### `            update           `
 
 Updates a row access policy.

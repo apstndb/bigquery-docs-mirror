@@ -28,7 +28,7 @@ The following services are enabled by default for every new Google Cloud project
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       analyticshub.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">analyticshub.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction">Publish data exchanges</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings">Publish listings</a> and <a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions">manage subscriptions</a></li>
@@ -43,7 +43,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       bigqueryconnection.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">bigqueryconnection.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/federated-queries-intro">Federated queries</a> to data stored outside of BigQuery</li>
 <li>External tables and datasets</li>
@@ -57,7 +57,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       bigquerymigration.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">bigquerymigration.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/migration-assessment">Data migration assessment</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator">SQL query translation</a></li>
@@ -69,7 +69,7 @@ The following services are enabled by default for every new Google Cloud project
 <p><strong>Note:</strong> Usually you can disable this service after completing data migration.</p></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       bigquerydatapolicy.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">bigquerydatapolicy.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro">Data masking</a></li>
 </ul></td>
@@ -79,7 +79,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       bigquerydatatransfer.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">bigquerydatatransfer.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/dts-introduction">Scheduled data transfers</a></li>
 </ul></td>
@@ -89,7 +89,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       bigqueryreservation.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">bigqueryreservation.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reservations-get-started">Capacity-based workload management</a></li>
 </ul></td>
@@ -101,7 +101,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       bigquerystorage.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">bigquerystorage.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/write-api-streaming">Streaming data ingestion</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/write-api-batch">Batch data loading</a></li>
@@ -112,7 +112,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       dataform.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">dataform.googleapis.com</code></td>
 <td>Dataform provides code repositories that are leveraged by the following features:
 <ul>
 <li><a href="https://docs.cloud.google.com/dataform/docs/quickstart-create-workflow">BigQuery pipelines</a></li>
@@ -129,7 +129,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       dataplex.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">dataplex.googleapis.com</code></td>
 <td><ul>
 <li>Dataplex Universal Catalog provides data cataloging and governance capabilities that are used by the following:
 <ul>
@@ -167,9 +167,9 @@ Disabling the BigQuery API also disables the following services which are depend
 
 ## Services enabled by BigQuery Unified API
 
-The BigQuery Unified API ( `  bigqueryunified.googleapis.com  ` ) includes a curated collection of services that are required for various BigQuery features to function. If you enable the BigQuery Unified API, then all of these services are activated simultaneously. Google can update the services in this collection, and those services are automatically enabled in projects with this API enabled. You can disable individual services and APIs.
+The BigQuery Unified API ( `bigqueryunified.googleapis.com` ) includes a curated collection of services that are required for various BigQuery features to function. If you enable the BigQuery Unified API, then all of these services are activated simultaneously. Google can update the services in this collection, and those services are automatically enabled in projects with this API enabled. You can disable individual services and APIs.
 
-For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enabling and disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable) .
+For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling and disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable) .
 
 <table>
 <colgroup>
@@ -186,7 +186,7 @@ For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enablin
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       aiplatform.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">aiplatform.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/notebooks-introduction">Colab notebooks</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">BigQuery ML remote models</a></li>
@@ -198,7 +198,7 @@ For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enablin
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       bigqueryunified.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">bigqueryunified.googleapis.com</code></td>
 <td><ul>
 <li>Provides a single-click activation of the BigQuery dependent services listed in this document, excluding the <strong>cloudaicompanion</strong> , <strong>composer</strong> and <strong>datalineage</strong> APIs.</li>
 <li>Ensures new BigQuery dependencies are enabled in your project.</li>
@@ -208,9 +208,9 @@ For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enablin
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       compute.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">compute.googleapis.com</code></td>
 <td><ul>
-<li>Google Compute Engine provides a runtime environment for all features provided by Dataproc and Vertex AI.</li>
+<li>Google Compute Engine provides a runtime environment for all features provided by Managed Service for Apache Spark and Vertex AI.</li>
 </ul></td>
 <td><ul>
 <li>Colab notebooks, remote ML models, Apache Spark, SparkSQL, and PySpark jobs stop.</li>
@@ -219,20 +219,20 @@ For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enablin
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       dataproc.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">dataproc.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc">Query data with open source engines such as Apache Spark.</a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless">Use Spark SQL or PySpark with Google Cloud Serverless for Apache Spark.</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless">Use Spark SQL or PySpark with Managed Service for Apache Spark.</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/spark-procedures">Use stored procedures for Spark.</a></li>
 </ul></td>
 <td><ul>
-<li>You can't create Dataproc clusters to run open source data analytics.</li>
-<li>You can't run Serverless for Apache Spark workloads.</li>
+<li>You can't create Managed Service for Apache Spark clusters to run open source data analytics.</li>
+<li>You can't run Managed Service for Apache Spark workloads.</li>
 <li>You can't run Spark in BigQuery workloads.</li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       datastream.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">datastream.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/datastream/docs/overview">Provides change data capture and replication to BigQuery.</a></li>
 </ul></td>
@@ -262,7 +262,7 @@ You must manually enable the following services for the corresponding capabiliti
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       cloudaicompanion.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">cloudaicompanion.googleapis.com</code></td>
 <td><ul>
 <li>Gemini in BigQuery features</li>
 </ul></td>
@@ -272,7 +272,7 @@ You must manually enable the following services for the corresponding capabiliti
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       composer.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">composer.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads">Schedule workloads</a></li>
 </ul></td>
@@ -282,7 +282,7 @@ You must manually enable the following services for the corresponding capabiliti
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       datalineage.googleapis.com      </code></td>
+<td><code dir="ltr" translate="no">datalineage.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#view-bq-lineage">Data lineage</a> capture and viewing</li>
 </ul></td>
@@ -306,7 +306,7 @@ Before March 2024, these APIs were not automatically enabled by default. If you 
 
 ### Before you begin
 
-To manually enable code asset management, you must have the Identity and Access Management (IAM) [Owner role](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ).
+To manually enable code asset management, you must have the Identity and Access Management (IAM) [Owner role](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) ( `roles/owner` ).
 
 ### Manually enable BigQuery code assets
 
@@ -320,7 +320,7 @@ To enable required API dependencies for code assets, follow these steps:
 
 3.  Click **Enable APIs** .
     
-    If you don't see this option, check if you have the required IAM [Owner role](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ). If an empty notebook opens, then you already have the necessary APIs enabled.
+    If you don't see this option, check if you have the required IAM [Owner role](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) ( `roles/owner` ). If an empty notebook opens, then you already have the necessary APIs enabled.
 
 4.  In the **Enable core features** pane, in the **Core feature APIs** section, do the following:
     

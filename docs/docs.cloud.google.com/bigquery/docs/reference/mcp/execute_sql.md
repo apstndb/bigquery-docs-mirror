@@ -1,16 +1,16 @@
-## Tool: `       execute_sql      `
+## Tool: `execute_sql`
 
 Run a SQL query in the project and return the result.
 
-This tool is restricted to only `  SELECT  ` statements. `  INSERT  ` , `  UPDATE  ` , and `  DELETE  ` statements and stored procedures aren't allowed. If the query doesn't include a `  SELECT  ` statement, an error is returned. For information on creating queries, see the [GoogleSQL documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
+This tool is restricted to only `SELECT` statements. `INSERT` , `UPDATE` , and `DELETE` statements and stored procedures aren't allowed. If the query doesn't include a `SELECT` statement, an error is returned. For information on creating queries, see the [GoogleSQL documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
 
-The `  execute_sql  ` tool can also have side effects if the the query invokes [remote functions](https://cloud.google.com/bigquery/docs/remote-functions) or [Python UDFs](https://cloud.google.com/bigquery/docs/user-defined-functions-python) .
+The `execute_sql` tool can also have side effects if the the query invokes [remote functions](https://cloud.google.com/bigquery/docs/remote-functions) or [Python UDFs](https://cloud.google.com/bigquery/docs/user-defined-functions-python) .
 
-All queries that are run using the `  execute_sql  ` tool have a label that identifies the tool as the source. You can use this label to filter the queries using the label and value pair `  goog-mcp-server: true  ` .
+All queries that are run using the `execute_sql` tool have a label that identifies the tool as the source. You can use this label to filter the queries using the label and value pair `goog-mcp-server: true` .
 
-Queries are charged to the project specified in the `  project_id  ` field.
+Queries are charged to the project specified in the `project_id` field.
 
-The following sample demonstrate how to use `  curl  ` to invoke the `  execute_sql  ` MCP tool.
+The following sample demonstrate how to use `curl` to invoke the `execute_sql` MCP tool.
 
 <table>
 <colgroup>
@@ -71,21 +71,21 @@ Runs a BigQuery SQL query synchronously and returns query results if the query c
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project that will be used for query execution and billing.
 
-`  query  `
+`query`
 
-`  string  `
+`string`
 
 Required. The query to execute in the form of a GoogleSQL query.
 
-`  dryRun  `
+`dryRun`
 
-`  boolean  `
+`boolean`
 
 Optional. If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.
 
@@ -106,49 +106,34 @@ Response for a BigQuery SQL query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;schema&quot;: {
-    object (TableSchema)
-  },
-  &quot;rows&quot;: [
-    {
-      object
-    }
-  ],
-  &quot;jobComplete&quot;: boolean,
-  &quot;errors&quot;: [
-    {
-      object (ErrorProto)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;schema&quot;: {object (TableSchema)},&quot;rows&quot;: [{object}],&quot;jobComplete&quot;: boolean,&quot;errors&quot;: [{object (ErrorProto)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  schema  `
+`schema`
 
-`  object ( TableSchema  ` )
+` object ( TableSchema  ` )
 
 The schema of the results. Present only when the query completes successfully.
 
-`  rows[]  `
+`rows[]`
 
-`  object ( Struct  ` format)
+` object ( Struct  ` format)
 
 An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call GetQueryResults and specify the jobReference returned above.
 
-`  jobComplete  `
+`jobComplete`
 
-`  boolean  `
+`boolean`
 
 Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.
 
-`  errors[]  `
+`errors[]`
 
-`  object ( ErrorProto  ` )
+` object ( ErrorProto  ` )
 
 Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see [Error messages](https://cloud.google.com/bigquery/docs/error-messages) .
 
@@ -165,33 +150,24 @@ Output only. The first errors or warnings encountered during the running of the 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;fields&quot;: [
-    {
-      object (TableFieldSchema)
-    }
-  ],
-  &quot;foreignTypeInfo&quot;: {
-    object (ForeignTypeInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;foreignTypeInfo&quot;: {object (ForeignTypeInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  fields[]  `
+`fields[]`
 
-`  object ( TableFieldSchema  ` )
+` object ( TableFieldSchema  ` )
 
 Describes the fields in a table.
 
-`  foreignTypeInfo  `
+`foreignTypeInfo`
 
-`  object ( ForeignTypeInfo  ` )
+` object ( ForeignTypeInfo  ` )
 
-Optional. Specifies metadata of the foreign data type definition in field schema ( `  TableFieldSchema.foreign_type_definition  ` ).
+Optional. Specifies metadata of the foreign data type definition in field schema ( `TableFieldSchema.foreign_type_definition` ).
 
 ### TableFieldSchema
 
@@ -206,51 +182,22 @@ Optional. Specifies metadata of the foreign data type definition in field schema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;type&quot;: string,
-  &quot;mode&quot;: string,
-  &quot;fields&quot;: [
-    {
-      object (TableFieldSchema)
-    }
-  ],
-  &quot;description&quot;: string,
-  &quot;policyTags&quot;: {
-    object (PolicyTagList)
-  },
-  &quot;dataPolicies&quot;: [
-    {
-      object (DataPolicyOption)
-    }
-  ],
-  &quot;maxLength&quot;: string,
-  &quot;precision&quot;: string,
-  &quot;scale&quot;: string,
-  &quot;timestampPrecision&quot;: string,
-  &quot;roundingMode&quot;: enum (RoundingMode),
-  &quot;collation&quot;: string,
-  &quot;defaultValueExpression&quot;: string,
-  &quot;rangeElementType&quot;: {
-    object (FieldElementType)
-  },
-  &quot;foreignTypeDefinition&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {object (PolicyTagList)},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;timestampPrecision&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;foreignTypeDefinition&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Required. The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_), and must start with a letter or underscore. The maximum length is 300 characters.
 
-`  type  `
+`type`
 
-`  string  `
+`string`
 
 Required. The field data type. Possible values include:
 
@@ -272,39 +219,39 @@ Required. The field data type. Possible values include:
 
 Use of RECORD/STRUCT indicates that the field contains a nested schema.
 
-`  mode  `
+`mode`
 
-`  string  `
+`string`
 
 Optional. The field mode. Possible values include NULLABLE, REQUIRED and REPEATED. The default value is NULLABLE.
 
-`  fields[]  `
+`fields[]`
 
-`  object ( TableFieldSchema  ` )
+` object ( TableFieldSchema  ` )
 
 Optional. Describes the nested schema fields if the type property is set to RECORD.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. The field description. The maximum length is 1,024 characters.
 
-`  policyTags  `
+`policyTags`
 
-`  object ( PolicyTagList  ` )
+` object ( PolicyTagList  ` )
 
 Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policy\_tags.
 
-`  dataPolicies[]  `
+`dataPolicies[]`
 
-`  object ( DataPolicyOption  ` )
+` object ( DataPolicyOption  ` )
 
 Optional. Data policies attached to this field, used for field-level access control.
 
-`  maxLength  `
+`maxLength`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Maximum length of values of this field for STRINGS or BYTES.
 
@@ -316,9 +263,9 @@ If type = "BYTES", then max\_length represents the maximum number of bytes in th
 
 It is invalid to set this field if type ≠ "STRING" and ≠ "BYTES".
 
-`  precision  `
+`precision`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Precision (maximum number of total digits in base 10) and scale (maximum number of digits in the fractional part in base 10) constraints for values of this field for NUMERIC or BIGNUMERIC.
 
@@ -343,44 +290,44 @@ Acceptable values for precision if only precision is specified but not scale (an
 
 If scale is specified but not precision, then it is invalid.
 
-`  scale  `
+`scale`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. See documentation for precision.
 
-`  timestampPrecision  `
+`timestampPrecision`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Optional. Precision (maximum number of total digits in base 10) for seconds of TIMESTAMP type.
 
 Possible values include: \* 6 (Default, for TIMESTAMP type with microsecond precision) \* 12 (For TIMESTAMP type with picosecond precision)
 
-`  roundingMode  `
+`roundingMode`
 
-`  enum ( RoundingMode  ` )
+`enum ( RoundingMode` )
 
 Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type.
 
-`  collation  `
+`collation`
 
-`  string  `
+`string`
 
 Optional. Field collation can be set only when the type of field is STRING. The following values are supported:
 
   - 'und:ci': undetermined locale, case insensitive.
   - '': empty string. Default to case-sensitive behavior.
 
-`  defaultValueExpression  `
+`defaultValueExpression`
 
-`  string  `
+`string`
 
 Optional. A SQL expression to specify the [default value](https://cloud.google.com/bigquery/docs/default-values) for this field.
 
-`  rangeElementType  `
+`rangeElementType`
 
-`  object ( FieldElementType  ` )
+` object ( FieldElementType  ` )
 
 Optional. The subtype of the RANGE, if the type of this field is RANGE. If the type is RANGE, this field is required. Values for the field element type can be the following:
 
@@ -388,9 +335,9 @@ Optional. The subtype of the RANGE, if the type of this field is RANGE. If the t
   - DATETIME
   - TIMESTAMP
 
-`  foreignTypeDefinition  `
+`foreignTypeDefinition`
 
-`  string  `
+`string`
 
 Optional. Definition of the foreign data type. Only valid for top-level schema fields (not nested fields). If the type is FOREIGN, this field is required.
 
@@ -416,9 +363,9 @@ Optional. Definition of the foreign data type. Only valid for top-level schema f
 
 Fields
 
-`  value  `
+`value`
 
-`  string  `
+`string`
 
 The string value.
 
@@ -446,9 +393,9 @@ The string value.
 
 Fields
 
-`  names[]  `
+`names[]`
 
-`  string  `
+`string`
 
 A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed.
 
@@ -465,25 +412,20 @@ A list of policy tag resource names. For example, "projects/1/locations/eu/taxon
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field _name can be only one of the following:
-  &quot;name&quot;: string
-  // End of list of possible types for union field _name.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field _name can be only one of the following:&quot;name&quot;: string// End of list of possible types for union field _name.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  _name  ` .
+Union field `_name` .
 
-`  _name  ` can be only one of the following:
+`_name` can be only one of the following:
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Data policy resource name in the form of projects/project\_id/locations/location\_id/dataPolicies/data\_policy\_id.
 
@@ -509,9 +451,9 @@ Data policy resource name in the form of projects/project\_id/locations/location
 
 Fields
 
-`  value  `
+`value`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The int64 value.
 
@@ -537,11 +479,11 @@ The int64 value.
 
 Fields
 
-`  type  `
+`type`
 
-`  string  `
+`string`
 
-Required. The type of a field element. For more information, see `  TableFieldSchema.type  ` .
+Required. The type of a field element. For more information, see `TableFieldSchema.type` .
 
 ### ForeignTypeInfo
 
@@ -556,18 +498,16 @@ Required. The type of a field element. For more information, see `  TableFieldSc
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;typeSystem&quot;: enum (TypeSystem)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;typeSystem&quot;: enum (TypeSystem)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  typeSystem  `
+`typeSystem`
 
-`  enum ( TypeSystem  ` )
+`enum ( TypeSystem` )
 
 Required. Specifies the system which defines the foreign data type.
 
@@ -596,13 +536,13 @@ Required. Specifies the system which defines the foreign data type.
 
 Fields
 
-`  fields  `
+`fields`
 
-`  map (key: string, value: value ( Value  ` format))
+` map (key: string, value: value ( Value  ` format))
 
 Unordered map of dynamically typed values.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
 ### FieldsEntry
 
@@ -627,13 +567,13 @@ An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "
 
 Fields
 
-`  key  `
+`key`
 
-`  string  `
+`string`
 
-`  value  `
+`value`
 
-`  value ( Value  ` format)
+` value ( Value  ` format)
 
 ### Value
 
@@ -648,62 +588,50 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field kind can be only one of the following:
-  &quot;nullValue&quot;: null,
-  &quot;numberValue&quot;: number,
-  &quot;stringValue&quot;: string,
-  &quot;boolValue&quot;: boolean,
-  &quot;structValue&quot;: {
-    object
-  },
-  &quot;listValue&quot;: array
-  // End of list of possible types for union field kind.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field kind can be only one of the following:&quot;nullValue&quot;: null,&quot;numberValue&quot;: number,&quot;stringValue&quot;: string,&quot;boolValue&quot;: boolean,&quot;structValue&quot;: {object},&quot;listValue&quot;: array// End of list of possible types for union field kind.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  kind  ` . The kind of value. `  kind  ` can be only one of the following:
+Union field `kind` . The kind of value. `kind` can be only one of the following:
 
-`  nullValue  `
+`nullValue`
 
-`  null  `
+`null`
 
 Represents a null value.
 
-`  numberValue  `
+`numberValue`
 
-`  number  `
+`number`
 
 Represents a double value.
 
-`  stringValue  `
+`stringValue`
 
-`  string  `
+`string`
 
 Represents a string value.
 
-`  boolValue  `
+`boolValue`
 
-`  boolean  `
+`boolean`
 
 Represents a boolean value.
 
-`  structValue  `
+`structValue`
 
-`  object ( Struct  ` format)
+` object ( Struct  ` format)
 
 Represents a structured value.
 
-`  listValue  `
+`listValue`
 
-`  array ( ListValue  ` format)
+` array ( ListValue  ` format)
 
-Represents a repeated `  Value  ` .
+Represents a repeated `Value` .
 
 ### ListValue
 
@@ -729,9 +657,9 @@ Represents a repeated `  Value  ` .
 
 Fields
 
-`  values[]  `
+`values[]`
 
-`  value ( Value  ` format)
+` value ( Value  ` format)
 
 Repeated field of dynamically typed values.
 
@@ -757,9 +685,9 @@ Repeated field of dynamically typed values.
 
 Fields
 
-`  value  `
+`value`
 
-`  boolean  `
+`boolean`
 
 The bool value.
 
@@ -788,27 +716,27 @@ The bool value.
 
 Fields
 
-`  reason  `
+`reason`
 
-`  string  `
+`string`
 
 A short error code that summarizes the error.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 Specifies where the error occurred, if present.
 
-`  debugInfo  `
+`debugInfo`
 
-`  string  `
+`string`
 
 Debugging information. This property is internal to Google and should not be used.
 
-`  message  `
+`message`
 
-`  string  `
+`string`
 
 A human-readable description of the error.
 

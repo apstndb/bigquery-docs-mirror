@@ -1,8 +1,8 @@
-## Tool: `       explain_translation      `
+## Tool: `explain_translation`
 
 Explains the SQL translation for a given translation ID.
 
-The following sample demonstrate how to use `  curl  ` to invoke the `  explain_translation  ` MCP tool.
+The following sample demonstrate how to use `curl` to invoke the `explain_translation` MCP tool.
 
 <table>
 <colgroup>
@@ -37,7 +37,7 @@ curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
 
 ## Input Schema
 
-Request message for `  ExplainTranslation  ` .
+Request message for `ExplainTranslation` .
 
 ### ExplainTranslationRequest
 
@@ -61,15 +61,15 @@ Request message for `  ExplainTranslation  ` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The name of the translation to explain. Format: `  projects/PROJECT_ID/locations/LOCATION/translations/TRANSLATION_ID  ` .
+Required. The name of the translation to explain. Format: `projects/PROJECT_ID/locations/LOCATION/translations/TRANSLATION_ID` .
 
 ## Output Schema
 
-Response message for `  ExplainTranslation  ` .
+Response message for `ExplainTranslation` .
 
 ### ExplainTranslationResponse
 
@@ -93,9 +93,9 @@ Response message for `  ExplainTranslation  ` .
 
 Fields
 
-`  explanation  `
+`explanation`
 
-`  string  `
+`string`
 
 The string that explains the translation.
 

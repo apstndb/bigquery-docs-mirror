@@ -69,8 +69,8 @@ You can [query BigQuery data](https://docs.cloud.google.com/bigquery/docs/runnin
 You can run query jobs by using the following methods:
 
   - Compose and run a query in the [Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui#overview) .
-  - Run the `  bq query  ` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
-  - Programmatically call the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
+  - Run the `bq query` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+  - Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
   - Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
 
 ### Multi-statement queries
@@ -109,7 +109,7 @@ The performance of queries that are run repeatedly on the same data can vary bec
 
 ### Query optimization
 
-When you run a query, you can [view the query plan](https://docs.cloud.google.com/bigquery/docs/query-insights) in the Google Cloud console. You can also request execution details by using the [`  INFORMATION_SCHEMA.JOBS*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) or the [`  jobs.get  ` REST API method](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#api_sample_representation) .
+When you run a query, you can [view the query plan](https://docs.cloud.google.com/bigquery/docs/query-insights) in the Google Cloud console. You can also request execution details by using the [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) or the [`jobs.get` REST API method](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#api_sample_representation) .
 
 The query plan includes details about query stages and steps. These details can help you identify ways to improve query performance. For example, if you notice a stage that writes a lot more output than other stages, it might mean that you need to filter earlier in the query.
 
@@ -194,7 +194,7 @@ Several third-party analytics tools work with BigQuery. For example, you can con
 
 ODBC and JDBC drivers are available and can be used to integrate your application with BigQuery. The intent of these drivers is to help users leverage the power of BigQuery with existing tooling and infrastructure. For information on latest release and known issues, see [ODBC and JDBC drivers for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
 
-The pandas libraries like `  pandas-gbq  ` let you interact with BigQuery data in Jupyter notebooks. For information about this library and how it compares with using the BigQuery [Python client library](https://docs.cloud.google.com/bigquery/docs/reference/libraries) , see [Comparison with `  pandas-gbq  `](https://docs.cloud.google.com/bigquery/docs/pandas-gbq-migration) .
+The pandas libraries like `pandas-gbq` let you interact with BigQuery data in Jupyter notebooks. For information about this library and how it compares with using the BigQuery [Python client library](https://docs.cloud.google.com/bigquery/docs/reference/libraries) , see [Comparison with `pandas-gbq`](https://docs.cloud.google.com/bigquery/docs/pandas-gbq-migration) .
 
 You can also use BigQuery with other notebooks and analysis tools. For more information, see [Programmatic analysis tools](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
 

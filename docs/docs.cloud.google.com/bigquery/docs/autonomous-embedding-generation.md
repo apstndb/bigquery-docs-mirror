@@ -37,9 +37,9 @@ To enable autonomous embedding generation on a table, you must have the necessar
 
 To get the permissions that you need to enable autonomous embedding generation, ask your administrator to grant you the following IAM roles:
 
-  - To use a connection resource: [BigQuery Connections User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on the connection
-  - To create or alter a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the table
-  - Grant the connection's service account the following role so that it can access models hosted in Vertex AI endpoints: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `  roles/aiplatform.user  ` ) on the project that has the connection
+  - To use a connection resource: [BigQuery Connections User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) on the connection
+  - To create or alter a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table
+  - Grant the connection's service account the following role so that it can access models hosted in Vertex AI endpoints: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) on the project that has the connection
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -47,7 +47,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ### Create a connection and grant permission to a service account
 
-To enable autonomous embedding generation on a table, you must [create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#create_a_connection) . Then, [grant](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#grant_access_to_the_service_account) the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `  roles/aiplatform.user  ` ) to the service account that was created when you created the connection.
+To enable autonomous embedding generation on a table, you must [create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#create_a_connection) . Then, [grant](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#grant_access_to_the_service_account) the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) to the service account that was created when you created the connection.
 
 ## Create an automatically generated embedding column
 
@@ -55,7 +55,7 @@ You can either create an automatically generated embedding column within a new t
 
 ### Create a table with an automatically generated embedding column
 
-You can use autonomous embedding generation to generate embeddings by using the [`  AI.EMBED  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) in a [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
+You can use autonomous embedding generation to generate embeddings by using the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) in a [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
 
 ``` notranslate
 CREATE TABLE DATASET_ID.TABLE (
@@ -77,27 +77,27 @@ CREATE TABLE DATASET_ID.TABLE (
 
 Replace the following:
 
-  - `  DATASET_ID  ` : The name of the dataset in which you want to create the table.
+  - `DATASET_ID` : The name of the dataset in which you want to create the table.
 
-  - `  TABLE  ` : The name of the table on which to create autonomous embedding generation.
+  - `TABLE` : The name of the table on which to create autonomous embedding generation.
 
-  - `  COLUMN, ...  ` : Any columns that your table should contain besides the column that you want to automatically embed.
+  - `COLUMN, ...` : Any columns that your table should contain besides the column that you want to automatically embed.
 
-  - `  STRING_COL  ` : The name of the `  STRING  ` column that you want to automatically embed.
+  - `STRING_COL` : The name of the `STRING` column that you want to automatically embed.
 
-  - `  EMBEDDING_COL_NAME  ` : The name of the automatically generated embedding column.
+  - `EMBEDDING_COL_NAME` : The name of the automatically generated embedding column.
 
-  - `  CONNECTION_ID  ` : A `  STRING  ` value that contains the name of a connection to use, such as `  my_project.us.example_connection  ` . You must grant the [Vertex AI User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) role to the connection's service account in the project in which you create the table.
+  - `CONNECTION_ID` : A `STRING` value that contains the name of a connection to use, such as `my_project.us.example_connection` . You must grant the [Vertex AI User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) role to the connection's service account in the project in which you create the table.
 
-  - `  ENDPOINT  ` : a `  STRING  ` value that specifies a supported Vertex AI [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model. The endpoint value that you specify must include the model version, for example `  text-embedding-005  ` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
+  - `ENDPOINT` : a `STRING` value that specifies a supported Vertex AI [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model. The endpoint value that you specify must include the model version, for example `text-embedding-005` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 
-  - `  MODEL  ` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `  STRING  ` value that specifies a built-in text embedding model. The only supported value is the [`  embeddinggemma-300m  ` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `  endpoint  ` or `  connection_id  ` parameters.
+  - `MODEL` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters.
     
-    When you specify the `  MODEL  ` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Vertex AI and no charges are incurred in Vertex AI.
+    When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Vertex AI and no charges are incurred in Vertex AI.
 
 ### Add an automatically generated embedding column to an existing table
 
-You can also add an automatically generated embedding column to an existing table by using an [`  ALTER TABLE ADD COLUMN  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) .
+You can also add an automatically generated embedding column to an existing table by using an [`ALTER TABLE ADD COLUMN` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) .
 
 ``` notranslate
 ALTER TABLE DATASET_ID.TABLE
@@ -124,7 +124,7 @@ To track the progress of the embedding generation, you can use a query similar t
     FROM
       PROJECT_ID.DATASET_ID.TABLE;
 
-After you have the table with embeddings, you can [create a vector index](https://docs.cloud.google.com/bigquery/docs/vector-index#choose-vector-index-type) on the `  STRUCT  ` column that contains the automatically generated embedding.
+After you have the table with embeddings, you can [create a vector index](https://docs.cloud.google.com/bigquery/docs/vector-index#choose-vector-index-type) on the `STRUCT` column that contains the automatically generated embedding.
 
 ## Example
 
@@ -134,7 +134,7 @@ First, create a dataset:
 
     CREATE SCHEMA mydataset;
 
-Next, create a table with autonomous embedding generation enabled to hold your product information. The automatically generated column is called `  description_embedding  ` and it's based on the `  description  ` column.
+Next, create a table with autonomous embedding generation enabled to hold your product information. The automatically generated column is called `description_embedding` and it's based on the `description` column.
 
     # Create a table of products and descriptions with a generated embedding column.
     CREATE TABLE mydataset.products (
@@ -149,7 +149,7 @@ Next, create a table with autonomous embedding generation enabled to hold your p
         ) STORED OPTIONS( asynchronous = TRUE )
     );
 
-The following query inserts some product names and descriptions into the table. You don't specify a value for `  description_embedding  ` because it's generated automatically.
+The following query inserts some product names and descriptions into the table. You don't specify a value for `description_embedding` because it's generated automatically.
 
     # Insert product descriptions into the table.
     # The description_embedding column is automatically updated.
@@ -158,13 +158,13 @@ The following query inserts some product names and descriptions into the table. 
       ("Super slingers", "An exciting board game for the whole family."),
       ("Encyclopedia set", "A collection of informational books.");
 
-You can optionally create a vector index on the table to speed up searching. A vector index requires more than three rows, so the following query assumes that you have inserted additional data. Every time you insert data, the `  description_embedding  ` column is automatically updated.
+You can optionally create a vector index on the table to speed up searching. A vector index requires more than three rows, so the following query assumes that you have inserted additional data. Every time you insert data, the `description_embedding` column is automatically updated.
 
     CREATE VECTOR INDEX my_index
     ON mydataset.products(description_embedding)
     OPTIONS(index_type = 'IVF');
 
-Finally, you can use the [`  AI.SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) to perform semantic search on your products for a fun toy:
+Finally, you can use the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) to perform semantic search on your products for a fun toy:
 
     # Search for products that are fun to play with.
     SELECT base.name, base.description, distance
@@ -180,7 +180,7 @@ Finally, you can use the [`  AI.SEARCH  ` function](https://docs.cloud.google.co
 
 ## Get information about automatically generated embedding columns
 
-To verify that a column is an automatically generated embedding column, query the [`  INFORMATION_SCHEMA.COLUMNS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) .
+To verify that a column is an automatically generated embedding column, query the [`INFORMATION_SCHEMA.COLUMNS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) .
 
 The following query shows you information about all of your automatically generated embedding columns:
 
@@ -188,17 +188,17 @@ The following query shows you information about all of your automatically genera
     FROM PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.COLUMNS
     WHERE is_generated = 'ALWAYS';
 
-The `  generation_expression  ` field shows you the call to the `  AI.EMBED  ` function that is used to generate the embeddings on the column.
+The `generation_expression` field shows you the call to the `AI.EMBED` function that is used to generate the embeddings on the column.
 
 ## Use your own reservation
 
-By default, BigQuery uses on-demand slots to handle the processing required to maintain the generated embedding column. To ensure predictable and consistent performance, you can optionally [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) and set the `  job_type  ` to `  BACKGROUND  ` . When a background reservation is present, BigQuery uses it to maintain the generated embedding column instead.
+By default, BigQuery uses on-demand slots to handle the processing required to maintain the generated embedding column. To ensure predictable and consistent performance, you can optionally [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) and set the `job_type` to `BACKGROUND` . When a background reservation is present, BigQuery uses it to maintain the generated embedding column instead.
 
 ## Troubleshooting
 
-The generated embedding column contains two fields: `  result  ` and `  status  ` . If an error occurs when BigQuery tries to generate an embedding for a particular row in your table, then the `  result  ` field is `  NULL  ` and the `  status  ` field describes the error. For example, if the source column is `  NULL  ` then the `  result  ` embedding is also `  NULL  ` and the status is `  NULL value is not supported for embedding generation  ` .
+The generated embedding column contains two fields: `result` and `status` . If an error occurs when BigQuery tries to generate an embedding for a particular row in your table, then the `result` field is `NULL` and the `status` field describes the error. For example, if the source column is `NULL` then the `result` embedding is also `NULL` and the status is `NULL value is not supported for embedding generation` .
 
-A more severe error can stall embedding generation. In this case, you can query the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) for the background job and look at the information in the `  error_result  ` field. The job ID of a background embedding job is prefixed with `  gc_  ` . For example, the following query extracts all background jobs whose error result isn't `  NULL  ` :
+A more severe error can stall embedding generation. In this case, you can query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) for the background job and look at the information in the `error_result` field. The job ID of a background embedding job is prefixed with `gc_` . For example, the following query extracts all background jobs whose error result isn't `NULL` :
 
     SELECT * FROM `region-REGION.INFORMATION_SCHEMA.JOBS` j
     WHERE EXISTS (
@@ -225,7 +225,7 @@ Autonomous embedding generation sends requests to Vertex AI, which can incur cos
 
 3.  To see the charges for a specific job, [filter by label](https://docs.cloud.google.com/billing/docs/how-to/reports#filter-by-labels) .
     
-    Set the key to `  bigquery_ml_job  ` and the value to the [job ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) of the embedding job. Background embedding jobs all have a prefix of `  gc_  ` .
+    Set the key to `bigquery_ml_job` and the value to the [job ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) of the embedding job. Background embedding jobs all have a prefix of `gc_` .
 
 It can take up to 24 hours for some charges to appear in Cloud Billing.
 
@@ -237,15 +237,15 @@ It can take up to 24 hours for some charges to appear in Cloud Billing.
 
   - If you are using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) to ingest data, then there might be some delays before the embedding generation starts.
 
-  - There is no indication that a column is automatically generated when you view a table's schema using the Google Cloud console, the `  bq show  ` command, or the `  ddl  ` field of the `  INFORMATION_SCHEMA.TABLES  ` view.
+  - There is no indication that a column is automatically generated when you view a table's schema using the Google Cloud console, the `bq show` command, or the `ddl` field of the `INFORMATION_SCHEMA.TABLES` view.
 
   - If you create a copy, clone, or snapshot of a table that has a generated embedding column, only the data is copied. The generation configuration doesn't apply to the new table, and updates to the source column of the new table won't result in new embeddings.
 
   - If you restore a table that had autonomous embedding generation enabled from a snapshot, the embedding generation configuration isn't restored.
 
-  - You can create generated embedding columns only by using SQL. You can't use the `  bq mk  ` or `  bq update  ` commands to create generated embedding columns.
+  - You can create generated embedding columns only by using SQL. You can't use the `bq mk` or `bq update` commands to create generated embedding columns.
 
-  - The source column of the generated column must be a `  STRING  ` column.
+  - The source column of the generated column must be a `STRING` column.
 
   - After you create the generated embedding column, the following limitations apply:
     
@@ -258,12 +258,12 @@ It can take up to 24 hours for some charges to appear in Cloud Billing.
     
       - DML
       - Streaming writes
-      - `  bq insert  `
-      - `  bq copy -a  `
+      - `bq insert`
+      - `bq copy -a`
 
   - Tables with generated embedding columns don't support any column-level security policies, such as policy tags.
 
-  - When you call a search function, such as [`  VECTOR_SEARCH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) or [`  AI.SEARCH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) , rows with missing embeddings in the base table are skipped during the search.
+  - When you call a search function, such as [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) or [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) , rows with missing embeddings in the base table are skipped during the search.
 
   - You can't create a partitioned vector index on a table that has autonomous embedding generation enabled.
 

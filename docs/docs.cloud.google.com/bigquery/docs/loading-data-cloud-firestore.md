@@ -12,7 +12,7 @@ When you load data into BigQuery from a Firestore export, note the following res
   - You can specify only one Cloud Storage URI, and you cannot use a URI wildcard.
   - For a Firestore export to load correctly, documents in the export data must share a consistent schema with fewer than 10,000 unique field names.
   - You can create a new table to store the data, or you can overwrite an existing table. You cannot append Firestore export data to an existing table.
-  - Your [export command](https://docs.cloud.google.com/firestore/docs/manage-data/export-import#export_data) must specify a `  collection-ids  ` filter. Data exported without specifying a collection ID filter cannot be loaded into BigQuery.
+  - Your [export command](https://docs.cloud.google.com/firestore/docs/manage-data/export-import#export_data) must specify a `collection-ids` filter. Data exported without specifying a collection ID filter cannot be loaded into BigQuery.
 
 ## Before you begin
 
@@ -26,26 +26,26 @@ To load data into BigQuery, you need IAM permissions to run a load job and load 
 
 To load data into a new BigQuery table or partition or to append or overwrite an existing table or partition, you need the following IAM permissions:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.tables.updateData  `
-  - `  bigquery.tables.update  `
-  - `  bigquery.jobs.create  `
+  - `bigquery.tables.create`
+  - `bigquery.tables.updateData`
+  - `bigquery.tables.update`
+  - `bigquery.jobs.create`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to load data into a BigQuery table or partition:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.user  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.jobUser  ` (includes the `  bigquery.jobs.create  ` permission)
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.user` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.jobUser` (includes the `bigquery.jobs.create` permission)
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create and update tables using a load job in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can create and update tables using a load job in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### Permissions to load data from Cloud Storage
 
-To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to load data from a Cloud Storage bucket. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -53,9 +53,9 @@ This predefined role contains the permissions required to load data from a Cloud
 
 The following permissions are required to load data from a Cloud Storage bucket:
 
-  - `  storage.buckets.get  `
-  - `  storage.objects.get  `
-  - `  storage.objects.list (required if you are using a URI wildcard )  `
+  - `storage.buckets.get`
+  - `storage.objects.get`
+  - `storage.objects.list (required if you are using a URI wildcard )`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -65,7 +65,7 @@ You can load data from a Firestore export metadata file by using the Google Clou
 
 Sometimes Datastore terminology is used in the Google Cloud console and the bq command-line tool, but the following procedures are compatible with Firestore export files. Firestore and Datastore share an export format.
 
-**Note:** You can load specific fields by using the [--projection\_fields flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore#cloud_firestore_options) in the bq command-line tool or by setting the `  projectionFields  ` property in the `  load  ` job configuration.
+**Note:** You can load specific fields by using the [--projection\_fields flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore#cloud_firestore_options) in the bq command-line tool or by setting the `projectionFields` property in the `load` job configuration.
 
 ### Console
 
@@ -83,8 +83,8 @@ In the **Create table** pane, specify the following details:
 
 1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
     1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite.  
-        The URI for your Firestore export file must end with `  KIND_COLLECTION_ID .export_metadata  ` . For example, in `  default_namespace_kind_Book.export_metadata  ` , `  Book  ` is the collection ID, and `  default_namespace_kind_Book  ` is the file name generated by Firestore. If the URI doesn't end with `  KIND_COLLECTION_ID .export_metadata  ` , you receive the following error message: **does not contain valid backup metadata. (error code: invalid).**
-        **Note:** Do not use the file ending in `  overall_export_metadata  ` . This file is not usable by BigQuery.
+        The URI for your Firestore export file must end with `  KIND_COLLECTION_ID .export_metadata ` . For example, in `default_namespace_kind_Book.export_metadata` , `Book` is the collection ID, and `default_namespace_kind_Book` is the file name generated by Firestore. If the URI doesn't end with `  KIND_COLLECTION_ID .export_metadata ` , you receive the following error message: **does not contain valid backup metadata. (error code: invalid).**
+        **Note:** Do not use the file ending in `overall_export_metadata` . This file is not usable by BigQuery.
         ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
     2.  For **File format** , select **Cloud Datastore Backup** . Firestore and Datastore share the export format.
 2.  In the **Destination** section, specify the following details:
@@ -101,7 +101,7 @@ In the **Create table** pane, specify the following details:
 
 ### bq
 
-Use the [`  bq load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command with `  source_format  ` set to `  DATASTORE_BACKUP  ` . Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . If you are overwiting an existing table, add the `  --replace  ` flag.
+Use the [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command with `source_format` set to `DATASTORE_BACKUP` . Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . If you are overwriting an existing table, add the `--replace` flag.
 
 To load only specific fields, use the [--projection\_fields flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore#cloud_firestore_options) .
 
@@ -112,13 +112,13 @@ To load only specific fields, use the [--projection\_fields flag](https://docs.c
 
 Replace the following:
 
-  - `  LOCATION  ` : your location. The `  --location  ` flag is optional.
-  - `  FORMAT  ` : `  DATASTORE_BACKUP  ` . Datastore Backup is the correct option for Firestore. Firestore and Datastore share an export format.
+  - `  LOCATION  ` : your location. The `--location` flag is optional.
+  - `  FORMAT  ` : `DATASTORE_BACKUP` . Datastore Backup is the correct option for Firestore. Firestore and Datastore share an export format.
   - `  DATASET  ` : the dataset that contains the table into which you're loading data.
   - `  TABLE  ` : the table into which you're loading data. If the table doesn't exist, it is created.
   - `  PATH_TO_SOURCE  ` : the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) .
 
-For example, the following command loads the `  gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_Book.export_metadata  ` Firestore export file into a table named `  book_data  ` . `  mybucket  ` and `  mydataset  ` were created in the `  US  ` multi-region location.
+For example, the following command loads the `gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_Book.export_metadata` Firestore export file into a table named `book_data` . `mybucket` and `mydataset` were created in the `US` multi-region location.
 
     bq --location=US load \
     --source_format=DATASTORE_BACKUP \
@@ -129,17 +129,17 @@ For example, the following command loads the `  gs://mybucket/20180228T1256/defa
 
 Set the following properties to load Firestore export data using the [API](https://docs.cloud.google.com/bigquery/docs/reference/v2) .
 
-1.  Create a `  load  ` job configuration that points to the source data in Cloud Storage.
+1.  Create a `load` job configuration that points to the source data in Cloud Storage.
 
-2.  Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  sourceUris  ` must be fully qualified, in the format `  gs:// BUCKET / OBJECT  ` in the load job configuration. The file (object) name must end in `  KIND_NAME .export_metadata  ` . Only one URI is allowed for Firestore exports, and you cannot use a wildcard.
+3.  The `sourceUris` must be fully qualified, in the format ` gs:// BUCKET / OBJECT  ` in the load job configuration. The file (object) name must end in `  KIND_NAME .export_metadata ` . Only one URI is allowed for Firestore exports, and you cannot use a wildcard.
 
-4.  Specify the data format by setting the `  sourceFormat  ` property to `  DATASTORE_BACKUP  ` in the load job configuration. Datastore Backup is the correct option for Firestore. Firestore and Datastore share an export format.
+4.  Specify the data format by setting the `sourceFormat` property to `DATASTORE_BACKUP` in the load job configuration. Datastore Backup is the correct option for Firestore. Firestore and Datastore share an export format.
 
-5.  To load only specific fields, set the `  projectionFields  ` property.
+5.  To load only specific fields, set the `projectionFields` property.
 
-6.  If you are overwriting an existing table, specify the write disposition by setting the `  writeDisposition  ` property to `  WRITE_TRUNCATE  ` .
+6.  If you are overwriting an existing table, specify the write disposition by setting the `writeDisposition` property to `WRITE_TRUNCATE` .
 
 ### Python
 
@@ -186,9 +186,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To change how BigQuery parses Firestore export data, specify the following option:
 
-| Google Cloud console option | \`bq\` flag                          | BigQuery API property                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Description                                                                                                                                                                                                                                                                                           |
-| --------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Not available               | `        --projection_fields       ` | `        projectionFields       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.DatastoreBackupOptions.Builder#com_google_cloud_bigquery_DatastoreBackupOptions_Builder_setProjectionFields_java_util_List_java_lang_String__) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_projection_fields) ) | (Optional) A comma-separated list that indicates which document fields to load from a Firestore export. By default, BigQuery loads all fields. Field names are case-sensitive and must be present in the export. You cannot specify field paths within a map field such as `        map.foo       ` . |
+| Google Cloud console option | \`bq\` flag           | BigQuery API property                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                                                            |
+| --------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Not available               | `--projection_fields` | `projectionFields` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.DatastoreBackupOptions.Builder#com_google_cloud_bigquery_DatastoreBackupOptions_Builder_setProjectionFields_java_util_List_java_lang_String__) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_projection_fields) ) | (Optional) A comma-separated list that indicates which document fields to load from a Firestore export. By default, BigQuery loads all fields. Field names are case-sensitive and must be present in the export. You cannot specify field paths within a map field such as `map.foo` . |
 
 ## Data type conversion
 
@@ -250,13 +250,13 @@ BigQuery converts data from each document in Firestore export files to BigQuery 
 
 ## Firestore key properties
 
-Each document in Firestore has a unique key that contains information such as the document ID and the document path. BigQuery creates a `  RECORD  ` data type (also known as a [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) for the key, with nested fields for each piece of information, as described in the following table.
+Each document in Firestore has a unique key that contains information such as the document ID and the document path. BigQuery creates a `RECORD` data type (also known as a [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) for the key, with nested fields for each piece of information, as described in the following table.
 
-| Key property                       | Description                                                                                                                                                                                            | BigQuery data type |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| `        __key__.app       `       | The Firestore app name.                                                                                                                                                                                | STRING             |
-| `        __key__.id       `        | The document's ID, or `        null       ` if `        __key__.name       ` is set.                                                                                                                   | INTEGER            |
-| `        __key__.kind       `      | The document's collection ID.                                                                                                                                                                          | STRING             |
-| `        __key__.name       `      | The document's name, or `        null       ` if `        __key__.id       ` is set.                                                                                                                   | STRING             |
-| `        __key__.namespace       ` | Firestore does not support custom namespaces. The default namespace is represented by an empty string.                                                                                                 | STRING             |
-| `        __key__.path       `      | The path of the document: the sequence of the document and the collection pairs from the root collection. For example: `        "Country",         "USA", "PostalCode", 10011, "Route", 1234       ` . | STRING             |
+| Key property        | Description                                                                                                                                                                     | BigQuery data type |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `__key__.app`       | The Firestore app name.                                                                                                                                                         | STRING             |
+| `__key__.id`        | The document's ID, or `null` if `__key__.name` is set.                                                                                                                          | INTEGER            |
+| `__key__.kind`      | The document's collection ID.                                                                                                                                                   | STRING             |
+| `__key__.name`      | The document's name, or `null` if `__key__.id` is set.                                                                                                                          | STRING             |
+| `__key__.namespace` | Firestore does not support custom namespaces. The default namespace is represented by an empty string.                                                                          | STRING             |
+| `__key__.path`      | The path of the document: the sequence of the document and the collection pairs from the root collection. For example: `"Country", "USA", "PostalCode", 10011, "Route", 1234` . | STRING             |

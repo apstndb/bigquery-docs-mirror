@@ -1,6 +1,6 @@
 # Restore table snapshots
 
-This document describes how to create a writeable table from a table snapshot by using the Google Cloud console, a `  CREATE TABLE CLONE  ` query, a `  bq cp  ` command, or the `  jobs.insert  ` API. It is intended for users who are familiar with [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+This document describes how to create a writeable table from a table snapshot by using the Google Cloud console, a `CREATE TABLE CLONE` query, a `bq cp` command, or the `jobs.insert` API. It is intended for users who are familiar with [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
@@ -25,14 +25,14 @@ To create a writeable table from a table snapshot, you need the following permis
 <tr class="odd">
 <td>All of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.tables.get      </code><br />
-<code dir="ltr" translate="no">       bigquery.tables.getData      </code><br />
-<code dir="ltr" translate="no">       bigquery.tables.restoreSnapshot      </code><br />
+<code dir="ltr" translate="no">bigquery.tables.get</code><br />
+<code dir="ltr" translate="no">bigquery.tables.getData</code><br />
+<code dir="ltr" translate="no">bigquery.tables.restoreSnapshot</code><br />
 </td>
 <td>The table snapshot that you want to copy into a writeable table.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
+<td><code dir="ltr" translate="no">bigquery.tables.create</code></td>
 <td>The dataset that contains the destination table.</td>
 </tr>
 </tbody>
@@ -57,17 +57,17 @@ The predefined BigQuery roles that provide the required permissions are as follo
 <tr class="odd">
 <td>Any of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.dataEditor      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataOwner      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
+<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code></td>
 <td>The table snapshot that you want to copy into a writeable table.</td>
 </tr>
 <tr class="even">
 <td>Any of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.dataEditor      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataOwner      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
+<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code></td>
 <td>The dataset that contains the destination table.</td>
 </tr>
 </tbody>
@@ -107,7 +107,7 @@ You can restore a table snapshot into a new table by using one of the following 
 
 ### SQL
 
-Use the [`  CREATE TABLE CLONE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
+Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -156,11 +156,11 @@ Replace the following:
   - `  TABLE_DATASET_NAME  ` : the name of the dataset in which to create the new table.
   - `  NEW_TABLE_NAME  ` : the name of the new table.
 
-The `  --no_clobber  ` flag instructs the command to fail if the destination table already exists.
+The `--no_clobber` flag instructs the command to fail if the destination table already exists.
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
 
 <table>
 <colgroup>
@@ -175,7 +175,7 @@ Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/referen
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">         projectId        </code></td>
+<td><code dir="ltr" translate="no">projectId</code></td>
 <td>The project ID of the project to bill for this operation.</td>
 </tr>
 <tr class="even">
@@ -245,7 +245,7 @@ You can overwrite an existing table with a table snapshot by using one of the fo
 
 ### SQL
 
-Use the [`  CREATE TABLE CLONE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
+Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -296,7 +296,7 @@ Replace the following:
 
 ### API
 
-Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
+Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
 
 <table>
 <colgroup>
@@ -311,7 +311,7 @@ Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/referen
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">         projectId        </code></td>
+<td><code dir="ltr" translate="no">projectId</code></td>
 <td>The project ID of the project to bill for this operation.</td>
 </tr>
 <tr class="even">

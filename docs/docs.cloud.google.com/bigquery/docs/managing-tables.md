@@ -33,7 +33,7 @@ You can update the following elements of a table:
 
 ### Required permissions
 
-To get the permissions that you need to update table properties, ask your administrator to grant you the [Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on a table. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to update table properties, ask your administrator to grant you the [Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on a table. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to update table properties. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -41,21 +41,21 @@ This predefined role contains the permissions required to update table propertie
 
 The following permissions are required to update table properties:
 
-  - `  bigquery.tables.update  `
-  - `  bigquery.tables.get  `
+  - `bigquery.tables.update`
+  - `bigquery.tables.get`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can update the properties of the tables of the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can update the properties of the tables of the datasets that you create.
 
 ### Update a table's description
 
 You can update a table's description in the following ways:
 
   - Using the Google Cloud console.
-  - Using a data definition language (DDL) `  ALTER TABLE  ` statement.
-  - Using the bq command-line tool's `  bq update  ` command.
-  - Calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
+  - Using a data definition language (DDL) `ALTER TABLE` statement.
+  - Using the bq command-line tool's `bq update` command.
+  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
   - Using the client libraries.
   - Generating a description with Gemini in BigQuery.
 
@@ -83,7 +83,7 @@ You can't add a description when you create a table using the Google Cloud conso
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the description of a table named `  mytable  ` :
+Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the description of a table named `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -109,7 +109,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Issue the `  bq update  ` command with the `  --description  ` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
+2.  Issue the `bq update` command with the `--description` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
     
     ``` notranslate
     bq update \
@@ -126,13 +126,13 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     Examples:
     
-    To change the description of the `  mytable  ` table in the `  mydataset  ` dataset to "Description of mytable", enter the following command. The `  mydataset  ` dataset is in your default project.
+    To change the description of the `mytable` table in the `mydataset` dataset to "Description of mytable", enter the following command. The `mydataset` dataset is in your default project.
     
     ``` lang-sh
     bq update --description "Description of mytable" mydataset.mytable
     ```
     
-    To change the description of the `  mytable  ` table in the `  mydataset  ` dataset to "Description of mytable", enter the following command. The `  mydataset  ` dataset is in the `  myotherproject  ` project, not your default project.
+    To change the description of the `mytable` table in the `mydataset` dataset to "Description of mytable", enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
     
     ``` lang-sh
     bq update \
@@ -142,7 +142,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `  description  ` property in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) to update the table's description. Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `description` property in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) to update the table's description. Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -293,9 +293,9 @@ If you set the expiration when the table is created, the dataset's default table
 At any point after the table is created, you can update the table's expiration time in the following ways:
 
   - Using the Google Cloud console.
-  - Using a data definition language (DDL) `  ALTER TABLE  ` statement.
-  - Using the bq command-line tool's `  bq update  ` command.
-  - Calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
+  - Using a data definition language (DDL) `ALTER TABLE` statement.
+  - Using the bq command-line tool's `bq update` command.
+  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
   - Using the client libraries.
 
 **Note:** If you set an expiration time that has already passed, the table is deleted immediately.
@@ -322,7 +322,7 @@ You can't add an expiration time when you create a table using the Google Cloud 
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the expiration time of a table named `  mytable  ` :
+Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the expiration time of a table named `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -349,30 +349,29 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Issue the `  bq update  ` command with the `  --expiration  ` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
+2.  Issue the `bq update` command with the `--expiration` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
     
     ``` notranslate
     bq update \
-    --expiration integer \
-    project_id:dataset.table
+    --expiration integer \project_id:dataset.table
     ```
     
     Replace the following:
     
-      - `  integer  ` : the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value. If you specify `  0  ` , the table expiration is removed, and the table never expires. Tables with no expiration must be manually deleted.
+      - `  integer  ` : the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value. If you specify `0` , the table expiration is removed, and the table never expires. Tables with no expiration must be manually deleted.
       - `  project_id  ` : your project ID.
       - `  dataset  ` : the name of the dataset that contains the table you're updating.
       - `  table  ` : the name of the table you're updating.
     
     Examples:
     
-    To update the expiration time of the `  mytable  ` table in the `  mydataset  ` dataset to 5 days (432000 seconds), enter the following command. The `  mydataset  ` dataset is in your default project.
+    To update the expiration time of the `mytable` table in the `mydataset` dataset to 5 days (432000 seconds), enter the following command. The `mydataset` dataset is in your default project.
     
     ``` lang-sh
     bq update --expiration 432000 mydataset.mytable
     ```
     
-    To update the expiration time of the `  mytable  ` table in the `  mydataset  ` dataset to 5 days (432000 seconds), enter the following command. The `  mydataset  ` dataset is in the `  myotherproject  ` project, not your default project.
+    To update the expiration time of the `mytable` table in the `mydataset` dataset to 5 days (432000 seconds), enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
     
     ``` lang-sh
     bq update --expiration 432000 myotherproject:mydataset.mytable
@@ -380,7 +379,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `  expirationTime  ` property in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) to update the table expiration in milliseconds. Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `expirationTime` property in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) to update the table expiration in milliseconds. Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -636,7 +635,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Update a table's rounding mode
 
-You can update a table's [default rounding mode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode) by using the [`  ALTER TABLE SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the default rounding mode for `  mytable  ` to `  ROUND_HALF_EVEN  ` :
+You can update a table's [default rounding mode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode) by using the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the default rounding mode for `mytable` to `ROUND_HALF_EVEN` :
 
 ``` notranslate
 ALTER TABLE mydataset.mytable
@@ -644,7 +643,7 @@ SET OPTIONS (
   default_rounding_mode = "ROUND_HALF_EVEN");
 ```
 
-When you add a `  NUMERIC  ` or `  BIGNUMERIC  ` field to a table and do not specify a [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) , then the rounding mode is automatically set to the table's default rounding mode. Changing a table's default rounding mode doesn't alter the rounding mode of existing fields.
+When you add a `NUMERIC` or `BIGNUMERIC` field to a table and do not specify a [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) , then the rounding mode is automatically set to the table's default rounding mode. Changing a table's default rounding mode doesn't alter the rounding mode of existing fields.
 
 ### Update a table's schema definition
 
@@ -652,14 +651,14 @@ For more information about updating a table's schema definition, see [Modifying 
 
 ### Rename a table
 
-You can rename a table after it has been created by using the [`  ALTER TABLE RENAME TO  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) . The following example renames `  mytable  ` to `  mynewtable  ` :
+You can rename a table after it has been created by using the [`ALTER TABLE RENAME TO` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) . The following example renames `mytable` to `mynewtable` :
 
 ``` notranslate
 ALTER TABLE mydataset.mytable
 RENAME TO mynewtable;
 ```
 
-The `  ALTER TABLE RENAME TO  ` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
+The `ALTER TABLE RENAME TO` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
 
 #### Limitations on renaming tables
 
@@ -678,9 +677,9 @@ This section describes how to create a full copy of a table. For information abo
 You can copy a table in the following ways:
 
   - Use the Google Cloud console.
-  - Use the [`  bq cp  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command.
-  - Use a data definition language (DDL) [`  CREATE TABLE COPY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
-  - Call the [jobs.insert](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method and configure a `  copy  ` job.
+  - Use the [`bq cp`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command.
+  - Use a data definition language (DDL) [`CREATE TABLE COPY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
+  - Call the [jobs.insert](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method and configure a `copy` job.
   - Use the client libraries.
 
 ### Limitations on copying tables
@@ -699,11 +698,11 @@ Table copy jobs are subject to the following limitations:
 
   - When copying multiple source tables to a destination table using the API, bq command-line tool, or the client libraries, all source tables must have identical schemas, including any partitioning or clustering.
     
-    Certain table schema updates, such as dropping or renaming columns, can cause tables to have apparently identical schemas but different internal representations. This might cause a table copy job to fail with the error `  Maximum limit on diverging physical schemas reached  ` . In this case, you can use the [`  CREATE TABLE LIKE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_like) to ensure that your source table's schema matches the destination table's schema exactly.
+    Certain table schema updates, such as dropping or renaming columns, can cause tables to have apparently identical schemas but different internal representations. This might cause a table copy job to fail with the error `Maximum limit on diverging physical schemas reached` . In this case, you can use the [`CREATE TABLE LIKE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_like) to ensure that your source table's schema matches the destination table's schema exactly.
 
   - The time that BigQuery takes to copy tables might vary significantly across different runs because the underlying storage is managed dynamically.
 
-  - You can't copy and append a source table to a destination table that has more columns than the source table, and the additional columns have [default values](https://docs.cloud.google.com/bigquery/docs/default-values) . Instead, you can run `  INSERT destination_table SELECT * FROM source_table  ` to copy over the data.
+  - You can't copy and append a source table to a destination table that has more columns than the source table, and the additional columns have [default values](https://docs.cloud.google.com/bigquery/docs/default-values) . Instead, you can run `INSERT destination_table SELECT * FROM source_table` to copy over the data.
 
   - If the copy operation overwrites an existing table, then the table-level access for the existing table is maintained. [Tags](https://docs.cloud.google.com/bigquery/docs/tags) from the source table aren't copied to the overwritten table, while tags on the existing table are retained. However, when you copy tables across regions, tags on the existing table are removed.
 
@@ -717,7 +716,7 @@ To perform the tasks in this document, you need the following permissions.
 
 #### Roles to copy tables and partitions
 
-To get the permissions that you need to copy tables and partitions, ask your administrator to grant you the [Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on the source and destination datasets. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to copy tables and partitions, ask your administrator to grant you the [Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on the source and destination datasets. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to copy tables and partitions. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -725,18 +724,18 @@ This predefined role contains the permissions required to copy tables and partit
 
 The following permissions are required to copy tables and partitions:
 
-  - `  bigquery.tables.getData  ` on the source and destination datasets
-  - `  bigquery.tables.get  ` on the source and destination datasets
-  - `  bigquery.tables.create  ` on the destination dataset
-  - `  bigquery.tables.update  ` on the destination dataset
+  - `bigquery.tables.getData` on the source and destination datasets
+  - `bigquery.tables.get` on the source and destination datasets
+  - `bigquery.tables.create` on the destination dataset
+  - `bigquery.tables.update` on the destination dataset
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 #### Permission to run a copy job
 
-To get the permission that you need to run a copy job, ask your administrator to grant you the [Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) IAM role on the source and destination datasets. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to run a copy job, ask your administrator to grant you the [Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) IAM role on the source and destination datasets. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.jobs.create  ` permission, which is required to run a copy job.
+This predefined role contains the `bigquery.jobs.create` permission, which is required to run a copy job.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -745,12 +744,12 @@ You might also be able to get this permission with [custom roles](https://docs.c
 You can copy a single table in the following ways:
 
   - Using the Google Cloud console.
-  - Using the bq command-line tool's `  bq cp  ` command.
-  - Using a data definition language (DDL) `  CREATE TABLE COPY  ` statement.
-  - Calling the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method, configuring a `  copy  ` job, and specifying the `  sourceTable  ` property.
+  - Using the bq command-line tool's `bq cp` command.
+  - Using a data definition language (DDL) `CREATE TABLE COPY` statement.
+  - Calling the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method, configuring a `copy` job, and specifying the `sourceTable` property.
   - Using the client libraries.
 
-The Google Cloud console and the `  CREATE TABLE COPY  ` statement support only one source table and one destination table in a copy job. To [copy multiple source files](https://docs.cloud.google.com/bigquery/docs/managing-tables#copying_multiple_source_tables) to a destination table, you must use the bq command-line tool or the API.
+The Google Cloud console and the `CREATE TABLE COPY` statement support only one source table and one destination table in a copy job. To [copy multiple source files](https://docs.cloud.google.com/bigquery/docs/managing-tables#copying_multiple_source_tables) to a destination table, you must use the bq command-line tool or the API.
 
 To copy a single source table:
 
@@ -776,7 +775,7 @@ To copy a single source table:
 
 ### SQL
 
-Use the [`  CREATE TABLE COPY  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) to copy a table named `  table1  ` to a new table named `  table1copy  ` :
+Use the [`CREATE TABLE COPY` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) to copy a table named `table1` to a new table named `table1copy` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -785,8 +784,7 @@ Use the [`  CREATE TABLE COPY  ` statement](https://docs.cloud.google.com/bigque
 2.  In the query editor, enter the following statement:
     
     ``` notranslate
-    CREATE TABLE myproject.mydataset.table1copy
-    COPY myproject.mydataset.table1;
+    CREATE TABLE myproject.mydataset.table1copyCOPY myproject.mydataset.table1;
     ```
 
 3.  Click play\_circle **Run** .
@@ -801,29 +799,27 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Issue the `  bq cp  ` command. Optional flags can be used to control the write disposition of the destination table:
+2.  Issue the `bq cp` command. Optional flags can be used to control the write disposition of the destination table:
     
-      - `  -a  ` or `  --append_table  ` appends the data from the source table to an existing table in the destination dataset.
-      - `  -f  ` or `  --force  ` overwrites an existing table in the destination dataset and doesn't prompt you for confirmation.
-      - `  -n  ` or `  --no_clobber  ` returns the following error message if the table exists in the destination dataset: `  Table ' project_id:dataset.table ' already exists, skipping.  ` If `  -n  ` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
-      - `  --destination_kms_key  ` is the customer-managed Cloud KMS key used to encrypt the destination table.
+      - `-a` or `--append_table` appends the data from the source table to an existing table in the destination dataset.
+      - `-f` or `--force` overwrites an existing table in the destination dataset and doesn't prompt you for confirmation.
+      - `-n` or `--no_clobber` returns the following error message if the table exists in the destination dataset: `Table ' project_id:dataset.table ' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
+      - `--destination_kms_key` is the customer-managed Cloud KMS key used to encrypt the destination table.
     
-    `  --destination_kms_key  ` is not demonstrated here. See [Protecting data with Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for more information.
+    `--destination_kms_key` is not demonstrated here. See [Protecting data with Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for more information.
     
     If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `  project_id : dataset  ` .
     
-    (Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+    (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
     
     ``` notranslate
     bq --location=location cp \
-    -a -f -n \
-    project_id:dataset.source_table \
-    project_id:dataset.destination_table
+    -a -f -n \project_id:dataset.source_table \project_id:dataset.destination_table
     ```
     
     Replace the following:
     
-      - `  location  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+      - `  location  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
       - `  project_id  ` : your project ID.
       - `  dataset  ` : the name of the source or destination dataset.
       - `  source_table  ` : the table you're copying.
@@ -831,13 +827,13 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     Examples:
     
-    To copy the `  mydataset.mytable  ` table to the `  mydataset2.mytable2  ` table, enter the following command. Both datasets are in your default project.
+    To copy the `mydataset.mytable` table to the `mydataset2.mytable2` table, enter the following command. Both datasets are in your default project.
     
     ``` lang-sh
     bq cp mydataset.mytable mydataset2.mytable2
     ```
     
-    To copy the `  mydataset.mytable  ` table and to overwrite a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `  myotherproject  ` project. The `  -f  ` shortcut is used to overwrite the destination table without a prompt.
+    To copy the `mydataset.mytable` table and to overwrite a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-f` shortcut is used to overwrite the destination table without a prompt.
     
     ``` notranslate
     bq cp -f \
@@ -845,7 +841,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     myotherproject:myotherdataset.mytable
     ```
     
-    To copy the `  mydataset.mytable  ` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `  myotherproject  ` project. The `  -n  ` shortcut is used to prevent overwriting a table with the same name.
+    To copy the `mydataset.mytable` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-n` shortcut is used to prevent overwriting a table with the same name.
     
     ``` notranslate
     bq cp -n \
@@ -853,7 +849,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     myotherproject:myotherdataset.mytable
     ```
     
-    To copy the `  mydataset.mytable  ` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `  myotherproject  ` project. The `  - a  ` shortcut is used to append to the destination table.
+    To copy the `mydataset.mytable` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `- a` shortcut is used to append to the destination table.
     
     ``` lang-sh
     bq cp -a mydataset.mytable myotherproject:myotherdataset.mytable
@@ -861,7 +857,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-You can copy an existing table through the API by calling the [`  bigquery.jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, and configuring a `  copy  ` job. Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+You can copy an existing table through the API by calling the [`bigquery.jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, and configuring a `copy` job. Specify your location in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
 You must specify the following values in your job configuration:
 
@@ -880,7 +876,7 @@ You must specify the following values in your job configuration:
           "writeDisposition": string,   // Optional
         },
 
-Where `  sourceTable  ` provides information about the table to be copied, `  destinationTable  ` provides information about the new table, `  createDisposition  ` specifies whether to create the table if it doesn't exist, and `  writeDisposition  ` specifies whether to overwrite or append to an existing table.
+Where `sourceTable` provides information about the table to be copied, `destinationTable` provides information about the new table, `createDisposition` specifies whether to create the table if it doesn't exist, and `writeDisposition` specifies whether to overwrite or append to an existing table.
 
 ### C\#
 
@@ -1135,8 +1131,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 You can copy multiple source tables to a destination table in the following ways:
 
-  - Using the bq command-line tool's `  bq cp  ` command.
-  - Calling the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configuring a `  copy  ` job, and specifying the `  sourceTables  ` property.
+  - Using the bq command-line tool's `bq cp` command.
+  - Calling the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configuring a `copy` job, and specifying the `sourceTables` property.
   - Using the client libraries.
 
 All source tables must have identical schemas and [tags](https://docs.cloud.google.com/bigquery/docs/tags) , and only one destination table is allowed.
@@ -1153,29 +1149,27 @@ To copy multiple source tables, select one of the following choices:
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Issue the `  bq cp  ` command and include multiple source tables as a comma-separated list. Optional flags can be used to control the write disposition of the destination table:
+2.  Issue the `bq cp` command and include multiple source tables as a comma-separated list. Optional flags can be used to control the write disposition of the destination table:
     
-      - `  -a  ` or `  --append_table  ` appends the data from the source tables to an existing table in the destination dataset.
-      - `  -f  ` or `  --force  ` overwrites an existing destination table in the destination dataset and doesn't prompt you for confirmation.
-      - `  -n  ` or `  --no_clobber  ` returns the following error message if the table exists in the destination dataset: `  Table ' project_id : dataset . table ' already exists, skipping.  ` If `  -n  ` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
-      - `  --destination_kms_key  ` is the customer-managed Cloud Key Management Service key used to encrypt the destination table.
+      - `-a` or `--append_table` appends the data from the source tables to an existing table in the destination dataset.
+      - `-f` or `--force` overwrites an existing destination table in the destination dataset and doesn't prompt you for confirmation.
+      - `-n` or `--no_clobber` returns the following error message if the table exists in the destination dataset: `Table ' project_id : dataset . table ' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
+      - `--destination_kms_key` is the customer-managed Cloud Key Management Service key used to encrypt the destination table.
     
-    `  --destination_kms_key  ` is not demonstrated here. See [Protecting data with Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for more information.
+    `--destination_kms_key` is not demonstrated here. See [Protecting data with Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for more information.
     
     If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `  project_id : dataset  ` .
     
-    (Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+    (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
     
     ``` notranslate
     bq --location=location cp \
-    -a -f -n \
-    project_id:dataset.source_table,project_id:dataset.source_table \
-    project_id:dataset.destination_table
+    -a -f -n \project_id:dataset.source_table,project_id:dataset.source_table \project_id:dataset.destination_table
     ```
     
     Replace the following:
     
-      - `  location  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+      - `  location  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
       - `  project_id  ` : your project ID.
       - `  dataset  ` : the name of the source or destination dataset.
       - `  source_table  ` : the table that you're copying.
@@ -1183,7 +1177,7 @@ To copy multiple source tables, select one of the following choices:
     
     Examples:
     
-    To copy the `  mydataset.mytable  ` table and the `  mydataset.mytable2  ` table to `  mydataset2.tablecopy  ` table, enter the following command . All datasets are in your default project.
+    To copy the `mydataset.mytable` table and the `mydataset.mytable2` table to `mydataset2.tablecopy` table, enter the following command . All datasets are in your default project.
     
     ``` notranslate
     bq cp \
@@ -1191,7 +1185,7 @@ To copy multiple source tables, select one of the following choices:
     mydataset2.tablecopy
     ```
     
-    To copy the `  mydataset.mytable  ` table and the `  mydataset.mytable2  ` table to `  myotherdataset.mytable  ` table and to overwrite a destination table with the same name, enter the following command. The destination dataset is in the `  myotherproject  ` project, not your default project. The `  -f  ` shortcut is used to overwrite the destination table without a prompt.
+    To copy the `mydataset.mytable` table and the `mydataset.mytable2` table to `myotherdataset.mytable` table and to overwrite a destination table with the same name, enter the following command. The destination dataset is in the `myotherproject` project, not your default project. The `-f` shortcut is used to overwrite the destination table without a prompt.
     
     ``` notranslate
     bq cp -f \
@@ -1199,7 +1193,7 @@ To copy multiple source tables, select one of the following choices:
     myotherproject:myotherdataset.mytable
     ```
     
-    To copy the `  myproject:mydataset.mytable  ` table and the `  myproject:mydataset.mytable2  ` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The destination dataset is in the `  myotherproject  ` project. The `  -n  ` shortcut is used to prevent overwriting a table with the same name.
+    To copy the `myproject:mydataset.mytable` table and the `myproject:mydataset.mytable2` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The destination dataset is in the `myotherproject` project. The `-n` shortcut is used to prevent overwriting a table with the same name.
     
     ``` notranslate
     bq cp -n \
@@ -1207,7 +1201,7 @@ To copy multiple source tables, select one of the following choices:
     myotherproject:myotherdataset.mytable
     ```
     
-    To copy the `  mydataset.mytable  ` table and the `  mydataset.mytable2  ` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `  myotherproject  ` project. The `  -a  ` shortcut is used to append to the destination table.
+    To copy the `mydataset.mytable` table and the `mydataset.mytable2` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-a` shortcut is used to append to the destination table.
     
     ``` notranslate
     bq cp -a \
@@ -1217,9 +1211,9 @@ To copy multiple source tables, select one of the following choices:
 
 ### API
 
-To copy multiple tables using the API, call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configure a table `  copy  ` job, and specify the `  sourceTables  ` property.
+To copy multiple tables using the API, call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configure a table `copy` job, and specify the `sourceTables` property.
 
-Specify your region in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+Specify your region in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
 ### Go
 
@@ -1412,16 +1406,12 @@ To copy a table across regions, select one of the following options:
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Run the [`  bq cp  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) :
+2.  Run the [`bq cp` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) :
 
 <!-- end list -->
 
 ``` notranslate
-   bq cp \
-   -f -n \
-   SOURCE_PROJECT:SOURCE_DATASET.SOURCE_TABLE \
-   DESTINATION_PROJECT:DESTINATION_DATASET.DESTINATION_TABLE
-   
+   bq cp \   -f -n \   SOURCE_PROJECT:SOURCE_DATASET.SOURCE_TABLE \   DESTINATION_PROJECT:DESTINATION_DATASET.DESTINATION_TABLE   
 ```
 
 Replace the following:
@@ -1438,19 +1428,19 @@ Replace the following:
 
   - `  DESTINATION_TABLE  ` : the name of the table in the destination dataset.
 
-The following example is a command that copies the `  mydataset_us.mytable  ` table from the `  us  ` multi-region to the `  mydataset_eu.mytable2  ` table in the `  eu  ` multi-region. Both datasets are in the default project.
+The following example is a command that copies the `mydataset_us.mytable` table from the `us` multi-region to the `mydataset_eu.mytable2` table in the `eu` multi-region. Both datasets are in the default project.
 
 ``` lang-sh
 bq cp --sync=false mydataset_us.mytable mydataset_eu.mytable2
 ```
 
-To copy a table across regions into a CMEK-enabled destination dataset, you must [enable CMEK on the table](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#change_to_kms) with a key from the table's region. The CMEK on the table doesn't have to be the same CMEK in use by the destination dataset. The following example copies a CMEK-enabled table to a destination dataset using the `  bq cp  ` command.
+To copy a table across regions into a CMEK-enabled destination dataset, you must [enable CMEK on the table](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#change_to_kms) with a key from the table's region. The CMEK on the table doesn't have to be the same CMEK in use by the destination dataset. The following example copies a CMEK-enabled table to a destination dataset using the `bq cp` command.
 
 ``` lang-sh
 bq cp source-project-id:source-dataset-id.source-table-id destination-project-id:destination-dataset-id.destination-table-id
 ```
 
-Conversely, to copy a CMEK-enabled table across regions into a destination dataset, you can [enable CMEK on the destination dataset](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#dataset_default_key) with a key from the destination dataset's region. You can also use the `  destination_kms_keys  ` flag in the `  bq cp  ` command, as shown in the following example:
+Conversely, to copy a CMEK-enabled table across regions into a destination dataset, you can [enable CMEK on the destination dataset](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#dataset_default_key) with a key from the destination dataset's region. You can also use the `destination_kms_keys` flag in the `bq cp` command, as shown in the following example:
 
 ``` lang-sh
 bq cp --destination_kms_key=projects/project_id/locations/eu/keyRings/eu_key/cryptoKeys/eu_region mydataset_us.mytable mydataset_eu.mytable2
@@ -1458,9 +1448,9 @@ bq cp --destination_kms_key=projects/project_id/locations/eu/keyRings/eu_key/cry
 
 ### API
 
-To copy a table across regions using the API, call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and configure a table `  copy  ` job.
+To copy a table across regions using the API, call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and configure a table `copy` job.
 
-Specify your region in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+Specify your region in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
 ### C\#
 
@@ -1715,19 +1705,19 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Copying a table across regions is subject to the following limitations:
 
-  - You can't copy a table using the Google Cloud console or the [`  TABLE COPY DDL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
+  - You can't copy a table using the Google Cloud console or the [`TABLE COPY DDL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
   - You can't copy a table if there are any policy tags on the source table.
   - You can't copy a table if the source table is larger than 20 physical TiB. See [get information about tables](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) for the source table physical size. Additionally, copying source tables that are larger than 1 physical TiB across regions may need multiple retries to successfully copy them.
   - You can't copy IAM policies associated with the tables. You can apply the same policies to the destination after the copy is completed.
   - If the copy operation overwrites an existing table, [tags](https://docs.cloud.google.com/bigquery/docs/tags) on the existing table are removed.
   - You can't copy multiple source tables into a single destination table.
-  - You can't copy tables in append mode. If you use `  write_empty  ` mode, the destination table must not exist.
+  - You can't copy tables in append mode. If you use `write_empty` mode, the destination table must not exist.
   - [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) information is not copied to the destination region.
   - When you copy a table clone or snapshot to a new region, a full copy of the table is created. This incurs additional storage costs.
 
 ### View current quota usage
 
-You can view your current usage of query, load, extract, or copy jobs by running an `  INFORMATION_SCHEMA  ` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `  INFORMATION_SCHEMA.JOBS  ` view to list the number of query, load, extract, and copy jobs by project:
+You can view your current usage of query, load, extract, or copy jobs by running an `INFORMATION_SCHEMA` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `INFORMATION_SCHEMA.JOBS` view to list the number of query, load, extract, and copy jobs by project:
 
 ``` notranslate
 SELECT
@@ -1739,7 +1729,7 @@ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
 WHERE date(creation_time)= CURRENT_DATE()
 ```
 
-**Note:** The `  INFORMATION_SCHEMA  ` view does not display cross-region copy jobs.
+**Note:** The `INFORMATION_SCHEMA` view does not display cross-region copy jobs.
 
 ### Maximum number of copy jobs per day per project quota errors
 
@@ -1753,7 +1743,7 @@ BigQuery returns this error when the number of copy jobs running in a project ha
 
 If you'd like to gather more data about where the copy jobs are coming from, you can try the following:
 
-  - If your copy jobs are located in a single or only a few regions, you can try querying the [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
+  - If your copy jobs are located in a single or only a few regions, you can try querying the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
     
     ``` notranslate
     SELECT
@@ -1783,9 +1773,9 @@ If you'd like to gather more data about where the copy jobs are coming from, you
 You can delete a table in the following ways:
 
   - Using the Google Cloud console.
-  - Using a data definition language (DDL) `  DROP TABLE  ` statement.
-  - Using the bq command-line tool `  bq rm  ` command.
-  - Calling the [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method.
+  - Using a data definition language (DDL) `DROP TABLE` statement.
+  - Using the bq command-line tool `bq rm` command.
+  - Calling the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method.
   - Using the client libraries.
 
 To delete all of the tables in the dataset, [delete the dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets) .
@@ -1796,7 +1786,7 @@ Deleting a table also deletes any permissions associated with this table. When y
 
 ### Required roles
 
-To get the permissions that you need to delete a table, ask your administrator to grant you the [Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on the dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to delete a table, ask your administrator to grant you the [Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on the dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to delete a table. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -1804,8 +1794,8 @@ This predefined role contains the permissions required to delete a table. To see
 
 The following permissions are required to delete a table:
 
-  - `  bigquery.tables.delete  `
-  - `  bigquery.tables.get  `
+  - `bigquery.tables.delete`
+  - `bigquery.tables.get`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -1825,11 +1815,11 @@ To delete a table:
 
 4.  In the details pane, click **Delete** .
 
-5.  Type `  "delete"  ` in the dialog, then click **Delete** to confirm.
+5.  Type `"delete"` in the dialog, then click **Delete** to confirm.
 
 ### SQL
 
-Use the [`  DROP TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement) . The following example deletes a table named `  mytable  ` :
+Use the [`DROP TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement) . The following example deletes a table named `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1853,7 +1843,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use the `  bq rm  ` command with the `  --table  ` flag (or `  -t  ` shortcut) to delete a table. When you use the bq command-line tool to remove a table, you must confirm the action. You can use the `  --force  ` flag (or `  -f  ` shortcut) to skip confirmation.
+2.  Use the `bq rm` command with the `--table` flag (or `-t` shortcut) to delete a table. When you use the bq command-line tool to remove a table, you must confirm the action. You can use the `--force` flag (or `-f` shortcut) to skip confirmation.
     
     If the table is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
     
@@ -1872,29 +1862,29 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     Examples:
     
-    To delete the `  mytable  ` table from the `  mydataset  ` dataset, enter the following command. The `  mydataset  ` dataset is in your default project.
+    To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in your default project.
     
     ``` lang-sh
     bq rm -t mydataset.mytable
     ```
     
-    To delete the `  mytable  ` table from the `  mydataset  ` dataset, enter the following command. The `  mydataset  ` dataset is in the `  myotherproject  ` project, not your default project.
+    To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
     
     ``` lang-sh
     bq rm -t myotherproject:mydataset.mytable
     ```
     
-    To delete the `  mytable  ` table from the `  mydataset  ` dataset, enter the following command. The `  mydataset  ` dataset is in your default project. The command uses the `  -f  ` shortcut to bypass confirmation.
+    To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in your default project. The command uses the `-f` shortcut to bypass confirmation.
     
     ``` lang-sh
     bq rm -f -t mydataset.mytable
     ```
     
-    **Note:** You can enter the [`  bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) command in the bq command-line tool to confirm that a table was removed from a dataset.
+    **Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) command in the bq command-line tool to confirm that a table was removed from a dataset.
 
 ### API
 
-Call the [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) API method and specify the table to delete using the `  tableId  ` parameter.
+Call the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) API method and specify the table to delete using the `tableId` parameter.
 
 ### C\#
 

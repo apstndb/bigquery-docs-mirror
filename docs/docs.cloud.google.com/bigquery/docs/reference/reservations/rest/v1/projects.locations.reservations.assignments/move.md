@@ -12,7 +12,7 @@ This differs from removing an existing assignment and recreating a new one by pr
 
 ### HTTP request
 
-`  POST https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/reservations/*/assignments/*}:move  `
+`POST https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/reservations/*/assignments/*}:move`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,15 +20,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The resource name of the assignment, e.g. `  projects/myproject/locations/US/reservations/team1-prod/assignments/123  `
+Required. The resource name of the assignment, e.g. `projects/myproject/locations/US/reservations/team1-prod/assignments/123`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.reservationAssignments.delete  `
+  - `bigquery.reservationAssignments.delete`
 
 ### Request body
 
@@ -55,15 +55,15 @@ The request body contains data with the following structure:
 
 Fields
 
-`  destinationId  `
+`destinationId`
 
-`  string  `
+`string`
 
-The new reservation ID, e.g.: `  projects/myotherproject/locations/US/reservations/team2-prod  `
+The new reservation ID, e.g.: `projects/myotherproject/locations/US/reservations/team2-prod`
 
-`  assignmentId  `
+`assignmentId`
 
-`  string  `
+`string`
 
 The optional assignment ID. A new assignment name is generated if this field is empty.
 
@@ -77,7 +77,7 @@ If successful, the response body contains an instance of `  Assignment  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

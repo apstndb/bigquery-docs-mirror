@@ -1,8 +1,8 @@
 # The ML.ENTITY\_FEATURES\_AT\_TIME function
 
-This document describes the `  ML.ENTITY_FEATURES_AT_TIME  ` function, which lets you use multiple point-in-time cutoffs for multiple entities when retrieving features, because features can have time dependencies if they include time-sensitive data. To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) , use point-in-time features when training models and running inference.
+This document describes the `ML.ENTITY_FEATURES_AT_TIME` function, which lets you use multiple point-in-time cutoffs for multiple entities when retrieving features, because features can have time dependencies if they include time-sensitive data. To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) , use point-in-time features when training models and running inference.
 
-Use this function to retrieve features from multiple entities for multiple points in time. For example, you could retrieve features created at or before three different points in time for entity 1, and features created at or before yet another different point in time for entity 2. Use the [`  ML.FEATURES_AT_TIME  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
+Use this function to retrieve features from multiple entities for multiple points in time. For example, you could retrieve features created at or before three different points in time for entity 1, and features created at or before yet another different point in time for entity 2. Use the [`ML.FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
 
 ## Syntax
 
@@ -15,38 +15,38 @@ ML.ENTITY_FEATURES_AT_TIME(
 
 ### Arguments
 
-`  ML.ENTITY_FEATURES_AT_TIME  ` takes the following arguments:
+`ML.ENTITY_FEATURES_AT_TIME` takes the following arguments:
 
   - `  PROJECT_ID  ` : the project that contains the resource.
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  FEATURE_TABLE_NAME  ` : a `  STRING  ` value that specifies the name of the BigQuery table that contains the feature data. The feature table must contain the following columns:
+  - `  FEATURE_TABLE_NAME  ` : a `STRING` value that specifies the name of the BigQuery table that contains the feature data. The feature table must contain the following columns:
     
-      - `  entity_id  ` : a `  STRING  ` column that contains the ID of the entity related to the features.
+      - `entity_id` : a `STRING` column that contains the ID of the entity related to the features.
       - One or more feature columns.
-      - `  feature_timestamp  ` : a `  TIMESTAMP  ` column that identifies when the feature data was last updated.
+      - `feature_timestamp` : a `TIMESTAMP` column that identifies when the feature data was last updated.
     
-    The column names are case-insensitive. For example, you can use a column named `  Entity_ID  ` instead of `  entity_id  ` .
+    The column names are case-insensitive. For example, you can use a column named `Entity_ID` instead of `entity_id` .
     
     The feature table must be in [wide](https://en.wikipedia.org/wiki/Wide_and_narrow_data#Wide) format, with one column for each feature.
 
-  - `  FEATURE_QUERY_STATEMENT  ` : a `  STRING  ` value that specifies a GoogleSQL query that returns the feature data. This query must return the same columns as `  feature_table  ` . See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `  FEATURE_QUERY_STATEMENT  ` clause.
+  - `  FEATURE_QUERY_STATEMENT  ` : a `STRING` value that specifies a GoogleSQL query that returns the feature data. This query must return the same columns as `feature_table` . See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `FEATURE_QUERY_STATEMENT` clause.
 
-  - `  ENTITY_TIME_TABLE_NAME  ` : a `  STRING  ` value that specifies the name of the BigQuery table that maps entity IDs to feature lookup times. The entity time table must contain the following columns:
+  - `  ENTITY_TIME_TABLE_NAME  ` : a `STRING` value that specifies the name of the BigQuery table that maps entity IDs to feature lookup times. The entity time table must contain the following columns:
     
-      - `  entity_id  ` : a `  STRING  ` column that contains the entity ID.
-      - `  time  ` : a `  TIMESTAMP  ` column that identifies a point in time to use as a cutoff time when selecting features for the entity represented by the entity ID.
+      - `entity_id` : a `STRING` column that contains the entity ID.
+      - `time` : a `TIMESTAMP` column that identifies a point in time to use as a cutoff time when selecting features for the entity represented by the entity ID.
     
-    The column names are case-insensitive. For example, you can use a column named `  Entity_ID  ` instead of `  entity_id  ` .
+    The column names are case-insensitive. For example, you can use a column named `Entity_ID` instead of `entity_id` .
     
-    The table identified by the `  ENTITY_TIME_TABLE_NAME  ` value must be no larger than 100 MB.
+    The table identified by the `ENTITY_TIME_TABLE_NAME` value must be no larger than 100 MB.
 
-  - `  ENTITY_TIME_QUERY_STATEMENT  ` : a `  STRING  ` value that specifies a GoogleSQL query that returns the entity time data. This query must return the same columns as the `  ENTITY_TIME_TABLE_NAME  ` argument. See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `  ENTITY_TIME_QUERY_STATEMENT  ` clause.
+  - `  ENTITY_TIME_QUERY_STATEMENT  ` : a `STRING` value that specifies a GoogleSQL query that returns the entity time data. This query must return the same columns as the `ENTITY_TIME_TABLE_NAME` argument. See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `ENTITY_TIME_QUERY_STATEMENT` clause.
 
-  - `  NUM_ROWS  ` : an `  INT64  ` value that specifies the number of rows to return for each row in `  ENTITY_TIME_TABLE_NAME  ` . Defaults to `  1  ` .
+  - `  NUM_ROWS  ` : an `INT64` value that specifies the number of rows to return for each row in `ENTITY_TIME_TABLE_NAME` . Defaults to `1` .
 
-  - `  IGNORE_FEATURE_NULLS  ` : a `  BOOL  ` value that indicates whether to replace a `  NULL  ` value in a feature column with the feature column value from the row for the same entity that immediately precedes it in time. For example, for the following feature table and entity time table:
+  - `  IGNORE_FEATURE_NULLS  ` : a `BOOL` value that indicates whether to replace a `NULL` value in a feature column with the feature column value from the row for the same entity that immediately precedes it in time. For example, for the following feature table and entity time table:
     
     **Feature table**
     
@@ -82,7 +82,7 @@ ML.ENTITY_FEATURES_AT_TIME(
             num_rows => 1,
             ignore_feature_nulls => TRUE);
     
-    Results in the following output, where the `  f2  ` value from the row for entity ID 2 that is timestamped `  '2022-06-10 12:00:00+00'  ` is substituted for the `  NULL  ` value in the row timestamped `  '2022-06-11 10:00:00+00'  ` :
+    Results in the following output, where the `f2` value from the row for entity ID 2 that is timestamped `'2022-06-10 12:00:00+00'` is substituted for the `NULL` value in the row timestamped `'2022-06-11 10:00:00+00'` :
     
     ``` console
     +-----------+------+------+--------------------------+
@@ -92,15 +92,15 @@ ML.ENTITY_FEATURES_AT_TIME(
     +-----------+------+------+--------------------------+
     ```
     
-    If there is no available replacement value, for example, where there is no earlier row for that entity ID, a `  NULL  ` value is returned.
+    If there is no available replacement value, for example, where there is no earlier row for that entity ID, a `NULL` value is returned.
     
-    Defaults to `  FALSE  ` .
+    Defaults to `FALSE` .
 
 ## Output
 
-`  ML.ENTITY_FEATURES_AT_TIME  ` returns the input table rows that meet the point-in-time cutoff criteria, with the `  feature_timestamp  ` column showing the timestamp from the `  time  ` column of the entity time table.
+`ML.ENTITY_FEATURES_AT_TIME` returns the input table rows that meet the point-in-time cutoff criteria, with the `feature_timestamp` column showing the timestamp from the `time` column of the entity time table.
 
-Because you can specify multiple points in time from which to retrieve features for the same entity, it is possible to return duplicate rows, depending on the timestamps in the feature and entity time tables, and the `  num_rows  ` value you specify. For example, if the only row in the feature table for entity ID 1 is timestamped `  2022-06-11 10:00:00+00  ` , and you have two rows for entity ID 1 in the entity time table that both have later timestamps, the function output has 2 rows with the same feature data for entity ID 1.
+Because you can specify multiple points in time from which to retrieve features for the same entity, it is possible to return duplicate rows, depending on the timestamps in the feature and entity time tables, and the `num_rows` value you specify. For example, if the only row in the feature table for entity ID 1 is timestamped `2022-06-11 10:00:00+00` , and you have two rows for entity ID 1 in the entity time table that both have later timestamps, the function output has 2 rows with the same feature data for entity ID 1.
 
 If either of the following conditions are true:
 
@@ -113,7 +113,7 @@ Then the function doesn't return any output for that entity time table row.
 
 **Example 1**
 
-This example shows a how to retrain a model using only features that were created or updated before the timestamps identified in `  mydataset.entity_time_table  ` :
+This example shows a how to retrain a model using only features that were created or updated before the timestamps identified in `mydataset.entity_time_table` :
 
     CREATE OR REPLACE
       `mydataset.mymodel` OPTIONS (WARM_START = TRUE)
@@ -128,7 +128,7 @@ This example shows a how to retrain a model using only features that were create
 
 **Example 2**
 
-This example shows a how to get predictions from a model based on features that were created or updated before the timestamps identified in `  mydataset.entity_time_table  ` :
+This example shows a how to get predictions from a model based on features that were created or updated before the timestamps identified in `mydataset.entity_time_table` :
 
     SELECT
       *

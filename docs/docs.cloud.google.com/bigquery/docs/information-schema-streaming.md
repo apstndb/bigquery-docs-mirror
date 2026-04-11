@@ -1,24 +1,24 @@
 # STREAMING\_TIMELINE view
 
-The `  INFORMATION_SCHEMA.STREAMING_TIMELINE  ` view contains per minute aggregated streaming statistics for the current project.
+The `INFORMATION_SCHEMA.STREAMING_TIMELINE` view contains per minute aggregated streaming statistics for the current project.
 
-You can query the `  INFORMATION_SCHEMA  ` streaming views to retrieve historical and real-time information about streaming data into BigQuery that uses the legacy [`  tabledata.insertAll  ` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) and not the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . For more information about streaming data into BigQuery, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
+You can query the `INFORMATION_SCHEMA` streaming views to retrieve historical and real-time information about streaming data into BigQuery that uses the legacy [`tabledata.insertAll` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) and not the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . For more information about streaming data into BigQuery, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
-**Note:** The view names `  INFORMATION_SCHEMA.STREAMING_TIMELINE  ` and `  INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT  ` are synonymous and can be used interchangeably.
+**Note:** The view names `INFORMATION_SCHEMA.STREAMING_TIMELINE` and `INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required permission
 
-To query the `  INFORMATION_SCHEMA.STREAMING_TIMELINE  ` view, you need the `  bigquery.tables.list  ` Identity and Access Management (IAM) permission for the project.
+To query the `INFORMATION_SCHEMA.STREAMING_TIMELINE` view, you need the `bigquery.tables.list` Identity and Access Management (IAM) permission for the project.
 
 Each of the following predefined IAM roles includes the required permission:
 
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.resourceAdmin  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.user`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.resourceAdmin`
+  - `roles/bigquery.admin`
 
 **Caution:** The required \`bigquery.tables.list\` permission is *not* included in the [basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) Owner or Editor.
 
@@ -26,23 +26,23 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA  ` streaming views, the query results contain historical and real-time information about streaming data into BigQuery. Each row in the following views represents statistics for streaming into a specific table, aggregated over a one minute interval starting at `  start_timestamp  ` . Statistics are grouped by error code, so there will be one row for each error code encountered during the one minute interval for each timestamp and table combination. Successful requests have the error code set to `  NULL  ` . If no data was streamed into a table during a certain time period, then no rows are present for the corresponding timestamps for that table.
+When you query the `INFORMATION_SCHEMA` streaming views, the query results contain historical and real-time information about streaming data into BigQuery. Each row in the following views represents statistics for streaming into a specific table, aggregated over a one minute interval starting at `start_timestamp` . Statistics are grouped by error code, so there will be one row for each error code encountered during the one minute interval for each timestamp and table combination. Successful requests have the error code set to `NULL` . If no data was streamed into a table during a certain time period, then no rows are present for the corresponding timestamps for that table.
 
-The `  INFORMATION_SCHEMA.STREAMING_TIMELINE  ` view has the following schema:
+The `INFORMATION_SCHEMA.STREAMING_TIMELINE` view has the following schema:
 
-| Column name                        | Data type                  | Value                                                                                           |
-| ---------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `        start_timestamp       `   | `        TIMESTAMP       ` | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics. |
-| `        project_id       `        | `        STRING       `    | *(Clustering column)* ID of the project.                                                        |
-| `        project_number       `    | `        INTEGER       `   | Number of the project.                                                                          |
-| `        dataset_id       `        | `        STRING       `    | *(Clustering column)* ID of the dataset.                                                        |
-| `        table_id       `          | `        STRING       `    | *(Clustering column)* ID of the table.                                                          |
-| `        error_code       `        | `        STRING       `    | Error code returned for the requests specified by this row. NULL for successful requests.       |
-| `        total_requests       `    | `        INTEGER       `   | Total number of requests within the 1 minute interval.                                          |
-| `        total_rows       `        | `        INTEGER       `   | Total number of rows from all requests within the 1 minute interval.                            |
-| `        total_input_bytes       ` | `        INTEGER       `   | Total number of bytes from all rows within the 1 minute interval.                               |
+| Column name         | Data type   | Value                                                                                           |
+| ------------------- | ----------- | ----------------------------------------------------------------------------------------------- |
+| `start_timestamp`   | `TIMESTAMP` | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics. |
+| `project_id`        | `STRING`    | *(Clustering column)* ID of the project.                                                        |
+| `project_number`    | `INTEGER`   | Number of the project.                                                                          |
+| `dataset_id`        | `STRING`    | *(Clustering column)* ID of the dataset.                                                        |
+| `table_id`          | `STRING`    | *(Clustering column)* ID of the table.                                                          |
+| `error_code`        | `STRING`    | Error code returned for the requests specified by this row. NULL for successful requests.       |
+| `total_requests`    | `INTEGER`   | Total number of requests within the 1 minute interval.                                          |
+| `total_rows`        | `INTEGER`   | Total number of rows from all requests within the 1 minute interval.                            |
+| `total_input_bytes` | `INTEGER`   | Total number of bytes from all rows within the 1 minute interval.                               |
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Data retention
 
@@ -52,21 +52,21 @@ This view contains the streaming history of the past 180 days.
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-| View name                                                                                                                                                    | Resource scope | Region scope |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ------------ |
-| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.STREAMING_TIMELINE[_BY_PROJECT]       `` | Project level  | REGION       |
+| View name                                                                                                             | Resource scope | Region scope |
+| --------------------------------------------------------------------------------------------------------------------- | -------------- | ------------ |
+| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.STREAMING_TIMELINE[_BY_PROJECT]`` | Project level  | REGION       |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
-  - To query data in the US multi-region, use ``  `region-us`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT  ``
-  - To query data in the EU multi-region, use ``  `region-eu`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT  ``
-  - To query data in the asia-northeast1 region, use ``  `region-asia-northeast1`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT  ``
+  - To query data in the US multi-region, use `` `region-us`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT ``
+  - To query data in the EU multi-region, use `` `region-eu`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT ``
+  - To query data in the asia-northeast1 region, use `` `region-asia-northeast1`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT ``
 
 For a list of available regions, see [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
@@ -93,7 +93,7 @@ ORDER BY
   start_timestamp DESC;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -141,7 +141,7 @@ ORDER BY
   start_timestamp DESC;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -177,7 +177,7 @@ ORDER BY
 LIMIT 10;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -220,7 +220,7 @@ ORDER BY
   day, project_id, dataset_id DESC;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

@@ -13,19 +13,15 @@ Message for response when you subscribe to a Data Exchange.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;subscription&quot;: {
-    object (Subscription)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;subscription&quot;: {object (Subscription)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  subscription  `
+`subscription`
 
-`  object ( Subscription  ` )
+` object ( Subscription  ` )
 
 Subscription object created from this subscribe action.

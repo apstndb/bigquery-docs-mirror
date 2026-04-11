@@ -17,7 +17,7 @@ Ensure that you have the following resources:
   - A [connection to access your Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection) .
   - An [Amazon S3 BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) .
   - The correct Amazon Web Services (AWS) Identity and Access Management (IAM) policy:
-      - You must have the `  PutObject  ` permission to write data into the Amazon S3 bucket. For more information, see [Create an AWS IAM policy for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-policy) .
+      - You must have the `PutObject` permission to write data into the Amazon S3 bucket. For more information, see [Create an AWS IAM policy for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-policy) .
 
 <!-- end list -->
 
@@ -33,7 +33,7 @@ To run a query, select one of the following options:
 
 In the **Query editor** field, enter a GoogleSQL export query. GoogleSQL is the default syntax in the Google Cloud console.
 
-**Note:** To override the default project, use the `  --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -55,9 +55,9 @@ In the **Query editor** field, enter a GoogleSQL export query. GoogleSQL is the 
     
       - `  BUCKET_NAME  ` : the Amazon S3 bucket where you want to write the data.
     
-      - `  PATH  ` : the path where you want to write the exported file to. It must contain exactly one wildcard `  *  ` anywhere in the leaf directory of the path string, for example, `  ../aa/*  ` , `  ../aa/b*c  ` , `  ../aa/*bc  ` , and `  ../aa/bc*  ` . BigQuery replaces `  *  ` with `  0000..N  ` depending on the number of files exported. BigQuery determines the file count and sizes. If BigQuery decides to export two files, then `  *  ` in the first file's filename is replaced by `  000000000000  ` , and `  *  ` in the second file's filename is replaced by `  000000000001  ` .
+      - `  PATH  ` : the path where you want to write the exported file to. It must contain exactly one wildcard `*` anywhere in the leaf directory of the path string, for example, `../aa/*` , `../aa/b*c` , `../aa/*bc` , and `../aa/bc*` . BigQuery replaces `*` with `0000..N` depending on the number of files exported. BigQuery determines the file count and sizes. If BigQuery decides to export two files, then `*` in the first file's filename is replaced by `000000000000` , and `*` in the second file's filename is replaced by `000000000001` .
     
-      - `  FORMAT  ` : supported formats are `  JSON  ` , `  AVRO  ` , `  CSV  ` , and `  PARQUET  ` .
+      - `  FORMAT  ` : supported formats are `JSON` , `AVRO` , `CSV` , and `PARQUET` .
     
       - `  QUERY  ` : the query to analyze the data that is stored in a BigLake table. The dataset that contains the BigLake table used in the query must be located in the same [Amazon S3 region](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) as the target Amazon S3 bucket.
     
@@ -124,7 +124,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Troubleshooting
 
-If you get an error related to `  quota failure  ` , then check if you have reserved capacity for your queries. For more information about slot reservations, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3#before_you_begin) in this document.
+If you get an error related to `quota failure` , then check if you have reserved capacity for your queries. For more information about slot reservations, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3#before_you_begin) in this document.
 
 ## What's next
 

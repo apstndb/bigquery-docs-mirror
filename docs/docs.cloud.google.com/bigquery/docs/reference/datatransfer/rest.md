@@ -27,7 +27,7 @@ A [Discovery Document](https://developers.google.com/discovery/v1/reference/apis
 
 A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_endpoint) is a base URL that specifies the network address of an API service. One service might have multiple service endpoints. This service has the following service endpoint and all URIs below are relative to this service endpoint:
 
-  - `  https://bigquerydatatransfer.googleapis.com  `
+  - `https://bigquerydatatransfer.googleapis.com`
 
 ## REST Resource: [v1.projects](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects)
 
@@ -35,7 +35,7 @@ Methods
 
 `  enrollDataSources  `
 
-`  POST /v1/{name=projects/*}:enrollDataSources  `  
+`POST /v1/{name=projects/*}:enrollDataSources`  
 Enroll data sources in a user project.
 
 ## REST Resource: [v1.projects.dataSources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources)
@@ -44,17 +44,17 @@ Methods
 
 `  checkValidCreds  `
 
-`  POST /v1/{name=projects/*/dataSources/*}:checkValidCreds  `  
+`POST /v1/{name=projects/*/dataSources/*}:checkValidCreds`  
 Returns true if valid credentials exist for the given data source and requesting user.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/dataSources/*}  `  
+`GET /v1/{name=projects/*/dataSources/*}`  
 Retrieves a supported data source and returns its settings.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*}/dataSources  `  
+`GET /v1/{parent=projects/*}/dataSources`  
 Lists supported data sources and returns their settings.
 
 ## REST Resource: [v1.projects.locations](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations)
@@ -63,22 +63,22 @@ Methods
 
 `  enrollDataSources  `
 
-`  POST /v1/{name=projects/*/locations/*}:enrollDataSources  `  
+`POST /v1/{name=projects/*/locations/*}:enrollDataSources`  
 Enroll data sources in a user project.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*}  `  
+`GET /v1/{name=projects/*/locations/*}`  
 Gets information about a location.
 
 `  list  `
 
-`  GET /v1/{name=projects/*}/locations  `  
+`GET /v1/{name=projects/*}/locations`  
 Lists information about the supported locations for this service.
 
 `  unenrollDataSources  `
 
-`  POST /v1/{name=projects/*/locations/*}:unenrollDataSources  `  
+`POST /v1/{name=projects/*/locations/*}:unenrollDataSources`  
 Unenroll data sources in a user project.
 
 ## REST Resource: [v1.projects.locations.dataSources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources)
@@ -87,17 +87,17 @@ Methods
 
 `  checkValidCreds  `
 
-`  POST /v1/{name=projects/*/locations/*/dataSources/*}:checkValidCreds  `  
+`POST /v1/{name=projects/*/locations/*/dataSources/*}:checkValidCreds`  
 Returns true if valid credentials exist for the given data source and requesting user.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/dataSources/*}  `  
+`GET /v1/{name=projects/*/locations/*/dataSources/*}`  
 Retrieves a supported data source and returns its settings.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*}/dataSources  `  
+`GET /v1/{parent=projects/*/locations/*}/dataSources`  
 Lists supported data sources and returns their settings.
 
 ## REST Resource: [v1.projects.locations.transferConfigs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs)
@@ -106,37 +106,37 @@ Methods
 
 `  create  `
 
-`  POST /v1/{parent=projects/*/locations/*}/transferConfigs  `  
+`POST /v1/{parent=projects/*/locations/*}/transferConfigs`  
 Creates a new data transfer configuration.
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/locations/*/transferConfigs/*}  `  
+`DELETE /v1/{name=projects/*/locations/*/transferConfigs/*}`  
 Deletes a data transfer configuration, including any associated transfer runs and logs.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/transferConfigs/*}  `  
+`GET /v1/{name=projects/*/locations/*/transferConfigs/*}`  
 Returns information about a data transfer config.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*}/transferConfigs  `  
+`GET /v1/{parent=projects/*/locations/*}/transferConfigs`  
 Returns information about all transfer configs owned by a project in the specified location.
 
 `  patch  `
 
-`  PATCH /v1/{transferConfig.name=projects/*/locations/*/transferConfigs/*}  `  
+`PATCH /v1/{transferConfig.name=projects/*/locations/*/transferConfigs/*}`  
 Updates a data transfer configuration.
 
 `  scheduleRuns (deprecated)  `
 
-`  POST /v1/{parent=projects/*/locations/*/transferConfigs/*}:scheduleRuns  `  
+`POST /v1/{parent=projects/*/locations/*/transferConfigs/*}:scheduleRuns`  
 Creates transfer runs for a time range \[start\_time, end\_time\].
 
 `  startManualRuns  `
 
-`  POST /v1/{parent=projects/*/locations/*/transferConfigs/*}:startManualRuns  `  
+`POST /v1/{parent=projects/*/locations/*/transferConfigs/*}:startManualRuns`  
 Manually initiates transfer runs.
 
 ## REST Resource: [v1.projects.locations.transferConfigs.runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs)
@@ -145,17 +145,17 @@ Methods
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}  `  
+`DELETE /v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}`  
 Deletes the specified transfer run.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}  `  
+`GET /v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}`  
 Returns information about the particular transfer run.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*/transferConfigs/*}/runs  `  
+`GET /v1/{parent=projects/*/locations/*/transferConfigs/*}/runs`  
 Returns information about running and completed transfer runs.
 
 ## REST Resource: [v1.projects.locations.transferConfigs.runs.transferLogs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs)
@@ -164,7 +164,7 @@ Methods
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*/transferConfigs/*/runs/*}/transferLogs  `  
+`GET /v1/{parent=projects/*/locations/*/transferConfigs/*/runs/*}/transferLogs`  
 Returns log messages for the transfer run.
 
 ## REST Resource: [v1.projects.locations.transferConfigs.transferResources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources)
@@ -173,12 +173,12 @@ Methods
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/transferConfigs/*/transferResources/*}  `  
+`GET /v1/{name=projects/*/locations/*/transferConfigs/*/transferResources/*}`  
 Returns a transfer resource.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*/transferConfigs/*}/transferResources  `  
+`GET /v1/{parent=projects/*/locations/*/transferConfigs/*}/transferResources`  
 Returns information about transfer resources.
 
 ## REST Resource: [v1.projects.transferConfigs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs)
@@ -187,37 +187,37 @@ Methods
 
 `  create  `
 
-`  POST /v1/{parent=projects/*}/transferConfigs  `  
+`POST /v1/{parent=projects/*}/transferConfigs`  
 Creates a new data transfer configuration.
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/transferConfigs/*}  `  
+`DELETE /v1/{name=projects/*/transferConfigs/*}`  
 Deletes a data transfer configuration, including any associated transfer runs and logs.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/transferConfigs/*}  `  
+`GET /v1/{name=projects/*/transferConfigs/*}`  
 Returns information about a data transfer config.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*}/transferConfigs  `  
+`GET /v1/{parent=projects/*}/transferConfigs`  
 Returns information about all transfer configs owned by a project in the specified location.
 
 `  patch  `
 
-`  PATCH /v1/{transferConfig.name=projects/*/transferConfigs/*}  `  
+`PATCH /v1/{transferConfig.name=projects/*/transferConfigs/*}`  
 Updates a data transfer configuration.
 
 `  scheduleRuns (deprecated)  `
 
-`  POST /v1/{parent=projects/*/transferConfigs/*}:scheduleRuns  `  
+`POST /v1/{parent=projects/*/transferConfigs/*}:scheduleRuns`  
 Creates transfer runs for a time range \[start\_time, end\_time\].
 
 `  startManualRuns  `
 
-`  POST /v1/{parent=projects/*/transferConfigs/*}:startManualRuns  `  
+`POST /v1/{parent=projects/*/transferConfigs/*}:startManualRuns`  
 Manually initiates transfer runs.
 
 ## REST Resource: [v1.projects.transferConfigs.runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs)
@@ -226,17 +226,17 @@ Methods
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/transferConfigs/*/runs/*}  `  
+`DELETE /v1/{name=projects/*/transferConfigs/*/runs/*}`  
 Deletes the specified transfer run.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/transferConfigs/*/runs/*}  `  
+`GET /v1/{name=projects/*/transferConfigs/*/runs/*}`  
 Returns information about the particular transfer run.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/transferConfigs/*}/runs  `  
+`GET /v1/{parent=projects/*/transferConfigs/*}/runs`  
 Returns information about running and completed transfer runs.
 
 ## REST Resource: [v1.projects.transferConfigs.runs.transferLogs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs.transferLogs)
@@ -245,7 +245,7 @@ Methods
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs  `  
+`GET /v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs`  
 Returns log messages for the transfer run.
 
 ## REST Resource: [v1.projects.transferConfigs.transferResources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources)
@@ -254,10 +254,10 @@ Methods
 
 `  get  `
 
-`  GET /v1/{name=projects/*/transferConfigs/*/transferResources/*}  `  
+`GET /v1/{name=projects/*/transferConfigs/*/transferResources/*}`  
 Returns a transfer resource.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/transferConfigs/*}/transferResources  `  
+`GET /v1/{parent=projects/*/transferConfigs/*}/transferResources`  
 Returns information about transfer resources.

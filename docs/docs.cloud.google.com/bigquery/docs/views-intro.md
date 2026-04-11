@@ -25,13 +25,13 @@ BigQuery views are subject to the following limitations:
   - Views are read-only. For example, you can't run queries that insert, update, or delete data.
   - If your view references tables from remote [locations](https://docs.cloud.google.com/bigquery/docs/locations) , you must enable [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries) before you create the view.
   - A reference inside of a view must be qualified with a dataset. The default dataset doesn't affect a view body.
-  - You cannot use the `  TableDataList  ` JSON API method to retrieve data from a view. For more information, see [Tabledata: list](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) .
+  - You cannot use the `TableDataList` JSON API method to retrieve data from a view. For more information, see [Tabledata: list](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) .
   - You cannot mix GoogleSQL and legacy SQL queries when using views. A GoogleSQL query cannot reference a view defined using legacy SQL syntax.
   - You cannot reference [query parameters](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) in views.
   - The schemas of the underlying tables are stored with the view when the view is created. If columns are added, deleted, or modified after the view is created, the view isn't automatically updated and the reported schema will remain inaccurate until the view SQL definition is changed or the view is recreated. Even though the reported schema may be inaccurate, all submitted queries produce accurate results.
   - You cannot automatically update a legacy SQL view to GoogleSQL syntax. To modify the query used to define a view, you can use the following:
       - The [**Edit query**](https://docs.cloud.google.com/bigquery/docs/updating-views#update-sql) option in the Google Cloud console
-      - The [`  bq update --view  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command in the bq command-line tool
+      - The [`bq update --view`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command in the bq command-line tool
       - The [BigQuery Client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)
       - The [update](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) or [patch](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API methods.
   - You cannot include a temporary user-defined function or a temporary table in the SQL query that defines a view.

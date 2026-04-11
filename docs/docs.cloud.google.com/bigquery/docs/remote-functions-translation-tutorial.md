@@ -41,9 +41,9 @@ To set up a Google Cloud project for this tutorial, complete these steps:
 
 To get the permissions that you need to perform the tasks in this tutorial, ask your administrator to grant you the following IAM roles on your project:
 
-  - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` )
-  - [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
-  - [Cloud Functions Developer](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudfunctions#cloudfunctions.developer) ( `  roles/cloudfunctions.developer  ` )
+  - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` )
+  - [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
+  - [Cloud Functions Developer](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudfunctions#cloudfunctions.developer) ( `roles/cloudfunctions.developer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -53,10 +53,10 @@ These predefined roles contain the permissions required to perform the tasks in 
 
 The following permissions are required to perform the tasks in this tutorial:
 
-  - `  bigquery.datasets.create  `
-  - `  bigquery.connections.create  `
-  - `  bigquery.connections.get  `
-  - `  cloudfunctions.functions.create  `
+  - `bigquery.datasets.create`
+  - `bigquery.connections.create`
+  - `bigquery.connections.get`
+  - `cloudfunctions.functions.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -92,11 +92,11 @@ Using Cloud Run functions, create a function that translates input text into Spa
     
       - For **Environment** , select **2nd gen** .
     
-      - For **Function name** , enter `  translation-handler  ` .
+      - For **Function name** , enter `translation-handler` .
     
       - For **Region** , select **us-central1** .
     
-      - For **Maximum number of instances** , enter `  10  ` .
+      - For **Maximum number of instances** , enter `10` .
         
         This setting is in the **Runtime, build, connections and security settings** section.
         
@@ -104,7 +104,7 @@ Using Cloud Run functions, create a function that translates input text into Spa
     
       - For **Runtime** , select **Python 3.10** .
     
-      - For **Entry point** , enter `  handle_translation  ` .
+      - For **Entry point** , enter `handle_translation` .
 
 2.  In the file list, select **main.py** , and then paste the following code.
     
@@ -214,7 +214,7 @@ Using Cloud Run functions, create a function that translates input text into Spa
             # Convert the translated value to a list and return it
             return [translation.translated_text for translation in response.translations]
 
-    Update `  <your location>  ` with `  us-central1  ` .
+    Update `<your location>` with `us-central1` .
 
 3.  In the file list, select **requirements.txt** , and then paste the following text:
     
@@ -233,7 +233,7 @@ Using Cloud Run functions, create a function that translates input text into Spa
 
 [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) that will contain the remote function. When you create the dataset, include these specifications:
 
-  - For **Dataset ID** , enter `  remote_function_test  ` .
+  - For **Dataset ID** , enter `remote_function_test` .
   - For **Location type** , select **Multi-region** .
   - For **Multi-region** , select **US (multiple regions in United States)** .
 
@@ -244,11 +244,11 @@ Create a BigQuery connection so that you can implement a remote function with an
 1.  [Create a Google Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) with the following specifications:
     
       - For **Connection type** , select **BigLake and remote functions (Cloud Resource)**
-      - For **Connection ID** , enter `  remote-function-connection  ` .
+      - For **Connection ID** , enter `remote-function-connection` .
       - For **Location type** , select **Multi-region** .
       - For **Multi-region** , select **US (multiple regions in United States)** .
 
-2.  [Open the **Connections** list](https://docs.cloud.google.com/bigquery/docs/working-with-connections#list-connections) and select **`  us.remote-function-connection  `** .
+2.  [Open the **Connections** list](https://docs.cloud.google.com/bigquery/docs/working-with-connections#list-connections) and select **`us.remote-function-connection`** .
 
 3.  Copy the service account ID and save it for later. You must grant permissions to this ID in the next step.
 
@@ -262,7 +262,7 @@ The service account that you created in the previous step needs permission to us
 
 2.  Select your project.
 
-3.  Select the checkbox next to **`  translation-handler  `** .
+3.  Select the checkbox next to **`translation-handler`** .
 
 4.  In the **Permissions** panel, click **Add principal** .
 
@@ -301,7 +301,7 @@ To use the Cloud Run functions function that translates text into Spanish with a
     your_project.remote_function_test.translate_text.
     ```
 
-**Note:** To limit how many rows are included in an HTTP request, the `  max_batching_rows  ` option is set to `  10  ` . When you do not specify the `  max_batching_rows  ` option, BigQuery decides how many rows are included in an HTTP request.
+**Note:** To limit how many rows are included in an HTTP request, the `max_batching_rows` option is set to `10` . When you do not specify the `max_batching_rows` option, BigQuery decides how many rows are included in an HTTP request.
 
 ## Call the BigQuery remote function
 
@@ -323,7 +323,7 @@ After you create your remote function, test it to make sure that it is linked to
     +-------------------------------------------+
     ```
 
-2.  Optional: To test the remote function on a public dataset, enter the following query, and then click **Run** . To limit the results returned, use the `  LIMIT  ` clause.
+2.  Optional: To test the remote function on a public dataset, enter the following query, and then click **Run** . To limit the results returned, use the `LIMIT` clause.
     
         SELECT
             text,
@@ -350,7 +350,7 @@ If you don't plan to use these functions in this project, you can avoid addition
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

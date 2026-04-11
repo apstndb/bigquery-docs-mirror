@@ -1,44 +1,44 @@
 # SEARCH\_INDEX\_COLUMNS view
 
-The `  INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS  ` view contains one row for each search-indexed column on each table in a dataset.
+The `INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS` view contains one row for each search-indexed column on each table in a dataset.
 
 ## Required permissions
 
-To see [search index](https://docs.cloud.google.com/bigquery/docs/search-index) metadata, you need the `  bigquery.tables.get  ` or `  bigquery.tables.list  ` Identity and Access Management (IAM) permission on the table with the index. Each of the following predefined IAM roles includes at least one of these permissions:
+To see [search index](https://docs.cloud.google.com/bigquery/docs/search-index) metadata, you need the `bigquery.tables.get` or `bigquery.tables.list` Identity and Access Management (IAM) permission on the table with the index. Each of the following predefined IAM roles includes at least one of these permissions:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.user  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.user`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS  ` view, the query results contain one row for each indexed column on each table in a dataset.
+When you query the `INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS` view, the query results contain one row for each indexed column on each table in a dataset.
 
-The `  INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS  ` view has the following schema:
+The `INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS` view has the following schema:
 
-| Column name                        | Data type               | Value                                                                                                         |
-| ---------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `        index_catalog       `     | `        STRING       ` | The name of the project that contains the dataset.                                                            |
-| `        index_schema       `      | `        STRING       ` | The name of the dataset that contains the index.                                                              |
-| `        table_name       `        | `        STRING       ` | The name of the base table that the index is created on.                                                      |
-| `        index_name       `        | `        STRING       ` | The name of the index.                                                                                        |
-| `        index_column_name       ` | `        STRING       ` | The name of the top-level indexed column.                                                                     |
-| `        index_field_path       `  | `        STRING       ` | The full path of the expanded indexed field, starting with the column name. Fields are separated by a period. |
+| Column name         | Data type | Value                                                                                                         |
+| ------------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| `index_catalog`     | `STRING`  | The name of the project that contains the dataset.                                                            |
+| `index_schema`      | `STRING`  | The name of the dataset that contains the index.                                                              |
+| `table_name`        | `STRING`  | The name of the base table that the index is created on.                                                      |
+| `index_name`        | `STRING`  | The name of the index.                                                                                        |
+| `index_column_name` | `STRING`  | The name of the top-level indexed column.                                                                     |
+| `index_field_path`  | `STRING`  | The full path of the expanded indexed field, starting with the column name. Fields are separated by a period. |
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
 Queries against this view must have a [dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-| View Name                                                                                                                                  | Resource scope | Region scope     |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ---------------- |
-| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS       ` | Dataset level  | Dataset location |
+| View Name                                                                                           | Resource scope | Region scope     |
+| --------------------------------------------------------------------------------------------------- | -------------- | ---------------- |
+| `[         PROJECT_ID        .]         DATASET_ID        .INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS` | Dataset level  | Dataset location |
 
 Replace the following:
 
@@ -52,7 +52,7 @@ Replace the following:
 
 ## Examples
 
-The following example creates a search index on all columns of `  my_table  ` .
+The following example creates a search index on all columns of `my_table` .
 
 ``` notranslate
 CREATE TABLE dataset.my_table(
@@ -67,7 +67,7 @@ CREATE SEARCH INDEX my_index
 ON dataset.my_table(ALL COLUMNS);
 ```
 
-The following query extracts information on which fields are indexed. The `  index_field_path  ` indicates which field of a column is indexed. This differs from the `  index_column_name  ` only in the case of a `  STRUCT  ` , where the full path to the indexed field is given. In this example, column `  c  ` contains an `  ARRAY<STRING>  ` field `  e  ` and another `  STRUCT  ` called `  f  ` which contains a `  STRING  ` field `  g  ` , each of which is indexed.
+The following query extracts information on which fields are indexed. The `index_field_path` indicates which field of a column is indexed. This differs from the `index_column_name` only in the case of a `STRUCT` , where the full path to the indexed field is given. In this example, column `c` contains an `ARRAY<STRING>` field `e` and another `STRUCT` called `f` which contains a `STRING` field `g` , each of which is indexed.
 
     SELECT table_name, index_name, index_column_name, index_field_path
     FROM my_project.dataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS
@@ -82,7 +82,7 @@ The result is similar to the following:
     | my_table   | my_index   | c                 | c.f.g            |
     +------------+------------+-------------------+------------------+
 
-The following query joins the `  INFORMATION_SCHEMA.SEARCH_INDEX_COUMNS  ` view with the `  INFORMATION_SCHEMA.SEARCH_INDEXES  ` and `  INFORMATION_SCHEMA.COLUMNS  ` views to include the search index status and the data type of each column:
+The following query joins the `INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS` view with the `INFORMATION_SCHEMA.SEARCH_INDEXES` and `INFORMATION_SCHEMA.COLUMNS` views to include the search index status and the data type of each column:
 
 ``` notranslate
 SELECT

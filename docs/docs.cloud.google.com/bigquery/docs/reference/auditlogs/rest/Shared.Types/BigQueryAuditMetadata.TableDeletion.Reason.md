@@ -2,18 +2,18 @@ Describes how the table was deleted.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  TABLE_DELETE_REQUEST  `
+`TABLE_DELETE_REQUEST`
 
 Table was deleted using the tables.delete API.
 
-`  EXPIRED  `
+`EXPIRED`
 
 Table expired.
 
-`  QUERY  `
+`QUERY`
 
 Table deleted using a DDL query.

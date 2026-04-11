@@ -35,75 +35,58 @@ Resource (table/partition) that is being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;type&quot;: enum (ResourceType),
-  &quot;destination&quot;: enum (ResourceDestination),
-  &quot;latestRun&quot;: {
-    object (TransferRunBrief)
-  },
-  &quot;latestStatusDetail&quot;: {
-    object (TransferResourceStatusDetail)
-  },
-  &quot;lastSuccessfulRun&quot;: {
-    object (TransferRunBrief)
-  },
-  &quot;hierarchyDetail&quot;: {
-    object (HierarchyDetail)
-  },
-  &quot;updateTime&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: enum (ResourceType),&quot;destination&quot;: enum (ResourceDestination),&quot;latestRun&quot;: {object (TransferRunBrief)},&quot;latestStatusDetail&quot;: {object (TransferResourceStatusDetail)},&quot;lastSuccessfulRun&quot;: {object (TransferRunBrief)},&quot;hierarchyDetail&quot;: {object (HierarchyDetail)},&quot;updateTime&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Identifier. Resource name.
 
-`  type  `
+`type`
 
-`  enum ( ResourceType  ` )
+` enum ( ResourceType  ` )
 
 Optional. Resource type.
 
-`  destination  `
+`destination`
 
-`  enum ( ResourceDestination  ` )
+` enum ( ResourceDestination  ` )
 
 Optional. Resource destination.
 
-`  latestRun  `
+`latestRun`
 
-`  object ( TransferRunBrief  ` )
+` object ( TransferRunBrief  ` )
 
 Optional. Run details for the latest run.
 
-`  latestStatusDetail  `
+`latestStatusDetail`
 
-`  object ( TransferResourceStatusDetail  ` )
+` object ( TransferResourceStatusDetail  ` )
 
 Optional. Status details for the latest run.
 
-`  lastSuccessfulRun  `
+`lastSuccessfulRun`
 
-`  object ( TransferRunBrief  ` )
+` object ( TransferRunBrief  ` )
 
 Output only. Run details for the last successful run.
 
-`  hierarchyDetail  `
+`hierarchyDetail`
 
-`  object ( HierarchyDetail  ` )
+` object ( HierarchyDetail  ` )
 
 Optional. Details about the hierarchy.
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Time when the resource was last updated.
 
@@ -113,15 +96,15 @@ Type of resource being transferred.
 
 Enums
 
-`  RESOURCE_TYPE_UNSPECIFIED  `
+`RESOURCE_TYPE_UNSPECIFIED`
 
 Default value.
 
-`  RESOURCE_TYPE_TABLE  `
+`RESOURCE_TYPE_TABLE`
 
 Table resource type.
 
-`  RESOURCE_TYPE_PARTITION  `
+`RESOURCE_TYPE_PARTITION`
 
 Partition resource type.
 
@@ -131,27 +114,27 @@ The destination for a transferred resource.
 
 Enums
 
-`  RESOURCE_DESTINATION_UNSPECIFIED  `
+`RESOURCE_DESTINATION_UNSPECIFIED`
 
 Default value.
 
-`  RESOURCE_DESTINATION_BIGQUERY  `
+`RESOURCE_DESTINATION_BIGQUERY`
 
 BigQuery.
 
-`  RESOURCE_DESTINATION_DATAPROC_METASTORE  `
+`RESOURCE_DESTINATION_DATAPROC_METASTORE`
 
 Dataproc Metastore.
 
-`  RESOURCE_DESTINATION_BIGLAKE_METASTORE  `
+`RESOURCE_DESTINATION_BIGLAKE_METASTORE`
 
 BigLake Metastore.
 
-`  RESOURCE_DESTINATION_BIGLAKE_REST_CATALOG  `
+`RESOURCE_DESTINATION_BIGLAKE_REST_CATALOG`
 
 BigLake REST Catalog.
 
-`  RESOURCE_DESTINATION_BIGLAKE_HIVE_CATALOG  `
+`RESOURCE_DESTINATION_BIGLAKE_HIVE_CATALOG`
 
 BigLake Hive Catalog.
 
@@ -180,15 +163,15 @@ Basic information about a transfer run.
 
 Fields
 
-`  run  `
+`run`
 
-`  string  `
+`string`
 
-Optional. Run URI. The format must be: `  projects/{project}/locations/{location}/transferConfigs/{transferConfig}/run/{run}  `
+Optional. Run URI. The format must be: `projects/{project}/locations/{location}/transferConfigs/{transferConfig}/run/{run}`
 
-`  startTime  `
+`startTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Optional. Start time of the transfer run.
 
@@ -207,43 +190,34 @@ Status details of the resource being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;state&quot;: enum (ResourceTransferState),
-  &quot;summary&quot;: {
-    object (TransferStatusSummary)
-  },
-  &quot;error&quot;: {
-    object (Status)
-  },
-  &quot;completedPercentage&quot;: number
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;state&quot;: enum (ResourceTransferState),&quot;summary&quot;: {object (TransferStatusSummary)},&quot;error&quot;: {object (Status)},&quot;completedPercentage&quot;: number}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  state  `
+`state`
 
-`  enum ( ResourceTransferState  ` )
+` enum ( ResourceTransferState  ` )
 
 Optional. Transfer state of the resource.
 
-`  summary  `
+`summary`
 
-`  object ( TransferStatusSummary  ` )
+` object ( TransferStatusSummary  ` )
 
 Optional. Transfer status summary of the resource.
 
-`  error  `
+`error`
 
-`  object ( Status  ` )
+` object ( Status  ` )
 
 Optional. Transfer error details for the resource.
 
-`  completedPercentage  `
+`completedPercentage`
 
-`  number  `
+`number`
 
 Output only. Percentage of the transfer completed. Valid values: 0-100.
 
@@ -253,27 +227,27 @@ The transfer state of an individual resource (e.g., a table or partition). This 
 
 Enums
 
-`  RESOURCE_TRANSFER_STATE_UNSPECIFIED  `
+`RESOURCE_TRANSFER_STATE_UNSPECIFIED`
 
 Default value.
 
-`  RESOURCE_TRANSFER_PENDING  `
+`RESOURCE_TRANSFER_PENDING`
 
 Resource is waiting to be transferred.
 
-`  RESOURCE_TRANSFER_RUNNING  `
+`RESOURCE_TRANSFER_RUNNING`
 
 Resource transfer is running.
 
-`  RESOURCE_TRANSFER_SUCCEEDED  `
+`RESOURCE_TRANSFER_SUCCEEDED`
 
 Resource transfer is a success.
 
-`  RESOURCE_TRANSFER_FAILED  `
+`RESOURCE_TRANSFER_FAILED`
 
 Resource transfer failed.
 
-`  RESOURCE_TRANSFER_CANCELLED  `
+`RESOURCE_TRANSFER_CANCELLED`
 
 Resource transfer was cancelled.
 
@@ -292,29 +266,22 @@ Status summary of the resource being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;metrics&quot;: [
-    {
-      object (TransferStatusMetric)
-    }
-  ],
-  &quot;progressUnit&quot;: enum (TransferStatusUnit)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;metrics&quot;: [{object (TransferStatusMetric)}],&quot;progressUnit&quot;: enum (TransferStatusUnit)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  metrics[]  `
+`metrics[]`
 
-`  object ( TransferStatusMetric  ` )
+` object ( TransferStatusMetric  ` )
 
 Optional. List of transfer status metrics.
 
-`  progressUnit  `
+`progressUnit`
 
-`  enum ( TransferStatusUnit  ` )
+` enum ( TransferStatusUnit  ` )
 
 Input only. Unit based on which transfer status progress should be calculated.
 
@@ -333,46 +300,40 @@ Metrics for tracking the transfer status.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;completed&quot;: string,
-  &quot;pending&quot;: string,
-  &quot;failed&quot;: string,
-  &quot;total&quot;: string,
-  &quot;unit&quot;: enum (TransferStatusUnit)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;completed&quot;: string,&quot;pending&quot;: string,&quot;failed&quot;: string,&quot;total&quot;: string,&quot;unit&quot;: enum (TransferStatusUnit)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  completed  `
+`completed`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Number of units transferred successfully.
 
-`  pending  `
+`pending`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Number of units pending transfer.
 
-`  failed  `
+`failed`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Number of units that failed to transfer.
 
-`  total  `
+`total`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Total number of units for the transfer.
 
-`  unit  `
+`unit`
 
-`  enum ( TransferStatusUnit  ` )
+` enum ( TransferStatusUnit  ` )
 
 Optional. Unit for measuring progress (e.g., BYTES).
 
@@ -382,15 +343,15 @@ Unit of the transfer status.
 
 Enums
 
-`  TRANSFER_STATUS_UNIT_UNSPECIFIED  `
+`TRANSFER_STATUS_UNIT_UNSPECIFIED`
 
 Default value.
 
-`  TRANSFER_STATUS_UNIT_BYTES  `
+`TRANSFER_STATUS_UNIT_BYTES`
 
 Bytes.
 
-`  TRANSFER_STATUS_UNIT_OBJECTS  `
+`TRANSFER_STATUS_UNIT_OBJECTS`
 
 Objects.
 
@@ -409,34 +370,24 @@ Details about the hierarchy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field detail can be only one of the following:
-  &quot;tableDetail&quot;: {
-    object (TableDetail)
-  },
-  &quot;partitionDetail&quot;: {
-    object (PartitionDetail)
-  }
-  // End of list of possible types for union field detail.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field detail can be only one of the following:&quot;tableDetail&quot;: {object (TableDetail)},&quot;partitionDetail&quot;: {object (PartitionDetail)}// End of list of possible types for union field detail.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  detail  ` . Details about the hierarchy can be one of table/partition. `  detail  ` can be only one of the following:
+Union field `detail` . Details about the hierarchy can be one of table/partition. `detail` can be only one of the following:
 
-`  tableDetail  `
+`tableDetail`
 
-`  object ( TableDetail  ` )
+` object ( TableDetail  ` )
 
 Optional. Table details related to hierarchy.
 
-`  partitionDetail  `
+`partitionDetail`
 
-`  object ( PartitionDetail  ` )
+` object ( PartitionDetail  ` )
 
 Optional. Partition details related to hierarchy.
 
@@ -464,9 +415,9 @@ Table details related to hierarchy.
 
 Fields
 
-`  partitionCount  `
+`partitionCount`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Total number of partitions being tracked within the table.
 
@@ -494,18 +445,18 @@ Partition details related to hierarchy.
 
 Fields
 
-`  table  `
+`table`
 
-`  string  `
+`string`
 
 Optional. Name of the table which has the partitions.
 
 ## Methods
 
-### `             get           `
+### `            get           `
 
 Returns a transfer resource.
 
-### `             list           `
+### `            list           `
 
 Returns information about transfer resources.

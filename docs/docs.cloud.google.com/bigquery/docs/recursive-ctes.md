@@ -1,14 +1,14 @@
-In GoogleSQL for BigQuery, a `  WITH  ` clause contains one or more common table expressions (CTEs) that you can reference in a query expression. CTEs can be [non-recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#simple_cte) , [recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#recursive_cte) , or both. The [`  RECURSIVE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#recursive_keyword) keyword enables recursion in the `  WITH  ` clause ( `  WITH RECURSIVE  ` ).
+In GoogleSQL for BigQuery, a `WITH` clause contains one or more common table expressions (CTEs) that you can reference in a query expression. CTEs can be [non-recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#simple_cte) , [recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#recursive_cte) , or both. The [`RECURSIVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#recursive_keyword) keyword enables recursion in the `WITH` clause ( `WITH RECURSIVE` ).
 
 A recursive CTE can reference itself, a preceding CTE, or a subsequent CTE. A non-recursive CTE can reference only preceding CTEs and can't reference itself. Recursive CTEs run continuously until no new results are found, while non-recursive CTEs run once. For these reasons, recursive CTEs are commonly used for querying hierarchical data and graph data.
 
-For example, consider a graph where each row represents a node that can link to other nodes. To find the transitive closure of all reachable nodes from a particular start node without knowing the maximum number of hops, you would need a recursive CTE in the query ( `  WITH RECURSIVE  ` ). The recursive query would start with the base case of the start node, and each step would compute the new unseen nodes that can be reached from all the nodes seen so far up to the previous step. The query concludes when no new nodes can be found.
+For example, consider a graph where each row represents a node that can link to other nodes. To find the transitive closure of all reachable nodes from a particular start node without knowing the maximum number of hops, you would need a recursive CTE in the query ( `WITH RECURSIVE` ). The recursive query would start with the base case of the start node, and each step would compute the new unseen nodes that can be reached from all the nodes seen so far up to the previous step. The query concludes when no new nodes can be found.
 
-However, recursive CTEs can be computationally expensive, so before you use them, review this guide and the [`  WITH  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) section of the GoogleSQL reference documentation.
+However, recursive CTEs can be computationally expensive, so before you use them, review this guide and the [`WITH` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) section of the GoogleSQL reference documentation.
 
 ## Create a recursive CTE
 
-To create a recursive CTE in GoogleSQL, use the [`  WITH RECURSIVE  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) as shown in the following example:
+To create a recursive CTE in GoogleSQL, use the [`WITH RECURSIVE` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) as shown in the following example:
 
     WITH RECURSIVE
       CTE_1 AS (
@@ -36,16 +36,16 @@ A recursive CTE includes a base term, a union operator, and a recursive term. Th
 
 In the preceding example, the recursive CTE contains the following components:
 
-  - Recursive CTE name: `  CTE_1  `
-  - Base term: `  SELECT 1 AS iteration  `
-  - Union operator: `  UNION ALL  `
-  - Recursive term: `  SELECT iteration + 1 AS iteration FROM CTE_1 WHERE iteration < 3  `
+  - Recursive CTE name: `CTE_1`
+  - Base term: `SELECT 1 AS iteration`
+  - Union operator: `UNION ALL`
+  - Recursive term: `SELECT iteration + 1 AS iteration FROM CTE_1 WHERE iteration < 3`
 
-To learn more about the recursive CTE syntax, rules, and examples, see [`  WITH  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) in the GoogleSQL reference documentation.
+To learn more about the recursive CTE syntax, rules, and examples, see [`WITH` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) in the GoogleSQL reference documentation.
 
 ## Explore reachability in a directed acyclic graph (DAG)
 
-You can use a recursive query to explore reachability in a directed acyclic graph (DAG). The following query finds all nodes that can be reached from node `  5  ` in a graph called `  GraphData  ` :
+You can use a recursive query to explore reachability in a directed acyclic graph (DAG). The following query finds all nodes that can be reached from node `5` in a graph called `GraphData` :
 
     WITH RECURSIVE
       GraphData AS (
@@ -100,7 +100,7 @@ If you experience a recursion iteration limit error, review the suggestions in t
 
 To prevent infinite recursion, make sure the recursive term is able to produce an empty result after executing a certain number of iterations.
 
-One way to check for infinite recursion is to convert your recursive CTE to a `  TEMP TABLE  ` with a `  REPEAT  ` loop for the first `  100  ` iterations, as follows:
+One way to check for infinite recursion is to convert your recursive CTE to a `TEMP TABLE` with a `REPEAT` loop for the first `100` iterations, as follows:
 
 ``` notranslate
 DECLARE current_iteration INT64 DEFAULT 0;
@@ -122,12 +122,12 @@ END REPEAT;
 
 Replace the following values:
 
-  - `  recursive_cte_name  ` : The recursive CTE to debug.
-  - `  base_expression  ` : The base term of the recursive CTE.
-  - `  recursive_expression  ` : The recursive term of the recursive CTE.
-  - `  termination_condition_expression  ` : The termination expression of the recursive CTE.
+  - `recursive_cte_name` : The recursive CTE to debug.
+  - `base_expression` : The base term of the recursive CTE.
+  - `recursive_expression` : The recursive term of the recursive CTE.
+  - `termination_condition_expression` : The termination expression of the recursive CTE.
 
-For example, consider the following recursive CTE called `  TestCTE  ` :
+For example, consider the following recursive CTE called `TestCTE` :
 
     WITH RECURSIVE
       TestCTE AS (
@@ -138,12 +138,12 @@ For example, consider the following recursive CTE called `  TestCTE  ` :
 
 This example uses the following values:
 
-  - `  recursive_cte_name  ` : `  TestCTE  `
-  - `  base_expression  ` : `  SELECT 1  `
-  - `  recursive_expression  ` : `  n + 3  `
-  - `  termination_condition_expression  ` : `  MOD(n, 6) != 0  `
+  - `recursive_cte_name` : `TestCTE`
+  - `base_expression` : `SELECT 1`
+  - `recursive_expression` : `n + 3`
+  - `termination_condition_expression` : `MOD(n, 6) != 0`
 
-The following code would therefore test the `  TestCTE  ` for infinite recursion:
+The following code would therefore test the `TestCTE` for infinite recursion:
 
 ``` notranslate
 DECLARE current_iteration INT64 DEFAULT 0;
@@ -196,7 +196,7 @@ The preceding example produces the following results that include the iteration 
      | 10        | 1        |
      +-----------+----------*/
 
-These are the actual results produced during iteration `  2  ` :
+These are the actual results produced during iteration `2` :
 
     /*----------+-----------+
      | n        | iteration |
@@ -208,7 +208,7 @@ If the number of rows is always greater than zero, which is true in this example
 
 ### Verify the appropriate usage of the recursive CTE
 
-Verify that you're using the recursive CTE in an appropriate scenario. Recursive CTEs can be expensive to compute because they're designed to query hierarchical data and graph data. If you aren't querying these two kinds of data, consider alternatives, such as using the [`  LOOP  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#loop) with a non-recursive CTE.
+Verify that you're using the recursive CTE in an appropriate scenario. Recursive CTEs can be expensive to compute because they're designed to query hierarchical data and graph data. If you aren't querying these two kinds of data, consider alternatives, such as using the [`LOOP` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#loop) with a non-recursive CTE.
 
 ### Split a recursive CTE into multiple recursive CTEs
 
@@ -242,8 +242,8 @@ UNION ALL SELECT * FROM CTE_3 WHERE iteration > 500 * 2
 
 Replace the following values:
 
-  - `  base_expression  ` : The base term expression for the current CTE.
-  - `  recursive_expression  ` : The recursive term expression for the current CTE.
+  - `base_expression` : The base term expression for the current CTE.
+  - `recursive_expression` : The recursive term expression for the current CTE.
 
 For example, the following code splits a CTE into three distinct CTEs:
 
@@ -284,7 +284,7 @@ You could test the previous query on much larger iterations.
 
 ### Use a loop instead of a recursive CTE
 
-To avoid iteration limits, consider using a loop instead of a recursive CTE. You can create a loop with one of several loop statements, such as `  LOOP  ` , `  REPEAT  ` , or `  WHILE  ` . For more information, see [Loops](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#loops) .
+To avoid iteration limits, consider using a loop instead of a recursive CTE. You can create a loop with one of several loop statements, such as `LOOP` , `REPEAT` , or `WHILE` . For more information, see [Loops](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#loops) .
 
 ### Change the recursive limit
 

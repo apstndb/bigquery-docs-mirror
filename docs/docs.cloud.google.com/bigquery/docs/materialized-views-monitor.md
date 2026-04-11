@@ -6,9 +6,9 @@ To create a list of materialized views, see [List materialized views](https://do
 
 ## Materialized view information schema view
 
-To discover materialized views, query the [`  INFORMATION_SCHEMA.TABLES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) . To retrieve the properties of a materialized view, query the [`  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) .
+To discover materialized views, query the [`INFORMATION_SCHEMA.TABLES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) . To retrieve the properties of a materialized view, query the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) .
 
-Materialized views are not listed in the [`  INFORMATION_SCHEMA.VIEWS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) table.
+Materialized views are not listed in the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) table.
 
 ## Monitor automatic refresh
 
@@ -16,7 +16,7 @@ This section describes how to view [refresh details for materialized views](http
 
 ### View last refresh status
 
-To retrieve the current status of materialized views, call the [`  tables.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) , or query the [`  INFORMATION_SCHEMA.MATERIALIZED_VIEWS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) .
+To retrieve the current status of materialized views, call the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) , or query the [`INFORMATION_SCHEMA.MATERIALIZED_VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) .
 
 For example:
 
@@ -27,11 +27,11 @@ FROM
   `DATASET`.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
 ```
 
-If the value for `  last_refresh_status  ` is not `  NULL  ` , the last automatic refresh job failed. Manual refresh requests are not reflected here. Changes to base tables can invalidate a materialized view definition, resulting in an error during automatic refresh. For more information, see [Incremental updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) . For example, if a column that is referenced by the materialized view gets dropped from the base table, the `  last_refresh_status  ` field returns an `  invalidQuery  ` error. For more information, see [Error messages](https://docs.cloud.google.com/bigquery/docs/error-messages) .
+If the value for `last_refresh_status` is not `NULL` , the last automatic refresh job failed. Manual refresh requests are not reflected here. Changes to base tables can invalidate a materialized view definition, resulting in an error during automatic refresh. For more information, see [Incremental updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) . For example, if a column that is referenced by the materialized view gets dropped from the base table, the `last_refresh_status` field returns an `invalidQuery` error. For more information, see [Error messages](https://docs.cloud.google.com/bigquery/docs/error-messages) .
 
 ### List automatic refresh jobs
 
-To list materialized view automatic refresh jobs, call the [`  jobs.list  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list) . To retrieve details about the jobs, call the [`  jobs.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) . You can also query the [`  INFORMATION_SCHEMA.JOBS_BY_*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to retrieve job details. Automatic refresh jobs contain the `  materialized_view_refresh  ` prefix within the [job ID](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#FIELDS.id) and are started by a BigQuery administrator account.
+To list materialized view automatic refresh jobs, call the [`jobs.list` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list) . To retrieve details about the jobs, call the [`jobs.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) . You can also query the [`INFORMATION_SCHEMA.JOBS_BY_*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to retrieve job details. Automatic refresh jobs contain the `materialized_view_refresh` prefix within the [job ID](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#FIELDS.id) and are started by a BigQuery administrator account.
 
 For example:
 
@@ -47,7 +47,7 @@ WHERE
 LIMIT 10;
 ```
 
-To monitor the cost of refresh jobs and adjust the automatic refresh interval if needed, view the `  total_bytes_processed  ` and `  total_slot_ms  ` fields.
+To monitor the cost of refresh jobs and adjust the automatic refresh interval if needed, view the `total_bytes_processed` and `total_slot_ms` fields.
 
 For example, if the ingestion rate in the base tables is relatively small, it makes sense to refresh the view less often. If the underlying data changes quickly, it makes sense to refresh more often.
 
@@ -57,7 +57,7 @@ If the base tables ingest data at predefined points in time, such as by using a 
 
 2.  [Perform a manual refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#manual-refresh) , either as part of the ETL pipeline, or by configuring a scheduled query at specific times of the day.
 
-Table truncation, partition truncation, partition expiration, and `  UPDATE  ` , `  DELETE  ` , and `  MERGE  ` data manipulation language (DML) statements on a base table can all invalidate their materialized views. If the materialized view is partitioned, the modified partitions are invalidated; otherwise, the entire materialized view is invalidated. Therefore, you might want to batch your DML statements and perform the manual refresh at the end of your query.
+Table truncation, partition truncation, partition expiration, and `UPDATE` , `DELETE` , and `MERGE` data manipulation language (DML) statements on a base table can all invalidate their materialized views. If the materialized view is partitioned, the modified partitions are invalidated; otherwise, the entire materialized view is invalidated. Therefore, you might want to batch your DML statements and perform the manual refresh at the end of your query.
 
 For more information on pricing for materialized views, see [materialized views pricing](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#materialized_views_pricing) .
 
@@ -142,7 +142,7 @@ Complete the following steps to create an alert policy that specifies the condit
 
 5.  In the **Rolling window** setting of the **Transform data** section, specify a value greater than 10 minutes to ensure that multiple log entries matching your filter are counted, and click **Next** .
 
-6.  Specify **Threshold value** , `  3  ` for example, and optionally, configure the **Alert trigger** and **Threshold position** fields. Click **Next** .
+6.  Specify **Threshold value** , `3` for example, and optionally, configure the **Alert trigger** and **Threshold position** fields. Click **Next** .
 
 7.  Choose a notification channel for alerting.
 
@@ -233,7 +233,7 @@ For more information about counter metrics, see [Log-based metrics overview](htt
 
 ## Monitor materialized view usage
 
-To view the materialized view usage for a query job, you can call the [`  jobs.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) or query the [`  INFORMATION_SCHEMA.JOBS_BY_*  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , and view the `  materialized_view_statistics  ` field, which provides details about the use of materialized views by the query, including the following details:
+To view the materialized view usage for a query job, you can call the [`jobs.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) or query the [`INFORMATION_SCHEMA.JOBS_BY_*` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , and view the `materialized_view_statistics` field, which provides details about the use of materialized views by the query, including the following details:
 
   - Whether the materialized view was used.
   - If the materialized view was not used, [the reason it was rejected](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#rejectedreason) .
@@ -249,7 +249,7 @@ WHERE
   job_id = '<my-query-job-id>';
 ```
 
-To view the usage of a materialized view over time, query the [`  INFORMATION_SCHEMA.JOBS_BY_*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
+To view the usage of a materialized view over time, query the [`INFORMATION_SCHEMA.JOBS_BY_*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
 For example, the following query returns a summary of recent query jobs that use the target materialized view:
 

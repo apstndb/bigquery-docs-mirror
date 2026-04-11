@@ -27,7 +27,7 @@ You incur charges for:
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
@@ -41,15 +41,15 @@ This tutorial uses a dataset available through the [Google Cloud Public Dataset 
 
 Citi Bike is the nation's largest bike share program, with 10,000 bikes and 600 stations across Manhattan, Brooklyn, Queens, and Jersey City. This dataset includes Citi Bike trips since Citi Bike launched in September 2013 and is updated daily. The data is processed by Citi Bike to remove trips that are taken by staff to service and inspect the system and any trips that are less than 60 seconds in duration, which are considered false starts.
 
-You can start exploring this data in the BigQuery console by viewing the details of the `  citibike_stations  ` table:
+You can start exploring this data in the BigQuery console by viewing the details of the `citibike_stations` table:
 
 [Go to citibike\_stations schema](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=new_york_citibike&t=citibike_stations&page=table)
 
 Three columns in this table are relevant to this tutorial:
 
-  - `  bike_stations.longitude  ` : the longitude of a station. The values are valid WGS 84 longitudes in decimal degrees format.
-  - `  bike_stations.latitude  ` : the latitude of a station. The values are valid WGS 84 latitudes in decimal degrees format.
-  - `  num_bikes_available  ` : the number of bikes available for rental.
+  - `bike_stations.longitude` : the longitude of a station. The values are valid WGS 84 longitudes in decimal degrees format.
+  - `bike_stations.latitude` : the latitude of a station. The values are valid WGS 84 latitudes in decimal degrees format.
+  - `num_bikes_available` : the number of bikes available for rental.
 
 ## Query the bike stations with more than 30 bikes available
 
@@ -70,14 +70,14 @@ WHERE num_bikes_available > 30
 
 The query clauses do the following:
 
-  -   - `  SELECT ST_GeogPoint(longitude, latitude) AS WKT, num_bikes_available  `  
-        The `  SELECT  ` clause selects the `  num_bikes_available  ` column and uses the `  ST_GeogPoint  ` function to convert the values in the `  latitude  ` and `  longitude  ` columns to `  GEOGRAPHY  ` types (points).
+  -   - `SELECT ST_GeogPoint(longitude, latitude) AS WKT, num_bikes_available`  
+        The `SELECT` clause selects the `num_bikes_available` column and uses the `ST_GeogPoint` function to convert the values in the `latitude` and `longitude` columns to `GEOGRAPHY` types (points).
 
-  -   - ``  FROM `bigquery-public-data.new_york.citibike_stations`  ``  
-        The `  FROM  ` clause specifies the table being queried: `  citibike_stations  ` .
+  -   - `` FROM `bigquery-public-data.new_york.citibike_stations` ``  
+        The `FROM` clause specifies the table being queried: `citibike_stations` .
 
-  -   - `  WHERE num_bikes_available > 30  `  
-        The `  WHERE  ` clause filters the values in the `  num_bikes_available  ` column to just those stations with more than 30 bikes.
+  -   - `WHERE num_bikes_available > 30`  
+        The `WHERE` clause filters the values in the `num_bikes_available` column to just those stations with more than 30 bikes.
 
 ### Run the query
 
@@ -115,7 +115,7 @@ To visualize the results in an interactive map, follow these steps:
     
     The points on the map show the locations of each bike station.
 
-2.  You can apply uniform or data driven styling to your map. To visualize how many bikes are available at each station, for **Data column** select `  num_bikes_available  ` .
+2.  You can apply uniform or data driven styling to your map. To visualize how many bikes are available at each station, for **Data column** select `num_bikes_available` .
 
 3.  To improve visibility, try adjusting the **Opacity** , **Color** , or **Point size** . If your data contains outliers, you can adjust the **Min** and **Max** values. Geographies with values outside this range are still displayed on the map, but no color is applied.
 
@@ -185,14 +185,14 @@ To run the query:
 
 ### Format your visualization
 
-The Style section provides a list of visual styles for customization. Certain properties apply only to certain types of data. For example, `  circleRadius  ` affects only points.
+The Style section provides a list of visual styles for customization. Certain properties apply only to certain types of data. For example, `circleRadius` affects only points.
 
 Supported style properties include:
 
   - **fillColor** . The fill color of a polygon or point. For example, "linear" or "interval" functions can be used to map numeric values to a color gradient.
-  - **fillOpacity** . The fill opacity of a polygon or point. Values must be in the range 0 to 1, where `  0  ` = transparent and `  1  ` = opaque.
+  - **fillOpacity** . The fill opacity of a polygon or point. Values must be in the range 0 to 1, where `0` = transparent and `1` = opaque.
   - **strokeColor** . The stroke or outline color of a polygon or line.
-  - **strokeOpacity** . The stroke or outline opacity of polygon or line. Values must be in the range 0 to 1, where `  0  ` = transparent and `  1  ` = opaque.
+  - **strokeOpacity** . The stroke or outline opacity of polygon or line. Values must be in the range 0 to 1, where `0` = transparent and `1` = opaque.
   - **strokeWeight** . The stroke or outline width in pixels of a polygon or line.
   - **circleRadius** . The radius of the circle representing a point in pixels. For example, a "linear" function can be used to map numeric values to point sizes to create a scatterplot style.
 
@@ -205,7 +205,7 @@ Each style can be given either a global value (applied to every result) or a dat
   - **linear** . Data values of each field are interpolated linearly across values in the domain and are then styled with a blend of the corresponding styles in the range.
   - **field** . The specified field in the data is used as the input to the styling function.
   - **domain** . An ordered list of sample input values from a field. Sample inputs (domain) are paired with sample outputs (range) based on the given function and are used to infer style values for all inputs (even those not listed in the domain). Values in the domain must have the same type (text, number, and so on) as the values of the field you are visualizing.
-  - **range** . A list of sample output values for the style rule. Values in the range must have the same type (color or number) as the style property you are controlling. For example, the range of the `  fillColor  ` property should contain only colors.
+  - **range** . A list of sample output values for the style rule. Values in the range must have the same type (color or number) as the style property you are controlling. For example, the range of the `fillColor` property should contain only colors.
 
 To format your map:
 
@@ -213,7 +213,7 @@ To format your map:
 
 2.  Change the color of your points. Click **fillColor** .
 
-3.  In the **Value** field, enter **`  #0000FF  `** , the HTML color code for blue.
+3.  In the **Value** field, enter **`#0000FF`** , the HTML color code for blue.
 
 4.  Click **Apply Style** .
     
@@ -225,7 +225,7 @@ To format your map:
 
 6.  Click **fillOpacity** .
 
-7.  In the **Value** field, enter **`  0.5  `** and click **Apply Style** .
+7.  In the **Value** field, enter **`0.5`** and click **Apply Style** .
     
     ![Fill opacity.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-fill-opacity.png)
 
@@ -241,11 +241,11 @@ To format your map:
     
     2.  For **Function** , choose **linear** .
     
-    3.  For **Field** , choose **`  num_bikes_available  `** .
+    3.  For **Field** , choose **`num_bikes_available`** .
     
-    4.  For **Domain** , enter **`  30  `** in the first box and **`  60  `** in the second.
+    4.  For **Domain** , enter **`30`** in the first box and **`60`** in the second.
     
-    5.  For **Range** , enter **`  5  `** in the first box and **`  20  `** in the second.
+    5.  For **Range** , enter **`5`** in the first box and **`20`** in the second.
         
         ![Circle radius.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-radius.png)
 
@@ -267,7 +267,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

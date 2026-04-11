@@ -78,7 +78,7 @@ The BigQuery sandbox is subject to the following limits:
 
 ## View a public dataset
 
-BigQuery public datasets are available by default in BigQuery Studio in a project named `  bigquery-public-data  ` . In this tutorial you query the NYC Citi Bike Trips dataset. Citi Bike is a large bike share program, with 10,000 bikes and 600 stations across Manhattan, Brooklyn, Queens, and Jersey City. This dataset includes Citi Bike trips since Citi Bike launched in September 2013.
+BigQuery public datasets are available by default in BigQuery Studio in a project named `bigquery-public-data` . In this tutorial you query the NYC Citi Bike Trips dataset. Citi Bike is a large bike share program, with 10,000 bikes and 600 stations across Manhattan, Brooklyn, Queens, and Jersey City. This dataset includes Citi Bike trips since Citi Bike launched in September 2013.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -94,7 +94,7 @@ BigQuery public datasets are available by default in BigQuery Studio in a projec
 
 4.  In the **Add data** dialog, click ![Public dataset icon on the Filter by page](https://docs.cloud.google.com/static/bigquery/images/icon-public-dataset.png) **Public datasets** .
 
-5.  On the **Marketplace** page, in the **Search Marketplace** field, type `  NYC Citi Bike Trips  ` to narrow your search.
+5.  On the **Marketplace** page, in the **Search Marketplace** field, type `NYC Citi Bike Trips` to narrow your search.
 
 6.  In the search results, click **NYC Citi Bike Trips** .
 
@@ -102,9 +102,9 @@ BigQuery public datasets are available by default in BigQuery Studio in a projec
 
 ## Query a public dataset
 
-In the following steps, you query the `  citibike_trips  ` table to determine the 100 most popular Citi Bike stations in the NYC Citi Bike Trips public dataset. The query retrieves the station's name and location, and the number of trips that started at that station.
+In the following steps, you query the `citibike_trips` table to determine the 100 most popular Citi Bike stations in the NYC Citi Bike Trips public dataset. The query retrieves the station's name and location, and the number of trips that started at that station.
 
-The query uses the [ST\_GEOGPOINT function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) to create a point from each station's longitude and latitude parameters and returns that point in a `  GEOGRAPHY  ` column. The `  GEOGRAPHY  ` column is used to generate a heatmap in the integrated geography data viewer.
+The query uses the [ST\_GEOGPOINT function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) to create a point from each station's longitude and latitude parameters and returns that point in a `GEOGRAPHY` column. The `GEOGRAPHY` column is used to generate a heatmap in the integrated geography data viewer.
 
 1.  In the Google Cloud console, open the **BigQuery** page.
     
@@ -146,8 +146,8 @@ The query uses the [ST\_GEOGPOINT function](https://docs.cloud.google.com/bigque
 7.  In the **Visualization configuration** panel:
     
     1.  Verify that **Visualization type** is set to **Map** .
-    2.  Verify that **Geography column** is set to **`  geo_location  `** .
-    3.  For **Data column** , choose **`  num_trips  `** .
+    2.  Verify that **Geography column** is set to **`geo_location`** .
+    3.  For **Data column** , choose **`num_trips`** .
     4.  Use the add **Zoom in** option to reveal the map of Manhattan.
     
     ![A heatmap generated on the Visualization tab](https://docs.cloud.google.com/static/bigquery/images/query-visualization-ui.png)
@@ -179,7 +179,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

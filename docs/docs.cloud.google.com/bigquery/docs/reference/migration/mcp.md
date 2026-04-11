@@ -44,7 +44,7 @@ Fetches DDL suggestion for a given suggestion ID.
 
 ### Get MCP tool specifications
 
-To get the MCP tool specifications for all tools in an MCP server, use the `  tools/list  ` method. The following example demonstrates how to use `  curl  ` to list all tools and their specifications currently available within the MCP server.
+To get the MCP tool specifications for all tools in an MCP server, use the `tools/list` method. The following example demonstrates how to use `curl` to list all tools and their specifications currently available within the MCP server.
 
 <table>
 <colgroup>

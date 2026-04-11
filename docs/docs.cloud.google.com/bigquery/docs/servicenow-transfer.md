@@ -19,12 +19,12 @@ ServiceNow data transfers are subject to the following limitations:
 
 Incremental ServiceNow transfers are subject to the following limitations:
 
-  - You can only choose `  DATETIME  ` columns as watermark columns.
+  - You can only choose `DATETIME` columns as watermark columns.
   - Incremental ingestion is only supported for assets with valid watermark columns.
   - Values in a watermark column must be monotonically increasing.
   - Incremental transfers cannot sync delete operations in the source table.
   - A single transfer configuration can only support either incremental or full ingestion.
-  - You cannot update objects in the `  asset  ` list after the first incremental ingestion run.
+  - You cannot update objects in the `asset` list after the first incremental ingestion run.
   - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
   - You cannot change the watermark column or the primary key after the first incremental ingestion run.
   - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) .
@@ -42,7 +42,7 @@ You specify how data loads into BigQuery by selecting the **Full** or **Incremen
 
 You can configure a *full* data transfer to transfer all data from your ServiceNow datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify the *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Upsert write mode
 
@@ -52,7 +52,7 @@ When you select the upsert mode, you must select a watermark column and a primar
 
   - A watermark column is required for the ServiceNow connector to track changes in the source table.
     
-    Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
+    Select a watermark column that updates every time a row is modified. We recommend columns similar to the `UPDATED_AT` or `LAST_MODIFIED` column.
 
 <!-- end list -->
 
@@ -88,7 +88,7 @@ When you make changes to the table schema in your data source, incremental data 
 </tr>
 <tr class="odd">
 <td>Changing the data type in a column</td>
-<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">ALTER COLUMN</code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
 <p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
 </tr>
 <tr class="even">
@@ -121,11 +121,11 @@ Before you create a ServiceNow data transfer, do the following for ServiceNow an
 
   - Complete all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) for storing the data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -134,18 +134,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ## Set up a ServiceNow data transfer
 
@@ -167,10 +167,10 @@ Add ServiceNow data into BigQuery by setting up a transfer configuration using o
           - Select a network attachment to configure this data transfer to use a single, consistent IP address. You can use this option if your ServiceNow instance is configured to only accept traffic from specific IP addresses.
           - For more information about creating a network attachment, see [Configure connections with network attachments](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment)
           - For more information about defining IP addresses in ServiceNow, see [Define allowed ServiceNow internal IP addresses](https://www.servicenow.com/docs/csh?topicname=sc-ip-addresses-access-allowlist.html&version=latest)
-      - For **Instance ID** , enter the ServiceNow instance ID. You can get this from your ServiceNow URL—for example, `  https:// INSTANCE_ID .service-now.com  ` .
+      - For **Instance ID** , enter the ServiceNow instance ID. You can get this from your ServiceNow URL—for example, `https:// INSTANCE_ID .service-now.com` .
       - (Optional) For **ServiceNow Cloud Type** , select the cloud type for your ServiceNow account:
-          - Select **Commercial** if your ServiceNow instance URL follows the pattern `  https:// INSTANCE_ID .service-now.com  ` . This is the default value.
-          - Select **Government Community Cloud (GCC)** if your ServiceNow instance URL follows the pattern `  https:// INSTANCE_ID .servicenowservices.com  ` .
+          - Select **Commercial** if your ServiceNow instance URL follows the pattern `https:// INSTANCE_ID .service-now.com` . This is the default value.
+          - Select **Government Community Cloud (GCC)** if your ServiceNow instance URL follows the pattern `https:// INSTANCE_ID .servicenowservices.com` .
       - For **Username** , enter the ServiceNow username to use for the connection.
       - For **Password** , enter the ServiceNow password.
       - For **Client ID** , enter the client ID from your OAuth credentials. To generate credentials, see [Create OAuth Credentials](https://docs.oracle.com/cd/B13789_01/server.101/b10759/statements_9013.htm) .
@@ -203,7 +203,7 @@ Add ServiceNow data into BigQuery by setting up a transfer configuration using o
 
 ### bq
 
-Enter the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command and supply the transfer creation flag, `  --transfer_config  ` :
+Enter the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command and supply the transfer creation flag, `--transfer_config` :
 
     bq mk
         --transfer_config
@@ -217,13 +217,13 @@ Replace the following:
 
   - `  PROJECT_ID  ` (optional): Your Google Cloud project ID. If a project ID isn't specified, the default project is used.
 
-  - `  DATA_SOURCE  ` : the data source (for example, `  servicenow  ` ).
+  - `  DATA_SOURCE  ` : the data source (for example, `servicenow` ).
 
   - `  DISPLAY_NAME  ` : the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
   - `  DATASET  ` : the target dataset for the transfer configuration.
 
-  - `  PARAMETERS  ` : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a ServiceNow data transfer:
+  - `  PARAMETERS  ` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a ServiceNow data transfer:
     
     <table>
     <colgroup>
@@ -240,83 +240,83 @@ Replace the following:
     </thead>
     <tbody>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">           connector.networkAttachment          </code></td>
+    <td><code dir="ltr" translate="no">connector.networkAttachment</code></td>
     <td>Optional</td>
     <td>Name of the Network attachment to use for ensuring connectivity to the ServiceNow Instance.</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">           connector.instanceId          </code></td>
+    <td><code dir="ltr" translate="no">connector.instanceId</code></td>
     <td>Required</td>
     <td>Instance ID of the ServiceNow instance</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">           connector.authentication.username          </code></td>
+    <td><code dir="ltr" translate="no">connector.authentication.username</code></td>
     <td>Required</td>
     <td>Username for the ServiceNow instance of user.</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">           connector.authentication.password          </code></td>
+    <td><code dir="ltr" translate="no">connector.authentication.password</code></td>
     <td>Required</td>
     <td>Password for the ServiceNow instance of user.</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">           connector.authentication.oauth.clientId          </code></td>
+    <td><code dir="ltr" translate="no">connector.authentication.oauth.clientId</code></td>
     <td>Required</td>
     <td>Client ID for OAuth authentication with the ServiceNow instance.</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">           connector.authentication.oauth.clientSecret          </code></td>
+    <td><code dir="ltr" translate="no">connector.authentication.oauth.clientSecret</code></td>
     <td>Required</td>
     <td>Client Secret for OAuth authentication with the ServiceNow instance.</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">           connector.instanceCloudType          </code></td>
+    <td><code dir="ltr" translate="no">connector.instanceCloudType</code></td>
     <td>Optional</td>
     <td>Specify the cloud type of your ServiceNow account. Supported values are:
     <ul>
-    <li><code dir="ltr" translate="no">             COMMERCIAL_CLOUD            </code> , if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">             https://                           INSTANCE_ID                          .service-now.com            </code></li>
-    <li><code dir="ltr" translate="no">             GOVERNMENT_COMMUNITY_CLOUD            </code> if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">             https://                           INSTANCE_ID                          .servicenowservices.com            </code></li>
+    <li><code dir="ltr" translate="no">COMMERCIAL_CLOUD</code> , if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">https://               INSTANCE_ID              .service-now.com</code></li>
+    <li><code dir="ltr" translate="no">GOVERNMENT_COMMUNITY_CLOUD</code> if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">https://               INSTANCE_ID              .servicenowservices.com</code></li>
     </ul></td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">           ingestionType          </code></td>
+    <td><code dir="ltr" translate="no">ingestionType</code></td>
     <td>Optional</td>
     <td>Defines the method for transferring data from the source ServiceNow to the destination, determining whether a full dataset reload or an efficient incremental update is performed.</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">           writeMode          </code></td>
+    <td><code dir="ltr" translate="no">writeMode</code></td>
     <td>Optional</td>
     <td>If using incremental ingestion, determines the synchronization strategy for incremental ingestion, specifying <strong>Upsert</strong> (updated if existing, inserted if new) into the destination table. This field is required for incremental transfers.</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">           assets          </code></td>
+    <td><code dir="ltr" translate="no">assets</code></td>
     <td>Required</td>
     <td>List of the names of ServiceNow tables be transferred from ServiceNow as part of the transfer.</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">           watermarkColumns          </code></td>
+    <td><code dir="ltr" translate="no">watermarkColumns</code></td>
     <td>Optional</td>
     <td>If using incremental ingestion, source table field (typically datetime) used to track the last successful synchronization point, enabling the connector to efficiently query and transfer only the records that have been created or modified since that specific time. This field is required for incremental transfers.</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">           primaryKeys          </code></td>
+    <td><code dir="ltr" translate="no">primaryKeys</code></td>
     <td>Optional</td>
     <td>If using incremental ingestion, the unique column or combination of columns used to uniquely identify each row in the source table. This field is required for incremental transfers.</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">           valueType          </code></td>
+    <td><code dir="ltr" translate="no">valueType</code></td>
     <td>Optional</td>
     <td>Controls how specific data types from ServiceNow are mapped to BigQuery data types.</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">           connector.legacyMapping          </code></td>
+    <td><code dir="ltr" translate="no">connector.legacyMapping</code></td>
     <td>Required</td>
-    <td>Set to <code dir="ltr" translate="no">           true          </code> (default) to use the <a href="https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#data_type_mapping">legacy data type mapping</a> . Set to <code dir="ltr" translate="no">           false          </code> to use the updated data type mapping. If you are making an incremental transfer, this value must be <code dir="ltr" translate="no">           false          </code> . For more information about the data type mapping updates, see <a href="https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-servicenow">March 16, 2027</a> .</td>
+    <td>Set to <code dir="ltr" translate="no">true</code> (default) to use the <a href="https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#data_type_mapping">legacy data type mapping</a> . Set to <code dir="ltr" translate="no">false</code> to use the updated data type mapping. If you are making an incremental transfer, this value must be <code dir="ltr" translate="no">false</code> . For more information about the data type mapping updates, see <a href="https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-servicenow">March 16, 2027</a> .</td>
     </tr>
     </tbody>
     </table>
     
-    When specifying multiple assets during an incremental transfer, the values of the `  watermarkColumns  ` and `  primaryKeys  ` fields correspond to the position of values in the `  assets  ` field. Ensure the order of tables and their respective columns is maintained consistently across all related configuration lists.
+    When specifying multiple assets during an incremental transfer, the values of the `watermarkColumns` and `primaryKeys` fields correspond to the position of values in the `assets` field. Ensure the order of tables and their respective columns is maintained consistently across all related configuration lists.
     
     For example, the following command creates a ServiceNow data transfer in the default project with all the required parameters:
     
@@ -334,7 +334,7 @@ Replace the following:
             "connector.networkAttachment": "projects/dev-project1/regions/us-central1/networkattachments/na1"}'
     ```
     
-    The following command creates an incremental ServiceNow data transfer in the default project, and uses the `  UPSERT  ` write mode.
+    The following command creates an incremental ServiceNow data transfer in the default project, and uses the `UPSERT` write mode.
     
     ``` 
       bq mk
@@ -356,7 +356,7 @@ Replace the following:
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 When you save the transfer configuration, the ServiceNow connector automatically triggers a transfer run according to your schedule option. With every transfer run, the ServiceNow connector transfers all available data from ServiceNow into BigQuery.
 
@@ -368,25 +368,25 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 The following table shows how data types are mapped in a ServiceNow data transfer:
 
-| ServiceNow data type             | BigQuery data type        | [Updated BigQuery data type](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-servicenow) |
-| -------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `        decimal       `         | `        FLOAT64       `  |                                                                                                             |
-| `        integer       `         | `        INTEGER       `  |                                                                                                             |
-| `        boolean       `         | `        BOOLEAN       `  |                                                                                                             |
-| `        glide_date       `      | `        DATE       `     |                                                                                                             |
-| `        glide_date_time       ` | `        DATETIME       ` |                                                                                                             |
-| `        glide_list       `      | `        STRING       `   | `        ARRAY       `                                                                                      |
-| `        glide_time       `      | `        INT64       `    |                                                                                                             |
-| `        reference       `       | `        STRING       `   |                                                                                                             |
-| `        currency       `        | `        STRING       `   |                                                                                                             |
-| `        sys_class_name       `  | `        STRING       `   |                                                                                                             |
-| `        domain_id       `       | `        STRING       `   |                                                                                                             |
-| `        domain_path       `     | `        STRING       `   |                                                                                                             |
-| `        guid       `            | `        STRING       `   |                                                                                                             |
-| `        translated_html       ` | `        STRING       `   |                                                                                                             |
-| `        journal       `         | `        STRING       `   |                                                                                                             |
-| `        string       `          | `        STRING       `   |                                                                                                             |
-| `        list       `            | `        STRING       `   | `        ARRAY       `                                                                                      |
+| ServiceNow data type | BigQuery data type | [Updated BigQuery data type](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-servicenow) |
+| -------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `decimal`            | `FLOAT64`          |                                                                                                             |
+| `integer`            | `INTEGER`          |                                                                                                             |
+| `boolean`            | `BOOLEAN`          |                                                                                                             |
+| `glide_date`         | `DATE`             |                                                                                                             |
+| `glide_date_time`    | `DATETIME`         |                                                                                                             |
+| `glide_list`         | `STRING`           | `ARRAY`                                                                                                     |
+| `glide_time`         | `INT64`            |                                                                                                             |
+| `reference`          | `STRING`           |                                                                                                             |
+| `currency`           | `STRING`           |                                                                                                             |
+| `sys_class_name`     | `STRING`           |                                                                                                             |
+| `domain_id`          | `STRING`           |                                                                                                             |
+| `domain_path`        | `STRING`           |                                                                                                             |
+| `guid`               | `STRING`           |                                                                                                             |
+| `translated_html`    | `STRING`           |                                                                                                             |
+| `journal`            | `STRING`           |                                                                                                             |
+| `string`             | `STRING`           |                                                                                                             |
+| `list`               | `STRING`           | `ARRAY`                                                                                                     |
 
 ## Troubleshoot transfer issues
 

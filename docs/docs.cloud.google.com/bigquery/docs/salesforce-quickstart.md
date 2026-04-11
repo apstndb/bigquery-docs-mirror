@@ -14,8 +14,8 @@ Before working with Data Cloud data, you must be a Data Cloud user. If you have 
 
 The following roles and permissions are required:
 
-  - Analytics Hub Subscriber ( `  roles/analyticshub.subscriber  ` )
-  - BigQuery Admin ( `  roles/bigquery.admin  ` )
+  - Analytics Hub Subscriber ( `roles/analyticshub.subscriber` )
+  - BigQuery Admin ( `roles/bigquery.admin` )
 
 ## Share Data From Data Cloud
 
@@ -60,20 +60,20 @@ All of these objects are represented as views in BigQuery. These views point to 
 
 The following examples use a dataset called Northwest Trail Outfitters (NTO) that is hosted in Data Cloud. This dataset consists of three tables that represent the online sales data of the NTO organization:
 
-  - `  linked_nto_john.nto_customers__dll  `
-  - `  linked_nto_john.nto_products__dll  `
-  - `  linked_nto_john.nto_orders__dll  `
+  - `linked_nto_john.nto_customers__dll`
+  - `linked_nto_john.nto_products__dll`
+  - `linked_nto_john.nto_orders__dll`
 
 The other dataset used in these examples is offline Point of Sale data. This covers the offline sales, and consists of three tables:
 
-  - `  nto_pos.customers  `
-  - `  nto_pos.products  `
-  - `  nto_pos.orders  `
+  - `nto_pos.customers`
+  - `nto_pos.products`
+  - `nto_pos.orders`
 
 The following datasets store additional objects:
 
-  - `  aws_data  `
-  - `  us_data  `
+  - `aws_data`
+  - `us_data`
 
 ### Run ad-hoc queries
 
@@ -88,7 +88,7 @@ SELECT name__c, age__c
 
 ### Run cross-cloud queries
 
-Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](https://docs.cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `  john  ` .
+Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](https://docs.cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `john` .
 
 ``` notranslate
 -- Get combined sales for a customer from both offline and online sales
@@ -103,7 +103,7 @@ USING (
 
 ### Cross Cloud Data Transfer through CTAS
 
-You can use Create Table As Select (CTAS) to move data from Data Cloud tables in the BigQuery Omni region to the `  US  ` region.
+You can use Create Table As Select (CTAS) to move data from Data Cloud tables in the BigQuery Omni region to the `US` region.
 
 ``` notranslate
 -- Move all the orders for March to the US region
@@ -112,13 +112,13 @@ CREATE OR REPLACE TABLE us_data.online_orders_march
     WHERE EXTRACT(MONTH FROM order_time) = 3
 ```
 
-The destination table is a BigQuery managed table in the `  US  ` region. This table can be joined with other tables. This operation incurs AWS egress costs based on how much data is transferred.
+The destination table is a BigQuery managed table in the `US` region. This table can be joined with other tables. This operation incurs AWS egress costs based on how much data is transferred.
 
-Once the data is moved, you no longer need to pay egress fees for any queries that run in the `  online_orders_march  ` table.
+Once the data is moved, you no longer need to pay egress fees for any queries that run in the `online_orders_march` table.
 
 ### Cross cloud materialized views
 
-Cross Cloud Materialized Views ( [CCMV](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni-cross-cloud-materialized-views) ) transfer data from a BigQuery Omni region to a non-BigQuery Omni BigQuery region incrementally. Set up a new CCMV that transfers a summary of total sales from online transactions and replicate that data into the `  US  ` region.
+Cross Cloud Materialized Views ( [CCMV](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni-cross-cloud-materialized-views) ) transfer data from a BigQuery Omni region to a non-BigQuery Omni BigQuery region incrementally. Set up a new CCMV that transfers a summary of total sales from online transactions and replicate that data into the `US` region.
 
 You can access CCMVs from Ads Data Hub and join it with other Ads Data Hub data. CCMVs act like regular BigQuery Managed Tables for most part.
 
@@ -138,21 +138,21 @@ CREATE MATERIALIZED VIEW `aws_data.total_sales`
 
 #### Authorize the materialized view
 
-You must authorize materialized views to create a CCMV. You can either authorize the view ( `  aws_data.total_sales  ` ) or the dataset ( `  aws_data  ` ). To authorize the materialized view:
+You must authorize materialized views to create a CCMV. You can either authorize the view ( `aws_data.total_sales` ) or the dataset ( `aws_data` ). To authorize the materialized view:
 
 1.  In the Google Cloud console, go to the BigQuery page.
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  Open the source dataset `  listing_nto_john  ` .
+2.  Open the source dataset `listing_nto_john` .
 
 3.  Click **Sharing** , then click **Authorize Datasets** .
 
-4.  Enter the dataset name (in this case `  listing_nto_john  ` ), then click **Ok** .
+4.  Enter the dataset name (in this case `listing_nto_john` ), then click **Ok** .
 
 #### Create a replica materialized view
 
-Create a new replica materialized view in the `  US  ` region. The materialized view periodically replicates whenever there is a source data change to keep the replica up to date.
+Create a new replica materialized view in the `US` region. The materialized view periodically replicates whenever there is a source data change to keep the replica up to date.
 
 ``` notranslate
 -- Create a replica MV in the us region.
@@ -173,13 +173,13 @@ SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
   GROUP BY 1
 ```
 
-## Using Data Cloud data with `     INFORMATION_SCHEMA    `
+## Using Data Cloud data with `INFORMATION_SCHEMA`
 
-Data Cloud datasets support BigQuery `  INFORMATION_SCHEMA  ` views. The data in `  INFORMATION_SCHEMA  ` views is synced regularly from Data Cloud and may be stale. The `  SYNC_STATUS  ` column in the [`  TABLES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`  SCHEMATA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) views shows the last completed sync time, any errors that prevent BigQuery from providing fresh data, and any steps that are required to fix the error.
+Data Cloud datasets support BigQuery `INFORMATION_SCHEMA` views. The data in `INFORMATION_SCHEMA` views is synced regularly from Data Cloud and may be stale. The `SYNC_STATUS` column in the [`TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`SCHEMATA`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) views shows the last completed sync time, any errors that prevent BigQuery from providing fresh data, and any steps that are required to fix the error.
 
-`  INFORMATION_SCHEMA  ` queries don't reflect datasets that have been recently created before the initial sync.
+`INFORMATION_SCHEMA` queries don't reflect datasets that have been recently created before the initial sync.
 
-Data Cloud datasets are subject to the same [limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) as other linked datasets, such as only being accessible in `  INFORMATION_SCHEMA  ` in dataset-scoped queries.
+Data Cloud datasets are subject to the same [limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) as other linked datasets, such as only being accessible in `INFORMATION_SCHEMA` in dataset-scoped queries.
 
 ## What's next
 

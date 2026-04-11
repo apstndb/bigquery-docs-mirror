@@ -17,7 +17,7 @@ For help using the BigQuery API you can post questions to the developer communit
 
 ## Discuss BigQuery
 
-Visit the Google Cloud [Slack community](https://googlecloud-community.slack.com/) to discuss BigQuery and other Google Cloud products. If you haven't already joined, [use this form to sign up](https://join.slack.com/t/googlecloud-community/shared_invite/zt-3icuwfdvq-eq_58LqmOoCNc16mpZcaNA) . For BigQuery, join the [`  #bigquery  `](https://googlecloud-community.slack.com/messages/C0E2CFHJT/) channel.
+Visit the Google Cloud [Slack community](https://googlecloud-community.slack.com/) to discuss BigQuery and other Google Cloud products. If you haven't already joined, [use this form to sign up](https://join.slack.com/t/googlecloud-community/shared_invite/zt-3icuwfdvq-eq_58LqmOoCNc16mpZcaNA) . For BigQuery, join the [`#bigquery`](https://googlecloud-community.slack.com/messages/C0E2CFHJT/) channel.
 
 ## File feature requests and bug reports
 

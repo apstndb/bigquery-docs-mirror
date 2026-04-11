@@ -1,19 +1,19 @@
 GoogleSQL for BigQuery supports numbering functions. Numbering functions are a subset of window functions. To create a window function call and learn about the syntax for window functions, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
-Numbering functions assign values to each row based on their position within the specified window. The `  OVER  ` clause syntax varies across numbering functions.
+Numbering functions assign values to each row based on their position within the specified window. The `OVER` clause syntax varies across numbering functions.
 
 ## Function list
 
-| Name                                                                                                                                   | Summary                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| [`         CUME_DIST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#cume_dist)       | Gets the cumulative distribution (relative position (0,1\]) of each row within a window. |
-| [`         DENSE_RANK        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#dense_rank)     | Gets the dense rank (1-based, no gaps) of each row within a window.                      |
-| [`         NTILE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#ntile)               | Gets the quantile bucket number (1-based) of each row within a window.                   |
-| [`         PERCENT_RANK        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#percent_rank) | Gets the percentile rank (from 0 to 1) of each row within a window.                      |
-| [`         RANK        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#rank)                 | Gets the rank (1-based) of each row within a window.                                     |
-| [`         ROW_NUMBER        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#row_number)     | Gets the sequential row number (1-based) of each row within a window.                    |
+| Name                                                                                                                  | Summary                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [`CUME_DIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#cume_dist)       | Gets the cumulative distribution (relative position (0,1\]) of each row within a window. |
+| [`DENSE_RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#dense_rank)     | Gets the dense rank (1-based, no gaps) of each row within a window.                      |
+| [`NTILE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#ntile)               | Gets the quantile bucket number (1-based) of each row within a window.                   |
+| [`PERCENT_RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#percent_rank) | Gets the percentile rank (from 0 to 1) of each row within a window.                      |
+| [`RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#rank)                 | Gets the rank (1-based) of each row within a window.                                     |
+| [`ROW_NUMBER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#row_number)     | Gets the sequential row number (1-based) of each row within a window.                    |
 
-## `     CUME_DIST    `
+## `CUME_DIST`
 
     CUME_DIST()
     OVER over_clause
@@ -30,11 +30,11 @@ Numbering functions assign values to each row based on their position within the
 
 Return the relative rank of a row defined as NP/NR. NP is defined to be the number of rows that either precede or are peers with the current row. NR is the number of rows in the partition.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Example**
 
@@ -68,7 +68,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | Suzy Slane      | 2016-10-18 10:06:24+00 | F35-39   | 1           |
      +-----------------+------------------------+----------+-------------*/
 
-## `     DENSE_RANK    `
+## `DENSE_RANK`
 
     DENSE_RANK()
     OVER over_clause
@@ -85,11 +85,11 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 Returns the ordinal (1-based) rank of each row within the window partition. All peer rows receive the same rank value, and the subsequent rank value is incremented by one.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Type**
 
-`  INT64  `
+`INT64`
 
 **Examples**
 
@@ -148,7 +148,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | Suzy Slane      | 2016-10-18 10:06:24+00 | F35-39   | 4           |
      +-----------------+------------------------+----------+-------------*/
 
-## `     NTILE    `
+## `NTILE`
 
     NTILE(constant_integer_expression)
     OVER over_clause
@@ -163,13 +163,13 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Description**
 
-This function divides the rows into `  constant_integer_expression  ` buckets based on row ordering and returns the 1-based bucket number that is assigned to each row. The number of rows in the buckets can differ by at most 1. The remainder values (the remainder of number of rows divided by buckets) are distributed one for each bucket, starting with bucket 1. If `  constant_integer_expression  ` evaluates to NULL, 0 or negative, an error is provided.
+This function divides the rows into `constant_integer_expression` buckets based on row ordering and returns the 1-based bucket number that is assigned to each row. The number of rows in the buckets can differ by at most 1. The remainder values (the remainder of number of rows divided by buckets) are distributed one for each bucket, starting with bucket 1. If `constant_integer_expression` evaluates to NULL, 0 or negative, an error is provided.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Type**
 
-`  INT64  `
+`INT64`
 
 **Example**
 
@@ -203,7 +203,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | Suzy Slane      | 2016-10-18 10:06:24+00 | F35-39   | 3           |
      +-----------------+------------------------+----------+-------------*/
 
-## `     PERCENT_RANK    `
+## `PERCENT_RANK`
 
     PERCENT_RANK()
     OVER over_clause
@@ -218,13 +218,13 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Description**
 
-Return the percentile rank of a row defined as (RK-1)/(NR-1), where RK is the `  RANK  ` of the row and NR is the number of rows in the partition. Returns 0 if NR=1.
+Return the percentile rank of a row defined as (RK-1)/(NR-1), where RK is the `RANK` of the row and NR is the number of rows in the partition. Returns 0 if NR=1.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Example**
 
@@ -258,7 +258,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | Suzy Slane      | 2016-10-18 10:06:24+00 | F35-39   | 1                   |
      +-----------------+------------------------+----------+---------------------*/
 
-## `     RANK    `
+## `RANK`
 
     RANK()
     OVER over_clause
@@ -273,13 +273,13 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Description**
 
-Returns the ordinal (1-based) rank of each row within the ordered partition. All peer rows receive the same rank value. The next row or set of peer rows receives a rank value which increments by the number of peers with the previous rank value, instead of `  DENSE_RANK  ` , which always increments by 1.
+Returns the ordinal (1-based) rank of each row within the ordered partition. All peer rows receive the same rank value. The next row or set of peer rows receives a rank value which increments by the number of peers with the previous rank value, instead of `DENSE_RANK` , which always increments by 1.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Type**
 
-`  INT64  `
+`INT64`
 
 **Examples**
 
@@ -338,7 +338,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | Suzy Slane      | 2016-10-18 10:06:24+00 | F35-39   | 4           |
      +-----------------+------------------------+----------+-------------*/
 
-## `     ROW_NUMBER    `
+## `ROW_NUMBER`
 
     ROW_NUMBER()
     OVER over_clause
@@ -355,13 +355,13 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 Returns the sequential row ordinal (1-based) of each row for each ordered partition. The order of row numbers within their peer group is non-deterministic.
 
-Doesn't require the `  ORDER BY  ` clause. If the `  ORDER BY  ` clause is unspecified then the result is non-deterministic.
+Doesn't require the `ORDER BY` clause. If the `ORDER BY` clause is unspecified then the result is non-deterministic.
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Type**
 
-`  INT64  `
+`INT64`
 
 **Examples**
 

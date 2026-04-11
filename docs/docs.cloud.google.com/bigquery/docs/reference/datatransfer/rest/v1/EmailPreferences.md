@@ -22,8 +22,8 @@ Represents preferences for sending email notifications for transfer run events.
 
 Fields
 
-`  enableFailureEmail  `
+`enableFailureEmail`
 
-`  boolean  `
+`boolean`
 
 If true, email notifications will be sent on transfer run failures.

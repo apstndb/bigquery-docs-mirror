@@ -25,19 +25,19 @@ Before creating an Amazon Redshift transfer, follow these steps:
 
 1.  Ensure that the person creating the transfer has the following required Identity and Access Management (IAM) permissions in BigQuery:
     
-      - `  bigquery.transfers.update  ` permissions to create the transfer
-      - `  bigquery.datasets.update  ` permissions on the target dataset
+      - `bigquery.transfers.update` permissions to create the transfer
+      - `bigquery.datasets.update` permissions on the target dataset
     
-    The `  role/bigquery.admin  ` predefined IAM role includes `  bigquery.transfers.update  ` and `  bigquery.datasets.update  ` permissions. For more information on IAM roles in BigQuery Data Transfer Service, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
+    The `role/bigquery.admin` predefined IAM role includes `bigquery.transfers.update` and `bigquery.datasets.update` permissions. For more information on IAM roles in BigQuery Data Transfer Service, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-2.  Consult the documentation for Amazon S3 to ensure you have configured any permissions necessary to enable the transfer. At a minimum, the Amazon S3 source data must have the AWS managed policy [`  AmazonS3ReadOnlyAccess  `](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console) applied to it.
+2.  Consult the documentation for Amazon S3 to ensure you have configured any permissions necessary to enable the transfer. At a minimum, the Amazon S3 source data must have the AWS managed policy [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console) applied to it.
 
 3.  Grant the appropriate [IAM permissions](https://docs.cloud.google.com/iam/docs/roles-permissions) for creating and deleting VPC Network Peering to the individual setting up the transfer. The service uses the individual's Google Cloud user credentials to create the VPC peering connection.
     
-      - Permissions to create VPC peering: `  compute.networks.addPeering  `
-      - Permissions to delete VPC peering: `  compute.networks.removePeering  `
+      - Permissions to create VPC peering: `compute.networks.addPeering`
+      - Permissions to delete VPC peering: `compute.networks.removePeering`
     
-    The `  roles/project.owner  ` , `  roles/project.editor  ` , and `  roles/compute.networkAdmin  ` predefined IAM roles include the `  compute.networks.addPeering  ` and `  compute.networks.removePeering  ` permissions by default.
+    The `roles/project.owner` , `roles/project.editor` , and `roles/compute.networkAdmin` predefined IAM roles include the `compute.networks.addPeering` and `compute.networks.removePeering` permissions by default.
 
 ### Create a dataset
 
@@ -108,7 +108,7 @@ Use the following instructions to set up an Amazon Redshift transfer:
 
 4.  In the **Source type** section, select **Migration: Amazon Redshift** from the **Source** list.
 
-5.  In the **Transfer config name** section, enter a name for the transfer, such as `  My migration  ` , in the **Display name** field. The display name can be any value that allows you to easily identify the transfer if you need to modify it later.
+5.  In the **Transfer config name** section, enter a name for the transfer, such as `My migration` , in the **Display name** field. The display name can be any value that allows you to easily identify the transfer if you need to modify it later.
 
 6.  In the **Destination settings** section, choose [the dataset you created](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#create_a_dataset) from the **Dataset** list.
 
@@ -128,10 +128,10 @@ Use the following instructions to set up an Amazon Redshift transfer:
     
     6.  For **Amazon Redshift Schema** , enter the Amazon Redshift schema you're migrating.
     
-    7.  For **Table name patterns** , specify a name or a pattern for matching the table names in the schema. You can use regular expressions to specify the pattern in the form: `  <table1Regex>;<table2Regex>  ` . The pattern should follow Java regular expression syntax. For example:
+    7.  For **Table name patterns** , specify a name or a pattern for matching the table names in the schema. You can use regular expressions to specify the pattern in the form: `<table1Regex>;<table2Regex>` . The pattern should follow Java regular expression syntax. For example:
         
-          - `  lineitem;ordertb  ` matches tables that are named `  lineitem  ` and `  ordertb  ` .
-          - `  .*  ` matches all tables.
+          - `lineitem;ordertb` matches tables that are named `lineitem` and `ordertb` .
+          - `.*` matches all tables.
         
         Leave this field empty to migrate all tables from the specified schema.
         
@@ -141,11 +141,11 @@ Use the following instructions to set up an Amazon Redshift transfer:
         
         ![Amazon Redshift migration CIDR field](https://docs.cloud.google.com/static/bigquery/images/redshift-migration-cidr-field.png)
         
-          - The form is `  VPC_network_name:CIDR  ` , for example: `  my_vpc:10.251.1.0/24  ` .
-          - Use standard private VPC network address ranges in the CIDR notation, starting with `  10.x.x.x  ` .
+          - The form is `VPC_network_name:CIDR` , for example: `my_vpc:10.251.1.0/24` .
+          - Use standard private VPC network address ranges in the CIDR notation, starting with `10.x.x.x` .
           - The IP range must have more than 10 IP addresses.
           - The IP range must not overlap with any subnet in your project VPC network or the Amazon Redshift VPC network.
-          - If you have multiple transfers configured for the same Amazon Redshift instance, make sure to use the same `  VPC_network_name:CIDR  ` value in each, so that multiple transfers can reuse the same migration infrastructure.
+          - If you have multiple transfers configured for the same Amazon Redshift instance, make sure to use the same `VPC_network_name:CIDR` value in each, so that multiple transfers can reuse the same migration infrastructure.
         
         **Caution:** After being configured, the value of this CIDR block is immutable.
 

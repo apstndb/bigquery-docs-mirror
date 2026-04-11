@@ -2,9 +2,9 @@ A service to modify your BigQuery reservations.
 
 ## Service: bigqueryreservation.googleapis.com
 
-The Service name `  bigqueryreservation.googleapis.com  ` is needed to create RPC client stubs.
+The Service name `bigqueryreservation.googleapis.com` is needed to create RPC client stubs.
 
-## `         google.cloud.bigquery.reservation.v1.ReservationService       `
+## `        google.cloud.bigquery.reservation.v1.ReservationService       `
 
 Methods
 
@@ -103,7 +103,7 @@ Sets an access control policy for a resource.
 
 `  SplitCapacityCommitment  `
 
-Splits capacity commitment to two commitments of the same plan and `  commitment_end_time  ` .
+Splits capacity commitment to two commitments of the same plan and `commitment_end_time` .
 
 `  TestIamPermissions  `
 

@@ -11,13 +11,13 @@ Salesforce data transfers are subject to the following limitations:
   - The Salesforce connector uses Salesforce Bulk API V1 to connect to the Salesforce Sales Cloud endpoint to retrieve data.
       - The Salesforce connector only supports the Salesforce Bulk API V1 to connect to the Salesforce instance, and only supports the transfer of entities which are supported by the Salesforce Bulk API. For more information about what entities are supported, see ['Entity is not supported by the Bulk API' error](https://help.salesforce.com/s/articleView?id=000383508&type=1) .
   - The Salesforce connector does not support the transfer of the following objects that have binary fields.
-      - `  Attachment  `
-      - `  ContentVersion  `
-      - `  Document  `
-      - `  StaticResource  `
-      - `  Scontrol  `
-      - `  EmailCapture  `
-      - `  MailMergeTemplate  `
+      - `Attachment`
+      - `ContentVersion`
+      - `Document`
+      - `StaticResource`
+      - `Scontrol`
+      - `EmailCapture`
+      - `MailMergeTemplate`
   - The minimum interval time between recurring data transfers is 15 minutes. The default interval for a recurring transfer is 24 hours.
   - Due to Salesforce processing limits, scheduling too many data transfers at a time can lead to delays or failures. We recommend that you limit Salesforce data transfers to the following:
       - Have no more than 10 assets per transfer configuration.
@@ -31,12 +31,12 @@ Salesforce data transfers are subject to the following limitations:
 
 Incremental Salesforce transfers are subject to the following limitations:
 
-  - You can only choose `  TIMESTAMP  ` columns as watermark columns.
+  - You can only choose `TIMESTAMP` columns as watermark columns.
   - Incremental ingestion is only supported for assets with valid watermark columns.
   - Values in a watermark column must be monotonically increasing.
   - Incremental transfers cannot sync delete operations in the source table.
   - A single transfer configuration can only support either incremental or full ingestion.
-  - You cannot update objects in the `  asset  ` list after the first incremental ingestion run.
+  - You cannot update objects in the `asset` list after the first incremental ingestion run.
   - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
   - You cannot change the watermark column or the primary key after the first incremental ingestion run.
   - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) .
@@ -54,7 +54,7 @@ You can specify how data is loaded into BigQuery by selecting either the **Full*
 
 You can configure a *full* data transfer to transfer all data from your Salesforce datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Append write mode
 
@@ -62,7 +62,7 @@ The append write mode only inserts new rows to your destination table. This opti
 
 When you select the append mode, you must select a watermark column. A watermark column is required for the Salesforce connector to track changes in the source table.
 
-Select a watermark column that is only updated when the record was created, and won't change with subsequent updates. For example, the `  CreatedDate  ` column.
+Select a watermark column that is only updated when the record was created, and won't change with subsequent updates. For example, the `CreatedDate` column.
 
 #### Upsert write mode
 
@@ -70,7 +70,7 @@ The upsert write mode either updates a row or inserts a new row in your destinat
 
 When you select the upsert mode, you must select a watermark column and a primary key:
 
-\* A watermark column is required for the Salesforce connector to track changes in the source table. \* Select a watermark column that updates every time a row is modified. We recommend using the `  SystemModstamp  ` or `  LastModifiedDate  ` column.
+\* A watermark column is required for the Salesforce connector to track changes in the source table. \* Select a watermark column that updates every time a row is modified. We recommend using the `SystemModstamp` or `LastModifiedDate` column.
 
   - The primary key can be one or more columns on your table that are required for the Salesforce connector to determine if it needs to insert or update a row.
     
@@ -104,7 +104,7 @@ When you make changes to the table schema in your data source, incremental data 
 </tr>
 <tr class="odd">
 <td>Changing the data type in a column</td>
-<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">ALTER COLUMN</code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
 <p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
 </tr>
 <tr class="even">
@@ -126,8 +126,8 @@ You must [create a Salesforce Connected App](https://help.salesforce.com/s/artic
   - [Enable OAuth Settings](https://help.salesforce.com/s/articleView?id=sf.connected_app_create_api_integration.htm&type=5) with the following configurations:
       - Select the **Enable OAuth Settings** checkbox.
       - In the **Callback URL** field, enter the following:
-          - For a production environment, enter `  https://login.salesforce.com/services/oauth2/token  ` .
-          - For a sandbox environment, enter `  https://test.salesforce.com/services/oauth2/token  ` .
+          - For a production environment, enter `https://login.salesforce.com/services/oauth2/token` .
+          - For a sandbox environment, enter `https://test.salesforce.com/services/oauth2/token` .
       - Verify that the **Issue JSON Web Token(JWT)-based access tokens for named users** checkbox isn't selected.
   - In the **Selected OAuth Scopes** section, select **Manage user data via APIs (api)** .
   - Clear the **Required Proof Key for Code Exchange (PKCE) Extension for Supported Authorization Flows** checkbox.
@@ -148,30 +148,30 @@ Once you have created the Connected App, you must also configure the client cred
 
 You must have the following Salesforce information when creating a Salesforce data transfer:
 
-| Parameter Name                | Description                                                                                               |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `        myDomain       `     | Your [My Domain](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm) in Salesforce. |
-| `        clientId       `     | Consumer Key of the Salesforce connected application.                                                     |
-| `        clientSecret       ` | OAuth Client Secret or Consumer Secret of the Salesforce connected application.                           |
+| Parameter Name | Description                                                                                               |
+| -------------- | --------------------------------------------------------------------------------------------------------- |
+| `myDomain`     | Your [My Domain](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm) in Salesforce. |
+| `clientId`     | Consumer Key of the Salesforce connected application.                                                     |
+| `clientSecret` | OAuth Client Secret or Consumer Secret of the Salesforce connected application.                           |
 
-To obtain your `  myDomain  ` , `  clientID  ` , and `  clientSecret  ` values, select one of the following options:
+To obtain your `myDomain` , `clientID` , and `clientSecret` values, select one of the following options:
 
 ### Salesforce Classic
 
-### Retrieve `       myDomain      ` details
+### Retrieve `myDomain` details
 
-To find your `  myDomain  ` , do the following:
+To find your `myDomain` , do the following:
 
 1.  Sign in to the Salesforce platform.
 2.  Click **Setup** .
 3.  In the search bar, search for *My Domain* .
 4.  In the search results, click **Domain Management** \> **My Domain** .
 
-In the **My Domain Details** section, your `  myDomain  ` appears as the prefix in **Current My Domain URL** . For example, if the My Domain URL is `  example.my.salesforce.com  ` , the `  myDomain  ` value to use is `  example  ` .
+In the **My Domain Details** section, your `myDomain` appears as the prefix in **Current My Domain URL** . For example, if the My Domain URL is `example.my.salesforce.com` , the `myDomain` value to use is `example` .
 
-### Retrieve `       ClientId      ` and `       ClientSecret      ` details
+### Retrieve `ClientId` and `ClientSecret` details
 
-To find your `  ClientId  ` and `  ClientSecret  ` values, do the following:
+To find your `ClientId` and `ClientSecret` values, do the following:
 
 1.  Sign in to the Salesforce platform.
 2.  Click **Setup** .
@@ -180,13 +180,13 @@ To find your `  ClientId  ` and `  ClientSecret  ` values, do the following:
 5.  Click a **Connected App Name** .
 6.  In the **Connected Apps** details page, click **Manage Consumer Details** .
 7.  Verify your identity using one of the registered methods. You can view the consumer details page for up to five minutes before you're prompted to verify your identity again.
-8.  In the **Consumer Details** page, the **Consumer Key** is your `  ClientId  ` value. The **Customer Secret** is your `  ClientSecret  ` value.
+8.  In the **Consumer Details** page, the **Consumer Key** is your `ClientId` value. The **Customer Secret** is your `ClientSecret` value.
 
 ### Salesforce Lightning Experience
 
-### Retrieve `       myDomain      ` details
+### Retrieve `myDomain` details
 
-To find your `  myDomain  ` , do the following:
+To find your `myDomain` , do the following:
 
 1.  Sign in to the Salesforce platform.
 2.  Click **Setup** .
@@ -196,9 +196,9 @@ To find your `  myDomain  ` , do the following:
 1.  In the search bar, search for *My Domain* .
 2.  In the search results, click **Company Settings** \> **My Domain** .
 
-In the **My Domain Details** section, your `  myDomain  ` appears as the prefix in **Current My Domain URL** . For example, if the My Domain URL is `  example.my.salesforce.com  ` , the `  myDomain  ` value to use is `  example  ` .
+In the **My Domain Details** section, your `myDomain` appears as the prefix in **Current My Domain URL** . For example, if the My Domain URL is `example.my.salesforce.com` , the `myDomain` value to use is `example` .
 
-### Retrieve `       ClientId      ` and `       ClientSecret      ` details
+### Retrieve `ClientId` and `ClientSecret` details
 
 1.  Sign in to the Salesforce platform.
 2.  Click **Setup** .
@@ -207,7 +207,7 @@ In the **My Domain Details** section, your `  myDomain  ` appears as the prefix 
 5.  Find a connected app, then click **View** .
 6.  Click **Manage Consumer Details** .
 7.  Verify your identity using one of the registered methods. You can view the consumer details page for up to five minutes before you're prompted to verify your identity again.
-8.  In the **Consumer Details** page, the **Consumer Key** is your `  ClientId  ` value. The **Customer Secret** is your `  ClientSecret  ` value.
+8.  In the **Consumer Details** page, the **Consumer Key** is your `ClientId` value. The **Customer Secret** is your `ClientSecret` value.
 
 ### Setup IP allowlist for Salesforce transfers
 
@@ -228,11 +228,11 @@ Once you have set up the IP ranges, you can now specify the static IP when you [
 
   - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -241,18 +241,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ## Set up a Salesforce data transfer
 
@@ -299,7 +299,7 @@ Add Salesforce data into BigQuery by setting up a transfer configuration using o
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
 ``` notranslate
 bq mk
@@ -313,26 +313,26 @@ bq mk
 
 Where:
 
-  - PROJECT\_ID (optional): your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
+  - PROJECT\_ID (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - DATA\_SOURCE : the data source — `  salesforce  ` .
+  - DATA\_SOURCE : the data source — `salesforce` .
 
   - NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
   - DATASET : the target dataset for the transfer configuration.
 
-  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a Salesforce data transfer:
+  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Salesforce data transfer:
     
-      - `  connector.authentication.oauth.clientId  ` : the Consumer Key of the Salesforce connected application.
-      - `  connector.authentication.oauth.clientSecret  ` : OAuth Client Secret or Consumer Secret of the Salesforce connected application.
-      - `  connector.authentication.oauth.myDomain  ` : the [Salesforce My Domain](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm) . For example, if your domain URL is `  example.my.salesforce.com  ` , then the value is `  example  ` .
-      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#full_or_incremental_transfers) .
-      - `  writeMode  ` : specify either `  WRITE_MODE_APPEND  ` or `  WRITE_MODE_UPSERT  ` .
-      - `  watermarkColumns  ` : specify columns in your table as watermark columns. This field is required for incremental transfers.
-      - `  primaryKeys  ` : specify columns in your table as primary keys. This field is required for incremental transfers.
-      - `  assets  ` : the path to the Salesforce objects to be transferred to BigQuery.
+      - `connector.authentication.oauth.clientId` : the Consumer Key of the Salesforce connected application.
+      - `connector.authentication.oauth.clientSecret` : OAuth Client Secret or Consumer Secret of the Salesforce connected application.
+      - `connector.authentication.oauth.myDomain` : the [Salesforce My Domain](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm) . For example, if your domain URL is `example.my.salesforce.com` , then the value is `example` .
+      - `ingestionType` : specify either `FULL` or `INCREMENTAL` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#full_or_incremental_transfers) .
+      - `writeMode` : specify either `WRITE_MODE_APPEND` or `WRITE_MODE_UPSERT` .
+      - `watermarkColumns` : specify columns in your table as watermark columns. This field is required for incremental transfers.
+      - `primaryKeys` : specify columns in your table as primary keys. This field is required for incremental transfers.
+      - `assets` : the path to the Salesforce objects to be transferred to BigQuery.
 
-When specifying multiple assets during an incremental transfer, the values of the `  watermarkColumns  ` and `  primaryKeys  ` fields correspond to the position of values in the `  assets  ` field. In the following example, `  Id  ` corresponds to the table `  Account  ` , while `  master_label  ` and `  type  ` corresponds to the table `  CaseHistory  ` .
+When specifying multiple assets during an incremental transfer, the values of the `watermarkColumns` and `primaryKeys` fields correspond to the position of values in the `assets` field. In the following example, `Id` corresponds to the table `Account` , while `master_label` and `type` corresponds to the table `CaseHistory` .
 
 ``` notranslate
       "primaryKeys":[['Id'], ['master_label','type']],
@@ -340,7 +340,7 @@ When specifying multiple assets during an incremental transfer, the values of th
   
 ```
 
-The following command creates an incremental Salesforce data transfer in the default project, and uses the `  APPEND  ` write mode.
+The following command creates an incremental Salesforce data transfer in the default project, and uses the `APPEND` write mode.
 
 ``` notranslate
 bq mk
@@ -362,7 +362,7 @@ bq mk
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 When you save the transfer configuration, the Salesforce connector automatically triggers a transfer run according to your schedule option. With every transfer run, the Salesforce connector transfers all available data from Salesforce into BigQuery.
 
@@ -372,34 +372,34 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 The following table maps Salesforce data types to the corresponding BigQuery data types:
 
-| Salesforce data type                        | BigQuery data type         |
-| ------------------------------------------- | -------------------------- |
-| `        _bool       `                      | `        BOOLEAN       `   |
-| `        _int       `                       | `        INTEGER       `   |
-| `        _long       `                      | `        INTEGER       `   |
-| `        _double       `                    | `        FLOAT       `     |
-| `        currency       `                   | `        FLOAT       `     |
-| `        percent       `                    | `        FLOAT       `     |
-| `        geolocation (latitude)       `     | `        FLOAT       `     |
-| `        geolocation (longitude)       `    | `        FLOAT       `     |
-| `        date       `                       | `        DATE       `      |
-| `        datetime       `                   | `        TIMESTAMP       ` |
-| `        time       `                       | `        TIME       `      |
-| `        picklist       `                   | `        STRING       `    |
-| `        multipicklist       `              | `        STRING       `    |
-| `        combobox       `                   | `        STRING       `    |
-| `        reference       `                  | `        STRING       `    |
-| `        base64       `                     | `        STRING       `    |
-| `        textarea       `                   | `        STRING       `    |
-| `        phone       `                      | `        STRING       `    |
-| `        id       `                         | `        STRING       `    |
-| `        url       `                        | `        STRING       `    |
-| `        email       `                      | `        STRING       `    |
-| `        encryptedstring       `            | `        STRING       `    |
-| `        datacategorygroupreference       ` | `        STRING       `    |
-| `        location       `                   | `        STRING       `    |
-| `        address       `                    | `        STRING       `    |
-| `        anyType       `                    | `        STRING       `    |
+| Salesforce data type         | BigQuery data type |
+| ---------------------------- | ------------------ |
+| `_bool`                      | `BOOLEAN`          |
+| `_int`                       | `INTEGER`          |
+| `_long`                      | `INTEGER`          |
+| `_double`                    | `FLOAT`            |
+| `currency`                   | `FLOAT`            |
+| `percent`                    | `FLOAT`            |
+| `geolocation (latitude)`     | `FLOAT`            |
+| `geolocation (longitude)`    | `FLOAT`            |
+| `date`                       | `DATE`             |
+| `datetime`                   | `TIMESTAMP`        |
+| `time`                       | `TIME`             |
+| `picklist`                   | `STRING`           |
+| `multipicklist`              | `STRING`           |
+| `combobox`                   | `STRING`           |
+| `reference`                  | `STRING`           |
+| `base64`                     | `STRING`           |
+| `textarea`                   | `STRING`           |
+| `phone`                      | `STRING`           |
+| `id`                         | `STRING`           |
+| `url`                        | `STRING`           |
+| `email`                      | `STRING`           |
+| `encryptedstring`            | `STRING`           |
+| `datacategorygroupreference` | `STRING`           |
+| `location`                   | `STRING`           |
+| `address`                    | `STRING`           |
+| `anyType`                    | `STRING`           |
 
 ## Pricing
 

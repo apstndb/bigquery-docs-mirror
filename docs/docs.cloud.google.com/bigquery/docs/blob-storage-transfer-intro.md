@@ -35,43 +35,43 @@ There are two types of write preferences available, [incremental transfers](http
 
 ### Incremental transfers
 
-A transfer configuration with an **`  APPEND  `** or **`  WRITE_APPEND  `** write preference, also called an incremental transfer, incrementally appends new data since the previous successful transfer to a BigQuery destination table. When a transfer configuration runs with an **`  APPEND  `** write preference, the BigQuery Data Transfer Service filters for files which have been modified since the previous successful transfer run. To determine when a file is modified, BigQuery Data Transfer Service looks at the file metadata for a "last modified time" property. For example, the BigQuery Data Transfer Service looks at the [`  updated  ` timestamp property](https://docs.cloud.google.com/storage/docs/metadata#timestamps) in a Cloud Storage file. If the BigQuery Data Transfer Service finds any files with a "last modified time" that have occurred after the timestamp of the last successful transfer, the BigQuery Data Transfer Service transfers those files in an incremental transfer.
+A transfer configuration with an **`APPEND`** or **`WRITE_APPEND`** write preference, also called an incremental transfer, incrementally appends new data since the previous successful transfer to a BigQuery destination table. When a transfer configuration runs with an **`APPEND`** write preference, the BigQuery Data Transfer Service filters for files which have been modified since the previous successful transfer run. To determine when a file is modified, BigQuery Data Transfer Service looks at the file metadata for a "last modified time" property. For example, the BigQuery Data Transfer Service looks at the [`updated` timestamp property](https://docs.cloud.google.com/storage/docs/metadata#timestamps) in a Cloud Storage file. If the BigQuery Data Transfer Service finds any files with a "last modified time" that have occurred after the timestamp of the last successful transfer, the BigQuery Data Transfer Service transfers those files in an incremental transfer.
 
-To demonstrate how incremental transfers work, consider the following Cloud Storage transfer example. A user creates a file in a Cloud Storage bucket at time 2023-07-01T00:00Z named `  file_1  ` . The [`  updated  ` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `  file_1  ` is the time that the file was created. The user then creates an incremental transfer from the Cloud Storage bucket, scheduled to run once daily at time 03:00Z, starting from 2023-07-01T03:00Z.
+To demonstrate how incremental transfers work, consider the following Cloud Storage transfer example. A user creates a file in a Cloud Storage bucket at time 2023-07-01T00:00Z named `file_1` . The [`updated` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `file_1` is the time that the file was created. The user then creates an incremental transfer from the Cloud Storage bucket, scheduled to run once daily at time 03:00Z, starting from 2023-07-01T03:00Z.
 
-  - At 2023-07-01T03:00Z, the first transfer run starts. As this is the first transfer run for this configuration, BigQuery Data Transfer Service attempts to load all files matching the source URI into the destination BigQuery table. The transfer run succeeds and BigQuery Data Transfer Service successfully loads `  file_1  ` into the destination BigQuery table.
-  - The next transfer run, at 2023-07-02T03:00Z, detects no files where the `  updated  ` timestamp property is greater than the last successful transfer run (2023-07-01T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
+  - At 2023-07-01T03:00Z, the first transfer run starts. As this is the first transfer run for this configuration, BigQuery Data Transfer Service attempts to load all files matching the source URI into the destination BigQuery table. The transfer run succeeds and BigQuery Data Transfer Service successfully loads `file_1` into the destination BigQuery table.
+  - The next transfer run, at 2023-07-02T03:00Z, detects no files where the `updated` timestamp property is greater than the last successful transfer run (2023-07-01T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
 
-The preceding example shows how the BigQuery Data Transfer Service looks at the `  updated  ` timestamp property of the source file to determine if any changes were made to the source files, and to transfer those changes if any were detected.
+The preceding example shows how the BigQuery Data Transfer Service looks at the `updated` timestamp property of the source file to determine if any changes were made to the source files, and to transfer those changes if any were detected.
 
-Following the same example, suppose that the user then creates another file in the Cloud Storage bucket at time 2023-07-03T00:00Z, named `  file_2  ` . The [`  updated  ` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `  file_2  ` is the time that the file was created.
+Following the same example, suppose that the user then creates another file in the Cloud Storage bucket at time 2023-07-03T00:00Z, named `file_2` . The [`updated` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `file_2` is the time that the file was created.
 
-  - The next transfer run, at 2023-07-03T03:00Z, detects that `  file_2  ` has an `  updated  ` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). Suppose that when the transfer run starts it fails due to a transient error. In this scenario, `  file_2  ` is not loaded into the destination BigQuery table. The last successful transfer run timestamp remains at 2023-07-01T03:00Z.
-  - The next transfer run, at 2023-07-04T03:00Z, detects that `  file_2  ` has an `  updated  ` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). This time, the transfer run completes without issue, so it successfully loads `  file_2  ` into the destination BigQuery table.
-  - The next transfer run, at 2023-07-05T03:00Z, detects no files where the `  updated  ` timestamp is greater than the last successful transfer run (2023-07-04T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
+  - The next transfer run, at 2023-07-03T03:00Z, detects that `file_2` has an `updated` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). Suppose that when the transfer run starts it fails due to a transient error. In this scenario, `file_2` is not loaded into the destination BigQuery table. The last successful transfer run timestamp remains at 2023-07-01T03:00Z.
+  - The next transfer run, at 2023-07-04T03:00Z, detects that `file_2` has an `updated` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). This time, the transfer run completes without issue, so it successfully loads `file_2` into the destination BigQuery table.
+  - The next transfer run, at 2023-07-05T03:00Z, detects no files where the `updated` timestamp is greater than the last successful transfer run (2023-07-04T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
 
 The preceding example shows that when a transfer fails, no files are transferred to the BigQuery destination table. Any file changes are transferred at the next successful transfer run. Any subsequent successful transfers following a failed transfer does not cause duplicate data. In the case of a failed transfer, you can also choose to [manually trigger a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) outside its regularly scheduled time.
 
-**Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`  updated  `](https://docs.cloud.google.com/storage/docs/metadata#timestamps) .
+**Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`updated`](https://docs.cloud.google.com/storage/docs/metadata#timestamps) .
 
 ### Truncated transfers
 
-A transfer configuration with a **`  MIRROR  `** or **`  WRITE_TRUNCATE  `** write preference, also called a truncated transfer, overwrites data in the BigQuery destination table during each transfer run with data from all files matching the source URI. **`  MIRROR  `** overwrites a fresh copy of data in the destination table. If the destination table is using a partition decorator, the transfer run only overwrites data in the specified partition. A destination table with a partition decorator has the format `  my_table${run_date}  ` —for example, `  my_table$20230809  ` .
+A transfer configuration with a **`MIRROR`** or **`WRITE_TRUNCATE`** write preference, also called a truncated transfer, overwrites data in the BigQuery destination table during each transfer run with data from all files matching the source URI. **`MIRROR`** overwrites a fresh copy of data in the destination table. If the destination table is using a partition decorator, the transfer run only overwrites data in the specified partition. A destination table with a partition decorator has the format `my_table${run_date}` —for example, `my_table$20230809` .
 
 Repeating the same incremental or truncated transfers in a day does not cause duplicate data. However, if you run multiple different transfer configurations that affect the same BigQuery destination table, this can cause the BigQuery Data Transfer Service to duplicate data.
 
 ## Wildcard support for the Blob Storage data path
 
-You can select source data that is separated into multiple files by specifying one or more asterisk ( `  *  ` ) wildcard characters in the data path.
+You can select source data that is separated into multiple files by specifying one or more asterisk ( `*` ) wildcard characters in the data path.
 
 While more than one wildcard can be used in the data path, some optimization is possible when only a single wildcard is used:
 
   - There is a [higher limit](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#quotas_and_limits) on the maximum number of files per transfer run.
-  - The wildcard will span directory boundaries. For example, the data path `  my-folder/*.csv  ` will match the file `  my-folder/my-subfolder/my-file.csv  ` .
+  - The wildcard will span directory boundaries. For example, the data path `my-folder/*.csv` will match the file `my-folder/my-subfolder/my-file.csv` .
 
 ## Blob Storage data path examples
 
-The following are examples of valid data paths for a Blob Storage transfer. Note that data paths do not begin with `  /  ` .
+The following are examples of valid data paths for a Blob Storage transfer. Note that data paths do not begin with `/` .
 
 ### Example: Single file
 
@@ -103,7 +103,7 @@ To load all files from Blob Storage with a similar path, specify the common pref
 
     my-folder/*.csv
 
-When you only use a single wildcard, it spans directories. In this example, every CSV file in `  my-folder  ` is selected, as well as every CSV file in every subfolder of `  my-folder  ` .
+When you only use a single wildcard, it spans directories. In this example, every CSV file in `my-folder` is selected, as well as every CSV file in every subfolder of `my-folder` .
 
 ### Example: Wildcard at end of path
 
@@ -201,12 +201,12 @@ As an example, consider this data path:
 
     folder/*/subfolder/*.csv
 
-Both of the following files are transferred to Google Cloud, because they have the prefix `  folder/  ` :
+Both of the following files are transferred to Google Cloud, because they have the prefix `folder/` :
 
     folder/any/subfolder/file1.csv
     folder/file2.csv
 
-However, only the `  folder/any/subfolder/file1.csv  ` file is loaded into BigQuery, because it matches the full data path.
+However, only the `folder/any/subfolder/file1.csv` file is loaded into BigQuery, because it matches the full data path.
 
 ## Pricing
 

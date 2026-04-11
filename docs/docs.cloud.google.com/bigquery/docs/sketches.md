@@ -135,7 +135,7 @@ HLL++ sketches support custom precision. The following table shows the supported
 | 23           | 8192 KiB + 32 B  | ±0.04% | ±0.07% | ±0.11% |
 | 24           | 16384 KiB + 32 B | ±0.03% | ±0.05% | ±0.08% |
 
-You can define precision for an HLL++ sketch when you initialize it with the [`  HLL_COUNT.INIT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions#hll_countinit) function.
+You can define precision for an HLL++ sketch when you initialize it with the [`HLL_COUNT.INIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions#hll_countinit) function.
 
 **Deletion**
 
@@ -161,21 +161,21 @@ KLL (short for Karnin-Lang-Liberty) is a streaming algorithm to compute sketches
 
 KLL sketches support custom precision. Precision defines the exactness of a returned approximate quantile *q* .
 
-By default, the rank of an approximate quantile can be at most `  ±1/1000 * n  ` off from `  ⌈Φ * n⌉  ` , where `  n  ` is the number of rows in the input and `  ⌈Φ * n⌉  ` is the rank of the exact quantile.
+By default, the rank of an approximate quantile can be at most `±1/1000 * n` off from `⌈Φ * n⌉` , where `n` is the number of rows in the input and `⌈Φ * n⌉` is the rank of the exact quantile.
 
-If you provide custom precision, the rank of the approximate quantile can be at most `  ±1/precision * n  ` off from the rank of the exact quantile. The error is within this error bound in 99.999% of cases. This error guarantee only applies to the difference between exact and approximate ranks. The numerical difference between the exact and approximated value for a quantile can be arbitrarily large.
+If you provide custom precision, the rank of the approximate quantile can be at most `±1/precision * n` off from the rank of the exact quantile. The error is within this error bound in 99.999% of cases. This error guarantee only applies to the difference between exact and approximate ranks. The numerical difference between the exact and approximated value for a quantile can be arbitrarily large.
 
-For example, suppose you want to find the median value, `  Φ = 0.5  ` , and you use the default precision of `  1000  ` . Then the rank of the value returned by the `  KLL_QUANTILES.EXTRACT_POINT  ` function differs from the true rank by at most `  n/1000  ` in 99.999% of cases. In other words, the returned value is almost always between the 49.9th and 50.1st percentiles. If you have 1,000,000 items in your sketch, then the rank of the returned median is almost always between 499,000 and 501,000.
+For example, suppose you want to find the median value, `Φ = 0.5` , and you use the default precision of `1000` . Then the rank of the value returned by the `KLL_QUANTILES.EXTRACT_POINT` function differs from the true rank by at most `n/1000` in 99.999% of cases. In other words, the returned value is almost always between the 49.9th and 50.1st percentiles. If you have 1,000,000 items in your sketch, then the rank of the returned median is almost always between 499,000 and 501,000.
 
-If you use a custom precision of `  100  ` to find the median value, then the rank of the value returned by the `  KLL_QUANTILES.EXTRACT_POINT  ` function differs from the true rank by at most `  n/100  ` in 99.999% of cases. In other words, the returned value is almost always between the 49th and 51st percentiles. If you have 1,000,000 items in your sketch, then the rank of the returned median is almost always between 490,000 and 510,000.
+If you use a custom precision of `100` to find the median value, then the rank of the value returned by the `KLL_QUANTILES.EXTRACT_POINT` function differs from the true rank by at most `n/100` in 99.999% of cases. In other words, the returned value is almost always between the 49th and 51st percentiles. If you have 1,000,000 items in your sketch, then the rank of the returned median is almost always between 490,000 and 510,000.
 
-You can define precision for a KLL sketch when you initialize it with the [`  KLL_QUANTILES.INIT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesinit_int64) function.
+You can define precision for a KLL sketch when you initialize it with the [`KLL_QUANTILES.INIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesinit_int64) function.
 
 <span id="phi_kll"></span>
 
 **Size**
 
-KLL sketch size depends on the precision parameter and the input type. If your input type is `  INT64  ` , the sketches can use additional optimization that's especially helpful if the input values come from a small universe. The following table contains two columns for `  INT64  ` . One column provides an upper bound on sketch size for items from a limited universe of size 1B, and a second column provides an upper bound for arbitrary input values.
+KLL sketch size depends on the precision parameter and the input type. If your input type is `INT64` , the sketches can use additional optimization that's especially helpful if the input values come from a small universe. The following table contains two columns for `INT64` . One column provides an upper bound on sketch size for items from a limited universe of size 1B, and a second column provides an upper bound for arbitrary input values.
 
 | Precision | FLOAT64   | INT64 (\<1B) | INT64 (Any) |
 | --------- | --------- | ------------ | ----------- |
@@ -201,7 +201,7 @@ Phi (Φ) represents the quantile to produce as a fraction of the total number of
 
 For a list of functions that you can use with KLL sketches, see [KLL quantile functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_functions) .
 
-The KLL algorithm is defined in the paper [Optimal Quantile Approximation in Streams](https://arxiv.org/pdf/1603.05346v2.pdf) , and is named after its authors, Karnin, Lang, and Liberty, who published the paper in 2016. The KLL algorithm improves the older [MP80 algorithm](https://polylogblog.files.wordpress.com/2009/08/80munro-median.pdf) by using variable-size buffers to reduce memory use for large data sets, reducing the sketch size from `  O(log n)  ` to `  O(1)  ` . Due to the non-deterministic nature of the algorithm, sketches created on the same set of data with the same precision might not be identical.
+The KLL algorithm is defined in the paper [Optimal Quantile Approximation in Streams](https://arxiv.org/pdf/1603.05346v2.pdf) , and is named after its authors, Karnin, Lang, and Liberty, who published the paper in 2016. The KLL algorithm improves the older [MP80 algorithm](https://polylogblog.files.wordpress.com/2009/08/80munro-median.pdf) by using variable-size buffers to reduce memory use for large data sets, reducing the sketch size from `O(log n)` to `O(1)` . Due to the non-deterministic nature of the algorithm, sketches created on the same set of data with the same precision might not be identical.
 
 ## Quantiles
 
@@ -209,13 +209,13 @@ The KLL algorithm is defined in the paper [Optimal Quantile Approximation in Str
 
 Quantiles are typically defined in two ways:
 
-  - For a positive integer `  q  ` , `  q  ` -quantiles are a set of values that partition an input set into `  q  ` subsets of nearly equal size. Some of these have specific names: the single 2-quantile is the median, the 4-quantiles are quartiles, the 100-quantiles are percentiles, etc. KLL functions additionally return the (exact) minimum and the maximum of the input, so when querying for the 2-quantiles, three values are returned.
+  - For a positive integer `q` , `q` -quantiles are a set of values that partition an input set into `q` subsets of nearly equal size. Some of these have specific names: the single 2-quantile is the median, the 4-quantiles are quartiles, the 100-quantiles are percentiles, etc. KLL functions additionally return the (exact) minimum and the maximum of the input, so when querying for the 2-quantiles, three values are returned.
     
-    **Tip:** To extract a set of `  q  ` -quantiles where `  q  ` is the `  number  ` argument, use the `  MERGE  ` and `  EXTRACT  ` functions in the `  KLL_QUANTILES.*  ` functions.
+    **Tip:** To extract a set of `q` -quantiles where `q` is the `number` argument, use the `MERGE` and `EXTRACT` functions in the `KLL_QUANTILES.*` functions.
 
-  - Alternatively, quantiles might be considered individual `  Φ  ` -quantiles, where `  Φ  ` is a real number with `  0 <= Φ <= 1  ` . The `  Φ  ` -quantile `  x  ` is an element of the input such that a `  Φ  ` fraction of the input is less than or equal to `  x  ` , and a `  (1-Φ)  ` fraction is greater than or equal to `  x  ` . In this notation, the median is the 0.5-quantile, and the 95th percentile is the 0.95-quantile.
+  - Alternatively, quantiles might be considered individual `Φ` -quantiles, where `Φ` is a real number with `0 <= Φ <= 1` . The `Φ` -quantile `x` is an element of the input such that a `Φ` fraction of the input is less than or equal to `x` , and a `(1-Φ)` fraction is greater than or equal to `x` . In this notation, the median is the 0.5-quantile, and the 95th percentile is the 0.95-quantile.
     
-    **Tip:** To extract individual `  Φ  ` -quantiles, use the quantile-supporting `  MERGE_POINT  ` and `  EXTRACT_POINT  ` functions, where `  Φ  ` is the `  phi  ` argument.
+    **Tip:** To extract individual `Φ` -quantiles, use the quantile-supporting `MERGE_POINT` and `EXTRACT_POINT` functions, where `Φ` is the `phi` argument.
 
 For example, you can use a quantiles-supporting sketch to get the median of the number of times an application is opened by users.
 

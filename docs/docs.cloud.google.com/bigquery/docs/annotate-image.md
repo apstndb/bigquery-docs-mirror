@@ -1,35 +1,35 @@
 # Annotate images with the ML.ANNOTATE\_IMAGE function
 
-This document describes how to use the [`  ML.ANNOTATE_IMAGE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to annotate images from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+This document describes how to use the [`ML.ANNOTATE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to annotate images from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 ## Required roles
 
 To create a remote model and annotate images, you need the following Identity and Access Management (IAM) roles at the project level:
 
-  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )
+  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` )
 
-  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` )
+  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` )
     
-    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
+    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` )
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` )
 
-  - Create BigQuery jobs: BigQuery Job User ( `  roles/bigquery.jobUser  ` )
+  - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` )
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
-  - Create an object table: `  bigquery.tables.create  ` and `  bigquery.tables.update  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
+  - Create an object table: `bigquery.tables.create` and `bigquery.tables.update`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
 
@@ -68,7 +68,7 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
     ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
@@ -123,7 +123,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -159,7 +159,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -297,13 +297,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -337,13 +337,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -355,7 +355,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -367,7 +367,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -403,7 +403,7 @@ Select one of the following options:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
 
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/serviceusage.serviceUsageConsumer' --condition=None
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/bigquery.connectionUser' --condition=None
@@ -419,11 +419,11 @@ Failure to grant the permission results in an error.
 
 Create an object table that has image contents. The object table makes it possible to analyze the images without moving them from Cloud Storage.
 
-The Cloud Storage bucket used by the object table should be in the same project where you plan to create the model and call the `  ML.ANNOTATE_IMAGE  ` function. If you want to call the `  ML.ANNOTATE_IMAGE  ` function in a different project than the one that contains the Cloud Storage bucket used by the object table, you must [grant the Storage Admin role at the bucket level](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) .
+The Cloud Storage bucket used by the object table should be in the same project where you plan to create the model and call the `ML.ANNOTATE_IMAGE` function. If you want to call the `ML.ANNOTATE_IMAGE` function in a different project than the one that contains the Cloud Storage bucket used by the object table, you must [grant the Storage Admin role at the bucket level](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) .
 
 ## Create a model
 
-Create a remote model with a [`  REMOTE_SERVICE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_VISION_V1  ` :
+Create a remote model with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_VISION_V1` :
 
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
@@ -440,13 +440,13 @@ Replace the following:
 
   - `  REGION  ` : the region used by the connection.
 
-  - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
+  - `  CONNECTION_ID  ` : the connection ID—for example, `myconnection` .
     
-    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
 
 ## Annotate images
 
-Annotate images with the `  ML.ANNOTATE_IMAGE  ` function:
+Annotate images with the `ML.ANNOTATE_IMAGE` function:
 
     SELECT *
     FROM ML.ANNOTATE_IMAGE(

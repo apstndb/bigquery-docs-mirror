@@ -15,9 +15,9 @@ This API has two different kinds of endpoint URIs, as this method supports a var
 ### HTTP request
 
   - Upload URI, for media upload requests:  
-    `  POST https://bigquery.googleapis.com/upload/bigquery/v2/projects/{projectId}/jobs  `
+    `POST https://bigquery.googleapis.com/upload/bigquery/v2/projects/{projectId}/jobs`
   - Metadata URI, for metadata-only requests:  
-    `  POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs  `
+    `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -25,9 +25,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Project ID of project that will be billed for the job.
 
@@ -43,10 +43,10 @@ If successful, the response body contains an instance of `  Job  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/devstorage.full_control  `
-  - `  https://www.googleapis.com/auth/devstorage.read_only  `
-  - `  https://www.googleapis.com/auth/devstorage.read_write  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/devstorage.full_control`
+  - `https://www.googleapis.com/auth/devstorage.read_only`
+  - `https://www.googleapis.com/auth/devstorage.read_write`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

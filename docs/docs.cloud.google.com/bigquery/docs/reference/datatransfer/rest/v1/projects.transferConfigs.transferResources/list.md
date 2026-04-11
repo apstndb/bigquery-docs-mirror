@@ -12,7 +12,7 @@ Returns information about transfer resources.
 
 ### HTTP request
 
-`  GET https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/transferConfigs/*}/transferResources  `
+`GET https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/transferConfigs/*}/transferResources`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,55 +20,55 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
 Required. Name of transfer configuration for which transfer resources should be retrieved. The name should be in one of the following forms:
 
-  - `  projects/{project}/transferConfigs/{transferConfig}  `
-  - `  projects/{project}/locations/{locationId}/transferConfigs/{transferConfig}  `
+  - `projects/{project}/transferConfigs/{transferConfig}`
+  - `projects/{project}/locations/{locationId}/transferConfigs/{transferConfig}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.transfers.get  `
+  - `bigquery.transfers.get`
 
 ### Query parameters
 
 Parameters
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 Optional. The maximum number of transfer resources to return. The maximum value is 1000; values above 1000 will be coerced to 1000. The default page size is the maximum value of 1000 results.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
-Optional. A page token, received from a previous `  transferResources.list  ` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `  transferResources.list  ` must match the call that provided the page token.
+Optional. A page token, received from a previous `transferResources.list` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `transferResources.list` must match the call that provided the page token.
 
-`  filter  `
+`filter`
 
-`  string  `
+`string`
 
 Optional. Filter for the transfer resources. Currently supported filters include:
 
-  - Resource name: `  name  ` - Wildcard supported
-  - Resource type: `  type  `
-  - Resource destination: `  destination  `
-  - Latest resource state: `  latest_status_detail.state  `
-  - Last update time: `  update_time  ` - RFC-3339 format
-  - Parent table name: `  hierarchy_detail.partition_detail.table  `
+  - Resource name: `name` - Wildcard supported
+  - Resource type: `type`
+  - Resource destination: `destination`
+  - Latest resource state: `latest_status_detail.state`
+  - Last update time: `update_time` - RFC-3339 format
+  - Parent table name: `hierarchy_detail.partition_detail.table`
 
-Multiple filters can be applied using the `  AND/OR  ` operator.
+Multiple filters can be applied using the `AND/OR` operator.
 
 Examples:
 
-  - `  name="*123" AND (type="TABLE" OR latest_status_detail.state="SUCCEEDED")  `
-  - `  update_time >= "2012-04-21T11:30:00-04:00"  `
-  - `  hierarchy_detail.partition_detail.table = "table1"  `
+  - `name="*123" AND (type="TABLE" OR latest_status_detail.state="SUCCEEDED")`
+  - `update_time >= "2012-04-21T11:30:00-04:00"`
+  - `hierarchy_detail.partition_detail.table = "table1"`
 
 ### Request body
 
@@ -82,6 +82,6 @@ If successful, the response body contains an instance of `  ListTransferResource
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

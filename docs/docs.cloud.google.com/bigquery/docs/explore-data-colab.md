@@ -18,7 +18,7 @@ This tutorial uses a dataset available through the [Google Cloud Public Datasets
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -30,7 +30,7 @@ This tutorial uses a dataset available through the [Google Cloud Public Datasets
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
@@ -40,7 +40,7 @@ This tutorial uses a dataset available through the [Google Cloud Public Datasets
 
 If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
 
-**Note:** If you create a code asset and choose a different default region than the one you have been using for code assets—for example, choosing `  us-west1  ` when you have been using `  us-central1  ` —then that code asset and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+**Note:** If you create a code asset and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that code asset and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
 
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
@@ -62,9 +62,9 @@ For a list of supported regions, see [BigQuery Studio locations](https://docs.cl
 
 To create and run notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
-  - [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser)
-  - [Code Creator ( `  roles/dataform.codeCreator  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator)
+  - [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
+  - [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser)
+  - [Code Creator ( `roles/dataform.codeCreator` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator)
 
 ## Open query results in a notebook
 
@@ -74,15 +74,15 @@ You can run a SQL query and then use a notebook to explore the data. This approa
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the **Type to search** field, enter `  bigquery-public-data  ` .
+2.  In the **Type to search** field, enter `bigquery-public-data` .
     
-    If the project is not shown, enter `  bigquery  ` in the search field, and then click **Search to all projects** to match the search string with the existing projects.
+    If the project is not shown, enter `bigquery` in the search field, and then click **Search to all projects** to match the search string with the existing projects.
 
 3.  Select **bigquery-public-data \> ml\_datasets \> penguins** .
 
 4.  For the **penguins** table, click more\_vert **View actions** , and then click **Query** .
 
-5.  Add an asterisk ( `  *  ` ) for field selection to the generated query, so that it reads like the following example:
+5.  Add an asterisk ( `*` ) for field selection to the generated query, so that it reads like the following example:
     
     ``` notranslate
     SELECT * FROM `bigquery-public-data.ml_datasets.penguins` LIMIT 1000;
@@ -105,7 +105,7 @@ Prepare the notebook for use by connecting to a runtime and setting application 
 2.  To get descriptive metrics for the data, click play\_circle **Run cell** in the code block in the **Show descriptive statistics using describe()** section.
 3.  Optional: Use other Python functions or packages to explore and analyze the data.
 
-The following code sample shows using [`  bigframes.pandas  `](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to analyze data, and [`  bigframes.ml  `](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai) to create a linear regression model from **penguins** data in a BigQuery DataFrame:
+The following code sample shows using [`bigframes.pandas`](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to analyze data, and [`bigframes.ml`](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai) to create a linear regression model from **penguins** data in a BigQuery DataFrame:
 
     import bigframes.pandas as bpd
     
@@ -167,7 +167,7 @@ The easiest way to eliminate billing is to delete the Google Cloud project that 
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

@@ -59,22 +59,22 @@ When you use data masking, a data masking rule is applied to a column at query r
 
 You can use the following data masking rules:
 
-  - **Custom masking routine** . Returns the column's value after applying a [user-defined function (UDF)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#custom-mask) to the column. [Routine permissions](https://docs.cloud.google.com/bigquery/docs/routines#permissions) are required to manage the masking rule. This rule, by design, supports all [BigQuery data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) except for the `  STRUCT  ` data type. However, support for data types other than `  STRING  ` and `  BYTES  ` is limited. The output depends on the defined function.
+  - **Custom masking routine** . Returns the column's value after applying a [user-defined function (UDF)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#custom-mask) to the column. [Routine permissions](https://docs.cloud.google.com/bigquery/docs/routines#permissions) are required to manage the masking rule. This rule, by design, supports all [BigQuery data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) except for the `STRUCT` data type. However, support for data types other than `STRING` and `BYTES` is limited. The output depends on the defined function.
     
     For more information about creating UDFs for custom masking routines, see [Create custom masking routines](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#custom-mask) .
 
-  - **Date year mask** . Returns the column's value after truncating the value to its year, setting all non-year parts of the value to the beginning of the year. You can only use this rule with columns that use the `  DATE  ` , `  DATETIME  ` , and `  TIMESTAMP  ` data types. For example:
+  - **Date year mask** . Returns the column's value after truncating the value to its year, setting all non-year parts of the value to the beginning of the year. You can only use this rule with columns that use the `DATE` , `DATETIME` , and `TIMESTAMP` data types. For example:
     
-    | Type                           | Original            | Masked              |
-    | ------------------------------ | ------------------- | ------------------- |
-    | `          DATE         `      | 2030-07-17          | 2030-01-01          |
-    | `          DATETIME         `  | 2030-07-17T01:45:06 | 2030-01-01T00:00:00 |
-    | `          TIMESTAMP         ` | 2030-07-17 01:45:06 | 2030-01-01 00:00:00 |
+    | Type        | Original            | Masked              |
+    | ----------- | ------------------- | ------------------- |
+    | `DATE`      | 2030-07-17          | 2030-01-01          |
+    | `DATETIME`  | 2030-07-17T01:45:06 | 2030-01-01T00:00:00 |
+    | `TIMESTAMP` | 2030-07-17 01:45:06 | 2030-01-01 00:00:00 |
     
 
     **Note:** Truncation occurs according to the UTC time zone. To change this, adjust the default time zone using the **@@time\_zone** [system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) .
 
-  - **Default masking value** . Returns a default masking value for the column based on the column's data type. Use this when you want to hide the value of the column but reveal the data type. When this data masking rule is applied to a column, it makes it less useful in query [`  JOIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) operations for users with Masked Reader access. This is because a default value isn't sufficiently unique to be useful when joining tables.
+  - **Default masking value** . Returns a default masking value for the column based on the column's data type. Use this when you want to hide the value of the column but reveal the data type. When this data masking rule is applied to a column, it makes it less useful in query [`JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) operations for users with Masked Reader access. This is because a default value isn't sufficiently unique to be useful when joining tables.
     
     The following table shows the default masking value for each data type:
     
@@ -91,105 +91,105 @@ You can use the following data masking rules:
     </thead>
     <tbody>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         STRING        </code></td>
+    <td><code dir="ltr" translate="no">STRING</code></td>
     <td>""</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">         BYTES        </code></td>
+    <td><code dir="ltr" translate="no">BYTES</code></td>
     <td>b''</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         INTEGER        </code></td>
+    <td><code dir="ltr" translate="no">INTEGER</code></td>
     <td>0</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">         FLOAT        </code></td>
+    <td><code dir="ltr" translate="no">FLOAT</code></td>
     <td>0.0</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         NUMERIC        </code></td>
+    <td><code dir="ltr" translate="no">NUMERIC</code></td>
     <td>0</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">         BOOLEAN        </code></td>
-    <td><code dir="ltr" translate="no">         FALSE        </code></td>
+    <td><code dir="ltr" translate="no">BOOLEAN</code></td>
+    <td><code dir="ltr" translate="no">FALSE</code></td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         TIMESTAMP        </code></td>
+    <td><code dir="ltr" translate="no">TIMESTAMP</code></td>
     <td>1970-01-01 00:00:00 UTC</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">         DATE        </code></td>
+    <td><code dir="ltr" translate="no">DATE</code></td>
     <td>1970-01-01</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         TIME        </code></td>
+    <td><code dir="ltr" translate="no">TIME</code></td>
     <td>00:00:00</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">         DATETIME        </code></td>
+    <td><code dir="ltr" translate="no">DATETIME</code></td>
     <td>1970-01-01T00:00:00</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         GEOGRAPHY        </code></td>
+    <td><code dir="ltr" translate="no">GEOGRAPHY</code></td>
     <td>POINT(0 0)</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">         BIGNUMERIC        </code></td>
+    <td><code dir="ltr" translate="no">BIGNUMERIC</code></td>
     <td>0</td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         ARRAY        </code></td>
+    <td><code dir="ltr" translate="no">ARRAY</code></td>
     <td>[]</td>
     </tr>
     <tr class="even">
-    <td><code dir="ltr" translate="no">         STRUCT        </code></td>
+    <td><code dir="ltr" translate="no">STRUCT</code></td>
     <td><p>NOT_APPLICABLE</p>
-    <p>Policy tags can't be applied to columns that use the <code dir="ltr" translate="no">          STRUCT         </code> data type, but they can be associated with the leaf fields of such columns.</p></td>
+    <p>Policy tags can't be applied to columns that use the <code dir="ltr" translate="no">STRUCT</code> data type, but they can be associated with the leaf fields of such columns.</p></td>
     </tr>
     <tr class="odd">
-    <td><code dir="ltr" translate="no">         JSON        </code></td>
+    <td><code dir="ltr" translate="no">JSON</code></td>
     <td>null</td>
     </tr>
     </tbody>
     </table>
 
-  - **Email mask** . Returns the column's value after replacing the username of a valid email with `  XXXXX  ` . If the column's value is not a valid email address, then it returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. You can only use this rule with columns that use the `  STRING  ` data type. For example:
+  - **Email mask** . Returns the column's value after replacing the username of a valid email with `XXXXX` . If the column's value is not a valid email address, then it returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. You can only use this rule with columns that use the `STRING` data type. For example:
     
-    | Original                                  | Masked                                                            |
-    | ----------------------------------------- | ----------------------------------------------------------------- |
-    | `          abc123@gmail.com         `     | `          XXXXX@gmail.com         `                              |
-    | `          randomtext         `           | `          jQHDyQuj7vJcveEe59ygb3Zcvj0B5FJINBzgM6Bypgw=         ` |
-    | `          test@gmail@gmail.com         ` | `          Qdje6MO+GLwI0u+KyRyAICDjHbLF1ImxRqaW08tY52k=         ` |
+    | Original               | Masked                                         |
+    | ---------------------- | ---------------------------------------------- |
+    | `abc123@gmail.com`     | `XXXXX@gmail.com`                              |
+    | `randomtext`           | `jQHDyQuj7vJcveEe59ygb3Zcvj0B5FJINBzgM6Bypgw=` |
+    | `test@gmail@gmail.com` | `Qdje6MO+GLwI0u+KyRyAICDjHbLF1ImxRqaW08tY52k=` |
     
 
-  - **First four characters** . Returns the first 4 characters of the column's value, replacing the rest of the string with `  XXXXX  ` . If the column's value is equal to or less than 4 characters in length, then it returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. You can only use this rule with columns that use the `  STRING  ` data type.
+  - **First four characters** . Returns the first 4 characters of the column's value, replacing the rest of the string with `XXXXX` . If the column's value is equal to or less than 4 characters in length, then it returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. You can only use this rule with columns that use the `STRING` data type.
 
-  - **Hash (SHA-256)** . Returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. Use this when you want the end user to be able to use this column in a [`  JOIN  ` operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) for a query. You can only use this rule with columns that use the `  STRING  ` or `  BYTES  ` data types.
+  - **Hash (SHA-256)** . Returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. Use this when you want the end user to be able to use this column in a [`JOIN` operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) for a query. You can only use this rule with columns that use the `STRING` or `BYTES` data types.
     
-    The SHA-256 function used in data masking is type preserving, so the hash value it returns has the same data type as the column value. For example, the hash value for a `  STRING  ` column value also has a `  STRING  ` data type.
+    The SHA-256 function used in data masking is type preserving, so the hash value it returns has the same data type as the column value. For example, the hash value for a `STRING` column value also has a `STRING` data type.
     
     **Important:** SHA-256 is a deterministic hashing function; an initial value always resolves to the same hash value. However, it does not require encryption keys. This makes it possible for a malicious actor to use a brute force attack to determine the original value, by running all possible original values through the SHA-256 algorithm and seeing which one produces a hash that matches the hash returned by data masking.
 
-  - **Random hash** . Returns a hash of the column's value using a salted hash algorithm. Random hash provides stronger security than the standard `  Hash (SHA-256)  ` rule. You can only use this rule with columns that use the `  STRING  ` or `  BYTES  ` data types.
+  - **Random hash** . Returns a hash of the column's value using a salted hash algorithm. Random hash provides stronger security than the standard `Hash (SHA-256)` rule. You can only use this rule with columns that use the `STRING` or `BYTES` data types.
     
       - **Non-deterministic:** A unique random value (salt) is generated for each query. The same column value produces different hash results across different queries. This helps prevent brute-force attacks and analysis of masked data patterns over time.
       - **Joinability control:**
-          - Joins on columns masked with `  RANDOM_HASH  ` are only possible *within the same query* .
+          - Joins on columns masked with `RANDOM_HASH` are only possible *within the same query* .
           - Joins across different queries aren't possible because of the per-query random salt.
           - Joins are supported only if the data policies applied to the columns belong to the *same Google Cloud project* . This is enforced by including the data policy's project ID in the hash input.
       - **Limitations:**
           - Random hash is only supported with data policies that are set on columns, not policy tags.
 
-  - **Last four characters** . Returns the last 4 characters of the column's value, replacing the rest of the string with `  XXXXX  ` . If the column's value is equal to or less than 4 characters in length, then it returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. You can only use this rule with columns that use the `  STRING  ` data type.
+  - **Last four characters** . Returns the last 4 characters of the column's value, replacing the rest of the string with `XXXXX` . If the column's value is equal to or less than 4 characters in length, then it returns the column's value after it has been run through the [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. You can only use this rule with columns that use the `STRING` data type.
 
-  - **Nullify** . Returns `  NULL  ` instead of the column value. Use this when you want to hide both the value and the data type of the column. When this data masking rule is applied to a column, it makes it less useful in query [`  JOIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) operations for users with Masked Reader access. This is because a `  NULL  ` value isn't sufficiently unique to be useful when joining tables.
+  - **Nullify** . Returns `NULL` instead of the column value. Use this when you want to hide both the value and the data type of the column. When this data masking rule is applied to a column, it makes it less useful in query [`JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) operations for users with Masked Reader access. This is because a `NULL` value isn't sufficiently unique to be useful when joining tables.
 
 ### Data masking rule comparison
 
 The following table compares the different data masking options available in BigQuery, considering their ability to be used in joins and their relative security strength:
 
-  - **Joinability:** Refers to whether the masked data can be used in SQL `  JOIN  ` operations. Masking methods that produce a consistent output for a given input (deterministic for the scope of the join) and preserve sufficient uniqueness can be used.
+  - **Joinability:** Refers to whether the masked data can be used in SQL `JOIN` operations. Masking methods that produce a consistent output for a given input (deterministic for the scope of the join) and preserve sufficient uniqueness can be used.
   - **Security Strength:** Indicates the level of protection against de-anonymization or reverse-engineering the original data. This is a relative comparison.
 
 <table>
@@ -212,7 +212,7 @@ The following table compares the different data masking options available in Big
 <td>Nullify</td>
 <td>Predefined</td>
 <td>No</td>
-<td><strong>Highest:</strong> Replaces data with <code dir="ltr" translate="no">       NULL      </code> . No information leakage about the original value.</td>
+<td><strong>Highest:</strong> Replaces data with <code dir="ltr" translate="no">NULL</code> . No information leakage about the original value.</td>
 </tr>
 <tr class="even">
 <td>Default masking value</td>
@@ -224,25 +224,25 @@ The following table compares the different data masking options available in Big
 <td>Email mask</td>
 <td>Predefined</td>
 <td>No</td>
-<td><strong>Moderate:</strong> Redacts the username (for example, <code dir="ltr" translate="no">       user@example.com      </code> becomes <code dir="ltr" translate="no">       XXXXX@example.com      </code> ), but the domain name remains visible. The unmasked domain can be sensitive, as it reveals organizational affiliation. This information can potentially be used in de-anonymization efforts by correlating with other data. The effectiveness of this mask is reduced if the pool of potential individuals within the domain is small, making it easier to infer the original user. If the value is not a valid email address, it's hashed using SHA-256 ( <strong>Moderate:</strong> security strength).</td>
+<td><strong>Moderate:</strong> Redacts the username (for example, <code dir="ltr" translate="no">user@example.com</code> becomes <code dir="ltr" translate="no">XXXXX@example.com</code> ), but the domain name remains visible. The unmasked domain can be sensitive, as it reveals organizational affiliation. This information can potentially be used in de-anonymization efforts by correlating with other data. The effectiveness of this mask is reduced if the pool of potential individuals within the domain is small, making it easier to infer the original user. If the value is not a valid email address, it's hashed using SHA-256 ( <strong>Moderate:</strong> security strength).</td>
 </tr>
 <tr class="even">
 <td>First four characters</td>
 <td>Predefined</td>
 <td>No</td>
-<td><strong>Low to Moderate:</strong> Returns the first 4 characters, replacing the rest with <code dir="ltr" translate="no">       XXXXX      </code> . If the string is 4 characters or less, it's hashed using SHA-256. When SHA-256 is used on these short strings, the security is <strong>Very Low</strong> because the limited input space (1–4 characters) makes it trivial to compute a rainbow table for all possible inputs, enabling reverse lookup.</td>
+<td><strong>Low to Moderate:</strong> Returns the first 4 characters, replacing the rest with <code dir="ltr" translate="no">XXXXX</code> . If the string is 4 characters or less, it's hashed using SHA-256. When SHA-256 is used on these short strings, the security is <strong>Very Low</strong> because the limited input space (1–4 characters) makes it trivial to compute a rainbow table for all possible inputs, enabling reverse lookup.</td>
 </tr>
 <tr class="odd">
 <td>Last four characters</td>
 <td>Predefined</td>
 <td>No</td>
-<td><strong>Low to Moderate:</strong> Returns the last 4 characters, prepending <code dir="ltr" translate="no">       XXXXX      </code> to replace the rest. If the string is 4 characters or less, it's hashed using SHA-256. Similar to 'First Four Characters', the security is <strong>Very Low</strong> when SHA-256 is used on short strings due to the ease of reverse lookups.</td>
+<td><strong>Low to Moderate:</strong> Returns the last 4 characters, prepending <code dir="ltr" translate="no">XXXXX</code> to replace the rest. If the string is 4 characters or less, it's hashed using SHA-256. Similar to 'First Four Characters', the security is <strong>Very Low</strong> when SHA-256 is used on short strings due to the ease of reverse lookups.</td>
 </tr>
 <tr class="even">
 <td>Date year mask</td>
 <td>Predefined</td>
 <td>No</td>
-<td><strong>Moderate:</strong> Shows only the year, truncating the rest of the date (for example, <code dir="ltr" translate="no">       2030-07-17      </code> becomes <code dir="ltr" translate="no">       2030-01-01      </code> ). Leaks partial information and is vulnerable to statistical analysis.</td>
+<td><strong>Moderate:</strong> Shows only the year, truncating the rest of the date (for example, <code dir="ltr" translate="no">2030-07-17</code> becomes <code dir="ltr" translate="no">2030-01-01</code> ). Leaks partial information and is vulnerable to statistical analysis.</td>
 </tr>
 <tr class="odd">
 <td>Random hash</td>
@@ -266,21 +266,21 @@ The following table compares the different data masking options available in Big
 <td>Custom masking routine – Salted SHA-256</td>
 <td>Custom</td>
 <td>Yes</td>
-<td><strong>High (contingent on proper salt protection):</strong> Enhanced security over standard SHA-256 by using a <em>consistent, secret</em> salt hardcoded within the custom UDF definition. The security hinges on the secrecy of the salt. Access to the UDF definition must be restricted. BigQuery redacting constants from execution details helps prevent salt exposure. Unlike <code dir="ltr" translate="no">       RANDOM_HASH      </code> , the salt is consistent across queries using this <em>specific</em> UDF, supporting joins across queries.</td>
+<td><strong>High (contingent on proper salt protection):</strong> Enhanced security over standard SHA-256 by using a <em>consistent, secret</em> salt hardcoded within the custom UDF definition. The security hinges on the secrecy of the salt. Access to the UDF definition must be restricted. BigQuery redacting constants from execution details helps prevent salt exposure. Unlike <code dir="ltr" translate="no">RANDOM_HASH</code> , the salt is consistent across queries using this <em>specific</em> UDF, supporting joins across queries.</td>
 </tr>
 <tr class="odd">
 <td>Custom masking routine – AEAD Encryption</td>
 <td>Custom</td>
 <td>Yes</td>
 <td><strong>High (contingent on proper key management):</strong> Can provide strong security and joinability.<br />
-<strong>Important Consideration:</strong> To use AEAD encryption with a KMS wrapped keyset, the querying user typically needs the <code dir="ltr" translate="no">       cloudkms.cryptoKeyVersions.useToDecryptViaDelegation      </code> permission on the KMS key. This permission enables the user to use the wrapped keyset for <em>both</em> encryption and decryption. Hence, the <em>wrapped keyset</em> must be protected. If the user has access to the <em>wrapped key</em> they will be able to decrypt (unmask) sensitive column data.</td>
+<strong>Important Consideration:</strong> To use AEAD encryption with a KMS wrapped keyset, the querying user typically needs the <code dir="ltr" translate="no">cloudkms.cryptoKeyVersions.useToDecryptViaDelegation</code> permission on the KMS key. This permission enables the user to use the wrapped keyset for <em>both</em> encryption and decryption. Hence, the <em>wrapped keyset</em> must be protected. If the user has access to the <em>wrapped key</em> they will be able to decrypt (unmask) sensitive column data.</td>
 </tr>
 </tbody>
 </table>
 
 ### Hash collisions and join integrity
 
-Hashing techniques, such as SHA-256 and Random Hash, carry a theoretical risk of [hash collisions](https://en.wikipedia.org/wiki/Hash_collision) , where two different original values produce the same hash value. When columns are masked using these rules and subsequently used in a `  JOIN  ` operation, a collision can lead to improper data associations (false matches) in the query results.
+Hashing techniques, such as SHA-256 and Random Hash, carry a theoretical risk of [hash collisions](https://en.wikipedia.org/wiki/Hash_collision) , where two different original values produce the same hash value. When columns are masked using these rules and subsequently used in a `JOIN` operation, a collision can lead to improper data associations (false matches) in the query results.
 
 However, the statistical probability of a SHA-256 collision is practically negligible for any real-world dataset. Users can therefore rely on hashing-based masking rules for join integrity with extremely high confidence.
 
@@ -298,7 +298,7 @@ You can configure up to nine data policies for a policy tag, each with a differe
 8.  Default masking value
 9.  Nullify
 
-For example, user A is a member of both the employees and the accounting groups. User A runs a query that includes the `  sales_total  ` field, which has the `  confidential  ` policy tag applied. The `  confidential  ` policy tag has two data policies associated with it: one that has the employees role as the principal and applies the nullify data masking rule, and one that has the accounting role as the principal and applies the hash (SHA-256) data masking rule. In this case, the hash (SHA-256) data masking rule is prioritized over the nullify data masking rule, so the hash (SHA-256) rule is applied to the `  sales_total  ` field value in user A's query.
+For example, user A is a member of both the employees and the accounting groups. User A runs a query that includes the `sales_total` field, which has the `confidential` policy tag applied. The `confidential` policy tag has two data policies associated with it: one that has the employees role as the principal and applies the nullify data masking rule, and one that has the accounting role as the principal and applies the hash (SHA-256) data masking rule. In this case, the hash (SHA-256) data masking rule is prioritized over the nullify data masking rule, so the hash (SHA-256) rule is applied to the `sales_total` field value in user A's query.
 
 Figure 3 shows this scenario:
 
@@ -327,18 +327,18 @@ You need the Data Catalog Policy Tag Admin role to create and manage taxonomies 
 </thead>
 <tbody>
 <tr class="odd">
-<td>Data Catalog Policy Tag Admin ( <code dir="ltr" translate="no">       datacatalog.categoryAdmin      </code> )</td>
-<td><code dir="ltr" translate="no">       datacatalog.categories.getIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.categories.setIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.create      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.delete      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.get      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.getIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.list      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.setIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.update      </code><br />
-<code dir="ltr" translate="no">       resourcemanager.projects.get      </code><br />
-<code dir="ltr" translate="no">       resourcemanager.projects.list      </code></td>
+<td>Data Catalog Policy Tag Admin ( <code dir="ltr" translate="no">datacatalog.categoryAdmin</code> )</td>
+<td><code dir="ltr" translate="no">datacatalog.categories.getIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.categories.setIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.create</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.delete</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.get</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.getIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.list</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.setIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.update</code><br />
+<code dir="ltr" translate="no">resourcemanager.projects.get</code><br />
+<code dir="ltr" translate="no">resourcemanager.projects.list</code></td>
 <td><p>Applies at the project level.</p>
 <p>This role grants the ability to do the following:</p>
 <ul>
@@ -368,19 +368,19 @@ You need one of the following BigQuery roles to create and manage data policies:
 </thead>
 <tbody>
 <tr class="odd">
-<td>BigQuery Data Policy Admin ( <code dir="ltr" translate="no">       bigquerydatapolicy.admin      </code> )<br />
+<td>BigQuery Data Policy Admin ( <code dir="ltr" translate="no">bigquerydatapolicy.admin</code> )<br />
 <br />
-BigQuery Admin ( <code dir="ltr" translate="no">       bigquery.admin      </code> )<br />
+BigQuery Admin ( <code dir="ltr" translate="no">bigquery.admin</code> )<br />
 <br />
-BigQuery Data Owner ( <code dir="ltr" translate="no">       bigquery.dataOwner      </code> )</td>
-<td><code dir="ltr" translate="no">       bigquery.dataPolicies.create      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.delete      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.get      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.getIamPolicy      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.list      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.setIamPolicy      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.update      </code></td>
-<td><p>The <code dir="ltr" translate="no">        bigquery.dataPolicies.create       </code> and <code dir="ltr" translate="no">        bigquery.dataPolicies.list       </code> permissions apply at the project level. The other permissions apply at the data policy level.</p>
+BigQuery Data Owner ( <code dir="ltr" translate="no">bigquery.dataOwner</code> )</td>
+<td><code dir="ltr" translate="no">bigquery.dataPolicies.create</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.delete</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.get</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.getIamPolicy</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.list</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.setIamPolicy</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.update</code></td>
+<td><p>The <code dir="ltr" translate="no">bigquery.dataPolicies.create</code> and <code dir="ltr" translate="no">bigquery.dataPolicies.list</code> permissions apply at the project level. The other permissions apply at the data policy level.</p>
 <p>This role grants the ability to do the following:</p>
 <ul>
 <li>Create, read, update, and delete data policies.</li>
@@ -390,11 +390,11 @@ BigQuery Data Owner ( <code dir="ltr" translate="no">       bigquery.dataOwner  
 </tbody>
 </table>
 
-You also need the `  datacatalog.taxonomies.get  ` permission, which you can get from several of the [Data Catalog predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog) .
+You also need the `datacatalog.taxonomies.get` permission, which you can get from several of the [Data Catalog predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog) .
 
 ### Roles for attaching policy tags to columns
 
-You need the `  datacatalog.taxonomies.get  ` and `  bigquery.tables.setCategory  ` permissions to attach policy tags to columns. `  datacatalog.taxonomies.get  ` is included in the Data Catalog Policy Tags Admin and Viewer roles. `  bigquery.tables.setCategory  ` is included in the BigQuery Admin ( `  roles/bigquery.admin  ` ) and BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` ) roles.
+You need the `datacatalog.taxonomies.get` and `bigquery.tables.setCategory` permissions to attach policy tags to columns. `datacatalog.taxonomies.get` is included in the Data Catalog Policy Tags Admin and Viewer roles. `bigquery.tables.setCategory` is included in the BigQuery Admin ( `roles/bigquery.admin` ) and BigQuery Data Owner ( `roles/bigquery.dataOwner` ) roles.
 
 ### Roles for querying masked data
 
@@ -415,8 +415,8 @@ You need the [BigQuery Masked Reader](https://docs.cloud.google.com/bigquery/doc
 </thead>
 <tbody>
 <tr class="odd">
-<td>Masked Reader ( <code dir="ltr" translate="no">       bigquerydatapolicy.maskedReader      </code> )</td>
-<td><code dir="ltr" translate="no">       bigquery.dataPolicies.maskedGet      </code></td>
+<td>Masked Reader ( <code dir="ltr" translate="no">bigquerydatapolicy.maskedReader</code> )</td>
+<td><code dir="ltr" translate="no">bigquery.dataPolicies.maskedGet</code></td>
 <td><p>This role can only be granted on Resource Manager resources (projects, folders, and organizations).</p>
 <p>This role grants the ability to view the masked data of a column that is associated with a data policy.</p>
 <p>Additionally, a user must have appropriate permissions to query the table. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/running-queries#required_permissions">Required permissions</a> .</p></td>
@@ -433,9 +433,9 @@ Data masking builds on top of column-level access control. For a given column, i
   - User with Masked Reader role: can see masked (obscured) column data.
   - User with neither role: permission denied.
 
-In the case where a table has columns that are secured or secured and masked, in order to run a `  SELECT * FROM  ` statement on that table, a user must be a member of appropriate groups such that they are granted Masked Reader or Fine-Grained Reader roles on all of these columns.
+In the case where a table has columns that are secured or secured and masked, in order to run a `SELECT * FROM` statement on that table, a user must be a member of appropriate groups such that they are granted Masked Reader or Fine-Grained Reader roles on all of these columns.
 
-A user who is not granted these roles must instead specify only columns that they have access to in the `  SELECT  ` statement, or use `  SELECT * EXCEPT ( restricted_columns ) FROM  ` to exclude the secured or masked columns.
+A user who is not granted these roles must instead specify only columns that they have access to in the `SELECT` statement, or use `SELECT * EXCEPT ( restricted_columns ) FROM` to exclude the secured or masked columns.
 
 ### Authorization inheritance in a policy tag hierarchy
 
@@ -447,9 +447,9 @@ For example, take the policy tag and data policy configuration shown in Figure 4
 
 **Figure 4.** Policy tag and data policy configuration.
 
-You have a table column that is annotated with the `  Financial  ` policy tag, and a user who is a member of both the ftes@example.com and analysts@example.com groups. When this user runs a query that includes the annotated column, their access is determined by the hierarchy defined in the policy tag taxonomy. Because the user is granted the Data Catalog Fine-Grained Reader role by the `  Financial  ` policy tag, the query returns unmasked column data.
+You have a table column that is annotated with the `Financial` policy tag, and a user who is a member of both the ftes@example.com and analysts@example.com groups. When this user runs a query that includes the annotated column, their access is determined by the hierarchy defined in the policy tag taxonomy. Because the user is granted the Data Catalog Fine-Grained Reader role by the `Financial` policy tag, the query returns unmasked column data.
 
-If another user who is only a member of the ftes@example.com role runs a query that includes the annotated column, the query returns column data that has been hashed using the SHA-256 algorithm, because the user is granted the BigQuery Masked Reader role by the `  Confidential  ` policy tag, which is the parent of the `  Financial  ` policy tag.
+If another user who is only a member of the ftes@example.com role runs a query that includes the annotated column, the query returns column data that has been hashed using the SHA-256 algorithm, because the user is granted the BigQuery Masked Reader role by the `Confidential` policy tag, which is the parent of the `Financial` policy tag.
 
 A user who is not a member of either of those roles gets an access denied error if they try to query the annotated column.
 
@@ -482,7 +482,7 @@ For example, take the policy tag and data policy configuration shown in Figure 6
 
 **Figure 6.** Policy tag and data policy configuration.
 
-You have a table column that is annotated with the `  Financial  ` policy tag, and a user who is a member of the analysts@example.com group. When this user tries to access the annotated column through one of the incompatible features, they get an access denied error. This is because they are granted the BigQuery Masked Reader by `  Financial  ` policy tag, but in this case, they must have the Data Catalog Fine-Grained Reader role. Because the service has already determined an applicable role for the user, it does not continue to check farther up the policy tag hierarchy for additional permissions.
+You have a table column that is annotated with the `Financial` policy tag, and a user who is a member of the analysts@example.com group. When this user tries to access the annotated column through one of the incompatible features, they get an access denied error. This is because they are granted the BigQuery Masked Reader by `Financial` policy tag, but in this case, they must have the Data Catalog Fine-Grained Reader role. Because the service has already determined an applicable role for the user, it does not continue to check farther up the policy tag hierarchy for additional permissions.
 
 ## Data masking example with output
 
@@ -502,9 +502,9 @@ The policy tags are then associated with table columns, as shown in Figure 8:
 
 **Figure 8.** Example.com policy tags associated with table columns.
 
-Given the tags that are associated with the columns, running `  SELECT * FROM Accounts;  ` leads to the following results for the different groups:
+Given the tags that are associated with the columns, running `SELECT * FROM Accounts;` leads to the following results for the different groups:
 
-  - **data-users@example.com** : This group has been granted the BigQuery Masked Reader role on both the `  PII  ` and `  Confidential  ` policy tags. The following results are returned:
+  - **data-users@example.com** : This group has been granted the BigQuery Masked Reader role on both the `PII` and `Confidential` policy tags. The following results are returned:
     
     | **SSN** | **Priority** | **Lifetime value** | **Creation date** | **Email** |
     | ------- | ------------ | ------------------ | ----------------- | --------- |
@@ -514,7 +514,7 @@ Given the tags that are associated with the columns, running `  SELECT * FROM Ac
     | NULL    | ""           | 0                  | May 5, 1997       | NULL      |
     
 
-  - **accounting@example.com** : This group has been granted the Data Catalog Fine-Grained Reader role on the `  SSN  ` policy tag. The following results are returned:
+  - **accounting@example.com** : This group has been granted the Data Catalog Fine-Grained Reader role on the `SSN` policy tag. The following results are returned:
     
     | **SSN**     | **Priority** | **Lifetime value** | **Creation date** | **NULL** |
     | ----------- | ------------ | ------------------ | ----------------- | -------- |
@@ -524,7 +524,7 @@ Given the tags that are associated with the columns, running `  SELECT * FROM Ac
     | 456-78-9123 | ""           | 0                  | May 5, 1997       | NULL     |
     
 
-  - **sales-exec@example.com** : This group has been granted the Data Catalog Fine-Grained Reader role on the `  Confidential  ` policy tag. The following results are returned:
+  - **sales-exec@example.com** : This group has been granted the Data Catalog Fine-Grained Reader role on the `Confidential` policy tag. The following results are returned:
     
     | **SSN** | **Priority** | **Lifetime value** | **Creation date** | **Email** |
     | ------- | ------------ | ------------------ | ----------------- | --------- |
@@ -534,7 +534,7 @@ Given the tags that are associated with the columns, running `  SELECT * FROM Ac
     | NULL    | Low          | 245                | May 5, 1997       | NULL      |
     
 
-  - **fin-dev@example.com** : This group has been granted the BigQuery Masked Reader role on the `  Financial  ` policy tag. The following results are returned:
+  - **fin-dev@example.com** : This group has been granted the BigQuery Masked Reader role on the `Financial` policy tag. The following results are returned:
     
     | **SSN** | **Priority** | **Lifetime value** | **Creation date** | **Email** |
     | ------- | ------------ | ------------------ | ----------------- | --------- |
@@ -544,7 +544,7 @@ Given the tags that are associated with the columns, running `  SELECT * FROM Ac
     | NULL    | ""           | Uh02hnR1sg=        | May 5, 1997       | NULL      |
     
 
-  - **All other users** : Any user who does not belong to one of the listed groups gets an access denied error, because they haven't been granted the Data Catalog Fine-Grained Reader or BigQuery Masked Reader roles. To query the `  Accounts  ` table, they must instead specify only columns that they have access to in the `  SELECT * EXCEPT ( restricted_columns ) FROM Accounts  ` to exclude the secured or masked columns.
+  - **All other users** : Any user who does not belong to one of the listed groups gets an access denied error, because they haven't been granted the Data Catalog Fine-Grained Reader or BigQuery Masked Reader roles. To query the `Accounts` table, they must instead specify only columns that they have access to in the `SELECT * EXCEPT ( restricted_columns ) FROM Accounts` to exclude the secured or masked columns.
 
 ## Cost considerations
 
@@ -588,14 +588,14 @@ Legacy SQL is not supported.
 
 Custom masking routines are subject to the following limitations:
 
-  - Custom data masking supports all [BigQuery data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) except `  STRUCT  ` , because data masking can only apply to leaf fields of the `  STRUCT  ` data type.
-  - Deleting a custom masking routine doesn't delete all data policies that use it. However, the data policies that use the deleted masking routine are left with an empty masking rule. Users with the Masked Reader role on other data policies with the same tag can see masked data. Others see the message `  Permission denied.  ` Dangling references to empty masking rules might be cleaned by automated processes after seven days.
+  - Custom data masking supports all [BigQuery data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) except `STRUCT` , because data masking can only apply to leaf fields of the `STRUCT` data type.
+  - Deleting a custom masking routine doesn't delete all data policies that use it. However, the data policies that use the deleted masking routine are left with an empty masking rule. Users with the Masked Reader role on other data policies with the same tag can see masked data. Others see the message `Permission denied.` Dangling references to empty masking rules might be cleaned by automated processes after seven days.
 
 ## Compatibility with other BigQuery features
 
 ### BigQuery API
 
-Not compatible with the [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method. To call `  tabledata.list  ` , you need full access to all of the columns returned by this method. The Data Catalog Fine-Grained Reader role grants appropriate access.
+Not compatible with the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method. To call `tabledata.list` , you need full access to all of the columns returned by this method. The Data Catalog Fine-Grained Reader role grants appropriate access.
 
 ### BigLake tables
 
@@ -627,27 +627,27 @@ Compatible. If you have the BigQuery Masked Reader role, then the exported data 
 
 ### Row-level security
 
-Only compatible with queries that have non-subquery row access policies. Data masking is applied on top of row-level security. For example, if there is a row access policy applied on `  location = "US"  ` and `  location  ` is masked, then users are able to see rows where `  location = "US"  ` but the location field is masked in the results.
+Only compatible with queries that have non-subquery row access policies. Data masking is applied on top of row-level security. For example, if there is a row access policy applied on `location = "US"` and `location` is masked, then users are able to see rows where `location = "US"` but the location field is masked in the results.
 
 Queries involving a subquery row access policy require Fine-Grained Reader access on columns referenced by row access policies.
 
 ### Search in BigQuery
 
-Partially compatible. You can call the [`  SEARCH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) function on indexed or unindexed columns that have data masking applied.
+Partially compatible. You can call the [`SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) function on indexed or unindexed columns that have data masking applied.
 
-When you call the `  SEARCH  ` function on columns that have data masking applied, you must use search criteria compatible with your level of access. For example, if you have Masked Reader access with a Hash (SHA-256) data masking rule, you would use the hash value in your `  SEARCH  ` clause, similar to the following:
+When you call the `SEARCH` function on columns that have data masking applied, you must use search criteria compatible with your level of access. For example, if you have Masked Reader access with a Hash (SHA-256) data masking rule, you would use the hash value in your `SEARCH` clause, similar to the following:
 
 ``` notranslate
 SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "sg172y34shw94fujaweu");
 ```
 
-If you have Fine-Grained Reader access, you would use the actual column value in your `  SEARCH  ` clause, similar to the following:
+If you have Fine-Grained Reader access, you would use the actual column value in your `SEARCH` clause, similar to the following:
 
 ``` notranslate
 SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "jane.doe@example.com");
 ```
 
-Searching is less likely to be useful if you have Masked Reader access to a column where the data masking rule used is Nullify or Default Masking Value. This is because the masked results you would use as search criteria, such as `  NULL  ` or `  ""  ` , aren't sufficiently unique to be useful.
+Searching is less likely to be useful if you have Masked Reader access to a column where the data masking rule used is Nullify or Default Masking Value. This is because the masked results you would use as search criteria, such as `NULL` or `""` , aren't sufficiently unique to be useful.
 
 When searching on an indexed column that has data masking applied, the search index is only used if you have Fine-Grained Reader access to the column.
 
@@ -661,7 +661,7 @@ Compatible. Table renaming is not affected by data masking.
 
 ### Time travel
 
-Compatible with both [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) and the [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) option in `  SELECT  ` statements. The policy tags for the current dataset schema are applied to the retrieved data.
+Compatible with both [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) and the [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) option in `SELECT` statements. The policy tags for the current dataset schema are applied to the retrieved data.
 
 ### Query caching
 

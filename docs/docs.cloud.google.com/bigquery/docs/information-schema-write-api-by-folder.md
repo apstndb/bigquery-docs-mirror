@@ -1,22 +1,22 @@
 # WRITE\_API\_TIMELINE\_BY\_FOLDER view
 
-The `  INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER  ` view contains per minute aggregated BigQuery Storage Write API ingestion statistics for the parent folder of the current project, including its subfolders.
+The `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER` view contains per minute aggregated BigQuery Storage Write API ingestion statistics for the parent folder of the current project, including its subfolders.
 
-You can query the `  INFORMATION_SCHEMA  ` Write API views to retrieve historical and real-time information about data ingestion into BigQuery that uses the BigQuery Storage Write API. See [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) for more information.
+You can query the `INFORMATION_SCHEMA` Write API views to retrieve historical and real-time information about data ingestion into BigQuery that uses the BigQuery Storage Write API. See [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) for more information.
 
 ## Required permission
 
-To query the `  INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER  ` view, you need the `  bigquery.tables.list  ` Identity and Access Management (IAM) permission for the parent folder of the project.
+To query the `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER` view, you need the `bigquery.tables.list` Identity and Access Management (IAM) permission for the parent folder of the project.
 
 Each of the following predefined IAM roles includes the preceding permission:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.resourceAdmin  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.user`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.resourceAdmin`
 
 **Caution:** The required \`bigquery.tables.list\` permission is *not* included in the [basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) Owner or Editor.
 
@@ -24,25 +24,25 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA  ` BigQuery Storage Write API views, the query results contain historical and real-time information about data ingestion into BigQuery using the BigQuery Storage Write API. Each row in the following views represents statistics for ingestion into a specific table, aggregated over a one minute interval starting at `  start_timestamp  ` . Statistics are grouped by stream type and error code, so there will be one row for each stream type and each encountered error code during the one minute interval for each timestamp and table combination. Successful requests have the error code set to `  OK  ` . If no data was ingested into a table during a certain time period, then no rows are present for the corresponding timestamps for that table.
+When you query the `INFORMATION_SCHEMA` BigQuery Storage Write API views, the query results contain historical and real-time information about data ingestion into BigQuery using the BigQuery Storage Write API. Each row in the following views represents statistics for ingestion into a specific table, aggregated over a one minute interval starting at `start_timestamp` . Statistics are grouped by stream type and error code, so there will be one row for each stream type and each encountered error code during the one minute interval for each timestamp and table combination. Successful requests have the error code set to `OK` . If no data was ingested into a table during a certain time period, then no rows are present for the corresponding timestamps for that table.
 
-The `  INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER  ` view has the following schema:
+The `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER` view has the following schema:
 
-| Column name                        | Data type                         | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ---------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `        start_timestamp       `   | `        TIMESTAMP       `        | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `        folder_numbers       `    | `        REPEATED INTEGER       ` | Number IDs of folders that contain the project, starting with the folder that immediately contains the project, followed by the folder that contains the child folder, and so forth. For example, if `        folder_numbers       ` is `        [1, 2, 3]       ` , then folder `        1       ` immediately contains the project, folder `        2       ` contains `        1       ` , and folder `        3       ` contains `        2       ` . This column is only populated in `        WRITE_API_TIMELINE_BY_FOLDER       ` . |
-| `        project_id       `        | `        STRING       `           | *(Clustering column)* ID of the project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `        project_number       `    | `        INTEGER       `          | Number of the project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `        dataset_id       `        | `        STRING       `           | *(Clustering column)* ID of the dataset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `        table_id       `          | `        STRING       `           | *(Clustering column)* ID of the table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `        stream_type       `       | `        STRING       `           | The [stream type](https://docs.cloud.google.com/bigquery/docs/write-api#overview) used for the data ingestion with BigQuery Storage Write API. It is supposed to be one of "DEFAULT", "COMMITTED", "BUFFERED", or "PENDING".                                                                                                                                                                                                                                                                                                               |
-| `        error_code       `        | `        STRING       `           | Error code returned for the requests specified by this row. "OK" for successful requests.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `        total_requests       `    | `        INTEGER       `          | Total number of requests within the 1 minute interval.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `        total_rows       `        | `        INTEGER       `          | Total number of rows from all requests within the 1 minute interval.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `        total_input_bytes       ` | `        INTEGER       `          | Total number of bytes from all rows within the 1 minute interval.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Column name         | Data type          | Value                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `start_timestamp`   | `TIMESTAMP`        | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics.                                                                                                                                                                                                                                                                                                                    |
+| `folder_numbers`    | `REPEATED INTEGER` | Number IDs of folders that contain the project, starting with the folder that immediately contains the project, followed by the folder that contains the child folder, and so forth. For example, if `folder_numbers` is `[1, 2, 3]` , then folder `1` immediately contains the project, folder `2` contains `1` , and folder `3` contains `2` . This column is only populated in `WRITE_API_TIMELINE_BY_FOLDER` . |
+| `project_id`        | `STRING`           | *(Clustering column)* ID of the project.                                                                                                                                                                                                                                                                                                                                                                           |
+| `project_number`    | `INTEGER`          | Number of the project.                                                                                                                                                                                                                                                                                                                                                                                             |
+| `dataset_id`        | `STRING`           | *(Clustering column)* ID of the dataset.                                                                                                                                                                                                                                                                                                                                                                           |
+| `table_id`          | `STRING`           | *(Clustering column)* ID of the table.                                                                                                                                                                                                                                                                                                                                                                             |
+| `stream_type`       | `STRING`           | The [stream type](https://docs.cloud.google.com/bigquery/docs/write-api#overview) used for the data ingestion with BigQuery Storage Write API. It is supposed to be one of "DEFAULT", "COMMITTED", "BUFFERED", or "PENDING".                                                                                                                                                                                       |
+| `error_code`        | `STRING`           | Error code returned for the requests specified by this row. "OK" for successful requests.                                                                                                                                                                                                                                                                                                                          |
+| `total_requests`    | `INTEGER`          | Total number of requests within the 1 minute interval.                                                                                                                                                                                                                                                                                                                                                             |
+| `total_rows`        | `INTEGER`          | Total number of rows from all requests within the 1 minute interval.                                                                                                                                                                                                                                                                                                                                               |
+| `total_input_bytes` | `INTEGER`          | Total number of bytes from all rows within the 1 minute interval.                                                                                                                                                                                                                                                                                                                                                  |
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Data retention
 
@@ -52,21 +52,21 @@ This view contains the BigQuery Storage Write API ingestion history of the past 
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-| View name                                                                                                                                                 | Resource scope                             | Region scope |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------ |
-| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER       `` | Folder that contains the specified project | REGION       |
+| View name                                                                                                          | Resource scope                             | Region scope |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | ------------ |
+| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`` | Folder that contains the specified project | REGION       |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
-  - To query data in the US multi-region, use `  region-us.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER  `
-  - To query data in the EU multi-region, use `  region-eu.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER  `
-  - To query data in the asia-northeast1 region, use `  region-asia-northeast1.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER  `
+  - To query data in the US multi-region, use `region-us.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
+  - To query data in the EU multi-region, use `region-eu.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
+  - To query data in the asia-northeast1 region, use `region-asia-northeast1.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
 
 For a list of available regions, see [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
@@ -95,7 +95,7 @@ ORDER BY
   start_timestamp DESC;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -144,7 +144,7 @@ ORDER BY
   start_timestamp DESC;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -180,7 +180,7 @@ ORDER BY
 LIMIT 10;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

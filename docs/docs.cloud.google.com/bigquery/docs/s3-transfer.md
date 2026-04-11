@@ -10,7 +10,7 @@ Before you create an Amazon S3 data transfer:
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
   - [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. The destination table must follow the [table naming rules](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) . Destination table names also support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) . You can create a BigQuery table or [create BigLake Iceberg table in BigQuery](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
   - Retrieve your Amazon S3 URI, your access key ID, and your secret access key. For information on managing your access keys, see the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) .
-  - If you intend to setup transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Limitations
 
@@ -18,9 +18,9 @@ Amazon S3 data transfers are subject to the following limitations:
 
   - The bucket portion of the Amazon S3 URI cannot be parameterized.
 
-  - Data transfers from Amazon S3 with the **Write disposition** parameter set to `  WRITE_TRUNCATE  ` will transfer all matching files to Google Cloud during each run. This may result in additional Amazon S3 outbound data transfer costs. For more information on which files are transferred during a run, see [Impact of prefix matching versus wildcard matching](https://docs.cloud.google.com/bigquery/docs/s3-transfer#matching) .
+  - Data transfers from Amazon S3 with the **Write disposition** parameter set to `WRITE_TRUNCATE` will transfer all matching files to Google Cloud during each run. This may result in additional Amazon S3 outbound data transfer costs. For more information on which files are transferred during a run, see [Impact of prefix matching versus wildcard matching](https://docs.cloud.google.com/bigquery/docs/s3-transfer#matching) .
 
-  - Data transfers from AWS GovCloud ( `  us-gov  ` ) regions are not supported.
+  - Data transfers from AWS GovCloud ( `us-gov` ) regions are not supported.
 
   - Data transfers to [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) are not supported.
 
@@ -38,7 +38,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -47,22 +47,22 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Amazon S3 roles
 
-Consult the documentation for Amazon S3 to ensure you have configured any permissions necessary to enable the data transfer. At a minimum, the Amazon S3 source data must have the AWS managed policy [`  AmazonS3ReadOnlyAccess  `](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console) applied to it.
+Consult the documentation for Amazon S3 to ensure you have configured any permissions necessary to enable the data transfer. At a minimum, the Amazon S3 source data must have the AWS managed policy [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console) applied to it.
 
 ## Set up an Amazon S3 data transfer
 
@@ -82,7 +82,7 @@ To create an Amazon S3 data transfer:
         
         ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/s3-transfer-source.png)
     
-      - In the **Transfer config name** section, for **Display name** , enter a name for the transfer such as `  My Transfer  ` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+      - In the **Transfer config name** section, for **Display name** , enter a name for the transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
         
         ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
     
@@ -101,15 +101,15 @@ To create an Amazon S3 data transfer:
       - In the **Data source details** section:
         
           - For **Destination table** , enter the name of the table that you created to store the data in BigQuery. Destination table names support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) .
-          - For **Amazon S3 URI** , enter the URI with the format `  s3://mybucket/myfolder/...  ` . URIs also support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) .
+          - For **Amazon S3 URI** , enter the URI with the format `s3://mybucket/myfolder/...` . URIs also support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) .
           - For **Access key ID** , enter your access key ID.
           - For **Secret access key** , enter your secret access key.
           - For **File format** choose your data format (newline delimited JSON, CSV, Avro, Parquet, or ORC).
           - For **Write Disposition** , choose one of the following:
-              - **`  WRITE_APPEND  `** to incrementally append new data to your existing destination table. **`  WRITE_APPEND  `** is the default value for Write preference.
-              - **`  WRITE_TRUNCATE  `** to overwrite data in the destination table during each data transfer run.
+              - **`WRITE_APPEND`** to incrementally append new data to your existing destination table. **`WRITE_APPEND`** is the default value for Write preference.
+              - **`WRITE_TRUNCATE`** to overwrite data in the destination table during each data transfer run.
         
-        For more information about how BigQuery Data Transfer Service ingests data using either **`  WRITE_APPEND  `** or **`  WRITE_TRUNCATE  `** , see [Data ingestion for Amazon S3 transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro#data-ingestion) . For more information about the `  writeDisposition  ` field, see [`  JobConfigurationLoad  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
+        For more information about how BigQuery Data Transfer Service ingests data using either **`WRITE_APPEND`** or **`WRITE_TRUNCATE`** , see [Data ingestion for Amazon S3 transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro#data-ingestion) . For more information about the `writeDisposition` field, see [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
         
         ![S3 source details](https://docs.cloud.google.com/static/bigquery/images/s3-source-details.png)
     
@@ -148,7 +148,7 @@ To create an Amazon S3 data transfer:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` .
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` .
 
 ``` notranslate
 bq mk \
@@ -163,23 +163,23 @@ bq mk \
 
 Where:
 
-  - project\_id : Optional. Your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
+  - project\_id : Optional. Your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - data\_source : Required. The data source — `  amazon_s3  ` .
+  - data\_source : Required. The data source — `amazon_s3` .
 
   - display\_name : Required. The display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
   - dataset : Required. The target dataset for the data transfer configuration.
 
-  - service\_account : The service account name used to authenticate your data transfer. The service account should be owned by the same `  project_id  ` used to create the data transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/s3-transfer#required_permissions) .
+  - service\_account : The service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the data transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/s3-transfer#required_permissions) .
 
-  - parameters : Required. The parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for an Amazon S3 transfer:
+  - parameters : Required. The parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for an Amazon S3 transfer:
     
       - destination\_table\_name\_template : Required. The name of your destination table.
     
       - data\_path : Required. The Amazon S3 URI, in the following format:
         
-        `  s3://mybucket/myfolder/...  `
+        `s3://mybucket/myfolder/...`
         
         URIs also support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) .
     
@@ -187,27 +187,27 @@ Where:
     
       - secret\_access\_key : Required. Your secret access key.
     
-      - file\_format : Optional. Indicates the type of files you want to transfer: `  CSV  ` , `  JSON  ` , `  AVRO  ` , `  PARQUET  ` , or `  ORC  ` . The default value is `  CSV  ` .
+      - file\_format : Optional. Indicates the type of files you want to transfer: `CSV` , `JSON` , `AVRO` , `PARQUET` , or `ORC` . The default value is `CSV` .
     
-      - write\_disposition : Optional. `  WRITE_APPEND  ` will transfer only the files which have been modified since the previous successful run. `  WRITE_TRUNCATE  ` will transfer all matching files, including files that were transferred in a previous run. The default is `  WRITE_APPEND  ` .
+      - write\_disposition : Optional. `WRITE_APPEND` will transfer only the files which have been modified since the previous successful run. `WRITE_TRUNCATE` will transfer all matching files, including files that were transferred in a previous run. The default is `WRITE_APPEND` .
     
-      - max\_bad\_records : Optional. The number of allowed bad records. The default is `  0  ` .
+      - max\_bad\_records : Optional. The number of allowed bad records. The default is `0` .
     
       - decimal\_target\_types : Optional. A comma-separated list of possible SQL data types that the source decimal values could be converted to. If this field is not provided, the data type defaults to "NUMERIC,STRING" for ORC, and "NUMERIC" for the other file formats.
     
-      - ignore\_unknown\_values : Optional, and ignored if file\_format is not `  JSON  ` or `  CSV  ` . Whether to ignore unknown values in your data.
+      - ignore\_unknown\_values : Optional, and ignored if file\_format is not `JSON` or `CSV` . Whether to ignore unknown values in your data.
     
-      - field\_delimiter : Optional, and applies only when `  file_format  ` is `  CSV  ` . The character that separates fields. The default value is a comma.
+      - field\_delimiter : Optional, and applies only when `file_format` is `CSV` . The character that separates fields. The default value is a comma.
     
-      - skip\_leading\_rows : Optional, and applies only when file\_format is `  CSV  ` . Indicates the number of header rows you don't want to import. The default value is `  0  ` .
+      - skip\_leading\_rows : Optional, and applies only when file\_format is `CSV` . Indicates the number of header rows you don't want to import. The default value is `0` .
     
-      - allow\_quoted\_newlines : Optional, and applies only when file\_format is `  CSV  ` . Indicates whether to allow newlines within quoted fields.
+      - allow\_quoted\_newlines : Optional, and applies only when file\_format is `CSV` . Indicates whether to allow newlines within quoted fields.
     
-      - allow\_jagged\_rows : Optional, and applies only when file\_format is `  CSV  ` . Indicates whether to accept rows that are missing trailing optional columns. The missing values will be filled in with NULLs.
+      - allow\_jagged\_rows : Optional, and applies only when file\_format is `CSV` . Indicates whether to accept rows that are missing trailing optional columns. The missing values will be filled in with NULLs.
 
 **Caution:** You cannot configure notifications using the command-line tool.
 
-For example, the following command creates an Amazon S3 data transfer named `  My Transfer  ` using a `  data_path  ` value of `  s3://mybucket/myfile/*.csv  ` , target dataset `  mydataset  ` , and `  file_format  ` `  CSV  ` . This example includes non-default values for the optional params associated with the `  CSV  ` file\_format.
+For example, the following command creates an Amazon S3 data transfer named `My Transfer` using a `data_path` value of `s3://mybucket/myfile/*.csv` , target dataset `mydataset` , and `file_format` `CSV` . This example includes non-default values for the optional params associated with the `CSV` file\_format.
 
 The data transfer is created in the default project:
 
@@ -228,7 +228,7 @@ The data transfer is created in the default project:
 
 After running the command, you receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions and paste the authentication code on the command line.
 
@@ -236,7 +236,7 @@ Follow the instructions and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -320,9 +320,9 @@ Along with these files in the source location:
     s3://bucket/folder/any/subfolder/file1.csv
     s3://bucket/folder/file2.csv
 
-This will result in all Amazon S3 files with the prefix `  s3://bucket/folder/  ` being transferred to Google Cloud. In this example, both `  file1.csv  ` and `  file2.csv  ` will be transferred.
+This will result in all Amazon S3 files with the prefix `s3://bucket/folder/` being transferred to Google Cloud. In this example, both `file1.csv` and `file2.csv` will be transferred.
 
-However, only files matching `  s3://bucket/folder/*/subfolder/*.csv  ` will actually load into BigQuery. In this example, only `  file1.csv  ` will be loaded into BigQuery.
+However, only files matching `s3://bucket/folder/*/subfolder/*.csv` will actually load into BigQuery. In this example, only `file1.csv` will be loaded into BigQuery.
 
 ## Troubleshoot transfer setup
 

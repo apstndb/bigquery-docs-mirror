@@ -11,7 +11,7 @@ Gets a previously created migration subtask.
 
 ### HTTP request
 
-`  GET https://bigquerymigration.googleapis.com/v2/{name=projects/*/locations/*/workflows/*/subtasks/*}  `
+`GET https://bigquerymigration.googleapis.com/v2/{name=projects/*/locations/*/workflows/*/subtasks/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,19 +19,19 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The unique identifier for the migration subtask. Example: `  projects/123/locations/us/workflows/1234/subtasks/543  `
+Required. The unique identifier for the migration subtask. Example: `projects/123/locations/us/workflows/1234/subtasks/543`
 
 ### Query parameters
 
 Parameters
 
-`  readMask  `
+`readMask`
 
-`  string ( FieldMask  ` format)
+` string ( FieldMask  ` format)
 
 Optional. The list of fields to be retrieved.
 
@@ -47,14 +47,14 @@ If successful, the response body contains an instance of `  MigrationSubtask  ` 
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  bigquerymigration.subtasks.get  `
+  - `bigquerymigration.subtasks.get`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

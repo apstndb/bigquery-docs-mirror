@@ -164,12 +164,12 @@ ARIMA\_PLUS\_XREG
 
 ## Dense vector input
 
-BigQuery ML supports `  ARRAY<numerical>  ` as dense vector input during model training. The embedding feature is a special type of dense vector. see the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) for more information.
+BigQuery ML supports `ARRAY<numeric>` as dense vector input during model training. The embedding feature is a special type of dense vector. see the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) for more information.
 
 ## Sparse input
 
-BigQuery ML supports `  ARRAY<STRUCT>  ` as sparse input during model training. Each struct contains an `  INT64  ` value that represents its zero-based index, and a [numeric type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) that represents the corresponding value.
+BigQuery ML supports `ARRAY<STRUCT>` as sparse input during model training. Each struct contains an `INT64` value that represents its zero-based index, and a [numeric type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) that represents the corresponding value.
 
-Below is an example of a sparse tensor input for the integer array `  [0,1,0,0,0,0,1]  ` :
+Below is an example of a sparse tensor input for the integer array `[0,1,0,0,0,0,1]` :
 
     ARRAY<STRUCT<k INT64, v INT64>>[(1, 1), (6, 1)] AS f1

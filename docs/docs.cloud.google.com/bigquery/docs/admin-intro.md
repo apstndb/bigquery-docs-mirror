@@ -19,7 +19,7 @@ To take a tour of BigQuery data administration features directly in the Google C
 
 ## Tools
 
-BigQuery provides several interfaces you can use for administration tasks. Often a particular task can be done with multiple tools, letting you choose the tool that works best for you. For example, you can create a table by using the **Explorer** pane in the Google Cloud console, a `  bq mk --table  ` command, or a `  CREATE TABLE  ` SQL statement.
+BigQuery provides several interfaces you can use for administration tasks. Often a particular task can be done with multiple tools, letting you choose the tool that works best for you. For example, you can create a table by using the **Explorer** pane in the Google Cloud console, a `bq mk --table` command, or a `CREATE TABLE` SQL statement.
 
   - **Google Cloud console.** The Google Cloud console has several pages dedicated to BigQuery administration. For more information, see [Use the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
 
@@ -27,7 +27,7 @@ BigQuery provides several interfaces you can use for administration tasks. Often
     
     You can use stored procedures to automate administration tasks that use SQL statements. For more information, see [Work with stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
-  - **`  bq  ` commands.** The bq command-line tool lets you do many administrative tasks by using `  bq  ` commands. You can use the bq command-line tool to do tasks that aren't supported in the Google Cloud console, to prototype capabilities before encoding them in queries or API methods, or if you prefer working in a command-line interface. For more information, see [Use the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) .
+  - **`bq` commands.** The bq command-line tool lets you do many administrative tasks by using `bq` commands. You can use the bq command-line tool to do tasks that aren't supported in the Google Cloud console, to prototype capabilities before encoding them in queries or API methods, or if you prefer working in a command-line interface. For more information, see [Use the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) .
 
 ## Manage resources
 
@@ -56,15 +56,15 @@ Refer to the following documents for more information about table administration
 
 ### Label resources
 
-To help organize your BigQuery resources, you can add labels to your datasets, tables, and views. Labels are key-value pairs that you can attach to a resource. After labeling your resources, you can search for them based on label values. For example, you could use labels to group datasets by department by adding labels like `  dept:sales  ` , `  dept:marketing  ` , or `  dept:analytics  ` . Then you could [break down your billed charges](https://docs.cloud.google.com/billing/docs/how-to/bq-examples) by department using the labels.
+To help organize your BigQuery resources, you can add labels to your datasets, tables, and views. Labels are key-value pairs that you can attach to a resource. After labeling your resources, you can search for them based on label values. For example, you could use labels to group datasets by department by adding labels like `dept:sales` , `dept:marketing` , or `dept:analytics` . Then you could [break down your billed charges](https://docs.cloud.google.com/billing/docs/how-to/bq-examples) by department using the labels.
 
 For more information, see [Introduction to labels](https://docs.cloud.google.com/bigquery/docs/labels-intro) .
 
 ### Get resource information
 
-You can get information about your BigQuery resources by querying the `  INFORMATION_SCHEMA  ` views. BigQuery provides [views](https://docs.cloud.google.com/bigquery/docs/views-intro) for each resource type. For example, the `  INFORMATION_SCHEMA.TABLES  ` view contains information about your tables.
+You can get information about your BigQuery resources by querying the `INFORMATION_SCHEMA` views. BigQuery provides [views](https://docs.cloud.google.com/bigquery/docs/views-intro) for each resource type. For example, the `INFORMATION_SCHEMA.TABLES` view contains information about your tables.
 
-The following are a few examples of information you can obtain by querying `  INFORMATION_SCHEMA  ` views:
+The following are a few examples of information you can obtain by querying `INFORMATION_SCHEMA` views:
 
   - See when a table was created.
   - Get the names and data types of each column in a table.
@@ -75,7 +75,7 @@ The following are a few examples of information you can obtain by querying `  IN
   - Find the partitioning and clustering columns on a table.
   - Get a project's assigned reservation and its slot capacity.
 
-For more information, see [Introduction to BigQuery `  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+For more information, see [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
 
 ### Copy data
 

@@ -2,7 +2,7 @@
 
 To run a BigQuery job programmatically using the REST API or client libraries, you:
 
-1.  Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method.
+1.  Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method.
 2.  Periodically request the job resource and examine the status property to learn when the job is complete.
 3.  Check to see whether the job finished successfully.
 
@@ -12,18 +12,18 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required permissions
 
-To run a BigQuery job, you need the `  bigquery.jobs.create  ` IAM permission.
+To run a BigQuery job, you need the `bigquery.jobs.create` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to run a job:
 
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.jobUser  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.user`
+  - `roles/bigquery.jobUser`
+  - `roles/bigquery.admin`
 
 Additionally, when you create a job, you are automatically granted the following permissions for that job:
 
-  - `  bigquery.jobs.get  `
-  - `  bigquery.jobs.update  `
+  - `bigquery.jobs.get`
+  - `bigquery.jobs.update`
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -31,15 +31,15 @@ For more information on IAM roles and permissions in BigQuery, see [Predefined r
 
 To run a job programmatically:
 
-1.  Start the job by calling the `  jobs.insert  ` method. When you call the `  jobs.insert  ` method, include a [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) representation.
+1.  Start the job by calling the `jobs.insert` method. When you call the `jobs.insert` method, include a [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) representation.
 
-2.  In the [`  configuration  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration) section of the job resource, include a child property that specifies the job type — `  load  ` , `  query  ` , `  extract  ` , or `  copy  ` .
+2.  In the [`configuration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration) section of the job resource, include a child property that specifies the job type — `load` , `query` , `extract` , or `copy` .
 
-3.  After calling the `  jobs.insert  ` method, check the job status by calling `  jobs.get  ` with the job ID and location, and check the `  status.state  ` value to learn the job status. When `  status.state  ` is `  DONE  ` , the job has stopped running; however, a `  DONE  ` status does not mean that the job completed successfully, only that it is no longer running.
+3.  After calling the `jobs.insert` method, check the job status by calling `jobs.get` with the job ID and location, and check the `status.state` value to learn the job status. When `status.state` is `DONE` , the job has stopped running; however, a `DONE` status does not mean that the job completed successfully, only that it is no longer running.
     
-    **Note:** There are some wrapper functions that manage job status requests for you. For example, running `  jobs.query  ` creates a job and periodically polls for `  DONE  ` status for a specified period of time.
+    **Note:** There are some wrapper functions that manage job status requests for you. For example, running `jobs.query` creates a job and periodically polls for `DONE` status for a specified period of time.
 
-4.  Check for job success. If the job has an `  errorResult  ` property, the job has failed. The `  status.errorResult  ` property holds information describing what went wrong in a failed job. If `  status.errorResult  ` is absent, the job finished successfully, although there might have been some nonfatal errors, such as problems importing a few rows in a load job. Nonfatal errors are returned in the job's `  status.errors  ` list.
+4.  Check for job success. If the job has an `errorResult` property, the job has failed. The `status.errorResult` property holds information describing what went wrong in a failed job. If `status.errorResult` is absent, the job finished successfully, although there might have been some nonfatal errors, such as problems importing a few rows in a load job. Nonfatal errors are returned in the job's `status.errors` list.
 
 ## Running jobs using client libraries
 
@@ -173,9 +173,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Adding job labels
 
-Labels can be added to query jobs through the command line by using the bq command-line tool's `  --label  ` flag. The bq tool supports adding labels only to query jobs.
+Labels can be added to query jobs through the command line by using the bq command-line tool's `--label` flag. The bq tool supports adding labels only to query jobs.
 
-You can also add a label to a job when it's submitted through the API by specifying the `  labels  ` property in the job configuration when you call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. The API can be used to add labels to any job type.
+You can also add a label to a job when it's submitted through the API by specifying the `labels` property in the job configuration when you call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. The API can be used to add labels to any job type.
 
 You cannot add labels to or update labels on pending, running, or completed jobs.
 

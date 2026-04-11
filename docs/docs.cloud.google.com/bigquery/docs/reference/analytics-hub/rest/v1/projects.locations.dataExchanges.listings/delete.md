@@ -11,7 +11,7 @@ Deletes a listing.
 
 ### HTTP request
 
-`  DELETE https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}  `
+`DELETE https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,19 +19,19 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the listing to delete. e.g. `  projects/myproject/locations/us/dataExchanges/123/listings/456  ` .
+Required. Resource name of the listing to delete. e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456` .
 
 ### Query parameters
 
 Parameters
 
-`  deleteCommercial  `
+`deleteCommercial`
 
-`  boolean  `
+`boolean`
 
 Optional. If the listing is commercial then this field must be set to true, otherwise a failure is thrown. This acts as a safety guard to avoid deleting commercial listings accidentally.
 
@@ -47,15 +47,15 @@ If successful, the response body is an empty JSON object.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  analyticshub.listings.delete  `
+  - `analyticshub.listings.delete`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

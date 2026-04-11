@@ -45,14 +45,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc CreateConnection(                         CreateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Connection            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc CreateConnection(              CreateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Connection            </code> )</p>
 <p>Creates a new connection.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -72,14 +72,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc DeleteConnection(                         DeleteConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Empty            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc DeleteConnection(              DeleteConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Empty            </code> )</p>
 <p>Deletes connection and associated credential.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -99,14 +99,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc GetConnection(                         GetConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Connection            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc GetConnection(              GetConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Connection            </code> )</p>
 <p>Returns specified connection.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -126,14 +126,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc GetIamPolicy(                         GetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">              Policy            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc GetIamPolicy(              GetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">             Policy            </code> )</p>
 <p>Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -153,14 +153,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc ListConnections(                         ListConnectionsRequest            </code> ) returns ( <code dir="ltr" translate="no">              ListConnectionsResponse            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc ListConnections(              ListConnectionsRequest            </code> ) returns ( <code dir="ltr" translate="no">             ListConnectionsResponse            </code> )</p>
 <p>Returns a list of connections in the given project.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -180,15 +180,15 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc SetIamPolicy(                         SetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">              Policy            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc SetIamPolicy(              SetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">             Policy            </code> )</p>
 <p>Sets the access control policy on the specified resource. Replaces any existing policy.</p>
-<p>Can return <code dir="ltr" translate="no">           NOT_FOUND          </code> , <code dir="ltr" translate="no">           INVALID_ARGUMENT          </code> , and <code dir="ltr" translate="no">           PERMISSION_DENIED          </code> errors.</p>
+<p>Can return <code dir="ltr" translate="no">NOT_FOUND</code> , <code dir="ltr" translate="no">INVALID_ARGUMENT</code> , and <code dir="ltr" translate="no">PERMISSION_DENIED</code> errors.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -208,15 +208,15 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc TestIamPermissions(                         TestIamPermissionsRequest            </code> ) returns ( <code dir="ltr" translate="no">              TestIamPermissionsResponse            </code> )</p>
-<p>Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a <code dir="ltr" translate="no">           NOT_FOUND          </code> error.</p>
+<td><p><code dir="ltr" translate="no">rpc TestIamPermissions(              TestIamPermissionsRequest            </code> ) returns ( <code dir="ltr" translate="no">             TestIamPermissionsResponse            </code> )</p>
+<p>Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a <code dir="ltr" translate="no">NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -236,14 +236,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc UpdateConnection(                         UpdateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Connection            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc UpdateConnection(              UpdateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Connection            </code> )</p>
 <p>Updates the specified connection. For security reasons, also resets credential if connection properties are in the update field mask.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -258,15 +258,15 @@ Authentication method for Amazon Web Services (AWS) that uses Google owned Googl
 
 Fields
 
-`  iam_role_id  `
+`iam_role_id`
 
-`  string  `
+`string`
 
 The user’s AWS IAM Role that trusts the Google-owned AWS IAM user Connection.
 
-`  identity  `
+`identity`
 
-`  string  `
+`string`
 
 A unique Google-owned and Google-generated identity for the Connection. This identity will be used to access the user's AWS IAM Role.
 
@@ -276,9 +276,9 @@ Connection properties specific to Amazon Web Services (AWS).
 
 Fields
 
-Union field `  authentication_method  ` . Authentication method chosen at connection creation. `  authentication_method  ` can be only one of the following:
+Union field `authentication_method` . Authentication method chosen at connection creation. `authentication_method` can be only one of the following:
 
-`  access_role  `
+`access_role`
 
 `  AwsAccessRole  `
 
@@ -290,45 +290,45 @@ Container for connection properties specific to Azure.
 
 Fields
 
-`  application  `
+`application`
 
-`  string  `
+`string`
 
 Output only. The name of the Azure Active Directory Application.
 
-`  client_id  `
+`client_id`
 
-`  string  `
+`string`
 
 Output only. The client id of the Azure Active Directory Application.
 
-`  object_id  `
+`object_id`
 
-`  string  `
+`string`
 
 Output only. The object id of the Azure Active Directory Application.
 
-`  customer_tenant_id  `
+`customer_tenant_id`
 
-`  string  `
+`string`
 
 The id of customer's directory that host the data.
 
-`  redirect_uri  `
+`redirect_uri`
 
-`  string  `
+`string`
 
 The URL user will be redirected to after granting consent during connection setup.
 
-`  federated_application_client_id  `
+`federated_application_client_id`
 
-`  string  `
+`string`
 
 The client ID of the user's Azure Active Directory Application used for a federated connection.
 
-`  identity  `
+`identity`
 
-`  string  `
+`string`
 
 Output only. A unique Google-owned and Google-generated identity for the Connection. This identity will be used to access the user's Azure Active Directory Application.
 
@@ -338,9 +338,9 @@ Container for connection properties for delegation of access to GCP resources.
 
 Fields
 
-`  service_account_id  `
+`service_account_id`
 
-`  string  `
+`string`
 
 Output only. The account ID of the service created for the purpose of this connection.
 
@@ -354,41 +354,41 @@ Connection properties specific to Cloud Spanner.
 
 Fields
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 Cloud Spanner database in the form \`project/instance/database'
 
-`  use_parallelism  `
+`use_parallelism`
 
-`  bool  `
+`bool`
 
 If parallelism should be used when reading from Cloud Spanner
 
-`  max_parallelism  `
+`max_parallelism`
 
-`  int32  `
+`int32`
 
 Allows setting max parallelism per query when executing on Spanner independent compute resources. If unspecified, default values of parallelism are chosen that are dependent on the Cloud Spanner instance configuration.
 
-REQUIRES: `  use_parallelism  ` must be set.
+REQUIRES: `use_parallelism` must be set.
 
-REQUIRES: `  use_data_boost  ` must be set.
+REQUIRES: `use_data_boost` must be set.
 
-`  use_data_boost  `
+`use_data_boost`
 
-`  bool  `
+`bool`
 
 If set, the request will be executed via Spanner independent compute resources.
 
-REQUIRES: `  use_parallelism  ` must be set.
+REQUIRES: `use_parallelism` must be set.
 
-`  database_role  `
+`database_role`
 
-`  string  `
+`string`
 
-Optional. Cloud Spanner database role for fine-grained access control. The Cloud Spanner admin should have provisioned the database role with appropriate permissions, such as `  SELECT  ` and `  INSERT  ` . Other users should only use roles provided by their Cloud Spanner admins.
+Optional. Cloud Spanner database role for fine-grained access control. The Cloud Spanner admin should have provisioned the database role with appropriate permissions, such as `SELECT` and `INSERT` . Other users should only use roles provided by their Cloud Spanner admins.
 
 For more details, see [About fine-grained access control](https://cloud.google.com/spanner/docs/fgac-about) .
 
@@ -400,15 +400,15 @@ Credential info for the Cloud SQL.
 
 Fields
 
-`  username  `
+`username`
 
-`  string  `
+`string`
 
 The username for the credential.
 
-`  password  `
+`password`
 
-`  string  `
+`string`
 
 The password for the credential.
 
@@ -418,33 +418,33 @@ Connection properties specific to the Cloud SQL.
 
 Fields
 
-`  instance_id  `
+`instance_id`
 
-`  string  `
+`string`
 
-Cloud SQL instance ID in the form `  project:location:instance  ` .
+Cloud SQL instance ID in the form `project:location:instance` .
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 Database name.
 
-`  type  `
+`type`
 
 `  DatabaseType  `
 
 Type of the Cloud SQL database.
 
-`  credential  `
+`credential`
 
 `  CloudSqlCredential  `
 
 Input only. Cloud SQL credential.
 
-`  service_account_id  `
+`service_account_id`
 
-`  string  `
+`string`
 
 Output only. The account ID of the service used for the purpose of this connection.
 
@@ -456,15 +456,15 @@ Supported Cloud SQL database types.
 
 Enums
 
-`  DATABASE_TYPE_UNSPECIFIED  `
+`DATABASE_TYPE_UNSPECIFIED`
 
 Unspecified database type.
 
-`  POSTGRES  `
+`POSTGRES`
 
 Cloud SQL for PostgreSQL.
 
-`  MYSQL  `
+`MYSQL`
 
 Cloud SQL for MySQL.
 
@@ -474,97 +474,97 @@ Configuration parameters to establish connection with an external data source, e
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. The resource name of the connection in the form of: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+Output only. The resource name of the connection in the form of: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-`  friendly_name  `
+`friendly_name`
 
-`  string  `
+`string`
 
 User provided display name for the connection.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 User provided description.
 
-`  configuration  `
+`configuration`
 
 `  ConnectorConfiguration  `
 
 Optional. Connector configuration.
 
-`  creation_time  `
+`creation_time`
 
-`  int64  `
+`int64`
 
 Output only. The creation timestamp of the connection.
 
-`  last_modified_time  `
+`last_modified_time`
 
-`  int64  `
+`int64`
 
 Output only. The last update timestamp of the connection.
 
-`  has_credential  `
+`has_credential`
 
-`  bool  `
+`bool`
 
 Output only. True, if credential is configured for this connection.
 
-`  kms_key_name  `
+`kms_key_name`
 
-`  string  `
+`string`
 
 Optional. The Cloud KMS key that is used for credentials encryption.
 
 If omitted, internal Google owned encryption keys are used.
 
-Example: `  projects/[kms_project_id]/locations/[region]/keyRings/[key_region]/cryptoKeys/[key]  `
+Example: `projects/[kms_project_id]/locations/[region]/keyRings/[key_region]/cryptoKeys/[key]`
 
-Union field `  properties  ` . Properties specific to the underlying data source. `  properties  ` can be only one of the following:
+Union field `properties` . Properties specific to the underlying data source. `properties` can be only one of the following:
 
-`  cloud_sql  `
+`cloud_sql`
 
 `  CloudSqlProperties  `
 
 Cloud SQL properties.
 
-`  aws  `
+`aws`
 
 `  AwsProperties  `
 
 Amazon Web Services (AWS) properties.
 
-`  azure  `
+`azure`
 
 `  AzureProperties  `
 
 Azure properties.
 
-`  cloud_spanner  `
+`cloud_spanner`
 
 `  CloudSpannerProperties  `
 
 Cloud Spanner properties.
 
-`  cloud_resource  `
+`cloud_resource`
 
 `  CloudResourceProperties  `
 
 Cloud Resource properties.
 
-`  spark  `
+`spark`
 
 `  SparkProperties  `
 
 Spark properties.
 
-`  salesforce_data_cloud  `
+`salesforce_data_cloud`
 
 `  SalesforceDataCloudProperties  `
 
@@ -576,31 +576,31 @@ Represents concrete parameter values for Connector Configuration.
 
 Fields
 
-`  connector_id  `
+`connector_id`
 
-`  string  `
+`string`
 
 Required. Immutable. The ID of the Connector these parameters are configured for.
 
-`  endpoint  `
+`endpoint`
 
 `  Endpoint  `
 
 Specifies how to reach the remote system this connection is pointing to.
 
-`  authentication  `
+`authentication`
 
 `  Authentication  `
 
 Client authentication.
 
-`  network  `
+`network`
 
 `  Network  `
 
 Networking configuration.
 
-`  asset  `
+`asset`
 
 `  Asset  `
 
@@ -612,17 +612,17 @@ Data Asset - a resource within instance of the system, reachable under specified
 
 Fields
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 Name of the database.
 
-`  google_cloud_resource  `
+`google_cloud_resource`
 
-`  string  `
+`string`
 
-Full Google Cloud resource name - <https://cloud.google.com/apis/design/resource_names#full_resource_name> . Example: `  //library.googleapis.com/shelves/shelf1/books/book2  `
+Full Google Cloud resource name - <https://cloud.google.com/apis/design/resource_names#full_resource_name> . Example: `//library.googleapis.com/shelves/shelf1/books/book2`
 
 ## Authentication
 
@@ -630,17 +630,17 @@ Client authentication.
 
 Fields
 
-`  username_password  `
+`username_password`
 
 `  UsernamePassword  `
 
 Username/password authentication.
 
-`  service_account  `
+`service_account`
 
-`  string  `
+`string`
 
-Output only. Google-managed service account associated with this connection, e.g., `  service-{project_number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` . BigQuery jobs using this connection will act as `  service_account  ` identity while connecting to the datasource.
+Output only. Google-managed service account associated with this connection, e.g., `service-{project_number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com` . BigQuery jobs using this connection will act as `service_account` identity while connecting to the datasource.
 
 ## Endpoint
 
@@ -648,15 +648,15 @@ Remote endpoint specification.
 
 Fields
 
-Union field `  endpoint  ` .
+Union field `endpoint` .
 
-`  endpoint  ` can be only one of the following:
+`endpoint` can be only one of the following:
 
-`  host_port  `
+`host_port`
 
-`  string  `
+`string`
 
-Host and port in a format of `  hostname:port  ` as defined in <https://www.ietf.org/rfc/rfc3986.html#section-3.2.2> and <https://www.ietf.org/rfc/rfc3986.html#section-3.2.3> .
+Host and port in a format of `hostname:port` as defined in <https://www.ietf.org/rfc/rfc3986.html#section-3.2.2> and <https://www.ietf.org/rfc/rfc3986.html#section-3.2.3> .
 
 ## Network
 
@@ -664,11 +664,11 @@ Network related configuration.
 
 Fields
 
-Union field `  network  ` .
+Union field `network` .
 
-`  network  ` can be only one of the following:
+`network` can be only one of the following:
 
-`  private_service_connect  `
+`private_service_connect`
 
 `  PrivateServiceConnect  `
 
@@ -680,11 +680,11 @@ Private Service Connect configuration.
 
 Fields
 
-`  network_attachment  `
+`network_attachment`
 
-`  string  `
+`string`
 
-Required. Network Attachment name in the format of `  projects/{project}/regions/{region}/networkAttachments/{networkattachment}  ` .
+Required. Network Attachment name in the format of `projects/{project}/regions/{region}/networkAttachments/{networkattachment}` .
 
 ## Secret
 
@@ -692,17 +692,17 @@ Secret value parameter.
 
 Fields
 
-`  secret_type  `
+`secret_type`
 
 `  SecretType  `
 
-Output only. Indicates type of secret. Can be used to check type of stored secret value even if it's `  INPUT_ONLY  ` .
+Output only. Indicates type of secret. Can be used to check type of stored secret value even if it's `INPUT_ONLY` .
 
-Union field `  secret  ` . Required. Secret value. `  secret  ` can be only one of the following:
+Union field `secret` . Required. Secret value. `secret` can be only one of the following:
 
-`  plaintext  `
+`plaintext`
 
-`  string  `
+`string`
 
 Input only. Secret as plaintext.
 
@@ -712,9 +712,9 @@ Indicates type of stored secret.
 
 Enums
 
-`  SECRET_TYPE_UNSPECIFIED  `
+`SECRET_TYPE_UNSPECIFIED`
 
-`  PLAINTEXT  `
+`PLAINTEXT`
 
 ## UsernamePassword
 
@@ -722,13 +722,13 @@ Username and Password authentication.
 
 Fields
 
-`  username  `
+`username`
 
-`  string  `
+`string`
 
 Required. Username.
 
-`  password  `
+`password`
 
 `  Secret  `
 
@@ -740,23 +740,23 @@ The request for `  ConnectionService.CreateConnection  ` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Parent resource name. Must be in the format `  projects/{project_id}/locations/{location_id}  `
+Required. Parent resource name. Must be in the format `projects/{project_id}/locations/{location_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.connections.create  `
+  - `bigquery.connections.create`
 
-`  connection_id  `
+`connection_id`
 
-`  string  `
+`string`
 
 Optional. Connection id that should be assigned to the created connection.
 
-`  connection  `
+`connection`
 
 `  Connection  `
 
@@ -768,15 +768,15 @@ The request for \[ConnectionService.DeleteConnectionRequest\]\[\].
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the deleted connection, for example: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+Required. Name of the deleted connection, for example: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.delete  `
+  - `bigquery.connections.delete`
 
 ## GetConnectionRequest
 
@@ -784,15 +784,15 @@ The request for `  ConnectionService.GetConnection  ` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the requested connection, for example: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+Required. Name of the requested connection, for example: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.get  `
+  - `bigquery.connections.get`
 
 ## ListConnectionsRequest
 
@@ -800,25 +800,25 @@ The request for `  ConnectionService.ListConnections  ` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Parent resource name. Must be in the form: `  projects/{project_id}/locations/{location_id}  `
+Required. Parent resource name. Must be in the form: `projects/{project_id}/locations/{location_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.connections.list  `
+  - `bigquery.connections.list`
 
-`  page_size  `
+`page_size`
 
-`  int32  `
+`int32`
 
 Required. Page size.
 
-`  page_token  `
+`page_token`
 
-`  string  `
+`string`
 
 Page token.
 
@@ -828,13 +828,13 @@ The response for `  ConnectionService.ListConnections  ` .
 
 Fields
 
-`  next_page_token  `
+`next_page_token`
 
-`  string  `
+`string`
 
 Next page token.
 
-`  connections[]  `
+`connections[]`
 
 `  Connection  `
 
@@ -846,15 +846,15 @@ Configuration of the Dataproc Metastore Service.
 
 Fields
 
-`  metastore_service  `
+`metastore_service`
 
-`  string  `
+`string`
 
 Optional. Resource name of an existing Dataproc Metastore service.
 
 Example:
 
-  - `  projects/[project_id]/locations/[region]/services/[service_id]  `
+  - `projects/[project_id]/locations/[region]/services/[service_id]`
 
 ## SalesforceDataCloudProperties
 
@@ -862,21 +862,21 @@ Connection properties specific to Salesforce DataCloud. This is intended for use
 
 Fields
 
-`  instance_uri  `
+`instance_uri`
 
-`  string  `
+`string`
 
 The URL to the user's Salesforce DataCloud instance.
 
-`  identity  `
+`identity`
 
-`  string  `
+`string`
 
 Output only. A unique Google-owned and Google-generated service account identity for the connection.
 
-`  tenant_id  `
+`tenant_id`
 
-`  string  `
+`string`
 
 The ID of the user's Salesforce tenant.
 
@@ -886,15 +886,15 @@ Configuration of the Spark History Server.
 
 Fields
 
-`  dataproc_cluster  `
+`dataproc_cluster`
 
-`  string  `
+`string`
 
 Optional. Resource name of an existing Dataproc Cluster to act as a Spark History Server for the connection.
 
 Example:
 
-  - `  projects/[project_id]/regions/[region]/clusters/[cluster_name]  `
+  - `projects/[project_id]/regions/[region]/clusters/[cluster_name]`
 
 ## SparkProperties
 
@@ -902,9 +902,9 @@ Container for connection properties to execute stored procedures for Apache Spar
 
 Fields
 
-`  service_account_id  `
+`service_account_id`
 
-`  string  `
+`string`
 
 Output only. The account ID of the service created for the purpose of this connection.
 
@@ -912,13 +912,13 @@ The service account does not have any permissions associated with it when it is 
 
 The account ID is in the form of: bqcx- - @gcp-sa-bigquery-consp.iam.gserviceaccount.com
 
-`  metastore_service_config  `
+`metastore_service_config`
 
 `  MetastoreServiceConfig  `
 
 Optional. Dataproc Metastore Service configuration for the connection.
 
-`  spark_history_server_config  `
+`spark_history_server_config`
 
 `  SparkHistoryServerConfig  `
 
@@ -930,23 +930,23 @@ The request for `  ConnectionService.UpdateConnection  ` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the connection to update, for example: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+Required. Name of the connection to update, for example: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.update  `
+  - `bigquery.connections.update`
 
-`  connection  `
+`connection`
 
 `  Connection  `
 
 Required. Connection containing the updated fields.
 
-`  update_mask  `
+`update_mask`
 
 `  FieldMask  `
 

@@ -37,43 +37,43 @@ Example natural language prompt
 
 Dataset and table information
 
-`  get_dataset_info  `
+`get_dataset_info`
 
 Get information about the dataset bigquery-public-data.pypi
 
-`  get_table_info  `
+`get_table_info`
 
 Get information about the table bigquery-public-data.pypi.file\_downloads
 
-`  list_dataset_ids  `
+`list_dataset_ids`
 
 List all ML datasets in the project bigquery-public-data
 
-`  list_table_ids  `
+`list_table_ids`
 
 List all tables in the dataset bigquery-public-data.pypi
 
 Search
 
-`  search_catalog  `
+`search_catalog`
 
 Find tables related to PyPi downloads
 
 SQL execution
 
-`  execute_sql  `
+`execute_sql`
 
 Using bigquery-public-data.pypi.file\_downloads, show me the top 10 downloaded pypi packages this month
 
 Time-series forecasting
 
-`  forecast  `
+`forecast`
 
 Using bigquery-public-data.pypi.file\_downloads, forecast the downloads for the last four months of 2025 for package urllib3
 
 Contribution analysis
 
-`  analyze_contribution  `
+`analyze_contribution`
 
 Analyze the contribution of country to revenue in the bigquery-public-data.google\_analytics\_sample.ga\_sessions\_20170801 table
 
@@ -81,10 +81,10 @@ Analyze the contribution of country to revenue in the bigquery-public-data.googl
 
 The [Conversational Analytics extension](https://github.com/gemini-cli-extensions/bigquery-conversational-analytics) provides the following tools:
 
-| Category                 | Tool                               | Example natural language prompt                                                                                                                        |
-| ------------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Search                   | `        search_catalog       `    | Find tables related to PyPi downloads                                                                                                                  |
-| Conversational analytics | `        ask_data_insights       ` | Using the tool ask\_data\_insights and the tables under bigquery-public-data.google\_analytics\_sample, tell me the channels I should focus on and why |
+| Category                 | Tool                | Example natural language prompt                                                                                                                        |
+| ------------------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Search                   | `search_catalog`    | Find tables related to PyPi downloads                                                                                                                  |
+| Conversational analytics | `ask_data_insights` | Using the tool ask\_data\_insights and the tables under bigquery-public-data.google\_analytics\_sample, tell me the channels I should focus on and why |
 
 ## Before you begin
 
@@ -95,21 +95,21 @@ Before you begin, you need the following:
   - For the Data Analytics extension, enable the following APIs:
     
       - BigQuery
-      - To use the `  search_catalog  ` tool: Dataplex Universal Catalog
+      - To use the `search_catalog` tool: Dataplex Universal Catalog
 
   - For the Conversational Analytics extension, enable the following APIs:
     
       - BigQuery
       - Dataplex Universal Catalog
-      - To use the `  ask_data_insights  ` tool: Gemini for Google Cloud API, Gemini, and Data Analytics API with Gemini
+      - To use the `ask_data_insights` tool: Gemini for Google Cloud API, Gemini, and Data Analytics API with Gemini
 
 ### Required roles
 
 To get the permissions that you need to use the BigQuery extensions with Gemini CLI, ask your administrator to grant you the following IAM roles on Resource Manager resources (projects, folders, and organizations) or lower-level resources like datasets:
 
-  - Run BigQuery queries in a Google Cloud project: [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
-  - Use the foundational metadata tools to get BigQuery dataset and table metadata: [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` )
-  - Use the Conversational Analytics extension: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` )
+  - Run BigQuery queries in a Google Cloud project: [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+  - Use the foundational metadata tools to get BigQuery dataset and table metadata: [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
+  - Use the Conversational Analytics extension: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -129,10 +129,10 @@ Install the BigQuery extensions and then use them to explore and analyze your da
     
     You can also set these optional environment variables:
     
-      - `  BIGQUERY_LOCATION  ` : the dataset location—for example: `  export BIGQUERY_LOCATION="us"  `
-      - `  BIGQUERY_USE_CLIENT_OAUTH  ` : whether to use client-side OAuth—for example: `  export BIGQUERY_USE_CLIENT_OAUTH=true  `
+      - `BIGQUERY_LOCATION` : the dataset location—for example: `export BIGQUERY_LOCATION="us"`
+      - `BIGQUERY_USE_CLIENT_OAUTH` : whether to use client-side OAuth—for example: `export BIGQUERY_USE_CLIENT_OAUTH=true`
 
-3.  Install the BigQuery Data Analytics or Conversational Analytics extension using the `  gemini extension install  ` command:
+3.  Install the BigQuery Data Analytics or Conversational Analytics extension using the `gemini extension install` command:
     
       - Optional: install the BigQuery Data Analytics extension:
         
@@ -193,9 +193,9 @@ The following example prompts let you explore and analyze your tables.
             9.  grpcio-status: 402,535,938 downloads
             10. aiobotocore: 399,650,559 downloads
 
-### Run deeper insights using the `     ask_data_insights    ` tool
+### Run deeper insights using the `ask_data_insights` tool
 
-The `  ask_data_insights  ` tool triggers an agent on the BigQuery Conversational Analytics API to answer your questions. The server-side agent gathers additional context about your data and offers more insights.
+The `ask_data_insights` tool triggers an agent on the BigQuery Conversational Analytics API to answer your questions. The server-side agent gathers additional context about your data and offers more insights.
 
   - **Example prompt** to get insights on channels to focus on:
     
@@ -240,11 +240,11 @@ The `  ask_data_insights  ` tool triggers an agent on the BigQuery Conversationa
 
 ### Pricing
 
-There is no additional cost for using metadata tools (such as `  get_dataset_info  ` , `  get_table_info  ` , `  list_dataset_ids  ` , and `  list_table_ids  ` ) or the `  search_catalog  ` tool.
+There is no additional cost for using metadata tools (such as `get_dataset_info` , `get_table_info` , `list_dataset_ids` , and `list_table_ids` ) or the `search_catalog` tool.
 
-Tools that run queries, including `  execute_sql  ` , `  forecast  ` , and `  analyze_contribution  ` , are billed according to [BigQuery on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) or [BigQuery capacity pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , depending on your project configuration.
+Tools that run queries, including `execute_sql` , `forecast` , and `analyze_contribution` , are billed according to [BigQuery on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) or [BigQuery capacity pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , depending on your project configuration.
 
-During beta (pre-v1.0), the `  ask_data_insights  ` tool is offered at no additional cost; however, any BigQuery queries that this tool triggers are billed according to standard BigQuery pricing.
+During beta (pre-v1.0), the `ask_data_insights` tool is offered at no additional cost; however, any BigQuery queries that this tool triggers are billed according to standard BigQuery pricing.
 
 ## What's next
 

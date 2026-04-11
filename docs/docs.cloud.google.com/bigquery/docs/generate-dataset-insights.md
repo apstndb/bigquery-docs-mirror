@@ -18,13 +18,13 @@ Data insights are generated using [Gemini in BigQuery](https://docs.cloud.google
 
 ### Enable APIs
 
-**Important:** To enable any API in your project, ask your administrator to grant you the `  serviceusage.services.enable  ` permission on your project.
+**Important:** To enable any API in your project, ask your administrator to grant you the `serviceusage.services.enable` permission on your project.
 
 To use data insights, enable the following APIs in your project: Dataplex API, BigQuery API, and Gemini for Google Cloud API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com,bigquery.googleapis.com,cloudaicompanion.googleapis.com)
 
@@ -39,12 +39,12 @@ To improve the quality of insights, generate [data profiling results](https://do
 To get the permissions that you need to generate, manage, and retrieve dataset insights, ask your administrator to grant you the following IAM roles:
 
   - To generate, manage, and retrieve insights:
-      - Dataplex DataScan Editor ( `  roles/dataplex.dataScanEditor  ` ) or Dataplex DataScan Administrator ( `  roles/dataplex.dataScanAdmin  ` ) on project
-      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on tables
-      - BigQuery User ( `  roles/bigquery.user  ` ) or BigQuery Studio User ( `  roles/bigquery.studioUser  ` ) on project.
+      - Dataplex DataScan Editor ( `roles/dataplex.dataScanEditor` ) or Dataplex DataScan Administrator ( `roles/dataplex.dataScanAdmin` ) on project
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on tables
+      - BigQuery User ( `roles/bigquery.user` ) or BigQuery Studio User ( `roles/bigquery.studioUser` ) on project.
   - To view insights:
-      - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `  roles/dataplex.dataScanDataViewer  ` ) on project
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on dataset
+      - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `roles/dataplex.dataScanDataViewer` ) on project
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on dataset
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -54,14 +54,14 @@ To see the exact permissions that are required to generate insights, expand the 
 
 #### Required permissions
 
-  - `  bigquery.datasets.get  ` : read dataset metadata
-  - `  bigquery.jobs.create  ` : create jobs
-  - `  bigquery.tables.get  ` : get table metadata
-  - `  bigquery.tables.getData  ` : get table data and metadata
-  - `  dataplex.datascans.create  ` : create DataScan resource
-  - `  dataplex.datascans.get  ` : read DataScan resource metadata
-  - `  dataplex.datascans.getData  ` : read DataScan execution results
-  - `  dataplex.datascans.run  ` : run on-demand DataScan
+  - `bigquery.datasets.get` : read dataset metadata
+  - `bigquery.jobs.create` : create jobs
+  - `bigquery.tables.get` : get table metadata
+  - `bigquery.tables.getData` : get table data and metadata
+  - `dataplex.datascans.create` : create DataScan resource
+  - `dataplex.datascans.get` : read DataScan resource metadata
+  - `dataplex.datascans.getData` : read DataScan execution results
+  - `dataplex.datascans.run` : run on-demand DataScan
 
 ## Generate dataset insights
 

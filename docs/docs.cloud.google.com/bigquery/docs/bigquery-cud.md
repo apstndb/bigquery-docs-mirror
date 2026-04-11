@@ -37,7 +37,7 @@ Spend-based CUDs automatically apply to aggregate BigQuery instance usage in a r
   - Composer 3 (also referred to as BigQuery engine for Apache Airflow)
   - Dataplex Universal Catalog
   - BigQuery services
-  - Google Cloud Serverless for Apache Spark (previously known as *Dataproc Serverless* )
+  - Managed Service for Apache Spark (previously known as *Dataproc Serverless* )
 
 For a complete list of applicable SKUs, see [BigQuery CUD Eligible SKUs](https://docs.cloud.google.com/skus/sku-groups/bigquery-cud-eligible-skus) .
 
@@ -60,9 +60,9 @@ Key points to keep in mind:
 
 When you calculate the hourly rate for BigQuery PAYG in the region where you want to purchase a CUD, first consider whether it saves money for your situation. Any usage greater than the commitment is charged at the regular PAYG price.
 
-For example, assume you are running a workload that uses Enterprise edition slot-hours in the `  us-central1  ` region for BigQuery.
+For example, assume you are running a workload that uses Enterprise edition slot-hours in the `us-central1` region for BigQuery.
 
-Use the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page to determine the per hour cost for a three-year commitment, for example $0.036 / slot hour (20% discount). That amount is your commitment price, which you commit to spend per hour on BigQuery for three years in `  us-central1  ` across all projects. Any overage in usage is charged at the PAYG rate.
+Use the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page to determine the per hour cost for a three-year commitment, for example $0.036 / slot hour (20% discount). That amount is your commitment price, which you commit to spend per hour on BigQuery for three years in `us-central1` across all projects. Any overage in usage is charged at the PAYG rate.
 
 In the legacy CUDs program before automatic account migration, your commitment amount was the on-demand price instead. For more information, see [Spend-based CUDs](https://docs.cloud.google.com/docs/cuds-multiprice) .
 

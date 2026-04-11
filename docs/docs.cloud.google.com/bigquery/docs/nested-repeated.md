@@ -4,38 +4,38 @@ This page describes how to define a table schema with nested and repeated column
 
 ## Define nested and repeated columns
 
-To create a column with nested data, set the data type of the column to `  RECORD  ` in the schema. A `  RECORD  ` can be accessed as a [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) type in GoogleSQL. A `  STRUCT  ` is a container of ordered fields.
+To create a column with nested data, set the data type of the column to `RECORD` in the schema. A `RECORD` can be accessed as a [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) type in GoogleSQL. A `STRUCT` is a container of ordered fields.
 
-To create a column with repeated data, set the [mode](https://docs.cloud.google.com/bigquery/docs/schemas#modes) of the column to `  REPEATED  ` in the schema. A repeated field can be accessed as an [`  ARRAY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) type in GoogleSQL.
+To create a column with repeated data, set the [mode](https://docs.cloud.google.com/bigquery/docs/schemas#modes) of the column to `REPEATED` in the schema. A repeated field can be accessed as an [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) type in GoogleSQL.
 
-A `  RECORD  ` column can have `  REPEATED  ` mode, which is represented as an array of `  STRUCT  ` types. Also, a field within a record can be repeated, which is represented as a `  STRUCT  ` that contains an `  ARRAY  ` . An array cannot contain another array directly. For more information, see [Declaring an `  ARRAY  ` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#declaring_an_array_type) .
+A `RECORD` column can have `REPEATED` mode, which is represented as an array of `STRUCT` types. Also, a field within a record can be repeated, which is represented as a `STRUCT` that contains an `ARRAY` . An array cannot contain another array directly. For more information, see [Declaring an `ARRAY` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#declaring_an_array_type) .
 
 ## Limitations
 
 Nested and repeated schemas are subject to the following limitations:
 
-  - **A schema cannot contain more than 15 levels of nested `  RECORD  ` types.**  
-    Columns of type `  RECORD  ` can contain nested `  RECORD  ` types, also called *child* records. The maximum nested depth limit is 15 levels. This limit is independent of whether the `  RECORD  ` s are scalar or array-based (repeated).
+  - **A schema cannot contain more than 15 levels of nested `RECORD` types.**  
+    Columns of type `RECORD` can contain nested `RECORD` types, also called *child* records. The maximum nested depth limit is 15 levels. This limit is independent of whether the `RECORD` s are scalar or array-based (repeated).
 
-**`  RECORD  ` type is incompatible with `  UNION  ` , `  INTERSECT  ` , `  EXCEPT DISTINCT  ` , and `  SELECT DISTINCT  ` .**
+**`RECORD` type is incompatible with `UNION` , `INTERSECT` , `EXCEPT DISTINCT` , and `SELECT DISTINCT` .**
 
 ## Example schema
 
 The following example shows sample nested and repeated data. This table contains information about people. It consists of the following fields:
 
-  - `  id  `
-  - `  first_name  `
-  - `  last_name  `
-  - `  dob  ` (date of birth)
-  - `  addresses  ` (a nested and repeated field)
-      - `  addresses.status  ` (current or previous)
-      - `  addresses.address  `
-      - `  addresses.city  `
-      - `  addresses.state  `
-      - `  addresses.zip  `
-      - `  addresses.numberOfYears  ` (years at the address)
+  - `id`
+  - `first_name`
+  - `last_name`
+  - `dob` (date of birth)
+  - `addresses` (a nested and repeated field)
+      - `addresses.status` (current or previous)
+      - `addresses.address`
+      - `addresses.city`
+      - `addresses.state`
+      - `addresses.zip`
+      - `addresses.numberOfYears` (years at the address)
 
-The JSON data file would look like the following. Notice that the addresses column contains an array of values (indicated by `  [ ]  ` ). The multiple addresses in the array are the repeated data. The multiple fields within each address are the nested data.
+The JSON data file would look like the following. Notice that the addresses column contains an array of values (indicated by `[ ]` ). The multiple addresses in the array are the repeated data. The multiple fields within each address are the nested data.
 
     {"id":"1","first_name":"John","last_name":"Doe","dob":"1968-01-22","addresses":[{"status":"current","address":"123 First Avenue","city":"Seattle","state":"WA","zip":"11111","numberOfYears":"1"},{"status":"previous","address":"456 Main Street","city":"Portland","state":"OR","zip":"22222","numberOfYears":"5"}]}
     {"id":"2","first_name":"Jane","last_name":"Doe","dob":"1980-10-16","addresses":[{"status":"current","address":"789 Any Avenue","city":"New York","state":"NY","zip":"33333","numberOfYears":"2"},{"status":"previous","address":"321 Main Street","city":"Hoboken","state":"NJ","zip":"44444","numberOfYears":"3"}]}
@@ -110,7 +110,7 @@ To create a new table with the previous nested and repeated columns, select one 
 
 ### Console
 
-Specify the nested and repeated `  addresses  ` column:
+Specify the nested and repeated `addresses` column:
 
 1.  In the Google Cloud console, open the BigQuery page.
     
@@ -137,7 +137,7 @@ Specify the nested and repeated `  addresses  ` column:
     
       - For **Schema** , click add\_box **Add field** and enter the following table schema:
         
-          - For **Field name** , enter `  addresses  ` .
+          - For **Field name** , enter `addresses` .
         
           - For **Type** , select **RECORD** .
         
@@ -145,7 +145,7 @@ Specify the nested and repeated `  addresses  ` column:
         
           - Specify the following fields for a nested field:
             
-              - In the **Field name** field, enter `  status  ` .
+              - In the **Field name** field, enter `status` .
             
               - For **Type** , choose **STRING** .
             
@@ -153,20 +153,20 @@ Specify the nested and repeated `  addresses  ` column:
             
               - Click add\_box **Add field** to add the following fields:
                 
-                | Field name                                         | Type                                        | Mode                                          |
-                | -------------------------------------------------- | ------------------------------------------- | --------------------------------------------- |
-                | `                  address                 `       | `                  STRING                 ` | `                  NULLABLE                 ` |
-                | `                  city                 `          | `                  STRING                 ` | `                  NULLABLE                 ` |
-                | `                  state                 `         | `                  STRING                 ` | `                  NULLABLE                 ` |
-                | `                  zip                 `           | `                  STRING                 ` | `                  NULLABLE                 ` |
-                | `                  numberOfYears                 ` | `                  STRING                 ` | `                  NULLABLE                 ` |
+                | Field name      | Type     | Mode       |
+                | --------------- | -------- | ---------- |
+                | `address`       | `STRING` | `NULLABLE` |
+                | `city`          | `STRING` | `NULLABLE` |
+                | `state`         | `STRING` | `NULLABLE` |
+                | `zip`           | `STRING` | `NULLABLE` |
+                | `numberOfYears` | `STRING` | `NULLABLE` |
                 
 
             Alternatively, click **Edit as text** and specify the schema as a JSON array.
 
 ### SQL
 
-Use the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) . Specify the schema using the [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) option:
+Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) . Specify the schema using the [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) option:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -199,7 +199,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To specify the nested and repeated `  addresses  ` column in a JSON schema file, use a text editor to create a new file. Paste in the example schema definition shown above.
+To specify the nested and repeated `addresses` column in a JSON schema file, use a text editor to create a new file. Paste in the example schema definition shown above.
 
 After you create your JSON schema file, you can provide it through the bq command-line tool. For more information, see [Using a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#using_a_json_schema_file) .
 
@@ -412,7 +412,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Insert data in nested columns in the example
 
-Use the following queries to insert nested data records into tables that have `  RECORD  ` data type columns.
+Use the following queries to insert nested data records into tables that have `RECORD` data type columns.
 
 **Example 1**
 
@@ -445,7 +445,7 @@ addresses) values ("1","Johnny","Dawn","1969-01-22",[("current","123 First Avenu
 
 ### Query nested and repeated columns
 
-To select the value of an `  ARRAY  ` at a specific position, use an [array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator) . To access elements in a `  STRUCT  ` , use the [dot operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator) . The following example selects the first name, last name, and first address listed in the `  addresses  ` field:
+To select the value of an `ARRAY` at a specific position, use an [array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator) . To access elements in a `STRUCT` , use the [dot operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator) . The following example selects the first name, last name, and first address listed in the `addresses` field:
 
 ``` notranslate
 SELECT
@@ -465,7 +465,7 @@ The result is the following:
     | Jane       | Doe       | 789 Any Avenue   |
     +------------+-----------+------------------+
 
-To extract all elements of an `  ARRAY  ` , use the [`  UNNEST  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) with a [`  CROSS JOIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join) . The following example selects the first name, last name, address, and state for all addresses not located in New York:
+To extract all elements of an `ARRAY` , use the [`UNNEST` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) with a [`CROSS JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join) . The following example selects the first name, last name, address, and state for all addresses not located in New York:
 
 ``` notranslate
 SELECT
@@ -497,11 +497,11 @@ After you add a nested column or a nested and repeated column to a table's schem
 
 BigQuery performs best when your data is denormalized. Rather than preserving a relational schema such as a star or snowflake schema, denormalize your data and take advantage of nested and repeated columns. Nested and repeated columns can maintain relationships without the performance impact of preserving a relational (normalized) schema.
 
-For example, a relational database used to track library books would likely keep all author information in a separate table. A key such as `  author_id  ` would be used to link the book to the authors.
+For example, a relational database used to track library books would likely keep all author information in a separate table. A key such as `author_id` would be used to link the book to the authors.
 
 In BigQuery, you can preserve the relationship between book and author without creating a separate author table. Instead, you create an author column, and you nest fields within it such as the author's first name, last name, date of birth, and so on. If a book has multiple authors, you can make the nested author column repeated.
 
-Suppose you have the following table `  mydataset.books  ` :
+Suppose you have the following table `mydataset.books` :
 
     +------------------+------------+-----------+
     | title            | author_ids | num_pages |
@@ -510,7 +510,7 @@ Suppose you have the following table `  mydataset.books  ` :
     | Example Book Two | [456]      | 89        |
     +------------------+------------+-----------+
 
-You also have the following table, `  mydataset.authors  ` , with complete information for each author ID:
+You also have the following table, `mydataset.authors` , with complete information for each author ID:
 
     +-----------+-------------+---------------+
     | author_id | author_name | date_of_birth |
@@ -558,7 +558,7 @@ BigQuery supports loading nested and repeated data from source formats that supp
 
 ## Deduplicate duplicate records in a table
 
-The following query uses the `  row_number()  ` function to identify duplicate records that have the same values for `  last_name  ` and `  first_name  ` in the examples used and sorts them by `  dob  ` :
+The following query uses the `row_number()` function to identify duplicate records that have the same values for `last_name` and `first_name` in the examples used and sorts them by `dob` :
 
 ``` notranslate
 CREATE OR REPLACE TABLE mydataset.mytable AS (

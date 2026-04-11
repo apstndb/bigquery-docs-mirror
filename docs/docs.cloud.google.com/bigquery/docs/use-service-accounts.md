@@ -1,6 +1,6 @@
 # Use service accounts with BigQuery Data Transfer Service
 
-Some data sources support data transfer authentication by using a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) through the Google Cloud console, API, or the `  bq  ` command line. A service account is a Google Account associated with your Google Cloud project. A service account can run jobs, such as scheduled queries or batch processing pipelines by authenticating with the service account credentials rather than a user's credentials.
+Some data sources support data transfer authentication by using a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) through the Google Cloud console, API, or the `bq` command line. A service account is a Google Account associated with your Google Cloud project. A service account can run jobs, such as scheduled queries or batch processing pipelines by authenticating with the service account credentials rather than a user's credentials.
 
 You can update an existing data transfer with the credentials of a service account. For more information, see [Update data transfer credentials](https://docs.cloud.google.com/bigquery/docs/use-service-accounts#update_data_transfer_credentials) .
 
@@ -8,11 +8,11 @@ The following situations require updating credentials:
 
   - Your transfer failed to authorize the user's access to the data source:
     
-    `  Error code 401 : Request is missing required authentication credential. UNAUTHENTICATED  `
+    `Error code 401 : Request is missing required authentication credential. UNAUTHENTICATED`
 
   - You receive an **INVALID\_USER** error when you attempt to run the transfer:
     
-    `  Error code 5 : Authentication failure: User Id not found. Error code: INVALID_USERID  `
+    `Error code 5 : Authentication failure: User Id not found. Error code: INVALID_USERID`
 
 To learn more about authenticating with service accounts, see [Introduction to authentication](https://docs.cloud.google.com/bigquery/docs/authentication#sa-impersonation) .
 
@@ -45,17 +45,17 @@ BigQuery Data Transfer Service can use service account credentials for transfers
 
 To update a data transfer to use a service account, you must have the following permissions:
 
-  - The `  bigquery.transfers.update  ` permission to modify the transfer.
+  - The `bigquery.transfers.update` permission to modify the transfer.
     
-    The predefined `  roles/bigquery.admin  ` IAM role includes this permission.
+    The predefined `roles/bigquery.admin` IAM role includes this permission.
 
   - Access to the service account. For more information about granting users the service account role, see [Service Account User role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) .
 
 Ensure that the service account you choose to run the transfer has the following permissions:
 
-  - The `  bigquery.datasets.get  ` and `  bigquery.datasets.update  ` permissions on the target dataset. If the table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , the service account must also have the `  bigquery.tables.setCategory  ` permission.
+  - The `bigquery.datasets.get` and `bigquery.datasets.update` permissions on the target dataset. If the table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , the service account must also have the `bigquery.tables.setCategory` permission.
     
-    The `  bigquery.admin  ` predefined IAM role includes all of these permissions. For more information about IAM roles in BigQuery Data Transfer Service, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
+    The `bigquery.admin` predefined IAM role includes all of these permissions. For more information about IAM roles in BigQuery Data Transfer Service, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
   - Access to the configured transfer data source. For more information about the required permissions for different data sources, see [Data sources with service account support](https://docs.cloud.google.com/bigquery/docs/use-service-accounts#data_sources_with_service_account_support) .
 
@@ -85,7 +85,7 @@ The following procedure updates a data transfer configuration to authenticate as
 
 To update the credentials of a data transfer, you can use the bq command-line tool to update the transfer configuration.
 
-Use the `  bq update  ` command with the `  --transfer_config  ` , `  --update_credentials  ` , and `  --service_account_name  ` flags.
+Use the `bq update` command with the `--transfer_config` , `--update_credentials` , and `--service_account_name` flags.
 
 For example, the following command updates a data transfer configuration to authenticate as a service account instead of your individual user account:
 
@@ -94,7 +94,7 @@ For example, the following command updates a data transfer configuration to auth
     --update_credentials \
     --service_account_name=abcdef-test-sa@abcdef-test.iam.gserviceaccount.com projects/862514376110/locations/us/transferConfigs/5dd12f26-0000-262f-bc38-089e0820fe38 \
 
-**Note:** If you are using the bq command-line tool, use the `  --service_account_name  ` flag instead of authenticating as a service account.
+**Note:** If you are using the bq command-line tool, use the `--service_account_name` flag instead of authenticating as a service account.
 
 ### Java
 

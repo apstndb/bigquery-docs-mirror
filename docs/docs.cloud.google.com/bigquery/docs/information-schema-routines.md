@@ -1,27 +1,27 @@
 # ROUTINES view
 
-The `  INFORMATION_SCHEMA.ROUTINES  ` view contains one row for each routine in a dataset.
+The `INFORMATION_SCHEMA.ROUTINES` view contains one row for each routine in a dataset.
 
 ## Required permissions
 
-To query the `  INFORMATION_SCHEMA.ROUTINES  ` view, you need the following Identity and Access Management (IAM) permissions:
+To query the `INFORMATION_SCHEMA.ROUTINES` view, you need the following Identity and Access Management (IAM) permissions:
 
-  - `  bigquery.routines.get  `
-  - `  bigquery.routines.list  `
+  - `bigquery.routines.get`
+  - `bigquery.routines.list`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to get routine metadata:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.ROUTINES  ` view, the query results contain one row for each routine in a dataset.
+When you query the `INFORMATION_SCHEMA.ROUTINES` view, the query results contain one row for each routine in a dataset.
 
-The `  INFORMATION_SCHEMA.ROUTINES  ` view has the following schema:
+The `INFORMATION_SCHEMA.ROUTINES` view has the following schema:
 
 <table>
 <colgroup>
@@ -38,117 +38,117 @@ The `  INFORMATION_SCHEMA.ROUTINES  ` view has the following schema:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       specific_catalog      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">specific_catalog</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The name of the project that contains the dataset where the routine is defined</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       specific_schema      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">specific_schema</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The name of the dataset that contains the routine</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       specific_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">specific_name</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The name of the routine</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       routine_catalog      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">routine_catalog</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The name of the project that contains the dataset where the routine is defined</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       routine_schema      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">routine_schema</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The name of the dataset that contains the routine</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       routine_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">routine_name</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The name of the routine</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       routine_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">routine_type</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The routine type:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">         FUNCTION        </code> : A BigQuery persistent user-defined function</li>
-<li><code dir="ltr" translate="no">         AGGREGATE FUNCTION        </code> : A BigQuery persistent user-defined aggregate function</li>
-<li><code dir="ltr" translate="no">         PROCEDURE        </code> : A BigQuery stored procedure</li>
-<li><code dir="ltr" translate="no">         TABLE FUNCTION        </code> : A BigQuery table function</li>
+<li><code dir="ltr" translate="no">FUNCTION</code> : A BigQuery persistent user-defined function</li>
+<li><code dir="ltr" translate="no">AGGREGATE FUNCTION</code> : A BigQuery persistent user-defined aggregate function</li>
+<li><code dir="ltr" translate="no">PROCEDURE</code> : A BigQuery stored procedure</li>
+<li><code dir="ltr" translate="no">TABLE FUNCTION</code> : A BigQuery table function</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       data_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The data type that the routine returns. <code dir="ltr" translate="no">       NULL      </code> if the routine is a stored procedure</td>
+<td><code dir="ltr" translate="no">data_type</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The data type that the routine returns. <code dir="ltr" translate="no">NULL</code> if the routine is a stored procedure</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       routine_body      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>How the body of the routine is defined, either <code dir="ltr" translate="no">       SQL      </code> or <code dir="ltr" translate="no">       EXTERNAL      </code> if the routine is a JavaScript user-defined function</td>
+<td><code dir="ltr" translate="no">routine_body</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>How the body of the routine is defined, either <code dir="ltr" translate="no">SQL</code> or <code dir="ltr" translate="no">EXTERNAL</code> if the routine is a JavaScript user-defined function</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       routine_definition      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">routine_definition</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>The definition of the routine</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       external_language      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       JAVASCRIPT      </code> if the routine is a JavaScript user-defined function or <code dir="ltr" translate="no">       NULL      </code> if the routine was defined with SQL</td>
+<td><code dir="ltr" translate="no">external_language</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code dir="ltr" translate="no">JAVASCRIPT</code> if the routine is a JavaScript user-defined function or <code dir="ltr" translate="no">NULL</code> if the routine was defined with SQL</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       is_deterministic      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       YES      </code> if the routine is known to be deterministic, <code dir="ltr" translate="no">       NO      </code> if it is not, or <code dir="ltr" translate="no">       NULL      </code> if unknown</td>
+<td><code dir="ltr" translate="no">is_deterministic</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code dir="ltr" translate="no">YES</code> if the routine is known to be deterministic, <code dir="ltr" translate="no">NO</code> if it is not, or <code dir="ltr" translate="no">NULL</code> if unknown</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       security_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Security type of the routine, always <code dir="ltr" translate="no">       NULL      </code></td>
+<td><code dir="ltr" translate="no">security_type</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>Security type of the routine, always <code dir="ltr" translate="no">NULL</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       created      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">created</code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>The routine's creation time</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       last_altered      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">last_altered</code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>The routine's last modification time</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ddl      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language">DDL statement</a> that can be used to create the routine, such as <code dir="ltr" translate="no">         CREATE FUNCTION       </code> or <code dir="ltr" translate="no">         CREATE PROCEDURE       </code></td>
+<td><code dir="ltr" translate="no">ddl</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language">DDL statement</a> that can be used to create the routine, such as <code dir="ltr" translate="no">        CREATE FUNCTION       </code> or <code dir="ltr" translate="no">        CREATE PROCEDURE       </code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       connection      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The connection name, if the routine has one. Otherwise <code dir="ltr" translate="no">       NULL      </code></td>
+<td><code dir="ltr" translate="no">connection</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The connection name, if the routine has one. Otherwise <code dir="ltr" translate="no">NULL</code></td>
 </tr>
 </tbody>
 </table>
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
 Queries against this view must include a dataset or a region qualifier. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-| View name                                                                                                                             | Resource scope | Region scope               |
-| ------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
-| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.ROUTINES       `` | Project level  | `          REGION        ` |
-| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.ROUTINES       `        | Dataset level  | Dataset location           |
+| View name                                                                                      | Resource scope | Region scope              |
+| ---------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
+| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.ROUTINES`` | Project level  | `         REGION        ` |
+| `[         PROJECT_ID        .]         DATASET_ID        .INFORMATION_SCHEMA.ROUTINES`        | Dataset level  | Dataset location          |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
   - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
@@ -166,9 +166,9 @@ To run the query against a project other than your default project, add the proj
 
     `PROJECT_ID`.INFORMATION_SCHEMA.ROUTINES
 
-. For example, ``  `myproject`.INFORMATION_SCHEMA.ROUTINES  `` .
+. For example, `` `myproject`.INFORMATION_SCHEMA.ROUTINES `` .
 
-The following example retrieves all columns from the `  INFORMATION_SCHEMA.ROUTINES  ` view. The metadata returned is for all routines in `  mydataset  ` in your default project — `  myproject  ` . The dataset `  mydataset  ` contains a routine named `  myroutine1  ` .
+The following example retrieves all columns from the `INFORMATION_SCHEMA.ROUTINES` view. The metadata returned is for all routines in `mydataset` in your default project — `myproject` . The dataset `mydataset` contains a routine named `myroutine1` .
 
 ``` notranslate
 SELECT
@@ -177,7 +177,7 @@ FROM
   mydataset.INFORMATION_SCHEMA.ROUTINES;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

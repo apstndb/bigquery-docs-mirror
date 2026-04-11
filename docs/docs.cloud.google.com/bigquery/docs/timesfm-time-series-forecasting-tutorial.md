@@ -1,6 +1,6 @@
-This tutorial teaches you how to use the [`  AI.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to forecast the future value for a given column, based on the historical value of that column.
+This tutorial teaches you how to use the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to forecast the future value for a given column, based on the historical value of that column.
 
-This tutorial uses data from the public [`  bigquery-public-data.san_francisco_bikeshare.bikeshare_trips  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) table.
+This tutorial uses data from the public [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) table.
 
 ## Objectives
 
@@ -25,15 +25,15 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Forecast a single bike share trips time series
 
-Forecast future time series values by using the `  AI.FORECAST  ` function.
+Forecast future time series values by using the `AI.FORECAST` function.
 
-The following query forecasts the number of subscriber bike share trips per hour for the next month (approximately 720 hours), based on the previous four months of historical data. The `  confidence_level  ` argument indicates that the query generates a prediction interval with a 95% confidence level.
+The following query forecasts the number of subscriber bike share trips per hour for the next month (approximately 720 hours), based on the previous four months of historical data. The `confidence_level` argument indicates that the query generates a prediction interval with a 95% confidence level.
 
 Follow these steps to forecast data with the TimesFM model:
 
@@ -77,7 +77,7 @@ Follow these steps to forecast data with the TimesFM model:
 
 ## Compare the forecasted data to the input data
 
-Chart the `  AI.FORECAST  ` function output alongside a subset of the function input data to see how they compare.
+Chart the `AI.FORECAST` function output alongside a subset of the function input data to see how they compare.
 
 Follow these steps to chart the function output:
 
@@ -104,7 +104,7 @@ Follow these steps to chart the function output:
         output_historical_time_series => true);
     ```
 
-3.  When the query is finished running, click the **Visualization** tab in the **Query results** pane. For **Visualization type** , select **Line** . For **Dimension** , select `  time_series_timestamp  ` . For **Measures** , select `  time_series_data  ` , `  prediction_interval_lower_bound  ` , and `  prediction_interval_upper_bound  ` . The resulting chart looks similar to the following:
+3.  When the query is finished running, click the **Visualization** tab in the **Query results** pane. For **Visualization type** , select **Line** . For **Dimension** , select `time_series_timestamp` . For **Measures** , select `time_series_data` , `prediction_interval_lower_bound` , and `prediction_interval_upper_bound` . The resulting chart looks similar to the following:
     
     ![Graph 100 time points of input data along with the AI.FORECAST function output data to evaluate their similarity.](https://docs.cloud.google.com/static/bigquery/images/ai-forecast-output-comparison.png)
     
@@ -112,7 +112,7 @@ Follow these steps to chart the function output:
 
 ## Forecast multiple bike share trips time series
 
-The following query forecasts the number of bike share trips per subscriber type and per hour for the next month (approximately 720 hours), based on the previous four months of historical data. The `  confidence_level  ` argument indicates that the query generates a prediction interval with a 95% confidence level.
+The following query forecasts the number of bike share trips per subscriber type and per hour for the next month (approximately 720 hours), based on the previous four months of historical data. The `confidence_level` argument indicates that the query generates a prediction interval with a 95% confidence level.
 
 Follow these steps to forecast data with the TimesFM model:
 
@@ -166,7 +166,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

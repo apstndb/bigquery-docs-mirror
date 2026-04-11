@@ -10,30 +10,30 @@ This document describes tasks that are common to all routine types in BigQuery.
 
 ## Permissions
 
-To reference a routine in a SQL query, you must have the `  bigquery.routines.get  ` permission. To grant access to routines you can grant an IAM role with the `  bigquery.routines.get  ` permission on the dataset or on the individual routine. Granting access at the dataset level gives the principal access to all routines in the dataset. For more information, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
+To reference a routine in a SQL query, you must have the `bigquery.routines.get` permission. To grant access to routines you can grant an IAM role with the `bigquery.routines.get` permission on the dataset or on the individual routine. Granting access at the dataset level gives the principal access to all routines in the dataset. For more information, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 
 By default, you also need permission to access any resources that the routine references, such as tables or views. For UDFs and table functions, you can *authorize* the function to access those resources on the caller's behalf. For more information, see [Authorized functions](https://docs.cloud.google.com/bigquery/docs/authorized-functions) .
 
 ## Create a routine
 
-To create a routine, you must have the `  bigquery.routines.create  ` permission.
+To create a routine, you must have the `bigquery.routines.create` permission.
 
 ### SQL
 
 Depending on the routine type, run one of the following DDL statements:
 
-  - [Stored procedure: `  CREATE PROCEDURE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure)
-  - [User-defined function: `  CREATE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement)
-  - [Table function: `  CREATE TABLE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement)
-  - [User-defined aggregate function: `  CREATE AGGREGATE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function)
+  - [Stored procedure: `CREATE PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure)
+  - [User-defined function: `CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement)
+  - [Table function: `CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement)
+  - [User-defined aggregate function: `CREATE AGGREGATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function)
 
 ### API
 
-Call the [`  routines.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/insert) with a defined [`  Routine  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine) .
+Call the [`routines.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/insert) with a defined [`Routine` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine) .
 
 ## List routines
 
-To list the routines in a dataset, you must have the `  bigquery.routines.get  ` and `  bigquery.routines.list  ` permissions.
+To list the routines in a dataset, you must have the `bigquery.routines.get` and `bigquery.routines.list` permissions.
 
 ### Console
 
@@ -53,7 +53,7 @@ To list the routines in a dataset, you must have the `  bigquery.routines.get  `
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.ROUTINES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) :
+Query the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -74,7 +74,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Replace the following:
 
-  - COLUMN\_LIST : a comma-separated list of columns from the [`  INFORMATION_SCHEMA.ROUTINES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) .
+  - COLUMN\_LIST : a comma-separated list of columns from the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) .
   - DATASET : the name of a dataset in your project.
   - REGION : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) .
 
@@ -97,7 +97,7 @@ FROM
 
 ### bq
 
-Use the [`  bq ls  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) with the `  --routines  ` flag:
+Use the [`bq ls` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) with the `--routines` flag:
 
 ``` notranslate
 bq ls --routines DATASET
@@ -123,11 +123,11 @@ bq ls --routines mydataset
 
 ### API
 
-Call the [`  routines.list  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/list) with the dataset ID.
+Call the [`routines.list` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/list) with the dataset ID.
 
 ## View the body of a routine
 
-To view the body of a routine, you must have the `  bigquery.routines.get  ` permission.
+To view the body of a routine, you must have the `bigquery.routines.get` permission.
 
 ### Console
 
@@ -147,7 +147,7 @@ To view the body of a routine, you must have the `  bigquery.routines.get  ` per
 
 ### SQL
 
-Select the `  routine_definition  ` column of the [`  INFORMATION_SCHEMA.ROUTINES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) :
+Select the `routine_definition` column of the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -193,7 +193,7 @@ WHERE
 
 ### bq
 
-Use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) with the `  --routine  ` flag:
+Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) with the `--routine` flag:
 
 ``` notranslate
 bq show --routine DATASET.ROUTINE_NAME
@@ -218,11 +218,11 @@ bq show --routine mydataset.AddFourAndDivide
 
 ### API
 
-Call the [`  routines.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/get) with the dataset ID and the name of the routine. The body of the routine is returned in the [`  Routine  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine) .
+Call the [`routines.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/get) with the dataset ID and the name of the routine. The body of the routine is returned in the [`Routine` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine) .
 
 ## Delete a routine
 
-To delete a routine, you must have the `  bigquery.routines.delete  ` permission.
+To delete a routine, you must have the `bigquery.routines.delete` permission.
 
 ### Console
 
@@ -242,15 +242,15 @@ To delete a routine, you must have the `  bigquery.routines.delete  ` permission
 
 6.  In the details pane, click **Delete** .
 
-7.  Type `  "delete"  ` in the dialog, then click **Delete** to confirm.
+7.  Type `"delete"` in the dialog, then click **Delete** to confirm.
 
 ### SQL
 
 Depending on the routine type, run one of the following DDL statements:
 
-  - [Stored procedure: `  DROP PROCEDURE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_procedure_statement)
-  - [User-defined function: `  DROP FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement)
-  - [Table function: `  DROP TABLE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function)
+  - [Stored procedure: `DROP PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_procedure_statement)
+  - [User-defined function: `DROP FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement)
+  - [Table function: `DROP TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function)
 
 Example:
 
@@ -258,7 +258,7 @@ Example:
 
 ### bq
 
-Use the [`  bq rm  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) with the `  --routine  ` flag:
+Use the [`bq rm` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) with the `--routine` flag:
 
 ``` notranslate
 bq rm --routine DATASET.ROUTINE_NAME
@@ -275,4 +275,4 @@ Example:
 
 ### API
 
-Call the [`  routines.delete  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/delete) with the dataset ID and the name of the routine.
+Call the [`routines.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/delete) with the dataset ID and the name of the routine.

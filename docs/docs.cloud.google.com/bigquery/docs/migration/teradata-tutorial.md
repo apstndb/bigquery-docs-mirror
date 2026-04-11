@@ -53,7 +53,7 @@ The [TPC-H specification](http://www.tpc.org/tpch/default5.asp) is a benchmark t
     
     A directory whose name includes the tools version number is extracted. This directory includes the TPC source code for the DBGEN data generation tool and the TPC-H specification itself.
 
-4.  Go to the `  dbgen  ` subdirectory. Use the parent directory name corresponding to your version, as in the following example:
+4.  Go to the `dbgen` subdirectory. Use the parent directory name corresponding to your version, as in the following example:
     
         cd 2.18.0_rc2/dbgen
 
@@ -73,7 +73,7 @@ The [TPC-H specification](http://www.tpc.org/tpch/default5.asp) is a benchmark t
         MACHINE  = LINUX
         WORKLOAD = TPCH
     
-    Depending on your environment, the C compiler ( `  CC  ` ) or `  MACHINE  ` values might be different. if needed, ask your system administrator.
+    Depending on your environment, the C compiler ( `CC` ) or `MACHINE` values might be different. if needed, ask your system administrator.
 
 8.  Save the changes and close the file.
 
@@ -81,11 +81,11 @@ The [TPC-H specification](http://www.tpc.org/tpch/default5.asp) is a benchmark t
     
         make
 
-10. Generate the TPC-H data using the `  dbgen  ` tool:
+10. Generate the TPC-H data using the `dbgen` tool:
     
         dbgen -v
     
-    The data generation takes a couple of minutes. The `  -v  ` (verbose) flag causes the command to report on the progress. When data generation is done, you find 8 ASCII files with the `  .tbl  ` extension in the current folder. They contain pipe-delimited synthetic data to be loaded in each one of the TPC-H tables.
+    The data generation takes a couple of minutes. The `-v` (verbose) flag causes the command to report on the progress. When data generation is done, you find 8 ASCII files with the `.tbl` extension in the current folder. They contain pipe-delimited synthetic data to be loaded in each one of the TPC-H tables.
 
 ## Uploading sample data to Teradata
 
@@ -103,7 +103,7 @@ The Teradata client, called [Basic Teradata Query (BTEQ)](https://docs.teradata.
     
         .LOGON teradata-ip/teradata-user
 
-3.  Create a database named `  tpch  ` with 2 GB of allocated space:
+3.  Create a database named `tpch` with 2 GB of allocated space:
     
         CREATE DATABASE tpch
         AS PERM=2e+09;
@@ -116,15 +116,15 @@ The Teradata client, called [Basic Teradata Query (BTEQ)](https://docs.teradata.
 
 In this section, you create a FastLoad script to create and load the sample tables. The table definitions are described in section 1.4 of the [TPC-H specification](http://www.tpc.org/TPC_Documents_Current_Versions/pdf/tpc-h_v2.18.0.pdf) . Section 1.2 contains an entity-relationship diagram of the whole database schema.
 
-The following procedure shows how to create the `  lineitem  ` table, which is the largest and most complex of the TPC-H tables. When you finish with the `  lineitem  ` table, you repeat this procedure for the remaining tables.
+The following procedure shows how to create the `lineitem` table, which is the largest and most complex of the TPC-H tables. When you finish with the `lineitem` table, you repeat this procedure for the remaining tables.
 
-1.  Using a text editor, create a new file named `  fastload_lineitem.fl  ` :
+1.  Using a text editor, create a new file named `fastload_lineitem.fl` :
     
         vi fastload_lineitem.fl
 
-2.  Copy the following script into the file, which connects to the Teradata database and creates a table named `  lineitem  ` .
+2.  Copy the following script into the file, which connects to the Teradata database and creates a table named `lineitem` .
     
-    In the `  logon  ` command, replace teradata-ip , teradata-user , and teradata-pwd with your connection details.
+    In the `logon` command, replace teradata-ip , teradata-user , and teradata-pwd with your connection details.
     
         logon teradata-ip/teradata-user,teradata-pwd;
         
@@ -160,9 +160,9 @@ The following procedure shows how to create the `  lineitem  ` table, which is t
                                          AND     DATE '1998-12-31'
                        EACH INTERVAL '1' DAY);
     
-    The script first makes sure that the `  lineitem  ` table and temporary error tables do not exist, and proceeds to create the `  lineitem  ` table.
+    The script first makes sure that the `lineitem` table and temporary error tables do not exist, and proceeds to create the `lineitem` table.
 
-3.  In the same file, add the following code, which loads the data into the newly created table. Complete all of the table fields in the three blocks ( `  define  ` , `  insert  ` and `  values  ` ), making sure you use `  varchar  ` as their load data type.
+3.  In the same file, add the following code, which loads the data into the newly created table. Complete all of the table fields in the three blocks ( `define` , `insert` and `values` ), making sure you use `varchar` as their load data type.
     
         begin loading tpch.lineitem
         errorfiles tpch.error_1, tpch.error_2;
@@ -223,7 +223,7 @@ The following procedure shows how to create the `  lineitem  ` table, which is t
         end loading;
         logoff;
     
-    The FastLoad script loads the data from a file in the same directory called `  lineitem.tbl  ` , which you generated in the previous section.
+    The FastLoad script loads the data from a file in the same directory called `lineitem.tbl` , which you generated in the previous section.
 
 4.  Save the changes and close the file.
 
@@ -241,7 +241,7 @@ The instructions for how to migrate the schema and data to BigQuery are in a sep
 
 ### Create the BigQuery dataset
 
-During the initial Google Cloud configuration steps, you're asked to create a dataset in BigQuery to hold the tables after they're migrated. Name the dataset `  tpch  ` . The queries at the end of this quickstart assume this name, and don't require any modifications.
+During the initial Google Cloud configuration steps, you're asked to create a dataset in BigQuery to hold the tables after they're migrated. Name the dataset `tpch` . The queries at the end of this quickstart assume this name, and don't require any modifications.
 
     # Use the bq utility to create the dataset
     bq mk --location=US tpch
@@ -280,9 +280,9 @@ One additional task in the Google Cloud configuration is to create a Cloud Stora
 
 ### Specify the table name patterns
 
-During the configuration of a new transfer in the BigQuery Data Transfer Service, you're asked to specify an expression that indicates which tables to include in the transfer. In this quickstart, you include all of the tables from the `  tpch  ` database.
+During the configuration of a new transfer in the BigQuery Data Transfer Service, you're asked to specify an expression that indicates which tables to include in the transfer. In this quickstart, you include all of the tables from the `tpch` database.
 
-The format of the expression is *`  database  `* . *`  table  `* , and the table name can be replaced by a wildcard. Because wildcards in Java start with two dots, the expression to transfer all of the tables from the `  tpch  ` database is as follows:
+The format of the expression is *`database`* . *`table`* , and the table name can be replaced by a wildcard. Because wildcards in Java start with two dots, the expression to transfer all of the tables from the `tpch` database is as follows:
 
     tpch..*
 
@@ -344,7 +344,7 @@ Run the same query in BigQuery:
 
 2.  Copy the query into the query editor.
 
-3.  Make sure that the dataset name in the `  FROM  ` line is correct.
+3.  Make sure that the dataset name in the `FROM` line is correct.
 
 4.  Click **Run** .
     
@@ -446,9 +446,9 @@ Both Teradata and BigQuery return the same results, although Teradata uses scien
 
 Optionally, you can run the rest of the TPC-H queries that are defined in section 2.4 of the TPC-H specification.
 
-You can also generate queries following the TPC-H standard using the QGEN tool, which is in the same directory as the DBGEN tool. QGEN is built using the same makefile as DBGEN, so when you run make to compile `  dbgen  ` , you also produced the `  qgen  ` executable.
+You can also generate queries following the TPC-H standard using the QGEN tool, which is in the same directory as the DBGEN tool. QGEN is built using the same makefile as DBGEN, so when you run make to compile `dbgen` , you also produced the `qgen` executable.
 
-For more information on both tools and on their command-line options, see the `  README  ` file for each tool.
+For more information on both tools and on their command-line options, see the `README` file for each tool.
 
 ## Cleanup
 
@@ -461,7 +461,7 @@ The simplest way to stop billing charges is to delete the project you created fo
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 In the Google Cloud console, go to the **Manage resources** page.
 

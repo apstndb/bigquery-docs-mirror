@@ -32,7 +32,7 @@ BigQuery ML offers several advantages over other approaches to using ML or AI wi
 
 ## Recommended knowledge
 
-By using the default settings in the `  CREATE MODEL  ` statements and the inference functions, you can create and use BigQuery ML models even without much ML knowledge. However, having basic knowledge about the ML development lifecycle, such as feature engineering and model training, helps you optimize both your data and your model to deliver better results. We recommend using the following resources to develop familiarity with ML techniques and processes:
+By using the default settings in the `CREATE MODEL` statements and the inference functions, you can create and use BigQuery ML models even without much ML knowledge. However, having basic knowledge about the ML development lifecycle, such as feature engineering and model training, helps you optimize both your data and your model to deliver better results. We recommend using the following resources to develop familiarity with ML techniques and processes:
 
   - [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
   - [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)
@@ -42,7 +42,7 @@ By using the default settings in the `  CREATE MODEL  ` statements and the infer
 
 ## Work with time series
 
-You can use the TimesFM, `  ARIMA_PLUS  ` , and `  ARIMA_PLUS_XREG  ` models to perform [forecasting](https://docs.cloud.google.com/bigquery/docs/forecasting-overview) and [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) on time series data.
+You can use the TimesFM, `ARIMA_PLUS` , and `ARIMA_PLUS_XREG` models to perform [forecasting](https://docs.cloud.google.com/bigquery/docs/forecasting-overview) and [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) on time series data.
 
 ## Perform contribution analysis
 
@@ -60,7 +60,7 @@ The following models are built in to BigQuery ML:
 
   - [Linear regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) is for predicting the value of a numerical metric for new data by using a model trained on similar remote data. Labels are real-valued, meaning they cannot be positive infinity or negative infinity or a NaN (Not a Number).
 
-  - [Logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) is for the classification of two or more possible values such as whether an input is `  low-value  ` , `  medium-value  ` , or `  high-value  ` . Labels can have up to 50 unique values.
+  - [Logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) is for the classification of two or more possible values such as whether an input is `low-value` , `medium-value` , or `high-value` . Labels can have up to 50 unique values.
 
   - [K-means clustering](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) is for data segmentation. For example, this model identifies customer segments. K-means is an unsupervised learning technique, so model training doesn't require labels or split data for training or evaluation.
 
@@ -68,11 +68,11 @@ The following models are built in to BigQuery ML:
 
   - [Principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) is the process of computing the principal components and using them to perform a change of basis on the data. It's commonly used for dimensionality reduction by projecting each data point onto only the first few principal components to obtain lower-dimensional data while preserving as much of the data's variation as possible.
 
-  - Time series is for performing time series forecasts and anomaly detection. The [`  ARIMA_PLUS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) and [`  ARIMA_PLUS_XREG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) time series models offer multiple tuning options, and automatically handle anomalies, seasonality, and holidays.
+  - Time series is for performing time series forecasts and anomaly detection. The [`ARIMA_PLUS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) and [`ARIMA_PLUS_XREG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) time series models offer multiple tuning options, and automatically handle anomalies, seasonality, and holidays.
     
-    If you don't want to manage your own time series forecasting model, you can use the [`  AI.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to perform forecasting.
+    If you don't want to manage your own time series forecasting model, you can use the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to perform forecasting.
 
-You can perform a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) on the `  CREATE MODEL  ` statements for internally trained models to get an estimate of how much data they will process if you run them.
+You can perform a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) on the `CREATE MODEL` statements for internally trained models to get an estimate of how much data they will process if you run them.
 
 ### Externally trained models
 
@@ -85,13 +85,13 @@ The following models are external to BigQuery ML and trained in Vertex AI:
   - [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest) is for constructing multiple learning method decision trees for classification, regression, and other tasks at training time.
   - [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl) is a supervised ML service that builds and deploys classification and regression models on tabular data at high speed and scale.
 
-You can't perform a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) on the `  CREATE MODEL  ` statements for externally trained models to get an estimate of how much data they will process if you run them.
+You can't perform a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) on the `CREATE MODEL` statements for externally trained models to get an estimate of how much data they will process if you run them.
 
 ### Remote models
 
-You can create [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) in BigQuery that use models deployed to [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) . You reference the deployed model by specifying the model's [HTTPS endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment#what_happens_when_you_deploy_a_model) in the remote model's `  CREATE MODEL  ` statement.
+You can create [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) in BigQuery that use models deployed to [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) . You reference the deployed model by specifying the model's [HTTPS endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment#what_happens_when_you_deploy_a_model) in the remote model's `CREATE MODEL` statement.
 
-The `  CREATE MODEL  ` statements for remote models don't process any bytes and don't incur BigQuery charges.
+The `CREATE MODEL` statements for remote models don't process any bytes and don't incur BigQuery charges.
 
 ### Imported models
 
@@ -102,7 +102,7 @@ BigQuery ML lets you import custom models that are trained outside of BigQuery a
   - [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) is a light version of TensorFlow for deployment on mobile devices, microcontrollers, and other edge devices. TensorFlow optimizes existing TensorFlow models for reduced model size and faster inference.
   - [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) is an optimized distributed gradient boosting library designed to be highly efficient, flexible, and portable. It implements ML algorithms under the [gradient boosting](https://en.wikipedia.org/wiki/Gradient_boosting) framework.
 
-The `  CREATE MODEL  ` statements for imported models don't process any bytes and don't incur BigQuery charges.
+The `CREATE MODEL` statements for imported models don't process any bytes and don't incur BigQuery charges.
 
 In BigQuery ML, you can use a model with data from multiple BigQuery Datasets for training and for prediction.
 
@@ -136,7 +136,7 @@ For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquer
 
 ## Quotas
 
-In addition to [BigQuery ML-specific limits](https://docs.cloud.google.com/bigquery/quotas#bqml-quotas) , queries that use BigQuery ML functions and `  CREATE MODEL  ` statements are subject to the quotas and limits on BigQuery [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
+In addition to [BigQuery ML-specific limits](https://docs.cloud.google.com/bigquery/quotas#bqml-quotas) , queries that use BigQuery ML functions and `CREATE MODEL` statements are subject to the quotas and limits on BigQuery [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
 
 ## Limitations
 

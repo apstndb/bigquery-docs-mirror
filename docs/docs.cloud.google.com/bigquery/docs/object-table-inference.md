@@ -4,9 +4,9 @@
 
 This document describes how to use BigQuery ML to run inference on image [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
-You can run inference on image data by using an object table as input to the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+You can run inference on image data by using an object table as input to the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
 
-To do this, you must first choose an appropriate model, upload it to Cloud Storage, and import it into BigQuery by running the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) . You can either create your own model, or download one from [TensorFlow Hub](https://tfhub.dev/) .
+To do this, you must first choose an appropriate model, upload it to Cloud Storage, and import it into BigQuery by running the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) . You can either create your own model, or download one from [TensorFlow Hub](https://tfhub.dev/) .
 
 ## Limitations
 
@@ -24,7 +24,7 @@ To do this, you must first choose an appropriate model, upload it to Cloud Stora
       - A [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) or [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) model in [SavedModel](https://www.tensorflow.org/guide/saved_model) format.
       - A PyTorch model in [ONNX format](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
 
-  - The model must meet the input requirements and limitations described in the [`  CREATE MODEL  ` statement for importing TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
+  - The model must meet the input requirements and limitations described in the [`CREATE MODEL` statement for importing TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
 
   - The serialized size of the model must be less than 450 MB.
 
@@ -32,20 +32,20 @@ To do this, you must first choose an appropriate model, upload it to Cloud Stora
 
   - The model input tensor must meet the following criteria:
     
-      - Have a data type of `  tf.float32  ` with values in `  [0, 1)  ` or have a data type of `  tf.uint8  ` with values in `  [0, 255)  ` .
-      - Have the shape `  [batch_size, width, height, 3]  ` , where:
-          - `  batch_size  ` must be `  -1  ` , `  None  ` , or `  1  ` .
-          - `  width  ` and `  height  ` must be greater than 0.
+      - Have a data type of `tf.float32` with values in `[0, 1)` or have a data type of `tf.uint8` with values in `[0, 255)` .
+      - Have the shape `[batch_size, width, height, 3]` , where:
+          - `batch_size` must be `-1` , `None` , or `1` .
+          - `width` and `height` must be greater than 0.
 
   - The model must be trained with images in one of the following color spaces:
     
-      - `  RGB  `
-      - `  HSV  `
-      - `  YIQ  `
-      - `  YUV  `
-      - `  GRAYSCALE  `
+      - `RGB`
+      - `HSV`
+      - `YIQ`
+      - `YUV`
+      - `GRAYSCALE`
     
-    You can use the [`  ML.CONVERT_COLOR_SPACE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-color-space) to convert input images to the color space that the model was trained with.
+    You can use the [`ML.CONVERT_COLOR_SPACE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-color-space) to convert input images to the color space that the model was trained with.
 
 ## Example models
 
@@ -56,20 +56,20 @@ The following models on TensorFlow Hub work with BigQuery ML and image object ta
 
 ## Required permissions
 
-  - To upload the model to Cloud Storage, you need the `  storage.objects.create  ` and `  storage.objects.get  ` permissions.
+  - To upload the model to Cloud Storage, you need the `storage.objects.create` and `storage.objects.get` permissions.
 
   - To load the model into BigQuery ML, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following permissions:
     
-      - `  bigquery.tables.getData  ` on the object table
-      - `  bigquery.models.getData  ` on the model
-      - `  bigquery.jobs.create  `
+      - `bigquery.tables.getData` on the object table
+      - `bigquery.models.getData` on the model
+      - `bigquery.jobs.create`
 
 ## Before you begin
 
@@ -77,7 +77,7 @@ The following models on TensorFlow Hub work with BigQuery ML and image object ta
 
 Follow these steps to upload a model:
 
-1.  If you have created your own model, save it locally. If you are using a model from TensorFlow Hub, download it to your local machine. If you are using TensorFlow, this should give you a `  saved_model.pb  ` file and a `  variables  ` folder for the model.
+1.  If you have created your own model, save it locally. If you are using a model from TensorFlow Hub, download it to your local machine. If you are using TensorFlow, this should give you a `saved_model.pb` file and a `variables` folder for the model.
 2.  If necessary, [create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
 3.  [Upload](https://docs.cloud.google.com/storage/docs/uploading-objects) the model artifacts to the bucket.
 
@@ -98,11 +98,11 @@ Replace the following:
   - `  DATASET_ID  ` : the ID of the dataset to contain the model.
   - `  MODEL_NAME  ` : the name of the model.
   - `  MODEL_TYPE  ` : use one of the following values:
-      - `  TENSORFLOW  ` for a TensorFlow model
-      - `  ONNX  ` for a PyTorch model in ONNX format
-  - `  BUCKET_PATH  ` : the path to the Cloud Storage bucket that contains the model, in the format `  [gs://bucket_name/[folder_name/]*]  ` .
+      - `TENSORFLOW` for a TensorFlow model
+      - `ONNX` for a PyTorch model in ONNX format
+  - `  BUCKET_PATH  ` : the path to the Cloud Storage bucket that contains the model, in the format `[gs://bucket_name/[folder_name/]*]` .
 
-The following example uses the default project and loads a TensorFlow model to BigQuery ML as `  my_vision_model  ` , using the `  saved_model.pb  ` file and `  variables  ` folder from `  gs://my_bucket/my_model_folder  ` :
+The following example uses the default project and loads a TensorFlow model to BigQuery ML as `my_vision_model` , using the `saved_model.pb` file and `variables` folder from `gs://my_bucket/my_model_folder` :
 
 ``` notranslate
 CREATE MODEL `my_dataset.my_vision_model`
@@ -137,15 +137,15 @@ Follow these steps to inspect a model:
 
 7.  Look at the **Labels** section. This identifies the fields that are output by the model.
 
-8.  Look at the **Features** section. This identifies the fields that must be input into the model. You reference them in the `  SELECT  ` statement for the `  ML.DECODE_IMAGE  ` function.
+8.  Look at the **Features** section. This identifies the fields that must be input into the model. You reference them in the `SELECT` statement for the `ML.DECODE_IMAGE` function.
 
-For more detailed inspection of a TensorFlow model, for example to determine the shape of the model input, [install TensorFlow](https://www.tensorflow.org/install) and use the [`  saved_model_cli show  ` command](https://www.tensorflow.org/guide/saved_model#show_command) .
+For more detailed inspection of a TensorFlow model, for example to determine the shape of the model input, [install TensorFlow](https://www.tensorflow.org/install) and use the [`saved_model_cli show` command](https://www.tensorflow.org/guide/saved_model#show_command) .
 
 ## Preprocess images
 
-You must use the [`  ML.DECODE_IMAGE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) to convert image bytes to a multi-dimensional `  ARRAY  ` representation. You can use `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` function, or you can write the results from `  ML.DECODE_IMAGE  ` to a table column and reference that column when you call `  ML.PREDICT  ` .
+You must use the [`ML.DECODE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) to convert image bytes to a multi-dimensional `ARRAY` representation. You can use `ML.DECODE_IMAGE` output directly in an `ML.PREDICT` function, or you can write the results from `ML.DECODE_IMAGE` to a table column and reference that column when you call `ML.PREDICT` .
 
-The following example writes the output of the `  ML.DECODE_IMAGE  ` function to a table:
+The following example writes the output of the `ML.DECODE_IMAGE` function to a table:
 
 ``` notranslate
 CREATE OR REPLACE TABLE mydataset.mytable AS (
@@ -155,11 +155,11 @@ CREATE OR REPLACE TABLE mydataset.mytable AS (
 
 Use the following functions to further process images so that they work with your model:
 
-  - The [`  ML.CONVERT_COLOR_SPACE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-color-space) converts images with an `  RGB  ` color space to a different color space.
-  - The [`  ML.CONVERT_IMAGE_TYPE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-image-type) converts the pixel values output by the [`  ML.DECODE_IMAGE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) from floating point numbers to integers with a range of `  [0, 255)  ` .
-  - The [`  ML.RESIZE_IMAGE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image) resizes images.
+  - The [`ML.CONVERT_COLOR_SPACE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-color-space) converts images with an `RGB` color space to a different color space.
+  - The [`ML.CONVERT_IMAGE_TYPE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-image-type) converts the pixel values output by the [`ML.DECODE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) from floating point numbers to integers with a range of `[0, 255)` .
+  - The [`ML.RESIZE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image) resizes images.
 
-You can use these as part of the `  ML.PREDICT  ` function, or run them on a table column containing image data output by `  ML.DECODE_IMAGE  ` .
+You can use these as part of the `ML.PREDICT` function, or run them on a table column containing image data output by `ML.DECODE_IMAGE` .
 
 ## Run inference
 
@@ -181,7 +181,7 @@ Replace the following:
   - `  PROJECT_ID  ` : the project ID of the project that contains the model and object table.
   - `  DATASET_ID  ` : the ID of the dataset that contains the model and object table.
   - `  MODEL_NAME  ` : the name of the model.
-  - `  IMAGE_DATA  ` : the image data, represented either by the output of the `  ML.DECODE_IMAGE  ` function, or by a table column containing image data output by `  ML.DECODE_IMAGE  ` or other image processing functions.
+  - `  IMAGE_DATA  ` : the image data, represented either by the output of the `ML.DECODE_IMAGE` function, or by a table column containing image data output by `ML.DECODE_IMAGE` or other image processing functions.
   - `  MODEL_INPUT  ` : the name of an input field for the model. You can find this information by [inspecting the model](https://docs.cloud.google.com/bigquery/docs/object-table-inference#inspect_the_model) and looking at the field names in the **Features** section.
   - `  TABLE_NAME  ` : the name of the object table.
 
@@ -189,7 +189,7 @@ Replace the following:
 
 **Example 1**
 
-The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function. It returns the inference results for all images in the object table, for a model with an input field of `  input  ` and an output field of `  feature  ` :
+The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. It returns the inference results for all images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
 ``` notranslate
 SELECT * FROM
@@ -202,7 +202,7 @@ ML.PREDICT(
 
 **Example 2**
 
-The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function, and uses the `  ML.CONVERT_COLOR_SPACE  ` function in the `  ML.PREDICT  ` function to convert the image color space from `  RBG  ` to `  YIQ  ` . It also shows how to use object table fields to filter the objects included in inference. It returns the inference results for all JPG images in the object table, for a model with an input field of `  input  ` and an output field of `  feature  ` :
+The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function, and uses the `ML.CONVERT_COLOR_SPACE` function in the `ML.PREDICT` function to convert the image color space from `RBG` to `YIQ` . It also shows how to use object table fields to filter the objects included in inference. It returns the inference results for all JPG images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
 ``` notranslate
 SELECT * FROM
@@ -216,7 +216,7 @@ SELECT * FROM
 
 **Example 3**
 
-The following example uses results from `  ML.DECODE_IMAGE  ` that have been written to a table column but not processed any further. It uses `  ML.RESIZE_IMAGE  ` and `  ML.CONVERT_IMAGE_TYPE  ` in the `  ML.PREDICT  ` function to process the image data. It returns the inference results for all images in the decoded images table, for a model with an input field of `  input  ` and an output field of `  feature  ` .
+The following example uses results from `ML.DECODE_IMAGE` that have been written to a table column but not processed any further. It uses `ML.RESIZE_IMAGE` and `ML.CONVERT_IMAGE_TYPE` in the `ML.PREDICT` function to process the image data. It returns the inference results for all images in the decoded images table, for a model with an input field of `input` and an output field of `feature` .
 
 Create the decoded images table:
 
@@ -239,7 +239,7 @@ ML.PREDICT(
 
 **Example 4**
 
-The following example uses results from `  ML.DECODE_IMAGE  ` that have been written to a table column and preprocessed using `  ML.RESIZE_IMAGE  ` . It returns the inference results for all images in the decoded images table, for a model with an input field of `  input  ` and an output field of `  feature  ` .
+The following example uses results from `ML.DECODE_IMAGE` that have been written to a table column and preprocessed using `ML.RESIZE_IMAGE` . It returns the inference results for all images in the decoded images table, for a model with an input field of `input` and an output field of `feature` .
 
 Create the table:
 
@@ -262,7 +262,7 @@ ML.PREDICT(
 
 **Example 5**
 
-The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function. In this example, the model has an output field of `  embeddings  ` and two input fields: one that expects an image, `  f_img  ` , and one that expects a string, `  f_txt  ` . The image input comes from the object table and the string input comes from a standard BigQuery table that is joined with the object table by using the `  uri  ` column.
+The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. In this example, the model has an output field of `embeddings` and two input fields: one that expects an image, `f_img` , and one that expects a string, `f_txt` . The image input comes from the object table and the string input comes from a standard BigQuery table that is joined with the object table by using the `uri` column.
 
 ``` notranslate
 SELECT * FROM
@@ -282,4 +282,4 @@ SELECT * FROM
   - Try [running inference on an object table by using a feature vector model](https://docs.cloud.google.com/bigquery/docs/inference-tutorial-mobilenet) .
   - Try [running inference on an object table by using a classification model](https://docs.cloud.google.com/bigquery/docs/inference-tutorial-resnet) .
   - Try [analyzing an object table by using a remote function](https://docs.cloud.google.com/bigquery/docs/remote-function-tutorial) .
-  - Try [annotating an image with the `  ML.ANNOTATE_IMAGE  ` function](https://docs.cloud.google.com/bigquery/docs/annotate-image) .
+  - Try [annotating an image with the `ML.ANNOTATE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/annotate-image) .

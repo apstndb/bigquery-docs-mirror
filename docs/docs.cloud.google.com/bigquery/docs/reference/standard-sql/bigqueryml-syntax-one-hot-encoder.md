@@ -1,10 +1,10 @@
 # The ML.ONE\_HOT\_ENCODER function
 
-This document describes the `  ML.ONE_HOT_ENCODER  ` function, which lets you encode a string expression using a [one-hot](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#one_hot_encoding) or [dummy](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#dummy_encoding) encoding scheme.
+This document describes the `ML.ONE_HOT_ENCODER` function, which lets you encode a string expression using a [one-hot](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#one_hot_encoding) or [dummy](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#dummy_encoding) encoding scheme.
 
-The encoding vocabulary is sorted alphabetically. `  NULL  ` values and categories that aren't in the vocabulary are encoded with an `  index  ` value of `  0  ` . If you use dummy encoding, the dropped category is encoded with a `  value  ` of `  0  ` .
+The encoding vocabulary is sorted alphabetically. `NULL` values and categories that aren't in the vocabulary are encoded with an `index` value of `0` . If you use dummy encoding, the dropped category is encoded with a `value` of `0` .
 
-When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the vocabulary and dropped category values calculated during training, along with the top *k* and frequency threshold values that you specified, are automatically used in prediction.
+When used in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the vocabulary and dropped category values calculated during training, along with the top *k* and frequency threshold values that you specified, are automatically used in prediction.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
@@ -19,18 +19,18 @@ ML.ONE_HOT_ENCODER(string_expression [, drop] [, top_k] [, frequency_threshold])
 
 ### Arguments
 
-`  ML.ONE_HOT_ENCODER  ` takes the following arguments:
+`ML.ONE_HOT_ENCODER` takes the following arguments:
 
-  - `  string_expression  ` : the `  STRING  ` expression to encode.
-  - `  drop  ` : a `  STRING  ` value that specifies whether the function drops a category. Valid values are as follows:
-      - `  none  ` : Retain all categories. This is the default value.
-      - `  most_frequent  ` : Drop the most frequent category found in the string expression. Selecting this value causes the function to use dummy encoding.
-  - `  top_k  ` : an `  INT64  ` value that specifies the number of categories included in the encoding vocabulary. The function selects the `  top_k  ` most frequent categories in the data and uses those; categories below this threshold are encoded to `  0  ` . This value must be less than `  1,000,000  ` to avoid problems due to high dimensionality. The default value is `  32,000  ` .
-  - `  frequency_threshold  ` : an `  INT64  ` value that limits the categories included in the encoding vocabulary based on category frequency. The function uses categories whose frequency is greater than or equal to `  frequency_threshold  ` ; categories below this threshold are encoded to `  0  ` . The default value is `  5  ` .
+  - `string_expression` : the `STRING` expression to encode.
+  - `drop` : a `STRING` value that specifies whether the function drops a category. Valid values are as follows:
+      - `none` : Retain all categories. This is the default value.
+      - `most_frequent` : Drop the most frequent category found in the string expression. Selecting this value causes the function to use dummy encoding.
+  - `top_k` : an `INT64` value that specifies the number of categories included in the encoding vocabulary. The function selects the `top_k` most frequent categories in the data and uses those; categories below this threshold are encoded to `0` . This value must be less than `1,000,000` to avoid problems due to high dimensionality. The default value is `32,000` .
+  - `frequency_threshold` : an `INT64` value that limits the categories included in the encoding vocabulary based on category frequency. The function uses categories whose frequency is greater than or equal to `frequency_threshold` ; categories below this threshold are encoded to `0` . The default value is `5` .
 
 ## Output
 
-`  ML.ONE_HOT_ENCODER  ` returns an array of struct values, in the form `  ARRAY<STRUCT<INT64, FLOAT64>>  ` . The first element in the struct provides the index of the encoded string expression, and the second element provides the value of the encoded string expression.
+`ML.ONE_HOT_ENCODER` returns an array of struct values, in the form `ARRAY<STRUCT<INT64, FLOAT64>>` . The first element in the struct provides the index of the encoded string expression, and the second element provides the value of the encoded string expression.
 
 ## Example
 

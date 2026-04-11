@@ -2,22 +2,22 @@ Describes how the table metadata was changed.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  TABLE_UPDATE_REQUEST  `
+`TABLE_UPDATE_REQUEST`
 
 Table metadata was updated using the tables.update or tables.patch API.
 
-`  JOB  `
+`JOB`
 
 Table was used as a job destination table.
 
-`  QUERY  `
+`QUERY`
 
 Table metadata was updated using a DML or DDL query.
 
-`  SET_IAM_POLICY  `
+`SET_IAM_POLICY`
 
 Table metadata was updated using the SetIamPolicy API.

@@ -12,9 +12,9 @@ Before you begin, you or an administrator in your organization must create an ex
 
 To query Bigtable external tables, ensure you have the following roles.
 
-  - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )
-  - BigQuery User ( `  roles/bigquery.user  ` )
-  - Bigtable Reader ( `  roles/bigtable.reader  ` )
+  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` )
+  - BigQuery User ( `roles/bigquery.user` )
+  - Bigtable Reader ( `roles/bigtable.reader` )
 
 Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles) .
 
@@ -22,10 +22,10 @@ To see the exact BigQuery permissions that are required to query external tables
 
 #### Required permissions
 
-  - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  ` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.getData  `
+  - `bigquery.jobs.create`
+  - `bigquery.readsessions.create` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -49,16 +49,16 @@ When you use a temporary external table, you do not create a table in one of you
 
 Using a temporary external table instead of a permanent external table has some limitations, including the following:
 
-  - You must have the Bigtable Admin ( `  roles/bigtable.admin  ` ) role.
+  - You must have the Bigtable Admin ( `roles/bigtable.admin` ) role.
   - This approach does not let you use the Google Cloud console to infer the schema of the Bigtable table and automatically create the table definition. You must create the table definition yourself.
 
 ### Required roles
 
 To query Bigtable temporary external tables, ensure you have the following roles:
 
-  - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )
-  - BigQuery User ( `  roles/bigquery.user  ` )
-  - Bigtable Admin ( `  roles/bigtable.admin  ` )
+  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` )
+  - BigQuery User ( `roles/bigquery.user` )
+  - Bigtable Admin ( `roles/bigtable.admin` )
 
 Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles) .
 
@@ -66,10 +66,10 @@ To see the exact BigQuery permissions that are required to query external tables
 
 #### Required permissions
 
-  - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  ` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.getData  `
+  - `bigquery.jobs.create`
+  - `bigquery.readsessions.create` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -84,9 +84,9 @@ Creating and querying a temporary external table is supported by the bq command-
 
 ### bq
 
-To query a temporary table using a table definition file, enter the `  bq query  ` command with the `  --external_table_definition  ` flag.
+To query a temporary table using a table definition file, enter the `bq query` command with the `--external_table_definition` flag.
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ``` notranslate
 bq --location=LOCATION query \
@@ -97,12 +97,12 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional.
+  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `--location` flag is optional.
   - `  TABLE  ` : the name of the temporary table you're creating.
   - `  DEFINITION_FILE  ` : the path to the [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) on your local machine.
   - `  QUERY  ` : the query you're submitting to the temporary table.
 
-For example, the following command creates and queries a temporary table named `  follows  ` using a table definition file named `  follows_def  ` .
+For example, the following command creates and queries a temporary table named `follows` using a table definition file named `follows_def` .
 
     bq query \
     --use_legacy_sql=false \
@@ -116,9 +116,9 @@ For example, the following command creates and queries a temporary table named `
 
   - Create a query. See [Querying data](https://docs.cloud.google.com/bigquery/querying-data) for information about creating a query job.
 
-  - (Optional) Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) .
+  - (Optional) Specify your location in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) .
 
-  - Specify the external data source properties by setting the `  ExternalDataConfiguration  ` for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
+  - Specify the external data source properties by setting the `ExternalDataConfiguration` for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
 
 ### Java
 
@@ -271,61 +271,26 @@ WHERE
   rowkey = "alice";
 ```
 
-Range filters such as `  rowkey > '1'  ` and `  rowkey < '8'  ` are also supported, but only when rowkey is read as a string with the `  readRowkeyAsString  ` option.
+Range filters such as `rowkey > '1'` and `rowkey < '8'` are also supported, but only when rowkey is read as a string with the `readRowkeyAsString` option.
 
-**Note:** If `  readRowkeyAsString  ` is set to `  true  ` , then the rowkey column families are read and converted to strings. Otherwise they are read with BYTES type values.
+**Note:** If `readRowkeyAsString` is set to `true` , then the rowkey column families are read and converted to strings. Otherwise they are read with BYTES type values.
 
 ### Filter by column family and qualifier
 
-You can also select a specific column family or a specific qualifier within a column family. To filter by column family, select the column family name, and the result includes only the selected column family. In the following example, `  user_info  ` represents a column family:
+You can also select a specific column family or a specific qualifier within a column family. To filter by column family, select the column family name, and the result includes only the selected column family. In the following example, `user_info` represents a column family:
 
 ``` notranslate
-    SELECT
-      rowkey AS user_id,
-      user_info
-    FROM
-      project.dataset.table;
+    SELECT      rowkey AS user_id,      user_info    FROM      project.dataset.table;
 ```
 
-To filter by a specific qualifier, you must first declare them in `  "columns"  ` in the external table definition:
+To filter by a specific qualifier, you must first declare them in `"columns"` in the external table definition:
 
 ``` notranslate
-CREATE OR REPLACE EXTERNAL TABLE project.dataset.table
-  OPTIONS (
-    format = 'CLOUD_BIGTABLE',
-    uris = ['https://googleapis.com/bigtable/projects/…/instances/…/tables/…'],
-    bigtable_options = '''{
-  "columnFamilies": [
-    {
-      "familyId": "user_info",
-      "columns": [
-        {
-          "qualifierString": "name"
-        },
-        {
-          "qualifierString": "email"
-        },
-        {
-          "qualifierString": "registered_at"
-        }
-      ]
-    },
-    {
-      "familyId": "session_data"
-    }
-  ],
-  "readRowkeyAsString": true,
-  "timestampSuffix": "_ts"
-}'''
-  );
+CREATE OR REPLACE EXTERNAL TABLE project.dataset.table  OPTIONS (    format = 'CLOUD_BIGTABLE',    uris = ['https://googleapis.com/bigtable/projects/…/instances/…/tables/…'],    bigtable_options = '''{  "columnFamilies": [    {      "familyId": "user_info",      "columns": [        {          "qualifierString": "name"        },        {          "qualifierString": "email"        },        {          "qualifierString": "registered_at"        }      ]    },    {      "familyId": "session_data"    }  ],  "readRowkeyAsString": true,  "timestampSuffix": "_ts"}'''  );
 ```
 
-After the external table is created, use a `  SELECT  ` statement to query a specific qualifier. This ensures that BigQuery pushes down the filter to Bigtable and only loads the specified qualifiers when running a `  SELECT  ` statement from BigQuery, not the entire column family's data. This reduces BigQuery resource consumption.
+After the external table is created, use a `SELECT` statement to query a specific qualifier. This ensures that BigQuery pushes down the filter to Bigtable and only loads the specified qualifiers when running a `SELECT` statement from BigQuery, not the entire column family's data. This reduces BigQuery resource consumption.
 
 ``` notranslate
-    SELECT
-      rowkey AS user_id,
-      user_info.email.cell[SAFE_OFFSET(0)].value as email
-    FROM
-      project.dataset.table;
+    SELECT      rowkey AS user_id,      user_info.email.cell[SAFE_OFFSET(0)].value as email    FROM      project.dataset.table;
 ```

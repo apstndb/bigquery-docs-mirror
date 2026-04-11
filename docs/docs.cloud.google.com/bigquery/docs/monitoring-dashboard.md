@@ -157,22 +157,22 @@ In the <strong>Metrics</strong> menu, select <strong>Query execution times</stro
 <tr class="odd">
 <td><strong>Across time series<br />
 Time series group by</strong></td>
-<td><code dir="ltr" translate="no">       priority      </code></td>
+<td><code dir="ltr" translate="no">priority</code></td>
 </tr>
 <tr class="even">
 <td><strong>Across time series<br />
 Time series aggregation</strong></td>
-<td><code dir="ltr" translate="no">       99th percentile      </code><br />
+<td><code dir="ltr" translate="no">99th percentile</code><br />
 </td>
 </tr>
 <tr class="odd">
 <td><strong>Rolling window</strong></td>
-<td><code dir="ltr" translate="no">       5 m      </code><br />
+<td><code dir="ltr" translate="no">5 m</code><br />
 </td>
 </tr>
 <tr class="even">
 <td><strong>Rolling window function</strong></td>
-<td><code dir="ltr" translate="no">       sum      </code></td>
+<td><code dir="ltr" translate="no">sum</code></td>
 </tr>
 </tbody>
 </table>
@@ -193,15 +193,15 @@ Value</th>
 <tbody>
 <tr class="odd">
 <td><strong>Condition type</strong></td>
-<td><code dir="ltr" translate="no">       Threshold      </code></td>
+<td><code dir="ltr" translate="no">Threshold</code></td>
 </tr>
 <tr class="even">
 <td><strong>Alert trigger</strong></td>
-<td><code dir="ltr" translate="no">       Any time series violates      </code></td>
+<td><code dir="ltr" translate="no">Any time series violates</code></td>
 </tr>
 <tr class="odd">
 <td><strong>Threshold position</strong></td>
-<td><code dir="ltr" translate="no">       Above threshold      </code></td>
+<td><code dir="ltr" translate="no">Above threshold</code></td>
 </tr>
 <tr class="even">
 <td><strong>Threshold value</strong></td>
@@ -209,7 +209,7 @@ Value</th>
 </tr>
 <tr class="odd">
 <td><strong>Retest window</strong></td>
-<td><code dir="ltr" translate="no">       most recent value      </code></td>
+<td><code dir="ltr" translate="no">most recent value</code></td>
 </tr>
 </tbody>
 </table>
@@ -248,17 +248,17 @@ Time series group by</strong></td>
 <tr class="even">
 <td><strong>Across time series<br />
 Time series aggregation</strong></td>
-<td><code dir="ltr" translate="no">       sum      </code><br />
+<td><code dir="ltr" translate="no">sum</code><br />
 </td>
 </tr>
 <tr class="odd">
 <td><strong>Rolling window</strong></td>
-<td><code dir="ltr" translate="no">       5 m      </code><br />
+<td><code dir="ltr" translate="no">5 m</code><br />
 </td>
 </tr>
 <tr class="even">
 <td><strong>Rolling window function</strong></td>
-<td><code dir="ltr" translate="no">       sum      </code></td>
+<td><code dir="ltr" translate="no">sum</code></td>
 </tr>
 </tbody>
 </table>
@@ -279,19 +279,19 @@ Value</th>
 <tbody>
 <tr class="odd">
 <td><strong>Condition type</strong></td>
-<td><code dir="ltr" translate="no">       Threshold      </code></td>
+<td><code dir="ltr" translate="no">Threshold</code></td>
 </tr>
 <tr class="even">
 <td><strong>Alert trigger</strong></td>
-<td><code dir="ltr" translate="no">       Any time series violates      </code></td>
+<td><code dir="ltr" translate="no">Any time series violates</code></td>
 </tr>
 <tr class="odd">
 <td><strong>Threshold position</strong></td>
-<td><code dir="ltr" translate="no">       Above threshold      </code></td>
+<td><code dir="ltr" translate="no">Above threshold</code></td>
 </tr>
 <tr class="even">
 <td><strong>Threshold value</strong></td>
-<td>You determine this value. For example, to trigger an alert when usage exceeds 1 TiB, enter <code dir="ltr" translate="no">       1000000000000      </code> .</td>
+<td>You determine this value. For example, to trigger an alert when usage exceeds 1 TiB, enter <code dir="ltr" translate="no">1000000000000</code> .</td>
 </tr>
 </tbody>
 </table>
@@ -307,9 +307,9 @@ You can use the following formula to convert your cost threshold into bytes:
 Let's say you want to be alerted when your project's query costs exceed **$100** .
 
 1.  **Calculate the equivalent data volume in TiB:**  
-    `  $100 / (price per TiB) = Equivalent Data Volume in TiB  `
+    `$100 / (price per TiB) = Equivalent Data Volume in TiB`
 2.  **Convert data volume to bytes:**  
-    `  (Equivalent Data Volume in TiB) * 1,000,000,000,000 = Threshold Value in Bytes  `
+    `(Equivalent Data Volume in TiB) * 1,000,000,000,000 = Threshold Value in Bytes`
 3.  **Set the Threshold Value:**  
     In the **Configure alert trigger** section of your policy, enter the "Threshold Value in Bytes" as the **Threshold value** .
 
@@ -349,13 +349,13 @@ BI Engine Query Fallback Count ( [Preview](https://cloud.google.com/products/#pr
 
 Queries
 
-The amount of queries that did not use BI Engine as a rate. You can set the **Group By** option to `  reason  ` to separate the count into different fallback reasons, including:
+The amount of queries that did not use BI Engine as a rate. You can set the **Group By** option to `reason` to separate the count into different fallback reasons, including:
 
-  - `  NO_RESERVATION  `
-  - `  INSUFFICIENT_RESERVATION  `
-  - `  UNSUPPORTED_SQL_TEXT  `
-  - `  INPUT_TOO_LARGE  `
-  - `  OTHER_REASON  `
+  - `NO_RESERVATION`
+  - `INSUFFICIENT_RESERVATION`
+  - `UNSUPPORTED_SQL_TEXT`
+  - `INPUT_TOO_LARGE`
+  - `OTHER_REASON`
 
 BigQuery
 
@@ -429,7 +429,7 @@ Slots used across projects in reservations
 
 Slots
 
-Number of BigQuery slots allocated across projects in the reservation. Note that the metric data is only reported while at least one project has been assigned to the reservation and is consuming slots. As an alternative, consider querying reservations information from [`  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) . To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](https://docs.cloud.google.com/monitoring/settings) of the project where you are viewing the dashboard.
+Number of BigQuery slots allocated across projects in the reservation. Note that the metric data is only reported while at least one project has been assigned to the reservation and is consuming slots. As an alternative, consider querying reservations information from [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) . To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](https://docs.cloud.google.com/monitoring/settings) of the project where you are viewing the dashboard.
 
 BigQuery
 
@@ -535,7 +535,7 @@ For a complete list of available Google Cloud metrics, see [Google Cloud metrics
 
   - If queries are running in both the US and the EU, then slots allocated and slots available might be incorrect.
 
-  - Slots allocated is reported as the average value in a time window (the width of the time window depends on the zoom level of the chart). Zooming in and out can change the value of slots allocated. Zooming in to a time window of 1 hr or less shows the true values of slots allocated. At this range for any time visible on the chart, `  avg(slots allocated) = slots allocated  ` .
+  - Slots allocated is reported as the average value in a time window (the width of the time window depends on the zoom level of the chart). Zooming in and out can change the value of slots allocated. Zooming in to a time window of 1 hr or less shows the true values of slots allocated. At this range for any time visible on the chart, `avg(slots allocated) = slots allocated` .
 
   - The data in Cloud Monitoring charts pertains only to the selected project.
 

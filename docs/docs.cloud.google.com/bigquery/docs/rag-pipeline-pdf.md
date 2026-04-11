@@ -15,13 +15,13 @@ This tutorial covers the following tasks:
   - Creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) over the PDF file to make the PDF file available in BigQuery.
   - [Creating a Document AI processor](https://docs.cloud.google.com/document-ai/docs/create-processor#create-processor) that you can use to parse the PDF file.
   - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) that lets you use the Document AI API to access the document processor from BigQuery.
-  - Using the remote model with the [`  ML.PROCESS_DOCUMENT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) to parse the PDF contents into chunks and then write that content to a BigQuery table.
-  - Extracting PDF content from the JSON data returned by the `  ML.PROCESS_DOCUMENT  ` function, and then writing that content to a BigQuery table.
-  - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that lets you use the Vertex AI `  text-embedding-004  ` embedding generation model from BigQuery.
-  - Using the remote model with the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from the parsed PDF content, and then writing those embeddings to a BigQuery table. Embeddings are numerical representations of the PDF content that enable you to perform semantic search and retrieval on the PDF content.
-  - Using the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the embeddings to identify semantically similar PDF content.
+  - Using the remote model with the [`ML.PROCESS_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) to parse the PDF contents into chunks and then write that content to a BigQuery table.
+  - Extracting PDF content from the JSON data returned by the `ML.PROCESS_DOCUMENT` function, and then writing that content to a BigQuery table.
+  - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that lets you use the Vertex AI `text-embedding-004` embedding generation model from BigQuery.
+  - Using the remote model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from the parsed PDF content, and then writing those embeddings to a BigQuery table. Embeddings are numerical representations of the PDF content that enable you to perform semantic search and retrieval on the PDF content.
+  - Using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the embeddings to identify semantically similar PDF content.
   - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that lets you use a Gemini text generation model from BigQuery.
-  - Perform retrieval-augmented generation (RAG) by using the remote model with the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text, using vector search results to augment the prompt input and improve results.
+  - Perform retrieval-augmented generation (RAG) by using the remote model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text, using vector search results to augment the prompt input and improve results.
 
 ## Costs
 
@@ -50,7 +50,7 @@ For more information, see the following pricing pages:
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -62,7 +62,7 @@ For more information, see the following pricing pages:
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com,documentai.googleapis.com,storage.googleapis.com)
 
@@ -70,31 +70,31 @@ For more information, see the following pricing pages:
 
 To run this tutorial, you need the following Identity and Access Management (IAM) roles:
 
-  - Create Cloud Storage buckets and objects: Storage Admin ( `  roles/storage.storageAdmin  ` )
-  - Create a document processor: Document AI Editor ( `  roles/documentai.editor  ` )
-  - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `  roles/bigquery.admin  ` )
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` )
+  - Create Cloud Storage buckets and objects: Storage Admin ( `roles/storage.storageAdmin` )
+  - Create a document processor: Document AI Editor ( `roles/documentai.editor` )
+  - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `roles/bigquery.admin` )
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` )
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set the default connection: `  bigquery.config.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
-  - Create an object table: `  bigquery.tables.create  ` and `  bigquery.tables.update  `
-  - Create Cloud Storage buckets and objects: `  storage.buckets.*  ` and `  storage.objects.*  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set the default connection: `bigquery.config.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
+  - Create an object table: `bigquery.tables.create` and `bigquery.tables.update`
+  - Create Cloud Storage buckets and objects: `storage.buckets.*` and `storage.objects.*`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
   - Create a document processor:
-      - `  documentai.processors.create  `
-      - `  documentai.processors.update  `
-      - `  documentai.processors.delete  `
+      - `documentai.processors.create`
+      - `documentai.processors.update`
+      - `documentai.processors.delete`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
 
@@ -114,7 +114,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -122,9 +122,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -141,7 +141,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -189,7 +189,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -225,7 +225,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -363,13 +363,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -403,13 +403,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -421,7 +421,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -433,7 +433,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -473,7 +473,7 @@ Select one of the following options:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
 
 ``` 
 gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/documentai.viewer' --condition=None
@@ -491,9 +491,9 @@ Replace the following:
 
 To upload the sample PDF to Cloud Storage, follow these steps:
 
-1.  Download the `  scf23.pdf  ` sample PDF by going to <https://www.federalreserve.gov/publications/files/scf23.pdf> and clicking download download .
+1.  Download the `scf23.pdf` sample PDF by going to <https://www.federalreserve.gov/publications/files/scf23.pdf> and clicking download download .
 2.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
-3.  [Upload](https://docs.cloud.google.com/storage/docs/uploading-objects) the `  scf23.pdf  ` file to the bucket.
+3.  [Upload](https://docs.cloud.google.com/storage/docs/uploading-objects) the `scf23.pdf` file to the bucket.
 
 ## Create an object table
 
@@ -519,13 +519,13 @@ Create an object table over the PDF file in Cloud Storage:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-      - `  BUCKET  ` : the Cloud Storage bucket containing the `  scf23.pdf  ` file. The full `  uri  ` option value should look similar to `  ['gs://mybucket/scf23.pdf']  ` .
+      - `  BUCKET  ` : the Cloud Storage bucket containing the `scf23.pdf` file. The full `uri` option value should look similar to `['gs://mybucket/scf23.pdf']` .
 
 ## Create a document processor
 
-[Create a document processor](https://docs.cloud.google.com/document-ai/docs/create-processor#create-processor) based on the [Layout Parser processor](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) in the `  us  ` multi-region.
+[Create a document processor](https://docs.cloud.google.com/document-ai/docs/create-processor#create-processor) based on the [Layout Parser processor](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) in the `us` multi-region.
 
 ## Create the remote model for the document processor
 
@@ -549,13 +549,13 @@ Create a remote model to access the Document AI processor:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
       - `  PROCESSOR_ID  ` : the document processor ID. To find this value, [view the processor details](https://docs.cloud.google.com/document-ai/docs/create-processor#get-processor) , and then look at the **ID** row in the **Basic Information** section.
 
 ## Parse the PDF file into chunks
 
-Use the document processor with the `  ML.PROCESS_DOCUMENT  ` function to parse the PDF file into chunks, and then write that content to a table. The `  ML.PROCESS_DOCUMENT  ` function returns the PDF chunks in JSON format.
+Use the document processor with the `ML.PROCESS_DOCUMENT` function to parse the PDF file into chunks, and then write that content to a table. The `ML.PROCESS_DOCUMENT` function returns the PDF chunks in JSON format.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -564,18 +564,12 @@ Use the document processor with the `  ML.PROCESS_DOCUMENT  ` function to parse 
 2.  In the query editor, run the following statement:
     
     ``` notranslate
-    CREATE or REPLACE TABLE bqml_tutorial.chunked_pdf AS (
-      SELECT * FROM ML.PROCESS_DOCUMENT(
-      MODEL bqml_tutorial.parser_model,
-      TABLE bqml_tutorial.pdf,
-      PROCESS_OPTIONS => (JSON '{"layout_config": {"chunking_config": {"chunk_size": 250}}}')
-      )
-    );
+    CREATE or REPLACE TABLE bqml_tutorial.chunked_pdf AS (  SELECT * FROM ML.PROCESS_DOCUMENT(  MODEL bqml_tutorial.parser_model,  TABLE bqml_tutorial.pdf,  PROCESS_OPTIONS => (JSON '{"layout_config": {"chunking_config": {"chunk_size": 250}}}')  ));
     ```
 
 ## Parse the PDF chunk data into separate columns
 
-Extract the PDF content and metadata information from the JSON data returned by the `  ML.PROCESS_DOCUMENT  ` function, and then write that content to a table:
+Extract the PDF content and metadata information from the JSON data returned by the `ML.PROCESS_DOCUMENT` function, and then write that content to a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -584,16 +578,7 @@ Extract the PDF content and metadata information from the JSON data returned by 
 2.  In the query editor, run the following statement to parse the PDF content:
     
     ``` notranslate
-    CREATE OR REPLACE TABLE bqml_tutorial.parsed_pdf AS (
-    SELECT
-      uri,
-      JSON_EXTRACT_SCALAR(json , '$.chunkId') AS id,
-      JSON_EXTRACT_SCALAR(json , '$.content') AS content,
-      JSON_EXTRACT_SCALAR(json , '$.pageFooters[0].text') AS page_footers_text,
-      JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageStart') AS page_span_start,
-      JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageEnd') AS page_span_end
-    FROM bqml_tutorial.chunked_pdf, UNNEST(JSON_EXTRACT_ARRAY(ml_process_document_result.chunkedDocument.chunks, '$')) json
-    );
+    CREATE OR REPLACE TABLE bqml_tutorial.parsed_pdf AS (SELECT  uri,  JSON_EXTRACT_SCALAR(json , '$.chunkId') AS id,  JSON_EXTRACT_SCALAR(json , '$.content') AS content,  JSON_EXTRACT_SCALAR(json , '$.pageFooters[0].text') AS page_footers_text,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageStart') AS page_span_start,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageEnd') AS page_span_endFROM bqml_tutorial.chunked_pdf, UNNEST(JSON_EXTRACT_ARRAY(ml_process_document_result.chunkedDocument.chunks, '$')) json);
     ```
 
 3.  In the query editor, run the following statement to view a subset of the parsed PDF content:
@@ -642,7 +627,7 @@ Create a remote model that represents a hosted Vertex AI text embedding generati
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
 
 ## Generate embeddings
 
@@ -666,7 +651,7 @@ Generate embeddings for the parsed PDF content and then write them to a table:
 
 Run a vector search against the parsed PDF content.
 
-The following query takes text input, creates an embedding for that input using the `  AI.GENERATE_EMBEDDING  ` function, and then uses the `  VECTOR_SEARCH  ` function to match the input embedding with the most similar PDF content embeddings. The results are the top ten PDF chunks that are most semantically similar to the input.
+The following query takes text input, creates an embedding for that input using the `AI.GENERATE_EMBEDDING` function, and then uses the `VECTOR_SEARCH` function to match the input embedding with the most similar PDF content embeddings. The results are the top ten PDF chunks that are most semantically similar to the input.
 
 1.  Go to the **BigQuery** page.
     
@@ -735,11 +720,11 @@ Create a remote model that represents a hosted Vertex AI text generation model:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
 
 ## Generate text augmented by vector search results
 
-Perform a vector search on the embeddings to identify semantically similar PDF content, and then use the `  AI.GENERATE_TEXT  ` function with the vector search results to augment the prompt input and improve the text generation results. In this case, the query uses information from the PDF chunks to answer a question about the change in family net worth over the past decade.
+Perform a vector search on the embeddings to identify semantically similar PDF content, and then use the `AI.GENERATE_TEXT` function with the vector search results to augment the prompt input and improve the text generation results. In this case, the query uses information from the PDF chunks to answer a question about the change in family net worth over the past decade.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -801,7 +786,7 @@ Perform a vector search on the embeddings to identify semantically similar PDF c
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

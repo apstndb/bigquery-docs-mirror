@@ -1,6 +1,6 @@
 **Note:** Exporting your models is not required for deployment on Vertex AI if you are using the Vertex AI Model Registry. To learn more about the registry, see [Manage BigQuery ML models in the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
 
-This tutorial shows how to [export a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/exporting-models) and then deploy the model either on Vertex AI or on a local machine. You will use the [`  iris  ` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=iris&page=table) from the BigQuery public datasets and work through the following three end-to-end scenarios:
+This tutorial shows how to [export a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/exporting-models) and then deploy the model either on Vertex AI or on a local machine. You will use the [`iris` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=iris&page=table) from the BigQuery public datasets and work through the following three end-to-end scenarios:
 
   - Train and deploy a logistic regression model - also applies to DNN classifier, DNN regressor, k-means, linear regression, and matrix factorization models.
   - Train and deploy a boosted tree classifier model - also applies to boosted tree regressor model.
@@ -28,7 +28,7 @@ For more information about Vertex AI costs, see [Custom-trained models](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
@@ -36,7 +36,7 @@ For more information about Vertex AI costs, see [Custom-trained models](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=ml.googleapis.com,compute_component)
 
@@ -58,7 +58,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -66,9 +66,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -85,7 +85,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -101,7 +101,7 @@ Use the following sections to learn how to train and deploy a logistic regressio
 
 ### Train the model
 
-Train a logistic regression model that predicts iris type using the BigQuery ML [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_model_syntax) statement. This training job should take approximately 1 minute to complete.
+Train a logistic regression model that predicts iris type using the BigQuery ML [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_model_syntax) statement. This training job should take approximately 1 minute to complete.
 
 ``` notranslate
 bq query --use_legacy_sql=false \
@@ -173,7 +173,7 @@ For more information about deploying a model to Vertex AI for online or batch pr
 
     gcloud ai-platform versions create $VERSION_NAME --model=$MODEL_NAME --origin=$MODEL_DIR --runtime-version=1.15 --framework=$FRAMEWORK
 
-This step might take a few minutes to complete. You should see the message `  Creating version (this might take a few minutes)......  ` .
+This step might take a few minutes to complete. You should see the message `Creating version (this might take a few minutes)......` .
 
 3\) (optional) Get information about your new version:
 
@@ -194,7 +194,7 @@ You should see output similar to this:
 
 For more information about running online predictions against a deployed model, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions) .
 
-1\) Create a newline-delimited JSON file for inputs, for example `  instances.json  ` file with the following content:
+1\) Create a newline-delimited JSON file for inputs, for example `instances.json` file with the following content:
 
     {"sepal_length":5.0, "sepal_width":2.0, "petal_length":3.5, "petal_width":1.0}
     {"sepal_length":5.3, "sepal_width":3.7, "petal_length":1.5, "petal_width":0.2}
@@ -213,7 +213,7 @@ Use the following sections to learn how to train and deploy a boosted tree class
 
 ### Train the model
 
-Train a boosted tree classifier model that predicts iris type using the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_model) statement. This training job should take approximately 7 minutes to complete.
+Train a boosted tree classifier model that predicts iris type using the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_model) statement. This training job should take approximately 7 minutes to complete.
 
 ``` notranslate
 bq query --use_legacy_sql=false \
@@ -234,7 +234,7 @@ Export the model to a Cloud Storage bucket using the [bq command-line tool](http
 
 ### Local deployment and serving
 
-In the exported files, there is a `  main.py  ` file for local run.
+In the exported files, there is a `main.py` file for local run.
 
 #### Download the exported model files to a local directory
 
@@ -278,7 +278,7 @@ For more information about deploying a model to Vertex AI for online or batch pr
 
     gcloud beta ai-platform versions create $VERSION_NAME --model=$MODEL_NAME --origin=$MODEL_DIR --package-uris=${MODEL_DIR}/xgboost_predictor-0.1.tar.gz --prediction-class=predictor.Predictor --runtime-version=1.15
 
-This step might take a few minutes to complete. You should see the message `  Creating version (this might take a few minutes)......  ` .
+This step might take a few minutes to complete. You should see the message `Creating version (this might take a few minutes)......` .
 
 3\) (optional) Get information about your new version:
 
@@ -302,7 +302,7 @@ You should see output similar to this:
 
 For more information about running online predictions against a deployed model, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions) .
 
-1\) Create a newline-delimited JSON file for inputs. For example, `  instances.json  ` file with the following content:
+1\) Create a newline-delimited JSON file for inputs. For example, `instances.json` file with the following content:
 
     {"sepal_length":5.0, "sepal_width":2.0, "petal_length":3.5, "petal_width":1.0}
     {"sepal_length":5.3, "sepal_width":3.7, "petal_length":1.5, "petal_width":0.2}
@@ -321,7 +321,7 @@ Use the following sections to learn how to train and deploy an AutoML classifier
 
 ### Train the model
 
-Train an AutoML classifier model that predicts iris type using the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) statement. AutoML models need at least 1000 rows of input data. Because `  ml_datasets.iris  ` only has 150 rows, we duplicate the data 10 times. This training job should take around **2 hours** to complete.
+Train an AutoML classifier model that predicts iris type using the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) statement. AutoML models need at least 1000 rows of input data. Because `ml_datasets.iris` only has 150 rows, we duplicate the data 10 times. This training job should take around **2 hours** to complete.
 
 ``` notranslate
 bq query --use_legacy_sql=false \
@@ -359,7 +359,7 @@ For details about building AutoML containers, see [Export AutoML tabular models]
 
 #### Run the prediction
 
-1\) Create a newline-delimited JSON file for inputs. For example, `  input.json  ` file with the following contents:
+1\) Create a newline-delimited JSON file for inputs. For example, `input.json` file with the following contents:
 
     {"instances": [{"sepal_length":5.0, "sepal_width":2.0, "petal_length":3.5, "petal_width":1.0},
     {"sepal_length":5.3, "sepal_width":3.7, "petal_length":1.5, "petal_width":0.2}]}
@@ -411,7 +411,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
-4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `  bqml_tutorial  ` ) and then click **Delete** .
+4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `bqml_tutorial` ) and then click **Delete** .
 
 ### Delete your Cloud Storage bucket
 
@@ -434,7 +434,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -450,4 +450,4 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 
   - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
   - For information on exporting models, see [Export models](https://docs.cloud.google.com/bigquery/docs/exporting-models) .
-  - For information on creating models, see the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.
+  - For information on creating models, see the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.

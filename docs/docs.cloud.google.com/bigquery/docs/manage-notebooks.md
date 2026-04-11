@@ -15,27 +15,27 @@ Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/quer
 
 To share notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
-  - [Code Owner ( `  roles/dataform.codeOwner  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) at the resource level.
+  - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+  - [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) at the resource level.
 
 To save and delete notebooks, you need the following IAM roles:
 
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
-  - [Code Owner ( `  roles/dataform.codeOwner  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) or [Code Editor ( `  roles/dataform.codeEditor  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
+  - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+  - [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) or [Code Editor ( `roles/dataform.codeEditor` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
 
 To work with notebook revisions, you need the following IAM roles:
 
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
 
-  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+  - [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
 
   - Any one of the following roles:
     
-      - [Code Owner ( `  roles/dataform.codeOwner  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner)
-      - [Code Editor ( `  roles/dataform.codeEditor  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
-      - [Code Viewer ( `  roles/dataform.codeViewer  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer)
+      - [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner)
+      - [Code Editor ( `roles/dataform.codeEditor` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
+      - [Code Viewer ( `roles/dataform.codeViewer` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer)
 
 For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -73,7 +73,7 @@ To grant other users access to a notebook, add those users to an appropriate IAM
       - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
       - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
     
-    **Note:** The principal must also have the [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
+    **Note:** The principal must also have the [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
@@ -265,7 +265,7 @@ To delete a notebook, follow these steps:
 
 5.  Click more\_vert **View actions** next to the notebook and then click **Delete** .
 
-6.  To confirm deletion, type `  delete  ` in the dialog.
+6.  To confirm deletion, type `delete` in the dialog.
 
 7.  Click **Delete** .
 
@@ -286,13 +286,13 @@ Dataplex Universal Catalog automatically retrieves the following metadata from n
 Dataplex Universal Catalog logs notebooks as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for notebooks is `  @dataform  ` . To view details of notebook entries in Dataplex Universal Catalog, you need to view the `  dataform  ` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for notebooks is `@dataform` . To view details of notebook entries in Dataplex Universal Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for notebooks is `  dataform-code-asset  ` . To view details of notebooks, you need to view the `  dataform-code-asset  ` system entry type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  NOTEBOOK  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected notebook. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for notebooks is `dataform-code-asset` . To view details of notebooks, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `NOTEBOOK`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected notebook. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for notebooks is `  dataform-code-asset  ` . To provide additional context to notebooks in Dataplex Universal Catalog by annotating notebook entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `  dataform-code-asset  ` aspect type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  NOTEBOOK  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for notebooks is `dataform-code-asset` . To provide additional context to notebooks in Dataplex Universal Catalog by annotating notebook entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `NOTEBOOK`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
   - Type  
-    The type for data canvases is `  NOTEBOOK  ` . This type lets you filter notebooks in the `  dataform-code-asset  ` system entry type and the `  dataform-code-asset  ` aspect type by using the `  aspect:dataplex-types.global.dataform-code-asset.type=NOTEBOOK  ` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
+    The type for data canvases is `NOTEBOOK` . This type lets you filter notebooks in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=NOTEBOOK` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
 For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
 

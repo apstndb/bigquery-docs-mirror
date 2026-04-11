@@ -71,7 +71,7 @@ A data exchange is a container that lets you share data through self-service. It
 A data exchange can be one of the following types:
 
   - **Private data exchange.** By default, a data exchange is private and only users or groups that have access to that exchange can view or subscribe to its listings.
-  - **Public data exchange.** By default, a data exchange is private and only users or groups that have access to that exchange can view or subscribe to its listings. However, you can choose to make a data exchange public. Listings in public data exchanges can be [discovered](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) and [subscribed to](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) by [Google Cloud users ( `  allAuthenticatedUsers  ` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) . For more information about public data exchanges, see [Make a data exchange public](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#make-data-exchange-public) .
+  - **Public data exchange.** By default, a data exchange is private and only users or groups that have access to that exchange can view or subscribe to its listings. However, you can choose to make a data exchange public. Listings in public data exchanges can be [discovered](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) and [subscribed to](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) by [Google Cloud users ( `allAuthenticatedUsers` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) . For more information about public data exchanges, see [Make a data exchange public](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#make-data-exchange-public) .
 
 The Analytics Hub Admin role lets you create multiple data exchanges and manage other users performing sharing tasks.
 
@@ -83,7 +83,7 @@ The primary contact email address lets users contact the listing owner with ques
 
 A listing can be one of two types, based on the IAM policy set for the listing and the type of data exchange that contains the listing:
 
-  - **Public listing.** A public listing is shared with all [Google Cloud users ( `  allAuthenticatedUsers  ` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) . Listings in a public data exchange are public listings. These listings can be references of a *free public resource* or a *commercial resource* . If the listing is of a commercial resource, subscribers can either request access to the listing directly from the data provider, or they can browse and purchase [Google Cloud Marketplace-integrated commercial listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) .
+  - **Public listing.** A public listing is shared with all [Google Cloud users ( `allAuthenticatedUsers` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) . Listings in a public data exchange are public listings. These listings can be references of a *free public resource* or a *commercial resource* . If the listing is of a commercial resource, subscribers can either request access to the listing directly from the data provider, or they can browse and purchase [Google Cloud Marketplace-integrated commercial listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) .
   - **Private listing.** A private listing is shared directly with individuals or groups. For example, a private listing can reference a marketing metrics dataset that you share with other internal teams within your organization.
 
 ### Subscriber workflow
@@ -128,9 +128,9 @@ Publishers can enable data egress restriction on a listing, the results of a que
 
   - BigQuery Data Transfer Service is unavailable on the restricted dataset.
 
-  - [`  CREATE TABLE AS SELECT  ` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and [writing to a destination table](https://docs.cloud.google.com/bigquery/docs/writing-results) are unavailable.
+  - [`CREATE TABLE AS SELECT` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and [writing to a destination table](https://docs.cloud.google.com/bigquery/docs/writing-results) are unavailable.
 
-  - [`  CREATE VIEW AS SELECT  ` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) and writing to a destination view are unavailable.
+  - [`CREATE VIEW AS SELECT` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) and writing to a destination view are unavailable.
 
 When you [create a listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) , you can set the appropriate data egress options.
 
@@ -168,9 +168,9 @@ BigQuery sharing has the following limitations:
     
       - Taking [snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of linked dataset tables isn't supported.
     
-      - Queries with linked datasets and `  JOIN  ` statements that are larger than 1 TB (physical storage) might fail. You can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) to resolve this issue.
+      - Queries with linked datasets and `JOIN` statements that are larger than 1 TB (physical storage) might fail. You can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) to resolve this issue.
     
-      - You cannot use [region qualifiers](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) with `  INFORMATION_SCHEMA  ` views to [view metadata for your linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view-table-metadata) .
+      - You cannot use [region qualifiers](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) with `INFORMATION_SCHEMA` views to [view metadata for your linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view-table-metadata) .
     
       - The following limitations apply to listings for multiple regions:
     
@@ -184,19 +184,19 @@ BigQuery sharing has the following limitations:
     
       - You can't get the usage metrics for listings that were subscribed before July 20, 2023.
     
-      - [External table](https://docs.cloud.google.com/bigquery/docs/external-tables) usage metrics for the `  num_rows_processed  ` and `  total_bytes_processed  ` fields might contain inaccurate data.
+      - [External table](https://docs.cloud.google.com/bigquery/docs/external-tables) usage metrics for the `num_rows_processed` and `total_bytes_processed` fields might contain inaccurate data.
     
       - Usage metrics for consumption are supported only for usage with [BigQuery jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) . The following resources don't support consumption:
         
           - [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage#read_from_a_session_stream)
-          - [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list)
+          - [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list)
           - [BigQuery BI Engine queries](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro)
     
       - Usage metrics for [views](https://docs.cloud.google.com/bigquery/docs/views-intro) are populated only for queries after April 22, 2024.
     
       - Usage metrics aren't captured for linked Pub/Sub subscriptions in BigQuery. You can continue to see usage directly in Pub/Sub.
     
-      - SQL stored procedures aren't available in the BigQuery sharing usage metrics dashboard. You can view details in the `  INFORMATION_SCHEMA.ROUTINES  ` view, but not in the `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view. For more information, see [Use `  INFORMATION_SCHEMA  ` view](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-information-schema) .
+      - SQL stored procedures aren't available in the BigQuery sharing usage metrics dashboard. You can view details in the `INFORMATION_SCHEMA.ROUTINES` view, but not in the `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view. For more information, see [Use `INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-information-schema) .
 
   - The following limitations apply when subscribing to Salesforce Data Cloud data:
     
@@ -218,133 +218,133 @@ Details
 
 Columbus, Ohio
 
-`  us-east5  `
+`us-east5`
 
 Dallas
 
-`  us-south1  `
+`us-south1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
-`  us-central1  `
+`us-central1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
-`  us-west4  `
+`us-west4`
 
 Los Angeles
 
-`  us-west2  `
+`us-west2`
 
 Mexico
 
-`  northamerica-south1  `
+`northamerica-south1`
 
 Montréal
 
-`  northamerica-northeast1  `
+`northamerica-northeast1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Northern Virginia
 
-`  us-east4  `
+`us-east4`
 
 Oklahoma
 
-`  us-central2  `
+`us-central2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Oregon
 
-`  us-west1  `
+`us-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
-`  us-west3  `
+`us-west3`
 
 São Paulo
 
-`  southamerica-east1  `
+`southamerica-east1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Santiago
 
-`  southamerica-west1  `
+`southamerica-west1`
 
 South Carolina
 
-`  us-east1  `
+`us-east1`
 
 Toronto
 
-`  northamerica-northeast2  `
+`northamerica-northeast2`
 
 The following table lists the regions in Asia Pacific where sharing is available.
 
-| Region description | Region name                           | Details |
-| ------------------ | ------------------------------------- | ------- |
-| Delhi              | `        asia-south2       `          |         |
-| Hong Kong          | `        asia-east2       `           |         |
-| Jakarta            | `        asia-southeast2       `      |         |
-| Melbourne          | `        australia-southeast2       ` |         |
-| Mumbai             | `        asia-south1       `          |         |
-| Osaka              | `        asia-northeast2       `      |         |
-| Seoul              | `        asia-northeast3       `      |         |
-| Singapore          | `        asia-southeast1       `      |         |
-| Sydney             | `        australia-southeast1       ` |         |
-| Taiwan             | `        asia-east1       `           |         |
-| Tokyo              | `        asia-northeast1       `      |         |
+| Region description | Region name            | Details |
+| ------------------ | ---------------------- | ------- |
+| Delhi              | `asia-south2`          |         |
+| Hong Kong          | `asia-east2`           |         |
+| Jakarta            | `asia-southeast2`      |         |
+| Melbourne          | `australia-southeast2` |         |
+| Mumbai             | `asia-south1`          |         |
+| Osaka              | `asia-northeast2`      |         |
+| Seoul              | `asia-northeast3`      |         |
+| Singapore          | `asia-southeast1`      |         |
+| Sydney             | `australia-southeast1` |         |
+| Taiwan             | `asia-east1`           |         |
+| Tokyo              | `asia-northeast1`      |         |
 
 The following table lists the regions in Europe where sharing is available.
 
-| Region description | Region name                        | Details                                                                                                                                                                  |
-| ------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Belgium            | `        europe-west1       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Berlin             | `        europe-west10       `     |                                                                                                                                                                          |
-| Finland            | `        europe-north1       `     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Frankfurt          | `        europe-west3       `      |                                                                                                                                                                          |
-| London             | `        europe-west2       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Madrid             | `        europe-southwest1       ` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Milan              | `        europe-west8       `      |                                                                                                                                                                          |
-| Netherlands        | `        europe-west4       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Paris              | `        europe-west9       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Turin              | `        europe-west12       `     |                                                                                                                                                                          |
-| Warsaw             | `        europe-central2       `   |                                                                                                                                                                          |
-| Zürich             | `        europe-west6       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Region description | Region name         | Details                                                                                                                                                                  |
+| ------------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Belgium            | `europe-west1`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Berlin             | `europe-west10`     |                                                                                                                                                                          |
+| Finland            | `europe-north1`     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Frankfurt          | `europe-west3`      |                                                                                                                                                                          |
+| London             | `europe-west2`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Madrid             | `europe-southwest1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Milan              | `europe-west8`      |                                                                                                                                                                          |
+| Netherlands        | `europe-west4`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Paris              | `europe-west9`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Turin              | `europe-west12`     |                                                                                                                                                                          |
+| Warsaw             | `europe-central2`   |                                                                                                                                                                          |
+| Zürich             | `europe-west6`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 
 The following table lists the regions in the Middle East where sharing is available.
 
-| **Region description** | **Region name**              | **Details** |
-| ---------------------- | ---------------------------- | ----------- |
-| Dammam                 | `        me-central2       ` |             |
-| Doha                   | `        me-central1       ` |             |
-| Tel Aviv               | `        me-west1       `    |             |
+| **Region description** | **Region name** | **Details** |
+| ---------------------- | --------------- | ----------- |
+| Dammam                 | `me-central2`   |             |
+| Doha                   | `me-central1`   |             |
+| Tel Aviv               | `me-west1`      |             |
 
 The following table lists the regions in Africa where sharing is available.
 
-| **Region description** | **Region name**                | **Details** |
-| ---------------------- | ------------------------------ | ----------- |
-| Johannesburg           | `        africa-south1       ` |             |
+| **Region description** | **Region name** | **Details** |
+| ---------------------- | --------------- | ----------- |
+| Johannesburg           | `africa-south1` |             |
 
 #### Multi-regions
 
 The following table lists the multi-regions where sharing is available.
 
-| Multi-region description                                                                                                       | Multi-region name   |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
-| Data centers within [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union <sup>1</sup> | `        EU       ` |
-| Data centers in the United States                                                                                              | `        US       ` |
+| Multi-region description                                                                                                       | Multi-region name |
+| ------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
+| Data centers within [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union <sup>1</sup> | `EU`              |
+| Data centers in the United States                                                                                              | `US`              |
 
-<sup>1</sup> Data located in the `  EU  ` multi-region is not stored in the `  europe-west2  ` (London) or `  europe-west6  ` (Zürich) data centers.
+<sup>1</sup> Data located in the `EU` multi-region is not stored in the `europe-west2` (London) or `europe-west6` (Zürich) data centers.
 
 #### Omni regions
 
@@ -358,33 +358,33 @@ Omni region name
 
 AWS - US East (N. Virginia)
 
-`  aws-us-east-1  `
+`aws-us-east-1`
 
 AWS - US West (Oregon)
 
-`  aws-us-west-2  `
+`aws-us-west-2`
 
 AWS - Asia Pacific (Seoul)
 
-`  aws-ap-northeast-2  `
+`aws-ap-northeast-2`
 
 AWS - Asia Pacific (Sydney)
 
-`  aws-ap-southeast-2  `
+`aws-ap-southeast-2`
 
 AWS - Europe (Ireland)
 
-`  aws-eu-west-1  `
+`aws-eu-west-1`
 
 AWS - Europe (Frankfurt)
 
-`  aws-eu-central-1  `
+`aws-eu-central-1`
 
 **Azure**
 
 Azure - East US 2
 
-`  azure-eastus2  `
+`azure-eastus2`
 
 ## Example use case
 
@@ -394,7 +394,7 @@ Suppose you are a retailer and your organization has real-time demand forecastin
 
 ### Administrators
 
-As the owner of the Forecasting project, you must first enable the API and then assign the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `  roles/analyticshub.admin  ` ) to a user who administers the data exchange in the project. Users with the Analytics Hub Admin role are referred to as *BigQuery sharing administrators* .
+As the owner of the Forecasting project, you must first enable the API and then assign the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ) to a user who administers the data exchange in the project. Users with the Analytics Hub Admin role are referred to as *BigQuery sharing administrators* .
 
 A BigQuery sharing administrator can perform the following tasks:
 
@@ -402,9 +402,9 @@ A BigQuery sharing administrator can perform the following tasks:
 
   - Manage other *BigQuery sharing administrators* with the Analytics Hub Admin role.
 
-  - Manage *BigQuery sharing publishers* by granting the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.publisher) ( `  roles/analyticshub.publisher  ` ) to your organization's employees. If you want employees to only update, delete, and share listings, but not create them, grant them the [Analytics Hub Listing Admin role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.listingAdmin) ( `  roles/analyticshub.listingAdmin  ` ).
+  - Manage *BigQuery sharing publishers* by granting the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.publisher) ( `roles/analyticshub.publisher` ) to your organization's employees. If you want employees to only update, delete, and share listings, but not create them, grant them the [Analytics Hub Listing Admin role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.listingAdmin) ( `roles/analyticshub.listingAdmin` ).
 
-  - Manage *BigQuery sharing subscribers* by granting the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.subscriber) ( `  roles/analyticshub.subscriber  ` ) to a Google group consisting of all vendors. If you want vendors to only view available exchanges and listings, grant them the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.viewer) ( `  roles/analyticshub.viewer  ` ). These vendors aren't able to subscribe to listings.
+  - Manage *BigQuery sharing subscribers* by granting the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.subscriber) ( `roles/analyticshub.subscriber` ) to a Google group consisting of all vendors. If you want vendors to only view available exchanges and listings, grant them the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.viewer) ( `roles/analyticshub.viewer` ). These vendors aren't able to subscribe to listings.
 
 For more information, see [BigQuery sharing IAM roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#user_roles) and [Manage data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) .
 

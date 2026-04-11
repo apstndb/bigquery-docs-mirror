@@ -11,7 +11,7 @@ Creates a new listing.
 
 ### HTTP request
 
-`  POST https://analyticshub.googleapis.com/v1beta1/{parent=projects/*/locations/*/dataExchanges/*}/listings  `
+`POST https://analyticshub.googleapis.com/v1beta1/{parent=projects/*/locations/*/dataExchanges/*}/listings`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,19 +19,19 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The parent resource path of the listing. e.g. `  projects/myproject/locations/us/dataExchanges/123  ` .
+Required. The parent resource path of the listing. e.g. `projects/myproject/locations/us/dataExchanges/123` .
 
 ### Query parameters
 
 Parameters
 
-`  listingId  `
+`listingId`
 
-`  string  `
+`string`
 
 Required. The ID of the listing to create. Must contain only Unicode letters, numbers (0-9), underscores (\_). Should not use characters that require URL-escaping, or characters outside of ASCII, spaces. Max length: 100 bytes.
 
@@ -47,15 +47,15 @@ If successful, the response body contains a newly created instance of `  Listing
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  parent  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:
 
-  - `  analyticshub.listings.create  `
+  - `analyticshub.listings.create`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

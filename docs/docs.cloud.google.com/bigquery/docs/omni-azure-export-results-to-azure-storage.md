@@ -14,7 +14,7 @@ For a full list of limitations that apply to BigLake tables based on Amazon S3 a
 
 Ensure that you have the following resources:
 
-  - A [connection to access your Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection) . Within the connection, you must create a policy for the Blob Storage container path that you want to export to. Then, within that policy, create a role that has the `  Microsoft.Storage/storageAccounts/blobServices/containers/write  ` permission.
+  - A [connection to access your Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection) . Within the connection, you must create a policy for the Blob Storage container path that you want to export to. Then, within that policy, create a role that has the `Microsoft.Storage/storageAccounts/blobServices/containers/write` permission.
   - An [Blob Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
 
 <!-- end list -->
@@ -46,15 +46,15 @@ BigQuery Omni writes to the specified Blob Storage location regardless of any ex
       - `  CONNECTION_NAME  ` : the connection name that you created with the necessary permission to write to the container.
       - `  AZURE_STORAGE_ACCOUNT_NAME  ` : the name of the Blob Storage account to which you want to write the query result.
       - `  CONTAINER_NAME  ` : the name of the container to which you want to write the query result.
-      - `  FILE_PATH  ` : the path where you want to write the exported file to. It must contain exactly one wildcard `  *  ` anywhere in the leaf directory of the path string, for example, `  ../aa/*  ` , `  ../aa/b*c  ` , `  ../aa/*bc  ` , and `  ../aa/bc*  ` . BigQuery replaces `  *  ` with `  0000..N  ` depending on the number of files exported. BigQuery determines the file count and sizes. If BigQuery decides to export two files, then `  *  ` in the first file's filename is replaced by `  000000000000  ` , and `  *  ` in the second file's filename is replaced by `  000000000001  ` .
-      - `  FORMAT  ` : supported formats are `  JSON  ` , `  AVRO  ` , `  CSV  ` , and `  PARQUET  ` .
+      - `  FILE_PATH  ` : the path where you want to write the exported file to. It must contain exactly one wildcard `*` anywhere in the leaf directory of the path string, for example, `../aa/*` , `../aa/b*c` , `../aa/*bc` , and `../aa/bc*` . BigQuery replaces `*` with `0000..N` depending on the number of files exported. BigQuery determines the file count and sizes. If BigQuery decides to export two files, then `*` in the first file's filename is replaced by `000000000000` , and `*` in the second file's filename is replaced by `000000000001` .
+      - `  FORMAT  ` : supported formats are `JSON` , `AVRO` , `CSV` , and `PARQUET` .
       - `  QUERY  ` : the query to analyze the data that is stored in a BigLake table.
 
-**Note:** To override the default project, use the `  --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 ## Troubleshooting
 
-If you get an error related to `  quota failure  ` , then check if you have reserved capacity for your queries. For more information about slot reservations, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage#before_you_begin) in this document.
+If you get an error related to `quota failure` , then check if you have reserved capacity for your queries. For more information about slot reservations, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage#before_you_begin) in this document.
 
 ## What's next
 

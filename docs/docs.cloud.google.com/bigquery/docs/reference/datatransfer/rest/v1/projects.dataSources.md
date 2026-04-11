@@ -23,151 +23,126 @@ Defines the properties and custom parameters for a data source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;dataSourceId&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;clientId&quot;: string,
-  &quot;scopes&quot;: [
-    string
-  ],
-  &quot;transferType&quot;: enum (TransferType),
-  &quot;supportsMultipleTransfers&quot;: boolean,
-  &quot;updateDeadlineSeconds&quot;: integer,
-  &quot;defaultSchedule&quot;: string,
-  &quot;supportsCustomSchedule&quot;: boolean,
-  &quot;parameters&quot;: [
-    {
-      object (DataSourceParameter)
-    }
-  ],
-  &quot;helpUrl&quot;: string,
-  &quot;authorizationType&quot;: enum (AuthorizationType),
-  &quot;dataRefreshType&quot;: enum (DataRefreshType),
-  &quot;defaultDataRefreshWindowDays&quot;: integer,
-  &quot;manualRunsDisabled&quot;: boolean,
-  &quot;minimumScheduleInterval&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataSourceId&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;clientId&quot;: string,&quot;scopes&quot;: [string],&quot;transferType&quot;: enum (TransferType),&quot;supportsMultipleTransfers&quot;: boolean,&quot;updateDeadlineSeconds&quot;: integer,&quot;defaultSchedule&quot;: string,&quot;supportsCustomSchedule&quot;: boolean,&quot;parameters&quot;: [{object (DataSourceParameter)}],&quot;helpUrl&quot;: string,&quot;authorizationType&quot;: enum (AuthorizationType),&quot;dataRefreshType&quot;: enum (DataRefreshType),&quot;defaultDataRefreshWindowDays&quot;: integer,&quot;manualRunsDisabled&quot;: boolean,&quot;minimumScheduleInterval&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Output only. Data source resource name.
 
-`  dataSourceId  `
+`dataSourceId`
 
-`  string  `
+`string`
 
 Data source id.
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 User friendly data source name.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 User friendly data source description string.
 
-`  clientId  `
+`clientId`
 
-`  string  `
+`string`
 
 Data source client id which should be used to receive refresh token.
 
-`  scopes[]  `
+`scopes[]`
 
-`  string  `
+`string`
 
 Api auth scopes for which refresh token needs to be obtained. These are scopes needed by a data source to prepare data and ingest them into BigQuery, e.g., <https://www.googleapis.com/auth/bigquery>
 
-`  transferType (deprecated)  `
+` transferType (deprecated)  `
 
-`  enum ( TransferType  ` )
-
-This item is deprecated\!
-
-Deprecated. This field has no effect.
-
-`  supportsMultipleTransfers (deprecated)  `
-
-`  boolean  `
+` enum ( TransferType  ` )
 
 This item is deprecated\!
 
 Deprecated. This field has no effect.
 
-`  updateDeadlineSeconds  `
+` supportsMultipleTransfers (deprecated)  `
 
-`  integer  `
+`boolean`
+
+This item is deprecated\!
+
+Deprecated. This field has no effect.
+
+`updateDeadlineSeconds`
+
+`integer`
 
 The number of seconds to wait for an update from the data source before the Data Transfer Service marks the transfer as FAILED.
 
-`  defaultSchedule  `
+`defaultSchedule`
 
-`  string  `
+`string`
 
-Default data transfer schedule. Examples of valid schedules include: `  1st,3rd monday of month 15:30  ` , `  every wed,fri of jan,jun 13:15  ` , and `  first sunday of quarter 00:00  ` .
+Default data transfer schedule. Examples of valid schedules include: `1st,3rd monday of month 15:30` , `every wed,fri of jan,jun 13:15` , and `first sunday of quarter 00:00` .
 
-`  supportsCustomSchedule  `
+`supportsCustomSchedule`
 
-`  boolean  `
+`boolean`
 
-Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `  true  ` , user can override default schedule.
+Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `true` , user can override default schedule.
 
-`  parameters[]  `
+`parameters[]`
 
-`  object ( DataSourceParameter  ` )
+` object ( DataSourceParameter  ` )
 
 Data source parameters.
 
-`  helpUrl  `
+`helpUrl`
 
-`  string  `
+`string`
 
 Url for the help document for this data source.
 
-`  authorizationType  `
+`authorizationType`
 
-`  enum ( AuthorizationType  ` )
+` enum ( AuthorizationType  ` )
 
 Indicates the type of authorization.
 
-`  dataRefreshType  `
+`dataRefreshType`
 
-`  enum ( DataRefreshType  ` )
+` enum ( DataRefreshType  ` )
 
 Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data might not be complete until a few days later, so it's useful to refresh data automatically.
 
-`  defaultDataRefreshWindowDays  `
+`defaultDataRefreshWindowDays`
 
-`  integer  `
+`integer`
 
-Default data refresh window on days. Only meaningful when `  dataRefreshType  ` = `  SLIDING_WINDOW  ` .
+Default data refresh window on days. Only meaningful when `dataRefreshType` = `SLIDING_WINDOW` .
 
-`  manualRunsDisabled  `
+`manualRunsDisabled`
 
-`  boolean  `
+`boolean`
 
 Disables backfilling and manual run scheduling for the data source.
 
-`  minimumScheduleInterval  `
+`minimumScheduleInterval`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
 The minimum interval for scheduler to schedule runs.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
 ### TransferType
 
@@ -177,15 +152,15 @@ DEPRECATED. Represents data transfer type.
 
 Enums
 
-`  TRANSFER_TYPE_UNSPECIFIED  `
+`TRANSFER_TYPE_UNSPECIFIED`
 
 Invalid or Unknown transfer type placeholder.
 
-`  BATCH  `
+`BATCH`
 
 Batch data transfer.
 
-`  STREAMING  `
+`STREAMING`
 
 Streaming data transfer. Streaming data source currently doesn't support multiple transfer configs per project.
 
@@ -204,136 +179,112 @@ A parameter used to define custom fields in a data source definition.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;paramId&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;type&quot;: enum (Type),
-  &quot;required&quot;: boolean,
-  &quot;repeated&quot;: boolean,
-  &quot;validationRegex&quot;: string,
-  &quot;allowedValues&quot;: [
-    string
-  ],
-  &quot;minValue&quot;: number,
-  &quot;maxValue&quot;: number,
-  &quot;fields&quot;: [
-    {
-      object (DataSourceParameter)
-    }
-  ],
-  &quot;validationDescription&quot;: string,
-  &quot;validationHelpUrl&quot;: string,
-  &quot;immutable&quot;: boolean,
-  &quot;recurse&quot;: boolean,
-  &quot;deprecated&quot;: boolean,
-  &quot;maxListSize&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;paramId&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;type&quot;: enum (Type),&quot;required&quot;: boolean,&quot;repeated&quot;: boolean,&quot;validationRegex&quot;: string,&quot;allowedValues&quot;: [string],&quot;minValue&quot;: number,&quot;maxValue&quot;: number,&quot;fields&quot;: [{object (DataSourceParameter)}],&quot;validationDescription&quot;: string,&quot;validationHelpUrl&quot;: string,&quot;immutable&quot;: boolean,&quot;recurse&quot;: boolean,&quot;deprecated&quot;: boolean,&quot;maxListSize&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  paramId  `
+`paramId`
 
-`  string  `
+`string`
 
 Parameter identifier.
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 Parameter display name in the user interface.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Parameter description.
 
-`  type  `
+`type`
 
-`  enum ( Type  ` )
+` enum ( Type  ` )
 
 Parameter type.
 
-`  required  `
+`required`
 
-`  boolean  `
+`boolean`
 
 Is parameter required.
 
-`  repeated  `
+`repeated`
 
-`  boolean  `
+`boolean`
 
 Deprecated. This field has no effect.
 
-`  validationRegex  `
+`validationRegex`
 
-`  string  `
+`string`
 
 Regular expression which can be used for parameter validation.
 
-`  allowedValues[]  `
+`allowedValues[]`
 
-`  string  `
+`string`
 
 All possible values for the parameter.
 
-`  minValue  `
+`minValue`
 
-`  number  `
+`number`
 
 For integer and double values specifies minimum allowed value.
 
-`  maxValue  `
+`maxValue`
 
-`  number  `
+`number`
 
 For integer and double values specifies maximum allowed value.
 
-`  fields[]  `
+`fields[]`
 
-`  object ( DataSourceParameter  ` )
+` object ( DataSourceParameter  ` )
 
 Deprecated. This field has no effect.
 
-`  validationDescription  `
+`validationDescription`
 
-`  string  `
+`string`
 
 Description of the requirements for this field, in case the user input does not fulfill the regex pattern or min/max values.
 
-`  validationHelpUrl  `
+`validationHelpUrl`
 
-`  string  `
+`string`
 
 URL to a help document to further explain the naming requirements.
 
-`  immutable  `
+`immutable`
 
-`  boolean  `
+`boolean`
 
 Cannot be changed after initial creation.
 
-`  recurse  `
+`recurse`
 
-`  boolean  `
+`boolean`
 
 Deprecated. This field has no effect.
 
-`  deprecated  `
+`deprecated`
 
-`  boolean  `
+`boolean`
 
 If true, it should not be used in new transfers, and it should not be visible to users.
 
-`  maxListSize  `
+`maxListSize`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 For list parameters, the max size of the list.
 
@@ -343,35 +294,35 @@ Parameter type.
 
 Enums
 
-`  TYPE_UNSPECIFIED  `
+`TYPE_UNSPECIFIED`
 
 Type unspecified.
 
-`  STRING  `
+`STRING`
 
 String parameter.
 
-`  INTEGER  `
+`INTEGER`
 
 Integer parameter (64-bits). Will be serialized to json as string.
 
-`  DOUBLE  `
+`DOUBLE`
 
 Double precision floating point parameter.
 
-`  BOOLEAN  `
+`BOOLEAN`
 
 Boolean parameter.
 
-`  RECORD  `
+`RECORD`
 
 Deprecated. This field has no effect.
 
-`  PLUS_PAGE  `
+`PLUS_PAGE`
 
 Page ID for a Google+ Page.
 
-`  LIST  `
+`LIST`
 
 List of strings parameter.
 
@@ -381,19 +332,19 @@ The type of authorization needed for this data source.
 
 Enums
 
-`  AUTHORIZATION_TYPE_UNSPECIFIED  `
+`AUTHORIZATION_TYPE_UNSPECIFIED`
 
 Type unspecified.
 
-`  AUTHORIZATION_CODE  `
+`AUTHORIZATION_CODE`
 
 Use OAuth 2 authorization codes that can be exchanged for a refresh token on the backend.
 
-`  GOOGLE_PLUS_AUTHORIZATION_CODE  `
+`GOOGLE_PLUS_AUTHORIZATION_CODE`
 
 Return an authorization code for a given Google+ page that can then be exchanged for a refresh token on the backend.
 
-`  FIRST_PARTY_OAUTH  `
+`FIRST_PARTY_OAUTH`
 
 Use First Party OAuth.
 
@@ -403,28 +354,28 @@ Represents how the data source supports data auto refresh.
 
 Enums
 
-`  DATA_REFRESH_TYPE_UNSPECIFIED  `
+`DATA_REFRESH_TYPE_UNSPECIFIED`
 
 The data source won't support data auto refresh, which is default value.
 
-`  SLIDING_WINDOW  `
+`SLIDING_WINDOW`
 
 The data source supports data auto refresh, and runs will be scheduled for the past few days. Does not allow custom values to be set for each transfer config.
 
-`  CUSTOM_SLIDING_WINDOW  `
+`CUSTOM_SLIDING_WINDOW`
 
 The data source supports data auto refresh, and runs will be scheduled for the past few days. Allows custom values to be set for each transfer config.
 
 ## Methods
 
-### `             checkValidCreds           `
+### `            checkValidCreds           `
 
 Returns true if valid credentials exist for the given data source and requesting user.
 
-### `             get           `
+### `            get           `
 
 Retrieves a supported data source and returns its settings.
 
-### `             list           `
+### `            list           `
 
 Lists supported data sources and returns their settings.

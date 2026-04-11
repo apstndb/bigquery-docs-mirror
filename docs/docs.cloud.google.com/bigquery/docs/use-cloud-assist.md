@@ -69,7 +69,7 @@ Generate a SQL query by describing what you want the query to do. For best resul
 
 ## Generate Python code
 
-Generate Python code by describing what you want it to do. For example, in the **Cloud Assist** panel, you can enter the following prompt to ask Gemini to query the `  penguins  ` table from a public dataset using the BigQuery magics syntax:
+Generate Python code by describing what you want it to do. For example, in the **Cloud Assist** panel, you can enter the following prompt to ask Gemini to query the `penguins` table from a public dataset using the BigQuery magics syntax:
 
     Generate python code to query the `bigquery-public-data.ml_datasets.penguins`
     table using bigquery magics

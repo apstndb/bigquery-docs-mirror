@@ -10,7 +10,7 @@ The storage savings from using normalized data has less of an effect in modern s
 
 To maintain relationships while denormalizing your data, you can use nested and repeated fields instead of completely flattening your data. When relational data is completely flattened, network communication (shuffling) can negatively impact query performance.
 
-For example, denormalizing an orders schema without using nested and repeated fields might require you to group the data by a field like `  order_id  ` (when there is a one-to-many relationship). Because of the shuffling involved, grouping the data is less effective than denormalizing the data by using nested and repeated fields.
+For example, denormalizing an orders schema without using nested and repeated fields might require you to group the data by a field like `order_id` (when there is a one-to-many relationship). Because of the shuffling involved, grouping the data is less effective than denormalizing the data by using nested and repeated fields.
 
 In some circumstances, denormalizing your data and using nested and repeated fields doesn't result in increased performance. For example, star schemas are typically optimized schemas for analytics, and as a result, performance might not be significantly different if you attempt to denormalize further.
 
@@ -18,22 +18,22 @@ In some circumstances, denormalizing your data and using nested and repeated fie
 
 BigQuery doesn't require a completely flat denormalization. You can use nested and repeated fields to maintain relationships.
 
-  - Nesting data ( `  STRUCT  ` )
+  - Nesting data ( `STRUCT` )
     
       - Nesting data lets you represent foreign entities inline.
       - Querying nested data uses "dot" syntax to reference leaf fields, which is similar to the syntax using a join.
-      - Nested data is represented as a [`  STRUCT  ` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) in GoogleSQL.
+      - Nested data is represented as a [`STRUCT` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) in GoogleSQL.
 
-  - Repeated data ( `  ARRAY  ` )
+  - Repeated data ( `ARRAY` )
     
-      - Creating a field of type `  RECORD  ` with the mode set to `  REPEATED  ` lets you preserve a one-to-many relationship inline (so long as the relationship isn't high cardinality).
+      - Creating a field of type `RECORD` with the mode set to `REPEATED` lets you preserve a one-to-many relationship inline (so long as the relationship isn't high cardinality).
       - With repeated data, shuffling is not necessary.
-      - Repeated data is represented as an `  ARRAY  ` . You can use an [`  ARRAY  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions) in GoogleSQL when you query the repeated data.
+      - Repeated data is represented as an `ARRAY` . You can use an [`ARRAY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions) in GoogleSQL when you query the repeated data.
 
-  - Nested and repeated data ( `  ARRAY  ` of `  STRUCT  ` s)
+  - Nested and repeated data ( `ARRAY` of `STRUCT` s)
     
       - Nesting and repetition complement each other.
-      - For example, in a table of transaction records, you could include an array of line item `  STRUCT  ` s.
+      - For example, in a table of transaction records, you could include an array of line item `STRUCT` s.
 
 For more information, see [Specify nested and repeated columns in table schemas](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
@@ -41,7 +41,7 @@ For more information about denormalizing data, see [Denormalization](https://doc
 
 ## Example
 
-Consider an `  Orders  ` table with a row for each line item sold:
+Consider an `Orders` table with a row for each line item sold:
 
 | **Order\_Id** | **Item\_Name** |
 | ------------- | -------------- |
@@ -50,7 +50,7 @@ Consider an `  Orders  ` table with a row for each line item sold:
 | 002           | A1             |
 | 002           | C1             |
 
-If you wanted to analyze data from this table, you would need to use a `  GROUP BY  ` clause, similar to the following:
+If you wanted to analyze data from this table, you would need to use a `GROUP BY` clause, similar to the following:
 
 ``` notranslate
 SELECT COUNT (Item_Name)
@@ -58,7 +58,7 @@ FROM Orders
 GROUP BY Order_Id;
 ```
 
-The `  GROUP BY  ` clause involves additional computation overhead, but this can be avoided by nesting repeated data. You can avoid using a `  GROUP BY  ` clause by creating a table with one order per row, where the order line items are in a nested field:
+The `GROUP BY` clause involves additional computation overhead, but this can be avoided by nesting repeated data. You can avoid using a `GROUP BY` clause by creating a table with one order per row, where the order line items are in a nested field:
 
 <table>
 <colgroup>
@@ -87,7 +87,7 @@ C1</td>
 </tbody>
 </table>
 
-In BigQuery, you typically specify a nested schema as an `  ARRAY  ` of `  STRUCT  ` objects. You use the [`  UNNEST  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) to [flatten the nested data](https://docs.cloud.google.com/bigquery/docs/arrays#flattening_arrays) , as shown in the following query:
+In BigQuery, you typically specify a nested schema as an `ARRAY` of `STRUCT` objects. You use the [`UNNEST` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) to [flatten the nested data](https://docs.cloud.google.com/bigquery/docs/arrays#flattening_arrays) , as shown in the following query:
 
 ``` notranslate
 SELECT *
@@ -103,13 +103,13 @@ This query yields results similar to the following:
 
 ![Query output with unnested data](https://docs.cloud.google.com/static/bigquery/images/unnested-results.png)
 
-If this data wasn't nested, you could potentially have several rows for each order, one for each item sold in that order, which would result in a large table and an expensive `  GROUP BY  ` operation.
+If this data wasn't nested, you could potentially have several rows for each order, one for each item sold in that order, which would result in a large table and an expensive `GROUP BY` operation.
 
 ## Exercise
 
 You can see the performance difference in queries that use nested fields as compared to those that don't by following the steps in this section.
 
-1.  Create a table based on the `  bigquery-public-data.stackoverflow.comments  ` public dataset:
+1.  Create a table based on the `bigquery-public-data.stackoverflow.comments` public dataset:
     
     ``` notranslate
     CREATE OR REPLACE TABLE `PROJECT.DATASET.stackoverflow`
@@ -123,7 +123,7 @@ You can see the performance difference in queries that use nested fields as comp
     );
     ```
 
-2.  Using the `  stackoverflow  ` table, run the following query to see the earliest comment for each user:
+2.  Using the `stackoverflow` table, run the following query to see the earliest comment for each user:
     
     ``` notranslate
     SELECT
@@ -137,7 +137,7 @@ You can see the performance difference in queries that use nested fields as comp
     
     This query takes about 25 seconds to run and processes 1.88 GB of data.
 
-3.  Create a second table with identical data that creates a `  comments  ` field using a `  STRUCT  ` type to store the `  post_id  ` and `  creation_date  ` data, instead of two individual fields:
+3.  Create a second table with identical data that creates a `comments` field using a `STRUCT` type to store the `post_id` and `creation_date` data, instead of two individual fields:
     
     ``` notranslate
     CREATE OR REPLACE TABLE `PROJECT.DATASET.stackoverflow_nested`
@@ -151,7 +151,7 @@ You can see the performance difference in queries that use nested fields as comp
     );
     ```
 
-4.  Using the `  stackoverflow_nested  ` table, run the following query to see the earliest comment for each user:
+4.  Using the `stackoverflow_nested` table, run the following query to see the earliest comment for each user:
     
     ``` notranslate
     SELECT
@@ -164,4 +164,4 @@ You can see the performance difference in queries that use nested fields as comp
     
     This query takes about 10 seconds to run and processes 1.28 GB of data.
 
-5.  [Delete](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-delete-table) the `  stackoverflow  ` and `  stackoverflow_nested  ` tables when you are finished with them.
+5.  [Delete](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-delete-table) the `stackoverflow` and `stackoverflow_nested` tables when you are finished with them.

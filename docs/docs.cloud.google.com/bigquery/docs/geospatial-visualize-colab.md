@@ -47,7 +47,7 @@ If you are using an existing project you need the following project-level role i
 
 Make sure that you have the following role or roles on the project:
 
-  - [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.user  ` )
+  - [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.user` )
 
 #### Check for the roles
 
@@ -91,7 +91,7 @@ This tutorial builds a Colab notebook to visualize geospatial analytics data. Yo
 
 2.  In the **Open notebook** dialog, click **New notebook** .
 
-3.  Click `  Untitled0.ipynb  ` and change the name of the notebook to **`  bigquery-geo.ipynb  `** .
+3.  Click `Untitled0.ipynb` and change the name of the notebook to **`bigquery-geo.ipynb`** .
 
 4.  Select **File \> Save** .
 
@@ -138,7 +138,7 @@ This tutorial queries BigQuery datasets and uses the Google Maps JavaScript API.
 
 If you use Google Maps Platform as the map provider for base maps, you must provide a Google Maps Platform API key. The notebook retrieves the key from your Colab Secrets.
 
-This step is necessary only if you're using the Maps API. If you don't authenticate with Google Maps Platform, `  pydeck  ` uses the `  carto  ` map instead.
+This step is necessary only if you're using the Maps API. If you don't authenticate with Google Maps Platform, `pydeck` uses the `carto` map instead.
 
 1.  Get your Google Maps API key by following the instructions on the [Use API keys](https://developers.google.com/maps/documentation/javascript/get-api-key#create-api-keys) page in the Google Maps documentation.
 
@@ -146,7 +146,7 @@ This step is necessary only if you're using the Maps API. If you don't authentic
 
 3.  Click **Add new secret** .
 
-4.  For **Name** , enter **`  GMP_API_KEY  `** .
+4.  For **Name** , enter **`GMP_API_KEY`** .
 
 5.  For **Value** , enter the Maps API key value you generated previously.
 
@@ -174,24 +174,24 @@ This step is necessary only if you're using the Maps API. If you don't authentic
 
 ## Install Python packages and import data science libraries
 
-In addition to the [`  colabtools  ` ( `  google.colab  ` )](https://github.com/googlecolab/colabtools) Python modules, this tutorial uses several other Python packages and data science libraries.
+In addition to the [`colabtools` ( `google.colab` )](https://github.com/googlecolab/colabtools) Python modules, this tutorial uses several other Python packages and data science libraries.
 
-In this section, you install the `  pydeck  ` and `  h3  ` packages. [`  pydeck  `](https://deckgl.readthedocs.io/en/latest/) provides high-scale spatial rendering in Python, powered by [`  deck.gl  `](https://deck.gl/) . [`  h3-py  `](https://uber.github.io/h3-py/intro.html) provides Uber's H3 Hexagonal Hierarchical Geospatial Indexing System in Python.
+In this section, you install the `pydeck` and `h3` packages. [`pydeck`](https://deckgl.readthedocs.io/en/latest/) provides high-scale spatial rendering in Python, powered by [`deck.gl`](https://deck.gl/) . [`h3-py`](https://uber.github.io/h3-py/intro.html) provides Uber's H3 Hexagonal Hierarchical Geospatial Indexing System in Python.
 
-You then import the `  h3  ` and `  pydeck  ` libraries and the following Python geospatial libraries:
+You then import the `h3` and `pydeck` libraries and the following Python geospatial libraries:
 
-  - [`  geopandas  `](https://geopandas.org/en/stable/index.html) to extend the data types used by [`  pandas  `](https://pandas.pydata.org/) to allow spatial operations on geometric types.
-  - [`  shapely  `](https://shapely.readthedocs.io/en/stable/index.html) for manipulation and analysis of individual planar geometric objects.
-  - [`  branca  `](https://python-visualization.github.io/branca/) to generate HTML and JavaScript colormaps.
-  - [`  geemap.deck  `](https://geemap.org/deck/) for visualization with `  pydeck  ` and `  earthengine-api  ` .
+  - [`geopandas`](https://geopandas.org/en/stable/index.html) to extend the data types used by [`pandas`](https://pandas.pydata.org/) to allow spatial operations on geometric types.
+  - [`shapely`](https://shapely.readthedocs.io/en/stable/index.html) for manipulation and analysis of individual planar geometric objects.
+  - [`branca`](https://python-visualization.github.io/branca/) to generate HTML and JavaScript colormaps.
+  - [`geemap.deck`](https://geemap.org/deck/) for visualization with `pydeck` and `earthengine-api` .
 
-After importing the libraries, you enable interactive tables for [`  pandas  ` DataFrames in Colab](https://colab.google/articles/alive) .
+After importing the libraries, you enable interactive tables for [`pandas` DataFrames in Colab](https://colab.google/articles/alive) .
 
-### Install the `       pydeck      ` and `       h3      ` packages
+### Install the `pydeck` and `h3` packages
 
 1.  To insert a code cell, click add **Code** .
 
-2.  To install the `  pydeck  ` and `  h3  ` packages, enter the following code:
+2.  To install the `pydeck` and `h3` packages, enter the following code:
     
     ``` notranslate
     # Install pydeck and h3.
@@ -226,7 +226,7 @@ After importing the libraries, you enable interactive tables for [`  pandas  ` D
 
 1.  To insert a code cell, click add **Code** .
 
-2.  To enable `  pandas  ` DataFrames, enter the following code:
+2.  To enable `pandas` DataFrames, enter the following code:
     
     ``` notranslate
     # Enable displaying pandas data frames as interactive tables by default.
@@ -275,7 +275,7 @@ In this section, you create a shared routine that renders layers on a base map.
 
 ## Create a scatter plot
 
-In this section, you create a scatter plot of all bike share stations in the San Francisco Ford GoBike Share public dataset by retrieving data from the `  bigquery-public-data.san_francisco_bikeshare.bikeshare_station_info  ` table. The scatter plot is created using a [layer](https://deckgl.readthedocs.io/en/latest/layer.html#pydeck.bindings.layer.Layer) and a [scatterplot layer](https://deck.gl/docs/api-reference/layers/scatterplot-layer) from the `  deck.gl  ` framework.
+In this section, you create a scatter plot of all bike share stations in the San Francisco Ford GoBike Share public dataset by retrieving data from the `bigquery-public-data.san_francisco_bikeshare.bikeshare_station_info` table. The scatter plot is created using a [layer](https://deckgl.readthedocs.io/en/latest/layer.html#pydeck.bindings.layer.Layer) and a [scatterplot layer](https://deck.gl/docs/api-reference/layers/scatterplot-layer) from the `deck.gl` framework.
 
 Scatter plots are useful when you need to review a subset of individual points (also known as *spot checking* ).
 
@@ -283,7 +283,7 @@ The following example demonstrates how to use a layer and a scatterplot layer to
 
 1.  To insert a code cell, click add **Code** .
 
-2.  To query the San Francisco Ford GoBike Share public dataset, enter the following code. This code uses the [`  %%bigquery  ` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
+2.  To query the San Francisco Ford GoBike Share public dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
     ``` notranslate
     # Query the station ID, station name, station short name, and station
@@ -305,7 +305,7 @@ The following example demonstrates how to use a layer and a scatterplot layer to
     
     The output is similar to the following:
     
-    `  Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%  `
+    `Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%`
 
 4.  To insert a code cell, click add **Code** .
 
@@ -347,13 +347,13 @@ The following example demonstrates how to use a layer and a scatterplot layer to
     
     ![The first five rows of the DataFrame.](https://docs.cloud.google.com/bigquery/images/station-geometry-results.png)
 
-Rendering the points requires you to extract the longitude and latitude as x and y coordinates from the `  station_geom  ` column in the bike share dataset.
+Rendering the points requires you to extract the longitude and latitude as x and y coordinates from the `station_geom` column in the bike share dataset.
 
-Since `  gdf_sf_bikestations  ` is a `  geopandas.GeoDataFrame  ` , coordinates are accessed directly from its `  station_geom  ` geometry column. You can retrieve the longitude using the column's `  .x  ` attribute and the latitude using its `  .y  ` attribute. Then, you can store them in new longitude and latitude columns.
+Since `gdf_sf_bikestations` is a `geopandas.GeoDataFrame` , coordinates are accessed directly from its `station_geom` geometry column. You can retrieve the longitude using the column's `.x` attribute and the latitude using its `.y` attribute. Then, you can store them in new longitude and latitude columns.
 
 1.  To insert a code cell, click add **Code** .
 
-2.  To extract the longitude and latitude values from the `  station_geom  ` column, enter the following code:
+2.  To extract the longitude and latitude values from the `station_geom` column, enter the following code:
     
     ``` notranslate
     # Extract the longitude (x) and latitude (y) from station_geom.
@@ -394,24 +394,24 @@ Since `  gdf_sf_bikestations  ` is a `  geopandas.GeoDataFrame  ` , coordinates 
 
 ## Visualize polygons
 
-Geospatial analytics lets you analyze and visualize geospatial data in BigQuery by using `  GEOGRAPHY  ` data types and GoogleSQL geography functions.
+Geospatial analytics lets you analyze and visualize geospatial data in BigQuery by using `GEOGRAPHY` data types and GoogleSQL geography functions.
 
-The [`  GEOGRAPHY  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) in geospatial analytics is a collection of points, linestrings, and polygons, which is represented as a point set, or a subset of the surface of the Earth. A `  GEOGRAPHY  ` type can contain objects such as the following:
+The [`GEOGRAPHY` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) in geospatial analytics is a collection of points, linestrings, and polygons, which is represented as a point set, or a subset of the surface of the Earth. A `GEOGRAPHY` type can contain objects such as the following:
 
   - Points
   - Lines
   - Polygons
   - Multipolygons
 
-For a list of all supported objects, see the [`  GEOGRAPHY  ` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) documentation.
+For a list of all supported objects, see the [`GEOGRAPHY` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) documentation.
 
-If you are provided geospatial data without knowing the expected shapes, you can visualize the data to discover the shapes. You can visualize shapes by converting the geographic data to [`  GeoJSON  `](https://geojson.org/) format. You can then visualize the `  GeoJSON  ` data using a [`  GeoJSON  ` layer](https://deck.gl/docs/api-reference/layers/geojson-layer) from the `  deck.gl  ` framework.
+If you are provided geospatial data without knowing the expected shapes, you can visualize the data to discover the shapes. You can visualize shapes by converting the geographic data to [`GeoJSON`](https://geojson.org/) format. You can then visualize the `GeoJSON` data using a [`GeoJSON` layer](https://deck.gl/docs/api-reference/layers/geojson-layer) from the `deck.gl` framework.
 
 In this section, you query geographic data in the San Francisco Neighborhoods dataset and then visualize the polygons.
 
 1.  To insert a code cell, click add **Code** .
 
-2.  To query the geographic data from the `  bigquery-public-data.san_francisco_neighborhoods.boundaries  ` table in the San Francisco Neighborhoods dataset, enter the following code. This code uses the [`  %%bigquery  ` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
+2.  To query the geographic data from the `bigquery-public-data.san_francisco_neighborhoods.boundaries` table in the San Francisco Neighborhoods dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
     ``` notranslate
     # Query the neighborhood name and geometry from the San Francisco
@@ -429,7 +429,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
     
     The output is similar to the following:
     
-    `  Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%  `
+    `Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%`
 
 4.  To insert a code cell, click add **Code** .
 
@@ -471,7 +471,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 9.  To insert a code cell, click add **Code** .
 
-10. To visualize the polygons, enter the following code. `  pydeck  ` is used to convert each `  shapely  ` object instance in the geometry column into `  GeoJSON  ` format:
+10. To visualize the polygons, enter the following code. `pydeck` is used to convert each `shapely` object instance in the geometry column into `GeoJSON` format:
     
     ``` notranslate
     # Visualize the polygons.
@@ -498,13 +498,13 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 ## Create a choropleth map
 
-If you are exploring data with polygons that are difficult to convert to `  GeoJSON  ` format, you can use a [polygon layer](https://deck.gl/docs/api-reference/layers/polygon-layer) from the `  deck.gl  ` framework instead. A polygon layer can process input data of specific types such as an array of points.
+If you are exploring data with polygons that are difficult to convert to `GeoJSON` format, you can use a [polygon layer](https://deck.gl/docs/api-reference/layers/polygon-layer) from the `deck.gl` framework instead. A polygon layer can process input data of specific types such as an array of points.
 
 In this section, you use a polygon layer to render an array of points and use the results to render a choropleth map. The choropleth map shows the density of bike share stations by neighborhood by joining data from the San Francisco Neighborhoods dataset with the San Francisco Ford GoBike Share dataset.
 
 1.  To insert a code cell, click add **Code** .
 
-2.  To aggregate and count the number of stations per neighborhood and to create a `  polygon  ` column that contains an array of points, enter the following code:
+2.  To aggregate and count the number of stations per neighborhood and to create a `polygon` column that contains an array of points, enter the following code:
     
     ``` notranslate
     # Aggregate and count the number of stations per neighborhood.
@@ -523,7 +523,7 @@ In this section, you use a polygon layer to render an array of points and use th
 
 4.  To insert a code cell, click add **Code** .
 
-5.  To add a `  fill_color  ` column for each of the polygons, enter the following code:
+5.  To add a `fill_color` column for each of the polygons, enter the following code:
     
     ``` notranslate
     # Create a color map gradient using the branch library, and add a fill_color
@@ -573,17 +573,17 @@ In this section, you use a polygon layer to render an array of points and use th
 
 Choropleths are useful when you have meaningful boundaries that are known. If you have data with no known meaningful boundaries, you can use a heatmap layer to render its continuous density.
 
-In the following example, you query data in the `  bigquery-public-data.san_francisco_sfpd_incidents.sfpd_incidents  ` table in the San Francisco Police Department (SFPD) Reports dataset. The data is used to visualize the distribution of incidents in 2015.
+In the following example, you query data in the `bigquery-public-data.san_francisco_sfpd_incidents.sfpd_incidents` table in the San Francisco Police Department (SFPD) Reports dataset. The data is used to visualize the distribution of incidents in 2015.
 
-For heatmaps, it is recommended that you quantize and aggregate the data before rendering. In this example, the data is quantized and aggregated using Carto [H3 spatial indexing](https://docs.carto.com/data-and-analysis/analytics-toolbox-for-bigquery/sql-reference/h3) . The heatmap is created using a [heatmap layer](https://deck.gl/docs/api-reference/aggregation-layers/heatmap-layer) from the `  deck.gl  ` framework.
+For heatmaps, it is recommended that you quantize and aggregate the data before rendering. In this example, the data is quantized and aggregated using Carto [H3 spatial indexing](https://docs.carto.com/data-and-analysis/analytics-toolbox-for-bigquery/sql-reference/h3) . The heatmap is created using a [heatmap layer](https://deck.gl/docs/api-reference/aggregation-layers/heatmap-layer) from the `deck.gl` framework.
 
-In this example, quantizing is done using the `  h3  ` Python library to aggregate the incident points into hexagons. The `  h3.latlng_to_cell  ` function is used to map the incident's position (latitude and longitude) to an H3 cell index. An H3 resolution of nine provides sufficient aggregated hexagons for the heatmap. The `  h3.cell_to_latlng  ` function is used to determine the center of each hexagon.
+In this example, quantizing is done using the `h3` Python library to aggregate the incident points into hexagons. The `h3.latlng_to_cell` function is used to map the incident's position (latitude and longitude) to an H3 cell index. An H3 resolution of nine provides sufficient aggregated hexagons for the heatmap. The `h3.cell_to_latlng` function is used to determine the center of each hexagon.
 
 **Note:** You can also use Carto's [Analytics toolbox for BigQuery](https://carto.com/blog/spatial-functions-bigquery-uber) to perform similar conversions.
 
 1.  To insert a code cell, click add **Code** .
 
-2.  To query the data in the San Francisco Police Department (SFPD) Reports dataset, enter the following code. This code uses the [`  %%bigquery  ` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
+2.  To query the data in the San Francisco Police Department (SFPD) Reports dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
     ``` notranslate
     # Query the incident key and location  data from the SFPD reports dataset.
@@ -606,11 +606,11 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
     
     The output is similar to the following:
     
-    `  Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%  `
+    `Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%`
 
 4.  To insert a code cell, click add **Code** .
 
-5.  To compute the cell for each incident's latitude and longitude, aggregate the incidents for each cell, construct a `  geopandas  ` DataFrame, and add the center of each hexagon for the heatmap layer, enter the following code:
+5.  To compute the cell for each incident's latitude and longitude, aggregate the incidents for each cell, construct a `geopandas` DataFrame, and add the center of each hexagon for the heatmap layer, enter the following code:
     
     ``` notranslate
     # Compute the cell for each incident's latitude and longitude.
@@ -661,7 +661,7 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
 
 10. To insert a code cell, click add **Code** .
 
-11. To convert the data into a JSON format that can be used by `  HeatmapLayer  ` , enter the following code:
+11. To convert the data into a JSON format that can be used by `HeatmapLayer` , enter the following code:
     
     ``` notranslate
     # Convert to a JSON format recognized by the HeatmapLayer.
@@ -716,7 +716,7 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -733,7 +733,7 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -747,7 +747,7 @@ After you delete the Google Cloud project, if you used the Google Maps API, dele
 
 1.  In your Colab, click vpn\_key **Secrets** .
 
-2.  At the end of the `  GMP_API_KEY  ` row, click delete **Delete** .
+2.  At the end of the `GMP_API_KEY` row, click delete **Delete** .
 
 3.  Optional: To delete the notebook, click **File \> Move to trash** .
 
@@ -755,7 +755,7 @@ After you delete the Google Cloud project, if you used the Google Maps API, dele
 
   - For more information on geospatial analytics in BigQuery, see [Introduction to geospatial analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/geospatial-intro) .
   - For an introduction to visualizing geospatial data in BigQuery, see [Visualize geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize) .
-  - To learn more about `  pydeck  ` and other `  deck.gl  ` chart types, you can find examples in the [`  pydeck  ` Gallery](https://deckgl.readthedocs.io/en/latest/) , the [`  deck.gl  ` Layer Catalog](https://deck.gl/docs/api-reference/layers) , and the [`  deck.gl  ` GitHub source](https://github.com/visgl/deck.gl) .
+  - To learn more about `pydeck` and other `deck.gl` chart types, you can find examples in the [`pydeck` Gallery](https://deckgl.readthedocs.io/en/latest/) , the [`deck.gl` Layer Catalog](https://deck.gl/docs/api-reference/layers) , and the [`deck.gl` GitHub source](https://github.com/visgl/deck.gl) .
   - For more information on working with geospatial data in data frames, see the [GeoPandas Getting started page](https://geopandas.org/en/stable/getting_started.html) and the [GeoPandas User guide](https://geopandas.org/en/stable/docs/user_guide.html) .
   - For more information on geometric object manipulation, see the [Shapely user manual](https://shapely.readthedocs.io/en/stable/manual.html) .
   - To explore using Google Earth Engine data in BigQuery, see [Exporting to BigQuery](https://developers.google.com/earth-engine/guides/exporting_to_bigquery) in the Google Earth Engine documentation.

@@ -28,83 +28,83 @@ Details
 
 Johannesburg
 
-`  africa-south1  `
+`africa-south1`
 
 **Americas**
 
 Columbus
 
-`  us-east5  `
+`us-east5`
 
 Dallas
 
-`  us-south1  `
+`us-south1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
-`  us-central1  `
+`us-central1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
-`  us-west4  `
+`us-west4`
 
 Los Angeles
 
-`  us-west2  `
+`us-west2`
 
 Mexico
 
-`  northamerica-south1  `
+`northamerica-south1`
 
 Montréal
 
-`  northamerica-northeast1  `
+`northamerica-northeast1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 North Virginia
 
-`  us-east4  `
+`us-east4`
 
 Oklahoma
 
-`  us-central2  `
+`us-central2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Oregon
 
-`  us-west1  `
+`us-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
-`  us-west3  `
+`us-west3`
 
 Santiago
 
-`  southamerica-west1  `
+`southamerica-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
-`  southamerica-east1  `
+`southamerica-east1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
-`  us-east1  `
+`us-east1`
 
 Toronto
 
-`  northamerica-northeast2  `
+`northamerica-northeast2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
@@ -112,119 +112,119 @@ Toronto
 
 Bangkok
 
-`  asia-southeast3  `
+`asia-southeast3`
 
 Delhi
 
-`  asia-south2  `
+`asia-south2`
 
 Hong Kong
 
-`  asia-east2  `
+`asia-east2`
 
 Jakarta
 
-`  asia-southeast2  `
+`asia-southeast2`
 
 Melbourne
 
-`  australia-southeast2  `
+`australia-southeast2`
 
 Mumbai
 
-`  asia-south1  `
+`asia-south1`
 
 Osaka
 
-`  asia-northeast2  `
+`asia-northeast2`
 
 Seoul
 
-`  asia-northeast3  `
+`asia-northeast3`
 
 Singapore
 
-`  asia-southeast1  `
+`asia-southeast1`
 
 Sydney
 
-`  australia-southeast1  `
+`australia-southeast1`
 
 Taiwan
 
-`  asia-east1  `
+`asia-east1`
 
 Tokyo
 
-`  asia-northeast1  `
+`asia-northeast1`
 
 **Europe**
 
 Belgium
 
-`  europe-west1  `
+`europe-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
-`  europe-west10  `
+`europe-west10`
 
 Finland
 
-`  europe-north1  `
+`europe-north1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
-`  europe-west3  `
+`europe-west3`
 
 London
 
-`  europe-west2  `
+`europe-west2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
-`  europe-southwest1  `
+`europe-southwest1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
-`  europe-west8  `
+`europe-west8`
 
 Netherlands
 
-`  europe-west4  `
+`europe-west4`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
-`  europe-west9  `
+`europe-west9`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
-`  europe-north2  `
+`europe-north2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
-`  europe-west12  `
+`europe-west12`
 
 Warsaw
 
-`  europe-central2  `
+`europe-central2`
 
 Zürich
 
-`  europe-west6  `
+`europe-west6`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
@@ -232,15 +232,15 @@ Zürich
 
 Dammam
 
-`  me-central2  `
+`me-central2`
 
 Doha
 
-`  me-central1  `
+`me-central1`
 
 Tel Aviv
 
-`  me-west1  `
+`me-west1`
 
 ### Quotas and limits
 
@@ -250,7 +250,7 @@ For more information, see [Saved query quotas and limits](https://docs.cloud.goo
 
 Saved queries have the following limitations:
 
-  - You can [grant public access to saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) only to the [`  allAuthenticatedUsers  `](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) principal. You can't grant access to saved queries to the [`  allUsers  `](https://docs.cloud.google.com/iam/docs/principals-overview#all-users) principal.
+  - You can [grant public access to saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) only to the [`allAuthenticatedUsers`](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) principal. You can't grant access to saved queries to the [`allUsers`](https://docs.cloud.google.com/iam/docs/principals-overview#all-users) principal.
   - If your Google Cloud project contains more than 2500 classic saved queries, you can't use [batch migration](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) to migrate classic saved queries to saved queries.
 
 ## Classic saved queries
@@ -283,23 +283,23 @@ If users, including yourself, have personal queries with information that should
 
 To support this transition, the following BigQuery IAM roles were updated in February 2024:
 
-  - [BigQuery Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) ( `  roles/bigquery.admin  ` ) gets [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) permissions.
+  - [BigQuery Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) ( `roles/bigquery.admin` ) gets [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) permissions.
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) gets the following permissions:
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` ) gets the following permissions:
     
-      - `  dataform.locations.get  `
-      - `  dataform.locations.list  `
-      - `  dataform.repositories.create  `
-      - `  dataform.repositories.list  `
+      - `dataform.locations.get`
+      - `dataform.locations.list`
+      - `dataform.repositories.create`
+      - `dataform.repositories.list`
 
-  - [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `  roles/bigquery.user  ` ) gets the following permissions:
+  - [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` ) gets the following permissions:
     
-      - `  dataform.locations.get  `
-      - `  dataform.locations.list  `
-      - `  dataform.repositories.create  `
-      - `  dataform.repositories.list  `
+      - `dataform.locations.get`
+      - `dataform.locations.list`
+      - `dataform.repositories.create`
+      - `dataform.repositories.list`
 
-**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `  dataform.repositories.list  ` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `  dataform.repositories.list  ` permission.
+**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
 
 To let users without the BigQuery Admin, BigQuery Job User, or BigQuery User roles use saved queries, grant them the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions) in IAM.
 

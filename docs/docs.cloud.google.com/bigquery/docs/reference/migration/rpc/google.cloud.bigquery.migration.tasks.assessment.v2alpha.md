@@ -8,26 +8,26 @@ DEPRECATED\! Use the AssessmentTaskDetails defined in com.google.cloud.bigquery.
 
 Fields
 
-`  input_path  `
+`input_path`
 
-`  string  `
+`string`
 
 Required. The Cloud Storage path for assessment input files.
 
-`  output_dataset  `
+`output_dataset`
 
-`  string  `
+`string`
 
 Required. The BigQuery dataset for output.
 
-`  querylogs_path  `
+`querylogs_path`
 
-`  string  `
+`string`
 
 Optional. An optional Cloud Storage path to write the query logs (which is then used as an input path on the translation task)
 
-`  data_source  `
+`data_source`
 
-`  string  `
+`string`
 
 Required. The data source or data warehouse type (eg: TERADATA/REDSHIFT) from which the input data is extracted.

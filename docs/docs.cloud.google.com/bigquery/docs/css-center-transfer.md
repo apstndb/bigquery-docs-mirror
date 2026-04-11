@@ -38,9 +38,9 @@ You can configure the access rights of a CSS user by [configuring the user's acc
 
 When your data is transferred to BigQuery, the data is written to [ingestion-time partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-When you query your CSS Center table, you must use the `  _PARTITIONTIME  ` or `  _PARTITIONDATE  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+When you query your CSS Center table, you must use the `_PARTITIONTIME` or `_PARTITIONDATE` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-The `  Products_  ` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) .
+The `Products_` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) .
 
 ## CSS Center sample queries
 

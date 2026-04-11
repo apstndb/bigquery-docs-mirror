@@ -10,15 +10,15 @@ Alternatively, to replicate data into BigQuery, you can also use Cloud Data Fusi
 
   - Ensure that your BigQuery administrator has created a [Cloud SQL connection](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#create-sql-connection) and [shared](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#share_connections) it with you.
 
-  - To get the permissions that you need to query a Cloud SQL instance, ask your administrator to grant you the [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+  - To get the permissions that you need to query a Cloud SQL instance, ask your administrator to grant you the [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Query data
 
-To send a federated query to Cloud SQL from a GoogleSQL query, use the [`  EXTERNAL_QUERY  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) .
+To send a federated query to Cloud SQL from a GoogleSQL query, use the [`EXTERNAL_QUERY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) .
 
-Suppose that you store a customer table in BigQuery, while storing a sales table in Cloud SQL, and want to join the two tables in a single query. The following example makes a federated query to a Cloud SQL table named `  orders  ` and joins the results with a BigQuery table named `  mydataset.customers  ` .
+Suppose that you store a customer table in BigQuery, while storing a sales table in Cloud SQL, and want to join the two tables in a single query. The following example makes a federated query to a Cloud SQL table named `orders` and joins the results with a BigQuery table named `mydataset.customers` .
 
     SELECT c.customer_id, c.name, rq.first_order_date
     FROM mydataset.customers AS c
@@ -31,13 +31,13 @@ Suppose that you store a customer table in BigQuery, while storing a sales table
 
 The example query includes 3 parts:
 
-1.  Run the external query `  SELECT customer_id, MIN(order_date) AS first_order_date FROM orders GROUP BY customer_id  ` in the operational PostgreSQL database to get the first order date for each customer through the `  EXTERNAL_QUERY()  ` function.
-2.  Join the external query result table with the customers table in BigQuery by `  customer_id  ` .
+1.  Run the external query `SELECT customer_id, MIN(order_date) AS first_order_date FROM orders GROUP BY customer_id` in the operational PostgreSQL database to get the first order date for each customer through the `EXTERNAL_QUERY()` function.
+2.  Join the external query result table with the customers table in BigQuery by `customer_id` .
 3.  Select customer information and first order date.
 
 ## View a Cloud SQL table schema
 
-You can use the `  EXTERNAL_QUERY()  ` function to query information\_schema tables to access database metadata, such as list all tables in the database or show table schema. The following example information\_schema queries work in both MySQL and PostgreSQL. You can learn more from [MySQL information\_schema tables](https://dev.mysql.com/doc/refman/8.0/en/information-schema-introduction.html) and [PostgreSQL information\_schema tables](https://www.postgresql.org/docs/9.1/information-schema.html) .
+You can use the `EXTERNAL_QUERY()` function to query information\_schema tables to access database metadata, such as list all tables in the database or show table schema. The following example information\_schema queries work in both MySQL and PostgreSQL. You can learn more from [MySQL information\_schema tables](https://dev.mysql.com/doc/refman/8.0/en/information-schema-introduction.html) and [PostgreSQL information\_schema tables](https://www.postgresql.org/docs/9.1/information-schema.html) .
 
     -- List all tables in a database.
     SELECT * FROM EXTERNAL_QUERY("connection_id",
@@ -66,46 +66,46 @@ The following table shows the Cloud SQL connection properties:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       name      </code></td>
+<td><code dir="ltr" translate="no">name</code></td>
 <td>string</td>
 <td>Name of the connection resource in the format: project_id.location_id.connection_id.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       location      </code></td>
+<td><code dir="ltr" translate="no">location</code></td>
 <td>string</td>
-<td>Location of the connection which must either match the Cloud SQL instance location or be a multi-region of the corresponding jurisdiction. For example, a Cloud SQL instance in <code dir="ltr" translate="no">       us-east4      </code> can use <code dir="ltr" translate="no">       US      </code> , while a Cloud SQL instance in <code dir="ltr" translate="no">       europe-north1      </code> can use <code dir="ltr" translate="no">       EU      </code> . Only BigQuery queries running in this location will be able to use this connection.</td>
+<td>Location of the connection which must either match the Cloud SQL instance location or be a multi-region of the corresponding jurisdiction. For example, a Cloud SQL instance in <code dir="ltr" translate="no">us-east4</code> can use <code dir="ltr" translate="no">US</code> , while a Cloud SQL instance in <code dir="ltr" translate="no">europe-north1</code> can use <code dir="ltr" translate="no">EU</code> . Only BigQuery queries running in this location will be able to use this connection.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       friendlyName      </code></td>
+<td><code dir="ltr" translate="no">friendlyName</code></td>
 <td>string</td>
 <td>A user-friendly display name for the connection.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       description      </code></td>
+<td><code dir="ltr" translate="no">description</code></td>
 <td>string</td>
 <td>Description of the connection.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       cloudSql.type      </code></td>
+<td><code dir="ltr" translate="no">cloudSql.type</code></td>
 <td>string</td>
 <td>Can be "POSTGRES" or "MYSQL".</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       cloudSql.instanceId      </code></td>
+<td><code dir="ltr" translate="no">cloudSql.instanceId</code></td>
 <td>string</td>
 <td>Name of the <a href="https://docs.cloud.google.com/sql/docs/mysql/instance-settings#instance-id-2ndgen">Cloud SQL instance</a> , usually in the format of:<br />
 <br />
-<code dir="ltr" translate="no">       Project-id:location-id:instance-id      </code><br />
+<code dir="ltr" translate="no">Project-id:location-id:instance-id</code><br />
 <br />
 You can find the instance ID in the <a href="https://console.cloud.google.com/sql/instances">Cloud SQL instance</a> detail page.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       cloudSql.database      </code></td>
+<td><code dir="ltr" translate="no">cloudSql.database</code></td>
 <td>string</td>
 <td>The Cloud SQL database that you want to connect to.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       cloudSql.serviceAccountId      </code></td>
+<td><code dir="ltr" translate="no">cloudSql.serviceAccountId</code></td>
 <td>string</td>
 <td>The service account configured to access the Cloud SQL database.</td>
 </tr>
@@ -114,10 +114,10 @@ You can find the instance ID in the <a href="https://console.cloud.google.com/sq
 
 The following table shows the properties for the Cloud SQL instance credential:
 
-| Property name             | Value  | Description       |
-| ------------------------- | ------ | ----------------- |
-| `        username       ` | string | Database username |
-| `        password       ` | string | Database password |
+| Property name | Value  | Description       |
+| ------------- | ------ | ----------------- |
+| `username`    | string | Database username |
+| `password`    | string | Database password |
 
 ## Track BigQuery federated queries
 
@@ -161,18 +161,18 @@ This section helps you troubleshoot issues you might encounter when sending a fe
 
 **Issue:** Failed to connect to database server. If you are querying a MySQL database, you might encounter the following error:
 
-`  Invalid table-valued function EXTERNAL_QUERY Failed to connect to MySQL database. Error: MysqlErrorCode(2013): Lost connection to MySQL server during query.  `
+`Invalid table-valued function EXTERNAL_QUERY Failed to connect to MySQL database. Error: MysqlErrorCode(2013): Lost connection to MySQL server during query.`
 
 Alternatively, if you are querying a PostgreSQL database, you might encounter the following error:
 
-  - `  Invalid table-valued function EXTERNAL_QUERY Connect to PostgreSQL server failed: server closed the connection unexpectedly This probably means the server terminated abnormally before or while processing the request.  `  
-    **Resolution:** Ensure that valid credentials were used and all prerequisites were followed to create the [connection for Cloud SQL](https://docs.cloud.google.com/bigquery/docs/connect-to-sql) . Check if the service account that is automatically created when a connection to Cloud SQL is created has the Cloud SQL Client ( `  roles/cloudsql.client  ` ) role. The service account is of the following format: `  service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` . For detailed instructions, see [Grant access to the service account](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#access-sql) .
+  - `Invalid table-valued function EXTERNAL_QUERY Connect to PostgreSQL server failed: server closed the connection unexpectedly This probably means the server terminated abnormally before or while processing the request.`  
+    **Resolution:** Ensure that valid credentials were used and all prerequisites were followed to create the [connection for Cloud SQL](https://docs.cloud.google.com/bigquery/docs/connect-to-sql) . Check if the service account that is automatically created when a connection to Cloud SQL is created has the Cloud SQL Client ( `roles/cloudsql.client` ) role. The service account is of the following format: `service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com` . For detailed instructions, see [Grant access to the service account](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#access-sql) .
     
     If your Cloud SQL instance uses a private IP address, ensure that you enabled a private path when you [created the Cloud SQL instance](https://docs.cloud.google.com/sql/docs/postgres/create-instance) . Doing so lets BigQuery access data in Cloud SQL and run queries against this data over a private connection.
 
 **Issue:** Failed to connect to MySQL database. When you run a federated query against Cloud SQL data, you might encounter the following error:
 
-  - `  Invalid table-valued function EXTERNAL_QUERY Failed to connect to MySQL database. Error: MysqlErrorCode(2059): Authentication plugin 'caching_sha2_password' cannot be loaded: /usr/lib/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory at [1:15]  `  
+  - `Invalid table-valued function EXTERNAL_QUERY Failed to connect to MySQL database. Error: MysqlErrorCode(2059): Authentication plugin 'caching_sha2_password' cannot be loaded: /usr/lib/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory at [1:15]`  
     **Resolution:**
     
     This error occurs for database users that use [caching\_sha2\_password authentication](https://dev.mysql.com/doc/refman/8.4/en/native-pluggable-authentication.html) , which isn't supported for federated queries.
@@ -186,15 +186,15 @@ Alternatively, if you are querying a PostgreSQL database, you might encounter th
       - `  USERNAME  ` : the database user account that BigQuery uses to authenticate and connect to your Cloud SQL for MySQL instance.
       - `  PASSWORD  ` : the password for the database user.
     
-    If you use a Cloud SQL instance running MySQL version 8.4, there's no workaround available, because the `  mysql_native_password  ` plugin is deprecated for version 8.4. We don't recommend downgrading an existing database from 8.4 to 8.0 as a solution for production workloads.
+    If you use a Cloud SQL instance running MySQL version 8.4, there's no workaround available, because the `mysql_native_password` plugin is deprecated for version 8.4. We don't recommend downgrading an existing database from 8.4 to 8.0 as a solution for production workloads.
     
     Upgrading a Cloud SQL instance that runs a MySQL version earlier than 8.4 to version 8.4 doesn't affect existing database connections, provided that you don't change the authentication plugin for users before the upgrade.
     
-    Because only users created with the `  mysql_native_password  ` plugin (typically those created before upgrading to version 8.4) can be used for federated queries, even after the MySQL instance upgrades to the 8.4 version, you should send federated queries to MySQL with connection settings that use a database user that existed on a MySQL version earlier than 8.4.
+    Because only users created with the `mysql_native_password` plugin (typically those created before upgrading to version 8.4) can be used for federated queries, even after the MySQL instance upgrades to the 8.4 version, you should send federated queries to MySQL with connection settings that use a database user that existed on a MySQL version earlier than 8.4.
 
 ## Limitations
 
-  - The MySQL `  caching_sha2_password  ` plugin isn't supported for federated queries. As a result, federated queries for MySQL 8.0 and 8.4 using this plugin will fail. For more information, see [Troubleshooting](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries#troubleshooting) .
+  - The MySQL `caching_sha2_password` plugin isn't supported for federated queries. As a result, federated queries for MySQL 8.0 and 8.4 using this plugin will fail. For more information, see [Troubleshooting](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries#troubleshooting) .
 
 ## What's next
 

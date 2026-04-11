@@ -11,7 +11,7 @@ tabledata.list the content of a table in rows.
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,21 +19,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project id of the table to list.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset id of the table to list.
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 Required. Table id of the table to list.
 
@@ -41,33 +41,33 @@ Required. Table id of the table to list.
 
 Parameters
 
-`  startIndex  `
+`startIndex`
 
-`  string  `
+`string`
 
 Start row index of the table.
 
-`  maxResults  `
+`maxResults`
 
-`  integer ( uint32 format)  `
+`integer ( uint32 format)`
 
 Row limit of the table.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 To retrieve the next page of table data, set this field to the string provided in the pageToken field of the response body from your previous call to tabledata.list.
 
-`  selectedFields  `
+`selectedFields`
 
-`  string  `
+`string`
 
 Subset of fields to return, supports select into sub fields. Example: selectedFields = "a,e.d.f";
 
-`  formatOptions  `
+`formatOptions`
 
-`  object ( DataFormatOptions  ` )
+` object ( DataFormatOptions  ` )
 
 Output timestamp field value in usec int64 instead of double. Output format adjustments.
 
@@ -109,33 +109,33 @@ If successful, the response body contains data with the following structure:
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 Will be set to "bigquery\#tableDataList".
 
-`  etag  `
+`etag`
 
-`  string  `
+`string`
 
 Etag to the response.
 
-`  totalRows  `
+`totalRows`
 
-`  string  `
+`string`
 
 Total rows of the entire table. In order to show default value "0", we have to present it as string.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 When this field is non-empty, it indicates that additional results are available. To request the next page of data, set the pageToken field of your next tabledata.list call to the string returned in this field.
 
-`  rows[]  `
+`rows[]`
 
-`  object ( Struct  ` format)
+` object ( Struct  ` format)
 
 Repeated rows as result. The REST-based representation of this data leverages a series of JSON f,v objects for indicating fields and values.
 
@@ -143,9 +143,9 @@ Repeated rows as result. The REST-based representation of this data leverages a 
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -8,15 +8,15 @@ Before you create an external table, gather some information and make sure you h
 
 ### Required roles
 
-To create an external table to use to query your Bigtable data, you must be a principal in the Bigtable Admin ( `  roles/bigtable.admin  ` ) role for the instance that contains the source table.
+To create an external table to use to query your Bigtable data, you must be a principal in the Bigtable Admin ( `roles/bigtable.admin` ) role for the instance that contains the source table.
 
-You also need the `  bigquery.tables.create  ` BigQuery Identity and Access Management (IAM) permission.
+You also need the `bigquery.tables.create` BigQuery Identity and Access Management (IAM) permission.
 
 Each of the following predefined Identity and Access Management roles includes this permission:
 
-  - BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )
-  - BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )
-  - BigQuery Admin ( `  roles/bigquery.admin  ` )
+  - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
+  - BigQuery Data Owner ( `roles/bigquery.dataOwner` )
+  - BigQuery Admin ( `roles/bigquery.admin` )
 
 If you are not a principal in any of these roles, ask your administrator to grant you access or to create the external table for you.
 
@@ -74,7 +74,7 @@ To create an external table for a Bigtable data source, you must provide the Big
       - APP\_PROFILE (optional) is the identifier for the app profile that you want to use
       - TABLE\_NAME is the name of the table you're querying
     
-    `  https://googleapis.com/bigtable/projects/ PROJECT_ID /instances/ INSTANCE_ID [/appProfiles/ APP_PROFILE ]/tables/ TABLE_NAME  `
+    ` https://googleapis.com/bigtable/projects/ PROJECT_ID /instances/ INSTANCE_ID [/appProfiles/ APP_PROFILE ]/tables/ TABLE_NAME  `
 
 **Note:** Exactly one Bigtable URI can be specified, and it must be a fully specified, valid HTTPS URL for a Bigtable table. Wildcards are not supported for Bigtable external data sources.
 
@@ -83,7 +83,7 @@ To create an external table for a Bigtable data source, you must provide the Big
 When you create a permanent external table in BigQuery that is linked to a Bigtable data source, there are two options for specifying the format of the external table:
 
   - If you are using the API or the bq command-line tool, you create a [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition) that defines the schema and metadata for the external table.
-  - If you are using SQL, you use the `  uri  ` option of the `  CREATE EXTERNAL TABLE  ` statement to specify the Bigtable table to pull data from, and the `  bigtable_options  ` option to specify the table schema.
+  - If you are using SQL, you use the `uri` option of the `CREATE EXTERNAL TABLE` statement to specify the Bigtable table to pull data from, and the `bigtable_options` option to specify the table schema.
 
 The external table data is not stored in the BigQuery table. Because the table is permanent, you can use dataset-level [access controls](https://docs.cloud.google.com/bigquery/docs/access-control) to share the table with others who also have access to the underlying Bigtable data source.
 
@@ -91,7 +91,7 @@ To create a permanent table, choose one of the following methods.
 
 ### SQL
 
-You can create a permanent external table by running the [`  CREATE EXTERNAL TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) . You must specify the table schema explicitly as part of the statement options.
+You can create a permanent external table by running the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) . You must specify the table schema explicitly as part of the statement options.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -141,9 +141,9 @@ A statement to create an external Bigtable table might look similar to the follo
 
 ### bq
 
-You create a table in the bq command-line tool using the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) . When you use the bq command-line tool to create a table linked to an external data source, you identify the table's schema using a [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) .
+You create a table in the bq command-line tool using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) . When you use the bq command-line tool to create a table linked to an external data source, you identify the table's schema using a [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) .
 
-1.  Use the `  bq mk  ` command to create a permanent table.
+1.  Use the `bq mk` command to create a permanent table.
     
     ``` notranslate
     bq mk \
@@ -159,11 +159,11 @@ You create a table in the bq command-line tool using the [`  bq mk  ` command](h
 
 ### API
 
-Use the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) API method, and create an [`  ExternalDataConfiguration  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the [`  Table  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table) that you pass in.
+Use the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) API method, and create an [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the [`Table` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table) that you pass in.
 
-For the `  sourceUris  ` property in the `  Table  ` resource, specify only one [Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) . It must be a valid HTTPS URL.
+For the `sourceUris` property in the `Table` resource, specify only one [Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) . It must be a valid HTTPS URL.
 
-For the `  sourceFormat  ` property, specify `  "BIGTABLE"  ` .
+For the `sourceFormat` property, specify `"BIGTABLE"` .
 
 ### Java
 
@@ -282,7 +282,7 @@ By default, BigQuery exposes the values in a column family as an array of column
 
 ### Example
 
-You are storing user profiles for a fictional social network. One data model for this might be a `  profile  ` column family with individual columns for `  gender  ` , `  age  ` and `  email  ` :
+You are storing user profiles for a fictional social network. One data model for this might be a `profile` column family with individual columns for `gender` , `age` and `email` :
 
     rowkey | profile:gender| profile:age| profile:email
     -------| --------------| -----------| -------------
@@ -302,7 +302,7 @@ OMIT
     AND INTEGER(profile.column.cell.value) > 30)
 ```
 
-Querying the data is less challenging if `  gender  ` and `  age  ` are exposed as sub- fields. To expose them as sub-fields, list `  gender  ` and `  age  ` as named columns in the `  profile  ` column family when defining the table. You can also instruct BigQuery to expose the latest values from this column family because typically, only the latest value (and possibly the only value) is of interest.
+Querying the data is less challenging if `gender` and `age` are exposed as sub- fields. To expose them as sub-fields, list `gender` and `age` as named columns in the `profile` column family when defining the table. You can also instruct BigQuery to expose the latest values from this column family because typically, only the latest value (and possibly the only value) is of interest.
 
 After exposing the columns as sub-fields, the GoogleSQL query to count the number of male users over 30 is:
 
@@ -316,7 +316,7 @@ WHERE
   AND profile.age.cell.value > 30
 ```
 
-Notice how `  gender  ` and `  age  ` are referenced directly as fields. The JSON configuration for this setup is:
+Notice how `gender` and `age` are referenced directly as fields. The JSON configuration for this setup is:
 
 ``` notranslate
   "bigtableOptions": {
@@ -344,7 +344,7 @@ Notice how `  gender  ` and `  age  ` are referenced directly as fields. The JSO
 
 Bigtable stores data as raw bytes, independent to data encoding. However, byte values are of limited use in SQL query analysis. Bigtable provides two basic types of scalar decoding: text and HBase-binary.
 
-The text format assumes that all values are stored as alphanumeric text strings. For example, an integer 768 will be stored as the string "768". The binary encoding assumes that HBase's [`  Bytes.toBytes  `](https://hbase.apache.org/devapidocs/org/apache/hadoop/hbase/util/Bytes.html) class of methods were used to encode the data and applies an appropriate decoding method.
+The text format assumes that all values are stored as alphanumeric text strings. For example, an integer 768 will be stored as the string "768". The binary encoding assumes that HBase's [`Bytes.toBytes`](https://hbase.apache.org/devapidocs/org/apache/hadoop/hbase/util/Bytes.html) class of methods were used to encode the data and applies an appropriate decoding method.
 
 ## Supported regions and zones
 
@@ -359,7 +359,7 @@ Querying data in Bigtable is available in all supported Bigtable zones. You can 
 
 When you create a Compute Engine instance, you can specify a list of scopes for the instance. The scopes control the instance's access to Google Cloud products, including Bigtable. Applications running on the VM use the service account to call Google Cloud APIs.
 
-If you set up a Compute Engine instance to run as a [service account](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) , and that service account accesses an external table linked to a Bigtable data source, you must add the Bigtable read-only data access scope ( `  https://www.googleapis.com/auth/bigtable.data.readonly  ` ) to the instance. For more information, see [Creating a Compute Engine instance for Bigtable](https://docs.cloud.google.com/bigtable/docs/creating-compute-instance) .
+If you set up a Compute Engine instance to run as a [service account](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) , and that service account accesses an external table linked to a Bigtable data source, you must add the Bigtable read-only data access scope ( `https://www.googleapis.com/auth/bigtable.data.readonly` ) to the instance. For more information, see [Creating a Compute Engine instance for Bigtable](https://docs.cloud.google.com/bigtable/docs/creating-compute-instance) .
 
 For information on applying scopes to a Compute Engine instance, see [Changing the service account and access scopes for an instance](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances#changeserviceaccountandscopes) . For more information on Compute Engine service accounts, see [Service accounts](https://docs.cloud.google.com/compute/docs/access/service-accounts) .
 

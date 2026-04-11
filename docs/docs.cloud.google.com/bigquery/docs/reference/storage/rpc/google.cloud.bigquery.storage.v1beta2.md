@@ -65,7 +65,7 @@ New code should use the v1 Read API going forward, if they don't use Write API a
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc CreateReadSession(                         CreateReadSessionRequest            </code> ) returns ( <code dir="ltr" translate="no">              ReadSession            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc CreateReadSession(              CreateReadSessionRequest            </code> ) returns ( <code dir="ltr" translate="no">             ReadSession            </code> )</p>
 <p>Creates a new read session. A read session divides the contents of a BigQuery table into one or more streams, which can then be used to read data from the table. The read session also specifies properties of the data to be read, such as a list of columns or a push-down filter describing the rows to be returned.</p>
 <p>A particular row can be read by at most one stream. When the caller has reached the end of each stream in the session, then all the data in the table has been read.</p>
 <p>Data is assigned to each stream such that roughly the same number of rows can be read from each stream. Because the server-side unit for assigning data is collections of rows, the API does not guarantee that each stream will return the same number or rows. Additionally, the limits are enforced based on the number of pre-filtered rows, so some filters can lead to lopsided assignments.</p>
@@ -85,7 +85,7 @@ New code should use the v1 Read API going forward, if they don't use Write API a
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc ReadRows(                         ReadRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">              ReadRowsResponse            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc ReadRows(              ReadRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">             ReadRowsResponse            </code> )</p>
 <p>Reads rows from the stream in the format prescribed by the ReadSession. Each response contains one or more table rows, up to a maximum of 100 MiB per response; read requests which attempt to read individual rows larger than 100 MiB will fail.</p>
 <p>Each request also returns a set of stream statistics reflecting the current state of the stream.</p></td>
 </tr>
@@ -103,9 +103,9 @@ New code should use the v1 Read API going forward, if they don't use Write API a
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc SplitReadStream(                         SplitReadStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">              SplitReadStreamResponse            </code> )</p>
-<p>Splits a given <code dir="ltr" translate="no">           ReadStream          </code> into two <code dir="ltr" translate="no">           ReadStream          </code> objects. These <code dir="ltr" translate="no">           ReadStream          </code> objects are referred to as the primary and the residual streams of the split. The original <code dir="ltr" translate="no">           ReadStream          </code> can still be read from in the same manner as before. Both of the returned <code dir="ltr" translate="no">           ReadStream          </code> objects can also be read from, and the rows returned by both child streams will be the same as the rows read from the original stream.</p>
-<p>Moreover, the two child streams will be allocated back-to-back in the original <code dir="ltr" translate="no">           ReadStream          </code> . Concretely, it is guaranteed that for streams original, primary, and residual, that original[0-j] = primary[0-j] and original[j-n] = residual[0-m] once the streams have been read to completion.</p></td>
+<td><p><code dir="ltr" translate="no">rpc SplitReadStream(              SplitReadStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">             SplitReadStreamResponse            </code> )</p>
+<p>Splits a given <code dir="ltr" translate="no">ReadStream</code> into two <code dir="ltr" translate="no">ReadStream</code> objects. These <code dir="ltr" translate="no">ReadStream</code> objects are referred to as the primary and the residual streams of the split. The original <code dir="ltr" translate="no">ReadStream</code> can still be read from in the same manner as before. Both of the returned <code dir="ltr" translate="no">ReadStream</code> objects can also be read from, and the rows returned by both child streams will be the same as the rows read from the original stream.</p>
+<p>Moreover, the two child streams will be allocated back-to-back in the original <code dir="ltr" translate="no">ReadStream</code> . Concretely, it is guaranteed that for streams original, primary, and residual, that original[0-j] = primary[0-j] and original[j-n] = residual[0-m] once the streams have been read to completion.</p></td>
 </tr>
 </tbody>
 </table>
@@ -132,11 +132,11 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 <tbody>
 <tr class="odd">
 <td><p>This item is deprecated!</p>
-<p><code dir="ltr" translate="no">           rpc AppendRows(                         AppendRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">              AppendRowsResponse            </code> )</p>
+<p><code dir="ltr" translate="no">rpc AppendRows(              AppendRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">             AppendRowsResponse            </code> )</p>
 <p>Appends data to the given stream.</p>
-<p>If <code dir="ltr" translate="no">           offset          </code> is specified, the <code dir="ltr" translate="no">           offset          </code> is checked against the end of stream. The server returns <code dir="ltr" translate="no">           OUT_OF_RANGE          </code> in <code dir="ltr" translate="no">           AppendRowsResponse          </code> if an attempt is made to append to an offset beyond the current end of the stream or <code dir="ltr" translate="no">           ALREADY_EXISTS          </code> if user provids an <code dir="ltr" translate="no">           offset          </code> that has already been written to. User can retry with adjusted offset within the same RPC stream. If <code dir="ltr" translate="no">           offset          </code> is not specified, append happens at the end of the stream.</p>
-<p>The response contains the offset at which the append happened. Responses are received in the same order in which requests are sent. There will be one response for each successful request. If the <code dir="ltr" translate="no">           offset          </code> is not set in response, it means append didn't happen due to some errors. If one request fails, all the subsequent requests will also fail until a success request is made again.</p>
-<p>If the stream is of <code dir="ltr" translate="no">           PENDING          </code> type, data will only be available for read operations after the stream is committed.</p></td>
+<p>If <code dir="ltr" translate="no">offset</code> is specified, the <code dir="ltr" translate="no">offset</code> is checked against the end of stream. The server returns <code dir="ltr" translate="no">OUT_OF_RANGE</code> in <code dir="ltr" translate="no">AppendRowsResponse</code> if an attempt is made to append to an offset beyond the current end of the stream or <code dir="ltr" translate="no">ALREADY_EXISTS</code> if user provids an <code dir="ltr" translate="no">offset</code> that has already been written to. User can retry with adjusted offset within the same RPC stream. If <code dir="ltr" translate="no">offset</code> is not specified, append happens at the end of the stream.</p>
+<p>The response contains the offset at which the append happened. Responses are received in the same order in which requests are sent. There will be one response for each successful request. If the <code dir="ltr" translate="no">offset</code> is not set in response, it means append didn't happen due to some errors. If one request fails, all the subsequent requests will also fail until a success request is made again.</p>
+<p>If the stream is of <code dir="ltr" translate="no">PENDING</code> type, data will only be available for read operations after the stream is committed.</p></td>
 </tr>
 </tbody>
 </table>
@@ -153,8 +153,8 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 <tbody>
 <tr class="odd">
 <td><p>This item is deprecated!</p>
-<p><code dir="ltr" translate="no">           rpc BatchCommitWriteStreams(                         BatchCommitWriteStreamsRequest            </code> ) returns ( <code dir="ltr" translate="no">              BatchCommitWriteStreamsResponse            </code> )</p>
-<p>Atomically commits a group of <code dir="ltr" translate="no">           PENDING          </code> streams that belong to the same <code dir="ltr" translate="no">           parent          </code> table. Streams must be finalized before commit and cannot be committed multiple times. Once a stream is committed, data in the stream becomes available for read operations.</p></td>
+<p><code dir="ltr" translate="no">rpc BatchCommitWriteStreams(              BatchCommitWriteStreamsRequest            </code> ) returns ( <code dir="ltr" translate="no">             BatchCommitWriteStreamsResponse            </code> )</p>
+<p>Atomically commits a group of <code dir="ltr" translate="no">PENDING</code> streams that belong to the same <code dir="ltr" translate="no">parent</code> table. Streams must be finalized before commit and cannot be committed multiple times. Once a stream is committed, data in the stream becomes available for read operations.</p></td>
 </tr>
 </tbody>
 </table>
@@ -171,7 +171,7 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 <tbody>
 <tr class="odd">
 <td><p>This item is deprecated!</p>
-<p><code dir="ltr" translate="no">           rpc CreateWriteStream(                         CreateWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">              WriteStream            </code> )</p>
+<p><code dir="ltr" translate="no">rpc CreateWriteStream(              CreateWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">             WriteStream            </code> )</p>
 <p>Creates a write stream to the given table. Additionally, every table has a special COMMITTED stream named '_default' to which data can be written. This stream doesn't need to be created using CreateWriteStream. It is a stream that can be used simultaneously by any number of clients. Data written to this stream is considered committed as soon as an acknowledgement is received.</p></td>
 </tr>
 </tbody>
@@ -189,7 +189,7 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 <tbody>
 <tr class="odd">
 <td><p>This item is deprecated!</p>
-<p><code dir="ltr" translate="no">           rpc FinalizeWriteStream(                         FinalizeWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">              FinalizeWriteStreamResponse            </code> )</p>
+<p><code dir="ltr" translate="no">rpc FinalizeWriteStream(              FinalizeWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">             FinalizeWriteStreamResponse            </code> )</p>
 <p>Finalize a write stream so that no new data can be appended to the stream. Finalize is not supported on the '_default' stream.</p></td>
 </tr>
 </tbody>
@@ -207,7 +207,7 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 <tbody>
 <tr class="odd">
 <td><p>This item is deprecated!</p>
-<p><code dir="ltr" translate="no">           rpc FlushRows(                         FlushRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">              FlushRowsResponse            </code> )</p>
+<p><code dir="ltr" translate="no">rpc FlushRows(              FlushRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">             FlushRowsResponse            </code> )</p>
 <p>Flushes rows to a BUFFERED stream. If users are appending rows to BUFFERED stream, flush operation is required in order for the rows to become available for reading. A Flush operation flushes up to any previously flushed offset in a BUFFERED stream, to the offset specified in the request. Flush is not supported on the _default stream, since it is not BUFFERED.</p></td>
 </tr>
 </tbody>
@@ -225,7 +225,7 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 <tbody>
 <tr class="odd">
 <td><p>This item is deprecated!</p>
-<p><code dir="ltr" translate="no">           rpc GetWriteStream(                         GetWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">              WriteStream            </code> )</p>
+<p><code dir="ltr" translate="no">rpc GetWriteStream(              GetWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">             WriteStream            </code> )</p>
 <p>Gets a write stream.</p></td>
 </tr>
 </tbody>
@@ -233,35 +233,35 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 
 ## AppendRowsRequest
 
-Request message for `  AppendRows  ` .
+Request message for `AppendRows` .
 
 Fields
 
-`  write_stream  `
+`write_stream`
 
-`  string  `
+`string`
 
-Required. The stream that is the target of the append operation. This value must be specified for the initial request. If subsequent requests specify the stream name, it must equal to the value provided in the first request. To write to the \_default stream, populate this field with a string in the format `  projects/{project}/datasets/{dataset}/tables/{table}/_default  ` .
+Required. The stream that is the target of the append operation. This value must be specified for the initial request. If subsequent requests specify the stream name, it must equal to the value provided in the first request. To write to the \_default stream, populate this field with a string in the format `projects/{project}/datasets/{dataset}/tables/{table}/_default` .
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  writeStream  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `writeStream` :
 
-  - `  bigquery.tables.updateData  `
+  - `bigquery.tables.updateData`
 
-`  offset  `
+`offset`
 
 `  Int64Value  `
 
 If present, the write is only performed if the next append offset is same as the provided value. If not present, the write is performed at the current end of stream. Specifying a value for this field is not allowed when calling AppendRows for the '\_default' stream.
 
-`  trace_id  `
+`trace_id`
 
-`  string  `
+`string`
 
 Id set by client to annotate its identity. Only initial request setting is respected.
 
-Union field `  rows  ` . Input rows. The `  writer_schema  ` field must be specified at the initial request and currently, it will be ignored if specified in following requests. Following requests must have data in the same format as the initial request. `  rows  ` can be only one of the following:
+Union field `rows` . Input rows. The `writer_schema` field must be specified at the initial request and currently, it will be ignored if specified in following requests. Following requests must have data in the same format as the initial request. `rows` can be only one of the following:
 
-`  proto_rows  `
+`proto_rows`
 
 `  ProtoData  `
 
@@ -273,13 +273,13 @@ Proto schema and data.
 
 Fields
 
-`  writer_schema  `
+`writer_schema`
 
 `  ProtoSchema  `
 
 Proto schema used to serialize the data.
 
-`  rows  `
+`rows`
 
 `  ProtoRows  `
 
@@ -287,33 +287,33 @@ Output only. Serialized row data in protobuf message format.
 
 ## AppendRowsResponse
 
-Response message for `  AppendRows  ` .
+Response message for `AppendRows` .
 
 Fields
 
-`  updated_schema  `
+`updated_schema`
 
 `  TableSchema  `
 
 If backend detects a schema update, pass it to user so that user can use it to input new type of message. It will be empty when no schema updates have occurred.
 
-`  row_errors[]  `
+`row_errors[]`
 
 `  RowError  `
 
 If a request failed due to corrupted rows, no rows in the batch will be appended. The API will return row level error info, so that the caller can remove the bad rows and retry the request.
 
-Union field `  response  ` .
+Union field `response` .
 
-`  response  ` can be only one of the following:
+`response` can be only one of the following:
 
-`  append_result  `
+`append_result`
 
 `  AppendResult  `
 
 Result if the append is successful.
 
-`  error  `
+`error`
 
 `  Status  `
 
@@ -337,7 +337,7 @@ AppendResult is returned for successful append requests.
 
 Fields
 
-`  offset  `
+`offset`
 
 `  Int64Value  `
 
@@ -349,9 +349,9 @@ Arrow RecordBatch.
 
 Fields
 
-`  serialized_record_batch  `
+`serialized_record_batch`
 
-`  bytes  `
+`bytes`
 
 IPC-serialized Arrow RecordBatch.
 
@@ -363,9 +363,9 @@ See code samples on how this message can be deserialized.
 
 Fields
 
-`  serialized_schema  `
+`serialized_schema`
 
-`  bytes  `
+`bytes`
 
 IPC serialized Arrow schema.
 
@@ -375,7 +375,7 @@ Contains options specific to Arrow Serialization.
 
 Fields
 
-`  format  `
+`format`
 
 `  Format  `
 
@@ -387,15 +387,15 @@ The IPC format to use when serializing Arrow streams.
 
 Enums
 
-`  FORMAT_UNSPECIFIED  `
+`FORMAT_UNSPECIFIED`
 
 If unspecified, the IPC format as of Apache Arrow Release 0.15 is used.
 
-`  ARROW_0_14  `
+`ARROW_0_14`
 
 Use the legacy IPC message format from Apache Arrow Release 0.14.
 
-`  ARROW_0_15  `
+`ARROW_0_15`
 
 Use the message format from Apache Arrow Release 0.15.
 
@@ -405,9 +405,9 @@ Avro rows.
 
 Fields
 
-`  serialized_binary_rows  `
+`serialized_binary_rows`
 
-`  bytes  `
+`bytes`
 
 Binary serialized rows in a block.
 
@@ -417,47 +417,47 @@ Avro schema.
 
 Fields
 
-`  schema  `
+`schema`
 
-`  string  `
+`string`
 
 Json serialized schema, as described at <https://avro.apache.org/docs/1.8.1/spec.html> .
 
 ## BatchCommitWriteStreamsRequest
 
-Request message for `  BatchCommitWriteStreams  ` .
+Request message for `BatchCommitWriteStreams` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Parent table that all the streams should belong to, in the form of `  projects/{project}/datasets/{dataset}/tables/{table}  ` .
+Required. Parent table that all the streams should belong to, in the form of `projects/{project}/datasets/{dataset}/tables/{table}` .
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.tables.updateData  `
+  - `bigquery.tables.updateData`
 
-`  write_streams[]  `
+`write_streams[]`
 
-`  string  `
+`string`
 
 Required. The group of streams that will be committed atomically.
 
 ## BatchCommitWriteStreamsResponse
 
-Response message for `  BatchCommitWriteStreams  ` .
+Response message for `BatchCommitWriteStreams` .
 
 Fields
 
-`  commit_time  `
+`commit_time`
 
 `  Timestamp  `
 
 The time at which streams were committed in microseconds granularity. This field will only exist when there are no stream errors. **Note** if this field is not set, it means the commit was not successful.
 
-`  stream_errors[]  `
+`stream_errors[]`
 
 `  StorageError  `
 
@@ -465,33 +465,33 @@ Stream level error if commit failed. Only streams with error will be in the list
 
 ## CreateReadSessionRequest
 
-Request message for `  CreateReadSession  ` .
+Request message for `CreateReadSession` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The request project that owns the session, in the form of `  projects/{project_id}  ` .
+Required. The request project that owns the session, in the form of `projects/{project_id}` .
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.readsessions.create  `
+  - `bigquery.readsessions.create`
 
-`  read_session  `
+`read_session`
 
 `  ReadSession  `
 
 Required. Session to be created.
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  readSession  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `readSession` :
 
-  - `  bigquery.tables.getData  `
+  - `bigquery.tables.getData`
 
-`  max_stream_count  `
+`max_stream_count`
 
-`  int32  `
+`int32`
 
 Max initial number of streams. If unset or zero, the server will provide a value of streams so as to produce reasonable throughput. Must be non-negative. The number of streams may be lower than the requested number, depending on the amount parallelism that is reasonable for the table. Error will be returned if the max count is greater than the current system max limit of 1,000.
 
@@ -499,21 +499,21 @@ Streams must be read starting from offset 0.
 
 ## CreateWriteStreamRequest
 
-Request message for `  CreateWriteStream  ` .
+Request message for `CreateWriteStream` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Reference to the table to which the stream belongs, in the format of `  projects/{project}/datasets/{dataset}/tables/{table}  ` .
+Required. Reference to the table to which the stream belongs, in the format of `projects/{project}/datasets/{dataset}/tables/{table}` .
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.tables.updateData  `
+  - `bigquery.tables.updateData`
 
-`  write_stream  `
+`write_stream`
 
 `  WriteStream  `
 
@@ -525,61 +525,61 @@ Data format for input or output data.
 
 Enums
 
-`  DATA_FORMAT_UNSPECIFIED  `
+`DATA_FORMAT_UNSPECIFIED`
 
-`  AVRO  `
+`AVRO`
 
 Avro is a standard open source row based file format. See <https://avro.apache.org/> for more details.
 
-`  ARROW  `
+`ARROW`
 
 Arrow is a standard open source column-based message format. See <https://arrow.apache.org/> for more details.
 
 ## FinalizeWriteStreamRequest
 
-Request message for invoking `  FinalizeWriteStream  ` .
+Request message for invoking `FinalizeWriteStream` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the stream to finalize, in the form of `  projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}  ` .
+Required. Name of the stream to finalize, in the form of `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}` .
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.tables.updateData  `
+  - `bigquery.tables.updateData`
 
 ## FinalizeWriteStreamResponse
 
-Response message for `  FinalizeWriteStream  ` .
+Response message for `FinalizeWriteStream` .
 
 Fields
 
-`  row_count  `
+`row_count`
 
-`  int64  `
+`int64`
 
 Number of rows in the finalized stream.
 
 ## FlushRowsRequest
 
-Request message for `  FlushRows  ` .
+Request message for `FlushRows` .
 
 Fields
 
-`  write_stream  `
+`write_stream`
 
-`  string  `
+`string`
 
 Required. The stream that is the target of the flush operation.
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  writeStream  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `writeStream` :
 
-  - `  bigquery.tables.updateData  `
+  - `bigquery.tables.updateData`
 
-`  offset  `
+`offset`
 
 `  Int64Value  `
 
@@ -587,39 +587,39 @@ Ending offset of the flush operation. Rows before this offset(including this off
 
 ## FlushRowsResponse
 
-Respond message for `  FlushRows  ` .
+Respond message for `FlushRows` .
 
 Fields
 
-`  offset  `
+`offset`
 
-`  int64  `
+`int64`
 
 The rows before this offset (including this offset) are flushed.
 
 ## GetWriteStreamRequest
 
-Request message for `  GetWriteStreamRequest  ` .
+Request message for `GetWriteStreamRequest` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the stream to get, in the form of `  projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}  ` .
+Required. Name of the stream to get, in the form of `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}` .
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.tables.get  `
+  - `bigquery.tables.get`
 
 ## ProtoRows
 
 Fields
 
-`  serialized_rows[]  `
+`serialized_rows[]`
 
-`  bytes  `
+`bytes`
 
 A sequence of rows serialized as a Protocol Buffer.
 
@@ -631,7 +631,7 @@ ProtoSchema describes the schema of the serialized protocol buffer data rows.
 
 Fields
 
-`  proto_descriptor  `
+`proto_descriptor`
 
 `  Any  `
 
@@ -641,73 +641,73 @@ For additional information for how proto types and values map onto BigQuery see:
 
 ## ReadRowsRequest
 
-Request message for `  ReadRows  ` .
+Request message for `ReadRows` .
 
 Fields
 
-`  read_stream  `
+`read_stream`
 
-`  string  `
+`string`
 
 Required. Stream to read rows from.
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  readStream  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `readStream` :
 
-  - `  bigquery.readsessions.getData  `
+  - `bigquery.readsessions.getData`
 
-`  offset  `
+`offset`
 
-`  int64  `
+`int64`
 
 The offset requested must be less than the last row read from Read. Requesting a larger offset is undefined. If not specified, start reading from offset zero.
 
 ## ReadRowsResponse
 
-Response from calling `  ReadRows  ` may include row data, progress and throttling information.
+Response from calling `ReadRows` may include row data, progress and throttling information.
 
 Fields
 
-`  row_count  `
+`row_count`
 
-`  int64  `
+`int64`
 
 Number of serialized rows in the rows block.
 
-`  stats  `
+`stats`
 
 `  StreamStats  `
 
 Statistics for the stream.
 
-`  throttle_state  `
+`throttle_state`
 
 `  ThrottleState  `
 
 Throttling state. If unset, the latest response still describes the current throttling status.
 
-Union field `  rows  ` . Row data is returned in format specified during session creation. `  rows  ` can be only one of the following:
+Union field `rows` . Row data is returned in format specified during session creation. `rows` can be only one of the following:
 
-`  avro_rows  `
+`avro_rows`
 
 `  AvroRows  `
 
 Serialized row data in AVRO format.
 
-`  arrow_record_batch  `
+`arrow_record_batch`
 
 `  ArrowRecordBatch  `
 
 Serialized row data in Arrow RecordBatch format.
 
-Union field `  schema  ` . The schema for the read. If read\_options.selected\_fields is set, the schema may be different from the table schema as it will only contain the selected fields. This schema is equivalent to the one returned by CreateSession. This field is only populated in the first ReadRowsResponse RPC. `  schema  ` can be only one of the following:
+Union field `schema` . The schema for the read. If read\_options.selected\_fields is set, the schema may be different from the table schema as it will only contain the selected fields. This schema is equivalent to the one returned by CreateSession. This field is only populated in the first ReadRowsResponse RPC. `schema` can be only one of the following:
 
-`  avro_schema  `
+`avro_schema`
 
 `  AvroSchema  `
 
 Output only. Avro schema.
 
-`  arrow_schema  `
+`arrow_schema`
 
 `  ArrowSchema  `
 
@@ -719,48 +719,48 @@ Information about the ReadSession.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. Unique identifier for the session, in the form `  projects/{project_id}/locations/{location}/sessions/{session_id}  ` .
+Output only. Unique identifier for the session, in the form `projects/{project_id}/locations/{location}/sessions/{session_id}` .
 
-`  expire_time  `
+`expire_time`
 
 `  Timestamp  `
 
 Output only. Time at which the session becomes invalid. After this time, subsequent requests to read this Session will return errors. The expire\_time is automatically assigned and currently cannot be specified or updated.
 
-`  data_format  `
+`data_format`
 
 `  DataFormat  `
 
 Immutable. Data format of the output data.
 
-`  table  `
+`table`
 
-`  string  `
+`string`
 
 Immutable. Table that this ReadSession is reading from, in the form \`projects/{project\_id}/datasets/{dataset\_id}/tables/{table\_id}
 
-Authorization requires one or more of the following [IAM](https://cloud.google.com/iam/docs/) permissions on the specified resource `  table  ` :
+Authorization requires one or more of the following [IAM](https://cloud.google.com/iam/docs/) permissions on the specified resource `table` :
 
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.getData  `
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData`
 
-`  table_modifiers  `
+`table_modifiers`
 
 `  TableModifiers  `
 
 Optional. Any modifiers which are applied when reading from the specified table.
 
-`  read_options  `
+`read_options`
 
 `  TableReadOptions  `
 
 Optional. Read options for this session (e.g. column selection, filters).
 
-`  streams[]  `
+`streams[]`
 
 `  ReadStream  `
 
@@ -768,15 +768,15 @@ Output only. A list of streams created with the session.
 
 At least one stream is created with the session. In the future, larger request\_stream\_count values *may* result in this list being unpopulated, in that case, the user will need to use a List method to get the streams instead, which is not yet available.
 
-Union field `  schema  ` . The schema for the read. If read\_options.selected\_fields is set, the schema may be different from the table schema as it will only contain the selected fields. `  schema  ` can be only one of the following:
+Union field `schema` . The schema for the read. If read\_options.selected\_fields is set, the schema may be different from the table schema as it will only contain the selected fields. `schema` can be only one of the following:
 
-`  avro_schema  `
+`avro_schema`
 
 `  AvroSchema  `
 
 Output only. Avro schema.
 
-`  arrow_schema  `
+`arrow_schema`
 
 `  ArrowSchema  `
 
@@ -788,7 +788,7 @@ Additional attributes when reading a table.
 
 Fields
 
-`  snapshot_time  `
+`snapshot_time`
 
 `  Timestamp  `
 
@@ -800,9 +800,9 @@ Options dictating how we read a table.
 
 Fields
 
-`  selected_fields[]  `
+`selected_fields[]`
 
-`  string  `
+`string`
 
 Optional. The names of the fields in the table to be returned. If no field names are specified, then all fields in the table are returned.
 
@@ -822,9 +822,9 @@ struct\_field { string\_field1 }
 
 The order of the fields in the read session schema is derived from the table schema and does not correspond to the order in which the fields are specified in this list.
 
-`  row_restriction  `
+`row_restriction`
 
-`  string  `
+`string`
 
 SQL text filtering statement, similar to a WHERE clause in a query. Aggregates are not supported.
 
@@ -832,7 +832,7 @@ Examples: "int\_field \> 5" "date\_field = CAST('2014-9-27' as DATE)" "nullable\
 
 Restricted to a maximum length for 1 MB.
 
-`  arrow_serialization_options  `
+`arrow_serialization_options`
 
 `  ArrowSerializationOptions  `
 
@@ -840,15 +840,15 @@ Optional. Options specific to the Apache Arrow output format.
 
 ## ReadStream
 
-Information about a single stream that gets data out of the storage system. Most of the information about `  ReadStream  ` instances is aggregated, making `  ReadStream  ` lightweight.
+Information about a single stream that gets data out of the storage system. Most of the information about `ReadStream` instances is aggregated, making `ReadStream` lightweight.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. Name of the stream, in the form `  projects/{project_id}/locations/{location}/sessions/{session_id}/streams/{stream_id}  ` .
+Output only. Name of the stream, in the form `projects/{project_id}/locations/{location}/sessions/{session_id}/streams/{stream_id}` .
 
 ## RowError
 
@@ -856,57 +856,57 @@ The message that presents row level error info in a request.
 
 Fields
 
-`  index  `
+`index`
 
-`  int64  `
+`int64`
 
 Index of the malformed row in the request.
 
-`  code  `
+`code`
 
 `  RowErrorCode  `
 
 Structured error reason for a row error.
 
-`  message  `
+`message`
 
-`  string  `
+`string`
 
 Description of the issue encountered when processing the row.
 
 ## RowErrorCode
 
-Error code for `  RowError  ` .
+Error code for `RowError` .
 
 Enums
 
-`  ROW_ERROR_CODE_UNSPECIFIED  `
+`ROW_ERROR_CODE_UNSPECIFIED`
 
 Default error.
 
-`  FIELDS_ERROR  `
+`FIELDS_ERROR`
 
 One or more fields in the row has errors.
 
 ## SplitReadStreamRequest
 
-Request message for `  SplitReadStream  ` .
+Request message for `SplitReadStream` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Required. Name of the stream to split.
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.readsessions.update  `
+  - `bigquery.readsessions.update`
 
-`  fraction  `
+`fraction`
 
-`  double  `
+`double`
 
 A value in the range (0.0, 1.0) that specifies the fractional point at which the original stream should be split. The actual split point is evaluated on pre-filtered rows, so if a filter is provided, then there is no guarantee that the division of the rows between the new child streams will be proportional to this fractional value. Additionally, because the server-side unit for assigning data is collections of rows, this fraction will always map to a data storage boundary on the server side.
 
@@ -914,13 +914,13 @@ A value in the range (0.0, 1.0) that specifies the fractional point at which the
 
 Fields
 
-`  primary_stream  `
+`primary_stream`
 
 `  ReadStream  `
 
 Primary stream, which contains the beginning portion of |original\_stream|. An empty value indicates that the original stream can no longer be split.
 
-`  remainder_stream  `
+`remainder_stream`
 
 `  ReadStream  `
 
@@ -932,87 +932,87 @@ Structured custom BigQuery Storage error message. The error can be attached as e
 
 Fields
 
-`  code  `
+`code`
 
 `  StorageErrorCode  `
 
 BigQuery Storage specific error code.
 
-`  entity  `
+`entity`
 
-`  string  `
+`string`
 
 Name of the failed entity.
 
-`  error_message  `
+`error_message`
 
-`  string  `
+`string`
 
 Message that describes the error.
 
 ## StorageErrorCode
 
-Error code for `  StorageError  ` .
+Error code for `StorageError` .
 
 Enums
 
-`  STORAGE_ERROR_CODE_UNSPECIFIED  `
+`STORAGE_ERROR_CODE_UNSPECIFIED`
 
 Default error.
 
-`  TABLE_NOT_FOUND  `
+`TABLE_NOT_FOUND`
 
 Table is not found in the system.
 
-`  STREAM_ALREADY_COMMITTED  `
+`STREAM_ALREADY_COMMITTED`
 
 Stream is already committed.
 
-`  STREAM_NOT_FOUND  `
+`STREAM_NOT_FOUND`
 
 Stream is not found.
 
-`  INVALID_STREAM_TYPE  `
+`INVALID_STREAM_TYPE`
 
 Invalid Stream type. For example, you try to commit a stream that is not pending.
 
-`  INVALID_STREAM_STATE  `
+`INVALID_STREAM_STATE`
 
 Invalid Stream state. For example, you try to commit a stream that is not finalized or is garbaged.
 
-`  STREAM_FINALIZED  `
+`STREAM_FINALIZED`
 
 Stream is finalized.
 
-`  SCHEMA_MISMATCH_EXTRA_FIELDS  `
+`SCHEMA_MISMATCH_EXTRA_FIELDS`
 
 There is a schema mismatch and it is caused by user schema has extra field than bigquery schema.
 
-`  OFFSET_ALREADY_EXISTS  `
+`OFFSET_ALREADY_EXISTS`
 
 Offset already exists.
 
-`  OFFSET_OUT_OF_RANGE  `
+`OFFSET_OUT_OF_RANGE`
 
 Offset out of range.
 
-`  CMEK_NOT_PROVIDED  `
+`CMEK_NOT_PROVIDED`
 
 Customer-managed encryption key (CMEK) not provided for CMEK-enabled data.
 
-`  INVALID_CMEK_PROVIDED  `
+`INVALID_CMEK_PROVIDED`
 
 Customer-managed encryption key (CMEK) was incorrectly provided.
 
-`  CMEK_ENCRYPTION_ERROR  `
+`CMEK_ENCRYPTION_ERROR`
 
 There is an encryption error while using customer-managed encryption key.
 
-`  KMS_SERVICE_ERROR  `
+`KMS_SERVICE_ERROR`
 
 Key Management Service (KMS) service returned an error, which can be retried.
 
-`  KMS_PERMISSION_DENIED  `
+`KMS_PERMISSION_DENIED`
 
 Permission denied while using customer-managed encryption key.
 
@@ -1022,7 +1022,7 @@ Estimated stream statistics for a given Stream.
 
 Fields
 
-`  progress  `
+`progress`
 
 `  Progress  `
 
@@ -1032,21 +1032,21 @@ Represents the progress of the current stream.
 
 Fields
 
-`  at_response_start  `
+`at_response_start`
 
-`  double  `
+`double`
 
 The fraction of rows assigned to the stream that have been processed by the server so far, not including the rows in the current response message.
 
-This value, along with `  at_response_end  ` , can be used to interpolate the progress made as the rows in the message are being processed using the following formula: `  at_response_start + (at_response_end - at_response_start) * rows_processed_from_response / rows_in_response  ` .
+This value, along with `at_response_end` , can be used to interpolate the progress made as the rows in the message are being processed using the following formula: `at_response_start + (at_response_end - at_response_start) * rows_processed_from_response / rows_in_response` .
 
-Note that if a filter is provided, the `  at_response_end  ` value of the previous response may not necessarily be equal to the `  at_response_start  ` value of the current response.
+Note that if a filter is provided, the `at_response_end` value of the previous response may not necessarily be equal to the `at_response_start` value of the current response.
 
-`  at_response_end  `
+`at_response_end`
 
-`  double  `
+`double`
 
-Similar to `  at_response_start  ` , except that this value includes the rows in the current response.
+Similar to `at_response_start` , except that this value includes the rows in the current response.
 
 ## TableFieldSchema
 
@@ -1054,39 +1054,39 @@ A field in TableSchema
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Required. The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_), and must start with a letter or underscore. The maximum length is 128 characters.
 
-`  type  `
+`type`
 
 `  Type  `
 
 Required. The field data type.
 
-`  mode  `
+`mode`
 
 `  Mode  `
 
 Optional. The field mode. The default value is NULLABLE.
 
-`  fields[]  `
+`fields[]`
 
 `  TableFieldSchema  `
 
 Optional. Describes the nested schema fields if the type property is set to STRUCT.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. The field description. The maximum length is 1,024 characters.
 
-`  max_length  `
+`max_length`
 
-`  int64  `
+`int64`
 
 Optional. Maximum length of values of this field for STRINGS or BYTES.
 
@@ -1098,9 +1098,9 @@ If type = "BYTES", then max\_length represents the maximum number of bytes in th
 
 It is invalid to set this field if type ≠ "STRING" and ≠ "BYTES".
 
-`  precision  `
+`precision`
 
-`  int64  `
+`int64`
 
 Optional. Precision (maximum number of total digits in base 10) and scale (maximum number of digits in the fractional part in base 10) constraints for values of this field for NUMERIC or BIGNUMERIC.
 
@@ -1125,15 +1125,15 @@ Acceptable values for precision if only precision is specified but not scale (an
 
 If scale is specified but not precision, then it is invalid.
 
-`  scale  `
+`scale`
 
-`  int64  `
+`int64`
 
 Optional. See documentation for precision.
 
-`  default_value_expression  `
+`default_value_expression`
 
-`  string  `
+`string`
 
 Optional. A SQL expression to specify the [default value](https://cloud.google.com/bigquery/docs/default-values) for this field.
 
@@ -1141,81 +1141,81 @@ Optional. A SQL expression to specify the [default value](https://cloud.google.c
 
 Enums
 
-`  MODE_UNSPECIFIED  `
+`MODE_UNSPECIFIED`
 
 Illegal value
 
-`  NULLABLE  `
+`NULLABLE`
 
-`  REQUIRED  `
+`REQUIRED`
 
-`  REPEATED  `
+`REPEATED`
 
 ## Type
 
 Enums
 
-`  TYPE_UNSPECIFIED  `
+`TYPE_UNSPECIFIED`
 
 Illegal value
 
-`  STRING  `
+`STRING`
 
 64K, UTF8
 
-`  INT64  `
+`INT64`
 
 64-bit signed
 
-`  DOUBLE  `
+`DOUBLE`
 
 64-bit IEEE floating point
 
-`  STRUCT  `
+`STRUCT`
 
 Aggregate type
 
-`  BYTES  `
+`BYTES`
 
 64K, Binary
 
-`  BOOL  `
+`BOOL`
 
 2-valued
 
-`  TIMESTAMP  `
+`TIMESTAMP`
 
 64-bit signed usec since UTC epoch
 
-`  DATE  `
+`DATE`
 
 Civil date - Year, Month, Day
 
-`  TIME  `
+`TIME`
 
 Civil time - Hour, Minute, Second, Microseconds
 
-`  DATETIME  `
+`DATETIME`
 
 Combination of civil date and civil time
 
-`  GEOGRAPHY  `
+`GEOGRAPHY`
 
 Geography object
 
-`  NUMERIC  `
+`NUMERIC`
 
 Numeric value
 
-`  BIGNUMERIC  `
+`BIGNUMERIC`
 
 BigNumeric value
 
-`  INTERVAL  `
+`INTERVAL`
 
 Interval
 
-`  JSON  `
+`JSON`
 
 JSON, String
 
@@ -1225,7 +1225,7 @@ Schema of a table. This schema is a subset of google.cloud.bigquery.v2.TableSche
 
 Fields
 
-`  fields[]  `
+`fields[]`
 
 `  TableFieldSchema  `
 
@@ -1237,9 +1237,9 @@ Information on if the current connection is being throttled.
 
 Fields
 
-`  throttle_percent  `
+`throttle_percent`
 
-`  int32  `
+`int32`
 
 How much this connection is being throttled. Zero means no throttling, 100 means fully throttled.
 
@@ -1249,35 +1249,35 @@ Information about a single stream that gets data inside the storage system.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. Name of the stream, in the form `  projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}  ` .
+Output only. Name of the stream, in the form `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}` .
 
-`  type  `
+`type`
 
 `  Type  `
 
 Immutable. Type of the stream.
 
-`  create_time  `
+`create_time`
 
 `  Timestamp  `
 
 Output only. Create time of the stream. For the \_default stream, this is the creation\_time of the table.
 
-`  commit_time  `
+`commit_time`
 
 `  Timestamp  `
 
-Output only. Commit time of the stream. If a stream is of `  COMMITTED  ` type, then it will have a commit\_time same as `  create_time  ` . If the stream is of `  PENDING  ` type, commit\_time being empty means it is not committed.
+Output only. Commit time of the stream. If a stream is of `COMMITTED` type, then it will have a commit\_time same as `create_time` . If the stream is of `PENDING` type, commit\_time being empty means it is not committed.
 
-`  table_schema  `
+`table_schema`
 
 `  TableSchema  `
 
-Output only. The schema of the destination table. It is only returned in `  CreateWriteStream  ` response. Caller should generate data that's compatible with this schema to send in initial `  AppendRowsRequest  ` . The table schema could go out of date during the life time of the stream.
+Output only. The schema of the destination table. It is only returned in `CreateWriteStream` response. Caller should generate data that's compatible with this schema to send in initial `AppendRowsRequest` . The table schema could go out of date during the life time of the stream.
 
 ## Type
 
@@ -1285,18 +1285,18 @@ Type enum of the stream.
 
 Enums
 
-`  TYPE_UNSPECIFIED  `
+`TYPE_UNSPECIFIED`
 
 Unknown type.
 
-`  COMMITTED  `
+`COMMITTED`
 
 Data will commit automatically and appear as soon as the write is acknowledged.
 
-`  PENDING  `
+`PENDING`
 
 Data is invisible until the stream is committed.
 
-`  BUFFERED  `
+`BUFFERED`
 
 Data is only visible up to the offset to which it was flushed.

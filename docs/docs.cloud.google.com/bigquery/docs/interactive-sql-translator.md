@@ -22,7 +22,7 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 
 #### Permissions to use the interactive SQL translator
 
-To get the permissions that you need to use the interactive translator, ask your administrator to grant you the [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` ) IAM role on the `  parent  ` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to use the interactive translator, ask your administrator to grant you the [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` ) IAM role on the `parent` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to use the interactive translator. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -30,8 +30,8 @@ This predefined role contains the permissions required to use the interactive tr
 
 The following permissions are required to use the interactive translator:
 
-  - `  bigquerymigration.workflows.create  `
-  - `  bigquerymigration.workflows.get  `
+  - `bigquerymigration.workflows.create`
+  - `bigquerymigration.workflows.get`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -39,12 +39,12 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 You can configure additional translation configurations using the **Translation Config ID** and **Translation Configuration Source Location** fields in the translation settings. To configure these translation configurations, you need the following permissions:
 
-  - `  bigquerymigration.workflows.get  `
-  - `  bigquerymigration.workflows.list  `
+  - `bigquerymigration.workflows.get`
+  - `bigquerymigration.workflows.list`
 
 The following predefined IAM role provide the permissions that you need to configure additional translation configurations:
 
-  - `  roles/bigquerymigration.viewer  `
+  - `roles/bigquerymigration.viewer`
 
 For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -81,16 +81,16 @@ Additionally, translation of the following SQL dialects is supported in [preview
 
 When translating SQL from a source dialect to BigQuery, some functions might not have a direct equivalent. To address this, the BigQuery Migration Service (and the broader BigQuery community) provide helper user-defined functions (UDFs) that replicate the behavior of these unsupported source dialect functions.
 
-These UDFs are often found in the `  bqutil  ` public dataset, allowing translated queries to initially reference them using the format `  bqutil.<dataset>.<function>()  ` . For example, `  bqutil.fn.cw_count()  ` .
+These UDFs are often found in the `bqutil` public dataset, allowing translated queries to initially reference them using the format `bqutil.<dataset>.<function>()` . For example, `bqutil.fn.cw_count()` .
 
 #### Important considerations for production environments:
 
-While `  bqutil  ` offers convenient access to these helper UDFs for initial translation and testing, direct reliance on `  bqutil  ` for production workloads is not recommended for several reasons:
+While `bqutil` offers convenient access to these helper UDFs for initial translation and testing, direct reliance on `bqutil` for production workloads is not recommended for several reasons:
 
-1.  Version control: The `  bqutil  ` project hosts the latest version of these UDFs, which means their definitions can change over time. Relying directly on `  bqutil  ` could lead to unexpected behavior or breaking changes in your production queries if a UDF's logic is updated.
+1.  Version control: The `bqutil` project hosts the latest version of these UDFs, which means their definitions can change over time. Relying directly on `bqutil` could lead to unexpected behavior or breaking changes in your production queries if a UDF's logic is updated.
 2.  Dependency isolation: Deploying UDFs to your own project isolates your production environment from external changes.
 3.  Customization: You might need to modify or optimize these UDFs to better suit your specific business logic or performance requirements. This is only possible if they are within your own project.
-4.  Security and governance: Your organization's security policies might restrict direct access to public datasets like `  bqutil  ` for production data processing. Copying UDFs to your controlled environment aligns with such policies.
+4.  Security and governance: Your organization's security policies might restrict direct access to public datasets like `bqutil` for production data processing. Copying UDFs to your controlled environment aligns with such policies.
 
 #### Deploying helper UDFs to your project:
 
@@ -110,123 +110,123 @@ The interactive SQL translator is available in the following processing location
 
 Bangkok
 
-`  asia-southeast3  `
+`asia-southeast3`
 
 Delhi
 
-`  asia-south2  `
+`asia-south2`
 
 Hong Kong
 
-`  asia-east2  `
+`asia-east2`
 
 Jakarta
 
-`  asia-southeast2  `
+`asia-southeast2`
 
 Melbourne
 
-`  australia-southeast2  `
+`australia-southeast2`
 
 Mumbai
 
-`  asia-south1  `
+`asia-south1`
 
 Osaka
 
-`  asia-northeast2  `
+`asia-northeast2`
 
 Seoul
 
-`  asia-northeast3  `
+`asia-northeast3`
 
 Singapore
 
-`  asia-southeast1  `
+`asia-southeast1`
 
 Sydney
 
-`  australia-southeast1  `
+`australia-southeast1`
 
 Taiwan
 
-`  asia-east1  `
+`asia-east1`
 
 Tokyo
 
-`  asia-northeast1  `
+`asia-northeast1`
 
 **Europe**
 
 Belgium
 
-`  europe-west1  `
+`europe-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
-`  europe-west10  `
+`europe-west10`
 
 EU multi-region
 
-`  eu  `
+`eu`
 
 Finland
 
-`  europe-north1  `
+`europe-north1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
-`  europe-west3  `
+`europe-west3`
 
 London
 
-`  europe-west2  `
+`europe-west2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
-`  europe-southwest1  `
+`europe-southwest1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
-`  europe-west8  `
+`europe-west8`
 
 Netherlands
 
-`  europe-west4  `
+`europe-west4`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
-`  europe-west9  `
+`europe-west9`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
-`  europe-north2  `
+`europe-north2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
-`  europe-west12  `
+`europe-west12`
 
 Warsaw
 
-`  europe-central2  `
+`europe-central2`
 
 Zürich
 
-`  europe-west6  `
+`europe-west6`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
@@ -234,97 +234,97 @@ Zürich
 
 Columbus, Ohio
 
-`  us-east5  `
+`us-east5`
 
 Dallas
 
-`  us-south1  `
+`us-south1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
-`  us-central1  `
+`us-central1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
-`  us-west4  `
+`us-west4`
 
 Los Angeles
 
-`  us-west2  `
+`us-west2`
 
 Mexico
 
-`  northamerica-south1  `
+`northamerica-south1`
 
 Northern Virginia
 
-`  us-east4  `
+`us-east4`
 
 Oregon
 
-`  us-west1  `
+`us-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Québec
 
-`  northamerica-northeast1  `
+`northamerica-northeast1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
-`  southamerica-east1  `
+`southamerica-east1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
-`  us-west3  `
+`us-west3`
 
 Santiago
 
-`  southamerica-west1  `
+`southamerica-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
-`  us-east1  `
+`us-east1`
 
 Toronto
 
-`  northamerica-northeast2  `
+`northamerica-northeast2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 US multi-region
 
-`  us  `
+`us`
 
 **Africa**
 
 Johannesburg
 
-`  africa-south1  `
+`africa-south1`
 
 **MiddleEast**
 
 Dammam
 
-`  me-central2  `
+`me-central2`
 
 Doha
 
-`  me-central1  `
+`me-central1`
 
 Israel
 
-`  me-west1  `
+`me-west1`
 
 [Gemini-based translation configurations](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) are only available in specific processing locations. For more information, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
 
@@ -340,7 +340,7 @@ Follow these steps to translate a query into GoogleSQL:
 
 3.  For **Source dialect** , select the SQL dialect that you want to translate.
 
-4.  Optional. For **Processing location** , select the location where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, select the `  eu  ` region.
+4.  Optional. For **Processing location** , select the location where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, select the `eu` region.
 
 5.  Click **Save** .
 
@@ -390,7 +390,7 @@ When the **Customize** menu appears, continue with the following steps.
     
       - In the **Find and replace a pattern** prompt, specify a SQL pattern that you want to replace in the **Replace** field, and a SQL pattern to replace it in the **With** field.
         
-        A SQL pattern can contain any number of statements, clauses, or functions in a SQL script. When you create a rule using this prompt, the Gemini enhanced SQL translation identifies any instances of that SQL pattern in the SQL query and dynamically replaces it with another SQL pattern. For example, you can use this prompt to create a rule that replaces all occurrences of `  months_between (X,Y)  ` with `  date_diff(X,Y,MONTH)  ` .
+        A SQL pattern can contain any number of statements, clauses, or functions in a SQL script. When you create a rule using this prompt, the Gemini enhanced SQL translation identifies any instances of that SQL pattern in the SQL query and dynamically replaces it with another SQL pattern. For example, you can use this prompt to create a rule that replaces all occurrences of `months_between (X,Y)` with `date_diff(X,Y,MONTH)` .
     
       - In the **Describe a change to the output** field, type a change to the SQL translation output in natural language.
         
@@ -404,7 +404,7 @@ When the **Customize** menu appears, continue with the following steps.
 
 4.  Optional: To add this rule for use with future translations, select the **Save this prompt...** checkbox.
     
-    Rules are saved in the default configuration YAML file, or `  __default.ai_config.yaml  ` . This configuration YAML file is saved to the Cloud Storage folder as specified in the **Translation Configuration Source Location** field in the [translation settings](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate-with-additional-configs) . If the **Translation Configuration Source Location** isn't already set, a folder browser appears and lets you select one. A configuration YAML file is subject to [configuration file size limitations](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#config-limitations) .
+    Rules are saved in the default configuration YAML file, or `__default.ai_config.yaml` . This configuration YAML file is saved to the Cloud Storage folder as specified in the **Translation Configuration Source Location** field in the [translation settings](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate-with-additional-configs) . If the **Translation Configuration Source Location** isn't already set, a folder browser appears and lets you select one. A configuration YAML file is subject to [configuration file size limitations](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#config-limitations) .
 
 5.  To apply the suggested changes to the SQL query, click **Apply** .
 
@@ -498,21 +498,21 @@ To specify translation configurations by providing a location to the translation
 
 When you use a translation configuration file with the BigQuery interactive SQL translator, the compressed metadata file or YAML config file must be smaller than 50 MB. If the file size exceeds 50 MB, the interactive translator skips that configuration file during translation and produces an error message similar to the following:
 
-`  CONFIG ERROR: Skip reading file "gs://metadata-file.zip". File size (150,000,000 bytes) exceeds limit (50 MB).  `
+`CONFIG ERROR: Skip reading file "gs://metadata-file.zip". File size (150,000,000 bytes) exceeds limit (50 MB).`
 
-One method to reduce metadata file size is to use the `  --database  ` or `  --schema  ` flags to only extract metadata for databases or schemas that are relevant for the translation input queries. For more information about using these flags when you [generate metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) , see [Global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
+One method to reduce metadata file size is to use the `--database` or `--schema` flags to only extract metadata for databases or schemas that are relevant for the translation input queries. For more information about using these flags when you [generate metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) , see [Global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 ## Troubleshoot translation errors
 
 The following are commonly encountered errors when using the interactive SQL translator.
 
-### `     RelationNotFound    ` or `     AttributeNotFound    ` translation issues
+### `RelationNotFound` or `AttributeNotFound` translation issues
 
-After translating a querying using the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate_a_query_into_standard_sql) , you might encounter a failed translation with the `  RelationNotFound  ` or `  AttributeNotFound  ` error.
+After translating a query using the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate_a_query_into_standard_sql) , you might encounter a failed translation with the `RelationNotFound` or `AttributeNotFound` error.
 
 You can find failed translations by navigating to the **Translation details** page and opening the **Log Messages** tab.
 
-To ensure the most accurate translation, you can input the data definition language (DDL) statements for any tables used in a query prior to the query itself. For example, if you want to translate the Amazon Redshift query `  select table1.field1, table2.field1 from table1, table2 where table1.id = table2.id;  ` , you would input the following SQL statements into the interactive SQL translator:
+To ensure the most accurate translation, you can input the data definition language (DDL) statements for any tables used in a query prior to the query itself. For example, if you want to translate the Amazon Redshift query `select table1.field1, table2.field1 from table1, table2 where table1.id = table2.id;` , you would input the following SQL statements into the interactive SQL translator:
 
     create table schema1.table1 (id int, field1 int, field2 varchar(16));
     create table schema1.table2 (id int, field1 varchar(30), field2 date);
@@ -529,11 +529,11 @@ This product or feature is subject to the "Pre-GA Offerings Terms" in the Genera
 
 **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
-To fixed failed translation jobs with the `  RelationNotFound  ` or `  AttributeNotFound  ` errors, you can also use Gemini to try to resolve these issues with the following steps.
+To fixed failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to try to resolve these issues with the following steps.
 
 1.  Navigate to the **Translation details** page and open the **Log Messages** tab.
 
-2.  Click the query that has the message `  RelationNotFound  ` or `  AttributeNotFound  ` in the **Category** column.
+2.  Click the query that has the message `RelationNotFound` or `AttributeNotFound` in the **Category** column.
 
 3.  Click **Suggested fix** .
 

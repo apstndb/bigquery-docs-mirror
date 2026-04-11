@@ -34,7 +34,7 @@ Once you have an existing Amazon S3 connection, you can do the following:
 
 ### Spark connections
 
-[Stored procedures for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) let you run stored procedures written in Python using BigQuery. A [Spark connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) lets you connect to Serverless for Apache Spark and run the stored procedures for Spark.
+[Stored procedures for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) let you run stored procedures written in Python using BigQuery. A [Spark connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) lets you connect to Managed Service for Apache Spark and run the stored procedures for Spark.
 
 To create this connection, see [Create connections](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#create-spark-connection) .
 

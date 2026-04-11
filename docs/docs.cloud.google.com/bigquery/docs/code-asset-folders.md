@@ -32,7 +32,7 @@ BigQuery supports the following types of folders:
 
 ### Folder code regions
 
-You can have folders and code assets in different code regions. For example, you could have `  folderA  ` and the code assets that it contains in the `  us-west1  ` region, and `  folderB  ` and the code assets that it contains in the `  us-central1  ` region. The region that you are viewing is displayed in the **Files** pane:
+You can have folders and code assets in different code regions. For example, you could have `folderA` and the code assets that it contains in the `us-west1` region, and `folderB` and the code assets that it contains in the `us-central1` region. The region that you are viewing is displayed in the **Files** pane:
 
 ![The current code region is displayed next to the project name in the \*\*Files\*\* pane.](https://docs.cloud.google.com/static/bigquery/images/folder-location.png)
 
@@ -58,8 +58,8 @@ The following are best practices for applying IAM policies to files and folders:
 
 When you create a folder, the following roles are granted automatically:
 
-  - Users who create folders in their user root node automatically receive the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) on those folders.
-  - The creator of a root team folder automatically receives the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) on that team folder.
+  - Users who create folders in their user root node automatically receive the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on those folders.
+  - The creator of a root team folder automatically receives the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that team folder.
 
 You can [use the Config API to grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 

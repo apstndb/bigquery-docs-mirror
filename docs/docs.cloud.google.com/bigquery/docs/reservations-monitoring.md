@@ -6,15 +6,15 @@ As a BigQuery administrator, you can monitor reservations in your project by vie
 
 You can view the project and reservation slot usage in the following ways:
 
-  - **`  INFORMATION_SCHEMA  ` views.** To retrieve project and reservation usage information, query the [`  INFORMATION_SCHEMA.JOBS*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#examples) .
+  - **`INFORMATION_SCHEMA` views.** To retrieve project and reservation usage information, query the [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#examples) .
     
-    The [`  reservation_id  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) field in the `  INFORMATION_SCHEMA.JOBS*  ` views contains the reservation name.
+    The [`reservation_id`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) field in the `INFORMATION_SCHEMA.JOBS*` views contains the reservation name.
 
   - **Google Cloud console.** The Google Cloud console includes charts that display slot usage. For more information, see [Use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
   - **Audit logs.** Use [audit logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) to view metrics about slot usage.
 
-  - **The `  Jobs  ` method.** Use the [`  Jobs  ` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) to view metrics about slot usage for a job.
+  - **The `Jobs` method.** Use the [`Jobs` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) to view metrics about slot usage for a job.
 
   - **Cloud Monitoring.** You can use [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard) to create dashboards to monitor your allocated slots. With a Cloud Monitoring dashboard, you can view your slot usage for each reservation and for each job type, across all projects within the reservation. To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](https://docs.cloud.google.com/monitoring/settings) of the project where you are monitoring the metrics. For more information about the metrics available for the Cloud Monitoring dashboard, see [Metrics available for visualization](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) .
     
@@ -53,13 +53,13 @@ Creating, deleting, and updating resources related to [BigQuery reservations](ht
 
 ## Monitor autoscaling with information schema
 
-You can use the following SQL scripts to check the billed slot seconds for a particular edition. You must run these scripts in the same project the reservations were created. The first script shows billed slot seconds covered by `  commitment_plan  ` while the second script shows billed slot seconds that aren't covered by a commitment.
+You can use the following SQL scripts to check the billed slot seconds for a particular edition. You must run these scripts in the same project the reservations were created. The first script shows billed slot seconds covered by `commitment_plan` while the second script shows billed slot seconds that aren't covered by a commitment.
 
 You only need to set the value of three variables to run these scripts:
 
-  - `  start_time  `
-  - `  end_time  `
-  - `  edition_to_check  `
+  - `start_time`
+  - `end_time`
+  - `edition_to_check`
 
 These scripts are subject to the following caveats:
 
@@ -793,24 +793,24 @@ FROM
 
 This section describes how to resolve common issues when monitoring BigQuery reservations and slot usage.
 
-### Slot usage metrics don't match `     INFORMATION_SCHEMA    `
+### Slot usage metrics don't match `INFORMATION_SCHEMA`
 
-If you encounter discrepancies between slot usage metrics in resource charts and `  INFORMATION_SCHEMA  ` data, try the following:
+If you encounter discrepancies between slot usage metrics in resource charts and `INFORMATION_SCHEMA` data, try the following:
 
   - **Reduce granularity.** Change the chart granularity to 1-second intervals instead of 1-hour intervals.
-  - **Align aggregation.** Ensure that you are using aggregation methods that align between resource charts and `  INFORMATION_SCHEMA  ` data. For example, to better reflect peak usage in resource charts, change the metric aggregation to p99 or p90 consistently.
+  - **Align aggregation.** Ensure that you are using aggregation methods that align between resource charts and `INFORMATION_SCHEMA` data. For example, to better reflect peak usage in resource charts, change the metric aggregation to p99 or p90 consistently.
 
 ### Borrowed slots appear when idle slots are disabled
 
-Your monitoring charts might show a non-zero value for `  borrowed_slots  ` even if `  ignore_idle_slots=true  ` is set for one or more reservations. This setting prevents a reservation from *borrowing* idle slots, but doesn't prevent it from *lending* its unused slots to other reservations.
+Your monitoring charts might show a non-zero value for `borrowed_slots` even if `ignore_idle_slots=true` is set for one or more reservations. This setting prevents a reservation from *borrowing* idle slots, but doesn't prevent it from *lending* its unused slots to other reservations.
 
 These borrowed slots appear in the following cases:
 
-  - **Lending to other reservations:** A reservation with `  ignore_idle_slots=true  ` can lend its unused baseline slots to other reservations in the same edition that *do* allow idle slot borrowing ( `  ignore_idle_slots=false  ` ). If all reservations in an edition have `  ignore_idle_slots=true  ` , then idle slots are not shared between them.
+  - **Lending to other reservations:** A reservation with `ignore_idle_slots=true` can lend its unused baseline slots to other reservations in the same edition that *do* allow idle slot borrowing ( `ignore_idle_slots=false` ). If all reservations in an edition have `ignore_idle_slots=true` , then idle slots are not shared between them.
     
-    For example, assume Reservation A has 100 slots, 0 usage, and is configured with `  ignore_idle_slots=true  ` . Reservation B is in the same edition and project, has 100 slots, needs 150 slots for its workload, and is configured with `  ignore_idle_slots=false  ` . Reservation B can borrow 50 idle slots from Reservation A to meet its needs. When this occurs, monitoring charts report 50 `  lent_slots  ` for Reservation A and 50 `  borrowed_slots  ` for Reservation B.
+    For example, assume Reservation A has 100 slots, 0 usage, and is configured with `ignore_idle_slots=true` . Reservation B is in the same edition and project, has 100 slots, needs 150 slots for its workload, and is configured with `ignore_idle_slots=false` . Reservation B can borrow 50 idle slots from Reservation A to meet its needs. When this occurs, monitoring charts report 50 `lent_slots` for Reservation A and 50 `borrowed_slots` for Reservation B.
 
-  - **Usage exceeding capacity:** If a reservation's slot usage temporarily exceeds its capacity (baseline + autoscaled slots), monitoring charts show this difference as `  borrowed_slots  ` . This can occur even for reservations with `  ignore_idle_slots=true  ` .
+  - **Usage exceeding capacity:** If a reservation's slot usage temporarily exceeds its capacity (baseline + autoscaled slots), monitoring charts show this difference as `borrowed_slots` . This can occur even for reservations with `ignore_idle_slots=true` .
 
 Slot usage can occasionally exceed the sum of your baseline plus scaled slots. You aren't billed for slot usage that's greater than your baseline plus scaled slots.
 
@@ -818,7 +818,7 @@ Slot usage can occasionally exceed the sum of your baseline plus scaled slots. Y
 
 Monitoring dashboards use sampled data, which might not accurately reflect the precise timing of slot usage within a sampling interval.
 
-For a more accurate analysis of slot usage, query columns related to idle slots, such as `  borrowed_slots  ` and `  lent_slots  ` columns in the [`  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline#schema) .
+For a more accurate analysis of slot usage, query columns related to idle slots, such as `borrowed_slots` and `lent_slots` columns in the [`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline#schema) .
 
 ## What's next
 

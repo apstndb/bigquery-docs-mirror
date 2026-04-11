@@ -8,7 +8,7 @@ This document describes how to create [Colab Enterprise notebooks in BigQuery](h
 
 Set the appropriate permissions to create, edit, or view notebooks.
 
-All users with the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) have owner access to all notebooks created in the project.
+All users with the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) have owner access to all notebooks created in the project.
 
 For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -16,17 +16,17 @@ For more information about BigQuery Identity and Access Management (IAM), see [A
 
 To get the permissions that you need to create and run notebooks, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
 
-  - [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` )
+  - [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` )
     
     The BigQuery Studio User role combines the following IAM roles:
     
-      - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-      - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-      - [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
+      - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+      - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+      - [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `roles/dataform.codeCreator` )
 
-**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `  dataform.repositories.list  ` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `  dataform.repositories.list  ` permission.
+**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
 
 **Note:** Users assigned the Code Creator role in a project can list the names of code assets in that project by using the Dataform API or the Dataform command-line interface (CLI).
 
@@ -34,47 +34,47 @@ You might also be able to get the required permissions through [custom roles](ht
 
 #### Required permissions
 
-  - `  bigquery.config.get  `
-  - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  `
-  - `  bigquery.readsessions.getData  `
-  - `  bigquery.readsessions.update  `
-  - `  resourcemanager.projects.get  `
-  - `  resourcemanager.projects.list  `
-  - `  dataform.locations.get  `
-  - `  dataform.locations.list  `
-  - `  dataform.repositories.create  `
-  - `  dataform.repositories.list  `
-  - `  dataform.collections.create  `
-  - `  dataform.collections.list  `
-  - `  aiplatform.notebookRuntimeTemplates.apply  `
-  - `  aiplatform.notebookRuntimeTemplates.get  `
-  - `  aiplatform.notebookRuntimeTemplates.list  `
-  - `  aiplatform.notebookRuntimeTemplates.getIamPolicy  `
-  - `  aiplatform.notebookRuntimes.assign  `
-  - `  aiplatform.notebookRuntimes.get  `
-  - `  aiplatform.notebookRuntimes.list  `
-  - `  aiplatform.operations.list  `
+  - `bigquery.config.get`
+  - `bigquery.jobs.create`
+  - `bigquery.readsessions.create`
+  - `bigquery.readsessions.getData`
+  - `bigquery.readsessions.update`
+  - `resourcemanager.projects.get`
+  - `resourcemanager.projects.list`
+  - `dataform.locations.get`
+  - `dataform.locations.list`
+  - `dataform.repositories.create`
+  - `dataform.repositories.list`
+  - `dataform.collections.create`
+  - `dataform.collections.list`
+  - `aiplatform.notebookRuntimeTemplates.apply`
+  - `aiplatform.notebookRuntimeTemplates.get`
+  - `aiplatform.notebookRuntimeTemplates.list`
+  - `aiplatform.notebookRuntimeTemplates.getIamPolicy`
+  - `aiplatform.notebookRuntimes.assign`
+  - `aiplatform.notebookRuntimes.get`
+  - `aiplatform.notebookRuntimes.list`
+  - `aiplatform.operations.list`
 
-**Note:** When you create a notebook, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `  roles/dataform.admin  ` ) on that notebook. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the notebooks created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
+**Note:** When you create a notebook, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `roles/dataform.admin` ) on that notebook. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the notebooks created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
 #### Roles to edit notebooks
 
 To edit and run notebooks, you need the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-  - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-  - [Code Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+  - [Code Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) ( `roles/dataform.codeEditor` )
 
 #### Roles to view notebooks
 
 To view and run notebooks, you need the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-  - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-  - [Code Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ( `  roles/dataform.codeViewer  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+  - [Code Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ( `roles/dataform.codeViewer` )
 
 ## Create notebooks
 
@@ -84,7 +84,7 @@ Use the following sections to learn how to create a notebook.
 
 If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
 
-**Note:** If you create a notebook and choose a different default region than the one you have been using for code assets—for example, choosing `  us-west1  ` when you have been using `  us-central1  ` —then that notebook and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+**Note:** If you create a notebook and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that notebook and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
 
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
@@ -122,7 +122,7 @@ To create a notebook from a template in the notebook gallery, follow these steps
 
 3.  In the notebook gallery, select a template. For example, you can select **Getting started with BigQuery DataFrames** .
     
-    The new notebook opens, containing cells that show example queries against the `  bigquery-public-data.ml_datasets.penguins  ` public dataset.
+    The new notebook opens, containing cells that show example queries against the `bigquery-public-data.ml_datasets.penguins` public dataset.
 
 4.  Alternatively, you can click the arrow\_drop\_down arrow next to add\_box **SQL query** , and then click **Notebook \> Empty notebook** , **Notebook \> BigQuery template** , or **Notebook \> Spark template** to open these specific templates.
 
@@ -229,7 +229,7 @@ Use the following sections to learn how to connect a notebook to a [Vertex AI ru
 
 For more information about runtimes, see [Runtimes and runtime templates](https://docs.cloud.google.com/colab/docs/runtimes) .
 
-**Note:** If you use [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview) , make sure you have configured [Private Google Access with VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/private-connectivity) before connecting to a runtime. Otherwise, the service returns the error `  Failed to connect to Runtime Network projects/ projectid /global/networks/default' was not found.  `
+**Note:** If you use [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview) , make sure you have configured [Private Google Access with VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/private-connectivity) before connecting to a runtime. Otherwise, the service returns the error `Failed to connect to Runtime Network projects/ projectid /global/networks/default' was not found.`
 
 ### Connect to the default runtime
 
@@ -315,7 +315,7 @@ A notebook is made up of cells that you can edit. The following types of cells a
 
   - **SQL cell** ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ): Use a [SQL cell](https://docs.cloud.google.com/colab/docs/sql-cells) to run GoogleSQL queries. The output of the query is automatically saved as a DataFrame with the same name as the title of the cell. You can run multiple SQL statements in a single SQL cell, but only the results of the last statement are saved to a DataFrame.
     
-    You can refer to Python variables in expressions or use BigQuery DataFrames as tables in your query by enclosing the variable name in braces ( `  { }  ` ):
+    You can refer to Python variables in expressions or use BigQuery DataFrames as tables in your query by enclosing the variable name in braces ( `{ }` ):
     
         # Refer to the Python variable my_threshold in a SQL expression.
         SELECT * FROM my_dataset.my_table WHERE x > {my_threshold};
@@ -357,7 +357,7 @@ To grant other users access to a notebook, add those users to an appropriate IAM
       - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
       - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
     
-    **Note:** The principal must also have the [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
+    **Note:** The principal must also have the [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
@@ -430,9 +430,9 @@ To disable saving of output for a selected notebook, follow these steps:
 
 ## Resolve conflicts
 
-If you and another user make conflicting changes in a notebook, the service raises the error `  Automatic saving failed. This file was updated remotely or in another tab.  ` and provides a `  Show diff  ` link. To resolve the conflict, follow these steps:
+If you and another user make conflicting changes in a notebook, the service raises the error `Automatic saving failed. This file was updated remotely or in another tab.` and provides a `Show diff` link. To resolve the conflict, follow these steps:
 
-1.  Click the `  Show diff  ` link. The **Review remote changes** dialog opens.
+1.  Click the `Show diff` link. The **Review remote changes** dialog opens.
 2.  Optional: To compare the notebook source code, select the **Raw source** checkbox.
 3.  Optional: To compare the versions inline instead of in separate panes, select the **Inline diff** checkbox.
 4.  Review the changes and decide which to keep, revising your input if necessary.

@@ -10,7 +10,7 @@ Creates a new capacity commitment resource.
 
 ### HTTP request
 
-`  POST https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*}/capacityCommitments  `
+`POST https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*}/capacityCommitments`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,29 +18,29 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Resource name of the parent reservation. E.g., `  projects/myproject/locations/US  `
+Required. Resource name of the parent reservation. E.g., `projects/myproject/locations/US`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.capacityCommitments.create  `
+  - `bigquery.capacityCommitments.create`
 
 ### Query parameters
 
 Parameters
 
-`  enforceSingleAdminProjectPerOrg  `
+`enforceSingleAdminProjectPerOrg`
 
-`  boolean  `
+`boolean`
 
 If true, fail the request if another project in the organization has a capacity commitment.
 
-`  capacityCommitmentId  `
+`capacityCommitmentId`
 
-`  string  `
+`string`
 
 The optional capacity commitment ID. Capacity commitment name will be generated automatically if this field is empty. This field must only contain lower case alphanumeric characters or dashes. The first and last character cannot be a dash. Max length is 64 characters. NOTE: this ID won't be kept if the capacity commitment is split or merged.
 
@@ -56,7 +56,7 @@ If successful, the response body contains a newly created instance of `  Capacit
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

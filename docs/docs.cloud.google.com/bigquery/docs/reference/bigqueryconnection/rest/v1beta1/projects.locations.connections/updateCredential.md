@@ -11,7 +11,7 @@ Sets the credential for the specified connection.
 
 ### HTTP request
 
-`  PATCH https://bigqueryconnection.googleapis.com/v1beta1/{name=projects/*/locations/*/connections/*/credential}  `
+`PATCH https://bigqueryconnection.googleapis.com/v1beta1/{name=projects/*/locations/*/connections/*/credential}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,15 +19,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the connection, for example: `  projects/{projectId}/locations/{locationId}/connections/{connectionId}/credential  `
+Required. Name of the connection, for example: `projects/{projectId}/locations/{locationId}/connections/{connectionId}/credential`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.update  `
+  - `bigquery.connections.update`
 
 ### Request body
 
@@ -41,8 +41,8 @@ If successful, the response body is an empty JSON object.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
@@ -61,24 +61,17 @@ Credential to use with a connection.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field credential can be only one of the following:
-  &quot;cloudSql&quot;: {
-    object (CloudSqlCredential)
-  }
-  // End of list of possible types for union field credential.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field credential can be only one of the following:&quot;cloudSql&quot;: {object (CloudSqlCredential)}// End of list of possible types for union field credential.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  credential  ` . Credential specific to the underlying data source. `  credential  ` can be only one of the following:
+Union field `credential` . Credential specific to the underlying data source. `credential` can be only one of the following:
 
-`  cloudSql  `
+`cloudSql`
 
-`  object ( CloudSqlCredential  ` )
+` object ( CloudSqlCredential  ` )
 
 Credential for Cloud SQL database.

@@ -118,7 +118,7 @@ Roles are the entities to which privileges on securable objects can be granted a
 
 In IAM, permissions are grouped into roles. IAM provides three types of roles:
 
-  - **[Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-primitive-roles) :** These roles include the Owner, Editor, and Viewer roles. You can apply these roles at the project or service resource levels by using the Google Cloud console, the Identity and Access Management API, or the `  gcloud CLI  ` . In general, for the strongest security, we recommend that you use predefined roles to follow the principle of least privilege.
+  - **[Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-primitive-roles) :** These roles include the Owner, Editor, and Viewer roles. You can apply these roles at the project or service resource levels by using the Google Cloud console, the Identity and Access Management API, or the `gcloud CLI` . In general, for the strongest security, we recommend that you use predefined roles to follow the principle of least privilege.
   - **[Predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) :** These roles provide more granular access to features in a product (such as BigQuery) and are meant to support common use cases and access control patterns.
   - **[Custom roles](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) :** These roles are composed of user-specified permissions.
 
@@ -149,8 +149,8 @@ Snowflake can export data in the following file formats. You can load the follow
 
 The following list describes the tools that you can use to migrate data from Snowflake to BigQuery. For examples of how these tools can be used together in a Snowflake migration pipeline, see [Snowflake migration pipeline examples](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials#pipeline-examples) .
 
-  - **[`  COPY INTO <location>  ` command](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location.html) :** Use this command in Snowflake to extract data from a Snowflake table directly into a specified Cloud Storage bucket. For an end-to-end example, see [Snowflake to BigQuery (snowflake2bq)](https://github.com/GoogleCloudPlatform/professional-services/tree/master/tools/snowflake2bq) on GitHub.
-  - **[Apache Sqoop](https://sqoop.apache.org/) :** To extract data from Snowflake into either HDFS or Cloud Storage, submit Hadoop jobs with the JDBC driver from Sqoop and Snowflake. Sqoop runs in a [Dataproc](https://docs.cloud.google.com/dataproc/docs) environment.
+  - **[`COPY INTO <location>` command](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location.html) :** Use this command in Snowflake to extract data from a Snowflake table directly into a specified Cloud Storage bucket. For an end-to-end example, see [Snowflake to BigQuery (snowflake2bq)](https://github.com/GoogleCloudPlatform/professional-services/tree/master/tools/snowflake2bq) on GitHub.
+  - **[Apache Sqoop](https://sqoop.apache.org/) :** To extract data from Snowflake into either HDFS or Cloud Storage, submit Hadoop jobs with the JDBC driver from Sqoop and Snowflake. Sqoop runs in a [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs) environment.
   - **[Snowflake JDBC](https://docs.snowflake.com/en/user-guide/jdbc.html) :** Use this driver with most client tools or applications that support JDBC.
 
 You can use the following generic tools to migrate data from Snowflake to BigQuery:

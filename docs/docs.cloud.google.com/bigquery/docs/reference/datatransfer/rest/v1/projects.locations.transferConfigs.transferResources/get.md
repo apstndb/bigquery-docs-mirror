@@ -11,7 +11,7 @@ Returns a transfer resource.
 
 ### HTTP request
 
-`  GET https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*/transferConfigs/*/transferResources/*}  `
+`GET https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*/transferConfigs/*/transferResources/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,18 +19,18 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Required. The name of the transfer resource in the form of:
 
-  - `  projects/{project}/transferConfigs/{transferConfig}/transferResources/{transferResource}  `
-  - `  projects/{project}/locations/{location}/transferConfigs/{transferConfig}/transferResources/{transferResource}  `
+  - `projects/{project}/transferConfigs/{transferConfig}/transferResources/{transferResource}`
+  - `projects/{project}/locations/{location}/transferConfigs/{transferConfig}/transferResources/{transferResource}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.transfers.get  `
+  - `bigquery.transfers.get`
 
 ### Request body
 
@@ -44,6 +44,6 @@ If successful, the response body contains an instance of `  TransferResource  ` 
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -68,23 +68,23 @@ If an important job consistently needs more slots than it receives from the sche
 
 As an example of fair scheduling, suppose you have the following reservation configuration:
 
-  - Reservation `  A  ` , which has 1,000 baseline slots with no autoscaling
-  - Project `  A  ` and project `  B  ` , which are assigned to your reservation
+  - Reservation `A` , which has 1,000 baseline slots with no autoscaling
+  - Project `A` and project `B` , which are assigned to your reservation
 
-Scenario 1: In project `  A  ` , you run query `  A  ` (one concurrent query) that requires high slot usage, and in project `  B  ` you run 20 concurrent queries. Even though there are a total of 21 queries that are using reservation `  A  ` , the slot distribution is the following:
+Scenario 1: In project `A` , you run query `A` (one concurrent query) that requires high slot usage, and in project `B` you run 20 concurrent queries. Even though there are a total of 21 queries that are using reservation `A` , the slot distribution is the following:
 
-  - Project `  A  ` receives 500 slots, and query `  A  ` runs with 500 slots.
-  - Project `  B  ` receives 500 slots that are shared among its 20 queries.
+  - Project `A` receives 500 slots, and query `A` runs with 500 slots.
+  - Project `B` receives 500 slots that are shared among its 20 queries.
 
-Scenario 2: In project `  A  ` , you run query `  A  ` (one concurrent query) that requires 100 slots to run, and in project `  B  ` you run 20 concurrent queries. Since query `  A  ` doesn't require 50% of the reservation, then the slot distribution is the following:
+Scenario 2: In project `A` , you run query `A` (one concurrent query) that requires 100 slots to run, and in project `B` you run 20 concurrent queries. Since query `A` doesn't require 50% of the reservation, then the slot distribution is the following:
 
-  - Project `  A  ` receives 100 slots, and query `  A  ` runs with 100 slots.
-  - Project `  B  ` receives 900 slots that are shared among its 20 queries.
+  - Project `A` receives 100 slots, and query `A` runs with 100 slots.
+  - Project `B` receives 900 slots that are shared among its 20 queries.
 
 Inversely, consider the following reservation configuration:
 
-  - Reservation `  B  ` , which has 1,000 baseline slots with no autoscaling.
-  - 10 projects, which are all assigned to reservation `  B  ` .
+  - Reservation `B` , which has 1,000 baseline slots with no autoscaling.
+  - 10 projects, which are all assigned to reservation `B` .
 
 Assume the 10 projects are running queries that have sufficient slot demand, then each project receives 1/10 of the total reservation slots (or 100 slots), regardless of how many queries are running on each project.
 
@@ -111,27 +111,27 @@ By default, queries running in a reservation automatically use idle slots from o
 
 For example, suppose you have the following reservation setup:
 
-  - `  project_a  ` is assigned to `  reservation_a  ` , which has 500 baseline slots with no autoscaling.
-  - `  project_b  ` is assigned to `  reservation_b  ` , which has 100 baseline slots with no autoscaling.
+  - `project_a` is assigned to `reservation_a` , which has 500 baseline slots with no autoscaling.
+  - `project_b` is assigned to `reservation_b` , which has 100 baseline slots with no autoscaling.
   - Both reservations are in the same region and administrative project and there are no other projects assigned to these reservations.
 
-You run `  query_b  ` in `  project_b  ` . If no query is running in `  project_a  ` , then `  query_b  ` has access to the 500 idle slots from `  reservation_a  ` . While `  query_b  ` is still running, it might use up to 600 slots: 100 baseline slots plus 500 idle slots.
+You run `query_b` in `project_b` . If no query is running in `project_a` , then `query_b` has access to the 500 idle slots from `reservation_a` . While `query_b` is still running, it might use up to 600 slots: 100 baseline slots plus 500 idle slots.
 
-While `  query_b  ` is running, suppose you run `  query_a  ` in `  project_a  ` that can use 500 slots.
+While `query_b` is running, suppose you run `query_a` in `project_a` that can use 500 slots.
 
-  - Since you have 500 baseline slots reserved for `  project_a  ` , `  query_a  ` immediately starts and is allocated 500 slots.
-  - The number of slots allocated to `  query_b  ` quickly decreases to 100 baseline slots.
-  - Additional queries run in `  project_b  ` share those 100 slots. If subsequent queries don't have enough slots to start, then they queue up until running queries complete and slots become available.
+  - Since you have 500 baseline slots reserved for `project_a` , `query_a` immediately starts and is allocated 500 slots.
+  - The number of slots allocated to `query_b` quickly decreases to 100 baseline slots.
+  - Additional queries run in `project_b` share those 100 slots. If subsequent queries don't have enough slots to start, then they queue up until running queries complete and slots become available.
 
-In this example, if `  project_b  ` was assigned to a reservation with no baseline slots or autoscaling, then `  query_b  ` would have no slots after `  query_a  ` starts running. BigQuery would pause `  query_b  ` until idle slots are available or the query times out. Additional queries in `  project_b  ` would queue up until idle slots are available.
+In this example, if `project_b` was assigned to a reservation with no baseline slots or autoscaling, then `query_b` would have no slots after `query_a` starts running. BigQuery would pause `query_b` until idle slots are available or the query times out. Additional queries in `project_b` would queue up until idle slots are available.
 
-To ensure a reservation only uses its provisioned slots, set `  ignore_idle_slots  ` to `  true  ` . Reservations with `  ignore_idle_slots  ` set to `  true  ` can, however, share their idle slots with other reservations.
+To ensure a reservation only uses its provisioned slots, set `ignore_idle_slots` to `true` . Reservations with `ignore_idle_slots` set to `true` can, however, share their idle slots with other reservations.
 
 You cannot share idle slots between reservations of different [editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) . You can share only the baseline slots or committed slots. Autoscaled slots might be temporarily available but are not shareable as idle slots for other reservations because they might scale down.
 
-As long as `  ignore_idle_slots  ` is false, a reservation can have a slot count of `  0  ` and still have access to unused slots. If you use only the `  default  ` reservation, toggle off `  ignore_idle_slots  ` as a best practice. You can then [assign a project or folder](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) to that reservation and it will only use idle slots.
+As long as `ignore_idle_slots` is false, a reservation can have a slot count of `0` and still have access to unused slots. If you use only the `default` reservation, toggle off `ignore_idle_slots` as a best practice. You can then [assign a project or folder](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) to that reservation and it will only use idle slots.
 
-Assignments of type `  ML_EXTERNAL  ` are an exception in that slots used by BigQuery ML external model creation jobs are not preemptible. The slots in a reservation with both `  ML_EXTERNAL  ` and `  QUERY  ` assignment types are only available for other query jobs when the slots are not occupied by the `  ML_EXTERNAL  ` jobs. Moreover, these jobs cannot use idle slots from other reservations.
+Assignments of type `ML_EXTERNAL` are an exception in that slots used by BigQuery ML external model creation jobs are not preemptible. The slots in a reservation with both `ML_EXTERNAL` and `QUERY` assignment types are only available for other query jobs when the slots are not occupied by the `ML_EXTERNAL` jobs. Moreover, these jobs cannot use idle slots from other reservations.
 
 ### Reservation-based fairness
 
@@ -199,18 +199,18 @@ Reservations use and add slots in the following priority:
 2.  Idle slot sharing (if enabled). Reservations can only share idle baseline or committed slots from other reservations that were created with the same edition and the same region.
 3.  Autoscale slots.
 
-In the following example, slots scale from a specified baseline amount. The `  etl  ` and `  dashboard  ` reservations have a baseline size of 700 and 300 slots respectively.
+In the following example, slots scale from a specified baseline amount. The `etl` and `dashboard` reservations have a baseline size of 700 and 300 slots respectively.
 
 ![Autoscaling example with no commitments.](https://docs.cloud.google.com/static/bigquery/images/autoscaling-example-no-commitment.png)
 
-In this example, the `  etl  ` reservation can scale to 1300 slots (700 baseline slots plus 600 autoscale slots). If the `  dashboard  ` reservation is not in use, the `  etl  ` reservation can use the 300 slots from the `  dashboard  ` reservation if no job is running there, leading to a maximum of 1600 possible slots.
+In this example, the `etl` reservation can scale to 1300 slots (700 baseline slots plus 600 autoscale slots). If the `dashboard` reservation is not in use, the `etl` reservation can use the 300 slots from the `dashboard` reservation if no job is running there, leading to a maximum of 1600 possible slots.
 
-The `  dashboard  ` reservation can scale to 1100 slots (300 baseline slots plus 800 autoscale slots). If the `  etl  ` reservation is totally idle, the `  dashboard  ` reservation can scale to a maximum of 1800 slots (300 baseline slots plus 800 autoscale slots plus 700 idle slots in the `  etl  ` reservation).
+The `dashboard` reservation can scale to 1100 slots (300 baseline slots plus 800 autoscale slots). If the `etl` reservation is totally idle, the `dashboard` reservation can scale to a maximum of 1800 slots (300 baseline slots plus 800 autoscale slots plus 700 idle slots in the `etl` reservation).
 
-If the `  etl  ` reservation requires more than 700 baseline slots, which are always available, it attempts to add slots by using the following methods in order:
+If the `etl` reservation requires more than 700 baseline slots, which are always available, it attempts to add slots by using the following methods in order:
 
 1.  700 baseline slots.
-2.  [Idle slot](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) sharing with the 300 baseline slots in the `  dashboard  ` reservation. Your reservation only shares idle baseline slots with other reservations that are created with the same edition.
+2.  [Idle slot](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) sharing with the 300 baseline slots in the `dashboard` reservation. Your reservation only shares idle baseline slots with other reservations that are created with the same edition.
 3.  Scaling up 600 additional slots to the maximum reservation size.
 
 ### Using slot commitments
@@ -227,19 +227,19 @@ The following example shows reservations when the number of baseline slots excee
 
 ![Baseline slots exceed the number of committed slots.](https://docs.cloud.google.com/static/bigquery/images/baseline-exceed-commitments.svg)
 
-In this example, there is a total of 1000 baseline slots between the two reservations, 500 from the `  etl  ` reservation and 500 from the `  dashboard  ` reservation. However, the commitment only covers 800 slots. In this scenario, the excess slots are charged at the pay as you go (PAYG) rate.
+In this example, there is a total of 1000 baseline slots between the two reservations, 500 from the `etl` reservation and 500 from the `dashboard` reservation. However, the commitment only covers 800 slots. In this scenario, the excess slots are charged at the pay as you go (PAYG) rate.
 
 ### Maximum available slots
 
 You can calculate the maximum number of slots a reservation can use by adding the baseline slots, the maximum number of autoscale slots, and any slots in commitments that were created with the same edition and are not covered by the baseline slots. The example in the previous image is set up as follows:
 
-  - A capacity commitment of 1000 annual slots. Those slots are assigned as baseline slots in the `  etl  ` reservation and the `  dashboard  ` reservation.
-  - 700 baseline slots assigned to the `  etl  ` reservation.
-  - 300 baseline slots assigned to the `  dashboard  ` reservation.
-  - Autoscale slots of 600 for the `  etl  ` reservation.
-  - Autoscale slots of 800 for the `  dashboard  ` reservation.
+  - A capacity commitment of 1000 annual slots. Those slots are assigned as baseline slots in the `etl` reservation and the `dashboard` reservation.
+  - 700 baseline slots assigned to the `etl` reservation.
+  - 300 baseline slots assigned to the `dashboard` reservation.
+  - Autoscale slots of 600 for the `etl` reservation.
+  - Autoscale slots of 800 for the `dashboard` reservation.
 
-For the `  etl  ` reservation, the maximum number of slots possible is equal to the `  etl  ` baseline slots (700) plus the `  dashboard  ` baseline slots (300, if all slots are idle) plus the maximum number of autoscale slots (600). So the maximum number of slots the `  etl  ` reservation could use in this example is 1600. This number exceeds the number in the capacity commitment.
+For the `etl` reservation, the maximum number of slots possible is equal to the `etl` baseline slots (700) plus the `dashboard` baseline slots (300, if all slots are idle) plus the maximum number of autoscale slots (600). So the maximum number of slots the `etl` reservation could use in this example is 1600. This number exceeds the number in the capacity commitment.
 
 In the following example, the annual commitment exceeds the assigned baseline slots.
 
@@ -249,7 +249,7 @@ In this example, we have:
 
   - A capacity commitment of 1600 annual slots.
   - A maximum reservation size of 1500 (including 500 autoscaling slots).
-  - 1000 baseline slots assigned to the `  etl  ` reservation.
+  - 1000 baseline slots assigned to the `etl` reservation.
 
 The maximum number of slots available to the reservation is equal to the baseline slots (1000) plus any committed idle slots not dedicated to the baseline slots (1600 annual slots - 1000 baseline slots = 600) plus the number of autoscaling slots (500). So the maximum potential slots in this reservation is 2100. The autoscaled slots are additional slots above the capacity commitment.
 
@@ -257,7 +257,7 @@ The maximum number of slots available to the reservation is equal to the baselin
 
   - When first using autoscaler, set the number of autoscaling slots to a meaningful number based on past and expected performance. Once the reservation is created, actively monitor the failure rate, performance, and bill and adjust the number of autoscaling slots as needed.
 
-  - Autoscaler has a 1 minute minimum before scaling down so it is important to set the maximum number of autoscaled slots to balance between performance and cost. If the maximum number of autoscale slots is too large and your job can use all the slots to complete a job in seconds, you still incur costs for the maximum slots for the full minute. If you lower your max slots to half the current amount, your reservation is scaled to a lower number and the job can use more `  slot_seconds  ` during that minute, reducing waste. For help determining your slot requirements, see [Monitor job performance](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor_job_performance) . As an alternative approach to determine your slot requirements, see [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
+  - Autoscaler has a 1 minute minimum before scaling down so it is important to set the maximum number of autoscaled slots to balance between performance and cost. If the maximum number of autoscale slots is too large and your job can use all the slots to complete a job in seconds, you still incur costs for the maximum slots for the full minute. If you lower your max slots to half the current amount, your reservation is scaled to a lower number and the job can use more `slot_seconds` during that minute, reducing waste. For help determining your slot requirements, see [Monitor job performance](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor_job_performance) . As an alternative approach to determine your slot requirements, see [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
 
   - Slot usage can occasionally exceed the sum of your baseline plus scaled slots. You aren't billed for slot usage that's greater than your baseline plus scaled slots.
 

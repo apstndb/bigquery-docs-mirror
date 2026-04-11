@@ -2,14 +2,14 @@ Priority given to the query.
 
 Enums
 
-`  PRIORITY_UNSPECIFIED  `
+`PRIORITY_UNSPECIFIED`
 
 Unknown.
 
-`  QUERY_INTERACTIVE  `
+`QUERY_INTERACTIVE`
 
 Interactive query.
 
-`  QUERY_BATCH  `
+`QUERY_BATCH`
 
 Batch query.

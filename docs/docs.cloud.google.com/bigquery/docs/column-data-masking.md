@@ -28,7 +28,7 @@ Use policy tags to selectively obscure sensitive data.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&redirect=https://console.cloud.google.com)
 
@@ -60,10 +60,10 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### API
 
-To use existing taxonomies, call [`  taxonomies.import  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import) in place of the first two steps of the following procedure.
+To use existing taxonomies, call [`taxonomies.import`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import) in place of the first two steps of the following procedure.
 
-1.  Call [`  taxonomies.create  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/create) to create a taxonomy.
-2.  Call [`  taxonomies.policytag.create  `](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create) to create a policy tag.
+1.  Call [`taxonomies.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/create) to create a taxonomy.
+2.  Call [`taxonomies.policytag.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create) to create a policy tag.
 
 ### Work with policy tags
 
@@ -71,9 +71,9 @@ For more information about how to work with policy tags, such as how to view or 
 
 ### Create data policies
 
-The user or service account that creates a data policy must have the `  bigquery.dataPolicies.create  ` , `  bigquery.dataPolicies.setIamPolicy  ` , and `  datacatalog.taxonomies.get  ` permissions.
+The user or service account that creates a data policy must have the `bigquery.dataPolicies.create` , `bigquery.dataPolicies.setIamPolicy` , and `datacatalog.taxonomies.get` permissions.
 
-The `  bigquery.dataPolicies.create  ` and `  bigquery.dataPolicies.setIamPolicy  ` permissions are included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles. The `  datacatalog.taxonomies.get  ` permission is included in the Data Catalog Admin and Data Catalog Viewer roles.
+The `bigquery.dataPolicies.create` and `bigquery.dataPolicies.setIamPolicy` permissions are included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles. The `datacatalog.taxonomies.get` permission is included in the Data Catalog Admin and Data Catalog Viewer roles.
 
 If you are creating a data policy that references a [custom masking routine](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask) , you also need [routine permissions](https://docs.cloud.google.com/bigquery/docs/routines#permissions) .
 
@@ -95,7 +95,7 @@ You can create up to nine data policies for a policy tag. One of these policies 
 
 5.  For **Data Policy Name** , type a name for the data policy. The data policy name must be unique within the project that data policy resides in.
 
-6.  For **Masking Rule** , choose a predefined masking rule or a custom masking routine. If you are selecting a custom masking routine, ensure that you have both the `  bigquery.routines.get  ` and the `  bigquery.routines.list  ` permissions at the project level.
+6.  For **Masking Rule** , choose a predefined masking rule or a custom masking routine. If you are selecting a custom masking routine, ensure that you have both the `bigquery.routines.get` and the `bigquery.routines.list` permissions at the project level.
 
 7.  For **Principal** , type the name of one or more users or groups to whom you want to grant masked access to the column. Note that all users and groups you enter here are granted the BigQuery Masked Reader role.
 
@@ -103,13 +103,13 @@ You can create up to nine data policies for a policy tag. One of these policies 
 
 ### API
 
-1.  Call the [`  create  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create) method. Pass in a [`  DataPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource that meets the following requirements:
+1.  Call the [`create`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create) method. Pass in a [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource that meets the following requirements:
     
-      - The `  dataPolicyType  ` field is set to `  DATA_MASKING_POLICY  ` .
-      - The `  dataMaskingPolicy  ` field identifies the data masking rule or routine to use.
-      - The `  dataPolicyId  ` field provides a name for the data policy that is unique within the project that data policy resides in.
+      - The `dataPolicyType` field is set to `DATA_MASKING_POLICY` .
+      - The `dataMaskingPolicy` field identifies the data masking rule or routine to use.
+      - The `dataPolicyId` field provides a name for the data policy that is unique within the project that data policy resides in.
 
-2.  Call the [`  setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method and pass in a [`  Policy  `](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) . The `  Policy  ` must identify the principals who are granted access to masked data, and specify `  roles/bigquerydatapolicy.maskedReader  ` for the `  role  ` field.
+2.  Call the [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method and pass in a [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) . The `Policy` must identify the principals who are granted access to masked data, and specify `roles/bigquerydatapolicy.maskedReader` for the `role` field.
 
 ### Node.js
 
@@ -245,9 +245,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Set a data policy on a column by attaching the policy tag associated with the data policy to the column.
 
-The user or service account that sets a policy tag needs the `  datacatalog.taxonomies.get  ` and `  bigquery.tables.setCategory  ` permissions. `  datacatalog.taxonomies.get  ` is included in the Data Catalog Policy Tags Admin and Project Viewer roles. `  bigquery.tables.setCategory  ` is included in the BigQuery Admin ( `  roles/bigquery.admin  ` ) and BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` ) roles.
+The user or service account that sets a policy tag needs the `datacatalog.taxonomies.get` and `bigquery.tables.setCategory` permissions. `datacatalog.taxonomies.get` is included in the Data Catalog Policy Tags Admin and Project Viewer roles. `bigquery.tables.setCategory` is included in the BigQuery Admin ( `roles/bigquery.admin` ) and BigQuery Data Owner ( `roles/bigquery.dataOwner` ) roles.
 
-To view taxonomies and policy tags across all projects in an organization in Google Cloud console, users need the `  resourcemanager.organizations.get  ` permission, which is included in the Organization Viewer role.
+To view taxonomies and policy tags across all projects in an organization in Google Cloud console, users need the `resourcemanager.organizations.get` permission, which is included in the Organization Viewer role.
 
 **Note:** You can assign only one policy tag per column.
 
@@ -288,7 +288,7 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
       - dataset is the name of the dataset that contains the table you're updating.
       - table is the name of the table you're updating.
 
-2.  Modify schema.json to set a policy tag on a column. For the value of the `  names  ` field of `  policyTags  ` , use the [policy tag resource name](https://docs.cloud.google.com/bigquery/docs/column-data-masking#retrieve_policy_tag_name) .
+2.  Modify schema.json to set a policy tag on a column. For the value of the `names` field of `policyTags` , use the [policy tag resource name](https://docs.cloud.google.com/bigquery/docs/column-data-masking#retrieve_policy_tag_name) .
     
     ``` notranslate
     [
@@ -314,9 +314,9 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 
 ### API
 
-For existing tables, call [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) , or for new tables call [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) . Use the `  schema  ` property of the `  Table  ` object that you pass in to set a policy tag in your schema definition. See the command-line example schema to see how to set a policy tag.
+For existing tables, call [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) , or for new tables call [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) . Use the `schema` property of the `Table` object that you pass in to set a policy tag in your schema definition. See the command-line example schema to see how to set a policy tag.
 
-When working with an existing table, the `  tables.patch  ` method is preferred, because the `  tables.update  ` method replaces the entire table resource.
+When working with an existing table, the `tables.patch` method is preferred, because the `tables.update` method replaces the entire table resource.
 
 ### Enforce access control
 
@@ -453,7 +453,7 @@ Follow these steps to get the IAM policy for a data policy:
 
 ### API
 
-Call the [`  testIamPermissions  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/testIamPermissions) .
+Call the [`testIamPermissions` method](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/testIamPermissions) .
 
 ### Node.js
 
@@ -705,11 +705,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Update data policies
 
-The user or service account that updates a data policy must have the `  bigquery.dataPolicies.update  ` permission. If you are updating the policy tag the data policy is associated with, you also require the `  datacatalog.taxonomies.get  ` permission.
+The user or service account that updates a data policy must have the `bigquery.dataPolicies.update` permission. If you are updating the policy tag the data policy is associated with, you also require the `datacatalog.taxonomies.get` permission.
 
-If you are updating the principals associated with the data policy, you require the `  bigquery.dataPolicies.setIamPolicy  ` permission.
+If you are updating the principals associated with the data policy, you require the `bigquery.dataPolicies.setIamPolicy` permission.
 
-The `  bigquery.dataPolicies.update  ` and `  bigquery.dataPolicies.setIamPolicy  ` permissions are included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles. The `  datacatalog.taxonomies.get  ` permission is included in the Data Catalog Admin and Data Catalog Viewer roles.
+The `bigquery.dataPolicies.update` and `bigquery.dataPolicies.setIamPolicy` permissions are included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles. The `datacatalog.taxonomies.get` permission is included in the Data Catalog Admin and Data Catalog Viewer roles.
 
 ### Console
 
@@ -731,9 +731,9 @@ The `  bigquery.dataPolicies.update  ` and `  bigquery.dataPolicies.setIamPolicy
 
 ### API
 
-To change the data masking rule, call the [`  patch  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method and pass in a [`  DataPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource with an updated `  dataMaskingPolicy  ` field.
+To change the data masking rule, call the [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method and pass in a [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource with an updated `dataMaskingPolicy` field.
 
-To change the principals associated with a data policy, call the [`  setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method and pass in a [`  Policy  `](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) that updates the principals that are granted access to masked data.
+To change the principals associated with a data policy, call the [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method and pass in a [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) that updates the principals that are granted access to masked data.
 
 ### Node.js
 
@@ -874,7 +874,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Delete data policies
 
-The user or service account that creates a data policy must have the `  bigquery.dataPolicies.delete  ` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
+The user or service account that creates a data policy must have the `bigquery.dataPolicies.delete` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
 
 ### Console
 
@@ -896,7 +896,7 @@ The user or service account that creates a data policy must have the `  bigquery
 
 ### API
 
-To delete a data policy, call the [`  delete  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/delete) method.
+To delete a data policy, call the [`delete`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/delete) method.
 
 ### Node.js
 
@@ -981,13 +981,13 @@ As an alternative to creating policy tags, you can create data policies and appl
 
 You can create, update, and delete data policies using the [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest) . To apply a data policy directly on a column, you can't use the **Policy tag taxonomies** page in the Google Cloud console.
 
-To work with data policies, use the [`  v2.projects.locations.datapolicies  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#rest-resource:-v2.projects.locations.datapolicies) resource.
+To work with data policies, use the [`v2.projects.locations.datapolicies`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#rest-resource:-v2.projects.locations.datapolicies) resource.
 
 #### Create data policies
 
-The user or service account that creates a data policy must have the `  bigquery.dataPolicies.create  ` permission.
+The user or service account that creates a data policy must have the `bigquery.dataPolicies.create` permission.
 
-The `  bigquery.dataPolicies.create  ` permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles. The `  datacatalog.taxonomies.get  ` permission is included in the Data Catalog Admin and Data Catalog Viewer roles.
+The `bigquery.dataPolicies.create` permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles. The `datacatalog.taxonomies.get` permission is included in the Data Catalog Admin and Data Catalog Viewer roles.
 
 If you are creating a data policy that references a [custom masking routine](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask) , you also need [routine permissions](https://docs.cloud.google.com/bigquery/docs/routines#permissions) .
 
@@ -995,15 +995,15 @@ If you use custom masking, grant users the BigQuery Data Owner role to ensure th
 
 ### API
 
-To create a data policy, call the [`  create  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create) method. Pass in a [`  DataPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource that meets the following requirements:
+To create a data policy, call the [`create`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create) method. Pass in a [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource that meets the following requirements:
 
-  - The `  dataPolicyType  ` field is set to `  DATA_MASKING_POLICY  ` or `  RAW_DATA_ACCESS_POLICY  ` .
-  - The `  dataMaskingPolicy  ` field identifies the data masking rule or routine to use.
-  - The `  dataPolicyId  ` field provides a name for the data policy that is unique within the project that the data policy resides in.
+  - The `dataPolicyType` field is set to `DATA_MASKING_POLICY` or `RAW_DATA_ACCESS_POLICY` .
+  - The `dataMaskingPolicy` field identifies the data masking rule or routine to use.
+  - The `dataPolicyId` field provides a name for the data policy that is unique within the project that the data policy resides in.
 
 ### SQL
 
-To create a data policy with masked access, use the `  CREATE DATA_POLICY  ` statement and set the value of `  data_policy_type  ` to `  DATA_MASKING_POLICY  ` :
+To create a data policy with masked access, use the `CREATE DATA_POLICY` statement and set the value of `data_policy_type` to `DATA_MASKING_POLICY` :
 
 ``` notranslate
     CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] `myproject.region-us.data_policy_name`
@@ -1013,35 +1013,35 @@ To create a data policy with masked access, use the `  CREATE DATA_POLICY  ` sta
     );
 ```
 
-To create a data policy with raw access, use the `  CREATE DATA_POLICY  ` statement and set the value of `  data_policy_type  ` to `  RAW_DATA_ACCESS_POLICY  ` :
+To create a data policy with raw access, use the `CREATE DATA_POLICY` statement and set the value of `data_policy_type` to `RAW_DATA_ACCESS_POLICY` :
 
 ``` notranslate
     CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] `myproject.region-us.data_policy_name`
     OPTIONS (data_policy_type="RAW_DATA_ACCESS_POLICY");
 ```
 
-If the value of `  data_policy_type  ` isn't specified, the default value is `  RAW_DATA_ACCESS_POLICY  ` .
+If the value of `data_policy_type` isn't specified, the default value is `RAW_DATA_ACCESS_POLICY` .
 
 ``` notranslate
     CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] myproject.region-us.data_policy_name;
 ```
 
-  - The `  data_policy_type  ` field is set to `  DATA_MASKING_POLICY  ` or `  RAW_DATA_ACCESS_POLICY  ` . You can't update this field once the data policy has been created.
-  - The `  masking_expression  ` field identifies the data masking rule or routine to use.
+  - The `data_policy_type` field is set to `DATA_MASKING_POLICY` or `RAW_DATA_ACCESS_POLICY` . You can't update this field once the data policy has been created.
+  - The `masking_expression` field identifies the data masking rule or routine to use.
 
 #### Update data policies
 
-The user or service account that updates a data policy must have the `  bigquery.dataPolicies.update  ` permission.
+The user or service account that updates a data policy must have the `bigquery.dataPolicies.update` permission.
 
-The `  bigquery.dataPolicies.update  ` permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
+The `bigquery.dataPolicies.update` permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
 
 ### API
 
-To change the data masking rule, call the [`  patch  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method and pass in a [`  DataPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource with an updated `  dataMaskingPolicy  ` field.
+To change the data masking rule, call the [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method and pass in a [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource with an updated `dataMaskingPolicy` field.
 
 ### SQL
 
-Use the `  ALTER DATA_POLICY  ` statement to update the data masking rules. For example:
+Use the `ALTER DATA_POLICY` statement to update the data masking rules. For example:
 
 ``` notranslate
     ALTER DATA_POLICY `myproject.region-us.data_policy_name`
@@ -1053,24 +1053,24 @@ Use the `  ALTER DATA_POLICY  ` statement to update the data masking rules. For 
 
 You can also grant fine-grained access control access to data policies.
 
-The permissions to grant fine-grained access control access to data policies and manage data policies are different. To control fine-grained access control permissions, you must update the `  grantees  ` field of the data policy. To control access to the data policies, set the IAM roles using the [`  setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method.
+The permissions to grant fine-grained access control access to data policies and manage data policies are different. To control fine-grained access control permissions, you must update the `grantees` field of the data policy. To control access to the data policies, set the IAM roles using the [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method.
 
-To set grantees on a data policy, use the [v2 `  patch  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method. To manage data policy permissions, use the [v1 `  setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies/setIamPolicy) method.
+To set grantees on a data policy, use the [v2 `patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method. To manage data policy permissions, use the [v1 `setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies/setIamPolicy) method.
 
 ### API
 
-To grant fine-grained access control access to data policies, call the [`  patch  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method and pass in a [`  DataPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource with an updated `  grantees  ` field.
+To grant fine-grained access control access to data policies, call the [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method and pass in a [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#resource:-datapolicy) resource with an updated `grantees` field.
 
 ### SQL
 
-To grant fine-grained access control access to data policies, use the `  GRANT FINE_GRAINED_READ  ` statement to add `  grantees  ` . For example:
+To grant fine-grained access control access to data policies, use the `GRANT FINE_GRAINED_READ` statement to add `grantees` . For example:
 
 ``` notranslate
     GRANT FINE_GRAINED_READ ON DATA_POLICY `myproject.region-us.data_policy_name`
     TO "principal://goog/subject/user1@example.com","principal://goog/subject/user2@example.com"
 ```
 
-To revoke fine-grained access control access from data policies, use the `  REVOKE FINE_GRAINED_READ  ` statement to remove `  grantees  ` . For example:
+To revoke fine-grained access control access from data policies, use the `REVOKE FINE_GRAINED_READ` statement to remove `grantees` . For example:
 
 ``` notranslate
     REVOKE FINE_GRAINED_READ ON DATA_POLICY `myproject.region-us.data_policy_name`
@@ -1079,15 +1079,15 @@ To revoke fine-grained access control access from data policies, use the `  REVO
 
 #### Delete data policies
 
-The user or service account that creates a data policy must have the `  bigquery.dataPolicies.delete  ` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
+The user or service account that creates a data policy must have the `bigquery.dataPolicies.delete` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
 
 ### API
 
-To delete a data policy, call the [`  delete  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/delete) method.
+To delete a data policy, call the [`delete`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/delete) method.
 
 ### SQL
 
-Use `  DROP DATA_POLICY  ` statement to delete a data policy:
+Use `DROP DATA_POLICY` statement to delete a data policy:
 
 ``` notranslate
     DROP DATA_POLICY `myproject.region-us.data_policy_name`;
@@ -1099,7 +1099,7 @@ You can assign a data policy directly on a column without using policy tags.
 
 #### Before you begin
 
-To get the permissions that you need to assign a data policy directly on a column, ask your administrator to grant you the [BigQuery Data Policy Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.admin) ( `  roles/bigquerydatapolicy.admin  ` ) IAM role on your table. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to assign a data policy directly on a column, ask your administrator to grant you the [BigQuery Data Policy Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.admin) ( `roles/bigquerydatapolicy.admin` ) IAM role on your table. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to assign a data policy directly on a column. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -1107,9 +1107,9 @@ This predefined role contains the permissions required to assign a data policy d
 
 The following permissions are required to assign a data policy directly on a column:
 
-  - `  bigquery.tables.update  `
-  - `  bigquery.tables.setColumnDataPolicy  `
-  - `  bigquery.dataPolicies.attach  `
+  - `bigquery.tables.update`
+  - `bigquery.tables.setColumnDataPolicy`
+  - `bigquery.dataPolicies.attach`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -1119,9 +1119,9 @@ To assign a data policy directly on a column, do one of the following:
 
 ### SQL
 
-To attach a data policy to a column, use the [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , [`  ALTER TABLE ADD COLUMN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) , or [`  ALTER COLUMN SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statements.
+To attach a data policy to a column, use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , [`ALTER TABLE ADD COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) , or [`ALTER COLUMN SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statements.
 
-The following example uses the `  CREATE TABLE  ` statement and sets data policies on a column:
+The following example uses the `CREATE TABLE` statement and sets data policies on a column:
 
 ``` notranslate
     CREATE TABLE myproject.table1 (
@@ -1130,7 +1130,7 @@ The following example uses the `  CREATE TABLE  ` statement and sets data polici
     );
 ```
 
-The following example uses the `  ALTER COLUMN SET OPTIONS  ` to add a data policy to an existing column on a table:
+The following example uses the `ALTER COLUMN SET OPTIONS` to add a data policy to an existing column on a table:
 
 ``` notranslate
 ALTER TABLE myproject.table1
@@ -1141,7 +1141,7 @@ ALTER COLUMN column_name SET OPTIONS (
 
 ### API
 
-To assign a data policy to a column, call the [`  patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method on the table and update the table schema with the applicable data policies.
+To assign a data policy to a column, call the [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method on the table and update the table schema with the applicable data policies.
 
 ### Unassign a data policy
 
@@ -1149,9 +1149,9 @@ To unassign a data policy directly on a column, do one of the following:
 
 ### SQL
 
-To detach a data policy to a column, use the [`  ALTER COLUMN SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statement.
+To detach a data policy to a column, use the [`ALTER COLUMN SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statement.
 
-The following example uses the `  ALTER COLUMN SET OPTIONS  ` to remove all data policies from an existing column on a table:
+The following example uses the `ALTER COLUMN SET OPTIONS` to remove all data policies from an existing column on a table:
 
 ``` notranslate
 ALTER TABLE myproject.table1
@@ -1159,7 +1159,7 @@ ALTER COLUMN column_name SET OPTIONS (
   data_policies = []);
 ```
 
-The following example uses the `  ALTER COLUMN SET OPTIONS  ` to replace data policies from an existing column on a table:
+The following example uses the `ALTER COLUMN SET OPTIONS` to replace data policies from an existing column on a table:
 
 ``` notranslate
 ALTER TABLE myproject.table1
@@ -1169,26 +1169,26 @@ ALTER COLUMN column_name SET OPTIONS (
 
 ### API
 
-To unassign a data policy to a column, call the [`  patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method on the table and update the table schema empty or updated data policies.
+To unassign a data policy to a column, call the [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method on the table and update the table schema empty or updated data policies.
 
 ### Limitations
 
 Assigning a data policy directly on a column is subject to the following limitations:
 
-  - You must use the [`  v2.projects.locations.datapolicies  `](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#rest-resource:-v2.projects.locations.datapolicies) resource.
+  - You must use the [`v2.projects.locations.datapolicies`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#rest-resource:-v2.projects.locations.datapolicies) resource.
   - You can't apply both policy tags and data policies to the same column.
   - You can attach a maximum of eight data policies to a column.
   - A table can reference a maximum of 1,000 unique data policies through its columns.
   - A query can reference a maximum of 2,000 data policies.
   - You can delete a data policy only if no table column references it.
-  - If a user only has the `  maskedAccess  ` role, the `  tabledata.list  ` API call fails.
+  - If a user only has the `maskedAccess` role, the `tabledata.list` API call fails.
   - Table copy operations fail on tables protected by column data policies if the user lacks raw data access.
   - Cross-region table copy operations don't support tables protected by column data policies.
   - Column data policies are unavailable in BigQuery Omni regions.
   - Legacy SQL fails if the target table has column data policies.
   - Load jobs don't support user-specified schemas with column data policies.
-  - If you overwrite a destination table, the system removes any existing policy tags from the table, unless you use the `  --destination_schema  ` flag to specify a schema with column data policies.
+  - If you overwrite a destination table, the system removes any existing policy tags from the table, unless you use the `--destination_schema` flag to specify a schema with column data policies.
   - By default, data masking does not support partitioned or clustered columns. This is a general limitation of data masking, not specific to column data policies. Data masking on partitioned or clustered columns can significantly increase query costs.
   - You can't assign a data policy directly on a column in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , [non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) , [Apache Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) and [Delta Lake](https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table) .
   - Fine Grained Access can be granted only at the data policy level. For more information, see [Update data policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking#update-data-policies-on-column) .
-  - You can't [unassign](https://docs.cloud.google.com/bigquery/docs/column-data-masking#unassign-data-policies-on-column) the last remaining data policy on a column using the BigQuery Data Policy API. You can unassign the last remaining data policy on a column using the [`  ALTER COLUMN SET OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statement.
+  - You can't [unassign](https://docs.cloud.google.com/bigquery/docs/column-data-masking#unassign-data-policies-on-column) the last remaining data policy on a column using the BigQuery Data Policy API. You can unassign the last remaining data policy on a column using the [`ALTER COLUMN SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statement.

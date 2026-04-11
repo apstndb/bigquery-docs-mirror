@@ -24,7 +24,7 @@ A [Discovery Document](https://developers.google.com/discovery/v1/reference/apis
 
 A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_endpoint) is a base URL that specifies the network address of an API service. One service might have multiple service endpoints. This service has the following service endpoint and all URIs below are relative to this service endpoint:
 
-  - `  https://analyticshub.googleapis.com  `
+  - `https://analyticshub.googleapis.com`
 
 ## REST Resource: [v1beta1.organizations.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges)
 
@@ -32,7 +32,7 @@ Methods
 
 `  list  `
 
-`  GET /v1beta1/{organization=organizations/*/locations/*}/dataExchanges  `  
+`GET /v1beta1/{organization=organizations/*/locations/*}/dataExchanges`  
 Lists all data exchanges from projects in a given organization and location.
 
 ## REST Resource: [v1beta1.projects.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges)
@@ -41,42 +41,42 @@ Methods
 
 `  create  `
 
-`  POST /v1beta1/{parent=projects/*/locations/*}/dataExchanges  `  
+`POST /v1beta1/{parent=projects/*/locations/*}/dataExchanges`  
 Creates a new data exchange.
 
 `  delete  `
 
-`  DELETE /v1beta1/{name=projects/*/locations/*/dataExchanges/*}  `  
+`DELETE /v1beta1/{name=projects/*/locations/*/dataExchanges/*}`  
 Deletes an existing data exchange.
 
 `  get  `
 
-`  GET /v1beta1/{name=projects/*/locations/*/dataExchanges/*}  `  
+`GET /v1beta1/{name=projects/*/locations/*/dataExchanges/*}`  
 Gets the details of a data exchange.
 
 `  getIamPolicy  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*}:getIamPolicy  `  
+`POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*}:getIamPolicy`  
 Gets the IAM policy.
 
 `  list  `
 
-`  GET /v1beta1/{parent=projects/*/locations/*}/dataExchanges  `  
+`GET /v1beta1/{parent=projects/*/locations/*}/dataExchanges`  
 Lists all data exchanges in a given project and location.
 
 `  patch  `
 
-`  PATCH /v1beta1/{dataExchange.name=projects/*/locations/*/dataExchanges/*}  `  
+`PATCH /v1beta1/{dataExchange.name=projects/*/locations/*/dataExchanges/*}`  
 Updates an existing data exchange.
 
 `  setIamPolicy  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*}:setIamPolicy  `  
+`POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*}:setIamPolicy`  
 Sets the IAM policy.
 
 `  testIamPermissions  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*}:testIamPermissions  `  
+`POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*}:testIamPermissions`  
 Returns the permissions that a caller has.
 
 ## REST Resource: [v1beta1.projects.locations.dataExchanges.listings](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings)
@@ -85,47 +85,47 @@ Methods
 
 `  create  `
 
-`  POST /v1beta1/{parent=projects/*/locations/*/dataExchanges/*}/listings  `  
+`POST /v1beta1/{parent=projects/*/locations/*/dataExchanges/*}/listings`  
 Creates a new listing.
 
 `  delete  `
 
-`  DELETE /v1beta1/{name=projects/*/locations/*/dataExchanges/*/listings/*}  `  
+`DELETE /v1beta1/{name=projects/*/locations/*/dataExchanges/*/listings/*}`  
 Deletes a listing.
 
 `  get  `
 
-`  GET /v1beta1/{name=projects/*/locations/*/dataExchanges/*/listings/*}  `  
+`GET /v1beta1/{name=projects/*/locations/*/dataExchanges/*/listings/*}`  
 Gets the details of a listing.
 
 `  getIamPolicy  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:getIamPolicy  `  
+`POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:getIamPolicy`  
 Gets the IAM policy.
 
 `  list  `
 
-`  GET /v1beta1/{parent=projects/*/locations/*/dataExchanges/*}/listings  `  
+`GET /v1beta1/{parent=projects/*/locations/*/dataExchanges/*}/listings`  
 Lists all listings in a given project and location.
 
 `  patch  `
 
-`  PATCH /v1beta1/{listing.name=projects/*/locations/*/dataExchanges/*/listings/*}  `  
+`PATCH /v1beta1/{listing.name=projects/*/locations/*/dataExchanges/*/listings/*}`  
 Updates an existing listing.
 
 `  setIamPolicy  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:setIamPolicy  `  
+`POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:setIamPolicy`  
 Sets the IAM policy.
 
 `  subscribe  `
 
-`  POST /v1beta1/{name=projects/*/locations/*/dataExchanges/*/listings/*}:subscribe  `  
+`POST /v1beta1/{name=projects/*/locations/*/dataExchanges/*/listings/*}:subscribe`  
 Subscribes to a listing.
 
 `  testIamPermissions  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:testIamPermissions  `  
+`POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:testIamPermissions`  
 Returns the permissions that a caller has.
 
 ## REST Resource: [v1.organizations.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/organizations.locations.dataExchanges)
@@ -134,7 +134,7 @@ Methods
 
 `  list  `
 
-`  GET /v1/{organization=organizations/*/locations/*}/dataExchanges  `  
+`GET /v1/{organization=organizations/*/locations/*}/dataExchanges`  
 Lists all data exchanges from projects in a given organization and location.
 
 ## REST Resource: [v1.projects.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges)
@@ -143,52 +143,52 @@ Methods
 
 `  create  `
 
-`  POST /v1/{parent=projects/*/locations/*}/dataExchanges  `  
+`POST /v1/{parent=projects/*/locations/*}/dataExchanges`  
 Creates a new data exchange.
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/locations/*/dataExchanges/*}  `  
+`DELETE /v1/{name=projects/*/locations/*/dataExchanges/*}`  
 Deletes an existing data exchange.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/dataExchanges/*}  `  
+`GET /v1/{name=projects/*/locations/*/dataExchanges/*}`  
 Gets the details of a data exchange.
 
 `  getIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/dataExchanges/*}:getIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/dataExchanges/*}:getIamPolicy`  
 Gets the IAM policy.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*}/dataExchanges  `  
+`GET /v1/{parent=projects/*/locations/*}/dataExchanges`  
 Lists all data exchanges in a given project and location.
 
 `  listSubscriptions  `
 
-`  GET /v1/{resource=projects/*/locations/*/dataExchanges/*}:listSubscriptions  `  
+`GET /v1/{resource=projects/*/locations/*/dataExchanges/*}:listSubscriptions`  
 Lists all subscriptions on a given Data Exchange or Listing.
 
 `  patch  `
 
-`  PATCH /v1/{dataExchange.name=projects/*/locations/*/dataExchanges/*}  `  
+`PATCH /v1/{dataExchange.name=projects/*/locations/*/dataExchanges/*}`  
 Updates an existing data exchange.
 
 `  setIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/dataExchanges/*}:setIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/dataExchanges/*}:setIamPolicy`  
 Sets the IAM policy.
 
 `  subscribe  `
 
-`  POST /v1/{name=projects/*/locations/*/dataExchanges/*}:subscribe  `  
+`POST /v1/{name=projects/*/locations/*/dataExchanges/*}:subscribe`  
 Creates a Subscription to a Data Clean Room.
 
 `  testIamPermissions  `
 
-`  POST /v1/{resource=projects/*/locations/*/dataExchanges/*}:testIamPermissions  `  
+`POST /v1/{resource=projects/*/locations/*/dataExchanges/*}:testIamPermissions`  
 Returns the permissions that a caller has.
 
 ## REST Resource: [v1.projects.locations.dataExchanges.listings](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings)
@@ -197,52 +197,52 @@ Methods
 
 `  create  `
 
-`  POST /v1/{parent=projects/*/locations/*/dataExchanges/*}/listings  `  
+`POST /v1/{parent=projects/*/locations/*/dataExchanges/*}/listings`  
 Creates a new listing.
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}  `  
+`DELETE /v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}`  
 Deletes a listing.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}  `  
+`GET /v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}`  
 Gets the details of a listing.
 
 `  getIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:getIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:getIamPolicy`  
 Gets the IAM policy.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*/dataExchanges/*}/listings  `  
+`GET /v1/{parent=projects/*/locations/*/dataExchanges/*}/listings`  
 Lists all listings in a given project and location.
 
 `  listSubscriptions  `
 
-`  GET /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:listSubscriptions  `  
+`GET /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:listSubscriptions`  
 Lists all subscriptions on a given Data Exchange or Listing.
 
 `  patch  `
 
-`  PATCH /v1/{listing.name=projects/*/locations/*/dataExchanges/*/listings/*}  `  
+`PATCH /v1/{listing.name=projects/*/locations/*/dataExchanges/*/listings/*}`  
 Updates an existing listing.
 
 `  setIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:setIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:setIamPolicy`  
 Sets the IAM policy.
 
 `  subscribe  `
 
-`  POST /v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}:subscribe  `  
+`POST /v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}:subscribe`  
 Subscribes to a listing.
 
 `  testIamPermissions  `
 
-`  POST /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:testIamPermissions  `  
+`POST /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:testIamPermissions`  
 Returns the permissions that a caller has.
 
 ## REST Resource: [v1.projects.locations.dataExchanges.queryTemplates](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates)
@@ -251,37 +251,37 @@ Methods
 
 `  approve  `
 
-`  POST /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}:approve  `  
+`POST /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}:approve`  
 Approves a query template.
 
 `  create  `
 
-`  POST /v1/{parent=projects/*/locations/*/dataExchanges/*}/queryTemplates  `  
+`POST /v1/{parent=projects/*/locations/*/dataExchanges/*}/queryTemplates`  
 Creates a new QueryTemplate
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}  `  
+`DELETE /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}`  
 Deletes a query template.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}  `  
+`GET /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}`  
 Gets a QueryTemplate
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*/dataExchanges/*}/queryTemplates  `  
+`GET /v1/{parent=projects/*/locations/*/dataExchanges/*}/queryTemplates`  
 Lists all QueryTemplates in a given project and location.
 
 `  patch  `
 
-`  PATCH /v1/{queryTemplate.name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}  `  
+`PATCH /v1/{queryTemplate.name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}`  
 Updates an existing QueryTemplate
 
 `  submit  `
 
-`  POST /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}:submit  `  
+`POST /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}:submit`  
 Submits a query template for approval.
 
 ## REST Resource: [v1.projects.locations.subscriptions](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions)
@@ -290,35 +290,35 @@ Methods
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/locations/*/subscriptions/*}  `  
+`DELETE /v1/{name=projects/*/locations/*/subscriptions/*}`  
 Deletes a subscription.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/subscriptions/*}  `  
+`GET /v1/{name=projects/*/locations/*/subscriptions/*}`  
 Gets the details of a Subscription.
 
 `  getIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/subscriptions/*}:getIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/subscriptions/*}:getIamPolicy`  
 Gets the IAM policy.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*}/subscriptions  `  
+`GET /v1/{parent=projects/*/locations/*}/subscriptions`  
 Lists all subscriptions in a given project and location.
 
 `  refresh  `
 
-`  POST /v1/{name=projects/*/locations/*/subscriptions/*}:refresh  `  
+`POST /v1/{name=projects/*/locations/*/subscriptions/*}:refresh`  
 Refreshes a Subscription to a Data Exchange.
 
 `  revoke  `
 
-`  POST /v1/{name=projects/*/locations/*/subscriptions/*}:revoke  `  
+`POST /v1/{name=projects/*/locations/*/subscriptions/*}:revoke`  
 Revokes a given subscription.
 
 `  setIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/subscriptions/*}:setIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/subscriptions/*}:setIamPolicy`  
 Sets the IAM policy.

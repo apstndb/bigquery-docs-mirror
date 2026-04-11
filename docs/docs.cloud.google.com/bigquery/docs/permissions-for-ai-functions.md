@@ -1,8 +1,8 @@
 # Set permissions for generative AI functions that call Vertex AI LLMs
 
-This document shows you how to set up permissions for running generative AI queries. Generative AI queries contain `  AI.*  ` functions that call foundation models in Vertex AI; for example, `  AI.GENERATE  ` .
+This document shows you how to set up permissions for running generative AI queries. Generative AI queries contain `AI.*` functions that call foundation models in Vertex AI; for example, `AI.GENERATE` .
 
-There are two ways to set up permissions to run queries that use `  AI.*  ` functions:
+There are two ways to set up permissions to run queries that use `AI.*` functions:
 
   - Run the query using your end-user credentials
   - Create a BigQuery connection to run the query using a service account
@@ -17,8 +17,8 @@ To run generative AI queries using end-user credentials, configure the necessary
 
 To get the permissions that you need to run a query job that calls a Vertex AI model, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Access a foundation model in Vertex AI: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `  roles/aiplatform.user  ` )
+  - Run query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - Access a foundation model in Vertex AI: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -26,7 +26,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ### Grant the required roles to the user or group
 
-You can use the Google Cloud console or SQL to grant the required roles for a principal. The principal is the user or group that runs the query that uses `  AI.*  ` functions to call a Vertex AI foundation model.
+You can use the Google Cloud console or SQL to grant the required roles for a principal. The principal is the user or group that runs the query that uses `AI.*` functions to call a Vertex AI foundation model.
 
 ### Console
 
@@ -46,7 +46,7 @@ You can use the Google Cloud console or SQL to grant the required roles for a pr
         
         The **Add principals** dialog opens.
     
-    3.  In the **New principals** field, enter the [principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) — for example, `  my-user@example.com  ` or `  //iam.googleapis.com/locations/global/workforcePools/example-pool/group/example-group@example.com  ` .
+    3.  In the **New principals** field, enter the [principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) — for example, `my-user@example.com` or `//iam.googleapis.com/locations/global/workforcePools/example-pool/group/example-group@example.com` .
     
     4.  In the **Assign roles** section, for **Select a role** , click the drop-down arrow.
     
@@ -64,7 +64,7 @@ You can use the Google Cloud console or SQL to grant the required roles for a pr
 
 ### SQL
 
-Use the [`  GRANT  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
+Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -80,8 +80,8 @@ Use the [`  GRANT  ` statement](https://docs.cloud.google.com/bigquery/docs/refe
     
     Replace the following:
     
-      - `  PROJECT_ID  ` : the project where you plan to use `  AI.*  ` functions.
-      - `  USER_OR_GROUP  ` : the user or group to grant access to, in the `  user: USER @ DOMAIN  ` or `  group: GROUP @ DOMAIN  ` format.
+      - `  PROJECT_ID  ` : the project where you plan to use `AI.*` functions.
+      - `  USER_OR_GROUP  ` : the user or group to grant access to, in the ` user: USER @ DOMAIN  ` or ` group: GROUP @ DOMAIN  ` format.
 
 3.  Click play\_circle **Run** .
 
@@ -97,7 +97,7 @@ To run generative AI queries using a connection, create the connection, and then
 
 ### Create a connection
 
-You can set up a Cloud Resource Connection to run all generative AI queries that contain `  AI.*  ` functions. When you create a connection, you grant permissions to run queries to a service account.
+You can set up a Cloud Resource Connection to run all generative AI queries that contain `AI.*` functions. When you create a connection, you grant permissions to run queries to a service account.
 
 Select one of the following options:
 
@@ -131,7 +131,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -167,7 +167,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -305,13 +305,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -345,13 +345,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -363,7 +363,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -375,7 +375,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -389,7 +389,7 @@ For more information, see [Create and set up a Cloud resource connection](https:
 
 ### Grant access to the service account
 
-To run queries that use generative `  AI.*  ` functions that call Vertex AI models, you must grant appropriate permissions to the service account that was created when you created your connection. To run functions that call a Vertex AI foundation model, the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `  roles/aiplatform.user  ` ) is required.
+To run queries that use generative `AI.*` functions that call Vertex AI models, you must grant appropriate permissions to the service account that was created when you created your connection. To run functions that call a Vertex AI foundation model, the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) is required.
 
 Select one of the following options:
 
@@ -413,7 +413,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  GRANT  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
+Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -438,7 +438,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
 
     gcloud projects add-iam-policy-binding PROJECT_ID \
     --member="serviceAccount:$(bq show --format=prettyjson --connection $PROJECT_ID.$REGION.$CONNECTION_ID | jq -r .cloudResource.serviceAccountId)"
@@ -452,7 +452,7 @@ Replace the following:
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
@@ -487,13 +487,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -505,7 +505,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -517,7 +517,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     

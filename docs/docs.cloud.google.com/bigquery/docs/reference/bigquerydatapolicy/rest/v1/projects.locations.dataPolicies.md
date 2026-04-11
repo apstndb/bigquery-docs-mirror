@@ -21,58 +21,44 @@ Represents the label-policy binding.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;dataPolicyType&quot;: enum (DataPolicyType),
-  &quot;dataPolicyId&quot;: string,
-
-  // Union field matching_label can be only one of the following:
-  &quot;policyTag&quot;: string
-  // End of list of possible types for union field matching_label.
-
-  // Union field policy can be only one of the following:
-  &quot;dataMaskingPolicy&quot;: {
-    object (DataMaskingPolicy)
-  }
-  // End of list of possible types for union field policy.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;dataPolicyId&quot;: string,// Union field matching_label can be only one of the following:&quot;policyTag&quot;: string// End of list of possible types for union field matching_label.// Union field policy can be only one of the following:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of list of possible types for union field policy.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. Resource name of this data policy, in the format of `  projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}  ` .
+Output only. Resource name of this data policy, in the format of `projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}` .
 
-`  dataPolicyType  `
+`dataPolicyType`
 
-`  enum ( DataPolicyType  ` )
+` enum ( DataPolicyType  ` )
 
 Required. Data policy type. Type of data policy.
 
-`  dataPolicyId  `
+`dataPolicyId`
 
-`  string  `
+`string`
 
 User-assigned (human readable) ID of the data policy that needs to be unique within a project. Used as {dataPolicyId} in part of the resource name.
 
-Union field `  matching_label  ` . Label that is bound to this data policy. `  matching_label  ` can be only one of the following:
+Union field `matching_label` . Label that is bound to this data policy. `matching_label` can be only one of the following:
 
-`  policyTag  `
+`policyTag`
 
-`  string  `
+`string`
 
-Policy tag resource name, in the format of `  projects/{projectNumber}/locations/{locationId}/taxonomies/{taxonomyId}/policyTags/{policyTag_id}  ` .
+Policy tag resource name, in the format of `projects/{projectNumber}/locations/{locationId}/taxonomies/{taxonomyId}/policyTags/{policyTag_id}` .
 
-Union field `  policy  ` . The policy that is bound to this data policy. `  policy  ` can be only one of the following:
+Union field `policy` . The policy that is bound to this data policy. `policy` can be only one of the following:
 
-`  dataMaskingPolicy  `
+`dataMaskingPolicy`
 
-`  object ( DataMaskingPolicy  ` )
+` object ( DataMaskingPolicy  ` )
 
 The data masking policy that specifies the data masking rule to use.
 
@@ -91,32 +77,26 @@ The data masking policy that is used to specify data masking rule.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field masking_expression can be only one of the following:
-  &quot;predefinedExpression&quot;: enum (PredefinedExpression),
-  &quot;routine&quot;: string
-  // End of list of possible types for union field masking_expression.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field masking_expression can be only one of the following:&quot;predefinedExpression&quot;: enum (PredefinedExpression),&quot;routine&quot;: string// End of list of possible types for union field masking_expression.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  masking_expression  ` . A masking expression to bind to the data masking rule. `  masking_expression  ` can be only one of the following:
+Union field `masking_expression` . A masking expression to bind to the data masking rule. `masking_expression` can be only one of the following:
 
-`  predefinedExpression  `
+`predefinedExpression`
 
-`  enum ( PredefinedExpression  ` )
+` enum ( PredefinedExpression  ` )
 
 A predefined masking expression.
 
-`  routine  `
+`routine`
 
-`  string  `
+`string`
 
-The name of the BigQuery routine that contains the custom masking routine, in the format of `  projects/{projectNumber}/datasets/{dataset_id}/routines/{routine_id}  ` .
+The name of the BigQuery routine that contains the custom masking routine, in the format of `projects/{projectNumber}/datasets/{dataset_id}/routines/{routine_id}` .
 
 ## PredefinedExpression
 
@@ -124,19 +104,19 @@ The available masking rules. Learn more here: <https://cloud.google.com/bigquery
 
 Enums
 
-`  PREDEFINED_EXPRESSION_UNSPECIFIED  `
+`PREDEFINED_EXPRESSION_UNSPECIFIED`
 
 Default, unspecified predefined expression. No masking will take place since no expression is specified.
 
-`  SHA256  `
+`SHA256`
 
 Masking expression to replace data with SHA-256 hash.
 
-`  ALWAYS_NULL  `
+`ALWAYS_NULL`
 
 Masking expression to replace data with NULLs.
 
-`  DEFAULT_MASKING_VALUE  `
+`DEFAULT_MASKING_VALUE`
 
 Masking expression to replace data with their default masking values. The default masking values for each type listed as below:
 
@@ -156,21 +136,21 @@ Masking expression to replace data with their default masking values. The defaul
   - STRUCT: NOT\_APPLICABLE
   - JSON: NULL
 
-`  LAST_FOUR_CHARACTERS  `
+`LAST_FOUR_CHARACTERS`
 
 Masking expression shows the last four characters of text. The masking behavior is as follows:
 
   - If text length \> 4 characters: Replace text with XXXXX, append last four characters of original text.
   - If text length \<= 4 characters: Apply SHA-256 hash.
 
-`  FIRST_FOUR_CHARACTERS  `
+`FIRST_FOUR_CHARACTERS`
 
 Masking expression shows the first four characters of text. The masking behavior is as follows:
 
   - If text length \> 4 characters: Replace text with XXXXX, prepend first four characters of original text.
   - If text length \<= 4 characters: Apply SHA-256 hash.
 
-`  EMAIL_MASK  `
+`EMAIL_MASK`
 
 Masking expression for email addresses. The masking behavior is as follows:
 
@@ -179,19 +159,19 @@ Masking expression for email addresses. The masking behavior is as follows:
 
 For more information, see [Email mask](https://cloud.google.com/bigquery/docs/column-data-masking-intro#masking_options) .
 
-`  DATE_YEAR_MASK  `
+`DATE_YEAR_MASK`
 
-Masking expression to only show the *year* of `  Date  ` , `  DateTime  ` and `  TimeStamp  ` . For example, with the year 2076:
+Masking expression to only show the *year* of `Date` , `DateTime` and `TimeStamp` . For example, with the year 2076:
 
   - DATE : 2076-01-01
   - DATETIME : 2076-01-01T00:00:00
   - TIMESTAMP : 2076-01-01 00:00:00 UTC
 
-Truncation occurs according to the UTC time zone. To change this, adjust the default time zone using the `  time_zone  ` system variable. For more information, see the [System variables reference](https://cloud.google.com/bigquery/docs/reference/system-variables) .
+Truncation occurs according to the UTC time zone. To change this, adjust the default time zone using the `time_zone` system variable. For more information, see the [System variables reference](https://cloud.google.com/bigquery/docs/reference/system-variables) .
 
-`  RANDOM_HASH  `
+`RANDOM_HASH`
 
-A masking expression that uses hashing to mask column data. It differs from SHA-256 in that a unique random value is generated for each query and is added to the hash input, resulting in a different masked result for each query. Creating and updating a data policy with a `  RANDOM_HASH  ` masking expression is only supported for the Data Policy v2 API.
+A masking expression that uses hashing to mask column data. It differs from SHA-256 in that a unique random value is generated for each query and is added to the hash input, resulting in a different masked result for each query. Creating and updating a data policy with a `RANDOM_HASH` masking expression is only supported for the Data Policy v2 API.
 
 ## DataPolicyType
 
@@ -199,52 +179,52 @@ A list of supported data policy types.
 
 Enums
 
-`  DATA_POLICY_TYPE_UNSPECIFIED  `
+`DATA_POLICY_TYPE_UNSPECIFIED`
 
 Default value for the data policy type. This should not be used.
 
-`  COLUMN_LEVEL_SECURITY_POLICY  `
+`COLUMN_LEVEL_SECURITY_POLICY`
 
 Used to create a data policy for column-level security, without data masking.
 
-`  DATA_MASKING_POLICY  `
+`DATA_MASKING_POLICY`
 
 Used to create a data policy for data masking.
 
 ## Methods
 
-### `             create           `
+### `            create           `
 
-Creates a new data policy under a project with the given `  dataPolicyId  ` (used as the display name), policy tag, and data policy type.
+Creates a new data policy under a project with the given `dataPolicyId` (used as the display name), policy tag, and data policy type.
 
-### `             delete           `
+### `            delete           `
 
 Deletes the data policy specified by its resource name.
 
-### `             get           `
+### `            get           `
 
 Gets the data policy specified by its resource name.
 
-### `             getIamPolicy           `
+### `            getIamPolicy           `
 
 Gets the IAM policy for the specified data policy.
 
-### `             list           `
+### `            list           `
 
 List all of the data policies in the specified parent project.
 
-### `             patch           `
+### `            patch           `
 
 Updates the metadata for an existing data policy.
 
-### `             rename           `
+### `            rename           `
 
 Renames the id (display name) of the specified data policy.
 
-### `             setIamPolicy           `
+### `            setIamPolicy           `
 
 Sets the IAM policy for the specified data policy.
 
-### `             testIamPermissions           `
+### `            testIamPermissions           `
 
 Returns the caller's permission on the specified data policy resource.

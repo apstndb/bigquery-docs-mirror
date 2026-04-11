@@ -1,6 +1,6 @@
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/TestIamPermissionsResponse#SCHEMA_REPRESENTATION)
 
-Response message for `  TestIamPermissions  ` method.
+Response message for `TestIamPermissions` method.
 
 <table>
 <colgroup>
@@ -24,8 +24,8 @@ Response message for `  TestIamPermissions  ` method.
 
 Fields
 
-`  permissions[]  `
+`permissions[]`
 
-`  string  `
+`string`
 
-A subset of `  TestPermissionsRequest.permissions  ` that the caller is allowed.
+A subset of `TestPermissionsRequest.permissions` that the caller is allowed.

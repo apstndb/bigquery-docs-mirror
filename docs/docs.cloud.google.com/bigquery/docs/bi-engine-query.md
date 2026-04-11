@@ -50,7 +50,7 @@ You can better understand how your workloads benefit from BI Engine by [reviewin
 
 ## Limitations
 
-Queries that contain the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) aren't accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
+Queries that contain the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) aren't accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
 ## Quotas and limits
 

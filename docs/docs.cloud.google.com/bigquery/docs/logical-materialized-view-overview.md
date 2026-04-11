@@ -39,7 +39,7 @@ The following table summarizes the similarities and differences between BigQuery
 | **Optimized For**               | Security and abstraction        | Speed and cost reduction                                                         |
 | **Maintenance & storage costs** | No                              | Yes                                                                              |
 
-<sup>1</sup> The [`  --max_staleness  ` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) improves query performance with controlled costs when processing large, frequently changing datasets.
+<sup>1</sup> The [`--max_staleness` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) improves query performance with controlled costs when processing large, frequently changing datasets.
 
 ### When to use logical views
 
@@ -64,7 +64,7 @@ You can create an authorized view for either a logical or materialized view. An 
 
 For a well-architected BigQuery environment, *logical views* are a useful tool for consolidating the data you need. Reserve *materialized views* for use as a performance optimization tool for specific, high-traffic query patterns that involve heavy aggregation.
 
-To learn how to monitor the use and performance of materialized views, see [`  MATERIALIZED_VIEWS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) .
+To learn how to monitor the use and performance of materialized views, see [`MATERIALIZED_VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) .
 
 ## What's next
 

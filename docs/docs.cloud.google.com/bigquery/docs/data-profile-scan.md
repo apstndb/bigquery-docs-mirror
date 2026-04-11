@@ -12,7 +12,7 @@ Enable the Dataplex API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com)
 
@@ -24,10 +24,10 @@ This section describes the IAM roles and permissions needed to use Dataplex Univ
 
 To get the permissions that you need to create and manage data profile scans, ask your administrator to grant you the following IAM roles:
 
-  - Create, run, update, and delete data profile scans: [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) on the project containing the data scan
-  - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `  roles/dataplex.dataScanViewer  ` ) on the project containing the data scan
-  - Publish data profile scan results to Dataplex Universal Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` ) on the `  @bigquery  ` entry group
-  - View published data profile scan results in BigQuery on the **Data profile** tab: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the table
+  - Create, run, update, and delete data profile scans: [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `roles/dataplex.dataScanEditor` ) on the project containing the data scan
+  - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `roles/dataplex.dataScanViewer` ) on the project containing the data scan
+  - Publish data profile scan results to Dataplex Universal Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the `@bigquery` entry group
+  - View published data profile scan results in BigQuery on the **Data profile** tab: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -38,26 +38,26 @@ These predefined roles contain the permissions required to create and manage dat
 The following permissions are required to create and manage data profile scans:
 
   - Create, run, update, and delete data profile scans:
-      - `  dataplex.datascans.create  ` on project
-      - `  dataplex.datascans.update  ` on data scan
-      - `  dataplex.datascans.delete  ` on data scan
-      - `  dataplex.datascans.run  ` on data scan
-      - `  dataplex.datascans.get  ` on data scan
-      - `  dataplex.datascans.list  ` on project
-      - `  dataplex.dataScanJobs.get  ` on data scan job
-      - `  dataplex.dataScanJobs.list  ` on data scan
+      - `dataplex.datascans.create` on project
+      - `dataplex.datascans.update` on data scan
+      - `dataplex.datascans.delete` on data scan
+      - `dataplex.datascans.run` on data scan
+      - `dataplex.datascans.get` on data scan
+      - `dataplex.datascans.list` on project
+      - `dataplex.dataScanJobs.get` on data scan job
+      - `dataplex.dataScanJobs.list` on data scan
   - View data profile scan results, jobs, and history:
-      - `  dataplex.datascans.getData  ` on data scan
-      - `  dataplex.datascans.list  ` on project
-      - `  dataplex.dataScanJobs.get  ` on data scan job
-      - `  dataplex.dataScanJobs.list  ` on data scan
+      - `dataplex.datascans.getData` on data scan
+      - `dataplex.datascans.list` on project
+      - `dataplex.dataScanJobs.get` on data scan job
+      - `dataplex.dataScanJobs.list` on data scan
   - Publish data profile scan results to Dataplex Universal Catalog:
-      - `  dataplex.entryGroups.useDataProfileAspect  ` on entry group
-      - `  bigquery.tables.update  ` on table
-      - `  dataplex.entries.update  ` on entry
+      - `dataplex.entryGroups.useDataProfileAspect` on entry group
+      - `bigquery.tables.update` on table
+      - `dataplex.entries.update` on entry
   - View published data profile results for a table in BigQuery or Dataplex Universal Catalog:
-      - `  bigquery.tables.get  ` on table
-      - `  bigquery.tables.getData  ` on table
+      - `bigquery.tables.get` on table
+      - `bigquery.tables.getData` on table
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -68,12 +68,12 @@ To ensure that the Dataplex Universal Catalog service account has the necessary 
 **Important:** You must grant these roles to the Dataplex Universal Catalog service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - Run data profile scans against BigQuery data:
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on project running the scan
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on tables being scanned
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on project running the scan
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on tables being scanned
   - Run data profile scans for BigQuery external tables that use Cloud Storage data:
-      - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` ) on Cloud Storage bucket
-      - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `  roles/storage.legacyBucketReader  ` ) on Cloud Storage bucket
-  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on table
+      - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on Cloud Storage bucket
+      - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `roles/storage.legacyBucketReader` ) on Cloud Storage bucket
+  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -84,27 +84,27 @@ These predefined roles contain the permissions required to run data profile scan
 The following permissions are required to run data profile scans and export results:
 
   - Run data profile scans against BigQuery data:
-      - `  bigquery.jobs.create  ` on project
-      - `  bigquery.tables.get  ` on table
-      - `  bigquery.tables.getData  ` on table
+      - `bigquery.jobs.create` on project
+      - `bigquery.tables.get` on table
+      - `bigquery.tables.getData` on table
   - Run data profile scans for BigQuery external tables that use Cloud Storage data:
-      - `  storage.buckets.get  ` on bucket
-      - `  storage.objects.get  ` on object
+      - `storage.buckets.get` on bucket
+      - `storage.objects.get` on object
   - Export data profile scan results to a BigQuery table:
-      - `  bigquery.tables.create  ` on dataset
-      - `  bigquery.tables.updateData  ` on table
+      - `bigquery.tables.create` on dataset
+      - `bigquery.tables.updateData` on table
 
 Your administrator might also be able to give the Dataplex Universal Catalog service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Dataplex Universal Catalog can only scan rows visible to the Dataplex Universal Catalog service account. To allow Dataplex Universal Catalog to scan all rows, add its service account to a row filter where the predicate is `  TRUE  ` .
+If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Dataplex Universal Catalog can only scan rows visible to the Dataplex Universal Catalog service account. To allow Dataplex Universal Catalog to scan all rows, add its service account to a row filter where the predicate is `TRUE` .
 
-If a table uses BigQuery [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) , then Dataplex Universal Catalog requires access to scan protected columns. To grant access, give the Dataplex Universal Catalog service account the **Data Catalog Fine-Grained Reader** ( `  roles/datacatalog.fineGrainedReader  ` ) role on all policy tags used in the table. The user creating or updating a data scan also needs permissions on protected columns.
+If a table uses BigQuery [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) , then Dataplex Universal Catalog requires access to scan protected columns. To grant access, give the Dataplex Universal Catalog service account the **Data Catalog Fine-Grained Reader** ( `roles/datacatalog.fineGrainedReader` ) role on all policy tags used in the table. The user creating or updating a data scan also needs permissions on protected columns.
 
 ### Grant roles to the Dataplex Universal Catalog service account
 
 To run data profile scans, Dataplex Universal Catalog uses a service account that requires permissions to run BigQuery jobs and read BigQuery table data. To grant the required roles, follow these steps:
 
-1.  Get the Dataplex Universal Catalog service account email address. If you haven't created a data profile or data quality scan in this project before, run the following `  gcloud  ` command to generate the service identity:
+1.  Get the Dataplex Universal Catalog service account email address. If you haven't created a data profile or data quality scan in this project before, run the following `gcloud` command to generate the service identity:
     
         gcloud beta services identity create --service=dataplex.googleapis.com
     
@@ -112,7 +112,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     
     If the service account already exists, you can find its email by viewing principals with the **Dataplex** name on the [**IAM** page](https://console.cloud.google.com/iam-admin/iam) in the Google Cloud console.
 
-2.  Grant the service account the **BigQuery Job User** ( `  roles/bigquery.jobUser  ` ) role on your project. This role lets the service account run BigQuery jobs for the scan.
+2.  Grant the service account the **BigQuery Job User** ( `roles/bigquery.jobUser` ) role on your project. This role lets the service account run BigQuery jobs for the scan.
     
         gcloud projects add-iam-policy-binding PROJECT_ID \
             --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com" \
@@ -121,9 +121,9 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     Replace the following:
     
       - `  PROJECT_ID  ` : your Google Cloud project ID.
-      - `  service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com  ` : the email of the Dataplex Universal Catalog service account.
+      - `service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com` : the email of the Dataplex Universal Catalog service account.
 
-3.  Grant the service account the **BigQuery Data Viewer** ( `  roles/bigquery.dataViewer  ` ) role for each table that you want to profile. This role grants read-only access to the tables.
+3.  Grant the service account the **BigQuery Data Viewer** ( `roles/bigquery.dataViewer` ) role for each table that you want to profile. This role grants read-only access to the tables.
     
         gcloud bigquery tables add-iam-policy-binding DATASET_ID.TABLE_ID \
             --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com" \
@@ -133,7 +133,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     
       - `  DATASET_ID  ` : the ID of the dataset containing the table.
       - `  TABLE_ID  ` : the ID of the table to profile.
-      - `  service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com  ` : the email of the Dataplex Universal Catalog service account.
+      - `service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com` : the email of the Dataplex Universal Catalog service account.
 
 ## Create a data profile scan
 
@@ -159,13 +159,13 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 7.  In the **Scope** field, choose **Incremental** or **Entire data** .
     
-      - If you choose **Incremental data** , in the **Timestamp column** field, select a column of type `  DATE  ` or `  TIMESTAMP  ` from your BigQuery table that increases as new records are added, and that can be used to identify new records. For tables partitioned on a column of type `  DATE  ` or `  TIMESTAMP  ` , we recommend using the partition column as the timestamp field.
+      - If you choose **Incremental data** , in the **Timestamp column** field, select a column of type `DATE` or `TIMESTAMP` from your BigQuery table that increases as new records are added, and that can be used to identify new records. For tables partitioned on a column of type `DATE` or `TIMESTAMP` , we recommend using the partition column as the timestamp field.
 
 8.  Optional: To filter your data, do any of the following:
     
-      - To filter by rows, select the **Filter rows** checkbox. Enter a valid SQL expression that can be used in a [`  WHERE  ` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example: `  col1 >= 0  ` .
+      - To filter by rows, select the **Filter rows** checkbox. Enter a valid SQL expression that can be used in a [`WHERE` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example: `col1 >= 0` .
         
-        The filter can be a combination of SQL conditions over multiple columns. For example: `  col1 >= 0 AND col2 < 10  ` .
+        The filter can be a combination of SQL conditions over multiple columns. For example: `col1 >= 0 AND col2 < 10` .
     
       - To filter by columns, select the **Filter columns** checkbox.
         
@@ -220,15 +220,15 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 ### gcloud
 
-To create a data profile scan, use the [`  gcloud dataplex datascans create data-profile  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-profile) .
+To create a data profile scan, use the [`gcloud dataplex datascans create data-profile` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-profile) .
 
-If the source data is organized in a Dataplex Universal Catalog lake, include the `  --data-source-entity  ` flag:
+If the source data is organized in a Dataplex Universal Catalog lake, include the `--data-source-entity` flag:
 
     gcloud dataplex datascans create data-profile DATASCAN \
     --location=LOCATION \
     --data-source-entity=DATA_SOURCE_ENTITY
 
-If the source data isn't organized in a Dataplex Universal Catalog lake, include the `  --data-source-resource  ` flag:
+If the source data isn't organized in a Dataplex Universal Catalog lake, include the `--data-source-resource` flag:
 
     gcloud dataplex datascans create data-profile DATASCAN \
     --location=LOCATION \
@@ -238,8 +238,8 @@ Replace the following variables:
 
   - `  DATASCAN  ` : The name of the data profile scan.
   - `  LOCATION  ` : The Google Cloud region in which to create the data profile scan.
-  - `  DATA_SOURCE_ENTITY  ` : The Dataplex Universal Catalog entity that contains the data for the data profile scan. For example, `  projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity  ` .
-  - `  DATA_SOURCE_RESOURCE  ` : The name of the resource that contains the data for the data profile scan. For example, `  //bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table  ` .
+  - `  DATA_SOURCE_ENTITY  ` : The Dataplex Universal Catalog entity that contains the data for the data profile scan. For example, `projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity` .
+  - `  DATA_SOURCE_RESOURCE  ` : The name of the resource that contains the data for the data profile scan. For example, `//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table` .
 
 ### C\#
 
@@ -468,9 +468,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To create a data profile scan, use the [`  dataScans.create  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+To create a data profile scan, use the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
-**Note:** If your BigQuery table is configured with the `  Require partition filter  ` setting set to `  true  ` , use the table's partition column as the data profile scan's row filter or timestamp column.
+**Note:** If your BigQuery table is configured with the `Require partition filter` setting set to `true` , use the table's partition column as the data profile scan's row filter or timestamp column.
 
 ## Create multiple data profile scans
 
@@ -496,7 +496,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
     
     1.  In the **Scope** field, choose **Incremental** or **Entire data** .
         
-        **Note:** If you choose **Incremental** data, you can select only tables that are partitioned on a column of type `  DATE  ` or `  TIMESTAMP  ` .
+        **Note:** If you choose **Incremental** data, you can select only tables that are partitioned on a column of type `DATE` or `TIMESTAMP` .
     
     2.  To apply sampling to the data profile scans, in the **Sampling size** list, select a sampling percentage.
         
@@ -552,7 +552,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
 
 ### gcloud
 
-To run a data profile scan, use the [`  gcloud dataplex datascans run  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/run) :
+To run a data profile scan, use the [`gcloud dataplex datascans run` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/run) :
 
     gcloud dataplex datascans run DATASCAN \
     --location=LOCATION
@@ -744,7 +744,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To run a data profile scan, use the [`  dataScans.run  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
+To run a data profile scan, use the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
 
 **Note:** Run isn't supported for data profile scans that are on a one-time schedule.
 
@@ -768,7 +768,7 @@ To run a data profile scan, use the [`  dataScans.run  ` method](https://docs.cl
 
 ### gcloud
 
-To view the results of a data profile scan job, use the [`  gcloud dataplex datascans jobs describe  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/describe) :
+To view the results of a data profile scan job, use the [`gcloud dataplex datascans jobs describe` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/describe) :
 
     gcloud dataplex datascans jobs describe JOB \
     --location=LOCATION \
@@ -780,7 +780,7 @@ Replace the following variables:
   - `  JOB  ` : The job ID of the data profile scan job.
   - `  LOCATION  ` : The Google Cloud region in which the data profile scan was created.
   - `  DATASCAN  ` : The name of the data profile scan the job belongs to.
-  - `  --view=FULL  ` : To see the scan job result, specify `  FULL  ` .
+  - `--view=FULL` : To see the scan job result, specify `FULL` .
 
 ### C\#
 
@@ -965,7 +965,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To view the results of a data profile scan, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
+To view the results of a data profile scan, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
 
 ### View published results
 
@@ -1007,7 +1007,7 @@ If the data profile scan results are published to the BigQuery and Dataplex Univ
 
 ### gcloud
 
-To view the most recent successful data profile scan, use the [`  gcloud dataplex datascans describe  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/describe) :
+To view the most recent successful data profile scan, use the [`gcloud dataplex datascans describe` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/describe) :
 
     gcloud dataplex datascans describe DATASCAN \
     --location=LOCATION \
@@ -1017,11 +1017,11 @@ Replace the following variables:
 
   - `  DATASCAN  ` : The name of the data profile scan to view the most recent job for.
   - `  LOCATION  ` : The Google Cloud region in which the data profile scan was created.
-  - `  --view=FULL  ` : To see the scan job result, specify `  FULL  ` .
+  - `--view=FULL` : To see the scan job result, specify `FULL` .
 
 ### REST
 
-To view the most recent scan job, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
+To view the most recent scan job, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
 
 ### View historical scan results
 
@@ -1043,7 +1043,7 @@ Dataplex Universal Catalog saves the data profile scan history of the last 300 j
 
 ### gcloud
 
-To view historical data profile scan jobs, use the [`  gcloud dataplex datascans jobs list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/list) :
+To view historical data profile scan jobs, use the [`gcloud dataplex datascans jobs list` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/list) :
 
     gcloud dataplex datascans jobs list \
     --location=LOCATION \
@@ -1294,7 +1294,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To view historical data profile scan jobs, use the [`  dataScans.jobs.list  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
+To view historical data profile scan jobs, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
 
 ### View the data profile scans for a table
 
@@ -1377,7 +1377,7 @@ You can also create and manage data profile scans when working with a specific t
 
 ### gcloud
 
-To update a data profile scan, use the [`  gcloud dataplex datascans update data-profile  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/update/data-profile) :
+To update a data profile scan, use the [`gcloud dataplex datascans update data-profile` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/update/data-profile) :
 
     gcloud dataplex datascans update data-profile DATASCAN \
     --location=LOCATION \
@@ -1389,7 +1389,7 @@ Replace the following variables:
   - `  LOCATION  ` : The Google Cloud region in which the data profile scan was created.
   - `  DESCRIPTION  ` : The new description for the data profile scan.
 
-**Note:** You can update specification fields, such as `  rowFilter  ` , `  samplingPercent  ` , or `  includeFields  ` , in the data profile specification file. See the [JSON format](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataProfileSpec) .
+**Note:** You can update specification fields, such as `rowFilter` , `samplingPercent` , or `includeFields` , in the data profile specification file. See the [JSON format](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataProfileSpec) .
 
 ### C\#
 
@@ -1614,7 +1614,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To edit a data profile scan, use the [`  dataScans.patch  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
+To edit a data profile scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
 
 **Note:** Update isn't supported for data profile scans that are on a one-time schedule.
 
@@ -1632,7 +1632,7 @@ To edit a data profile scan, use the [`  dataScans.patch  ` method](https://docs
 
 ### gcloud
 
-To delete a data profile scan, use the [`  gcloud dataplex datascans delete  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/delete) :
+To delete a data profile scan, use the [`gcloud dataplex datascans delete` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/delete) :
 
     gcloud dataplex datascans delete DATASCAN \
     --location=LOCATION --async
@@ -1644,7 +1644,7 @@ Replace the following variables:
 
 ### REST
 
-To delete a data profile scan, use the [`  dataScans.delete  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
+To delete a data profile scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
 
 **Note:** Delete isn't supported for data profile scans that are on a one-time schedule.
 

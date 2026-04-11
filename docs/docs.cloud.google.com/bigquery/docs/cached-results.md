@@ -11,11 +11,11 @@ Using the query cache is subject to the following limitations:
   - When you run a duplicate query, BigQuery attempts to reuse cached results. To retrieve data from the cache, the duplicate query text must be the same as the original query.
   - For query results to persist in a cached results table, the result set must be smaller than the maximum response size. For more information about managing large result sets, see [Returning large query results](https://docs.cloud.google.com/bigquery/docs/writing-results#large-results) .
   - You cannot target cached result tables with [DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) statements.
-  - Although current semantics allow it, the use of cached results as input for dependent jobs is discouraged. For example, you shouldn't submit query jobs that retrieve results from the cache table. Instead, write your results to a named destination table. To simplify cleanup, features such as the dataset level `  defaultTableExpirationMs  ` property can expire the data automatically after a given duration.
+  - Although current semantics allow it, the use of cached results as input for dependent jobs is discouraged. For example, you shouldn't submit query jobs that retrieve results from the cache table. Instead, write your results to a named destination table. To simplify cleanup, features such as the dataset level `defaultTableExpirationMs` property can expire the data automatically after a given duration.
 
 ## Pricing and quotas
 
-Cached query results are stored as temporary tables. You aren't charged for the storage of cached query results in temporary tables. When query results are retrieved from a cached results table, the job statistics property `  statistics.query.cacheHit  ` returns as `  true  ` , and you are not charged for the query. Though you are not charged for queries that use cached results, the queries are subject to the BigQuery [quota policies](https://docs.cloud.google.com/bigquery/quota-policy) . In addition to reducing costs, queries that use cached results are significantly faster because BigQuery does not need to compute the result set.
+Cached query results are stored as temporary tables. You aren't charged for the storage of cached query results in temporary tables. When query results are retrieved from a cached results table, the job statistics property `statistics.query.cacheHit` returns as `true` , and you are not charged for the query. Though you are not charged for queries that use cached results, the queries are subject to the BigQuery [quota policies](https://docs.cloud.google.com/bigquery/quota-policy) . In addition to reducing costs, queries that use cached results are significantly faster because BigQuery does not need to compute the result set.
 
 ## Exceptions to query caching
 
@@ -24,7 +24,7 @@ Query results are not cached:
   - When a destination table is specified in the job configuration, the Google Cloud console, the bq command-line tool, or the API.
   - If any of the referenced tables or logical views have changed since the results were previously cached.
   - When any of the tables referenced by the query have recently received streaming inserts (table has data in the write-optimized storage) even if no new rows have arrived.
-  - If the query uses non-deterministic functions; for example, date and time functions such as `  CURRENT_TIMESTAMP()  ` and `  CURRENT_DATE  ` , and other functions such as `  SESSION_USER()  ` , it returns different values depending on when a query is executed.
+  - If the query uses non-deterministic functions; for example, date and time functions such as `CURRENT_TIMESTAMP()` and `CURRENT_DATE` , and other functions such as `SESSION_USER()` , it returns different values depending on when a query is executed.
   - If you are querying multiple tables using a [wildcard](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
   - If the cached results have expired; typical cache lifetime is 24 hours, but the cached results are best-effort and may be invalidated sooner.
   - If the query runs against an [external data source](https://docs.cloud.google.com/bigquery/external-data-sources) . other than Cloud Storage. (GoogleSQL queries on Cloud Storage are supported by cached query results.)
@@ -34,7 +34,7 @@ Query results are not cached:
 
 ## How cached results are stored
 
-When you run a query, a temporary, cached results table is created in a special type of [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) referred to as an *anonymous dataset* . Unlike regular datasets which inherit permissions from the IAM resource hierarchy model (project and organization permissions), access to anonymous datasets is restricted to the owner. The owner of an anonymous dataset is the user who ran the query that produced the cached result. In addition, the `  bigquery.jobs.create  ` permission is checked on the project to verify that the user has access to the project.
+When you run a query, a temporary, cached results table is created in a special type of [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) referred to as an *anonymous dataset* . Unlike regular datasets which inherit permissions from the IAM resource hierarchy model (project and organization permissions), access to anonymous datasets is restricted to the owner. The owner of an anonymous dataset is the user who ran the query that produced the cached result. In addition, the `bigquery.jobs.create` permission is checked on the project to verify that the user has access to the project.
 
 BigQuery doesn't support sharing anonymous datasets. If you intend to share query results, don't use the cached results stored in an anonymous dataset. Instead, write the results to a named destination table.
 
@@ -56,7 +56,7 @@ The **Use cached results** option reuses results from a previous run of the same
 
 When you repeat a query with the **Use cached results** option disabled, the existing cached result is overwritten. This requires BigQuery to compute the query result, and you are charged for the query. This is particularly useful in benchmarking scenarios.
 
-If you want to disable retrieving cached results and force live evaluation of a query job, you can set the `  configuration.query.useQueryCache  ` property of your query job to `  false  ` .
+If you want to disable retrieving cached results and force live evaluation of a query job, you can set the `configuration.query.useQueryCache` property of your query job to `false` .
 
 To disable the **Use cached results** option:
 
@@ -77,7 +77,7 @@ To disable the **Use cached results** option:
 
 ### bq
 
-Use the `  nouse_cache  ` flag to overwrite the query cache. The following example forces BigQuery to process the query without using the existing cached results:
+Use the `nouse_cache` flag to overwrite the query cache. The following example forces BigQuery to process the query without using the existing cached results:
 
 ``` 
  bq query \
@@ -98,7 +98,7 @@ Use the `  nouse_cache  ` flag to overwrite the query cache. The following examp
 
 ### API
 
-To process a query without using the existing cached results, set the `  useQueryCache  ` property to `  false  ` in the `  query  ` job configuration.
+To process a query without using the existing cached results, set the `useQueryCache` property to `false` in the `query` job configuration.
 
 ### Go
 
@@ -160,7 +160,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Java
 
-To process a query without using the existing cached results, [set use query cache](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration.Builder#com_google_cloud_bigquery_QueryJobConfiguration_Builder_setUseQueryCache_java_lang_Boolean_) to `  false  ` when creating a [QueryJobConfiguration](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration) .
+To process a query without using the existing cached results, [set use query cache](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration.Builder#com_google_cloud_bigquery_QueryJobConfiguration_Builder_setUseQueryCache_java_lang_Boolean_) to `false` when creating a [QueryJobConfiguration](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration) .
 
 Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
@@ -299,13 +299,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Ensuring use of the cache
 
-If you use the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method to run a query, you can force a query job to fail unless cached results can be used by setting the `  createDisposition  ` property of the `  query  ` job configuration to `  CREATE_NEVER  ` .
+If you use the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method to run a query, you can force a query job to fail unless cached results can be used by setting the `createDisposition` property of the `query` job configuration to `CREATE_NEVER` .
 
-If the query result does not exist in the cache, a `  NOT_FOUND  ` error is returned.
+If the query result does not exist in the cache, a `NOT_FOUND` error is returned.
 
 ### bq
 
-Use the `  --require_cache  ` flag to require results from the query cache. The following example forces BigQuery to process the query if its results exist in the cache:
+Use the `--require_cache` flag to require results from the query cache. The following example forces BigQuery to process the query if its results exist in the cache:
 
 ``` 
  bq query \
@@ -326,14 +326,14 @@ Use the `  --require_cache  ` flag to require results from the query cache. The 
 
 ### API
 
-To process a query with existing cached results, set the [`  createDisposition  ` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.create_disposition) to `  CREATE_NEVER  ` in the `  query  ` job configuration.
+To process a query with existing cached results, set the [`createDisposition` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.create_disposition) to `CREATE_NEVER` in the `query` job configuration.
 
 ## Verifying use of the cache
 
 Use one of the following methods to determine if BigQuery returned a result using the cache:
 
   - **Use the Google Cloud console** . Go to **Query results** and click **Job Information** . **Bytes processed** shows **0 B (results cached)** .
-  - **Use the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/v2) .** The `  cacheHit  ` property in the query result is set to `  true  ` .
+  - **Use the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/v2) .** The `cacheHit` property in the query result is set to `true` .
 
 ## Impact of column-level security
 

@@ -4,7 +4,7 @@ This document describes how to use tags to conditionally apply [Identity and Acc
 
 You can also use tags to conditionally [deny access](https://docs.cloud.google.com/iam/docs/deny-access) with IAM policies to BigQuery tables, views, and datasets ( [Preview](https://cloud.google.com/products#product-launch-stages) ). For more information, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
 
-A tag is a key-value pair that you can attach directly to a table, view, or dataset or a key-value pair that a table, view, or dataset can [inherit](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance) from other Google Cloud resources. You can conditionally apply policies based on whether a resource has a specific tag. For example, you might conditionally grant the BigQuery Data Viewer role to a principal on any dataset with the `  environment:dev  ` tag.
+A tag is a key-value pair that you can attach directly to a table, view, or dataset or a key-value pair that a table, view, or dataset can [inherit](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance) from other Google Cloud resources. You can conditionally apply policies based on whether a resource has a specific tag. For example, you might conditionally grant the BigQuery Data Viewer role to a principal on any dataset with the `environment:dev` tag.
 
 For more information about using tags across the Google Cloud resource hierarchy, see [Tags overview](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview) .
 
@@ -22,7 +22,7 @@ To grant permissions to many related BigQuery resources at the same time, includ
 
   - Some services outside of BigQuery cannot properly verify IAM tag conditions. If the tag condition is positive, meaning that a user is granted a role on a resource only if that resource has a particular tag, then access is denied to the resource regardless of what tags are attached to it. If the tag condition is negative, meaning that a user is granted a role on a resource only if that resource *doesn't* have a particular tag, then the tag condition is not checked.
     
-    For example, Data Catalog cannot verify IAM tag conditions on BigQuery datasets and tables. Suppose there is a conditional IAM policy that gives an intern the BigQuery Data Viewer role on datasets with the `  employee_type=intern  ` tag. Since this is a positive tag condition, the intern cannot view datasets by searching in Data Catalog even if those datasets do have the `  employee_type=intern  ` tag. If the tag condition was changed to a negative one, so that the intern could only view datasets that did *not* have the `  employee_type=intern  ` tag, then the check would be skipped entirely and the intern could view the datasets that they couldn't normally access in BigQuery.
+    For example, Data Catalog cannot verify IAM tag conditions on BigQuery datasets and tables. Suppose there is a conditional IAM policy that gives an intern the BigQuery Data Viewer role on datasets with the `employee_type=intern` tag. Since this is a positive tag condition, the intern cannot view datasets by searching in Data Catalog even if those datasets do have the `employee_type=intern` tag. If the tag condition was changed to a negative one, so that the intern could only view datasets that did *not* have the `employee_type=intern` tag, then the check would be skipped entirely and the intern could view the datasets that they couldn't normally access in BigQuery.
     
     **Best practice:** Use positive IAM tag conditions rather than negative ones to prevent granting roles unintentionally.
 
@@ -32,10 +32,10 @@ You need to grant IAM roles that give users the necessary [permissions](https://
 
 Both of the following predefined IAM roles include all of the necessary BigQuery permissions:
 
-  - BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )
-  - BigQuery Admin ( `  roles/bigquery.admin  ` )
+  - BigQuery Data Owner ( `roles/bigquery.dataOwner` )
+  - BigQuery Admin ( `roles/bigquery.admin` )
 
-The Resource Manager permissions for adding and removing tags are included in the [Tag User role](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#required-permissions-attach) ( `  roles/resourcemanager.tagUser  ` ).
+The Resource Manager permissions for adding and removing tags are included in the [Tag User role](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#required-permissions-attach) ( `roles/resourcemanager.tagUser` ).
 
 ### Required permissions
 
@@ -58,51 +58,51 @@ To use tags in BigQuery, you need the following permissions:
 <tr class="odd">
 <td>Attach a tag to a table or view</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.tables.createTagBinding        </code> permission on the table or view</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.create        </code> permission on the tag value</li>
-<li><code dir="ltr" translate="no">         bigquery.tables.create        </code> permission to attach a tag when creating a table or view</li>
-<li><code dir="ltr" translate="no">         bigquery.tables.update        </code> permission to attach a tag when updating a table or view</li>
+<li><code dir="ltr" translate="no">bigquery.tables.createTagBinding</code> permission on the table or view</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.create</code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.tables.create</code> permission to attach a tag when creating a table or view</li>
+<li><code dir="ltr" translate="no">bigquery.tables.update</code> permission to attach a tag when updating a table or view</li>
 </ul></td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.tables.createTagBinding        </code> permission on the table or view</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.create        </code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.tables.createTagBinding</code> permission on the table or view</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.create</code> permission on the tag value</li>
 </ul></td>
 </tr>
 <tr class="even">
 <td>Remove a tag from a table or view</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.tables.deleteTagBinding        </code> permission on the table or view</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.delete        </code> permission on the tag value</li>
-<li><code dir="ltr" translate="no">         bigquery.tables.update        </code> permission to remove a tag when updating a table or view</li>
+<li><code dir="ltr" translate="no">bigquery.tables.deleteTagBinding</code> permission on the table or view</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.delete</code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.tables.update</code> permission to remove a tag when updating a table or view</li>
 </ul></td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.tables.deleteTagBinding        </code> permission on the table or view</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.delete        </code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.tables.deleteTagBinding</code> permission on the table or view</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.delete</code> permission on the tag value</li>
 </ul></td>
 </tr>
 <tr class="odd">
 <td>Attach a tag to a dataset</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.datasets.createTagBinding        </code> permission on the dataset</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.create        </code> permission on the tag value</li>
-<li><code dir="ltr" translate="no">         bigquery.datasets.create        </code> permission to attach a tag when creating a dataset</li>
-<li><code dir="ltr" translate="no">         bigquery.datasets.update        </code> permission to attach a tag when updating a dataset</li>
+<li><code dir="ltr" translate="no">bigquery.datasets.createTagBinding</code> permission on the dataset</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.create</code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.datasets.create</code> permission to attach a tag when creating a dataset</li>
+<li><code dir="ltr" translate="no">bigquery.datasets.update</code> permission to attach a tag when updating a dataset</li>
 </ul></td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.datasets.createTagBinding        </code> permission on the dataset</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.create        </code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.datasets.createTagBinding</code> permission on the dataset</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.create</code> permission on the tag value</li>
 </ul></td>
 </tr>
 <tr class="even">
 <td>Remove a tag from a dataset</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.datasets.deleteTagBinding        </code> permission on the dataset</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.delete        </code> permission on the tag value</li>
-<li><code dir="ltr" translate="no">         bigquery.datasets.update        </code> permission to remove a tag when updating a dataset</li>
+<li><code dir="ltr" translate="no">bigquery.datasets.deleteTagBinding</code> permission on the dataset</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.delete</code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.datasets.update</code> permission to remove a tag when updating a dataset</li>
 </ul></td>
 <td><ul>
-<li><code dir="ltr" translate="no">         bigquery.datasets.deleteTagBinding        </code> permission on the dataset</li>
-<li><code dir="ltr" translate="no">         resourcemanager.tagValueBindings.delete        </code> permission on the tag value</li>
+<li><code dir="ltr" translate="no">bigquery.datasets.deleteTagBinding</code> permission on the dataset</li>
+<li><code dir="ltr" translate="no">resourcemanager.tagValueBindings.delete</code> permission on the tag value</li>
 </ul></td>
 </tr>
 </tbody>
@@ -110,16 +110,16 @@ To use tags in BigQuery, you need the following permissions:
 
 To list tag keys and key values in the Google Cloud console, you need the following permissions:
 
-  - To list the tag keys that are associated with a parent organization or project, you need the `  resourcemanager.tagKeys.list  ` permission at the tag key's parent level and the `  resourcemanager.tagKeys.get  ` permission for each tag key. To view the list of tag keys in the BigQuery console, click the dataset name and then click **Edit details** , or click the table or view name and then click **Details \> Edit details** .
+  - To list the tag keys that are associated with a parent organization or project, you need the `resourcemanager.tagKeys.list` permission at the tag key's parent level and the `resourcemanager.tagKeys.get` permission for each tag key. To view the list of tag keys in the BigQuery console, click the dataset name and then click **Edit details** , or click the table or view name and then click **Details \> Edit details** .
 
-  - To list the tag values of keys that are associated with a parent organization or project, you need the `  resourcemanager.tagValues.list  ` permission at the tag value parent level and the `  resourcemanager.tagValues.get  ` permission for each tag value. To view the list of tag key values in the BigQuery console, click the dataset name and then click **Edit details** , or click the table or view name and then click **Details \> Edit details** .
+  - To list the tag values of keys that are associated with a parent organization or project, you need the `resourcemanager.tagValues.list` permission at the tag value parent level and the `resourcemanager.tagValues.get` permission for each tag value. To view the list of tag key values in the BigQuery console, click the dataset name and then click **Edit details** , or click the table or view name and then click **Details \> Edit details** .
 
 To use tags in Cloud Resource Manager API or gcloud, you need the following permissions:
 
-  - To list the tags attached to a table or view with the Cloud Resource Manager API or the gcloud CLI, you need the `  bigquery.tables.listTagBindings  ` IAM permission.
-  - To list the effective tags for a table or view, you need the `  bigquery.tables.listEffectiveTags  ` IAM permission.
-  - To list the tags attached to a dataset with the Cloud Resource Manager API or the gcloud CLI, you need the `  bigquery.datasets.listTagBindings  ` IAM permission.
-  - To list the effective tags for a dataset, you need the `  bigquery.datasets.listEffectiveTags  ` IAM permission.
+  - To list the tags attached to a table or view with the Cloud Resource Manager API or the gcloud CLI, you need the `bigquery.tables.listTagBindings` IAM permission.
+  - To list the effective tags for a table or view, you need the `bigquery.tables.listEffectiveTags` IAM permission.
+  - To list the tags attached to a dataset with the Cloud Resource Manager API or the gcloud CLI, you need the `bigquery.datasets.listTagBindings` IAM permission.
+  - To list the effective tags for a dataset, you need the `bigquery.datasets.listEffectiveTags` IAM permission.
 
 ## Create tag keys and values
 
@@ -167,7 +167,7 @@ After you create a tag, you can attach it to a new BigQuery dataset. You can att
         
         1.  Click the drop-down arrow beside **Select a scope** and choose **Manually enter IDs** \> **Organization** , **Project** , or **Tags** .
         
-        2.  If you're creating a tag for your project or organization, in the dialog, enter the `  PROJECT_ID  ` or the `  ORGANIZATION_ID  ` , and then click **Save** .
+        2.  If you're creating a tag for your project or organization, in the dialog, enter the `PROJECT_ID` or the `ORGANIZATION_ID` , and then click **Save** .
         
         3.  For **Key 1** and **Value 1** , choose the appropriate values from the lists.
     
@@ -177,7 +177,7 @@ After you create a tag, you can attach it to a new BigQuery dataset. You can att
 
 ### SQL
 
-Use the [`  CREATE SCHEMA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) .
+Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -195,8 +195,8 @@ Use the [`  CREATE SCHEMA  ` statement](https://docs.cloud.google.com/bigquery/d
     
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset that you're creating.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the dataset, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the dataset, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag.
       - `  TAG_VALUE_2  ` : the short name for the second tag's value.
 
@@ -206,7 +206,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `  --add_tags  ` flag:
+Use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `--add_tags` flag:
 
 ``` notranslate
 bq mk --dataset \
@@ -216,19 +216,19 @@ bq mk --dataset \
 
 Replace the following:
 
-  - `  TAG  ` : the tag that you are attaching to the new dataset. Multiple tags are separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
+  - `  TAG  ` : the tag that you are attaching to the new dataset. Multiple tags are separated by commas. For example, `556741164180/env:prod,myProject/department:sales` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
   - `  PROJECT_ID  ` : the ID of the project where you are creating a dataset.
   - `  DATASET_ID  ` : the ID of the new dataset.
 
 ### Terraform
 
-Use the [`  google_bigquery_dataset  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset) resource.
+Use the [`google_bigquery_dataset`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a dataset named `  my_dataset  ` , then attaches tags to it by populating the `  resource_tags  ` field:
+The following example creates a dataset named `my_dataset` , then attaches tags to it by populating the `resource_tags` field:
 
 ``` lang-terraform
 # Create tag keys and values
@@ -289,13 +289,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -307,7 +307,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -319,7 +319,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -331,7 +331,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  datasets.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) and add your tags to the `  resource_tags  ` field.
+Call the [`datasets.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) and add your tags to the `resource_tags` field.
 
 ### Attach tags to an existing dataset
 
@@ -365,7 +365,7 @@ After you create a tag, you can attach it to an existing dataset. You can attach
         
         1.  Click the drop-down arrow beside **Select a scope** and choose **Manually enter IDs** \> **Organization** , **Project** , or **Tags** .
         
-        2.  If you're creating a tag for your project or organization, in the dialog, enter the `  PROJECT_ID  ` or the `  ORGANIZATION_ID  ` , and then click **Save** .
+        2.  If you're creating a tag for your project or organization, in the dialog, enter the `PROJECT_ID` or the `ORGANIZATION_ID` , and then click **Save** .
         
         3.  For **Key 1** and **Value 1** , choose the appropriate values from the lists.
     
@@ -375,7 +375,7 @@ After you create a tag, you can attach it to an existing dataset. You can attach
 
 ### SQL
 
-Use the [`  ALTER SCHEMA SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
+Use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
 
 The following example overwrites all tags for an existing dataset.
 
@@ -396,8 +396,8 @@ The following example overwrites all tags for an existing dataset.
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset that contains the table.
       - `  TABLE_ID  ` : the name of the table you're tagging.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag.
       - `  TAG_VALUE_2  ` : the short name for the second tag's value.
 
@@ -405,7 +405,7 @@ The following example overwrites all tags for an existing dataset.
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The following example uses the `  +=  ` operator to attach tags to a dataset without overwriting existing tags. If an existing tag has the same key, that tag is overwritten.
+The following example uses the `+=` operator to attach tags to a dataset without overwriting existing tags. If an existing tag has the same key, that tag is overwritten.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -424,8 +424,8 @@ The following example uses the `  +=  ` operator to attach tags to a dataset wit
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset that contains the table.
       - `  TABLE_ID  ` : the name of the table you're tagging.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag.
       - `  TAG_VALUE_2  ` : the short name for the second tag's value.
 
@@ -435,7 +435,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `  --add_tags  ` flag:
+Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `--add_tags` flag:
 
 ``` notranslate
 bq update \
@@ -445,13 +445,13 @@ bq update \
 
 Replace the following:
 
-  - `  TAG  ` : the tag that you are attaching to the dataset. Multiple tags are separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
+  - `  TAG  ` : the tag that you are attaching to the dataset. Multiple tags are separated by commas. For example, `556741164180/env:prod,myProject/department:sales` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
   - `  PROJECT_ID  ` : the ID of the project where the existing dataset is located.
   - `  DATASET_ID  ` : the ID of the existing dataset.
 
 ### gcloud
 
-To attach a tag to a dataset using the command line, create a tag binding resource by using the [`  gcloud resource-manager tags bindings create  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/create) :
+To attach a tag to a dataset using the command line, create a tag binding resource by using the [`gcloud resource-manager tags bindings create` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/create) :
 
 ``` notranslate
 gcloud resource-manager tags bindings create \
@@ -462,17 +462,17 @@ gcloud resource-manager tags bindings create \
 
 Replace the following:
 
-  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be attached, such as `  tagValues/4567890123  ` or `  1234567/my_tag_key/my_tag_value  ` .
-  - `  RESOURCE_ID  ` : the full ID of the dataset, including the API domain name ( `  //bigquery.googleapis.com/  ` ) to identify the type of resource. For example, `  //bigquery.googleapis.com/projects/my_project/datasets/my_dataset  ` .
+  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be attached, such as `tagValues/4567890123` or `1234567/my_tag_key/my_tag_value` .
+  - `  RESOURCE_ID  ` : the full ID of the dataset, including the API domain name ( `//bigquery.googleapis.com/` ) to identify the type of resource. For example, `//bigquery.googleapis.com/projects/my_project/datasets/my_dataset` .
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your dataset.
 
 ### Terraform
 
-Add tags to the dataset's `  resource_tags  ` field, and then apply the updated configuration using the `  google_bigquery_dataset  ` resource. For more information, see the Terraform example in [Attach tags when you create a new dataset](https://docs.cloud.google.com/bigquery/docs/tags#attach_tags_when_you_create_a_new_dataset) .
+Add tags to the dataset's `resource_tags` field, and then apply the updated configuration using the `google_bigquery_dataset` resource. For more information, see the Terraform example in [Attach tags when you create a new dataset](https://docs.cloud.google.com/bigquery/docs/tags#attach_tags_when_you_create_a_new_dataset) .
 
 ### API
 
-Call the [`  datasets.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) to get the dataset resource, including the `  resource_tags  ` field. Add your tags to the `  resource_tags  ` field and pass the updated dataset resource back using the [`  datasets.update  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) .
+Call the [`datasets.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) to get the dataset resource, including the `resource_tags` field. Add your tags to the `resource_tags` field and pass the updated dataset resource back using the [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) .
 
 ### List tags attached to a dataset
 
@@ -494,7 +494,7 @@ The following steps provide a list of tag bindings attached directly to a datase
 
 ### bq
 
-To list tags attached to a dataset, use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) .
+To list tags attached to a dataset, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) .
 
 ``` notranslate
 bq show PROJECT_ID:DATASET_ID
@@ -507,7 +507,7 @@ Replace the following:
 
 ### gcloud
 
-To get a list of tag bindings attached to a resource, use the [`  gcloud resource-manager tags bindings list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/list) :
+To get a list of tag bindings attached to a resource, use the [`gcloud resource-manager tags bindings list` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/list) :
 
 ``` notranslate
 gcloud resource-manager tags bindings list \
@@ -517,7 +517,7 @@ gcloud resource-manager tags bindings list \
 
 Replace the following:
 
-  - `  RESOURCE_ID  ` : the full ID of the dataset, including the API domain name ( `  //bigquery.googleapis.com/  ` ) to identify the type of resource. For example, `  //bigquery.googleapis.com/projects/my_project/datasets/my_dataset  ` .
+  - `  RESOURCE_ID  ` : the full ID of the dataset, including the API domain name ( `//bigquery.googleapis.com/` ) to identify the type of resource. For example, `//bigquery.googleapis.com/projects/my_project/datasets/my_dataset` .
 
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your dataset.
 
@@ -531,7 +531,7 @@ tagValue: tagValues/4567890123
 
 ### Terraform
 
-Use the `  terraform state show  ` command to list the attributes of the dataset, including the `  resource_tags  ` field. Run this command in the directory where the dataset's Terraform configuration file has been run.
+Use the `terraform state show` command to list the attributes of the dataset, including the `resource_tags` field. Run this command in the directory where the dataset's Terraform configuration file has been run.
 
 ``` lang-none notranslate
 terraform state show google_bigquery_dataset.default
@@ -539,15 +539,15 @@ terraform state show google_bigquery_dataset.default
 
 ### API
 
-Call the [`  datasets.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) to get the dataset resource. The dataset resource includes tags attached to the dataset in the `  resource_tags  ` field.
+Call the [`datasets.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) to get the dataset resource. The dataset resource includes tags attached to the dataset in the `resource_tags` field.
 
 ### Views
 
-Use the [`  INFORMATION_SCHEMA.SCHEMATA_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options) .
+Use the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options) .
 
-For example, the following query shows all tags attached to all datasets in a region. This query returns a table with columns including `  schema_name  ` (the dataset names), `  option_name  ` (always `  'tags'  ` ), `  object_type  ` (always `  ARRAY<STRUCT<STRING, STRING>>  ` ), and `  option_value  ` , which contains arrays of `  STRUCT  ` objects representing tags associated with each dataset. For datasets without assigned tags, the `  option_value  ` column returns an empty array.
+For example, the following query shows all tags attached to all datasets in a region. This query returns a table with columns including `schema_name` (the dataset names), `option_name` (always `'tags'` ), `object_type` (always `ARRAY<STRUCT<STRING, STRING>>` ), and `option_value` , which contains arrays of `STRUCT` objects representing tags associated with each dataset. For datasets without assigned tags, the `option_value` column returns an empty array.
 
-``` notranslate lang-googlesql
+``` lang-googlesql notranslate
 SELECT * from region-REGION.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
 WHERE option_name='tags'
 ```
@@ -580,9 +580,9 @@ You can detach a tag from a resource by deleting the tag binding resource. If yo
 
 ### SQL
 
-Use the [`  ALTER SCHEMA SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
+Use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
 
-The following example detaches tags from a dataset using the `  -=  ` operator. To detach all tags from a dataset, you can specify `  tags=NULL  ` or `  tags=[]  ` .
+The following example detaches tags from a dataset using the `-=` operator. To detach all tags from a dataset, you can specify `tags=NULL` or `tags=[]` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -601,8 +601,8 @@ The following example detaches tags from a dataset using the `  -=  ` operator. 
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset that contains the table.
       - `  TABLE_ID  ` : the name of the table that you're detaching the tags from.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the first tag you want to detach, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the value for the tag you want to detach, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the first tag you want to detach, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the value for the tag you want to detach, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag you're detaching.
       - `  TAG_VALUE_2  ` : the short name for the value of the second tag you're detaching.
 
@@ -612,7 +612,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `  --remove_tags  ` flag:
+Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `--remove_tags` flag:
 
 ``` notranslate
 bq update \
@@ -622,11 +622,11 @@ bq update \
 
 Replace the following:
 
-  - `  REMOVED_TAG  ` : the tag that you are removing from the dataset. Multiple tags are separated by commas. Only accepts keys without value pairs. For example, `  556741164180/env,myProject/department  ` . Each tag must have the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
+  - `  REMOVED_TAG  ` : the tag that you are removing from the dataset. Multiple tags are separated by commas. Only accepts keys without value pairs. For example, `556741164180/env,myProject/department` . Each tag must have the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
   - `  PROJECT_ID  ` : the ID of the project that contains your dataset.
   - `  DATASET_ID  ` : the ID of the dataset to detach tags from.
 
-Alternatively, if you want to remove *all* tags from a dataset, use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --clear_all_tags  ` flag:
+Alternatively, if you want to remove *all* tags from a dataset, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--clear_all_tags` flag:
 
 ``` notranslate
 bq update \
@@ -636,7 +636,7 @@ bq update \
 
 ### gcloud
 
-To detach a tag from a dataset using the command line, delete the tag binding by using the [`  gcloud resource-manager tags bindings delete  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/delete) :
+To detach a tag from a dataset using the command line, delete the tag binding by using the [`gcloud resource-manager tags bindings delete` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/delete) :
 
 ``` notranslate
 gcloud resource-manager tags bindings delete \
@@ -647,17 +647,17 @@ gcloud resource-manager tags bindings delete \
 
 Replace the following:
 
-  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be detached, such as `  tagValues/4567890123  ` or `  1234567/my_tag_key/my_tag_value  ` .
-  - `  RESOURCE_ID  ` : the full ID of the dataset, including the API domain name ( `  //bigquery.googleapis.com/  ` ) to identify the type of resource. For example, `  //bigquery.googleapis.com/projects/my_project/datasets/my_dataset  ` .
+  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be detached, such as `tagValues/4567890123` or `1234567/my_tag_key/my_tag_value` .
+  - `  RESOURCE_ID  ` : the full ID of the dataset, including the API domain name ( `//bigquery.googleapis.com/` ) to identify the type of resource. For example, `//bigquery.googleapis.com/projects/my_project/datasets/my_dataset` .
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your dataset.
 
 ### Terraform
 
-Remove your tags from the dataset's `  resource_tags  ` field, and then apply the updated configuration using the `  google_bigquery_dataset  ` resource.
+Remove your tags from the dataset's `resource_tags` field, and then apply the updated configuration using the `google_bigquery_dataset` resource.
 
 ### API
 
-Call the [`  datasets.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) to get the dataset resource, including the `  resource_tags  ` field. Remove your tags from the `  resource_tags  ` field and pass the updated dataset resource back using the [`  datasets.update  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) .
+Call the [`datasets.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) to get the dataset resource, including the `resource_tags` field. Remove your tags from the `resource_tags` field and pass the updated dataset resource back using the [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) .
 
 ## Tag tables
 
@@ -697,7 +697,7 @@ After you create a tag, you can attach it to a new table. You can attach only on
         
         1.  Click the drop-down arrow beside **Select a scope** and choose **Manually enter IDs** \> **Organization** , **Project** , or **Tags** .
         
-        2.  If you're creating a tag for your project or organization, in the dialog, enter the `  PROJECT_ID  ` or the `  ORGANIZATION_ID  ` , and then click **Save** .
+        2.  If you're creating a tag for your project or organization, in the dialog, enter the `PROJECT_ID` or the `ORGANIZATION_ID` , and then click **Save** .
         
         3.  For **Key 1** and **Value 1** , choose the appropriate values from the lists.
     
@@ -707,7 +707,7 @@ After you create a tag, you can attach it to a new table. You can attach only on
 
 ### SQL
 
-Use the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
+Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -726,8 +726,8 @@ Use the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/do
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset where you're creating the table.
       - `  TABLE_ID  ` : the name of the new table.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag.
       - `  TAG_VALUE_2  ` : the short name for the second tag's value.
 
@@ -737,7 +737,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq mk --table  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `  --add_tags  ` flag:
+Use the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `--add_tags` flag:
 
 ``` notranslate
 bq mk --table \
@@ -749,20 +749,20 @@ bq mk --table \
 Replace the following:
 
   - `  SCHEMA  ` : the [inline schema definition](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) .
-  - `  TAG  ` : the tag that you are attaching to the new table. Multiple tags are separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
+  - `  TAG  ` : the tag that you are attaching to the new table. Multiple tags are separated by commas. For example, `556741164180/env:prod,myProject/department:sales` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
   - `  PROJECT_ID  ` : the ID of the project where you are creating a table.
   - `  DATASET_ID  ` : the ID of the dataset where you are creating a table.
   - `  TABLE_ID  ` : the ID of the new table.
 
 ### Terraform
 
-Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
+Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a table named `  mytable  ` , then attaches tags to it by populating the `  resource_tags  ` field:
+The following example creates a table named `mytable` , then attaches tags to it by populating the `resource_tags` field:
 
 ``` lang-terraform
 # Create tag keys and values
@@ -830,13 +830,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -848,7 +848,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -860,7 +860,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -872,7 +872,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  tables.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Include the tags in the `  resource_tags  ` field.
+Call the [`tables.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Include the tags in the `resource_tags` field.
 
 ### Attach tags to an existing table
 
@@ -908,7 +908,7 @@ After you create a tag, you can attach it to an existing table. You can attach o
         
         1.  Click the drop-down arrow beside **Select a scope** and choose **Manually enter IDs** \> **Organization** , **Project** , or **Tags** .
         
-        2.  If you're creating a tag for your project or organization, in the dialog, enter the `  PROJECT_ID  ` or the `  ORGANIZATION_ID  ` , and then click **Save** .
+        2.  If you're creating a tag for your project or organization, in the dialog, enter the `PROJECT_ID` or the `ORGANIZATION_ID` , and then click **Save** .
         
         3.  For **Key 1** and **Value 1** , choose the appropriate values from the lists.
     
@@ -918,7 +918,7 @@ After you create a tag, you can attach it to an existing table. You can attach o
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) .
+Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) .
 
 The following example overwrites all tags for an existing table.
 
@@ -939,8 +939,8 @@ The following example overwrites all tags for an existing table.
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset that contains the table.
       - `  TABLE_ID  ` : the name of the table you're tagging.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag.
       - `  TAG_VALUE_2  ` : the short name for the second tag's value.
 
@@ -948,7 +948,7 @@ The following example overwrites all tags for an existing table.
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The following example uses the `  +=  ` operator to attach a tag to a table without overwriting existing tags. If an existing tag has the same key, that tag is overwritten.
+The following example uses the `+=` operator to attach a tag to a table without overwriting existing tags. If an existing tag has the same key, that tag is overwritten.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -967,8 +967,8 @@ The following example uses the `  +=  ` operator to attach a tag to a table with
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset that contains the table.
       - `  TABLE_ID  ` : the name of the table you're tagging.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) that you want to set as the first tag on the table, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) for the tag's value, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag.
       - `  TAG_VALUE_2  ` : the short name for the second tag's value.
 
@@ -978,7 +978,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --add_tags  ` flag:
+Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--add_tags` flag:
 
 ``` notranslate
 bq update \
@@ -988,14 +988,14 @@ bq update \
 
 Replace the following:
 
-  - `  TAG  ` : the tag that you are attaching to the table. Multiple tags are separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
+  - `  TAG  ` : the tag that you are attaching to the table. Multiple tags are separated by commas. For example, `556741164180/env:prod,myProject/department:sales` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
   - `  PROJECT_ID  ` : the ID of the project that contains your table.
   - `  DATASET_ID  ` : the ID of the dataset that contains your table.
   - `  TABLE_ID  ` : the ID of the table that you are updating.
 
 ### gcloud
 
-To attach a tag to a table using the command line, create a tag binding resource by using the [`  gcloud resource-manager tags bindings create  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/create) :
+To attach a tag to a table using the command line, create a tag binding resource by using the [`gcloud resource-manager tags bindings create` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/create) :
 
 ``` notranslate
 gcloud resource-manager tags bindings create \
@@ -1006,17 +1006,17 @@ gcloud resource-manager tags bindings create \
 
 Replace the following:
 
-  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be attached, such as `  tagValues/4567890123  ` or `  1234567/my_tag_key/my_tag_value  ` .
-  - `  RESOURCE_ID  ` : the full ID of the table, including the API domain name ( `  //bigquery.googleapis.com/  ` ) to identify the type of resource. For example, `  //bigquery.googleapis.com/projects/my_project/datasets/my_dataset/tables/my_table  `
+  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be attached, such as `tagValues/4567890123` or `1234567/my_tag_key/my_tag_value` .
+  - `  RESOURCE_ID  ` : the full ID of the table, including the API domain name ( `//bigquery.googleapis.com/` ) to identify the type of resource. For example, `//bigquery.googleapis.com/projects/my_project/datasets/my_dataset/tables/my_table`
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your table.
 
 ### Terraform
 
-Add tags to the table's `  resource_tags  ` field, and then apply the updated configuration using the `  google_bigquery_table  ` resource. For more information, see the Terraform example in [Attach tags when you create a new table](https://docs.cloud.google.com/bigquery/docs/tags#attach_tags_when_you_create_a_new_table) .
+Add tags to the table's `resource_tags` field, and then apply the updated configuration using the `google_bigquery_table` resource. For more information, see the Terraform example in [Attach tags when you create a new table](https://docs.cloud.google.com/bigquery/docs/tags#attach_tags_when_you_create_a_new_table) .
 
 ### API
 
-Call the [`  tables.update  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Include the tags in the `  resource_tags  ` field.
+Call the [`tables.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Include the tags in the `resource_tags` field.
 
 ### List tags attached to a table
 
@@ -1040,7 +1040,7 @@ You can list tags that are attached directly to a table. This process doesn't li
 
 ### bq
 
-Use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) and look for the `  tags  ` column. If there are no tags on the table, the `  tags  ` column isn't displayed.
+Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) and look for the `tags` column. If there are no tags on the table, the `tags` column isn't displayed.
 
 ``` notranslate
 bq show \
@@ -1055,9 +1055,9 @@ Replace the following:
 
 ### gcloud
 
-To get a list of tag bindings attached to a resource, use the [`  gcloud resource-manager tags bindings list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/list) :
+To get a list of tag bindings attached to a resource, use the [`gcloud resource-manager tags bindings list` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/list) :
 
-``` notranslate lang-sh
+``` lang-sh notranslate
 gcloud resource-manager tags bindings list \
     --parent=RESOURCE_ID \
     --location=LOCATION
@@ -1065,7 +1065,7 @@ gcloud resource-manager tags bindings list \
 
 Replace the following:
 
-  - `  RESOURCE_ID  ` : the full ID of the table, including the API domain name ( `  //bigquery.googleapis.com/  ` ) to identify the type of resource. For example, `  //bigquery.googleapis.com/projects/my_project/datasets/my_dataset/tables/my_table  ` .
+  - `  RESOURCE_ID  ` : the full ID of the table, including the API domain name ( `//bigquery.googleapis.com/` ) to identify the type of resource. For example, `//bigquery.googleapis.com/projects/my_project/datasets/my_dataset/tables/my_table` .
 
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your dataset.
 
@@ -1079,7 +1079,7 @@ tagValue: tagValues/4567890123
 
 ### Terraform
 
-Use the `  terraform state show  ` command to list the attributes of the table, including the `  resource_tags  ` field. Run this command in the directory where the table's Terraform configuration file has been run.
+Use the `terraform state show` command to list the attributes of the table, including the `resource_tags` field. Run this command in the directory where the table's Terraform configuration file has been run.
 
 ``` lang-none notranslate
 terraform state show google_bigquery_table.default
@@ -1087,15 +1087,15 @@ terraform state show google_bigquery_table.default
 
 ### API
 
-Call the [`  tables.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) , and look for the `  resource_tags  ` field.
+Call the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) , and look for the `resource_tags` field.
 
 ### Views
 
-Use the [`  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) .
+Use the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) .
 
-For example, the following query shows all tags attached to all tables in a dataset. This query returns a table with columns including `  schema_name  ` (the dataset name), `  option_name  ` (always `  'tags'  ` ), `  object_type  ` (always `  ARRAY<STRUCT<STRING, STRING>>  ` ), and `  option_value  ` , which contains arrays of `  STRUCT  ` objects representing tags associated with each dataset. For tables without assigned tags, the `  option_value  ` column returns an empty array.
+For example, the following query shows all tags attached to all tables in a dataset. This query returns a table with columns including `schema_name` (the dataset name), `option_name` (always `'tags'` ), `object_type` (always `ARRAY<STRUCT<STRING, STRING>>` ), and `option_value` , which contains arrays of `STRUCT` objects representing tags associated with each dataset. For tables without assigned tags, the `option_value` column returns an empty array.
 
-``` notranslate lang-googlesql
+``` lang-googlesql notranslate
 SELECT * from DATASET_ID.INFORMATION_SCHEMA.TABLE_OPTIONS
 WHERE option_name='tags'
 ```
@@ -1128,9 +1128,9 @@ You can remove a tag association from a table by deleting the tag binding. If yo
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) .
+Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) .
 
-The following example detaches tags from a table using the `  -=  ` operator. To detach all tags from a table, you can specify `  tags=NULL  ` or `  tags=[]  ` .
+The following example detaches tags from a table using the `-=` operator. To detach all tags from a table, you can specify `tags=NULL` or `tags=[]` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1149,8 +1149,8 @@ The following example detaches tags from a table using the `  -=  ` operator. To
       - `  PROJECT_ID  ` : your project ID.
       - `  DATASET_ID  ` : the ID of the dataset that contains the table.
       - `  TABLE_ID  ` : the name of the table that you're detaching the tags from.
-      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the first tag you want to detach, for example, `  'my-project/env'  ` or `  '556741164180/department'  ` .
-      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the value for the tag you want to detach, for example, `  'prod'  ` or `  'sales'  ` .
+      - `  TAG_KEY_1  ` : the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the first tag you want to detach, for example, `'my-project/env'` or `'556741164180/department'` .
+      - `  TAG_VALUE_1  ` : the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) of the value for the tag you want to detach, for example, `'prod'` or `'sales'` .
       - `  TAG_KEY_2  ` : the namespaced key name for the second tag you're detaching.
       - `  TAG_VALUE_2  ` : the short name for the value of the second tag you're detaching.
 
@@ -1160,7 +1160,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To remove some tags from a table, use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --remove_tags  ` flag:
+To remove some tags from a table, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--remove_tags` flag:
 
 ``` notranslate
 bq update \
@@ -1170,12 +1170,12 @@ bq update \
 
 Replace the following:
 
-  - `  TAG_KEYS  ` : the tag keys that you are detaching from the table, separated by commas. For example, `  556741164180/env,myProject/department  ` . Each tag key must have the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
+  - `  TAG_KEYS  ` : the tag keys that you are detaching from the table, separated by commas. For example, `556741164180/env,myProject/department` . Each tag key must have the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
   - `  PROJECT_ID  ` : the ID of the project that contains your table.
   - `  DATASET_ID  ` : the ID of the dataset that contains your table.
   - `  TABLE_ID  ` : the ID of the table that you are updating.
 
-To remove all tags from a table, use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --clear_all_tags  ` flag:
+To remove all tags from a table, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--clear_all_tags` flag:
 
 ``` notranslate
 bq update \
@@ -1185,7 +1185,7 @@ bq update \
 
 ### gcloud
 
-To remove a tag association from a table using the command line, delete the tag binding by using the [`  gcloud resource-manager tags bindings delete  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/delete) :
+To remove a tag association from a table using the command line, delete the tag binding by using the [`gcloud resource-manager tags bindings delete` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/delete) :
 
 ``` notranslate
 gcloud resource-manager tags bindings delete \
@@ -1196,17 +1196,17 @@ gcloud resource-manager tags bindings delete \
 
 Replace the following:
 
-  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be deleted, such as `  tagValues/4567890123  ` or `  1234567/my_tag_key/my_tag_value  ` .
-  - `  RESOURCE_ID  ` : the full ID of the table, including the API domain name ( `  //bigquery.googleapis.com/  ` ) to identify the type of resource. For example, `  //bigquery.googleapis.com/projects/my_project/datasets/my_dataset/tables/my_table  ` .
+  - `  TAG_VALUE_NAME  ` : the permanent ID or namespaced name of the tag value to be deleted, such as `tagValues/4567890123` or `1234567/my_tag_key/my_tag_value` .
+  - `  RESOURCE_ID  ` : the full ID of the table, including the API domain name ( `//bigquery.googleapis.com/` ) to identify the type of resource. For example, `//bigquery.googleapis.com/projects/my_project/datasets/my_dataset/tables/my_table` .
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your dataset.
 
 ### Terraform
 
-Remove your tags from the table's `  resource_tags  ` field, and then apply the updated configuration using the `  google_bigquery_table  ` resource.
+Remove your tags from the table's `resource_tags` field, and then apply the updated configuration using the `google_bigquery_table` resource.
 
 ### API
 
-Call the [`  tables.update  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) , and remove the tags in the `  resource_tags  ` field. To remove all tags, remove the `  resource_tags  ` field.
+Call the [`tables.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) , and remove the tags in the `resource_tags` field. To remove all tags, remove the `resource_tags` field.
 
 ## Tag other table-like resources
 
@@ -1218,9 +1218,9 @@ You can't delete a tag if it's referenced by a table, view, or dataset. You shou
 
 ## Example
 
-Suppose you are an administrator of an organization. Your data analysts are all members of the group analysts@example.com, which has the BigQuery Data Viewer IAM role on the project `  userData  ` . A data analyst intern is hired, and according to the company policy they should only have permission to view the `  anonymousData  ` dataset in the `  userData  ` project. You can control their access using tags.
+Suppose you are an administrator of an organization. Your data analysts are all members of the group analysts@example.com, which has the BigQuery Data Viewer IAM role on the project `userData` . A data analyst intern is hired, and according to the company policy they should only have permission to view the `anonymousData` dataset in the `userData` project. You can control their access using tags.
 
-1.  [Create a tag](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#creating_tag) with the key `  employee_type  ` and the value `  intern  ` :
+1.  [Create a tag](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#creating_tag) with the key `employee_type` and the value `intern` :
     
     ![Example of creating tag key and values.](https://docs.cloud.google.com/static/bigquery/images/tag-key-value-example.png)
 
@@ -1242,17 +1242,17 @@ Suppose you are an administrator of an organization. Your data analysts are all 
 
 9.  In the **Operator** menu, select **has value** .
 
-10. In the **Value path** field, enter the tag value path in the form `  ORGANIZATION / TAG_KEY / TAG_VALUE  ` . For example, `  example.org/employee_type/intern  ` .
+10. In the **Value path** field, enter the tag value path in the form `  ORGANIZATION / TAG_KEY / TAG_VALUE  ` . For example, `example.org/employee_type/intern` .
     
     ![Example of an IAM condition using tags.](https://docs.cloud.google.com/static/bigquery/images/iam-tag-condition.png)
     
-    This IAM tag condition restricts the intern's access to datasets that have the `  intern  ` tag.
+    This IAM tag condition restricts the intern's access to datasets that have the `intern` tag.
 
 11. To save the tag condition, click **Save** .
 
 12. To save any changes that you made in the **Edit permissions** pane, click **Save** .
 
-13. To attach the `  intern  ` tag value to the `  anonymousData  ` dataset, use the command line to run the `  gcloud resource-manager tags bindings create  ` command. For example:
+13. To attach the `intern` tag value to the `anonymousData` dataset, use the command line to run the `gcloud resource-manager tags bindings create` command. For example:
     
     ``` notranslate
     gcloud resource-manager tags bindings create \

@@ -13,12 +13,12 @@ The Java Database Connectivity (JDBC) driver for BigQuery connects your Java app
 The JDBC driver for BigQuery is subject to the following limitations:
 
   - The driver is specific to BigQuery and can't be used with other products or services.
-  - The `  INTERVAL  ` data type isn't supported with the BigQuery Storage Read API.
+  - The `INTERVAL` data type isn't supported with the BigQuery Storage Read API.
   - All [data manipulation language (DML) limitations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) apply.
 
 ## Before you begin
 
-1.  Make sure that you're familiar with JDBC drivers, Apache Maven, and the [`  java.sql  ` package](https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html) .
+1.  Make sure that you're familiar with JDBC drivers, Apache Maven, and the [`java.sql` package](https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html) .
 
 2.  Verify that your system is configured with Java Runtime Environment (JRE) 8.0 or later. For information on checking your JRE version, see [Verifying the JRE Environment](https://docs.oracle.com/goldengate/dir1212/gg-director/GDRAD/verifying-jre-environment.htm) .
 
@@ -34,7 +34,7 @@ To configure your development environment with the JDBC driver, add the driver a
 
 ### Maven
 
-Add the following dependency to your `  pom.xml  ` file:
+Add the following dependency to your `pom.xml` file:
 
 ``` notranslate
 <dependency>
@@ -46,7 +46,7 @@ Add the following dependency to your `  pom.xml  ` file:
 
 ### Gradle
 
-Add the following to your `  build.gradle  ` file:
+Add the following to your `build.gradle` file:
 
 ``` notranslate
 dependencies {
@@ -57,7 +57,7 @@ implementation("com.google.cloud:google-cloud-bigquery-jdbc:0.3.0")
 
 ### Other (Shaded Uber JAR)
 
-If you need a standalone JAR file, for example to include in a non-Maven or non-Gradle project, download the [shaded Uber JAR](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-latest-all.jar) . A shaded JAR file with all dependencies included is also available from Maven with the classifier `  all  ` .
+If you need a standalone JAR file, for example to include in a non-Maven or non-Gradle project, download the [shaded Uber JAR](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-latest-all.jar) . A shaded JAR file with all dependencies included is also available from Maven with the classifier `all` .
 
 ## Establish a connection
 
@@ -71,21 +71,21 @@ To establish a connection between your Java application and BigQuery with the JD
     
     Replace the following:
     
-      - `  HOST  ` : the DNS or IP address of the server.
-      - `  PORT  ` : the TCP port number.
-      - `  PROJECT_ID  ` : the ID of your BigQuery project.
-      - `  AUTH_TYPE  ` : a number specifying the type of authentication that you used. One of the following:
-          - `  0  ` : for service account authentication (standard and key file)
-          - `  1  ` : for Google user account authentication
-          - `  2  ` : for pre-generated refresh or access token authentication
-          - `  3  ` : for Application Default Credential authentication
-          - `  4  ` : for other authentication methods
-      - `  AUTH_PROPS  ` : the authentication information that you noted when you [authenticated to BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#before_you_begin) , listed in the `  property_1=value_1; property_2=value_2;...  ` format—for example, `  OAuthPvtKeyPath=path/to/file/secret.json  ` , if you authenticated with a service account key file.
-      - `  OTHER_PROPS  ` (optional): additional connection properties for the JDBC driver, listed in the `  property_1=value_1; property_2=value_2;...  ` format. For a full list of connection properties, see [Connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) .
+      - `HOST` : the DNS or IP address of the server.
+      - `PORT` : the TCP port number.
+      - `PROJECT_ID` : the ID of your BigQuery project.
+      - `AUTH_TYPE` : a number specifying the type of authentication that you used. One of the following:
+          - `0` : for service account authentication (standard and key file)
+          - `1` : for Google user account authentication
+          - `2` : for pre-generated refresh or access token authentication
+          - `3` : for Application Default Credential authentication
+          - `4` : for other authentication methods
+      - `AUTH_PROPS` : the authentication information that you noted when you [authenticated to BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#before_you_begin) , listed in the `property_1=value_1; property_2=value_2;...` format—for example, `OAuthPvtKeyPath=path/to/file/secret.json` , if you authenticated with a service account key file.
+      - `OTHER_PROPS` (optional): additional connection properties for the JDBC driver, listed in the `property_1=value_1; property_2=value_2;...` format. For a full list of connection properties, see [Connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) .
 
-2.  Connect your Java application to the JDBC driver for BigQuery with either the [`  DriverManager  `](https://docs.oracle.com/javase/8/docs/api/java/sql/DriverManager.html) or [`  DataSource  `](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html) class.
+2.  Connect your Java application to the JDBC driver for BigQuery with either the [`DriverManager`](https://docs.oracle.com/javase/8/docs/api/java/sql/DriverManager.html) or [`DataSource`](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html) class.
     
-      - Connect with the `  DriverManager  ` class:
+      - Connect with the `DriverManager` class:
         
         ``` notranslate
         import java.sql.Connection;
@@ -97,9 +97,9 @@ To establish a connection between your Java application and BigQuery with the JD
         }
         ```
         
-        Replace `  CONNECTION_STRING  ` with the connection string from the previous step.
+        Replace `CONNECTION_STRING` with the connection string from the previous step.
     
-      - Connect with the `  DataSource  ` class:
+      - Connect with the `DataSource` class:
         
         ``` notranslate
         import com.google.cloud.bigquery.jdbc.DataSource;
@@ -115,9 +115,9 @@ To establish a connection between your Java application and BigQuery with the JD
         }
         ```
         
-        Replace `  CONNECTION_STRING  ` with the connection string from the previous step.
+        Replace `CONNECTION_STRING` with the connection string from the previous step.
         
-        The `  DataSource  ` class also has setter methods that you can use to set [connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) , rather than including them in the connection string. The following is an example:
+        The `DataSource` class also has setter methods that you can use to set [connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) , rather than including them in the connection string. The following is an example:
         
         ``` notranslate
         private static Connection getConnection() throws SQLException {
@@ -136,7 +136,7 @@ To establish a connection between your Java application and BigQuery with the JD
 
 JDBC driver connection properties are configuration parameters that you include in the connection string or pass through setter methods when you [establish a connection](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#establish_a_connection) to a database. The following connection properties are supported by the JDBC driver for BigQuery.
 
-**Note:** All connection property names are case-insensitive. Boolean connection properties accept both `  TRUE  ` / `  FALSE  ` and `  1  ` / `  0  ` .
+**Note:** All connection property names are case-insensitive. Boolean connection properties accept both `TRUE` / `FALSE` and `1` / `0` .
 
 **Connection property**
 
@@ -148,9 +148,9 @@ JDBC driver connection properties are configuration parameters that you include 
 
 **Required**
 
-`  AdditionalProjects  `
+`AdditionalProjects`
 
-Projects that the driver can access for queries and metadata operations, in addition to the primary project set by the `  ProjectId  ` property.
+Projects that the driver can access for queries and metadata operations, in addition to the primary project set by the `ProjectId` property.
 
 N/A
 
@@ -158,17 +158,17 @@ Comma-separated string
 
 No
 
-`  AllowLargeResults  `
+`AllowLargeResults`
 
-Determines if the driver processes query results that are larger than 128 MB when the `  QueryDialect  ` property is set to `  BIG_QUERY  ` . If the `  QueryDialect  ` property is set to `  SQL  ` , the driver always processes large query results.
+Determines if the driver processes query results that are larger than 128 MB when the `QueryDialect` property is set to `BIG_QUERY` . If the `QueryDialect` property is set to `SQL` , the driver always processes large query results.
 
-`  TRUE  `
+`TRUE`
 
 Boolean
 
 No
 
-`  BYOID_AudienceUri  `
+`BYOID_AudienceUri`
 
 The audience property in an external account configuration file. The audience property can contain the resource name for the workload identity pool or workforce pool, as well as the provider identifier in that pool.
 
@@ -176,9 +176,9 @@ N/A
 
 String
 
-Only when `  OAuthType=4  `
+Only when `OAuthType=4`
 
-`  BYOID_CredentialSource  `
+`BYOID_CredentialSource`
 
 The token retrieval and environmental information.
 
@@ -186,9 +186,9 @@ N/A
 
 String
 
-Only when `  OAuthType=4  `
+Only when `OAuthType=4`
 
-`  BYOID_PoolUserProject  `
+`BYOID_PoolUserProject`
 
 The user project when a workforce pool is being used for authentication.
 
@@ -196,9 +196,9 @@ N/A
 
 String
 
-Only when `  OAuthType=4  ` and using the workforce pool
+Only when `OAuthType=4` and using the workforce pool
 
-`  BYOID_SA_Impersonation_Uri  `
+`BYOID_SA_Impersonation_Uri`
 
 The URI for the service account impersonation when a workforce pool is being used for authentication.
 
@@ -206,44 +206,44 @@ N/A
 
 String
 
-Only when `  OAuthType=4  ` and using the workforce pool
+Only when `OAuthType=4` and using the workforce pool
 
-`  BYOID_SubjectTokenType  `
+`BYOID_SubjectTokenType`
 
 The Security Token Service token based on the token exchange specification. One of the following:  
 
-  - `  urn:ietf:params:oauth:token-type:jwt  `
-  - `  urn:ietf:params:oauth:token-type:id_token  `
-  - `  urn:ietf:params:oauth:token-type:saml2  `
-  - `  urn:ietf:params:aws:token-type:aws4_request  `
+  - `urn:ietf:params:oauth:token-type:jwt`
+  - `urn:ietf:params:oauth:token-type:id_token`
+  - `urn:ietf:params:oauth:token-type:saml2`
+  - `urn:ietf:params:aws:token-type:aws4_request`
 
-`  urn:ietf:params:oauth:tokentype:id_token  `
+`urn:ietf:params:oauth:tokentype:id_token`
 
 String
 
-Only when `  OAuthType=4  `
+Only when `OAuthType=4`
 
-`  BYOID_TokenUri  `
+`BYOID_TokenUri`
 
 The Security Token Service token exchange endpoint.
 
-`  https://sts.googleapis.com/v1/token  `
+`https://sts.googleapis.com/v1/token`
 
 String
 
 No
 
-`  ConnectionPoolSize  `
+`ConnectionPoolSize`
 
 The connection pool size, if connection pooling is enabled.
 
-`  10  `
+`10`
 
 Long
 
 No
 
-`  DefaultDataset  `
+`DefaultDataset`
 
 The dataset that's used when one isn't specified in a query.
 
@@ -253,44 +253,44 @@ String
 
 No
 
-`  EnableHighThroughputAPI  `
+`EnableHighThroughputAPI`
 
-Determines if the Storage Read API can be used. The `  HighThroughputActivationRatio  ` and `  HighThroughputMinTableSize  ` properties must also be set to `  TRUE  ` to use the Storage Read API.
+Determines if the Storage Read API can be used. The `HighThroughputActivationRatio` and `HighThroughputMinTableSize` properties must also be set to `TRUE` to use the Storage Read API.
 
-`  FALSE  `
-
-Boolean
-
-No
-
-`  EnableSession  `
-
-Determines if the connection starts a session. If set to `  TRUE  ` , the session ID is passed to all subsequent queries.
-
-`  FALSE  `
+`FALSE`
 
 Boolean
 
 No
 
-`  EnableWriteAPI  `
+`EnableSession`
 
-Determines if the Storage Write API can be used. It must be set to `  TRUE  ` to enable bulk inserts.
+Determines if the connection starts a session. If set to `TRUE` , the session ID is passed to all subsequent queries.
 
-`  FALSE  `
+`FALSE`
 
 Boolean
 
 No
 
-`  EndpointOverrides  `
+`EnableWriteAPI`
+
+Determines if the Storage Write API can be used. It must be set to `TRUE` to enable bulk inserts.
+
+`FALSE`
+
+Boolean
+
+No
+
+`EndpointOverrides`
 
 Custom endpoints to overwrite the following:  
 
-  - `  BIGQUERY=https://bigquery.googleapis.com  `
-  - `  READ_API=https://bigquerystorage.googleapis.com  `
-  - `  OAUTH2=https://oauth2.googleapis.com  `
-  - `  STS=https://sts.googleapis.com  `
+  - `BIGQUERY=https://bigquery.googleapis.com`
+  - `READ_API=https://bigquerystorage.googleapis.com`
+  - `OAUTH2=https://oauth2.googleapis.com`
+  - `STS=https://sts.googleapis.com`
 
 N/A
 
@@ -298,57 +298,57 @@ Comma-separated string
 
 No
 
-`  FilterTablesOnDefaultDataset  `
+`FilterTablesOnDefaultDataset`
 
-Determines the scope of metadata returned by the `  DatabaseMetaData.getTables()  ` and `  DatabaseMetaData.getColumns()  ` methods. When set to `  FALSE  ` , no filtering occurs. The `  DefaultDataset  ` property must also be set to enable filtering.
+Determines the scope of metadata returned by the `DatabaseMetaData.getTables()` and `DatabaseMetaData.getColumns()` methods. When set to `FALSE` , no filtering occurs. The `DefaultDataset` property must also be set to enable filtering.
 
-`  FALSE  `
+`FALSE`
 
 Boolean
 
 No
 
-`  HighThroughputActivationRatio  `
+`HighThroughputActivationRatio`
 
-The threshold for the number of pages in a query response. When this number is exceeded, and the `  EnableHighThroughputAPI  ` and `  HighThroughputMinTableSize  ` conditions are met, the driver starts using the Storage Read API.
+The threshold for the number of pages in a query response. When this number is exceeded, and the `EnableHighThroughputAPI` and `HighThroughputMinTableSize` conditions are met, the driver starts using the Storage Read API.
 
-`  2  `
-
-Integer
-
-No
-
-`  HighThroughputMinTableSize  `
-
-The threshold for the number of rows in a query response. When this number is exceeded, and the `  EnableHighThroughputAPI  ` and `  HighThroughputActivationRatio  ` conditions are met, the driver starts using the Storage Read API.
-
-`  100  `
+`2`
 
 Integer
 
 No
 
-`  JobCreationMode  `
+`HighThroughputMinTableSize`
 
-Determines if queries are run with or without jobs. A `  1  ` value means that jobs are created for every query, and a `  2  ` value means that queries can be executed without jobs.
+The threshold for the number of rows in a query response. When this number is exceeded, and the `EnableHighThroughputAPI` and `HighThroughputActivationRatio` conditions are met, the driver starts using the Storage Read API.
 
-`  2  `
+`100`
 
 Integer
 
 No
 
-`  JobTimeout  `
+`JobCreationMode`
+
+Determines if queries are run with or without jobs. A `1` value means that jobs are created for every query, and a `2` value means that queries can be executed without jobs.
+
+`2`
+
+Integer
+
+No
+
+`JobTimeout`
 
 The job timeout (in seconds) after which the job is cancelled on the server.
 
-`  0  `
+`0`
 
 Long
 
 No
 
-`  KMSKeyName  `
+`KMSKeyName`
 
 The KMS key name for encrypting data.
 
@@ -358,7 +358,7 @@ String
 
 No
 
-`  Labels  `
+`Labels`
 
 Labels that are associated with the query to organize and group query jobs.
 
@@ -368,47 +368,47 @@ Map\<String, String\>
 
 No
 
-`  LargeResultDataset  `
+`LargeResultDataset`
 
-The destination dataset for large query results, only when the `  LargeResultTable  ` property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.
+The destination dataset for large query results, only when the `LargeResultTable` property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.
 
-`  _google_jdbc  `
+`_google_jdbc`
 
 String
 
 No
 
-`  LargeResultsDatasetExpirationTime  `
+`LargeResultsDatasetExpirationTime`
 
 The lifetime of all tables in a large result dataset, in milliseconds. This property is ignored if the dataset already has a default expiration time set.
 
-`  3600000  `
+`3600000`
 
 Long
 
 No
 
-`  LargeResultTable  `
+`LargeResultTable`
 
-The destination table for large query results, only when the `  LargeResultDataset  ` property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.
+The destination table for large query results, only when the `LargeResultDataset` property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.
 
-`  temp_table...  `
+`temp_table...`
 
 String
 
 No
 
-`  ListenerPoolSize  `
+`ListenerPoolSize`
 
 The listener pool size, if connection pooling is enabled.
 
-`  10  `
+`10`
 
 Long
 
 No
 
-`  Location  `
+`Location`
 
 The [location](https://docs.cloud.google.com/bigquery/docs/locations) where datasets are created or queried. BigQuery automatically determines the location if this property isn't set.
 
@@ -418,27 +418,27 @@ String
 
 No
 
-`  LogLevel  `
+`LogLevel`
 
-The level of detail logged by the [`  java.util.logging  ` package](https://docs.oracle.com/javase/8/docs/api/java/util/logging/package-summary.html) during database interactions. Logging can affect performance, so only enable it temporarily to capture an issue. One of the following:  
+The level of detail logged by the [`java.util.logging` package](https://docs.oracle.com/javase/8/docs/api/java/util/logging/package-summary.html) during database interactions. Logging can affect performance, so only enable it temporarily to capture an issue. One of the following:  
 
-  - `  0  ` : the `  OFF  ` level
-  - `  1  ` : the `  SEVERE  ` level
-  - `  2  ` : the `  WARNING  ` level
-  - `  3  ` : the `  INFO  ` level
-  - `  4  ` : the `  CONFIG  ` level
-  - `  5  ` : the `  FINE  ` level
-  - `  6  ` : the `  FINER  ` level
-  - `  7  ` : the `  FINEST  ` level
-  - `  8  ` : the `  ALL  ` level
+  - `0` : the `OFF` level
+  - `1` : the `SEVERE` level
+  - `2` : the `WARNING` level
+  - `3` : the `INFO` level
+  - `4` : the `CONFIG` level
+  - `5` : the `FINE` level
+  - `6` : the `FINER` level
+  - `7` : the `FINEST` level
+  - `8` : the `ALL` level
 
-`  0  `
+`0`
 
 Integer
 
 No
 
-`  LogPath  `
+`LogPath`
 
 The directory where log files are written.
 
@@ -448,37 +448,37 @@ String
 
 No
 
-`  MaximumBytesBilled  `
+`MaximumBytesBilled`
 
 The limit of bytes billed. Queries with bytes billed greater than this number fail without incurring a charge.
 
-`  0  `
+`0`
 
 Long
 
 No
 
-`  MaxResults  `
+`MaxResults`
 
 The maximum number of results per page.
 
-`  10000  `
+`10000`
 
 Long
 
 No
 
-`  MetaDataFetchThreadCount  `
+`MetaDataFetchThreadCount`
 
 The number of threads used for database metadata methods.
 
-`  32  `
+`32`
 
 Integer
 
 No
 
-`  OAuthAccessToken  `
+`OAuthAccessToken`
 
 The access token that's used for pre-generated access token authentication.
 
@@ -486,9 +486,9 @@ N/A
 
 String
 
-Only when `  OAUTH_TYPE=2  `
+Only when `OAUTH_TYPE=2`
 
-`  OAuthClientId  `
+`OAuthClientId`
 
 The client ID for pre-generated refresh token authentication and user account authentication.
 
@@ -496,9 +496,9 @@ N/A
 
 String
 
-Only when `  OAUTH_TYPE=1  ` or `  OAUTH_TYPE=2  `
+Only when `OAUTH_TYPE=1` or `OAUTH_TYPE=2`
 
-`  OAuthClientSecret  `
+`OAuthClientSecret`
 
 The client secret for pre-generated refresh token authentication and user account authentication.
 
@@ -506,19 +506,19 @@ N/A
 
 String
 
-Only when `  OAUTH_TYPE=1  ` or `  OAUTH_TYPE=2  `
+Only when `OAUTH_TYPE=1` or `OAUTH_TYPE=2`
 
-`  OAuthP12Password  `
+`OAuthP12Password`
 
 The password for the PKCS12 key file.
 
-`  notasecret  `
+`notasecret`
 
 String
 
 No
 
-`  OAuthPvtKey  `
+`OAuthPvtKey`
 
 The service account key when using service account authentication. This value can be a raw JSON keyfile object or a path to the JSON keyfile.
 
@@ -526,9 +526,9 @@ N/A
 
 String
 
-Only when `  OAUTH_TYPE=0  ` and the `  OAuthPvtKeyPath  ` value isn't set
+Only when `OAUTH_TYPE=0` and the `OAuthPvtKeyPath` value isn't set
 
-`  OAuthPvtKeyPath  `
+`OAuthPvtKeyPath`
 
 The path to the service account key when using service account authentication.
 
@@ -536,9 +536,9 @@ N/A
 
 String
 
-Only when `  OAUTH_TYPE=0  ` and the `  OAuthPvtKey  ` and `  OAuthServiceAcctEmail  ` values aren't set
+Only when `OAUTH_TYPE=0` and the `OAuthPvtKey` and `OAuthServiceAcctEmail` values aren't set
 
-`  OAuthRefreshToken  `
+`OAuthRefreshToken`
 
 The refresh token for pre-generated refresh token authentication.
 
@@ -546,9 +546,9 @@ N/A
 
 String
 
-Only when `  OAUTH_TYPE=2  `
+Only when `OAUTH_TYPE=2`
 
-`  OAuthServiceAcctEmail  `
+`OAuthServiceAcctEmail`
 
 The service account email when using service account authentication.
 
@@ -556,25 +556,25 @@ N/A
 
 String
 
-Only when `  OAUTH_TYPE=0  ` and the `  OAuthPvtKeyPath  ` value isn't set
+Only when `OAUTH_TYPE=0` and the `OAuthPvtKeyPath` value isn't set
 
-`  OAuthType  `
+`OAuthType`
 
 The authentication type. One of the following:  
 
-  - `  0  ` : service account authentication
-  - `  1  ` : user account authentication
-  - `  2  ` : pre-generated refresh or access token authentication
-  - `  3  ` : Application Default Credential authentication
-  - `  4  ` : other authentication methods
+  - `0` : service account authentication
+  - `1` : user account authentication
+  - `2` : pre-generated refresh or access token authentication
+  - `3` : Application Default Credential authentication
+  - `4` : other authentication methods
 
-`  -1  `
+`-1`
 
 Integer
 
 Yes
 
-`  PartnerToken  `
+`PartnerToken`
 
 A token that's used by Google Cloud partners to track usage of the driver.
 
@@ -584,7 +584,7 @@ String
 
 No
 
-`  ProjectId  `
+`ProjectId`
 
 The default project ID for the driver. This project is used to execute queries and is billed for resource usage. If not set, the driver infers a project ID.
 
@@ -594,7 +594,7 @@ String
 
 No, but highly recommended
 
-`  ProxyHost  `
+`ProxyHost`
 
 The hostname or IP address of a proxy server through which the JDBC connection is routed.
 
@@ -604,7 +604,7 @@ String
 
 No
 
-`  ProxyPort  `
+`ProxyPort`
 
 The port number on which the proxy server is listening for connections.
 
@@ -614,7 +614,7 @@ String
 
 No
 
-`  ProxyPwd  `
+`ProxyPwd`
 
 The password for authentication when connecting through a proxy server that requires it.
 
@@ -624,7 +624,7 @@ String
 
 No
 
-`  ProxyUid  `
+`ProxyUid`
 
 The username for authentication when connecting through a proxy server that requires it.
 
@@ -634,17 +634,17 @@ String
 
 No
 
-`  QueryDialect  `
+`QueryDialect`
 
-The SQL dialect for query execution. Use `  SQL  ` for GoogleSQL (highly recommended) and `  BIG_QUERY  ` for legacy SQL.
+The SQL dialect for query execution. Use `SQL` for GoogleSQL (highly recommended) and `BIG_QUERY` for legacy SQL.
 
-`  SQL  `
+`SQL`
 
 String
 
 No
 
-`  QueryProperties  `
+`QueryProperties`
 
 [REST connection properties](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty) that customize query behavior.
 
@@ -654,37 +654,37 @@ Map\<String, String\>
 
 No
 
-`  RequestGoogleDriveScope  `
+`RequestGoogleDriveScope`
 
-Adds read-only Drive scope to the connection when set to `  1  ` .
+Adds read-only Drive scope to the connection when set to `1` .
 
-`  0  `
+`0`
 
 Integer
 
 No
 
-`  RetryInitialDelay  `
+`RetryInitialDelay`
 
 Sets the delay (in seconds) before the first retry.
 
-`  0  `
+`0`
 
 Long
 
 No
 
-`  RetryMaxDelay  `
+`RetryMaxDelay`
 
 Sets the maximum limit (in seconds) for the retry delay.
 
-`  0  `
+`0`
 
 Long
 
 No
 
-`  ServiceAccountImpersonationChain  `
+`ServiceAccountImpersonationChain`
 
 A comma-separated list of service account emails in the impersonation chain.
 
@@ -694,7 +694,7 @@ String
 
 No
 
-`  ServiceAccountImpersonationEmail  `
+`ServiceAccountImpersonationEmail`
 
 The service account email to be impersonated.
 
@@ -704,27 +704,27 @@ String
 
 No
 
-`  ServiceAccountImpersonationScopes  `
+`ServiceAccountImpersonationScopes`
 
 A comma-separated list of OAuth2 scopes to use with the impersonated account.
 
-`  https://www.googleapis.com/auth/bigquery  `
+`https://www.googleapis.com/auth/bigquery`
 
 String
 
 No
 
-`  ServiceAccountImpersonationTokenLifetime  `
+`ServiceAccountImpersonationTokenLifetime`
 
 The impersonated account token lifetime (in seconds).
 
-`  3600  `
+`3600`
 
 Integer
 
 No
 
-`  SSLTrustStore  `
+`SSLTrustStore`
 
 The full path to the Java TrustStore that contains trusted Certificate Authority (CA) certificates. The driver utilizes this truststore to validate the identity of the server during the SSL/TLS handshake.
 
@@ -734,9 +734,9 @@ String
 
 No
 
-`  SSLTrustStorePwd  `
+`SSLTrustStorePwd`
 
-The password to the Java TrustStore specified in the `  SSLTrustStore  ` property.
+The password to the Java TrustStore specified in the `SSLTrustStore` property.
 
 N/A
 
@@ -744,61 +744,61 @@ String
 
 Only if the Java TrustStore is password-protected
 
-`  SWA_ActivationRowCount  `
+`SWA_ActivationRowCount`
 
-The threshold of `  executeBatch insert  ` rows which, when exceeded, causes the connector to switch to the Storage Write API.
+The threshold of `executeBatch insert` rows which, when exceeded, causes the connector to switch to the Storage Write API.
 
-`  3  `
+`3`
 
 Integer
 
 No
 
-`  SWA_AppendRowCount  `
+`SWA_AppendRowCount`
 
 The size of the write stream.
 
-`  1000  `
+`1000`
 
 Integer
 
 No
 
-`  Timeout  `
+`Timeout`
 
 The length of time, in seconds, that the connector retries a failed API call before timing out.
 
-`  0  `
+`0`
 
 Long
 
 No
 
-`  UniverseDomain  `
+`UniverseDomain`
 
 The top-level domain that's associated with your organization's Google Cloud resources.
 
-`  googleapis.com  `
+`googleapis.com`
 
 String
 
 No
 
-`  UnsupportedHTAPIFallback  `
+`UnsupportedHTAPIFallback`
 
-Determines if the connector falls back to the REST API (when set to `  TRUE  ` ) or returns an error (when set to `  FALSE  ` ).
+Determines if the connector falls back to the REST API (when set to `TRUE` ) or returns an error (when set to `FALSE` ).
 
-`  TRUE  `
+`TRUE`
 
 Boolean
 
 No
 
-`  UseQueryCache  `
+`UseQueryCache`
 
 Enables query caching.
 
-`  TRUE  `
+`TRUE`
 
 Boolean
 
@@ -812,24 +812,24 @@ With your Java application connected to BigQuery through the JDBC driver, you ca
 
 When you run queries through the JDBC driver for BigQuery, the following data type mapping occurs:
 
-| **GoogleSQL type**          | **Java type**               |
-| --------------------------- | --------------------------- |
-| `        ARRAY       `      | `        Array       `      |
-| `        BIGNUMERIC       ` | `        BigDecimal       ` |
-| `        BOOL       `       | `        Boolean       `    |
-| `        BYTES       `      | `        byte[]       `     |
-| `        DATE       `       | `        Date       `       |
-| `        DATETIME       `   | `        String       `     |
-| `        FLOAT64       `    | `        Double       `     |
-| `        GEOGRAPHY       `  | `        String       `     |
-| `        INT64       `      | `        Long       `       |
-| `        INTERVAL       `   | `        String       `     |
-| `        JSON       `       | `        String       `     |
-| `        NUMERIC       `    | `        BigDecimal       ` |
-| `        STRING       `     | `        String       `     |
-| `        STRUCT       `     | `        Struct       `     |
-| `        TIME       `       | `        Time       `       |
-| `        TIMESTAMP       `  | `        Timestamp       `  |
+| **GoogleSQL type** | **Java type** |
+| ------------------ | ------------- |
+| `ARRAY`            | `Array`       |
+| `BIGNUMERIC`       | `BigDecimal`  |
+| `BOOL`             | `Boolean`     |
+| `BYTES`            | `byte[]`      |
+| `DATE`             | `Date`        |
+| `DATETIME`         | `String`      |
+| `FLOAT64`          | `Double`      |
+| `GEOGRAPHY`        | `String`      |
+| `INT64`            | `Long`        |
+| `INTERVAL`         | `String`      |
+| `JSON`             | `String`      |
+| `NUMERIC`          | `BigDecimal`  |
+| `STRING`           | `String`      |
+| `STRUCT`           | `Struct`      |
+| `TIME`             | `Time`        |
+| `TIMESTAMP`        | `Timestamp`   |
 
 ### Examples
 
@@ -848,7 +848,7 @@ ResultSet resultSet = statement.executeQuery(selectQuery);
 
 #### Nested and repeated records
 
-The following example queries the base record of `  Struct  ` data:
+The following example queries the base record of `Struct` data:
 
 ``` notranslate
 ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
@@ -874,7 +874,7 @@ The driver returns the base record as a struct object or a string representation
 }
 ```
 
-The following example queries the subcomponents of a `  Struct  ` object:
+The following example queries the subcomponents of a `Struct` object:
 
 ``` notranslate
 ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
@@ -901,7 +901,7 @@ for (; count < arrayObject.length; count++) {
 }
 ```
 
-The following example queries a `  Struct  ` array of repeated data, then verifies the result:
+The following example queries a `Struct` array of repeated data, then verifies the result:
 
 ``` notranslate
 // Execute Query
@@ -919,7 +919,7 @@ for (int count =0; count < arrayObject.length; count++) {
 
 #### Bulk-insert
 
-The following example performs a bulk-insert operation with the [`  executeBatch  ` method](https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#executeBatch--) .
+The following example performs a bulk-insert operation with the [`executeBatch` method](https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#executeBatch--) .
 
 ``` notranslate
 Connection conn = DriverManager.getConnection(connectionUrl);

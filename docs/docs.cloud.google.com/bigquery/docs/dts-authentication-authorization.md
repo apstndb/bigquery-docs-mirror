@@ -12,14 +12,14 @@ The BigQuery Data Transfer Service automates data transfers from various data so
 
 The control plane represents the stage in the authorization process where an authenticated user is able to control and manage transfer configurations and runs. A user in the control plane must have the appropriate Identity and Access Management (IAM) permissions to control and manage their transfer configurations and runs:
 
-  - The `  bigquery.transfers.update  ` permission, which lets users do the following:
+  - The `bigquery.transfers.update` permission, which lets users do the following:
       - Set up data transfer configurations.
       - Administer the existing transfers, such as updating, disabling or deleting a transfer.
-  - The `  bigquery.transfers.get  ` permission, which lets users monitor transfer runs, such as checking transfer run status or viewing transfer run history and logs.
+  - The `bigquery.transfers.get` permission, which lets users monitor transfer runs, such as checking transfer run status or viewing transfer run history and logs.
 
-If you are using the Google Cloud console or the bq command-line tool to create a transfer, you must also have the `  bigquery.transfers.get  ` permission.
+If you are using the Google Cloud console or the bq command-line tool to create a transfer, you must also have the `bigquery.transfers.get` permission.
 
-The `  bigquery.transfers.update  ` permission is not required to set up a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) . For more information, see the [required permissions](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#required_permissions) for scheduled queries.
+The `bigquery.transfers.update` permission is not required to set up a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) . For more information, see the [required permissions](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#required_permissions) for scheduled queries.
 
 ### Data plane
 
@@ -40,7 +40,7 @@ A transfer owner refers to the user identity that the BigQuery Data Transfer Ser
 The transfer owner and transfer creator can have the same user identity, but it is not a requirement. There are multiple ways of setting the transfer owner to be a different user than the transfer creator:
 
   - When creating a transfer, you can set the owner to a service account if the data source supports service accounts.
-  - Once a transfer has been created, you can transfer ownership to a new user account (or to a service account if the data source supports service accounts) that has the `  bigquery.transfers.update  ` and `  bigquery.transfers.get  ` permissions. You must be logged in to the new account when you [update the credentials](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_credentials) .
+  - Once a transfer has been created, you can transfer ownership to a new user account (or to a service account if the data source supports service accounts) that has the `bigquery.transfers.update` and `bigquery.transfers.get` permissions. You must be logged in to the new account when you [update the credentials](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_credentials) .
 
 ## Read-access authorization for external data sources
 
@@ -52,7 +52,7 @@ Depending on the transfer owner's identity type, a different authorization metho
 
 When a service account is used as the transfer owner, the necessary permissions are automatically granted when the BigQuery Data Transfer Service API is enabled for your project. The BigQuery Data Transfer Service uses a [*service agent*](https://docs.cloud.google.com/iam/docs/service-account-types#service-agents) to get the access token for the user-provided service account (transfer owner).
 
-When you enable the BigQuery Data Transfer Service API, a [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) is created for your project. The system also grants the service agent the [BigQuery Data Transfer Service Agent role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) ( `  roles/bigquerydatatransfer.serviceAgent  ` ), which includes the permission `  iam.serviceAccounts.getAccessToken  ` . That permission allows the BigQuery Data Transfer Service service agent to impersonate the transfer owner service account to retrieve the access token.
+When you enable the BigQuery Data Transfer Service API, a [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) is created for your project. The system also grants the service agent the [BigQuery Data Transfer Service Agent role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) ( `roles/bigquerydatatransfer.serviceAgent` ), which includes the permission `iam.serviceAccounts.getAccessToken` . That permission allows the BigQuery Data Transfer Service service agent to impersonate the transfer owner service account to retrieve the access token.
 
 For more information about the BigQuery Data Transfer Service service agent, see [Service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) . For more information about using service accounts and the up-to-date list of data sources that have service account support, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
 
@@ -70,7 +70,7 @@ The following screenshot shows the OAuth dialog interface when you are creating 
 
 ![Allow BigQuery Data Transfer Service to access Google Ads.](https://docs.cloud.google.com/static/bigquery/images/dts-auth-allow.png)
 
-**Note:** The BigQuery Data Transfer Service no longer supports the `  authorization_code  ` parameter for Youtube Channel data transfers. You can use the `  version_info  ` parameter to provide your authorization result to the transfer to allow it to get credentials. The `  version_info  ` parameter is only required in the `  bq  ` CLI or API calls.
+**Note:** The BigQuery Data Transfer Service no longer supports the `authorization_code` parameter for Youtube Channel data transfers. You can use the `version_info` parameter to provide your authorization result to the transfer to allow it to get credentials. The `version_info` parameter is only required in the `bq` CLI or API calls.
 
 To revoke the permissions that were given, follow these steps:
 
@@ -82,7 +82,7 @@ To revoke the permissions that were given, follow these steps:
 
 ## Authorization to start BigQuery jobs
 
-When you migrate from most data sources, except when migrating using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [dataset copies](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) , the BigQuery Data Transfer Service relies on [service agents](https://docs.cloud.google.com/iam/docs/service-account-types#service-agents) to start BigQuery jobs for your project. The required permission `  bigquery.job.create  ` is automatically given to the [service agent](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) when you enable the BigQuery Data Transfer Service API for your project. For more information, see [Enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+When you migrate from most data sources, except when migrating using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [dataset copies](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) , the BigQuery Data Transfer Service relies on [service agents](https://docs.cloud.google.com/iam/docs/service-account-types#service-agents) to start BigQuery jobs for your project. The required permission `bigquery.job.create` is automatically given to the [service agent](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) when you enable the BigQuery Data Transfer Service API for your project. For more information, see [Enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 
 When you migrate using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [dataset copies](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) , BigQuery Data Transfer Service uses the transfer owner's credentials to start the BigQuery jobs.
 
@@ -90,13 +90,13 @@ When you migrate using [scheduled queries](https://docs.cloud.google.com/bigquer
 
 ## Authorization to execute BigQuery jobs and write data to the destination dataset
 
-When you migrate from most data sources, except when migrating using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [dataset copies](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) , the BigQuery Data Transfer Service relies on the service agent to write data into the BigQuery destination dataset. The required permission, `  roles/bigquery.dataEditor  ` , is granted to the service agent by the BigQuery Data Transfer Service when you create the transfer. You must have `  bigquery.datasets.update  ` permission on the destination dataset to successfully grant the permission.
+When you migrate from most data sources, except when migrating using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [dataset copies](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) , the BigQuery Data Transfer Service relies on the service agent to write data into the BigQuery destination dataset. The required permission, `roles/bigquery.dataEditor` , is granted to the service agent by the BigQuery Data Transfer Service when you create the transfer. You must have `bigquery.datasets.update` permission on the destination dataset to successfully grant the permission.
 
 When you migrate using [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [dataset copies](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) , BigQuery Data Transfer Service uses the transfer owner's credentials to execute the BigQuery jobs and write the data into BigQuery destination dataset.
 
-**Note:** The `  roles/bigquery.dataEditor  ` role granted to the BigQuery Data Transfer Service agent is only limited to the destination dataset that is used in a transfer configuration. Other BigQuery datasets under the same project are not affected.
+**Note:** The `roles/bigquery.dataEditor` role granted to the BigQuery Data Transfer Service agent is only limited to the destination dataset that is used in a transfer configuration. Other BigQuery datasets under the same project are not affected.
 
-**Warning:** Don't remove the service agent's `  roles/bigquery.dataEditor  ` role from the destination dataset. The `  roles/bigquery.dataEditor  ` role is required for BigQuery Data Transfer Service to work.
+**Warning:** Don't remove the service agent's `roles/bigquery.dataEditor` role from the destination dataset. The `roles/bigquery.dataEditor` role is required for BigQuery Data Transfer Service to work.
 
 ## Troubleshoot permission errors
 

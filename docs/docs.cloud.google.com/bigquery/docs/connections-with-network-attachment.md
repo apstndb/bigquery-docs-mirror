@@ -15,7 +15,7 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required roles
 
-To get the permissions that you need to configure a connection with network attachments, ask your administrator to grant you the [Compute Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.admin) ( `  roles/compute.admin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to configure a connection with network attachments, ask your administrator to grant you the [Compute Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.admin) ( `roles/compute.admin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to configure a connection with network attachments. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -23,8 +23,8 @@ This predefined role contains the permissions required to configure a connection
 
 The following permissions are required to configure a connection with network attachments:
 
-  - `  compute.networkAttachments.get  `
-  - `  compute.networkAttachments.update  `
+  - `compute.networkAttachments.get`
+  - `compute.networkAttachments.update`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -35,7 +35,7 @@ For more information about IAM roles and permissions in BigQuery, see [BigQuery 
 Connections with network attachments are subject to the following limitations:
 
   - Network attachments are supported only for [SAP Datasphere connections](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) .
-  - For standard regions, network attachments must be located in the same region as the connection. For connections in the `  US  ` multi-region, the network attachment must be located in the `  us-central1  ` region. For connections in the `  EU  ` multi-region, the network attachment must be located in the `  europe-west4  ` region.
+  - For standard regions, network attachments must be located in the same region as the connection. For connections in the `US` multi-region, the network attachment must be located in the `us-central1` region. For connections in the `EU` multi-region, the network attachment must be located in the `europe-west4` region.
   - You can't make any changes to your network attachment after you create it. To configure anything in a new way, you need to recreate the network attachment.
   - Network attachments can't be deleted unless the producer (BigQuery) deletes the allocated resources. To initiate the deletion process, you must [contact BigQuery support](https://docs.cloud.google.com/bigquery/docs/support) .
 

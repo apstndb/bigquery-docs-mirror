@@ -11,7 +11,7 @@ Renames the id (display name) of the specified data policy.
 
 ### HTTP request
 
-`  POST https://bigquerydatapolicy.googleapis.com/v1/{name=projects/*/locations/*/dataPolicies/*}:rename  `
+`POST https://bigquerydatapolicy.googleapis.com/v1/{name=projects/*/locations/*/dataPolicies/*}:rename`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,11 +19,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the data policy to rename. The format is `  projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}  `
+Required. Resource name of the data policy to rename. The format is `projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}`
 
 ### Request body
 
@@ -49,9 +49,9 @@ The request body contains data with the following structure:
 
 Fields
 
-`  newDataPolicyId  `
+`newDataPolicyId`
 
-`  string  `
+`string`
 
 Required. The new data policy id.
 
@@ -63,15 +63,15 @@ If successful, the response body contains an instance of `  DataPolicy  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  bigquery.dataPolicies.update  `
+  - `bigquery.dataPolicies.update`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

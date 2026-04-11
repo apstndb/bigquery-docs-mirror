@@ -5,9 +5,9 @@ This document describes BigQuery continuous queries.
 BigQuery continuous queries are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time. You can insert the output rows produced by a continuous query into a BigQuery table or export them to Pub/Sub, Bigtable, or Spanner. Continuous queries can process data that has been written to [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) by using one of the following methods:
 
   - The [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api)
-  - The [`  tabledata.insertAll  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll)
+  - The [`tabledata.insertAll` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll)
   - [Batch load](https://docs.cloud.google.com/bigquery/docs/batch-loading-data)
-  - The [`  INSERT  ` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
+  - The [`INSERT` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
   - Writes from the [results of a batch query to a permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table)
   - Writes from the [results of a BigQuery continuous query to a permanent table](https://docs.cloud.google.com/bigquery/docs/continuous-queries#write-bigquery)
   - A [Pub/Sub BigQuery subscription](https://docs.cloud.google.com/pubsub/docs/bigquery)
@@ -34,36 +34,36 @@ Common use cases where you might want to use continuous queries are as follows:
 
 The following operations are supported in continuous queries:
 
-  - Running [`  INSERT  ` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) to write data from a continuous query into a BigQuery table.
+  - Running [`INSERT` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) to write data from a continuous query into a BigQuery table.
 
-  - Running [`  EXPORT DATA  ` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to [publish](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) continuous query output to Pub/Sub topics. For more information, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
+  - Running [`EXPORT DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to [publish](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) continuous query output to Pub/Sub topics. For more information, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
     
     From a Pub/Sub topic, you can use the data with other services, such as performing streaming analytics by using Dataflow, or using the data in an application integration workflow.
 
-  - Running `  EXPORT DATA  ` statements to export data from BigQuery to [Bigtable tables](https://docs.cloud.google.com/bigtable/docs/managing-tables) . For more information, see [Export data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) .
+  - Running `EXPORT DATA` statements to export data from BigQuery to [Bigtable tables](https://docs.cloud.google.com/bigtable/docs/managing-tables) . For more information, see [Export data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) .
 
-  - Running `  EXPORT DATA  ` statements to export data from BigQuery to Spanner tables. For more information, see [Export data to Spanner (reverse ETL)](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) .
+  - Running `EXPORT DATA` statements to export data from BigQuery to Spanner tables. For more information, see [Export data to Spanner (reverse ETL)](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) .
 
   - Calling the following generative AI functions:
     
-      - [`  AI.GENERATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
+      - [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
     
-      - [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
+      - [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
         
           - This function requires you to have a [BigQuery ML remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over a [Vertex AI model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) .
 
   - Calling the following AI functions:
     
-      - [`  ML.UNDERSTAND_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text)
-      - [`  ML.TRANSLATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate)
+      - [`ML.UNDERSTAND_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text)
+      - [`ML.TRANSLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate)
     
     These functions require you to have a [BigQuery ML remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) over a Cloud AI API.
 
-  - Normalizing numerical data by using the [`  ML.NORMALIZER  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-normalizer) .
+  - Normalizing numerical data by using the [`ML.NORMALIZER` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-normalizer) .
 
   - Using stateless GoogleSQL functions—for example, [conversion functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions) . In stateless functions, each row is processed independently from other rows in the table.
 
-  - Using the [`  APPENDS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to start continuous query processing from a specific point in time.
+  - Using the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to start continuous query processing from a specific point in time.
 
 ## Authorization
 
@@ -77,11 +77,11 @@ For a list of supported regions, see [BigQuery continuous query locations](https
 
 Continuous queries are subject to the following limitations:
 
-  - BigQuery continuous queries don't maintain the state of ingested data. Common operations that rely on state, such as a `  JOIN  ` , aggregation function, or window function, aren't supported.
+  - BigQuery continuous queries don't maintain the state of ingested data. Common operations that rely on state, such as a `JOIN` , aggregation function, or window function, aren't supported.
 
   - You can't use the following SQL capabilities in a continuous query:
     
-      - [`  JOIN  ` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types)
+      - [`JOIN` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types)
     
       - [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions)
     
@@ -89,22 +89,22 @@ Continuous queries are subject to the following limitations:
     
       - The following [query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) clauses:
         
-          - [`  GROUP BY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause)
-          - [`  HAVING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#having_clause)
-          - [`  ORDER BY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause)
-          - [`  LIMIT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
+          - [`GROUP BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause)
+          - [`HAVING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#having_clause)
+          - [`ORDER BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause)
+          - [`LIMIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
     
       - The following [query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) operators:
         
-          - [`  PIVOT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator)
-          - [`  UNPIVOT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator)
-          - [`  TABLESAMPLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#tablesample_operator)
+          - [`PIVOT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator)
+          - [`UNPIVOT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator)
+          - [`TABLESAMPLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#tablesample_operator)
     
       - Query [set operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators)
     
-      - The [`  SELECT DISTINCT  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct)
+      - The [`SELECT DISTINCT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct)
     
-      - [`  EXISTS  ` or `  NOT EXISTS  ` subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#exists_subquery_concepts)
+      - [`EXISTS` or `NOT EXISTS` subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#exists_subquery_concepts)
     
       - [Recursive CTEs](https://docs.cloud.google.com/bigquery/docs/recursive-ctes)
     
@@ -116,11 +116,11 @@ Continuous queries are subject to the following limitations:
     
       - [Data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
     
-      - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) except for `  INSERT  ` .
+      - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) except for `INSERT` .
     
       - [Data control language (DCL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language)
     
-      - `  EXPORT DATA  ` statements that don't target Bigtable, Pub/Sub, or Spanner.
+      - `EXPORT DATA` statements that don't target Bigtable, Pub/Sub, or Spanner.
     
       - [Procedural language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language)
     
@@ -134,7 +134,7 @@ Continuous queries are subject to the following limitations:
       - [Wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
       - [Change Data Capture (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture) data.
       - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
-      - [Views](https://docs.cloud.google.com/bigquery/docs/views) that are defined by other continuous query limitations, such as `  JOIN  ` operations, aggregate functions, change data capture-enabled tables.
+      - [Views](https://docs.cloud.google.com/bigquery/docs/views) that are defined by other continuous query limitations, such as `JOIN` operations, aggregate functions, change data capture-enabled tables.
 
   - Continuous queries don't support the [column-](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) security features.
 
@@ -146,7 +146,7 @@ Continuous queries are subject to the following limitations:
 
   - You can't modify the SQL used in a continuous query while the continuous query job is running. For more information, see [Modify the SQL of a continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries#modify_the_sql_of_a_continuous_query) .
 
-  - If a continuous query job falls behind in processing incoming data and has an [output watermark lag](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) of more than 48 hours, then it fails. You can run the query again and use the [`  APPENDS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to resume processing from the point in time at which you stopped the previous continuous query job. For more information, see [Start a continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) .
+  - If a continuous query job falls behind in processing incoming data and has an [output watermark lag](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) of more than 48 hours, then it fails. You can run the query again and use the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to resume processing from the point in time at which you stopped the previous continuous query job. For more information, see [Start a continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) .
 
   - A continuous query configured with a user account can run for up to two days. A continuous query configured with a service account can run for up to 150 days. When the maximum query runtime is reached, the query fails and stops processing incoming data.
 
@@ -155,9 +155,9 @@ Continuous queries are subject to the following limitations:
 ### Reservation limitations
 
   - You must create Enterprise edition or Enterprise Plus edition [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) in order to run continuous queries. Continuous queries don't support the on-demand compute billing model.
-  - When you create a `  CONTINUOUS  ` [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) , the associated reservation is limited to at most 500 slots. You can request an increase to this limit by contacting <bq-continuous-queries-feedback@google.com> .
+  - When you create a `CONTINUOUS` [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) , the associated reservation is limited to at most 500 slots. You can request an increase to this limit by contacting <bq-continuous-queries-feedback@google.com> .
   - You can't create a reservation assignment that uses a different [job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) in the same reservation as a continuous query reservation assignment.
-  - You can't configure continuous query concurrency. BigQuery automatically determines the number of continuous queries that can run concurrently, based on available reservation assignments that use the `  CONTINUOUS  ` job type.
+  - You can't configure continuous query concurrency. BigQuery automatically determines the number of continuous queries that can run concurrently, based on available reservation assignments that use the `CONTINUOUS` job type.
   - When running multiple continuous queries using the same reservation, individual jobs might not split available resources fairly, as defined by [BigQuery fairness](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) .
 
 ## Slots autoscaling
@@ -170,12 +170,12 @@ After a continuous query starts running, it actively *listens* for incoming data
 
 Continuous queries can use [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) to share unused slot resources with other reservations and [job types](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) .
 
-  - A `  CONTINUOUS  ` [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) is still required to run a continuous query and can't solely rely on idle slots from other reservations. Thus a `  CONTINUOUS  ` reservation assignment requires either a non-zero slot baseline or a non-zero slot autoscaling configuration.
-  - Only idle baseline slots or committed slots from a `  CONTINUOUS  ` reservation assignment are shareable. [Autoscaled slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) aren't shareable as idle slots for other reservations.
+  - A `CONTINUOUS` [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) is still required to run a continuous query and can't solely rely on idle slots from other reservations. Thus a `CONTINUOUS` reservation assignment requires either a non-zero slot baseline or a non-zero slot autoscaling configuration.
+  - Only idle baseline slots or committed slots from a `CONTINUOUS` reservation assignment are shareable. [Autoscaled slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) aren't shareable as idle slots for other reservations.
 
 ## Pricing
 
-Continuous queries use [BigQuery capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , which is measured in [slots](https://docs.cloud.google.com/bigquery/docs/slots) . To run continuous queries, you must have a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) that uses the [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , and a [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) that uses the `  CONTINUOUS  ` job type.
+Continuous queries use [BigQuery capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , which is measured in [slots](https://docs.cloud.google.com/bigquery/docs/slots) . To run continuous queries, you must have a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) that uses the [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , and a [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) that uses the `CONTINUOUS` job type.
 
 Usage of other BigQuery resources, such as data ingestion and storage, are charged at the rates shown in [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 

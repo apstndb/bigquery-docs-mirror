@@ -7,30 +7,30 @@ There is no persistent data associated with this resource.
 
 ## Methods
 
-### `             cancel           `
+### `            cancel           `
 
 Requests that a job be cancelled.
 
-### `             delete           `
+### `            delete           `
 
 Requests the deletion of the metadata of a job.
 
-### `             get           `
+### `            get           `
 
 Returns information about a specific job.
 
-### `             getQueryResults           `
+### `            getQueryResults           `
 
 RPC to get the results of a query job.
 
-### `             insert           `
+### `            insert           `
 
 Starts a new asynchronous job.
 
-### `             list           `
+### `            list           `
 
 Lists all jobs that you started in the specified project.
 
-### `             query           `
+### `            query           `
 
 Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.

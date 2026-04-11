@@ -59,7 +59,7 @@ Gemini provides context-aware suggestions to assist with the following data prep
 Each suggestion appears in a card in the suggestions list of the data preparation editor. The card contains the following information:
 
   - The high-level category of the step, such as **Keep rows** or **Transformation**
-  - A description of the step, such as **Keep rows if `  COLUMN_NAME  ` is not `  NULL  `**
+  - A description of the step, such as **Keep rows if `  COLUMN_NAME  ` is not `NULL`**
   - The corresponding SQL expression used to execute the step
 
 You can preview, edit, or apply the suggestion card, or fine-tune the suggestion. You can also add steps manually. For more information, see [Prepare data with Gemini](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
@@ -70,7 +70,7 @@ To fine-tune the suggestions from Gemini, [give it an example](https://docs.clou
 
 BigQuery uses data sampling to provide a preview of your data preparation. You can view the sample in the data view for each node.
 
-When you add BigQuery standard tables as a source, the data is prepared using a BigQuery [`  TABLESAMPLE  `](https://docs.cloud.google.com/bigquery/docs/table-sampling) function. This function creates a 10k-record sample.
+When you add BigQuery standard tables as a source, the data is prepared using a BigQuery [`TABLESAMPLE`](https://docs.cloud.google.com/bigquery/docs/table-sampling) function. This function creates a 10k-record sample.
 
 When you add a view or an external table as a source, the system reads the first 1 million records. From these records, the system selects a representative 10k-record sample.
 
@@ -116,18 +116,18 @@ BigQuery supports the following types of data preparation steps:
 <td>Cleans and transforms data using a SQL expression. You receive suggestion cards for the following expressions:<br />
 
 <ul>
-<li>Typecasting functions, such as <code dir="ltr" translate="no">         CAST        </code></li>
-<li>String functions, such as <code dir="ltr" translate="no">         SUBSTR        </code> , <code dir="ltr" translate="no">         CONCAT        </code> , <code dir="ltr" translate="no">         REPLACE        </code> , <code dir="ltr" translate="no">         UPPER        </code> , <code dir="ltr" translate="no">         LOWER        </code> , and <code dir="ltr" translate="no">         TRIM        </code></li>
-<li>Datetime functions, such as <code dir="ltr" translate="no">         PARSE_DATE        </code> , <code dir="ltr" translate="no">         TIMESTAMP        </code> , <code dir="ltr" translate="no">         EXTRACT        </code> , and <code dir="ltr" translate="no">         DATE_ADD        </code></li>
-<li>JSON functions, such as <code dir="ltr" translate="no">         JSON_VALUE        </code> or <code dir="ltr" translate="no">         JSON_QUERY        </code></li>
+<li>Typecasting functions, such as <code dir="ltr" translate="no">CAST</code></li>
+<li>String functions, such as <code dir="ltr" translate="no">SUBSTR</code> , <code dir="ltr" translate="no">CONCAT</code> , <code dir="ltr" translate="no">REPLACE</code> , <code dir="ltr" translate="no">UPPER</code> , <code dir="ltr" translate="no">LOWER</code> , and <code dir="ltr" translate="no">TRIM</code></li>
+<li>Datetime functions, such as <code dir="ltr" translate="no">PARSE_DATE</code> , <code dir="ltr" translate="no">TIMESTAMP</code> , <code dir="ltr" translate="no">EXTRACT</code> , and <code dir="ltr" translate="no">DATE_ADD</code></li>
+<li>JSON functions, such as <code dir="ltr" translate="no">JSON_VALUE</code> or <code dir="ltr" translate="no">JSON_QUERY</code></li>
 </ul>
 <br />
 You can also use any valid BigQuery SQL expressions in manual transformation steps. For example:<br />
 
 <ul>
 <li>Math with numbers, such as converting watt-hours to kilowatt-hours</li>
-<li>Array functions, such as <code dir="ltr" translate="no">         ARRAY_AGG        </code> , <code dir="ltr" translate="no">         ARRAY_CONCAT        </code> , and <code dir="ltr" translate="no">         UNNEST        </code></li>
-<li>Window functions, such as <code dir="ltr" translate="no">         ROW_NUMBER        </code> , <code dir="ltr" translate="no">         LAG        </code> , <code dir="ltr" translate="no">         LEAD        </code> , <code dir="ltr" translate="no">         RANK        </code> , and <code dir="ltr" translate="no">         NTILE        </code></li>
+<li>Array functions, such as <code dir="ltr" translate="no">ARRAY_AGG</code> , <code dir="ltr" translate="no">ARRAY_CONCAT</code> , and <code dir="ltr" translate="no">UNNEST</code></li>
+<li>Window functions, such as <code dir="ltr" translate="no">ROW_NUMBER</code> , <code dir="ltr" translate="no">LAG</code> , <code dir="ltr" translate="no">LEAD</code> , <code dir="ltr" translate="no">RANK</code> , and <code dir="ltr" translate="no">NTILE</code></li>
 </ul>
 <br />
 <br />
@@ -135,7 +135,7 @@ For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/d
 </tr>
 <tr class="odd">
 <td>Filter</td>
-<td>Removes rows through the <code dir="ltr" translate="no">       WHERE      </code> clause syntax. When you add a filter step, you can choose to make it into a validation step.<br />
+<td>Removes rows through the <code dir="ltr" translate="no">WHERE</code> clause syntax. When you add a filter step, you can choose to make it into a validation step.<br />
 <br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#filter-rows" class="internal">Filter rows</a> .</td>
 </tr>
@@ -209,7 +209,7 @@ If you use VPC Service Controls, you must configure the perimeter to protect Dat
 
 ### Role granted when creating a data preparation
 
-When you create a data preparation, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) on that data preparation. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the data preparations created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
+When you create a data preparation, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that data preparation. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the data preparations created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
 ## Limitations
 

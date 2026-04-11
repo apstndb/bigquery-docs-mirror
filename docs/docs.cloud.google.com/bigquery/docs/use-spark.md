@@ -14,11 +14,11 @@ If you haven't already done so, create a Google Cloud project and a Cloud Storag
     
       - Notebook credentials: By default, your notebook session uses your [user credentials](https://docs.cloud.google.com/docs/authentication#user-accounts) . Alternatively, it can use [session service account](https://docs.cloud.google.com/docs/authentication#service-accounts) credentials.
           - User credentials: Your user account must have the following Identity and Access Management roles:
-              - [Dataproc Editor ( `  roles/dataproc.editor  ` role)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc#dataproc.editor)
-              - [BigQuery Studio User ( `  roles/bigquery.studioUser  ` role)](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser)
-              - [Service Account User (roles/iam.serviceAccountUser) role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) on the [session service account](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account) . This role contains the required `  iam.serviceAccounts.actAs  ` permission to impersonate the service account.
+              - [Managed Service for Apache Spark Editor ( `roles/dataproc.editor` role)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc#dataproc.editor)
+              - [BigQuery Studio User ( `roles/bigquery.studioUser` role)](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser)
+              - [Service Account User (roles/iam.serviceAccountUser) role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) on the [session service account](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account) . This role contains the required `iam.serviceAccounts.actAs` permission to impersonate the service account.
           - Service account credentials: If you want to specify service account credentials instead of user credentials for your notebook session, the [session service account](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account) must have the following role:
-              - [Dataproc Worker ( `  roles/dataproc.worker  ` role)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc#dataproc.worker)
+              - [Dataproc Worker ( `roles/dataproc.worker` role)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc#dataproc.worker)
       - Notebook runtime: Your notebook uses a default Vertex AI runtime unless you select a different runtime. If you want to define your own runtime, create the runtime from the [**Runtimes** page](https://console.cloud.google.com/vertex-ai/colab/runtimes) in the Google Cloud console. **Note** that when using the [NumPy library](https://numpy.org/) , use NumPy version 1.26, which is supported by Spark 3.5, in the notebook runtime.
 
 ## Pricing
@@ -40,7 +40,7 @@ You can use a BigQuery Studio Python notebook to create a [Spark Connect](https:
 You can create a Spark session in a BigQuery Studio Python notebook in the following ways:
 
   - Configure and create a single session in the notebook.
-  - Configure a Spark session in an [**interactive session template**](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates#create-dataproc-serverless-session-template) , then use the template to configure and create a session in the notebook. BigQuery provides a `  Query using Spark  ` feature that helps you start coding the templated session as explained under the **Templated Spark session** tab.
+  - Configure a Spark session in an [**interactive session template**](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates#create-dataproc-serverless-session-template) , then use the template to configure and create a session in the notebook. BigQuery provides a `Query using Spark` feature that helps you start coding the templated session as explained under the **Templated Spark session** tab.
 
 ### Single session
 
@@ -72,27 +72,27 @@ To create a Spark session in a new notebook, do the following:
 Replace the following:
 
   - APP\_NAME : An optional name for your session.
-  - **Optional Session settings:** You can add Dataproc API [`  Session  `](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/projects.locations.sessions#Session) settings to customize your session. Here are some examples:
-      - [`  RuntimeConfig  `](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/RuntimeConfig) :
+  - **Optional Session settings:** You can add Managed Service for Apache Spark API [`Session`](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/projects.locations.sessions#Session) settings to customize your session. Here are some examples:
+      - [`RuntimeConfig`](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/RuntimeConfig) :
         
         ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/session-runtime-config.png)
         
-          - `  session.runtime_config.properties={ spark.property.key1 : VALUE_1 ,..., spark.property.keyN : VALUE_N }  `
-          - `  session.runtime_config.container_image = path/to/container/image  `
+          - `session.runtime_config.properties={ spark.property.key1 : VALUE_1 ,..., spark.property.keyN : VALUE_N }`
+          - ` session.runtime_config.container_image = path/to/container/image  `
     
-      - [`  EnvironmentConfig  `](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/EnvironmentConfig#ExecutionConfig) :
+      - [`EnvironmentConfig`](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/EnvironmentConfig#ExecutionConfig) :
         
         ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/session-environment-execution-config.png)
         
           - session.environment\_config.execution\_config.subnetwork\_uri = " SUBNET\_NAME "
-          - `  session.environment_config.execution_config.ttl = {"seconds": VALUE }  `
-          - `  session.environment_config.execution_config.service_account = SERVICE_ACCOUNT  `
+          - `session.environment_config.execution_config.ttl = {"seconds": VALUE }`
+          - ` session.environment_config.execution_config.service_account = SERVICE_ACCOUNT  `
 
 ### Templated Spark session
 
-You can enter and run the code in a notebook cell to create a Spark session based on an existing [session template](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates#create-dataproc-serverless-session-template) . Any `  session  ` configuration settings you provide in your notebook code will override any of the same settings that are set in the session template.
+You can enter and run the code in a notebook cell to create a Spark session based on an existing [session template](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates#create-dataproc-serverless-session-template) . Any `session` configuration settings you provide in your notebook code will override any of the same settings that are set in the session template.
 
-To get started quickly, use the `  Query using Spark  ` template to pre-populate your notebook with Spark session template code:
+To get started quickly, use the `Query using Spark` template to pre-populate your notebook with Spark session template code:
 
 1.  In the tab bar of the editor pane, click the arrow\_drop\_down drop-down arrow next to the **+** sign, and then click **Notebook** .
     
@@ -132,9 +132,9 @@ To get started quickly, use the `  Query using Spark  ` template to pre-populate
 
   - SESSION\_TEMPLATE : The name of an existing [interactive session template](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates#create-dataproc-serverless-session-template) . Session configuration settings are obtained from the template. The template must also specify the following settings:
     
-      - Runtime version [`  2.3  ` +](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-2.3)
+      - Runtime version [`2.3` +](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-2.3)
     
-      - Notebook type: `  Spark Connect  `
+      - Notebook type: `Spark Connect`
         
         Example:
         
@@ -152,21 +152,21 @@ After you create a Spark session in your notebook, use the session to run Spark 
 
 ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/supports-spark-connect.png)
 
-**Spark Connect notebook direct writes** : Spark sessions in a BigQuery Studio notebook pre-configure the [Spark BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example) to make DIRECT data writes. The DIRECT write method uses the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which writes data directly into BigQuery; the INDIRECT write method, which is the default for Serverless for Apache Spark batches, writes data to an intermediate Cloud Storage bucket, then writes the data to BigQuery (for more information on INDIRECT writes, see [Read and write data from and to BigQuery](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example#read-and-write-data-from-and-to-bigquery) ).
+**Spark Connect notebook direct writes** : Spark sessions in a BigQuery Studio notebook pre-configure the [Spark BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example) to make DIRECT data writes. The DIRECT write method uses the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which writes data directly into BigQuery; the INDIRECT write method, which is the default for Managed Service for Apache Spark batches, writes data to an intermediate Cloud Storage bucket, then writes the data to BigQuery (for more information on INDIRECT writes, see [Read and write data from and to BigQuery](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example#read-and-write-data-from-and-to-bigquery) ).
 
-**Dataproc specific APIs:** Dataproc simplifies adding `  PyPI  ` packages dynamically to your Spark session by extending the `  addArtifacts  ` method. You can specify the list in [`  version-scheme  `](https://packaging.python.org/en/latest/specifications/version-specifiers/#examples-of-compliant-version-schemes) format, (similar to `  pip install  ` ). This instructs the Spark Connect server to install packages and their dependencies on all cluster nodes, making them available to workers for your UDFs.
+**Managed Service for Apache Spark specific APIs:** Managed Service for Apache Spark simplifies adding `PyPI` packages dynamically to your Spark session by extending the `addArtifacts` method. You can specify the list in [`version-scheme`](https://packaging.python.org/en/latest/specifications/version-specifiers/#examples-of-compliant-version-schemes) format, (similar to `pip install` ). This instructs the Spark Connect server to install packages and their dependencies on all cluster nodes, making them available to workers for your UDFs.
 
-Example that installs specified `  textdistance  ` version and latest compatible `  random2  ` libraries on the cluster to allow UDFs using `  textdistance  ` and `  random2  ` to run on worker nodes.
+Example that installs specified `textdistance` version and latest compatible `random2` libraries on the cluster to allow UDFs using `textdistance` and `random2` to run on worker nodes.
 
     spark.addArtifacts("textdistance==4.6.1", "random2", pypi=True)
 
 **Notebook code help:** The BigQuery Studio notebook provides code help when you hold the pointer over a class or method name, and provides code completion help as you input code.
 
-In the following example, entering `  DataprocSparkSession  ` and holding the pointer over this class name displays code completion and documentation help.
+In the following example, entering `DataprocSparkSession` and holding the pointer over this class name displays code completion and documentation help.
 
 ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/bq-notebook-code-tips.png)
 
-**Tip:** See [Dataproc Spark Connect Client](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python) on GitHub for information on [using `  DataprocSparkSession.builder  ` methods](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python?tab=readme-ov-file#builder-configuration) to configure Spark Connect sessions.
+**Tip:** See [Dataproc Spark Connect Client](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python) on GitHub for information on [using `DataprocSparkSession.builder` methods](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python?tab=readme-ov-file#builder-configuration) to configure Spark Connect sessions.
 
 ### BigQuery Studio notebook PySpark examples
 
@@ -177,7 +177,7 @@ This section provides BigQuery Studio Python notebook examples with PySpark code
 
 ### Wordcount
 
-The following PySpark example creates a Spark session, then counts word occurrences in a public `  bigquery-public-data.samples.shakespeare  ` dataset.
+The following PySpark example creates a Spark session, then counts word occurrences in a public `bigquery-public-data.samples.shakespeare` dataset.
 
     # Basic wordcount example
     from google.cloud.dataproc_spark_connect import DataprocSparkSession
@@ -239,7 +239,7 @@ The cell output lists a sample of the wordcount output. To see session details i
 
 ## Run PySpark code to create an Iceberg table with BigLake metastore metadata
 
-The following example code creates a `  sample_iceberg_table  ` with table metadata stored in BigLake metastore, and then queries the table.
+The following example code creates a `sample_iceberg_table` with table metadata stored in BigLake metastore, and then queries the table.
 
     from google.cloud.dataproc_spark_connect import DataprocSparkSession
     from google.cloud.dataproc_v1 import Session
@@ -286,13 +286,13 @@ The following example code creates a `  sample_iceberg_table  ` with table metad
 Notes:
 
   - PROJECT\_ID : Your project ID, which is listed in the **Project info** section of the [Google Cloud console dashboard](https://console.cloud.google.com/home/dashboard) .
-  - REGION and SUBNET\_NAME : Specify the [Compute Engine region](https://docs.cloud.google.com/compute/docs/regions-zones#available) and the name of a subnet in the session region. Serverless for Apache Spark enables [Private Google Access (PGA)](https://docs.cloud.google.com/vpc/docs/private-google-access) on the specified subnet.
-  - LOCATION : The default `  BigQuery_metastore_config.location  ` and `  spark.sql.catalog.{catalog}.gcp_location  ` is `  US  ` , but you can choose any [supported BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) .
+  - REGION and SUBNET\_NAME : Specify the [Compute Engine region](https://docs.cloud.google.com/compute/docs/regions-zones#available) and the name of a subnet in the session region. Managed Service for Apache Spark enables [Private Google Access (PGA)](https://docs.cloud.google.com/vpc/docs/private-google-access) on the specified subnet.
+  - LOCATION : The default `BigQuery_metastore_config.location` and `spark.sql.catalog.{catalog}.gcp_location` is `US` , but you can choose any [supported BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) .
   - BUCKET and WAREHOUSE\_DIRECTORY : The Cloud Storage bucket and folder used for Iceberg warehouse directory.
-  - CATALOG and NAMESPACE : The Iceberg catalog name and namespace combine to identify the Iceberg table ( `  catalog.namespace.table_name  ` ).
+  - CATALOG and NAMESPACE : The Iceberg catalog name and namespace combine to identify the Iceberg table ( `catalog.namespace.table_name` ).
   - APP\_NAME : An optional name for your session.
 
-The cell output lists the `  sample_iceberg_table  ` with the added column, and displays a link to the **Interactive Session Details** page in the Google Cloud console. You can click **View Spark UI** on the session details page to monitor your Spark session.
+The cell output lists the `sample_iceberg_table` with the added column, and displays a link to the **Interactive Session Details** page in the Google Cloud console. You can click **View Spark UI** on the session details page to monitor your Spark session.
 
 ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/view-spark-ui.png)
 
@@ -316,20 +316,20 @@ Perform the following steps to check Iceberg table details in BigQuery:
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the project resources pane, click your project, then click your namespace to list the `  sample_iceberg_table  ` table. Click the **Details** table to view the **Open Catalog Table Configuration** information.
+2.  In the project resources pane, click your project, then click your namespace to list the `sample_iceberg_table` table. Click the **Details** table to view the **Open Catalog Table Configuration** information.
     
-    The input and output formats are the standard Hadoop `  InputFormat  ` and `  OutputFormat  ` class formats that Iceberg uses.
+    The input and output formats are the standard Hadoop `InputFormat` and `OutputFormat` class formats that Iceberg uses.
     
     ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/iceberg-in-bq.png)
 
 ### Other examples
 
-Create a Spark `  DataFrame  ` ( `  sdf  ` ) from a Pandas DataFrame ( `  df  ` ).
+Create a Spark `DataFrame` ( `sdf` ) from a Pandas DataFrame ( `df` ).
 
     sdf = spark.createDataFrame(df)
     sdf.show()
 
-Run aggregations on Spark `  DataFrames  ` .
+Run aggregations on Spark `DataFrames` .
 
     from pyspark.sql import functions as f
     
@@ -356,9 +356,9 @@ You can ask Gemini Code Assist to generate PySpark code in your notebook. Gemini
 
 To generate Gemini Code Assist code in your notebook, do the following:
 
-1.  Insert a new code cell by clicking **+ Code** in the toolbar. The new code cell displays `  Start coding or generate with AI  ` . Click **generate** .
+1.  Insert a new code cell by clicking **+ Code** in the toolbar. The new code cell displays `Start coding or generate with AI` . Click **generate** .
 
-2.  In the Generate editor, enter a natural language prompt, and then click `  enter  ` . **Make sure to include the keyword `  spark  ` or `  pyspark  ` in your prompt.**
+2.  In the Generate editor, enter a natural language prompt, and then click `enter` . **Make sure to include the keyword `spark` or `pyspark` in your prompt.**
     
     Sample prompt:
     
@@ -373,13 +373,13 @@ To generate Gemini Code Assist code in your notebook, do the following:
 
   - To let Gemini Code Assist fetch relevant tables and schemas, turn on [Data Catalog sync](https://docs.cloud.google.com/dataproc-metastore/docs/data-catalog-sync) for Dataproc Metastore instances.
 
-  - Make sure your user account has access to Data Catalog the query tables. To do this, assign the [`  DataCatalog.Viewer  ` role](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) .
+  - Make sure your user account has access to Data Catalog the query tables. To do this, assign the [`DataCatalog.Viewer` role](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) .
 
 ## End the Spark session
 
 You can take any of the following actions to stop your Spark Connect session in your BigQuery Studio notebook:
 
-  - Run `  spark.stop()  ` in a notebook cell.
+  - Run `spark.stop()` in a notebook cell.
   - Terminate the runtime in the notebook:
     1.  Click the runtime selector, then click **Manage sessions** .
         
@@ -395,7 +395,7 @@ You can orchestrate BigQuery Studio notebook code in the following ways:
 
   - Schedule notebook code from the Google Cloud console ( [notebook pricing](https://cloud.google.com/bigquery/pricing#external_services) applies).
 
-  - Run notebook code as a batch workload ( [Serverless for Apache Spark pricing](https://cloud.google.com/dataproc-serverless/pricing) applies).
+  - Run notebook code as a batch workload ( [Managed Service for Apache Spark pricing](https://cloud.google.com/dataproc-serverless/pricing) applies).
 
 ### Schedule notebook code from the Google Cloud console
 
@@ -420,21 +420,21 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
         
         ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/download-pyspark-notebook.png)
 
-2.  Generate `  requirements.txt  ` .
+2.  Generate `requirements.txt` .
     
-    1.  Install `  pipreqs  ` in the directory where you saved your `  .py  ` file.
+    1.  Install `pipreqs` in the directory where you saved your `.py` file.
         
             pip install pipreqs
     
-    2.  Run `  pipreqs  ` to generate `  requirements.txt  ` .
+    2.  Run `pipreqs` to generate `requirements.txt` .
         
             pipreqs filename.py
     
-    3.  Use the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud) to copy the local `  requirements.txt  ` file to a bucket in Cloud Storage.
+    3.  Use the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud) to copy the local `requirements.txt` file to a bucket in Cloud Storage.
         
             gcloud storage cp requirements.txt gs://BUCKET/
 
-3.  Update Spark session code by editing the downloaded `  .py  ` file.
+3.  Update Spark session code by editing the downloaded `.py` file.
     
     1.  Remove or comment out any shell script commands.
     
@@ -446,7 +446,7 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
             
                 session.environment_config.execution_config.subnetwork_uri = "{subnet_name}"
         
-          - When you [run your batch workload](https://docs.cloud.google.com/bigquery/docs/use-spark#run-the-batch-workload) , use the `  --subnet  ` flag to specify the subnet.
+          - When you [run your batch workload](https://docs.cloud.google.com/bigquery/docs/use-spark#run-the-batch-workload) , use the `--subnet` flag to specify the subnet.
             
                 gcloud dataproc batches submit pyspark \
                 --subnet=SUBNET_NAME
@@ -477,7 +477,7 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
     
     1.  See [Submit the Spark batch workload](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/spark-batch#submit_a_spark_batch_workload) for instructions.
         
-          - Make sure to include the --deps-bucket flag to point to the Cloud Storage bucket that contains your `  requirements.txt  ` file.
+          - Make sure to include the --deps-bucket flag to point to the Cloud Storage bucket that contains your `requirements.txt` file.
             
             Example:
         
@@ -492,16 +492,16 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
         
           - FILENAME : The name of your downloaded and edited notebook code file.
           - REGION : The Compute Engine [region](https://docs.cloud.google.com/compute/docs/regions-zones#available) where your cluster is located.
-          - BUCKET The name of the Cloud Storage bucket that contains your `  requirements.txt  ` file.
-          - `  --version  ` : [spark runtime version 2.3](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-2.3) is selected to run the batch workload.
+          - BUCKET The name of the Cloud Storage bucket that contains your `requirements.txt` file.
+          - `--version` : [spark runtime version 2.3](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-2.3) is selected to run the batch workload.
 
 5.  Commit your code.
     
-    1.  After testing your batch workload code, you can commit the `  .ipynb  ` or `  .py  ` file to your repository using your `  git  ` client, such as GitHub, GitLab, or Bitbucket, as part of your CI/CD pipeline.
+    1.  After testing your batch workload code, you can commit the `.ipynb` or `.py` file to your repository using your `git` client, such as GitHub, GitLab, or Bitbucket, as part of your CI/CD pipeline.
 
 6.  Schedule your batch workload with Cloud Composer.
     
-    1.  See [Run Serverless for Apache Spark workloads with Cloud Composer](https://docs.cloud.google.com/composer/docs/composer-2/run-dataproc-workloads) for instructions.
+    1.  See [Run Managed Service for Apache Spark workloads with Cloud Composer](https://docs.cloud.google.com/composer/docs/composer-2/run-dataproc-workloads) for instructions.
 
 ## Troubleshoot notebook errors
 
@@ -511,12 +511,12 @@ When you encounter a notebook code error, navigating to the last Spark job in th
 
 ### Known issues and solutions
 
-**Error** : A [Notebook runtime](https://console.cloud.google.com/vertex-ai/colab/runtimes) created with Python version `  3.10  ` can cause a `  PYTHON_VERSION_MISMATCH  ` error when it attempts to connect to the Spark session.
+**Error** : A [Notebook runtime](https://console.cloud.google.com/vertex-ai/colab/runtimes) created with Python version `3.10` can cause a `PYTHON_VERSION_MISMATCH` error when it attempts to connect to the Spark session.
 
-**Solution** : Recreate the runtime with Python version `  3.11  ` .
+**Solution** : Recreate the runtime with Python version `3.11` .
 
 ## What's next
 
   - YouTube video demo: [Unleashing the power of Apache Spark integrated with BigQuery](https://www.youtube.com/watch?v=DIZn6Nuur7k) .
-  - [Use BigLake metastore with Dataproc](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc)
-  - [Use BigLake metastore with Serverless for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless)
+  - [Use BigLake metastore with Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc)
+  - [Use BigLake metastore with Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless)

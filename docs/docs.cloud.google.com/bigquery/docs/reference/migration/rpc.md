@@ -2,9 +2,9 @@ The migration service, exposing apis for migration jobs operations, and agent ma
 
 ## Service: bigquerymigration.googleapis.com
 
-The Service name `  bigquerymigration.googleapis.com  ` is needed to create RPC client stubs.
+The Service name `bigquerymigration.googleapis.com` is needed to create RPC client stubs.
 
-## `         google.cloud.bigquery.migration.v2.MigrationService       `
+## `        google.cloud.bigquery.migration.v2.MigrationService       `
 
 Methods
 
@@ -36,7 +36,7 @@ Lists previously created migration workflow.
 
 Starts a previously created migration workflow.
 
-## `         google.cloud.bigquery.migration.v2alpha.MigrationService       `
+## `        google.cloud.bigquery.migration.v2alpha.MigrationService       `
 
 Methods
 

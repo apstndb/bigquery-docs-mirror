@@ -12,7 +12,7 @@ Returns information about all transfer configs owned by a project in the specifi
 
 ### HTTP request
 
-`  GET https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/locations/*}/transferConfigs  `
+`GET https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/locations/*}/transferConfigs`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,41 +20,41 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The BigQuery project id for which transfer configs should be returned. If you are using the regionless method, the location must be `  US  ` and `  parent  ` should be in the following form:
+Required. The BigQuery project id for which transfer configs should be returned. If you are using the regionless method, the location must be `US` and `parent` should be in the following form:
 
   - \`projects/{projectId}
 
-If you are using the regionalized method, `  parent  ` should be in the following form:
+If you are using the regionalized method, `parent` should be in the following form:
 
-  - `  projects/{projectId}/locations/{locationId}  `
+  - `projects/{projectId}/locations/{locationId}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.transfers.get  `
+  - `bigquery.transfers.get`
 
 ### Query parameters
 
 Parameters
 
-`  dataSourceIds[]  `
+`dataSourceIds[]`
 
-`  string  `
+`string`
 
 When specified, only configurations of requested data sources are returned.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
-Pagination token, which can be used to request a specific page of `  ListTransfersRequest  ` list results. For multiple-page results, `  ListTransfersResponse  ` outputs a `  next_page  ` token, which can be used as the `  pageToken  ` value to request the next page of list results.
+Pagination token, which can be used to request a specific page of `ListTransfersRequest` list results. For multiple-page results, `ListTransfersResponse` outputs a `next_page` token, which can be used as the `pageToken` value to request the next page of list results.
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 Page size. The default page size is the maximum value of 1000 results.
 
@@ -70,6 +70,6 @@ If successful, the response body contains an instance of `  ListTransferConfigsR
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

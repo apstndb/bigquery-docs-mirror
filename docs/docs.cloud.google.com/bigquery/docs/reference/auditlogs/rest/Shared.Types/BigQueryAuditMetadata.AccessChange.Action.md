@@ -2,14 +2,14 @@ The type of action performed on an access.
 
 Enums
 
-`  ACTION_UNSPECIFIED  `
+`ACTION_UNSPECIFIED`
 
 Unspecified.
 
-`  ADD  `
+`ADD`
 
 Addition of an access.
 
-`  REMOVE  `
+`REMOVE`
 
 Removal of an access.

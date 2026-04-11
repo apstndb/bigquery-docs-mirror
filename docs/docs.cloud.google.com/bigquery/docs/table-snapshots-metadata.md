@@ -1,6 +1,6 @@
 # View table snapshot metadata
 
-This document describes how to view the metadata for a BigQuery table snapshot in the Google Cloud console, by querying the [`  TABLE_SNAPSHOTS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) view of the `  INFORMATION_SCHEMA  ` table, by using the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command, or by calling the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API. It is intended for users who are familiar with BigQuery [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+This document describes how to view the metadata for a BigQuery table snapshot in the Google Cloud console, by querying the [`TABLE_SNAPSHOTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) view of the `INFORMATION_SCHEMA` table, by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command, or by calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API. It is intended for users who are familiar with BigQuery [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
@@ -10,9 +10,9 @@ This section describes the [Identity and Access Management (IAM) permission](htt
 
 To view a table snapshot's metadata, you need the following permission:
 
-| **Permission**                       | **Resource**       |
-| ------------------------------------ | ------------------ |
-| `        bigquery.tables.get       ` | The table snapshot |
+| **Permission**        | **Resource**       |
+| --------------------- | ------------------ |
+| `bigquery.tables.get` | The table snapshot |
 
 ### Roles
 
@@ -33,11 +33,11 @@ The predefined BigQuery roles that provide the required permission are as follow
 <tr class="odd">
 <td>Any of the following:<br />
 <br />
-<code dir="ltr" translate="no">       bigquery.metadataViewer      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataViewer      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataEditor      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataOwner      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<code dir="ltr" translate="no">bigquery.metadataViewer</code><br />
+<code dir="ltr" translate="no">bigquery.dataViewer</code><br />
+<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
+<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code></td>
 <td>The table snapshot</td>
 </tr>
 </tbody>
@@ -47,8 +47,8 @@ The predefined BigQuery roles that provide the required permission are as follow
 
 The metadata for a table snapshot is similar to the metadata for a standard table, with the following differences:
 
-  - An additional `  baseTableReference  ` field identifies the base table that the snapshot was taken from.
-  - The `  type  ` field has the value `  SNAPSHOT  ` .
+  - An additional `baseTableReference` field identifies the base table that the snapshot was taken from.
+  - The `type` field has the value `SNAPSHOT` .
 
 You can view the metadata for a table snapshot by using one of the following options:
 
@@ -76,7 +76,7 @@ You can view the metadata for a table snapshot by using one of the following opt
 
 ### SQL
 
-To see metadata for a table snapshot, query the [`  INFORMATION_SCHEMA.TABLE_SNAPSHOTS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) :
+To see metadata for a table snapshot, query the [`INFORMATION_SCHEMA.TABLE_SNAPSHOTS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -146,13 +146,13 @@ The output is similar to the following:
 
 ### API
 
-Call the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method with the following parameters:
+Call the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method with the following parameters:
 
-| **Parameter**                  | **Value**                                                 |
-| ------------------------------ | --------------------------------------------------------- |
-| `          projectId         ` | The project ID of the project that contains the snapshot. |
-| `          datasetId         ` | The name of the dataset that contains the snapshot.       |
-| `          tableId         `   | The name of the snapshot.                                 |
+| **Parameter** | **Value**                                                 |
+| ------------- | --------------------------------------------------------- |
+| `projectId`   | The project ID of the project that contains the snapshot. |
+| `datasetId`   | The name of the dataset that contains the snapshot.       |
+| `tableId`     | The name of the snapshot.                                 |
 
 The response body is similar to the following:
 

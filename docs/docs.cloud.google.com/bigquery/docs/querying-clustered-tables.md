@@ -11,8 +11,8 @@ When you submit a query that contains a filter on a clustered column, BigQuery u
 You can query clustered tables by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq query  ` command
-  - Calling the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and configuring a [query job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery)
+  - Using the bq command-line tool's `bq query` command
+  - Calling the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and configuring a [query job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery)
   - Using the client libraries
 
 You can only use [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) with clustered tables.
@@ -174,22 +174,22 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Required permissions
 
-To run a query [job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) , you need the `  bigquery.jobs.create  ` Identity and Access Management (IAM) permission on the project that runs the query job.
+To run a query [job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) , you need the `bigquery.jobs.create` Identity and Access Management (IAM) permission on the project that runs the query job.
 
 Each of the following predefined IAM roles includes the permissions that you need to run a query job:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.jobUser  `
-  - `  roles/bigquery.user  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.jobUser`
+  - `roles/bigquery.user`
 
-You also need the `  bigquery.tables.getData  ` permission on all tables and views that your query references. In addition, when querying a view you need this permission on all underlying tables and views. However, if you are using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
+You also need the `bigquery.tables.getData` permission on all tables and views that your query references. In addition, when querying a view you need this permission on all underlying tables and views. However, if you are using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
 
 Each of the following predefined IAM roles includes the permission that you need on all tables and views that the query references:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataViewer  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataViewer`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://cloud.google.com/bigquery/docs/access-control) .
 
@@ -197,7 +197,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 To get the best performance from queries against clustered tables, use the following best practices.
 
-For context, the sample table used in the best practice examples is a clustered table that is created by using a DDL statement. The DDL statement creates a table named `  ClusteredSalesData  ` . The table is clustered by the following columns: `  customer_id  ` , `  product_id  ` , `  order_id  ` , in that sort order.
+For context, the sample table used in the best practice examples is a clustered table that is created by using a DDL statement. The DDL statement creates a table named `ClusteredSalesData` . The table is clustered by the following columns: `customer_id` , `product_id` , `order_id` , in that sort order.
 
     CREATE TABLE
       `mydataset.ClusteredSalesData`
@@ -214,9 +214,9 @@ For context, the sample table used in the best practice examples is a clustered 
 
 ### Filter clustered columns by sort order
 
-When you specify a filter, use expressions that filter on the clustered columns in sort order. Sort order is the column order given in the `  CLUSTER BY  ` clause. To get the benefits of clustering, include one or more of the clustered columns in left-to-right sort order, starting with the first column. In most cases, the first clustering column is the most effective in block pruning, then the second column, then the third. You can still use the second or third column alone in the query, but block pruning probably won't be as effective. The ordering of the column names inside the filter expression doesn't affect performance.
+When you specify a filter, use expressions that filter on the clustered columns in sort order. Sort order is the column order given in the `CLUSTER BY` clause. To get the benefits of clustering, include one or more of the clustered columns in left-to-right sort order, starting with the first column. In most cases, the first clustering column is the most effective in block pruning, then the second column, then the third. You can still use the second or third column alone in the query, but block pruning probably won't be as effective. The ordering of the column names inside the filter expression doesn't affect performance.
 
-The following example queries the `  ClusteredSalesData  ` clustered table that was created in the preceding example. The query includes a filter expression that filters on `  customer_id  ` and then on `  product_id  ` . This query optimizes performance by filtering the clustered columns in *sort order* —the column order given in the `  CLUSTER BY  ` clause.
+The following example queries the `ClusteredSalesData` clustered table that was created in the preceding example. The query includes a filter expression that filters on `customer_id` and then on `product_id` . This query optimizes performance by filtering the clustered columns in *sort order* —the column order given in the `CLUSTER BY` clause.
 
     SELECT
       SUM(totalSale)
@@ -226,7 +226,7 @@ The following example queries the `  ClusteredSalesData  ` clustered table that 
       customer_id = 10000
       AND product_id LIKE 'gcp_analytics%'
 
-The following query does not filter the clustered columns in sort order. As a result, the performance of the query is not optimal. This query filters on `  product_id  ` then on `  order_id  ` (skipping `  customer_id  ` ).
+The following query does not filter the clustered columns in sort order. As a result, the performance of the query is not optimal. This query filters on `product_id` then on `order_id` (skipping `customer_id` ).
 
     SELECT
       SUM(totalSale)
@@ -240,7 +240,7 @@ The following query does not filter the clustered columns in sort order. As a re
 
 If you use a clustered column in a complex filter expression, the performance of the query is not optimized because block pruning cannot be applied.
 
-For example, the following query won't prune blocks because a clustered column— `  customer_id  ` —is used in a function in the filter expression.
+For example, the following query won't prune blocks because a clustered column— `customer_id` —is used in a function in the filter expression.
 
     SELECT
       SUM(totalSale)
@@ -249,7 +249,7 @@ For example, the following query won't prune blocks because a clustered column�
     WHERE
       CAST(customer_id AS STRING) = "10000"
 
-To optimize query performance by pruning blocks, use simple filter expressions like the following. In this example, a simple filter is applied to the clustered column— `  customer_id  ` .
+To optimize query performance by pruning blocks, use simple filter expressions like the following. In this example, a simple filter is applied to the clustered column— `customer_id` .
 
     SELECT
       SUM(totalSale)
@@ -262,7 +262,7 @@ To optimize query performance by pruning blocks, use simple filter expressions l
 
 If a filter expression compares a clustered column to another column (either a clustered column or a non-clustered column), the performance of the query is not optimized because block pruning cannot be applied.
 
-The following query does not prune blocks because the filter expression compares a clustered column— `  customer_id  ` to another column— `  order_id  ` .
+The following query does not prune blocks because the filter expression compares a clustered column— `customer_id` to another column— `order_id` .
 
     SELECT
       SUM(totalSale)

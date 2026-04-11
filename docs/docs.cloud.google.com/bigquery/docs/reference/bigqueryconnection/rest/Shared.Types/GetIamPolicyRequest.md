@@ -2,7 +2,7 @@
   - [GetPolicyOptions](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/GetIamPolicyRequest#GetPolicyOptions)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/GetIamPolicyRequest#GetPolicyOptions.SCHEMA_REPRESENTATION)
 
-Request message for `  GetIamPolicy  ` method.
+Request message for `GetIamPolicy` method.
 
 <table>
 <colgroup>
@@ -15,29 +15,24 @@ Request message for `  GetIamPolicy  ` method.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: string,
-  &quot;options&quot;: {
-    object (GetPolicyOptions)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: string,&quot;options&quot;: {object (GetPolicyOptions)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  string  `
+`string`
 
 REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
 
-`  options  `
+`options`
 
-`  object ( GetPolicyOptions  ` )
+` object ( GetPolicyOptions  ` )
 
-OPTIONAL: A `  GetPolicyOptions  ` object for specifying options to `  GetIamPolicy  ` .
+OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy` .
 
 ## GetPolicyOptions
 
@@ -63,9 +58,9 @@ Encapsulates settings provided to GetIamPolicy.
 
 Fields
 
-`  requestedPolicyVersion  `
+`requestedPolicyVersion`
 
-`  integer  `
+`integer`
 
 Optional. The maximum policy version that will be used to format the policy.
 

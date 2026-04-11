@@ -10,11 +10,11 @@ As a data analyst, you can query relational data in SAP Datasphere from BigQuery
 
 BigQuery SAP Datasphere federation lets BigQuery query data residing in SAP Datasphere in real time, without copying or moving data.
 
-To run a SQL query in SAP Datasphere, specify that SQL query within BigQuery in a `  EXTERNAL_QUERY  ` function. The results are then transferred from SAP Datasphere to BigQuery.
+To run a SQL query in SAP Datasphere, specify that SQL query within BigQuery in a `EXTERNAL_QUERY` function. The results are then transferred from SAP Datasphere to BigQuery.
 
 ## Limitations
 
-  - You can only query relational views that are [exposed for consumption](https://help.sap.com/docs/SAP_DATASPHERE/43509d67b8b84e66a30851e832f66911/d7d56284bb5148c887ac4054689bfbca.html?locale=en-US) . Other objects in SAP Datasphere are not accessible to the query federated through `  EXTERNAL_QUERY  ` .
+  - You can only query relational views that are [exposed for consumption](https://help.sap.com/docs/SAP_DATASPHERE/43509d67b8b84e66a30851e832f66911/d7d56284bb5148c887ac4054689bfbca.html?locale=en-US) . Other objects in SAP Datasphere are not accessible to the query federated through `EXTERNAL_QUERY` .
   - The federated query latency might be noticeably higher than the same query if it was executed directly in SAP Datasphere.
   - The first query that uses SAP Datasphere connection in a given project might take more than a minute to run.
   - No additional [SQL pushdowns](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#sql_pushdowns) are supported for SAP Datasphere.
@@ -27,7 +27,7 @@ Ensure that your BigQuery administrator has [created a SAP Datasphere connection
 
 ### Required roles
 
-To get the permissions that you need to query SAP Datasphere, ask your administrator to grant you the [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to query SAP Datasphere, ask your administrator to grant you the [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -35,7 +35,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 To send a federated query to SAP Datasphere from a GoogleSQL query, use the [EXTERNAL\_QUERY function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) .
 
-The following example is a federated query that joins a table in SAP Datasphere named `  ORDERS  ` and a table in BigQuery named `  mydataset.customers  ` .
+The following example is a federated query that joins a table in SAP Datasphere named `ORDERS` and a table in BigQuery named `mydataset.customers` .
 
     SELECT c.customer_id, c.name, rq.first_order_date
     FROM mydataset.customers AS c
@@ -49,7 +49,7 @@ The following example is a federated query that joins a table in SAP Datasphere 
 
 ## View a SAP Datasphere table schema
 
-The following examples use the [EXTERNAL\_QUERY function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) to retrieve database metadata from the `  SYS  ` schema in SAP Datasphere.
+The following examples use the [EXTERNAL\_QUERY function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) to retrieve database metadata from the `SYS` schema in SAP Datasphere.
 
     -- List all views in a schema.
     SELECT * FROM EXTERNAL_QUERY(
@@ -74,7 +74,7 @@ The cost of running a federated query is based on three factors:
   - The bandwidth cost of transferring the query results from SAP Datasphere to BigQuery.
   - The compute cost of executing the query in BigQuery.
 
-Any SAP Datasphere related costs depend on the type of SAP service you use. To limit the bandwidth cost, we recommend that you write the query in the `  EXTERNAL_QUERY  ` so that it excludes all columns and rows that are not needed to compute the final result.
+Any SAP Datasphere related costs depend on the type of SAP service you use. To limit the bandwidth cost, we recommend that you write the query in the `EXTERNAL_QUERY` so that it excludes all columns and rows that are not needed to compute the final result.
 
 There is no additional cost for running federated queries in BigQuery. For more information about BigQuery pricing, see [Pricing](https://cloud.google.com/bigquery/pricing) .
 

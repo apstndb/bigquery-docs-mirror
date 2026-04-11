@@ -2,14 +2,14 @@ Describes how the dataset was created.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  CREATE  `
+`CREATE`
 
 Dataset was created using the datasets.create API.
 
-`  QUERY  `
+`QUERY`
 
 Dataset was created using a query job, e.g., CREATE SCHEMA statement.

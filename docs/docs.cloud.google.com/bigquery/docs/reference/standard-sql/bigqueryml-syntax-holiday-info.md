@@ -1,6 +1,6 @@
 # The ML.HOLIDAY\_INFO function
 
-This document describes the `  ML.HOLIDAY_INFO  ` function, which you can use to return the list of holidays being modeled by an [`  ARIMA_PLUS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) or [`  ARIMA_PLUS_XREG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) time series forecasting model.
+This document describes the `ML.HOLIDAY_INFO` function, which you can use to return the list of holidays being modeled by an [`ARIMA_PLUS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) or [`ARIMA_PLUS_XREG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) time series forecasting model.
 
 ## Syntax
 
@@ -12,7 +12,7 @@ ML.HOLIDAY_INFO(
 
 ### Arguments
 
-`  ML.HOLIDAY_INFO  ` takes the following arguments:
+`ML.HOLIDAY_INFO` takes the following arguments:
 
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET  ` : the BigQuery dataset that contains the model.
@@ -20,13 +20,13 @@ ML.HOLIDAY_INFO(
 
 ## Output
 
-`  ML.HOLIDAY_INFO  ` returns the following columns:
+`ML.HOLIDAY_INFO` returns the following columns:
 
-  - `  region  ` : a `  STRING  ` value that identifies the holiday region.
-  - `  holiday_name  ` : a `  STRING  ` value that identifies the holiday.
-  - `  primary_date  ` : a `  DATE  ` value that identifies the date the holiday falls on.
-  - `  preholiday_days  ` : an `  INT64  ` value that identifies the start of the holiday window around the holiday that was taken into account when modeling.
-  - `  postholiday_days  ` : an `  INT64  ` value that identifies the end of the holiday window around the holiday that was taken into account when modeling.
+  - `region` : a `STRING` value that identifies the holiday region.
+  - `holiday_name` : a `STRING` value that identifies the holiday.
+  - `primary_date` : a `DATE` value that identifies the date the holiday falls on.
+  - `preholiday_days` : an `INT64` value that identifies the start of the holiday window around the holiday that was taken into account when modeling.
+  - `postholiday_days` : an `INT64` value that identifies the end of the holiday window around the holiday that was taken into account when modeling.
 
 ## Example
 
@@ -55,7 +55,7 @@ The output looks similar to the following:
 
 ## Limitation
 
-  - Results returned by `  ML.HOLIDAY_INFO  ` only indicate the holiday information used during model fitting. They don't necessarily indicate the detection of a holiday effect. Use [`  ML.EXPLAIN_FORECAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) instead for actual holiday effect results.
+  - Results returned by `ML.HOLIDAY_INFO` only indicate the holiday information used during model fitting. They don't necessarily indicate the detection of a holiday effect. Use [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) instead for actual holiday effect results.
 
 ## What's next
 

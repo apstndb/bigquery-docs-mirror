@@ -8,7 +8,7 @@ Some Gemini in BigQuery features are available at no additional charge, while ot
 
 ## Enable required APIs and grant roles
 
-To use Gemini in BigQuery, you must enable required APIs and grant required Identity and Access Management (IAM) roles. A service administrator or project owner with the [`  serviceusage.services.enable  ` IAM permission](https://docs.cloud.google.com/service-usage/docs/access-control#predefined_roles) usually performs this step. For a list of APIs and services used by BigQuery, see [Manage BigQuery API dependencies](https://docs.cloud.google.com/bigquery/docs/service-dependencies) .
+To use Gemini in BigQuery, you must enable required APIs and grant required Identity and Access Management (IAM) roles. A service administrator or project owner with the [`serviceusage.services.enable` IAM permission](https://docs.cloud.google.com/service-usage/docs/access-control#predefined_roles) usually performs this step. For a list of APIs and services used by BigQuery, see [Manage BigQuery API dependencies](https://docs.cloud.google.com/bigquery/docs/service-dependencies) .
 
 1.  In the the Google Cloud console, with your project selected, go to the **BigQuery Studio** page.
     
@@ -61,7 +61,7 @@ Preview features that require Gemini in BigQuery sign-up include the following:
 
 ## Turn off Gemini in BigQuery
 
-To prevent a user from using Gemini in BigQuery features, revoke the specific `  cloudaicompanion  ` IAM permissions that grant access to these capabilities, as detailed in [Enable necessary APIs and grant roles](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#enable-api) .
+To prevent a user from using Gemini in BigQuery features, revoke the specific `cloudaicompanion` IAM permissions that grant access to these capabilities, as detailed in [Enable necessary APIs and grant roles](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#enable-api) .
 
 To turn off specific Gemini in BigQuery features:
 

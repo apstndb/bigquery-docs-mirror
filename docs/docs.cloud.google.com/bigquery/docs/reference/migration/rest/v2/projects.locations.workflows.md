@@ -77,60 +77,48 @@ A migration workflow which specifies what needs to be done for an EDW migration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;tasks&quot;: {
-    string: {
-      object (MigrationTask)
-    },
-    ...
-  },
-  &quot;state&quot;: enum (State),
-  &quot;createTime&quot;: string,
-  &quot;lastUpdateTime&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;tasks&quot;: {string: {object (MigrationTask)},...},&quot;state&quot;: enum (State),&quot;createTime&quot;: string,&quot;lastUpdateTime&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Output only. Immutable. Identifier. The unique identifier for the migration workflow. The ID is server-generated.
 
-Example: `  projects/123/locations/us/workflows/345  `
+Example: `projects/123/locations/us/workflows/345`
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 The display name of the workflow. This can be set to give a workflow a descriptive name. There is no guarantee or enforcement of uniqueness.
 
-`  tasks  `
+`tasks`
 
-`  map (key: string, value: object ( MigrationTask  ` ))
+` map (key: string, value: object ( MigrationTask  ` ))
 
 The tasks in a workflow in a named map. The name (i.e. key) has no meaning and is merely a convenient way to address a specific task in a workflow.
 
-`  state  `
+`state`
 
-`  enum ( State  ` )
+` enum ( State  ` )
 
 Output only. That status of the workflow.
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Time when the workflow was created.
 
-`  lastUpdateTime  `
+`lastUpdateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Time when the workflow was last updated.
 
@@ -149,139 +137,102 @@ A single task for a migration which has details about the configuration of the t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;id&quot;: string,
-  &quot;type&quot;: string,
-  &quot;state&quot;: enum (State),
-  &quot;processingError&quot;: {
-    object (ErrorInfo)
-  },
-  &quot;createTime&quot;: string,
-  &quot;lastUpdateTime&quot;: string,
-  &quot;resourceErrorDetails&quot;: [
-    {
-      object (ResourceErrorDetail)
-    }
-  ],
-  &quot;resourceErrorCount&quot;: integer,
-  &quot;metrics&quot;: [
-    {
-      object (TimeSeries)
-    }
-  ],
-  &quot;taskResult&quot;: {
-    object (MigrationTaskResult)
-  },
-  &quot;totalProcessingErrorCount&quot;: integer,
-  &quot;totalResourceErrorCount&quot;: integer,
-
-  // Union field task_details can be only one of the following:
-  &quot;assessmentTaskDetails&quot;: {
-    object (AssessmentTaskDetails)
-  },
-  &quot;translationConfigDetails&quot;: {
-    object (TranslationConfigDetails)
-  },
-  &quot;translationDetails&quot;: {
-    object (TranslationDetails)
-  }
-  // End of list of possible types for union field task_details.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;id&quot;: string,&quot;type&quot;: string,&quot;state&quot;: enum (State),&quot;processingError&quot;: {object (ErrorInfo)},&quot;createTime&quot;: string,&quot;lastUpdateTime&quot;: string,&quot;resourceErrorDetails&quot;: [{object (ResourceErrorDetail)}],&quot;resourceErrorCount&quot;: integer,&quot;metrics&quot;: [{object (TimeSeries)}],&quot;taskResult&quot;: {object (MigrationTaskResult)},&quot;totalProcessingErrorCount&quot;: integer,&quot;totalResourceErrorCount&quot;: integer,// Union field task_details can be only one of the following:&quot;assessmentTaskDetails&quot;: {object (AssessmentTaskDetails)},&quot;translationConfigDetails&quot;: {object (TranslationConfigDetails)},&quot;translationDetails&quot;: {object (TranslationDetails)}// End of list of possible types for union field task_details.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  id  `
+`id`
 
-`  string  `
+`string`
 
 Output only. Immutable. The unique identifier for the migration task. The ID is server-generated.
 
-`  type  `
+`type`
 
-`  string  `
+`string`
 
 The type of the task. This must be one of the supported task types: Translation\_Teradata2BQ, Translation\_Redshift2BQ, Translation\_Bteq2BQ, Translation\_Oracle2BQ, Translation\_HiveQL2BQ, Translation\_SparkSQL2BQ, Translation\_Snowflake2BQ, Translation\_Netezza2BQ, Translation\_AzureSynapse2BQ, Translation\_Vertica2BQ, Translation\_SQLServer2BQ, Translation\_Presto2BQ, Translation\_MySQL2BQ, Translation\_Postgresql2BQ, Translation\_SQLite2BQ, Translation\_Greenplum2BQ.
 
-`  state  `
+`state`
 
-`  enum ( State  ` )
+` enum ( State  ` )
 
 Output only. The current state of the task.
 
-`  processingError  `
+`processingError`
 
-`  object ( ErrorInfo  ` )
+` object ( ErrorInfo  ` )
 
 Output only. An explanation that may be populated when the task is in FAILED state.
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Time when the task was created.
 
-`  lastUpdateTime  `
+`lastUpdateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Time when the task was last updated.
 
-`  resourceErrorDetails[]  `
+`resourceErrorDetails[]`
 
-`  object ( ResourceErrorDetail  ` )
+` object ( ResourceErrorDetail  ` )
 
 Output only. Provides details to errors and issues encountered while processing the task. Presence of error details does not mean that the task failed.
 
-`  resourceErrorCount  `
+`resourceErrorCount`
 
-`  integer  `
+`integer`
 
-The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `  resourceErrorCount  ` that is higher than the size of `  resourceErrorDetails  ` .
+The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `resourceErrorCount` that is higher than the size of `resourceErrorDetails` .
 
-`  metrics[]  `
+`metrics[]`
 
-`  object ( TimeSeries  ` )
+` object ( TimeSeries  ` )
 
 Output only. The metrics for the task.
 
-`  taskResult  `
+`taskResult`
 
-`  object ( MigrationTaskResult  ` )
+` object ( MigrationTaskResult  ` )
 
 Output only. The result of the task.
 
-`  totalProcessingErrorCount  `
+`totalProcessingErrorCount`
 
-`  integer  `
+`integer`
 
 Output only. Count of all the processing errors in this task and its subtasks.
 
-`  totalResourceErrorCount  `
+`totalResourceErrorCount`
 
-`  integer  `
+`integer`
 
 Output only. Count of all the resource errors in this task and its subtasks.
 
-Union field `  task_details  ` . The details of the task. `  task_details  ` can be only one of the following:
+Union field `task_details` . The details of the task. `task_details` can be only one of the following:
 
-`  assessmentTaskDetails  `
+`assessmentTaskDetails`
 
-`  object ( AssessmentTaskDetails  ` )
+` object ( AssessmentTaskDetails  ` )
 
 Task configuration for Assessment.
 
-`  translationConfigDetails  `
+`translationConfigDetails`
 
-`  object ( TranslationConfigDetails  ` )
+` object ( TranslationConfigDetails  ` )
 
 Task configuration for CW Batch/Offline SQL Translation.
 
-`  translationDetails  `
+`translationDetails`
 
-`  object ( TranslationDetails  ` )
+` object ( TranslationDetails  ` )
 
 Task details for unified SQL Translation.
 
@@ -300,48 +251,40 @@ Assessment task config.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;inputPath&quot;: string,
-  &quot;outputDataset&quot;: string,
-  &quot;querylogsPath&quot;: string,
-  &quot;dataSource&quot;: string,
-  &quot;featureHandle&quot;: {
-    object (AssessmentFeatureHandle)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;inputPath&quot;: string,&quot;outputDataset&quot;: string,&quot;querylogsPath&quot;: string,&quot;dataSource&quot;: string,&quot;featureHandle&quot;: {object (AssessmentFeatureHandle)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  inputPath  `
+`inputPath`
 
-`  string  `
+`string`
 
 Required. The Cloud Storage path for assessment input files.
 
-`  outputDataset  `
+`outputDataset`
 
-`  string  `
+`string`
 
 Required. The BigQuery dataset for output.
 
-`  querylogsPath  `
+`querylogsPath`
 
-`  string  `
+`string`
 
 Optional. An optional Cloud Storage path to write the query logs (which is then used as an input path on the translation task)
 
-`  dataSource  `
+`dataSource`
 
-`  string  `
+`string`
 
 Required. The data source or data warehouse type (eg: TERADATA/REDSHIFT) from which the input data is extracted.
 
-`  featureHandle  `
+`featureHandle`
 
-`  object ( AssessmentFeatureHandle  ` )
+` object ( AssessmentFeatureHandle  ` )
 
 Optional. A collection of additional feature flags for this assessment.
 
@@ -369,9 +312,9 @@ User-definable feature flags for assessment tasks.
 
 Fields
 
-`  addShareableDataset  `
+`addShareableDataset`
 
-`  boolean  `
+`boolean`
 
 Optional. Whether to create a dataset containing non-PII data in addition to the output dataset.
 
@@ -390,92 +333,64 @@ The translation config to capture necessary settings for a translation task and 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceDialect&quot;: {
-    object (Dialect)
-  },
-  &quot;targetDialect&quot;: {
-    object (Dialect)
-  },
-  &quot;sourceEnv&quot;: {
-    object (SourceEnv)
-  },
-  &quot;requestSource&quot;: string,
-  &quot;targetTypes&quot;: [
-    string
-  ],
-
-  // Union field source_location can be only one of the following:
-  &quot;gcsSourcePath&quot;: string
-  // End of list of possible types for union field source_location.
-
-  // Union field target_location can be only one of the following:
-  &quot;gcsTargetPath&quot;: string
-  // End of list of possible types for union field target_location.
-
-  // Union field output_name_mapping can be only one of the following:
-  &quot;nameMappingList&quot;: {
-    object (ObjectNameMappingList)
-  }
-  // End of list of possible types for union field output_name_mapping.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceDialect&quot;: {object (Dialect)},&quot;targetDialect&quot;: {object (Dialect)},&quot;sourceEnv&quot;: {object (SourceEnv)},&quot;requestSource&quot;: string,&quot;targetTypes&quot;: [string],// Union field source_location can be only one of the following:&quot;gcsSourcePath&quot;: string// End of list of possible types for union field source_location.// Union field target_location can be only one of the following:&quot;gcsTargetPath&quot;: string// End of list of possible types for union field target_location.// Union field output_name_mapping can be only one of the following:&quot;nameMappingList&quot;: {object (ObjectNameMappingList)}// End of list of possible types for union field output_name_mapping.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceDialect  `
+`sourceDialect`
 
-`  object ( Dialect  ` )
+` object ( Dialect  ` )
 
 The dialect of the input files.
 
-`  targetDialect  `
+`targetDialect`
 
-`  object ( Dialect  ` )
+` object ( Dialect  ` )
 
 The target dialect for the engine to translate the input to.
 
-`  sourceEnv  `
+`sourceEnv`
 
-`  object ( SourceEnv  ` )
+` object ( SourceEnv  ` )
 
 The default source environment values for the translation.
 
-`  requestSource  `
+`requestSource`
 
-`  string  `
+`string`
 
 The indicator to show translation request initiator.
 
-`  targetTypes[]  `
+`targetTypes[]`
 
-`  string  `
+`string`
 
 The types of output to generate, e.g. sql, metadata etc. If not specified, a default set of targets will be generated. Some additional target types may be slower to generate. See the documentation for the set of available target types.
 
-Union field `  source_location  ` . The chosen path where the source for input files will be found. `  source_location  ` can be only one of the following:
+Union field `source_location` . The chosen path where the source for input files will be found. `source_location` can be only one of the following:
 
-`  gcsSourcePath  `
+`gcsSourcePath`
 
-`  string  `
+`string`
 
 The Cloud Storage path for a directory of files to translate in a task.
 
-Union field `  target_location  ` . The chosen path where the destination for output files will be found. `  target_location  ` can be only one of the following:
+Union field `target_location` . The chosen path where the destination for output files will be found. `target_location` can be only one of the following:
 
-`  gcsTargetPath  `
+`gcsTargetPath`
 
-`  string  `
+`string`
 
 The Cloud Storage path to write back the corresponding input files to.
 
-Union field `  output_name_mapping  ` . The mapping of full SQL object names from their current state to the desired output. `  output_name_mapping  ` can be only one of the following:
+Union field `output_name_mapping` . The mapping of full SQL object names from their current state to the desired output. `output_name_mapping` can be only one of the following:
 
-`  nameMappingList  `
+`nameMappingList`
 
-`  object ( ObjectNameMappingList  ` )
+` object ( ObjectNameMappingList  ` )
 
 The mapping of objects to their desired output names in list form.
 
@@ -494,22 +409,16 @@ Represents a map of name mappings using a list of key:value proto messages of ex
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;nameMap&quot;: [
-    {
-      object (ObjectNameMapping)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;nameMap&quot;: [{object (ObjectNameMapping)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  nameMap[]  `
+`nameMap[]`
 
-`  object ( ObjectNameMapping  ` )
+` object ( ObjectNameMapping  ` )
 
 The elements of the object name map.
 
@@ -528,29 +437,22 @@ Represents a key-value pair of NameMappingKey to NameMappingValue to represent t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;source&quot;: {
-    object (NameMappingKey)
-  },
-  &quot;target&quot;: {
-    object (NameMappingValue)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;source&quot;: {object (NameMappingKey)},&quot;target&quot;: {object (NameMappingValue)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  source  `
+`source`
 
-`  object ( NameMappingKey  ` )
+` object ( NameMappingKey  ` )
 
 The name of the object in source that is being mapped.
 
-`  target  `
+`target`
 
-`  object ( NameMappingValue  ` )
+` object ( NameMappingValue  ` )
 
 The desired target name of the object that is being mapped.
 
@@ -569,46 +471,40 @@ The potential components of a full name mapping that will be mapped during trans
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;type&quot;: enum (Type),
-  &quot;database&quot;: string,
-  &quot;schema&quot;: string,
-  &quot;relation&quot;: string,
-  &quot;attribute&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;type&quot;: enum (Type),&quot;database&quot;: string,&quot;schema&quot;: string,&quot;relation&quot;: string,&quot;attribute&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  type  `
+`type`
 
-`  enum ( Type  ` )
+` enum ( Type  ` )
 
 The type of object that is being mapped.
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 The database name (BigQuery project ID equivalent in the source data warehouse).
 
-`  schema  `
+`schema`
 
-`  string  `
+`string`
 
 The schema name (BigQuery dataset equivalent in the source data warehouse).
 
-`  relation  `
+`relation`
 
-`  string  `
+`string`
 
 The relation name (BigQuery table or view equivalent in the source data warehouse).
 
-`  attribute  `
+`attribute`
 
-`  string  `
+`string`
 
 The attribute name (BigQuery column equivalent in the source data warehouse).
 
@@ -618,35 +514,35 @@ The type of the object that is being mapped.
 
 Enums
 
-`  TYPE_UNSPECIFIED  `
+`TYPE_UNSPECIFIED`
 
 Unspecified name mapping type.
 
-`  DATABASE  `
+`DATABASE`
 
 The object being mapped is a database.
 
-`  SCHEMA  `
+`SCHEMA`
 
 The object being mapped is a schema.
 
-`  RELATION  `
+`RELATION`
 
 The object being mapped is a relation.
 
-`  ATTRIBUTE  `
+`ATTRIBUTE`
 
 The object being mapped is an attribute.
 
-`  RELATION_ALIAS  `
+`RELATION_ALIAS`
 
 The object being mapped is a relation alias.
 
-`  ATTRIBUTE_ALIAS  `
+`ATTRIBUTE_ALIAS`
 
 The object being mapped is a an attribute alias.
 
-`  FUNCTION  `
+`FUNCTION`
 
 The object being mapped is a function.
 
@@ -677,27 +573,27 @@ The potential components of a full name mapping that will be mapped during trans
 
 Fields
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 The database name (BigQuery project ID equivalent in the target data warehouse).
 
-`  schema  `
+`schema`
 
-`  string  `
+`string`
 
 The schema name (BigQuery dataset equivalent in the target data warehouse).
 
-`  relation  `
+`relation`
 
-`  string  `
+`string`
 
 The relation name (BigQuery table or view equivalent in the target data warehouse).
 
-`  attribute  `
+`attribute`
 
-`  string  `
+`string`
 
 The attribute name (BigQuery column equivalent in the target data warehouse).
 
@@ -716,169 +612,114 @@ The possible dialect options for translation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field dialect_value can be only one of the following:
-  &quot;bigqueryDialect&quot;: {
-    object (BigQueryDialect)
-  },
-  &quot;hiveqlDialect&quot;: {
-    object (HiveQLDialect)
-  },
-  &quot;redshiftDialect&quot;: {
-    object (RedshiftDialect)
-  },
-  &quot;teradataDialect&quot;: {
-    object (TeradataDialect)
-  },
-  &quot;oracleDialect&quot;: {
-    object (OracleDialect)
-  },
-  &quot;sparksqlDialect&quot;: {
-    object (SparkSQLDialect)
-  },
-  &quot;snowflakeDialect&quot;: {
-    object (SnowflakeDialect)
-  },
-  &quot;netezzaDialect&quot;: {
-    object (NetezzaDialect)
-  },
-  &quot;azureSynapseDialect&quot;: {
-    object (AzureSynapseDialect)
-  },
-  &quot;verticaDialect&quot;: {
-    object (VerticaDialect)
-  },
-  &quot;sqlServerDialect&quot;: {
-    object (SQLServerDialect)
-  },
-  &quot;postgresqlDialect&quot;: {
-    object (PostgresqlDialect)
-  },
-  &quot;prestoDialect&quot;: {
-    object (PrestoDialect)
-  },
-  &quot;mysqlDialect&quot;: {
-    object (MySQLDialect)
-  },
-  &quot;db2Dialect&quot;: {
-    object (DB2Dialect)
-  },
-  &quot;sqliteDialect&quot;: {
-    object (SQLiteDialect)
-  },
-  &quot;greenplumDialect&quot;: {
-    object (GreenplumDialect)
-  }
-  // End of list of possible types for union field dialect_value.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field dialect_value can be only one of the following:&quot;bigqueryDialect&quot;: {object (BigQueryDialect)},&quot;hiveqlDialect&quot;: {object (HiveQLDialect)},&quot;redshiftDialect&quot;: {object (RedshiftDialect)},&quot;teradataDialect&quot;: {object (TeradataDialect)},&quot;oracleDialect&quot;: {object (OracleDialect)},&quot;sparksqlDialect&quot;: {object (SparkSQLDialect)},&quot;snowflakeDialect&quot;: {object (SnowflakeDialect)},&quot;netezzaDialect&quot;: {object (NetezzaDialect)},&quot;azureSynapseDialect&quot;: {object (AzureSynapseDialect)},&quot;verticaDialect&quot;: {object (VerticaDialect)},&quot;sqlServerDialect&quot;: {object (SQLServerDialect)},&quot;postgresqlDialect&quot;: {object (PostgresqlDialect)},&quot;prestoDialect&quot;: {object (PrestoDialect)},&quot;mysqlDialect&quot;: {object (MySQLDialect)},&quot;db2Dialect&quot;: {object (DB2Dialect)},&quot;sqliteDialect&quot;: {object (SQLiteDialect)},&quot;greenplumDialect&quot;: {object (GreenplumDialect)}// End of list of possible types for union field dialect_value.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  dialect_value  ` . The possible dialect options that this message represents. `  dialect_value  ` can be only one of the following:
+Union field `dialect_value` . The possible dialect options that this message represents. `dialect_value` can be only one of the following:
 
-`  bigqueryDialect  `
+`bigqueryDialect`
 
-`  object ( BigQueryDialect  ` )
+` object ( BigQueryDialect  ` )
 
 The BigQuery dialect
 
-`  hiveqlDialect  `
+`hiveqlDialect`
 
-`  object ( HiveQLDialect  ` )
+` object ( HiveQLDialect  ` )
 
 The HiveQL dialect
 
-`  redshiftDialect  `
+`redshiftDialect`
 
-`  object ( RedshiftDialect  ` )
+` object ( RedshiftDialect  ` )
 
 The Redshift dialect
 
-`  teradataDialect  `
+`teradataDialect`
 
-`  object ( TeradataDialect  ` )
+` object ( TeradataDialect  ` )
 
 The Teradata dialect
 
-`  oracleDialect  `
+`oracleDialect`
 
-`  object ( OracleDialect  ` )
+` object ( OracleDialect  ` )
 
 The Oracle dialect
 
-`  sparksqlDialect  `
+`sparksqlDialect`
 
-`  object ( SparkSQLDialect  ` )
+` object ( SparkSQLDialect  ` )
 
 The SparkSQL dialect
 
-`  snowflakeDialect  `
+`snowflakeDialect`
 
-`  object ( SnowflakeDialect  ` )
+` object ( SnowflakeDialect  ` )
 
 The Snowflake dialect
 
-`  netezzaDialect  `
+`netezzaDialect`
 
-`  object ( NetezzaDialect  ` )
+` object ( NetezzaDialect  ` )
 
 The Netezza dialect
 
-`  azureSynapseDialect  `
+`azureSynapseDialect`
 
-`  object ( AzureSynapseDialect  ` )
+` object ( AzureSynapseDialect  ` )
 
 The Azure Synapse dialect
 
-`  verticaDialect  `
+`verticaDialect`
 
-`  object ( VerticaDialect  ` )
+` object ( VerticaDialect  ` )
 
 The Vertica dialect
 
-`  sqlServerDialect  `
+`sqlServerDialect`
 
-`  object ( SQLServerDialect  ` )
+` object ( SQLServerDialect  ` )
 
 The SQL Server dialect
 
-`  postgresqlDialect  `
+`postgresqlDialect`
 
-`  object ( PostgresqlDialect  ` )
+` object ( PostgresqlDialect  ` )
 
 The Postgresql dialect
 
-`  prestoDialect  `
+`prestoDialect`
 
-`  object ( PrestoDialect  ` )
+` object ( PrestoDialect  ` )
 
 The Presto dialect
 
-`  mysqlDialect  `
+`mysqlDialect`
 
-`  object ( MySQLDialect  ` )
+` object ( MySQLDialect  ` )
 
 The MySQL dialect
 
-`  db2Dialect  `
+`db2Dialect`
 
-`  object ( DB2Dialect  ` )
+` object ( DB2Dialect  ` )
 
 DB2 dialect
 
-`  sqliteDialect  `
+`sqliteDialect`
 
-`  object ( SQLiteDialect  ` )
+` object ( SQLiteDialect  ` )
 
 SQLite dialect
 
-`  greenplumDialect  `
+`greenplumDialect`
 
-`  object ( GreenplumDialect  ` )
+` object ( GreenplumDialect  ` )
 
 Greenplum dialect
 
@@ -915,18 +756,16 @@ The dialect definition for Teradata.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;mode&quot;: enum (Mode)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;mode&quot;: enum (Mode)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  mode  `
+`mode`
 
-`  enum ( Mode  ` )
+` enum ( Mode  ` )
 
 Which Teradata sub-dialect mode the user specifies.
 
@@ -936,15 +775,15 @@ The sub-dialect options for Teradata.
 
 Enums
 
-`  MODE_UNSPECIFIED  `
+`MODE_UNSPECIFIED`
 
 Unspecified mode.
 
-`  SQL  `
+`SQL`
 
 Teradata SQL mode.
 
-`  BTEQ  `
+`BTEQ`
 
 BTEQ mode (which includes SQL).
 
@@ -1054,21 +893,21 @@ Represents the default source environment values for the translation.
 
 Fields
 
-`  defaultDatabase  `
+`defaultDatabase`
 
-`  string  `
+`string`
 
 The default database name to fully qualify SQL objects when their database name is missing.
 
-`  schemaSearchPath[]  `
+`schemaSearchPath[]`
 
-`  string  `
+`string`
 
 The schema search path. When SQL objects are missing schema name, translation engine will search through this list to find the value.
 
-`  metadataStoreDataset  `
+`metadataStoreDataset`
 
-`  string  `
+`string`
 
 Optional. Expects a valid BigQuery dataset ID that exists, e.g., project-123.metadata\_store\_123. If specified, translation will search and read the required schema information from a metadata store in this dataset. If metadata store doesn't exist, translation will parse the metadata file and upload the schema info to a temp table in the dataset to speed up future translation jobs.
 
@@ -1087,56 +926,40 @@ The translation details to capture the necessary settings for a translation job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceTargetMapping&quot;: [
-    {
-      object (SourceTargetMapping)
-    }
-  ],
-  &quot;targetBaseUri&quot;: string,
-  &quot;sourceEnvironment&quot;: {
-    object (SourceEnvironment)
-  },
-  &quot;targetReturnLiterals&quot;: [
-    string
-  ],
-  &quot;targetTypes&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceTargetMapping&quot;: [{object (SourceTargetMapping)}],&quot;targetBaseUri&quot;: string,&quot;sourceEnvironment&quot;: {object (SourceEnvironment)},&quot;targetReturnLiterals&quot;: [string],&quot;targetTypes&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceTargetMapping[]  `
+`sourceTargetMapping[]`
 
-`  object ( SourceTargetMapping  ` )
+` object ( SourceTargetMapping  ` )
 
 The mapping from source to target SQL.
 
-`  targetBaseUri  `
+`targetBaseUri`
 
-`  string  `
+`string`
 
 The base URI for all writes to persistent storage.
 
-`  sourceEnvironment  `
+`sourceEnvironment`
 
-`  object ( SourceEnvironment  ` )
+` object ( SourceEnvironment  ` )
 
 The default source environment values for the translation.
 
-`  targetReturnLiterals[]  `
+`targetReturnLiterals[]`
 
-`  string  `
+`string`
 
 The list of literal targets that will be directly returned to the response. Each entry consists of the constructed path, EXCLUDING the base path. Not providing a targetBaseUri will prevent writing to persistent storage.
 
-`  targetTypes[]  `
+`targetTypes[]`
 
-`  string  `
+`string`
 
 The types of output to generate, e.g. sql, metadata, lineage\_from\_sql\_scripts, etc. If not specified, a default set of targets will be generated. Some additional target types may be slower to generate. See the documentation for the set of available target types.
 
@@ -1155,29 +978,22 @@ Represents one mapping from a source SQL to a target SQL.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceSpec&quot;: {
-    object (SourceSpec)
-  },
-  &quot;targetSpec&quot;: {
-    object (TargetSpec)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceSpec&quot;: {object (SourceSpec)},&quot;targetSpec&quot;: {object (TargetSpec)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceSpec  `
+`sourceSpec`
 
-`  object ( SourceSpec  ` )
+` object ( SourceSpec  ` )
 
 The source SQL or the path to it.
 
-`  targetSpec  `
+`targetSpec`
 
-`  object ( TargetSpec  ` )
+` object ( TargetSpec  ` )
 
 The target SQL or the path for it.
 
@@ -1196,39 +1012,30 @@ Represents one path to the location that holds source data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;encoding&quot;: string,
-
-  // Union field source can be only one of the following:
-  &quot;baseUri&quot;: string,
-  &quot;literal&quot;: {
-    object (Literal)
-  }
-  // End of list of possible types for union field source.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;encoding&quot;: string,// Union field source can be only one of the following:&quot;baseUri&quot;: string,&quot;literal&quot;: {object (Literal)}// End of list of possible types for union field source.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  encoding  `
+`encoding`
 
-`  string  `
+`string`
 
 Optional. The optional field to specify the encoding of the sql bytes.
 
-Union field `  source  ` . The specific source SQL. `  source  ` can be only one of the following:
+Union field `source` . The specific source SQL. `source` can be only one of the following:
 
-`  baseUri  `
+`baseUri`
 
-`  string  `
+`string`
 
 The base URI for all files to be read in as sources for translation.
 
-`  literal  `
+`literal`
 
-`  object ( Literal  ` )
+` object ( Literal  ` )
 
 Source literal.
 
@@ -1247,37 +1054,30 @@ Literal data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;relativePath&quot;: string,
-
-  // Union field literal_data can be only one of the following:
-  &quot;literalString&quot;: string,
-  &quot;literalBytes&quot;: string
-  // End of list of possible types for union field literal_data.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;relativePath&quot;: string,// Union field literal_data can be only one of the following:&quot;literalString&quot;: string,&quot;literalBytes&quot;: string// End of list of possible types for union field literal_data.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  relativePath  `
+`relativePath`
 
-`  string  `
+`string`
 
 Required. The identifier of the literal entry.
 
-Union field `  literal_data  ` . The literal SQL contents. `  literal_data  ` can be only one of the following:
+Union field `literal_data` . The literal SQL contents. `literal_data` can be only one of the following:
 
-`  literalString  `
+`literalString`
 
-`  string  `
+`string`
 
 Literal string data.
 
-`  literalBytes  `
+`literalBytes`
 
-`  string ( bytes format)  `
+`string ( bytes format)`
 
 Literal byte data.
 
@@ -1305,11 +1105,11 @@ Represents one path to the location that holds target data.
 
 Fields
 
-`  relativePath  `
+`relativePath`
 
-`  string  `
+`string`
 
-The relative path for the target data. Given source file `  baseUri/input/sql  ` , the output would be `  targetBaseUri/sql/relativePath/input.sql  ` .
+The relative path for the target data. Given source file `baseUri/input/sql` , the output would be `targetBaseUri/sql/relativePath/input.sql` .
 
 ## SourceEnvironment
 
@@ -1339,21 +1139,21 @@ Represents the default source environment values for the translation.
 
 Fields
 
-`  defaultDatabase  `
+`defaultDatabase`
 
-`  string  `
+`string`
 
 The default database name to fully qualify SQL objects when their database name is missing.
 
-`  schemaSearchPath[]  `
+`schemaSearchPath[]`
 
-`  string  `
+`string`
 
 The schema search path. When SQL objects are missing schema name, translation engine will search through this list to find the value.
 
-`  metadataStoreDataset  `
+`metadataStoreDataset`
 
-`  string  `
+`string`
 
 Optional. Expects a validQ BigQuery dataset ID that exists, e.g., project-123.metadata\_store\_123. If specified, translation will search and read the required schema information from a metadata store in this dataset. If metadata store doesn't exist, translation will parse the metadata file and upload the schema info to a temp table in the dataset to speed up future translation jobs.
 
@@ -1363,31 +1163,31 @@ Possible states of a migration task.
 
 Enums
 
-`  STATE_UNSPECIFIED  `
+`STATE_UNSPECIFIED`
 
 The state is unspecified.
 
-`  PENDING  `
+`PENDING`
 
 The task is waiting for orchestration.
 
-`  ORCHESTRATING  `
+`ORCHESTRATING`
 
 The task is assigned to an orchestrator.
 
-`  RUNNING  `
+`RUNNING`
 
 The task is running, i.e. its subtasks are ready for execution.
 
-`  PAUSED  `
+`PAUSED`
 
 The task is paused. Assigned subtasks can continue, but no new subtasks will be scheduled.
 
-`  SUCCEEDED  `
+`SUCCEEDED`
 
 The task finished successfully.
 
-`  FAILED  `
+`FAILED`
 
 The task finished unsuccessfully.
 
@@ -1406,25 +1206,18 @@ The migration task result.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field details can be only one of the following:
-  &quot;translationTaskResult&quot;: {
-    object (TranslationTaskResult)
-  }
-  // End of list of possible types for union field details.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field details can be only one of the following:&quot;translationTaskResult&quot;: {object (TranslationTaskResult)}// End of list of possible types for union field details.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  details  ` . Details specific to the task type. `  details  ` can be only one of the following:
+Union field `details` . Details specific to the task type. `details` can be only one of the following:
 
-`  translationTaskResult  `
+`translationTaskResult`
 
-`  object ( TranslationTaskResult  ` )
+` object ( TranslationTaskResult  ` )
 
 Details specific to translation task types.
 
@@ -1443,40 +1236,28 @@ Translation specific result details from the migration task.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;translatedLiterals&quot;: [
-    {
-      object (Literal)
-    }
-  ],
-  &quot;reportLogMessages&quot;: [
-    {
-      object (GcsReportLogMessage)
-    }
-  ],
-  &quot;consoleUri&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;translatedLiterals&quot;: [{object (Literal)}],&quot;reportLogMessages&quot;: [{object (GcsReportLogMessage)}],&quot;consoleUri&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  translatedLiterals[]  `
+`translatedLiterals[]`
 
-`  object ( Literal  ` )
+` object ( Literal  ` )
 
 The list of the translated literals.
 
-`  reportLogMessages[]  `
+`reportLogMessages[]`
 
-`  object ( GcsReportLogMessage  ` )
+` object ( GcsReportLogMessage  ` )
 
 The records from the aggregate CSV report for a migration workflow.
 
-`  consoleUri  `
+`consoleUri`
 
-`  string  `
+`string`
 
 The Cloud Console URI for the migration workflow.
 
@@ -1514,69 +1295,69 @@ A record in the aggregate CSV report for a migration workflow
 
 Fields
 
-`  severity  `
+`severity`
 
-`  string  `
+`string`
 
 Severity of the translation record.
 
-`  category  `
+`category`
 
-`  string  `
+`string`
 
 Category of the error/warning. Example: SyntaxError
 
-`  filePath  `
+`filePath`
 
-`  string  `
+`string`
 
 The file path in which the error occurred
 
-`  filename  `
+`filename`
 
-`  string  `
+`string`
 
 The file name in which the error occurred
 
-`  sourceScriptLine  `
+`sourceScriptLine`
 
-`  integer  `
+`integer`
 
 Specifies the row from the source text where the error occurred (0 based, -1 for messages without line location). Example: 2
 
-`  sourceScriptColumn  `
+`sourceScriptColumn`
 
-`  integer  `
+`integer`
 
 Specifies the column from the source texts where the error occurred. (0 based, -1 for messages without column location) example: 6
 
-`  message  `
+`message`
 
-`  string  `
+`string`
 
 Detailed message of the record.
 
-`  scriptContext  `
+`scriptContext`
 
-`  string  `
+`string`
 
 The script context (obfuscated) in which the error occurred
 
-`  action  `
+`action`
 
-`  string  `
+`string`
 
 Category of the error/warning. Example: SyntaxError
 
-`  effect  `
+`effect`
 
-`  string  `
+`string`
 
 Effect of the error/warning. Example: COMPATIBILITY
 
-`  objectName  `
+`objectName`
 
-`  string  `
+`string`
 
 Name of the affected object in the log message.
 
@@ -1586,44 +1367,44 @@ Possible migration workflow states.
 
 Enums
 
-`  STATE_UNSPECIFIED  `
+`STATE_UNSPECIFIED`
 
 Workflow state is unspecified.
 
-`  DRAFT  `
+`DRAFT`
 
 Workflow is in draft status, i.e. tasks are not yet eligible for execution.
 
-`  RUNNING  `
+`RUNNING`
 
 Workflow is running (i.e. tasks are eligible for execution).
 
-`  PAUSED  `
+`PAUSED`
 
 Workflow is paused. Tasks currently in progress may continue, but no further tasks will be scheduled.
 
-`  COMPLETED  `
+`COMPLETED`
 
 Workflow is complete. There should not be any task in a non-terminal state, but if they are (e.g. forced termination), they will not be scheduled.
 
 ## Methods
 
-### `             create           `
+### `            create           `
 
 Creates a migration workflow.
 
-### `             delete           `
+### `            delete           `
 
 Deletes a migration workflow by name.
 
-### `             get           `
+### `            get           `
 
 Gets a previously created migration workflow.
 
-### `             list           `
+### `            list           `
 
 Lists previously created migration workflow.
 
-### `             start           `
+### `            start           `
 
 Starts a previously created migration workflow.

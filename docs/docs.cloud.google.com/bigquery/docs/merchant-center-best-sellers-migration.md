@@ -6,7 +6,7 @@ This product is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for Google Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
-This document helps you migrate from the older version of the best sellers reports to its [newer version](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema) . The older version of the report that exports the `  BestSellers_TopBrands_  ` , `  BestSellers_TopProducts_  ` , and `  BestSellers_TopProducts_Inventory_  ` tables will be deprecated on September 1, 2025.
+This document helps you migrate from the older version of the best sellers reports to its [newer version](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema) . The older version of the report that exports the `BestSellers_TopBrands_` , `BestSellers_TopProducts_` , and `BestSellers_TopProducts_Inventory_` tables will be deprecated on September 1, 2025.
 
 The new best sellers report offers the following:
 
@@ -20,86 +20,86 @@ The new best sellers report offers the following:
 
 The following table compares the tables exported by the old and new reports:
 
-| Old report                                         | New report                                                                                             |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `        BestSellers_TopBrands       `             | `        BestSellersBrandWeekly       ` and `        BestSellersBrandMonthly       `                   |
-| `        BestSellers_TopProducts       `           | `        BestSellersProductClusterWeekly       ` and `        BestSellersProductClusterMonthly       ` |
-| `        BestSellers_TopProducts_Inventory       ` | `        BestSellersEntityProductMapping       `                                                       |
+| Old report                          | New report                                                               |
+| ----------------------------------- | ------------------------------------------------------------------------ |
+| `BestSellers_TopBrands`             | `BestSellersBrandWeekly` and `BestSellersBrandMonthly`                   |
+| `BestSellers_TopProducts`           | `BestSellersProductClusterWeekly` and `BestSellersProductClusterMonthly` |
+| `BestSellers_TopProducts_Inventory` | `BestSellersEntityProductMapping`                                        |
 
 The old report contains a single aggregation of best sellers data over an unspecified time window. The new report provides both the latest weekly and monthly aggregations of this data at the time of the request.
 
-### Compare `     BestSellers_TopBrands    ` with `     BestSellersBrandWeekly    ` and `     BestSellersBrandMonthly    `
+### Compare `BestSellers_TopBrands` with `BestSellersBrandWeekly` and `BestSellersBrandMonthly`
 
-The following table helps you identify fields in the `  BestSellers_TopBrands  ` table that have equivalent replacements in the [`  BestSellersBrandWeekly  `](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) and [`  BestSellersBrandMonthly  `](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) tables. Replacements for some fields from the old table aren't available.
+The following table helps you identify fields in the `BestSellers_TopBrands` table that have equivalent replacements in the [`BestSellersBrandWeekly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) and [`BestSellersBrandMonthly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) tables. Replacements for some fields from the old table aren't available.
 
-| `        BestSellers_TopBrands       ` (old)     | `        BestSellersBrandWeekly       ` and `        BestSellersBrandMonthly       ` (new) |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `        rank_timestamp       `                  | `        _PARTITIONDATE       ` and `        _PARTITIONTIME       `                        |
-| `        brand       `                           | `        brand       `                                                                     |
-| `        google_brand_id       `                 |                                                                                            |
-| `        ranking_category       `                | `        category_id       `                                                               |
-| `        ranking_category_path.locale       `    |                                                                                            |
-| `        ranking_category_path.name       `      |                                                                                            |
-| `        ranking_country       `                 | `        country_code       `                                                              |
-| `        rank_id       `                         |                                                                                            |
-| `        rank       `                            | `        rank       `                                                                      |
-| `        previous_rank       `                   | `        previous_rank       `                                                             |
-| `        relative_demand.bucket       `          | `        relative_demand       `                                                           |
-| `        relative_demand.min       `             |                                                                                            |
-| `        relative_demand.max       `             |                                                                                            |
-| `        previous_relative_demand.bucket       ` | `        previous_relative_demand       `                                                  |
-| `        previous_relative_demand.min       `    |                                                                                            |
-| `        previous_relative_demand.max       `    |                                                                                            |
-|                                                  | `        relative_demand_change       `                                                    |
+| `BestSellers_TopBrands` (old)     | `BestSellersBrandWeekly` and `BestSellersBrandMonthly` (new) |
+| --------------------------------- | ------------------------------------------------------------ |
+| `rank_timestamp`                  | `_PARTITIONDATE` and `_PARTITIONTIME`                        |
+| `brand`                           | `brand`                                                      |
+| `google_brand_id`                 |                                                              |
+| `ranking_category`                | `category_id`                                                |
+| `ranking_category_path.locale`    |                                                              |
+| `ranking_category_path.name`      |                                                              |
+| `ranking_country`                 | `country_code`                                               |
+| `rank_id`                         |                                                              |
+| `rank`                            | `rank`                                                       |
+| `previous_rank`                   | `previous_rank`                                              |
+| `relative_demand.bucket`          | `relative_demand`                                            |
+| `relative_demand.min`             |                                                              |
+| `relative_demand.max`             |                                                              |
+| `previous_relative_demand.bucket` | `previous_relative_demand`                                   |
+| `previous_relative_demand.min`    |                                                              |
+| `previous_relative_demand.max`    |                                                              |
+|                                   | `relative_demand_change`                                     |
 
-### Compare `     BestSellers_TopProducts    ` with `     BestSellersProductClusterWeekly    ` and `     BestSellersProductClusterMonthly    `
+### Compare `BestSellers_TopProducts` with `BestSellersProductClusterWeekly` and `BestSellersProductClusterMonthly`
 
-The following table helps you identify fields in the `  BestSellers_TopProducts  ` table that have equivalent replacements in the [`  BestSellersProductClusterWeekly  `](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) and [`  BestSellersProductClusterMonthly  `](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) tables. Replacements for some fields from the old table aren't available.
+The following table helps you identify fields in the `BestSellers_TopProducts` table that have equivalent replacements in the [`BestSellersProductClusterWeekly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) and [`BestSellersProductClusterMonthly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) tables. Replacements for some fields from the old table aren't available.
 
-| `        BestSellers_TopProducts       ` (old)       | `        BestSellersProductClusterWeekly       ` and `        BestSellersProductClusterMonthly       ` (new)                                             |
-| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        rank_timestamp       `                      | `        _PARTITIONDATE       ` and `        _PARTITIONTIME       `                                                                                      |
-| `        rank_id       `                             | `        entity_id       `                                                                                                                               |
-| `        rank       `                                | `        rank       `                                                                                                                                    |
-| `        previous_rank       `                       | `        previous_rank       `                                                                                                                           |
-| `        ranking_country       `                     | `        country_code       `                                                                                                                            |
-| `        ranking_category       `                    | `        report_category_id       `                                                                                                                      |
-| `        ranking_category_path.locale       `        |                                                                                                                                                          |
-| `        ranking_category_path.name       `          |                                                                                                                                                          |
-| `        relative_demand.bucket       `              | `        relative_demand       `                                                                                                                         |
-| `        relative_demand.min       `                 |                                                                                                                                                          |
-| `        relative_demand.max       `                 |                                                                                                                                                          |
-| `        previous_relative_demand.bucket       `     | `        previous_relative_demand       `                                                                                                                |
-| `        previous_relative_demand.min       `        |                                                                                                                                                          |
-| `        previous_relative_demand.max       `        |                                                                                                                                                          |
-|                                                      | `        relative_demand_change       `                                                                                                                  |
-| `        product_title.locale       `                |                                                                                                                                                          |
-| `        product_title.name       `                  | `        title       ` (single title instead of an array for every locale)                                                                               |
-| `        gtins       `                               | `        variant_gtins       `                                                                                                                           |
-| `        google_brand_id       `                     |                                                                                                                                                          |
-| `        brand       `                               | `        brand       `                                                                                                                                   |
-| `        google_product_category       `             |                                                                                                                                                          |
-|                                                      | `        category_l1       ` , `        category_l2       ` , `        category_l3       ` , `        category_l4       ` , `        category_l5       ` |
-| `        google_product_category_path.locale       ` |                                                                                                                                                          |
-| `        google_product_category_path.name       `   |                                                                                                                                                          |
-| `        price_range.min       `                     | `        price_range.min_amount_micros       `                                                                                                           |
-| `        price_range.max       `                     | `        price_range.max_amount_micros       `                                                                                                           |
-| `        price_range.currency       `                | `        price_range.currency_code       `                                                                                                               |
-|                                                      | `        product_inventory_status       `                                                                                                                |
-|                                                      | `        brand_inventory_status       `                                                                                                                  |
+| `BestSellers_TopProducts` (old)       | `BestSellersProductClusterWeekly` and `BestSellersProductClusterMonthly` (new) |
+| ------------------------------------- | ------------------------------------------------------------------------------ |
+| `rank_timestamp`                      | `_PARTITIONDATE` and `_PARTITIONTIME`                                          |
+| `rank_id`                             | `entity_id`                                                                    |
+| `rank`                                | `rank`                                                                         |
+| `previous_rank`                       | `previous_rank`                                                                |
+| `ranking_country`                     | `country_code`                                                                 |
+| `ranking_category`                    | `report_category_id`                                                           |
+| `ranking_category_path.locale`        |                                                                                |
+| `ranking_category_path.name`          |                                                                                |
+| `relative_demand.bucket`              | `relative_demand`                                                              |
+| `relative_demand.min`                 |                                                                                |
+| `relative_demand.max`                 |                                                                                |
+| `previous_relative_demand.bucket`     | `previous_relative_demand`                                                     |
+| `previous_relative_demand.min`        |                                                                                |
+| `previous_relative_demand.max`        |                                                                                |
+|                                       | `relative_demand_change`                                                       |
+| `product_title.locale`                |                                                                                |
+| `product_title.name`                  | `title` (single title instead of an array for every locale)                    |
+| `gtins`                               | `variant_gtins`                                                                |
+| `google_brand_id`                     |                                                                                |
+| `brand`                               | `brand`                                                                        |
+| `google_product_category`             |                                                                                |
+|                                       | `category_l1` , `category_l2` , `category_l3` , `category_l4` , `category_l5`  |
+| `google_product_category_path.locale` |                                                                                |
+| `google_product_category_path.name`   |                                                                                |
+| `price_range.min`                     | `price_range.min_amount_micros`                                                |
+| `price_range.max`                     | `price_range.max_amount_micros`                                                |
+| `price_range.currency`                | `price_range.currency_code`                                                    |
+|                                       | `product_inventory_status`                                                     |
+|                                       | `brand_inventory_status`                                                       |
 
 ### Inventory mapping of best sellers data
 
-In the old best sellers report, the best sellers data is mapped to the merchant's inventory data in a new generated table, using the `  rank_id  ` column from the `  TopProducts  ` table.
+In the old best sellers report, the best sellers data is mapped to the merchant's inventory data in a new generated table, using the `rank_id` column from the `TopProducts` table.
 
-In the new best sellers report, the `  entity_id  ` column is exported in the `  BestSellersProductCluster  ` tables, which is mapped to all the product IDs from the merchant's inventory in the [`  BestSellersEntityProductMapping  `](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-mapping) table.
+In the new best sellers report, the `entity_id` column is exported in the `BestSellersProductCluster` tables, which is mapped to all the product IDs from the merchant's inventory in the [`BestSellersEntityProductMapping`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-mapping) table.
 
-| `        BestSellers_TopProductsInventory       ` (old)                       | `        BestSellersEntityProductMapping       ` (new)                                                                                                    |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        rank_id       ` (found in `        BestSellers_TopProducts       ` ) | `        entity_id       ` (found in the `        BestSellersProductClustersWeekly       ` and `        BestSellersProductClustersMonthly       ` tables) |
-| `        product_id       `                                                   | `        product_id       `                                                                                                                               |
-| `        merchant_id       `                                                  |                                                                                                                                                           |
-| `        aggregator_id       `                                                |                                                                                                                                                           |
+| `BestSellers_TopProductsInventory` (old)        | `BestSellersEntityProductMapping` (new)                                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `rank_id` (found in `BestSellers_TopProducts` ) | `entity_id` (found in the `BestSellersProductClustersWeekly` and `BestSellersProductClustersMonthly` tables) |
+| `product_id`                                    | `product_id`                                                                                                 |
+| `merchant_id`                                   |                                                                                                              |
+| `aggregator_id`                                 |                                                                                                              |
 
 ## Example queries
 
@@ -109,7 +109,7 @@ This section highlights changes in example queries that are used to retrieve bes
 
 The following queries return top products for a given category and country.
 
-#### Use the `     BestSellers_TopProducts    ` table (old)
+#### Use the `BestSellers_TopProducts` table (old)
 
     SELECT
       rank,
@@ -128,7 +128,7 @@ The following queries return top products for a given category and country.
     ORDER BY
       rank;
 
-#### Use the `     BestSellersProductClusterWeekly    ` or `     BestSellersProductClusterMonthly    ` table (new)
+#### Use the `BestSellersProductClusterWeekly` or `BestSellersProductClusterMonthly` table (new)
 
     SELECT
       rank,
@@ -152,7 +152,7 @@ The following queries return top products for a given category and country.
 
 The following queries return a list of top products in your inventory.
 
-#### Use the `     BestSellers_TopProducts    ` table (old)
+#### Use the `BestSellers_TopProducts` table (old)
 
     WITH latest_top_products AS
     (
@@ -184,7 +184,7 @@ The following queries return a list of top products in your inventory.
       latest_top_products_inventory AS inventory
     USING (rank_id);
 
-#### Use the `     BestSellersProductClusterWeekly    ` or `     BestSellersProductClusterMonthly    ` table (new)
+#### Use the `BestSellersProductClusterWeekly` or `BestSellersProductClusterMonthly` table (new)
 
     WITH latest_top_products AS
     (
@@ -216,7 +216,7 @@ The following queries return a list of top products in your inventory.
       latest_top_products_inventory AS inventory
     USING (entity_id);
 
-Moreover, if you want find the number of best selling products or brands in your inventory, run a query on the `  BestSellerProductClusterWeekly  ` or `  BestSellerProductClusterMonthly  ` tables using the `  product_inventory_status  ` or `  brand_inventory_status  ` columns. See the following example query:
+Moreover, if you want find the number of best selling products or brands in your inventory, run a query on the `BestSellerProductClusterWeekly` or `BestSellerProductClusterMonthly` tables using the `product_inventory_status` or `brand_inventory_status` columns. See the following example query:
 
     SELECT
       *
@@ -232,7 +232,7 @@ Moreover, if you want find the number of best selling products or brands in your
 
 The following queries return a list of top brands for a given category and country.
 
-#### Use the `     BestSellers_TopBrands    ` table (old)
+#### Use the `BestSellers_TopBrands` table (old)
 
     SELECT
       rank,
@@ -247,7 +247,7 @@ The following queries return a list of top brands for a given category and count
     ORDER BY
       rank;
 
-#### Use the `     BestSellersTopBrandsWeekly    ` or `     BestSellersTopBrandsMonthly    ` table (new)
+#### Use the `BestSellersTopBrandsWeekly` or `BestSellersTopBrandsMonthly` table (new)
 
     SELECT
       rank,
@@ -266,7 +266,7 @@ The following queries return a list of top brands for a given category and count
 
 The following queries return a list of products of top brands in your inventory.
 
-#### Use the `     BestSellers_TopBrands    ` table (old)
+#### Use the `BestSellers_TopBrands` table (old)
 
     WITH latest_top_brands AS
       (
@@ -306,7 +306,7 @@ The following queries return a list of products of top brands in your inventory.
        top_brands.ranking_category = product_category_id AND
        top_brands.ranking_country = products.approved_country;
 
-#### Use the `     BestSellersTopBrandsWeekly    ` or `     BestSellersTopBrandsMonthly    ` table (new)
+#### Use the `BestSellersTopBrandsWeekly` or `BestSellersTopBrandsMonthly` table (new)
 
     WITH latest_top_brands AS
       (
@@ -351,7 +351,7 @@ In these queries, replace the following:
 
   - `  DATASET  ` : the name of your dataset
   - `  MERCHANT_ID  ` : the merchant account ID
-  - `  DATE  ` : the date in the `  YYYY-MM-DD  ` format
+  - `  DATE  ` : the date in the `YYYY-MM-DD` format
 
 ## What's next
 

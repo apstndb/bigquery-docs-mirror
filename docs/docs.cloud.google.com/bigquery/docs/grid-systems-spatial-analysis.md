@@ -55,7 +55,7 @@ This section provides an overview of S2 and H3 grid systems.
 
 ![Example of S2 grid cells.](https://docs.cloud.google.com/static/bigquery/images/s2-example.png)
 
-BigQuery uses S2 cells to index spatial data and exposes multiple functions. For example, [`  S2_CELLIDFROMPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#s2_cellidfrompoint) returns the S2 cell ID that contains a point on earth's surface at a given level.
+BigQuery uses S2 cells to index spatial data and exposes multiple functions. For example, [`S2_CELLIDFROMPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#s2_cellidfrompoint) returns the S2 cell ID that contains a point on earth's surface at a given level.
 
 ### H3
 

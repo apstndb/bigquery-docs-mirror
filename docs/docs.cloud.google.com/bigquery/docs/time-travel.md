@@ -55,19 +55,19 @@ If you reduce the time travel window duration, delete a table, and then realize 
 
 If a table has, or has had, [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then only a table administrator can access historical data for the table. The following [Identity and Access Management (IAM)](https://docs.cloud.google.com/bigquery/docs/access-control) permission is required to restore tables with row access policies:
 
-| **Permission**                                                                                                                                                                                       | **Resource**                                      |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| [`         bigquery.rowAccessPolicies.overrideTimeTravelRestrictions        `](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.rowAccessPolicies.overrideTimeTravelRestrictions) | The table whose historical data is being accessed |
+| **Permission**                                                                                                                                                                      | **Resource**                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`bigquery.rowAccessPolicies.overrideTimeTravelRestrictions`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.rowAccessPolicies.overrideTimeTravelRestrictions) | The table whose historical data is being accessed |
 
-The `  bigquery.rowAccessPolicies.overrideTimeTravelRestrictions  ` permission can't be added to a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) . The following roles provide the required permission:
+The `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission can't be added to a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) . The following roles provide the required permission:
 
-| **Role**                                                                                                                         | **Resource**                                      |
-| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| [`         roles/bigquery.admin        `](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)             | The table whose historical data is being accessed |
-| [`         roles/bigquery.studioAdmin        `](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) | The table whose historical data is being accessed |
-| [`         roles/iam.databasesAdmin        `](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.databasesAdmin)   | The table whose historical data is being accessed |
+| **Role**                                                                                                        | **Resource**                                      |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`roles/bigquery.admin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)             | The table whose historical data is being accessed |
+| [`roles/bigquery.studioAdmin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) | The table whose historical data is being accessed |
+| [`roles/iam.databasesAdmin`](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.databasesAdmin)   | The table whose historical data is being accessed |
 
-**Note:** The **`  roles/owner  `** role does not contain all the permissions present in the table administrator roles, so you must grant one of these table administrator roles to any user who restores tables that have or had row-level access policies applied to them.
+**Note:** The **`roles/owner`** role does not contain all the permissions present in the table administrator roles, so you must grant one of these table administrator roles to any user who restores tables that have or had row-level access policies applied to them.
 
   - Run the following command to get the equivalent Unix epoch time by passing the UTC timestamp:
     
@@ -75,7 +75,7 @@ The `  bigquery.rowAccessPolicies.overrideTimeTravelRestrictions  ` permission c
     date -d '2023-08-04 16:00:34.456789Z' +%s000
     ```
 
-  - Replace the UNIX epoch time `  1691164834000  ` received from the previous command in the bq command-line tool. Run the following command to restore a copy of the deleted table `  deletedTableID  ` in another table `  restoredTable  ` , within the same dataset `  myDatasetID  ` :
+  - Replace the UNIX epoch time `1691164834000` received from the previous command in the bq command-line tool. Run the following command to restore a copy of the deleted table `deletedTableID` in another table `restoredTable` , within the same dataset `myDatasetID` :
     
     ``` notranslate
     bq cp myProjectID:myDatasetID.deletedTableID@1691164834000 myProjectID:myDatasetID.restoredTable
@@ -87,7 +87,7 @@ BigQuery provides a fail-safe period. During the fail-safe period, deleted data 
 
 When you perform the following operations, the data that is replaced or removed can be recovered through the time travel window. After the time travel window ends, this data then enters the fail-safe period for extended recovery time:
 
-  - **Table deletion or replacement:** When a table is deleted, or when its data is fully replaced (for example, by using the [`  WRITE_TRUNCATE  `](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) write disposition in a load job or by using the [`  CREATE OR REPLACE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement), the previous contents of the table are retained.
+  - **Table deletion or replacement:** When a table is deleted, or when its data is fully replaced (for example, by using the [`WRITE_TRUNCATE`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) write disposition in a load job or by using the [`CREATE OR REPLACE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement), the previous contents of the table are retained.
   - **Partition deletion:** If a specific partition is deleted from a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , the data belonging to that specific partition is retained. Other partitions in the table aren't affected.
 
 You can't query or directly recover data in fail-safe storage. To recover data from fail-safe storage, contact [Cloud Customer Care](https://cloud.google.com/support-hub) .
@@ -135,7 +135,7 @@ The following table show a comparison of physical and logical storage costs:
 </tbody>
 </table>
 
-If you use physical storage, you can see the bytes used by time travel and fail-safe by looking at the `  TIME_TRAVEL_PHYSICAL_BYTES  ` and `  FAIL_SAFE_PHYSICAL_BYTES  ` columns in the [`  TABLE_STORAGE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) and [`  TABLE_STORAGE_BY_ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization) views. For an example of how to use one of these views to estimate your costs, see [Forecast storage billing](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage#forecast_storage_billing) .
+If you use physical storage, you can see the bytes used by time travel and fail-safe by looking at the `TIME_TRAVEL_PHYSICAL_BYTES` and `FAIL_SAFE_PHYSICAL_BYTES` columns in the [`TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) and [`TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization) views. For an example of how to use one of these views to estimate your costs, see [Forecast storage billing](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage#forecast_storage_billing) .
 
 [Storage costs](https://cloud.google.com/bigquery/pricing#storage) apply for time travel and fail-safe data, but you are only billed if data storage fees don't apply elsewhere in BigQuery. The following details apply:
 
@@ -163,7 +163,7 @@ Data retrieval with time travel is subject to the following limitations:
   - If a table has, or has previously had, row-level access policies, then time travel can only be used by table administrators. For more information, see [Time travel and row-level access](https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel_and_row-level_access) .
   - Time travel does not restore table metadata.
   - Time travel is not supported in the following table types:
-      - [External tables](https://docs.cloud.google.com/bigquery/docs/external-tables) . However, for Apache Iceberg external tables, you can use the [`  FOR SYSTEM_TIME AS OF  ` clause](https://docs.cloud.google.com/bigquery/docs/access-historical-data#query_data_at_a_point_in_time) to access snapshots that are retained in your Iceberg metadata.
+      - [External tables](https://docs.cloud.google.com/bigquery/docs/external-tables) . However, for Apache Iceberg external tables, you can use the [`FOR SYSTEM_TIME AS OF` clause](https://docs.cloud.google.com/bigquery/docs/access-historical-data#query_data_at_a_point_in_time) to access snapshots that are retained in your Iceberg metadata.
       - [Temporary cached query result tables](https://docs.cloud.google.com/bigquery/docs/cached-results) .
       - [Temporary session tables](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .
       - [Temporary multi-statement tables](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) .

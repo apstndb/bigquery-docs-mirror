@@ -21,7 +21,7 @@ As a BigQuery administrator, you can create a [connection](https://docs.cloud.go
     
       - To let BigQuery access Cloud SQL data over a private connection, configure private IP connectivity for a [new](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip#new-private-instance) or an [existing](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip#existing-private-instance) Cloud SQL instance, and then select the **Enable private path** checkbox. This service uses an internal direct path instead of the private IP address inside of the Virtual Private Cloud.
 
-4.  To get the permissions that you need to create a Cloud SQL connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+4.  To get the permissions that you need to create a Cloud SQL connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -43,7 +43,7 @@ Select one of the following options to create a Cloud SQL connection:
 
 3.  In the **Filter By** pane, in the **Data Source Type** section, select **Databases** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `  mysql  ` .
+    Alternatively, in the **Search for data sources** field, you can enter `mysql` .
 
 4.  In the **Featured data sources** section, click **MySQL** .
 
@@ -53,17 +53,17 @@ Select one of the following options to create a Cloud SQL connection:
     
       - For **Connection type** , select the type of source, for example **MySQL** or **PostgreSQL** .
     
-      - For **Connection ID** , enter an identifier for the connection resource. Letters, numbers, and underscores are allowed. For example, `  bq_sql_connection  ` .
+      - For **Connection ID** , enter an identifier for the connection resource. Letters, numbers, and underscores are allowed. For example, `bq_sql_connection` .
     
       - For **Data location** , select a BigQuery location (or region) that is [compatible with your external data source region](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#supported_regions) .
     
-      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `  My connection resource  ` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
+      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `My connection resource` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
     
       - Optional: For **Description** , enter a description for this connection resource.
     
       - Optional: **Encryption** If you want to use a [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) to encrypt your credentials, select **Customer-managed encryption key (CMEK)** and then select a customer-managed key. Otherwise, your credentials are protected by the default Google-owned and Google-managed encryption key.
     
-      - If you chose Cloud SQL MySQL or Postgres for the connection type, for **Cloud SQL connection name** , enter the full [name of the Cloud SQL instance](https://docs.cloud.google.com/sql/docs/mysql/instance-settings#instance-id-2ndgen) , usually in the format `  project-id:location-id:instance-id  ` . You can find the instance ID on the detail page of the [Cloud SQL instance](https://console.cloud.google.com/sql/instances) you want to query.
+      - If you chose Cloud SQL MySQL or Postgres for the connection type, for **Cloud SQL connection name** , enter the full [name of the Cloud SQL instance](https://docs.cloud.google.com/sql/docs/mysql/instance-settings#instance-id-2ndgen) , usually in the format `project-id:location-id:instance-id` . You can find the instance ID on the detail page of the [Cloud SQL instance](https://console.cloud.google.com/sql/instances) you want to query.
     
       - For **Database name** , enter the name of the database.
     
@@ -83,21 +83,21 @@ Select one of the following options to create a Cloud SQL connection:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the connection flag: `  --connection  ` . The following flags are also required:
+Enter the `bq mk` command and supply the connection flag: `--connection` . The following flags are also required:
 
-  - `  --connection_type  `
-  - `  --properties  `
-  - `  --connection_credential  `
-  - `  --project_id  `
-  - `  --location  `
+  - `--connection_type`
+  - `--properties`
+  - `--connection_credential`
+  - `--project_id`
+  - `--location`
 
 The following flags are optional:
 
-  - `  --display_name  ` : The friendly name for the connection.
-  - `  --description  ` : A description of the connection.
-  - `  --kms_key_name  ` : A customer-managed encryption key. If omitted, credentials are protected by the default Google-owned and Google-managed encryption key.
+  - `--display_name` : The friendly name for the connection.
+  - `--description` : A description of the connection.
+  - `--kms_key_name` : A customer-managed encryption key. If omitted, credentials are protected by the default Google-owned and Google-managed encryption key.
 
-The `  connection_id  ` is an optional parameter that can be added as the last argument of the command which is used for storage internally. If a connection ID is not provided a unique ID is automatically generated. The `  connection_id  ` can contain letters, numbers, and underscores.
+The `connection_id` is an optional parameter that can be added as the last argument of the command which is used for storage internally. If a connection ID is not provided a unique ID is automatically generated. The `connection_id` can contain letters, numbers, and underscores.
 
 ``` 
     bq mk --connection --display_name='friendly name' --connection_type=TYPE \
@@ -109,13 +109,13 @@ The `  connection_id  ` is an optional parameter that can be added as the last a
 Replace the following:
 
   - `  TYPE  ` : the type of the external data source.
-  - `  PROPERTIES  ` : the parameters for the created connection in JSON format. For example: `  --properties='{"param":"param_value"}'  ` . For creating a connection resource, you must supply the `  instanceID  ` , `  database  ` , and `  type  ` parameters.
-  - `  CREDENTIALS  ` : the parameters `  username  ` and `  password  ` .
+  - `  PROPERTIES  ` : the parameters for the created connection in JSON format. For example: `--properties='{"param":"param_value"}'` . For creating a connection resource, you must supply the `instanceID` , `database` , and `type` parameters.
+  - `  CREDENTIALS  ` : the parameters `username` and `password` .
   - `  PROJECT_ID  ` : your project ID.
   - `  LOCATION  ` : the region your Cloud SQL instance is located in, or the corresponding multi-region.
   - `  CONNECTION_ID  ` : the connection identifier.
 
-For example, the following command creates a new connection resource named my\_new\_connection (friendly name: "My new connection") in a project with the ID `  federation-test  ` .
+For example, the following command creates a new connection resource named my\_new\_connection (friendly name: "My new connection") in a project with the ID `federation-test` .
 
     bq mk --connection --display_name='friendly name' --connection_type='CLOUD_SQL' \
       --properties='{"instanceId":"federation-test:us-central1:mytestsql","database":"mydatabase","type":"MYSQL"}' \
@@ -124,7 +124,7 @@ For example, the following command creates a new connection resource named my\_n
 
 ### API
 
-Within the BigQuery Connection API, you can invoke `  CreateConnection  ` within the `  ConnectionService  ` to instantiate a connection. See the [client library page](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection) for more details.
+Within the BigQuery Connection API, you can invoke `CreateConnection` within the `ConnectionService` to instantiate a connection. See the [client library page](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection) for more details.
 
 ### Java
 
@@ -188,14 +188,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 A [service agent](https://docs.cloud.google.com/iam/docs/service-agents) is automatically created when you create the first connection to Cloud SQL within the project. The service agent's name is **BigQuery Connection Service Agent** . To get the service agent ID, [view your connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) . The service agent ID is of the following format:
 
-`  service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` .
+`service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com` .
 
 To connect to Cloud SQL, you must give the new connection read-only access to Cloud SQL so that BigQuery can access files on behalf of users. The service agent must have the following permissions:
 
-  - `  cloudsql.instances.connect  `
-  - `  cloudsql.instances.get  `
+  - `cloudsql.instances.connect`
+  - `cloudsql.instances.get`
 
-You can grant the service agent associated with the connection the [Cloud SQL Client IAM role](https://docs.cloud.google.com/sql/docs/mysql/iam-roles#roles) ( `  roles/cloudsql.client  ` ), which has these permissions assigned. You can skip the following steps if the service agent already has the required permissions.
+You can grant the service agent associated with the connection the [Cloud SQL Client IAM role](https://docs.cloud.google.com/sql/docs/mysql/iam-roles#roles) ( `roles/cloudsql.client` ), which has these permissions assigned. You can skip the following steps if the service agent already has the required permissions.
 
 ### Console
 
@@ -215,7 +215,7 @@ You can grant the service agent associated with the connection the [Cloud SQL Cl
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  `](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) command:
+Use the [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) command:
 
     gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVICE_AGENT_ID --role=roles/cloudsql.client
 
@@ -230,9 +230,9 @@ Provide the following values:
 
 You can grant the following roles to let users query data and manage connections:
 
-  - `  roles/bigquery.connectionUser  ` : enables users to use connections to connect with external data sources and run queries on them.
+  - `roles/bigquery.connectionUser` : enables users to use connections to connect with external data sources and run queries on them.
 
-  - `  roles/bigquery.connectionAdmin  ` : enables users to manage connections.
+  - `roles/bigquery.connectionAdmin` : enables users to manage connections.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -266,7 +266,7 @@ You cannot share a connection with the bq command-line tool. To share a connecti
 
 ### API
 
-Use the [`  projects.locations.connections.setIAM  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `  policy  ` resource.
+Use the [`projects.locations.connections.setIAM` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `policy` resource.
 
 ### Java
 

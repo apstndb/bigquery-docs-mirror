@@ -24,42 +24,42 @@ After creating a view, you can update the following view properties:
 
 To update a view, you need the following IAM permissions:
 
-  - `  bigquery.tables.update  `
-  - `  bigquery.tables.get  `
+  - `bigquery.tables.update`
+  - `bigquery.tables.get`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to update a view:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can update tables and views in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can update tables and views in the datasets that you create.
 
 To update the view's SQL query, you must also have permissions to query any tables referenced by the view's SQL query.
 
-**Note:** To update the SQL of an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , or a view in an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you must have the `  bigquery.datasets.update  ` permission on the dataset that contains the view. You don't need this permission on the datasets that the view reads from or those that contain referenced UDFs. The methods used to update a view—for example, `  CREATE OR REPLACE VIEW  ` —are identical for both standard and authorized views. Updating a view preserves its authorization status. That is, if a view is already authorized, it remains authorized after the update; if the view isn't authorized, the update results in a standard view. For more information, see the [required permissions for authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) and the [required permissions for views in authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#permissions_datasets) .
+**Note:** To update the SQL of an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , or a view in an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you must have the `bigquery.datasets.update` permission on the dataset that contains the view. You don't need this permission on the datasets that the view reads from or those that contain referenced UDFs. The methods used to update a view—for example, `CREATE OR REPLACE VIEW` —are identical for both standard and authorized views. Updating a view preserves its authorization status. That is, if a view is already authorized, it remains authorized after the update; if the view isn't authorized, the update results in a standard view. For more information, see the [required permissions for authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) and the [required permissions for views in authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#permissions_datasets) .
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 #### Example: View referencing cross-project UDFs and datasets
 
-Consider a setup where you're updating a view in *Project A* ( `  authorized_dataset  ` ). This view query joins tables from *Project B* ( `  shared_dataset  ` ) and calls a UDF in *Project C* ( `  udf_dataset  ` ).
+Consider a setup where you're updating a view in *Project A* ( `authorized_dataset` ). This view query joins tables from *Project B* ( `shared_dataset` ) and calls a UDF in *Project C* ( `udf_dataset` ).
 
 The following permissions are required:
 
-  - *Project A* : `  bigquery.tables.update  ` on the specific view resource you update.
-  - *Project B* : `  bigquery.datasets.get  ` and `  bigquery.tables.getData  ` on the referenced shared resources.
-  - *Project C* : `  bigquery.routines.get  ` on the specific UDF you call.
+  - *Project A* : `bigquery.tables.update` on the specific view resource you update.
+  - *Project B* : `bigquery.datasets.get` and `bigquery.tables.getData` on the referenced shared resources.
+  - *Project C* : `bigquery.routines.get` on the specific UDF you call.
 
-Crucially, your identity doesn't require the `  bigquery.datasets.update  ` permission on *Project B* or *Project C* to perform this update.
+Crucially, your identity doesn't require the `bigquery.datasets.update` permission on *Project B* or *Project C* to perform this update.
 
 ### Updating a view's SQL query
 
 You can update the SQL query used to define a view by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq update  ` command
-  - Calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+  - Using the bq command-line tool's `bq update` command
+  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
   - Using the client libraries
 
 You can change the SQL dialect from legacy SQL to GoogleSQL in the API or bq command-line tool. You cannot update a legacy SQL view to GoogleSQL in the Google Cloud console.
@@ -90,11 +90,11 @@ To update a view's SQL query:
 
 ### bq
 
-Issue the `  bq update  ` command with the `  --view  ` flag. To use GoogleSQL or to update the query dialect from legacy SQL to GoogleSQL, include the `  --use_legacy_sql  ` flag and set it to `  false  ` .
+Issue the `bq update` command with the `--view` flag. To use GoogleSQL or to update the query dialect from legacy SQL to GoogleSQL, include the `--use_legacy_sql` flag and set it to `false` .
 
-If your query references external user-defined function resources stored in Cloud Storage or in local files, use the `  --view_udf_resource  ` flag to specify those resources. The `  --view_udf_resource  ` flag is not demonstrated here. For more information on using UDFs, see [GoogleSQL User-Defined Functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) .
+If your query references external user-defined function resources stored in Cloud Storage or in local files, use the `--view_udf_resource` flag to specify those resources. The `--view_udf_resource` flag is not demonstrated here. For more information on using UDFs, see [GoogleSQL User-Defined Functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) .
 
-If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
+If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
 ``` notranslate
 bq update \
@@ -114,7 +114,7 @@ Replace the following:
 
 **Examples**
 
-Enter the following command to update the SQL query for a view named `  myview  ` in `  mydataset  ` . `  mydataset  ` is in your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
+Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
 
     bq update \
         --use_legacy_sql=false \
@@ -130,7 +130,7 @@ Enter the following command to update the SQL query for a view named `  myview  
           number DESC;' \
         mydataset.myview
 
-Enter the following command to update the SQL query for a view named `  myview  ` in `  mydataset  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
+Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in `myotherproject` , not your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
 
     bq update \
         --use_legacy_sql=false \
@@ -148,7 +148,7 @@ Enter the following command to update the SQL query for a view named `  myview  
 
 ### API
 
-You can update a view by calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) that contains an updated `  view  ` property. Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+You can update a view by calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) that contains an updated `view` property. Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -316,8 +316,8 @@ At any point after the view is created, you can update the view's expiration tim
 
   - Using the Google Cloud console
   - Using a Data definition language (DDL) statement written in GoogleSQL syntax
-  - Using the bq command-line tool's `  bq update  ` command
-  - Calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+  - Using the bq command-line tool's `bq update` command
+  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
   - Using the client libraries
 
 **Note:** If you set an expiration time that has already passed, the view is deleted immediately.
@@ -344,7 +344,7 @@ To update a view's expiration time:
 
 ### SQL
 
-Use the [`  ALTER VIEW SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) :
+Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -370,7 +370,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Issue the `  bq update  ` command with the `  --expiration  ` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
+Issue the `bq update` command with the `--expiration` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
 ``` notranslate
 bq update \
@@ -387,13 +387,13 @@ Replace the following::
 
 **Examples**
 
-Enter the following command to update the expiration time of `  myview  ` in `  mydataset  ` to 5 days (432000 seconds). `  mydataset  ` is in your default project.
+Enter the following command to update the expiration time of `myview` in `mydataset` to 5 days (432000 seconds). `mydataset` is in your default project.
 
     bq update \
         --expiration 432000 \
         mydataset.myview
 
-Enter the following command to update the expiration time of `  myview  ` in `  mydataset  ` to 5 days (432000 seconds). `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to update the expiration time of `myview` in `mydataset` to 5 days (432000 seconds). `mydataset` is in `myotherproject` , not your default project.
 
     bq update \
         --expiration 432000 \
@@ -401,7 +401,7 @@ Enter the following command to update the expiration time of `  myview  ` in `  
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `  expirationTime  ` property in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred. When you use the REST API, the view's expiration is expressed in milliseconds.
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `expirationTime` property in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred. When you use the REST API, the view's expiration is expressed in milliseconds.
 
 ### Go
 
@@ -522,8 +522,8 @@ You can update a view's description by:
 
   - Using the Google Cloud console
   - Using a Data definition language (DDL) statement written in GoogleSQL syntax
-  - Using the bq command-line tool's `  bq update  ` command
-  - Calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+  - Using the bq command-line tool's `bq update` command
+  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
   - Using the client libraries
 
 To update a view's description:
@@ -550,7 +550,7 @@ You cannot add a description when you create a view using the Google Cloud conso
 
 ### SQL
 
-Use the [`  ALTER VIEW SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) :
+Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -576,7 +576,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Issue the `  bq update  ` command with the `  --description  ` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+Issue the `bq update` command with the `--description` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `[PROJECT_ID]:[DATASET]` .
 
 ``` notranslate
 bq update \
@@ -593,13 +593,13 @@ Replace the following:
 
 **Examples**
 
-Enter the following command to change the description of `  myview  ` in `  mydataset  ` to "Description of myview." `  mydataset  ` is in your default project.
+Enter the following command to change the description of `myview` in `mydataset` to "Description of myview." `mydataset` is in your default project.
 
     bq update \
         --description "Description of myview" \
         mydataset.myview
 
-Enter the following command to change the description of `  myview  ` in `  mydataset  ` to "Description of myview." `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to change the description of `myview` in `mydataset` to "Description of myview." `mydataset` is in `myotherproject` , not your default project.
 
     bq update \
         --description "Description of myview" \
@@ -607,7 +607,7 @@ Enter the following command to change the description of `  myview  ` in `  myda
 
 ### API
 
-Call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `  description  ` property to update the view's description in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Because the `  tables.update  ` method replaces the entire table resource, the `  tables.patch  ` method is preferred.
+Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and use the `description` property to update the view's description in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . Because the `tables.update` method replaces the entire table resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -726,22 +726,22 @@ To copy a view in the Google Cloud console, you need IAM permissions on the sour
 
   - On the source dataset, you need the following:
     
-      - `  bigquery.tables.get  `
-      - `  bigquery.tables.getData  ` (required to access the tables referenced by the view's SQL query)
+      - `bigquery.tables.get`
+      - `bigquery.tables.getData` (required to access the tables referenced by the view's SQL query)
 
   - On the destination dataset, you need the following:
     
-      - `  bigquery.tables.create  ` (lets you create a copy of the view in the destination dataset)
+      - `bigquery.tables.create` (lets you create a copy of the view in the destination dataset)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to copy a view:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can copy views in the datasets that you create. You also need access to the destination dataset unless you created it.
+Additionally, if you have the `bigquery.datasets.create` permission, you can copy views in the datasets that you create. You also need access to the destination dataset unless you created it.
 
-**Note:** `  bigquery.jobs.create  ` permissions are not required to copy a view. The Google Cloud console does not generate a copy job when you copy a view.
+**Note:** `bigquery.jobs.create` permissions are not required to copy a view. The Google Cloud console does not generate a copy job when you copy a view.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -786,8 +786,8 @@ You cannot change the name of an existing view by using the bq command-line tool
 You can delete a view by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq rm  ` command
-  - Calling the [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method
+  - Using the bq command-line tool's `bq rm` command
+  - Calling the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method
 
 Using any available method, you can only delete one view at a time.
 
@@ -802,21 +802,21 @@ Deleting a view also deletes any permissions associated with this view. When you
 **Note:** You cannot recover views directly, but you can recover the view creation statement by searching for the corresponding [audit log activity](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) .
 
   - For information about using the log explorer to query the activity log by audit log name, see the [audit logs overview](https://docs.cloud.google.com/logging/docs/audit) .
-  - For information about using `  projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity  ` , see [BigQuery Data Policy audit logging](https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging) .
+  - For information about using `projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity` , see [BigQuery Data Policy audit logging](https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging) .
 
 ### Required permissions
 
 To delete a view, you need the following IAM permissions:
 
-  - `  bigquery.tables.delete  `
+  - `bigquery.tables.delete`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to delete a view:
 
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can delete views in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can delete views in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -840,11 +840,11 @@ To delete a view:
 
 5.  In the details pane, click **Delete** .
 
-6.  Type `  "delete"  ` in the dialog, and click **Delete** to confirm.
+6.  Type `"delete"` in the dialog, and click **Delete** to confirm.
 
 ### SQL
 
-Use the [`  DROP VIEW  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_view_statement) :
+Use the [`DROP VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_view_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -868,7 +868,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the `  bq rm  ` command with the `  --table  ` flag (or `  -t  ` shortcut) to delete a view. When you use the bq command-line tool to remove a view, you must confirm the action. You can use the `  --force  ` flag (or `  -f  ` shortcut) to skip confirmation.
+Use the `bq rm` command with the `--table` flag (or `-t` shortcut) to delete a view. When you use the bq command-line tool to remove a view, you must confirm the action. You can use the `--force` flag (or `-f` shortcut) to skip confirmation.
 
 If the view is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
 
@@ -887,29 +887,29 @@ Where:
 
 Examples:
 
-You can use the bq command-line tool to run `  bq  ` commands.
+You can use the bq command-line tool to run `bq` commands.
 
 In the Google Cloud console, activate **Cloud Shell** .
 
 [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
-Enter the following command to delete `  myview  ` from `  mydataset  ` . `  mydataset  ` is in your default project.
+Enter the following command to delete `myview` from `mydataset` . `mydataset` is in your default project.
 
     bq rm -t mydataset.myview
 
-Enter the following command to delete `  myview  ` from `  mydataset  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to delete `myview` from `mydataset` . `mydataset` is in `myotherproject` , not your default project.
 
     bq rm -t myotherproject:mydataset.myview
 
-Enter the following command to delete `  myview  ` from `  mydataset  ` . `  mydataset  ` is in your default project. The command uses the `  -f  ` shortcut to bypass confirmation.
+Enter the following command to delete `myview` from `mydataset` . `mydataset` is in your default project. The command uses the `-f` shortcut to bypass confirmation.
 
     bq rm -f -t mydataset.myview
 
-**Note:** You can enter the [`  bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to confirm that a view was removed from a dataset.
+**Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to confirm that a view was removed from a dataset.
 
 ### API
 
-Call the [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method and specify the view to delete using the `  tableId  ` parameter.
+Call the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method and specify the view to delete using the `tableId` parameter.
 
 ### C\#
 

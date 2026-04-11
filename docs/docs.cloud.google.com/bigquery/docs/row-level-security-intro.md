@@ -16,13 +16,13 @@ One table can have multiple row-level access policies. Row-level access policies
 
 At a high level, row-level security involves the creation of row-level access policies on a target BigQuery table. These policies act as filters to hide or display certain rows of data, depending on whether a user or group is in an allowed list. Any users or groups not specifically included in the allowed list are denied access.
 
-**Note:** If you create a new row-level security policy to limit row access, users that previously had full access must be added to a [`  TRUE  ` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) to maintain their access.
+**Note:** If you create a new row-level security policy to limit row access, users that previously had full access must be added to a [`TRUE` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) to maintain their access.
 
 An authorized user, with the Identity and Access Management (IAM) roles [BigQuery Admin or BigQuery DataOwner](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) , can create row-level access policies on a BigQuery table.
 
-When you create a row-level access policy, you specify the table by name, and which users or groups (called the `  grantee-list  ` ) can access certain row data. The policy also includes the data on which you want to filter, called the `  filter_expression  ` . The `  filter_expression  ` functions like a `  WHERE  ` clause in a typical query.
+When you create a row-level access policy, you specify the table by name, and which users or groups (called the `grantee-list` ) can access certain row data. The policy also includes the data on which you want to filter, called the `filter_expression` . The `filter_expression` functions like a `WHERE` clause in a typical query.
 
-**Remember:** Like a `  WHERE  ` clause, the `  filter_expression  ` matches the data that you want to be visible to the principals in the `  grantee_list  ` . The users that are not in the `  grantee_list  ` cannot see any rows.
+**Remember:** Like a `WHERE` clause, the `filter_expression` matches the data that you want to be visible to the principals in the `grantee_list` . The users that are not in the `grantee_list` cannot see any rows.
 
 For instructions on how to create and use a row-level access policy, see [Managing row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) .
 
@@ -32,11 +32,11 @@ See the [DDL reference](https://docs.cloud.google.com/bigquery/docs/reference/st
 
 The following examples demonstrate potential use cases for row-level security.
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 #### Filter row data based on region
 
-Consider the case where the table `  dataset1.table1  ` contains rows belonging to different regions (denoted by the `  region  ` column).
+Consider the case where the table `dataset1.table1` contains rows belonging to different regions (denoted by the `region` column).
 
 You can create and populate the example table by using the following query:
 
@@ -69,7 +69,7 @@ FILTER USING
   (region="APAC" );
 ```
 
-The resulting behavior is that users in the `  sales-apac@example.com  ` group can view only rows where the value for `  region  ` is `  APAC  ` .
+The resulting behavior is that users in the `sales-apac@example.com` group can view only rows where the value for `region` is `APAC` .
 
 ![Row-level security behavior for the APAC region.](https://docs.cloud.google.com/static/bigquery/images/row-level-security-apac-region.png)
 
@@ -85,11 +85,11 @@ FILTER USING
   (region="US");
 ```
 
-The resulting behavior is that users in the group `  sales-us@example.com  ` and the user `  jon@example.com  ` can view only rows where the value for `  region  ` is `  US  ` .
+The resulting behavior is that users in the group `sales-us@example.com` and the user `jon@example.com` can view only rows where the value for `region` is `US` .
 
 ![Row-level security behavior for the US region.](https://docs.cloud.google.com/static/bigquery/images/row-level-security-us-region.png)
 
-Users that aren't in the `  APAC  ` or `  US  ` groups don't see any rows.
+Users that aren't in the `APAC` or `US` groups don't see any rows.
 
 #### Filter row data based on sensitive data
 
@@ -115,7 +115,7 @@ VALUES
   ('Carrie F', 'Business', 100000, 'carrie@example.com');
 ```
 
-The row access policy in the following statement restricts querying to members of the company domain. In addition, the use of the `  SESSION_USER()  ` function restricts access only to rows that belong to the user running the query, based on their user email address.
+The row access policy in the following statement restricts querying to members of the company domain. In addition, the use of the `SESSION_USER()` function restricts access only to rows that belong to the user running the query, based on their user email address.
 
 ``` notranslate
 CREATE ROW ACCESS POLICY
@@ -126,7 +126,7 @@ ON
   (Email=SESSION_USER());
 ```
 
-The following image demonstrates how the row access policy restricts the table containing salary information. In this example, the user is named Jim, with the email address `  jim@example.com  ` .
+The following image demonstrates how the row access policy restricts the table containing salary information. In this example, the user is named Jim, with the email address `jim@example.com` .
 
 ![Row-level security use case for salaries](https://docs.cloud.google.com/static/bigquery/images/row_level_security_use_case_salaries.png)
 
@@ -199,20 +199,20 @@ Row access policies can be implicitly (automatically) removed from a table under
 
 The general principle for automatically deleting row access policies are:
 
-  - Operations using a [`  WRITE_TRUNCATE  ` write disposition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) always overwrite any existing row access policies on the destination table.
-  - For operations with a `  WRITE_APPEND  ` write disposition, the destination table's current row access policies are preserved, and the source table's policies are added to the destination table.
+  - Operations using a [`WRITE_TRUNCATE` write disposition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) always overwrite any existing row access policies on the destination table.
+  - For operations with a `WRITE_APPEND` write disposition, the destination table's current row access policies are preserved, and the source table's policies are added to the destination table.
 
 Specifically, row access policies are implicitly removed in the following situations:
 
-  - Replacing a table: when a table is replaced using the [`  CREATE OR REPLACE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) DDL statement, all existing row access policies on the original table are dropped. This occurs even if the replacement query is based on the original table's data.
+  - Replacing a table: when a table is replaced using the [`CREATE OR REPLACE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) DDL statement, all existing row access policies on the original table are dropped. This occurs even if the replacement query is based on the original table's data.
 
-  - Loading or querying with `  WRITE_TRUNCATE  ` : operations that use the `  WRITE_TRUNCATE  ` write disposition remove all existing row access policies. This includes loading data using the [`  bq load --replace  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command and running a query with the status of `  writeDisposition  ` set to `  WRITE_TRUNCATE  ` . Such operations completely overwrite the table, and row access policies aren't carried over.
+  - Loading or querying with `WRITE_TRUNCATE` : operations that use the `WRITE_TRUNCATE` write disposition remove all existing row access policies. This includes loading data using the [`bq load --replace`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command and running a query with the status of `writeDisposition` set to `WRITE_TRUNCATE` . Such operations completely overwrite the table, and row access policies aren't carried over.
 
   - Table deletion or expiration: if a table is explicitly deleted or if it reaches its expiration time and is automatically removed, all associated row access policies are also deleted.
 
-  - Table copy operations: when copying a table without row access policies to a destination table that has row access policies, the policies on the destination table are removed, unless the [`  --append_table  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) flag or `  "writeDisposition": "WRITE_APPEND"  ` is used. See [Using row-level security with other BigQuery features](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter) for more information on table copy jobs.
+  - Table copy operations: when copying a table without row access policies to a destination table that has row access policies, the policies on the destination table are removed, unless the [`--append_table`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) flag or `"writeDisposition": "WRITE_APPEND"` is used. See [Using row-level security with other BigQuery features](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter) for more information on table copy jobs.
 
-Using the [`  TRUNCATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) DML statement, which removes all rows from a table while maintaining its schema, doesn't remove row access policies.
+Using the [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) DML statement, which removes all rows from a table while maintaining its schema, doesn't remove row access policies.
 
 ## Quotas
 
@@ -262,7 +262,7 @@ For more information about how row-level security interacts with some BigQuery f
     
       - Row access policies that incorporate [subqueries](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#filter_row_data_based_on_lookup_table) aren't compatible with the [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) . The BigQuery Storage Read API only supports simple filter predicates.
 
-  - Non-query operations, including service account jobs, that need full access to table data can use row-level security with the [`  TRUE  ` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) . Examples include [table copying](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter) , [dataproc workflows](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#tabledata-list) , and more. For more information, see [Using row-level security](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features) .
+  - Non-query operations, including service account jobs, that need full access to table data can use row-level security with the [`TRUE` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) . Examples include [table copying](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter) , [dataproc workflows](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#tabledata-list) , and more. For more information, see [Using row-level security](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features) .
 
   - You can create, replace, or delete row-level access policies with DDL statements or [row access policy APIs](https://docs.cloud.google.com/bigquery/docs/reference/rest#rest-resource:-v2.rowaccesspolicies) . You can also perform all available actions in the row access policy APIs in the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) . You can list and view row-level access policies in the Google Cloud console.
 
@@ -270,9 +270,9 @@ For more information about how row-level security interacts with some BigQuery f
 
   - [Table sampling](https://docs.cloud.google.com/bigquery/docs/table-sampling) is not compatible with row-level security.
 
-  - Top-level subquery policy results are limited to 100 MB. This limit applies per row-level access policy.
+  - Row-level access policies impose a 100 MB limit on results from top-level subqueries within themselves. Exceeding this threshold will cause the query to fail. It is important to note that this restriction is applied on a per-policy basis and does not affect the user query.
 
-  - Top-level [`  IN  ` subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#in_subquery_concepts) where the type of `  search_value  ` is `  FLOAT  ` , `  STRUCT  ` , `  ARRAY  ` , `  JSON  ` or `  GEOGRAPHY  ` aren't available in row access policies.
+  - Top-level [`IN` subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#in_subquery_concepts) where the type of `search_value` is `FLOAT` , `STRUCT` , `ARRAY` , `JSON` or `GEOGRAPHY` aren't available in row access policies.
 
   - If the row-level access policy predicate cannot be evaluated due to the deletion of any referenced table, the query fails.
 
@@ -280,13 +280,13 @@ For more information about how row-level security interacts with some BigQuery f
 
   - Column [renaming](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_name) and [dropping](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#delete_a_column) statements that modify table schema and could impact row access policies aren't permitted.
 
-  - [Data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) is only compatible with queries that have non-subquery row access policies. Data masking is applied on top of row-level security. For example, if there is a row access policy applied on `  location = "US"  ` and `  location  ` is masked, then users are able to see rows where `  location = "US"  ` but the location field is masked in the results. Queries involving a subquery row access policy will require Fine-Grained Reader access on columns referenced by row access policies.
+  - [Data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) is only compatible with queries that have non-subquery row access policies. Data masking is applied on top of row-level security. For example, if there is a row access policy applied on `location = "US"` and `location` is masked, then users are able to see rows where `location = "US"` but the location field is masked in the results. Queries involving a subquery row access policy will require Fine-Grained Reader access on columns referenced by row access policies.
 
 ## Audit logging and monitoring
 
 When data in a table with one or more row-level access policies is read, the row-level access policies authorized for the read access and any corresponding tables referenced in subqueries appear in the IAM authorization information for that read request.
 
-Creation and deletion of row-level access policies are audit logged, and can be accessed through [Cloud Logging](https://docs.cloud.google.com/logging/docs/overview) . Audit logs include the name of the row-level access policy. However, the `  filter_expression  ` and `  grantee_list  ` definitions of a row-level access policy are omitted from logs, as they may contain user or other sensitive information. Listing and viewing of row-level access policies are not audit logged.
+Creation and deletion of row-level access policies are audit logged, and can be accessed through [Cloud Logging](https://docs.cloud.google.com/logging/docs/overview) . Audit logs include the name of the row-level access policy. However, the `filter_expression` and `grantee_list` definitions of a row-level access policy are omitted from logs, as they may contain user or other sensitive information. Listing and viewing of row-level access policies are not audit logged.
 
 For more information about logging in BigQuery, see [Introduction to BigQuery monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) .
 

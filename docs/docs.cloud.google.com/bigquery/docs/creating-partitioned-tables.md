@@ -12,8 +12,8 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To get the permissions that you need to create a table, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project if you're creating a table by loading data or by saving query results to a table.
-  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the dataset where you're creating the table.
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project if you're creating a table by loading data or by saving query results to a table.
+  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the dataset where you're creating the table.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -23,10 +23,10 @@ These predefined roles contain the permissions required to create a table. To se
 
 The following permissions are required to create a table:
 
-  - `  bigquery.tables.create  ` on the dataset where you're creating the table.
-  - `  bigquery.tables.getData  ` on all tables and views that your query references if you're saving query results as a table.
-  - `  bigquery.jobs.create  ` on the project if you're creating the table by loading data or by saving query results to a table.
-  - `  bigquery.tables.updateData  ` on the table if you're appending to or overwriting a table with query results.
+  - `bigquery.tables.create` on the dataset where you're creating the table.
+  - `bigquery.tables.getData` on all tables and views that your query references if you're saving query results as a table.
+  - `bigquery.jobs.create` on the project if you're creating the table by loading data or by saving query results to a table.
+  - `bigquery.tables.updateData` on the table if you're appending to or overwriting a table with query results.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -57,7 +57,7 @@ In the **Create table** pane, specify the following details:
     1.  For **Dataset** , select the dataset in which you want to create the table.
     2.  In the **Table** field, enter the name of the table that you want to create.
     3.  Verify that the **Table type** field is set to **Native table** .
-3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. The schema must include a `  DATE  ` , `  TIMESTAMP  ` , or `  DATETIME  ` column for the partitioning column. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) . You can enter schema information manually by using one of the following methods:
+3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. The schema must include a `DATE` , `TIMESTAMP` , or `DATETIME` column for the partitioning column. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) . You can enter schema information manually by using one of the following methods:
       - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
         
         ``` notranslate
@@ -66,7 +66,7 @@ In the **Create table** pane, specify the following details:
         ```
     
       - Option 2: Click add\_box **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
-4.  In the **Partition and cluster settings** section, in the **Partitioning** list, select **Partition by field** , and then choose the partitioning column. This option is only available if the schema contains a `  DATE  ` , `  TIMESTAMP  ` , or `  DATETIME  ` column.
+4.  In the **Partition and cluster settings** section, in the **Partitioning** list, select **Partition by field** , and then choose the partitioning column. This option is only available if the schema contains a `DATE` , `TIMESTAMP` , or `DATETIME` column.
 5.  Optional: To require a partition filter on all queries for this table, select the **Require partition filter** checkbox. A partition filter can reduce cost and improve performance. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 6.  Select the **Partitioning type** .
 7.  Optional: In the **Advanced options** section, if you want to use a customer-managed encryption key, then select the **Use a customer-managed encryption key (CMEK)** option. By default, BigQuery [encrypts customer content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) by using a Google-owned and Google-managed encryption key.
@@ -76,9 +76,9 @@ In the **Create table** pane, specify the following details:
 
 ### SQL
 
-To create a time-unit column-partitioned table, use the [`  CREATE TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a [`  PARTITION BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) .
+To create a time-unit column-partitioned table, use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a [`PARTITION BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) .
 
-The following example creates a table with daily partitions based on the `  transaction_date  ` column:
+The following example creates a table with daily partitions based on the `transaction_date` column:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -96,13 +96,13 @@ The following example creates a table with daily partitions based on the `  tran
         require_partition_filter = TRUE);
     ```
     
-    Use the [`  OPTIONS  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
+    Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
 3.  Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The default partitioning type for `  DATE  ` columns is daily partitioning. To specify a different partitioning type, include the [`  DATE_TRUNC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc) function in the `  PARTITION BY  ` clause. For example, the following query creates a table with monthly partitions:
+The default partitioning type for `DATE` columns is daily partitioning. To specify a different partitioning type, include the [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc) function in the `PARTITION BY` clause. For example, the following query creates a table with monthly partitions:
 
 ``` notranslate
 CREATE TABLE
@@ -114,7 +114,7 @@ PARTITION BY
     require_partition_filter = TRUE);
 ```
 
-You can also specify a `  TIMESTAMP  ` or `  DATETIME  ` column as the partitioning column. In that case, include the `  TIMESTAMP_TRUNC  ` or `  DATETIME_TRUNC  ` function in the `  PARTITION BY  ` clause to specify the partition type. For example, the following statement creates a table with daily partitions based on a `  TIMESTAMP  ` column:
+You can also specify a `TIMESTAMP` or `DATETIME` column as the partitioning column. In that case, include the `TIMESTAMP_TRUNC` or `DATETIME_TRUNC` function in the `PARTITION BY` clause to specify the partition type. For example, the following statement creates a table with daily partitions based on a `TIMESTAMP` column:
 
 ``` notranslate
 CREATE TABLE
@@ -134,7 +134,7 @@ PARTITION BY
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `  --table  ` flag (or `  -t  ` shortcut):
+2.  Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `--table` flag (or `-t` shortcut):
     
     ``` notranslate
     bq mk \
@@ -149,18 +149,18 @@ PARTITION BY
     
     Replace the following:
     
-      - SCHEMA : A schema definition in the format `  column:data_type,column:data_type  ` or the path to a JSON schema file on your local machine. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
-      - COLUMN : The name of the partitioning column. In the table schema, this column must be a `  TIMESTAMP  ` , `  DATETIME  ` , or `  DATE  ` type.
-      - UNIT\_TIME : The partitioning type. Supported values include `  DAY  ` , `  HOUR  ` , `  MONTH  ` , or `  YEAR  ` .
-      - EXPIRATION\_TIME : The expiration time for the table's partitions, in seconds. The `  --time_partitioning_expiration  ` flag is optional. For more information, see [Set the partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) .
-      - BOOLEAN : If `  true  ` then queries on this table must include a partition filter. The `  --require_partition_filter  ` flag is optional. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
+      - SCHEMA : A schema definition in the format `column:data_type,column:data_type` or the path to a JSON schema file on your local machine. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+      - COLUMN : The name of the partitioning column. In the table schema, this column must be a `TIMESTAMP` , `DATETIME` , or `DATE` type.
+      - UNIT\_TIME : The partitioning type. Supported values include `DAY` , `HOUR` , `MONTH` , or `YEAR` .
+      - EXPIRATION\_TIME : The expiration time for the table's partitions, in seconds. The `--time_partitioning_expiration` flag is optional. For more information, see [Set the partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) .
+      - BOOLEAN : If `true` then queries on this table must include a partition filter. The `--require_partition_filter` flag is optional. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
       - PROJECT\_ID : The project ID. If omitted, your default project is used.
       - DATASET : The name of a dataset in your project.
       - TABLE : The name of the table to create.
     
-    For other command-line options, see [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
+    For other command-line options, see [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
     
-    The following example creates a table named `  mytable  ` that is partitioned on the `  ts  ` column, using hourly partitioning. The partition expiration is 259,200 seconds (3 days).
+    The following example creates a table named `mytable` that is partitioned on the `ts` column, using hourly partitioning. The partition expiration is 259,200 seconds (3 days).
     
     ``` notranslate
     bq mk \
@@ -174,13 +174,13 @@ PARTITION BY
 
 ### Terraform
 
-Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
+Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a table named `  mytable  ` that is partitioned by day:
+The following example creates a table named `mytable` that is partitioned by day:
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -250,13 +250,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -268,7 +268,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -280,7 +280,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -292,7 +292,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `  timePartitioning  ` property and the `  schema  ` property.
+Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `timePartitioning` property and the `schema` property.
 
 ### Go
 
@@ -507,7 +507,7 @@ To create an empty ingestion-time partitioned table with a schema definition:
 
 ### SQL
 
-To create an ingestion-time partitioned table, use the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a [`  PARTITION BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) that partitions on `  _PARTITIONDATE  ` .
+To create an ingestion-time partitioned table, use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a [`PARTITION BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) that partitions on `_PARTITIONDATE` .
 
 The following example creates a table with daily partitions:
 
@@ -527,13 +527,13 @@ The following example creates a table with daily partitions:
         require_partition_filter = TRUE);
     ```
     
-    Use the [`  OPTIONS  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
+    Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
 3.  Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The default partitioning type for ingestion-time partitioning is daily partitioning. To specify a different partitioning type, include the [`  DATE_TRUNC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc) function in the `  PARTITION BY  ` clause. For example, the following query creates a table with monthly partitions:
+The default partitioning type for ingestion-time partitioning is daily partitioning. To specify a different partitioning type, include the [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc) function in the `PARTITION BY` clause. For example, the following query creates a table with monthly partitions:
 
 ``` notranslate
 CREATE TABLE
@@ -553,7 +553,7 @@ PARTITION BY
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `  --table  ` flag (or `  -t  ` shortcut):
+2.  Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `--table` flag (or `-t` shortcut):
     
     ``` notranslate
     bq mk \
@@ -567,17 +567,17 @@ PARTITION BY
     
     Replace the following:
     
-      - SCHEMA : A definition in the format `  column:data_type,column:data_type  ` or the path to a JSON schema file on your local machine. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
-      - UNIT\_TIME : The partitioning type. Supported values include `  DAY  ` , `  HOUR  ` , `  MONTH  ` , or `  YEAR  ` .
-      - EXPIRATION\_TIME : The expiration time for the table's partitions, in seconds. The `  --time_partitioning_expiration  ` flag is optional. For more information, see [Set the partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) .
-      - BOOLEAN : If `  true  ` then queries on this table must include a partition filter. The `  --require_partition_filter  ` flag is optional. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
+      - SCHEMA : A definition in the format `column:data_type,column:data_type` or the path to a JSON schema file on your local machine. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+      - UNIT\_TIME : The partitioning type. Supported values include `DAY` , `HOUR` , `MONTH` , or `YEAR` .
+      - EXPIRATION\_TIME : The expiration time for the table's partitions, in seconds. The `--time_partitioning_expiration` flag is optional. For more information, see [Set the partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) .
+      - BOOLEAN : If `true` then queries on this table must include a partition filter. The `--require_partition_filter` flag is optional. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
       - PROJECT\_ID : The project ID. If omitted, your default project is used.
       - DATASET : The name of a dataset in your project.
       - TABLE : The name of the table to create.
     
-    For other command-line options, see [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
+    For other command-line options, see [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
     
-    The following example creates an ingestion-time partitioned table named `  mytable  ` . The table has daily partitioning, with a partition expiration of 259,200 seconds (3 days).
+    The following example creates an ingestion-time partitioned table named `mytable` . The table has daily partitioning, with a partition expiration of 259,200 seconds (3 days).
     
     ``` notranslate
     bq mk \
@@ -590,13 +590,13 @@ PARTITION BY
 
 ### Terraform
 
-Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
+Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a table named `  mytable  ` that is partitioned by ingestion time:
+The following example creates a table named `mytable` that is partitioned by ingestion time:
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -660,13 +660,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -678,7 +678,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -690,7 +690,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -702,7 +702,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `  timePartitioning  ` property and the `  schema  ` property.
+Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `timePartitioning` property and the `schema` property.
 
 ### Create an integer-range partitioned table
 
@@ -728,9 +728,9 @@ To create an empty integer-range partitioned table with a schema definition:
       - In the **Table name** field, enter the name of the table.
       - Verify that **Table type** is set to **Native table** .
 
-7.  In the **Schema** section, enter the schema definition. Make sure the schema includes an `  INTEGER  ` column for the partitioning column. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+7.  In the **Schema** section, enter the schema definition. Make sure the schema includes an `INTEGER` column for the partitioning column. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
-8.  In the **Partition and cluster settings** section, in the **Partitioning** drop-down list, select **Partition by field** and choose the partitioning column. This option is only available if the schema contains an `  INTEGER  ` column.
+8.  In the **Partition and cluster settings** section, in the **Partitioning** drop-down list, select **Partition by field** and choose the partitioning column. This option is only available if the schema contains an `INTEGER` column.
 
 9.  Provide values for **Start** , **End** , and **Interval** :
     
@@ -738,7 +738,7 @@ To create an empty integer-range partitioned table with a schema definition:
       - **End** is the end of last partition range (exclusive).
       - **Interval** is the width of each partition range.
     
-    Values outside of these ranges go into a special `  __UNPARTITIONED__  ` partition.
+    Values outside of these ranges go into a special `__UNPARTITIONED__` partition.
 
 10. (Optional) To require a partition filter on all queries for this table, select the **Require partition filter** checkbox. Requiring a partition filter can reduce cost and improve performance. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
@@ -748,9 +748,9 @@ To create an empty integer-range partitioned table with a schema definition:
 
 ### SQL
 
-To create an integer-range partitioned table, use the [`  CREATE TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a [`  PARTITION BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) .
+To create an integer-range partitioned table, use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with a [`PARTITION BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) .
 
-The following example creates a table that is partitioned on the `  customer_id  ` column with start 0, end 100, and interval 10:
+The following example creates a table that is partitioned on the `customer_id` column with start 0, end 100, and interval 10:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -766,7 +766,7 @@ The following example creates a table that is partitioned on the `  customer_id 
         require_partition_filter = TRUE);
     ```
     
-    Use the [`  OPTIONS  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
+    Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
 3.  Click play\_circle **Run** .
 
@@ -780,7 +780,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `  --table  ` flag (or `  -t  ` shortcut):
+2.  Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `--table` flag (or `-t` shortcut):
     
     ``` notranslate
     bq mk \
@@ -792,21 +792,21 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     Replace the following:
     
-      - SCHEMA : An inline schema definition in the format `  column:data_type,column:data_type  ` or the path to a JSON schema file on your local machine. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
-      - COLUMN\_NAME : The name of the partitioning column. In the table schema, this column must be an `  INTEGER  ` type.
+      - SCHEMA : An inline schema definition in the format `column:data_type,column:data_type` or the path to a JSON schema file on your local machine. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+      - COLUMN\_NAME : The name of the partitioning column. In the table schema, this column must be an `INTEGER` type.
       - START : The start of first partition range (inclusive).
       - END : The end of last partition range (exclusive).
       - INTERVAL : The width of each partition range.
-      - BOOLEAN : If `  true  ` then queries on this table must include a partition filter. The `  --require_partition_filter  ` flag is optional. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
+      - BOOLEAN : If `true` then queries on this table must include a partition filter. The `--require_partition_filter` flag is optional. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
       - PROJECT\_ID : The project ID. If omitted, your default project is used.
       - DATASET : The name of a dataset in your project.
       - TABLE : The name of the table to create.
     
-    Values outside of the partition range go into a special `  __UNPARTITIONED__  ` partition.
+    Values outside of the partition range go into a special `__UNPARTITIONED__` partition.
     
-    For other command-line options, see [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
+    For other command-line options, see [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
     
-    The following example creates a table named `  mytable  ` that is partitioned on the `  customer_id  ` column.
+    The following example creates a table named `mytable` that is partitioned on the `customer_id` column.
     
     ``` notranslate
     bq mk \
@@ -818,13 +818,13 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### Terraform
 
-Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
+Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a table named `  mytable  ` that is partitioned by integer range:
+The following example creates a table named `mytable` that is partitioned by integer range:
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -891,13 +891,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -909,7 +909,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -921,7 +921,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -933,7 +933,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `  rangePartitioning  ` property and the `  schema  ` property.
+Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `rangePartitioning` property and the `schema` property.
 
 ### Java
 
@@ -1095,17 +1095,17 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 You can create a partitioned table from a query result in the following ways:
 
-  - In SQL, use a `  CREATE TABLE ... AS SELECT  ` statement. You can use this approach to create a table that is partitioned by time-unit column or integer range, but not ingestion time.
+  - In SQL, use a `CREATE TABLE ... AS SELECT` statement. You can use this approach to create a table that is partitioned by time-unit column or integer range, but not ingestion time.
 
   - Use the bq command-line tool or the BigQuery API to set a destination table for a query. When the query runs, BigQuery writes the results to the destination table. You can use this approach for any partitioning type.
 
-  - Call the `  jobs.insert  ` API method and specify the partitioning in either the `  timePartitioning  ` property or the `  rangePartitioning  ` property.
+  - Call the `jobs.insert` API method and specify the partitioning in either the `timePartitioning` property or the `rangePartitioning` property.
 
 ### SQL
 
-Use the [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement. Include a [`  PARTITION BY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) clause to configure the partitioning.
+Use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement. Include a [`PARTITION BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) clause to configure the partitioning.
 
-The following example creates a table that is partitioned on the `  transaction_date  ` column:
+The following example creates a table that is partitioned on the `transaction_date` column:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1126,7 +1126,7 @@ The following example creates a table that is partitioned on the `  transaction_
     );
     ```
     
-    Use the [`  OPTIONS  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
+    Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
 3.  Click play\_circle **Run** .
 
@@ -1140,7 +1140,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To create a partitioned table from a query, use the [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command with the `  --destination_table  ` flag and the `  --time_partitioning_type  ` flag.
+2.  To create a partitioned table from a query, use the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command with the `--destination_table` flag and the `--time_partitioning_type` flag.
     
     Time-unit column-partitioning:
     
@@ -1179,13 +1179,13 @@ For more information about how to run queries, see [Run an interactive query](ht
       - DATASET : The name of a dataset in your project.
       - TABLE : The name of the table to create.
       - COLUMN : The name of the partitioning column.
-      - UNIT\_TIME : The partitioning type. Supported values include `  DAY  ` , `  HOUR  ` , `  MONTH  ` , or `  YEAR  ` .
+      - UNIT\_TIME : The partitioning type. Supported values include `DAY` , `HOUR` , `MONTH` , or `YEAR` .
       - START : The start of range partitioning, inclusive.
       - END : The end of range partitioning, exclusive.
       - INTERVAL : The width of each range within the partition.
       - QUERY\_STATEMENT : The query used to populate the table.
     
-    The following example creates a table that is partitioned on the `  transaction_date  ` column, using monthly partitioning.
+    The following example creates a table that is partitioned on the `transaction_date` column, using monthly partitioning.
     
     ``` notranslate
     bq query \
@@ -1196,7 +1196,7 @@ For more information about how to run queries, see [Run an interactive query](ht
        'SELECT transaction_id, transaction_date FROM mydataset.mytable'
     ```
     
-    The following example creates a table that is partitioned on the `  customer_id  ` column, using integer-range partitioning.
+    The following example creates a table that is partitioned on the `customer_id` column, using integer-range partitioning.
     
     ``` notranslate
     bq query \
@@ -1206,7 +1206,7 @@ For more information about how to run queries, see [Run an interactive query](ht
        'SELECT * FROM mydataset.ponies'
     ```
     
-    For ingestion-time partitioned tables, you can also load data into a specific partition by using a [partition decorator](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#write-to-partition) . The following example creates a new ingestion-time partitioned table and loads data into the `  20180201  ` (February 1, 2018) partition:
+    For ingestion-time partitioned tables, you can also load data into a specific partition by using a [partition decorator](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#write-to-partition) . The following example creates a new ingestion-time partitioned table and loads data into the `20180201` (February 1, 2018) partition:
     
     ``` notranslate
     bq query \
@@ -1218,11 +1218,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-To save query results to a partitioned table, call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `  query  ` job. Specify the destination table in the `  destinationTable  ` . Specify the partitioning in either the `  timePartitioning  ` property or the `  rangePartitioning  ` property.
+To save query results to a partitioned table, call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. Configure a `query` job. Specify the destination table in the `destinationTable` . Specify the partitioning in either the `timePartitioning` property or the `rangePartitioning` property.
 
 ## Convert date-sharded tables into ingestion-time partitioned tables
 
-If you previously created date-sharded tables, you can convert the entire set of related tables into a single ingestion-time partitioned table by using the [`  partition  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_partition) command in the bq command-line tool.
+If you previously created date-sharded tables, you can convert the entire set of related tables into a single ingestion-time partitioned table by using the [`partition`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_partition) command in the bq command-line tool.
 
 ``` notranslate
 bq --location=LOCATION partition \
@@ -1234,20 +1234,20 @@ bq --location=LOCATION partition \
 
 Replace the following:
 
-  - LOCATION : The name of your location. The `  --location  ` flag is optional.
-  - PARTITION\_TYPE : The partition type. Possible values include `  DAY  ` , `  HOUR  ` , `  MONTH  ` , or `  YEAR  ` .
-  - INTEGER : The partition expiration time, in seconds. There is no minimum value. The expiration time evaluates to the partition's UTC date plus the integer value. The `  time_partitioning_expiration  ` flag is optional.
+  - LOCATION : The name of your location. The `--location` flag is optional.
+  - PARTITION\_TYPE : The partition type. Possible values include `DAY` , `HOUR` , `MONTH` , or `YEAR` .
+  - INTEGER : The partition expiration time, in seconds. There is no minimum value. The expiration time evaluates to the partition's UTC date plus the integer value. The `time_partitioning_expiration` flag is optional.
   - PROJECT\_ID : Your project ID.
   - SOURCE\_DATASET : The dataset that contains the date-sharded tables.
   - SOURCE\_TABLE : The prefix of your date-sharded tables.
   - DESTINATION\_DATASET : The dataset for the new partitioned table.
   - DESTINATION\_TABLE : The name of the partitioned table to create.
 
-The `  partition  ` command does not support the `  --label  ` , `  --expiration  ` , `  --add_tags  ` , or `  --description  ` flags. You can add labels, a table expiration, [tags](https://docs.cloud.google.com/bigquery/docs/tags) , and a description to the table after it is created.
+The `partition` command does not support the `--label` , `--expiration` , `--add_tags` , or `--description` flags. You can add labels, a table expiration, [tags](https://docs.cloud.google.com/bigquery/docs/tags) , and a description to the table after it is created.
 
-When you run the `  partition  ` command, BigQuery creates a copy job that generates partitions from the sharded tables.
+When you run the `partition` command, BigQuery creates a copy job that generates partitions from the sharded tables.
 
-The following example creates an ingestion-time partitioned table named `  mytable_partitioned  ` from a set of date-sharded tables prefixed with `  sourcetable_  ` . The new table is partitioned daily, with a partition expiration of 259,200 seconds (3 days).
+The following example creates an ingestion-time partitioned table named `mytable_partitioned` from a set of date-sharded tables prefixed with `sourcetable_` . The new table is partitioned daily, with a partition expiration of 259,200 seconds (3 days).
 
     bq partition \
         --time_partitioning_type=DAY \
@@ -1255,7 +1255,7 @@ The following example creates an ingestion-time partitioned table named `  mytab
         mydataset.sourcetable_ \
         mydataset.mytable_partitioned
 
-If the date-sharded tables were `  sourcetable_20180126  ` and `  sourcetable_20180127  ` , this command would create the following partitions: `  mydataset.mytable_partitioned$20180126  ` and `  mydataset.mytable_partitioned$20180127  ` .
+If the date-sharded tables were `sourcetable_20180126` and `sourcetable_20180127` , this command would create the following partitions: `mydataset.mytable_partitioned$20180126` and `mydataset.mytable_partitioned$20180127` .
 
 ## Partitioned table security
 

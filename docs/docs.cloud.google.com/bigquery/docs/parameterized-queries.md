@@ -13,14 +13,14 @@ You pass query parameters for various data types, including the following:
 
 Query parameters are only supported in [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) . Parameters cannot be used as substitutes for identifiers, column names, table names, or other parts of the query.
 
-To specify a named parameter, use the `  @  ` character followed by an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) , such as `  @param_name  ` . Alternatively, use the placeholder value `  ?  ` to specify a positional parameter. A query can use positional or named parameters, but not both.
+To specify a named parameter, use the `@` character followed by an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) , such as `@param_name` . Alternatively, use the placeholder value `?` to specify a positional parameter. A query can use positional or named parameters, but not both.
 
 **Note:** To protect potentially sensitive information, the parameter value isn't logged in the BigQuery [logs](https://docs.cloud.google.com/bigquery/docs/monitoring#logs) when you run a query with a parameter.
 
 You can run a parameterized query in BigQuery in the following ways:
 
   - The BigQuery Studio query editor in the Google Cloud console
-  - The bq command-line tool's `  bq query  ` command
+  - The bq command-line tool's `bq query` command
   - The API
   - The client libraries
 
@@ -28,9 +28,9 @@ The following examples show how to pass parameter values to a parameterized quer
 
 ### Console
 
-To run a parameterized query in the Google Cloud console, configure parameters in **Query settings** , and then reference them in your SQL query by prefixing each parameter name with the `  @  ` character.
+To run a parameterized query in the Google Cloud console, configure parameters in **Query settings** , and then reference them in your SQL query by prefixing each parameter name with the `@` character.
 
-**Supported data types:** the Google Cloud console only supports parameterized queries of primitive data types, such as `  BIGNUMERIC  ` , `  BOOL  ` , `  BYTES  ` , `  DATE  ` , `  DATETIME  ` , `  FLOAT64  ` , `  GEOGRAPHY  ` , `  INT64  ` , `  INTERVAL  ` , `  NUMERIC  ` , `  STRING  ` , `  TIME  ` , or `  TIMESTAMP  ` . Complex data types, such as `  ARRAY  ` and `  STRUCT  ` , aren't supported in the Google Cloud console.
+**Supported data types:** the Google Cloud console only supports parameterized queries of primitive data types, such as `BIGNUMERIC` , `BOOL` , `BYTES` , `DATE` , `DATETIME` , `FLOAT64` , `GEOGRAPHY` , `INT64` , `INTERVAL` , `NUMERIC` , `STRING` , `TIME` , or `TIMESTAMP` . Complex data types, such as `ARRAY` and `STRUCT` , aren't supported in the Google Cloud console.
 
 ## Add the parameters in the Google Cloud console
 
@@ -44,7 +44,7 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 
 4.  For each parameter in your query, provide the following:
     
-      - **Name** : Enter the parameter name (don't include the `  @  ` character).
+      - **Name** : Enter the parameter name (don't include the `@` character).
       - **Type** : Select the data type for the parameter.
       - **Value** : Enter the value you want to use for this execution.
 
@@ -52,7 +52,7 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 
 ## Pass parameter values to a query in the Google Cloud console
 
-1.  In the query editor, enter a SQL query using the parameters you configured in the previous step. Reference them by prefixing their names with the `  @  ` character, as shown in the example.
+1.  In the query editor, enter a SQL query using the parameters you configured in the previous step. Reference them by prefixing their names with the `@` character, as shown in the example.
     
     **Example:**
     
@@ -68,7 +68,7 @@ To run a parameterized query in the Google Cloud console, configure parameters i
           ORDER BY
             word_count DESC;
     
-    For this example, you would add the `  corpus  ` parameter as a `  STRING  ` with value `  romeoandjuliet  ` , and the `  min_word_count  ` parameter as an `  INT64  ` with value `  250  ` .
+    For this example, you would add the `corpus` parameter as a `STRING` with value `romeoandjuliet` , and the `min_word_count` parameter as an `INT64` with value `250` .
     
     If the query contains a missing or invalid parameter, an error message is displayed. Click **Set parameter** in the error message to adjust the parameter settings.
 
@@ -82,11 +82,11 @@ To run a parameterized query in the Google Cloud console, configure parameters i
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Use `  --parameter  ` to provide values for parameters in the form `  name:type:value  ` . An empty name produces a positional parameter. The type may be omitted to assume `  STRING  ` .
+2.  Use `--parameter` to provide values for parameters in the form `name:type:value` . An empty name produces a positional parameter. The type may be omitted to assume `STRING` .
     
-    The `  --parameter  ` flag must be used in conjunction with the flag `  --use_legacy_sql=false  ` to specify GoogleSQL syntax.
+    The `--parameter` flag must be used in conjunction with the flag `--use_legacy_sql=false` to specify GoogleSQL syntax.
     
-    (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) using the `  --location  ` flag.
+    (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) using the `--location` flag.
     
     ``` notranslate
     bq query \
@@ -108,11 +108,11 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 
 ### API
 
-To use named parameters, set the `  parameterMode  ` to `  NAMED  ` in the `  query  ` job configuration.
+To use named parameters, set the `parameterMode` to `NAMED` in the `query` job configuration.
 
-Populate `  queryParameters  ` with the list of parameters in the `  query  ` job configuration. Set the `  name  ` of each parameter with the `  @param_name  ` used in the query.
+Populate `queryParameters` with the list of parameters in the `query` job configuration. Set the `name` of each parameter with the `@param_name` used in the query.
 
-[Enable GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/introduction-sql) by setting `  useLegacySql  ` to `  false  ` .
+[Enable GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/introduction-sql) by setting `useLegacySql` to `false` .
 
     {
       "query": "SELECT word, word_count FROM `bigquery-public-data.samples.shakespeare` WHERE corpus = @corpus AND word_count >= @min_word_count ORDER BY word_count DESC;",
@@ -142,7 +142,7 @@ Populate `  queryParameters  ` with the list of parameters in the `  query  ` jo
 
 [Try it in the Google APIs Explorer](https://developers.google.com/apis-explorer/#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+word%252C+word_count%255CnFROM+%2560bigquery-public-data.samples.shakespeare%2560%255CnWHERE+corpus+%253D+%2540corpus%255CnAND+word_count+%253E%253D+%2540min_word_count%255CnORDER+BY+word_count+DESC%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522romeoandjuliet%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522corpus%2522%250A++++%257D%252C%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522INT64%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522250%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522min_word_count%2522%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&) .
 
-To use positional parameters, set the `  parameterMode  ` to `  POSITIONAL  ` in the `  query  ` job configuration.
+To use positional parameters, set the `parameterMode` to `POSITIONAL` in the `query` job configuration.
 
 ### C\#
 
@@ -605,7 +605,7 @@ To use positional parameters:
 
 ## Use arrays in parameterized queries
 
-To use an array type in a query parameter, set the type to `  ARRAY<T>  ` where `  T  ` is the type of the elements in the array. Construct the value as a comma-separated list of elements enclosed in square brackets, such as `  [1, 2, 3]  ` .
+To use an array type in a query parameter, set the type to `ARRAY<T>` where `T` is the type of the elements in the array. Construct the value as a comma-separated list of elements enclosed in square brackets, such as `[1, 2, 3]` .
 
 See the [data types reference for more information about the array type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) .
 
@@ -646,13 +646,13 @@ Arrays in parameterized queries aren't supported by the Google Cloud console.
          10;'
     ```
     
-    Be careful to enclose the array type declaration in single quotes so that the command output is not accidentally redirected to a file by the `  >  ` character.
+    Be careful to enclose the array type declaration in single quotes so that the command output is not accidentally redirected to a file by the `>` character.
 
 ### API
 
-To use an array-valued parameter, set the [`  parameterType  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter) to `  ARRAY  ` in the `  query  ` job configuration.
+To use an array-valued parameter, set the [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter) to `ARRAY` in the `query` job configuration.
 
-If the array values are scalars set the [`  parameterType  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter) to the type of the values, such as `  STRING  ` . If the array values are structures set this to `  STRUCT  ` and add the needed field definitions to `  structTypes  ` .
+If the array values are scalars set the [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter) to the type of the values, such as `STRING` . If the array values are structures set this to `STRUCT` and add the needed field definitions to `structTypes` .
 
 For example, this query selects the most popular names for baby boys born in US states starting with the letter W.
 
@@ -950,13 +950,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Use timestamps in parameterized queries
 
-To use a timestamp in a query parameter, the underlying REST API takes a value of type `  TIMESTAMP  ` in the format `  YYYY-MM-DD HH:MM:SS.DDDDDD time_zone  ` . If you are using the client libraries, you create a built-in date object in that language, and the library converts it to the right format. For more information, see the following language-specific examples.
+To use a timestamp in a query parameter, the underlying REST API takes a value of type `TIMESTAMP` in the format `YYYY-MM-DD HH:MM:SS.DDDDDD time_zone` . If you are using the client libraries, you create a built-in date object in that language, and the library converts it to the right format. For more information, see the following language-specific examples.
 
-For more information about the `  TIMESTAMP  ` type, see the [data types reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
+For more information about the `TIMESTAMP` type, see the [data types reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
 
 ### Console
 
-Follow the steps for [adding parameters in the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/parameterized-queries#add-parameters-in-console) described earlier in this document. Select `  TIMESTAMP  ` for the parameter type and enter the timestamp value in the format `  YYYY-MM-DD HH:MM:SS.DDDDDD time_zone  ` .
+Follow the steps for [adding parameters in the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/parameterized-queries#add-parameters-in-console) described earlier in this document. Select `TIMESTAMP` for the parameter type and enter the timestamp value in the format `YYYY-MM-DD HH:MM:SS.DDDDDD time_zone` .
 
 ### bq
 
@@ -978,7 +978,7 @@ Follow the steps for [adding parameters in the Google Cloud console](https://doc
 
 ### API
 
-To use a timestamp parameter, set the [`  parameterType  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter) to `  TIMESTAMP  ` in the query job configuration.
+To use a timestamp parameter, set the [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter) to `TIMESTAMP` in the query job configuration.
 
 This query adds an hour to the timestamp parameter value.
 
@@ -1218,9 +1218,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Use structs in parameterized queries
 
-To use a struct in a query parameter, set the type to `  STRUCT<T>  ` where `  T  ` defines the fields and types within the struct. Field definitions are separated by commas and are of the form `  field_name TF  ` where `  TF  ` is the type of the field. For example, `  STRUCT<x INT64, y STRING>  ` defines a struct with a field named `  x  ` of type `  INT64  ` and a second field named `  y  ` of type `  STRING  ` .
+To use a struct in a query parameter, set the type to `STRUCT<T>` where `T` defines the fields and types within the struct. Field definitions are separated by commas and are of the form `field_name TF` where `TF` is the type of the field. For example, `STRUCT<x INT64, y STRING>` defines a struct with a field named `x` of type `INT64` and a second field named `y` of type `STRING` .
 
-For more information about the `  STRUCT  ` type, see the [data types reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) .
+For more information about the `STRUCT` type, see the [data types reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) .
 
 ### Console
 
@@ -1246,9 +1246,9 @@ Structs in parameterized queries aren't supported by the Google Cloud console.
 
 ### API
 
-To use a struct parameter, set the [`  parameterType  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) to `  STRUCT  ` in the query job configuration.
+To use a struct parameter, set the [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) to `STRUCT` in the query job configuration.
 
-Add an object for each field of the struct to [`  structTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) in the job's `  queryParameters  ` . If the struct values are scalars set the [`  type  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) to the type of the values, such as `  STRING  ` . If the struct values are arrays set this to `  ARRAY  ` , and set the nested `  arrayType  ` field to the appropriate type. If the struct values are structures set `  type  ` to `  STRUCT  ` and add the needed `  structTypes  ` .
+Add an object for each field of the struct to [`structTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) in the job's `queryParameters` . If the struct values are scalars set the [`type`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) to the type of the values, such as `STRING` . If the struct values are arrays set this to `ARRAY` , and set the nested `arrayType` field to the appropriate type. If the struct values are structures set `type` to `STRUCT` and add the needed `structTypes` .
 
 This trivial query demonstrates the use of structured types by returning the parameter value.
 
@@ -1471,9 +1471,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Use ranges in parameterized queries
 
-To use a range in a query parameter, set the `  type  ` field to `  RANGE  ` .
+To use a range in a query parameter, set the `type` field to `RANGE` .
 
-For more information about the `  RANGE  ` type, see the [data types reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type) .
+For more information about the `RANGE` type, see the [data types reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type) .
 
 ### Console
 
@@ -1498,9 +1498,9 @@ Ranges in parameterized queries aren't supported by the Google Cloud console.
 
 ### API
 
-To use a range parameter, in the [`  parameterType  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) set the `  type  ` field to `  RANGE  ` and set the `  rangeElementType  ` field to the type of range you want to use.
+To use a range parameter, in the [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType) set the `type` field to `RANGE` and set the `rangeElementType` field to the type of range you want to use.
 
-This query shows how to use the `  RANGE  ` parameter type by returning the parameter value.
+This query shows how to use the `RANGE` parameter type by returning the parameter value.
 
     {
       "query": "SELECT @my_param AS value_of_range_parameter;",

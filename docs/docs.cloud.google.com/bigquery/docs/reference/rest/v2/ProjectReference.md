@@ -22,8 +22,8 @@ A unique reference to a project.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. ID of the project. Can be either the numeric ID or the assigned ID of the project.

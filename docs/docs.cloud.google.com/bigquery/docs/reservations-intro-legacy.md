@@ -8,7 +8,7 @@ Reservations enable you to allocate query capacity, measured in [slots](https://
 
 Creating a [capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details) is optional when working with reservations that leverage [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) , but can save on costs for steady-state workloads.
 
-**Note:** [Legacy flat-rate commitments](https://docs.cloud.google.com/bigquery/docs/reservations-intro-legacy#commitments) have access to the same features as [Enterprise edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) commitments. All legacy flat-rate commitments are labeled as `  flat-rate  ` for the compute pricing model value and `  Enterprise  ` for the edition value.
+**Note:** [Legacy flat-rate commitments](https://docs.cloud.google.com/bigquery/docs/reservations-intro-legacy#commitments) have access to the same features as [Enterprise edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) commitments. All legacy flat-rate commitments are labeled as `flat-rate` for the compute pricing model value and `Enterprise` for the edition value.
 
 ## Overview
 
@@ -40,11 +40,11 @@ BigQuery capacity is measured in [*slots*](https://docs.cloud.google.com/bigquer
 
 Slots are allocated in pools called *reservations* . Reservations let you allocate the slots in ways that make sense for your particular organization.
 
-For example, you might create a reservation named `  prod  ` for production workloads, and a separate reservation named `  test  ` for testing. That way, your test jobs don't compete for resources that your production workloads need. Or, you might create reservations for different departments in your organization.
+For example, you might create a reservation named `prod` for production workloads, and a separate reservation named `test` for testing. That way, your test jobs don't compete for resources that your production workloads need. Or, you might create reservations for different departments in your organization.
 
 Reservations can include *baseline* slots, which are always allocated, as well as *autoscaled* slots, which are [added or removed dynamically](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) based on the demands of your workload.
 
-A reservation named `  default  ` is automatically created if you purchase slot commitments before creating a reservation. There is nothing special about the `  default  ` reservation — it's created as a convenience. You can decide whether you need additional reservations or just use the default reservation.
+A reservation named `default` is automatically created if you purchase slot commitments before creating a reservation. There is nothing special about the `default` reservation — it's created as a convenience. You can decide whether you need additional reservations or just use the default reservation.
 
 To use the slots that you allocate, you must *assign* one or more projects to a reservation, as described in the next section.
 
@@ -56,21 +56,21 @@ To use the slots that you allocate, you must assign one or more projects, folder
 
 When a job is started from a project that is assigned to a reservation, the job uses that reservation's slots. If a project is not assigned to a reservation (either directly or by inheriting from its parent folder or organization), the jobs in that project use on-demand pricing.
 
-`  None  ` assignments represent an absence of an assignment. Projects assigned to `  None  ` use on-demand pricing. The common use case for `  None  ` assignments is to assign an organization to the reservation and to opt out some projects or folders from that reservation by assigning them to `  None  ` . For more information, see [Assign a project to None](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-project-to-none) .
+`None` assignments represent an absence of an assignment. Projects assigned to `None` use on-demand pricing. The common use case for `None` assignments is to assign an organization to the reservation and to opt out some projects or folders from that reservation by assigning them to `None` . For more information, see [Assign a project to None](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-project-to-none) .
 
 When you create an assignment, you specify the job type for that assignment:
 
-  - `  QUERY  ` : Use this reservation for query jobs, including SQL, DDL, DML, and BigQuery ML queries.
+  - `QUERY` : Use this reservation for query jobs, including SQL, DDL, DML, and BigQuery ML queries.
 
-  - `  PIPELINE  ` : Use this reservation for load and extract jobs.
+  - `PIPELINE` : Use this reservation for load and extract jobs.
     
     By default, load and extract jobs are [free](https://cloud.google.com/bigquery/pricing#free) and use a shared pool of slots. BigQuery does not make guarantees about the available capacity of this shared pool or the throughput you see. If you are loading large amounts of data, your job might wait as slots become available. In that case, you might want to purchase dedicated slots and assign pipeline jobs to them. We recommend creating an additional dedicated reservation with idle slot sharing disabled.
     
     When load jobs are assigned to a reservation, they lose access to the free pool. Monitor performance to make sure the jobs have enough capacity. Otherwise, performance could actually be worse than using the free pool.
 
-  - `  BACKGROUND  ` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigQuery search](https://docs.cloud.google.com/bigquery/docs/search-intro) index management jobs or [BigQuery change data capture (CDC) ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) background jobs. Also use this reservation when you replicate source databases to BigQuery with Datastream's background apply operations. `  BACKGROUND  ` reservations are not available in the Standard edition.
+  - `BACKGROUND` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigQuery search](https://docs.cloud.google.com/bigquery/docs/search-intro) index management jobs or [BigQuery change data capture (CDC) ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) background jobs. Also use this reservation when you replicate source databases to BigQuery with Datastream's background apply operations. `BACKGROUND` reservations are not available in the Standard edition.
 
-  - `  ML_EXTERNAL  ` : Use this reservation for BigQuery ML queries that use services that are external to BigQuery. For more information, see [Assign slots to BigQuery ML workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) . `  ML_EXTERNAL  ` reservations are not available in the Standard edition.
+  - `ML_EXTERNAL` : Use this reservation for BigQuery ML queries that use services that are external to BigQuery. For more information, see [Assign slots to BigQuery ML workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) . `ML_EXTERNAL` reservations are not available in the Standard edition.
 
 You can't allocate slots to specific assignments. The BigQuery scheduler handles slot allocation for the assignments in a reservation.
 
@@ -111,13 +111,13 @@ At any given time, some slots might be idle. This can include:
 
 By default, queries running in a reservation automatically use idle slots from other reservations within the same administration project. That means a job can always run as long as there's capacity. Idle capacity is immediately preemptible back to the original assigned reservation as needed, regardless of the priority of the query that needs the resources. This happens automatically in real time.
 
-To disable this functionality and force a reservation to use only the slots provisioned to it, set `  ignore_idle_slots  ` to `  true  ` . Reservations with `  ignore_idle_slots  ` set to `  true  ` receive no idle slots.
+To disable this functionality and force a reservation to use only the slots provisioned to it, set `ignore_idle_slots` to `true` . Reservations with `ignore_idle_slots` set to `true` receive no idle slots.
 
 You cannot share idle slots between reservations of different [editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) . You can share only the baseline slots or committed slots. [Autoscaled slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) might be temporarily available, but are not shareable as they may scale down.
 
-As long as `  ignore_idle_slots  ` is false, a reservation can have a slot count of `  0  ` and still have access to unused slots. If you are only using the `  default  ` reservation, we recommend setting it up this way. You may then [assign a project or folder](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) to that reservation and it will only use idle slots.
+As long as `ignore_idle_slots` is false, a reservation can have a slot count of `0` and still have access to unused slots. If you are only using the `default` reservation, we recommend setting it up this way. You may then [assign a project or folder](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) to that reservation and it will only use idle slots.
 
-Assignments of type `  ML_EXTERNAL  ` are an exception to the behavior described earlier. Slots used by BigQuery ML external model creation jobs are not preemptible; that is, the slots in a reservation with both ml\_external and query assignment types are only available for other query jobs when the slots are not occupied by the `  ML_EXTERNAL  ` jobs. Also, these jobs don't use idle slots from other reservations.
+Assignments of type `ML_EXTERNAL` are an exception to the behavior described earlier. Slots used by BigQuery ML external model creation jobs are not preemptible; that is, the slots in a reservation with both ml\_external and query assignment types are only available for other query jobs when the slots are not occupied by the `ML_EXTERNAL` jobs. Also, these jobs don't use idle slots from other reservations.
 
 ## Limitations
 

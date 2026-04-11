@@ -12,7 +12,7 @@ Enroll data sources in a user project. This allows users to create transfer conf
 
 ### HTTP request
 
-`  POST https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*}:enrollDataSources  `
+`POST https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*}:enrollDataSources`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,15 +20,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The name of the project resource in the form: `  projects/{projectId}  `
+Required. The name of the project resource in the form: `projects/{projectId}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  resourcemanager.projects.update  `
+  - `resourcemanager.projects.update`
 
 ### Request body
 
@@ -56,9 +56,9 @@ The request body contains data with the following structure:
 
 Fields
 
-`  dataSourceIds[]  `
+`dataSourceIds[]`
 
-`  string  `
+`string`
 
 Data sources that are enrolled. It is required to provide at least one data source id.
 
@@ -70,6 +70,6 @@ If successful, the response body is an empty JSON object.
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

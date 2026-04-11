@@ -25,26 +25,26 @@ Describes the resource that is being accessed.
 
 Fields
 
-`  resourceType  `
+`resourceType`
 
-`  string  `
+`string`
 
 A name for the type of resource being accessed, e.g. "sql table", "cloud storage bucket", "file", "Google calendar"; or the type URL of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
 
-`  resourceName  `
+`resourceName`
 
-`  string  `
+`string`
 
-The name of the resource being accessed. For example, a shared calendar name: "example.com [\_4fghdhgsrgh@group.calendar.google.com"](mailto:_4fghdhgsrgh@group.calendar.google.com%22) , if the current error is `  google.rpc.Code.PERMISSION_DENIED  ` .
+The name of the resource being accessed. For example, a shared calendar name: "example.com [\_4fghdhgsrgh@group.calendar.google.com"](mailto:_4fghdhgsrgh@group.calendar.google.com%22) , if the current error is `google.rpc.Code.PERMISSION_DENIED` .
 
-`  owner  `
+`owner`
 
-`  string  `
+`string`
 
 The owner of the resource (optional). For example, "user: " or "project: ".
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
-Describes what error is encountered when accessing this resource. For example, updating a cloud project may require the `  writer  ` permission on the developer console project.
+Describes what error is encountered when accessing this resource. For example, updating a cloud project may require the `writer` permission on the developer console project.

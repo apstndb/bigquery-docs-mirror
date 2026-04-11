@@ -15,12 +15,12 @@ During migration of public or project classic saved queries to BigQuery Studio s
 To get the permissions that you need to manage saved queries, ask your administrator to grant you the following IAM roles on the project that you want to manage saved queries for:
 
   - To manage BigQuery Studio saved queries in the Google Cloud console:
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-      - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `  roles/dataform.codeOwner  ` )
-  - To manage BigQuery Studio saved queries by using the BigQuery API: [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `  roles/dataform.codeOwner  ` )
-  - To migrate project classic saved queries to BigQuery Studio saved queries: [BigQuery Studio Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioAdmin) ( `  roles/bigquery.studioAdmin  ` )
-  - To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `  roles/dataform.codeViewer  ` )
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+      - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` )
+  - To manage BigQuery Studio saved queries by using the BigQuery API: [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` )
+  - To migrate project classic saved queries to BigQuery Studio saved queries: [BigQuery Studio Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioAdmin) ( `roles/bigquery.studioAdmin` )
+  - To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `roles/dataform.codeViewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -30,16 +30,16 @@ These predefined roles contain the permissions required to manage saved queries.
 
 The following permissions are required to manage saved queries:
 
-  - To manage BigQuery Studio saved queries in the Google Cloud console: `  bigquery.config.get, bigquery.jobs.create, dataform.locations. , resourcemanager.projects.get, resourcemanager.projects.list, bigquery.readsessions. , dataform.repositories. , dataform.workspaces.  `
-  - To manage BigQuery Studio saved queries by using the BigQuery API: `  dataform.locations. , dataform.repositories. , dataform.workspaces.*, resourcemanager.projects.get, resourcemanager.projects.list  `
-  - To migrate project classic saved queries to BigQuery Studio saved queries: `  bigquery.savedqueries.get, bigquery.savedqueries.list, bigquery.savedqueries.update, bigquery.savedqueries.delete, bigquery.savedqueries.create  `
-  - To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : `  dataform.locations.*, dataform.repositories.computeAccessTokenStatus, dataform.repositories.fetchHistory, dataform.repositories.fetchRemoteBranches, dataform.repositories.get, dataform.repositories.getIamPolicy, dataform.repositories.list, dataform.repositories.queryDirectoryContents, dataform.repositories.readFile, dataform.workspaces.fetchFileDiff, dataform.workspaces.fetchFileGitStatuses, dataform.workspaces.fetchGitAheadBehind. dataform.workspaces.get, dataform.workspaces.getIamPolicy, dataform.workspaces.list, dataform.workspaces.queryDirectoryContents, dataform.workspaces.readFile, dataform.workspaces.searchFiles, resourcemanager.projects.get, resourcemanager.projects.list  `
+  - To manage BigQuery Studio saved queries in the Google Cloud console: ` bigquery.config.get, bigquery.jobs.create, dataform.locations. , resourcemanager.projects.get, resourcemanager.projects.list, bigquery.readsessions. , dataform.repositories. , dataform.workspaces.  `
+  - To manage BigQuery Studio saved queries by using the BigQuery API: `dataform.locations. , dataform.repositories. , dataform.workspaces.*, resourcemanager.projects.get, resourcemanager.projects.list`
+  - To migrate project classic saved queries to BigQuery Studio saved queries: `bigquery.savedqueries.get, bigquery.savedqueries.list, bigquery.savedqueries.update, bigquery.savedqueries.delete, bigquery.savedqueries.create`
+  - To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : `dataform.locations.*, dataform.repositories.computeAccessTokenStatus, dataform.repositories.fetchHistory, dataform.repositories.fetchRemoteBranches, dataform.repositories.get, dataform.repositories.getIamPolicy, dataform.repositories.list, dataform.repositories.queryDirectoryContents, dataform.repositories.readFile, dataform.workspaces.fetchFileDiff, dataform.workspaces.fetchFileGitStatuses, dataform.workspaces.fetchGitAheadBehind. dataform.workspaces.get, dataform.workspaces.getIamPolicy, dataform.workspaces.list, dataform.workspaces.queryDirectoryContents, dataform.workspaces.readFile, dataform.workspaces.searchFiles, resourcemanager.projects.get, resourcemanager.projects.list`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To manage saved query metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`  dataform.repositories.get  `](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
+To manage saved query metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
 
 ## Share saved queries
 
@@ -73,7 +73,7 @@ Users that you share a query with only see the most recent version of a query. A
       - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
       - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : can view the query.
     
-    **Note:** The principal must also have the [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
+    **Note:** The principal must also have the [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
@@ -87,13 +87,13 @@ Users that you share a query with only see the most recent version of a query. A
 
 ## Grant public access to a saved query
 
-You can grant public access to a BigQuery Studio saved query by granting the Code Viewer ( [roles/dataform.codeViewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ) role on the saved query to the `  allAuthenticatedUsers  ` principal.
+You can grant public access to a BigQuery Studio saved query by granting the Code Viewer ( [roles/dataform.codeViewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ) role on the saved query to the `allAuthenticatedUsers` principal.
 
-When you assign an IAM role to the `  allAuthenticatedUsers  ` principal, service accounts and all users on the internet who have authenticated with a Google Account are granted that role. This includes accounts that aren't connected to a Google Workspace account or Cloud Identity domain, such as personal Gmail accounts. Users who aren't authenticated, such as anonymous visitors, aren't included. For more information, see [All authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) .
+When you assign an IAM role to the `allAuthenticatedUsers` principal, service accounts and all users on the internet who have authenticated with a Google Account are granted that role. This includes accounts that aren't connected to a Google Workspace account or Cloud Identity domain, such as personal Gmail accounts. Users who aren't authenticated, such as anonymous visitors, aren't included. For more information, see [All authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) .
 
-For example, when you grant the Code Viewer role to `  allAuthenticatedUsers  ` on the `  sales  ` saved query, all service accounts and users on the internet who have authenticated with a Google Account have read-only access to the `  sales  ` saved query.
+For example, when you grant the Code Viewer role to `allAuthenticatedUsers` on the `sales` saved query, all service accounts and users on the internet who have authenticated with a Google Account have read-only access to the `sales` saved query.
 
-**Caution:** Granting administrator, edit, or execution level permissions to `  allAuthenticatedUsers  ` can allow bad actors to access your data. Grant only the minimal required permissions.
+**Caution:** Granting administrator, edit, or execution level permissions to `allAuthenticatedUsers` can allow bad actors to access your data. Grant only the minimal required permissions.
 
 To grant public access to a BigQuery Studio saved query, do the following:
 
@@ -115,7 +115,7 @@ To grant public access to a BigQuery Studio saved query, do the following:
 
 6.  In the **Manage permissions** pane, click **Add user/group** .
 
-7.  In the **New principals** field, enter `  allAuthenticatedUsers  ` .
+7.  In the **New principals** field, enter `allAuthenticatedUsers` .
 
 8.  In the **Role** list, select the [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) role.
 
@@ -125,19 +125,19 @@ To grant public access to a BigQuery Studio saved query, do the following:
 
 ## Prevent public access to saved queries
 
-To ensure no public access is granted to any BigQuery Studio saved query, restrict the `  allAuthenticatedUsers  ` principal in your project.
+To ensure no public access is granted to any BigQuery Studio saved query, restrict the `allAuthenticatedUsers` principal in your project.
 
-To restrict `  allAuthenticatedUsers  ` in your project, you can [set the `  iam.allowedPolicyMemberDomains  ` policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains#setting_the_organization_policy) , and remove `  allAuthenticatedUsers  ` from the list of `  allowed_values  ` .
+To restrict `allAuthenticatedUsers` in your project, you can [set the `iam.allowedPolicyMemberDomains` policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains#setting_the_organization_policy) , and remove `allAuthenticatedUsers` from the list of `allowed_values` .
 
-When you restrict `  allAuthenticatedUsers  ` in the `  iam.allowedPolicyMemberDomains  ` policy, the `  allAuthenticatedUsers  ` principal cannot be used in any IAM policy in your project, which prevents granting public access to all resources, including BigQuery Studio saved queries.
+When you restrict `allAuthenticatedUsers` in the `iam.allowedPolicyMemberDomains` policy, the `allAuthenticatedUsers` principal cannot be used in any IAM policy in your project, which prevents granting public access to all resources, including BigQuery Studio saved queries.
 
-For more information about the `  iam.allowedPolicyMemberDomains  ` policy and instructions to set it, see [Restricting identities by domain](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) .
+For more information about the `iam.allowedPolicyMemberDomains` policy and instructions to set it, see [Restricting identities by domain](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) .
 
 ## Set default region
 
 If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
 
-**Note:** If you create a saved query and choose a different default region than the one you have been using for code assets—for example, choosing `  us-west1  ` when you have been using `  us-central1  ` —then that query and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+**Note:** If you create a saved query and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that query and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
 
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
@@ -321,7 +321,7 @@ To delete a saved query, do the following:
 
 5.  Click more\_vert **Open actions** next to the saved query and then click **Delete** .
 
-6.  To confirm deletion, type `  delete  ` in the dialog.
+6.  To confirm deletion, type `delete` in the dialog.
 
 7.  Click **Delete** .
 
@@ -449,7 +449,7 @@ To batch migrate classic saved queries in your project to BigQuery Studio saved 
     
     3.  Optional: To add a user or group with whom you want to share the migrated saved queries, click **Add User/Group** .
         
-        To share the migrated saved queries publicly, set `  allAuthenticatedUsers  ` as the principal, and grant it the Code Viewer role. For more information, see [Grant public access](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) .
+        To share the migrated saved queries publicly, set `allAuthenticatedUsers` as the principal, and grant it the Code Viewer role. For more information, see [Grant public access](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) .
     
     4.  Click **Next** .
 
@@ -460,7 +460,7 @@ To batch migrate classic saved queries in your project to BigQuery Studio saved 
     3.  Optional: To add a user or group with whom you want to share the migrated saved queries, click **Add User/Group** .
     4.  Click **Next** .
 
-9.  To confirm that you understand the [migration risks](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migration-risks) and that you want to batch migrate classic saved queries, in the **Confirm** section, in the **Confirm** field, enter `  confirm  ` , and then click **Next** .
+9.  To confirm that you understand the [migration risks](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migration-risks) and that you want to batch migrate classic saved queries, in the **Confirm** section, in the **Confirm** field, enter `confirm` , and then click **Next** .
     
     **Warning:** Migration cannot be stopped or canceled once started.
 
@@ -484,7 +484,7 @@ Migration can take over 15 minutes, depending on the number of migrating queries
 
 5.  Click more\_vert **View actions** next to the query and then click **Delete** .
 
-6.  To confirm deletion, type `  delete  ` in the dialog.
+6.  To confirm deletion, type `delete` in the dialog.
 
 7.  Click **Delete** .
 
@@ -505,13 +505,13 @@ Dataplex Universal Catalog automatically retrieves the following metadata from s
 Dataplex Universal Catalog logs saved queries as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for saved queries is `  @dataform  ` . To view details of saved query entries in Dataplex Universal Catalog, you need to view the `  dataform  ` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for saved queries is `@dataform` . To view details of saved query entries in Dataplex Universal Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for saved queries is `  dataform-code-asset  ` . To view details of saved queries,you need to view the `  dataform-code-asset  ` system entry type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  SQL_QUERY  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for saved queries is `  dataform-code-asset  ` . To provide additional context to saved queries in Dataplex Universal Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `  dataform-code-asset  ` aspect type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  SQL_QUERY  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Dataplex Universal Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
   - Type  
-    The type for saved queries is `  SQL_QUERY  ` . This type lets you filter saved queries in the `  dataform-code-asset  ` system entry type and the `  dataform-code-asset  ` aspect type by using the `  aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY  ` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
+    The type for saved queries is `SQL_QUERY` . This type lets you filter saved queries in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
 For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
 

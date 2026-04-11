@@ -22,85 +22,72 @@ A data exchange is a container that lets you share data. Along with the descript
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;primaryContact&quot;: string,
-  &quot;documentation&quot;: string,
-  &quot;listingCount&quot;: integer,
-  &quot;icon&quot;: string,
-  &quot;sharingEnvironmentConfig&quot;: {
-    object (SharingEnvironmentConfig)
-  },
-  &quot;discoveryType&quot;: enum (DiscoveryType),
-  &quot;logLinkedDatasetQueryUserEmail&quot;: boolean
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;listingCount&quot;: integer,&quot;icon&quot;: string,&quot;sharingEnvironmentConfig&quot;: {object (SharingEnvironmentConfig)},&quot;discoveryType&quot;: enum (DiscoveryType),&quot;logLinkedDatasetQueryUserEmail&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. The resource name of the data exchange. e.g. `  projects/myproject/locations/us/dataExchanges/123  ` .
+Output only. The resource name of the data exchange. e.g. `projects/myproject/locations/us/dataExchanges/123` .
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 Required. Human-readable display name of the data exchange. The display name must contain only Unicode letters, numbers (0-9), underscores (\_), dashes (-), spaces ( ), ampersands (&) and must not start or end with spaces. Default value is an empty string. Max length: 63 bytes.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. Description of the data exchange. The description must not contain Unicode non-characters as well as C0 and C1 control codes except tabs (HT), new lines (LF), carriage returns (CR), and page breaks (FF). Default value is an empty string. Max length: 2000 bytes.
 
-`  primaryContact  `
+`primaryContact`
 
-`  string  `
+`string`
 
 Optional. Email or URL of the primary point of contact of the data exchange. Max Length: 1000 bytes.
 
-`  documentation  `
+`documentation`
 
-`  string  `
+`string`
 
 Optional. Documentation describing the data exchange.
 
-`  listingCount  `
+`listingCount`
 
-`  integer  `
+`integer`
 
 Output only. Number of listings contained in the data exchange.
 
-`  icon  `
+`icon`
 
-`  string ( bytes format)  `
+`string ( bytes format)`
 
 Optional. Base64 encoded image representing the data exchange. Max Size: 3.0MiB Expected image dimensions are 512x512 pixels, however the API only performs validation on size of the encoded data. Note: For byte fields, the content of the fields are base64-encoded (which increases the size of the data by 33-36%) when using JSON on the wire.
 
 A base64-encoded string.
 
-`  sharingEnvironmentConfig  `
+`sharingEnvironmentConfig`
 
-`  object ( SharingEnvironmentConfig  ` )
+` object ( SharingEnvironmentConfig  ` )
 
 Optional. Configurable data sharing environment option for a data exchange.
 
-`  discoveryType  `
+`discoveryType`
 
-`  enum ( DiscoveryType  ` )
+` enum ( DiscoveryType  ` )
 
 Optional. Type of discovery on the discovery page for all the listings under this exchange. Updating this field also updates (overwrites) the discoveryType field for all the listings under this exchange.
 
-`  logLinkedDatasetQueryUserEmail  `
+`logLinkedDatasetQueryUserEmail`
 
-`  boolean  `
+`boolean`
 
 Optional. By default, false. If true, the DataExchange has an email sharing mandate enabled.
 
@@ -119,36 +106,26 @@ Sharing environment is a behavior model for sharing data within a data exchange.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field environment can be only one of the following:
-  &quot;defaultExchangeConfig&quot;: {
-    object (DefaultExchangeConfig)
-  },
-  &quot;dcrExchangeConfig&quot;: {
-    object (DcrExchangeConfig)
-  }
-  // End of list of possible types for union field environment.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field environment can be only one of the following:&quot;defaultExchangeConfig&quot;: {object (DefaultExchangeConfig)},&quot;dcrExchangeConfig&quot;: {object (DcrExchangeConfig)}// End of list of possible types for union field environment.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  environment  ` .
+Union field `environment` .
 
-`  environment  ` can be only one of the following:
+`environment` can be only one of the following:
 
-`  defaultExchangeConfig  `
+`defaultExchangeConfig`
 
-`  object ( DefaultExchangeConfig  ` )
+` object ( DefaultExchangeConfig  ` )
 
 Default Analytics Hub data exchange, used for secured data sharing.
 
-`  dcrExchangeConfig  `
+`dcrExchangeConfig`
 
-`  object ( DcrExchangeConfig  ` )
+` object ( DcrExchangeConfig  ` )
 
 Data Clean Room (DCR), used for privacy-safe and secured data sharing.
 
@@ -183,56 +160,56 @@ Data Clean Room (DCR), used for privacy-safe and secured data sharing.
 
 Fields
 
-`  singleSelectedResourceSharingRestriction  `
+`singleSelectedResourceSharingRestriction`
 
-`  boolean  `
+`boolean`
 
 Output only. If True, this DCR restricts the contributors to sharing only a single resource in a Listing. And no two resources should have the same IDs. So if a contributor adds a view with a conflicting name, the CreateListing API will reject the request. if False, the data contributor can publish an entire dataset (as before). This is not configurable, and by default, all new DCRs will have the restriction set to True.
 
-`  singleLinkedDatasetPerCleanroom  `
+`singleLinkedDatasetPerCleanroom`
 
-`  boolean  `
+`boolean`
 
 Output only. If True, when subscribing to this DCR, it will create only one linked dataset containing all resources shared within the cleanroom. If False, when subscribing to this DCR, it will create 1 linked dataset per listing. This is not configurable, and by default, all new DCRs will have the restriction set to True.
 
 ## Methods
 
-### `             create           `
+### `            create           `
 
 Creates a new data exchange.
 
-### `             delete           `
+### `            delete           `
 
 Deletes an existing data exchange.
 
-### `             get           `
+### `            get           `
 
 Gets the details of a data exchange.
 
-### `             getIamPolicy           `
+### `            getIamPolicy           `
 
 Gets the IAM policy.
 
-### `             list           `
+### `            list           `
 
 Lists all data exchanges in a given project and location.
 
-### `             listSubscriptions           `
+### `            listSubscriptions           `
 
 Lists all subscriptions on a given Data Exchange or Listing.
 
-### `             patch           `
+### `            patch           `
 
 Updates an existing data exchange.
 
-### `             setIamPolicy           `
+### `            setIamPolicy           `
 
 Sets the IAM policy.
 
-### `             subscribe           `
+### `            subscribe           `
 
 Creates a Subscription to a Data Clean Room.
 
-### `             testIamPermissions           `
+### `            testIamPermissions           `
 
 Returns the permissions that a caller has.

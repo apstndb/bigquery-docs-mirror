@@ -6,13 +6,13 @@ This tutorial uses the product catalog from the public Cymbal pet store dataset.
 
 ## Objectives
 
-  - Use [`  ObjectRef  `](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values to store image data alongside structured data in a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
-  - Generate text based on image data from a standard table by using the [`  AI.GENERATE_TABLE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) .
+  - Use [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values to store image data alongside structured data in a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+  - Generate text based on image data from a standard table by using the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) .
   - Transform existing images to create new images by using a Python UDF.
   - Chunk PDFs for further analysis by using a Python UDF.
-  - Use a Gemini model and the `  AI.GENERATE_TEXT  ` function to analyze the chunked PDF data.
-  - Generate embeddings based on image data from a standard table by using the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) .
-  - Process ordered multimodal data using arrays of `  ObjectRef  ` values.
+  - Use a Gemini model and the `AI.GENERATE_TEXT` function to analyze the chunked PDF data.
+  - Generate embeddings based on image data from a standard table by using the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) .
+  - Process ordered multimodal data using arrays of `ObjectRef` values.
 
 ## Costs
 
@@ -41,7 +41,7 @@ For more information about, see the following pricing pages:
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -53,7 +53,7 @@ For more information about, see the following pricing pages:
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,storage.googleapis.com,aiplatform.googleapis.com)
 
@@ -61,11 +61,11 @@ For more information about, see the following pricing pages:
 
 To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles:
 
-  - Create a connection: [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
-  - Grant permissions to the connection's service account: [Project IAM Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `  roles/resourcemanager.projectIamAdmin  ` )
-  - Create a Cloud Storage bucket: [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` )
-  - Create datasets, models, UDFs, and tables, and run BigQuery jobs: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` )
-  - Create URLs that let you read and modify Cloud Storage objects: [BigQuery ObjectRef Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.objectRefAdmin) ( `  roles/bigquery.objectRefAdmin  ` )
+  - Create a connection: [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
+  - Grant permissions to the connection's service account: [Project IAM Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `roles/resourcemanager.projectIamAdmin` )
+  - Create a Cloud Storage bucket: [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
+  - Create datasets, models, UDFs, and tables, and run BigQuery jobs: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
+  - Create URLs that let you read and modify Cloud Storage objects: [BigQuery ObjectRef Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.objectRefAdmin) ( `roles/bigquery.objectRefAdmin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -93,7 +93,7 @@ Create a BigQuery dataset to contain the objects you create in this tutorial:
 
 4.  Click more\_vert **View actions** , and then click **Create dataset** . The **Create dataset** pane opens.
 
-5.  For **Dataset ID** , type `  cymbal_pets  ` .
+5.  For **Dataset ID** , type `cymbal_pets` .
 
 6.  Click **Create dataset** .
 
@@ -129,7 +129,7 @@ Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs
 
 4.  In the **Filter By** pane, in the **Data Source Type** section, select **Business Applications** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `  Vertex AI  ` .
+    Alternatively, in the **Search for data sources** field, you can enter `Vertex AI` .
 
 5.  In the **Featured data sources** section, click **Vertex AI** .
 
@@ -137,7 +137,7 @@ Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs
 
 7.  In the **Connection type** list, select **Vertex AI remote models, remote functions, BigLake and Spanner (Cloud Resource)** .
 
-8.  In the **Connection ID** field, type `  cymbal_conn  ` .
+8.  In the **Connection ID** field, type `cymbal_conn` .
 
 9.  Click **Create connection** .
 
@@ -147,7 +147,7 @@ Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs
 
 ### Grant permissions to the connection's service account
 
-Grant the connection's service account the appropriate roles to access other services. You must grant these roles in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial#before_you_begin) section. Granting the roles in a different project results in the error `  bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource  ` .
+Grant the connection's service account the appropriate roles to access other services. You must grant these roles in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial#before_you_begin) section. Granting the roles in a different project results in the error `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 #### Grant permissions on the Cloud Storage bucket
 
@@ -189,7 +189,7 @@ Give the service account access to use Vertex AI models:
 
 Create tables to store the Cymbal pets product information.
 
-#### Create the `     products    ` table
+#### Create the `products` table
 
 Create a standard table that contains the Cymbal pets product information:
 
@@ -197,7 +197,7 @@ Create a standard table that contains the Cymbal pets product information:
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  Run the following to create the `  products  ` table:
+2.  Run the following to create the `products` table:
     
     ### SQL
     
@@ -230,11 +230,11 @@ Create a standard table that contains the Cymbal pets product information:
             },
         )
 
-#### Create the `     product_images    ` table
+#### Create the `product_images` table
 
 Create an object table that contains the Cymbal pets product images:
 
-  - Run the following to create the `  product_images  ` table:
+  - Run the following to create the `product_images` table:
     
     ### SQL
     
@@ -266,11 +266,11 @@ Create an object table that contains the Cymbal pets product images:
             },
         )
 
-#### Create the `     product_manuals    ` table
+#### Create the `product_manuals` table
 
 Create an object table that contains the Cymbal pets product manuals:
 
-  - Run the following to create the `  product_manuals  ` table:
+  - Run the following to create the `product_manuals` table:
     
     ### SQL
     
@@ -354,11 +354,11 @@ Create a BigQuery ML remote model that represents a Vertex AI multimodal embeddi
             options={"endpoint": "multimodalembedding@001"},
         )
 
-## Create a `     products_mm    ` table with multimodal data
+## Create a `products_mm` table with multimodal data
 
-Create a `  products_mm  ` table that contains an `  image  ` column populated with product images from the `  product_images  ` object table. The `  image  ` column that is created is a `  STRUCT  ` column that uses the `  ObjectRef  ` format.
+Create a `products_mm` table that contains an `image` column populated with product images from the `product_images` object table. The `image` column that is created is a `STRUCT` column that uses the `ObjectRef` format.
 
-1.  Run the following to create the `  products_mm  ` table and populate the `  image  ` column:
+1.  Run the following to create the `products_mm` table and populate the `image` column:
     
     ### SQL
     
@@ -382,7 +382,7 @@ Create a `  products_mm  ` table that contains an `  image  ` column populated w
         df_products_mm = df_images.merge(df_products, on="uri").drop(columns="uri")
         df_products_mm = df_products_mm.rename(columns={"ref": "image"})
 
-2.  Run the following to view the `  image  ` column data:
+2.  Run the following to view the `image` column data:
     
     ### SQL
     
@@ -421,13 +421,13 @@ Create a `  products_mm  ` table that contains an `  image  ` column populated w
 
 Use a Gemini model to generate the following data for the pet store products:
 
-  - Add an `  image_description  ` column to the `  products_mm  ` table.
-  - Populate the `  animal_type  ` , `  search_keywords  ` , and `  subcategory  ` columns of the `  products_mm  ` table.
+  - Add an `image_description` column to the `products_mm` table.
+  - Populate the `animal_type` , `search_keywords` , and `subcategory` columns of the `products_mm` table.
   - Run a query that returns a description of each product brand and also a count of the number of products from that brand. The brand description is generated by analyzing product information for all of the products from that brand, including product images.
 
 <!-- end list -->
 
-1.  Run the following to create and populate the `  image_description  ` column:
+1.  Run the following to create and populate the `image_description` column:
     
     ### SQL
     
@@ -497,7 +497,7 @@ Use a Gemini model to generate the following data for the pet store products:
             ]
         ]
 
-2.  Run the following to update the `  animal_type  ` , `  search_keywords  ` , and `  subcategory  ` columns with generated data:
+2.  Run the following to update the `animal_type` , `search_keywords` , and `subcategory` columns with generated data:
     
     ### SQL
     
@@ -692,7 +692,7 @@ Create a Python UDF to convert product images to grayscale.
 
 The Python UDF uses open source libraries, and also uses parallel execution to transform multiple images simultaneously.
 
-1.  Run the following to create the `  to_grayscale  ` UDF:
+1.  Run the following to create the `to_grayscale` UDF:
     
     ### SQL
     
@@ -786,11 +786,11 @@ The Python UDF uses open source libraries, and also uses parallel execution to t
 
 ## Transform product images
 
-Create the `  products_grayscale  ` table with an `  ObjectRef  ` column that contains the destination paths and authorizers for grayscale images. The destination path is derived from the original image path.
+Create the `products_grayscale` table with an `ObjectRef` column that contains the destination paths and authorizers for grayscale images. The destination path is derived from the original image path.
 
-After you create the table, run the `  to_grayscale  ` function to create the grayscale images, write them to a Cloud Storage bucket, and then return [`  ObjectRefRuntime  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values containing access URLs and metadata for the grayscale images.
+After you create the table, run the `to_grayscale` function to create the grayscale images, write them to a Cloud Storage bucket, and then return [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values containing access URLs and metadata for the grayscale images.
 
-1.  Run the following to create the `  products_grayscale  ` table:
+1.  Run the following to create the `products_grayscale` table:
     
     ### SQL
     
@@ -839,7 +839,7 @@ After you create the table, run the `  to_grayscale  ` function to create the gr
     
     Replace `  BUCKET  ` with the name of the [bucket that you created](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial#create_a_bucket) .
 
-2.  Run the following to create the grayscale images, write them to a Cloud Storage bucket, and then return `  ObjectRefRuntime  ` values containing access URLs and metadata for the grayscale images:
+2.  Run the following to create the grayscale images, write them to a Cloud Storage bucket, and then return `ObjectRefRuntime` values containing access URLs and metadata for the grayscale images:
     
     ### SQL
     
@@ -906,7 +906,7 @@ Create a Python UDF to chunk the PDF objects that contain the Cymbal pets produc
 
 PDFs are often very large and might not fit into a single call to a generative AI model. By chunking the PDFs, you can store the PDF data in a model-ready format for easier analysis.
 
-1.  Run the following to create the `  chunk_pdf  ` UDF:
+1.  Run the following to create the `chunk_pdf` UDF:
     
     ### SQL
     
@@ -1009,9 +1009,9 @@ PDFs are often very large and might not fit into a single call to a generative A
 
 ## Analyze PDF data
 
-Run the `  chunk_pdf  ` function to chunk the PDF data in the `  product_manuals  ` table, and then create a `  product_manual_chunk_strings  ` table that contains one PDF chunk per row. Use a Gemini model on the `  product_manual_chunk_strings  ` data to summarize the legal information found in the product manuals.
+Run the `chunk_pdf` function to chunk the PDF data in the `product_manuals` table, and then create a `product_manual_chunk_strings` table that contains one PDF chunk per row. Use a Gemini model on the `product_manual_chunk_strings` data to summarize the legal information found in the product manuals.
 
-1.  Run the following to create the `  product_manual_chunk_strings  ` table:
+1.  Run the following to create the `product_manual_chunk_strings` table:
     
     ### SQL
     
@@ -1123,7 +1123,7 @@ Generate embeddings from image data, and then use the embeddings to return simil
 
 In a production scenario, we recommend creating a [vector index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) before running a vector search. A vector index lets you perform the vector search more quickly, with the trade-off of reducing recall and so returning more approximate results.
 
-1.  Run the following to create the `  products_embeddings  ` table:
+1.  Run the following to create the `products_embeddings` table:
     
     ### SQL
     
@@ -1220,24 +1220,24 @@ In a production scenario, we recommend creating a [vector index](https://docs.cl
     +-----------------+-----------------+----------------+----------------------------------------------+--------------------+-------------------------------+------------------------------------------------+----------------+
     ```
 
-## Process ordered multimodal data using arrays of `     ObjectRef    ` values
+## Process ordered multimodal data using arrays of `ObjectRef` values
 
 This section shows you how to complete the following tasks:
 
-1.  Recreate the `  product_manuals  ` table so that it contains both a PDF file for the `  Crittercuisine 5000  ` product manual, and PDF files for each page of that manual.
-2.  Create a table that maps the manual to its chunks. The `  ObjectRef  ` value that represents the complete manual is stored in a `  STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>  ` column. The `  ObjectRef  ` values that represent the manual pages are stored in an `  ARRAY<STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>  ` column.
-3.  Analyze an array of `  ObjectRef  ` values together to return a single generated value.
-4.  Analyze an array of `  ObjectRef  ` values separately and returning a generated value for each array value.
+1.  Recreate the `product_manuals` table so that it contains both a PDF file for the `Crittercuisine 5000` product manual, and PDF files for each page of that manual.
+2.  Create a table that maps the manual to its chunks. The `ObjectRef` value that represents the complete manual is stored in a `STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>` column. The `ObjectRef` values that represent the manual pages are stored in an `ARRAY<STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>` column.
+3.  Analyze an array of `ObjectRef` values together to return a single generated value.
+4.  Analyze an array of `ObjectRef` values separately and returning a generated value for each array value.
 
-As part of the analysis tasks, you convert the array of `  ObjectRef  ` values to an ordered list of [`  ObjectRefRuntime  `](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#objectrefruntime_values) values, and then pass that list to a Gemini model, specifying the `  ObjectRefRuntime  ` values as part of the prompt. The `  ObjectRefRuntime  ` values provide signed URLs that the model uses to access the object information in Cloud Storage.
+As part of the analysis tasks, you convert the array of `ObjectRef` values to an ordered list of [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#objectrefruntime_values) values, and then pass that list to a Gemini model, specifying the `ObjectRefRuntime` values as part of the prompt. The `ObjectRefRuntime` values provide signed URLs that the model uses to access the object information in Cloud Storage.
 
-Follow these steps to process ordered multimodal data using arrays of `  ObjectRef  ` values:
+Follow these steps to process ordered multimodal data using arrays of `ObjectRef` values:
 
 1.  Go to the **BigQuery** page.
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  Run the following to recreate the `  product_manuals  ` table:
+2.  Run the following to recreate the `product_manuals` table:
     
     ### SQL
     
@@ -1270,7 +1270,7 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
             },
         )
 
-3.  Run the following to write PDF data to the `  map_manual_to_chunks  ` table:
+3.  Run the following to write PDF data to the `map_manual_to_chunks` table:
     
     ### SQL
     
@@ -1310,7 +1310,7 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
             df_manuals_all[["ref_y", "uri_x"]].groupby("uri_x")
         )["ref_y"]
 
-4.  Run the following to view the PDF data in the `  map_manual_to_chunks  ` table:
+4.  Run the following to view the PDF data in the `map_manual_to_chunks` table:
     
     ### SQL
     
@@ -1345,7 +1345,7 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     +-------------------------------------+--------------------------------+-----------------------------------+------------------------------------------------------+-------------------------------------------+---------------------------------+------------------------------------+-------------------------------------------------------+
     ```
 
-5.  Run the following to generate a single response from a Gemini model based on the analysis of an array of `  ObjectRef  ` values:
+5.  Run the following to generate a single response from a Gemini model based on the analysis of an array of `ObjectRef` values:
     
     ### SQL
     
@@ -1410,7 +1410,7 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     +-------------------------------------------+
     ```
 
-6.  Run the following to generate multiple responses from a Gemini model based on the analysis of an array of `  ObjectRef  ` values:
+6.  Run the following to generate multiple responses from a Gemini model based on the analysis of an array of `ObjectRef` values:
     
     ### SQL
     
@@ -1496,7 +1496,7 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

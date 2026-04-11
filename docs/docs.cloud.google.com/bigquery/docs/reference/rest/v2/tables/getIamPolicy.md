@@ -10,7 +10,7 @@ Gets the access control policy for a resource. Returns an empty policy if the re
 
 ### HTTP request
 
-`  POST https://bigquery.googleapis.com/bigquery/v2/{resource=projects/*/datasets/*/tables/*}:getIamPolicy  `
+`POST https://bigquery.googleapis.com/bigquery/v2/{resource=projects/*/datasets/*/tables/*}:getIamPolicy`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,9 +18,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  resource  `
+`resource`
 
-`  string  `
+`string`
 
 REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
 
@@ -39,22 +39,18 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;options&quot;: {
-    object (GetPolicyOptions)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;options&quot;: {object (GetPolicyOptions)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  options  `
+`options`
 
-`  object ( GetPolicyOptions  ` )
+` object ( GetPolicyOptions  ` )
 
-OPTIONAL: A `  GetPolicyOptions  ` object for specifying options to `  tables.getIamPolicy  ` .
+OPTIONAL: A `GetPolicyOptions` object for specifying options to `tables.getIamPolicy` .
 
 ### Response body
 
@@ -64,9 +60,9 @@ If successful, the response body contains an instance of `  Policy  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

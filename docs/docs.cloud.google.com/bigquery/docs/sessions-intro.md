@@ -16,7 +16,7 @@ Typical uses for a session include the following:
 
   - There are no additional costs for using sessions.
 
-  - For projects that use on-demand pricing, queries against `  INFORMATION_SCHEMA  ` incur charges. For more information, see [`  INFORMATION_SCHEMA  ` pricing](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#pricing) .
+  - For projects that use on-demand pricing, queries against `INFORMATION_SCHEMA` incur charges. For more information, see [`INFORMATION_SCHEMA` pricing](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#pricing) .
 
   - You are charged for temporary tables that you create in sessions. Storage charges are based on how much data is stored in the tables. For information about storage pricing, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
@@ -52,53 +52,53 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 <tbody>
 <tr class="odd">
 <td>Create a new session. Work with an existing session that you created.</td>
-<td><code dir="ltr" translate="no">       bigquery.jobs.create      </code></td>
-<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
-<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+<td><code dir="ltr" translate="no">bigquery.jobs.create</code></td>
+<td><code dir="ltr" translate="no">bigquery.user</code><br />
+<code dir="ltr" translate="no">bigquery.Jobuser</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code><br />
 </td>
 </tr>
 <tr class="even">
 <td>Terminate a session that you created.</td>
-<td><code dir="ltr" translate="no">       bigquery.jobs.create      </code></td>
-<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
-<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+<td><code dir="ltr" translate="no">bigquery.jobs.create</code></td>
+<td><code dir="ltr" translate="no">bigquery.user</code><br />
+<code dir="ltr" translate="no">bigquery.Jobuser</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code><br />
 </td>
 </tr>
 <tr class="odd">
 <td>Terminate a session another user created.</td>
-<td><code dir="ltr" translate="no">       bigquery.jobs.create      </code><br />
-<code dir="ltr" translate="no">       bigquery.jobs.update      </code><br />
+<td><code dir="ltr" translate="no">bigquery.jobs.create</code><br />
+<code dir="ltr" translate="no">bigquery.jobs.update</code><br />
 </td>
-<td><code dir="ltr" translate="no">       bigquery.admin      </code><br />
+<td><code dir="ltr" translate="no">bigquery.admin</code><br />
 </td>
 </tr>
 <tr class="even">
-<td>View a list of your sessions in a project. This list includes the IDs for sessions you've created in a project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.JOBS_BY_USER       </code> .</td>
-<td><code dir="ltr" translate="no">       bigquery.jobs.list      </code></td>
-<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
-<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+<td>View a list of your sessions in a project. This list includes the IDs for sessions you've created in a project with <code dir="ltr" translate="no">        INFORMATION_SCHEMA.JOBS_BY_USER       </code> .</td>
+<td><code dir="ltr" translate="no">bigquery.jobs.list</code></td>
+<td><code dir="ltr" translate="no">bigquery.user</code><br />
+<code dir="ltr" translate="no">bigquery.Jobuser</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code><br />
 </td>
 </tr>
 <tr class="odd">
-<td>View all sessions for all users in a project. This list includes the IDs for all sessions created in the project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.JOBS       </code> .</td>
-<td><code dir="ltr" translate="no">       bigquery.jobs.listAll      </code></td>
-<td><code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<td>View all sessions for all users in a project. This list includes the IDs for all sessions created in the project with <code dir="ltr" translate="no">        INFORMATION_SCHEMA.JOBS       </code> .</td>
+<td><code dir="ltr" translate="no">bigquery.jobs.listAll</code></td>
+<td><code dir="ltr" translate="no">bigquery.admin</code></td>
 </tr>
 <tr class="even">
-<td>View metadata for sessions created by the current user in the current project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.SESSIONS_BY_USER       </code> .</td>
-<td><code dir="ltr" translate="no">       bigquery.jobs.list      </code></td>
-<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
-<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
-<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+<td>View metadata for sessions created by the current user in the current project with <code dir="ltr" translate="no">        INFORMATION_SCHEMA.SESSIONS_BY_USER       </code> .</td>
+<td><code dir="ltr" translate="no">bigquery.jobs.list</code></td>
+<td><code dir="ltr" translate="no">bigquery.user</code><br />
+<code dir="ltr" translate="no">bigquery.Jobuser</code><br />
+<code dir="ltr" translate="no">bigquery.admin</code><br />
 </td>
 </tr>
 <tr class="odd">
-<td>View metadata for all sessions in the current project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.SESSIONS_BY_PROJECT       </code> .</td>
-<td><code dir="ltr" translate="no">       bigquery.jobs.listAll      </code></td>
-<td><code dir="ltr" translate="no">       bigquery.admin      </code></td>
+<td>View metadata for all sessions in the current project with <code dir="ltr" translate="no">        INFORMATION_SCHEMA.SESSIONS_BY_PROJECT       </code> .</td>
+<td><code dir="ltr" translate="no">bigquery.jobs.listAll</code></td>
+<td><code dir="ltr" translate="no">bigquery.admin</code></td>
 </tr>
 </tbody>
 </table>

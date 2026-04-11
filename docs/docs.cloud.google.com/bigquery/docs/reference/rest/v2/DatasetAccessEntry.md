@@ -15,28 +15,21 @@ Similar to how individually authorized views work, updates to any resource grant
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataset&quot;: {
-    object (DatasetReference)
-  },
-  &quot;targetTypes&quot;: [
-    enum (TargetType)
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataset&quot;: {object (DatasetReference)},&quot;targetTypes&quot;: [enum (TargetType)]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dataset  `
+`dataset`
 
-`  object ( DatasetReference  ` )
+` object ( DatasetReference  ` )
 
 The dataset this entry applies to
 
-`  targetTypes[]  `
+`targetTypes[]`
 
-`  enum ( TargetType  ` )
+` enum ( TargetType  ` )
 
 Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future.

@@ -9,7 +9,7 @@ BigQuery ML offers the following models for dimensionality reduction:
   - [Principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
   - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
-You can use PCA and autoencoder models with the [`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) functions to embed data into a lower-dimensional space, and with the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
+You can use PCA and autoencoder models with the [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) functions to embed data into a lower-dimensional space, and with the [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
 You can use the output from dimensionality reduction models for tasks such as the following:
 
@@ -19,7 +19,7 @@ You can use the output from dimensionality reduction models for tasks such as th
 
 ## Recommended knowledge
 
-By using the default settings in the `  CREATE MODEL  ` statements and the inference functions, you can create and use a dimensionality reduction model even without much ML knowledge. However, having basic knowledge about ML development helps you optimize both your data and your model to deliver better results. We recommend using the following resources to develop familiarity with ML techniques and processes:
+By using the default settings in the `CREATE MODEL` statements and the inference functions, you can create and use a dimensionality reduction model even without much ML knowledge. However, having basic knowledge about ML development helps you optimize both your data and your model to deliver better results. We recommend using the following resources to develop familiarity with ML techniques and processes:
 
   - [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
   - [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)

@@ -71,7 +71,7 @@ To create a new data preparation from a file in Cloud Storage or Google Drive, f
 
 4.  In the **Source** section, select your file:
     
-      - **Cloud Storage** : Select the file from a Cloud Storage bucket, or enter the path of your source. For example, enter a path to your CSV file: `  STORAGE_BUCKET_NAME / FILE_NAME .csv  ` . Wildcard searches, such as `  *.csv  ` , are supported.
+      - **Cloud Storage** : Select the file from a Cloud Storage bucket, or enter the path of your source. For example, enter a path to your CSV file: `  STORAGE_BUCKET_NAME / FILE_NAME .csv ` . Wildcard searches, such as `*.csv` , are supported.
       - **Google Drive** : Select the file from Google Drive by entering its URI. To load a subset of that data, you can enter a specific sheet name and a range.
     
     **Note:** If you use Google Drive as a data source, you must use a service account to [run or schedule the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
@@ -171,7 +171,7 @@ If existing suggestions don't meet your needs, add a step. Choose columns or a s
 
 1.  In the data or schema view, choose the **Transform** option. You can also choose columns or add examples to help Gemini understand your data transformation.
 
-2.  In the **Description** field, enter a prompt, such as `  Convert the state column to uppercase  ` .
+2.  In the **Description** field, enter a prompt, such as `Convert the state column to uppercase` .
 
 3.  Click send **Send** .
     
@@ -187,7 +187,7 @@ If existing suggestions don't meet your needs, add a step. Choose columns or a s
 
 ### Flatten JSON columns
 
-To make key-value pairs easier to access and analyze, flatten JSON columns. For example, if you have a JSON column named `  user_properties  ` that contains the keys `  country  ` and `  device_type  ` , flattening this column extracts `  country  ` and `  device_type  ` into their own top-level columns so you can use them directly in your analysis.
+To make key-value pairs easier to access and analyze, flatten JSON columns. For example, if you have a JSON column named `user_properties` that contains the keys `country` and `device_type` , flattening this column extracts `country` and `device_type` into their own top-level columns so you can use them directly in your analysis.
 
 Gemini for BigQuery suggests operations that extract fields only from the top level of the JSON. If these extracted fields contain more JSON objects, you can flatten them in additional steps to access their contents.
 
@@ -201,13 +201,13 @@ Flattening has the following behaviors:
 
   - The **Flatten** option appears in the data view after you select cells or columns containing JSON. It doesn't appear by default when you click **Add step** .
   - If a JSON key isn't present in the selected rows, the generated suggestion doesn't contain that key. This issue might cause some columns to be left out when data is flattened.
-  - If column names collide during flattening, the repeated column names end in this format: `  _<i>  ` . For example, if there's already a column named `  address  ` , the new flattened column name is `  address_1  ` .
+  - If column names collide during flattening, the repeated column names end in this format: `_<i>` . For example, if there's already a column named `address` , the new flattened column name is `address_1` .
   - Flattened column names follow the BigQuery [column naming conventions](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) .
-  - If you leave the JSON key field empty, the default column name format is `  f<i>_  ` .
+  - If you leave the JSON key field empty, the default column name format is `f<i>_` .
 
-### Flatten `     RECORD    ` or `     STRUCT    ` columns
+### Flatten `RECORD` or `STRUCT` columns
 
-To make nested fields easier to access and analyze, flatten columns with the `  RECORD  ` or `  STRUCT  ` data type. For example, if you have an `  event_log  ` record that contains the fields `  timestamp  ` and `  action  ` , flattening this record extracts `  timestamp  ` and `  action  ` into their own top-level columns so you can transform them directly.
+To make nested fields easier to access and analyze, flatten columns with the `RECORD` or `STRUCT` data type. For example, if you have an `event_log` record that contains the fields `timestamp` and `action` , flattening this record extracts `timestamp` and `action` into their own top-level columns so you can transform them directly.
 
 This process extracts all nested columns from the record, up to 10 levels deep, and creates a new column for each. The new column names are created by combining the parent column's name with the nested field name, separated by an underscore (for example, `  PARENT-COLUMN-NAME _ FIELD-NAME  ` ). The original column is dropped. To keep the original column, you can [delete](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#delete-applied-step) the **Drop column** step from the **Applied steps** list.
 
@@ -227,14 +227,14 @@ Unnesting expands each element in an array into its own row, duplicating the oth
 
 You can unnest the following column types:
 
-  - **`  ARRAY  ` data type:** Unnests into elements of the array's base type. For example, an `  ARRAY<STRUCT<...>>  ` unnesting results in elements of type `  STRUCT  ` .
-  - **`  JSON  ` columns:** Unnests JSON arrays within the column into elements of type `  JSON  ` .
+  - **`ARRAY` data type:** Unnests into elements of the array's base type. For example, an `ARRAY<STRUCT<...>>` unnesting results in elements of type `STRUCT` .
+  - **`JSON` columns:** Unnests JSON arrays within the column into elements of type `JSON` .
 
 When you unnest an array, a new column is created that contains the unnested elements. By default, the original array column is dropped. To keep the original column, [delete](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#delete-applied-step) the **Drop column** step from the **Applied steps** list.
 
 To unnest arrays, follow these steps:
 
-1.  In the data view for a source table, choose an `  ARRAY  ` column.
+1.  In the data view for a source table, choose an `ARRAY` column.
 2.  Click **Unnest** to generate suggestions.
 3.  Optional: To update the SQL expression, you can manually enter a SQL expression.
 4.  Optional: Click **Preview** and review the step.
@@ -247,7 +247,7 @@ To unnest arrays, follow these steps:
 To add a filter that removes rows, follow these steps:
 
 1.  In the data or schema view, choose the **Filter** option. You can also choose columns to help Gemini understand your data filter.
-2.  In the **Description** field, enter a prompt, such as `  Column ID should not be NULL  ` .
+2.  In the **Description** field, enter a prompt, such as `Column ID should not be NULL` .
 3.  Click **Generate** . Gemini generates a SQL expression and a new description based on your prompt.
 4.  Optional: To update the SQL expression, revise the prompt and click send **Send** , or enter a SQL expression manually.
 5.  Optional: Click **Preview** and review the step.
@@ -255,11 +255,11 @@ To add a filter that removes rows, follow these steps:
 
 #### Filter expression format
 
-SQL expressions for filters retain rows that match the specified condition. This is equivalent to a `  SELECT … WHERE SQL_EXPRESSION  ` statement.
+SQL expressions for filters retain rows that match the specified condition. This is equivalent to a ` SELECT … WHERE SQL_EXPRESSION  ` statement.
 
-For example, to retain records where the column `  year  ` is greater than or equal to `  2000  ` , the condition is `  year >= 2000  ` .
+For example, to retain records where the column `year` is greater than or equal to `2000` , the condition is `year >= 2000` .
 
-Expressions must follow the BigQuery SQL syntax for the [`  WHERE  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) .
+Expressions must follow the BigQuery SQL syntax for the [`WHERE` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) .
 
 ### Deduplicate data
 
@@ -269,12 +269,12 @@ To remove duplicate rows from your data, follow these steps:
 2.  Optional: To refine the suggestion, enter a new description and click send **Send** .
 3.  Optional: To manually configure the deduplication step, use the following options:
       - In the **Record choosing** list, select one of the following strategies:
-          - **First** : For each group of rows with the same deduplication key values, this strategy chooses the first row based on the `  ORDER BY  ` expression and removes the rest.
-          - **Last** : For each group of rows with the same deduplication key values, this strategy chooses the last row based on the `  ORDER BY  ` expression and removes the rest.
+          - **First** : For each group of rows with the same deduplication key values, this strategy chooses the first row based on the `ORDER BY` expression and removes the rest.
+          - **Last** : For each group of rows with the same deduplication key values, this strategy chooses the last row based on the `ORDER BY` expression and removes the rest.
           - **Any** : For each group of rows with the same deduplication key values, this strategy chooses any row from that group and removes the rest.
           - **Distinct** : Removes all duplicate rows across all columns in the table.
       - In the **Deduplication keys** field, choose one or more columns or expressions to identify duplicate rows. This field is applicable when the record choosing strategy is **First** , **Last** , or **Any** .
-      - In the **Order by expression** field, enter an expression that defines the row order. For example, to choose the most recent row, enter `  datetime DESC  ` . To choose the first row alphabetically by name, enter a column name like `  last_name  ` . The expression follows the same rules as the standard [`  ORDER BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in BigQuery. This field is only applicable when the record choosing strategy is **First** or **Last** .
+      - In the **Order by expression** field, enter an expression that defines the row order. For example, to choose the most recent row, enter `datetime DESC` . To choose the first row alphabetically by name, enter a column name like `last_name` . The expression follows the same rules as the standard [`ORDER BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in BigQuery. This field is only applicable when the record choosing strategy is **First** or **Last** .
 4.  Optional: Click **Preview** and review the step.
 5.  Click **Apply** .
 
@@ -299,7 +299,7 @@ To add a join operation step between two sources in your data preparation, follo
     
       - **Join description** : The natural language description of the SQL expression for the join operation. When you edit this description and click send **Send** , Gemini suggests new SQL join conditions.
     
-      - **Join conditions** : The SQL expressions within the `  ON  ` clause for the join operation. You can use the `  L  ` and `  R  ` qualifiers to refer to the left and right source tables, respectively. For example, to join the `  customer_id  ` column from the left table to the `  customer_id  ` column from the right table, enter `  L.customerId = R.customerId  ` . These qualifiers aren't case-sensitive.
+      - **Join conditions** : The SQL expressions within the `ON` clause for the join operation. You can use the `L` and `R` qualifiers to refer to the left and right source tables, respectively. For example, to join the `customer_id` column from the left table to the `customer_id` column from the right table, enter `L.customerId = R.customerId` . These qualifiers aren't case-sensitive.
         
         **Note:** If the **Join conditions** field is empty, the join operation type is automatically set to **Cross join** , even if you selected a different join type in the previous step.
 
@@ -315,7 +315,7 @@ To add a join operation step between two sources in your data preparation, follo
 
 1.  In the data or schema view, choose the **Aggregate** option.
 
-2.  In the **Description** field, enter a prompt, such as `  Find the total revenue for a region  ` .
+2.  In the **Description** field, enter a prompt, such as `Find the total revenue for a region` .
 
 3.  Click **Send** .
     
@@ -325,8 +325,8 @@ To add a join operation step between two sources in your data preparation, follo
 
 5.  Optional: You can manually add grouping keys and aggregation expressions.
     
-      - In the **Grouping keys** field, enter a column name or expression. If you leave it blank, the resulting table has one row. If you enter an expression, it must have an alias (an `  AS  ` clause)—for example `  EXTRACT(YEAR FROM order_date) AS order_year  ` . No duplicates are allowed.
-      - In the **Aggregation expressions** field, enter an aggregation expression that has an alias (an `  AS  ` clause)—for example `  SUM(quantity) AS total_quantity  ` . You can enter multiple, comma-separated expressions. No duplicates are allowed. For a list of the supported aggregation expressions, see [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) .
+      - In the **Grouping keys** field, enter a column name or expression. If you leave it blank, the resulting table has one row. If you enter an expression, it must have an alias (an `AS` clause)—for example `EXTRACT(YEAR FROM order_date) AS order_year` . No duplicates are allowed.
+      - In the **Aggregation expressions** field, enter an aggregation expression that has an alias (an `AS` clause)—for example `SUM(quantity) AS total_quantity` . You can enter multiple, comma-separated expressions. No duplicates are allowed. For a list of the supported aggregation expressions, see [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) .
 
 6.  Optional: Click **Preview** and review the step.
 
@@ -352,7 +352,7 @@ To add a validation rule, follow these steps:
 
 1.  In the data or schema view, click the **Filter** option. You can also choose columns to help Gemini understand your data filter.
 2.  Enter a description for the step.
-3.  Enter a SQL expression, in the form of a `  WHERE  ` clause.
+3.  Enter a SQL expression, in the form of a `WHERE` clause.
 4.  Optional: If you want the SQL expression to act as a validation rule, select the **Failed validation rows go to error table** checkbox. You can also change a filter to a validation in the data preparation toolbar by clicking **More \> Error table** .
 5.  Optional: Click **Preview** and review the step.
 6.  Click **Apply** .

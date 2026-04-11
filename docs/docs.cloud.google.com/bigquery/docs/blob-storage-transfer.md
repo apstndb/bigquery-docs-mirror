@@ -19,7 +19,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -28,18 +28,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Blob Storage roles
 
@@ -95,9 +95,9 @@ Select one of the following options:
           - For **Data path** , enter the path to filter files to be transferred. See [examples](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#azure_blob_storage_data_path_examples) .
           - For **SAS token** , enter the Azure SAS token.
           - For **File format** , choose your source data format.
-          - For **Write disposition** , select **`  WRITE_APPEND  `** to incrementally append new data to the destination table, or **`  WRITE_TRUNCATE  `** to overwrite data in the destination table during each transfer run. **`  WRITE_APPEND  `** is the default value for **Write disposition** .
+          - For **Write disposition** , select **`WRITE_APPEND`** to incrementally append new data to the destination table, or **`WRITE_TRUNCATE`** to overwrite data in the destination table during each transfer run. **`WRITE_APPEND`** is the default value for **Write disposition** .
         
-        For more information about how BigQuery Data Transfer Service ingests data using either **`  WRITE_APPEND  `** or **`  WRITE_TRUNCATE  `** , see [Data ingestion for Azure Blob transfers](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#data-ingestion) . For more information about the `  writeDisposition  ` field, see [`  JobConfigurationLoad  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
+        For more information about how BigQuery Data Transfer Service ingests data using either **`WRITE_APPEND`** or **`WRITE_TRUNCATE`** , see [Data ingestion for Azure Blob transfers](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#data-ingestion) . For more information about the `writeDisposition` field, see [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
         
         ![Data source details](https://docs.cloud.google.com/static/bigquery/images/blob-source-details.png)
     
@@ -105,10 +105,10 @@ Select one of the following options:
         
           - For **Number of errors allowed** , enter an integer value for the maximum number of bad records that can be ignored. The default value is 0.
           - (Optional) For **Decimal target types** , enter a comma-separated list of possible SQL data types that decimal values in the source data are converted to. Which SQL data type is selected for conversion depends on the following conditions:
-              - In the order of `  NUMERIC  ` , `  BIGNUMERIC  ` , and `  STRING  ` , a type is picked if it is in your specified list and if it supports the precision and the scale.
+              - In the order of `NUMERIC` , `BIGNUMERIC` , and `STRING` , a type is picked if it is in your specified list and if it supports the precision and the scale.
               - If none of your listed data types support the precision and the scale, the data type supporting the widest range in your specified list is selected. If a value exceeds the supported range when reading the source data, an error is thrown.
-              - The data type `  STRING  ` supports all precision and scale values.
-              - If this field is left empty, the data type defaults to `  NUMERIC,STRING  ` for ORC, and `  NUMERIC  ` for other file formats.
+              - The data type `STRING` supports all precision and scale values.
+              - If this field is left empty, the data type defaults to `NUMERIC,STRING` for ORC, and `NUMERIC` for other file formats.
               - This field cannot contain duplicate data types.
               - The order of the data types that you list is ignored.
     
@@ -129,7 +129,7 @@ Select one of the following options:
 
 ### bq
 
-Use the [`  bq mk --transfer_config  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) to create a Blob Storage transfer:
+Use the [`bq mk --transfer_config` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) to create a Blob Storage transfer:
 
 ``` notranslate
 bq mk \
@@ -145,27 +145,27 @@ bq mk \
 Replace the following:
 
   - `  PROJECT_ID  ` : (Optional) the project ID containing your target dataset. If not specified, your default project is used.
-  - `  DATA_SOURCE  ` : `  azure_blob_storage  ` .
+  - `  DATA_SOURCE  ` : `azure_blob_storage` .
   - `  DISPLAY_NAME  ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
   - `  DATASET  ` : the target dataset for the data transfer configuration.
-  - `  DESTINATION_KEY  ` : (Optional) the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) — for example, `  projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name  ` .
-  - `  PARAMETERS  ` : the parameters for the data transfer configuration, listed in JSON format. For example, `  --params={"param1":"value1", "param2":"value2"}  ` . The following are the parameters for a Blob Storage data transfer:
-      - `  destination_table_name_template  ` : Required. The name of your destination table.
-      - `  storage_account  ` : Required. The Blob Storage account name.
-      - `  container  ` : Required. The Blob Storage container name.
-      - `  data_path  ` : Optional. The path to filter files to be transferred. See [examples](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#azure_blob_storage_data_path_examples) .
-      - `  sas_token  ` : Required. The Azure SAS token.
-      - `  file_format  ` : Optional. The type of files you want to transfer: `  CSV  ` , `  JSON  ` , `  AVRO  ` , `  PARQUET  ` , or `  ORC  ` . The default value is `  CSV  ` .
-      - `  write_disposition  ` : Optional. Select `  WRITE_APPEND  ` to append data to the destination table, or `  WRITE_TRUNCATE  ` , to overwrite data in the destination table. The default value is `  WRITE_APPEND  ` .
-      - `  max_bad_records  ` : Optional. The number of allowed bad records. The default value is 0.
-      - `  decimal_target_types  ` : Optional. A comma-separated list of possible SQL data types that decimal values in the source data are converted to. If this field is not provided, the data type defaults to `  NUMERIC,STRING  ` for ORC, and `  NUMERIC  ` for the other file formats.
-      - `  ignore_unknown_values  ` : Optional, and ignored if `  file_format  ` is not `  JSON  ` or `  CSV  ` . Set to `  true  ` to accept rows that contain values that don't match the schema.
-      - `  field_delimiter  ` : Optional, and applies only when `  file_format  ` is `  CSV  ` . The character that separates fields. The default value is `  ,  ` .
-      - `  skip_leading_rows  ` : Optional, and applies only when `  file_format  ` is `  CSV  ` . Indicates the number of header rows that you don't want to import. The default value is 0.
-      - `  allow_quoted_newlines  ` : Optional, and applies only when `  file_format  ` is `  CSV  ` . Indicates whether to allow newlines within quoted fields.
-      - `  allow_jagged_rows  ` : Optional, and applies only when `  file_format  ` is `  CSV  ` . Indicates whether to accept rows that are missing trailing optional columns. The missing values are filled in with `  NULL  ` .
+  - `  DESTINATION_KEY  ` : (Optional) the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) — for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` .
+  - `  PARAMETERS  ` : the parameters for the data transfer configuration, listed in JSON format. For example, `--params={"param1":"value1", "param2":"value2"}` . The following are the parameters for a Blob Storage data transfer:
+      - `destination_table_name_template` : Required. The name of your destination table.
+      - `storage_account` : Required. The Blob Storage account name.
+      - `container` : Required. The Blob Storage container name.
+      - `data_path` : Optional. The path to filter files to be transferred. See [examples](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#azure_blob_storage_data_path_examples) .
+      - `sas_token` : Required. The Azure SAS token.
+      - `file_format` : Optional. The type of files you want to transfer: `CSV` , `JSON` , `AVRO` , `PARQUET` , or `ORC` . The default value is `CSV` .
+      - `write_disposition` : Optional. Select `WRITE_APPEND` to append data to the destination table, or `WRITE_TRUNCATE` , to overwrite data in the destination table. The default value is `WRITE_APPEND` .
+      - `max_bad_records` : Optional. The number of allowed bad records. The default value is 0.
+      - `decimal_target_types` : Optional. A comma-separated list of possible SQL data types that decimal values in the source data are converted to. If this field is not provided, the data type defaults to `NUMERIC,STRING` for ORC, and `NUMERIC` for the other file formats.
+      - `ignore_unknown_values` : Optional, and ignored if `file_format` is not `JSON` or `CSV` . Set to `true` to accept rows that contain values that don't match the schema.
+      - `field_delimiter` : Optional, and applies only when `file_format` is `CSV` . The character that separates fields. The default value is `,` .
+      - `skip_leading_rows` : Optional, and applies only when `file_format` is `CSV` . Indicates the number of header rows that you don't want to import. The default value is 0.
+      - `allow_quoted_newlines` : Optional, and applies only when `file_format` is `CSV` . Indicates whether to allow newlines within quoted fields.
+      - `allow_jagged_rows` : Optional, and applies only when `file_format` is `CSV` . Indicates whether to accept rows that are missing trailing optional columns. The missing values are filled in with `NULL` .
 
-For example, the following creates a Blob Storage data transfer called `  mytransfer  ` :
+For example, the following creates a Blob Storage data transfer called `mytransfer` :
 
 ``` notranslate
 bq mk \
@@ -190,7 +190,7 @@ bq mk \
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 

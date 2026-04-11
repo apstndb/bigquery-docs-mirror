@@ -10,7 +10,7 @@ Requests the deletion of the metadata of a job. This call returns when the job's
 
 ### HTTP request
 
-`  DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs/{jobId}/delete  `
+`DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs/{jobId}/delete`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,15 +18,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the job for which metadata is to be deleted.
 
-`  jobId  `
+`jobId`
 
-`  string  `
+`string`
 
 Required. Job ID of the job for which metadata is to be deleted. If this is a parent job which has child jobs, the metadata from all child jobs will be deleted as well. Direct deletion of the metadata of child jobs is not allowed.
 
@@ -34,9 +34,9 @@ Required. Job ID of the job for which metadata is to be deleted. If this is a pa
 
 Parameters
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 The geographic location of the job. Required.
 
@@ -54,7 +54,7 @@ If successful, the response body is an empty JSON object.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -2,12 +2,12 @@ GoogleSQL for BigQuery supports the following search functions.
 
 ## Function list
 
-| Name                                                                                                                                  | Summary                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [`         SEARCH        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search)               | Checks to see whether a table or other search data contains a set of search terms. |
-| [`         VECTOR_SEARCH        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) | Performs a vector search on embeddings to find semantically similar entities.      |
+| Name                                                                                                                 | Summary                                                                            |
+| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [`SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search)               | Checks to see whether a table or other search data contains a set of search terms. |
+| [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) | Performs a vector search on embeddings to find semantically similar entities.      |
 
-## `     SEARCH    `
+## `SEARCH`
 
     SEARCH(
       data_to_search, search_query
@@ -18,64 +18,64 @@ GoogleSQL for BigQuery supports the following search functions.
 
 **Description**
 
-The `  SEARCH  ` function checks to see whether a BigQuery table or other search data contains a set of search terms (tokens). It returns `  TRUE  ` if all search terms appear in the data, based on the [rules for search\_query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_rules) and text analysis described in the [text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) . Otherwise, this function returns `  FALSE  ` .
+The `SEARCH` function checks to see whether a BigQuery table or other search data contains a set of search terms (tokens). It returns `TRUE` if all search terms appear in the data, based on the [rules for search\_query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_rules) and text analysis described in the [text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) . Otherwise, this function returns `FALSE` .
 
 **Definitions**
 
 <span id="data_to_search_arg"></span>
 
-  - `  data_to_search  ` : The data to search over. The value can be:
+  - `data_to_search` : The data to search over. The value can be:
     
       - Any GoogleSQL data type literal
       - A list of columns
       - A table reference
       - A column of any type
     
-    A table reference is evaluated as a `  STRUCT  ` whose fields are the columns of the table. `  data_to_search  ` can be any type, but `  SEARCH  ` will return `  FALSE  ` for all types except those listed here:
+    A table reference is evaluated as a `STRUCT` whose fields are the columns of the table. `data_to_search` can be any type, but `SEARCH` will return `FALSE` for all types except those listed here:
     
-      - `  ARRAY<STRING>  `
-      - `  ARRAY<STRUCT>  `
-      - `  JSON  `
-      - `  STRING  `
-      - `  STRUCT  `
+      - `ARRAY<STRING>`
+      - `ARRAY<STRUCT>`
+      - `JSON`
+      - `STRING`
+      - `STRUCT`
     
     You can search for string literals in columns of the preceding types. For additional rules, see [Search data rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#data_to_search_rules) .
 
 <span id="search_query_arg"></span>
 
-  - `  search_query  ` : A `  STRING  ` literal, or a `  STRING  ` constant expression that represents the terms of the search query. If `  search_query  ` is `  NULL  ` , an error is returned. If `  search_query  ` produces no search tokens, and the text analyzer is `  LOG_ANALYZER  ` or `  PATTERN_ANALYZER  ` , an error is produced.
+  - `search_query` : A `STRING` literal, or a `STRING` constant expression that represents the terms of the search query. If `search_query` is `NULL` , an error is returned. If `search_query` produces no search tokens, and the text analyzer is `LOG_ANALYZER` or `PATTERN_ANALYZER` , an error is produced.
 
-  - `  json_scope  ` : A named argument with a `  STRING  ` value. Takes one of the following values to indicate the scope of JSON data to be searched. It has no effect if `  data_to_search  ` isn't a JSON value or doesn't contain a JSON field.
+  - `json_scope` : A named argument with a `STRING` value. Takes one of the following values to indicate the scope of JSON data to be searched. It has no effect if `data_to_search` isn't a JSON value or doesn't contain a JSON field.
     
-      - `  'JSON_VALUES'  ` (default): Only the JSON values are searched. If `  json_scope  ` isn't provided, this is used by default.
+      - `'JSON_VALUES'` (default): Only the JSON values are searched. If `json_scope` isn't provided, this is used by default.
     
-      - `  'JSON_KEYS'  ` : Only the JSON keys are searched.
+      - `'JSON_KEYS'` : Only the JSON keys are searched.
     
-      - `  'JSON_KEYS_AND_VALUES'  ` : The JSON keys and values are searched.
+      - `'JSON_KEYS_AND_VALUES'` : The JSON keys and values are searched.
 
-  - `  analyzer  ` : A named argument with a `  STRING  ` value. Takes one of the following values to indicate the text analyzer to use:
+  - `analyzer` : A named argument with a `STRING` value. Takes one of the following values to indicate the text analyzer to use:
     
-      - `  'LOG_ANALYZER'  ` (default): Breaks the input into tokens when delimiters are encountered and then normalizes the tokens. For more information, see [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) .
+      - `'LOG_ANALYZER'` (default): Breaks the input into tokens when delimiters are encountered and then normalizes the tokens. For more information, see [`LOG_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) .
     
-      - `  'NO_OP_ANALYZER'  ` : Extracts the text as a single token, but doesn't apply normalization. For more information about this analyzer, see [`  NO_OP_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) .
+      - `'NO_OP_ANALYZER'` : Extracts the text as a single token, but doesn't apply normalization. For more information about this analyzer, see [`NO_OP_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) .
     
-      - `  'PATTERN_ANALYZER'  ` : Breaks the input into tokens that match a regular expression. For more information, see [`  PATTERN_ANALYZER  ` text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) .
+      - `'PATTERN_ANALYZER'` : Breaks the input into tokens that match a regular expression. For more information, see [`PATTERN_ANALYZER` text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) .
 
-  - `  analyzer_options  ` : A named argument with a JSON-formatted `  STRING  ` value. Takes a list of text analysis rules. For more information, see [Text analyzer options](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#text_analyzer_options) .
+  - `analyzer_options` : A named argument with a JSON-formatted `STRING` value. Takes a list of text analysis rules. For more information, see [Text analyzer options](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#text_analyzer_options) .
 
 **Details**
 
-The `  SEARCH  ` function is designed to work with [search indexes](https://docs.cloud.google.com/bigquery/docs/search-index) to optimize point lookups. Although the `  SEARCH  ` function works for tables that aren't indexed, its performance will be greatly improved with a search index. If both the analyzer and analyzer options match the one used to create the index, the search index will be used.
+The `SEARCH` function is designed to work with [search indexes](https://docs.cloud.google.com/bigquery/docs/search-index) to optimize point lookups. Although the `SEARCH` function works for tables that aren't indexed, its performance will be greatly improved with a search index. If both the analyzer and analyzer options match the one used to create the index, the search index will be used.
 
 <span id="text_analyzer"></span>
 
 <span id="search_query_rules"></span>
 
-**Rules for `  search_query  `**
+**Rules for `search_query`**
 
-The `  'NO_OP_ANALYZER'  ` extracts the search query as a single token without parsing it. The following rules apply only when using the `  'LOG_ANALYZER'  ` or `  'PATTERN_ANALYZER'  ` .
+The `'NO_OP_ANALYZER'` extracts the search query as a single token without parsing it. The following rules apply only when using the `'LOG_ANALYZER'` or `'PATTERN_ANALYZER'` .
 
-A search query is a set of one or more terms that are combined using the logical operators `  AND  ` and `  OR  ` along with parenthesis. Any whitespace in the search query that is not in a *phrase* or *backtick* term is considered an (implicit) `  AND  ` . First, a search query is broken down into terms using logical operators and parenthesis in the search query. Then, each term is evaluated based on whether or not it appears in the data to search. The final outcome of the `  SEARCH  ` function is the result of the logical expression represented by the search query.
+A search query is a set of one or more terms that are combined using the logical operators `AND` and `OR` along with parenthesis. Any whitespace in the search query that is not in a *phrase* or *backtick* term is considered an (implicit) `AND` . First, a search query is broken down into terms using logical operators and parenthesis in the search query. Then, each term is evaluated based on whether or not it appears in the data to search. The final outcome of the `SEARCH` function is the result of the logical expression represented by the search query.
 
 The following grammar is used to transform the search query into a logical expression of terms. The grammar is defined using the [ANTLR meta-language](https://www.antlr2.org/doc/metalang.html) :
 
@@ -101,21 +101,21 @@ The following grammar is used to transform the search query into a logical expre
 
 To evaluate each term, it is further broken down into zero or more searchable tokens based on the text analyzer. The following section contains the rules for how different types of terms are analyzed and evaluated.
 
-Rules for `  backtick_term  ` in [`  search_query  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) :
+Rules for `backtick_term` in [`search_query`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) :
 
-  - If the `  LOG_ANALYZER  ` text analyzer is used, text enclosed in backticks forces an exact match.
+  - If the `LOG_ANALYZER` text analyzer is used, text enclosed in backticks forces an exact match.
     
-    For example, ``  `Hello World` happy days  `` becomes `  Hello World  ` , `  happy  ` , and `  days  ` .
+    For example, `` `Hello World` happy days `` becomes `Hello World` , `happy` , and `days` .
 
-  - Search terms enclosed in backticks must match exactly in `  data_to_search  ` , subject to the following conditions:
+  - Search terms enclosed in backticks must match exactly in `data_to_search` , subject to the following conditions:
     
-      - It appears at the start of `  data_to_search  ` or is immediately preceded by a delimiter.
+      - It appears at the start of `data_to_search` or is immediately preceded by a delimiter.
     
-      - It appears at the end of `  data_to_search  ` or is immediately followed by a delimiter.
+      - It appears at the end of `data_to_search` or is immediately followed by a delimiter.
     
-    For example, ``  SEARCH('foo.bar', '`foo.`')  `` returns `  FALSE  ` because the text enclosed in the backticks `  foo.  ` is immediately followed by the character `  b  ` in the search data `  foo.bar  ` , rather than by a delimiter or the end of the string. However, ``  SEARCH('foo..bar', '`foo.`')  `` returns `  TRUE  ` because `  foo.  ` is immediately followed by the delimiter `  .  ` in the search data.
+    For example, ``SEARCH('foo.bar', '`foo.`')`` returns `FALSE` because the text enclosed in the backticks `foo.` is immediately followed by the character `b` in the search data `foo.bar` , rather than by a delimiter or the end of the string. However, ``SEARCH('foo..bar', '`foo.`')`` returns `TRUE` because `foo.` is immediately followed by the delimiter `.` in the search data.
 
-  - Search terms enclosed in backticks must match case exactly, regardless of any normalization settings in `  analyzer_options  ` .
+  - Search terms enclosed in backticks must match case exactly, regardless of any normalization settings in `analyzer_options` .
     
     For example:
     
@@ -133,27 +133,27 @@ Rules for `  backtick_term  ` in [`  search_query  `](https://docs.cloud.google.
             }'''
           ) AS results
 
-  - The backtick itself can be escaped using a backslash, as in ``  \`foobar\`  `` .
+  - The backtick itself can be escaped using a backslash, as in `` \`foobar\` `` .
 
   - The following are reserved words and must be enclosed in backticks:
     
-    `  AND  ` , `  NOT  ` , `  OR  ` , `  IN  ` , and `  NEAR  `
+    `AND` , `NOT` , `OR` , `IN` , and `NEAR`
 
-Rules for `  reserved_char  ` in [`  search_query  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) :
+Rules for `reserved_char` in [`search_query`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) :
 
-  - Text not enclosed in backticks requires the following reserved characters to be escaped by a double backslash `  \\  ` :
+  - Text not enclosed in backticks requires the following reserved characters to be escaped by a double backslash `\\` :
     
-      - `  [ ] < > ( ) { } | ! ' " * & ? + / : = - \ ~ ^  `
+      - `[ ] < > ( ) { } | ! ' " * & ? + / : = - \ ~ ^`
     
-      - If the quoted string is preceded by the character `  r  ` or `  R  ` , such as `  r"my\+string"  ` , then it's treated as a raw string and only a single backslash is required to escape the reserved characters. For more information about raw strings and escape sequences, see [String and byte literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#literals) .
+      - If the quoted string is preceded by the character `r` or `R` , such as `r"my\+string"` , then it's treated as a raw string and only a single backslash is required to escape the reserved characters. For more information about raw strings and escape sequences, see [String and byte literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#literals) .
 
-Rules for `  phrase_term  ` in [`  search_query  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) :
+Rules for `phrase_term` in [`search_query`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) :
 
-  - A phrase is a type of term. If text is enclosed in double quotes and the `  analyzer  ` is `  LOG_ANALYZER  ` , `  PATTERN_ANALYZER  ` , or not set ( `  LOG_ANALYZER  ` by default), the term represents a phrase.
+  - A phrase is a type of term. If text is enclosed in double quotes and the `analyzer` is `LOG_ANALYZER` , `PATTERN_ANALYZER` , or not set ( `LOG_ANALYZER` by default), the term represents a phrase.
 
-  - When a phrase is analyzed, a subset of tokens is created for that phrase. For example, from the phrase `  "foo baz.bar"  ` , the analyzer called `  LOG_ANALYZER  ` generates the phrase-specific tokens `  foo  ` , `  baz  ` , and `  bar  ` .
+  - When a phrase is analyzed, a subset of tokens is created for that phrase. For example, from the phrase `"foo baz.bar"` , the analyzer called `LOG_ANALYZER` generates the phrase-specific tokens `foo` , `baz` , and `bar` .
 
-  - The order of terms in a phrase matters. A match is only returned if the tokens that were produced for the phrase are next to each other and in the same order as the tokens for [`  data_to_search  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#data_to_search_arg) .
+  - The order of terms in a phrase matters. A match is only returned if the tokens that were produced for the phrase are next to each other and in the same order as the tokens for [`data_to_search`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#data_to_search_arg) .
     
     For example:
     
@@ -171,9 +171,9 @@ Rules for `  phrase_term  ` in [`  search_query  `](https://docs.cloud.google.co
 
 <span id="search_query_to_search_query"></span>
 
-**How `  data_to_search  ` is broken into searchable tokens**
+**How `data_to_search` is broken into searchable tokens**
 
-The following table shows how [`  data_to_search  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#data_to_search_arg) is broken into searchable tokens by the `  LOG_ANALYZER  ` text analyzer. All entries are strings.
+The following table shows how [`data_to_search`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#data_to_search_arg) is broken into searchable tokens by the `LOG_ANALYZER` text analyzer. All entries are strings.
 
 <table>
 <colgroup>
@@ -221,9 +221,9 @@ fox.</td>
 </tbody>
 </table>
 
-**How `  search_query  ` is broken into query terms**
+**How `search_query` is broken into query terms**
 
-The following table shows how [`  search_query  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) is broken into query terms by the `  LOG_ANALYZER  ` text analyzer. All entries are strings.
+The following table shows how [`search_query`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search_query_arg) is broken into query terms by the `LOG_ANALYZER` text analyzer. All entries are strings.
 
 <table>
 <colgroup>
@@ -263,29 +263,29 @@ com</td>
 
 <span id="data_to_search_rules"></span>
 
-**Rules for `  data_to_search  `**
+**Rules for `data_to_search`**
 
-General rules for [`  data_to_search  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#data_to_search_arg) :
+General rules for [`data_to_search`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#data_to_search_arg) :
 
-  - `  data_to_search  ` must contain all tokens produced for `  search_query  ` for the function to return `  TRUE  ` .
+  - `data_to_search` must contain all tokens produced for `search_query` for the function to return `TRUE` .
 
-  - To perform a cross-field search, `  data_to_search  ` must be a `  STRUCT  ` , `  ARRAY  ` , or `  JSON  ` data type.
+  - To perform a cross-field search, `data_to_search` must be a `STRUCT` , `ARRAY` , or `JSON` data type.
 
-  - Each `  STRING  ` field in a compound data type is individually searched for terms.
+  - Each `STRING` field in a compound data type is individually searched for terms.
 
-  - If at least one field in `  data_to_search  ` includes all search terms produced by `  search_query  ` , `  SEARCH  ` returns `  TRUE  ` . Otherwise it has the following behavior:
+  - If at least one field in `data_to_search` includes all search terms produced by `search_query` , `SEARCH` returns `TRUE` . Otherwise it has the following behavior:
     
-      - If at least one `  STRING  ` field is `  NULL  ` , `  SEARCH  ` returns `  NULL  ` .
+      - If at least one `STRING` field is `NULL` , `SEARCH` returns `NULL` .
     
-      - Otherwise, `  SEARCH  ` returns `  FALSE  ` .
+      - Otherwise, `SEARCH` returns `FALSE` .
 
 **Return type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
-The following queries show how tokens in `  search_query  ` are analyzed by a `  SEARCH  ` function call using the default analyzer, `  LOG_ANALYZER  ` :
+The following queries show how tokens in `search_query` are analyzed by a `SEARCH` function call using the default analyzer, `LOG_ANALYZER` :
 
     SELECT
       -- ERROR: `search_query` is NULL.
@@ -385,7 +385,7 @@ The following queries show how tokens in `  search_query  ` are analyzed by a ` 
      | false | false | false | true  | true  | true  | false | true  |
      +-------+-------+-------+-------+-------+-------+-------+-------*/
 
-The following queries show how logical expression can be used in `  search_query  ` to perform a `  SEARCH  ` function call:
+The following queries show how logical expression can be used in `search_query` to perform a `SEARCH` function call:
 
     SELECT
       -- TRUE: A whitespace is an implicit AND.
@@ -411,7 +411,7 @@ The following queries show how logical expression can be used in `  search_query
      | true  | true  | true  | true  | false |
      +-------+-------+-------+-------+-------+/
 
-The following queries show how phrases in `  search_query  ` are analyzed by a `  SEARCH  ` function call:
+The following queries show how phrases in `search_query` are analyzed by a `SEARCH` function call:
 
     SELECT
       -- TRUE: The phrase `foo bar` is in `foo bar baz`.
@@ -524,7 +524,7 @@ The following queries show how phrases in `  search_query  ` are analyzed by a `
      | false | true  | true  | false | true  |
      +-------+-------+-------+-------+-------*/
 
-The following query shows examples of calls to the `  SEARCH  ` function using the `  NO_OP_ANALYZER  ` text analyzer and reasons for various return values:
+The following query shows examples of calls to the `SEARCH` function using the `NO_OP_ANALYZER` text analyzer and reasons for various return values:
 
     SELECT
       -- TRUE: exact match
@@ -559,7 +559,7 @@ The following query shows examples of calls to the `  SEARCH  ` function using t
      | true  | false | false | false | true  | false | true  | false |
      +-------+-------+-------+-------+-------+-------+-------+-------*/
 
-Consider the following table called `  meals  ` with columns `  breakfast  ` , `  lunch  ` , and `  dinner  ` :
+Consider the following table called `meals` with columns `breakfast` , `lunch` , and `dinner` :
 
     /*-------------------+-------------------------+------------------+
      | breakfast         | lunch                   | dinner           |
@@ -568,7 +568,7 @@ Consider the following table called `  meals  ` with columns `  breakfast  ` , `
      | Avocado toast     | Tomato soup             | Chicken soup     |
      +-------------------+-------------------------+------------------*/
 
-The following query shows how to search single columns, multiple columns, and whole tables, using the default [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) text analyzer with the default analyzer options:
+The following query shows how to search single columns, multiple columns, and whole tables, using the default [`LOG_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) text analyzer with the default analyzer options:
 
     WITH
       meals AS (
@@ -595,7 +595,7 @@ The following query shows how to search single columns, multiple columns, and wh
      | true       | true                     | true         |
      +------------+--------------------------+--------------*/
 
-The following query shows additional ways to search, using the default [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) text analyzer with default analyzer options:
+The following query shows additional ways to search, using the default [`LOG_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) text analyzer with default analyzer options:
 
     WITH data AS ( SELECT 'Please use foobar@example.com as your email.' AS email )
     SELECT
@@ -612,7 +612,7 @@ The following query shows additional ways to search, using the default [`  LOG_A
      | false | true  | true  | true  | false |
      +-------+-------+-------+-------+-------*/
 
-The following query shows additional ways to search, using the default [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) text analyzer with custom analyzer options. Terms are only split when a space or `  @  ` symbol is encountered.
+The following query shows additional ways to search, using the default [`LOG_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) text analyzer with custom analyzer options. Terms are only split when a space or `@` symbol is encountered.
 
     WITH data AS ( SELECT 'Please use foobar@example.com as your email.' AS email )
     SELECT
@@ -629,7 +629,7 @@ The following query shows additional ways to search, using the default [`  LOG_A
      | true  | false | true  | true  | true  |
      +-------+-------+-------+-------+-------*/
 
-The following query shows how to search, using the [`  NO_OP_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) text analyzer:
+The following query shows how to search, using the [`NO_OP_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) text analyzer:
 
     WITH meals AS ( SELECT 'Tomato soup' AS lunch )
     SELECT
@@ -645,7 +645,7 @@ The following query shows how to search, using the [`  NO_OP_ANALYZER  `](https:
      | true  | false | false | false |
      +-------+-------+-------+-------*/
 
-The following query shows how to use the [`  PATTERN_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with default analyzer options:
+The following query shows how to use the [`PATTERN_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with default analyzer options:
 
     WITH data AS ( SELECT 'Please use foobar@example.com as your email.' AS email )
     SELECT
@@ -661,7 +661,7 @@ The following query shows how to use the [`  PATTERN_ANALYZER  `](https://docs.c
      | false | true  | true  | true  |
      +-------+-------+-------+-------*/
 
-The following query shows additional ways to search, using the [`  PATTERN_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with custom analyzer options:
+The following query shows additional ways to search, using the [`PATTERN_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with custom analyzer options:
 
     WITH data AS ( SELECT 'Please use foobar@EXAMPLE.com as your email.' AS email )
     SELECT
@@ -681,7 +681,7 @@ For additional examples that include analyzer options, see the [Text analysis](h
 
 For helpful analyzer recipes that you can use to enhance analyzer-supported queries, see the [Search with text analyzers](https://docs.cloud.google.com/bigquery/docs/text-analysis-search) user guide.
 
-## `     VECTOR_SEARCH    `
+## `VECTOR_SEARCH`
 
 Use the following syntax for batch searches, when you want to perform a vector search for multiple rows in a table or query result:
 
@@ -710,97 +710,97 @@ Use the following syntax (in [Preview](https://cloud.google.com/products#product
 
 **Description**
 
-The `  VECTOR_SEARCH  ` function lets you search embeddings to find semantically similar entities.
+The `VECTOR_SEARCH` function lets you search embeddings to find semantically similar entities.
 
 Embeddings are high-dimensional numerical vectors that represent a given entity, like a piece of text or an audio file. Machine learning (ML) models use embeddings to encode semantics about such entities to make it easier to reason about and compare them. For example, a common operation in clustering, classification, and recommendation models is to measure the distance between vectors in an [embedding space](https://en.wikipedia.org/wiki/Latent_space) to find items that are most semantically similar.
 
 **Definitions**
 
-  - `  base_table  ` : The table to search for nearest neighbor embeddings.
+  - `base_table` : The table to search for nearest neighbor embeddings.
 
-  - `  base_table_query  ` : A query that you can use to pre-filter the base table. Only `  SELECT  ` , `  FROM  ` , and `  WHERE  ` clauses are allowed in this query. Don't apply any filters to the embedding column. You can't use [logical views](https://docs.cloud.google.com/bigquery/docs/views-intro) in this query. Using a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) might interfere with index usage or cause your query to fail. If the base table is indexed and the `  WHERE  ` clause contains columns that are not stored in the index, then `  VECTOR_SEARCH  ` post-filters on those columns instead. To learn more, see [Store columns and pre-filter](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) .
+  - `base_table_query` : A query that you can use to pre-filter the base table. Only `SELECT` , `FROM` , and `WHERE` clauses are allowed in this query. Don't apply any filters to the embedding column. You can't use [logical views](https://docs.cloud.google.com/bigquery/docs/views-intro) in this query. Using a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) might interfere with index usage or cause your query to fail. If the base table is indexed and the `WHERE` clause contains columns that are not stored in the index, then `VECTOR_SEARCH` post-filters on those columns instead. To learn more, see [Store columns and pre-filter](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) .
 
-  - `  column_to_search  ` : The name of the base table column to search for nearest neighbor embeddings. The column must be one of the following types:
+  - `column_to_search` : The name of the base table column to search for nearest neighbor embeddings. The column must be one of the following types:
     
-      - `  ARRAY<FLOAT64>  ` : All elements in the array must be non- `  NULL  ` , and all values in the column must have the same array dimensions.
-      - `  STRING  ` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) The table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled on this column. Rows with missing embeddings in the base table are skipped during the search.
+      - `ARRAY<FLOAT64>` : All elements in the array must be non- `NULL` , and all values in the column must have the same array dimensions.
+      - `STRING` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) The table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled on this column. Rows with missing embeddings in the base table are skipped during the search.
     
     If the column has a vector index, BigQuery attempts to use it. To determine if an index was used in the vector search, see [Vector index usage](https://docs.cloud.google.com/bigquery/docs/vector-index#vector_index_usage) .
 
-  - `  query_table  ` : The table that provides the embeddings for which to find nearest neighbors. All columns are passed through as output columns.
+  - `query_table` : The table that provides the embeddings for which to find nearest neighbors. All columns are passed through as output columns.
 
-  - `  query_table_query  ` : A query that provides the embeddings for which to find nearest neighbors. All columns are passed through as output columns.
+  - `query_table_query` : A query that provides the embeddings for which to find nearest neighbors. All columns are passed through as output columns.
 
-  - `  query_column_to_search  ` : A named argument with a `  STRING  ` value. `  query_column_to_search_value  ` specifies the name of the column in the query table or statement that contains the strings or embeddings for which to find nearest neighbors. The column must be one of the following types:
+  - `query_column_to_search` : A named argument with a `STRING` value. `query_column_to_search_value` specifies the name of the column in the query table or statement that contains the strings or embeddings for which to find nearest neighbors. The column must be one of the following types:
     
-      - `  ARRAY<FLOAT64>  ` : All elements in the array must be non- `  NULL  ` and all values in the column must have the same array dimensions as the values in the `  column_to_search  ` column.
-      - `  STRING  ` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) The `  base_table  ` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The string values are embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. These embeddings are used to return query results but aren't stored anywhere. You must have the BigQuery Connection User role ( `  roles/bigquery.connectionUser  ` ) on the connection that the base table uses for background embedding generation.
+      - `ARRAY<FLOAT64>` : All elements in the array must be non- `NULL` and all values in the column must have the same array dimensions as the values in the `column_to_search` column.
+      - `STRING` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The string values are embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. These embeddings are used to return query results but aren't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
     
-    If you don't specify `  query_column_to_search_value  ` , the function uses the `  column_to_search  ` value or picks the most appropriate column.
+    If you don't specify `query_column_to_search_value` , the function uses the `column_to_search` value or picks the most appropriate column.
 
-  - `  query_value  ` : A named argument of one of the following types:
+  - `query_value` : A named argument of one of the following types:
     
-      - `  ARRAY<FLOAT64>  ` : The `  single_query_value  ` is a single embedding for which to find nearest neighbors.
-      - `  STRING  ` : The `  base_table  ` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The `  single_query_value  ` is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. The embedding is used to return query results but isn't stored anywhere. You must have the BigQuery Connection User role ( `  roles/bigquery.connectionUser  ` ) on the connection that the base table uses for background embedding generation.
+      - `ARRAY<FLOAT64>` : The `single_query_value` is a single embedding for which to find nearest neighbors.
+      - `STRING` : The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The `single_query_value` is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. The embedding is used to return query results but isn't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
 
-  - `  top_k  ` : A named argument with an `  INT64  ` value. `  top_k_value  ` specifies the number of nearest neighbors to return. The default is `  10  ` . If the value is negative, all values are counted as neighbors and returned.
+  - `top_k` : A named argument with an `INT64` value. `top_k_value` specifies the number of nearest neighbors to return. The default is `10` . If the value is negative, all values are counted as neighbors and returned.
 
-  - `  distance_type  ` : A named argument with a `  STRING  ` value. `  distance_type_value  ` specifies the type of metric to use to compute the distance between two vectors. Supported distance types are [`  EUCLIDEAN  `](https://en.wikipedia.org/wiki/Euclidean_distance) , [`  COSINE  `](https://en.wikipedia.org/wiki/Cosine_similarity#Cosine_Distance) , and [`  DOT_PRODUCT  `](https://en.wikipedia.org/wiki/Dot_product) . The default is `  EUCLIDEAN  ` .
+  - `distance_type` : A named argument with a `STRING` value. `distance_type_value` specifies the type of metric to use to compute the distance between two vectors. Supported distance types are [`EUCLIDEAN`](https://en.wikipedia.org/wiki/Euclidean_distance) , [`COSINE`](https://en.wikipedia.org/wiki/Cosine_similarity#Cosine_Distance) , and [`DOT_PRODUCT`](https://en.wikipedia.org/wiki/Dot_product) . The default is `EUCLIDEAN` .
     
-    If you don't specify `  distance_type_value  ` and the `  column_to_search  ` column has a vector index that's used, `  VECTOR_SEARCH  ` uses the distance type specified in the [`  distance_type  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) of the `  CREATE VECTOR INDEX  ` statement.
+    If you don't specify `distance_type_value` and the `column_to_search` column has a vector index that's used, `VECTOR_SEARCH` uses the distance type specified in the [`distance_type` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) of the `CREATE VECTOR INDEX` statement.
 
-  - `  options  ` : A named argument with a JSON-formatted `  STRING  ` value. `  options_value  ` is a literal that specifies the following vector search options:
+  - `options` : A named argument with a JSON-formatted `STRING` value. `options_value` is a literal that specifies the following vector search options:
     
-      - `  fraction_lists_to_search  ` : A JSON number that specifies the percentage of lists to search. For example, `  options => '{"fraction_lists_to_search":0.15}'  ` . The `  fraction_lists_to_search  ` value must be in the range `  0.0  ` to `  1.0  ` , exclusive.
+      - `fraction_lists_to_search` : A JSON number that specifies the percentage of lists to search. For example, `options => '{"fraction_lists_to_search":0.15}'` . The `fraction_lists_to_search` value must be in the range `0.0` to `1.0` , exclusive.
         
         Specifying a higher percentage leads to higher recall and slower performance, and the converse is true when specifying a lower percentage.
         
-        `  fraction_lists_to_search  ` is only used when a vector index is also used. If you don't specify a `  fraction_lists_to_search  ` value but an index is matched, an appropriate value is picked.
+        `fraction_lists_to_search` is only used when a vector index is also used. If you don't specify a `fraction_lists_to_search` value but an index is matched, an appropriate value is picked.
         
-        The number of available lists to search is determined by the [`  num_lists  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) in the `  ivf_options  ` option or derived from the [`  leaf_node_embedding_count  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) in the `  tree_ah_options  ` option of the `  CREATE VECTOR INDEX  ` statement if specified. Otherwise, BigQuery calculates an appropriate number.
+        The number of available lists to search is determined by the [`num_lists` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) in the `ivf_options` option or derived from the [`leaf_node_embedding_count` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) in the `tree_ah_options` option of the `CREATE VECTOR INDEX` statement if specified. Otherwise, BigQuery calculates an appropriate number.
         
-        You can't specify `  fraction_lists_to_search  ` when `  use_brute_force  ` is set to `  true  ` .
+        You can't specify `fraction_lists_to_search` when `use_brute_force` is set to `true` .
     
-      - `  use_brute_force  ` : A JSON boolean that determines whether to use brute force search by skipping the vector index if one is available. For example, `  options => '{"use_brute_force":true}'  ` . The default is `  false  ` . If you specify `  use_brute_force=false  ` and there is no useable vector index available, brute force is used anyway.
+      - `use_brute_force` : A JSON boolean that determines whether to use brute force search by skipping the vector index if one is available. For example, `options => '{"use_brute_force":true}'` . The default is `false` . If you specify `use_brute_force=false` and there is no useable vector index available, brute force is used anyway.
     
-    `  options  ` defaults to `  '{}'  ` to denote that all underlying options use their corresponding default values.
+    `options` defaults to `'{}'` to denote that all underlying options use their corresponding default values.
 
 **Details**
 
-You can optionally use `  VECTOR_SEARCH  ` with a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) . When a vector index is used, `  VECTOR_SEARCH  ` uses the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique to help improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. When a base table is large, the use of an index typically improves performance without significantly sacrificing recall. Brute force is used to return exact results when a vector index isn't available, and you can choose to use brute force to get exact results even when a vector index is available.
+You can optionally use `VECTOR_SEARCH` with a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) . When a vector index is used, `VECTOR_SEARCH` uses the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique to help improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. When a base table is large, the use of an index typically improves performance without significantly sacrificing recall. Brute force is used to return exact results when a vector index isn't available, and you can choose to use brute force to get exact results even when a vector index is available.
 
-If the base table has autonomous embedding generation enabled, then you can alternatively use the [`  AI.SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) to simplify your search syntax.
+If the base table has autonomous embedding generation enabled, then you can alternatively use the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) to simplify your search syntax.
 
 **Output**
 
-For each row in the query data, the output contains multiple rows from the base table that satisfy the search criteria. The number of results rows per query table row is either 10 or the `  top_k  ` value if it's specified. The order of the output isn't guaranteed.
+For each row in the query data, the output contains multiple rows from the base table that satisfy the search criteria. The number of results rows per query table row is either 10 or the `top_k` value if it's specified. The order of the output isn't guaranteed.
 
 The output includes the following columns:
 
-  - `  query  ` : A `  STRUCT  ` value that contains all selected columns from the query data. This column is only included in the output if you use the batch search syntax. For single vector searches, this column is omitted.
-  - `  base  ` : A `  STRUCT  ` value that contains all columns from `  base_table  ` or a subset of the columns from `  base_table  ` that you selected in the `  base_table_query  ` query.
-  - `  distance  ` : A `  FLOAT64  ` value that represents the distance between the base data and the query data.
+  - `query` : A `STRUCT` value that contains all selected columns from the query data. This column is only included in the output if you use the batch search syntax. For single vector searches, this column is omitted.
+  - `base` : A `STRUCT` value that contains all columns from `base_table` or a subset of the columns from `base_table` that you selected in the `base_table_query` query.
+  - `distance` : A `FLOAT64` value that represents the distance between the base data and the query data.
 
 **Limitations**
 
-BigQuery data security and governance rules apply to the use of `  VECTOR_SEARCH  ` , which results in the following behavior:
+BigQuery data security and governance rules apply to the use of `VECTOR_SEARCH` , which results in the following behavior:
 
-  - If the base table has [row-level security policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , `  VECTOR_SEARCH  ` applies the row-level access policies to the query results.
+  - If the base table has [row-level security policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , `VECTOR_SEARCH` applies the row-level access policies to the query results.
 
-  - If the indexed column from the base table has [data masking policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , `  VECTOR_SEARCH  ` succeeds only if the user running the query has the [`  Fine-Grained Reader  `](https://docs.cloud.google.com/iam/docs/understanding-roles#datacatalog.categoryFineGrainedReader) role on the policy tags that are used. Otherwise, `  VECTOR_SEARCH  ` fails with an invalid query error.
+  - If the indexed column from the base table has [data masking policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , `VECTOR_SEARCH` succeeds only if the user running the query has the [`Fine-Grained Reader`](https://docs.cloud.google.com/iam/docs/understanding-roles#datacatalog.categoryFineGrainedReader) role on the policy tags that are used. Otherwise, `VECTOR_SEARCH` fails with an invalid query error.
 
-  - If any base table column or any column in the query table or statement has [column-level security policies](https://docs.cloud.google.com/bigquery/docs/column-level-security) and you don't have appropriate permissions to access the column, `  VECTOR_SEARCH  ` fails with a permission denied error.
+  - If any base table column or any column in the query table or statement has [column-level security policies](https://docs.cloud.google.com/bigquery/docs/column-level-security) and you don't have appropriate permissions to access the column, `VECTOR_SEARCH` fails with a permission denied error.
 
-  - The project that runs the query containing `  VECTOR_SEARCH  ` must match the project that contains the base table.
+  - The project that runs the query containing `VECTOR_SEARCH` must match the project that contains the base table.
 
-  - If the base table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled and your `  query_column_to_search  ` column is a `  STRING  ` column, then the following limitations apply:
+  - If the base table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled and your `query_column_to_search` column is a `STRING` column, then the following limitations apply:
     
       - If embedding generation for the query string fails, then the entire query fails.
       - Your query is subject to the [generative AI function limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
 
 **Examples**
 
-The following queries create test tables `  base_table  ` and `  query_table  ` to use in subsequent query examples. These tables use a fictional 2-dimensional embedding of various animal names for readability, but a typical text embedding uses hundreds or thousands of dimensions.
+The following queries create test tables `base_table` and `query_table` to use in subsequent query examples. These tables use a fictional 2-dimensional embedding of various animal names for readability, but a typical text embedding uses hundreds or thousands of dimensions.
 
     CREATE OR REPLACE TABLE mydataset.base_table
     (
@@ -827,7 +827,7 @@ The following queries create test tables `  base_table  ` and `  query_table  ` 
     VALUES('dog', [1.0, 2.0]),
     ('cat', [1.0, -1.0]);
 
-The following example searches the `  my_embedding  ` column of `  base_table  ` for the top two embeddings that match each row of data in the `  embedding  ` column of `  query_table  ` :
+The following example searches the `my_embedding` column of `base_table` for the top two embeddings that match each row of data in the `embedding` column of `query_table` :
 
     SELECT *
     FROM
@@ -854,7 +854,7 @@ The following example searches the `  my_embedding  ` column of `  base_table  `
      |                | -1.0            |         | -2.0              |                    |
      +----------------+-----------------+---------+-------------------+--------------------*/
 
-The following example pre-filters `  base_table  ` to rows where `  id  ` isn't equal to "wolf" and then searches the `  my_embedding  ` column of `  base_table  ` for the top two embeddings that match each row of data in the `  embedding  ` column of `  query_table  ` .
+The following example pre-filters `base_table` to rows where `id` isn't equal to "wolf" and then searches the `my_embedding` column of `base_table` for the top two embeddings that match each row of data in the `embedding` column of `query_table` .
 
     SELECT *
     FROM
@@ -882,7 +882,7 @@ The following example pre-filters `  base_table  ` to rows where `  id  ` isn't 
      |                | -1.0            |         | -2.0              |                    |
      +----------------+-----------------+---------+-------------------+--------------------*/
 
-The following example searches the `  my_embedding  ` column of `  base_table  ` for the top two embeddings that match each row of data in the `  embedding  ` column of `  query_table  ` , and uses the `  COSINE  ` distance type to measure the distance between the embeddings:
+The following example searches the `my_embedding` column of `base_table` for the top two embeddings that match each row of data in the `embedding` column of `query_table` , and uses the `COSINE` distance type to measure the distance between the embeddings:
 
     SELECT *
     FROM
@@ -910,7 +910,7 @@ The following example searches the `  my_embedding  ` column of `  base_table  `
      |                | -1.0            |         | -2.0              |                       |
      +----------------+-----------------+---------+-------------------+-----------------------*/
 
-The following example searches the `  my_embedding  ` column of `  base_table  ` for the top two embeddings that match the single embedding value `  [1.0, -1.0]  ` . It uses the optimized syntax for single searches:
+The following example searches the `my_embedding` column of `base_table` for the top two embeddings that match the single embedding value `[1.0, -1.0]` . It uses the optimized syntax for single searches:
 
     SELECT *
     FROM
@@ -930,7 +930,7 @@ The following example searches the `  my_embedding  ` column of `  base_table  `
      |         | -2.0              |                    |
      +---------+-------------------+--------------------*/
 
-Instead of including the embedding value as a literal in your query, you can generate it by using an embedding function such as `  AI.EMBED  ` . The following example shows how you could search the `  my_embedding  ` column of `  base_table  ` for the top two embeddings that match the computed embedding value for `  'butterfly'  ` . It uses the optimized syntax for single searches:
+Instead of including the embedding value as a literal in your query, you can generate it by using an embedding function such as `AI.EMBED` . The following example shows how you could search the `my_embedding` column of `base_table` for the top two embeddings that match the computed embedding value for `'butterfly'` . It uses the optimized syntax for single searches:
 
     SELECT *
     FROM

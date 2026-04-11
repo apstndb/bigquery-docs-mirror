@@ -13,28 +13,21 @@ The returned list transfer run messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;transferMessages&quot;: [
-    {
-      object (TransferMessage)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;transferMessages&quot;: [{object (TransferMessage)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  transferMessages[]  `
+`transferMessages[]`
 
-`  object ( TransferMessage  ` )
+` object ( TransferMessage  ` )
 
 Output only. The stored pipeline transfer messages.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
-Output only. The next-pagination token. For multiple-page list results, this token can be used as the `  GetTransferRunLogRequest.page_token  ` to request the next page of list results.
+Output only. The next-pagination token. For multiple-page list results, this token can be used as the `GetTransferRunLogRequest.page_token` to request the next page of list results.

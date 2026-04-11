@@ -24,7 +24,7 @@ This guide demonstrates the connection process for the following IDEs:
 
 3.  [Enable the BigQuery API in the Google Cloud project](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&redirect=https://console.cloud.google.com/) .
 
-4.  Configure the required roles and permissions to complete this task. You will need the [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control) role ( `  roles/bigquery.user  ` ), the BigQuery Data Viewer role ( `  roles/bigquery.dataViewer  ` ), or equivalent IAM permissions to connect to the project.
+4.  Configure the required roles and permissions to complete this task. You will need the [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control) role ( `roles/bigquery.user` ), the BigQuery Data Viewer role ( `roles/bigquery.dataViewer` ), or equivalent IAM permissions to connect to the project.
 
 5.  Configure [Application Default Credentials (ADC)](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) for your environment.
 
@@ -82,25 +82,25 @@ The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelc
     
         curl -O https://storage.googleapis.com/genai-toolbox/VERSION/linux/amd64/toolbox
     
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
+    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
     
     ### macOS darwin/arm64
     
         curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/arm64/toolbox
     
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
+    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
     
     ### macOS darwin/amd64
     
         curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/amd64/toolbox
     
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
+    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
     
     ### windows/amd64
     
         curl -O https://storage.googleapis.com/genai-toolbox/VERSION/windows/amd64/toolbox
     
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
+    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
 
 2.  Make the binary executable:
     
@@ -122,7 +122,7 @@ For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](ht
 
 1.  Install [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) .
 
-2.  Create a `  .mcp.json  ` file in your project root, if it doesn't exist.
+2.  Create a `.mcp.json` file in your project root, if it doesn't exist.
 
 3.  Add the configuration, replace the environment variables with your values, and save:
     
@@ -197,9 +197,9 @@ A green active status appears after the server connects successfully.
 
 ### Cursor
 
-1.  Create the `  .cursor  ` directory in your project root if it doesn't exist.
+1.  Create the `.cursor` directory in your project root if it doesn't exist.
 
-2.  Create the `  .cursor/mcp.json  ` file if it doesn't exist and open it.
+2.  Create the `.cursor/mcp.json` file if it doesn't exist and open it.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
     
@@ -222,9 +222,9 @@ A green active status appears after the server connects successfully.
 
 ### Visual Studio Code (Copilot)
 
-1.  Open [VS Code](https://code.visualstudio.com/docs/copilot/overview) and create a `  .vscode  ` directory in your project root if it does not exist.
+1.  Open [VS Code](https://code.visualstudio.com/docs/copilot/overview) and create a `.vscode` directory in your project root if it does not exist.
 
-2.  Create the `  .vscode/mcp.json  ` file if it doesn't exist, and open it.
+2.  Create the `.vscode/mcp.json` file if it doesn't exist, and open it.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
     
@@ -268,7 +268,7 @@ A green active status appears after the server connects successfully.
             
     ```
 
-> **Note:** The `  BIGQUERY_PROJECT  ` environment variable specifies the default Google Cloud Project ID for the MCP Toolbox to use. All BigQuery operations, such as executing queries, are run within this project.
+> **Note:** The `BIGQUERY_PROJECT` environment variable specifies the default Google Cloud Project ID for the MCP Toolbox to use. All BigQuery operations, such as executing queries, are run within this project.
 
 ## Use the tools
 

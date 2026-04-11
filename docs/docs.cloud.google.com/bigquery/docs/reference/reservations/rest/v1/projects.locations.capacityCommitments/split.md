@@ -7,7 +7,7 @@
   - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments/split#body.aspect)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments/split#try-it)
 
-Splits capacity commitment to two commitments of the same plan and `  commitmentEndTime  ` .
+Splits capacity commitment to two commitments of the same plan and `commitmentEndTime` .
 
 A common use case is to enable downgrading commitments.
 
@@ -15,7 +15,7 @@ For example, in order to downgrade from 10000 slots to 8000, you might split a 1
 
 ### HTTP request
 
-`  POST https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/capacityCommitments/*}:split  `
+`POST https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/capacityCommitments/*}:split`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -23,15 +23,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The resource name e.g.,: `  projects/myproject/locations/US/capacityCommitments/123  `
+Required. The resource name e.g.,: `projects/myproject/locations/US/capacityCommitments/123`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.capacityCommitments.update  `
+  - `bigquery.capacityCommitments.update`
 
 ### Request body
 
@@ -57,9 +57,9 @@ The request body contains data with the following structure:
 
 Fields
 
-`  slotCount  `
+`slotCount`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of slots in the capacity commitment after the split.
 
@@ -80,29 +80,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;first&quot;: {
-    object (CapacityCommitment)
-  },
-  &quot;second&quot;: {
-    object (CapacityCommitment)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;first&quot;: {object (CapacityCommitment)},&quot;second&quot;: {object (CapacityCommitment)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  first  `
+`first`
 
-`  object ( CapacityCommitment  ` )
+` object ( CapacityCommitment  ` )
 
 First capacity commitment, result of a split.
 
-`  second  `
+`second`
 
-`  object ( CapacityCommitment  ` )
+` object ( CapacityCommitment  ` )
 
 Second capacity commitment, result of a split.
 
@@ -110,7 +103,7 @@ Second capacity commitment, result of a split.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

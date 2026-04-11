@@ -18,14 +18,14 @@ You have a choice of whether to use legacy or GoogleSQL when you run a query. Fo
 
 GoogleSQL complies with the SQL 2011 standard, and has extensions that support querying nested and repeated data. It has several advantages over legacy SQL, including:
 
-  - Composability using [`  WITH  ` clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_with_clauses) and [SQL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_sql_functions)
-  - [Subqueries in the `  SELECT  ` list and `  WHERE  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#subqueries_in_more_places)
+  - Composability using [`WITH` clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_with_clauses) and [SQL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_sql_functions)
+  - [Subqueries in the `SELECT` list and `WHERE` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#subqueries_in_more_places)
   - [Correlated subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#correlated_subqueries)
-  - [`  ARRAY  ` and `  STRUCT  ` data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#arrays_and_structs)
+  - [`ARRAY` and `STRUCT` data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#arrays_and_structs)
   - [Inserts, updates, and deletes](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language)
-  - `  COUNT(DISTINCT <expr>)  ` is exact and scalable, providing the accuracy of `  EXACT_COUNT_DISTINCT  ` without its limitations
-  - Automatic predicate push-down through `  JOIN  ` s
-  - Complex `  JOIN  ` predicates, including arbitrary expressions
+  - `COUNT(DISTINCT <expr>)` is exact and scalable, providing the accuracy of `EXACT_COUNT_DISTINCT` without its limitations
+  - Automatic predicate push-down through `JOIN` s
+  - Complex `JOIN` predicates, including arbitrary expressions
 
 For examples that demonstrate some of these features, see [GoogleSQL highlights](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#standard_sql_highlights) .
 
@@ -33,9 +33,9 @@ For examples that demonstrate some of these features, see [GoogleSQL highlights]
 
 This section discusses some of the highlights of GoogleSQL compared to legacy SQL.
 
-### Composability using `     WITH    ` clauses
+### Composability using `WITH` clauses
 
-Some of the GoogleSQL examples on this page make use of a [`  WITH  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) , which enables extraction or reuse of named subqueries. For example:
+Some of the GoogleSQL examples on this page make use of a [`WITH` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) , which enables extraction or reuse of named subqueries. For example:
 
     #standardSQL
     WITH T AS (
@@ -44,7 +44,7 @@ Some of the GoogleSQL examples on this page make use of a [`  WITH  ` clause](ht
     SELECT x / (SELECT SUM(x) FROM T) AS weighted_x
     FROM T;
 
-This query defines a named subquery `  T  ` that contains `  x  ` values of 1, 2, 3, and 4. It selects `  x  ` values from `  T  ` and divides them by the sum of all `  x  ` values in `  T  ` . This query is equivalent to a query where the contents of `  T  ` are inline:
+This query defines a named subquery `T` that contains `x` values of 1, 2, 3, and 4. It selects `x` values from `T` and divides them by the sum of all `x` values in `T` . This query is equivalent to a query where the contents of `T` are inline:
 
     #standardSQL
     SELECT
@@ -69,13 +69,13 @@ As another example, consider this query, which uses multiple named subqueries:
     SELECT z
     FROM TPlusOneTimesTwo;
 
-This query defines a sequence of transformations of the original data, followed by a `  SELECT  ` statement over `  TPlusOneTimesTwo  ` . This query is equivalent to the following query, which inlines the computations:
+This query defines a sequence of transformations of the original data, followed by a `SELECT` statement over `TPlusOneTimesTwo` . This query is equivalent to the following query, which inlines the computations:
 
     #standardSQL
     SELECT (x + 1) * 2 AS z
     FROM (SELECT x FROM UNNEST([1, 2, 3, 4]) AS x);
 
-For more information, see [`  WITH  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) .
+For more information, see [`WITH` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) .
 
 ### Composability using SQL functions
 
@@ -97,11 +97,11 @@ GoogleSQL supports [user-defined SQL functions](https://docs.cloud.google.com/bi
     SELECT arr, HarmonicMean(arr) AS h_mean
     FROM T;
 
-This query defines a SQL function named `  HarmonicMean  ` and then applies it to the array column `  arr  ` from `  T  ` .
+This query defines a SQL function named `HarmonicMean` and then applies it to the array column `arr` from `T` .
 
 ### Subqueries in more places
 
-GoogleSQL supports subqueries in the `  SELECT  ` list, `  WHERE  ` clause, and anywhere else in the query that expects an expression. For example, consider the following GoogleSQL query that computes the fraction of warm days in Seattle in 2015:
+GoogleSQL supports subqueries in the `SELECT` list, `WHERE` clause, and anywhere else in the query that expects an expression. For example, consider the following GoogleSQL query that computes the fraction of warm days in Seattle in 2015:
 
     #standardSQL
     WITH SeattleWeather AS (
@@ -114,7 +114,7 @@ GoogleSQL supports subqueries in the `  SELECT  ` list, `  WHERE  ` clause, and 
         (SELECT COUNT(*) FROM SeattleWeather) AS warm_days_fraction
     FROM SeattleWeather;
 
-The Seattle weather station has an ID of `  '994014'  ` . The query computes the number of warm days based on those where the temperature reached 70 degrees Fahrenheit, or approximately 21 degrees Celsius, divided by the total number of recorded days for that station in 2015.
+The Seattle weather station has an ID of `'994014'` . The query computes the number of warm days based on those where the temperature reached 70 degrees Fahrenheit, or approximately 21 degrees Celsius, divided by the total number of recorded days for that station in 2015.
 
 ### Correlated subqueries
 
@@ -137,11 +137,11 @@ In GoogleSQL, subqueries can reference correlated columns; that is, columns that
     FROM WashingtonStations AS washington_stations
     ORDER BY warm_days DESC;
 
-This query computes the names of weather stations in Washington state and the number of days in 2015 that the temperature reached 70 degrees Fahrenheit, or approximately 21 degrees Celsius. Notice that there is a subquery in the `  SELECT  ` list, and that the subquery references `  washington_stations.station_id  ` from the outer scope, namely `  FROM WashingtonStations AS washington_stations  ` .
+This query computes the names of weather stations in Washington state and the number of days in 2015 that the temperature reached 70 degrees Fahrenheit, or approximately 21 degrees Celsius. Notice that there is a subquery in the `SELECT` list, and that the subquery references `washington_stations.station_id` from the outer scope, namely `FROM WashingtonStations AS washington_stations` .
 
 ### Arrays and structs
 
-`  ARRAY  ` and `  STRUCT  ` are powerful concepts in GoogleSQL. As an example that uses both, consider the following query, which computes the top two articles for each day in the HackerNews dataset:
+`ARRAY` and `STRUCT` are powerful concepts in GoogleSQL. As an example that uses both, consider the following query, which computes the top two articles for each day in the HackerNews dataset:
 
     #standardSQL
     WITH TitlesAndScores AS (
@@ -160,40 +160,40 @@ This query computes the names of weather stations in Washington state and the nu
     FROM TitlesAndScores
     ORDER BY date DESC;
 
-The `  WITH  ` clause defines `  TitlesAndScores  ` , which contains two columns. The first is an array of structs, where one field is an article title and the second is a score. The `  ARRAY_AGG  ` expression returns an array of these structs for each day.
+The `WITH` clause defines `TitlesAndScores` , which contains two columns. The first is an array of structs, where one field is an article title and the second is a score. The `ARRAY_AGG` expression returns an array of these structs for each day.
 
-The `  SELECT  ` statement following the `  WITH  ` clause uses an `  ARRAY  ` subquery to sort and return the top two articles within each array in accordance with the `  score  ` , then returns the results in descending order by date.
+The `SELECT` statement following the `WITH` clause uses an `ARRAY` subquery to sort and return the top two articles within each array in accordance with the `score` , then returns the results in descending order by date.
 
-For more information about arrays and `  ARRAY  ` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) . See also the references for [arrays](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) and [structs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) .
+For more information about arrays and `ARRAY` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) . See also the references for [arrays](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) and [structs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) .
 
 ## Data type differences
 
 Legacy SQL types have an equivalent in GoogleSQL. In some cases, the type has a different name. The following table lists each legacy SQL data type and its GoogleSQL equivalent.
 
-| Legacy SQL                  | GoogleSQL                   | Notes                                                                                                                                                                   |
-| --------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        BOOLEAN       `    | `        BOOLEAN       `    |                                                                                                                                                                         |
-| `        INTEGER       `    | `        INT64       `      |                                                                                                                                                                         |
-| `        FLOAT       `      | `        FLOAT64       `    |                                                                                                                                                                         |
-| `        NUMERIC       `    | `        NUMERIC       `    | Legacy SQL has limited support for `        NUMERIC       `                                                                                                             |
-| `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | Legacy SQL has limited support for `        BIGNUMERIC       `                                                                                                          |
-| `        STRING       `     | `        STRING       `     |                                                                                                                                                                         |
-| `        BYTES       `      | `        BYTES       `      |                                                                                                                                                                         |
-| `        RECORD       `     | `        STRUCT       `     |                                                                                                                                                                         |
-| `        REPEATED       `   | `        ARRAY       `      |                                                                                                                                                                         |
-| `        TIMESTAMP       `  | `        TIMESTAMP       `  | See [`         TIMESTAMP        ` differences](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#timestamp_type_differences) |
-| `        DATE       `       | `        DATE       `       | Legacy SQL has limited support for `        DATE       `                                                                                                                |
-| `        TIME       `       | `        TIME       `       | Legacy SQL has limited support for `        TIME       `                                                                                                                |
-| `        DATETIME       `   | `        DATETIME       `   | Legacy SQL has limited support for `        DATETIME       `                                                                                                            |
+| Legacy SQL   | GoogleSQL    | Notes                                                                                                                                                  |
+| ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BOOLEAN`    | `BOOLEAN`    |                                                                                                                                                        |
+| `INTEGER`    | `INT64`      |                                                                                                                                                        |
+| `FLOAT`      | `FLOAT64`    |                                                                                                                                                        |
+| `NUMERIC`    | `NUMERIC`    | Legacy SQL has limited support for `NUMERIC`                                                                                                           |
+| `BIGNUMERIC` | `BIGNUMERIC` | Legacy SQL has limited support for `BIGNUMERIC`                                                                                                        |
+| `STRING`     | `STRING`     |                                                                                                                                                        |
+| `BYTES`      | `BYTES`      |                                                                                                                                                        |
+| `RECORD`     | `STRUCT`     |                                                                                                                                                        |
+| `REPEATED`   | `ARRAY`      |                                                                                                                                                        |
+| `TIMESTAMP`  | `TIMESTAMP`  | See [`TIMESTAMP` differences](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#timestamp_type_differences) |
+| `DATE`       | `DATE`       | Legacy SQL has limited support for `DATE`                                                                                                              |
+| `TIME`       | `TIME`       | Legacy SQL has limited support for `TIME`                                                                                                              |
+| `DATETIME`   | `DATETIME`   | Legacy SQL has limited support for `DATETIME`                                                                                                          |
 
 For more information see:
 
   - [GoogleSQL data types reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
   - [Legacy SQL data types reference](https://docs.cloud.google.com/bigquery/docs/data-types)
 
-### `     TIMESTAMP    ` type differences
+### `TIMESTAMP` type differences
 
-GoogleSQL has a [stricter range of valid `  TIMESTAMP  ` values](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) than legacy SQL does. In GoogleSQL, valid `  TIMESTAMP  ` values are in the range of `  0001-01-01 00:00:00.000000  ` to `  9999-12-31 23:59:59.999999  ` . For example, you can select the minimum and maximum `  TIMESTAMP  ` values using GoogleSQL:
+GoogleSQL has a [stricter range of valid `TIMESTAMP` values](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) than legacy SQL does. In GoogleSQL, valid `TIMESTAMP` values are in the range of `0001-01-01 00:00:00.000000` to `9999-12-31 23:59:59.999999` . For example, you can select the minimum and maximum `TIMESTAMP` values using GoogleSQL:
 
     #standardSQL
     SELECT
@@ -207,7 +207,7 @@ GoogleSQL has a [stricter range of valid `  TIMESTAMP  ` values](https://docs.cl
         TIMESTAMP '9999-12-31 23:59:59.999999' AS max_timestamp
     );
 
-This query returns `  -62135596800000000  ` as `  min_unix_micros  ` and `  253402300799999999  ` as `  max_unix_micros  ` .
+This query returns `-62135596800000000` as `min_unix_micros` and `253402300799999999` as `max_unix_micros` .
 
 If you select a column that contains timestamp values outside of this range, you receive an error:
 
@@ -233,27 +233,27 @@ To correct the error, one option is to define and use a [user-defined function](
     FROM MyTableWithInvalidTimestamps
     WHERE TimestampIsValid(timestamp_column_with_invalid_values);
 
-Another option to correct the error is to use the [`  SAFE_CAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) function with the timestamp column. For example:
+Another option to correct the error is to use the [`SAFE_CAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) function with the timestamp column. For example:
 
     #standardSQL
     SELECT SAFE_CAST(timestamp_column_with_invalid_values AS STRING) AS timestamp_string
     FROM MyTableWithInvalidTimestamps;
 
-This query returns `  NULL  ` rather than a timestamp string for invalid timestamp values.
+This query returns `NULL` rather than a timestamp string for invalid timestamp values.
 
 ### Automatic data type coercions
 
-Both legacy and GoogleSQL support coercions (automatic conversions) between certain data types. For example, BigQuery coerces a value of type `  INT64  ` to `  FLOAT64  ` if the query passes it to a function that requires `  FLOAT64  ` as input.
+Both legacy and GoogleSQL support coercions (automatic conversions) between certain data types. For example, BigQuery coerces a value of type `INT64` to `FLOAT64` if the query passes it to a function that requires `FLOAT64` as input.
 
 The following legacy SQL coercions are not supported in GoogleSQL and need to be explicitly cast to the correct type:
 
-| Coercion                                                                                                | Translation                                                                                                                                                                            |
-| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        BOOLEAN       ` to `        INT64       ` or `        FLOAT64       `                          | Use `        SAFE_CAST(bool AS INT64)       ` or `        SAFE_CAST(bool AS FLOAT64)       `                                                                                           |
-| `        INT64       ` to `        TIMESTAMP       `                                                    | Use `        TIMESTAMP_MICROS(micros_value)       `                                                                                                                                    |
-| `        STRING       ` to `        BYTES       `                                                       | Use `        SAFE_CAST(str AS BYTES)       `                                                                                                                                           |
-| `        STRING       ` to `        INT64       ` , `        FLOAT64       ` , or `        BOOL       ` | Mostly supported by GoogleSQL. For corner cases use `        SAFE_CAST(str AS INT64)       ` , `        SAFE_CAST(str AS FLOAT64)       ` , or `        SAFE_CAST(str AS BOOL)       ` |
-| `        STRING       ` to `        TIMESTAMP       `                                                   | Mostly supported by GoogleSQL. For corner cases use `        TIMESTAMP(str)       ` or `        SAFE_CAST(str AS TIMESTAMP)       `                                                    |
+| Coercion                                    | Translation                                                                                                                               |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `BOOLEAN` to `INT64` or `FLOAT64`           | Use `SAFE_CAST(bool AS INT64)` or `SAFE_CAST(bool AS FLOAT64)`                                                                            |
+| `INT64` to `TIMESTAMP`                      | Use `TIMESTAMP_MICROS(micros_value)`                                                                                                      |
+| `STRING` to `BYTES`                         | Use `SAFE_CAST(str AS BYTES)`                                                                                                             |
+| `STRING` to `INT64` , `FLOAT64` , or `BOOL` | Mostly supported by GoogleSQL. For corner cases use `SAFE_CAST(str AS INT64)` , `SAFE_CAST(str AS FLOAT64)` , or `SAFE_CAST(str AS BOOL)` |
+| `STRING` to `TIMESTAMP`                     | Mostly supported by GoogleSQL. For corner cases use `TIMESTAMP(str)` or `SAFE_CAST(str AS TIMESTAMP)`                                     |
 
 For example, the following legacy SQL query uses implicit coercions:
 
@@ -275,7 +275,7 @@ While GoogleSQL and legacy SQL syntaxes are similar, there are some crucial diff
 
 ### Escaping reserved keywords and invalid identifiers
 
-In legacy SQL, you escape reserved keywords and identifiers that contain invalid characters such as a space `  ` or hyphen `  -  ` using square brackets `  []  ` . In GoogleSQL, you escape such keywords and identifiers using backticks ``  `  `` . For example:
+In legacy SQL, you escape reserved keywords and identifiers that contain invalid characters such as a space `  ` or hyphen `-` using square brackets `[]` . In GoogleSQL, you escape such keywords and identifiers using backticks `` ` `` . For example:
 
     #standardSQL
     SELECT
@@ -286,7 +286,7 @@ In legacy SQL, you escape reserved keywords and identifiers that contain invalid
     WHERE word IN ('me', 'I', 'you')
     GROUP BY word;
 
-Legacy SQL allows reserved keywords in some places that GoogleSQL does not. For example, the following query fails due to a `  Syntax error  ` using standard SQL:
+Legacy SQL allows reserved keywords in some places that GoogleSQL does not. For example, the following query fails due to a `Syntax error` using standard SQL:
 
     #standardSQL
     SELECT
@@ -294,7 +294,7 @@ Legacy SQL allows reserved keywords in some places that GoogleSQL does not. For 
     FROM
       `bigquery-public-data.samples.shakespeare`;
 
-To fix the error, escape the alias `  rows  ` using backticks:
+To fix the error, escape the alias `rows` using backticks:
 
     #standardSQL
     SELECT
@@ -314,58 +314,58 @@ The following is a list of keywords allowed in legacy SQL, but not in GoogleSQL:
 <tbody>
 <tr class="odd">
 <td><ul>
-<li><code dir="ltr" translate="no">         ALL        </code></li>
-<li><code dir="ltr" translate="no">         AND        </code></li>
-<li><code dir="ltr" translate="no">         ANY        </code></li>
-<li><code dir="ltr" translate="no">         ARRAY        </code></li>
-<li><code dir="ltr" translate="no">         ASSERT_ROWS_MODIFIED        </code></li>
-<li><code dir="ltr" translate="no">         AT        </code></li>
-<li><code dir="ltr" translate="no">         COLLATE        </code></li>
-<li><code dir="ltr" translate="no">         CURRENT        </code></li>
-<li><code dir="ltr" translate="no">         DEFAULT        </code></li>
-<li><code dir="ltr" translate="no">         DESC        </code></li>
-<li><code dir="ltr" translate="no">         END        </code></li>
-<li><code dir="ltr" translate="no">         ENUM        </code></li>
+<li><code dir="ltr" translate="no">ALL</code></li>
+<li><code dir="ltr" translate="no">AND</code></li>
+<li><code dir="ltr" translate="no">ANY</code></li>
+<li><code dir="ltr" translate="no">ARRAY</code></li>
+<li><code dir="ltr" translate="no">ASSERT_ROWS_MODIFIED</code></li>
+<li><code dir="ltr" translate="no">AT</code></li>
+<li><code dir="ltr" translate="no">COLLATE</code></li>
+<li><code dir="ltr" translate="no">CURRENT</code></li>
+<li><code dir="ltr" translate="no">DEFAULT</code></li>
+<li><code dir="ltr" translate="no">DESC</code></li>
+<li><code dir="ltr" translate="no">END</code></li>
+<li><code dir="ltr" translate="no">ENUM</code></li>
 </ul></td>
 <td><ul>
-<li><code dir="ltr" translate="no">         ESCAPE        </code></li>
-<li><code dir="ltr" translate="no">         EXCEPT        </code></li>
-<li><code dir="ltr" translate="no">         EXCLUDE        </code></li>
-<li><code dir="ltr" translate="no">         EXTRACT        </code></li>
-<li><code dir="ltr" translate="no">         FETCH        </code></li>
-<li><code dir="ltr" translate="no">         FOR        </code></li>
-<li><code dir="ltr" translate="no">         GROUP        </code></li>
-<li><code dir="ltr" translate="no">         GROUPING        </code></li>
-<li><code dir="ltr" translate="no">         GROUPS        </code></li>
-<li><code dir="ltr" translate="no">         IF        </code></li>
-<li><code dir="ltr" translate="no">         INTERVAL        </code></li>
-<li><code dir="ltr" translate="no">         IS        </code></li>
+<li><code dir="ltr" translate="no">ESCAPE</code></li>
+<li><code dir="ltr" translate="no">EXCEPT</code></li>
+<li><code dir="ltr" translate="no">EXCLUDE</code></li>
+<li><code dir="ltr" translate="no">EXTRACT</code></li>
+<li><code dir="ltr" translate="no">FETCH</code></li>
+<li><code dir="ltr" translate="no">FOR</code></li>
+<li><code dir="ltr" translate="no">GROUP</code></li>
+<li><code dir="ltr" translate="no">GROUPING</code></li>
+<li><code dir="ltr" translate="no">GROUPS</code></li>
+<li><code dir="ltr" translate="no">IF</code></li>
+<li><code dir="ltr" translate="no">INTERVAL</code></li>
+<li><code dir="ltr" translate="no">IS</code></li>
 </ul></td>
 <td><ul>
-<li><code dir="ltr" translate="no">         LATERAL        </code></li>
-<li><code dir="ltr" translate="no">         NATURAL        </code></li>
-<li><code dir="ltr" translate="no">         NEW        </code></li>
-<li><code dir="ltr" translate="no">         NO        </code></li>
-<li><code dir="ltr" translate="no">         NULLS        </code></li>
-<li><code dir="ltr" translate="no">         OF        </code></li>
-<li><code dir="ltr" translate="no">         ORDER        </code></li>
-<li><code dir="ltr" translate="no">         PROTO        </code></li>
-<li><code dir="ltr" translate="no">         QUALIFY        </code></li>
-<li><code dir="ltr" translate="no">         RANGE        </code></li>
-<li><code dir="ltr" translate="no">         RECURSIVE        </code></li>
+<li><code dir="ltr" translate="no">LATERAL</code></li>
+<li><code dir="ltr" translate="no">NATURAL</code></li>
+<li><code dir="ltr" translate="no">NEW</code></li>
+<li><code dir="ltr" translate="no">NO</code></li>
+<li><code dir="ltr" translate="no">NULLS</code></li>
+<li><code dir="ltr" translate="no">OF</code></li>
+<li><code dir="ltr" translate="no">ORDER</code></li>
+<li><code dir="ltr" translate="no">PROTO</code></li>
+<li><code dir="ltr" translate="no">QUALIFY</code></li>
+<li><code dir="ltr" translate="no">RANGE</code></li>
+<li><code dir="ltr" translate="no">RECURSIVE</code></li>
 </ul></td>
 <td><ul>
-<li><code dir="ltr" translate="no">         RESPECT        </code></li>
-<li><code dir="ltr" translate="no">         ROLLUP        </code></li>
-<li><code dir="ltr" translate="no">         ROWS        </code></li>
-<li><code dir="ltr" translate="no">         SOME        </code></li>
-<li><code dir="ltr" translate="no">         STRUCT        </code></li>
-<li><code dir="ltr" translate="no">         TABLESAMPLE        </code></li>
-<li><code dir="ltr" translate="no">         TO        </code></li>
-<li><code dir="ltr" translate="no">         TREAT        </code></li>
-<li><code dir="ltr" translate="no">         UNNEST        </code></li>
-<li><code dir="ltr" translate="no">         WHEN        </code></li>
-<li><code dir="ltr" translate="no">         WINDOW        </code></li>
+<li><code dir="ltr" translate="no">RESPECT</code></li>
+<li><code dir="ltr" translate="no">ROLLUP</code></li>
+<li><code dir="ltr" translate="no">ROWS</code></li>
+<li><code dir="ltr" translate="no">SOME</code></li>
+<li><code dir="ltr" translate="no">STRUCT</code></li>
+<li><code dir="ltr" translate="no">TABLESAMPLE</code></li>
+<li><code dir="ltr" translate="no">TO</code></li>
+<li><code dir="ltr" translate="no">TREAT</code></li>
+<li><code dir="ltr" translate="no">UNNEST</code></li>
+<li><code dir="ltr" translate="no">WHEN</code></li>
+<li><code dir="ltr" translate="no">WINDOW</code></li>
 </ul></td>
 </tr>
 </tbody>
@@ -375,7 +375,7 @@ For a more comprehensive list of reserved keywords and what constitutes valid id
 
 ### Project-qualified table names
 
-In legacy SQL, to query a table with a project-qualified name, you can use either a colon `  :  ` or a period `  .  ` . In GoogleSQL however, you must use only periods `  .  ` .
+In legacy SQL, to query a table with a project-qualified name, you can use either a colon `:` or a period `.` . In GoogleSQL however, you must use only periods `.` .
 
 Example legacy SQL query:
 
@@ -395,7 +395,7 @@ The GoogleSQL equivalent is:
       `bigquery-public-data.samples.shakespeare`
     LIMIT 1;
 
-If your project name includes a domain, such as `  example.com:myproject  ` , you use `  example.com:myproject  ` as the project name, including the `  :  ` .
+If your project name includes a domain, such as `example.com:myproject` , you use `example.com:myproject` as the project name, including the `:` .
 
 ### Table decorators
 
@@ -403,19 +403,19 @@ If your project name includes a domain, such as `  example.com:myproject  ` , yo
 
 #### Time decorator (snapshot decorator)
 
-You can achieve the semantics of time decorators (formerly known as *snapshot decorators* ) by using the [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause, which references the historical version of a table at a specified timestamp. For more information, see [Accessing historical data using time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
+You can achieve the semantics of time decorators (formerly known as *snapshot decorators* ) by using the [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause, which references the historical version of a table at a specified timestamp. For more information, see [Accessing historical data using time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
 
 #### Range decorator
 
 There is no exact equivalent to range decorators in GoogleSQL. You can achieve similar semantics by creating a time-partitioned table and using a partition filter when querying data. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-Another option is to create date-sharded tables and filter on the `  _TABLE_SUFFIX  ` pseudocolumn. For more information, see [GoogleSQL wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables#wildcard_table_syntax) .
+Another option is to create date-sharded tables and filter on the `_TABLE_SUFFIX` pseudocolumn. For more information, see [GoogleSQL wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables#wildcard_table_syntax) .
 
 #### Partition decorator
 
 The equivalent of a partition decorator in GoogleSQL is a filter on the partitioning column. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-For example, consider a legacy SQL query using a `  table  ` partitioned over the `  _PARTITIONTIME  ` pseudocolumn:
+For example, consider a legacy SQL query using a `table` partitioned over the `_PARTITIONTIME` pseudocolumn:
 
     #legacySQL
     SELECT * FROM dataset.table$20160501;
@@ -426,17 +426,17 @@ The GoogleSQL equivalent is:
     SELECT * FROM dataset.table
     WHERE _PARTITIONTIME=TIMESTAMP('2016-05-01');
 
-Another option is to filter on the `  _TABLE_SUFFIX  ` pseudocolumn. For more information, see [GoogleSQL wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables#wildcard_table_syntax) .
+Another option is to filter on the `_TABLE_SUFFIX` pseudocolumn. For more information, see [GoogleSQL wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables#wildcard_table_syntax) .
 
 ### Table wildcard functions
 
 In legacy SQL, you can use the following [table wildcard functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tablewildcardfunctions) to query multiple tables.
 
-  - `  TABLE_DATE_RANGE  `
-  - `  TABLE_DATE_RANGE_STRICT  `
-  - `  TABLE_QUERY  `
+  - `TABLE_DATE_RANGE`
+  - `TABLE_DATE_RANGE_STRICT`
+  - `TABLE_QUERY`
 
-These functions are not supported in GoogleSQL, but they can be migrated using a filter on `  _TABLE_SUFFIX  ` pseudocolumn.
+These functions are not supported in GoogleSQL, but they can be migrated using a filter on `_TABLE_SUFFIX` pseudocolumn.
 
 For example, consider the following legacy SQL query, which counts the number of rows across 2010 and 2011 in the National Oceanic and Atmospheric Administration GSOD (global summary of the day) tables:
 
@@ -456,7 +456,7 @@ For more information, including examples of all wildcard functions, see [Migrati
 
 ### Comma operator with tables
 
-In legacy SQL, the comma operator `  ,  ` has the non-standard meaning of [`  UNION ALL BY NAME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators) when applied to tables. In GoogleSQL, the comma operator has the standard meaning of `  JOIN  ` .
+In legacy SQL, the comma operator `,` has the non-standard meaning of [`UNION ALL BY NAME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators) when applied to tables. In GoogleSQL, the comma operator has the standard meaning of `JOIN` .
 
 For example, consider the following legacy SQL query:
 
@@ -478,7 +478,7 @@ This is equivalent to the GoogleSQL query:
       (SELECT 1 AS x, "foo" AS y UNION ALL BY NAME
        SELECT 2 AS x, "bar" AS y);
 
-Legacy SQL associates columns by name instead of by position. To get the same behavior in GoogleSQL, use `  UNION ALL BY NAME  ` . For example, the following query shows a translation where the column names and order are swapped:
+Legacy SQL associates columns by name instead of by position. To get the same behavior in GoogleSQL, use `UNION ALL BY NAME` . For example, the following query shows a translation where the column names and order are swapped:
 
     #legacySQL
     SELECT * FROM (SELECT 1 AS A, 2 as B), (SELECT 3 AS B, 4 as A);
@@ -501,13 +501,13 @@ Where the result in both cases will be:
 
 You cannot query a logical view defined with legacy SQL using GoogleSQL, and conversely, you cannot query a logical view defined with GoogleSQL using legacy SQL due to differences in syntax and semantics between the dialects. Instead, you would need to create a new view that uses GoogleSQL -- possibly under a different name -- to replace a view that uses legacy SQL.
 
-As an example, suppose that view `  V  ` is defined using legacy SQL as:
+As an example, suppose that view `V` is defined using legacy SQL as:
 
     #legacySQL
     SELECT *, UTC_USEC_TO_DAY(timestamp_col) AS day
     FROM MyTable;
 
-Suppose that view `  W  ` is defined using legacy SQL as:
+Suppose that view `W` is defined using legacy SQL as:
 
     #legacySQL
     SELECT user, action, day
@@ -522,91 +522,91 @@ Suppose that you execute the following legacy SQL query daily, but you want to m
 
 One possible migration path is to create new views using different names. The steps involved are:
 
-Create a view named `  V2  ` using GoogleSQL with the following contents:
+Create a view named `V2` using GoogleSQL with the following contents:
 
     #standardSQL
     SELECT *, EXTRACT(DAY FROM timestamp_col) AS day
     FROM MyTable;
 
-Create a view named `  W2  ` using GoogleSQL with the following contents:
+Create a view named `W2` using GoogleSQL with the following contents:
 
     #standardSQL
     SELECT user, action, day
     FROM V2;
 
-Change your query that executes daily to use GoogleSQL and refer to `  W2  ` instead:
+Change your query that executes daily to use GoogleSQL and refer to `W2` instead:
 
     #standardSQL
     SELECT COUNT(DISTINCT user), action, day
     FROM W2
     GROUP BY action, day;
 
-Another option is to delete views `  V  ` and `  W  ` , then recreate them using standard SQL under the same names. With this option, you would need to migrate all of your queries that reference `  V  ` or `  W  ` to use GoogleSQL at the same time, however.
+Another option is to delete views `V` and `W` , then recreate them using standard SQL under the same names. With this option, you would need to migrate all of your queries that reference `V` or `W` to use GoogleSQL at the same time, however.
 
 ## Function comparison
 
 The following is a partial list of legacy SQL functions and their GoogleSQL equivalents.
 
-| Legacy SQL                                              | GoogleSQL                                                                                                                                                                                                                                                                                                                                            | Notes                                                                                                                                                        |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `        INTEGER(x)       `                             | [`         SAFE_CAST(x AS INT64)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting)                                                                                                                                                                                                     |                                                                                                                                                              |
-| `        CAST(x AS INTEGER)       `                     | [`         SAFE_CAST(x AS INT64)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting)                                                                                                                                                                                                     |                                                                                                                                                              |
-| `        DATEDIFF(t1, t2)       `                       | [`         DATE_DIFF(DATE(t1), DATE(t2), DAY)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_diff)                                                                                                                                                                                                 |                                                                                                                                                              |
-| `        NOW()       `                                  | [`         UNIX_MICROS(CURRENT_TIMESTAMP())        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp)                                                                                                                                                                                      |                                                                                                                                                              |
-| `        STRFTIME_UTC_USEC(ts_usec, fmt)       `        | [`         FORMAT_TIMESTAMP(fmt, TIMESTAMP_MICROS(ts_usec))        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp)                                                                                                                                                                       |                                                                                                                                                              |
-| `        UTC_USEC_TO_DAY(ts_usec)       `               | [`         UNIX_MICROS(TIMESTAMP_TRUNC(TIMESTAMP_MICROS(ts_usec), DAY))        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc)                                                                                                                                                            |                                                                                                                                                              |
-| `        UTC_USEC_TO_WEEK(ts_usec, day_of_week)       ` | [`         UNIX_MICROS(TIMESTAMP_ADD(TIMESTAMP_TRUNC(TIMESTAMP_MICROS(ts_usec), WEEK),INTERVAL day_of_week DAY))        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc)                                                                                                                   |                                                                                                                                                              |
-| `        REGEXP_MATCH(s, pattern)       `               | [`         REGEXP_CONTAINS(s, pattern)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_contains)                                                                                                                                                                                                |                                                                                                                                                              |
-| `        IS_NULL(x)       `                             | [`         x IS NULL        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_operators)                                                                                                                                                                                                                            |                                                                                                                                                              |
-| `        LEFT(s, len)       `                           | [`         SUBSTR(s, 0, len)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#substr)                                                                                                                                                                                                                   |                                                                                                                                                              |
-| `        RIGHT(s, len)       `                          | [`         SUBSTR(s, -len)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#substr)                                                                                                                                                                                                                     |                                                                                                                                                              |
-| `        s CONTAINS "foo"       `                       | [`         STRPOS(s, "foo") > 0        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#strpos) or [`         s LIKE '%foo%'        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                                                      |                                                                                                                                                              |
-| `        INSTR(s, "foo")       `                        | [`         STRPOS(s, "foo")        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#strpos)                                                                                                                                                                                                                    |                                                                                                                                                              |
-| `        x % y       `                                  | [`         MOD(x, y)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#mod)                                                                                                                                                                                                                        |                                                                                                                                                              |
-| `        NEST(x)       `                                | [`         ARRAY_AGG(x)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)                                                                                                                                                                                                                  |                                                                                                                                                              |
-| `        GROUP_CONCAT_UNQUOTED(s, sep)       `          | [`         STRING_AGG(s, sep)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg)                                                                                                                                                                                                           |                                                                                                                                                              |
-| `        SOME(x)       `                                | `        IFNULL(       ` [`         LOGICAL_OR(x)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators) `        , false)       `                                                                                                                                                                |                                                                                                                                                              |
-| `        EVERY(x)       `                               | `        IFNULL(       ` [`         LOGICAL_AND(x)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators) `        , true)       `                                                                                                                                                                |                                                                                                                                                              |
-| `        COUNT(DISTINCT x)       `                      | [`         APPROX_COUNT_DISTINCT(x)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct)                                                                                                                                                                              | see [notes below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#count_function_comparison)                    |
-| `        EXACT_COUNT_DISTINCT(x)       `                | [`         COUNT(DISTINCT x)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count)                                                                                                                                                                                                                 | see [notes below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#count_function_comparison)                    |
-| `        QUANTILES(x, boundaries)       `               | [`         APPROX_QUANTILES(x, boundaries-1)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)                                                                                                                                                                          | output needs to be [unnested](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#removing_repetition_with_flatten) |
-| `        TOP(x, num), COUNT(*)       `                  | [`         APPROX_TOP_COUNT(x, num)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)                                                                                                                                                                                   |                                                                                                                                                              |
-| `        NTH(index, arr) WITHIN RECORD       `          | [`         arr[SAFE_ORDINAL(index)]        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator)                                                                                                                                                                                                 |                                                                                                                                                              |
-| `        COUNT(arr) WITHIN RECORD       `               | [`         ARRAY_LENGTH(arr)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_length)                                                                                                                                                                                                              |                                                                                                                                                              |
-| `        HOST(url)       `                              | [`         NET.HOST(url)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#nethost)                                                                                                                                                                                                                         | see [differences below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#url_function_comparison)                |
-| `        TLD(url)       `                               | [`         NET.PUBLIC_SUFFIX(url)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netpublic_suffix)                                                                                                                                                                                                       | see [differences below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#url_function_comparison)                |
-| `        DOMAIN(url)       `                            | [`         NET.REG_DOMAIN(url)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netreg_domain)                                                                                                                                                                                                             | see [differences below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#url_function_comparison)                |
-| `        PARSE_IP(addr_string)       `                  | [`         NET.IPV4_TO_INT64        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netipv4_to_int64) `        (       ` [`         NET.IP_FROM_STRING        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_from_string) `        (addr_string))       `             |                                                                                                                                                              |
-| `        FORMAT_IP(addr_int64)       `                  | [`         NET.IP_TO_STRING        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_to_string) `        (       ` [`         NET.IPV4_FROM_INT64        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netipv4_from_int64) `        (addr_int64 & 0xFFFFFFFF))       ` |                                                                                                                                                              |
-| `        PARSE_PACKED_IP(addr_string)       `           | [`         NET.IP_FROM_STRING(addr_string)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_from_string)                                                                                                                                                                                             |                                                                                                                                                              |
-| `        FORMAT_PACKED_IP(addr_bytes)       `           | [`         NET.IP_TO_STRING(addr_bytes)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_to_string)                                                                                                                                                                                                  |                                                                                                                                                              |
-| `        NVL(expr, null_default)       `                | [`         IFNULL(expr, null_default)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull)                                                                                                                                                                                                   |                                                                                                                                                              |
+| Legacy SQL                               | GoogleSQL                                                                                                                                                                                                                                                                            | Notes                                                                                                                                                        |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `INTEGER(x)`                             | [`SAFE_CAST(x AS INT64)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting)                                                                                                                                                      |                                                                                                                                                              |
+| `CAST(x AS INTEGER)`                     | [`SAFE_CAST(x AS INT64)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting)                                                                                                                                                      |                                                                                                                                                              |
+| `DATEDIFF(t1, t2)`                       | [`DATE_DIFF(DATE(t1), DATE(t2), DAY)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_diff)                                                                                                                                                  |                                                                                                                                                              |
+| `NOW()`                                  | [`UNIX_MICROS(CURRENT_TIMESTAMP())`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp)                                                                                                                                       |                                                                                                                                                              |
+| `STRFTIME_UTC_USEC(ts_usec, fmt)`        | [`FORMAT_TIMESTAMP(fmt, TIMESTAMP_MICROS(ts_usec))`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp)                                                                                                                        |                                                                                                                                                              |
+| `UTC_USEC_TO_DAY(ts_usec)`               | [`UNIX_MICROS(TIMESTAMP_TRUNC(TIMESTAMP_MICROS(ts_usec), DAY))`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc)                                                                                                             |                                                                                                                                                              |
+| `UTC_USEC_TO_WEEK(ts_usec, day_of_week)` | [`UNIX_MICROS(TIMESTAMP_ADD(TIMESTAMP_TRUNC(TIMESTAMP_MICROS(ts_usec), WEEK),INTERVAL day_of_week DAY))`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc)                                                                    |                                                                                                                                                              |
+| `REGEXP_MATCH(s, pattern)`               | [`REGEXP_CONTAINS(s, pattern)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_contains)                                                                                                                                                 |                                                                                                                                                              |
+| `IS_NULL(x)`                             | [`x IS NULL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_operators)                                                                                                                                                                             |                                                                                                                                                              |
+| `LEFT(s, len)`                           | [`SUBSTR(s, 0, len)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#substr)                                                                                                                                                                    |                                                                                                                                                              |
+| `RIGHT(s, len)`                          | [`SUBSTR(s, -len)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#substr)                                                                                                                                                                      |                                                                                                                                                              |
+| `s CONTAINS "foo"`                       | [`STRPOS(s, "foo") > 0`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#strpos) or [`s LIKE '%foo%'`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                        |                                                                                                                                                              |
+| `INSTR(s, "foo")`                        | [`STRPOS(s, "foo")`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#strpos)                                                                                                                                                                     |                                                                                                                                                              |
+| `x % y`                                  | [`MOD(x, y)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#mod)                                                                                                                                                                         |                                                                                                                                                              |
+| `NEST(x)`                                | [`ARRAY_AGG(x)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)                                                                                                                                                                   |                                                                                                                                                              |
+| `GROUP_CONCAT_UNQUOTED(s, sep)`          | [`STRING_AGG(s, sep)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg)                                                                                                                                                            |                                                                                                                                                              |
+| `SOME(x)`                                | `IFNULL(` [`LOGICAL_OR(x)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators) `, false)`                                                                                                                                               |                                                                                                                                                              |
+| `EVERY(x)`                               | `IFNULL(` [`LOGICAL_AND(x)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators) `, true)`                                                                                                                                               |                                                                                                                                                              |
+| `COUNT(DISTINCT x)`                      | [`APPROX_COUNT_DISTINCT(x)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct)                                                                                                                               | see [notes below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#count_function_comparison)                    |
+| `EXACT_COUNT_DISTINCT(x)`                | [`COUNT(DISTINCT x)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count)                                                                                                                                                                  | see [notes below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#count_function_comparison)                    |
+| `QUANTILES(x, boundaries)`               | [`APPROX_QUANTILES(x, boundaries-1)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)                                                                                                                           | output needs to be [unnested](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#removing_repetition_with_flatten) |
+| `TOP(x, num), COUNT(*)`                  | [`APPROX_TOP_COUNT(x, num)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)                                                                                                                                    |                                                                                                                                                              |
+| `NTH(index, arr) WITHIN RECORD`          | [`arr[SAFE_ORDINAL(index)]`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator)                                                                                                                                                  |                                                                                                                                                              |
+| `COUNT(arr) WITHIN RECORD`               | [`ARRAY_LENGTH(arr)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_length)                                                                                                                                                               |                                                                                                                                                              |
+| `HOST(url)`                              | [`NET.HOST(url)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#nethost)                                                                                                                                                                          | see [differences below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#url_function_comparison)                |
+| `TLD(url)`                               | [`NET.PUBLIC_SUFFIX(url)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netpublic_suffix)                                                                                                                                                        | see [differences below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#url_function_comparison)                |
+| `DOMAIN(url)`                            | [`NET.REG_DOMAIN(url)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netreg_domain)                                                                                                                                                              | see [differences below](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#url_function_comparison)                |
+| `PARSE_IP(addr_string)`                  | [`NET.IPV4_TO_INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netipv4_to_int64) `(` [`NET.IP_FROM_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_from_string) `(addr_string))`             |                                                                                                                                                              |
+| `FORMAT_IP(addr_int64)`                  | [`NET.IP_TO_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_to_string) `(` [`NET.IPV4_FROM_INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netipv4_from_int64) `(addr_int64 & 0xFFFFFFFF))` |                                                                                                                                                              |
+| `PARSE_PACKED_IP(addr_string)`           | [`NET.IP_FROM_STRING(addr_string)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_from_string)                                                                                                                                              |                                                                                                                                                              |
+| `FORMAT_PACKED_IP(addr_bytes)`           | [`NET.IP_TO_STRING(addr_bytes)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netip_to_string)                                                                                                                                                   |                                                                                                                                                              |
+| `NVL(expr, null_default)`                | [`IFNULL(expr, null_default)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull)                                                                                                                                                    |                                                                                                                                                              |
 
 For more information about GoogleSQL functions, see [All functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all) .
 
-### `     COUNT    ` function comparison
+### `COUNT` function comparison
 
 Both legacy SQL and GoogleSQL contain a COUNT function. However, each function behaves differently, depending on the SQL dialect you use.
 
-In legacy SQL, `  COUNT(DISTINCT x)  ` returns an approximate count. In standard SQL, it returns an exact count. For an approximate count of distinct values that runs faster and requires fewer resources, use [`  APPROX_COUNT_DISTINCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct) .
+In legacy SQL, `COUNT(DISTINCT x)` returns an approximate count. In standard SQL, it returns an exact count. For an approximate count of distinct values that runs faster and requires fewer resources, use [`APPROX_COUNT_DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct) .
 
 ### URL function comparison
 
-Both legacy SQL and GoogleSQL contain functions for parsing URLs. In legacy SQL, these functions are `  HOST(url)  ` , `  TLD(url)  ` , and `  DOMAIN(url)  ` . In standard SQL, these functions are [`  NET.HOST(url)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#nethost) , [`  NET.PUBLIC_SUFFIX(url)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netpublic_suffix) , and [`  NET.REG_DOMAIN(url)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netreg_domain) .
+Both legacy SQL and GoogleSQL contain functions for parsing URLs. In legacy SQL, these functions are `HOST(url)` , `TLD(url)` , and `DOMAIN(url)` . In standard SQL, these functions are [`NET.HOST(url)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#nethost) , [`NET.PUBLIC_SUFFIX(url)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netpublic_suffix) , and [`NET.REG_DOMAIN(url)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netreg_domain) .
 
 **Improvements in GoogleSQL functions**
 
   - GoogleSQL URL functions can parse URLs starting with "//".
   - When the input is not compliant with [RFC 3986](https://tools.ietf.org/html/rfc3986#appendix-A) or is not a URL (for example, "mailto:?to=\&subject=\&body="), different rules are applied to parse the input. In particular, GoogleSQL URL functions can parse non-standard inputs without "//", such as "www.google.com". For best results, it is recommended that you ensure that inputs are URLs and comply with RFC 3986.
-  - `  NET.PUBLIC_SUFFIX  ` returns results without leading dots. For example, it returns "com" instead of ".com". This complies with the format in the [public suffix list](https://publicsuffix.org/list/public_suffix_list.dat) .
-  - `  NET.PUBLIC_SUFFIX  ` and `  NET.REG_DOMAIN  ` support uppercase letters and internationalized domain names. `  TLD  ` and `  DOMAIN  ` don't support them (might return unexpected results).
+  - `NET.PUBLIC_SUFFIX` returns results without leading dots. For example, it returns "com" instead of ".com". This complies with the format in the [public suffix list](https://publicsuffix.org/list/public_suffix_list.dat) .
+  - `NET.PUBLIC_SUFFIX` and `NET.REG_DOMAIN` support uppercase letters and internationalized domain names. `TLD` and `DOMAIN` don't support them (might return unexpected results).
 
 **Minor differences on edge cases**
 
-  - If the input does not contain any suffix in the [public suffix list](https://publicsuffix.org/list/public_suffix_list.dat) , `  NET.PUBLIC_SUFFIX  ` and `  NET.REG_DOMAIN  ` return NULL, while `  TLD  ` and `  DOMAIN  ` return non-NULL values as best effort guesses.
-  - If the input contains only a public suffix without a preceding label (for example, "http://com"), `  NET.PUBLIC_SUFFIX  ` returns the public suffix, while `  TLD  ` returns an empty string. Similarly, `  NET.REG_DOMAIN  ` returns NULL, while `  DOMAIN  ` returns the public suffix.
-  - For inputs with IPv6 hosts, `  NET.HOST  ` does not remove brackets from the result, as specified by [RFC 3986](https://tools.ietf.org/html/rfc3986#appendix-A) .
-  - For inputs with IPv4 hosts, `  NET.REG_DOMAIN  ` returns NULL, while `  DOMAIN  ` returns the first 3 octets.
+  - If the input does not contain any suffix in the [public suffix list](https://publicsuffix.org/list/public_suffix_list.dat) , `NET.PUBLIC_SUFFIX` and `NET.REG_DOMAIN` return NULL, while `TLD` and `DOMAIN` return non-NULL values as best effort guesses.
+  - If the input contains only a public suffix without a preceding label (for example, "http://com"), `NET.PUBLIC_SUFFIX` returns the public suffix, while `TLD` returns an empty string. Similarly, `NET.REG_DOMAIN` returns NULL, while `DOMAIN` returns the public suffix.
+  - For inputs with IPv6 hosts, `NET.HOST` does not remove brackets from the result, as specified by [RFC 3986](https://tools.ietf.org/html/rfc3986#appendix-A) .
+  - For inputs with IPv4 hosts, `NET.REG_DOMAIN` returns NULL, while `DOMAIN` returns the first 3 octets.
 
 **Examples**
 
@@ -729,11 +729,11 @@ In the following table, gray text color indicates results that are the same betw
 
 ## Differences in repeated field handling
 
-A `  REPEATED  ` type in legacy SQL is equivalent to an `  ARRAY  ` of that type in GoogleSQL. For example, `  REPEATED INTEGER  ` is equivalent to `  ARRAY<INT64>  ` in GoogleSQL. The following section discusses some of the differences in operations on repeated fields between legacy and GoogleSQL.
+A `REPEATED` type in legacy SQL is equivalent to an `ARRAY` of that type in GoogleSQL. For example, `REPEATED INTEGER` is equivalent to `ARRAY<INT64>` in GoogleSQL. The following section discusses some of the differences in operations on repeated fields between legacy and GoogleSQL.
 
-### `     NULL    ` elements and `     NULL    ` arrays
+### `NULL` elements and `NULL` arrays
 
-GoogleSQL supports `  NULL  ` array elements, but raises an error if there is a `  NULL  ` array element in the query result. If there is a `  NULL  ` array column in the query result, GoogleSQL stores it as an empty array.
+GoogleSQL supports `NULL` array elements, but raises an error if there is a `NULL` array element in the query result. If there is a `NULL` array column in the query result, GoogleSQL stores it as an empty array.
 
 ### Selecting nested repeated leaf fields
 
@@ -752,7 +752,7 @@ Attempting to execute this query returns:
     Cannot access field page_name on a value with type
     ARRAY<STRUCT<action STRING, html_url STRING, page_name STRING, ...>>
 
-To correct the error and return an array of `  page_name  ` s in the result, use an `  ARRAY  ` subquery instead. For example:
+To correct the error and return an array of `page_name` s in the result, use an `ARRAY` subquery instead. For example:
 
     #standardSQL
     SELECT
@@ -762,11 +762,11 @@ To correct the error and return an array of `  page_name  ` s in the result, use
       `bigquery-public-data.samples.github_nested`
     LIMIT 5;
 
-For more information about arrays and `  ARRAY  ` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) .
+For more information about arrays and `ARRAY` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) .
 
 ### Filtering repeated fields
 
-Using legacy SQL, you can filter repeated fields directly using a `  WHERE  ` clause. In GoogleSQL, you can express similar logic with a `  JOIN  ` comma operator followed by a filter. For example, consider the following legacy SQL query:
+Using legacy SQL, you can filter repeated fields directly using a `WHERE` clause. In GoogleSQL, you can express similar logic with a `JOIN` comma operator followed by a filter. For example, consider the following legacy SQL query:
 
     #legacySQL
     SELECT
@@ -775,7 +775,7 @@ Using legacy SQL, you can filter repeated fields directly using a `  WHERE  ` cl
       [bigquery-public-data:samples.github_nested]
     WHERE payload.pages.page_name IN ('db_jobskill', 'Profession');
 
-This query returns all `  title  ` s of pages for which the `  page_name  ` is either `  db_jobskill  ` or `  Profession  ` . You can express a similar query in GoogleSQL as:
+This query returns all `title` s of pages for which the `page_name` is either `db_jobskill` or `Profession` . You can express a similar query in GoogleSQL as:
 
     #standardSQL
     SELECT
@@ -785,7 +785,7 @@ This query returns all `  title  ` s of pages for which the `  page_name  ` is e
       UNNEST(payload.pages) AS page
     WHERE page.page_name IN ('db_jobskill', 'Profession');
 
-One difference between the preceding legacy SQL and GoogleSQL queries is that if you unset the **Flatten Results** option and execute the legacy SQL query, `  payload.pages.title  ` is `  REPEATED  ` in the query result. To achieve the same semantics in GoogleSQL and return an array for the `  title  ` column, use an `  ARRAY  ` subquery instead:
+One difference between the preceding legacy SQL and GoogleSQL queries is that if you unset the **Flatten Results** option and execute the legacy SQL query, `payload.pages.title` is `REPEATED` in the query result. To achieve the same semantics in GoogleSQL and return an array for the `title` column, use an `ARRAY` subquery instead:
 
     #standardSQL
     SELECT
@@ -798,13 +798,13 @@ One difference between the preceding legacy SQL and GoogleSQL queries is that if
         `bigquery-public-data.samples.github_nested`)
     WHERE ARRAY_LENGTH(title) > 0;
 
-This query creates an array of `  title  ` s where the `  page_name  ` is either `  'db_jobskill'  ` or `  'Profession'  ` , then filters any rows where the array did not match that condition using `  ARRAY_LENGTH(title) > 0  ` .
+This query creates an array of `title` s where the `page_name` is either `'db_jobskill'` or `'Profession'` , then filters any rows where the array did not match that condition using `ARRAY_LENGTH(title) > 0` .
 
 For more information about arrays, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) .
 
 ### Structure of selected nested leaf fields
 
-Legacy SQL preserves the structure of nested leaf fields in the `  SELECT  ` list when the **Flatten Results** option is unset, whereas GoogleSQL does not. For example, consider the following legacy SQL query:
+Legacy SQL preserves the structure of nested leaf fields in the `SELECT` list when the **Flatten Results** option is unset, whereas GoogleSQL does not. For example, consider the following legacy SQL query:
 
     #legacySQL
     SELECT
@@ -814,7 +814,7 @@ Legacy SQL preserves the structure of nested leaf fields in the `  SELECT  ` lis
       [bigquery-public-data.samples.github_nested]
     LIMIT 5;
 
-This query returns `  url  ` and `  has_downloads  ` within a record named `  repository  ` when **Flatten Results** is unset. Now consider the following GoogleSQL query:
+This query returns `url` and `has_downloads` within a record named `repository` when **Flatten Results** is unset. Now consider the following GoogleSQL query:
 
     #standardSQL
     SELECT
@@ -824,7 +824,7 @@ This query returns `  url  ` and `  has_downloads  ` within a record named `  re
       `bigquery-public-data.samples.github_nested`
     LIMIT 5;
 
-This query returns `  url  ` and `  has_downloads  ` as top-level columns; they are not part of a `  repository  ` record or struct. To return them as part of a struct, use the `  STRUCT  ` operator:
+This query returns `url` and `has_downloads` as top-level columns; they are not part of a `repository` record or struct. To return them as part of a struct, use the `STRUCT` operator:
 
     #standardSQL
     SELECT
@@ -835,9 +835,9 @@ This query returns `  url  ` and `  has_downloads  ` as top-level columns; they 
       `bigquery-public-data.samples.github_nested`
     LIMIT 5;
 
-### Removing repetition with `     FLATTEN    `
+### Removing repetition with `FLATTEN`
 
-GoogleSQL does not have a `  FLATTEN  ` function as in legacy SQL, but you can achieve similar semantics using the `  JOIN  ` (comma) operator. For example, consider the following legacy SQL query:
+GoogleSQL does not have a `FLATTEN` function as in legacy SQL, but you can achieve similar semantics using the `JOIN` (comma) operator. For example, consider the following legacy SQL query:
 
     #legacySQL
     SELECT
@@ -858,7 +858,7 @@ You can express a similar query in GoogleSQL as follows:
       UNNEST(payload.pages) AS page
     LIMIT 5;
 
-Or, equivalently, use `  JOIN  ` rather than the comma `  ,  ` operator:
+Or, equivalently, use `JOIN` rather than the comma `,` operator:
 
     #standardSQL
     SELECT
@@ -870,7 +870,7 @@ Or, equivalently, use `  JOIN  ` rather than the comma `  ,  ` operator:
       UNNEST(payload.pages) AS page
     LIMIT 5;
 
-One important difference is that the legacy SQL query returns a row where `  payload.pages.page_name  ` is `  NULL  ` if `  payload.pages  ` is empty. The standard SQL query, however, does not return a row if `  payload.pages  ` is empty. To achieve exactly the same semantics, use a `  LEFT JOIN  ` or `  LEFT OUTER JOIN  ` . For example:
+One important difference is that the legacy SQL query returns a row where `payload.pages.page_name` is `NULL` if `payload.pages` is empty. The standard SQL query, however, does not return a row if `payload.pages` is empty. To achieve exactly the same semantics, use a `LEFT JOIN` or `LEFT OUTER JOIN` . For example:
 
     #standardSQL
     SELECT
@@ -882,11 +882,11 @@ One important difference is that the legacy SQL query returns a row where `  pay
       UNNEST(payload.pages) AS page
     LIMIT 5;
 
-For more information about arrays, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) . For more information about `  UNNEST  ` , see the [`  UNNEST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) topic.
+For more information about arrays, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) . For more information about `UNNEST` , see the [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) topic.
 
-### Filtering rows with `     OMIT RECORD IF    `
+### Filtering rows with `OMIT RECORD IF`
 
-The `  OMIT IF  ` clause from legacy SQL lets you filter rows based on a condition that can apply to repeated fields. In GoogleSQL, you can model an `  OMIT IF  ` clause with an `  EXISTS  ` clause, `  IN  ` clause, or simple filter. For example, consider the following legacy SQL query:
+The `OMIT IF` clause from legacy SQL lets you filter rows based on a condition that can apply to repeated fields. In GoogleSQL, you can model an `OMIT IF` clause with an `EXISTS` clause, `IN` clause, or simple filter. For example, consider the following legacy SQL query:
 
     #legacySQL
     SELECT
@@ -909,9 +909,9 @@ The analogous GoogleSQL query is:
       WHERE page_name = 'db_jobskill'
         OR page_name = 'Profession');
 
-Here the `  EXISTS  ` clause evaluates to `  true  ` if there is at least one element of `  payload.pages  ` where the page name is `  'db_jobskill'  ` or `  'Profession'  ` .
+Here the `EXISTS` clause evaluates to `true` if there is at least one element of `payload.pages` where the page name is `'db_jobskill'` or `'Profession'` .
 
-Alternatively, suppose that the legacy SQL query uses `  IN  ` :
+Alternatively, suppose that the legacy SQL query uses `IN` :
 
     #legacySQL
     SELECT
@@ -921,7 +921,7 @@ Alternatively, suppose that the legacy SQL query uses `  IN  ` :
     OMIT RECORD IF NOT
       SOME(payload.pages.page_name IN ('db_jobskill', 'Profession'));
 
-In GoogleSQL, you can express the query using an `  EXISTS  ` clause with `  IN  ` :
+In GoogleSQL, you can express the query using an `EXISTS` clause with `IN` :
 
     #standardSQL
     SELECT
@@ -942,7 +942,7 @@ Consider the following legacy SQL query that filters records with 80 or fewer pa
     OMIT RECORD IF
       COUNT(payload.pages.page_name) <= 80;
 
-In this case, you can use a filter with `  ARRAY_LENGTH  ` in GoogleSQL:
+In this case, you can use a filter with `ARRAY_LENGTH` in GoogleSQL:
 
     #standardSQL
     SELECT
@@ -952,9 +952,9 @@ In this case, you can use a filter with `  ARRAY_LENGTH  ` in GoogleSQL:
     WHERE
       ARRAY_LENGTH(payload.pages) > 80;
 
-Note that the `  ARRAY_LENGTH  ` function applies to the repeated `  payload.pages  ` field directly rather than the nested field `  payload.pages.page_name  ` as in the legacy SQL query.
+Note that the `ARRAY_LENGTH` function applies to the repeated `payload.pages` field directly rather than the nested field `payload.pages.page_name` as in the legacy SQL query.
 
-For more information about arrays and `  ARRAY  ` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) .
+For more information about arrays and `ARRAY` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) .
 
 ## Semantic differences
 
@@ -962,15 +962,15 @@ The semantics of some operations differ between legacy and GoogleSQL.
 
 ### Runtime errors
 
-Some functions in legacy SQL return `  NULL  ` for invalid input, potentially masking problems in queries or in data. GoogleSQL is generally more strict, and raises an error if an input is invalid.
+Some functions in legacy SQL return `NULL` for invalid input, potentially masking problems in queries or in data. GoogleSQL is generally more strict, and raises an error if an input is invalid.
 
-  - For all mathematical functions and operators, legacy SQL does not check for overflows. GoogleSQL adds overflow checks, and raises an error if a computation overflows. This includes the `  +  ` , `  -  ` , `  *  ` operators, the `  SUM  ` , `  AVG  ` , and `  STDDEV  ` aggregate functions, and others.
-  - GoogleSQL raises an error upon division by zero, whereas legacy SQL returns `  NULL  ` . To return `  NULL  ` for division by zero in GoogleSQL, use [`  SAFE_DIVIDE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide) .
-  - GoogleSQL raises an error for `  CAST  ` s where the input format is invalid or out of range for the target type, whereas legacy SQL returns `  NULL  ` . To avoid raising an error for an invalid cast in GoogleSQL, use [`  SAFE_CAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) .
+  - For all mathematical functions and operators, legacy SQL does not check for overflows. GoogleSQL adds overflow checks, and raises an error if a computation overflows. This includes the `+` , `-` , `*` operators, the `SUM` , `AVG` , and `STDDEV` aggregate functions, and others.
+  - GoogleSQL raises an error upon division by zero, whereas legacy SQL returns `NULL` . To return `NULL` for division by zero in GoogleSQL, use [`SAFE_DIVIDE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide) .
+  - GoogleSQL raises an error for `CAST` s where the input format is invalid or out of range for the target type, whereas legacy SQL returns `NULL` . To avoid raising an error for an invalid cast in GoogleSQL, use [`SAFE_CAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) .
 
 ### Nested repeated results
 
-Queries executed using GoogleSQL preserve any nesting and repetition of the columns in the result, and the **Flatten Results** option has no effect. To return top-level columns for nested fields, use the `  .*  ` operator on struct columns. For example:
+Queries executed using GoogleSQL preserve any nesting and repetition of the columns in the result, and the **Flatten Results** option has no effect. To return top-level columns for nested fields, use the `.*` operator on struct columns. For example:
 
     #standardSQL
     SELECT
@@ -979,7 +979,7 @@ Queries executed using GoogleSQL preserve any nesting and repetition of the colu
       `bigquery-public-data.samples.github_nested`
     LIMIT 5;
 
-To return top-level columns for repeated nested fields ( `  ARRAY  ` s of `  STRUCT  ` s), use a `  JOIN  ` to take the cross product of the table's rows and the elements of the repeated nested field. For example:
+To return top-level columns for repeated nested fields ( `ARRAY` s of `STRUCT` s), use a `JOIN` to take the cross product of the table's rows and the elements of the repeated nested field. For example:
 
     #standardSQL
     SELECT
@@ -991,11 +991,11 @@ To return top-level columns for repeated nested fields ( `  ARRAY  ` s of `  STR
       UNNEST(payload.pages) AS page
     LIMIT 5;
 
-For more information about arrays and `  ARRAY  ` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) .
+For more information about arrays and `ARRAY` subqueries, see [Working with arrays](https://docs.cloud.google.com/bigquery/docs/arrays) .
 
 ### NOT IN conditions and NULL
 
-Legacy SQL does not comply with the SQL standard in its handling of `  NULL  ` with `  NOT IN  ` conditions, whereas GoogleSQL does. Consider the following legacy SQL query, which finds the number of words that don't appear in the GitHub sample table as locations:
+Legacy SQL does not comply with the SQL standard in its handling of `NULL` with `NOT IN` conditions, whereas GoogleSQL does. Consider the following legacy SQL query, which finds the number of words that don't appear in the GitHub sample table as locations:
 
     #legacySQL
     SELECT COUNT(*)
@@ -1015,7 +1015,7 @@ This query returns 163,716 as the count, indicating that there are 163,716 words
       FROM `bigquery-public-data.samples.github_nested`
     );
 
-This query returns 0 as the count. The difference is due to the semantics of `  NOT IN  ` with GoogleSQL, which returns `  NULL  ` if any value on the right hand side is `  NULL  ` . To achieve the same results as with the legacy SQL query, use a `  WHERE  ` clause to exclude the `  NULL  ` values:
+This query returns 0 as the count. The difference is due to the semantics of `NOT IN` with GoogleSQL, which returns `NULL` if any value on the right hand side is `NULL` . To achieve the same results as with the legacy SQL query, use a `WHERE` clause to exclude the `NULL` values:
 
     #standardSQL
     SELECT COUNT(*)
@@ -1026,7 +1026,7 @@ This query returns 0 as the count. The difference is due to the semantics of `  
       WHERE actor_attributes.location IS NOT NULL
     );
 
-This query returns 163,716 as the count. Alternatively, use a `  NOT EXISTS  ` condition:
+This query returns 163,716 as the count. Alternatively, use a `NOT EXISTS` condition:
 
     #standardSQL
     SELECT COUNT(*)
@@ -1037,7 +1037,7 @@ This query returns 163,716 as the count. Alternatively, use a `  NOT EXISTS  ` c
       WHERE t.word = actor_attributes.location
     );
 
-This query also returns 163,716 as the count. For further reading, see the [comparison operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) section of the documentation, which explains the semantics of `  IN  ` , `  NOT IN  ` , `  EXISTS  ` , and other comparison operators.
+This query also returns 163,716 as the count. For further reading, see the [comparison operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) section of the documentation, which explains the semantics of `IN` , `NOT IN` , `EXISTS` , and other comparison operators.
 
 ## Differences in user-defined JavaScript functions
 
@@ -1045,7 +1045,7 @@ The [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-de
 
 ### Functions in the query text
 
-With GoogleSQL, you use `  CREATE TEMPORARY FUNCTION  ` as part of the query body rather than specifying user-defined functions separately. Examples of defining functions separately include using the UDF Editor in the Google Cloud console or using the `  --udf_resource  ` flag in [the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
+With GoogleSQL, you use `CREATE TEMPORARY FUNCTION` as part of the query body rather than specifying user-defined functions separately. Examples of defining functions separately include using the UDF Editor in the Google Cloud console or using the `--udf_resource` flag in [the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 Consider the following GoogleSQL query:
 
@@ -1069,7 +1069,7 @@ Consider the following GoogleSQL query:
     SELECT arr, HarmonicMean(arr) AS h_mean
     FROM T;
 
-This query defines a JavaScript function named `  HarmonicMean  ` and then applies it to the array column `  arr  ` from `  T  ` .
+This query defines a JavaScript function named `HarmonicMean` and then applies it to the array column `arr` from `T` .
 
 For more information about user-defined functions, see the [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) topic.
 
@@ -1101,7 +1101,7 @@ In legacy SQL, JavaScript functions operate on rows from a table. In standard SQ
     SELECT AddField(t).*
     FROM T AS t;
 
-This query defines a JavaScript function that takes a struct with the same row type as `  T  ` and creates a new struct with an additional field named `  foo  ` . The `  SELECT  ` statement passes the row `  t  ` as input to the function and uses `  .*  ` to return the fields of the resulting struct in the output.
+This query defines a JavaScript function that takes a struct with the same row type as `T` and creates a new struct with an additional field named `foo` . The `SELECT` statement passes the row `t` as input to the function and uses `.*` to return the fields of the resulting struct in the output.
 
 ## Migrating table wildcard functions
 
@@ -1109,7 +1109,7 @@ This section describes in detail how to migrate legacy SQL [table wildcard funct
 
 ### The TABLE\_DATE\_RANGE function
 
-The legacy SQL `  TABLE_DATE_RANGE  ` functions work on tables that conform to a specific naming scheme: `  <prefix>YYYYMMDD  ` , where the `  <prefix>  ` represents the first part of a table name and `  YYYYMMDD  ` represents the date associated with that table's data.
+The legacy SQL `TABLE_DATE_RANGE` functions work on tables that conform to a specific naming scheme: `<prefix>YYYYMMDD` , where the `<prefix>` represents the first part of a table name and `YYYYMMDD` represents the date associated with that table's data.
 
 For example, the following legacy SQL query finds the average temperature from a set of daily tables that contain Seattle area weather data:
 
@@ -1121,7 +1121,7 @@ For example, the following legacy SQL query finds the average temperature from a
                         TIMESTAMP("2016-05-01"),
                         TIMESTAMP("2016-05-09"))
 
-In GoogleSQL, an equivalent query uses a table wildcard and the `  BETWEEN  ` clause.
+In GoogleSQL, an equivalent query uses a table wildcard and the `BETWEEN` clause.
 
     #standardSQL
     SELECT
@@ -1133,13 +1133,13 @@ In GoogleSQL, an equivalent query uses a table wildcard and the `  BETWEEN  ` cl
 
 ### The TABLE\_DATE\_RANGE\_STRICT function
 
-This function is equivalent to `  TABLE_DATE_RANGE  ` , except that it fails with an error if any daily table in the sequence is missing.
+This function is equivalent to `TABLE_DATE_RANGE` , except that it fails with an error if any daily table in the sequence is missing.
 
-**Note:** If you don't need the query to fail when tables are missing, use the simpler `  _TABLE_SUFFIX BETWEEN 'YYYYMMDD' AND 'YYYYMMDD'  ` filter, as shown in the [`  TABLE_DATE_RANGE  ` migration example](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#the_table_date_range_function) .
+**Note:** If you don't need the query to fail when tables are missing, use the simpler `_TABLE_SUFFIX BETWEEN 'YYYYMMDD' AND 'YYYYMMDD'` filter, as shown in the [`TABLE_DATE_RANGE` migration example](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#the_table_date_range_function) .
 
 **Detailed migration for the TABLE\_DATE\_RANGE\_STRICT function**
 
-Consider the same query as in the previous example, with the `  TABLE_DATE_RANGE_STRICT  ` function:
+Consider the same query as in the previous example, with the `TABLE_DATE_RANGE_STRICT` function:
 
     #legacySQL
     SELECT
@@ -1151,7 +1151,7 @@ Consider the same query as in the previous example, with the `  TABLE_DATE_RANGE
 
 To make an equivalent GoogleSQL query with error handling, the query should be split into two phases: validation and query execution. Depending on the application and query complexity, it can be achieved using [Composability using WITH clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_with_clauses) or [BigQuery Scripting (procedural SQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) .
 
-Translated query using [`  WITH  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_with_clauses) and conditional `  ERROR  ` :
+Translated query using [`WITH` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_with_clauses) and conditional `ERROR` :
 
     #standardSQL
     WITH MissingTables AS (
@@ -1208,15 +1208,15 @@ And using [BigQuery Scripting (procedural SQL)](https://docs.cloud.google.com/bi
 
 ### The TABLE\_QUERY function
 
-The legacy SQL `  TABLE_QUERY  ` function lets you find table names based on patterns. When migrating a `  TABLE_QUERY  ` function to GoogleSQL, which does not support the `  TABLE_QUERY  ` function, you can instead filter using the `  _TABLE_SUFFIX  ` pseudocolumn. Keep the following differences in mind when migrating:
+The legacy SQL `TABLE_QUERY` function lets you find table names based on patterns. When migrating a `TABLE_QUERY` function to GoogleSQL, which does not support the `TABLE_QUERY` function, you can instead filter using the `_TABLE_SUFFIX` pseudocolumn. Keep the following differences in mind when migrating:
 
-  - In legacy SQL, you place the `  TABLE_QUERY  ` function in the `  FROM  ` clause, whereas in GoogleSQL, you filter using the `  _TABLE_SUFFIX  ` pseudocolumn in the `  WHERE  ` clause.
+  - In legacy SQL, you place the `TABLE_QUERY` function in the `FROM` clause, whereas in GoogleSQL, you filter using the `_TABLE_SUFFIX` pseudocolumn in the `WHERE` clause.
 
-  - In legacy SQL, the `  TABLE_QUERY  ` function operates on the entire table name (or `  table_id  ` ), whereas in GoogleSQL, the `  _TABLE_SUFFIX  ` pseudocolumn contains part or all of the table name, depending on how you use the wildcard character.
+  - In legacy SQL, the `TABLE_QUERY` function operates on the entire table name (or `table_id` ), whereas in GoogleSQL, the `_TABLE_SUFFIX` pseudocolumn contains part or all of the table name, depending on how you use the wildcard character.
 
 #### Filter in the WHERE clause
 
-When migrating from legacy SQL to GoogleSQL, move the filter to the `  WHERE  ` clause. For example, the following query finds the maximum temperatures across all years that end in the number `  0  ` :
+When migrating from legacy SQL to GoogleSQL, move the filter to the `WHERE` clause. For example, the following query finds the maximum temperatures across all years that end in the number `0` :
 
     #legacySQL
     SELECT
@@ -1232,7 +1232,7 @@ When migrating from legacy SQL to GoogleSQL, move the filter to the `  WHERE  ` 
     ORDER BY
       max DESC
 
-In GoogleSQL, an equivalent query uses a table wildcard and places the regular expression function, `  REGEXP_CONTAINS  ` , in the `  WHERE  ` clause:
+In GoogleSQL, an equivalent query uses a table wildcard and places the regular expression function, `REGEXP_CONTAINS` , in the `WHERE` clause:
 
     #standardSQL
     SELECT
@@ -1250,9 +1250,9 @@ In GoogleSQL, an equivalent query uses a table wildcard and places the regular e
 
 #### Differences between table\_id and \_TABLE\_SUFFIX
 
-In the legacy SQL `  TABLE_QUERY(dataset, expr)  ` function, the second parameter is an expression that operates over the entire table name, using the value `  table_id  ` . When migrating to GoogleSQL, the filter that you create in the `  WHERE  ` clause operates on the value of `  _TABLE_SUFFIX  ` , which can include part or all of the table name, depending on your use of the wildcard character.
+In the legacy SQL `TABLE_QUERY(dataset, expr)` function, the second parameter is an expression that operates over the entire table name, using the value `table_id` . When migrating to GoogleSQL, the filter that you create in the `WHERE` clause operates on the value of `_TABLE_SUFFIX` , which can include part or all of the table name, depending on your use of the wildcard character.
 
-For example, the following legacy SQL query uses the entire table name in a regular expression to find the maximum temperatures across all years that end in the number `  0  ` :
+For example, the following legacy SQL query uses the entire table name in a regular expression to find the maximum temperatures across all years that end in the number `0` :
 
     #legacySQL
     SELECT
@@ -1267,9 +1267,9 @@ For example, the following legacy SQL query uses the entire table name in a regu
     ORDER BY
       max DESC
 
-In GoogleSQL, an equivalent query can use the entire table name or only a part of the table name. You can use an empty prefix in GoogleSQL so that your filter operates over the entire table name ``  FROM `bigquery-public-data.noaa_gsod.*`  `` .
+In GoogleSQL, an equivalent query can use the entire table name or only a part of the table name. You can use an empty prefix in GoogleSQL so that your filter operates over the entire table name `` FROM `bigquery-public-data.noaa_gsod.*` `` .
 
-However, longer prefixes perform better than empty prefixes, so the following example uses a longer prefix, which means that the value of `  _TABLE_SUFFIX  ` is only part of the table name.
+However, longer prefixes perform better than empty prefixes, so the following example uses a longer prefix, which means that the value of `_TABLE_SUFFIX` is only part of the table name.
 
     #standardSQL
     SELECT
@@ -1287,7 +1287,7 @@ However, longer prefixes perform better than empty prefixes, so the following ex
 
 ## Migrating the partition meta-table decorator
 
-In legacy SQL, you can query the [`  __PARTITIONS_SUMMARY__  ` meta-table](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#get_partition_metadata) to get partition metadata for a specific table.
+In legacy SQL, you can query the [`__PARTITIONS_SUMMARY__` meta-table](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#get_partition_metadata) to get partition metadata for a specific table.
 
 ``` notranslate
 #legacySQL
@@ -1302,11 +1302,11 @@ FROM
   [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__];
 ```
 
-In GoogleSQL, you can query the [`  INFORMATION_SCHEMA.PARTITIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) view instead.
+In GoogleSQL, you can query the [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) view instead.
 
-**Note:** `  INFORMATION_SCHEMA.PARTITIONS  ` is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see the [documentation](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) .
+**Note:** `INFORMATION_SCHEMA.PARTITIONS` is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see the [documentation](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) .
 
-To migrate a query that uses `  __PARTITIONS_SUMMARY__  ` and keep the output schema and error handling consistent, use the following GoogleSQL query:
+To migrate a query that uses `__PARTITIONS_SUMMARY__` and keep the output schema and error handling consistent, use the following GoogleSQL query:
 
 ``` notranslate
 #standardSQL
@@ -1323,9 +1323,9 @@ WHERE
   table_name = 'TABLE_NAME';
 ```
 
-**Warning:** Partition-level `  creation_time  ` isn't available in `  INFORMATION_SCHEMA.PARTITIONS  ` and is set to `  NULL  ` in the example. For table-level creation time, use the [`  INFORMATION_SCHEMA.TABLES  ` `  creation_time  `](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#schema) field.
+**Warning:** Partition-level `creation_time` isn't available in `INFORMATION_SCHEMA.PARTITIONS` and is set to `NULL` in the example. For table-level creation time, use the [`INFORMATION_SCHEMA.TABLES` `creation_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#schema) field.
 
 The permissions required to access the partition metadata differ between legacy SQL and GoogleSQL:
 
-  - Legacy SQL: The [meta-table](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#get_partition_metadata) requires the `  bigquery.tables.getData  ` permission.
-  - GoogleSQL: The `  INFORMATION_SCHEMA.PARTITIONS  ` view requires the [`  bigquery.tables.get  ` and `  bigquery.tables.list  `](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions#required_permissions) permissions. This change in permissions for GoogleSQL lets you grant metadata-only roles (for example, [`  roles/bigquery.metadataViewer  `](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ) without providing access to the underlying table data.
+  - Legacy SQL: The [meta-table](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#get_partition_metadata) requires the `bigquery.tables.getData` permission.
+  - GoogleSQL: The `INFORMATION_SCHEMA.PARTITIONS` view requires the [`bigquery.tables.get` and `bigquery.tables.list`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions#required_permissions) permissions. This change in permissions for GoogleSQL lets you grant metadata-only roles (for example, [`roles/bigquery.metadataViewer`](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ) without providing access to the underlying table data.

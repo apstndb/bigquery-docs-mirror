@@ -230,12 +230,12 @@ BigQuery displays the following version control options:
     Commit the X number of local changes in your workspace or selected changed files. BigQuery displays the uncommitted changes.
   - Push to default branch  
     Push your committed changes to your default branch. This option is available in a repository if you have no uncommitted changes in your workspace and there are unpushed commits.
-  - Push to `  your-branch-name  `  
-    Push your committed changes to `  your-branch-name  ` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
+  - Push to `your-branch-name`  
+    Push your committed changes to `your-branch-name` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
   - Pull from default branch  
     Update your workspaces with recent changes from your default branch. This option is available in a repository if you have no uncommitted changes in your workspace.
-  - Pull from `  your-branch-name  `  
-    Update your workspace with recent changes from `  your-branch-name  ` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
+  - Pull from `your-branch-name`  
+    Update your workspace with recent changes from `your-branch-name` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
   - Revert to last commit  
     Restore the files in your workspace to their state from your last commit.
 
@@ -270,13 +270,13 @@ To pull changes from your repository to your workspace, follow these steps:
     2.  If you are in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) , do one of the following:
         
         1.  Click **Pull from default branch** to pull from the default branch of the third-party repository.
-        2.  Click **Pull from `  your-branch-name  `** to pull from the branch of the third-party repository that corresponds to the current workspace.
+        2.  Click **Pull from `your-branch-name`** to pull from the branch of the third-party repository that corresponds to the current workspace.
 
 ### Commit changes
 
 After you make a change in a workspace, BigQuery displays the **Commit** option. You can commit all local changes or selected files. Files that you have added or modified are identified with a blue dot next to them in the workspace pane.
 
-**Note:** BigQuery defaults to using the authenticated Google Cloud user's email address for the commit author, but the Dataform API allows setting a custom email address for the commit author. This behavior is similar to the [`  git commit --author  ` command](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorauthor) and affects only the Git commit history. The commit author identity is not cryptographically verified.
+**Note:** BigQuery defaults to using the authenticated Google Cloud user's email address for the commit author, but the Dataform API allows setting a custom email address for the commit author. This behavior is similar to the [`git commit --author` command](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorauthor) and affects only the Git commit history. The commit author identity is not cryptographically verified.
 
 To commit changes from your workspace to your repository, follow these steps:
 
@@ -343,7 +343,7 @@ To push changes from your workspace to your repository, follow these steps:
     2.  If you are in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) , do one of the following:
         
         1.  Click **Push to default branch** to push to the default branch of the third-party repository.
-        2.  Click **Push to `  your-branch-name  `** to push to the branch of the third-party repository that corresponds to the current workspace.
+        2.  Click **Push to `your-branch-name`** to push to the branch of the third-party repository that corresponds to the current workspace.
 
 ### Revert uncommitted changes
 

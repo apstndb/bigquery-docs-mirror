@@ -15,62 +15,48 @@ Defines the destination bigquery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;datasetReference&quot;: {
-    object (DestinationDatasetReference)
-  },
-  &quot;friendlyName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;labels&quot;: {
-    string: string,
-    ...
-  },
-  &quot;location&quot;: string,
-  &quot;replicaLocations&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;datasetReference&quot;: {object (DestinationDatasetReference)},&quot;friendlyName&quot;: string,&quot;description&quot;: string,&quot;labels&quot;: {string: string,...},&quot;location&quot;: string,&quot;replicaLocations&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  datasetReference  `
+`datasetReference`
 
-`  object ( DestinationDatasetReference  ` )
+` object ( DestinationDatasetReference  ` )
 
 Required. A reference that identifies the destination dataset.
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
 Optional. A descriptive name for the dataset.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. A user-friendly description of the dataset.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Optional. The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See <https://cloud.google.com/resource-manager/docs/creating-managing-labels> for more information.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 Required. The geographic location where the dataset should reside. See <https://cloud.google.com/bigquery/docs/locations> for supported locations.
 
-`  replicaLocations[]  `
+`replicaLocations[]`
 
-`  string  `
+`string`
 
 Optional. The geographic locations where the dataset should be replicated. See [BigQuery locations](https://cloud.google.com/bigquery/docs/locations) for supported locations.
 
@@ -97,14 +83,14 @@ Optional. The geographic locations where the dataset should be replicated. See [
 
 Fields
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 1,024 characters.
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. The ID of the project containing this dataset.

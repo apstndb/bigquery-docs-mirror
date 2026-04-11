@@ -12,13 +12,13 @@ Before you complete these steps, ensure you have the necessary [permissions](htt
 
 You can set or retrieve session-level data with the following [system variables](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) :
 
-  - `  @@dataset_id  ` : The ID of the default dataset in the current project. The system variables `  @@dataset_project_id  ` and `  @@dataset_id  ` can be set and used together.
-  - `  @@dataset_project_id  ` : The ID of the default project for datasets that are used in the query. If this system variable is not set, or if it is set to `  NULL  ` , the query-executing project is used. The system variables `  @@dataset_project_id  ` and `  @@dataset_id  ` can be set and used together.
-  - `  @@query_label  ` : The [job label](https://docs.cloud.google.com/bigquery/docs/adding-labels#job-label) to assign to the session. The label can be used throughout the entire session, not just for a specific query in the session.
-  - `  @@session_id  ` : The ID of the current session.
-  - `  @@time_zone  ` : The default time zone to use in time zone-dependent SQL functions, when a time zone is not specified as an argument.
+  - `@@dataset_id` : The ID of the default dataset in the current project. The system variables `@@dataset_project_id` and `@@dataset_id` can be set and used together.
+  - `@@dataset_project_id` : The ID of the default project for datasets that are used in the query. If this system variable is not set, or if it is set to `NULL` , the query-executing project is used. The system variables `@@dataset_project_id` and `@@dataset_id` can be set and used together.
+  - `@@query_label` : The [job label](https://docs.cloud.google.com/bigquery/docs/adding-labels#job-label) to assign to the session. The label can be used throughout the entire session, not just for a specific query in the session.
+  - `@@session_id` : The ID of the current session.
+  - `@@time_zone` : The default time zone to use in time zone-dependent SQL functions, when a time zone is not specified as an argument.
 
-These system variables can be used at any time during the session and are in scope for the remaining session. You don't define these variables, but they can be assigned a new value with the [`  SET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#set) statement.
+These system variables can be used at any time during the session and are in scope for the remaining session. You don't define these variables, but they can be assigned a new value with the [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#set) statement.
 
 The maximum size of a [variable](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#variables) in a session is 1 MB, and the maximum size of all variables in a session is 10 MB.
 
@@ -30,11 +30,11 @@ You can [assign a job label to a session](https://docs.cloud.google.com/bigquery
 
 You can create, set, and retrieve session-level data with [variables](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#variables) . Variables can be used at any time during the session and are in scope for the remaining session.
 
-  - To create a session-scoped variable, use the [`  DECLARE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#declare) statement outside of a [`  BEGIN...END  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin) block.
-  - To set a session-scoped variable after it has been created, use the [`  SET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#set) statement.
-  - A variable declared inside of a `  BEGIN...END  ` block is not a session-scoped variable.
-  - A session-scoped variable can be referenced inside of a `  BEGIN...END  ` block.
-  - A session-scoped variable can be set inside of a `  BEGIN...END  ` block.
+  - To create a session-scoped variable, use the [`DECLARE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#declare) statement outside of a [`BEGIN...END`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin) block.
+  - To set a session-scoped variable after it has been created, use the [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#set) statement.
+  - A variable declared inside of a `BEGIN...END` block is not a session-scoped variable.
+  - A session-scoped variable can be referenced inside of a `BEGIN...END` block.
+  - A session-scoped variable can be set inside of a `BEGIN...END` block.
 
 The maximum size of a variable in a session is 1 MB, and the maximum size of all variables in a session is 10 MB.
 
@@ -58,7 +58,7 @@ The following query begins a transaction.
 
     BEGIN TRANSACTION
 
-Inside of the transaction, the following query creates a temporary table called `  Flights  ` and then returns the data in this table. Two statements are included in the query.
+Inside of the transaction, the following query creates a temporary table called `Flights` and then returns the data in this table. Two statements are included in the query.
 
     CREATE TEMP TABLE Flights(total INT64)  AS SELECT * FROM UNNEST([10,23,3,14,55]) AS a;
     
@@ -68,7 +68,7 @@ The following query commits the transaction.
 
     COMMIT
 
-You can find an active transaction that affects the `  Flights  ` table:
+You can find an active transaction that affects the `Flights` table:
 
     WITH running_transactions AS (
       SELECT DISTINCT transaction_id
@@ -94,7 +94,7 @@ You can find an active transaction that affects the `  Flights  ` table:
       AND destination_table = ("Flights")
       AND jobs.transaction_id = running_transactions.transaction_id;
 
-If you want to cancel an ongoing transaction and you have the `  bigquery.admin  ` role, you can [issue a rollback statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) , using the session ID associated with the transaction in the Cloud Shell or with an API call. When you [run the query](https://docs.cloud.google.com/bigquery/docs/sessions#run-queries) , using the session ID associated with the transaction, the session ID is shown in the results.
+If you want to cancel an ongoing transaction and you have the `bigquery.admin` role, you can [issue a rollback statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) , using the session ID associated with the transaction in the Cloud Shell or with an API call. When you [run the query](https://docs.cloud.google.com/bigquery/docs/sessions#run-queries) , using the session ID associated with the transaction, the session ID is shown in the results.
 
 ## Example session
 
@@ -107,7 +107,7 @@ This is an example of the session workflow in the Google Cloud console:
         CREATE TEMP TABLE Flights(total INT64)  AS SELECT * FROM UNNEST([10,23,3,14,55]) AS a;
         SELECT * FROM Flights;
 
-3.  Run the query. A temporary table called `  Flights  ` is created and all of the data is returned.
+3.  Run the query. A temporary table called `Flights` is created and all of the data is returned.
     
         +-------+
         | total |
@@ -145,7 +145,7 @@ This is an example of the session workflow in the Google Cloud console:
         
         SELECT total * x AS total_c FROM Flights LIMIT 2;
 
-7.  Run the query. The session-scoped variable `  x  ` is used to limit the number of results returned for the `  Flights  ` table. Look closely at how scoping affects this variable when it is declared outside of a `  BEGIN...END  ` statement, set inside of a `  BEGIN...END  ` statement, and then referenced outside of the `  BEGIN...END  ` statement again.
+7.  Run the query. The session-scoped variable `x` is used to limit the number of results returned for the `Flights` table. Look closely at how scoping affects this variable when it is declared outside of a `BEGIN...END` statement, set inside of a `BEGIN...END` statement, and then referenced outside of the `BEGIN...END` statement again.
     
         +---------+
         | total_a |
@@ -176,7 +176,7 @@ This is an example of the session workflow in the Google Cloud console:
         
         SELECT STRING(TIMESTAMP "2008-12-20 15:30:00+00", @@time_zone) AS new_time_zone;
 
-9.  Run the query. The session-scoped system variable `  @@time_zone  ` is used to assign a time zone to a timestamp. The first statement returns a timestamp with the default time zone (in this example, `  UTC  ` ). The next statement assigns `  @@time_zone  ` to a new value. The third statement returns a timestamp with the new time zone.
+9.  Run the query. The session-scoped system variable `@@time_zone` is used to assign a time zone to a timestamp. The first statement returns a timestamp with the default time zone (in this example, `UTC` ). The next statement assigns `@@time_zone` to a new value. The third statement returns a timestamp with the new time zone.
     
         +-------------------------------+
         | default_time_zone             |

@@ -26,26 +26,26 @@ A reservation group is a container for reservations.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Identifier. The resource name of the reservation group, e.g., `  projects/*/locations/*/reservationGroups/team1-prod  ` . The reservationGroupId must only contain lower case alphanumeric characters or dashes. It must start with a letter and must not end with a dash. Its maximum length is 64 characters.
+Identifier. The resource name of the reservation group, e.g., `projects/*/locations/*/reservationGroups/team1-prod` . The reservationGroupId must only contain lower case alphanumeric characters or dashes. It must start with a letter and must not end with a dash. Its maximum length is 64 characters.
 
 ## Methods
 
-### `             create           `
+### `            create           `
 
 Creates a new reservation group.
 
-### `             delete           `
+### `            delete           `
 
 Deletes a reservation.
 
-### `             get           `
+### `            get           `
 
 Returns information about the reservation group.
 
-### `             list           `
+### `            list           `
 
 Lists all the reservation groups for the project in the specified location.

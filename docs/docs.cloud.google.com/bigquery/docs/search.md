@@ -1,12 +1,12 @@
 # Search indexed data
 
-This page provides examples of searching for table data in BigQuery. When you index your data, BigQuery can optimize some queries that use the [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or other [functions and operators](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) , such as `  =  ` , `  IN  ` , `  LIKE  ` , and `  STARTS_WITH  ` .
+This page provides examples of searching for table data in BigQuery. When you index your data, BigQuery can optimize some queries that use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or other [functions and operators](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) , such as `=` , `IN` , `LIKE` , and `STARTS_WITH` .
 
 SQL queries return correct results from all ingested data, even if some of the data isn't indexed yet. However, query performance can be greatly improved with an index. Savings in [bytes processed](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) and [slot milliseconds](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) are maximized when the number of search results make up a relatively small fraction of the total rows in your table because less data is scanned. To determine whether an index was used for a query, see [search index usage](https://docs.cloud.google.com/bigquery/docs/search#search_index_usage) .
 
 ## Create a search index
 
-The following table called `  Logs  ` is used to show different ways of using the `  SEARCH  ` function. This example table is quite small, but in practice the performance gains you get with `  SEARCH  ` improve with the size of the table.
+The following table called `Logs` is used to show different ways of using the `SEARCH` function. This example table is quite small, but in practice the performance gains you get with `SEARCH` improve with the size of the table.
 
 ``` notranslate
 CREATE TABLE my_dataset.Logs (Level STRING, Source STRING, Message STRING)
@@ -35,7 +35,7 @@ The table looks like the following:
     | INFO    | 181.94.60.64   | Entry Foo-Baz created                                 |
     +---------+----------------+-------------------------------------------------------+
 
-Create a search index on the `  Logs  ` table using the default text analyzer:
+Create a search index on the `Logs` table using the default text analyzer:
 
 ``` notranslate
 CREATE SEARCH INDEX my_index ON my_dataset.Logs(ALL COLUMNS);
@@ -43,13 +43,13 @@ CREATE SEARCH INDEX my_index ON my_dataset.Logs(ALL COLUMNS);
 
 For more information about search indexes, see [Manage search indexes](https://docs.cloud.google.com/bigquery/docs/search-index) .
 
-## Use the `     SEARCH    ` function
+## Use the `SEARCH` function
 
-The `  SEARCH  ` function provides tokenized search on data. `  SEARCH  ` is designed to be used with an [index](https://docs.cloud.google.com/bigquery/docs/search-index) to optimize lookups. You can use the `  SEARCH  ` function to search an entire table or restrict your search to specific columns.
+The `SEARCH` function provides tokenized search on data. `SEARCH` is designed to be used with an [index](https://docs.cloud.google.com/bigquery/docs/search-index) to optimize lookups. You can use the `SEARCH` function to search an entire table or restrict your search to specific columns.
 
 ### Search an entire table
 
-The following query searches across all columns of the `  Logs  ` table for the value `  bar  ` and returns the rows that contain this value, regardless of capitalization. Since the search index uses the default text analyzer, you don't need to specify it in the `  SEARCH  ` function.
+The following query searches across all columns of the `Logs` table for the value `bar` and returns the rows that contain this value, regardless of capitalization. Since the search index uses the default text analyzer, you don't need to specify it in the `SEARCH` function.
 
 ``` notranslate
 SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, 'bar');
@@ -64,7 +64,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, 'bar');
     | SEVERE  | 4.113.82.10    | Entry Foo-Bar does not exist, deleted by 94.60.64.181 |
     +---------+----------------+-------------------------------------------------------+
 
-The following query searches across all columns of the `  Logs  ` table for the value ``  `94.60.64.181`  `` and returns the rows that contain this value. The backticks allow for an exact search, which is why the last row of the `  Logs  ` table which contains `  181.94.60.64  ` is omitted.
+The following query searches across all columns of the `Logs` table for the value `` `94.60.64.181` `` and returns the rows that contain this value. The backticks allow for an exact search, which is why the last row of the `Logs` table which contains `181.94.60.64` is omitted.
 
 ``` notranslate
 SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, '`94.60.64.181`');
@@ -79,7 +79,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, '`94.60.64.181`');
 
 ### Search a subset of columns
 
-`  SEARCH  ` makes it easy to specify a subset of columns within which to search for data. The following query searches the `  Message  ` column of the `  Logs  ` table for the value `  94.60.64.181  ` and returns the rows that contain this value.
+`SEARCH` makes it easy to specify a subset of columns within which to search for data. The following query searches the `Message` column of the `Logs` table for the value `94.60.64.181` and returns the rows that contain this value.
 
 ``` notranslate
 SELECT * FROM my_dataset.Logs WHERE SEARCH(Message, '`94.60.64.181`');
@@ -91,7 +91,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH(Message, '`94.60.64.181`');
     | SEVERE  | 4.113.82.10    | Entry Foo-Bar does not exist, deleted by 94.60.64.181 |
     +---------+----------------+-------------------------------------------------------+
 
-The following query searches both the `  Source  ` and `  Message  ` columns of the `  Logs  ` table. It returns the rows that contain the value `  94.60.64.181  ` from either column.
+The following query searches both the `Source` and `Message` columns of the `Logs` table. It returns the rows that contain the value `94.60.64.181` from either column.
 
 ``` notranslate
 SELECT * FROM my_dataset.Logs WHERE SEARCH((Source, Message), '`94.60.64.181`');
@@ -106,7 +106,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH((Source, Message), '`94.60.64.181`');
 
 ### Exclude columns from a search
 
-If a table has many columns and you want to search most of them, it may be easier to specify only the columns to exclude from the search. The following query searches across all columns of the `  Logs  ` table except for the `  Message  ` column. It returns the rows of any columns other than `  Message  ` that contains the value `  94.60.64.181  ` .
+If a table has many columns and you want to search most of them, it may be easier to specify only the columns to exclude from the search. The following query searches across all columns of the `Logs` table except for the `Message` column. It returns the rows of any columns other than `Message` that contains the value `94.60.64.181` .
 
 ``` notranslate
 SELECT *
@@ -123,7 +123,7 @@ WHERE SEARCH(
 
 ### Use a different text analyzer
 
-The following example creates a table called `  contact_info  ` with an index that uses the `  NO_OP_ANALYZER  ` [text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) :
+The following example creates a table called `contact_info` with an index that uses the `NO_OP_ANALYZER` [text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) :
 
 ``` notranslate
 CREATE TABLE my_dataset.contact_info (name STRING, email STRING)
@@ -146,7 +146,7 @@ OPTIONS (analyzer = 'NO_OP_ANALYZER');
     | Sasha   | sasha@example.com   |
     +---------+---------------------+
 
-The following query searches for `  Kim  ` in the `  name  ` column and `  kim  ` in the `  email  ` column. Since the search index doesn't use the default text analyzer, you must pass the name of the analyzer to the `  SEARCH  ` function.
+The following query searches for `Kim` in the `name` column and `kim` in the `email` column. Since the search index doesn't use the default text analyzer, you must pass the name of the analyzer to the `SEARCH` function.
 
 ``` notranslate
 SELECT
@@ -158,7 +158,7 @@ FROM
   my_dataset.contact_info;
 ```
 
-The `  NO_OP_ANALYZER  ` doesn't modify the text, so the `  SEARCH  ` function only returns `  TRUE  ` for exact matches:
+The `NO_OP_ANALYZER` doesn't modify the text, so the `SEARCH` function only returns `TRUE` for exact matches:
 
     +---------+----------+---------------------+-----------+
     | name    | name_Kim | email               | email_kim |
@@ -170,9 +170,9 @@ The `  NO_OP_ANALYZER  ` doesn't modify the text, so the `  SEARCH  ` function o
 
 ### Configure text analyzer options
 
-The `  LOG_ANALYZER  ` and `  PATTERN_ANALYZER  ` [text analyzers](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) can be customized by adding a JSON-formatted string to the configuration options. You can configure text analyzers in the [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) , the [`  CREATE SEARCH INDEX  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , and the [`  TEXT_ANALYZE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) .
+The `LOG_ANALYZER` and `PATTERN_ANALYZER` [text analyzers](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) can be customized by adding a JSON-formatted string to the configuration options. You can configure text analyzers in the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) , the [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , and the [`TEXT_ANALYZE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) .
 
-The following example creates a table called `  complex_table  ` with an index that uses the `  LOG_ANALYZER  ` text analyzer. It uses a JSON-formatted string to configure the analyzer options:
+The following example creates a table called `complex_table` with an index that uses the `LOG_ANALYZER` text analyzer. It uses a JSON-formatted string to configure the analyzer options:
 
 ``` notranslate
 CREATE TABLE dataset.complex_table(
@@ -192,7 +192,7 @@ OPTIONS (analyzer = 'LOG_ANALYZER', analyzer_options = '''{
 }''');
 ```
 
-The following table shows examples of calls to the `  SEARCH  ` function with different text analyzers and their results. The first table calls the `  SEARCH  ` function using the default text analyzer, the `  LOG_ANALYZER  ` :
+The following table shows examples of calls to the `SEARCH` function with different text analyzers and their results. The first table calls the `SEARCH` function using the default text analyzer, the `LOG_ANALYZER` :
 
 | Function call                                      | Returns | Reason                                                           |
 | -------------------------------------------------- | ------- | ---------------------------------------------------------------- |
@@ -220,7 +220,7 @@ The following table shows examples of calls to the `  SEARCH  ` function with di
 | SEARCH('foobar.example', '\`foobar.\`')            | FALSE   | \`foobar.\` isn't analyzed because of backticks; it isn't        |
 | SEARCH('foobar..example', '\`foobar.\`')           | TRUE    | \`foobar.\` isn't analyzed because of backticks; it is followed  |
 
-The following table shows examples of calls to the `  SEARCH  ` function using the `  NO_OP_ANALYZER  ` text analyzer and reasons for various return values:
+The following table shows examples of calls to the `SEARCH` function using the `NO_OP_ANALYZER` text analyzer and reasons for various return values:
 
 | Function call                                                     | Returns | Reason                                                    |
 | ----------------------------------------------------------------- | ------- | --------------------------------------------------------- |
@@ -236,48 +236,48 @@ You can perform search index optimizations with several operators, functions, an
 
 ### Optimize with operators and comparison functions
 
-BigQuery can optimize some queries that use the [equal operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) ( `  =  ` ), [`  IN  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators) , [`  LIKE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) , or [`  STARTS_WITH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#starts_with) to compare string literals with indexed data.
+BigQuery can optimize some queries that use the [equal operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) ( `=` ), [`IN` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators) , [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) , or [`STARTS_WITH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#starts_with) to compare string literals with indexed data.
 
 ### Optimize with string predicates
 
 The following predicates are eligible for search index optimization:
 
-  - `  column_name = 'string_literal'  `
-  - `  'string_literal' = column_name  `
-  - `  struct_column.nested_field = 'string_literal'  `
-  - `  string_array_column[OFFSET(0)] = 'string_literal'  `
-  - `  string_array_column[ORDINAL(1)] = 'string_literal'  `
-  - `  column_name IN ('string_literal1', 'string_literal2', ...)  `
-  - `  STARTS_WITH(column_name, 'prefix')  `
-  - `  column_name LIKE 'prefix%'  `
+  - `column_name = 'string_literal'`
+  - `'string_literal' = column_name`
+  - `struct_column.nested_field = 'string_literal'`
+  - `string_array_column[OFFSET(0)] = 'string_literal'`
+  - `string_array_column[ORDINAL(1)] = 'string_literal'`
+  - `column_name IN ('string_literal1', 'string_literal2', ...)`
+  - `STARTS_WITH(column_name, 'prefix')`
+  - `column_name LIKE 'prefix%'`
 
 ### Optimize with numeric predicates
 
-If the search index was created with numeric data types, BigQuery can optimize some queries that use the equal operator ( `  =  ` ) or `  IN  ` operator with indexed data. The following predicates are eligible for search index optimization:
+If the search index was created with numeric data types, BigQuery can optimize some queries that use the equal operator ( `=` ) or `IN` operator with indexed data. The following predicates are eligible for search index optimization:
 
-  - `  INT64(json_column.int64_field) = 1  `
-  - `  int64_column = 1  `
-  - `  int64_array_column[OFFSET(0)] = 1  `
-  - `  int64_column IN (1, 2)  `
-  - `  struct_column.nested_int64_field = 1  `
-  - `  struct_column.nested_timestamp_field = TIMESTAMP "2024-02-15 21:31:40"  `
-  - `  timestamp_column = "2024-02-15 21:31:40"  `
-  - `  timestamp_column IN ("2024-02-15 21:31:40", "2024-02-16 21:31:40")  `
+  - `INT64(json_column.int64_field) = 1`
+  - `int64_column = 1`
+  - `int64_array_column[OFFSET(0)] = 1`
+  - `int64_column IN (1, 2)`
+  - `struct_column.nested_int64_field = 1`
+  - `struct_column.nested_timestamp_field = TIMESTAMP "2024-02-15 21:31:40"`
+  - `timestamp_column = "2024-02-15 21:31:40"`
+  - `timestamp_column IN ("2024-02-15 21:31:40", "2024-02-16 21:31:40")`
 
 ### Optimize functions that produce indexed data
 
-BigQuery supports search index optimization when certain functions are applied to indexed data. If the search index uses the default `  LOG_ANALYZER  ` text analyzer then you can apply the [`  UPPER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#upper) or [`  LOWER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#lower) functions to the column, such as `  UPPER(column_name) = 'STRING_LITERAL'  ` .
+BigQuery supports search index optimization when certain functions are applied to indexed data. If the search index uses the default `LOG_ANALYZER` text analyzer then you can apply the [`UPPER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#upper) or [`LOWER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#lower) functions to the column, such as `UPPER(column_name) = 'STRING_LITERAL'` .
 
-For `  JSON  ` scalar string data extracted from an indexed `  JSON  ` column, you can apply the [`  STRING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#string_for_json) function or its safe version, [`  SAFE.STRING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) . If the extracted `  JSON  ` value is not a string, then the `  STRING  ` function produces an error and the `  SAFE.STRING  ` function returns `  NULL  ` .
+For `JSON` scalar string data extracted from an indexed `JSON` column, you can apply the [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#string_for_json) function or its safe version, [`SAFE.STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) . If the extracted `JSON` value is not a string, then the `STRING` function produces an error and the `SAFE.STRING` function returns `NULL` .
 
-For indexed JSON-formatted `  STRING  ` (not `  JSON  ` ) data, you can apply the following functions:
+For indexed JSON-formatted `STRING` (not `JSON` ) data, you can apply the following functions:
 
-  - [`  JSON_EXTRACT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract)
-  - [`  JSON_EXTRACT_SCALAR  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract_scalar)
-  - [`  JSON_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query)
-  - [`  JSON_VALUE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value)
+  - [`JSON_EXTRACT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract)
+  - [`JSON_EXTRACT_SCALAR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract_scalar)
+  - [`JSON_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query)
+  - [`JSON_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value)
 
-For example, suppose you have the following indexed table called `  dataset.person_data  ` with a `  JSON  ` and a `  STRING  ` column:
+For example, suppose you have the following indexed table called `dataset.person_data` with a `JSON` and a `STRING` column:
 
     +----------------------------------------------------------------+-----------------------------------------+
     | json_column                                                    | string_column                           |
@@ -297,11 +297,11 @@ SELECT * FROM dataset.person_data
 WHERE JSON_VALUE(string_column, '$.job') IN ('doctor', 'lawyer', 'teacher');
 ```
 
-Combinations of these functions are also optimized, such as `  UPPER(JSON_VALUE(json_string_expression)) = 'FOO'  ` .
+Combinations of these functions are also optimized, such as `UPPER(JSON_VALUE(json_string_expression)) = 'FOO'` .
 
 ## Search index usage
 
-To determine whether a search index was used for a query, you can view the [job details](https://docs.cloud.google.com/bigquery/docs/search#search_index_usage_job_details) or query one of the [`  INFORMATION_SCHEMA.JOBS*  `](https://docs.cloud.google.com/bigquery/docs/search#search_index_usage_information_schema) views.
+To determine whether a search index was used for a query, you can view the [job details](https://docs.cloud.google.com/bigquery/docs/search#search_index_usage_job_details) or query one of the [`INFORMATION_SCHEMA.JOBS*`](https://docs.cloud.google.com/bigquery/docs/search#search_index_usage_information_schema) views.
 
 ### View job details
 
@@ -309,15 +309,15 @@ In **Job Information** of the **Query results** , the [**Index Usage Mode**](htt
 
 ![Job information showing why a search index was unused.](https://docs.cloud.google.com/static/bigquery/images/search-index-job-information.png)
 
-Information on search index usage is also available through the [`  searchStatistics  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#searchstatistics) in the [Jobs.Get](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) API method. The `  indexUsageMode  ` field in `  searchStatistics  ` indicates whether a search index was used with the following values:
+Information on search index usage is also available through the [`searchStatistics` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#searchstatistics) in the [Jobs.Get](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) API method. The `indexUsageMode` field in `searchStatistics` indicates whether a search index was used with the following values:
 
-  - `  UNUSED  ` : no search index was used.
-  - `  PARTIALLY_USED  ` : part of the query used search indexes and part did not.
-  - `  FULLY_USED  ` : every `  SEARCH  ` function in the query used a search index.
+  - `UNUSED` : no search index was used.
+  - `PARTIALLY_USED` : part of the query used search indexes and part did not.
+  - `FULLY_USED` : every `SEARCH` function in the query used a search index.
 
-When `  indexUsageMode  ` is `  UNUSED  ` or `  PARTIALLY_USED  ` , the `  indexUnusedReasons  ` field contains information about why search indexes were not used in the query.
+When `indexUsageMode` is `UNUSED` or `PARTIALLY_USED` , the `indexUnusedReasons` field contains information about why search indexes were not used in the query.
 
-To view `  searchStatistics  ` for a query, run the `  bq show  ` command.
+To view `searchStatistics` for a query, run the `bq show` command.
 
 ``` notranslate
 bq show --format=prettyjson -j JOB_ID
@@ -325,11 +325,11 @@ bq show --format=prettyjson -j JOB_ID
 
 #### Example
 
-Suppose you run a query that calls the `  SEARCH  ` function on data in a table. You can view the [job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) of the query to find the job ID, then run the `  bq show  ` command to see more information:
+Suppose you run a query that calls the `SEARCH` function on data in a table. You can view the [job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) of the query to find the job ID, then run the `bq show` command to see more information:
 
     bq show --format=prettyjson --j my_project:US.bquijob_123x456_789y123z456c
 
-The output contains many fields, including `  searchStatistics  ` , which looks similar to the following. In this example, `  indexUsageMode  ` indicates that the index was not used. The reason is that the table doesn't have a search index. To solve this problem, [create a search index](https://docs.cloud.google.com/bigquery/docs/search-index) on the table. See the `  indexUnusedReason  ` [`  code  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#Code_1) for a list of all reasons a search index might not be used in a query.
+The output contains many fields, including `searchStatistics` , which looks similar to the following. In this example, `indexUsageMode` indicates that the index was not used. The reason is that the table doesn't have a search index. To solve this problem, [create a search index](https://docs.cloud.google.com/bigquery/docs/search-index) on the table. See the `indexUnusedReason` [`code` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#Code_1) for a list of all reasons a search index might not be used in a query.
 
     "searchStatistics": {
       "indexUnusedReasons": [
@@ -350,10 +350,10 @@ The output contains many fields, including `  searchStatistics  ` , which looks 
 
 You can also see search index usage for multiple jobs in a region in the following views:
 
-  - [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
-  - [`  INFORMATION_SCHEMA.JOBS_BY_USER  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user)
-  - [`  INFORMATION_SCHEMA.JOBS_BY_FOLDER  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder)
-  - [`  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)
+  - [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
+  - [`INFORMATION_SCHEMA.JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user)
+  - [`INFORMATION_SCHEMA.JOBS_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder)
+  - [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)
 
 The following query shows information about index usage for all search index optimizable queries in the past 7 days:
 
@@ -385,7 +385,7 @@ Searching works best when your search has few results. Make your searches as spe
 
 ### ORDER BY LIMIT optimization
 
-Queries that use `  SEARCH  ` , `  =  ` , `  IN  ` , `  LIKE  ` or `  STARTS_WITH  ` on a very large [partitioned](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) table can be optimized when you use an `  ORDER BY  ` clause on the partitioned field and a `  LIMIT  ` clause. For queries that don't contain the `  SEARCH  ` function, you can use the [other operators and functions](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) to take advantage of the optimization. The optimization is applied whether or not the table is indexed. This works well if you're searching for a common term. For example, suppose the `  Logs  ` table created earlier is partitioned on an additional `  DATE  ` type column called `  day  ` . The following query is optimized:
+Queries that use `SEARCH` , `=` , `IN` , `LIKE` or `STARTS_WITH` on a very large [partitioned](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) table can be optimized when you use an `ORDER BY` clause on the partitioned field and a `LIMIT` clause. For queries that don't contain the `SEARCH` function, you can use the [other operators and functions](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) to take advantage of the optimization. The optimization is applied whether or not the table is indexed. This works well if you're searching for a common term. For example, suppose the `Logs` table created earlier is partitioned on an additional `DATE` type column called `day` . The following query is optimized:
 
 ``` notranslate
 SELECT
@@ -401,8 +401,8 @@ LIMIT 10;
 
 ### Scope your search
 
-When you use the `  SEARCH  ` function, only search the columns of the table that you expect to contain your search terms. This improves performance and reduces the number of bytes that need to be scanned.
+When you use the `SEARCH` function, only search the columns of the table that you expect to contain your search terms. This improves performance and reduces the number of bytes that need to be scanned.
 
 ### Use backticks
 
-When you use the `  SEARCH  ` function with the `  LOG_ANALYZER  ` text analyzer, enclosing your search query in backticks forces an exact match. This is helpful if your search is case-sensitive or contains characters that shouldn't be interpreted as delimiters. For example, to search for the IP address `  192.0.2.1  ` , use ``  `192.0.2.1`  `` . Without the backticks, the search returns any row that contains the individual tokens `  192  ` , `  0  ` , `  2  ` , and `  1  ` , in any order.
+When you use the `SEARCH` function with the `LOG_ANALYZER` text analyzer, enclosing your search query in backticks forces an exact match. This is helpful if your search is case-sensitive or contains characters that shouldn't be interpreted as delimiters. For example, to search for the IP address `192.0.2.1` , use `` `192.0.2.1` `` . Without the backticks, the search returns any row that contains the individual tokens `192` , `0` , `2` , and `1` , in any order.

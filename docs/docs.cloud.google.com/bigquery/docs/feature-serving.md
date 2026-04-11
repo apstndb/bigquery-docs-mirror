@@ -8,12 +8,12 @@ The data used to train a model often has time dependencies built into it. When y
 
 Use the following functions to specify point-in-time cutoffs when retrieving time sensitive features:
 
-  - [`  ML.FEATURES_AT_TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time)
-  - [`  ML.ENTITY_FEATURES_AT_TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time)
+  - [`ML.FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time)
+  - [`ML.ENTITY_FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time)
 
 ## Serve features in BigQuery ML
 
-To train models and perform batch inference in BigQuery ML, you can retrieve features using one of the point-in-time lookup functions described in the [Point-in-time correctness](https://docs.cloud.google.com/bigquery/docs/feature-serving#point-in-time_correctness) section. You can include these functions in the [`  query_statement  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) of the `  CREATE MODEL  ` statement for training, or in the `  query_statement  ` clause of the appropriate table-valued function, such as [`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) , for serving.
+To train models and perform batch inference in BigQuery ML, you can retrieve features using one of the point-in-time lookup functions described in the [Point-in-time correctness](https://docs.cloud.google.com/bigquery/docs/feature-serving#point-in-time_correctness) section. You can include these functions in the [`query_statement` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) of the `CREATE MODEL` statement for training, or in the `query_statement` clause of the appropriate table-valued function, such as [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) , for serving.
 
 ## Serve features with Vertex AI Feature Store
 

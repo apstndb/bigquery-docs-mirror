@@ -11,7 +11,7 @@ Gets the specified table resource by table ID. This method does not return the d
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,21 +19,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the requested table
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the requested table
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 Required. Table ID of the requested table
 
@@ -41,15 +41,15 @@ Required. Table ID of the requested table
 
 Parameters
 
-`  selectedFields  `
+`selectedFields`
 
-`  string  `
+`string`
 
 tabledata.list of table schema fields to return (comma-separated). If unspecified, all fields are returned. A fieldMask cannot be used here because the fields will automatically be converted from camelCase to snake\_case and the conversion will fail if there are underscores. Since these are fields in BigQuery table schemas, underscores are allowed.
 
-`  view  `
+`view`
 
-`  enum ( TableMetadataView  ` )
+` enum ( TableMetadataView  ` )
 
 Optional. Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE\_STATS) are returned.
 
@@ -65,10 +65,10 @@ If successful, the response body contains an instance of `  Table  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
@@ -78,18 +78,18 @@ TableMetadataView specifies which table information is returned.
 
 Enums
 
-`  TABLE_METADATA_VIEW_UNSPECIFIED  `
+`TABLE_METADATA_VIEW_UNSPECIFIED`
 
 The default value. Default to the STORAGE\_STATS view.
 
-`  BASIC  `
+`BASIC`
 
 Includes basic table information including schema and partitioning specification. This view does not include storage statistics such as numRows or numBytes. This view is significantly more efficient and should be used to support high query rates.
 
-`  STORAGE_STATS  `
+`STORAGE_STATS`
 
 Includes all information in the BASIC view as well as storage statistics (numBytes, numLongTermBytes, numRows and lastModifiedTime).
 
-`  FULL  `
+`FULL`
 
 Includes all table information, including storage statistics. It returns same information as STORAGE\_STATS view, but may contain additional information in the future.

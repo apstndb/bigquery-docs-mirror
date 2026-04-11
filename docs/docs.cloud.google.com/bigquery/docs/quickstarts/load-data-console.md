@@ -16,7 +16,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
@@ -30,8 +30,8 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 
 To get the permissions that you need to create a dataset, create a table, load data, and query data, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run load jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
+  - Run load jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -55,8 +55,8 @@ Select **Create dataset** .
 
 On the **Create dataset** page, do the following:
 
-1.  For **Dataset ID** , enter `  babynames  ` .
-2.  For **Location type** , select **Multi-region** , and then choose **US (multiple regions in United States)** . The public datasets are stored in the `  us  ` multi-region location. For simplicity, store your dataset in the same location.
+1.  For **Dataset ID** , enter `babynames` .
+2.  For **Location type** , select **Multi-region** , and then choose **US (multiple regions in United States)** . The public datasets are stored in the `us` multi-region location. For simplicity, store your dataset in the same location.
 3.  Leave the remaining default settings as they are, and click **Create dataset** .
 
 ## Download the file that contains the source data
@@ -71,11 +71,11 @@ For more information about the data, see the Social Security Administration's [B
 
 2.  Extract the file.
     
-    For more information about the dataset schema, see the zip file's `  NationalReadMe.pdf  ` file.
+    For more information about the dataset schema, see the zip file's `NationalReadMe.pdf` file.
 
-3.  To see what the data looks like, open the `  yob2024.txt  ` file. This file contains comma-separated values for name, assigned sex at birth, and number of children with that name. The file has no header row.
+3.  To see what the data looks like, open the `yob2024.txt` file. This file contains comma-separated values for name, assigned sex at birth, and number of children with that name. The file has no header row.
 
-4.  Note the location of the `  yob2024.txt  ` file so that you can find it later.
+4.  Note the location of the `yob2024.txt` file so that you can find it later.
 
 ## Load data into a table
 
@@ -97,11 +97,11 @@ On the **Create table** page, do the following:
 
 2.  In the **Select file** field, click **Browse** .
 
-3.  Navigate to and open your local `  yob2024.txt  ` file, and click **Open** .
+3.  Navigate to and open your local `yob2024.txt` file, and click **Open** .
 
 4.  From the **File format** list, choose **CSV** .
 
-5.  In the **Destination** section, in the **Table** field, enter `  names_2024  ` .
+5.  In the **Destination** section, in the **Table** field, enter `names_2024` .
 
 6.  In the **Schema** section, click the **Edit as text** toggle, and paste the following schema definition into the text field:
 
@@ -115,7 +115,7 @@ To preview the table data, follow these steps:
 
 1.  In the left pane, click explore **Explorer** .
 2.  In the **Explorer** pane, expand your project and click **Datasets** .
-3.  Click the `  babynames  ` dataset, and then select the `  names_2024  ` table.
+3.  Click the `babynames` dataset, and then select the `names_2024` table.
 4.  Click the **Preview** tab. BigQuery displays the first few rows of the table.
 
 The **Preview** tab is not available for all table types. For example, the **Preview** tab is not displayed for external tables or views.
@@ -154,9 +154,9 @@ To avoid incurring charges to your Google Cloud account for the resources used o
 
 1.  In the Google Cloud console, open the BigQuery page.
 2.  In the left pane, click explore **Explorer** .
-3.  In the **Explorer** pane, click **Datasets** and then click the `  babynames  ` dataset that you created.
+3.  In the **Explorer** pane, click **Datasets** and then click the `babynames` dataset that you created.
 4.  Expand the more\_vert **View actions** option and click **Delete** .
-5.  In the **Delete dataset** dialog, confirm the delete command: type the word `  delete  ` and then click **Delete** .
+5.  In the **Delete dataset** dialog, confirm the delete command: type the word `delete` and then click **Delete** .
 
 ## What's next
 

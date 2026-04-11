@@ -11,7 +11,7 @@ Gets information about a location.
 
 ### HTTP request
 
-`  GET https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*}  `
+`GET https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,9 +19,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Resource name for the location.
 
@@ -37,6 +37,6 @@ If successful, the response body contains an instance of `  Location  ` .
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

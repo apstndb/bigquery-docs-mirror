@@ -1,8 +1,8 @@
 # The AI.FORECAST function
 
-This document describes the `  AI.FORECAST  ` function, which lets you forecast a time series by using BigQuery ML's built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) .
+This document describes the `AI.FORECAST` function, which lets you forecast a time series by using BigQuery ML's built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) .
 
-Using the `  AI.FORECAST  ` function with the built-in TimesFM model lets you perform forecasting without having to create and train your own model, so you can avoid the need for model management.
+Using the `AI.FORECAST` function with the built-in TimesFM model lets you perform forecasting without having to create and train your own model, so you can avoid the need for model management.
 
 ## Syntax
 
@@ -26,53 +26,53 @@ FROM
 
 ### Arguments
 
-`  AI.FORECAST  ` takes the following arguments:
+`AI.FORECAST` takes the following arguments:
 
-  - `  TABLE  ` : the name of the table that contains the data that you want to forecast. For example, ``  `mydataset.mytable`  `` .
+  - `  TABLE  ` : the name of the table that contains the data that you want to forecast. For example, `` `mydataset.mytable` `` .
     
     If the table is in a different project, then you must prepend the project ID to the table name in the following format, including backticks:
     
-    ``  `[PROJECT_ID].[DATASET].[TABLE]`  ``
+    `` `[PROJECT_ID].[DATASET].[TABLE]` ``
     
-    For example, ``  `myproject.mydataset.mytable`  `` .
+    For example, `` `myproject.mydataset.mytable` `` .
     
     To prevent query errors, we recommend providing the fully qualified table name, including backticks. This is especially important if the project name contains characters other than letters, numbers, and underscores.
 
-  - `  QUERY_STATEMENT  ` : the GoogleSQL query that generates the data that you want to forecast. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  QUERY_STATEMENT  ` clause.
+  - `  QUERY_STATEMENT  ` : the GoogleSQL query that generates the data that you want to forecast. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `QUERY_STATEMENT` clause.
 
-  - `  DATA_COL  ` : a `  STRING  ` value that specifies the name of the data column. The data column contains the data to forecast. The data column must use one of the following data types:
+  - `  DATA_COL  ` : a `STRING` value that specifies the name of the data column. The data column contains the data to forecast. The data column must use one of the following data types:
     
-      - `  INT64  `
-      - `  NUMERIC  `
-      - `  BIGNUMERIC  `
-      - `  FLOAT64  `
+      - `INT64`
+      - `NUMERIC`
+      - `BIGNUMERIC`
+      - `FLOAT64`
 
-  - `  TIMESTAMP_COL  ` : a `  STRING  ` value that specified the name of the timestamp column. The timestamp column must use one of the following data types:
+  - `  TIMESTAMP_COL  ` : a `STRING` value that specified the name of the timestamp column. The timestamp column must use one of the following data types:
     
-      - `  TIMESTAMP  `
-      - `  DATE  `
-      - `  DATETIME  `
+      - `TIMESTAMP`
+      - `DATE`
+      - `DATETIME`
 
-  - `  MODEL  ` : a `  STRING  ` value that specifies the name of the model to use. Supported models include `  TimesFM 2.0  ` and `  TimesFM 2.5  ` . The default value is `  TimesFM 2.0  ` .
+  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.0` .
 
-  - `  ID_COLS  ` : an `  ARRAY<STRING>  ` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to forecast. Specify one or more values for this argument in order to forecast multiple time series using a single query. The columns that you specify must use one of the following data types:
+  - `  ID_COLS  ` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to forecast. Specify one or more values for this argument in order to forecast multiple time series using a single query. The columns that you specify must use one of the following data types:
     
-      - `  STRING  `
-      - `  INT64  `
-      - `  ARRAY<STRING>  `
-      - `  ARRAY<INT64>  `
+      - `STRING`
+      - `INT64`
+      - `ARRAY<STRING>`
+      - `ARRAY<INT64>`
 
-  - `  HORIZON  ` : an `  INT64  ` value that specifies the number of time series data points to forecast. The default value is `  10  ` . The valid input range is `  [1, 10,000]  ` . This argument can't be used with the `  forecast_end_timestamp  ` argument.
+  - `  HORIZON  ` : an `INT64` value that specifies the number of time series data points to forecast. The default value is `10` . The valid input range is `[1, 10,000]` . This argument can't be used with the `forecast_end_timestamp` argument.
 
-  - `  FORECAST_END_TIMESTAMP  ` : a timestamp literal value that specifies the end timestamp for the forecasted values. The horizon is calculated based on the end timestamp and the frequency provided from the input table for each time series. If the calculated horizon is out of the valid range `  [1, 10,000]  ` , the query returns an error. You can then adjust the `  forecast_end_timestamp  ` value so that the calculated horizon is within the valid range. This argument can't be used with the `  horizon  ` argument.
+  - `  FORECAST_END_TIMESTAMP  ` : a timestamp literal value that specifies the end timestamp for the forecasted values. The horizon is calculated based on the end timestamp and the frequency provided from the input table for each time series. If the calculated horizon is out of the valid range `[1, 10,000]` , the query returns an error. You can then adjust the `forecast_end_timestamp` value so that the calculated horizon is within the valid range. This argument can't be used with the `horizon` argument.
 
-  - `  CONFIDENCE_LEVEL  ` : a `  FLOAT64  ` value that specifies the percentage of the future values that fall in the prediction interval. The default value is `  0.95  ` . The valid input range is `  [0, 1)  ` .
+  - `  CONFIDENCE_LEVEL  ` : a `FLOAT64` value that specifies the percentage of the future values that fall in the prediction interval. The default value is `0.95` . The valid input range is `[0, 1)` .
 
-  - `  OUTPUT_HISTORICAL_TIME_SERIES  ` : a `  BOOL  ` value that determines whether the input data is returned along with the forecasted data. Set this argument to `  TRUE  ` to return input data. The default value is `  FALSE  ` .
+  - `  OUTPUT_HISTORICAL_TIME_SERIES  ` : a `BOOL` value that determines whether the input data is returned along with the forecasted data. Set this argument to `TRUE` to return input data. The default value is `FALSE` .
     
     Returning the input data along with the forecasted data lets you compare the historical value of the data column with the forecasted value of the data column, or chart the change in the data column values over time.
 
-  - `  CONTEXT_WINDOW  ` : an `  INT64  ` value that specifies the context window length used by BigQuery ML's built-in TimesFM model. The context window length determines how many of the most recent data points from the input time series are used by the model. For example, if your time series date range is March 1 to April 15, data points are selected starting at April 15 and working backwards. Valid values for models are as follows:
+  - `  CONTEXT_WINDOW  ` : an `INT64` value that specifies the context window length used by BigQuery ML's built-in TimesFM model. The context window length determines how many of the most recent data points from the input time series are used by the model. For example, if your time series date range is March 1 to April 15, data points are selected starting at April 15 and working backwards. Valid values for models are as follows:
     
     | **Model Name** | **Supported Context Window Length**              |
     | -------------- | ------------------------------------------------ |
@@ -80,7 +80,7 @@ FROM
     | TimesFM 2.5    | 64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360 |
     
 
-    If you don't specify a `  CONTEXT_WINDOW  ` value, the `  AI.FORECAST  ` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. The following table shows the relationships between the number of time series data points in the input data, the selected context window length and the corresponding supported TimesFM model name:
+    If you don't specify a `CONTEXT_WINDOW` value, the `AI.FORECAST` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. The following table shows the relationships between the number of time series data points in the input data, the selected context window length and the corresponding supported TimesFM model name:
     
     | **Number of time series data points** | **Context window length** | **Supported Model Names** |
     | ------------------------------------- | ------------------------- | ------------------------- |
@@ -96,28 +96,28 @@ FROM
     | \>15360                               | 15,360                    | TimesFM 2.5               |
     
 
-    For the `  TimesFM 2.0  ` model, 2,048 is the maximum number of time series data points that are passed to the model. For the `  TimesFM 2.5  ` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
+    For the `TimesFM 2.0` model, 2,048 is the maximum number of time series data points that are passed to the model. For the `TimesFM 2.5` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
 
 ## Output
 
-The output schema of `  AI.FORECAST  ` depends on the value of the `  output_historical_time_series  ` argument. The following columns are always part of the output:
+The output schema of `AI.FORECAST` depends on the value of the `output_historical_time_series` argument. The following columns are always part of the output:
 
-  - `  id_cols  ` : one or more values that contain the identifiers of a time series. `  id_cols  ` can be an `  INT64  ` , `  STRING  ` , `  ARRAY<INT64>  ` or `  ARRAY<STRING>  ` value. The column names and types are inherited from the `  ID_COLS  ` argument value specified in the function input.
-  - `  confidence_level  ` : a `  FLOAT64  ` value that contains the `  confidence_level  ` value that you specified in the function input, or `  0.95  ` if you didn't specify a `  confidence_level  ` value. This value is the same across all rows.
-  - `  prediction_interval_lower_bound  ` : a `  FLOAT64  ` value that contains the lower bound of the prediction interval for each forecasted point. For historical points, the value is `  NULL  ` .
-  - `  prediction_interval_upper_bound  ` : a `  FLOAT64  ` value that contains the upper bound of the prediction interval for each forecasted point. For historical points, the value is `  NULL  ` .
-  - `  ai_forecast_status  ` : a `  STRING  ` value that contains the forecast status. This value is empty if the operation was successful. If the operation wasn't successful, the value is the error string. A common error is `  The time series data is too short.  ` This error indicates that there wasn't enough historical data in the time series to generate a forecast. A minimum of 3 data points is required.
+  - `id_cols` : one or more values that contain the identifiers of a time series. `id_cols` can be an `INT64` , `STRING` , `ARRAY<INT64>` or `ARRAY<STRING>` value. The column names and types are inherited from the `ID_COLS` argument value specified in the function input.
+  - `confidence_level` : a `FLOAT64` value that contains the `confidence_level` value that you specified in the function input, or `0.95` if you didn't specify a `confidence_level` value. This value is the same across all rows.
+  - `prediction_interval_lower_bound` : a `FLOAT64` value that contains the lower bound of the prediction interval for each forecasted point. For historical points, the value is `NULL` .
+  - `prediction_interval_upper_bound` : a `FLOAT64` value that contains the upper bound of the prediction interval for each forecasted point. For historical points, the value is `NULL` .
+  - `ai_forecast_status` : a `STRING` value that contains the forecast status. This value is empty if the operation was successful. If the operation wasn't successful, the value is the error string. A common error is `The time series data is too short.` This error indicates that there wasn't enough historical data in the time series to generate a forecast. A minimum of 3 data points is required.
 
-If you set `  output_historical_time_series  ` to `  FALSE  ` , then the output rows only include forecasted data and the output columns are the following:
+If you set `output_historical_time_series` to `FALSE` , then the output rows only include forecasted data and the output columns are the following:
 
-  - `  forecast_timestamp  ` : a `  TIMESTAMP  ` value that contains the timestamps of the time series.
-  - `  forecast_value  ` : a `  FLOAT64  ` value that contains the 50% quantile value for the forecasting output from the model. The 50% quantile value represents the median value of the forecasted data.
+  - `forecast_timestamp` : a `TIMESTAMP` value that contains the timestamps of the time series.
+  - `forecast_value` : a `FLOAT64` value that contains the 50% quantile value for the forecasting output from the model. The 50% quantile value represents the median value of the forecasted data.
 
-If you set `  output_historical_time_series  ` to `  TRUE  ` , then the output rows include all data, and the output columns are the following:
+If you set `output_historical_time_series` to `TRUE` , then the output rows include all data, and the output columns are the following:
 
-  - `  time_series_type  ` : a `  STRING  ` value that contains a value of either `  history  ` or `  forecast  ` . Rows that have a value of `  history  ` contain data from the input table or query. Rows that have a value of `  forecast  ` contain forecasted data.
-  - `  time_series_timestamp  ` : a `  TIMESTAMP  ` value that contains the timestamps of the time series.
-  - `  time_series_data  ` : a `  FLOAT64  ` value that represents the historical input if the `  time_series_type  ` is `  history  ` . Otherwise, if the `  time_series_type  ` is `  forecast  ` this number represents the 50% quantile of the forecast.
+  - `time_series_type` : a `STRING` value that contains a value of either `history` or `forecast` . Rows that have a value of `history` contain data from the input table or query. Rows that have a value of `forecast` contain forecasted data.
+  - `time_series_timestamp` : a `TIMESTAMP` value that contains the timestamps of the time series.
+  - `time_series_data` : a `FLOAT64` value that represents the historical input if the `time_series_type` is `history` . Otherwise, if the `time_series_type` is `forecast` this number represents the 50% quantile of the forecast.
 
 ## Examples
 
@@ -148,7 +148,7 @@ The result is similar to the following:
     | ...        | ...                     | ...            | ...              | ...                             | ...                             | ...                |
     +------------+-------------------------+----------------+------------------+---------------------------------+---------------------------------+--------------------+
 
-The following example forecasts the daily number of bike trips for each different user type, the `  output_historical_time_series  ` argument is set to `  TRUE  ` , so the output includes historical and forecasted data.
+The following example forecasts the daily number of bike trips for each different user type, the `output_historical_time_series` argument is set to `TRUE` , so the output includes historical and forecasted data.
 
     WITH
       citibike_trips AS (
@@ -182,15 +182,15 @@ The result is similar to the following:
 
 ## Locations
 
-`  AI.FORECAST  ` and the TimesFM model are available in all [supported BigQuery ML locations](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
+`AI.FORECAST` and the TimesFM model are available in all [supported BigQuery ML locations](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Pricing
 
-`  AI.FORECAST  ` usage is billed at the evaluation, inspection, and prediction rate documented in the **BigQuery ML on-demand pricing** section of the [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) page.
+`AI.FORECAST` usage is billed at the evaluation, inspection, and prediction rate documented in the **BigQuery ML on-demand pricing** section of the [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) page.
 
 ## What's next
 
-  - Try [using a TimesFM model with the `  AI.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tutorial) .
-  - Evaluate forecasting results from the TimesFM model using the [`  AI.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) .
+  - Try [using a TimesFM model with the `AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tutorial) .
+  - Evaluate forecasting results from the TimesFM model using the [`AI.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) .
   - For information about forecasting in BigQuery ML, see [Forecasting overview](https://docs.cloud.google.com/bigquery/docs/forecasting-overview) .
   - For more information about supported SQL statements and functions for time series forecasting models, see [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast) .

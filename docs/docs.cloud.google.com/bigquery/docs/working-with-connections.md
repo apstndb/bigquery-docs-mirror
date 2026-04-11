@@ -30,11 +30,11 @@ To create a default connection for a project, see the [Default connection overvi
 
 To get the permissions that you need to manage connections, ask your administrator to grant you the following IAM roles:
 
-  - [View connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) : [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on your dataset
-  - [List all connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections#list-connections) : [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on your dataset
-  - [Share a connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#share-connections) : [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) on your connection
-  - [Edit a connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#edit-connections) : [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) on your connection
-  - [Delete a connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#delete-connections) : [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) on your connection
+  - [View connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) : [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) on your dataset
+  - [List all connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections#list-connections) : [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) on your dataset
+  - [Share a connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#share-connections) : [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) on your connection
+  - [Edit a connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#edit-connections) : [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) on your connection
+  - [Delete a connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#delete-connections) : [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) on your connection
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -46,10 +46,10 @@ These predefined roles contain the permissions required to perform the tasks in 
 
 #### Required permissions
 
-  - View connection details: `  bigquery.connections.get  `
-  - List all connections: `  bigquery.connections.list  `
-  - Edit and delete a connection: `  bigquery.connections.update  `
-  - Share a connection: `  bigquery.connections.setIamPolicy  `
+  - View connection details: `bigquery.connections.get`
+  - List all connections: `bigquery.connections.list`
+  - Edit and delete a connection: `bigquery.connections.update`
+  - Share a connection: `bigquery.connections.setIamPolicy`
 
 ## List all connections
 
@@ -73,7 +73,7 @@ Select one of the following options:
 
 ### bq
 
-Enter the `  bq ls  ` command and specify the `  --connection  ` flag. Optionally, specify the `  --project_id  ` and `  --location  ` flags to identify the project and location of the connections to be listed.
+Enter the `bq ls` command and specify the `--connection` flag. Optionally, specify the `--project_id` and `--location` flags to identify the project and location of the connections to be listed.
 
     bq ls --connection --project_id=PROJECT_ID --location=REGION
 
@@ -84,7 +84,7 @@ Replace the following:
 
 ### API
 
-[Use the `  projects.locations.connections.list  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section.
+[Use the `projects.locations.connections.list` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section.
 
 ### Python
 
@@ -244,7 +244,7 @@ Select one of the following options:
 
 ### bq
 
-Enter the `  bq show  ` command and specify the `  --connection  ` flag. Optionally, qualify the connection ID with the project ID and region of the connection.
+Enter the `bq show` command and specify the `--connection` flag. Optionally, qualify the connection ID with the project ID and region of the connection.
 
     bq show --connection PROJECT_ID.REGION.CONNECTION_ID
 
@@ -256,7 +256,7 @@ Replace the following:
 
 ### API
 
-Use the [`  projects.locations.connections.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section.
+Use the [`projects.locations.connections.get` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section.
 
 ### Python
 
@@ -488,9 +488,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 You can grant the following roles to let users query data and manage connections:
 
-  - `  roles/bigquery.connectionUser  ` : enables users to use connections to connect with external data sources and run queries on them.
+  - `roles/bigquery.connectionUser` : enables users to use connections to connect with external data sources and run queries on them.
 
-  - `  roles/bigquery.connectionAdmin  ` : enables users to manage connections.
+  - `roles/bigquery.connectionAdmin` : enables users to manage connections.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -524,7 +524,7 @@ You cannot share a connection with the bq command-line tool. To share a connecti
 
 ### API
 
-Use the [`  projects.locations.connections.setIAM  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `  policy  ` resource.
+Use the [`projects.locations.connections.setIAM` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `policy` resource.
 
 ### Java
 
@@ -608,7 +608,7 @@ Select one of the following options:
 
 ### bq
 
-Enter the `  bq update  ` command and supply the connection flag: `  --connection  ` . The fully qualified `  connection_id  ` is required.
+Enter the `bq update` command and supply the connection flag: `--connection` . The fully qualified `connection_id` is required.
 
 ``` 
   bq update --connection --connection_type='CLOUD_SQL'
@@ -629,7 +629,7 @@ Replace the following:
   - `  REGION  ` : the [connection region](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations)
   - `  CONNECTION_ID  ` : the connection ID
 
-For example, the following command updates the connection in a project with the ID `  federation-test  ` and connection ID `  test-mysql  ` .
+For example, the following command updates the connection in a project with the ID `federation-test` and connection ID `test-mysql` .
 
     bq update --connection --connection_type='CLOUD_SQL'
         --properties='{"instanceId" : "federation-test:us-central1:new-mysql",
@@ -639,7 +639,7 @@ For example, the following command updates the connection in a project with the 
 
 ### API
 
-See the [`  projects.locations.connections.patch  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section, and supply an instance of the `  connection  ` .
+See the [`projects.locations.connections.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section, and supply an instance of the `connection` .
 
 ### Python
 
@@ -814,13 +814,13 @@ Select one of the following options:
 
 5.  In the details pane, click delete **Delete** to delete the connection.
 
-6.  In the **Delete connection?** dialog, enter `  delete  ` to confirm deletion.
+6.  In the **Delete connection?** dialog, enter `delete` to confirm deletion.
 
 7.  Click **Delete** .
 
 ### bq
 
-Enter the `  bq rm  ` command and supply the connection flag: `  --connection  ` . The fully qualified `  connection_id  ` is required.
+Enter the `bq rm` command and supply the connection flag: `--connection` . The fully qualified `connection_id` is required.
 
     bq rm --connection PROJECT_ID.REGION.CONNECTION_ID
 
@@ -832,7 +832,7 @@ Replace the following:
 
 ### API
 
-See the [`  projects.locations.connections.delete  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section.
+See the [`projects.locations.connections.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the REST API reference section.
 
 ### Python
 

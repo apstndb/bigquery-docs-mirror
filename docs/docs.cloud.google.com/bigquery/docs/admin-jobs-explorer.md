@@ -1,20 +1,20 @@
 # Use administrative jobs explorer
 
-As a BigQuery administrator, you can use the administrative jobs explorer to help you monitor jobs activity across your organization. Jobs explorer also provides an array of filters and sorting options to troubleshoot and identify problematic jobs. Jobs explorer removes the need for you to have a deep understanding of `  INFORMATION_SCHEMA  ` , and lets you quickly view job information such as owner, project, slot usage, duration, and more, without the need to write `  INFORMATION_SCHEMA  ` queries.
+As a BigQuery administrator, you can use the administrative jobs explorer to help you monitor jobs activity across your organization. Jobs explorer also provides an array of filters and sorting options to troubleshoot and identify problematic jobs. Jobs explorer removes the need for you to have a deep understanding of `INFORMATION_SCHEMA` , and lets you quickly view job information such as owner, project, slot usage, duration, and more, without the need to write `INFORMATION_SCHEMA` queries.
 
 You can also select individual jobs to open the [job details page](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#get-job-details) , which provides query details such as execution graphs, SQL text, and execution history to help you diagnose and troubleshoot queries. From this page, you can [compare two jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) to highlight significant differences between them and address potential performance issues.
 
-BigQuery provides job details and insights through the following `  INFORMATION_SCHEMA  ` views:
+BigQuery provides job details and insights through the following `INFORMATION_SCHEMA` views:
 
-  - [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
-  - [`  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)
-  - [`  INFORMATION_SCHEMA.JOBS_BY_USER  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user)
+  - [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
+  - [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)
+  - [`INFORMATION_SCHEMA.JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user)
 
 **Note:** If you use organization restrictions, see [Enable access to Google-owned resources](https://docs.cloud.google.com/resource-manager/docs/organization-restrictions/additional-considerations#google-owned-resources) .
 
 ## Required roles
 
-To get the permissions that you need to use administrative jobs explorer, ask your administrator to grant you the [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `  roles/bigquery.resourceViewer  ` ) IAM role on your organization or project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to use administrative jobs explorer, ask your administrator to grant you the [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) IAM role on your organization or project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to use administrative jobs explorer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -22,9 +22,9 @@ This predefined role contains the permissions required to use administrative job
 
 The following permissions are required to use administrative jobs explorer:
 
-  - To see data at project level: `  bigquery.jobs.listAll  ` on the project
-  - To see data at organization level: `  bigquery.jobs.listAll  ` on the organization
-  - To filter by reservations in your organization: `  bigquery.reservations.list  ` on the organization
+  - To see data at project level: `bigquery.jobs.listAll` on the project
+  - To see data at organization level: `bigquery.jobs.listAll` on the organization
+  - To filter by reservations in your organization: `bigquery.reservations.list` on the organization
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -32,7 +32,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ## Filter jobs
 
-To filter jobs for queries that are contained in the `  INFORMATION_SCHEMA.JOBS*  ` views, do the following:
+To filter jobs for queries that are contained in the `INFORMATION_SCHEMA.JOBS*` views, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -56,7 +56,7 @@ To filter jobs for queries that are contained in the `  INFORMATION_SCHEMA.JOBS*
       - **Bytes processed more than** . Jobs that processed more bytes than the specified processed bytes.
       - **Query Insights** . Types of query insights, such as slot contention, memory shuffle capacity exceeded, and data input scale change.
       - **Query Hash** . Query hash contains the hashes of the query. It is a hexadecimal STRING hash that ignores comments, parameter values, UDFs, and literals. This field appears for successful [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) queries that are not cache hits.
-      - **Labels** . `  key:value  ` pairs that can be assigned to a job. You can filter using a key, value, or `  key:value  ` combination.
+      - **Labels** . `key:value` pairs that can be assigned to a job. You can filter using a key, value, or `key:value` combination.
       - **Job category** . The type of query, such as **Standard** or **Continuous query** .
 
 ## View query execution details
@@ -95,8 +95,8 @@ The **Performance** tab also supports query comparison, enabling you to compare 
 
 To get the permissions that you need to work with BigQuery job details and system-level details, ask your administrator to grant you the following IAM roles on your organization or project:
 
-  - View job details: BigQuery Resource Viewer ( `  roles/bigquery.resourceViewer  ` ) - the project where the queries were run
-  - View system-level details: BigQuery Resource Viewer ( `  roles/bigquery.resourceViewer  ` ) - the administration project
+  - View job details: BigQuery Resource Viewer ( `roles/bigquery.resourceViewer` ) - the project where the queries were run
+  - View system-level details: BigQuery Resource Viewer ( `roles/bigquery.resourceViewer` ) - the administration project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -106,9 +106,9 @@ These predefined roles contain the permissions required to work with BigQuery jo
 
 The following permissions are required to work with BigQuery job details and system-level details:
 
-  - To see data at project level: `  bigquery.jobs.listAll  ` on the project
-  - To see data at organization level: `  bigquery.jobs.listAll  ` on the organization
-  - To filter by reservations in your organization: `  bigquery.reservations.list  ` on the organization
+  - To see data at project level: `bigquery.jobs.listAll` on the project
+  - To see data at organization level: `bigquery.jobs.listAll` on the organization
+  - To filter by reservations in your organization: `bigquery.reservations.list` on the organization
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -158,8 +158,8 @@ Important details to consider for optimizing your queries when comparing two que
 
 To get the permissions that you need to work with BigQuery job details and system-level details, ask your administrator to grant you the following IAM roles on your organization or project:
 
-  - View job details: BigQuery Resource Viewer ( `  roles/bigquery.resourceViewer  ` ) - the project where the queries were run
-  - View system-level details: BigQuery Resource Viewer ( `  roles/bigquery.resourceViewer  ` ) - the administration project
+  - View job details: BigQuery Resource Viewer ( `roles/bigquery.resourceViewer` ) - the project where the queries were run
+  - View system-level details: BigQuery Resource Viewer ( `roles/bigquery.resourceViewer` ) - the administration project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -169,9 +169,9 @@ These predefined roles contain the permissions required to work with BigQuery jo
 
 The following permissions are required to work with BigQuery job details and system-level details:
 
-  - To see data at project level: `  bigquery.jobs.listAll  ` on the project
-  - To see data at organization level: `  bigquery.jobs.listAll  ` on the organization
-  - To filter by reservations in your organization: `  bigquery.reservations.list  ` on the organization
+  - To see data at project level: `bigquery.jobs.listAll` on the project
+  - To see data at organization level: `bigquery.jobs.listAll` on the organization
+  - To filter by reservations in your organization: `bigquery.reservations.list` on the organization
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 

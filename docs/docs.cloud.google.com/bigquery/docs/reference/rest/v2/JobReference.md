@@ -24,21 +24,21 @@ A job reference is a fully qualified identifier for referring to a job.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. The ID of the project containing this job.
 
-`  jobId  `
+`jobId`
 
-`  string  `
+`string`
 
 Required. The ID of the job. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (\_), or dashes (-). The maximum length is 1,024 characters.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 Optional. The geographic location of the job. The default value is US.
 

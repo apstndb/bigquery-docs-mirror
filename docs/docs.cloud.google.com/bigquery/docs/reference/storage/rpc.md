@@ -1,8 +1,8 @@
 ## Service: bigquerystorage.googleapis.com
 
-The Service name `  bigquerystorage.googleapis.com  ` is needed to create RPC client stubs.
+The Service name `bigquerystorage.googleapis.com` is needed to create RPC client stubs.
 
-## `         google.cloud.bigquery.storage.v1.BigQueryRead       `
+## `        google.cloud.bigquery.storage.v1.BigQueryRead       `
 
 Methods
 
@@ -16,9 +16,9 @@ Reads rows from the stream in the format prescribed by the ReadSession.
 
 `  SplitReadStream  `
 
-Splits a given `  ReadStream  ` into two `  ReadStream  ` objects.
+Splits a given `ReadStream` into two `ReadStream` objects.
 
-## `         google.cloud.bigquery.storage.v1.BigQueryWrite       `
+## `        google.cloud.bigquery.storage.v1.BigQueryWrite       `
 
 Methods
 
@@ -28,7 +28,7 @@ Appends data to the given stream.
 
 `  BatchCommitWriteStreams  `
 
-Atomically commits a group of `  PENDING  ` streams that belong to the same `  parent  ` table.
+Atomically commits a group of `PENDING` streams that belong to the same `parent` table.
 
 `  CreateWriteStream  `
 
@@ -46,7 +46,7 @@ Flushes rows to a BUFFERED stream.
 
 Gets information about a write stream.
 
-## `         google.cloud.bigquery.storage.v1beta1.BigQueryStorage       `
+## `        google.cloud.bigquery.storage.v1beta1.BigQueryStorage       `
 
 Methods
 
@@ -70,7 +70,7 @@ Reads rows from the table in the format prescribed by the read session.
 
 Splits a given read stream into two Streams.
 
-## `         google.cloud.bigquery.storage.v1beta2.BigQueryRead       `
+## `        google.cloud.bigquery.storage.v1beta2.BigQueryRead       `
 
 Methods
 
@@ -84,9 +84,9 @@ Reads rows from the stream in the format prescribed by the ReadSession.
 
 `  SplitReadStream  `
 
-Splits a given `  ReadStream  ` into two `  ReadStream  ` objects.
+Splits a given `ReadStream` into two `ReadStream` objects.
 
-## `         google.cloud.bigquery.storage.v1beta2.BigQueryWrite       `
+## `        google.cloud.bigquery.storage.v1beta2.BigQueryWrite       `
 
 This item is deprecated\!
 
@@ -100,7 +100,7 @@ Appends data to the given stream.
 `  BatchCommitWriteStreams  `  
 **(deprecated)**
 
-Atomically commits a group of `  PENDING  ` streams that belong to the same `  parent  ` table.
+Atomically commits a group of `PENDING` streams that belong to the same `parent` table.
 
 `  CreateWriteStream  `  
 **(deprecated)**

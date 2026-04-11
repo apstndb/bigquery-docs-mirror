@@ -11,7 +11,7 @@ RPC to get the results of a query job.
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/queries/{jobId}  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/queries/{jobId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,15 +19,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the query job.
 
-`  jobId  `
+`jobId`
 
-`  string  `
+`string`
 
 Required. Job ID of the query job.
 
@@ -35,27 +35,27 @@ Required. Job ID of the query job.
 
 Parameters
 
-`  startIndex  `
+`startIndex`
 
-`  string ( UInt64Value format)  `
+`string ( UInt64Value format)`
 
 Zero-based index of the starting row.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token, returned by a previous call, to request the next page of results.
 
-`  maxResults  `
+`maxResults`
 
-`  integer  `
+`integer`
 
 Maximum number of results to read.
 
-`  timeoutMs  `
+`timeoutMs`
 
-`  integer  `
+`integer`
 
 Optional: Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete. By default, this limit is 10 seconds (10,000 milliseconds). If the query is complete, the jobComplete field in the response is true. If the query has not yet completed, jobComplete is false.
 
@@ -63,20 +63,20 @@ You can request a longer timeout period in the timeoutMs field. However, the cal
 
 If jobComplete is false, you can continue to wait for the query to complete by calling the getQueryResults method until the jobComplete field in the getQueryResults response is true.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 The geographic location of the job. You must specify the location to run the job for the following scenarios:
 
-  - If the location to run a job is not in the `  us  ` or the `  eu  ` multi-regional location
-  - If the job's location is in a single region (for example, `  us-central1  ` )
+  - If the location to run a job is not in the `us` or the `eu` multi-regional location
+  - If the job's location is in a single region (for example, `us-central1` )
 
 For more information, see how to [specify locations](https://cloud.google.com/bigquery/docs/locations#specify_locations) .
 
-`  formatOptions  `
+`formatOptions`
 
-`  object ( DataFormatOptions  ` )
+` object ( DataFormatOptions  ` )
 
 Optional. Output format adjustments.
 
@@ -101,109 +101,84 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;kind&quot;: string,
-  &quot;etag&quot;: string,
-  &quot;schema&quot;: {
-    object (TableSchema)
-  },
-  &quot;jobReference&quot;: {
-    object (JobReference)
-  },
-  &quot;totalRows&quot;: string,
-  &quot;pageToken&quot;: string,
-  &quot;rows&quot;: [
-    {
-      object
-    }
-  ],
-  &quot;totalBytesProcessed&quot;: string,
-  &quot;jobComplete&quot;: boolean,
-  &quot;errors&quot;: [
-    {
-      object (ErrorProto)
-    }
-  ],
-  &quot;cacheHit&quot;: boolean,
-  &quot;numDmlAffectedRows&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;etag&quot;: string,&quot;schema&quot;: {object (TableSchema)},&quot;jobReference&quot;: {object (JobReference)},&quot;totalRows&quot;: string,&quot;pageToken&quot;: string,&quot;rows&quot;: [{object}],&quot;totalBytesProcessed&quot;: string,&quot;jobComplete&quot;: boolean,&quot;errors&quot;: [{object (ErrorProto)}],&quot;cacheHit&quot;: boolean,&quot;numDmlAffectedRows&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 The resource type of the response.
 
-`  etag  `
+`etag`
 
-`  string  `
+`string`
 
 A hash of this response.
 
-`  schema  `
+`schema`
 
-`  object ( TableSchema  ` )
+` object ( TableSchema  ` )
 
 The schema of the results. Present only when the query completes successfully.
 
-`  jobReference  `
+`jobReference`
 
-`  object ( JobReference  ` )
+` object ( JobReference  ` )
 
 Reference to the BigQuery Job that was created to run the query. This field will be present even if the original request timed out, in which case jobs.getQueryResults can be used to read the results once the query has completed. Since this API only returns the first page of results, subsequent pages can be fetched via the same mechanism (jobs.getQueryResults).
 
-`  totalRows  `
+`totalRows`
 
-`  string ( UInt64Value format)  `
+`string ( UInt64Value format)`
 
 The total number of rows in the complete query result set, which can be more than the number of rows in this single page of results. Present only when the query completes successfully.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 A token used for paging results. When this token is non-empty, it indicates additional results are available.
 
-`  rows[]  `
+`rows[]`
 
-`  object ( Struct  ` format)
+` object ( Struct  ` format)
 
 An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call jobs.getQueryResults and specify the jobReference returned above. Present only when the query completes successfully.
 
 The REST-based representation of this data leverages a series of JSON f,v objects for indicating fields and values.
 
-`  totalBytesProcessed  `
+`totalBytesProcessed`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 The total number of bytes processed for this query.
 
-`  jobComplete  `
+`jobComplete`
 
-`  boolean  `
+`boolean`
 
 Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.
 
-`  errors[]  `
+`errors[]`
 
-`  object ( ErrorProto  ` )
+` object ( ErrorProto  ` )
 
 Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see [Error messages](https://cloud.google.com/bigquery/docs/error-messages) .
 
-`  cacheHit  `
+`cacheHit`
 
-`  boolean  `
+`boolean`
 
 Whether the query result was fetched from the query cache.
 
-`  numDmlAffectedRows  `
+`numDmlAffectedRows`
 
-`  string ( Int64Value format)  `
+`string ( Int64Value format)`
 
 Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
 
@@ -211,9 +186,9 @@ Output only. The number of rows affected by a DML statement. Present only for DM
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

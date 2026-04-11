@@ -67,11 +67,11 @@ Review the following prerequisites and information before you create a Google An
   - In Google Analytics 4, the user account or the service account must have viewer access to the [property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id) that is used in the transfer configuration.
   - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your Google Analytics 4 data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -80,18 +80,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ## Custom reports
 
@@ -124,7 +124,7 @@ Select one of the following options:
 4.  In the **Data source details** section:
     
       - In the **Property ID** field, enter a [property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id) .
-      - Optional: In the **Table Filter** field, enter a comma-separated list of tables to include, for example, `  Audiences, Events  ` . Prefix this list with the `  -  ` character to exclude certain tables, for example `  -Audiences, Events  ` . All tables are included by default.
+      - Optional: In the **Table Filter** field, enter a comma-separated list of tables to include, for example, `Audiences, Events` . Prefix this list with the `-` character to exclude certain tables, for example `-Audiences, Events` . All tables are included by default.
       - Optional: To ingest custom reports instead of the standard reports, do the following:
           - In the **Custom Report Table Name** field, enter the output table name for the custom report. For more information about valid table names, see [Table naming](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) .
           - In the **Custom Report Dimensions** field, enter the dimensions for the custom report. For more information, see [Custom reports](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#custom_reports) .
@@ -155,12 +155,12 @@ Select one of the following options:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` . The following flags are required:
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are required:
 
-  - `  --data_source  `
-  - `  --target_dataset  `
-  - `  --display_name  `
-  - `  --params  `
+  - `--data_source`
+  - `--target_dataset`
+  - `--display_name`
+  - `--params`
 
 <!-- end list -->
 
@@ -175,13 +175,13 @@ Enter the `  bq mk  ` command and supply the transfer creation flag — `  --tra
 
 Where:
 
-  - PROJECT\_ID : your project ID. If `  --project_id  ` isn't specified, the default project is used.
+  - PROJECT\_ID : your project ID. If `--project_id` isn't specified, the default project is used.
   - DATASET : the target dataset for the data transfer configuration.
   - NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - PARAMETERS : the parameters for the created data transfer configuration in JSON format, for example, `  --params='{"param":"param_value"}'  ` . For Google Analytics 4 transfers, the `  property_id  ` parameter is required.
-  - DATA\_SOURCE : the data source — `  ga4  ` .
+  - PARAMETERS : the parameters for the created data transfer configuration in JSON format, for example, `--params='{"param":"param_value"}'` . For Google Analytics 4 transfers, the `property_id` parameter is required.
+  - DATA\_SOURCE : the data source — `ga4` .
 
-For example, the following command creates a Google Analytics 4 data transfer named `  My Transfer  ` using property ID `  468039345  ` , with the target dataset `  mydataset  ` .
+For example, the following command creates a Google Analytics 4 data transfer named `My Transfer` using property ID `468039345` , with the target dataset `mydataset` .
 
 The data transfer is created in the default project:
 
@@ -196,7 +196,7 @@ The data transfer is created in the default project:
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ## Limitations
 

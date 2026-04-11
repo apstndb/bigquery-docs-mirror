@@ -1,8 +1,8 @@
 # The ML.FEATURES\_AT\_TIME function
 
-This document describes the `  ML.FEATURES_AT_TIME  ` function, which lets you use a point-in-time cutoff for all entities when retrieving features, because features can have time dependencies if they include time-sensitive data. To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) , use point-in-time features when training models and running inference.
+This document describes the `ML.FEATURES_AT_TIME` function, which lets you use a point-in-time cutoff for all entities when retrieving features, because features can have time dependencies if they include time-sensitive data. To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) , use point-in-time features when training models and running inference.
 
-Use this function to use the same point-in-time cutoff for all entities when retrieving features. Use the [`  ML.ENTITY_FEATURES_AT_TIME  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time) to retrieve features from multiple points in time for multiple entities.
+Use this function to use the same point-in-time cutoff for all entities when retrieving features. Use the [`ML.ENTITY_FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time) to retrieve features from multiple points in time for multiple entities.
 
 ## Syntax
 
@@ -14,7 +14,7 @@ ML.FEATURES_AT_TIME(
 
 ### Arguments
 
-`  ML.FEATURES_AT_TIME  ` takes the following arguments:
+`ML.FEATURES_AT_TIME` takes the following arguments:
 
   - `  PROJECT_ID  ` : the project that contains the table.
 
@@ -22,21 +22,21 @@ ML.FEATURES_AT_TIME(
 
   - `  TABLE_NAME  ` : is the name of the BigQuery table that contains the feature data. The feature table must contain the following columns:
     
-      - `  entity_id  ` : a `  STRING  ` column that contains the ID of the entity related to the features.
+      - `entity_id` : a `STRING` column that contains the ID of the entity related to the features.
       - One or more feature columns.
-      - `  feature_timestamp  ` : a `  TIMESTAMP  ` column that identifies when the feature data was last updated.
+      - `feature_timestamp` : a `TIMESTAMP` column that identifies when the feature data was last updated.
     
-    The column names are case-insensitive. For example, you can use a column named `  Entity_ID  ` instead of `  entity_id  ` .
+    The column names are case-insensitive. For example, you can use a column named `Entity_ID` instead of `entity_id` .
     
     The feature table must be in [wide](https://en.wikipedia.org/wiki/Wide_and_narrow_data#Wide) format, with one column for each feature.
 
-  - `  QUERY_STATEMENT  ` : a `  STRING  ` value that specifies a GoogleSQL query that returns the feature data. This query must return the same columns as the `  TABLE_NAME  ` argument. See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `  QUERY_STATEMENT  ` clause.
+  - `  QUERY_STATEMENT  ` : a `STRING` value that specifies a GoogleSQL query that returns the feature data. This query must return the same columns as the `TABLE_NAME` argument. See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `QUERY_STATEMENT` clause.
 
-  - `  TIME  ` : a `  TIMESTAMP  ` value that specifies the point in time to use as a cutoff for feature data. Only rows where the value in the `  feature_timestamp  ` column is equal to or earlier than the `  TIME  ` value are returned. Defaults to the value of the [`  CURRENT_TIMESTAMP  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp) .
+  - `  TIME  ` : a `TIMESTAMP` value that specifies the point in time to use as a cutoff for feature data. Only rows where the value in the `feature_timestamp` column is equal to or earlier than the `TIME` value are returned. Defaults to the value of the [`CURRENT_TIMESTAMP` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp) .
 
-  - `  NUM_ROWS  ` : an `  INT64  ` value that specifies the number of rows to return for each entity ID. Defaults to `  1  ` .
+  - `  NUM_ROWS  ` : an `INT64` value that specifies the number of rows to return for each entity ID. Defaults to `1` .
 
-  - `  IGNORE_FEATURE_NULLS  ` : a `  BOOL  ` value that indicates whether to replace a `  NULL  ` value in a feature column with the feature column value from the row for the same entity that immediately precedes it in time. For example, for the following feature table:
+  - `  IGNORE_FEATURE_NULLS  ` : a `BOOL` value that indicates whether to replace a `NULL` value in a feature column with the feature column value from the row for the same entity that immediately precedes it in time. For example, for the following feature table:
     
     ``` console
     +-----------+------+------+--------------------------+
@@ -60,7 +60,7 @@ ML.FEATURES_AT_TIME(
             num_rows => 1,
             ignore_feature_nulls => TRUE);
     
-    Results in the following output, where the `  f2  ` value from the row for entity ID 2 that is timestamped `  '2022-06-10 12:00:00+00'  ` is substituted for the `  NULL  ` value in the row timestamped `  '2022-06-11 10:00:00+00'  ` :
+    Results in the following output, where the `f2` value from the row for entity ID 2 that is timestamped `'2022-06-10 12:00:00+00'` is substituted for the `NULL` value in the row timestamped `'2022-06-11 10:00:00+00'` :
     
     ``` console
     +-----------+------+------+--------------------------+
@@ -70,19 +70,19 @@ ML.FEATURES_AT_TIME(
     +-----------+------+------+--------------------------+
     ```
     
-    If there is no available replacement value, for example, where there is no earlier row for that entity ID, a `  NULL  ` value is returned.
+    If there is no available replacement value, for example, where there is no earlier row for that entity ID, a `NULL` value is returned.
     
-    Defaults to `  FALSE  ` .
+    Defaults to `FALSE` .
 
 ## Output
 
-The `  ML.FEATURES_AT_TIME  ` function returns the input table rows that meet the point-in-time cutoff criteria, with the `  feature_timestamp  ` column showing the timestamp that was input in the `  time  ` argument.
+The `ML.FEATURES_AT_TIME` function returns the input table rows that meet the point-in-time cutoff criteria, with the `feature_timestamp` column showing the timestamp that was input in the `time` argument.
 
 ## Examples
 
 **Example 1**
 
-This example shows a how to retrain a model using only features that were created or updated before `  2023-01-01 12:00:00+00  ` :
+This example shows a how to retrain a model using only features that were created or updated before `2023-01-01 12:00:00+00` :
 
     CREATE OR REPLACE
       `mydataset.mymodel` OPTIONS (WARM_START = TRUE)
@@ -97,7 +97,7 @@ This example shows a how to retrain a model using only features that were create
 
 **Example 2**
 
-This example shows how to get predictions from a model based on features that were created or updated before `  2023-01-01 12:00:00+00  ` :
+This example shows how to get predictions from a model based on features that were created or updated before `2023-01-01 12:00:00+00` :
 
     SELECT
       *

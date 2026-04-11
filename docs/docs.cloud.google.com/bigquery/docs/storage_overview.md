@@ -78,10 +78,10 @@ You can't enroll a dataset in physical storage billing if your organization has 
 
 ## Optimize storage
 
-Optimizing BigQuery storage improves query performance and controls cost. To view the table storage metadata, query the following `  INFORMATION_SCHEMA  ` views:
+Optimizing BigQuery storage improves query performance and controls cost. To view the table storage metadata, query the following `INFORMATION_SCHEMA` views:
 
-  - [`  INFORMATION_SCHEMA.TABLE_STORAGE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
-  - [`  INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
+  - [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
+  - [`INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
 
 For information about optimizing storage, see [Optimize storage in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
 
@@ -101,11 +101,11 @@ For more information about when to choose each of these ingestion methods, see [
 
 Most of the time, you store data in BigQuery in order to run analytical [queries](https://docs.cloud.google.com/bigquery/docs/query-overview) on that data. However, sometimes you might want to read records directly from a table. BigQuery provides several ways to read table data:
 
-  - **[BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest) :** Synchronous paginated access with the [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method. Data is read in a serial fashion, one page per invocation. For more information, see [Browsing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data#browse-table) .
+  - **[BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest) :** Synchronous paginated access with the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method. Data is read in a serial fashion, one page per invocation. For more information, see [Browsing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data#browse-table) .
 
   - **[BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) :** Streaming high-throughput access that also supports server-side column projection and filtering. Reads can be parallelized across many readers by segmenting them into multiple disjoint streams.
 
-  - **[Export](https://docs.cloud.google.com/bigquery/docs/exporting-data) :** Asynchronous high-throughput copying to Google Cloud Storage, either with extract jobs or the [`  EXPORT DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) . If you need to copy data in Cloud Storage, export the data either with an extract job or an `  EXPORT DATA  ` statement.
+  - **[Export](https://docs.cloud.google.com/bigquery/docs/exporting-data) :** Asynchronous high-throughput copying to Google Cloud Storage, either with extract jobs or the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) . If you need to copy data in Cloud Storage, export the data either with an extract job or an `EXPORT DATA` statement.
 
   - **[Copy](https://docs.cloud.google.com/bigquery/docs/copying-datasets) :** Asynchronous copying of datasets within BigQuery. The copy is done logically when the source and destination location is the same.
 
@@ -113,13 +113,13 @@ For pricing information, see [Data extraction pricing](https://cloud.google.com/
 
 Based on the application requirements, you can read the table data:
 
-  - **Read and copy:** If you need an at-rest copy in Cloud Storage, export the data either with an extract job or an `  EXPORT DATA  ` statement. If you only want to read the data, use the BigQuery Storage API. If you want to make a copy within BigQuery, then use a copy job.
-  - **Scale:** The BigQuery API is the least efficient method and shouldn't be used for high volume reads. If you need to export more than 50 TB of data per day, use the `  EXPORT DATA  ` statement or the BigQuery Storage API.
+  - **Read and copy:** If you need an at-rest copy in Cloud Storage, export the data either with an extract job or an `EXPORT DATA` statement. If you only want to read the data, use the BigQuery Storage API. If you want to make a copy within BigQuery, then use a copy job.
+  - **Scale:** The BigQuery API is the least efficient method and shouldn't be used for high volume reads. If you need to export more than 50 TB of data per day, use the `EXPORT DATA` statement or the BigQuery Storage API.
   - **Time to return the first row:** The BigQuery API is the fastest method to return the first row, but should only be used to read small amounts of data. The BigQuery Storage API is slower to return the first row, but has much higher-throughput. Exports and copies must finish before any rows can be read, so the time to the first row for these types of jobs can be on the order of minutes.
 
 ## Deletion
 
-When you delete a table, the data persists for at least the duration of your [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) . After this, data is cleaned up from disk within the [Google Cloud deletion timeline](https://docs.cloud.google.com/docs/security/deletion#deletion_timeline) . Some deletion operations, such as the [`  DROP COLUMN  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) , are metadata-only operations. In this case, storage is freed up the next time you modify the affected rows. If you do not modify the table, there is no guaranteed time within which the storage is freed up. For more information, see [Data deletion on Google Cloud](https://docs.cloud.google.com/docs/security/deletion) .
+When you delete a table, the data persists for at least the duration of your [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) . After this, data is cleaned up from disk within the [Google Cloud deletion timeline](https://docs.cloud.google.com/docs/security/deletion#deletion_timeline) . Some deletion operations, such as the [`DROP COLUMN` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) , are metadata-only operations. In this case, storage is freed up the next time you modify the affected rows. If you do not modify the table, there is no guaranteed time within which the storage is freed up. For more information, see [Data deletion on Google Cloud](https://docs.cloud.google.com/docs/security/deletion) .
 
 ## What's next
 

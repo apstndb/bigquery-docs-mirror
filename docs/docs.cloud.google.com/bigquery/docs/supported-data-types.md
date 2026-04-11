@@ -10,83 +10,83 @@ BigQuery data type
 
 Supported protocol buffer types
 
-`  BOOL  `
+`BOOL`
 
-`  bool  ` , `  int32  ` , `  int64  ` , `  uint32  ` , `  uint64  ` , `  google.protobuf.BoolValue  `
+`bool` , `int32` , `int64` , `uint32` , `uint64` , `google.protobuf.BoolValue`
 
-`  BYTES  `
+`BYTES`
 
-`  bytes  ` , `  string  ` , `  google.protobuf.BytesValue  `
+`bytes` , `string` , `google.protobuf.BytesValue`
 
-`  DATE  `
+`DATE`
 
-`  int32  ` (preferred), `  int64  ` , `  string  `
+`int32` (preferred), `int64` , `string`
 
-The value is the number of days since the Unix epoch (1970-01-01). The valid range is `  -719162  ` (0001-01-01) to `  2932896  ` (9999-12-31).
+The value is the number of days since the Unix epoch (1970-01-01). The valid range is `-719162` (0001-01-01) to `2932896` (9999-12-31).
 
-`  DATETIME  ` , `  TIME  `
+`DATETIME` , `TIME`
 
-`  string  `
+`string`
 
-The value must be a [`  DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) or [`  TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#time_literals) literal.
+The value must be a [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) or [`TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#time_literals) literal.
 
-`  int64  `
+`int64`
 
-Use the [`  CivilTimeEncoder  ` class](https://github.com/googleapis/java-bigquerystorage/blob/main/google-cloud-bigquerystorage/src/main/java/com/google/cloud/bigquery/storage/v1/CivilTimeEncoder.java) to perform the conversion.
+Use the [`CivilTimeEncoder` class](https://github.com/googleapis/java-bigquerystorage/blob/main/google-cloud-bigquerystorage/src/main/java/com/google/cloud/bigquery/storage/v1/CivilTimeEncoder.java) to perform the conversion.
 
-`  FLOAT  `
+`FLOAT`
 
-`  double  ` , `  float  ` , `  google.protobuf.DoubleValue  ` , `  google.protobuf.FloatValue  `
+`double` , `float` , `google.protobuf.DoubleValue` , `google.protobuf.FloatValue`
 
-`  GEOGRAPHY  `
+`GEOGRAPHY`
 
-`  string  `
+`string`
 
 The value is a geometry in either WKT or GeoJson format.
 
-`  INTEGER  `
+`INTEGER`
 
-`  int32  ` , `  int64  ` , `  uint32  ` , `  enum  ` , `  google.protobuf.Int32Value  ` , `  google.protobuf.Int64Value  ` , `  google.protobuf.UInt32Value  `
+`int32` , `int64` , `uint32` , `enum` , `google.protobuf.Int32Value` , `google.protobuf.Int64Value` , `google.protobuf.UInt32Value`
 
-`  JSON  `
+`JSON`
 
-`  string  `
+`string`
 
-`  NUMERIC  ` , `  BIGNUMERIC  `
+`NUMERIC` , `BIGNUMERIC`
 
-`  int32  ` , `  int64  ` , `  uint32  ` , `  uint64  ` , `  double  ` , `  float  ` , `  string  `
+`int32` , `int64` , `uint32` , `uint64` , `double` , `float` , `string`
 
-`  bytes  ` , `  google.protobuf.BytesValue  `
+`bytes` , `google.protobuf.BytesValue`
 
-Use the [`  BigDecimalByteStringEncoder  ` class](https://github.com/googleapis/java-bigquerystorage/blob/main/google-cloud-bigquerystorage/src/main/java/com/google/cloud/bigquery/storage/v1/BigDecimalByteStringEncoder.java) to perform the conversion.
+Use the [`BigDecimalByteStringEncoder` class](https://github.com/googleapis/java-bigquerystorage/blob/main/google-cloud-bigquerystorage/src/main/java/com/google/cloud/bigquery/storage/v1/BigDecimalByteStringEncoder.java) to perform the conversion.
 
-`  STRING  `
+`STRING`
 
-`  string  ` , `  enum  ` , `  google.protobuf.StringValue  `
+`string` , `enum` , `google.protobuf.StringValue`
 
-`  TIME  `
+`TIME`
 
-`  string  `
+`string`
 
-The value must be a [`  TIME  ` literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#time_literals) .
+The value must be a [`TIME` literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#time_literals) .
 
-`  TIMESTAMP  `
+`TIMESTAMP`
 
-`  int64  ` (preferred), `  int32  ` , `  uint32  ` , `  google.protobuf.Timestamp  `
+`int64` (preferred), `int32` , `uint32` , `google.protobuf.Timestamp`
 
 The value is given in microseconds since the Unix epoch (1970-01-01).
 
-`  INTERVAL  `
+`INTERVAL`
 
-`  string  ` , `  google.protobuf.Duration  `
+`string` , `google.protobuf.Duration`
 
-The string value must be an [`  INTERVAL  ` literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) .
+The string value must be an [`INTERVAL` literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) .
 
-`  RANGE<T>  `
+`RANGE<T>`
 
-`  message  `
+`message`
 
-A nested message type in the proto with two fields, `  start  ` and `  end  ` , where both fields must be of the same supported protocol buffer type that corresponds to a BigQuery data type `  T  ` . `  T  ` must be one of `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` . If a field ( `  start  ` or `  end  ` ) is not set in the proto message, it represents an unbounded boundary. In the following example, `  f_range_date  ` represents a `  RANGE  ` column in a table. Since the `  end  ` field is not set in the proto message, the end boundary of this range is unbounded.
+A nested message type in the proto with two fields, `start` and `end` , where both fields must be of the same supported protocol buffer type that corresponds to a BigQuery data type `T` . `T` must be one of `DATE` , `DATETIME` , or `TIMESTAMP` . If a field ( `start` or `end` ) is not set in the proto message, it represents an unbounded boundary. In the following example, `f_range_date` represents a ` RANGE  ` column in a table. Since the `end` field is not set in the proto message, the end boundary of this range is unbounded.
 
     {
       f_range_date: {
@@ -94,15 +94,15 @@ A nested message type in the proto with two fields, `  start  ` and `  end  ` , 
       }
     }
 
-`  REPEATED FIELD  `
+`REPEATED FIELD`
 
-`  array  `
+`array`
 
 An array type in the proto corresponds to a repeated field in BigQuery.
 
-`  RECORD  `
+`RECORD`
 
-`  message  `
+`message`
 
 A nested message type in the proto corresponds to a record field in BigQuery.
 
@@ -116,106 +116,106 @@ Supported Apache Arrow types
 
 Supported type parameters
 
-`  BOOL  `
+`BOOL`
 
-`  Boolean  `
+`Boolean`
 
-`  BYTES  `
+`BYTES`
 
-`  Binary  `
+`Binary`
 
-`  DATE  `
+`DATE`
 
-`  Date  `
+`Date`
 
 unit = Day
 
-`  String  ` , `  int32  `
+`String` , `int32`
 
-`  DATETIME  `
+`DATETIME`
 
-`  Timestamp  `
+`Timestamp`
 
 unit = MICROSECONDS
 
 timezone is empty
 
-`  FLOAT  `
+`FLOAT`
 
-`  FloatingPoint  `
+`FloatingPoint`
 
 Precision in {SINGLE, DOUBLE}
 
-`  GEOGRAPHY  `
+`GEOGRAPHY`
 
-`  Utf8  `
+`Utf8`
 
 The value is a geometry in either WKT or GeoJson format.
 
-`  INTEGER  `
+`INTEGER`
 
-`  int  `
+`int`
 
 bitWidth in {8, 16, 32, 64}
 
 is\_signed = false
 
-`  JSON  `
+`JSON`
 
-`  Utf8  `
+`Utf8`
 
-`  NUMERIC  `
+`NUMERIC`
 
-`  Decimal128  `
+`Decimal128`
 
 You can provide a NUMERIC that has any precision or scale that's smaller than the [BigQuery supported range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
-`  BIGNUMERIC  `
+`BIGNUMERIC`
 
-`  Decimal256  `
+`Decimal256`
 
 You can provide a BIGNUMERIC that has any precision or scale that's smaller than the [BigQuery supported range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
-`  STRING  `
+`STRING`
 
-`  Utf8  `
+`Utf8`
 
-`  TIMESTAMP  `
+`TIMESTAMP`
 
-`  Timestamp  `
+`Timestamp`
 
 unit= MICROSECONDS
 
 timezone = UTC
 
-`  INTERVAL  `
+`INTERVAL`
 
-`  Interval  `
+`Interval`
 
 unit in {YEAR\_MONTH, DAY\_TIME, MONTH\_DAY\_NANO}
 
-`  Utf8  `
+`Utf8`
 
-`  RANGE<T>  `
+`RANGE<T>`
 
-`  Struct  `
+`Struct`
 
-The Arrow Struct must have two subfields named `  start  ` and `  end  ` .
+The Arrow Struct must have two subfields named `start` and `end` .
 
-For the `  RANGE<DATE>  ` column, the fields must be Arrow type `  Date  ` with `  unit=Day  ` .
+For the `RANGE<DATE>` column, the fields must be Arrow type `Date` with `unit=Day` .
 
-For the `  RANGE<DATETIME>  ` column, the fields must be the Arrow type `  Timestamp  ` with `  unit=MICROSECONDS  ` , without the timezone.
+For the `RANGE<DATETIME>` column, the fields must be the Arrow type `Timestamp` with `unit=MICROSECONDS` , without the timezone.
 
-For the `  RANGE<TIMESTAMP>  ` , the fields must be the Arrow type `  Timestamp  ` with `  unit=MICROSECONDS  ` , `  timezone=UTC  ` .
+For the `RANGE<TIMESTAMP>` , the fields must be the Arrow type `Timestamp` with `unit=MICROSECONDS` , `timezone=UTC` .
 
-A `  NULL  ` value in any of the `  start  ` and `  end  ` fields will be treated as `  UNBOUNDED  ` .
+A `NULL` value in any of the `start` and `end` fields will be treated as `UNBOUNDED` .
 
-`  REPEATED FIELD  `
+`REPEATED FIELD`
 
-`  List  `
+`List`
 
-A `  NULL  ` value must be represented by an empty list.
+A `NULL` value must be represented by an empty list.
 
-`  RECORD  `
+`RECORD`
 
-`  Struct  `
+`Struct`

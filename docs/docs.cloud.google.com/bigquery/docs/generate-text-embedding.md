@@ -1,6 +1,6 @@
 # Generate text embeddings by using the AI.GENERATE\_EMBEDDING function
 
-This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references an embedding model. You then use that model with the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create text embeddings by using data from a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references an embedding model. You then use that model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create text embeddings by using data from a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
 The following types of remote models are supported:
 
@@ -9,32 +9,32 @@ The following types of remote models are supported:
 
 ## Required roles
 
-To create a remote model and use the `  AI.GENERATE_EMBEDDING  ` function, you need the following Identity and Access Management (IAM) roles:
+To create a remote model and use the `AI.GENERATE_EMBEDDING` function, you need the following Identity and Access Management (IAM) roles:
 
-  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) on your project.
+  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` ) on your project.
 
-  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` ) on your project.
+  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` ) on your project.
     
-    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
+    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` ) on the project that contains the Vertex AI endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Vertex AI endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
 
-  - Create BigQuery jobs: BigQuery Job User ( `  roles/bigquery.jobUser  ` ) on your project.
+  - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` ) on your project.
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
-  - Query table data: `  bigquery.tables.getData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
+  - Query table data: `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -45,7 +45,7 @@ You might also be able to get these permissions with [custom roles](https://docs
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -57,7 +57,7 @@ You might also be able to get these permissions with [custom roles](https://docs
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
@@ -94,7 +94,7 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
     ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
@@ -149,7 +149,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -185,7 +185,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -323,13 +323,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -363,13 +363,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -381,7 +381,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -393,7 +393,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -407,11 +407,11 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 You must grant the connection's service account the Vertex AI User role.
 
-If you plan to specify the endpoint as a URL when you create the remote model, for example `  endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/text-embedding-005'  ` , grant this role in the same project you specify in the URL.
+If you plan to specify the endpoint as a URL when you create the remote model, for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/text-embedding-005'` , grant this role in the same project you specify in the URL.
 
-If you plan to specify the endpoint by using the model name when you create the remote model, for example `  endpoint = 'text-embedding-005'  ` , grant this role in the same project where you plan to create the remote model.
+If you plan to specify the endpoint by using the model name when you create the remote model, for example `endpoint = 'text-embedding-005'` , grant this role in the same project where you plan to create the remote model.
 
-Granting the role in a different project results in the error `  bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource  ` .
+Granting the role in a different project results in the error `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 To grant the role, follow these steps:
 
@@ -433,7 +433,7 @@ To grant the role, follow these steps:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
 
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
 
@@ -444,7 +444,7 @@ Replace the following:
 
 ## Choose an open model deployment method
 
-If you are creating a remote model over a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , you can automatically deploy the open model at the same time that you create the remote model by specifying the Vertex AI Model Garden or Hugging Face model ID in the `  CREATE MODEL  ` statement. Alternatively, you can manually deploy the open model first, and then use that open model with the remote model by specifying the model endpoint in the `  CREATE MODEL  ` statement. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
+If you are creating a remote model over a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , you can automatically deploy the open model at the same time that you create the remote model by specifying the Vertex AI Model Garden or Hugging Face model ID in the `CREATE MODEL` statement. Alternatively, you can manually deploy the open model first, and then use that open model with the remote model by specifying the model endpoint in the `CREATE MODEL` statement. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
 
 ## Create a BigQuery ML remote model
 
@@ -477,9 +477,9 @@ Create a remote model:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-      - `  ENDPOINT  ` : the name of an embedding model to use. For more information, see [`  ENDPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+      - `  ENDPOINT  ` : the name of an embedding model to use. For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
         
         The Vertex AI model that you specify must be available in the location where you are creating the remote model. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#locations) .
 
@@ -521,15 +521,15 @@ Create a remote model:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-      - `  HUGGING_FACE_MODEL_ID  ` : a `  STRING  ` value that specifies the model ID for a [supported Hugging Face model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#hugging-face-models) , in the format `  provider_name  ` / `  model_name  ` . For example, `  deepseek-ai/DeepSeek-R1  ` . You can get the model ID by clicking the model name in the Hugging Face Model Hub and then copying the model ID from the top of the model card.
+      - `  HUGGING_FACE_MODEL_ID  ` : a `STRING` value that specifies the model ID for a [supported Hugging Face model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#hugging-face-models) , in the format `  provider_name  ` / `  model_name  ` . For example, `deepseek-ai/DeepSeek-R1` . You can get the model ID by clicking the model name in the Hugging Face Model Hub and then copying the model ID from the top of the model card.
     
-      - `  MODEL_GARDEN_MODEL_NAME  ` : a `  STRING  ` value that specifies the model ID and model version of a [supported Vertex AI Model Garden model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models) , in the format `  publishers/ publisher  ` /models/ `  model_name  ` @ `  model_version  ` . For example, `  publishers/openai/models/gpt-oss@gpt-oss-120b  ` . You can get the model ID by clicking the model card in the Vertex AI Model Garden and then copying the model ID from the **Model ID** field. You can get the default model version by copying it from the **Version** field on the model card. To see other model versions that you can use, click **Deploy model** and then click the **Resource ID** field.
+      - `  MODEL_GARDEN_MODEL_NAME  ` : a `STRING` value that specifies the model ID and model version of a [supported Vertex AI Model Garden model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models) , in the format ` publishers/ publisher  ` /models/ `  model_name  ` @ `  model_version  ` . For example, `publishers/openai/models/gpt-oss@gpt-oss-120b` . You can get the model ID by clicking the model card in the Vertex AI Model Garden and then copying the model ID from the **Model ID** field. You can get the default model version by copying it from the **Version** field on the model card. To see other model versions that you can use, click **Deploy model** and then click the **Resource ID** field.
     
-      - `  HUGGING_FACE_TOKEN  ` : a `  STRING  ` value that specifies the Hugging Face [User Access Token](https://huggingface.co/docs/hub/en/security-tokens) to use. You can only specify a value for this option if you also specify a value for the `  HUGGING_FACE_MODEL_ID  ` option.
+      - `  HUGGING_FACE_TOKEN  ` : a `STRING` value that specifies the Hugging Face [User Access Token](https://huggingface.co/docs/hub/en/security-tokens) to use. You can only specify a value for this option if you also specify a value for the `HUGGING_FACE_MODEL_ID` option.
         
-        The token must have the `  read  ` role at minimum but tokens with a broader scope are also acceptable. This option is required when the model identified by the `  HUGGING_FACE_MODEL_ID  ` value is a Hugging Face [gated](https://huggingface.co/docs/hub/en/models-gated) or private model.
+        The token must have the `read` role at minimum but tokens with a broader scope are also acceptable. This option is required when the model identified by the `HUGGING_FACE_MODEL_ID` value is a Hugging Face [gated](https://huggingface.co/docs/hub/en/models-gated) or private model.
         
         Some gated models require explicit agreement to their terms of service before access is granted. To agree to these terms, follow these steps:
         
@@ -537,11 +537,11 @@ Create a remote model:
         2.  Locate and review the model's terms of service. A link to the service agreement is typically found on the model card.
         3.  Accept the terms as prompted on the page.
     
-      - `  MACHINE_TYPE  ` : a `  STRING  ` value that specifies the machine type to use when deploying the model to Vertex AI. For information about supported machine types, see [Machine types](https://docs.cloud.google.com/vertex-ai/docs/predictions/configure-compute#machine-types) . If you don't specify a value for the `  MACHINE_TYPE  ` option, the Vertex AI Model Garden default machine type for the model is used.
+      - `  MACHINE_TYPE  ` : a `STRING` value that specifies the machine type to use when deploying the model to Vertex AI. For information about supported machine types, see [Machine types](https://docs.cloud.google.com/vertex-ai/docs/predictions/configure-compute#machine-types) . If you don't specify a value for the `MACHINE_TYPE` option, the Vertex AI Model Garden default machine type for the model is used.
     
-      - `  MIN_REPLICA_COUNT  ` : an `  INT64  ` value that specifies the minimum number of machine replicas used when deploying the model on a Vertex AI endpoint. The service increases or decreases the replica count as required by the inference load on the endpoint. The number of replicas used is never lower than the `  MIN_REPLICA_COUNT  ` value and never higher than the `  MAX_REPLICA_COUNT  ` value. The `  MIN_REPLICA_COUNT  ` value must be in the range `  [1, 4096]  ` . The default value is `  1  ` .
+      - `  MIN_REPLICA_COUNT  ` : an `INT64` value that specifies the minimum number of machine replicas used when deploying the model on a Vertex AI endpoint. The service increases or decreases the replica count as required by the inference load on the endpoint. The number of replicas used is never lower than the `MIN_REPLICA_COUNT` value and never higher than the `MAX_REPLICA_COUNT` value. The `MIN_REPLICA_COUNT` value must be in the range `[1, 4096]` . The default value is `1` .
     
-      - `  MAX_REPLICA_COUNT  ` : an `  INT64  ` value that specifies the maximum number of machine replicas used when deploying the model on a Vertex AI endpoint. The service increases or decreases the replica count as required by the inference load on the endpoint. The number of replicas used is never lower than the `  MIN_REPLICA_COUNT  ` value and never higher than the `  MAX_REPLICA_COUNT  ` value. The `  MAX_REPLICA_COUNT  ` value must be in the range `  [1, 4096]  ` . The default value is the `  MIN_REPLICA_COUNT  ` value.
+      - `  MAX_REPLICA_COUNT  ` : an `INT64` value that specifies the maximum number of machine replicas used when deploying the model on a Vertex AI endpoint. The service increases or decreases the replica count as required by the inference load on the endpoint. The number of replicas used is never lower than the `MIN_REPLICA_COUNT` value and never higher than the `MAX_REPLICA_COUNT` value. The `MAX_REPLICA_COUNT` value must be in the range `[1, 4096]` . The default value is the `MIN_REPLICA_COUNT` value.
     
       - `  RESERVATION_AFFINITY_TYPE  ` : determines whether the deployed model uses [Compute Engine reservations](https://docs.cloud.google.com/compute/docs/instances/reservations-overview) to provide assured virtual machine (VM) availability when serving predictions, and specifies whether the model uses VMs from all available reservations or just one specific reservation. For more information, see [Compute Engine reservation affinity](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity) .
         
@@ -549,42 +549,42 @@ Create a remote model:
         
         Supported values are as follows:
         
-          - `  NO_RESERVATION  ` : no reservation is consumed when your model is deployed to a Vertex AI endpoint. Specifying `  NO_RESERVATION  ` has the same effect as not specifying a reservation affinity.
+          - `NO_RESERVATION` : no reservation is consumed when your model is deployed to a Vertex AI endpoint. Specifying `NO_RESERVATION` has the same effect as not specifying a reservation affinity.
         
-          - `  ANY_RESERVATION  ` : the Vertex AI model deployment consumes virtual machines (VMs) from Compute Engine reservations that are in the current project or that are [shared with the project](https://docs.cloud.google.com/compute/docs/instances/reservations-overview#how-shared-reservations-work) , and that are [configured for automatic consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_any_matching_reservation) . Only VMs that meet the following qualifications are used:
+          - `ANY_RESERVATION` : the Vertex AI model deployment consumes virtual machines (VMs) from Compute Engine reservations that are in the current project or that are [shared with the project](https://docs.cloud.google.com/compute/docs/instances/reservations-overview#how-shared-reservations-work) , and that are [configured for automatic consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_any_matching_reservation) . Only VMs that meet the following qualifications are used:
             
-              - They use the machine type specified by the `  MACHINE_TYPE  ` value.
-              - If the BigQuery dataset in which you are creating the remote model is a single region, the reservation must be in the same region. If the dataset is in the `  US  ` multiregion, the reservation must be in the `  us-central1  ` region. If the dataset is in the `  EU  ` multiregion, the reservation must be in the `  europe-west4  ` region.
+              - They use the machine type specified by the `MACHINE_TYPE` value.
+              - If the BigQuery dataset in which you are creating the remote model is a single region, the reservation must be in the same region. If the dataset is in the `US` multiregion, the reservation must be in the `us-central1` region. If the dataset is in the `EU` multiregion, the reservation must be in the `europe-west4` region.
             
             If there isn't enough capacity in the available reservations, or if no suitable reservations are found, the system provisions on-demand Compute Engine VMs to meet the resource requirements.
         
-          - `  SPECIFIC_RESERVATION  ` : the Vertex AI model deployment consumes VMs only from the reservation that you specify in the `  RESERVATION_AFFINITY_VALUES  ` value. This reservation must be [configured for specifically targeted consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_a_specific_reservation) . Deployment fails if the specified reservation doesn't have sufficient capacity.
+          - `SPECIFIC_RESERVATION` : the Vertex AI model deployment consumes VMs only from the reservation that you specify in the `RESERVATION_AFFINITY_VALUES` value. This reservation must be [configured for specifically targeted consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_a_specific_reservation) . Deployment fails if the specified reservation doesn't have sufficient capacity.
     
-      - `  RESERVATION_AFFINITY_KEY  ` : the string `  compute.googleapis.com/reservation-name  ` . You must specify this option when the `  RESERVATION_AFFINITY_TYPE  ` value is `  SPECIFIC_RESERVATION  ` .
+      - `  RESERVATION_AFFINITY_KEY  ` : the string `compute.googleapis.com/reservation-name` . You must specify this option when the `RESERVATION_AFFINITY_TYPE` value is `SPECIFIC_RESERVATION` .
     
-      - `  RESERVATION_AFFINITY_VALUES  ` : an `  ARRAY<STRING>  ` value that specifies the full resource name of the Compute Engine reservation, in the following format:  
+      - `  RESERVATION_AFFINITY_VALUES  ` : an `ARRAY<STRING>` value that specifies the full resource name of the Compute Engine reservation, in the following format:  
           
-        `  projects/ myproject /zones/ reservation_zone /reservations/ reservation_name  `
+        ` projects/ myproject /zones/ reservation_zone /reservations/ reservation_name  `
         
-        For example, `  RESERVATION_AFFINITY_values = ['projects/myProject/zones/us-central1-a/reservations/myReservationName']  ` .
+        For example, `RESERVATION_AFFINITY_values = ['projects/myProject/zones/us-central1-a/reservations/myReservationName']` .
         
         You can get the reservation name and zone from the **Reservations** page of the Google Cloud console. For more information, see [View reservations](https://docs.cloud.google.com/compute/docs/instances/reservations-view#view-reservations) .
         
-        You must specify this option when the `  RESERVATION_AFFINITY_TYPE  ` value is `  SPECIFIC_RESERVATION  ` .
+        You must specify this option when the `RESERVATION_AFFINITY_TYPE` value is `SPECIFIC_RESERVATION` .
     
-      - `  ENDPOINT_IDLE_TTL  ` : an `  INTERVAL  ` value that specifies the duration of inactivity after which the open model is automatically undeployed from the Vertex AI endpoint.
+      - `  ENDPOINT_IDLE_TTL  ` : an `INTERVAL` value that specifies the duration of inactivity after which the open model is automatically undeployed from the Vertex AI endpoint.
         
-        To enable automatic undeployment, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `  INTERVAL 8 HOUR  ` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
+        To enable automatic undeployment, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `INTERVAL 8 HOUR` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
         
         Model inactivity is defined as the amount of time that has passed since any of the following operations were performed on the model:
         
-          - Running the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
-          - Running the [`  ALTER MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) with the `  DEPLOY_MODEL  ` argument set to `  TRUE  ` .
-          - Sending an inference request to the model endpoint. For example, by running the [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function.
+          - Running the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
+          - Running the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) with the `DEPLOY_MODEL` argument set to `TRUE` .
+          - Sending an inference request to the model endpoint. For example, by running the [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function.
         
         Each of these operations resets the inactivity timer to zero. The reset is triggered at the start of the BigQuery job that performs the operation.
         
-        After the model is undeployed, inference requests sent to the model return an error. The BigQuery model object remains unchanged, including model metadata. To use the model for inference again, you must redeploy it by running the `  ALTER MODEL  ` statement on the model and setting the `  DEPLOY_MODEL  ` option to `  TRUE  ` .
+        After the model is undeployed, inference requests sent to the model return an error. The BigQuery model object remains unchanged, including model metadata. To use the model for inference again, you must redeploy it by running the `ALTER MODEL` statement on the model and setting the `DEPLOY_MODEL` option to `TRUE` .
 
 ### Deployed open models
 
@@ -615,7 +615,7 @@ Create a remote model:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
       - `  ENDPOINT_REGION  ` : the region in which the open model is deployed.
     
@@ -625,7 +625,7 @@ Create a remote model:
 
 ## Generate text embeddings
 
-Generate text embeddings with the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) by using text data from a table column or a query.
+Generate text embeddings with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) by using text data from a table column or a query.
 
 Typically, you would use a text embedding model for text-only use cases, and a multimodal embedding model for cross-modal search use cases, where embeddings for text and visual content are generated in the same semantic space.
 
@@ -651,51 +651,43 @@ Replace the following:
 
   - `  MODEL_NAME  ` : the name of the remote model over an embedding model.
 
-  - `  TABLE_NAME  ` : the name of the table that contains the text to embed. This table must have a column that's named `  content  ` , or you can use an alias to use a differently named column.
+  - `  TABLE_NAME  ` : the name of the table that contains the text to embed. This table must have a column that's named `content` , or you can use an alias to use a differently named column.
 
-  - `  CONTENT_QUERY  ` : a query whose result contains a `  STRING  ` column called `  content  ` .
+  - `  CONTENT_QUERY  ` : a query whose result contains a `STRING` column called `content` .
 
-  - `  TASK_TYPE  ` : a `  STRING  ` literal that specifies the intended downstream application to help the model produce better quality embeddings. `  TASK_TYPE  ` accepts the following values:
+  - `  TASK_TYPE  ` : a `STRING` literal that specifies the intended downstream application to help the model produce better quality embeddings. `  TASK_TYPE  ` accepts the following values:
     
-      - `  RETRIEVAL_QUERY  ` : specifies that the given text is a query in a search or retrieval setting.
+      - `RETRIEVAL_QUERY` : specifies that the given text is a query in a search or retrieval setting.
     
-      - `  RETRIEVAL_DOCUMENT  ` : specifies that the given text is a document in a search or retrieval setting.
+      - `RETRIEVAL_DOCUMENT` : specifies that the given text is a document in a search or retrieval setting.
         
-        When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `  title  ` or aliased as `  title  ` , for example:
+        When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `title` or aliased as `title` , for example:
         
         ``` notranslate
-              SELECT *
-              FROM
-                AI.GENERATE_EMBEDDING(
-                  MODEL mydataset.embedding_model,
-                  (SELECT abstract as content, header as title, publication_number
-                  FROM mydataset.publications),
-                  STRUCT('RETRIEVAL_DOCUMENT' as task_type)
-              );
-              
+              SELECT *      FROM        AI.GENERATE_EMBEDDING(          MODEL mydataset.embedding_model,          (SELECT abstract as content, header as title, publication_number          FROM mydataset.publications),          STRUCT('RETRIEVAL_DOCUMENT' as task_type)      );      
         ```
         
-        Specifying the title column in the input query populates the [`  title  ` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `  title  ` value when using any other task type, that input is ignored and has no effect on the embedding results.
+        Specifying the title column in the input query populates the [`title` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `title` value when using any other task type, that input is ignored and has no effect on the embedding results.
     
-      - `  SEMANTIC_SIMILARITY  ` : specifies that the given text will be used for Semantic Textual Similarity (STS).
+      - `SEMANTIC_SIMILARITY` : specifies that the given text will be used for Semantic Textual Similarity (STS).
     
-      - `  CLASSIFICATION  ` : specifies that the embeddings will be used for classification.
+      - `CLASSIFICATION` : specifies that the embeddings will be used for classification.
     
-      - `  CLUSTERING  ` : specifies that the embeddings will be used for clustering.
+      - `CLUSTERING` : specifies that the embeddings will be used for clustering.
     
-      - `  QUESTION_ANSWERING  ` : specifies that the embeddings will be used for question answering.
+      - `QUESTION_ANSWERING` : specifies that the embeddings will be used for question answering.
     
-      - `  FACT_VERIFICATION  ` : specifies that the embeddings will be used for fact verification.
+      - `FACT_VERIFICATION` : specifies that the embeddings will be used for fact verification.
     
-      - `  CODE_RETRIEVAL_QUERY  ` : specifies that the embeddings will be used for code retrieval.
+      - `CODE_RETRIEVAL_QUERY` : specifies that the embeddings will be used for code retrieval.
 
-  - `  OUTPUT_DIMENSIONALITY  ` : an `  INT64  ` value that specifies the number of dimensions to use when generating embeddings. For example, if you specify `  256 AS output_dimensionality  ` , then the `  embedding  ` output column contains a 256 dimensional embedding for each input value.
+  - `  OUTPUT_DIMENSIONALITY  ` : an `INT64` value that specifies the number of dimensions to use when generating embeddings. For example, if you specify `256 AS output_dimensionality` , then the `embedding` output column contains a 256 dimensional embedding for each input value.
     
-    For remote models over `  gemini-embedding-001  ` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `  [1, 3072]  ` . The default value is `  3072  ` . For remote models over `  text-embedding  ` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `  [1, 768]  ` . The default value is `  768  ` .
+    For remote models over `gemini-embedding-001` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `[1, 3072]` . The default value is `3072` . For remote models over `text-embedding` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `[1, 768]` . The default value is `768` .
 
 **Example: Embed text in a table**
 
-The following example shows a request to embed the `  content  ` column of the `  text_data  ` table:
+The following example shows a request to embed the `content` column of the `text_data` table:
 
 ``` notranslate
 SELECT *
@@ -730,8 +722,8 @@ Replace the following:
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET_ID  ` : the ID of the dataset that contains the model.
   - `  MODEL_NAME  ` : the name of the remote model over an embedding model.
-  - `  TABLE_NAME  ` : the name of the table that contains the text to embed. This table must have a column that's named `  content  ` , or you can use an alias to use a differently named column.
-  - `  CONTENT_QUERY  ` : a query whose result contains a `  STRING  ` column called `  content  ` .
+  - `  TABLE_NAME  ` : the name of the table that contains the text to embed. This table must have a column that's named `content` , or you can use an alias to use a differently named column.
+  - `  CONTENT_QUERY  ` : a query whose result contains a `STRING` column called `content` .
 
 ### Vertex AI multimodal
 
@@ -750,14 +742,14 @@ Replace the following:
 
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET_ID  ` : the ID of the dataset that contains the model.
-  - `  MODEL_NAME  ` : the name of the remote model over a `  multimodalembedding@001  ` model.
-  - `  TABLE_NAME  ` : the name of the table that contains the text to embed. This table must have a column that's named `  content  ` , or you can use an alias to use a differently named column.
-  - `  CONTENT_QUERY  ` : a query whose result contains a `  STRING  ` column called `  content  ` .
-  - `  OUTPUT_DIMENSIONALITY  ` : an `  INT64  ` value that specifies the number of dimensions to use when generating embeddings. Valid values are `  128  ` , `  256  ` , `  512  ` , and `  1408  ` . The default value is `  1408  ` . For example, if you specify `  256 AS output_dimensionality  ` , then the `  embedding  ` output column contains a 256-dimensional embedding for each input value.
+  - `  MODEL_NAME  ` : the name of the remote model over a `multimodalembedding@001` model.
+  - `  TABLE_NAME  ` : the name of the table that contains the text to embed. This table must have a column that's named `content` , or you can use an alias to use a differently named column.
+  - `  CONTENT_QUERY  ` : a query whose result contains a `STRING` column called `content` .
+  - `  OUTPUT_DIMENSIONALITY  ` : an `INT64` value that specifies the number of dimensions to use when generating embeddings. Valid values are `128` , `256` , `512` , and `1408` . The default value is `1408` . For example, if you specify `256 AS output_dimensionality` , then the `embedding` output column contains a 256-dimensional embedding for each input value.
 
 **Example: Use embeddings to rank semantic similarity**
 
-The following example embeds a collection of movie reviews and orders them by cosine distance to the review "This movie was average" using the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) . A smaller distance indicates more semantic similarity.
+The following example embeds a collection of movie reviews and orders them by cosine distance to the review "This movie was average" using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) . A smaller distance indicates more semantic similarity.
 
 For more information about vector search and vector index, see [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
 

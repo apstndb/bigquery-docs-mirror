@@ -2,11 +2,11 @@ GoogleSQL for BigQuery supports the following federated query functions.
 
 ## Function list
 
-| Name                                                                                                                                             | Summary                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| [`         EXTERNAL_QUERY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) | Executes a query on an external database and returns the results as a temporary table. |
+| Name                                                                                                                            | Summary                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) | Executes a query on an external database and returns the results as a temporary table. |
 
-## `     EXTERNAL_QUERY    `
+## `EXTERNAL_QUERY`
 
     EXTERNAL_QUERY('connection_id', '''external_database_query'''[, 'options'])
 
@@ -14,9 +14,9 @@ GoogleSQL for BigQuery supports the following federated query functions.
 
 Executes a query on an external database and returns the results as a temporary table. The external database data type is converted to a [GoogleSQL data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_list) in the temporary result table with [these data type mappings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#data_type_mappings) .
 
-  - `  external_database_query  ` : The query to run on the external database.
+  - `external_database_query` : The query to run on the external database.
 
-  - `  connection_id  ` : The ID of the [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) . The connection resource contains settings for the connection between the external database and BigQuery. If you don't have a default project configured, prepend the project ID to the connection ID in following format:
+  - `connection_id` : The ID of the [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) . The connection resource contains settings for the connection between the external database and BigQuery. If you don't have a default project configured, prepend the project ID to the connection ID in following format:
     
         projects/PROJECT_ID/locations/LOCATION/connections/CONNECTION_ID
     
@@ -26,13 +26,13 @@ Executes a query on an external database and returns the results as a temporary 
       - LOCATION : The location of the connection.
       - CONNECTION\_ID : The connection ID.
     
-    For example, `  projects/example-project/locations/us/connections/sql-bq  ` .
+    For example, `projects/example-project/locations/us/connections/sql-bq` .
     
-    **Caution:** If you have a view that's shared across multiple projects where you use `  EXTERNAL_QUERY  ` , always use the fully qualified connection ID (projects/ PROJECT\_ID /locations/ LOCATION /connections/ CONNECTION\_ID ), otherwise the wrong project might be used.
+    **Caution:** If you have a view that's shared across multiple projects where you use `EXTERNAL_QUERY` , always use the fully qualified connection ID (projects/ PROJECT\_ID /locations/ LOCATION /connections/ CONNECTION\_ID ), otherwise the wrong project might be used.
 
-  - <span id="external_query_options"></span> `  options  ` : An optional string of a JSON format map with key value pairs of option name and value (both are case sensitive).
+  - <span id="external_query_options"></span> `options` : An optional string of a JSON format map with key value pairs of option name and value (both are case sensitive).
     
-    For example: `  '{"default_type_for_decimal_columns":"numeric"}'  `
+    For example: `'{"default_type_for_decimal_columns":"numeric"}'`
     
     Supported options:
     
@@ -44,9 +44,9 @@ Executes a query on an external database and returns the results as a temporary 
 
 Additional notes:
 
-  - The `  EXTERNAL_QUERY  ` function is usually used in a `  FROM  ` clause.
-  - You can use the `  EXTERNAL_QUERY()  ` function to access metadata about the external database.
-  - `  EXTERNAL_QUERY()  ` won't honor the ordering of the external query result, even if your external query includes `  ORDER BY  ` .
+  - The `EXTERNAL_QUERY` function is usually used in a `FROM` clause.
+  - You can use the `EXTERNAL_QUERY()` function to access metadata about the external database.
+  - `EXTERNAL_QUERY()` won't honor the ordering of the external query result, even if your external query includes `ORDER BY` .
 
 **Return Data Type**
 
@@ -56,8 +56,8 @@ BigQuery table
 
 Suppose you need the date of the first order for each of your customers to include in a report. This data is not currently in BigQuery but is available in your operational PostgreSQL database in . The following federated query example accomplishes this and includes 3 parts:
 
-1.  Run the external query `  SELECT customer_id, MIN(order_date) AS first_order_date FROM orders GROUP BY customer_id  ` in the operational PostgreSQL database to get the first order date for each customer through the `  EXTERNAL_QUERY()  ` function.
-2.  Join external query result table with customers table in BigQuery by `  customer_id  ` .
+1.  Run the external query `SELECT customer_id, MIN(order_date) AS first_order_date FROM orders GROUP BY customer_id` in the operational PostgreSQL database to get the first order date for each customer through the `EXTERNAL_QUERY()` function.
+2.  Join external query result table with customers table in BigQuery by `customer_id` .
 3.  Select customer information and first order date.
 
 <!-- end list -->
@@ -76,7 +76,7 @@ Suppose you need the date of the first order for each of your customers to inclu
       ON rq.customer_id = c.customer_id
     GROUP BY c.customer_id, c.name, rq.first_order_date;
 
-You can use the `  EXTERNAL_QUERY()  ` function to query information\_schema tables to access database metadata, such as list all tables in the database or show table schema. The following example information\_schema queries work in both [MySQL](https://dev.mysql.com/doc/refman/8.0/en/information-schema-introduction.html) and [PostgreSQL](https://www.postgresql.org/docs/9.1/information-schema.html) .
+You can use the `EXTERNAL_QUERY()` function to query information\_schema tables to access database metadata, such as list all tables in the database or show table schema. The following example information\_schema queries work in both [MySQL](https://dev.mysql.com/doc/refman/8.0/en/information-schema-introduction.html) and [PostgreSQL](https://www.postgresql.org/docs/9.1/information-schema.html) .
 
     -- List all tables in a database.
     SELECT *
@@ -94,7 +94,7 @@ You can use the `  EXTERNAL_QUERY()  ` function to query information\_schema tab
         '''SELECT * FROM information_schema.columns WHERE table_name='x';'''
       );
 
-`  EXTERNAL_QUERY()  ` won't honor the ordering of the external query result, even if your external query includes `  ORDER BY  ` . The following example query orders rows by customer ID in the external database, but BigQuery will not output the result rows in that order.
+`EXTERNAL_QUERY()` won't honor the ordering of the external query result, even if your external query includes `ORDER BY` . The following example query orders rows by customer ID in the external database, but BigQuery will not output the result rows in that order.
 
     -- ORDER BY will not order rows.
     SELECT *
@@ -110,9 +110,9 @@ When you execute a federated query, the data from the external database are conv
 
 Things to know about mapping:
 
-  - Most MySQL data types can be matched to the same BigQuery data type, with a few exceptions such as `  decimal  ` , `  timestamp  ` , and `  time  ` .
-  - PostgreSQL supports many non-standard data types which aren't supported in BigQuery, for example `  money  ` , `  path  ` , `  uuid  ` , `  boxer  ` , and others.
-  - The numeric data types in MySQL and PostgreSQL will be mapped to BigQuery `  NUMERIC  ` value by default. The BigQuery `  NUMERIC  ` value range is smaller than in MySQL and PostgreSQL. It can also be mapped to [`  BIGNUMERIC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) , `  FLOAT64  ` , or `  STRING  ` with ["default\_type\_for\_decimal\_columns"](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query_options) in `  EXTERNAL_QUERY  ` options.
+  - Most MySQL data types can be matched to the same BigQuery data type, with a few exceptions such as `decimal` , `timestamp` , and `time` .
+  - PostgreSQL supports many non-standard data types which aren't supported in BigQuery, for example `money` , `path` , `uuid` , `boxer` , and others.
+  - The numeric data types in MySQL and PostgreSQL will be mapped to BigQuery `NUMERIC` value by default. The BigQuery `NUMERIC` value range is smaller than in MySQL and PostgreSQL. It can also be mapped to [`BIGNUMERIC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) , `FLOAT64` , or `STRING` with ["default\_type\_for\_decimal\_columns"](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query_options) in `EXTERNAL_QUERY` options.
 
 **Error handling**
 
@@ -389,35 +389,35 @@ NOT YET SUPPORTED
 If your external query contains a data type that's unsupported in BigQuery, the query will fail immediately. You can cast the unsupported data type to a different supported MySQL / PostgreSQL data type.
 
   - Unsupported MySQL data type
-      - **Error message:** `  Invalid table-valued function external_query Found unsupported MySQL type in BigQuery. at [1:15]  `
-      - **Unsupported type:** `  GEOMETRY  ` , `  BIT  `
+      - **Error message:** `Invalid table-valued function external_query Found unsupported MySQL type in BigQuery. at [1:15]`
+      - **Unsupported type:** `GEOMETRY` , `BIT`
       - **Resolution:** Cast the unsupported data type to STRING.
-      - **Example:** `  SELECT ST_AsText(ST_GeomFromText('POINT(1 1)'));  ` This command casts the unsupported data type `  GEOMETRY  ` to `  STRING  ` .
+      - **Example:** `SELECT ST_AsText(ST_GeomFromText('POINT(1 1)'));` This command casts the unsupported data type `GEOMETRY` to `STRING` .
   - Unsupported PostgreSQL data type
-      - **Error message:** `  Invalid table-valued function external_query Postgres type (OID = 790) isn't supported now at [1:15]  `
-      - **Unsupported type:** `  money, time with time zone, inet, path, pg_lsn, point, polygon, tsquery, tsvector, txid_snapshot, uuid, box, cidr, circle, interval, jsonb, line, lseg, macaddr, macaddr8  `
+      - **Error message:** `Invalid table-valued function external_query Postgres type (OID = 790) isn't supported now at [1:15]`
+      - **Unsupported type:** `money, time with time zone, inet, path, pg_lsn, point, polygon, tsquery, tsvector, txid_snapshot, uuid, box, cidr, circle, interval, jsonb, line, lseg, macaddr, macaddr8`
       - **Resolution:** Cast the unsupported data type to STRING.
-      - **Example:** `  SELECT CAST('12.34'::float8::numeric::money AS varchar(30));  ` This command casts the unsupported data type `  money  ` to `  string  ` .
+      - **Example:** `SELECT CAST('12.34'::float8::numeric::money AS varchar(30));` This command casts the unsupported data type `money` to `string` .
 
 #### Spanner to BigQuery type mapping
 
 When you execute a Spanner federated query, the data from Spanner is converted to GoogleSQL types.
 
-| Spanner GoogleSQL type     | Spanner PostgreSQL type      | BigQuery type                                         |
-| -------------------------- | ---------------------------- | ----------------------------------------------------- |
-| `        ARRAY       `     | \-                           | `        ARRAY       `                                |
-| `        BOOL       `      | `        bool       `        | `        BOOL       `                                 |
-| `        BYTES       `     | `        bytea       `       | `        BYTES       `                                |
-| `        DATE       `      | `        date       `        | `        DATE       `                                 |
-| `        FLOAT64       `   | `        float8       `      | `        FLOAT64       `                              |
-| `        INT64       `     | `        bigint       `      | `        INT64       `                                |
-| `        JSON       `      | `        JSONB       `       | `        JSON       `                                 |
-| `        NUMERIC       `   | `        numeric       ` \*  | `        NUMERIC       `                              |
-| `        STRING       `    | `        varchar       `     | `        STRING       `                               |
-| `        STRUCT       `    | \-                           | Not supported for Spanner federated queries           |
-| `        TIMESTAMP       ` | `        timestamptz       ` | `        TIMESTAMP       ` with nanoseconds truncated |
+| Spanner GoogleSQL type | Spanner PostgreSQL type | BigQuery type                               |
+| ---------------------- | ----------------------- | ------------------------------------------- |
+| `ARRAY`                | \-                      | `ARRAY`                                     |
+| `BOOL`                 | `bool`                  | `BOOL`                                      |
+| `BYTES`                | `bytea`                 | `BYTES`                                     |
+| `DATE`                 | `date`                  | `DATE`                                      |
+| `FLOAT64`              | `float8`                | `FLOAT64`                                   |
+| `INT64`                | `bigint`                | `INT64`                                     |
+| `JSON`                 | `JSONB`                 | `JSON`                                      |
+| `NUMERIC`              | `numeric` \*            | `NUMERIC`                                   |
+| `STRING`               | `varchar`               | `STRING`                                    |
+| `STRUCT`               | \-                      | Not supported for Spanner federated queries |
+| `TIMESTAMP`            | `timestamptz`           | `TIMESTAMP` with nanoseconds truncated      |
 
-\* PostgreSQL numeric values with a precision that's greater than the precision that BigQuery supports are rounded. Values that are larger than the maximum value generate an `  Invalid NUMERIC value  ` error.
+\* PostgreSQL numeric values with a precision that's greater than the precision that BigQuery supports are rounded. Values that are larger than the maximum value generate an `Invalid NUMERIC value` error.
 
 If your external query contains a data type that's unsupported for federated queries, the query fails immediately. You can cast the unsupported data type to a supported data type.
 

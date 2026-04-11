@@ -12,7 +12,7 @@ Lists all QueryTemplates in a given project and location.
 
 ### HTTP request
 
-`  GET https://analyticshub.googleapis.com/v1/{parent=projects/*/locations/*/dataExchanges/*}/queryTemplates  `
+`GET https://analyticshub.googleapis.com/v1/{parent=projects/*/locations/*/dataExchanges/*}/queryTemplates`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,25 +20,25 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The parent resource path of the QueryTemplates. e.g. `  projects/myproject/locations/us/dataExchanges/123  ` .
+Required. The parent resource path of the QueryTemplates. e.g. `projects/myproject/locations/us/dataExchanges/123` .
 
 ### Query parameters
 
 Parameters
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 Optional. The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Optional. Page token, returned by a previous call, to request the next page of results.
 
@@ -63,29 +63,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;queryTemplates&quot;: [
-    {
-      object (QueryTemplate)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;queryTemplates&quot;: [{object (QueryTemplate)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  queryTemplates[]  `
+`queryTemplates[]`
 
-`  object ( QueryTemplate  ` )
+` object ( QueryTemplate  ` )
 
 The list of QueryTemplates.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 A token to request the next page of results.
 
@@ -93,15 +86,15 @@ A token to request the next page of results.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  parent  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:
 
-  - `  analyticshub.queryTemplates.list  `
+  - `analyticshub.queryTemplates.list`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

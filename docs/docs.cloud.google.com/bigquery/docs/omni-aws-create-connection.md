@@ -16,7 +16,7 @@ Ensure that you've created the following resources:
 
 ## Required roles
 
-To get the permissions that you need to create a connection to access Amazon S3 data, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a connection to access Amazon S3 data, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -73,12 +73,12 @@ To create an AWS IAM policy, use the AWS console or Terraform:
     Replace the following:
     
       - `  BUCKET_NAME  ` : the Amazon S3 bucket that you want BigQuery to access.
-      - `  EXPORT_PERM  ` (optional): additional permission if you want to [export data to an Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . Replace with `  "s3:PutObject"  `
+      - `  EXPORT_PERM  ` (optional): additional permission if you want to [export data to an Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . Replace with `"s3:PutObject"`
           - To separate export access control, we recommend that you create another connection with a separate AWS IAM role and grant the role write-only access. For more granular access control, you can also limit a role's access to a specific path of the bucket.
     
     **Note:** If you get an error after pasting the JSON into the editor, format the JSON text using a JSON editor.
 
-4.  In the **Name** field, enter a policy name, such as `  bq_omni_read_only  ` .
+4.  In the **Name** field, enter a policy name, such as `bq_omni_read_only` .
 
 5.  Click **Create policy** .
 
@@ -95,7 +95,7 @@ Replace the following:
 
 ### AWS CLI
 
-To create an AWS IAM policy, use the [`  aws iam create-policy  ` command](https://docs.aws.amazon.com/cli/latest/reference/iam/create-policy.html) :
+To create an AWS IAM policy, use the [`aws iam create-policy` command](https://docs.aws.amazon.com/cli/latest/reference/iam/create-policy.html) :
 
 ``` notranslate
   aws iam create-policy \
@@ -131,7 +131,7 @@ Replace the following:
 
   - `  POLICY_NAME  ` : the name of the policy you are creating.
   - `  BUCKET_NAME  ` : the Amazon S3 bucket that you want BigQuery to access.
-  - `  EXPORT_PERM  ` (optional): additional permission if you want to [export data to an Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . Replace with `  "s3:PutObject"  `
+  - `  EXPORT_PERM  ` (optional): additional permission if you want to [export data to an Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . Replace with `"s3:PutObject"`
       - To separate export access control, we recommend that you create another connection with a separate AWS IAM role and grant the role write-only access. For more granular access control, you can also limit a role's access to a specific path of the bucket.
 
 Your policy is created with an Amazon Resource Name (ARN) in the following format:
@@ -181,7 +181,7 @@ Add the following to your Terraform config to attach a policy to an Amazon S3 bu
 Replace the following:
 
   - `  BUCKET_NAME  ` : the Amazon S3 bucket that you want BigQuery to access.
-  - `  EXPORT_PERM  ` (optional): additional permission if you want to [export data to an Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . Replace with `  "s3:PutObject"  `
+  - `  EXPORT_PERM  ` (optional): additional permission if you want to [export data to an Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . Replace with `"s3:PutObject"`
       - To separate export access control, we recommend that you create another connection with a separate AWS IAM role and grant the role write-only access. For more granular access control, you can also limit a role's access to a specific path of the bucket.
 
 ## Create an AWS IAM role for BigQuery
@@ -202,7 +202,7 @@ To create an AWS IAM role, use the AWS console or Terraform:
 
 4.  For **Identity Provider** , select **Google** .
 
-5.  For **Audience** , enter `  00000  ` as a placeholder value. You'll replace the value later.
+5.  For **Audience** , enter `00000` as a placeholder value. You'll replace the value later.
 
 6.  Click **Next: Permissions** .
 
@@ -210,7 +210,7 @@ To create an AWS IAM role, use the AWS console or Terraform:
 
 8.  Click **Next: Tags** .
 
-9.  Click **Next: Review** . Enter a name for the role, such as `  BQ_Read_Only  ` .
+9.  Click **Next: Review** . Enter a name for the role, such as `BQ_Read_Only` .
 
 10. Click **Create role** .
 
@@ -312,7 +312,7 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
 
 3.  In the **Filter By** pane, in the **Data Source Type** section, select **Storage/Data Lakes** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `  aws  ` or `  Amazon S3  ` .
+    Alternatively, in the **Search for data sources** field, you can enter `aws` or `Amazon S3` .
 
 4.  In the **Featured data sources** section, click **Amazon S3** .
 
@@ -328,7 +328,7 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
     
       - For **Region** , select the location where you want to create the connection.
     
-      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `  My connection resource  ` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
+      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `My connection resource` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
     
       - Optional: For **Description** , enter a description for this connection resource.
     
@@ -373,7 +373,7 @@ Replace the following:
 
   - `  AWS_LOCATION  ` : an [Amazon S3 location](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) in Google Cloud
   - `  AWS_ACCOUNT  ` : your AWS account ID.
-  - `  IAM_ROLE_NAME  ` : the role that allows access to the Amazon S3 bucket from BigQuery. Use the value of the `  name  ` argument from the `  aws_iam_role  ` resource in [Create an AWS IAM role for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-role) .
+  - `  IAM_ROLE_NAME  ` : the role that allows access to the Amazon S3 bucket from BigQuery. Use the value of the `name` argument from the `aws_iam_role` resource in [Create an AWS IAM role for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-role) .
 
 ### bq
 
@@ -403,7 +403,7 @@ The output contains the following:
 
 Take note of the `  IDENTITY_ID  ` value.
 
-**Note:** To override the default project, use the `  --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 ### Java
 
@@ -460,7 +460,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Add a trust relationship to the AWS role
 
-BigQuery Omni provides two methods for securely accessing data from Amazon S3. You can either grant the Google Cloud service account access to your AWS role, or if your AWS account has a [custom identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) for `  accounts.google.com  ` , then you must add the Google Cloud service account as an audience to the provider:
+BigQuery Omni provides two methods for securely accessing data from Amazon S3. You can either grant the Google Cloud service account access to your AWS role, or if your AWS account has a [custom identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) for `accounts.google.com` , then you must add the Google Cloud service account as an audience to the provider:
 
   - [Add the trust policy to the AWS role](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#add-trust-policy) .
   - [Configure a custom AWS identity provider](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#configuring-custom-idp) .
@@ -517,7 +517,7 @@ To add a trust relationship, use the AWS console or Terraform:
 
 ### AWS CLI
 
-To create a trust relationship with the BigQuery connection, use the [`  aws iam update-assume-role-policy  ` command](https://docs.aws.amazon.com/cli/latest/reference/iam/update-assume-role-policy.html) :
+To create a trust relationship with the BigQuery connection, use the [`aws iam update-assume-role-policy` command](https://docs.aws.amazon.com/cli/latest/reference/iam/update-assume-role-policy.html) :
 
 ``` notranslate
   aws iam update-assume-role-policy \
@@ -566,7 +566,7 @@ Replace the following:
 
 ### Terraform
 
-Update the `  aws_iam_role  ` resource in the Terraform configuration to add a trust relationship:
+Update the `aws_iam_role` resource in the Terraform configuration to add a trust relationship:
 
 ``` notranslate
     resource "aws_iam_role" "bigquery-omni-connection-role" {
@@ -601,7 +601,7 @@ The connection is now ready to use.
 
 ### Configure a custom AWS identity provider
 
-If your AWS account has a [custom identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) for `  accounts.google.com  ` , you will need to add the IDENTITY\_ID as an audience to the provider. You can accomplish this by:
+If your AWS account has a [custom identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) for `accounts.google.com` , you will need to add the IDENTITY\_ID as an audience to the provider. You can accomplish this by:
 
 1.  Go to the AWS IAM console. Ensure that you're in the account that owns the Amazon S3 bucket that you want to access.
     
@@ -619,9 +619,9 @@ The connection is now ready to use.
 
 You can grant the following roles to let users query data and manage connections:
 
-  - `  roles/bigquery.connectionUser  ` : enables users to use connections to connect with external data sources and run queries on them.
+  - `roles/bigquery.connectionUser` : enables users to use connections to connect with external data sources and run queries on them.
 
-  - `  roles/bigquery.connectionAdmin  ` : enables users to manage connections.
+  - `roles/bigquery.connectionAdmin` : enables users to manage connections.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -655,7 +655,7 @@ You cannot share a connection with the bq command-line tool. To share a connecti
 
 ### API
 
-Use the [`  projects.locations.connections.setIAM  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `  policy  ` resource.
+Use the [`projects.locations.connections.setIAM` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `policy` resource.
 
 ### Java
 

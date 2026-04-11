@@ -80,17 +80,17 @@ Use this section to learn more about using tools and pipelines to help with migr
 
 The BigQuery Data Transfer Service provides an automated tool to migrate both schema and data from Amazon Redshift to BigQuery directly. The following table lists additional tools to assist in migrating from Amazon Redshift to BigQuery:
 
-| **Tool**                                                                                         | **Purpose**                                                                                                                                                                         |
-| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction)   | Perform an automated batch transfer of your Amazon Redshift data to BigQuery by using this fully managed service.                                                                   |
-| [Storage Transfer Service](https://docs.cloud.google.com/storage/transfer)                       | Quickly import Amazon S3 data into Cloud Storage and set up a repeating schedule for transferring data by using this fully managed service.                                         |
-| `          gcloud        `                                                                       | Copy Amazon S3 files into Cloud Storage by using this command-line tool.                                                                                                            |
-| [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool)              | Interact with BigQuery by using this command-line tool. Common interactions include creating BigQuery table schemas, loading Cloud Storage data into tables, and executing queries. |
-| [Cloud Storage client libraries](https://docs.cloud.google.com/storage/docs/reference/libraries) | Copy Amazon S3 files into Cloud Storage by using your custom tool, built on top of the Cloud Storage client library.                                                                |
-| [BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)     | Interact with BigQuery by using your custom tool, built on top of the BigQuery client library.                                                                                      |
-| [BigQuery query scheduler](https://docs.cloud.google.com/bigquery/docs/scheduling-queries)       | Schedule recurring SQL queries by using this built-in BigQuery feature.                                                                                                             |
-| [Cloud Composer](https://docs.cloud.google.com/composer)                                         | Orchestrate transformations and BigQuery load jobs by using this fully managed Apache Airflow environment.                                                                          |
-| [Apache Sqoop](https://sqoop.apache.org/)                                                        | Submit Hadoop jobs by using Sqoop and Amazon Redshift's JDBC driver to extract data from Amazon Redshift into either HDFS or Cloud Storage. Sqoop runs in a Dataproc environment.   |
+| **Tool**                                                                                         | **Purpose**                                                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction)   | Perform an automated batch transfer of your Amazon Redshift data to BigQuery by using this fully managed service.                                                                                         |
+| [Storage Transfer Service](https://docs.cloud.google.com/storage/transfer)                       | Quickly import Amazon S3 data into Cloud Storage and set up a repeating schedule for transferring data by using this fully managed service.                                                               |
+| `         gcloud        `                                                                        | Copy Amazon S3 files into Cloud Storage by using this command-line tool.                                                                                                                                  |
+| [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool)              | Interact with BigQuery by using this command-line tool. Common interactions include creating BigQuery table schemas, loading Cloud Storage data into tables, and executing queries.                       |
+| [Cloud Storage client libraries](https://docs.cloud.google.com/storage/docs/reference/libraries) | Copy Amazon S3 files into Cloud Storage by using your custom tool, built on top of the Cloud Storage client library.                                                                                      |
+| [BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)     | Interact with BigQuery by using your custom tool, built on top of the BigQuery client library.                                                                                                            |
+| [BigQuery query scheduler](https://docs.cloud.google.com/bigquery/docs/scheduling-queries)       | Schedule recurring SQL queries by using this built-in BigQuery feature.                                                                                                                                   |
+| [Cloud Composer](https://docs.cloud.google.com/composer)                                         | Orchestrate transformations and BigQuery load jobs by using this fully managed Apache Airflow environment.                                                                                                |
+| [Apache Sqoop](https://sqoop.apache.org/)                                                        | Submit Hadoop jobs by using Sqoop and Amazon Redshift's JDBC driver to extract data from Amazon Redshift into either HDFS or Cloud Storage. Sqoop runs in a Managed Service for Apache Spark environment. |
 
 For more information on using BigQuery Data Transfer Service, see [Migrate schema and data from Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift) .
 
@@ -132,7 +132,7 @@ Use any of the following Google Cloud products to export Amazon Redshift data by
     
       - [Using JDBC drivers](https://docs.cloud.google.com/data-fusion/docs/how-to/using-jdbc-drivers)
 
-  - [Dataproc](https://docs.cloud.google.com/dataproc/docs)
+  - [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs)
     
       - [Connect to Amazon Redshift through JDBC using Apache Spark](https://docs.databricks.com/spark/latest/data-sources/aws/amazon-redshift.html)
         
@@ -144,7 +144,7 @@ Use any of the following Google Cloud products to export Amazon Redshift data by
     
       - Use Sqoop and the [Amazon Redshift JDBC driver](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#download-jdbc-driver) to extract data from Amazon Redshift into Cloud Storage
         
-          - [Sqoop on Dataproc example](https://medium.com/google-cloud/moving-data-with-apache-sqoop-in-google-cloud-dataproc-4056b8fa2600)
+          - [Sqoop on Managed Service for Apache Spark example](https://medium.com/google-cloud/moving-data-with-apache-sqoop-in-google-cloud-dataproc-4056b8fa2600)
 
 #### Extract, transform, and load (ETL)
 
@@ -162,7 +162,7 @@ If you want to transform some data before loading it into BigQuery, follow the s
 
 3.  Transform and then load your data into BigQuery by using any of the following options:
     
-      - [Dataproc](https://docs.cloud.google.com/dataproc/docs)
+      - [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs)
         
           - [Read from Cloud Storage with Apache Spark](https://docs.cloud.google.com/dataproc/docs/tutorials/gcs-connector-spark-tutorial#prepare_the_spark_wordcount_job)
           - [Write to BigQuery with Apache Spark](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example#reading_and_writing_data_from_bigquery)
@@ -197,7 +197,7 @@ Use any of the products described in the [Extract and Load (EL)](https://docs.cl
     
       - Transform your data using any of the [CDAP plugins](https://cdap.io/resources/plugins/) .
 
-  - [Dataproc](https://docs.cloud.google.com/dataproc/docs)
+  - [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs)
     
       - Transform your data using either [Spark SQL](https://spark.apache.org/docs/latest/sql-programming-guide.html) or your own custom code in any of the supported Spark languages ( [Scala](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.package) , [Java](https://spark.apache.org/docs/latest/api/java/index.html) , [Python](https://spark.apache.org/docs/latest/api/python/index.html) , or [R](https://spark.apache.org/docs/latest/api/R/index.html) ).
 
@@ -290,7 +290,7 @@ A partitioned table is a table that is divided into segments, called partitions,
 There are three types of table partitioning in BigQuery:
 
   - [Tables partitioned by ingestion time](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) : Tables are partitioned based on the data's ingestion time.
-  - [Tables partitioned by column](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables are partitioned based on a `  TIMESTAMP  ` or `  DATE  ` column.
+  - [Tables partitioned by column](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables are partitioned based on a `TIMESTAMP` or `DATE` column.
   - [Tables partitioned by integer range](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) : Tables are partitioned based on an integer column.
 
 A column-based, time-partitioned table obviates the need to maintain partition awareness independent from the existing data filtering on the bound column. Data written to a column-based, time-partitioned table is automatically delivered to, the appropriate partition based on the value of the data. Similarly, queries that express filters on the partitioning column can reduce the overall data scanned, which can yield improved performance and reduced query cost for on-demand queries.
@@ -316,7 +316,7 @@ Use clustering in the following circumstances:
 
 When you use clustering and partitioning together, your data can be partitioned by a date, timestamp, or integer column and then clustered on a different set of columns (up to four total clustered columns). In this case, data in each partition is clustered based on the values of the clustering columns.
 
-When you specify sort keys in tables in Amazon Redshift, depending on the load on the system, Amazon Redshift automatically initiates the sort using your own cluster's compute capacity. You may even need to manually run the [`  VACUUM  `](https://docs.aws.amazon.com/redshift/latest/dg/r_VACUUM_command.html) command if you want to fully sort your table data as soon as possible, for example, after a large data load. BigQuery [automatically handles](https://docs.cloud.google.com/bigquery/docs/clustered-tables#automatic_reclustering) this sorting for you and does not use your allocated BigQuery slots, therefore not affecting the performance of any of your queries.
+When you specify sort keys in tables in Amazon Redshift, depending on the load on the system, Amazon Redshift automatically initiates the sort using your own cluster's compute capacity. You may even need to manually run the [`VACUUM`](https://docs.aws.amazon.com/redshift/latest/dg/r_VACUUM_command.html) command if you want to fully sort your table data as soon as possible, for example, after a large data load. BigQuery [automatically handles](https://docs.cloud.google.com/bigquery/docs/clustered-tables#automatic_reclustering) this sorting for you and does not use your allocated BigQuery slots, therefore not affecting the performance of any of your queries.
 
 For more information about working with clustered tables, see the [Introduction to clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) .
 
@@ -344,11 +344,11 @@ Amazon Redshift data types differ from BigQuery data types. For more details on 
 
 BigQuery also supports the following data types, which don't have a direct Amazon Redshift analog:
 
-  - [`  ARRAY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type)
-  - [`  BYTES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type)
-  - [`  GEOGRAPHY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type)
-  - [`  TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type)
-  - [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type)
+  - [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type)
+  - [`BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type)
+  - [`GEOGRAPHY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type)
+  - [`TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type)
+  - [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type)
 
 ### SQL comparison
 

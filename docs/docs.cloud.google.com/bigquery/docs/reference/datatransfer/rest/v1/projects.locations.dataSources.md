@@ -17,162 +17,137 @@ Defines the properties and custom parameters for a data source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;dataSourceId&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;clientId&quot;: string,
-  &quot;scopes&quot;: [
-    string
-  ],
-  &quot;transferType&quot;: enum (TransferType),
-  &quot;supportsMultipleTransfers&quot;: boolean,
-  &quot;updateDeadlineSeconds&quot;: integer,
-  &quot;defaultSchedule&quot;: string,
-  &quot;supportsCustomSchedule&quot;: boolean,
-  &quot;parameters&quot;: [
-    {
-      object (DataSourceParameter)
-    }
-  ],
-  &quot;helpUrl&quot;: string,
-  &quot;authorizationType&quot;: enum (AuthorizationType),
-  &quot;dataRefreshType&quot;: enum (DataRefreshType),
-  &quot;defaultDataRefreshWindowDays&quot;: integer,
-  &quot;manualRunsDisabled&quot;: boolean,
-  &quot;minimumScheduleInterval&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataSourceId&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;clientId&quot;: string,&quot;scopes&quot;: [string],&quot;transferType&quot;: enum (TransferType),&quot;supportsMultipleTransfers&quot;: boolean,&quot;updateDeadlineSeconds&quot;: integer,&quot;defaultSchedule&quot;: string,&quot;supportsCustomSchedule&quot;: boolean,&quot;parameters&quot;: [{object (DataSourceParameter)}],&quot;helpUrl&quot;: string,&quot;authorizationType&quot;: enum (AuthorizationType),&quot;dataRefreshType&quot;: enum (DataRefreshType),&quot;defaultDataRefreshWindowDays&quot;: integer,&quot;manualRunsDisabled&quot;: boolean,&quot;minimumScheduleInterval&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Output only. Data source resource name.
 
-`  dataSourceId  `
+`dataSourceId`
 
-`  string  `
+`string`
 
 Data source id.
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 User friendly data source name.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 User friendly data source description string.
 
-`  clientId  `
+`clientId`
 
-`  string  `
+`string`
 
 Data source client id which should be used to receive refresh token.
 
-`  scopes[]  `
+`scopes[]`
 
-`  string  `
+`string`
 
 Api auth scopes for which refresh token needs to be obtained. These are scopes needed by a data source to prepare data and ingest them into BigQuery, e.g., <https://www.googleapis.com/auth/bigquery>
 
-`  transferType (deprecated)  `
+` transferType (deprecated)  `
 
-`  enum ( TransferType  ` )
-
-This item is deprecated\!
-
-Deprecated. This field has no effect.
-
-`  supportsMultipleTransfers (deprecated)  `
-
-`  boolean  `
+` enum ( TransferType  ` )
 
 This item is deprecated\!
 
 Deprecated. This field has no effect.
 
-`  updateDeadlineSeconds  `
+` supportsMultipleTransfers (deprecated)  `
 
-`  integer  `
+`boolean`
+
+This item is deprecated\!
+
+Deprecated. This field has no effect.
+
+`updateDeadlineSeconds`
+
+`integer`
 
 The number of seconds to wait for an update from the data source before the Data Transfer Service marks the transfer as FAILED.
 
-`  defaultSchedule  `
+`defaultSchedule`
 
-`  string  `
+`string`
 
-Default data transfer schedule. Examples of valid schedules include: `  1st,3rd monday of month 15:30  ` , `  every wed,fri of jan,jun 13:15  ` , and `  first sunday of quarter 00:00  ` .
+Default data transfer schedule. Examples of valid schedules include: `1st,3rd monday of month 15:30` , `every wed,fri of jan,jun 13:15` , and `first sunday of quarter 00:00` .
 
-`  supportsCustomSchedule  `
+`supportsCustomSchedule`
 
-`  boolean  `
+`boolean`
 
-Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `  true  ` , user can override default schedule.
+Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `true` , user can override default schedule.
 
-`  parameters[]  `
+`parameters[]`
 
-`  object ( DataSourceParameter  ` )
+` object ( DataSourceParameter  ` )
 
 Data source parameters.
 
-`  helpUrl  `
+`helpUrl`
 
-`  string  `
+`string`
 
 Url for the help document for this data source.
 
-`  authorizationType  `
+`authorizationType`
 
-`  enum ( AuthorizationType  ` )
+` enum ( AuthorizationType  ` )
 
 Indicates the type of authorization.
 
-`  dataRefreshType  `
+`dataRefreshType`
 
-`  enum ( DataRefreshType  ` )
+` enum ( DataRefreshType  ` )
 
 Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data might not be complete until a few days later, so it's useful to refresh data automatically.
 
-`  defaultDataRefreshWindowDays  `
+`defaultDataRefreshWindowDays`
 
-`  integer  `
+`integer`
 
-Default data refresh window on days. Only meaningful when `  dataRefreshType  ` = `  SLIDING_WINDOW  ` .
+Default data refresh window on days. Only meaningful when `dataRefreshType` = `SLIDING_WINDOW` .
 
-`  manualRunsDisabled  `
+`manualRunsDisabled`
 
-`  boolean  `
+`boolean`
 
 Disables backfilling and manual run scheduling for the data source.
 
-`  minimumScheduleInterval  `
+`minimumScheduleInterval`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
 The minimum interval for scheduler to schedule runs.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
 ## Methods
 
-### `             checkValidCreds           `
+### `            checkValidCreds           `
 
 Returns true if valid credentials exist for the given data source and requesting user.
 
-### `             get           `
+### `            get           `
 
 Retrieves a supported data source and returns its settings.
 
-### `             list           `
+### `            list           `
 
 Lists supported data sources and returns their settings.

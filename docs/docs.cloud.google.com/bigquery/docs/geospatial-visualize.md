@@ -10,7 +10,7 @@ Geospatial analytics lets you visualize geographic location data by using the fo
 
 ## BigQuery Studio
 
-BigQuery Studio offers an integrated geography data viewer. When your query results contain one or more `  GEOGRAPHY  ` type columns, you can view the results in an interactive map. To view the map, in the **Query results** pane, click the **Visualization** tab.
+BigQuery Studio offers an integrated geography data viewer. When your query results contain one or more `GEOGRAPHY` type columns, you can view the results in an interactive map. To view the map, in the **Query results** pane, click the **Visualization** tab.
 
 ![Drought index visualization in BigQuery Studio.](https://docs.cloud.google.com/static/bigquery/images/visualization-drought.png)
 
@@ -20,16 +20,16 @@ To see an example of how to use the integrated geography viewer, see [Get starte
 
 ### BigQuery Studio limitations
 
-  - You can only visualize one `  GEOGRAPHY  ` column at a time.
+  - You can only visualize one `GEOGRAPHY` column at a time.
   - Performance is subject to browser capabilities and isn't intended for rendering extremely large or complex datasets. BigQuery renders up to approximately one million vertices, 20,000 rows, or 128 MB of results.
 
 ## Looker Studio
 
-Looker Studio is a no-cost, self-serve reporting and data visualization service from Google Marketing Platform that connects to BigQuery and hundreds of other data sources. The service includes support for a variety of [geographic field types](https://support.google.com/looker-studio/answer/9843174) and [choropleth maps](https://en.wikipedia.org/wiki/Choropleth_map) of BigQuery `  GEOGRAPHY  ` polygons. With [Google Maps-based visualization](https://support.google.com/looker-studio/answer/9713352) , you can visualize and interact with your geographic data just as you do with Google Maps: pan around, zoom in, and pop into Street View.
+Looker Studio is a no-cost, self-serve reporting and data visualization service from Google Marketing Platform that connects to BigQuery and hundreds of other data sources. The service includes support for a variety of [geographic field types](https://support.google.com/looker-studio/answer/9843174) and [choropleth maps](https://en.wikipedia.org/wiki/Choropleth_map) of BigQuery `GEOGRAPHY` polygons. With [Google Maps-based visualization](https://support.google.com/looker-studio/answer/9713352) , you can visualize and interact with your geographic data just as you do with Google Maps: pan around, zoom in, and pop into Street View.
 
 ![Geographic regions visualized in Looker Studio.](https://docs.cloud.google.com/static/bigquery/images/gis-data-studio.png)
 
-For a walkthrough of geospatial analytics in Looker Studio, see [Visualize BigQuery `  GEOGRAPHY  ` polygons with Looker Studio](https://support.google.com/looker-studio/answer/10502383) .
+For a walkthrough of geospatial analytics in Looker Studio, see [Visualize BigQuery `GEOGRAPHY` polygons with Looker Studio](https://support.google.com/looker-studio/answer/10502383) .
 
 ## BigQuery Geo Viz
 
@@ -45,8 +45,8 @@ To explore Geo Viz, go to the Geo Viz web tool:
 
 ### Geo Viz limitations
 
-  - Geo Viz supports geometry inputs (points, lines, and polygons) that are retrieved as a `  GEOGRAPHY  ` column. You can use BigQuery's geography functions to convert latitude and longitude to `  GEOGRAPHY  ` .
-  - The number of results that Geo Viz can display on a map is limited by browser memory. You can lower the resolution and reduce size of geospatial data returned from the query by using `  ST_Simplify  ` function.
+  - Geo Viz supports geometry inputs (points, lines, and polygons) that are retrieved as a `GEOGRAPHY` column. You can use BigQuery's geography functions to convert latitude and longitude to `GEOGRAPHY` .
+  - The number of results that Geo Viz can display on a map is limited by browser memory. You can lower the resolution and reduce size of geospatial data returned from the query by using `ST_Simplify` function.
   - Real-time, interactive analysis is handled locally by your browser and is subject to your browser's capabilities.
   - Geo Viz supports sharing visualizations only with users authorized to execute queries in the same BigQuery project.
   - Geo Viz does not support downloading a visualization for offline editing.

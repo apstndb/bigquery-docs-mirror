@@ -10,7 +10,7 @@ In this walkthrough, you explore the components of the BigQuery Google Cloud con
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
@@ -112,11 +112,11 @@ To explore the **Studio** page, follow these steps:
     
     **Note:** You can expand and collapse the left pane by clicking first\_page **Collapse left pane** or last\_page **Expand left pane** .
 
-3.  Go to the `  bigquery-public-data  ` project, click arrow\_right **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
+3.  Go to the `bigquery-public-data` project, click arrow\_right **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
     
     BigQuery [public datasets](https://docs.cloud.google.com/bigquery/public-data) are stored in BigQuery and made available to the general public through the Google Cloud Public Dataset Program.
 
-4.  In the list, click the `  austin_crime  ` dataset.
+4.  In the list, click the `austin_crime` dataset.
 
 5.  On the **Overview** tab, view the resources stored in the dataset such as tables, models, and routines.
 

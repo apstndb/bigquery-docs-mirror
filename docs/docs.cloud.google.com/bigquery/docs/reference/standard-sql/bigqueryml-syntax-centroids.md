@@ -1,6 +1,6 @@
 # The ML.CENTROIDS function
 
-This document describes the `  ML.CENTROIDS  ` function, which lets you return information about the [centroids](https://developers.google.com/machine-learning/glossary/#centroid) in a [k-means model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) .
+This document describes the `ML.CENTROIDS` function, which lets you return information about the [centroids](https://developers.google.com/machine-learning/glossary/#centroid) in a [k-means model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) .
 
 ## Syntax
 
@@ -12,43 +12,43 @@ ML.CENTROIDS(
 
 ### Arguments
 
-`  ML.CENTROIDS  ` takes the following arguments:
+`ML.CENTROIDS` takes the following arguments:
 
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET  ` : the BigQuery dataset that contains the model.
   - `  MODEL  ` : the name of the model.
-  - `  STANDARDIZE  ` : a `  BOOL  ` value that specifies whether the centroid features should be standardized to assume that all features have a mean of `  0  ` and a standard deviation of `  1  ` . Standardizing the features allows the absolute magnitude of the values to be compared to each other. The default value is `  FALSE  ` .
+  - `  STANDARDIZE  ` : a `BOOL` value that specifies whether the centroid features should be standardized to assume that all features have a mean of `0` and a standard deviation of `1` . Standardizing the features allows the absolute magnitude of the values to be compared to each other. The default value is `FALSE` .
 
 ## Output
 
-`  ML.CENTROIDS  ` returns the following columns:
+`ML.CENTROIDS` returns the following columns:
 
-  - `  trial_id  ` : an `  INT64  ` value that contains the hyperparameter tuning trial ID. This column is only returned if you ran hyperparameter tuning when creating the model.
+  - `trial_id` : an `INT64` value that contains the hyperparameter tuning trial ID. This column is only returned if you ran hyperparameter tuning when creating the model.
 
-  - `  centroid_id  ` : an `  INT64  ` value that contains the centroid ID.
+  - `centroid_id` : an `INT64` value that contains the centroid ID.
 
-  - `  feature  ` : a `  STRING  ` value that contains the feature column name.
+  - `feature` : a `STRING` value that contains the feature column name.
 
-  - `  numerical_value  ` : a `  FLOAT64  ` value that contains the feature value for the centroid that `  centroid_id  ` identifies if the column identified by the `  feature  ` value is numeric. Otherwise, `  numerical_value  ` is `  NULL  ` .
+  - `numerical_value` : a `FLOAT64` value that contains the feature value for the centroid that `centroid_id` identifies if the column identified by the `feature` value is numeric. Otherwise, `numerical_value` is `NULL` .
 
-  - `  categorical_value  ` : an `  ARRAY<STRUCT>  ` value that contains information about categorical features. Each struct contains the following fields:
+  - `categorical_value` : an `ARRAY<STRUCT>` value that contains information about categorical features. Each struct contains the following fields:
     
-      - `  categorical_value.category  ` : a `  STRING  ` value that contains the name of each category.
-      - `  categorical_value.value  ` : a `  STRING  ` value that contains the value of `  categorical_value.category  ` for the centroid that `  centroid_id  ` identifies.
+      - `categorical_value.category` : a `STRING` value that contains the name of each category.
+      - `categorical_value.value` : a `STRING` value that contains the value of `categorical_value.category` for the centroid that `centroid_id` identifies.
 
-  - `  geography_value  ` : a `  STRING  ` value that contains the `  categorical_value.category  ` value for the centroid that `  centroid_id  ` identifies if the column identified by the `  feature  ` value is of type `  GEOGRAPHY  ` . Otherwise, `  geography_value  ` value is `  NULL  ` .
+  - `geography_value` : a `STRING` value that contains the `categorical_value.category` value for the centroid that `centroid_id` identifies if the column identified by the `feature` value is of type `GEOGRAPHY` . Otherwise, `geography_value` value is `NULL` .
 
 The output contains one row per feature per centroid.
 
 ## Examples
 
-The following examples show how to use `  ML.CENTROIDS  ` with and without the `  standardize  ` argument.
+The following examples show how to use `ML.CENTROIDS` with and without the `standardize` argument.
 
 ### Without standardization
 
 **Numerical features**
 
-The following example retrieves centroid information from the model `  mydataset.my_kmeans_model  ` in your default project. This model only contains numerical features.
+The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. This model only contains numerical features.
 
 ``` notranslate
 SELECT
@@ -76,7 +76,7 @@ This query returns results like the following:
 
 **Categorical features**
 
-The following example retrieves centroid information from the model `  mydataset.my_kmeans_model  ` in your default project. This model contains categorical features.
+The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. This model contains categorical features.
 
 ``` notranslate
 SELECT
@@ -123,7 +123,7 @@ The following are the results from the same query against a k-means model with b
 
 ### With standardization
 
-The following example retrieves centroid information from the model `  mydataset.my_kmeans_model  ` in your default project. The query in this example assumes that all features have a mean of `  0  ` and a standard deviation of `  1  ` .
+The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. The query in this example assumes that all features have a mean of `0` and a standard deviation of `1` .
 
 ``` notranslate
 SELECT

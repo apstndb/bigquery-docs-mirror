@@ -2,18 +2,18 @@ Describes how the model was deleted.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  MODEL_DELETE_REQUEST  `
+`MODEL_DELETE_REQUEST`
 
 Model was deleted using the models.delete API.
 
-`  EXPIRED  `
+`EXPIRED`
 
 Model expired.
 
-`  QUERY  `
+`QUERY`
 
 Model was deleted using DDL query.

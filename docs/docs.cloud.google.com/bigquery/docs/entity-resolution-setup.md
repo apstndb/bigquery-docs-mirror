@@ -23,8 +23,8 @@ The following sections show you how to configure entity resolution in BigQuery. 
 To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles:
 
   - For the identity provider's service account to read the input dataset and write to the output dataset:
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the input dataset
-      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the output dataset
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the input dataset
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the output dataset
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -106,7 +106,7 @@ Create a metadata table to store the configuration required by the identity reso
 
 ##### Create a job status table
 
-Create a table to receive updates about the processing of an input batch. You can query this table to trigger other downstream processes in your pipeline. Possible job statuses include `  RUNNING  ` , `  COMPLETED  ` , or `  ERROR  ` .
+Create a table to receive updates about the processing of an input batch. You can query this table to trigger other downstream processes in your pipeline. Possible job statuses include `RUNNING` , `COMPLETED` , or `ERROR` .
 
 ##### Create the service invocation
 
@@ -213,11 +213,11 @@ The following sections show you how to configure entity resolution in BigQuery. 
 To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles:
 
   - For the service account that's associated with your function to read and write to associated datasets and launch jobs:
-      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the project
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
   - For the end-user principal to see and connect to the remote function:
-      - [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on the connection
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the control plane dataset with the remote function
+      - [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) on the connection
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the control plane dataset with the remote function
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 

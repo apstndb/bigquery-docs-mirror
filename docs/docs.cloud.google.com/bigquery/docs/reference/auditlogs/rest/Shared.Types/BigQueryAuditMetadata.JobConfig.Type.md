@@ -2,22 +2,22 @@ Job type.
 
 Enums
 
-`  TYPE_UNSPECIFIED  `
+`TYPE_UNSPECIFIED`
 
 Unknown.
 
-`  QUERY  `
+`QUERY`
 
 Query job.
 
-`  COPY  `
+`COPY`
 
 Table copy job.
 
-`  EXPORT  `
+`EXPORT`
 
 Export (extract) job.
 
-`  IMPORT  `
+`IMPORT`
 
 Import (load) job.

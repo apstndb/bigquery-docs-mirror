@@ -16,29 +16,29 @@ In this tutorial, the NNLM and SWIVEL models are [imported TensorFlow models](ht
 
 ## Required permissions
 
-  - To create the dataset, you need the `  bigquery.datasets.create  ` Identity and Access Management (IAM) permission.
+  - To create the dataset, you need the `bigquery.datasets.create` Identity and Access Management (IAM) permission.
 
-  - To create the bucket, you need the `  storage.buckets.create  ` IAM permission.
+  - To create the bucket, you need the `storage.buckets.create` IAM permission.
 
-  - To upload the model to Cloud Storage, you need the `  storage.objects.create  ` and `  storage.objects.get  ` IAM permissions.
+  - To upload the model to Cloud Storage, you need the `storage.objects.create` and `storage.objects.get` IAM permissions.
 
   - To create the connection resource, you need the following IAM permissions:
     
-      - `  bigquery.connections.create  `
-      - `  bigquery.connections.get  `
+      - `bigquery.connections.create`
+      - `bigquery.connections.get`
 
   - To load the model into BigQuery ML, you need the following IAM permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following IAM permissions:
     
-      - `  bigquery.tables.getData  ` on the object table
-      - `  bigquery.models.getData  ` on the model
-      - `  bigquery.jobs.create  `
+      - `bigquery.tables.getData` on the object table
+      - `bigquery.models.getData` on the model
+      - `bigquery.jobs.create`
 
 ## Costs
 
@@ -66,11 +66,11 @@ For more information, see the following resources:
 
 ## Create a dataset
 
-To create a dataset named `  tf_models_tutorial  ` to store the models that you create, select one of the following options:
+To create a dataset named `tf_models_tutorial` to store the models that you create, select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE SCHEMA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
+Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -94,7 +94,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
 
-2.  To create the dataset, run the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
+2.  To create the dataset, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
     
     ``` notranslate
     bq mk --dataset --location=us PROJECT_ID:tf_models_tutorial
@@ -108,7 +108,7 @@ For more detailed instructions on generating text embeddings using pretrained Te
 
 ### NNLM
 
-1.  Install the [`  bigquery-ml-utils  ` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
+1.  Install the [`bigquery-ml-utils` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
     
         pip install bigquery-ml-utils
 
@@ -140,7 +140,7 @@ For more detailed instructions on generating text embeddings using pretrained Te
 
 ### SWIVEL
 
-1.  Install the [`  bigquery-ml-utils  ` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
+1.  Install the [`bigquery-ml-utils` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
     
         pip install bigquery-ml-utils
 
@@ -172,7 +172,7 @@ For more detailed instructions on generating text embeddings using pretrained Te
 
 ### BERT
 
-1.  Install the [`  bigquery-ml-utils  ` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
+1.  Install the [`bigquery-ml-utils` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
     
         pip install bigquery-ml-utils
 
@@ -208,7 +208,7 @@ Select one of the following models:
 
 ### NNLM
 
-Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
+Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -217,10 +217,7 @@ Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/do
 2.  In the query editor, enter the following statement:
     
     ``` notranslate
-    CREATE OR REPLACE MODEL tf_models_tutorial.nnlm_model
-    OPTIONS (
-      model_type = 'TENSORFLOW',
-      model_path = 'gs://BUCKET_NAME/nnlm_model/*');
+    CREATE OR REPLACE MODEL tf_models_tutorial.nnlm_modelOPTIONS (  model_type = 'TENSORFLOW',  model_path = 'gs://BUCKET_NAME/nnlm_model/*');
     ```
     
     Replace `  BUCKET_NAME  ` with the name of the bucket that you previously created.
@@ -231,7 +228,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### SWIVEL
 
-Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
+Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -240,10 +237,7 @@ Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/do
 2.  In the query editor, enter the following statement:
     
     ``` notranslate
-    CREATE OR REPLACE MODEL tf_models_tutorial.swivel_model
-    OPTIONS (
-      model_type = 'TENSORFLOW',
-      model_path = 'gs://BUCKET_NAME/swivel_model/*');
+    CREATE OR REPLACE MODEL tf_models_tutorial.swivel_modelOPTIONS (  model_type = 'TENSORFLOW',  model_path = 'gs://BUCKET_NAME/swivel_model/*');
     ```
     
     Replace `  BUCKET_NAME  ` with the name of the bucket that you previously created.
@@ -264,13 +258,13 @@ To import the BERT model to Vertex AI, follow these steps:
 
 2.  Click **Import** , and then do the following:
     
-      - For **Name** , enter `  BERT  ` .
+      - For **Name** , enter `BERT` .
       - For **Region** , select a region that matches your Cloud Storage bucket's region.
 
 3.  Click **Continue** , and then do the following:
     
-      - For **Model framework version** , select `  2.8  ` .
-      - For **Model artifact location** , enter the path to the Cloud Storage bucket where you stored the model file. For example, `  gs:// BUCKET_PATH /bert_model  ` .
+      - For **Model framework version** , select `2.8` .
+      - For **Model artifact location** , enter the path to the Cloud Storage bucket where you stored the model file. For example, `gs:// BUCKET_PATH /bert_model` .
 
 4.  Click **Import** . After the import is complete, your model appears on the **Model registry** page.
 
@@ -286,7 +280,7 @@ To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, fol
 
 4.  Click **Deploy to endpoint** .
 
-5.  For **Endpoint name** , enter `  bert_model_endpoint  ` .
+5.  For **Endpoint name** , enter `bert_model_endpoint` .
 
 6.  Click **Continue** .
 
@@ -296,7 +290,7 @@ To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, fol
 
 9.  [Create a BigQuery Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) and [grant access](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#set_up_connection_access) to the connection's service account.
 
-To create a remote model based on the Vertex AI endpoint, use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
+To create a remote model based on the Vertex AI endpoint, use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -305,12 +299,8 @@ To create a remote model based on the Vertex AI endpoint, use the [`  CREATE MOD
 2.  In the query editor, enter the following statement:
     
     ``` notranslate
-    CREATE OR REPLACE MODEL tf_models_tutorial.bert_model
-    INPUT(content STRING)
-    OUTPUT(embedding ARRAY<FLOAT64>)
-    REMOTE WITH CONNECTION `PROJECT_ID.CONNECTION_LOCATION.CONNECTION_ID`
-    OPTIONS (
-      ENDPOINT = "https://ENDPOINT_LOCATION-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/ENDPOINT_LOCATION/endpoints/ENDPOINT_ID");
+    CREATE OR REPLACE MODEL tf_models_tutorial.bert_modelINPUT(content STRING)OUTPUT(embedding ARRAY<FLOAT64>)REMOTE WITH CONNECTION `PROJECT_ID.CONNECTION_LOCATION.CONNECTION_ID`
+    OPTIONS (  ENDPOINT = "https://ENDPOINT_LOCATION-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/ENDPOINT_LOCATION/endpoints/ENDPOINT_ID");
     ```
     
     Replace the following:
@@ -321,7 +311,7 @@ To create a remote model based on the Vertex AI endpoint, use the [`  CREATE MOD
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection
         
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  `
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  `
     
       - `  ENDPOINT_LOCATION  ` : the location of your Vertex AI endpoint. For example: "us-central1".
     
@@ -333,7 +323,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ## Generate text embeddings
 
-In this section, you use the [`  ML.PREDICT()  ` inference function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate text embeddings of the `  review  ` column from the public dataset `  bigquery-public-data.imdb.reviews  ` . The query limits the table to 500 rows to reduce the amount of data processed.
+In this section, you use the [`ML.PREDICT()` inference function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate text embeddings of the `review` column from the public dataset `bigquery-public-data.imdb.reviews` . The query limits the table to 500 rows to reduce the amount of data processed.
 
 ### NNLM
 
@@ -430,7 +420,7 @@ The result is similar to the following:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

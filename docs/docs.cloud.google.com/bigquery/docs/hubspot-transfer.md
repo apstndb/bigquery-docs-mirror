@@ -31,36 +31,36 @@ You must create a HubSpot private app and retrieve your private app access token
 
 #### Required scopes
 
-  - `  automation  `
-  - `  business-intelligence  `
-  - `  collector_graphql_query_execute  `
-  - `  collector_graphql_query_read  `
-  - `  content  `
-  - `  conversations.read  `
-  - `  conversations.visitor_identification.tokens.create  `
-  - `  crm.import  `
-  - `  crm.lists.read  `
-  - `  crm.objects.companies.read  `
-  - `  crm.objects.contacts.read  `
-  - `  crm.objects.deals.read  `
-  - `  crm.objects.owners.read  `
-  - `  crm.schemas.companies.read  `
-  - `  crm.schemas.contacts.read  `
-  - `  crm.schemas.deals.read  `
-  - `  e-commerce  `
-  - `  files  `
-  - `  forms  `
-  - `  forms-uploaded-files  `
-  - `  hubdb  `
-  - `  integration-sync  `
-  - `  oauth  `
-  - `  sales-email-read  `
-  - `  settings.users.read  `
-  - `  settings.users.teams.read  `
-  - `  social  `
-  - `  tickets  `
-  - `  timeline  `
-  - `  transactional-email  `
+  - `automation`
+  - `business-intelligence`
+  - `collector_graphql_query_execute`
+  - `collector_graphql_query_read`
+  - `content`
+  - `conversations.read`
+  - `conversations.visitor_identification.tokens.create`
+  - `crm.import`
+  - `crm.lists.read`
+  - `crm.objects.companies.read`
+  - `crm.objects.contacts.read`
+  - `crm.objects.deals.read`
+  - `crm.objects.owners.read`
+  - `crm.schemas.companies.read`
+  - `crm.schemas.contacts.read`
+  - `crm.schemas.deals.read`
+  - `e-commerce`
+  - `files`
+  - `forms`
+  - `forms-uploaded-files`
+  - `hubdb`
+  - `integration-sync`
+  - `oauth`
+  - `sales-email-read`
+  - `settings.users.read`
+  - `settings.users.teams.read`
+  - `social`
+  - `tickets`
+  - `timeline`
+  - `transactional-email`
 
 For information about configuring scopes for your private app, see [Legacy private apps](https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview) .
 
@@ -72,75 +72,75 @@ To transfer certain HubSpot data objects, such as sensitive or highly sensitive 
 
 To transfer sensitive data, enable the following scopes:
 
-  - `  crm.objects.contacts.sensitive.read  `
-  - `  crm.objects.companies.sensitive.read  `
-  - `  crm.objects.deals.sensitive.read  `
-  - `  crm.objects.appointments.sensitive.read  `
-  - `  crm.objects.custom.sensitive.read  `
-  - `  crm.objects.projects.sensitive.read  `
-  - `  tickets.sensitive  `
+  - `crm.objects.contacts.sensitive.read`
+  - `crm.objects.companies.sensitive.read`
+  - `crm.objects.deals.sensitive.read`
+  - `crm.objects.appointments.sensitive.read`
+  - `crm.objects.custom.sensitive.read`
+  - `crm.objects.projects.sensitive.read`
+  - `tickets.sensitive`
 
 #### Scopes for highly sensitive data
 
 To transfer highly sensitive data, enable the following scopes:
 
-  - `  crm.objects.contacts.highly_sensitive.read  `
-  - `  crm.objects.companies.highly_sensitive.read  `
-  - `  crm.objects.deals.highly_sensitive.read  `
-  - `  crm.objects.custom.highly_sensitive.read  `
-  - `  crm.objects.projects.highly_sensitive.read  `
-  - `  tickets.highly_sensitive  `
+  - `crm.objects.contacts.highly_sensitive.read`
+  - `crm.objects.companies.highly_sensitive.read`
+  - `crm.objects.deals.highly_sensitive.read`
+  - `crm.objects.custom.highly_sensitive.read`
+  - `crm.objects.projects.highly_sensitive.read`
+  - `tickets.highly_sensitive`
 
 #### Scopes for other data
 
-Some data objects require specific scopes to be included in a data transfer. For example, to transfer `  objects.courses  ` , you must have the scope `  crm.objects.courses.read  ` . The following list includes a list of required scopes needed to transfer its corresponding data object:
+Some data objects require specific scopes to be included in a data transfer. For example, to transfer `objects.courses` , you must have the scope `crm.objects.courses.read` . The following list includes a list of required scopes needed to transfer its corresponding data object:
 
-  - `  crm.objects.appointments.read  `
-  - `  crm.objects.courses.read  `
-  - `  crm.objects.custom.read  `
-  - `  crm.objects.goals.read  `
-  - `  crm.objects.leads.read  `
-  - `  crm.objects.line_items.read  `
-  - `  crm.objects.listings.read  `
-  - `  crm.objects.orders.read  `
-  - `  crm.objects.owners.read  `
-  - `  crm.objects.products.read  `
-  - `  crm.objects.services.read  `
-  - `  crm.objects.users.read  `
-  - `  crm.pipelines.orders.read  `
-  - `  crm.schemas.appointments.read  `
-  - `  crm.schemas.courses.read  `
-  - `  crm.schemas.custom.read  `
-  - `  crm.schemas.deals.read  `
-  - `  crm.schemas.line_items.read  `
-  - `  crm.schemas.listings.read  `
-  - `  crm.schemas.orders.read  `
-  - `  crm.schemas.quotes.read  `
-  - `  crm.schemas.services.read  `
-  - `  marketing.campaigns.read  `
-  - `  marketing.campaigns.revenue.read  `
-  - `  settings.users.read  `
-  - `  settings.users.teams.read  `
-  - `  crm.dealsplits.read_write  `
-  - `  crm.export  `
-  - `  crm.extensions_calling_transcripts.read  `
-  - `  crm.schemas.carts.read  `
-  - `  crm.objects.carts.read  `
-  - `  crm.objects.subscriptions.read  `
-  - `  crm.objects.commercepayments.read  `
-  - `  crm.objects.projects.read  `
-  - `  crm.objects.quotes.read  `
-  - `  crm.objects.partner-clients.read  `
-  - `  crm.objects.partner-services.read  `
-  - `  crm.objects.marketing_events.read  `
-  - `  crm.objects.invoices.read  `
-  - `  crm.objects.feedback_submissions.read  `
-  - `  crm.objects.forecasts.read  `
-  - `  crm.schemas.commercepayments.read  `
-  - `  crm.schemas.forecasts.read  `
-  - `  crm.schemas.invoices.read  `
-  - `  crm.schemas.projects.read  `
-  - `  crm.schemas.subscriptions.read  `
+  - `crm.objects.appointments.read`
+  - `crm.objects.courses.read`
+  - `crm.objects.custom.read`
+  - `crm.objects.goals.read`
+  - `crm.objects.leads.read`
+  - `crm.objects.line_items.read`
+  - `crm.objects.listings.read`
+  - `crm.objects.orders.read`
+  - `crm.objects.owners.read`
+  - `crm.objects.products.read`
+  - `crm.objects.services.read`
+  - `crm.objects.users.read`
+  - `crm.pipelines.orders.read`
+  - `crm.schemas.appointments.read`
+  - `crm.schemas.courses.read`
+  - `crm.schemas.custom.read`
+  - `crm.schemas.deals.read`
+  - `crm.schemas.line_items.read`
+  - `crm.schemas.listings.read`
+  - `crm.schemas.orders.read`
+  - `crm.schemas.quotes.read`
+  - `crm.schemas.services.read`
+  - `marketing.campaigns.read`
+  - `marketing.campaigns.revenue.read`
+  - `settings.users.read`
+  - `settings.users.teams.read`
+  - `crm.dealsplits.read_write`
+  - `crm.export`
+  - `crm.extensions_calling_transcripts.read`
+  - `crm.schemas.carts.read`
+  - `crm.objects.carts.read`
+  - `crm.objects.subscriptions.read`
+  - `crm.objects.commercepayments.read`
+  - `crm.objects.projects.read`
+  - `crm.objects.quotes.read`
+  - `crm.objects.partner-clients.read`
+  - `crm.objects.partner-services.read`
+  - `crm.objects.marketing_events.read`
+  - `crm.objects.invoices.read`
+  - `crm.objects.feedback_submissions.read`
+  - `crm.objects.forecasts.read`
+  - `crm.schemas.commercepayments.read`
+  - `crm.schemas.forecasts.read`
+  - `crm.schemas.invoices.read`
+  - `crm.schemas.projects.read`
+  - `crm.schemas.subscriptions.read`
 
 ### BigQuery prerequisites
 
@@ -149,7 +149,7 @@ Some data objects require specific scopes to be included in a data transfer. For
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -158,20 +158,20 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Set up a HubSpot data transfer
 
@@ -191,7 +191,7 @@ Add HubSpot data into BigQuery by setting up a transfer configuration using one 
     
       - For **Access token** , enter your private access token key. For more information, see [HubSpot prerequisites]() .
       - For **HubSpot objects to transfer** , click **Browse** to select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
-          - You can select custom HubSpot objects, which appear in the **Browse** menu in the format `  CUSTOM_OBJECT_NAME __c  ` .
+          - You can select custom HubSpot objects, which appear in the **Browse** menu in the format `  CUSTOM_OBJECT_NAME __c ` .
 
 5.  In the **Destination settings** section, for **Dataset** , choose the dataset that you created to store your data.
 
@@ -211,7 +211,7 @@ Add HubSpot data into BigQuery by setting up a transfer configuration using one 
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
 ``` notranslate
 bq mk
@@ -225,19 +225,19 @@ bq mk
 
 Replace the following:
 
-  - `  PROJECT_ID  ` (optional): your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
+  - `PROJECT_ID` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - `  DATA_SOURCE  ` : the data source — `  hubspot  ` .
+  - `DATA_SOURCE` : the data source — `hubspot` .
 
-  - `  NAME  ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+  - `NAME` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
-  - `  DATASET  ` : the target dataset for the transfer configuration.
+  - `DATASET` : the target dataset for the transfer configuration.
 
-  - `  PARAMETERS  ` : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a HubSpot data transfer:
+  - `PARAMETERS` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a HubSpot data transfer:
     
-      - `  assets  ` : the path to the HubSpot objects to be transferred to BigQuery.
-          - You can specify custom HubSpot objects using the format `  CUSTOM_OBJECT_NAME __c  ` .
-      - `  connector.authentication.oauth.accessToken  ` : the HubSpot private access token key.
+      - `assets` : the path to the HubSpot objects to be transferred to BigQuery.
+          - You can specify custom HubSpot objects using the format `  CUSTOM_OBJECT_NAME __c ` .
+      - `connector.authentication.oauth.accessToken` : the HubSpot private access token key.
 
 The following command creates a HubSpot data transfer in the default project.
 
@@ -260,15 +260,15 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 The following table maps HubSpot data types to the corresponding BigQuery data types:
 
-| HubSpot data type         | BigQuery data type          |
-| ------------------------- | --------------------------- |
-| `        String       `   | `        STRING       `     |
-| `        Text       `     | `        STRING       `     |
-| `        Integer       `  | `        INTEGER       `    |
-| `        Boolean       `  | `        BOOLEAN       `    |
-| `        Date       `     | `        TIMESTAMP       `  |
-| `        Datetime       ` | `        TIMESTAMP       `  |
-| `        Long       `     | `        BIGNUMERIC       ` |
+| HubSpot data type | BigQuery data type |
+| ----------------- | ------------------ |
+| `String`          | `STRING`           |
+| `Text`            | `STRING`           |
+| `Integer`         | `INTEGER`          |
+| `Boolean`         | `BOOLEAN`          |
+| `Date`            | `TIMESTAMP`        |
+| `Datetime`        | `TIMESTAMP`        |
+| `Long`            | `BIGNUMERIC`       |
 
 ## Pricing
 

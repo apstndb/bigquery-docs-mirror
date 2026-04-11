@@ -7,10 +7,10 @@ There is no persistent data associated with this resource.
 
 ## Methods
 
-### `             insertAll           `
+### `            insertAll           `
 
 Streams data into BigQuery one record at a time without needing to run a load job.
 
-### `             list           `
+### `            list           `
 
 List the content of a table in rows.

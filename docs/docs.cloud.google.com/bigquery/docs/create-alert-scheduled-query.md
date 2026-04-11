@@ -25,9 +25,9 @@ Scheduled queries automatically create a metric in Cloud Monitoring. This metric
 
 The following [metric](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerydatatransfer) is a gauge that contains the most recent row count of a scheduled query:
 
-`  bigquerydatatransfer.googleapis.com/transfer_config/last_execution_job_rows  `
+`bigquerydatatransfer.googleapis.com/transfer_config/last_execution_job_rows`
 
-All scheduled queries write their row count to this metric, using different labels. You need the `  config_id  ` label when you define an alert policy. To find the `  config_id  ` label, follow these steps:
+All scheduled queries write their row count to this metric, using different labels. You need the `config_id` label when you define an alert policy. To find the `config_id` label, follow these steps:
 
 1.  In Google Cloud console, go to the **Scheduled queries** page:
     
@@ -50,7 +50,7 @@ If a problem occurs with the scheduled query, an error message appears in the **
 Monitor scheduled queries to ensure successful executions:
 
   - Look for errors in the **Run history** tab of the scheduled query.
-  - Check the final status of each scheduled execution that is stored in the `  completion_state  ` field of the [`  bigquerydatatransfer.googleapis.com/transfer_config/completed_runs  ` metric](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerydatatransfer) .
+  - Check the final status of each scheduled execution that is stored in the `completion_state` field of the [`bigquerydatatransfer.googleapis.com/transfer_config/completed_runs` metric](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerydatatransfer) .
   - Look for errors in the [BigQuery Data Transfer Service logs](https://docs.cloud.google.com/bigquery/docs/dts-monitor#logs) .
 
 ## Create an alert policy
@@ -73,11 +73,11 @@ To set up an alert on the number of rows a scheduled query returns, follow these
 
 5.  In the **Filter** menu, select **config\_id** .
 
-6.  In the **Value** menu, select the `  config_id  ` of the scheduled query for which you want to create an alert:
+6.  In the **Value** menu, select the `config_id` of the scheduled query for which you want to create an alert:
     
     ![Set the config\_id filter.](https://docs.cloud.google.com/static/bigquery/images/config-id-filter.png)
     
-    If you don't set a filter, your alert tests the output of every scheduled query. To find the `  config_id  ` of your scheduled query, see [Understand the row count metric](https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query#understand_the_row_count_metric) .
+    If you don't set a filter, your alert tests the output of every scheduled query. To find the `config_id` of your scheduled query, see [Understand the row count metric](https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query#understand_the_row_count_metric) .
 
 7.  Keep the default **Transform data** settings and click **Next** .
 
@@ -87,7 +87,7 @@ To set up an alert on the number of rows a scheduled query returns, follow these
     
     1.  For **Alert trigger** , select **Any time series violates** .
     2.  For **Threshold position** , select **Above threshold** .
-    3.  In **Threshold value** , enter `  0  ` .
+    3.  In **Threshold value** , enter `0` .
 
 10. Keep the default **Advanced Options** and click **Next** .
 

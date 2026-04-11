@@ -34,7 +34,7 @@ Before you begin, ensure that you have a project to use, that you have enabled b
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
@@ -44,9 +44,9 @@ Before you begin, ensure that you have a project to use, that you have enabled b
 
 To get the permissions that you need to create a dataset, create a table, copy data, query data, and create a BI Engine reservation, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run copy jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Create a dataset, create a table, copy data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
-  - Create a BI Engine reservation: [BigQuery Resource Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceAdmin) ( `  roles/bigquery.resourceAdmin  ` )
+  - Run copy jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - Create a dataset, create a table, copy data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+  - Create a BI Engine reservation: [BigQuery Resource Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceAdmin) ( `roles/bigquery.resourceAdmin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -74,7 +74,7 @@ The first step is to create a BigQuery dataset to store your BI Engine-managed t
 
 5.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  biengine_tutorial  ` .
+      - For **Dataset ID** , enter `biengine_tutorial` .
     
       - For **Data location** , choose **us (multiple regions in United States)** , the [multi-region location](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) where public datasets are stored.
     
@@ -102,11 +102,11 @@ To create your table, follow these steps:
     
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-3.  In the **Explorer** pane, search for the `  san_francisco_311  ` dataset.
+3.  In the **Explorer** pane, search for the `san_francisco_311` dataset.
 
 4.  Click the dataset, and then click **Overview \> Tables** .
 
-5.  Click the `  311_service_requests  ` table.
+5.  Click the `311_service_requests` table.
 
 6.  In the toolbar, click **Copy** .
     
@@ -118,7 +118,7 @@ To create your table, follow these steps:
     
       - For **Dataset** , select **biengine\_tutorial** .
     
-      - For **Table** , enter `  311_service_requests_copy  ` .
+      - For **Table** , enter `311_service_requests_copy` .
         
         ![The copy table window with destination options](https://docs.cloud.google.com/static/bigquery/images/copy-311-table.png)
 
@@ -150,7 +150,7 @@ To create your table, follow these steps:
 
 5.  In the **Preferred Tables** section, optionally specify tables for acceleration with BI Engine. To find table names, do the following:
     
-    1.  In the **Table Id** field, type part of the name of the table that you want accelerated by BI Engine—for example, `  311  ` .
+    1.  In the **Table Id** field, type part of the name of the table that you want accelerated by BI Engine—for example, `311` .
     
     2.  From the list of suggested names, select your table names.
         
@@ -184,8 +184,8 @@ In [Tableau Desktop](https://www.tableau.com/products/desktop) , on the **Data S
 
 1.  From the **Billing Project** drop-down, select the billing project where you created the reservation.
 2.  From the **Project** drop-down, select your project.
-3.  From the **Dataset** drop-down, select the dataset `  biengine_tutorial  ` .
-4.  Under **Table** , select the table `  311_service_requests_copy  ` .
+3.  From the **Dataset** drop-down, select the dataset `biengine_tutorial` .
+4.  Under **Table** , select the table `311_service_requests_copy` .
 
 ## Creating a chart
 
@@ -195,7 +195,7 @@ Create a chart that displays the top complaints by neighborhood:
 
 1.  In the Google Cloud console, click **New worksheet** .
 2.  Set the **Dimension** to **Complaint Type** .
-3.  Filter based on the dimension called `  neighborhood  ` .
+3.  Filter based on the dimension called `neighborhood` .
 4.  Under **Measures** , select **Number of Records** .
 5.  Right-click on the **Neighborhood** filter and click **Edit Filter** .
 6.  Add a filter to exclude null: select **Null** .
@@ -218,7 +218,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -254,7 +254,7 @@ If you are using a custom OAuth configuration in Tableau Desktop to connect to B
 
     the app is blocked
 
-To resolve this error, verify that the user is assigned to a role that has all the [required permissions](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau#required_permissions) to connect Tableau to BigQuery. If the problem persists, add the user to the [OAuth Config Viewer role](https://docs.cloud.google.com/iam/docs/roles-permissions/oauthconfig#oauthconfig.viewer) ( `  roles/oauthconfig.viewer  ` ).
+To resolve this error, verify that the user is assigned to a role that has all the [required permissions](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau#required_permissions) to connect Tableau to BigQuery. If the problem persists, add the user to the [OAuth Config Viewer role](https://docs.cloud.google.com/iam/docs/roles-permissions/oauthconfig#oauthconfig.viewer) ( `roles/oauthconfig.viewer` ).
 
 ## What's next
 

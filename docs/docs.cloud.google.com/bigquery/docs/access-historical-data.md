@@ -4,7 +4,7 @@ BigQuery lets you query and restore data stored in BigQuery that has been change
 
 ## Query data at a point in time
 
-You can query a table's historical data from any point in time within the time travel window by using a [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause. This clause takes a constant timestamp expression and references the version of the table that was current at that timestamp. The table must be stored in BigQuery; it cannot be an external table. There is no limit on table size when using `  SYSTEM_TIME AS OF  ` .
+You can query a table's historical data from any point in time within the time travel window by using a [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause. This clause takes a constant timestamp expression and references the version of the table that was current at that timestamp. The table must be stored in BigQuery; it cannot be an external table. There is no limit on table size when using `SYSTEM_TIME AS OF` .
 
 For example, the following query returns a historical version of the table from one hour ago:
 
@@ -12,14 +12,14 @@ For example, the following query returns a historical version of the table from 
     FROM `mydataset.mytable`
       FOR SYSTEM_TIME AS OF TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR);
 
-**Note:** The `  FOR SYSTEM_TIME AS OF  ` clause is supported in GoogleSQL. For legacy SQL, [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) provide equivalent functionality.
+**Note:** The `FOR SYSTEM_TIME AS OF` clause is supported in GoogleSQL. For legacy SQL, [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) provide equivalent functionality.
 
 If the timestamp specifies a time from prior to the time travel window or from before the table was created, then the query fails and returns an error like the following:
 
     Invalid snapshot time 1601168925462 for table
     myproject:mydataset.table1@1601168925462. Cannot read before 1601573410026.
 
-After you replace an existing table by using the `  CREATE OR REPLACE TABLE  ` statement, you can use `  FOR SYSTEM_TIME AS OF  ` to query the previous version of the table.
+After you replace an existing table by using the `CREATE OR REPLACE TABLE` statement, you can use `FOR SYSTEM_TIME AS OF` to query the previous version of the table.
 
 If the table was deleted, then the query fails and returns an error like the following:
 
@@ -31,13 +31,13 @@ You can restore a table from historical data by copying the historical data into
 
 When you restore a table from historical data, [tags](https://docs.cloud.google.com/bigquery/docs/tags) from the source table aren't copied to the destination table. Table partitioning information also isn't copied to the destination table. To recreate the partitioning scheme of the original table, you can view the initial table creation request in [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface) and use that information to partition the restored table.
 
-You can restore a table that was deleted but is still within the time travel window by copying the table to a new table, using the `  @<time>  ` time decorator. You can't query a deleted table, even if you use a time decorator. You must restore it first.
+You can restore a table that was deleted but is still within the time travel window by copying the table to a new table, using the `@<time>` time decorator. You can't query a deleted table, even if you use a time decorator. You must restore it first.
 
-Use the following syntax with the `  @<time>  ` time decorator:
+Use the following syntax with the `@<time>` time decorator:
 
-  - `  tableid@ TIME  ` where `  TIME  ` is the number of milliseconds since the Unix epoch.
-  - `  tableid@- TIME_OFFSET  ` where `  TIME_OFFSET  ` is the relative offset from the current time, in milliseconds.
-  - `  tableid@0  ` : Specifies the oldest available historical data.
+  - ` tableid@ TIME  ` where `  TIME  ` is the number of milliseconds since the Unix epoch.
+  - ` tableid@- TIME_OFFSET  ` where `  TIME_OFFSET  ` is the relative offset from the current time, in milliseconds.
+  - `tableid@0` : Specifies the oldest available historical data.
 
 To restore a table, select one of the following options:
 
@@ -53,21 +53,21 @@ You can't undelete a table by using the Google Cloud console.
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To restore a table, first determine a UNIX timestamp of when the table existed (in milliseconds). You can use the Linux `  date  ` command to generate the Unix timestamp from a regular timestamp value:
+2.  To restore a table, first determine a UNIX timestamp of when the table existed (in milliseconds). You can use the Linux `date` command to generate the Unix timestamp from a regular timestamp value:
     
     ``` lang-sh
     date -d '2023-08-04 16:00:34.456789Z' +%s000
     ```
 
-3.  Then, use the `  bq copy  ` command with the `  @<time>  ` time travel decorator to perform the table copy operation.
+3.  Then, use the `bq copy` command with the `@<time>` time travel decorator to perform the table copy operation.
     
-    For example, enter the following command to copy the `  mydataset.mytable  ` table at the time `  1418864998000  ` into a new table `  mydataset.newtable  ` .
+    For example, enter the following command to copy the `mydataset.mytable` table at the time `1418864998000` into a new table `mydataset.newtable` .
     
     ``` lang-sh
     bq cp mydataset.mytable@1418864998000 mydataset.newtable
     ```
     
-    (Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+    (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
     
     You can also specify a relative offset. The following example copies the version of a table from one hour ago:
     
@@ -75,7 +75,7 @@ You can't undelete a table by using the Google Cloud console.
     bq cp mydataset.mytable@-3600000 mydataset.newtable
     ```
     
-    **Note:** If you attempt to recover data prior to the time travel window or from a time before the table was created, you'll receive an `  Invalid time travel timestamp  ` error. For more information, see [Troubleshoot table recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#troubleshoot_table_recovery) .
+    **Note:** If you attempt to recover data prior to the time travel window or from a time before the table was created, you'll receive an `Invalid time travel timestamp` error. For more information, see [Troubleshoot table recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#troubleshoot_table_recovery) .
 
 ### Go
 

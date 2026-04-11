@@ -44,7 +44,7 @@ To learn more about slots and how they are used, see [understand slots](https://
 
 ## Reservations
 
-In the capacity-based pricing model, slots are allocated in pools called *reservations* . Reservations let you assign slots in ways that make sense for your organization. For example, you might create a reservation named `  prod  ` for production workloads, and a separate reservation named `  test  ` for testing, so that test jobs don't compete for capacity with production workloads. Or, you might create reservations for different departments in your organization.
+In the capacity-based pricing model, slots are allocated in pools called *reservations* . Reservations let you assign slots in ways that make sense for your organization. For example, you might create a reservation named `prod` for production workloads, and a separate reservation named `test` for testing, so that test jobs don't compete for capacity with production workloads. Or, you might create reservations for different departments in your organization.
 
 For more information about reservations, see [workload management using reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 

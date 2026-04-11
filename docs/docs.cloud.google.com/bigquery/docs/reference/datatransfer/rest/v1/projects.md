@@ -7,6 +7,6 @@ There is no persistent data associated with this resource.
 
 ## Methods
 
-### `             enrollDataSources           `
+### `            enrollDataSources           `
 
 Enroll data sources in a user project.

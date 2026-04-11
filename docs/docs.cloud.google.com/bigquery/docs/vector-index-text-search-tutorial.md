@@ -5,34 +5,34 @@ This tutorial guides you through the end-to-end process of creating and using [t
 This tutorial covers the following tasks:
 
   - Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over a Vertex AI embedding model.
-  - Using the remote model with the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text in a BigQuery table.
+  - Using the remote model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text in a BigQuery table.
   - Creating a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) to index the embeddings in order to improve search performance.
-  - Using the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) with the embeddings to search for similar text.
-  - Perform RAG by generating text with the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) , and using vector search results to augment the prompt input and improve results.
+  - Using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) with the embeddings to search for similar text.
+  - Perform RAG by generating text with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) , and using vector search results to augment the prompt input and improve results.
 
-This tutorial uses the BigQuery public table `  patents-public-data.google_patents_research.publications  ` .
+This tutorial uses the BigQuery public table `patents-public-data.google_patents_research.publications` .
 
 ## Required roles
 
 To run this tutorial, you need the following Identity and Access Management (IAM) roles:
 
-  - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `  roles/bigquery.admin  ` ).
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` ).
+  - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `roles/bigquery.admin` ).
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ).
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set the default connection: `  bigquery.config.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set the default connection: `bigquery.config.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -58,7 +58,7 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -70,7 +70,7 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
@@ -90,7 +90,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -98,9 +98,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -117,7 +117,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -143,11 +143,11 @@ Create a remote model that represents a hosted Vertex AI text embedding generati
       OPTIONS (ENDPOINT = 'text-embedding-005');
     ```
     
-    The query takes several seconds to complete, after which the model `  embedding_model  ` can be accessed through the **Explorer** pane. Because the query uses a `  CREATE MODEL  ` statement to create a model, there are no query results.
+    The query takes several seconds to complete, after which the model `embedding_model` can be accessed through the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
 ## Generate text embeddings
 
-Generate text embeddings from patent abstracts using the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) , and then write them to a BigQuery table so that they can be searched.
+Generate text embeddings from patent abstracts using the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) , and then write them to a BigQuery table so that they can be searched.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -170,7 +170,7 @@ Generate text embeddings from patent abstracts using the [`  AI.GENERATE_EMBEDDI
 
 This query takes approximately 5 minutes to complete.
 
-Embedding generation using the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) might fail due to Vertex AI LLM [quotas](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) or service unavailability. Error details are returned in the `  status  ` column. An empty `  status  ` column indicates successful embedding generation.
+Embedding generation using the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) might fail due to Vertex AI LLM [quotas](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) or service unavailability. Error details are returned in the `status` column. An empty `status` column indicates successful embedding generation.
 
 For alternative text embedding generation methods in BigQuery, see the [Embed text with pretrained TensorFlow models tutorial](https://docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models) .
 
@@ -178,7 +178,7 @@ For alternative text embedding generation methods in BigQuery, see the [Embed te
 
 If you create a vector index on an embedding column, a vector search performed on that column uses the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique. This technique improves vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results.
 
-To create a vector index, use the [`  CREATE VECTOR INDEX  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) data definition language (DDL) statement:
+To create a vector index, use the [`CREATE VECTOR INDEX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) data definition language (DDL) statement:
 
 1.  Go to the **BigQuery** page.
     
@@ -198,7 +198,7 @@ Creating a vector index typically takes only a few seconds. It takes another 2 o
 
 ### Verify vector index readiness
 
-The vector index is populated asynchronously. You can check whether the index is ready to be used by querying the [`  INFORMATION_SCHEMA.VECTOR_INDEXES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) and verifying that the `  coverage_percentage  ` column value is greater than `  0  ` and the `  last_refresh_time  ` column value isn't `  NULL  ` .
+The vector index is populated asynchronously. You can check whether the index is ready to be used by querying the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) and verifying that the `coverage_percentage` column value is greater than `0` and the `last_refresh_time` column value isn't `NULL` .
 
 1.  Go to the **BigQuery** page.
     
@@ -216,9 +216,9 @@ The vector index is populated asynchronously. You can check whether the index is
 
 ## Perform a text similarity search using the vector index
 
-Use the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) to search for relevant patents that match embeddings generated from a text query.
+Use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) to search for relevant patents that match embeddings generated from a text query.
 
-The `  top_k  ` argument determines the number of matches to return, in this case five. The `  fraction_lists_to_search  ` option determines the percentage of vector index lists to search. [The vector index you created](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial#create_a_vector_index) has 500 lists, so the `  fraction_lists_to_search  ` value of `  .01  ` indicates that this vector search scans five of those lists. A lower `  fraction_lists_to_search  ` value as shown here provides lower [recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall#recall) and faster performance. For more information about vector index lists, see the `  num_lists  ` [vector index option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) .
+The `top_k` argument determines the number of matches to return, in this case five. The `fraction_lists_to_search` option determines the percentage of vector index lists to search. [The vector index you created](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial#create_a_vector_index) has 500 lists, so the `fraction_lists_to_search` value of `.01` indicates that this vector search scans five of those lists. A lower `fraction_lists_to_search` value as shown here provides lower [recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall#recall) and faster performance. For more information about vector index lists, see the `num_lists` [vector index option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) .
 
 The model you use to generate the embeddings in this query must be the same as the one you use to generate the embeddings in the table you are comparing against, otherwise the search results won't be accurate.
 
@@ -269,11 +269,11 @@ Create a remote model that represents a hosted Vertex AI text generation model:
       OPTIONS (ENDPOINT = 'gemini-2.0-flash-001');
     ```
     
-    The query takes several seconds to complete, after which the model `  text_model  ` can be accessed through the **Explorer** pane. Because the query uses a `  CREATE MODEL  ` statement to create a model, there are no query results.
+    The query takes several seconds to complete, after which the model `text_model` can be accessed through the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
 ## Generate text augmented by vector search results
 
-Feed the search results as prompts to generate text with the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
+Feed the search results as prompts to generate text with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -330,7 +330,7 @@ Feed the search results as prompts to generate text with the [`  AI.GENERATE_TEX
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

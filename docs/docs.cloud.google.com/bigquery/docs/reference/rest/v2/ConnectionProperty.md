@@ -4,7 +4,7 @@ A connection-level property to customize query behavior. Under JDBC, these corre
 
 Currently supported connection properties:
 
-  - **dataset\_project\_id** : represents the default project for datasets that are used in the query. Setting the system variable `  @@dataset_project_id  ` achieves the same behavior. For more information about system variables, see: <https://cloud.google.com/bigquery/docs/reference/system-variables>
+  - **dataset\_project\_id** : represents the default project for datasets that are used in the query. Setting the system variable `@@dataset_project_id` achieves the same behavior. For more information about system variables, see: <https://cloud.google.com/bigquery/docs/reference/system-variables>
 
   - **time\_zone** : represents the default timezone used to run the query.
 
@@ -37,14 +37,14 @@ Additional properties are allowed, but ignored. Specifying multiple connection p
 
 Fields
 
-`  key  `
+`key`
 
-`  string  `
+`string`
 
 The key of the property to set.
 
-`  value  `
+`value`
 
-`  string  `
+`string`
 
 The value of the property to set.

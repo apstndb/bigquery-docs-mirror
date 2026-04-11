@@ -13,26 +13,21 @@ A field or a column.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;type&quot;: {
-    object (StandardSqlDataType)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: {object (StandardSqlDataType)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Optional. The name of this field. Can be absent for struct fields.
 
-`  type  `
+`type`
 
-`  object ( StandardSqlDataType  ` )
+` object ( StandardSqlDataType  ` )
 
 Optional. The type of this parameter. Absent if not explicitly specified (e.g., CREATE FUNCTION statement can omit the return type; in this case the output parameter does not have this "type" field).

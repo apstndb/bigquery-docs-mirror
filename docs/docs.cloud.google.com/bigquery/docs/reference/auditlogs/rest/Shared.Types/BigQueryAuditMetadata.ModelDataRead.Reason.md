@@ -2,10 +2,10 @@ Describes how the model data was read.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  JOB  `
+`JOB`
 
 Model was used as a source model during a BigQuery job.

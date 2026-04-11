@@ -4,13 +4,13 @@ As a BigQuery administrator or analyst, you can load data from an Amazon Simple 
 
 You can transfer data into BigQuery in the following ways:
 
-  - Transfer data from files in Amazon S3 and Azure Blob Storage into BigQuery tables, by using the [`  LOAD DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) .
+  - Transfer data from files in Amazon S3 and Azure Blob Storage into BigQuery tables, by using the [`LOAD DATA` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) .
 
-  - Filter data from files in Amazon S3 or Blob Storage before transferring results into BigQuery tables, by using the [`  CREATE TABLE AS SELECT  ` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) . To append data to the destination table, use the [`  INSERT INTO SELECT  ` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) . Data manipulation is applied on the external tables that reference data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) or [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
+  - Filter data from files in Amazon S3 or Blob Storage before transferring results into BigQuery tables, by using the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) . To append data to the destination table, use the [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) . Data manipulation is applied on the external tables that reference data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) or [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
 
   - Create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) of external Amazon S3, Apache Iceberg, or Salesforce Data Cloud data in a BigQuery dataset so that the data is available locally in BigQuery.
 
-**Note:** If you want to transfer large files from Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into BigQuery tables on a scheduled basis, use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . If you want to read and process data before transferring data into BigQuery tables, use the [`  CREATE TABLE AS SELECT  ` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) .
+**Note:** If you want to transfer large files from Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into BigQuery tables on a scheduled basis, use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . If you want to read and process data before transferring data into BigQuery tables, use the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) .
 
 ## Quotas and limits
 
@@ -22,7 +22,7 @@ To provide Google Cloud with read access required to load or filter data in othe
 
 ### Required role
 
-To get the permissions that you need to load data using cross-cloud transfers, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on the dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data using cross-cloud transfers, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on the dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to load data using cross-cloud transfers. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -30,12 +30,12 @@ This predefined role contains the permissions required to load data using cross-
 
 The following permissions are required to load data using cross-cloud transfers:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.updateData  `
-  - `  bigquery.tables.update  `
-  - `  bigquery.jobs.create  `
-  - `  bigquery.connections.use  `
+  - `bigquery.tables.create`
+  - `bigquery.tables.get`
+  - `bigquery.tables.updateData`
+  - `bigquery.tables.update`
+  - `bigquery.jobs.create`
+  - `bigquery.connections.use`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -43,34 +43,34 @@ For more information about IAM roles in BigQuery, see [BigQuery IAM roles and pe
 
 ## Pricing
 
-You are billed for the bytes that are transferred across clouds by using the [`  LOAD  ` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) . For pricing information, see the Omni Cross Cloud Data Transfer section in [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
+You are billed for the bytes that are transferred across clouds by using the [`LOAD` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) . For pricing information, see the Omni Cross Cloud Data Transfer section in [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
 
-You are billed for the bytes that are transferred across clouds by using the [`  CREATE TABLE AS SELECT  ` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) or [`  INSERT INTO SELECT  ` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) and for the [compute capacity](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+You are billed for the bytes that are transferred across clouds by using the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) or [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) and for the [compute capacity](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
-Both `  LOAD  ` and `  CREATE TABLE AS SELECT  ` statements require slots in the BigQuery Omni regions to scan Amazon S3 and Blob Storage files to load them. For more information, see [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
+Both `LOAD` and `CREATE TABLE AS SELECT` statements require slots in the BigQuery Omni regions to scan Amazon S3 and Blob Storage files to load them. For more information, see [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
 
 For materialized view replicas of external data sources, costs can also include [materialized views pricing](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#materialized_views_pricing) .
 
 ## Best practices for load and filter options
 
   - Avoid loading multiple files that are less than 5 MB. Instead, create an external table for your file and export query result to [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) or [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) to create a larger file. This method helps to improve the transfer time of your data.
-  - If your source data is in a gzip-compressed file, then while creating external tables, set the [`  external_table_options.compression  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option to `  GZIP  ` .
+  - If your source data is in a gzip-compressed file, then while creating external tables, set the [`external_table_options.compression`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option to `GZIP` .
 
 ## Load data
 
-You can load data into BigQuery with the [`  LOAD DATA [INTO|OVERWRITE]  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) .
+You can load data into BigQuery with the [`LOAD DATA [INTO|OVERWRITE]` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) .
 
 ### Limitations
 
   - The connection and the destination dataset must belong to the same project. Loading data across projects is not supported.
-  - `  LOAD DATA  ` is only supported when you transfer data from an Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage to a colocated BigQuery region. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) .
-      - You can transfer data from any `  US  ` region to a `  US  ` multi-region. You can also transfer from any `  EU  ` region to a `  EU  ` multi-region.
+  - `LOAD DATA` is only supported when you transfer data from an Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage to a colocated BigQuery region. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) .
+      - You can transfer data from any `US` region to a `US` multi-region. You can also transfer from any `EU` region to a `EU` multi-region.
 
 ### Example
 
 #### Example 1
 
-The following example loads a parquet file named `  sample.parquet  ` from an Amazon S3 bucket into the `  test_parquet  ` table with an auto-detect schema:
+The following example loads a parquet file named `sample.parquet` from an Amazon S3 bucket into the `test_parquet` table with an auto-detect schema:
 
 ``` notranslate
 LOAD DATA INTO mydataset.testparquet
@@ -83,7 +83,7 @@ LOAD DATA INTO mydataset.testparquet
 
 #### Example 2
 
-The following example loads a CSV file with the prefix `  sampled*  ` from your Blob Storage into the `  test_csv  ` table with predefined column partitioning by time:
+The following example loads a CSV file with the prefix `sampled*` from your Blob Storage into the `test_csv` table with predefined column partitioning by time:
 
 ``` notranslate
 LOAD DATA INTO mydataset.test_csv (Number INT64, Name STRING, Time DATE)
@@ -97,7 +97,7 @@ LOAD DATA INTO mydataset.test_csv (Number INT64, Name STRING, Time DATE)
 
 #### Example 3
 
-The following example overwrites the existing table `  test_parquet  ` with data from a file named `  sample.parquet  ` with an auto-detect schema:
+The following example overwrites the existing table `test_parquet` with data from a file named `sample.parquet` with an auto-detect schema:
 
 ``` notranslate
 LOAD DATA OVERWRITE mydataset.testparquet
@@ -110,31 +110,31 @@ LOAD DATA OVERWRITE mydataset.testparquet
 
 ## Filter data
 
-You can filter data before transferring them into BigQuery by using the [`  CREATE TABLE AS SELECT  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and the [`  INSERT INTO SELECT  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
+You can filter data before transferring them into BigQuery by using the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and the [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
 
 ### Limitations
 
-  - If the result of the `  SELECT  ` query exceeds 60 GiB in logical bytes, the query fails. The table is not created and data is not transferred. To learn how to reduce the size of data that is scanned, see [Reduce data processed in queries](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-communication) .
+  - If the result of the `SELECT` query exceeds 60 GiB in logical bytes, the query fails. The table is not created and data is not transferred. To learn how to reduce the size of data that is scanned, see [Reduce data processed in queries](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-communication) .
 
   - Temporary tables are not supported.
 
   - Transferring the [Well-known binary (WKB)](https://docs.cloud.google.com/bigquery/docs/geospatial-data) geospatial data format is not supported.
 
-  - `  INSERT INTO SELECT  ` statement does not support transferring data into clustered table.
+  - `INSERT INTO SELECT` statement does not support transferring data into clustered table.
 
-  - In the `  INSERT INTO SELECT  ` statement, if the destination table is the same as the source table in the `  SELECT  ` query, then the `  INSERT INTO SELECT  ` statement doesn't modify any rows in the destination table. The destination table isn't modified as BigQuery can't read data across regions.
+  - In the `INSERT INTO SELECT` statement, if the destination table is the same as the source table in the `SELECT` query, then the `INSERT INTO SELECT` statement doesn't modify any rows in the destination table. The destination table isn't modified as BigQuery can't read data across regions.
 
-  - `  CREATE TABLE AS SELECT  ` and `  INSERT INTO SELECT  ` are only supported when you transfer data from an Amazon S3 or Blob Storage to a colocated BigQuery region. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) .
+  - `CREATE TABLE AS SELECT` and `INSERT INTO SELECT` are only supported when you transfer data from an Amazon S3 or Blob Storage to a colocated BigQuery region. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) .
     
-      - You can transfer data from any `  US  ` region to a `  US  ` multi-region. You can also transfer from any `  EU  ` region to a `  EU  ` multi-region.
+      - You can transfer data from any `US` region to a `US` multi-region. You can also transfer from any `EU` region to a `EU` multi-region.
 
 ### Example
 
 #### Example 1
 
-Suppose you have a BigLake table named `  myawsdataset.orders  ` that references data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) . You want to transfer data from that table to a BigQuery table `  myotherdataset.shipments  ` in the US multi-region.
+Suppose you have a BigLake table named `myawsdataset.orders` that references data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) . You want to transfer data from that table to a BigQuery table `myotherdataset.shipments` in the US multi-region.
 
-First, display information about the `  myawsdataset.orders  ` table:
+First, display information about the `myawsdataset.orders` table:
 
 ``` 
     bq show myawsdataset.orders;
@@ -154,7 +154,7 @@ The output is similar to the following:
                     |- l_commitdate: date
 ```
 
-Next, display information about the `  myotherdataset.shipments  ` table:
+Next, display information about the `myotherdataset.shipments` table:
 
 ``` 
   bq show myotherdataset.shipments
@@ -175,7 +175,7 @@ The output is similar to the following. Some columns are omitted to simplify the
                     |- l_shipmode: string
 ```
 
-Now, using the `  CREATE TABLE AS SELECT  ` statement you can selectively load data to the `  myotherdataset.orders  ` table in the US multi-region:
+Now, using the `CREATE TABLE AS SELECT` statement you can selectively load data to the `myotherdataset.orders` table in the US multi-region:
 
     CREATE OR REPLACE TABLE
       myotherdataset.orders
@@ -187,7 +187,7 @@ Now, using the `  CREATE TABLE AS SELECT  ` statement you can selectively load d
     WHERE
       EXTRACT(YEAR FROM l_commitdate) = 1992;
 
-**Note:** If you get a `  ResourceExhausted  ` error, retry after some time. If the issue persists, you can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+**Note:** If you get a `ResourceExhausted` error, retry after some time. If the issue persists, you can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 You can then perform a join operation with the newly created table:
 
@@ -209,7 +209,7 @@ You can then perform a join operation with the newly created table:
     AND orders.l_suppkey = shipments.l_suppkey
     WHERE orders.l_returnflag = 'R'; -- 'R' means refunded.
 
-When new data is available, append the data of the 1993 year to the destination table using the `  INSERT INTO SELECT  ` statement:
+When new data is available, append the data of the 1993 year to the destination table using the `INSERT INTO SELECT` statement:
 
     INSERT INTO
        myotherdataset.orders
@@ -256,7 +256,7 @@ A materialized view replica lets you use the Amazon S3, Iceberg, or Data Cloud m
 
 #### Required roles
 
-To get the permissions that you need to perform the tasks in this section, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to perform the tasks in this section, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to perform the tasks in this section. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -264,11 +264,11 @@ This predefined role contains the permissions required to perform the tasks in t
 
 The following permissions are required to perform the tasks in this section:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.getData  `
-  - `  bigquery.tables.replicateData  `
-  - `  bigquery.jobs.create  `
+  - `bigquery.tables.create`
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData`
+  - `bigquery.tables.replicateData`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -309,7 +309,7 @@ Select one of the following options:
     3.  For **Dataset** , enter the dataset where the source table or view is located.
     4.  For **View** , enter the source table or view that you are replicating. If you choose a view, it must be an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , or if not, all tables that are used to generate that view must be located in the view's dataset.
 
-5.  Optional: For **Local materialized view max staleness** , enter a [`  max_staleness  ` value](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) for your local materialized view.
+5.  Optional: For **Local materialized view max staleness** , enter a [`max_staleness` value](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) for your local materialized view.
 
 6.  In the **Destination** section of the **Create table** dialog, do the following:
     
@@ -317,7 +317,7 @@ Select one of the following options:
     2.  For **Dataset** , enter the dataset in which you want to create the materialized view replica.
     3.  For **Replica materialized view name** , enter a name for your replica.
 
-7.  Optional: Specify **tags** and **advanced options** for your materialized view replica. If you don't specify a dataset for **Local Materialized View Dataset** , then one is automatically created in the same project and region as the source data and named `  bq_auto_generated_local_mv_dataset  ` . If you don't specify a name for **Local Materialized View Name** , then one is automatically created in the same project and region as the source data and given the prefix `  bq_auto_generated_local_mv_  ` .
+7.  Optional: Specify **tags** and **advanced options** for your materialized view replica. If you don't specify a dataset for **Local Materialized View Dataset** , then one is automatically created in the same project and region as the source data and named `bq_auto_generated_local_mv_dataset` . If you don't specify a name for **Local Materialized View Name** , then one is automatically created in the same project and region as the source data and given the prefix `bq_auto_generated_local_mv_` .
 
 8.  Click **Create table** .
 
@@ -329,11 +329,11 @@ A new local materialized view is created (if it wasn't specified) and authorized
 
 2.  [Authorize the materialized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) on the datasets that contain the source tables used in the query that created the materialized view.
 
-3.  If you configured manual metadata cache refreshing for the source table, run the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache.
+3.  If you configured manual metadata cache refreshing for the source table, run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache.
 
-4.  Run the [`  BQ.REFRESH_MATERIALIZED_VIEW  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_materialized_view) to refresh the materialized view.
+4.  Run the [`BQ.REFRESH_MATERIALIZED_VIEW` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_materialized_view) to refresh the materialized view.
 
-5.  Create materialized view replicas by using the [`  CREATE MATERIALIZED VIEW AS REPLICA OF  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_as_replica_of_statement) :
+5.  Create materialized view replicas by using the [`CREATE MATERIALIZED VIEW AS REPLICA OF` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_as_replica_of_statement) :
     
     ``` notranslate
     CREATE MATERIALIZED VIEW PROJECT_ID.BQ_DATASET.REPLICA_NAME
@@ -343,14 +343,14 @@ A new local materialized view is created (if it wasn't specified) and authorized
     
     Replace the following:
     
-      - `  PROJECT_ID  ` : the name of your project in which you want to create the materialized view replica—for example, `  myproject  ` .
-      - `  BQ_DATASET  ` : the name of the BigQuery dataset that you want to create the materialized view replica in—for example, `  bq_dataset  ` . The dataset must be in the BigQuery [region](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) that maps to the region of the source materialized view.
-      - `  REPLICA_NAME  ` : the name of the materialized view replica that you want to create—for example, `  my_mv_replica  ` .
+      - `  PROJECT_ID  ` : the name of your project in which you want to create the materialized view replica—for example, `myproject` .
+      - `  BQ_DATASET  ` : the name of the BigQuery dataset that you want to create the materialized view replica in—for example, `bq_dataset` . The dataset must be in the BigQuery [region](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) that maps to the region of the source materialized view.
+      - `  REPLICA_NAME  ` : the name of the materialized view replica that you want to create—for example, `my_mv_replica` .
       - `  REPLICATION_INTERVAL  ` : specifies how often to replicate the data from the source materialized view to the replica, in seconds. Must be a value between 60 and 3,600, inclusive. Defaults to 300 (5 minutes).
-      - `  S3_DATASET  ` : the name of the dataset that contains the source materialized view—for example, `  s3_dataset  ` .
-      - `  MATERIALIZED_VIEW_NAME  ` : the name of the materialized view to replicate—for example, `  my_mv  ` .
+      - `  S3_DATASET  ` : the name of the dataset that contains the source materialized view—for example, `s3_dataset` .
+      - `  MATERIALIZED_VIEW_NAME  ` : the name of the materialized view to replicate—for example, `my_mv` .
     
-    The following example creates a materialized view replica named `  mv_replica  ` in `  bq_dataset  ` :
+    The following example creates a materialized view replica named `mv_replica` in `bq_dataset` :
     
     ``` notranslate
     CREATE MATERIALIZED VIEW `myproject.bq_dataset.mv_replica`
@@ -360,11 +360,11 @@ A new local materialized view is created (if it wasn't specified) and authorized
     AS REPLICA OF `myproject.s3_dataset.my_s3_mv`
     ```
 
-After you create the materialized view replica, the replication process polls the source materialized view for changes and replicates data to the materialized view replica, refreshing the data at the interval you specified in the `  replication_interval_seconds  ` or `  max_staleness  ` option. If you query the replica before the first backfill completes, you get a `  backfill in progress  ` error. You can query the data in the materialized view replica after the first replication completes.
+After you create the materialized view replica, the replication process polls the source materialized view for changes and replicates data to the materialized view replica, refreshing the data at the interval you specified in the `replication_interval_seconds` or `max_staleness` option. If you query the replica before the first backfill completes, you get a `backfill in progress` error. You can query the data in the materialized view replica after the first replication completes.
 
 ### Data freshness
 
-After you create the materialized view replica, the replication process polls the source materialized view for changes and replicates data to the materialized view replica. The data is replicated at the interval you specified in the `  replication_interval_seconds  ` option of the [`  CREATE MATERIALIZED VIEW AS REPLICA OF  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_as_replica_of_statement) .
+After you create the materialized view replica, the replication process polls the source materialized view for changes and replicates data to the materialized view replica. The data is replicated at the interval you specified in the `replication_interval_seconds` option of the [`CREATE MATERIALIZED VIEW AS REPLICA OF` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_as_replica_of_statement) .
 
 In addition to the replication interval, the freshness of the materialized view replica data is also affected by how often the source materialized view refreshes, and how often the metadata cache of the Amazon S3, Iceberg, or Data Cloud table used by the materialized view refreshes.
 
@@ -391,76 +391,76 @@ Use the location mappings in the following table when creating materialized view
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       aws-us-east-1      </code></td>
-<td>The <code dir="ltr" translate="no">       US      </code> <a href="https://docs.cloud.google.com/bigquery/docs/locations#multi-regions">multi-region</a> , or any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
+<td><code dir="ltr" translate="no">aws-us-east-1</code></td>
+<td>The <code dir="ltr" translate="no">US</code> <a href="https://docs.cloud.google.com/bigquery/docs/locations#multi-regions">multi-region</a> , or any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
 <ul>
-<li><code dir="ltr" translate="no">         northamerica-northeast1        </code></li>
-<li><code dir="ltr" translate="no">         northamerica-northeast2        </code></li>
-<li><code dir="ltr" translate="no">         us-central1        </code></li>
-<li><code dir="ltr" translate="no">         us-east1        </code></li>
-<li><code dir="ltr" translate="no">         us-east4        </code></li>
-<li><code dir="ltr" translate="no">         us-east5        </code></li>
-<li><code dir="ltr" translate="no">         us-south1        </code></li>
-<li><code dir="ltr" translate="no">         us-west1        </code></li>
-<li><code dir="ltr" translate="no">         us-west2        </code></li>
-<li><code dir="ltr" translate="no">         us-west3        </code></li>
-<li><code dir="ltr" translate="no">         us-west4        </code></li>
+<li><code dir="ltr" translate="no">northamerica-northeast1</code></li>
+<li><code dir="ltr" translate="no">northamerica-northeast2</code></li>
+<li><code dir="ltr" translate="no">us-central1</code></li>
+<li><code dir="ltr" translate="no">us-east1</code></li>
+<li><code dir="ltr" translate="no">us-east4</code></li>
+<li><code dir="ltr" translate="no">us-east5</code></li>
+<li><code dir="ltr" translate="no">us-south1</code></li>
+<li><code dir="ltr" translate="no">us-west1</code></li>
+<li><code dir="ltr" translate="no">us-west2</code></li>
+<li><code dir="ltr" translate="no">us-west3</code></li>
+<li><code dir="ltr" translate="no">us-west4</code></li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       aws-us-west-2      </code></td>
-<td>The <code dir="ltr" translate="no">       US      </code> <a href="https://docs.cloud.google.com/bigquery/docs/locations#multi-regions">multi-region</a> , or any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
+<td><code dir="ltr" translate="no">aws-us-west-2</code></td>
+<td>The <code dir="ltr" translate="no">US</code> <a href="https://docs.cloud.google.com/bigquery/docs/locations#multi-regions">multi-region</a> , or any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
 <ul>
-<li><code dir="ltr" translate="no">         northamerica-northeast1        </code></li>
-<li><code dir="ltr" translate="no">         northamerica-northeast2        </code></li>
-<li><code dir="ltr" translate="no">         us-central1        </code></li>
-<li><code dir="ltr" translate="no">         us-east1        </code></li>
-<li><code dir="ltr" translate="no">         us-east4        </code></li>
-<li><code dir="ltr" translate="no">         us-east5        </code></li>
-<li><code dir="ltr" translate="no">         us-south1        </code></li>
-<li><code dir="ltr" translate="no">         us-west1        </code></li>
-<li><code dir="ltr" translate="no">         us-west2        </code></li>
-<li><code dir="ltr" translate="no">         us-west3        </code></li>
-<li><code dir="ltr" translate="no">         us-west4        </code></li>
+<li><code dir="ltr" translate="no">northamerica-northeast1</code></li>
+<li><code dir="ltr" translate="no">northamerica-northeast2</code></li>
+<li><code dir="ltr" translate="no">us-central1</code></li>
+<li><code dir="ltr" translate="no">us-east1</code></li>
+<li><code dir="ltr" translate="no">us-east4</code></li>
+<li><code dir="ltr" translate="no">us-east5</code></li>
+<li><code dir="ltr" translate="no">us-south1</code></li>
+<li><code dir="ltr" translate="no">us-west1</code></li>
+<li><code dir="ltr" translate="no">us-west2</code></li>
+<li><code dir="ltr" translate="no">us-west3</code></li>
+<li><code dir="ltr" translate="no">us-west4</code></li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       aws-eu-west-1      </code></td>
-<td>The <code dir="ltr" translate="no">       EU      </code> <a href="https://docs.cloud.google.com/bigquery/docs/locations#multi-regions">multi-region</a> , or any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
+<td><code dir="ltr" translate="no">aws-eu-west-1</code></td>
+<td>The <code dir="ltr" translate="no">EU</code> <a href="https://docs.cloud.google.com/bigquery/docs/locations#multi-regions">multi-region</a> , or any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
 <ul>
-<li><code dir="ltr" translate="no">         europe-central2        </code></li>
-<li><code dir="ltr" translate="no">         europe-north1        </code></li>
-<li><code dir="ltr" translate="no">         europe-southwest1        </code></li>
-<li><code dir="ltr" translate="no">         europe-west1        </code></li>
-<li><code dir="ltr" translate="no">         europe-west2        </code></li>
-<li><code dir="ltr" translate="no">         europe-west3        </code></li>
-<li><code dir="ltr" translate="no">         europe-west4        </code></li>
-<li><code dir="ltr" translate="no">         europe-west6        </code></li>
-<li><code dir="ltr" translate="no">         europe-west8        </code></li>
-<li><code dir="ltr" translate="no">         europe-west9        </code></li>
-<li><code dir="ltr" translate="no">         europe-west10        </code></li>
+<li><code dir="ltr" translate="no">europe-central2</code></li>
+<li><code dir="ltr" translate="no">europe-north1</code></li>
+<li><code dir="ltr" translate="no">europe-southwest1</code></li>
+<li><code dir="ltr" translate="no">europe-west1</code></li>
+<li><code dir="ltr" translate="no">europe-west2</code></li>
+<li><code dir="ltr" translate="no">europe-west3</code></li>
+<li><code dir="ltr" translate="no">europe-west4</code></li>
+<li><code dir="ltr" translate="no">europe-west6</code></li>
+<li><code dir="ltr" translate="no">europe-west8</code></li>
+<li><code dir="ltr" translate="no">europe-west9</code></li>
+<li><code dir="ltr" translate="no">europe-west10</code></li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       aws-ap-northeast-2      </code></td>
+<td><code dir="ltr" translate="no">aws-ap-northeast-2</code></td>
 <td>Any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
 <ul>
-<li><code dir="ltr" translate="no">         asia-east1        </code></li>
-<li><code dir="ltr" translate="no">         asia-east2        </code></li>
-<li><code dir="ltr" translate="no">         asia-northeast1        </code></li>
-<li><code dir="ltr" translate="no">         asia-northeast2        </code></li>
-<li><code dir="ltr" translate="no">         asia-northeast3        </code></li>
-<li><code dir="ltr" translate="no">         asia-south1        </code></li>
-<li><code dir="ltr" translate="no">         asia-south2        </code></li>
-<li><code dir="ltr" translate="no">         asia-southeast1        </code></li>
+<li><code dir="ltr" translate="no">asia-east1</code></li>
+<li><code dir="ltr" translate="no">asia-east2</code></li>
+<li><code dir="ltr" translate="no">asia-northeast1</code></li>
+<li><code dir="ltr" translate="no">asia-northeast2</code></li>
+<li><code dir="ltr" translate="no">asia-northeast3</code></li>
+<li><code dir="ltr" translate="no">asia-south1</code></li>
+<li><code dir="ltr" translate="no">asia-south2</code></li>
+<li><code dir="ltr" translate="no">asia-southeast1</code></li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       aws-ap-southeast-2      </code></td>
+<td><code dir="ltr" translate="no">aws-ap-southeast-2</code></td>
 <td>Any of the following <a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">regions</a> :
 <ul>
-<li><code dir="ltr" translate="no">         australia-southeast1        </code></li>
-<li><code dir="ltr" translate="no">         australia-southeast2        </code></li>
+<li><code dir="ltr" translate="no">australia-southeast1</code></li>
+<li><code dir="ltr" translate="no">australia-southeast2</code></li>
 </ul></td>
 </tr>
 </tbody>

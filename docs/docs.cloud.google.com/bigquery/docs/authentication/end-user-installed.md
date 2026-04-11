@@ -66,7 +66,7 @@ Use the following button to select a project and create the required credentials
     
     ![Download JSON.](https://docs.cloud.google.com/static/bigquery/images/download-json.png)
     
-    Save the credentials file to `  client_secrets.json  ` . This file must be distributed with your app.
+    Save the credentials file to `client_secrets.json` . This file must be distributed with your app.
 
 ## Authenticate and call the API
 

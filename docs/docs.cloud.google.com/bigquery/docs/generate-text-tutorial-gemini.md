@@ -1,4 +1,4 @@
-This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`  gemini-2.5-flash  ` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
+This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`gemini-2.5-flash` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
 
 ## Costs
 
@@ -51,14 +51,14 @@ When you finish the tasks that are described in this document, you can avoid con
 
 ### gcloud
 
-1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `  roles/bigquery.admin, roles/resourcemanager.projectIamAdmin  `
+1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/bigquery.admin, roles/resourcemanager.projectIamAdmin`
     
         gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
     
     Replace the following:
     
       - `  PROJECT_ID  ` : Your project ID.
-      - `  USER_IDENTIFIER  ` : The identifier for your user account. For example, `  myemail@example.com  ` .
+      - `  USER_IDENTIFIER  ` : The identifier for your user account. For example, `myemail@example.com` .
       - `  ROLE  ` : The IAM role that you grant to your user account.
 
 ## Create a dataset
@@ -77,7 +77,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -85,9 +85,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -104,7 +104,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -116,7 +116,7 @@ Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/ref
 
 ## Create a connection
 
-Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in the `  US  ` multiregion, where you created the dataset. Then get the connection's service account.
+Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in the `US` multiregion, where you created the dataset. Then get the connection's service account.
 
 Select one of the following options:
 
@@ -150,7 +150,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -186,7 +186,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -324,13 +324,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -364,13 +364,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -382,7 +382,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -394,7 +394,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -406,7 +406,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ## Grant permissions to the connection's service account
 
-Grant the connection's service account the Vertex AI User role. You must grant this role in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemini#before_you_begin) section. Granting the role in a different project results in the error `  bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource  ` .
+Grant the connection's service account the Vertex AI User role. You must grant this role in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemini#before_you_begin) section. Granting the role in a different project results in the error `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 To grant the role, follow these steps:
 
@@ -424,7 +424,7 @@ To grant the role, follow these steps:
 
 ## Create the remote model
 
-Use the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) statement to create a remote model that represents a hosted Vertex AI model:
+Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) statement to create a remote model that represents a hosted Vertex AI model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -446,13 +446,13 @@ Replace the following:
 
   - `  CONNECTION_ID  ` : the ID of your BigQuery connection
     
-    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  `
+    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  `
 
-The query takes several seconds to complete, after which the model `  gemini_model  ` appears in the `  bqml_tutorial  ` dataset. There are no query results.
+The query takes several seconds to complete, after which the model `gemini_model` appears in the `bqml_tutorial` dataset. There are no query results.
 
 ## Perform keyword extraction
 
-Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by using the remote model and the `  AI.GENERATE_TEXT  ` function:
+Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by using the remote model and the `AI.GENERATE_TEXT` function:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -501,7 +501,7 @@ Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 ## Perform sentiment analysis
 
-Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by using the remote model and the `  AI.GENERATE_TEXT  ` function:
+Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by using the remote model and the `AI.GENERATE_TEXT` function:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -552,7 +552,7 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -570,7 +570,7 @@ If you want to reuse the project, then delete the resources that you created for
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  Delete the `  bqml_tutorial  ` dataset. Deleting the dataset also deletes the remote model.
+2.  Delete the `bqml_tutorial` dataset. Deleting the dataset also deletes the remote model.
     
     1.  In the **Explorer** pane, expand your project and click **Datasets**
     
@@ -588,13 +588,13 @@ If you want to reuse the project, then delete the resources that you created for
     
     3.  In the details pane, click delete **Delete** .
     
-    4.  In the **Delete connection** dialog, enter `  delete  ` to confirm deletion.
+    4.  In the **Delete connection** dialog, enter `delete` to confirm deletion.
     
     5.  Click **Delete** .
 
 ### gcloud
 
-1.  Delete the `  bqml_tutorial  ` dataset and the remote model.
+1.  Delete the `bqml_tutorial` dataset and the remote model.
     
         bq rm --dataset --recursive bqml_tutorial
 

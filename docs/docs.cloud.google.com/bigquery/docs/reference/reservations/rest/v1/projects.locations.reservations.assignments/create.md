@@ -16,18 +16,18 @@ When creating assignments, it does not matter if other assignments exist at high
 
 Example:
 
-  - The organization `  organizationA  ` contains two projects, `  project1  ` and `  project2  ` .
-  - Assignments for all three entities ( `  organizationA  ` , `  project1  ` , and `  project2  ` ) could all be created and mapped to the same or different reservations.
+  - The organization `organizationA` contains two projects, `project1` and `project2` .
+  - Assignments for all three entities ( `organizationA` , `project1` , and `project2` ) could all be created and mapped to the same or different reservations.
 
-"None" assignments represent an absence of the assignment. Projects assigned to None use on-demand pricing. To create a "None" assignment, use "none" as a reservationId in the parent. Example parent: `  projects/myproject/locations/US/reservations/none  ` .
+"None" assignments represent an absence of the assignment. Projects assigned to None use on-demand pricing. To create a "None" assignment, use "none" as a reservationId in the parent. Example parent: `projects/myproject/locations/US/reservations/none` .
 
-Returns `  google.rpc.Code.PERMISSION_DENIED  ` if user does not have 'bigquery.admin' permissions on the project using the reservation and the project that owns this reservation.
+Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have 'bigquery.admin' permissions on the project using the reservation and the project that owns this reservation.
 
-Returns `  google.rpc.Code.INVALID_ARGUMENT  ` when location of the assignment does not match location of the reservation.
+Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the assignment does not match location of the reservation.
 
 ### HTTP request
 
-`  POST https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*/reservations/*}/assignments  `
+`POST https://bigqueryreservation.googleapis.com/v1/{parent=projects/*/locations/*/reservations/*}/assignments`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -35,23 +35,23 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The parent resource name of the assignment E.g. `  projects/myproject/locations/US/reservations/team1-prod  `
+Required. The parent resource name of the assignment E.g. `projects/myproject/locations/US/reservations/team1-prod`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.reservationAssignments.create  `
+  - `bigquery.reservationAssignments.create`
 
 ### Query parameters
 
 Parameters
 
-`  assignmentId  `
+`assignmentId`
 
-`  string  `
+`string`
 
 The optional assignment ID. Assignment name will be generated automatically if this field is empty. This field must only contain lower case alphanumeric characters or dashes. Max length is 64 characters.
 
@@ -67,7 +67,7 @@ If successful, the response body contains a newly created instance of `  Assignm
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

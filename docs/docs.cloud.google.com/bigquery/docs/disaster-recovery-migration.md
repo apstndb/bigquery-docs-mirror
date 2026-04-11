@@ -100,7 +100,7 @@ The new reservation is visible in the **Slot reservations** tab.
 
 ### SQL
 
-To create a reservation, use the [`  CREATE RESERVATION  ` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
+To create a reservation, use the [`CREATE RESERVATION` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -127,7 +127,7 @@ To create a reservation, use the [`  CREATE RESERVATION  ` data definition langu
         
         The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
     
-      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `  slot_capacity  ` option and the `  edition  ` option in the same reservation.
+      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `edition` option in the same reservation.
     
       - `  SECONDARY_LOCATION  ` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
@@ -159,7 +159,7 @@ Once you've created the failover reservation, attach your cross-region dataset, 
 
 ### SQL
 
-To attach a dataset to a reservation, use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
+To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -186,7 +186,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### Verify the configuration
 
-To verify the status of your configuration, query the [`  INFORMATION_SCHEMA.SCHEMATA_REPLICAS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) .
+To verify the status of your configuration, query the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) .
 
     PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS[_BY_PROJECT]
 
@@ -195,20 +195,20 @@ Verify that the datasets are attached to the correct reservation in the correct 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Examples
 
 The following example walks you through the steps to migrate from CRR to DR with practical examples using GoogleSQL. For this example, assume the following:
 
-  - You are working in a project named `  myproject  ` .
+  - You are working in a project named `myproject` .
 
-  - You have already created a dataset named `  mydataset  ` and configured it with CRR.
+  - You have already created a dataset named `mydataset` and configured it with CRR.
 
-  - The primary region of `  mydataset  ` is `  us-central1  ` and the secondary region is `  us-west1  ` .
+  - The primary region of `mydataset` is `us-central1` and the secondary region is `us-west1` .
 
-To begin migrating your dataset to DR, first create a reservation with the Enterprise Plus edition. In this example, the name of the reservation is `  myreservation  ` .
+To begin migrating your dataset to DR, first create a reservation with the Enterprise Plus edition. In this example, the name of the reservation is `myreservation` .
 
     CREATE RESERVATION `myproject.region-us-central1.myreservation`
     OPTIONS (

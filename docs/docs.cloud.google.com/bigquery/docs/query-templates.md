@@ -20,7 +20,7 @@ Query templates let data owners and contributors create predefined and approved 
 
   - Query templates only support a maximum of two data references—that is, the data used to define the TVF's query and the data parameter input that the TVF accepts.
       - Multiple tables or views can be referenced within the TVF's query definition, but they must all belong to the same data owner or party.
-  - Query template TVFs only support `  TABLE  ` and `  VIEW  ` fixed types.
+  - Query template TVFs only support `TABLE` and `VIEW` fixed types.
   - Query template definitions are subject to [the same limitations as TVFs](https://docs.cloud.google.com/bigquery/docs/table-functions#limitations) .
 
 ## Before you begin
@@ -39,7 +39,7 @@ Enable the Analytics Hub API for your Google Cloud project by following these st
 
 ### bq
 
-Run the [`  gcloud services enable  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
+Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
 ``` notranslate
 gcloud services enable analyticshub.googleapis.com
@@ -50,24 +50,24 @@ gcloud services enable analyticshub.googleapis.com
 To get the permissions that you need to perform the tasks in this document, ask your administrator to grant you the following IAM roles:
 
   - Create or delete a TVF in a data clean room:
-      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `  roles/analyticshub.publisher  ` ) on the project
-      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `  roles/analyticshub.subscriber  ` ) on the project
-  - Authorize a TVF: [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` ) on the project
+      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `roles/analyticshub.publisher` ) on the project
+      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `roles/analyticshub.subscriber` ) on the project
+  - Authorize a TVF: [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) on the project
   - Add, update, or delete a TVF listing in a data clean room:
-      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `  roles/analyticshub.publisher  ` ) on the project
-      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `  roles/analyticshub.subscriber  ` ) on the project
+      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `roles/analyticshub.publisher` ) on the project
+      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `roles/analyticshub.subscriber` ) on the project
   - Create a query template:
-      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `  roles/analyticshub.publisher  ` ) on the project
-      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `  roles/analyticshub.subscriber  ` ) on the project
+      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `roles/analyticshub.publisher` ) on the project
+      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `roles/analyticshub.subscriber` ) on the project
   - Approve a query template:
-      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `  roles/analyticshub.publisher  ` ) on the project
-      - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` ) on the project
+      - [Analytics Hub Publisher](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `roles/analyticshub.publisher` ) on the project
+      - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) on the project
   - Subscribe to a data clean room with query templates:
-      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `  roles/analyticshub.subscriber  ` ) on the project
-      - [Analytics Hub Subscription Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriptionOwner) ( `  roles/analyticshub.subscriptionOwner  ` ) on the project where you want to subscribe to the data clean room
+      - [Analytics Hub Subscriber](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriber) ( `roles/analyticshub.subscriber` ) on the project
+      - [Analytics Hub Subscription Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriptionOwner) ( `roles/analyticshub.subscriptionOwner` ) on the project where you want to subscribe to the data clean room
   - Execute the queries defined in query templates:
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the project
-      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) on the project
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the project
+      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) on the project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -78,18 +78,18 @@ These predefined roles contain the permissions required to perform the tasks in 
 The following permissions are required to perform the tasks in this document:
 
   - Create or delete a TVF in a data clean room:
-      - `  bigquery.routines.create  ` on the project
-      - `  bigquery.routines.update  ` on the project
-      - `  bigquery.routines.delete  ` on the project
-  - Authorize a TVF: `  bigquery.datasets.update  ` on the datasets that the routine accesses
+      - `bigquery.routines.create` on the project
+      - `bigquery.routines.update` on the project
+      - `bigquery.routines.delete` on the project
+  - Authorize a TVF: `bigquery.datasets.update` on the datasets that the routine accesses
   - Create a query template:
-      - `  analyticshub.listings.subscribe  ` on the project
-      - `  analyticshub.queryTemplates.create  ` on the project
+      - `analyticshub.listings.subscribe` on the project
+      - `analyticshub.queryTemplates.create` on the project
   - Approve a query template:
-      - `  bigquery.routines.create  ` on the project
-      - `  bigquery.datasets.update  ` on the datasets that the routine accesses
-      - `  analyticshub.listings.create  ` on the project
-      - `  analyticshub.queryTemplates.approve  ` on the project
+      - `bigquery.routines.create` on the project
+      - `bigquery.datasets.update` on the datasets that the routine accesses
+      - `analyticshub.listings.create` on the project
+      - `analyticshub.queryTemplates.approve` on the project
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -97,9 +97,9 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 You can add an existing TVF to a data clean room using the Analytics Hub API.
 
-Use the [`  projects.locations.dataExchanges.listings.create  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/create) .
+Use the [`projects.locations.dataExchanges.listings.create` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/create) .
 
-The following example shows how to call the `  projects.locations.dataExchanges.listings.create  ` method using the `  curl  ` command:
+The following example shows how to call the `projects.locations.dataExchanges.listings.create` method using the `curl` command:
 
 ``` notranslate
     curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
@@ -154,7 +154,7 @@ Before creating a query template, you must add data to a data clean room. To cre
 
 5.  Set the metadata controls for the listing. If you only want to share the schemas and descriptions of the data added in the previous step (and not the shared data itself), select **Exclude access to listing from linked dataset** .
     
-    **Note:** You must have the Analytics Hub Subscriber ( `  roles/analyticshub.subscriber  ` ) role at the data clean room exchange level before you attempt to create a query template. The Analytics Hub Subscriber role lets you view the schemas of the data added to the clean room.
+    **Note:** You must have the Analytics Hub Subscriber ( `roles/analyticshub.subscriber` ) role at the data clean room exchange level before you attempt to create a query template. The Analytics Hub Subscriber role lets you view the schemas of the data added to the clean room.
     
     **Note:** You cannot update a listing to enable the metadata controls, so we recommend creating query templates on new listings. This verifies that shared data is not exposed to template subscribers, including data contributors who need the Analytics Hub Subscriber role to view the metadata.
 
@@ -186,13 +186,13 @@ Select one of the following options:
 
 7.  You can see the schemas of the views added to the clean room, and you can propose a query definition.
     
-    1.  Be sure to define the query using the supported [`  CREATE TABLE FUNCTION  ` syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) .
+    1.  Be sure to define the query using the supported [`CREATE TABLE FUNCTION` syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) .
     
     2.  Pass your entire table or view with fixed definitions. You must define the full table path reference, including the project ID and dataset ID, from the data added to the clean room. For example:
         
             query_template1(t1 TABLE<year INT64>) AS (SELECT * FROM `project_id.dataset_id.table_id` WHERE year = table_id.year)
     
-    3.  If you applied privacy analysis rules to the data, be sure this TVF includes privacy-specific SQL syntax, for example, [`  SELECT WITH AGGREGATION_THRESHOLD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+    3.  If you applied privacy analysis rules to the data, be sure this TVF includes privacy-specific SQL syntax, for example, [`SELECT WITH AGGREGATION_THRESHOLD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
     
     **Note:** Routine definitions are always hidden and never shared with template subscribers. Subscribers only see the table input parameter that the TVF expects.
 
@@ -202,11 +202,11 @@ Select one of the following options:
 
 You can [update the query template](https://docs.cloud.google.com/bigquery/docs/query-templates#update-query-template) or [submit the query template for review](https://docs.cloud.google.com/bigquery/docs/query-templates#submit-query-template) .
 
-**Note:** You must [authorize the TVF or routine](https://docs.cloud.google.com/bigquery/docs/authorized-routines#authorize_routines) for template subscribers to query the routine. If you modify a routine by running a `  CREATE OR REPLACE  ` statement, such as `  CREATE OR REPLACE FUNCTION  ` , `  CREATE OR REPLACE PROCEDURE  ` , or `  CREATE OR REPLACE TABLE FUNCTION  ` , you must re-authorize the routine.
+**Note:** You must [authorize the TVF or routine](https://docs.cloud.google.com/bigquery/docs/authorized-routines#authorize_routines) for template subscribers to query the routine. If you modify a routine by running a `CREATE OR REPLACE` statement, such as `CREATE OR REPLACE FUNCTION` , `CREATE OR REPLACE PROCEDURE` , or `CREATE OR REPLACE TABLE FUNCTION` , you must re-authorize the routine.
 
 ### API
 
-The following example shows how to create a query template with a `  curl  ` command:
+The following example shows how to create a query template with a `curl` command:
 
 ``` notranslate
 curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID -d
@@ -227,13 +227,13 @@ Replace the following:
   - `  QUERY_TEMPLATE_ID  ` : the query template ID.
   - `  TVF_DEFINITION  ` : the TVF definition.
 
-The following code sample shows a `  definition_body  ` example for the API call. You must define the full table path reference, including the project ID and dataset ID, from the data added to the clean room.
+The following code sample shows a `definition_body` example for the API call. You must define the full table path reference, including the project ID and dataset ID, from the data added to the clean room.
 
 ``` 
   query_template1(t1 TABLE<year INT64>) AS (SELECT * FROM `project_id.dataset_id.table_id` WHERE year = table_id.year)
 ```
 
-The `  definition_body  ` is analogous to the definition of a routine. The preceding `  definition_body  ` translates to the following routine:
+The `definition_body` is analogous to the definition of a routine. The preceding `definition_body` translates to the following routine:
 
 ``` 
   CREATE OR REPLACE TABLE FUNCTION <approvers_dataset>.query_template1(t1 TABLE, y INT64)
@@ -267,11 +267,11 @@ To update a query template, select one of the following options:
 1.  Click **Next** .
 2.  Review the query template and click **Save** to save the changes without submitting the template for review.
 
-**Note:** You must [authorize the TVF or routine](https://docs.cloud.google.com/bigquery/docs/authorized-routines#authorize_routines) for template subscribers to query the routine. If you modify a routine by running a `  CREATE OR REPLACE  ` statement, such as `  CREATE OR REPLACE FUNCTION  ` , `  CREATE OR REPLACE PROCEDURE  ` , or `  CREATE OR REPLACE TABLE FUNCTION  ` , you must re-authorize the routine.
+**Note:** You must [authorize the TVF or routine](https://docs.cloud.google.com/bigquery/docs/authorized-routines#authorize_routines) for template subscribers to query the routine. If you modify a routine by running a `CREATE OR REPLACE` statement, such as `CREATE OR REPLACE FUNCTION` , `CREATE OR REPLACE PROCEDURE` , or `CREATE OR REPLACE TABLE FUNCTION` , you must re-authorize the routine.
 
 ### API
 
-The following example shows how to update a query template with a `  curl  ` command:
+The following example shows how to update a query template with a `curl` command:
 
 ``` notranslate
  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
@@ -312,11 +312,11 @@ Select one of the following options:
 
 **Note:** After a query template is submitted for review, you can no longer modify it.
 
-**Note:** You must [authorize the TVF or routine](https://docs.cloud.google.com/bigquery/docs/authorized-routines#authorize_routines) for template subscribers to query the routine. If you modify a routine by running a `  CREATE OR REPLACE  ` statement, such as `  CREATE OR REPLACE FUNCTION  ` , `  CREATE OR REPLACE PROCEDURE  ` , or `  CREATE OR REPLACE TABLE FUNCTION  ` , you must re-authorize the routine.
+**Note:** You must [authorize the TVF or routine](https://docs.cloud.google.com/bigquery/docs/authorized-routines#authorize_routines) for template subscribers to query the routine. If you modify a routine by running a `CREATE OR REPLACE` statement, such as `CREATE OR REPLACE FUNCTION` , `CREATE OR REPLACE PROCEDURE` , or `CREATE OR REPLACE TABLE FUNCTION` , you must re-authorize the routine.
 
 ### API
 
-The following example shows how to submit a query template for review with a `  curl  ` command:
+The following example shows how to submit a query template for review with a `curl` command:
 
 ``` notranslate
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID:submit
@@ -349,7 +349,7 @@ Select one of the following options:
 
 ### API
 
-The following example shows how to delete a query template with a `  curl  ` command:
+The following example shows how to delete a query template with a `curl` command:
 
 ``` notranslate
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID
@@ -396,7 +396,7 @@ Select one of the following options:
 
 ### API
 
-1.  Create the routine out of the query template using a `  jobserver.query  ` call:
+1.  Create the routine out of the query template using a `jobserver.query` call:
     
     ``` notranslate
     curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://bigquery.googleapis.com/bigquery/v2/projects/ROUTINE_PROJECT_ID/queries --data '{"query":"ROUTINE_CREATION_QUERY","useLegacySql":false}'
@@ -425,7 +425,7 @@ Select one of the following options:
       - `  ROUTINE_ID  ` : the routine ID.
       - `  LISTING_NAME  ` : the listing name.
 
-3.  Update the query template status to `  APPROVED  ` :
+3.  Update the query template status to `APPROVED` :
     
     ``` notranslate
     curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID:approve  --data '{}'
@@ -476,9 +476,9 @@ If you can't view the TVF nested as a child element of the linked dataset in the
 
 ### API
 
-Use the [`  projects.locations.dataExchanges.subscribe  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe) .
+Use the [`projects.locations.dataExchanges.subscribe` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe) .
 
-The following example shows how to call the `  projects.locations.dataExchanges.subscribe  ` method using the `  curl  ` command:
+The following example shows how to call the `projects.locations.dataExchanges.subscribe` method using the `curl` command:
 
 ``` notranslate
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination":"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
@@ -504,7 +504,7 @@ Query templates can be used to facilitate different forms of data collaboration 
 
 A data publisher creates a query template to verify that subscribing partners can only run the queries that are defined by the publisher. Query template creators ultimately self-approve the query templates, because no other contributor is added to the clean room.
 
-In this scenario, user A is a data clean room owner who creates a data clean room called `  campaign_analysis  ` and adds a dataset named `  my_campaign  ` with a `  campaigns  ` table. User A configures an aggregation threshold policy and metadata controls to verify that only the metadata schema is visible and template subscribers cannot access the source data. User A then creates a query template by defining a table-valued function from the `  campaigns  ` table, restricting subscribers of the linked dataset to execute only the TVF.
+In this scenario, user A is a data clean room owner who creates a data clean room called `campaign_analysis` and adds a dataset named `my_campaign` with a `campaigns` table. User A configures an aggregation threshold policy and metadata controls to verify that only the metadata schema is visible and template subscribers cannot access the source data. User A then creates a query template by defining a table-valued function from the `campaigns` table, restricting subscribers of the linked dataset to execute only the TVF.
 
 This is the TVF syntax:
 
@@ -519,7 +519,7 @@ Since user A has the appropriate permissions for the campaigns table with the Bi
 
 A clean room owner invites a trusted contributor to propose queries to be run against each other's data. Both parties can safely propose queries by viewing metadata schemas only, without accessing the underlying shared data. When a query definition references data that does not belong to the template proposer, the template can only be approved by that data's owner.
 
-In this scenario, user A invites user B, who is a data clean room contributor, to the `  campaign_analysis  ` clean room. User B wants to propose a query template to join their own data to the `  campaigns  ` table by viewing the table's metadata schema.
+In this scenario, user A invites user B, who is a data clean room contributor, to the `campaign_analysis` clean room. User B wants to propose a query template to join their own data to the `campaigns` table by viewing the table's metadata schema.
 
 This is the TVF syntax:
 
@@ -528,9 +528,9 @@ This is the TVF syntax:
     group by company_id, company
     );
 
-Because user B didn't add or doesn't own the `  campaigns  ` table, only user A can approve the query template after it's submitted for approval. To use the query template, user B must subscribe to the clean room and invoke the TVF. User B passes their own table with a field named `  campaign_ID  ` as the table parameter, and they can execute the private SQL defined in the query template. User B doesn't need to add their data to the clean room.
+Because user B didn't add or doesn't own the `campaigns` table, only user A can approve the query template after it's submitted for approval. To use the query template, user B must subscribe to the clean room and invoke the TVF. User B passes their own table with a field named `campaign_ID` as the table parameter, and they can execute the private SQL defined in the query template. User B doesn't need to add their data to the clean room.
 
-User B also adds a dataset named `  my_transactions  ` to the clean room that has a `  transactions  ` table and a `  products  ` table. User B configures aggregation threshold policies and metadata controls to verify that only the metadata schema is visible and template subscribers cannot access the source data.
+User B also adds a dataset named `my_transactions` to the clean room that has a `transactions` table and a `products` table. User B configures aggregation threshold policies and metadata controls to verify that only the metadata schema is visible and template subscribers cannot access the source data.
 
 User A can now propose various query templates to join their own data to the transactions table by viewing the table's metadata schema. The following are examples of TVF syntax:
 
@@ -548,7 +548,7 @@ User A can now propose various query templates to join their own data to the tra
 
 **Note:** Only tables owned by the same party can be referenced within the TVF query syntax. For more details, see [Limitations](https://docs.cloud.google.com/bigquery/docs/query-templates#limitations) .
 
-Because user A didn't add or doesn't own the `  transactions  ` and `  products  ` tables, only user B can approve the query template after it's submitted for approval. To use the query template, user A must subscribe to the clean room and invoke the TVF. User A passes their own table with a field named `  user_ID  ` as the table parameter, and they can execute the privacy SQL defined in the query template. User A doesn't need to add their data to the clean room.
+Because user A didn't add or doesn't own the `transactions` and `products` tables, only user B can approve the query template after it's submitted for approval. To use the query template, user A must subscribe to the clean room and invoke the TVF. User A passes their own table with a field named `user_ID` as the table parameter, and they can execute the privacy SQL defined in the query template. User A doesn't need to add their data to the clean room.
 
 ## Pricing
 

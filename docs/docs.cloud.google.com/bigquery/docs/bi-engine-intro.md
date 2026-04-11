@@ -41,7 +41,7 @@ BI Engine works best for pre-joined or pre-aggregated data, and for queries with
 
 ### Understand the impact of BI Engine
 
-To understand your use of BI Engine, see [Monitor BI Engine with Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor) , or query the [`  INFORMATION_SCHEMA.BI_CAPACITIES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacities) and [`  INFORMATION_SCHEMA.BI_CAPACITY_CHANGES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacity-changes) views. Be sure to disable the **Use cached results** option in BigQuery to get the most accurate comparison. For more information, see [Use cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .
+To understand your use of BI Engine, see [Monitor BI Engine with Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor) , or query the [`INFORMATION_SCHEMA.BI_CAPACITIES`](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacities) and [`INFORMATION_SCHEMA.BI_CAPACITY_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacity-changes) views. Be sure to disable the **Use cached results** option in BigQuery to get the most accurate comparison. For more information, see [Use cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .
 
 ### Preferred tables
 
@@ -56,8 +56,8 @@ BI Engine preferred tables have the following limitations:
   - You cannot add views to the preferred tables reservation list. BI Engine preferred tables only support tables.
   - Queries to materialized views are only accelerated if both the materialized views and their base tables are in the preferred tables list.
   - Specifying partitions or columns for acceleration is not supported.
-  - `  JSON  ` type columns are unsupported and are not accelerated by BI Engine.
-  - Queries that access multiple tables are only accelerated if all tables are preferred tables. For example, all tables in a query with a `  JOIN  ` must be in the preferred tables list to be accelerated. If even one table is not in the preferred list, then the query cannot use BI Engine.
+  - `JSON` type columns are unsupported and are not accelerated by BI Engine.
+  - Queries that access multiple tables are only accelerated if all tables are preferred tables. For example, all tables in a query with a `JOIN` must be in the preferred tables list to be accelerated. If even one table is not in the preferred list, then the query cannot use BI Engine.
   - Public datasets are not supported in the Google Cloud console. To add a public table as a preferred table, use the API or the DDL.
 
 ## Limitations
@@ -68,7 +68,7 @@ In addition, BigQuery BI Engine has the following limitations.
 
 ### Joins
 
-BI Engine accelerates certain types of join queries. Acceleration happens on leaf-level subqueries with `  INNER  ` and `  LEFT OUTER JOINS  ` , where a large fact table is joined with up to four smaller, "dimension" tables. Small dimension tables have the following restrictions:
+BI Engine accelerates certain types of join queries. Acceleration happens on leaf-level subqueries with `INNER` and `LEFT OUTER JOINS` , where a large fact table is joined with up to four smaller, "dimension" tables. Small dimension tables have the following restrictions:
 
   - Less than 5 million rows
   - Size limit:
@@ -79,10 +79,10 @@ BI Engine accelerates certain types of join queries. Acceleration happens on lea
 
 [Window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , also known as analytical functions, have the following limitations when accelerated by BigQuery BI Engine:
 
-  - The input stages are accelerated by BigQuery BI Engine if they don't have window functions. In this case `  INFORMATION_SCHEMA.JOBS  ` view reports `  bi_engine_statistics  ` . `  acceleration_mode  ` as `  FULL_INPUT  ` .
-  - The input stages of queries with window functions in their input stages are accelerated by BI Engine, but don't have the limitations described in [BI Engine Window functions limitations](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#window_function_limitations) . In that case, the input stages or the full query is executed in BI Engine. In this case `  INFORMATION_SCHEMA.JOBS  ` view reports `  bi_engine_statistics  ` . `  acceleration_mode  ` as `  FULL_INPUT  ` or `  FULL_QUERY  ` .
+  - The input stages are accelerated by BigQuery BI Engine if they don't have window functions. In this case `INFORMATION_SCHEMA.JOBS` view reports `bi_engine_statistics` . `acceleration_mode` as `FULL_INPUT` .
+  - The input stages of queries with window functions in their input stages are accelerated by BI Engine, but don't have the limitations described in [BI Engine Window functions limitations](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#window_function_limitations) . In that case, the input stages or the full query is executed in BI Engine. In this case `INFORMATION_SCHEMA.JOBS` view reports `bi_engine_statistics` . `acceleration_mode` as `FULL_INPUT` or `FULL_QUERY` .
 
-For more information about the `  BiEngineStatistics  ` field, see the [Job reference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics) .
+For more information about the `BiEngineStatistics` field, see the [Job reference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics) .
 
 #### BI Engine window functions limitations
 
@@ -91,55 +91,55 @@ Queries with window functions only run in BI Engine if all of the following cond
   - The query scans exactly one table.
       - The table is not partitioned.
       - The table has less than 5 million rows.
-  - The query has no `  JOIN  ` operators.
+  - The query has no `JOIN` operators.
   - The scanned table size times the number of window function operators does not exceed 300 MiB.
 
-Two window functions with identical `  OVER  ` clauses and the same direct inputs can share the same window function operator. For example:
+Two window functions with identical `OVER` clauses and the same direct inputs can share the same window function operator. For example:
 
-  - `  SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (ORDER BY x) FROM my_table  ` has only one window function operator.
-  - `  SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (PARTITION BY y ORDER BY x) FROM my_table  ` has two window function operators because the two functions have different `  OVER  ` clauses.
-  - `  SELECT ROW_NUMBER() OVER (ORDER BY x) FROM (SELECT SUM(x) OVER (ORDER BY x) AS x FROM my_table)  ` has two window function operators because the two functions have different direct inputs although their `  OVER  ` clauses appear the same.
+  - `SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (ORDER BY x) FROM my_table` has only one window function operator.
+  - `SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (PARTITION BY y ORDER BY x) FROM my_table` has two window function operators because the two functions have different `OVER` clauses.
+  - `SELECT ROW_NUMBER() OVER (ORDER BY x) FROM (SELECT SUM(x) OVER (ORDER BY x) AS x FROM my_table)` has two window function operators because the two functions have different direct inputs although their `OVER` clauses appear the same.
 
 #### Supported window functions
 
 The following referenced window functions are supported:
 
-  - `  ANY_VALUE  `
-  - `  AVG  `
-  - `  BIT_AND  `
-  - `  BIT_OR  `
-  - `  BIT_XOR  `
-  - `  CORR  `
-  - `  COUNT  `
-  - `  COUNTIF  `
-  - `  COVAR_POP  `
-  - `  COVAR_SAMP  `
-  - `  CUME_DIST  `
-  - `  DENSE_RANK  `
-  - `  FIRST_VALUE  `
-  - `  LAG  `
-  - `  LAST_VALUE  `
-  - `  LEAD  `
-  - `  LOGICAL_AND  `
-  - `  LOGICAL_OR  `
-  - `  MAX  `
-  - `  MIN  `
-  - `  NTH_VALUE  `
-  - `  NTILE  `
-  - `  PERCENT_RANK  `
-  - `  PERCENTILE_CONT  `
-  - `  PERCENTILE_DISC  `
-  - `  RANK  `
-  - `  ROW_NUMBER  `
-  - `  ST_CLUSTERDBSCAN  `
-  - `  STDDEV_POP  `
-  - `  STDDEV_SAMP  `
-  - `  STDDEV  `
-  - `  STRING_AGG  `
-  - `  SUM  `
-  - `  VAR_POP  `
-  - `  VAR_SAMP  `
-  - `  VARIANCE  `
+  - `ANY_VALUE`
+  - `AVG`
+  - `BIT_AND`
+  - `BIT_OR`
+  - `BIT_XOR`
+  - `CORR`
+  - `COUNT`
+  - `COUNTIF`
+  - `COVAR_POP`
+  - `COVAR_SAMP`
+  - `CUME_DIST`
+  - `DENSE_RANK`
+  - `FIRST_VALUE`
+  - `LAG`
+  - `LAST_VALUE`
+  - `LEAD`
+  - `LOGICAL_AND`
+  - `LOGICAL_OR`
+  - `MAX`
+  - `MIN`
+  - `NTH_VALUE`
+  - `NTILE`
+  - `PERCENT_RANK`
+  - `PERCENTILE_CONT`
+  - `PERCENTILE_DISC`
+  - `RANK`
+  - `ROW_NUMBER`
+  - `ST_CLUSTERDBSCAN`
+  - `STDDEV_POP`
+  - `STDDEV_SAMP`
+  - `STDDEV`
+  - `STRING_AGG`
+  - `SUM`
+  - `VAR_POP`
+  - `VAR_SAMP`
+  - `VARIANCE`
 
 If window functions aren't supported, then you might see the following error:
 
@@ -157,7 +157,7 @@ BI Engine acceleration is not available for the following features:
   - [Transactions](https://docs.cloud.google.com/bigquery/docs/transactions)
   - Queries that return more than 1 GiB of data. For latency-sensitive applications, a response size of less than 1 MiB is recommended.
   - Row-level security
-  - Queries that use the [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or are optimized by [search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro)
+  - Queries that use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or are optimized by [search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro)
 
 ### Work-around for unsupported features
 

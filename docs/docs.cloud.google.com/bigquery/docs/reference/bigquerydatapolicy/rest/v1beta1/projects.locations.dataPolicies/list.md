@@ -12,7 +12,7 @@ List all of the data policies in the specified parent project.
 
 ### HTTP request
 
-`  GET https://bigquerydatapolicy.googleapis.com/v1beta1/{parent=projects/*/locations/*}/dataPolicies  `
+`GET https://bigquerydatapolicy.googleapis.com/v1beta1/{parent=projects/*/locations/*}/dataPolicies`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,27 +20,27 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Resource name of the project for which to list data policies. Format is `  projects/{projectNumber}/locations/{locationId}  ` .
+Required. Resource name of the project for which to list data policies. Format is `projects/{projectNumber}/locations/{locationId}` .
 
 ### Query parameters
 
 Parameters
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 The maximum number of data policies to return. Must be a value between 1 and 1000. If not set, defaults to 50.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
-The `  nextPageToken  ` value returned from a previous list request, if any. If not set, defaults to an empty string.
+The `nextPageToken` value returned from a previous list request, if any. If not set, defaults to an empty string.
 
 ### Request body
 
@@ -63,29 +63,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataPolicies&quot;: [
-    {
-      object (DataPolicy)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataPolicies&quot;: [{object (DataPolicy)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dataPolicies[]  `
+`dataPolicies[]`
 
-`  object ( DataPolicy  ` )
+` object ( DataPolicy  ` )
 
 Data policies that belong to the requested project.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 Token used to retrieve the next page of results, or empty if there are no more results.
 
@@ -93,15 +86,15 @@ Token used to retrieve the next page of results, or empty if there are no more r
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  parent  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:
 
-  - `  bigquery.dataPolicies.list  `
+  - `bigquery.dataPolicies.list`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

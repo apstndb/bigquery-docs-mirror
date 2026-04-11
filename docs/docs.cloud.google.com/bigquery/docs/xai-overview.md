@@ -35,11 +35,11 @@ Supervised models
 
 [Shapley values](https://christophm.github.io/interpretable-ml-book/shapley.html#the-shapley-value-in-detail)
 
-Shapley values for linear models are equal to `  model weight * feature value  ` , where feature values are standardized and model weights are trained with the standardized feature values.
+Shapley values for linear models are equal to `model weight * feature value` , where feature values are standardized and model weights are trained with the standardized feature values.
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
+[`ML.EXPLAIN_PREDICT` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
 
-[`  ML.GLOBAL_EXPLAIN  ` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
+[`ML.GLOBAL_EXPLAIN` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
 
 [Standard Errors](https://en.wikipedia.org/wiki/Standard_error) and [P-values](https://en.wikipedia.org/wiki/P-value)
 
@@ -47,7 +47,7 @@ Standard errors and p-values are used for significance testing against the model
 
 N/A
 
-[`  ML.ADVANCED_WEIGHTS  ` <sup>4</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
+[`ML.ADVANCED_WEIGHTS` <sup>4</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights)
 
 [Boosted trees](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)  
   
@@ -57,17 +57,17 @@ N/A
 
 Tree SHAP is an algorithm to compute exact [SHAP values](https://christophm.github.io/interpretable-ml-book/shap.html) for decision tree-based models.
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
+[`ML.EXPLAIN_PREDICT` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
 
-[`  ML.GLOBAL_EXPLAIN  ` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
+[`ML.GLOBAL_EXPLAIN` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
 
 [Approximate Feature Contribution](http://blog.datadive.net/interpreting-random-forests/)
 
 Approximates the feature contribution values. It is faster and simpler compared to Tree SHAP.
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
+[`ML.EXPLAIN_PREDICT` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
 
-[`  ML.GLOBAL_EXPLAIN  ` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
+[`ML.GLOBAL_EXPLAIN` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
 
 [Gini Index-based feature importance](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.XGBRegressor.feature_importances_)
 
@@ -75,7 +75,7 @@ A global feature importance score that indicates how useful or valuable each fea
 
 N/A
 
-[`  ML.FEATURE_IMPORTANCE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance)
+[`ML.FEATURE_IMPORTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance)
 
 [Deep Neural Network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)  
   
@@ -83,11 +83,11 @@ N/A
 
 [Integrated gradients](https://docs.cloud.google.com/ai-platform/prediction/docs/ai-explanations/overview#ig)
 
-A gradients-based method that efficiently computes feature attributions with the same axiomatic properties as the Shapley value. It provides a sampling approximation of exact feature attributions. Its accuracy is controlled by the [`  integrated_gradients_num_steps  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict#arguments) parameter.
+A gradients-based method that efficiently computes feature attributions with the same axiomatic properties as the Shapley value. It provides a sampling approximation of exact feature attributions. Its accuracy is controlled by the [`integrated_gradients_num_steps`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict#arguments) parameter.
 
-[`  ML.EXPLAIN_PREDICT  ` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
+[`ML.EXPLAIN_PREDICT` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
 
-[`  ML.GLOBAL_EXPLAIN  ` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
+[`ML.GLOBAL_EXPLAIN` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
 
 [AutoML Tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
 
@@ -97,7 +97,7 @@ Sampled Shapley assigns credit for the model's outcome to each feature, and cons
 
 N/A
 
-[`  ML.GLOBAL_EXPLAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain) <sup>2</sup>
+[`ML.GLOBAL_EXPLAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain) <sup>2</sup>
 
 Time series models
 
@@ -107,7 +107,7 @@ Time series models
 
 Decomposes the time series into multiple components if those components are present in the time series. The components include trend, seasonal, holiday, step changes, and spike and dips. See ARIMA\_PLUS [modeling pipeline](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline) for more details.
 
-[`  ML.EXPLAIN_FORECAST  ` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast)
+[`ML.EXPLAIN_FORECAST` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast)
 
 N/A
 
@@ -117,19 +117,19 @@ N/A
 and  
 [Shapley values](https://christophm.github.io/interpretable-ml-book/shapley.html#the-shapley-value-in-detail)
 
-Decomposes the time series into multiple components, including trend, seasonal, holiday, step changes, and spike and dips (similar to [ARIMA\_PLUS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) ). Attribution of each external regressor is calculated based on Shapley Values, which is equal to `  model weight * feature value  ` .
+Decomposes the time series into multiple components, including trend, seasonal, holiday, step changes, and spike and dips (similar to [ARIMA\_PLUS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) ). Attribution of each external regressor is calculated based on Shapley Values, which is equal to `model weight * feature value` .
 
-[`  ML.EXPLAIN_FORECAST  ` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast)
+[`ML.EXPLAIN_FORECAST` <sup>3</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast)
 
 N/A
 
-<sup>1</sup> `  ML_EXPLAIN_PREDICT  ` is an extended version of `  ML.PREDICT  ` .
+<sup>1</sup> `ML_EXPLAIN_PREDICT` is an extended version of `ML.PREDICT` .
 
-<sup>2</sup> `  ML.GLOBAL_EXPLAIN  ` returns the global explainability obtained by taking the mean absolute attribution that each feature receives for all the rows in the evaluation dataset.
+<sup>2</sup> `ML.GLOBAL_EXPLAIN` returns the global explainability obtained by taking the mean absolute attribution that each feature receives for all the rows in the evaluation dataset.
 
-<sup>3</sup> `  ML.EXPLAIN_FORECAST  ` is an extended version of `  ML.FORECAST  ` .
+<sup>3</sup> `ML.EXPLAIN_FORECAST` is an extended version of `ML.FORECAST` .
 
-<sup>4</sup> `  ML.ADVANCED_WEIGHTS  ` is an extended version of `  ML.WEIGHTS  ` .
+<sup>4</sup> `ML.ADVANCED_WEIGHTS` is an extended version of `ML.WEIGHTS` .
 
 ## Explainable AI in Vertex AI
 
@@ -160,7 +160,7 @@ When your BigQuery ML model is registered in Model Registry, and if it is a type
 4.  Select **More actions** from the model version. more\_vert
 5.  Click **Deploy to endpoint** .
 6.  Define your endpoint - create an endpoint name and click continue.
-7.  Select a machine type, for example, `  n1-standard-2  ` .
+7.  Select a machine type, for example, `n1-standard-2` .
 8.  Under **Model settings** , in the logging section, select the checkbox to enable Explainability options.
 9.  Click **Done** , and then **Continue** to deploy to the endpoint.
 

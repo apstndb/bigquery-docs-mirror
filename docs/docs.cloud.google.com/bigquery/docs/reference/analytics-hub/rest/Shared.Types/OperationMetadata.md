@@ -28,48 +28,48 @@ Represents the metadata of a long-running operation in Analytics Hub.
 
 Fields
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. The time the operation was created.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  endTime  `
+`endTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. The time the operation finished running.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  target  `
+`target`
 
-`  string  `
+`string`
 
 Output only. Server-defined resource path for the target of the operation.
 
-`  verb  `
+`verb`
 
-`  string  `
+`string`
 
 Output only. Name of the verb executed by the operation.
 
-`  statusMessage  `
+`statusMessage`
 
-`  string  `
+`string`
 
 Output only. Human-readable status of the operation, if any.
 
-`  requestedCancellation  `
+`requestedCancellation`
 
-`  boolean  `
+`boolean`
 
-Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have \[Operation.error\]\[\] value with a `  google.rpc.Status.code  ` of 1, corresponding to `  Code.CANCELLED  ` .
+Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have \[Operation.error\]\[\] value with a `  google.rpc.Status.code  ` of 1, corresponding to `Code.CANCELLED` .
 
-`  apiVersion  `
+`apiVersion`
 
-`  string  `
+`string`
 
 Output only. API version used to start the operation.

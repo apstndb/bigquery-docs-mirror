@@ -10,7 +10,7 @@ Updates the specified connection. For security reasons, also resets credential i
 
 ### HTTP request
 
-`  PATCH https://bigqueryconnection.googleapis.com/v1/{name=projects/*/locations/*/connections/*}  `
+`PATCH https://bigqueryconnection.googleapis.com/v1/{name=projects/*/locations/*/connections/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,23 +18,23 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the connection to update, for example: `  projects/{projectId}/locations/{locationId}/connections/{connectionId}  `
+Required. Name of the connection to update, for example: `projects/{projectId}/locations/{locationId}/connections/{connectionId}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.update  `
+  - `bigquery.connections.update`
 
 ### Query parameters
 
 Parameters
 
-`  updateMask  `
+`updateMask`
 
-`  string ( FieldMask  ` format)
+` string ( FieldMask  ` format)
 
 Required. Update mask for the connection fields to be updated.
 
@@ -50,7 +50,7 @@ If successful, the response body contains an instance of `  Connection  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

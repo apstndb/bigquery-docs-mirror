@@ -1,47 +1,47 @@
 # SEARCH\_INDEX\_OPTIONS view
 
-The `  INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS  ` view contains one row for each search index option in a dataset.
+The `INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS` view contains one row for each search index option in a dataset.
 
 ## Required permissions
 
-To see [search index](https://docs.cloud.google.com/bigquery/docs/search-index) metadata, you need the `  bigquery.tables.get  ` or `  bigquery.tables.list  ` Identity and Access Management (IAM) permission on the table with the index. Each of the following predefined IAM roles includes at least one of these permissions:
+To see [search index](https://docs.cloud.google.com/bigquery/docs/search-index) metadata, you need the `bigquery.tables.get` or `bigquery.tables.list` Identity and Access Management (IAM) permission on the table with the index. Each of the following predefined IAM roles includes at least one of these permissions:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.user  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.user`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS  ` view, the query results contain one row for each search index option in a dataset.
+When you query the `INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS` view, the query results contain one row for each search index option in a dataset.
 
-The `  INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS  ` view has the following schema:
+The `INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS` view has the following schema:
 
-| Column name                    | Data type               | Value                                                                                                                                                                                                           |
-| ------------------------------ | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        index_catalog       ` | `        STRING       ` | The name of the project that contains the dataset.                                                                                                                                                              |
-| `        index_schema       `  | `        STRING       ` | The name of the dataset that contains the index.                                                                                                                                                                |
-| `        table_name       `    | `        STRING       ` | The name of the base table that the index is created on.                                                                                                                                                        |
-| `        index_name       `    | `        STRING       ` | The name of the index.                                                                                                                                                                                          |
-| `        option_name       `   | `        STRING       ` | The name of the option, which can be one of the following: `        analyzer       ` , `        analyzer_options       ` , `        data_types       ` , or `        default_index_column_granularity       ` . |
-| `        option_type       `   | `        STRING       ` | The type of the option.                                                                                                                                                                                         |
-| `        option_value       `  | `        STRING       ` | The value of the option.                                                                                                                                                                                        |
+| Column name     | Data type | Value                                                                                                                                               |
+| --------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `index_catalog` | `STRING`  | The name of the project that contains the dataset.                                                                                                  |
+| `index_schema`  | `STRING`  | The name of the dataset that contains the index.                                                                                                    |
+| `table_name`    | `STRING`  | The name of the base table that the index is created on.                                                                                            |
+| `index_name`    | `STRING`  | The name of the index.                                                                                                                              |
+| `option_name`   | `STRING`  | The name of the option, which can be one of the following: `analyzer` , `analyzer_options` , `data_types` , or `default_index_column_granularity` . |
+| `option_type`   | `STRING`  | The type of the option.                                                                                                                             |
+| `option_value`  | `STRING`  | The value of the option.                                                                                                                            |
 
-**Note:** If a search index option is not specified, a row containing the default search index option is produced by a query. The `  analyzer  ` and `  data_types  ` options are always populated in the `  SEARCH_INDEX_OPTIONS  ` view regardless of whether they are specified in the DDL or not. If not specified, the default `  LOG_ANALYZER  ` and `  ["STRING"]  ` values are respectively produced. Other options are populated in the `  SEARCH_INDEX_OPTIONS  ` view only when they're specified in `  CREATE SEARCH INDEX DDL  ` .
+**Note:** If a search index option is not specified, a row containing the default search index option is produced by a query. The `analyzer` and `data_types` options are always populated in the `SEARCH_INDEX_OPTIONS` view regardless of whether they are specified in the DDL or not. If not specified, the default `LOG_ANALYZER` and `["STRING"]` values are respectively produced. Other options are populated in the `SEARCH_INDEX_OPTIONS` view only when they're specified in `CREATE SEARCH INDEX DDL` .
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
 Queries against this view must have a [dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-| View Name                                                                                                                                  | Resource scope | Region scope     |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ---------------- |
-| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS       ` | Dataset level  | Dataset location |
+| View Name                                                                                           | Resource scope | Region scope     |
+| --------------------------------------------------------------------------------------------------- | -------------- | ---------------- |
+| `[         PROJECT_ID        .]         DATASET_ID        .INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS` | Dataset level  | Dataset location |
 
 Replace the following:
 
@@ -55,7 +55,7 @@ Replace the following:
 
 ## Example
 
-The following example creates three search index options for columns of `  table1  ` and then extracts those options from fields that are indexed:
+The following example creates three search index options for columns of `table1` and then extracts those options from fields that are indexed:
 
 ``` notranslate
 CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS) OPTIONS (
@@ -79,7 +79,7 @@ The result is similar to the following:
     | myIndex    | data_types       | ARRAY<STRING> | ["STRING", "INT64", "TIMESTAMP"] |
     +------------+------------------+---------------+----------------------------------+
 
-The following example creates one search index option for columns of `  table1  ` and then extracts those options from fields that are indexed. If an option doesn't exist, the default option is produced:
+The following example creates one search index option for columns of `table1` and then extracts those options from fields that are indexed. If an option doesn't exist, the default option is produced:
 
 ``` notranslate
 CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS) OPTIONS (
@@ -100,7 +100,7 @@ The result is similar to the following:
     | myIndex    | data_types       | ARRAY<STRING> | ["STRING"]     |
     +------------+------------------+---------------+----------------+
 
-The following example creates no search index options for columns of `  table1  ` and then extracts the default options from fields that are indexed:
+The following example creates no search index options for columns of `table1` and then extracts the default options from fields that are indexed:
 
 ``` notranslate
 CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS);

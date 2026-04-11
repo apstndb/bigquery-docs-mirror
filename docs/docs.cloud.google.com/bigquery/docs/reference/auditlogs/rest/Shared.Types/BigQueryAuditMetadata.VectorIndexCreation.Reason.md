@@ -2,10 +2,10 @@ Describes how the vector index was created.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  QUERY  `
+`QUERY`
 
 Vector index was created using a DDL query.

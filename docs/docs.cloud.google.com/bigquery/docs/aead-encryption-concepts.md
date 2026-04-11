@@ -14,7 +14,7 @@ AEAD encryption functions allow you to create keysets that contain keys for encr
 
 A keyset is a collection of cryptographic keys, one of which is the primary cryptographic key and the rest of which, if any, are secondary cryptographic keys. Each key encodes an [algorithm for encryption or decryption](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#block_cipher_modes) ; whether the key is enabled, disabled, or destroyed; and, for non-destroyed keys, the key bytes themselves. The primary cryptographic key determines how to encrypt input plaintext. The primary cryptographic key can never be in a disabled state. Secondary cryptographic keys are only for decryption and can be either in an enabled or disabled state. A keyset can be used to decrypt any data that it was used to encrypt.
 
-The representation of a keyset in GoogleSQL is as a serialized [google.crypto.tink.Keyset](https://github.com/google/tink/blob/master/proto/tink.proto) protocol buffer in `  BYTES  ` .
+The representation of a keyset in GoogleSQL is as a serialized [google.crypto.tink.Keyset](https://github.com/google/tink/blob/master/proto/tink.proto) protocol buffer in `BYTES` .
 
 **Example**
 
@@ -51,9 +51,9 @@ The following is an example of an AEAD keyset, represented as a JSON string, wit
       ]
     }
 
-In the above example, the primary cryptographic key has an ID of `  569259624  ` and is the first key listed in the JSON string. There are two secondary cryptographic keys, one with ID `  852264701  ` in a disabled state, and another with ID `  237910588  ` in a destroyed state. When an AEAD encryption function uses this keyset for encryption, the resulting ciphertext encodes the primary cryptographic key's ID of `  569259624  ` .
+In the above example, the primary cryptographic key has an ID of `569259624` and is the first key listed in the JSON string. There are two secondary cryptographic keys, one with ID `852264701` in a disabled state, and another with ID `237910588` in a destroyed state. When an AEAD encryption function uses this keyset for encryption, the resulting ciphertext encodes the primary cryptographic key's ID of `569259624` .
 
-When an AEAD function uses this keyset for decryption, the function chooses the appropriate key for decryption based on the key ID encoded in the ciphertext; in the example above, attempting to decrypt using either key IDs `  852264701  ` or `  237910588  ` would result in an error, because key ID `  852264701  ` is disabled and ID `  237910588  ` is destroyed. Restoring key ID `  852264701  ` to an enabled state would render it usable for decryption.
+When an AEAD function uses this keyset for decryption, the function chooses the appropriate key for decryption based on the key ID encoded in the ciphertext; in the example above, attempting to decrypt using either key IDs `852264701` or `237910588` would result in an error, because key ID `852264701` is disabled and ID `237910588` is destroyed. Restoring key ID `852264701` to an enabled state would render it usable for decryption.
 
 The key type determines the [encryption mode](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#block_cipher_modes) to use with that key.
 
@@ -71,10 +71,10 @@ As with [keysets](https://docs.cloud.google.com/bigquery/docs/aead-encryption-co
 
 Here are some functions with wrapped keyset examples:
 
-  - [`  KEYS.NEW_WRAPPED_KEYSET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysnew_wrapped_keyset) : Create a new wrapped keyset.
-  - [`  KEYS.ROTATE_WRAPPED_KEYSET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_wrapped_keyset) : Rotate a wrapped keyset.
-  - [`  KEYS.REWRAP_KEYSET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrewrap_keyset) : Rewrap a wrapped keyset with new data.
-  - [`  KEYS.KEYSET_CHAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) : Get a [Tink](https://github.com/google/tink/blob/master/proto/tink.proto) keyset that is encrypted with a [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) .
+  - [`KEYS.NEW_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysnew_wrapped_keyset) : Create a new wrapped keyset.
+  - [`KEYS.ROTATE_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_wrapped_keyset) : Rotate a wrapped keyset.
+  - [`KEYS.REWRAP_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrewrap_keyset) : Rewrap a wrapped keyset with new data.
+  - [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) : Get a [Tink](https://github.com/google/tink/blob/master/proto/tink.proto) keyset that is encrypted with a [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) .
 
 ### Advanced Encryption Standard (AES)
 
@@ -96,17 +96,17 @@ CBC mode isn't an [AEAD scheme in the cryptographic sense](https://en.wikipedia.
 
 ### Additional data
 
-AEAD encryption functions support the use of an `  additional_data  ` argument, also known as associated data (AD) or additional authenticated data. A ciphertext can only be decrypted if the same additional data used to encrypt is also provided to decrypt. The additional data can therefore be used to bind the ciphertext to a context.
+AEAD encryption functions support the use of an `additional_data` argument, also known as associated data (AD) or additional authenticated data. A ciphertext can only be decrypted if the same additional data used to encrypt is also provided to decrypt. The additional data can therefore be used to bind the ciphertext to a context.
 
-For example, `  additional_data  ` could be the output of `  CAST(customer_id AS STRING)  ` when encrypting data for a particular customer. This ensures that when the data is decrypted, it was previously encrypted using the expected `  customer_id  ` . The same `  additional_data  ` value is required for decryption. For more information, see [RFC 5116](https://tools.ietf.org/html/rfc5116) .
+For example, `additional_data` could be the output of `CAST(customer_id AS STRING)` when encrypting data for a particular customer. This ensures that when the data is decrypted, it was previously encrypted using the expected `customer_id` . The same `additional_data` value is required for decryption. For more information, see [RFC 5116](https://tools.ietf.org/html/rfc5116) .
 
 ### Decryption
 
-The output of [`  AEAD.ENCRYPT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeadencrypt) is ciphertext `  BYTES  ` . The [`  AEAD.DECRYPT_STRING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string) or [`  AEAD.DECRYPT_BYTES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_bytes) functions can decrypt this ciphertext. These functions must use a [keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#keysets) that contains the key that was used for encryption. That key must be in an `  'ENABLED'  ` state. They must also use the same `  additional_data  ` as was used in encryption.
+The output of [`AEAD.ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeadencrypt) is ciphertext `BYTES` . The [`AEAD.DECRYPT_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string) or [`AEAD.DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_bytes) functions can decrypt this ciphertext. These functions must use a [keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#keysets) that contains the key that was used for encryption. That key must be in an `'ENABLED'` state. They must also use the same `additional_data` as was used in encryption.
 
 When the keyset is used for decryption, the appropriate key is chosen for decryption based on the key ID encoded in the ciphertext.
 
-The output of `  AEAD.DECRYPT_STRING  ` is a plaintext STRING, whereas the output of `  AEAD.DECRYPT_BYTES  ` is plaintext `  BYTES  ` . `  AEAD.DECRYPT_STRING  ` can decrypt ciphertext that encodes a STRING value; `  AEAD.DECRYPT_BYTES  ` can decrypt ciphertext that encodes a `  BYTES  ` value. Using one of these functions to decrypt a ciphertext that encodes the wrong data type, such as using `  AEAD.DECRYPT_STRING  ` to decrypt ciphertext that encodes a `  BYTES  ` value, causes undefined behavior and may result in an error.
+The output of `AEAD.DECRYPT_STRING` is a plaintext STRING, whereas the output of `AEAD.DECRYPT_BYTES` is plaintext `BYTES` . `AEAD.DECRYPT_STRING` can decrypt ciphertext that encodes a STRING value; `AEAD.DECRYPT_BYTES` can decrypt ciphertext that encodes a `BYTES` value. Using one of these functions to decrypt a ciphertext that encodes the wrong data type, such as using `AEAD.DECRYPT_STRING` to decrypt ciphertext that encodes a `BYTES` value, causes undefined behavior and may result in an error.
 
 ### Key rotation
 
@@ -117,12 +117,12 @@ Keyset rotation involves:
 1.  Creating a new primary cryptographic key within every keyset.
 2.  Decrypting and re-encrypting all encrypted data.
 
-The [`  KEYS.ROTATE_KEYSET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_keyset) or [`  KEYS.ROTATE_WRAPPED_KEYSET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_wrapped_keyset) function performs the first step, by adding a new primary cryptographic key to a keyset and changing the old primary cryptographic key a secondary cryptographic key.
+The [`KEYS.ROTATE_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_keyset) or [`KEYS.ROTATE_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_wrapped_keyset) function performs the first step, by adding a new primary cryptographic key to a keyset and changing the old primary cryptographic key a secondary cryptographic key.
 
 ### Cloud KMS keys
 
 GoogleSQL supports [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) with [Cloud KMS keys](https://cloud.google.com/kms/docs/resource-hierarchy) to further secure your data. This additional layer of protection encrypts your data encryption key (DEK) with a key encryption key (KEK). The KEK is a symmetric encryption keyset that is stored securely in the Cloud Key Management Service and managed using [Cloud KMS permissions and roles](https://cloud.google.com/kms/docs/reference/permissions-and-roles#predefined) .
 
-At query execution time, use the [`  KEYS.KEYSET_CHAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) function to provide the KMS resource path of the KEK and the ciphertext from the wrapped DEK. BigQuery calls Cloud KMS to unwrap the DEK, and then uses that key to decrypt the data in your query. The unwrapped version of the DEK is only stored in memory for the duration of the query, and then destroyed.
+At query execution time, use the [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) function to provide the KMS resource path of the KEK and the ciphertext from the wrapped DEK. BigQuery calls Cloud KMS to unwrap the DEK, and then uses that key to decrypt the data in your query. The unwrapped version of the DEK is only stored in memory for the duration of the query, and then destroyed.
 
 For more information, see [SQL column-level encryption with Cloud KMS keys](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt) .

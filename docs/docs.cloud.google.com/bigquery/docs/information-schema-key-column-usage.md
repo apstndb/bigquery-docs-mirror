@@ -1,32 +1,32 @@
 # KEY\_COLUMN\_USAGE view
 
-The `  KEY_COLUMN_USAGE  ` view contains columns of the tables from `  TABLE_CONSTRAINTS  ` that are constrained as keys by [primary and foreign key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) constraints.
+The `KEY_COLUMN_USAGE` view contains columns of the tables from `TABLE_CONSTRAINTS` that are constrained as keys by [primary and foreign key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) constraints.
 
 ## Schema
 
-The `  INFORMATION_SCHEMA.KEY_COLUMN_USAGE  ` view has the following schema:
+The `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` view has the following schema:
 
-| Column Name                                      | Data Type                 | Value                                                                                                                                                                    |
-| ------------------------------------------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `         constraint_catalog        `            | `         STRING        ` | The constraint project name.                                                                                                                                             |
-| `         constraint_schema        `             | `         STRING        ` | The constraint dataset name.                                                                                                                                             |
-| `         constraint_name        `               | `         STRING        ` | The constraint name.                                                                                                                                                     |
-| `         table_catalog        `                 | `         STRING        ` | The project name of the constrained table.                                                                                                                               |
-| `         table_schema        `                  | `         STRING        ` | The name of the constrained table dataset.                                                                                                                               |
-| `         table_name        `                    | `         STRING        ` | The name of the constrained table.                                                                                                                                       |
-| `         column_name        `                   | `         STRING        ` | The name of the constrained column.                                                                                                                                      |
-| `         ordinal_position        `              | `         INT64        `  | The ordinal position of the column within the constraint key (starting at 1).                                                                                            |
-| `         position_in_unique_constraint        ` | `         INT64        `  | For foreign keys, the ordinal position of the column within the primary key constraint (starting at 1). This value is `        NULL       ` for primary key constraints. |
+| Column Name                     | Data Type | Value                                                                                                                                                     |
+| ------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `constraint_catalog`            | `STRING`  | The constraint project name.                                                                                                                              |
+| `constraint_schema`             | `STRING`  | The constraint dataset name.                                                                                                                              |
+| `constraint_name`               | `STRING`  | The constraint name.                                                                                                                                      |
+| `table_catalog`                 | `STRING`  | The project name of the constrained table.                                                                                                                |
+| `table_schema`                  | `STRING`  | The name of the constrained table dataset.                                                                                                                |
+| `table_name`                    | `STRING`  | The name of the constrained table.                                                                                                                        |
+| `column_name`                   | `STRING`  | The name of the constrained column.                                                                                                                       |
+| `ordinal_position`              | `INT64`   | The ordinal position of the column within the constraint key (starting at 1).                                                                             |
+| `position_in_unique_constraint` | `INT64`   | For foreign keys, the ordinal position of the column within the primary key constraint (starting at 1). This value is `NULL` for primary key constraints. |
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
 Queries against this view must include a dataset qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For more information, see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table shows the region and resource scopes for this view:
 
-| View name                                                                                                                               | Resource scope | Region scope     |
-| --------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------- |
-| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.KEY_COLUMN_USAGE;       ` | Dataset level  | Dataset location |
+| View name                                                                                        | Resource scope | Region scope     |
+| ------------------------------------------------------------------------------------------------ | -------------- | ---------------- |
+| `[         PROJECT_ID        .]         DATASET_ID        .INFORMATION_SCHEMA.KEY_COLUMN_USAGE;` | Dataset level  | Dataset location |
 
 Replace the following:
 
@@ -71,7 +71,7 @@ The following DDL statements create a primary key table and a foreign key table.
     NOT ENFORCED, CONSTRAINT composite_fk foreign key (z, x)
     REFERENCES composite_pk (y, x) NOT ENFORCED);
 
-If queried with the statement in [Example 1](https://docs.cloud.google.com/bigquery/docs/information-schema-key-column-usage#example_01) , the query results are similar to the following. Note that `  CONSTRAINT_CATALOG  ` , `  CONSTRAINT_SCHEMA  ` , and duplicate columns are not included in the example results.
+If queried with the statement in [Example 1](https://docs.cloud.google.com/bigquery/docs/information-schema-key-column-usage#example_01) , the query results are similar to the following. Note that `CONSTRAINT_CATALOG` , `CONSTRAINT_SCHEMA` , and duplicate columns are not included in the example results.
 
     +---------------------------+--------------+-------------+------------------+-------------------------------+
     |     CONSTRAINT_NAME       |  TABLE_NAME  | COLUMN_NAME | ORDINAL_POSITION | POSITION_IN_UNIQUE_CONSTRAINT |

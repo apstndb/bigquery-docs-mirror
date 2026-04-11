@@ -8,13 +8,13 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required role
 
-To get the permission that you need to list datasets or get information on datasets, ask your administrator to grant you the [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to list datasets or get information on datasets, ask your administrator to grant you the [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.datasets.get  ` permission, which is required to list datasets or get information on datasets.
+This predefined role contains the `bigquery.datasets.get` permission, which is required to list datasets or get information on datasets.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-When you apply the `  roles/bigquery.metadataViewer  ` role at the project or organization level, you can list all the datasets in the project. When you apply the `  roles/bigquery.metadataViewer  ` role at the dataset level, you can list all the datasets for which you have been granted that role.
+When you apply the `roles/bigquery.metadataViewer` role at the project or organization level, you can list all the datasets in the project. When you apply the `roles/bigquery.metadataViewer` role at the dataset level, you can list all the datasets for which you have been granted that role.
 
 ## List datasets
 
@@ -32,7 +32,7 @@ Select one of the following options:
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.SCHEMATA  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) :
+Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -50,7 +50,7 @@ Query the [`  INFORMATION_SCHEMA.SCHEMATA  ` view](https://docs.cloud.google.com
     Replace the following:
     
       - `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-      - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  us  ` .
+      - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `us` .
 
 3.  Click play\_circle **Run** .
 
@@ -58,16 +58,16 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Issue the `  bq ls  ` command to list datasets by dataset ID. The `  --format  ` flag can be used to control the output. If you are listing dataset in a project other than your default project, add the `  --project_id  ` flag to the command.
+Issue the `bq ls` command to list datasets by dataset ID. The `--format` flag can be used to control the output. If you are listing datasets in a project other than your default project, add the `--project_id` flag to the command.
 
-To list all datasets in a project, including [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) , use the `  --all  ` flag or the `  -a  ` shortcut.
+To list all datasets in a project, including [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) , use the `--all` flag or the `-a` shortcut.
 
-To list all datasets in a project, excluding hidden datasets, use the `  --datasets  ` flag or the `  -d  ` shortcut. This flag is optional. By default, hidden datasets are not listed.
+To list all datasets in a project, excluding hidden datasets, use the `--datasets` flag or the `-d` shortcut. This flag is optional. By default, hidden datasets are not listed.
 
 Additional flags include:
 
-  - `  --filter  ` : List datasets that match the filter expression. Use a space-separated list of label keys and values in the form `  labels. key:value  ` . For more information on filtering datasets using labels, see [Adding and using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels) . Use the `  status: live  ` keyword to filter datasets based on status. Valid values of `  status  ` are `  live  ` (default), `  deleted  ` , and `  any  ` .
-  - `  --max_results  ` or `  -n  ` : An integer indicating the maximum number of results. The default value is `  50  ` .
+  - `--filter` : List datasets that match the filter expression. Use a space-separated list of label keys and values in the form ` labels. key:value  ` . For more information on filtering datasets using labels, see [Adding and using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels) . Use the ` status: live  ` keyword to filter datasets based on status. Valid values of `status` are `live` (default), `deleted` , and `any` .
+  - `--max_results` or `-n` : An integer indicating the maximum number of results. The default value is `50` .
 
 <!-- end list -->
 
@@ -86,11 +86,11 @@ Replace the following:
 
 Examples:
 
-Enter the following command to list datasets in your default project. `  -- format  ` is set to pretty to return a basic formatted table.
+Enter the following command to list datasets in your default project. `-- format` is set to pretty to return a basic formatted table.
 
     bq ls --format=pretty
 
-Enter the following command to list datasets in `  myotherproject  ` . `  --format  ` is set to `  prettyjson  ` to return detailed results in JSON format.
+Enter the following command to list datasets in `myotherproject` . `--format` is set to `prettyjson` to return detailed results in JSON format.
 
     bq ls --format=prettyjson --project_id myotherproject
 
@@ -102,13 +102,13 @@ Enter the following command to return more than the default output of 50 dataset
 
     bq ls --max_results 60
 
-Enter the following command to list datasets in your default project with the label `  org:dev  ` .
+Enter the following command to list datasets in your default project with the label `org:dev` .
 
     bq ls --filter labels.org:dev
 
 ### API
 
-To list datasets using the API, call the [`  datasets.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list) API method.
+To list datasets using the API, call the [`datasets.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list) API method.
 
 ### C\#
 
@@ -328,7 +328,7 @@ By default, [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datase
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.SCHEMATA  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) :
+Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -346,13 +346,13 @@ Query the [`  INFORMATION_SCHEMA.SCHEMATA  ` view](https://docs.cloud.google.com
     Replace the following:
     
       - `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-      - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  us  ` .
+      - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `us` .
 
 3.  Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-You can also query the [`  INFORMATION_SCHEMA.SCHEMATA_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options) .
+You can also query the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options) .
 
 ``` notranslate
 SELECT
@@ -363,9 +363,9 @@ FROM
 
 ### bq
 
-Issue the `  bq show  ` command. The `  --format  ` flag can be used to control the output. If you are getting information about a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` . The output displays the dataset's information such as access control, labels, and location. This command doesn't display a dataset's inherited permissions, but you can see them in the Google Cloud console.
+Issue the `bq show` command. The `--format` flag can be used to control the output. If you are getting information about a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` . The output displays the dataset's information such as access control, labels, and location. This command doesn't display a dataset's inherited permissions, but you can see them in the Google Cloud console.
 
-To show information about a [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) , use the [`  bq ls --all  `](https://docs.cloud.google.com/bigquery/docs/listing-datasets) command to list all datasets and then use the name of the hidden dataset in the `  bq show  ` command.
+To show information about a [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) , use the [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/listing-datasets) command to list all datasets and then use the name of the hidden dataset in the `bq show` command.
 
 ``` notranslate
 bq show --format=prettyjson project_id:dataset
@@ -378,21 +378,21 @@ Replace the following:
 
 Examples:
 
-Enter the following command to display information about `  mydataset  ` in your default project.
+Enter the following command to display information about `mydataset` in your default project.
 
     bq show --format=prettyjson mydataset
 
-Enter the following command to display information about `  mydataset  ` in `  myotherproject  ` .
+Enter the following command to display information about `mydataset` in `myotherproject` .
 
     bq show --format=prettyjson myotherproject:mydataset
 
-Enter the following command to display information about the hidden dataset `  _1234abcd56efgh78ijkl1234  ` in your default project.
+Enter the following command to display information about the hidden dataset `_1234abcd56efgh78ijkl1234` in your default project.
 
     bq show --format=prettyjson _1234abcd56efgh78ijkl1234
 
 ### API
 
-Call the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) API method and provide any relevant parameters.
+Call the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) API method and provide any relevant parameters.
 
 ### Go
 
@@ -637,4 +637,4 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
   - For more information on assigning access controls to datasets, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
   - For more information on changing dataset properties, see [Updating dataset properties](https://docs.cloud.google.com/bigquery/docs/updating-datasets) .
   - For more information on creating and managing labels, see [Creating and managing labels](https://docs.cloud.google.com/bigquery/docs/labels) .
-  - To see an overview of `  INFORMATION_SCHEMA  ` , go to [Introduction to BigQuery `  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+  - To see an overview of `INFORMATION_SCHEMA` , go to [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .

@@ -1,19 +1,19 @@
 # The CREATE MODEL statement for transform-only models
 
-This document describes the `  CREATE MODEL  ` statement for creating transform-only models in BigQuery. Transform-only models use the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to apply [preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) to input data and return the preprocessed data. Transform-only models decouple data preprocessing from model training, making it easier for you to capture and reuse a set of data preprocessing rules.
+This document describes the `CREATE MODEL` statement for creating transform-only models in BigQuery. Transform-only models use the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to apply [preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) to input data and return the preprocessed data. Transform-only models decouple data preprocessing from model training, making it easier for you to capture and reuse a set of data preprocessing rules.
 
-You can use a transform-only model in conjunction with the [`  ML.TRANSFORM  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) to provide preprocessed data to other models:
+You can use a transform-only model in conjunction with the [`ML.TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) to provide preprocessed data to other models:
 
   - You can use it in the [query statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) when creating another model, in order to use the transformed data as the training data for that model.
-  - You can use it in the [`  query statement  ` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `  ML.PREDICT  ` function, in order to provide data for prediction that is processed in the way the target model expects.
+  - You can use it in the [`query statement` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `ML.PREDICT` function, in order to provide data for prediction that is processed in the way the target model expects.
 
 For batch feature transformations, it is better to use transform-only models because it lets you process large amounts of data in a short time. For online feature transformations, it is better to use [Vertex AI Feature Store](https://docs.cloud.google.com/vertex-ai/docs/featurestore/latest/overview) because it provides responses with low latency.
 
-You can also use a transform-only model with the [`  ML.FEATURE_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) in order to return information about feature transformations in the model.
+You can also use a transform-only model with the [`ML.FEATURE_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) in order to return information about feature transformations in the model.
 
 For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
-## `     CREATE MODEL    ` syntax
+## `CREATE MODEL` syntax
 
 ``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
@@ -22,26 +22,26 @@ OPTIONS(MODEL_TYPE = 'TRANSFORM_ONLY')
 AS query_statement
 ```
 
-### `     CREATE MODEL    `
+### `CREATE MODEL`
 
-Creates and trains a new model in the specified dataset. If the model name exists, `  CREATE MODEL  ` returns an error.
+Creates and trains a new model in the specified dataset. If the model name exists, `CREATE MODEL` returns an error.
 
-### `     CREATE MODEL IF NOT EXISTS    `
+### `CREATE MODEL IF NOT EXISTS`
 
 Creates and trains a new model only if the model doesn't exist in the specified dataset.
 
-### `     CREATE OR REPLACE MODEL    `
+### `CREATE OR REPLACE MODEL`
 
 Creates and trains a model and replaces an existing model with the same name in the specified dataset.
 
-### `     model_name    `
+### `model_name`
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
   - Contain up to 1,024 characters
   - Contain letters (upper or lower case), numbers, and underscores
 
-`  model_name  ` is case-sensitive.
+`model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
@@ -49,40 +49,40 @@ If you don't have a default project configured, then you must prepend the projec
 
 For example, \`myproject.mydataset.mymodel\`.
 
-### `     select_list    `
+### `select_list`
 
-You can pass columns from `  query_statement  ` through to model training without transformation by either using `  *  ` , `  * EXCEPT()  ` , or by listing the column names directly.
+You can pass columns from `query_statement` through to model training without transformation by either using `*` , `* EXCEPT()` , or by listing the column names directly.
 
-Not all columns from `  query_statement  ` are required to appear in the `  TRANSFORM  ` clause, so you can drop columns appearing in `  query_statement  ` by omitting them from the `  TRANSFORM  ` clause.
+Not all columns from `query_statement` are required to appear in the `TRANSFORM` clause, so you can drop columns appearing in `query_statement` by omitting them from the `TRANSFORM` clause.
 
-You can transform inputs from `  query_statement  ` by using expressions in `  select_list  ` . `  select_list  ` is similar to a normal `  SELECT  ` statement. `  select_list  ` supports the following syntax:
+You can transform inputs from `query_statement` by using expressions in `select_list` . `select_list` is similar to a normal `SELECT` statement. `select_list` supports the following syntax:
 
-  - `  *  `
-  - `  * EXCEPT()  `
-  - `  * REPLACE()  `
-  - `  expression  `
-  - `  expression.*  `
+  - `*`
+  - `* EXCEPT()`
+  - `* REPLACE()`
+  - `expression`
+  - `expression.*`
 
-The following cannot appear inside `  select_list  ` :
+The following cannot appear inside `select_list` :
 
   - Aggregation functions.
   - Non-BigQuery ML analytic functions. For more information about supported functions, see [Manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) .
   - UDFs.
   - Subqueries.
-  - Anonymous columns. For example, `  a + b as c  ` is allowed, while `  a + b  ` isn't.
+  - Anonymous columns. For example, `a + b as c` is allowed, while `a + b` isn't.
 
-The output columns of `  select_list  ` can be of any BigQuery supported data type.
+The output columns of `select_list` can be of any BigQuery supported data type.
 
-If present, the following columns must appear in `  select_list  ` without transformation:
+If present, the following columns must appear in `select_list` without transformation:
 
-  - `  label  `
-  - `  data_split_col  `
-  - `  kmeans_init_col  `
-  - `  instance_weight_col  `
+  - `label`
+  - `data_split_col`
+  - `kmeans_init_col`
+  - `instance_weight_col`
 
-If these columns are returned by `  query_statement  ` , you must reference them in `  select_list  ` by column name outside of any expression, or by using `  *  ` . You can't use aliases with these columns.
+If these columns are returned by `query_statement` , you must reference them in `select_list` by column name outside of any expression, or by using `*` . You can't use aliases with these columns.
 
-### `     MODEL_TYPE    `
+### `MODEL_TYPE`
 
 **Syntax**
 
@@ -92,7 +92,7 @@ If these columns are returned by `  query_statement  ` , you must reference them
 
 Specify the model type. This option is required.
 
-### `     query_statement    `
+### `query_statement`
 
 The [GoogleSQL query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) that contains the data to preprocess. The statistics that are calculated when transforming this data are applied to the input data of any functions that you use the model with.
 
@@ -102,7 +102,7 @@ The following examples show how to create and use transform-only models.
 
 **Example 1**
 
-The following example creates a model named `  transform_model  ` in `  mydataset  ` in your default project. The model transforms several columns from the BigQuery public table `  bigquery-public-data.ml_datasets.penguins  ` :
+The following example creates a model named `transform_model` in `mydataset` in your default project. The model transforms several columns from the BigQuery public table `bigquery-public-data.ml_datasets.penguins` :
 
 ``` notranslate
 CREATE MODEL `mydataset.transform_model`
@@ -124,7 +124,7 @@ AS (
 
 **Example 2**
 
-The following example creates a model named `  mymodel  ` in `  mydataset  ` in your default project. The model is trained on data that is preprocessed by using a transform-only model:
+The following example creates a model named `mymodel` in `mydataset` in your default project. The model is trained on data that is preprocessed by using a transform-only model:
 
 ``` notranslate
 CREATE MODEL `mydataset.mymodel`

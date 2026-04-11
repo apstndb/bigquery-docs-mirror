@@ -10,9 +10,9 @@ Because jobs can potentially take a long time to complete, they run asynchronous
 
 When a job is submitted, it can be in one of the following states:
 
-  - `  PENDING  ` : The job is scheduled and waiting to be run.
-  - `  RUNNING  ` : The job is in progress.
-  - `  DONE  ` : The job is completed. If the job failed, the [JobStatus.errorResult](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatus.FIELDS.error_result) will be present.
+  - `PENDING` : The job is scheduled and waiting to be run.
+  - `RUNNING` : The job is in progress.
+  - `DONE` : The job is completed. If the job failed, the [JobStatus.errorResult](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatus.FIELDS.error_result) will be present.
 
 ### Quotas
 
@@ -27,7 +27,7 @@ For information about job quotas, see the documentation for the job type on the 
 
 Every job is associated with a specific project that you specify. The billing account attached to the associated project is billed for any usage incurred by the job. If you share access to a project, any jobs run in the project are also billed to the billing account.
 
-For example, when running a query job, the cost is billed to the project that runs the job. Thus when you view the job ID of a query job with the format of `  <project_id>:<region>.<job_id>  ` , the `  project_id  ` is the ID of the project billed for the query.
+For example, when running a query job, the cost is billed to the project that runs the job. Thus when you view the job ID of a query job with the format of `<project_id>:<region>.<job_id>` , the `project_id` is the ID of the project billed for the query.
 
 For more information, see [Pricing](https://cloud.google.com/bigquery/pricing) .
 
@@ -39,10 +39,10 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To get the permissions that you need to run and manage jobs, ask your administrator to grant you the following IAM roles on your project:
 
-  - BigQuery Job User ( `  roles/bigquery.jobUser  ` ) - to run or repeat a job, list your jobs, view details of your jobs, and cancel your jobs.
-  - BigQuery User ( `  roles/bigquery.user  ` ) - to run or repeat a job, list your jobs, view details of your jobs, and cancel your jobs (this role is more permissive than BigQuery Job User).
-  - BigQuery Resource Admin ( `  roles/bigquery.resourceAdmin  ` ) - to list all jobs and retrieve metadata on any job.
-  - BigQuery Admin ( `  roles/bigquery.admin  ` ) - to list all jobs, retrieve metadata on any job, and cancel any job.
+  - BigQuery Job User ( `roles/bigquery.jobUser` ) - to run or repeat a job, list your jobs, view details of your jobs, and cancel your jobs.
+  - BigQuery User ( `roles/bigquery.user` ) - to run or repeat a job, list your jobs, view details of your jobs, and cancel your jobs (this role is more permissive than BigQuery Job User).
+  - BigQuery Resource Admin ( `roles/bigquery.resourceAdmin` ) - to list all jobs and retrieve metadata on any job.
+  - BigQuery Admin ( `roles/bigquery.admin` ) - to list all jobs, retrieve metadata on any job, and cancel any job.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -52,14 +52,14 @@ These predefined roles contain the permissions required to run and manage jobs. 
 
 The following permissions are required to run and manage jobs:
 
-  - `  bigquery.jobs.create  ` on the project to run or repeat a job and list your jobs.
-  - `  bigquery.jobs.get  ` on the project to view the metadata for any job.
-  - `  bigquery.jobs.update  ` on the project to cancel any job.
-  - `  bigquery.jobs.listAll  ` on the organization, folder, or project to list all jobs and retrieve metadata on any job submitted by any user. To see details for all jobs, the `  bigquery.jobs.list  ` permission is also required.
-  - `  bigquery.jobs.list  ` on the project to list all jobs and retrieve metadata on any job submitted by any user. For jobs submitted by other users, details and metadata are redacted.
-  - `  bigquery.jobs.listExecutionMetadata  ` on the organization to list all job execution metadata (without sensitive information) for any job submitted by any user.
-  - `  bigquery.jobs.update  ` on the project to cancel any job.
-  - `  bigquery.jobs.delete  ` on the project to delete any job.
+  - `bigquery.jobs.create` on the project to run or repeat a job and list your jobs.
+  - `bigquery.jobs.get` on the project to view the metadata for any job.
+  - `bigquery.jobs.update` on the project to cancel any job.
+  - `bigquery.jobs.listAll` on the organization, folder, or project to list all jobs and retrieve metadata on any job submitted by any user. To see details for all jobs, the `bigquery.jobs.list` permission is also required.
+  - `bigquery.jobs.list` on the project to list all jobs and retrieve metadata on any job submitted by any user. For jobs submitted by other users, details and metadata are redacted.
+  - `bigquery.jobs.listExecutionMetadata` on the organization to list all job execution metadata (without sensitive information) for any job submitted by any user.
+  - `bigquery.jobs.update` on the project to cancel any job.
+  - `bigquery.jobs.delete` on the project to delete any job.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -96,17 +96,17 @@ To view job details, follow these steps:
 
 ### bq
 
-Issue the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command with the `  --job=true  ` flag and a job ID.
+Issue the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command with the `--job=true` flag and a job ID.
 
 When you supply the job ID, you can use the fully qualified ID or the short form. For example, job IDs listed in the Google Cloud console are fully qualified, that is, they include the project and location:
 
-`  my-project-1234:US.bquijob_123x456_123y123z123c  `
+`my-project-1234:US.bquijob_123x456_123y123z123c`
 
 Job IDs in the command-line tool are listed using the short form. Project ID and location are not included:
 
-`  bquijob_123x456_123y123z123c  `
+`bquijob_123x456_123y123z123c`
 
-To specify the job location, supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . This flag is optional if you use the fully qualified job ID. If you include the `  --location  ` flag and you're using the fully qualified job ID, the `  --location  ` flag is ignored.
+To specify the job location, supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . This flag is optional if you use the fully qualified job ID. If you include the `--location` flag and you're using the fully qualified job ID, the `--location` flag is ignored.
 
 The following command requests information about a job:
 
@@ -116,12 +116,12 @@ bq --location=LOCATION show --job=true JOB_ID
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of the location where the job runs. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) . If the location isn't specified as part of the job ID or by using the `  --location  ` flag, the default location is used.
+  - `  LOCATION  ` : the name of the location where the job runs. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) . If the location isn't specified as part of the job ID or by using the `--location` flag, the default location is used.
   - `  JOB_ID  ` : the ID of the job
 
 **Examples**
 
-The following command gets summary information about job `  US.bquijob_123x456_123y123z123c  ` running in `  myproject  ` :
+The following command gets summary information about job `US.bquijob_123x456_123y123z123c` running in `myproject` :
 
     bq show --job=true myproject:US.bquijob_123x456_123y123z123c
 
@@ -186,7 +186,7 @@ The output is similar to the following:
 
 ### API
 
-Call [jobs.get](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) and provide the `  jobId  ` and `  projectId  ` parameters. (Optional) Supply the `  location  ` parameter and set the value to the [location](https://docs.cloud.google.com/bigquery/docs/locations) where the job runs. This parameter is optional if you use the fully qualified job ID that includes the location, for example, `  my-project-1234:US.bquijob_123x456_123y123z123c  ` .
+Call [jobs.get](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) and provide the `jobId` and `projectId` parameters. (Optional) Supply the `location` parameter and set the value to the [location](https://docs.cloud.google.com/bigquery/docs/locations) where the job runs. This parameter is optional if you use the fully qualified job ID that includes the location, for example, `my-project-1234:US.bquijob_123x456_123y123z123c` .
 
 ### Go
 
@@ -322,11 +322,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         print(f"State: {job.state}")
         print(f"Created: {job.created.isoformat()}")
 
-If you need more information to troubleshoot a job, see the [`  INFORMATION_SCHEMA.JOBS*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [Logs](https://docs.cloud.google.com/bigquery/docs/monitoring#logs) .
+If you need more information to troubleshoot a job, see the [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [Logs](https://docs.cloud.google.com/bigquery/docs/monitoring#logs) .
 
 ## List jobs
 
-BigQuery saves a six-month job history for all the jobs of a project, for all locations. The job history includes jobs that are in the `  RUNNING  ` state and jobs that are `  DONE  ` (indicated by reporting the state as `  SUCCESS  ` or `  FAILURE  ` ).
+BigQuery saves a six-month job history for all the jobs of a project, for all locations. The job history includes jobs that are in the `RUNNING` state and jobs that are `DONE` (indicated by reporting the state as `SUCCESS` or `FAILURE` ).
 
 To list jobs in a project, follow these steps:
 
@@ -348,13 +348,13 @@ To list jobs in a project, follow these steps:
 
 ### bq
 
-Issue the [`  bq ls  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command with one of the following flags:
+Issue the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command with one of the following flags:
 
-  - `  --jobs=true  ` or `  -j  ` : identifies jobs as the type of resource to list.
-  - `  --all=true  ` or `  -a  ` : lists jobs from all users. To see full (unredacted) details for all jobs, you must have `  bigquery.jobs.listAll  ` permissions.
-  - `  --min_creation_time  ` : lists jobs after a supplied timestamp value. This value is represented as a [Unix epoch](https://wikipedia.org/wiki/Unix_time) timestamp in milliseconds.
-  - `  --max_creation_time  ` : lists jobs before a supplied timestamp value. This value is represented as a [Unix epoch](https://wikipedia.org/wiki/Unix_time) timestamp in milliseconds.
-  - `  --max_results  ` or `  -n  ` limits the results. The default is 50 results.
+  - `--jobs=true` or `-j` : identifies jobs as the type of resource to list.
+  - `--all=true` or `-a` : lists jobs from all users. To see full (unredacted) details for all jobs, you must have `bigquery.jobs.listAll` permissions.
+  - `--min_creation_time` : lists jobs after a supplied timestamp value. This value is represented as a [Unix epoch](https://wikipedia.org/wiki/Unix_time) timestamp in milliseconds.
+  - `--max_creation_time` : lists jobs before a supplied timestamp value. This value is represented as a [Unix epoch](https://wikipedia.org/wiki/Unix_time) timestamp in milliseconds.
+  - `--max_results` or `-n` limits the results. The default is 50 results.
 
 <!-- end list -->
 
@@ -375,25 +375,25 @@ Replace the following:
 
 **Examples**
 
-The following command lists all jobs for the current user. Running this command requires `  bigquery.jobs.list  ` permissions.
+The following command lists all jobs for the current user. Running this command requires `bigquery.jobs.list` permissions.
 
     bq ls --jobs=true myproject
 
-The following command lists all jobs for all users. Running this command requires `  bigquery.jobs.listAll  ` permissions.
+The following command lists all jobs for all users. Running this command requires `bigquery.jobs.listAll` permissions.
 
     bq ls --jobs=true --all=true myproject
 
-The following command lists the 10 most recent jobs in `  myproject  ` :
+The following command lists the 10 most recent jobs in `myproject` :
 
     bq ls --jobs=true --all=true --max_results=10 myproject
 
-The following command lists all jobs submitted before March 3, 2032, at 4:04:00 AM. This timestamp (in milliseconds) is equivalent to the following integer value: `  1961899440000  ` .
+The following command lists all jobs submitted before March 3, 2032, at 4:04:00 AM. This timestamp (in milliseconds) is equivalent to the following integer value: `1961899440000` .
 
     bq ls --jobs=true --max_creation_time=1961899440000
 
 ### API
 
-Call the [`  jobs.list  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list) and provide the `  projectId  ` parameter. To list jobs for all users, set the `  allUsers  ` parameter to `  true  ` . Setting `  allUsers  ` to `  true  ` requires `  bigquery.jobs.listAll  ` permissions. The `  jobs.list  ` method doesn't return child jobs. To list child jobs, use the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#child_jobs) .
+Call the [`jobs.list` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list) and provide the `projectId` parameter. To list jobs for all users, set the `allUsers` parameter to `true` . Setting `allUsers` to `true` requires `bigquery.jobs.listAll` permissions. The `jobs.list` method doesn't return child jobs. To list child jobs, use the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#child_jobs) .
 
 ### Go
 
@@ -544,7 +544,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Cancel a job
 
-You can cancel a `  RUNNING  ` or `  PENDING  ` job. It usually takes less than a minute to complete a job cancellation.
+You can cancel a `RUNNING` or `PENDING` job. It usually takes less than a minute to complete a job cancellation.
 
 Even if the job can be canceled, success is not guaranteed. The job might have completed by the time the cancel request is submitted, or the job might be in a stage where it cannot be canceled.
 
@@ -566,7 +566,7 @@ To cancel a job, follow these steps:
 
 ### SQL
 
-Use the `  BQ.JOBS.CANCEL  ` system procedure:
+Use the `BQ.JOBS.CANCEL` system procedure:
 
 ``` notranslate
   CALL BQ.JOBS.CANCEL('JOB_ID');
@@ -589,25 +589,25 @@ The procedure returns immediately, and BigQuery cancels the job shortly afterwar
 
 ### bq
 
-Issue the [`  bq cancel  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cancel) command with the `  JOB_ID  ` argument. You can request cancellation and return immediately by using the `  --nosync=true  ` flag. By default, cancellation requests wait for completion.
+Issue the [`bq cancel`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cancel) command with the `  JOB_ID  ` argument. You can request cancellation and return immediately by using the `--nosync=true` flag. By default, cancellation requests wait for completion.
 
 When you supply the `  JOB_ID  ` argument, you can use the fully qualified ID or the short form. For example, job IDs listed in the Google Cloud console are fully qualified; that is, they include the project and location:
 
-`  my-project-1234:US.bquijob_123x456_123y123z123c  `
+`my-project-1234:US.bquijob_123x456_123y123z123c`
 
 Job IDs in the bq command-line tool are listed using the short form. Project ID and location are not included:
 
-`  bquijob_123x456_123y123z123c  `
+`bquijob_123x456_123y123z123c`
 
-To specify the job location, supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . This flag is optional if you use the fully qualified job ID. If you include the `  --location  ` flag and you're using the fully qualified job ID, the `  --location  ` flag is ignored.
+To specify the job location, supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . This flag is optional if you use the fully qualified job ID. If you include the `--location` flag and you're using the fully qualified job ID, the `--location` flag is ignored.
 
-The following command requests job cancellation and waits for completion. If the fully qualified job ID is supplied, the `  --location  ` flag is ignored:
+The following command requests job cancellation and waits for completion. If the fully qualified job ID is supplied, the `--location` flag is ignored:
 
 ``` notranslate
 bq --location=LOCATION cancel JOB_ID
 ```
 
-The following command requests job cancellation and returns immediately. If the fully qualified job ID is supplied, the `  --location  ` flag is ignored:
+The following command requests job cancellation and returns immediately. If the fully qualified job ID is supplied, the `--location` flag is ignored:
 
 ``` notranslate
 bq --location=LOCATION --nosync cancel JOB_ID
@@ -615,26 +615,26 @@ bq --location=LOCATION --nosync cancel JOB_ID
 
 Replace the following:
 
-  - `  LOCATION  ` (optional): the name of the location where the job runs. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  JOB_ID  ` : the ID of the job that you're canceling. If you copy the job ID from the Google Cloud console, the project ID and location are included in the job ID. For example, `  my-project-1234:US.bquijob_123x456_123y123z123c  ` .
+  - `  LOCATION  ` (optional): the name of the location where the job runs. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  JOB_ID  ` : the ID of the job that you're canceling. If you copy the job ID from the Google Cloud console, the project ID and location are included in the job ID. For example, `my-project-1234:US.bquijob_123x456_123y123z123c` .
 
 **Examples**
 
-The following command cancels the job `  my-project-1234:US.bquijob_123x456_123y123z123c  ` running in the `  US  ` multi-region location in the `  my-project-1234  ` project, and waits for completion. Because the fully qualified job ID is used, the location flag is not supplied.
+The following command cancels the job `my-project-1234:US.bquijob_123x456_123y123z123c` running in the `US` multi-region location in the `my-project-1234` project, and waits for completion. Because the fully qualified job ID is used, the location flag is not supplied.
 
     bq cancel my-project-1234:US.bquijob_123x456_123y123z123c
 
-The following command cancels the job `  bquijob_123x456_123y123z123c  ` running in the `  US  ` multi-region location in the `  my-project-1234  ` project and waits for completion. Because the short form of the job ID is used, the `  --location  ` flag is supplied.
+The following command cancels the job `bquijob_123x456_123y123z123c` running in the `US` multi-region location in the `my-project-1234` project and waits for completion. Because the short form of the job ID is used, the `--location` flag is supplied.
 
     bq --location=US cancel bquijob_123x456_123y123z123c
 
-The following command cancels the job `  bquijob_123x456_123y123z123c  ` running in the `  US  ` multi-region location in the `  my-project-1234  ` project, and returns immediately. Because the fully qualified job ID is used, the `  --location  ` flag is not supplied.
+The following command cancels the job `bquijob_123x456_123y123z123c` running in the `US` multi-region location in the `my-project-1234` project, and returns immediately. Because the fully qualified job ID is used, the `--location` flag is not supplied.
 
     bq --nosync cancel my-project-1234:US.bquijob_123x456_123y123z123c
 
 ### API
 
-Call [jobs.cancel](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel) and provide the `  jobId  ` and `  projectId  ` parameters. Supply the `  location  ` parameter and set the value to the [location](https://docs.cloud.google.com/bigquery/docs/locations) where the job runs.
+Call [jobs.cancel](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel) and provide the `jobId` and `projectId` parameters. Supply the `location` parameter and set the value to the [location](https://docs.cloud.google.com/bigquery/docs/locations) where the job runs.
 
 ### Go
 
@@ -775,17 +775,17 @@ To delete job metadata, follow these steps:
 
 ### bq
 
-Issue the `  bq rm  ` command with the `  -j  ` flag and a job ID.
+Issue the `bq rm` command with the `-j` flag and a job ID.
 
 When you supply the job ID, you can use the fully qualified ID or the short form. For example, job IDs listed in the Google Cloud console are fully qualified, that is, they include the project and location:
 
-`  my-project-1234:US.bquijob_123x456_123y123z123c  `
+`my-project-1234:US.bquijob_123x456_123y123z123c`
 
 Job IDs in the bq command-line tool are listed using the short form. Project ID and location are not included:
 
-`  bquijob_123x456_123y123z123c  `
+`bquijob_123x456_123y123z123c`
 
-To specify the job location, supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . This flag is optional if you use the fully qualified job ID. If you include the `  --location  ` flag and you're using the fully qualified job ID, the `  --location  ` flag is ignored.
+To specify the job location, supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) . This flag is optional if you use the fully qualified job ID. If you include the `--location` flag and you're using the fully qualified job ID, the `--location` flag is ignored.
 
 The following command deletes a job:
 
@@ -877,11 +877,11 @@ Issue your command again and BigQuery automatically generates a job with a new j
 
 There is no single-call method to repeat a job; if you want to repeat a specific job:
 
-1.  Call [`  jobs.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) to retrieve the resource for the job to repeat.
+1.  Call [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) to retrieve the resource for the job to repeat.
 
 2.  Remove the *id* , *status* , and *statistics* field. Change the *jobId* field to a new value generated by your client code. Change any other fields as necessary.
 
-3.  Call [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) with the modified resource and the new job ID to start the new job.
+3.  Call [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) with the modified resource and the new job ID to start the new job.
 
 ## What's next
 

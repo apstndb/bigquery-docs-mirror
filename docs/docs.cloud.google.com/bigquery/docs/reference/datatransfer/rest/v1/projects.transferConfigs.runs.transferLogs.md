@@ -17,37 +17,33 @@ Represents a user facing message for a particular data transfer run.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;messageTime&quot;: string,
-  &quot;severity&quot;: enum (MessageSeverity),
-  &quot;messageText&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;messageTime&quot;: string,&quot;severity&quot;: enum (MessageSeverity),&quot;messageText&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  messageTime  `
+`messageTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Time when message was logged.
 
-`  severity  `
+`severity`
 
-`  enum ( MessageSeverity  ` )
+` enum ( MessageSeverity  ` )
 
 Message severity.
 
-`  messageText  `
+`messageText`
 
-`  string  `
+`string`
 
 Message text.
 
 ## Methods
 
-### `             list           `
+### `            list           `
 
 Returns log messages for the transfer run.

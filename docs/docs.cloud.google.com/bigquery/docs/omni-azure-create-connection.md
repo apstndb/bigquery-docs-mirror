@@ -24,18 +24,18 @@ After you create a BigQuery Azure connection, you can either [query the Blob Sto
         
           - Data is populated in one of the [supported formats](https://docs.cloud.google.com/bigquery/external-table-definition#table-definition) .
         
-          - Data is in the `  azure-eastus2  ` region.
+          - Data is in the `azure-eastus2` region.
 
 ## Required roles
 
-  - To get the permissions that you need to create a connection to access Azure Blob Storage data, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+  - To get the permissions that you need to create a connection to access Azure Blob Storage data, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
   - Ensure that you have the following Azure IAM permissions on your tenant:
     
-      - `  Application.ReadWrite.All  `
-      - `  AppRoleAssignment.ReadWrite.All  `
+      - `Application.ReadWrite.All`
+      - `AppRoleAssignment.ReadWrite.All`
 
 ## Quotas
 
@@ -105,7 +105,7 @@ For more information, see how to [register an application](https://docs.microsof
 
 3.  In the **Filter By** pane, in the **Data Source Type** section, select **Databases** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `  Azure  ` .
+    Alternatively, in the **Search for data sources** field, you can enter `Azure` .
 
 4.  In the **Featured data sources** section, click **Azure Blob Storage** .
 
@@ -121,7 +121,7 @@ For more information, see how to [register an application](https://docs.microsof
     
       - Select the location where you want to create the connection.
     
-      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `  My connection resource  ` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
+      - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `My connection resource` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
     
       - Optional: For **Description** , enter a description for the connection resource.
     
@@ -156,7 +156,7 @@ Replace `  TENANT_ID  ` with the tenant ID of the Azure directory that contains 
 
 ### bq
 
-Use the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) . To get the output in JSON format, use the `  --format=json  ` parameter.
+Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) . To get the output in JSON format, use the `--format=json` parameter.
 
 ``` notranslate
 bq mk --connection --connection_type='Azure' \
@@ -170,7 +170,7 @@ bq mk --connection --connection_type='Azure' \
 Replace the following:
 
   - `  TENANT_ID  ` : the tenant ID of the Azure directory that contains the Azure Storage account.
-  - `  AZURE_LOCATION  ` : the Azure region where your Azure Storage data is located. BigQuery Omni supports the `  azure-eastus2  ` region.
+  - `  AZURE_LOCATION  ` : the Azure region where your Azure Storage data is located. BigQuery Omni supports the `azure-eastus2` region.
   - `  APP_ID  ` : the Azure Application (client) ID. To learn how to get this ID, see [Create application in Azure tenant](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#create-azure-tenant) .
   - `  CONNECTION_ID  ` : the name of the connection.
 
@@ -190,7 +190,7 @@ This output includes the following values:
 
 Note the `  APP_ID  ` and the `  SUBJECT_ID  ` values for use in the next steps.
 
-**Note:** To override the default project, use the `  --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 Next, add a federated credential for your application.
 
@@ -206,7 +206,7 @@ To create a federated credential, follow these steps:
     
     1.  From the **Federated credential scenario** list, select **Other issuer** .
     
-    2.  For **Issuer** , enter `  https://accounts.google.com  ` .
+    2.  For **Issuer** , enter `https://accounts.google.com` .
     
     3.  For **Subject identifier** , enter the **BigQuery Google identity** of the Google Cloud service account that you got when you [created the connection](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#create-azure-connection) .
     
@@ -237,11 +237,11 @@ To assign a role to BigQuery's Azure application, use the Azure Portal, the Azur
 
 ### Azure Portal
 
-You can perform role assignments in the Azure Portal by logging in as a user with the `  Microsoft.Authorization/roleAssignments/write  ` permission. The role assignment lets the BigQuery Azure connection access the Azure Storage data as specified in the roles policy.
+You can perform role assignments in the Azure Portal by logging in as a user with the `Microsoft.Authorization/roleAssignments/write` permission. The role assignment lets the BigQuery Azure connection access the Azure Storage data as specified in the roles policy.
 
 To add role assignments using the Azure Portal, follow these steps:
 
-1.  From your Azure Storage account, enter `  IAM  ` in the search bar.
+1.  From your Azure Storage account, enter `IAM` in the search bar.
 
 2.  Click **Access Control (IAM)** .
 
@@ -274,7 +274,7 @@ Add the following to your Terraform configuration file:
 
 ### Azure PowerShell
 
-To add a role assignment for a service principal at a resource scope, you can use the [`  New-AzRoleAssignment  ` command](https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azroleassignment?view=azps-7.5.0) :
+To add a role assignment for a service principal at a resource scope, you can use the [`New-AzRoleAssignment` command](https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azroleassignment?view=azps-7.5.0) :
 
 ``` notranslate
   New-AzRoleAssignment`
@@ -299,9 +299,9 @@ For more information about using Azure PowerShell to add a new service principal
 
 ### Azure CLI
 
-To add a role assignment for a service principal at a resource scope, you can use the Azure command-line tool. You must have the `  Microsoft.Authorization/roleAssignments/write  ` permission for the storage account to grant roles.
+To add a role assignment for a service principal at a resource scope, you can use the Azure command-line tool. You must have the `Microsoft.Authorization/roleAssignments/write` permission for the storage account to grant roles.
 
-To assign a role, such as the **Storage Blob Data Reader** role, to the service principal, run the [`  az role assignment create  ` command](https://docs.microsoft.com/en-us/cli/azure/role/assignment?view=azure-cli-latest#az-role-assignment-create) :
+To assign a role, such as the **Storage Blob Data Reader** role, to the service principal, run the [`az role assignment create` command](https://docs.microsoft.com/en-us/cli/azure/role/assignment?view=azure-cli-latest#az-role-assignment-create) :
 
 ``` notranslate
   az role assignment create --role "Storage Blob Data Reader" \
@@ -323,7 +323,7 @@ For more information, see [Assign Azure roles using Azure CLI](https://docs.micr
 
 To add role assignments for a service principal, you can send an HTTP request to Microsoft Management.
 
-To call the Microsoft Graph REST API, retrieve an OAuth token for an application. For more information, see [Get access without a user](https://docs.microsoft.com/graph/auth-v2-service) . The application that called the Microsoft Graph REST API must have the `  Application.ReadWrite.All  ` application permission.
+To call the Microsoft Graph REST API, retrieve an OAuth token for an application. For more information, see [Get access without a user](https://docs.microsoft.com/graph/auth-v2-service) . The application that called the Microsoft Graph REST API must have the `Application.ReadWrite.All` application permission.
 
 To generate an OAuth token, run the following command:
 
@@ -349,8 +349,8 @@ Get the ID of the [Azure built-in roles](https://docs.microsoft.com/azure/role-b
 
 These are some common roles:
 
-  - [Storage Blob Data Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) : `  ba92f5b4-2d11-453d-a403-e96b0029c9fe  `
-  - [Storage Blob Data Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-reader) : `  2a2b9908-6ea1-4ae2-8e65-a410df84e7d1  `
+  - [Storage Blob Data Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) : `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+  - [Storage Blob Data Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-reader) : `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1`
 
 To assign a role to the service principal, call the Microsoft Graph REST API to the Azure Resource Management REST API:
 
@@ -386,9 +386,9 @@ The connection is now ready to use. However, there might be a propagation delay 
 
 You can grant the following roles to let users query data and manage connections:
 
-  - `  roles/bigquery.connectionUser  ` : enables users to use connections to connect with external data sources and run queries on them.
+  - `roles/bigquery.connectionUser` : enables users to use connections to connect with external data sources and run queries on them.
 
-  - `  roles/bigquery.connectionAdmin  ` : enables users to manage connections.
+  - `roles/bigquery.connectionAdmin` : enables users to manage connections.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -422,7 +422,7 @@ You cannot share a connection with the bq command-line tool. To share a connecti
 
 ### API
 
-Use the [`  projects.locations.connections.setIAM  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `  policy  ` resource.
+Use the [`projects.locations.connections.setIAM` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section, and supply an instance of the `policy` resource.
 
 ### Java
 

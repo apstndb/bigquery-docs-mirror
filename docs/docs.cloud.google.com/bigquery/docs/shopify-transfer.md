@@ -8,7 +8,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 You can load data from Shopify to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Shopify connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Shopify to BigQuery.
 
-The Shopify connector supports the data transfer of GraphQL-based resources, such as `  Collections  ` and `  Orders  ` , from the following resources:
+The Shopify connector supports the data transfer of GraphQL-based resources, such as `Collections` and `Orders` , from the following resources:
 
   - Subscription-based accounts
   - Partner accounts
@@ -17,14 +17,14 @@ The Shopify connector supports the data transfer of GraphQL-based resources, suc
 
 Shopify data transfers are subject to following limitations:
 
-  - To include the `  GiftCards  ` object in the data transfer, the account associated with this data transfer must have a ShopifyPlus subscription.
+  - To include the `GiftCards` object in the data transfer, the account associated with this data transfer must have a ShopifyPlus subscription.
   - To include the following app subscription data objects in the data transfer, the app installed on the Shopify store must be a [sales channel app](https://shopify.dev/docs/apps/build/sales-channels) .
-      - `  AppSubscriptionLineItems  `
-      - `  AppSubscriptions  `
-      - `  ProductResourceFeedbacks  `
+      - `AppSubscriptionLineItems`
+      - `AppSubscriptions`
+      - `ProductResourceFeedbacks`
   - To include the following Shopify data objects that require a [discount function](https://shopify.dev/docs/apps/build/functions) , you must use the [Shopify CLI](https://shopify.dev/docs/api/shopify-cli) to create a Shopify app.
-      - `  DiscountsCodeApp  `
-      - `  DiscountsCodeBasic  `
+      - `DiscountsCodeApp`
+      - `DiscountsCodeBasic`
 
 ## Before you begin
 
@@ -43,7 +43,7 @@ The following sections describe the prerequisites that you need to do before you
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -52,20 +52,20 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Set up a Shopify data transfer
 
@@ -83,7 +83,7 @@ Add Shopify data into BigQuery by setting up a transfer configuration using one 
 
 4.  In the **Data source details** section, do the following:
     
-      - For **Shop name** , enter the name of your Shopify shop. For example, if your merchant account ID is `  storename.myshopify.com  ` , then your shop name is `  storename  ` .
+      - For **Shop name** , enter the name of your Shopify shop. For example, if your merchant account ID is `storename.myshopify.com` , then your shop name is `storename` .
       - For **Client ID** and **Client Secret** , enter the client ID and secret for your Shopify app. For more information, see [About client secrets](https://shopify.dev/docs/apps/build/authentication-authorization/client-secrets) .
       - For **Shopify objects to transfer** , click **Browse** :
           - Select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
@@ -106,7 +106,7 @@ Add Shopify data into BigQuery by setting up a transfer configuration using one 
 
 ### bq
 
-Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
 ``` notranslate
 bq mk
@@ -120,19 +120,19 @@ bq mk
 
 Where:
 
-  - PROJECT\_ID (optional): your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
+  - PROJECT\_ID (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - DATA\_SOURCE : the data source — `  shopify  ` .
+  - DATA\_SOURCE : the data source — `shopify` .
 
   - NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
   - DATASET : the target dataset for the transfer configuration.
 
-  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a Shopify data transfer:
+  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Shopify data transfer:
     
-      - `  assets  ` : the path to the Shopify objects to be transferred to BigQuery.
-      - `  connector.shopName  ` : the name of your Shopify shop. For example, if your merchant account ID is `  storename.myshopify.com  ` , then your shop name is `  storename  ` .
-      - `  connector.authentication.accessToken  ` : the Shopify Admin API access token.
+      - `assets` : the path to the Shopify objects to be transferred to BigQuery.
+      - `connector.shopName` : the name of your Shopify shop. For example, if your merchant account ID is `storename.myshopify.com` , then your shop name is `storename` .
+      - `connector.authentication.accessToken` : the Shopify Admin API access token.
 
 The following command creates an incremental Shopify data transfer in the default project.
 
@@ -155,66 +155,66 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 The Shopify connector supports the following data objects:
 
-  - `  AppFeedbacks  `
-  - `  AppSubscriptionLineItems  ` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-  - `  AppSubscriptions  ` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-  - `  Catalogs  `
-  - `  Collections  `
-  - `  Companies  `
-  - `  CompanyContactRoleAssignments  `
-  - `  CompanyContacts  `
-  - `  CompanyLocations  `
-  - `  Customers  `
-  - `  DeliveryProfiles  `
-  - `  DiscountsAutomaticApp  ` (Requires a [discount function](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-  - `  DiscountsAutomaticBasic  ` (Requires a [discount function](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-  - `  DiscountsAutomaticBxgy  `
-  - `  DiscountsCodeApp  `
-  - `  DiscountsCodeBasic  `
-  - `  DiscountsCodeBxgy  `
-  - `  DraftOrders  `
-  - `  Files  `
-  - `  FulfillmentEvents  `
-  - `  FulfillmentOrders  `
-  - `  Fulfillments  `
-  - `  FulfillmentServices  `
-  - `  FulfillmentTrackingInfo  `
-  - `  GiftCards  ` (Requires a [ShopifyPlus subscription](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-  - `  InventoryItems  `
-  - `  Locations  `
-  - [`  Metafield  ` objects](https://help.shopify.com/en/manual/custom-data/metafields) , such as `  metafield_product  ` or `  metafield_order  ` .
-  - `  OrderRiskAssessments  `
-  - `  Orders  `
-  - `  OrderTransactions  `
-  - `  PriceLists  `
-  - `  ProductMediaImages  `
-  - `  ProductOptions  `
-  - `  ProductOptionValues  `
-  - `  ProductResourceFeedbacks  ` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-  - `  Products  `
-  - `  ProductVariants  `
-  - `  Publications  `
-  - `  Refunds  `
-  - `  Returns  `
-  - `  ScriptTags  `
-  - `  Segments  `
-  - `  SellingPlanGroups  `
-  - `  StorefrontAccessTokens  `
-  - `  UrlRedirects  `
+  - `AppFeedbacks`
+  - `AppSubscriptionLineItems` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
+  - `AppSubscriptions` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
+  - `Catalogs`
+  - `Collections`
+  - `Companies`
+  - `CompanyContactRoleAssignments`
+  - `CompanyContacts`
+  - `CompanyLocations`
+  - `Customers`
+  - `DeliveryProfiles`
+  - `DiscountsAutomaticApp` (Requires a [discount function](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
+  - `DiscountsAutomaticBasic` (Requires a [discount function](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
+  - `DiscountsAutomaticBxgy`
+  - `DiscountsCodeApp`
+  - `DiscountsCodeBasic`
+  - `DiscountsCodeBxgy`
+  - `DraftOrders`
+  - `Files`
+  - `FulfillmentEvents`
+  - `FulfillmentOrders`
+  - `Fulfillments`
+  - `FulfillmentServices`
+  - `FulfillmentTrackingInfo`
+  - `GiftCards` (Requires a [ShopifyPlus subscription](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
+  - `InventoryItems`
+  - `Locations`
+  - [`Metafield` objects](https://help.shopify.com/en/manual/custom-data/metafields) , such as `metafield_product` or `metafield_order` .
+  - `OrderRiskAssessments`
+  - `Orders`
+  - `OrderTransactions`
+  - `PriceLists`
+  - `ProductMediaImages`
+  - `ProductOptions`
+  - `ProductOptionValues`
+  - `ProductResourceFeedbacks` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
+  - `Products`
+  - `ProductVariants`
+  - `Publications`
+  - `Refunds`
+  - `Returns`
+  - `ScriptTags`
+  - `Segments`
+  - `SellingPlanGroups`
+  - `StorefrontAccessTokens`
+  - `UrlRedirects`
 
 ## Data type mapping
 
 The following table maps Shopify data types to the corresponding BigQuery data types:
 
-| Shopify data type         | BigQuery data type          |
-| ------------------------- | --------------------------- |
-| `        String       `   | `        STRING       `     |
-| `        Int       `      | `        INT64       `      |
-| `        Decimal       `  | `        NUMERIC       `    |
-| `        Double       `   | `        FLOAT64       `    |
-| `        Long       `     | `        BIGNUMERIC       ` |
-| `        Bool       `     | `        BOOL       `       |
-| `        Datetime       ` | `        TIMESTAMP       `  |
+| Shopify data type | BigQuery data type |
+| ----------------- | ------------------ |
+| `String`          | `STRING`           |
+| `Int`             | `INT64`            |
+| `Decimal`         | `NUMERIC`          |
+| `Double`          | `FLOAT64`          |
+| `Long`            | `BIGNUMERIC`       |
+| `Bool`            | `BOOL`             |
+| `Datetime`        | `TIMESTAMP`        |
 
 ## Pricing
 

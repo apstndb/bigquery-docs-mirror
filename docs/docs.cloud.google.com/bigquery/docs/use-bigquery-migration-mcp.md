@@ -10,7 +10,7 @@ The BigQuery remote MCP server is enabled when you enable the BigQuery API.
 
 [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) (MCP) standardizes how large language models (LLMs) and AI applications or agents connect to outside data sources. MCP servers let you use their tools, resources, and prompts to take actions and get updated data from their backend service.
 
-Local MCP servers typically run on your local machine and use the standard input and output streams ( `  stdio  ` ) for communication between services on the same device. MCP servers run on the service's infrastructure and offer an HTTPS endpoint to AI applications for communication between the AI MCP client and the MCP server. For more information on MCP architecture, see [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture) .
+Local MCP servers typically run on your local machine and use the standard input and output streams ( `stdio` ) for communication between services on the same device. MCP servers run on the service's infrastructure and offer an HTTPS endpoint to AI applications for communication between the AI MCP client and the MCP server. For more information on MCP architecture, see [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture) .
 
 Google and Google Cloud MCP servers have the following features and benefits:
 
@@ -28,7 +28,7 @@ For information about other MCP servers and information about security and gover
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquerymigration.googleapis.com)
 
@@ -36,8 +36,8 @@ For information about other MCP servers and information about security and gover
 
 To get the permissions that you need to enable the BigQuery Migration Service MCP server, ask your administrator to grant you the following IAM roles on the project where you want to enable the BigQuery Migration Service MCP server:
 
-  - Make MCP tool calls: [MCP Tool User](https://docs.cloud.google.com/iam/docs/roles-permissions/mcp#mcp.toolUser) ( `  roles/mcp.toolUser  ` )
-  - Use the BigQuery Migration Service: [Migration Workflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` )
+  - Make MCP tool calls: [MCP Tool User](https://docs.cloud.google.com/iam/docs/roles-permissions/mcp#mcp.toolUser) ( `roles/mcp.toolUser` )
+  - Use the BigQuery Migration Service: [Migration Workflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -47,14 +47,14 @@ These predefined roles contain the permissions required to enable the BigQuery M
 
 The following permissions are required to enable the BigQuery Migration Service MCP server:
 
-  - Make MCP tool calls: `  mcp.tools.call  `
+  - Make MCP tool calls: `mcp.tools.call`
   - Use the BigQuery Migration Service:
-      - `  bigquerymigration.workflows.create  `
-      - `  bigquerymigration.workflows.get  `
-      - `  bigquerymigration.workflows.list  `
-      - `  bigquerymigration.workflows.delete  `
-      - `  bigquerymigration.subtasks.get  `
-      - `  bigquerymigration.subtasks.list  `
+      - `bigquerymigration.workflows.create`
+      - `bigquerymigration.workflows.get`
+      - `bigquerymigration.workflows.list`
+      - `bigquerymigration.workflows.delete`
+      - `bigquerymigration.subtasks.get`
+      - `bigquerymigration.subtasks.list`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -72,10 +72,10 @@ OAuth 2.0 uses scopes and credentials to determine if an authenticated principal
 
 BigQuery Migration Service has the following MCP tool OAuth scopes:
 
-| Scope URI for gcloud CLI                                              | Description                                                                                                     |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `        https://www.googleapis.com/auth/bigquerymigration       `    | View and manage your workflows in BigQuery Migration Service and see the email address for your Google Account. |
-| `        https://www.googleapis.com/auth/devstorage.read_only       ` | This scope is required for query translations that read data from Cloud Storage.                                |
+| Scope URI for gcloud CLI                               | Description                                                                                                     |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `https://www.googleapis.com/auth/bigquerymigration`    | View and manage your workflows in BigQuery Migration Service and see the email address for your Google Account. |
+| `https://www.googleapis.com/auth/devstorage.read_only` | This scope is required for query translations that read data from Cloud Storage.                                |
 
 Resources accessed during a tool call might require additional scopes.
 
@@ -110,7 +110,7 @@ To view details of available MCP tools and their descriptions for the BigQuery M
 
 ### List tools
 
-Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to list tools, or send a `  tools/list  ` HTTP request directly to the BigQuery Migration Service MCP server. The `  tools/list  ` method doesn't require authentication.
+Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to list tools, or send a `tools/list` HTTP request directly to the BigQuery Migration Service MCP server. The `tools/list` method doesn't require authentication.
 
     POST /mcp HTTP/1.1
     Host: bigquerymigration.googleapis.com
@@ -135,13 +135,13 @@ The following are sample use cases for the BigQuery Migration Service MCP server
 
 You can use the following sample prompts to create and manage BigQuery Migration Service resources:
 
-  - Translate the `  DIALECT  ` query in this `  FILENAME  ` . Use `  PROJECT_ID  ` and `  LOCATION  ` . Persist the output and translation logs into separate directories.
+  - Translate the `DIALECT` query in this `FILENAME` . Use `PROJECT_ID` and `LOCATION` . Persist the output and translation logs into separate directories.
     
-    When you use this prompt, the MCP client calls the `  translate_query  ` tool to translate the query in the specified file. The MCP client periodically calls the `  get_translation  ` tool to get the results. After the translation completes, the client writes the output to the output directory and the logs to the logs directory.
+    When you use this prompt, the MCP client calls the `translate_query` tool to translate the query in the specified file. The MCP client periodically calls the `get_translation` tool to get the results. After the translation completes, the client writes the output to the output directory and the logs to the logs directory.
 
-  - Translate this query from `  DIALECT  ` : `  QUERY  ` . Use `  PROJECT_ID  ` and `  LOCATION  ` .
+  - Translate this query from `DIALECT` : `QUERY` . Use `PROJECT_ID` and `LOCATION` .
     
-    When you use this prompt, the MCP client calls the `  translate_query  ` tool to translate the specified query and displays the translation results.
+    When you use this prompt, the MCP client calls the `translate_query` tool to translate the specified query and displays the translation results.
 
   - Assess the translation quality.
     
@@ -149,7 +149,7 @@ You can use the following sample prompts to create and manage BigQuery Migration
 
   - Explain the translation.
     
-    When you use this prompt, the MCP client calls the `  explain_translation  ` tool to get an explanation of the translation. If the translation logs contain `  RelationNotFound  ` or `  AttributeNotFound  ` errors, the MCP client should suggest that you [create a metadata package](https://docs.cloud.google.com/bigquery/docs/generate-metadata) . If you can't generate the metadata, you can send a prompt that requests the DDL statement.
+    When you use this prompt, the MCP client calls the `explain_translation` tool to get an explanation of the translation. If the translation logs contain `RelationNotFound` or `AttributeNotFound` errors, the MCP client should suggest that you [create a metadata package](https://docs.cloud.google.com/bigquery/docs/generate-metadata) . If you can't generate the metadata, you can send a prompt that requests the DDL statement.
     
     A sample response looks like the following:
     
@@ -172,23 +172,23 @@ You can use the following sample prompts to create and manage BigQuery Migration
 
   - Generate DDL for this input query.
     
-    The MCP client calls the `  generate_ddl_suggestion  ` tool to start a suggestion job. The client gets the suggestion results by calling the `  fetch_ddl_suggestion  ` tool. When the suggestion is available, the MCP client displays it.
+    The MCP client calls the `generate_ddl_suggestion` tool to start a suggestion job. The client gets the suggestion results by calling the `fetch_ddl_suggestion` tool. When the suggestion is available, the MCP client displays it.
     
     If the DDL statements are correct, you can send a prompt to prepend the generated DDL statements to the query to improve the translation quality.
 
   - Prepend the generated DDL statements to the input query and retranslate.
     
-    When you use this prompt, the MCP client prepends the DDL statements to the original input query and calls the `  translate_query  ` tool. The client calls the `  get_translation  ` tool to get the translation. The new query translation and the logs persist when they're available.
+    When you use this prompt, the MCP client prepends the DDL statements to the original input query and calls the `translate_query` tool. The client calls the `get_translation` tool to get the translation. The new query translation and the logs persist when they're available.
     
-    If the generated DDL statements are correct, any `  RelationNotFound  ` or `  AttributeNotFound  ` errors should be resolved which results in improved translation quality.
+    If the generated DDL statements are correct, any `RelationNotFound` or `AttributeNotFound` errors should be resolved which results in improved translation quality.
 
 In the prompts, replace the following:
 
-  - `  DIALECT  ` : The dialect of the SQL query you're translating.
-  - `  QUERY  ` : The query you're translating.
-  - `  FILENAME  ` : The file that contains the query you're translating.
-  - `  PROJECT_NUMBER  ` : Your Google Cloud [project number](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin) .
-  - `  LOCATION  ` : The location of the [SQL translator](https://docs.cloud.google.com/bigquery/docs/locations#sql-translator-loc) .
+  - `DIALECT` : The dialect of the SQL query you're translating.
+  - `QUERY` : The query you're translating.
+  - `FILENAME` : The file that contains the query you're translating.
+  - `PROJECT_NUMBER` : Your Google Cloud [project number](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin) .
+  - `LOCATION` : The location of the [SQL translator](https://docs.cloud.google.com/bigquery/docs/locations#sql-translator-loc) .
 
 ## Optional security and safety configurations
 
@@ -214,7 +214,7 @@ You must enable Model Armor APIs before you can use Model Armor.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=modelarmor.googleapis.com)
 
@@ -261,9 +261,9 @@ Replace `  PROJECT_ID  ` with your Google Cloud project ID.
 
 Note the following settings:
 
-  - `  INSPECT_AND_BLOCK  ` : The enforcement type that inspects content for the Google MCP server and blocks prompts and responses that match the filters.
-  - `  ENABLED  ` : The setting that enables a filter or enforcement.
-  - `  MEDIUM_AND_ABOVE  ` : The confidence level for the Responsible AI - Dangerous filter settings. You can modify this setting, though lower values might result in more false positives. For more information, see [Model Armor confidence levels](https://docs.cloud.google.com/model-armor/overview#ma-confidence-levels) .
+  - `INSPECT_AND_BLOCK` : The enforcement type that inspects content for the Google MCP server and blocks prompts and responses that match the filters.
+  - `ENABLED` : The setting that enables a filter or enforcement.
+  - `MEDIUM_AND_ABOVE` : The confidence level for the Responsible AI - Dangerous filter settings. You can modify this setting, though lower values might result in more false positives. For more information, see [Model Armor confidence levels](https://docs.cloud.google.com/model-armor/overview#ma-confidence-levels) .
 
 #### Disable scanning MCP traffic with Model Armor
 

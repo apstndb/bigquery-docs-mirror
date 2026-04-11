@@ -18,21 +18,21 @@ BTEQ translation task related settings.
 
 Fields
 
-`  project_dataset  `
+`project_dataset`
 
 `  DatasetReference  `
 
 Specifies the project and dataset in BigQuery that will be used for external table creation during the translation.
 
-`  default_path_uri  `
+`default_path_uri`
 
-`  string  `
+`string`
 
 The Cloud Storage location to be used as the default path for files that are not otherwise specified in the file replacement map.
 
-`  file_replacement_map  `
+`file_replacement_map`
 
-`  map<string, string>  `
+`map<string, string>`
 
 Maps the local paths that are used in BTEQ scripts (the keys) to the paths in Cloud Storage that should be used in their stead in the translation (the value).
 
@@ -40,15 +40,15 @@ Maps the local paths that are used in BTEQ scripts (the keys) to the paths in Cl
 
 Fields
 
-`  dataset_id  `
+`dataset_id`
 
-`  string  `
+`string`
 
 Required. A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 1,024 characters.
 
-`  project_id  `
+`project_id`
 
-`  string  `
+`string`
 
 Optional. The ID of the project containing this dataset.
 
@@ -58,9 +58,9 @@ The filter applied to fields of translation details.
 
 Fields
 
-`  input_file_exclusion_prefixes[]  `
+`input_file_exclusion_prefixes[]`
 
-`  string  `
+`string`
 
 The list of prefixes used to exclude processing for input files.
 
@@ -70,13 +70,13 @@ Settings related to SQL identifiers.
 
 Fields
 
-`  output_identifier_case  `
+`output_identifier_case`
 
 `  IdentifierCase  `
 
 The setting to control output queries' identifier case.
 
-`  identifier_rewrite_mode  `
+`identifier_rewrite_mode`
 
 `  IdentifierRewriteMode  `
 
@@ -88,19 +88,19 @@ The identifier case type.
 
 Enums
 
-`  IDENTIFIER_CASE_UNSPECIFIED  `
+`IDENTIFIER_CASE_UNSPECIFIED`
 
 The identifier case is not specified.
 
-`  ORIGINAL  `
+`ORIGINAL`
 
 Identifiers' cases will be kept as the original cases.
 
-`  UPPER  `
+`UPPER`
 
 Identifiers will be in upper cases.
 
-`  LOWER  `
+`LOWER`
 
 Identifiers will be in lower cases.
 
@@ -110,15 +110,15 @@ The SQL identifier rewrite mode.
 
 Enums
 
-`  IDENTIFIER_REWRITE_MODE_UNSPECIFIED  `
+`IDENTIFIER_REWRITE_MODE_UNSPECIFIED`
 
 SQL Identifier rewrite mode is unspecified.
 
-`  NONE  `
+`NONE`
 
 SQL identifiers won't be rewrite.
 
-`  REWRITE_ALL  `
+`REWRITE_ALL`
 
 All SQL identifiers will be rewrite.
 
@@ -134,15 +134,15 @@ Mapping between an input and output file to be translated in a subtask.
 
 Fields
 
-`  input_path  `
+`input_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for a file to translation in a subtask.
 
-`  output_path  `
+`output_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path to write back the corresponding input file to.
 
@@ -152,69 +152,69 @@ DEPRECATED\! Use TranslationTaskDetails defined in com.google.cloud.bigquery.mig
 
 Fields
 
-`  input_path  `
+`input_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for translation input files.
 
-`  output_path  `
+`output_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for translation output files.
 
-`  file_paths[]  `
+`file_paths[]`
 
 `  TranslationFileMapping  `
 
 Cloud Storage files to be processed for translation.
 
-`  schema_path  `
+`schema_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path to DDL files as table schema to assist semantic translation.
 
-`  file_encoding  `
+`file_encoding`
 
 `  FileEncoding  `
 
 The file encoding type.
 
-`  identifier_settings  `
+`identifier_settings`
 
 `  IdentifierSettings  `
 
 The settings for SQL identifiers.
 
-`  special_token_map  `
+`special_token_map`
 
-`  map<string, TokenType  ` \>
+` map<string, TokenType  ` \>
 
 The map capturing special tokens to be replaced during translation. The key is special token in string. The value is the token data type. This is used to translate SQL query template which contains special token as place holder. The special token makes a query invalid to parse. This map will be applied to annotate those special token with types to let parser understand how to parse them into proper structure with type information.
 
-`  filter  `
+`filter`
 
 `  Filter  `
 
 The filter applied to translation details.
 
-`  translation_exception_table  `
+`translation_exception_table`
 
-`  string  `
+`string`
 
 Specifies the exact name of the bigquery table ("dataset.table") to be used for surfacing raw translation errors. If the table does not exist, we will create it. If it already exists and the schema is the same, we will re-use. If the table exists and the schema is different, we will throw an error.
 
-Union field `  language_options  ` . The language specific settings for the translation task. `  language_options  ` can be only one of the following:
+Union field `language_options` . The language specific settings for the translation task. `language_options` can be only one of the following:
 
-`  teradata_options  `
+`teradata_options`
 
 `  TeradataOptions  `
 
 The Teradata SQL specific settings for the translation task.
 
-`  bteq_options  `
+`bteq_options`
 
 `  BteqOptions  `
 
@@ -226,31 +226,31 @@ The file encoding types.
 
 Enums
 
-`  FILE_ENCODING_UNSPECIFIED  `
+`FILE_ENCODING_UNSPECIFIED`
 
 File encoding setting is not specified.
 
-`  UTF_8  `
+`UTF_8`
 
 File encoding is UTF\_8.
 
-`  ISO_8859_1  `
+`ISO_8859_1`
 
 File encoding is ISO\_8859\_1.
 
-`  US_ASCII  `
+`US_ASCII`
 
 File encoding is US\_ASCII.
 
-`  UTF_16  `
+`UTF_16`
 
 File encoding is UTF\_16.
 
-`  UTF_16LE  `
+`UTF_16LE`
 
 File encoding is UTF\_16LE.
 
-`  UTF_16BE  `
+`UTF_16BE`
 
 File encoding is UTF\_16BE.
 
@@ -260,34 +260,34 @@ The special token data type.
 
 Enums
 
-`  TOKEN_TYPE_UNSPECIFIED  `
+`TOKEN_TYPE_UNSPECIFIED`
 
 Token type is not specified.
 
-`  STRING  `
+`STRING`
 
 Token type as string.
 
-`  INT64  `
+`INT64`
 
 Token type as integer.
 
-`  NUMERIC  `
+`NUMERIC`
 
 Token type as numeric.
 
-`  BOOL  `
+`BOOL`
 
 Token type as boolean.
 
-`  FLOAT64  `
+`FLOAT64`
 
 Token type as float.
 
-`  DATE  `
+`DATE`
 
 Token type as date.
 
-`  TIMESTAMP  `
+`TIMESTAMP`
 
 Token type as timestamp.

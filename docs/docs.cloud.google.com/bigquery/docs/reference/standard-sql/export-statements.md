@@ -1,8 +1,8 @@
 # Export statements in GoogleSQL
 
-## `     EXPORT DATA    ` statement
+## `EXPORT DATA` statement
 
-The `  EXPORT DATA  ` statement exports the results of a query to an external storage location. You can export to the following services:
+The `EXPORT DATA` statement exports the results of a query to an external storage location. You can export to the following services:
 
   - Cloud Storage
   - Amazon Simple Storage Service (Amazon S3)
@@ -20,83 +20,83 @@ The `  EXPORT DATA  ` statement exports the results of a query to an external st
 
 ### Arguments
 
-  - `  connection_name  ` : Specifies a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) that has credentials for accessing the Amazon S3 data. Specify the connection name in the form `  PROJECT_ID . LOCATION . CONNECTION_ID  ` . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ). Connections aren't required to export to Google Cloud services.
+  - `connection_name` : Specifies a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) that has credentials for accessing the Amazon S3 data. Specify the connection name in the form `  PROJECT_ID . LOCATION . CONNECTION_ID  ` . If the project ID or location contains a dash, enclose the connection name in backticks ( `` ` `` ). Connections aren't required to export to Google Cloud services.
 
-  - `  export_option_list  ` : Specifies a list of options for the export operation, including the URI of the destination. For more information, see the following sections:
+  - `export_option_list` : Specifies a list of options for the export operation, including the URI of the destination. For more information, see the following sections:
     
       - [Cloud Storage, Amazon Simple Storage Service (Amazon S3), and Blob Storage export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#gcs_s3_export_option)
       - [Bigtable export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#bigtable_export_option)
       - [Pub/Sub export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#pubsub_export_option)
       - [Spanner export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#spanner_export_option)
 
-  - `  query_statement  ` : A SQL query. The query result is exported to the external destination. The query can't reference metatables, including `  INFORMATION_SCHEMA  ` views, system tables, or wildcard tables.
+  - `query_statement` : A SQL query. The query result is exported to the external destination. The query can't reference metatables, including `INFORMATION_SCHEMA` views, system tables, or wildcard tables.
 
 ## Export to Cloud Storage, Amazon S3, or Blob Storage
 
 You can export BigQuery data to Cloud Storage, Amazon S3, or Blob Storage in Avro, CSV, JSON, and Parquet formats. For more information about exporting to Cloud Storage, see [Export table data to Cloud Storage](https://docs.cloud.google.com/bigquery/docs/exporting-data) .
 
-Use the `  format  ` option to specify the format of the exported data. The following limitations apply:
+Use the `format` option to specify the format of the exported data. The following limitations apply:
 
   - You cannot export nested and repeated data in CSV format.
-  - If you export data in JSON format, `  INT64  ` data types are encoded as JSON strings to preserve 64-bit precision.
+  - If you export data in JSON format, `INT64` data types are encoded as JSON strings to preserve 64-bit precision.
 
 You are not billed for the export operation, but you are billed for running the query and for storing data in Cloud Storage, Amazon S3, or Blob Storage. For more information, see [Cloud Storage pricing](https://cloud.google.com/storage/pricing) , [Amazon S3 pricing](https://aws.amazon.com/s3/pricing) , or [Blob Storage pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/) .
 
 ### Cloud Storage, Amazon S3, and Blob Storage export option list
 
-The option list specifies options for exporting to Cloud Storage, Amazon S3, or Blob Storage. Specify the option list in the following format: `  NAME=VALUE, ...  `
+The option list specifies options for exporting to Cloud Storage, Amazon S3, or Blob Storage. Specify the option list in the following format: `NAME=VALUE, ...`
 
 Options
 
-`  compression  `
+`compression`
 
-`  STRING  `
+`STRING`
 
-Specifies a compression format. If not specified, the exported files are uncompressed. Supported values include: `  GZIP  ` , `  DEFLATE  ` , `  SNAPPY  ` .
+Specifies a compression format. If not specified, the exported files are uncompressed. Supported values include: `GZIP` , `DEFLATE` , `SNAPPY` .
 
-`  field_delimiter  `
+`field_delimiter`
 
-`  STRING  `
+`STRING`
 
-The delimiter used to separate fields. Default: `  ','  ` (comma).
-
-Applies to: CSV.
-
-`  format  `
-
-`  STRING  `
-
-Required. The format of the exported data. Supported values include: `  AVRO  ` , `  CSV  ` , `  JSON  ` , `  PARQUET  ` .
-
-`  header  `
-
-`  BOOL  `
-
-If `  true  ` , generates column headers for the first row of each data file. Default: `  false  ` .
+The delimiter used to separate fields. Default: `','` (comma).
 
 Applies to: CSV.
 
-`  overwrite  `
+`format`
 
-`  BOOL  `
+`STRING`
 
-If `  true  ` , overwrites any existing files with the same URI. Otherwise, if the destination storage bucket is not empty, the statement returns an error. Default: `  false  ` .
+Required. The format of the exported data. Supported values include: `AVRO` , `CSV` , `JSON` , `PARQUET` .
 
-Note: When `  overwrite  ` is `  true  ` , files are only overwritten, no files are ever deleted, even if they match the wildcard specified in the URI.
+`header`
 
-`  uri  `
+`BOOL`
 
-`  STRING  `
+If `true` , generates column headers for the first row of each data file. Default: `false` .
 
-Required. The destination URI for the export. The `  uri  ` option must be a single-wildcard URI as described in [Exporting data into one or more files](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) .
+Applies to: CSV.
 
-Examples: `  "gs://bucket/path/file_*.csv"  ` or `  "s3://bucket/path/file_*.csv"  `
+`overwrite`
 
-`  use_avro_logical_types  `
+`BOOL`
 
-`  BOOL  `
+If `true` , overwrites any existing files with the same URI. Otherwise, if the destination storage bucket is not empty, the statement returns an error. Default: `false` .
 
-Whether to use appropriate AVRO logical types when exporting `  TIMESTAMP  ` , `  DATETIME  ` , `  TIME  ` and `  DATE  ` types.
+Note: When `overwrite` is `true` , files are only overwritten, no files are ever deleted, even if they match the wildcard specified in the URI.
+
+`uri`
+
+`STRING`
+
+Required. The destination URI for the export. The `uri` option must be a single-wildcard URI as described in [Exporting data into one or more files](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) .
+
+Examples: `"gs://bucket/path/file_*.csv"` or `"s3://bucket/path/file_*.csv"`
+
+`use_avro_logical_types`
+
+`BOOL`
+
+Whether to use appropriate AVRO logical types when exporting `TIMESTAMP` , `DATETIME` , `TIME` and `DATE` types.
 
 Applies to: AVRO. For more information, see [Avro export details](https://docs.cloud.google.com/bigquery/docs/exporting-data#avro_export_details) .
 
@@ -106,7 +106,7 @@ The following examples show common use cases for exporting to Cloud Storage, Ama
 
 #### Export data to Cloud Storage in CSV format
 
-The following example exports data to a CSV file. It includes options to overwrite the destination location, write header rows, and use `  ';'  ` as a delimiter.
+The following example exports data to a CSV file. It includes options to overwrite the destination location, write header rows, and use `';'` as a delimiter.
 
 ``` notranslate
 EXPORT DATA OPTIONS(
@@ -158,57 +158,57 @@ SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 ## Export to Bigtable
 
-You can export BigQuery data to a Bigtable table by using the `  EXPORT DATA  ` statement. For Bigtable export examples and configuration options, see [Export data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) .
+You can export BigQuery data to a Bigtable table by using the `EXPORT DATA` statement. For Bigtable export examples and configuration options, see [Export data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) .
 
 You are not billed for the export operation, but you are billed for running the query and for storing data in Bigtable. For more information, see [Bigtable pricing](https://cloud.google.com/bigtable/pricing) .
 
 ### Bigtable export option list
 
-The option list specifies options for exporting to Bigtable. Specify the option list in the following format: `  NAME=VALUE  ` , ...
+The option list specifies options for exporting to Bigtable. Specify the option list in the following format: `NAME=VALUE` , ...
 
 Options
 
-`  format  `
+`format`
 
-`  STRING  `
+`STRING`
 
-Required. When exporting to Bigtable, the value must always be `  CLOUD_BIGTABLE  ` .
+Required. When exporting to Bigtable, the value must always be `CLOUD_BIGTABLE` .
 
-`  bigtable_options  `
+`bigtable_options`
 
-`  STRING  `
+`STRING`
 
-JSON string containing configurations related to mapping exported fields to Bigtable columns families and columns. For more information, see [Configure exports with `  bigtable_options  ` .](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#bigtable_options)
+JSON string containing configurations related to mapping exported fields to Bigtable columns families and columns. For more information, see [Configure exports with `bigtable_options` .](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#bigtable_options)
 
-`  overwrite  `
+`overwrite`
 
-`  BOOL  `
+`BOOL`
 
-If `  true  ` , allows export to overwrite existing data in the destination Bigtable table. When set to `  false  ` , and if the destination table is not empty, the statement returns an error. Default: `  false  ` .
+If `true` , allows export to overwrite existing data in the destination Bigtable table. When set to `false` , and if the destination table is not empty, the statement returns an error. Default: `false` .
 
-`  truncate  `
+`truncate`
 
-`  BOOL  `
+`BOOL`
 
-If `  true  ` , all existing data in the destination table will be deleted before any new data is written. Otherwise the export will proceed with a non-empty destination table. Default: `  false  ` .
+If `true` , all existing data in the destination table will be deleted before any new data is written. Otherwise the export will proceed with a non-empty destination table. Default: `false` .
 
-**Warning:** Only use `  truncate  ` when the destination table doesn't contain data that needs to be retained.
+**Warning:** Only use `truncate` when the destination table doesn't contain data that needs to be retained.
 
-`  uri  `
+`uri`
 
-`  STRING  `
+`STRING`
 
-Required. The destination URI for the export. We recommend specifying an app profile for traffic routing and visibility at monitoring dashboards provided by Bigtable. The `  uri  ` option for a Bigtable export must be provided in the following format: `  https://bigtable.googleapis.com/projects/ PROJECT_ID /instances/ INSTANCE_ID /appProfiles/ APP_PROFILE /tables/ TABLE_NAME  `
+Required. The destination URI for the export. We recommend specifying an app profile for traffic routing and visibility at monitoring dashboards provided by Bigtable. The `uri` option for a Bigtable export must be provided in the following format: ` https://bigtable.googleapis.com/projects/ PROJECT_ID /instances/ INSTANCE_ID /appProfiles/ APP_PROFILE /tables/ TABLE_NAME  `
 
-`  auto_create_column_families  `
+`auto_create_column_families`
 
-`  BOOL  `
+`BOOL`
 
-If `  true  ` , allows export to create missing column families in the target table. If `  false  ` and if the destination table is missing a column family, the statement returns an error. Default: `  false  ` .
+If `true` , allows export to create missing column families in the target table. If `false` and if the destination table is missing a column family, the statement returns an error. Default: `false` .
 
 ### Example
 
-The following example exports data to a Bigtable table. Data in `  field1  ` becomes a row key in Bigtable destination table. The fields `  field2  ` , `  field3  ` and `  field4  ` are written as columns `  cbtFeld2  ` , `  cbtField3  ` and `  cbtField4  ` into column family `  column_family  ` .
+The following example exports data to a Bigtable table. Data in `field1` becomes a row key in Bigtable destination table. The fields `field2` , `field3` and `field4` are written as columns `cbtFeld2` , `cbtField3` and `cbtField4` into column family `column_family` .
 
 ``` notranslate
 EXPORT DATA OPTIONS (
@@ -241,27 +241,27 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To enroll in the continuous queries preview, fill out [the request form](https://docs.google.com/forms/d/e/1FAIpQLSc-SL89C9K997jSm_u3oQH-UGGe3brzsybbX6mf5VFaA0a4iA/viewform) . To give feedback or request support for this feature, contact <bq-continuous-queries-feedback@google.com> .
 
-You can export BigQuery data to a Pub/Sub topic by using the `  EXPORT DATA  ` statement in a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) . For more information about Pub/Sub configuration options, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
+You can export BigQuery data to a Pub/Sub topic by using the `EXPORT DATA` statement in a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) . For more information about Pub/Sub configuration options, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
 
 For information about the costs involved with exporting to Pub/Sub by using a continuous query, see [Costs](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#pricing) .
 
 ### Pub/Sub export option list
 
-The option list specifies options for exporting to Pub/Sub. Specify the option list in the following format: `  NAME=VALUE  ` , ...
+The option list specifies options for exporting to Pub/Sub. Specify the option list in the following format: `NAME=VALUE` , ...
 
 Options
 
-`  format  `
+`format`
 
-`  STRING  `
+`STRING`
 
-Required. When exporting to Pub/Sub, the value must always be `  CLOUD_PUBSUB  ` .
+Required. When exporting to Pub/Sub, the value must always be `CLOUD_PUBSUB` .
 
-`  uri  `
+`uri`
 
-`  STRING  `
+`STRING`
 
-Required. The destination URI for the export. The `  uri  ` option for a Pub/Sub export must be provided in the following format: `  https://pubsub.googleapis.com/projects/ PROJECT_ID /topics/ TOPIC_ID  `
+Required. The destination URI for the export. The `uri` option for a Pub/Sub export must be provided in the following format: ` https://pubsub.googleapis.com/projects/ PROJECT_ID /topics/ TOPIC_ID  `
 
 ### Example
 
@@ -287,31 +287,31 @@ AS (
 
 ## Export to Spanner
 
-You can export data from a BigQuery table to a [Spanner](https://docs.cloud.google.com/spanner/docs/overview) table by using the `  EXPORT DATA  ` statement.
+You can export data from a BigQuery table to a [Spanner](https://docs.cloud.google.com/spanner/docs/overview) table by using the `EXPORT DATA` statement.
 
 ### Spanner export option list
 
-The option list specifies options for the export operation. Specify the option list in the following format: `  NAME=VALUE, ...  `
+The option list specifies options for the export operation. Specify the option list in the following format: `NAME=VALUE, ...`
 
 Options
 
-`  format  `
+`format`
 
-`  STRING  `
+`STRING`
 
-Required. To export data from BigQuery to Spanner, the value must always be `  CLOUD_SPANNER  ` .
+Required. To export data from BigQuery to Spanner, the value must always be `CLOUD_SPANNER` .
 
-`  uri  `
+`uri`
 
-`  STRING  `
+`STRING`
 
-Required. The destination URI for the export. For Spanner, the URI must be provided in the following format: `  https://spanner.googleapis.com/projects/ PROJECT_ID /instances/ INSTANCE_ID /databases/ DATABASE_ID  `
+Required. The destination URI for the export. For Spanner, the URI must be provided in the following format: ` https://spanner.googleapis.com/projects/ PROJECT_ID /instances/ INSTANCE_ID /databases/ DATABASE_ID  `
 
-`  spanner_options  `
+`spanner_options`
 
-`  STRING  `
+`STRING`
 
-Required. A JSON string containing configurations related to mapping exported fields to Spanner column families and columns. For more information, see [Configure exports with `  spanner_options  ` option.](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#spanner_options)
+Required. A JSON string containing configurations related to mapping exported fields to Spanner column families and columns. For more information, see [Configure exports with `spanner_options` option.](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#spanner_options)
 
 ### Examples
 

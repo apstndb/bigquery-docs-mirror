@@ -289,7 +289,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://pkg.go.dev/cloud.google.com/go/bigquery/migration/apiv2alpha?tab=doc)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/google-cloud-go/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bgo%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bgo%5D)
   - [Source code](https://github.com/googleapis/google-cloud-go)
 
 ### Java
@@ -299,7 +299,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerymigration/latest/overview)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/java-bigquerymigration/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bjava%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bjava%5D)
   - [Source code](https://github.com/googleapis/java-bigquerymigration)
 
 ### Python
@@ -309,7 +309,7 @@ The following list contains links to more resources related to the client librar
   - [API reference](https://docs.cloud.google.com/python/docs/reference/bigquerymigration/latest)
   - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
   - [Issue tracker](https://github.com/googleapis/python-bigquery-migration/issues)
-  - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bpython%5D)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bpython%5D)
   - [Source code](https://github.com/googleapis/python-bigquery-migration)
 
 ### What's next?

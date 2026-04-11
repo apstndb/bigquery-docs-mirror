@@ -8,11 +8,11 @@ There are two variants of this extensibility mechanism: [user-defined functions]
 
 To get the permissions that you need to complete the tasks in this document, ask your administrator to grant you the following IAM roles on your project:
 
-  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
-  - [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
-  - [Cloud Functions Developer](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudfunctions#cloudfunctions.developer) ( `  roles/cloudfunctions.developer  ` )
-  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` )
-  - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` )
+  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+  - [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
+  - [Cloud Functions Developer](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudfunctions#cloudfunctions.developer) ( `roles/cloudfunctions.developer` )
+  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )
+  - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -26,11 +26,11 @@ Creating a UDF in BigQuery DataFrames creates a BigQuery routine as the Python U
 
 ### Requirements
 
-To use a BigQuery DataFrames UDF, enable the [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com) in your project. If you provide the `  bigquery_connection  ` parameter in your project, you must also enable the [BigQuery Connection API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com) .
+To use a BigQuery DataFrames UDF, enable the [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com) in your project. If you provide the `bigquery_connection` parameter in your project, you must also enable the [BigQuery Connection API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com) .
 
 ### Clean up
 
-In addition to cleaning up the cloud artifacts directly in the Google Cloud console or with other tools, you can clean up the BigQuery DataFrames UDFs that were created with an explicit name argument by using the `  bigframes.pandas.get_global_session().bqclient.delete_routine(routine_id)  ` command.
+In addition to cleaning up the cloud artifacts directly in the Google Cloud console or with other tools, you can clean up the BigQuery DataFrames UDFs that were created with an explicit name argument by using the `bigframes.pandas.get_global_session().bqclient.delete_routine(routine_id)` command.
 
 ### Limitations
 
@@ -52,7 +52,7 @@ Creating a remote function in BigQuery DataFrames creates the following:
 
   - A [BigQuery connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) .
     
-    By default, a connection named `  bigframes-default-connection  ` is used. You can use a pre-configured BigQuery connection if you prefer, in which case the connection creation is skipped. The service account for the default connection is granted the [Cloud Run role](https://docs.cloud.google.com/iam/docs/roles-permissions/run#run.invoker) ( `  roles/run.invoker  ` ).
+    By default, a connection named `bigframes-default-connection` is used. You can use a pre-configured BigQuery connection if you prefer, in which case the connection creation is skipped. The service account for the default connection is granted the [Cloud Run role](https://docs.cloud.google.com/iam/docs/roles-permissions/run#run.invoker) ( `roles/run.invoker` ).
 
   - A BigQuery remote function that uses the Cloud Run function that's been created with the BigQuery connection.
 
@@ -60,19 +60,19 @@ Creating a remote function in BigQuery DataFrames creates the following:
 
 To use BigQuery DataFrames remote functions, you must enable the following APIs:
 
-  - [BigQuery API ( `  bigquery.googleapis.com  ` )](https://docs.cloud.google.com/bigquery/docs/reference/rest)
-  - [BigQuery Connection API ( `  bigqueryconnection.googleapis.com  ` )](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest)
-  - [Cloud Functions API ( `  cloudfunctions.googleapis.com  ` )](https://docs.cloud.google.com/functions/docs/reference/rest)
-  - [Cloud Run Admin API ( `  run.googleapis.com  ` )](https://docs.cloud.google.com/run/docs/reference/rest)
-  - [Artifact Registry API ( `  artifactregistry.googleapis.com  ` )](https://docs.cloud.google.com/artifact-registry/docs/reference/rest)
-  - [Cloud Build API ( `  cloudbuild.googleapis.com  ` )](https://docs.cloud.google.com/build/docs/api/reference/rest)
-  - [Compute Engine API ( `  compute.googleapis.com  ` )](https://docs.cloud.google.com/compute/docs/reference/rest/v1)
-  - [Cloud Resource Manager API ( `  cloudresourcemanager.googleapis.com  ` )](https://docs.cloud.google.com/resource-manager/reference/rest)
+  - [BigQuery API ( `bigquery.googleapis.com` )](https://docs.cloud.google.com/bigquery/docs/reference/rest)
+  - [BigQuery Connection API ( `bigqueryconnection.googleapis.com` )](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest)
+  - [Cloud Functions API ( `cloudfunctions.googleapis.com` )](https://docs.cloud.google.com/functions/docs/reference/rest)
+  - [Cloud Run Admin API ( `run.googleapis.com` )](https://docs.cloud.google.com/run/docs/reference/rest)
+  - [Artifact Registry API ( `artifactregistry.googleapis.com` )](https://docs.cloud.google.com/artifact-registry/docs/reference/rest)
+  - [Cloud Build API ( `cloudbuild.googleapis.com` )](https://docs.cloud.google.com/build/docs/api/reference/rest)
+  - [Compute Engine API ( `compute.googleapis.com` )](https://docs.cloud.google.com/compute/docs/reference/rest/v1)
+  - [Cloud Resource Manager API ( `cloudresourcemanager.googleapis.com` )](https://docs.cloud.google.com/resource-manager/reference/rest)
 
-When you use BigQuery DataFrames remote functions, you need the [Project IAM Admin role](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `  roles/resourcemanager.projectIamAdmin  ` ) if you're using a default BigQuery connection, or the [Browser role](https://docs.cloud.google.com/iam/docs/roles-permissions/browser#browser) ( `  roles/browser  ` ) if you're using a pre-configured connection. You can avoid this requirement by setting the `  bigframes.pandas.options.bigquery.skip_bq_connection_check  ` option to `  True  ` , in which case the connection (default or pre-configured) is used as-is without any existence or permission check. If you're using the pre-configured connection and skipping the connection check, verify the following:
+When you use BigQuery DataFrames remote functions, you need the [Project IAM Admin role](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `roles/resourcemanager.projectIamAdmin` ) if you're using a default BigQuery connection, or the [Browser role](https://docs.cloud.google.com/iam/docs/roles-permissions/browser#browser) ( `roles/browser` ) if you're using a pre-configured connection. You can avoid this requirement by setting the `bigframes.pandas.options.bigquery.skip_bq_connection_check` option to `True` , in which case the connection (default or pre-configured) is used as-is without any existence or permission check. If you're using the pre-configured connection and skipping the connection check, verify the following:
 
   - The connection is created in the right location.
-  - If you're using BigQuery DataFrames remote functions, the service account has the [Cloud Run Invoker role](https://docs.cloud.google.com/iam/docs/roles-permissions/run#run.invoker) ( `  roles/run.invoker  ` ) on the project.
+  - If you're using BigQuery DataFrames remote functions, the service account has the [Cloud Run Invoker role](https://docs.cloud.google.com/iam/docs/roles-permissions/run#run.invoker) ( `roles/run.invoker` ) on the project.
 
 ### View and manage connections
 
@@ -90,7 +90,7 @@ BigQuery connections are created in the same location as the BigQuery DataFrames
 
 4.  In the **Explorer** pane, expand the project, and then click **Connections** .
 
-BigQuery remote functions are created in the dataset you specify, or they are created in an anonymous dataset, which is a type of [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) . If you don't set a name for a remote function during its creation, BigQuery DataFrames applies a default name that begins with the `  bigframes  ` prefix. To view and manage remote functions created in a user-specified dataset, do the following:
+BigQuery remote functions are created in the dataset you specify, or they are created in an anonymous dataset, which is a type of [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) . If you don't set a name for a remote function during its creation, BigQuery DataFrames applies a default name that begins with the `bigframes` prefix. To view and manage remote functions created in a user-specified dataset, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -118,17 +118,17 @@ To view and manage Cloud Run functions, do the following:
 
 3.  In the list of available services, filter on **Function Deployment type** .
 
-4.  To identify functions created by BigQuery DataFrames, look for function names with the `  bigframes  ` prefix.
+4.  To identify functions created by BigQuery DataFrames, look for function names with the `bigframes` prefix.
 
 ### Clean up
 
 In addition to cleaning up the cloud artifacts directly in the Google Cloud console or with other tools, you can clean up the BigQuery remote functions that were created without an explicit name argument and their associated Cloud Run functions in the following ways:
 
-  - For a BigQuery DataFrames session, use the `  session.close()  ` command.
-  - For the default BigQuery DataFrames session, use the `  bigframes.pandas.close_session()  ` command.
-  - For a past session with `  session_id  ` , use the `  bigframes.pandas.clean_up_by_session_id(session_id)  ` command.
+  - For a BigQuery DataFrames session, use the `session.close()` command.
+  - For the default BigQuery DataFrames session, use the `bigframes.pandas.close_session()` command.
+  - For a past session with `session_id` , use the `bigframes.pandas.clean_up_by_session_id(session_id)` command.
 
-You can also clean up the BigQuery remote functions that were created with an explicit name argument and their associated Cloud Run functions by using the `  bigframes.pandas.get_global_session().bqclient.delete_routine(routine_id)  ` command.
+You can also clean up the BigQuery remote functions that were created with an explicit name argument and their associated Cloud Run functions by using the `bigframes.pandas.get_global_session().bqclient.delete_routine(routine_id)` command.
 
 ### Limitations
 

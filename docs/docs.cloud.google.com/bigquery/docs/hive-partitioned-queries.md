@@ -33,7 +33,7 @@ Hive partition keys appear as normal columns when you query data from Cloud Stor
     gs://my_bucket/my_table/dt=2019-10-31/lang=en/my_filename
     gs://my_bucket/my_table/dt=2018-10-31/lang=fr/my_filename
 
-The common source URI prefix in this example is `  gs://my_bucket/my_table  ` .
+The common source URI prefix in this example is `gs://my_bucket/my_table` .
 
 ### Unsupported data layouts
 
@@ -50,7 +50,7 @@ Files where the schema is not in a consistent order also fail detection. For exa
 
 BigQuery supports three modes of Hive partition schema detection:
 
-  - `  AUTO  ` : Key names and types are automatically detected. The following types can be detected:
+  - `AUTO` : Key names and types are automatically detected. The following types can be detected:
     
       - [STRING](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type)
     
@@ -58,21 +58,21 @@ BigQuery supports three modes of Hive partition schema detection:
     
       - [DATE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type)
         
-        For example, `  /date=2018-10-18/  ` .
+        For example, `/date=2018-10-18/` .
     
       - [TIMESTAMP](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type)
         
-        For example, `  /time=2018-10-18 16:00:00+00/  ` .
+        For example, `/time=2018-10-18 16:00:00+00/` .
 
-  - `  STRINGS  ` : Key names are automatically converted to `  STRING  ` type.
+  - `STRINGS` : Key names are automatically converted to `STRING` type.
 
-  - `  CUSTOM  ` : Partition key schema is encoded as specified in the source URI prefix.
+  - `CUSTOM` : Partition key schema is encoded as specified in the source URI prefix.
 
 #### Custom partition key schema
 
-To use a `  CUSTOM  ` schema, you must specify the schema in the source URI prefix field. Using a `  CUSTOM  ` schema lets you specify the type for each partition key. The values must validly parse as the specified type or the query fails.
+To use a `CUSTOM` schema, you must specify the schema in the source URI prefix field. Using a `CUSTOM` schema lets you specify the type for each partition key. The values must validly parse as the specified type or the query fails.
 
-For example, if you set the `  source_uri_prefix  ` flag to `  gs://my_bucket/my_table/{dt:DATE}/{val:STRING}  ` , BigQuery treats `  val  ` as a STRING, `  dt  ` as a DATE, and uses `  gs://my_bucket/my_table  ` as the source URI prefix for the matched files.
+For example, if you set the `source_uri_prefix` flag to `gs://my_bucket/my_table/{dt:DATE}/{val:STRING}` , BigQuery treats `val` as a STRING, `dt` as a DATE, and uses `gs://my_bucket/my_table` as the source URI prefix for the matched files.
 
 ### Partition pruning
 
@@ -80,19 +80,19 @@ BigQuery prunes partitions when possible using query predicates on the partition
 
 ### Predicate filters on partition keys in queries
 
-When you create an externally partitioned table, you can require the use of predicate filters on partition keys by enabling the `  requirePartitionFilter  ` option under [HivePartitioningOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) .
+When you create an externally partitioned table, you can require the use of predicate filters on partition keys by enabling the `requirePartitionFilter` option under [HivePartitioningOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) .
 
-When this option is enabled, attempts to query the externally partitioned table without specifying a `  WHERE  ` clause produce the following error: `  Cannot query over table <table_name> without a filter over column(s) <partition key names> that can be used for partition elimination  ` .
+When this option is enabled, attempts to query the externally partitioned table without specifying a `WHERE` clause produce the following error: `Cannot query over table <table_name> without a filter over column(s) <partition key names> that can be used for partition elimination` .
 
-**Note:** There must be at least one predicate that only references one or more partition keys for the filter to be considered eligible for partition elimination. For example, for a table with partition key `  val  ` and column `  f  ` in the file, both of the following `  WHERE  ` clauses satisfy the requirement:  
-`  WHERE val = "key"  `  
-`  WHERE val = "key" AND f = "column"  `
+**Note:** There must be at least one predicate that only references one or more partition keys for the filter to be considered eligible for partition elimination. For example, for a table with partition key `val` and column `f` in the file, both of the following `WHERE` clauses satisfy the requirement:  
+`WHERE val = "key"`  
+`WHERE val = "key" AND f = "column"`
 
-However, `  WHERE (val = "key" OR f = "column")  ` is not sufficient.
+However, `WHERE (val = "key" OR f = "column")` is not sufficient.
 
 ## Limitations
 
-  - Hive partitioning support is built assuming a common source URI prefix for all URIs that ends immediately before partition encoding, as follows: `  gs:// BUCKET / PATH_TO_TABLE /  ` .
+  - Hive partitioning support is built assuming a common source URI prefix for all URIs that ends immediately before partition encoding, as follows: `gs:// BUCKET / PATH_TO_TABLE /` .
 
   - The directory structure of a Hive partitioned table is assumed to have the same partitioning keys appear in the same order, with a maximum of ten partition keys per table.
 

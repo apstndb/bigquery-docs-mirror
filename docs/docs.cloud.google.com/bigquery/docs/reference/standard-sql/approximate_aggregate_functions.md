@@ -1,6 +1,6 @@
 GoogleSQL for BigQuery supports approximate aggregate functions. To learn about the syntax for aggregate function calls, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-Approximate aggregate functions are scalable in terms of memory usage and time, but produce approximate results instead of exact results. These functions typically require less memory than [exact aggregation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) like `  COUNT(DISTINCT ...)  ` , but also introduce statistical uncertainty. This makes approximate aggregation appropriate for large data streams for which linear memory usage is impractical, as well as for data that is already approximate.
+Approximate aggregate functions are scalable in terms of memory usage and time, but produce approximate results instead of exact results. These functions typically require less memory than [exact aggregation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) like `COUNT(DISTINCT ...)` , but also introduce statistical uncertainty. This makes approximate aggregation appropriate for large data streams for which linear memory usage is impractical, as well as for data that is already approximate.
 
 The approximate aggregate functions in this section work directly on the input data, rather than an intermediate estimation of the data. These functions *don't allow* users to specify the precision for the estimation with sketches. If you would like to specify precision with sketches, see:
 
@@ -9,14 +9,14 @@ The approximate aggregate functions in this section work directly on the input d
 
 ## Function list
 
-| Name                                                                                                                                                                 | Summary                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| [`         APPROX_COUNT_DISTINCT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct) | Gets the approximate result for `        COUNT(DISTINCT expression)       ` .                  |
-| [`         APPROX_QUANTILES        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)           | Gets the approximate quantile boundaries.                                                      |
-| [`         APPROX_TOP_COUNT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)           | Gets the approximate top elements and their approximate count.                                 |
-| [`         APPROX_TOP_SUM        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)               | Gets the approximate top elements and sum, based on the approximate sum of an assigned weight. |
+| Name                                                                                                                                                | Summary                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [`APPROX_COUNT_DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct) | Gets the approximate result for `COUNT(DISTINCT expression)` .                                 |
+| [`APPROX_QUANTILES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)           | Gets the approximate quantile boundaries.                                                      |
+| [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)           | Gets the approximate top elements and their approximate count.                                 |
+| [`APPROX_TOP_SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)               | Gets the approximate top elements and sum, based on the approximate sum of an assigned weight. |
 
-## `     APPROX_COUNT_DISTINCT    `
+## `APPROX_COUNT_DISTINCT`
 
     APPROX_COUNT_DISTINCT(
       expression
@@ -24,21 +24,21 @@ The approximate aggregate functions in this section work directly on the input d
 
 **Description**
 
-Returns the approximate result for `  COUNT(DISTINCT expression)  ` . The value returned is a statistical estimate, not necessarily the actual value.
+Returns the approximate result for `COUNT(DISTINCT expression)` . The value returned is a statistical estimate, not necessarily the actual value.
 
-This function is less accurate than `  COUNT(DISTINCT expression)  ` , but performs better on huge input.
+This function is less accurate than `COUNT(DISTINCT expression)` , but performs better on huge input.
 
 **Supported Argument Types**
 
 Any data type **except** :
 
-  - `  ARRAY  `
-  - `  STRUCT  `
-  - `  INTERVAL  `
+  - `ARRAY`
+  - `STRUCT`
+  - `INTERVAL`
 
 **Returned Data Types**
 
-`  INT64  `
+`INT64`
 
 **Examples**
 
@@ -51,7 +51,7 @@ Any data type **except** :
      | 5               |
      +-----------------*/
 
-## `     APPROX_QUANTILES    `
+## `APPROX_QUANTILES`
 
     APPROX_QUANTILES(
       [ DISTINCT ]
@@ -61,25 +61,25 @@ Any data type **except** :
 
 **Description**
 
-Returns the approximate boundaries for a group of `  expression  ` values, where `  number  ` represents the number of quantiles to create. This function returns an array of `  number  ` + 1 elements, sorted in ascending order, where the first element is the approximate minimum and the last element is the approximate maximum.
+Returns the approximate boundaries for a group of `expression` values, where `number` represents the number of quantiles to create. This function returns an array of `number` + 1 elements, sorted in ascending order, where the first element is the approximate minimum and the last element is the approximate maximum.
 
-Returns `  NULL  ` if there are zero input rows or `  expression  ` evaluates to `  NULL  ` for all rows.
+Returns `NULL` if there are zero input rows or `expression` evaluates to `NULL` for all rows.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
 **Supported Argument Types**
 
-  - `  expression  ` : Any supported data type **except** :
+  - `expression` : Any supported data type **except** :
     
-      - `  ARRAY  `
-      - `  STRUCT  `
-      - `  INTERVAL  `
+      - `ARRAY`
+      - `STRUCT`
+      - `INTERVAL`
 
-  - `  number  ` : `  INT64  ` literal or query parameter.
+  - `number` : `INT64` literal or query parameter.
 
 **Returned Data Types**
 
-`  ARRAY<T>  ` where `  T  ` is the type specified by `  expression  ` .
+`ARRAY<T>` where `T` is the type specified by `expression` .
 
 **Examples**
 
@@ -128,7 +128,7 @@ To learn more about the optional aggregate clauses that you can pass into this f
      | [NULL, 6, 10]    |
      +------------------*/
 
-## `     APPROX_TOP_COUNT    `
+## `APPROX_TOP_COUNT`
 
     APPROX_TOP_COUNT(
       expression, number
@@ -136,22 +136,22 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Description**
 
-Returns the approximate top elements of `  expression  ` as an array of `  STRUCT  ` s. The `  number  ` parameter specifies the number of elements returned.
+Returns the approximate top elements of `expression` as an array of `STRUCT` s. The `number` parameter specifies the number of elements returned.
 
-Each `  STRUCT  ` contains two fields. The first field (named `  value  ` ) contains an input value. The second field (named `  count  ` ) contains an `  INT64  ` specifying the number of times the value was returned.
+Each `STRUCT` contains two fields. The first field (named `value` ) contains an input value. The second field (named `count` ) contains an `INT64` specifying the number of times the value was returned.
 
-Returns `  NULL  ` if there are zero input rows.
+Returns `NULL` if there are zero input rows.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
 **Supported Argument Types**
 
-  - `  expression  ` : Any data type that the `  GROUP BY  ` clause supports.
-  - `  number  ` : `  INT64  ` literal or query parameter.
+  - `expression` : Any data type that the `GROUP BY` clause supports.
+  - `number` : `INT64` literal or query parameter.
 
 **Returned Data Types**
 
-`  ARRAY<STRUCT>  `
+`ARRAY<STRUCT>`
 
 **Examples**
 
@@ -166,7 +166,7 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **NULL handling**
 
-`  APPROX_TOP_COUNT  ` doesn't ignore `  NULL  ` s in the input. For example:
+`APPROX_TOP_COUNT` doesn't ignore `NULL` s in the input. For example:
 
     SELECT APPROX_TOP_COUNT(x, 2) as approx_top_count
     FROM UNNEST([NULL, "pear", "pear", "pear", "apple", NULL]) as x;
@@ -177,7 +177,7 @@ To learn more about the optional aggregate clauses that you can pass into this f
      | [{pear, 3}, {NULL, 2}] |
      +------------------------*/
 
-## `     APPROX_TOP_SUM    `
+## `APPROX_TOP_SUM`
 
     APPROX_TOP_SUM(
       expression, weight, number
@@ -185,32 +185,32 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Description**
 
-Returns the approximate top elements of `  expression  ` , ordered by the sum of the `  weight  ` values provided for each unique value of `  expression  ` . The `  number  ` parameter specifies the number of elements returned.
+Returns the approximate top elements of `expression` , ordered by the sum of the `weight` values provided for each unique value of `expression` . The `number` parameter specifies the number of elements returned.
 
-If the `  weight  ` input is negative or `  NaN  ` , this function returns an error.
+If the `weight` input is negative or `NaN` , this function returns an error.
 
-The elements are returned as an array of `  STRUCT  ` s. Each `  STRUCT  ` contains two fields: `  value  ` and `  sum  ` . The `  value  ` field contains the value of the input expression. The `  sum  ` field is the same type as `  weight  ` , and is the approximate sum of the input weight associated with the `  value  ` field.
+The elements are returned as an array of `STRUCT` s. Each `STRUCT` contains two fields: `value` and `sum` . The `value` field contains the value of the input expression. The `sum` field is the same type as `weight` , and is the approximate sum of the input weight associated with the `value` field.
 
-Returns `  NULL  ` if there are zero input rows.
+Returns `NULL` if there are zero input rows.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
 **Supported Argument Types**
 
-  - `  expression  ` : Any data type that the `  GROUP BY  ` clause supports.
+  - `expression` : Any data type that the `GROUP BY` clause supports.
 
-  - `  weight  ` : One of the following:
+  - `weight` : One of the following:
     
-      - `  INT64  `
-      - `  NUMERIC  `
-      - `  BIGNUMERIC  `
-      - `  FLOAT64  `
+      - `INT64`
+      - `NUMERIC`
+      - `BIGNUMERIC`
+      - `FLOAT64`
 
-  - `  number  ` : `  INT64  ` literal or query parameter.
+  - `number` : `INT64` literal or query parameter.
 
 **Returned Data Types**
 
-`  ARRAY<STRUCT>  `
+`ARRAY<STRUCT>`
 
 **Examples**
 
@@ -231,7 +231,7 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **NULL handling**
 
-`  APPROX_TOP_SUM  ` doesn't ignore `  NULL  ` values for the `  expression  ` and `  weight  ` parameters.
+`APPROX_TOP_SUM` doesn't ignore `NULL` values for the `expression` and `weight` parameters.
 
     SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
     UNNEST([STRUCT("apple" AS x, NULL AS weight), ("pear", 0), ("pear", NULL)]);

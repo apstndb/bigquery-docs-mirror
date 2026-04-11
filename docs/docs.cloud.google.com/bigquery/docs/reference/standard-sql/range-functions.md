@@ -15,58 +15,58 @@ GoogleSQL for BigQuery supports the following range functions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends"><code dir="ltr" translate="no">        APPENDS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends"><code dir="ltr" translate="no">APPENDS</code></a></td>
 <td>Returns all rows appended to a table for a given time range.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">        CHANGES       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">CHANGES</code></a></td>
 <td>Returns all rows that have changed in a table for a given time range.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#generate_range_array"><code dir="ltr" translate="no">        GENERATE_RANGE_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#generate_range_array"><code dir="ltr" translate="no">GENERATE_RANGE_ARRAY</code></a></td>
 <td>Splits a range into an array of subranges.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range"><code dir="ltr" translate="no">        RANGE       </code></a></td>
-<td>Constructs a range of <code dir="ltr" translate="no">       DATE      </code> , <code dir="ltr" translate="no">       DATETIME      </code> , or <code dir="ltr" translate="no">       TIMESTAMP      </code> values.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range"><code dir="ltr" translate="no">RANGE</code></a></td>
+<td>Constructs a range of <code dir="ltr" translate="no">DATE</code> , <code dir="ltr" translate="no">DATETIME</code> , or <code dir="ltr" translate="no">TIMESTAMP</code> values.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket"><code dir="ltr" translate="no">        RANGE_BUCKET       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket"><code dir="ltr" translate="no">RANGE_BUCKET</code></a></td>
 <td>Scans through a sorted array and returns the 0-based position of a point's upper bound.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions">Mathematical functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_contains"><code dir="ltr" translate="no">        RANGE_CONTAINS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_contains"><code dir="ltr" translate="no">RANGE_CONTAINS</code></a></td>
 <td>Signature 1: Checks if one range is in another range.<br />
 <br />
 Signature 2: Checks if a value is in a range.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_end"><code dir="ltr" translate="no">        RANGE_END       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_end"><code dir="ltr" translate="no">RANGE_END</code></a></td>
 <td>Gets the upper bound of a range.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_intersect"><code dir="ltr" translate="no">        RANGE_INTERSECT       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_intersect"><code dir="ltr" translate="no">RANGE_INTERSECT</code></a></td>
 <td>Gets a segment of two ranges that intersect.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_overlaps"><code dir="ltr" translate="no">        RANGE_OVERLAPS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_overlaps"><code dir="ltr" translate="no">RANGE_OVERLAPS</code></a></td>
 <td>Checks if two ranges overlap.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_sessionize"><code dir="ltr" translate="no">        RANGE_SESSIONIZE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_sessionize"><code dir="ltr" translate="no">RANGE_SESSIONIZE</code></a></td>
 <td>Produces a table of sessionized ranges.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_start"><code dir="ltr" translate="no">        RANGE_START       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_start"><code dir="ltr" translate="no">RANGE_START</code></a></td>
 <td>Gets the lower bound of a range.</td>
 </tr>
 </tbody>
 </table>
 
-## `     GENERATE_RANGE_ARRAY    `
+## `GENERATE_RANGE_ARRAY`
 
     GENERATE_RANGE_ARRAY(range_to_split, step_interval)
 
@@ -78,33 +78,33 @@ Splits a range into an array of subranges.
 
 **Definitions**
 
-  - `  range_to_split  ` : The `  RANGE<T>  ` value to split.
+  - `range_to_split` : The `RANGE<T>` value to split.
 
-  - `  step_interval  ` : The `  INTERVAL  ` value, which determines the maximum size of each subrange in the resulting array. An [interval single date and time part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) is supported, but an interval range of date and time parts isn't.
+  - `step_interval` : The `INTERVAL` value, which determines the maximum size of each subrange in the resulting array. An [interval single date and time part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) is supported, but an interval range of date and time parts isn't.
     
-      - If `  range_to_split  ` is `  RANGE<DATE>  ` , these interval date parts are supported: `  YEAR  ` to `  DAY  ` .
+      - If `range_to_split` is `RANGE<DATE>` , these interval date parts are supported: `YEAR` to `DAY` .
     
-      - If `  range_to_split  ` is `  RANGE<DATETIME>  ` , these interval date and time parts are supported: `  YEAR  ` to `  SECOND  ` .
+      - If `range_to_split` is `RANGE<DATETIME>` , these interval date and time parts are supported: `YEAR` to `SECOND` .
     
-      - If `  range_to_split  ` is `  RANGE<TIMESTAMP>  ` , these interval date and time parts are supported: `  DAY  ` to `  SECOND  ` .
+      - If `range_to_split` is `RANGE<TIMESTAMP>` , these interval date and time parts are supported: `DAY` to `SECOND` .
 
-  - `  include_last_partial_range  ` : A `  BOOL  ` value, which determines whether or not to include the last subrange if it's a partial subrange. If this argument isn't specified, the default value is `  TRUE  ` .
+  - `include_last_partial_range` : A `BOOL` value, which determines whether or not to include the last subrange if it's a partial subrange. If this argument isn't specified, the default value is `TRUE` .
     
-      - `  TRUE  ` (default): The last subrange is included, even if it's smaller than `  step_interval  ` .
+      - `TRUE` (default): The last subrange is included, even if it's smaller than `step_interval` .
     
-      - `  FALSE  ` : Exclude the last subrange if it's smaller than `  step_interval  ` .
+      - `FALSE` : Exclude the last subrange if it's smaller than `step_interval` .
 
 **Details**
 
-Returns `  NULL  ` if any input is `  NULL  ` .
+Returns `NULL` if any input is `NULL` .
 
 **Return type**
 
-`  ARRAY<RANGE<T>>  `
+`ARRAY<RANGE<T>>`
 
 **Examples**
 
-In the following example, a date range between `  2020-01-01  ` and `  2020-01-06  ` is split into an array of subranges that are one day long. There are no partial ranges.
+In the following example, a date range between `2020-01-01` and `2020-01-06` is split into an array of subranges that are one day long. There are no partial ranges.
 
     SELECT GENERATE_RANGE_ARRAY(
       RANGE(DATE '2020-01-01', DATE '2020-01-06'),
@@ -122,7 +122,7 @@ In the following example, a date range between `  2020-01-01  ` and `  2020-01-0
      | ]                          |
      +----------------------------*/
 
-In the following examples, a date range between `  2020-01-01  ` and `  2020-01-06  ` is split into an array of subranges that are two days long. The final subrange is smaller than two days:
+In the following examples, a date range between `2020-01-01` and `2020-01-06` is split into an array of subranges that are two days long. The final subrange is smaller than two days:
 
     SELECT GENERATE_RANGE_ARRAY(
       RANGE(DATE '2020-01-01', DATE '2020-01-06'),
@@ -153,7 +153,7 @@ In the following examples, a date range between `  2020-01-01  ` and `  2020-01-
      | ]                          |
      +----------------------------*/
 
-In the following example, a date range between `  2020-01-01  ` and `  2020-01-06  ` is split into an array of subranges that are two days long, but the final subrange is excluded because it's smaller than two days:
+In the following example, a date range between `2020-01-01` and `2020-01-06` is split into an array of subranges that are two days long, but the final subrange is excluded because it's smaller than two days:
 
     SELECT GENERATE_RANGE_ARRAY(
       RANGE(DATE '2020-01-01', DATE '2020-01-06'),
@@ -169,28 +169,28 @@ In the following example, a date range between `  2020-01-01  ` and `  2020-01-0
      | ]                          |
      +----------------------------*/
 
-## `     RANGE    `
+## `RANGE`
 
     RANGE(lower_bound, upper_bound)
 
 **Description**
 
-Constructs a range of [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) , [`  DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) , or [`  TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) values.
+Constructs a range of [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) , [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) , or [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) values.
 
 **Definitions**
 
-  - `  lower_bound  ` : The range starts from this value. This can be a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` value. If this value is `  NULL  ` , the range doesn't include a lower bound.
-  - `  upper_bound  ` : The range ends before this value. This can be a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` value. If this value is `  NULL  ` , the range doesn't include an upper bound.
+  - `lower_bound` : The range starts from this value. This can be a `DATE` , `DATETIME` , or `TIMESTAMP` value. If this value is `NULL` , the range doesn't include a lower bound.
+  - `upper_bound` : The range ends before this value. This can be a `DATE` , `DATETIME` , or `TIMESTAMP` value. If this value is `NULL` , the range doesn't include an upper bound.
 
 **Details**
 
-`  lower_bound  ` and `  upper_bound  ` must be of the same data type.
+`lower_bound` and `upper_bound` must be of the same data type.
 
-Produces an error if `  lower_bound  ` is greater than or equal to `  upper_bound  ` . To return `  NULL  ` instead, add the `  SAFE.  ` prefix to the function name.
+Produces an error if `lower_bound` is greater than or equal to `upper_bound` . To return `NULL` instead, add the `SAFE.` prefix to the function name.
 
 **Return type**
 
-`  RANGE<T>  ` , where `  T  ` is the same data type as the input.
+`RANGE<T>` , where `T` is the same data type as the input.
 
 **Examples**
 
@@ -247,7 +247,7 @@ The following query constructs a date range with no upper bound:
      | [2022-10-01, UNBOUNDED)  |
      +--------------------------*/
 
-## `     RANGE_CONTAINS    `
+## `RANGE_CONTAINS`
 
   - [Signature 1](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#signature_1) : Checks if every value in one range is in another range.
   - [Signature 2](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#signature_2) : Checks if a value is in a range.
@@ -262,18 +262,18 @@ Checks if the inner range is in the outer range.
 
 **Definitions**
 
-  - `  outer_range  ` : The `  RANGE<T>  ` value to search within.
-  - `  inner_range  ` : The `  RANGE<T>  ` value to search for in `  outer_range  ` .
+  - `outer_range` : The `RANGE<T>` value to search within.
+  - `inner_range` : The `RANGE<T>` value to search for in `outer_range` .
 
 **Details**
 
-Returns `  TRUE  ` if `  inner_range  ` exists in `  outer_range  ` . Otherwise, returns `  FALSE  ` .
+Returns `TRUE` if `inner_range` exists in `outer_range` . Otherwise, returns `FALSE` .
 
-`  T  ` must be of the same type for all inputs.
+`T` must be of the same type for all inputs.
 
 **Return type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
@@ -311,22 +311,22 @@ Checks if a value is in a range.
 
 **Definitions**
 
-  - `  range_to_search  ` : The `  RANGE<T>  ` value to search within.
-  - `  value_to_find  ` : The value to search for in `  range_to_search  ` .
+  - `range_to_search` : The `RANGE<T>` value to search within.
+  - `value_to_find` : The value to search for in `range_to_search` .
 
 **Details**
 
-Returns `  TRUE  ` if `  value_to_find  ` exists in `  range_to_search  ` . Otherwise, returns `  FALSE  ` .
+Returns `TRUE` if `value_to_find` exists in `range_to_search` . Otherwise, returns `FALSE` .
 
-The data type for `  value_to_find  ` must be the same data type as `  T  ` in `  range_to_search  ` .
+The data type for `value_to_find` must be the same data type as `T` in `range_to_search` .
 
 **Return type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
-In the following query, the value `  2022-04-01  ` is found in the range `  [2022-01-01, 2023-01-01)  ` :
+In the following query, the value `2022-04-01` is found in the range `[2022-01-01, 2023-01-01)` :
 
     SELECT RANGE_CONTAINS(
       RANGE<DATE> '[2022-01-01, 2023-01-01)',
@@ -338,7 +338,7 @@ In the following query, the value `  2022-04-01  ` is found in the range `  [202
      | TRUE    |
      +---------*/
 
-In the following query, the value `  2023-04-01  ` isn't found in the range `  [2022-01-01, 2023-01-01)  ` :
+In the following query, the value `2023-04-01` isn't found in the range `[2022-01-01, 2023-01-01)` :
 
     SELECT RANGE_CONTAINS(
       RANGE<DATE> '[2022-01-01, 2023-01-01)',
@@ -350,7 +350,7 @@ In the following query, the value `  2023-04-01  ` isn't found in the range `  [
      | FALSE   |
      +---------*/
 
-## `     RANGE_END    `
+## `RANGE_END`
 
     RANGE_END(range_to_check)
 
@@ -360,17 +360,17 @@ Gets the upper bound of a range.
 
 **Definitions**
 
-  - `  range_to_check  ` : The `  RANGE<T>  ` value.
+  - `range_to_check` : The `RANGE<T>` value.
 
 **Details**
 
-Returns `  NULL  ` if the upper bound in `  range_value  ` is `  UNBOUNDED  ` .
+Returns `NULL` if the upper bound in `range_value` is `UNBOUNDED` .
 
-Returns `  NULL  ` if `  range_to_check  ` is `  NULL  ` .
+Returns `NULL` if `range_to_check` is `NULL` .
 
 **Return type**
 
-`  T  ` in `  range_value  `
+`T` in `range_value`
 
 **Examples**
 
@@ -384,7 +384,7 @@ In the following query, the upper bound of the range is retrieved:
      | 2022-12-31 |
      +------------*/
 
-In the following query, the upper bound of the range is unbounded, so `  NULL  ` is returned:
+In the following query, the upper bound of the range is unbounded, so `NULL` is returned:
 
     SELECT RANGE_END(RANGE<DATE> '[2022-12-01, UNBOUNDED)') AS results;
     
@@ -394,7 +394,7 @@ In the following query, the upper bound of the range is unbounded, so `  NULL  `
      | NULL       |
      +------------*/
 
-## `     RANGE_INTERSECT    `
+## `RANGE_INTERSECT`
 
     RANGE_INTERSECT(range_a, range_b)
 
@@ -404,20 +404,20 @@ Gets a segment of two ranges that intersect.
 
 **Definitions**
 
-  - `  range_a  ` : The first `  RANGE<T>  ` value.
-  - `  range_b  ` : The second `  RANGE<T>  ` value.
+  - `range_a` : The first `RANGE<T>` value.
+  - `range_b` : The second `RANGE<T>` value.
 
 **Details**
 
-Returns `  NULL  ` if any input is `  NULL  ` .
+Returns `NULL` if any input is `NULL` .
 
-Produces an error if `  range_a  ` and `  range_b  ` don't overlap. To return `  NULL  ` instead, add the `  SAFE.  ` prefix to the function name.
+Produces an error if `range_a` and `range_b` don't overlap. To return `NULL` instead, add the `SAFE.` prefix to the function name.
 
-`  T  ` must be of the same type for all inputs.
+`T` must be of the same type for all inputs.
 
 **Return type**
 
-`  RANGE<T>  `
+`RANGE<T>`
 
 **Examples**
 
@@ -451,7 +451,7 @@ Produces an error if `  range_a  ` and `  range_b  ` don't overlap. To return ` 
      | [2022-02-01, UNBOUNDED) |
      +-------------------------*/
 
-## `     RANGE_OVERLAPS    `
+## `RANGE_OVERLAPS`
 
     RANGE_OVERLAPS(range_a, range_b)
 
@@ -461,24 +461,24 @@ Checks if two ranges overlap.
 
 **Definitions**
 
-  - `  range_a  ` : The first `  RANGE<T>  ` value.
-  - `  range_b  ` : The second `  RANGE<T>  ` value.
+  - `range_a` : The first `RANGE<T>` value.
+  - `range_b` : The second `RANGE<T>` value.
 
 **Details**
 
-Returns `  TRUE  ` if a part of `  range_a  ` intersects with `  range_b  ` , otherwise returns `  FALSE  ` .
+Returns `TRUE` if a part of `range_a` intersects with `range_b` , otherwise returns `FALSE` .
 
-`  T  ` must be of the same type for all inputs.
+`T` must be of the same type for all inputs.
 
-To get the part of the range that overlaps, use the [`  RANGE_INTERSECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_intersect) function.
+To get the part of the range that overlaps, use the [`RANGE_INTERSECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_intersect) function.
 
 **Return type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
-In the following query, the first and second ranges overlap between `  2022-02-01  ` and `  2022-04-15  ` :
+In the following query, the first and second ranges overlap between `2022-02-01` and `2022-04-15` :
 
     SELECT RANGE_OVERLAPS(
       RANGE<DATE> '[2022-02-01, 2022-09-01)',
@@ -502,7 +502,7 @@ In the following query, the first and second ranges don't overlap:
      | FALSE   |
      +---------*/
 
-In the following query, the first and second ranges overlap between `  2022-02-01  ` and `  UNBOUNDED  ` :
+In the following query, the first and second ranges overlap between `2022-02-01` and `UNBOUNDED` :
 
     SELECT RANGE_OVERLAPS(
       RANGE<DATE> '[2022-02-01, UNBOUNDED)',
@@ -514,7 +514,7 @@ In the following query, the first and second ranges overlap between `  2022-02-0
      | TRUE    |
      +---------*/
 
-## `     RANGE_SESSIONIZE    `
+## `RANGE_SESSIONIZE`
 
     RANGE_SESSIONIZE(
       TABLE table_name,
@@ -535,31 +535,31 @@ Produces a table of sessionized ranges.
 
 **Definitions**
 
-  - `  table_name  ` : A table expression that represents the name of the table to construct. This can represent any relation with `  range_column  ` .
+  - `table_name` : A table expression that represents the name of the table to construct. This can represent any relation with `range_column` .
 
-  - `  range_column  ` : A `  STRING  ` literal that indicates which `  RANGE  ` column in a table contains the data to sessionize.
+  - `range_column` : A `STRING` literal that indicates which `RANGE` column in a table contains the data to sessionize.
 
-  - `  partitioning_columns  ` : An `  ARRAY<STRING>  ` literal that indicates which columns should partition the data before the data is sessionized.
+  - `partitioning_columns` : An `ARRAY<STRING>` literal that indicates which columns should partition the data before the data is sessionized.
 
-  - `  sessionize_option  ` : A `  STRING  ` value that describes how order-adjacent ranges are sessionized. Your choices are as follows:
+  - `sessionize_option` : A `STRING` value that describes how order-adjacent ranges are sessionized. Your choices are as follows:
     
-      - `  MEETS  ` (default): Ranges that meet or overlap are sessionized.
+      - `MEETS` (default): Ranges that meet or overlap are sessionized.
     
-      - `  OVERLAPS  ` : Only a range that's overlapped by another range is sessionized.
+      - `OVERLAPS` : Only a range that's overlapped by another range is sessionized.
     
-    If this argument isn't provided, `  MEETS  ` is used by default.
+    If this argument isn't provided, `MEETS` is used by default.
 
 **Details**
 
-This function produces a table that includes all columns in the input table and an additional `  RANGE  ` column called `  session_range  ` , which indicates the start and end of a session. The start and end of each session is determined by the `  sessionize_option  ` argument.
+This function produces a table that includes all columns in the input table and an additional `RANGE` column called `session_range` , which indicates the start and end of a session. The start and end of each session is determined by the `sessionize_option` argument.
 
 **Return type**
 
-`  TABLE  `
+`TABLE`
 
 **Examples**
 
-The examples in this section reference the following table called `  my_sessionized_range_table  ` in a dataset called `  mydataset  ` :
+The examples in this section reference the following table called `my_sessionized_range_table` in a dataset called `mydataset` :
 
     INSERT mydataset.my_sessionized_range_table (emp_id, dept_id, duration)
     VALUES(10, 1000, RANGE<DATE> '[2010-01-10, 2010-03-10)'),
@@ -580,7 +580,7 @@ The examples in this section reference the following table called `  my_sessioni
      | 20     | 1000    | [2020-05-10, 2020-09-20) |
      +--------+---------+--------------------------*/
 
-In the following query, a table of sessionized data is produced for `  my_sessionized_range_table  ` , and only ranges that meet or overlap are sessionized:
+In the following query, a table of sessionized data is produced for `my_sessionized_range_table` , and only ranges that meet or overlap are sessionized:
 
     SELECT
       emp_id, duration, session_range
@@ -601,7 +601,7 @@ In the following query, a table of sessionized data is produced for `  my_sessio
      | 20     | [2020-05-10, 2020-09-20) | [2020-05-10, 2020-09-20) |
      +--------+-----------------------------------------------------*/
 
-In the following query, a table of sessionized data is produced for `  my_sessionized_range_table  ` , and only a range that's overlapped by another range is sessionized:
+In the following query, a table of sessionized data is produced for `my_sessionized_range_table` , and only a range that's overlapped by another range is sessionized:
 
     SELECT
       emp_id, duration, session_range
@@ -643,7 +643,7 @@ If you need to normalize sessionized data, you can use a query similar to the fo
      | 20     | [2020-05-10, 2020-09-20) |
      +--------+--------------------------*/
 
-## `     RANGE_START    `
+## `RANGE_START`
 
     RANGE_START(range_to_check)
 
@@ -653,17 +653,17 @@ Gets the lower bound of a range.
 
 **Definitions**
 
-  - `  range_to_check  ` : The `  RANGE<T>  ` value.
+  - `range_to_check` : The `RANGE<T>` value.
 
 **Details**
 
-Returns `  NULL  ` if the lower bound of `  range_value  ` is `  UNBOUNDED  ` .
+Returns `NULL` if the lower bound of `range_value` is `UNBOUNDED` .
 
-Returns `  NULL  ` if `  range_to_check  ` is `  NULL  ` .
+Returns `NULL` if `range_to_check` is `NULL` .
 
 **Return type**
 
-`  T  ` in `  range_value  `
+`T` in `range_value`
 
 **Examples**
 
@@ -677,7 +677,7 @@ In the following query, the lower bound of the range is retrieved:
      | 2022-12-01 |
      +------------*/
 
-In the following query, the lower bound of the range is unbounded, so `  NULL  ` is returned:
+In the following query, the lower bound of the range is unbounded, so `NULL` is returned:
 
     SELECT RANGE_START(RANGE<DATE> '[UNBOUNDED, 2022-12-31)') AS results;
     

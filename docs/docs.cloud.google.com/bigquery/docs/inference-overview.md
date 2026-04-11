@@ -15,7 +15,7 @@ The following sections describe the available ways of performing prediction in B
 
 *Prediction* in BigQuery ML is used not only for supervised learning models, but also unsupervised learning models.
 
-BigQuery ML supports prediction functionalities through the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) , with the following models:
+BigQuery ML supports prediction functionalities through the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) , with the following models:
 
 Model Category
 
@@ -55,7 +55,7 @@ Transform the entity into the embedded space.
 
 ### Inference using imported models
 
-With this approach, you create and train a model outside of BigQuery, import it by using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) , and then run inference on it by using the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . All inference processing occurs in BigQuery, using data from BigQuery. Imported models can perform supervised or unsupervised learning.
+With this approach, you create and train a model outside of BigQuery, import it by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) , and then run inference on it by using the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . All inference processing occurs in BigQuery, using data from BigQuery. Imported models can perform supervised or unsupervised learning.
 
 BigQuery ML supports the following types of imported models:
 
@@ -74,7 +74,7 @@ To learn more, try one of the following tutorials:
 
 ### Inference using remote models
 
-With this approach, you can create a reference to a model hosted in [Vertex AI Inference](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-predictions) by using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , and then run inference on it by using the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . All inference processing occurs in Vertex AI, using data from BigQuery. Remote models can perform supervised or unsupervised learning.
+With this approach, you can create a reference to a model hosted in [Vertex AI Inference](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-predictions) by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , and then run inference on it by using the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . All inference processing occurs in Vertex AI, using data from BigQuery. Remote models can perform supervised or unsupervised learning.
 
 Use this approach to run inference against large models that require the GPU hardware support provided by Vertex AI. If most of your models are hosted by Vertex AI, this also lets you run inference against these models by using SQL, without having to manually build data pipelines to take data to Vertex AI and bring prediction results back to BigQuery.
 
@@ -82,7 +82,7 @@ For step-by-step instructions, see [Make predictions with remote models on Verte
 
 ### Batch inference with BigQuery models in Vertex AI
 
-BigQuery ML has built-in support for batch prediction, without the need to use Vertex AI. It is also possible to register a BigQuery ML model to Model Registry in order to perform batch prediction in Vertex AI using a BigQuery table as input. However, this can only be done by using the Vertex AI API and setting [`  InstanceConfig.instanceType  `](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.batchPredictionJobs#instanceconfig) to `  object  ` .
+BigQuery ML has built-in support for batch prediction, without the need to use Vertex AI. It is also possible to register a BigQuery ML model to Model Registry in order to perform batch prediction in Vertex AI using a BigQuery table as input. However, this can only be done by using the Vertex AI API and setting [`InstanceConfig.instanceType`](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.batchPredictionJobs#instanceconfig) to `object` .
 
 ## Online prediction
 

@@ -85,7 +85,7 @@ Reference materials for BigQuery developers and analysts:
   - [SQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) for details about using GoogleSQL.
   - [BigQuery code samples](https://docs.cloud.google.com/bigquery/docs/samples) provide hundreds of snippets for client libraries in [C\#](https://docs.cloud.google.com/docs/samples?l=csharp&p=bigquery) , [Go](https://docs.cloud.google.com/docs/samples?l=go&p=bigquery) , [Java](https://docs.cloud.google.com/docs/samples?l=java&p=bigquery) , [Node.js](https://docs.cloud.google.com/docs/samples?l=nodejs&p=bigquery) , [Python](https://docs.cloud.google.com/docs/samples?l=python&p=bigquery) , [Ruby](https://docs.cloud.google.com/docs/samples?l=ruby&p=bigquery) . Or view the [sample browser](https://docs.cloud.google.com/docs/samples?p=bigquery) .
   - [DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) , [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) , and [user-defined functions (UDF)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) syntax lets you manage and transform your BigQuery data.
-  - [bq command-line tool reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) documents the syntax, commands, flags, and arguments for the `  bq  ` CLI interface.
+  - [bq command-line tool reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) documents the syntax, commands, flags, and arguments for the `bq` CLI interface.
   - [ODBC / JDBC integration](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) connect BigQuery to your existing tooling and infrastructure.
 
 ## Gemini in BigQuery features
@@ -163,7 +163,7 @@ Task guidance to help if you need to use [BigQuery ML's machine learning](https:
       - [Linear regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) forecasting
       - [Binary logistic](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) and [multiclass logistic](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) regression classifications
       - [K-means clustering](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) for data segmentation
-      - [Time series](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) forecasting with Arima+ models
+      - [Time series](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) forecasting with ARIMA+ models
 
 ### Data Developer
 

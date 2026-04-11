@@ -22,18 +22,18 @@ Before you begin, [create a notebook](https://docs.cloud.google.com/bigquery/doc
 
 To schedule notebooks, you must grant the following roles to the custom service account that you plan to use for notebook schedules:
 
-  - [Notebook Executor User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookExecutorUser) ( `  roles/aiplatform.notebookExecutorUser  ` )  
+  - [Notebook Executor User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookExecutorUser) ( `roles/aiplatform.notebookExecutorUser` )  
     Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Notebook Executor User role to your service account on the selected project.
-  - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` )  
+  - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )  
     Follow [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add your service account as a principal to the Cloud Storage bucket that you plan to use for storing the output of scheduled notebook runs, and grant the Storage Admin role to this principal.
-  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` )  
+  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
     Follow [Grant a single role on a service account](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#grant-single-role) to add your service account as a principal to itself. In other words, add the service account as a principal to the same service account. Then, grant the Service Account User role to this principal.
 
 Additionally, you must grant the following roles to the default Dataform service agent:
 
-  - [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/service-account-permissions#token-creator-role) ( `  roles/iam.serviceAccountTokenCreator  ` )  
+  - [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/service-account-permissions#token-creator-role) ( `roles/iam.serviceAccountTokenCreator` )  
     Follow [Grant token creation access to a custom Dataform service account](https://docs.cloud.google.com/dataform/docs/access-control#grant-token-creation-access) to add the default Dataform service agent as a principal to your service account, and grant the Service Account Token Creator role to this principal.
-  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` )  
+  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
     Follow [Grant or revoke multiple IAM roles using Google Cloud console](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#multiple-roles-console) to grant the Service Account User role to the default Dataform service agent on the custom service account.
 
 To learn more about service accounts in Dataform, see [About service accounts in Dataform](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) .
@@ -42,16 +42,16 @@ To learn more about service accounts in Dataform, see [About service accounts in
 
 To create notebook schedules, you need the following roles:
 
-  - [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` )
-  - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-  - [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) on the custom service account
+  - [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` )
+  - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+  - [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
 
-To use notebook runtime templates when scheduling notebooks, you need the [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) role.
+To use notebook runtime templates when scheduling notebooks, you need the [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) role.
 
-To edit and delete notebook schedules, you need the [Dataform Editor ( `  roles/dataform.editor  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.editor) role.
+To edit and delete notebook schedules, you need the [Dataform Editor ( `roles/dataform.editor` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.editor) role.
 
-To view notebook schedules, you need the [Dataform Viewer ( `  roles/dataform.viewer  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.viewer) role.
+To view notebook schedules, you need the [Dataform Viewer ( `roles/dataform.viewer` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.viewer) role.
 
 To enhance security for scheduling, see [Implement enhanced scheduling permissions](https://docs.cloud.google.com/dataform/docs/access-control#enhanced-scheduling-permissions) .
 
@@ -100,7 +100,7 @@ To create a notebook schedule, follow these steps:
 
 9.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket.
     
-    The selected service account must be granted the [Storage Admin ( `  roles/storage.admin  ` )](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) IAM role on the selected bucket. For more information, see [Enable notebook scheduling](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#enable-scheduling) .
+    The selected service account must be granted the [Storage Admin ( `roles/storage.admin` )](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) IAM role on the selected bucket. For more information, see [Enable notebook scheduling](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#enable-scheduling) .
 
 10. In the **Schedule frequency** section, do the following:
     
@@ -139,7 +139,7 @@ The latest deployed version of the notebook runs at the selected time and freque
 
 7.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket.
     
-    The selected service account must be granted the [Storage Admin ( `  roles/storage.admin  ` )](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) IAM role on the selected bucket. For more information, see [Enable notebook scheduling](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#enable-scheduling) .
+    The selected service account must be granted the [Storage Admin ( `roles/storage.admin` )](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) IAM role on the selected bucket. For more information, see [Enable notebook scheduling](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#enable-scheduling) .
 
 8.  In the **Schedule frequency** section, do the following:
     

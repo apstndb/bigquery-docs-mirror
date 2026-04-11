@@ -7,11 +7,11 @@
   - [IAM Permissions](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/create#body.aspect_1)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/create#try-it)
 
-Creates a new data policy under a project with the given `  dataPolicyId  ` (used as the display name), and data policy type.
+Creates a new data policy under a project with the given `dataPolicyId` (used as the display name), and data policy type.
 
 ### HTTP request
 
-`  POST https://bigquerydatapolicy.googleapis.com/v2beta1/{parent=projects/*/locations/*}/dataPolicies  `
+`POST https://bigquerydatapolicy.googleapis.com/v2beta1/{parent=projects/*/locations/*}/dataPolicies`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,11 +19,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Resource name of the project that the data policy will belong to. The format is `  projects/{projectNumber}/locations/{locationId}  ` .
+Required. Resource name of the project that the data policy will belong to. The format is `projects/{projectNumber}/locations/{locationId}` .
 
 ### Request body
 
@@ -40,29 +40,24 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataPolicyId&quot;: string,
-  &quot;dataPolicy&quot;: {
-    object (DataPolicy)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataPolicyId&quot;: string,&quot;dataPolicy&quot;: {object (DataPolicy)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dataPolicyId  `
+`dataPolicyId`
 
-`  string  `
+`string`
 
 Required. User-assigned (human readable) ID of the data policy that needs to be unique within a project. Used as {dataPolicyId} in part of the resource name.
 
-`  dataPolicy  `
+`dataPolicy`
 
-`  object ( DataPolicy  ` )
+` object ( DataPolicy  ` )
 
-Required. The data policy to create. The `  name  ` field does not need to be provided for the data policy creation.
+Required. The data policy to create. The `name` field does not need to be provided for the data policy creation.
 
 ### Response body
 
@@ -72,15 +67,15 @@ If successful, the response body contains a newly created instance of `  DataPol
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  parent  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:
 
-  - `  bigquery.dataPolicies.create  `
+  - `bigquery.dataPolicies.create`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

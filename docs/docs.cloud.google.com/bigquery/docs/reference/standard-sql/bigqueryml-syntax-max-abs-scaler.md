@@ -1,8 +1,8 @@
 # The ML.MAX\_ABS\_SCALER function
 
-This document describes the `  ML.MAX_ABS_SCALER  ` function, which lets you scale a numerical expression to the range `  [-1, 1]  ` by dividing with the maximum absolute value. It doesn't shift or center the data, and so doesn't destroy any sparsity.
+This document describes the `ML.MAX_ABS_SCALER` function, which lets you scale a numerical expression to the range `[-1, 1]` by dividing with the maximum absolute value. It doesn't shift or center the data, and so doesn't destroy any sparsity.
 
-When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the maximum absolute value calculated during training is automatically used in prediction.
+When used in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the maximum absolute value calculated during training is automatically used in prediction.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
@@ -17,17 +17,17 @@ ML.MAX_ABS_SCALER(numerical_expression) OVER()
 
 ### Arguments
 
-`  ML.MAX_ABS_SCALER  ` takes the following argument:
+`ML.MAX_ABS_SCALER` takes the following argument:
 
-  - `  numerical_expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
+  - `numerical_expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
 
 ## Output
 
-`  ML.MAX_ABS_SCALER  ` returns a `  FLOAT64  ` value that represents the scaled numerical expression.
+`ML.MAX_ABS_SCALER` returns a `FLOAT64` value that represents the scaled numerical expression.
 
 ## Example
 
-The following example scales a set of numerical expressions to have values between `  -1  ` and `  1  ` :
+The following example scales a set of numerical expressions to have values between `-1` and `1` :
 
 ``` notranslate
 SELECT f, ML.MAX_ABS_SCALER(f) OVER () AS output

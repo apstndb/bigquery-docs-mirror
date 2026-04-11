@@ -23,7 +23,7 @@ A [Discovery Document](https://developers.google.com/discovery/v1/reference/apis
 
 A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_endpoint) is a base URL that specifies the network address of an API service. One service might have multiple service endpoints. This service has the following service endpoint and all URIs below are relative to this service endpoint:
 
-  - `  https://bigquery.googleapis.com  `
+  - `https://bigquery.googleapis.com`
 
 ## REST Resource: [v2.datasets](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets)
 
@@ -31,37 +31,37 @@ Methods
 
 `  delete  `
 
-`  DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}  `  
+`DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}`  
 Deletes the dataset specified by the datasetId value.
 
 `  get  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}`  
 Returns the dataset specified by datasetID.
 
 `  insert  `
 
-`  POST /bigquery/v2/projects/{projectId}/datasets  `  
+`POST /bigquery/v2/projects/{projectId}/datasets`  
 Creates a new empty dataset.
 
 `  list  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets  `  
+`GET /bigquery/v2/projects/{projectId}/datasets`  
 Lists all datasets in the specified project to which the user has been granted the READER dataset role.
 
 `  patch  `
 
-`  PATCH /bigquery/v2/projects/{projectId}/datasets/{datasetId}  `  
+`PATCH /bigquery/v2/projects/{projectId}/datasets/{datasetId}`  
 Updates information in an existing dataset.
 
 `  undelete  `
 
-`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}:undelete  `  
+`POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}:undelete`  
 Undeletes a dataset which is within time travel window based on datasetId.
 
 `  update  `
 
-`  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}  `  
+`PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}`  
 Updates information in an existing dataset.
 
 ## REST Resource: [v2.jobs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs)
@@ -70,38 +70,38 @@ Methods
 
 `  cancel  `
 
-`  POST /bigquery/v2/projects/{projectId}/jobs/{jobId}/cancel  `  
+`POST /bigquery/v2/projects/{projectId}/jobs/{jobId}/cancel`  
 Requests that a job be cancelled.
 
 `  delete  `
 
-`  DELETE /bigquery/v2/projects/{projectId}/jobs/{jobId}/delete  `  
+`DELETE /bigquery/v2/projects/{projectId}/jobs/{jobId}/delete`  
 Requests the deletion of the metadata of a job.
 
 `  get  `
 
-`  GET /bigquery/v2/projects/{projectId}/jobs/{jobId}  `  
+`GET /bigquery/v2/projects/{projectId}/jobs/{jobId}`  
 Returns information about a specific job.
 
 `  getQueryResults  `
 
-`  GET /bigquery/v2/projects/{projectId}/queries/{jobId}  `  
+`GET /bigquery/v2/projects/{projectId}/queries/{jobId}`  
 RPC to get the results of a query job.
 
 `  insert  `
 
-`  POST /bigquery/v2/projects/{projectId}/jobs  `  
-`  POST /upload/bigquery/v2/projects/{projectId}/jobs  `  
+`POST /bigquery/v2/projects/{projectId}/jobs`  
+`POST /upload/bigquery/v2/projects/{projectId}/jobs`  
 Starts a new asynchronous job.
 
 `  list  `
 
-`  GET /bigquery/v2/projects/{projectId}/jobs  `  
+`GET /bigquery/v2/projects/{projectId}/jobs`  
 Lists all jobs that you started in the specified project.
 
 `  query  `
 
-`  POST /bigquery/v2/projects/{projectId}/queries  `  
+`POST /bigquery/v2/projects/{projectId}/queries`  
 Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
 
 ## REST Resource: [v2.models](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models)
@@ -110,22 +110,22 @@ Methods
 
 `  delete  `
 
-`  DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}  `  
+`DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}`  
 Deletes the model specified by modelId from the dataset.
 
 `  get  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}`  
 Gets the specified model resource by model ID.
 
 `  list  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models`  
 Lists all models in the specified dataset.
 
 `  patch  `
 
-`  PATCH /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}  `  
+`PATCH /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}`  
 Patch specific fields in the specified model.
 
 ## REST Resource: [v2.projects](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects)
@@ -134,12 +134,12 @@ Methods
 
 `  getServiceAccount  `
 
-`  GET /bigquery/v2/projects/{projectId}/serviceAccount  `  
+`GET /bigquery/v2/projects/{projectId}/serviceAccount`  
 RPC to get the service account for a project used for interactions with Google Cloud KMS
 
 `  list  `
 
-`  GET /bigquery/v2/projects  `  
+`GET /bigquery/v2/projects`  
 RPC to list projects to which the user has been granted any project role.
 
 ## REST Resource: [v2.routines](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines)
@@ -148,42 +148,42 @@ Methods
 
 `  delete  `
 
-`  DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}  `  
+`DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}`  
 Deletes the routine specified by routineId from the dataset.
 
 `  get  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}`  
 Gets the specified routine resource by routine ID.
 
 `  getIamPolicy  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/routines/*}:getIamPolicy  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/routines/*}:getIamPolicy`  
 Gets the access control policy for a resource.
 
 `  insert  `
 
-`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines  `  
+`POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines`  
 Creates a new routine in the dataset.
 
 `  list  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines`  
 Lists all routines in the specified dataset.
 
 `  setIamPolicy  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/routines/*}:setIamPolicy  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/routines/*}:setIamPolicy`  
 Sets the access control policy on the specified resource.
 
 `  testIamPermissions  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/routines/*}:testIamPermissions  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/routines/*}:testIamPermissions`  
 Returns permissions that a caller has on the specified resource.
 
 `  update  `
 
-`  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}  `  
+`PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}`  
 Updates information in an existing routine.
 
 ## REST Resource: [v2.rowAccessPolicies](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies)
@@ -192,42 +192,42 @@ Methods
 
 `  batchDelete  `
 
-`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies:batchDelete  `  
+`POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies:batchDelete`  
 Deletes provided row access policies.
 
 `  delete  `
 
-`  DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `  
+`DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}`  
 Deletes a row access policy.
 
 `  get  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}`  
 Gets the specified row access policy by policy ID.
 
 `  getIamPolicy  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*/rowAccessPolicies/*}:getIamPolicy  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*/rowAccessPolicies/*}:getIamPolicy`  
 Gets the access control policy for a resource.
 
 `  insert  `
 
-`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies  `  
+`POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies`  
 Creates a row access policy.
 
 `  list  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies`  
 Lists all row access policies on the specified table.
 
 `  testIamPermissions  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*/rowAccessPolicies/*}:testIamPermissions  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*/rowAccessPolicies/*}:testIamPermissions`  
 Returns permissions that a caller has on the specified resource.
 
 `  update  `
 
-`  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `  
+`PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}`  
 Updates a row access policy.
 
 ## REST Resource: [v2.tabledata](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata)
@@ -236,12 +236,12 @@ Methods
 
 `  insertAll  `
 
-`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll  `  
+`POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll`  
 Streams data into BigQuery one record at a time without needing to run a load job.
 
 `  list  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data`  
 List the content of a table in rows.
 
 ## REST Resource: [v2.tables](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables)
@@ -250,45 +250,45 @@ Methods
 
 `  delete  `
 
-`  DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}  `  
+`DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`  
 Deletes the table specified by tableId from the dataset.
 
 `  get  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`  
 Gets the specified table resource by table ID.
 
 `  getIamPolicy  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*}:getIamPolicy  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*}:getIamPolicy`  
 Gets the access control policy for a resource.
 
 `  insert  `
 
-`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables  `  
+`POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables`  
 Creates a new, empty table in the dataset.
 
 `  list  `
 
-`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables  `  
+`GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables`  
 Lists all tables in the specified dataset.
 
 `  patch  `
 
-`  PATCH /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}  `  
+`PATCH /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`  
 Updates information in an existing table.
 
 `  setIamPolicy  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*}:setIamPolicy  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*}:setIamPolicy`  
 Sets the access control policy on the specified resource.
 
 `  testIamPermissions  `
 
-`  POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*}:testIamPermissions  `  
+`POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*}:testIamPermissions`  
 Returns permissions that a caller has on the specified resource.
 
 `  update  `
 
-`  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}  `  
+`PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`  
 Updates information in an existing table.

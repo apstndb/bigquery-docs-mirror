@@ -33,7 +33,7 @@ The Google Cloud [Visual Studio Code (VS Code)](https://code.visualstudio.com/) 
     gcloud config set project PROJECT_ID
     ```
     
-    Replace `  PROJECT_ID  ` with your default project.
+    Replace `PROJECT_ID` with your default project.
 
 5.  Set up [Application Default Credentials](https://docs.cloud.google.com/bigquery/docs/authentication) :
     
@@ -76,16 +76,16 @@ The **Google Cloud Code** icon is now visible in the activity bar.
 
 1.  Open VS Code, and then in the activity bar, click **Google Cloud Code** .
 
-2.  Open the **BigQuery Notebooks** section, and click **BigQuery Notebook** . A new `  .ipynb  ` file containing sample code is created and opened in the editor.
+2.  Open the **BigQuery Notebooks** section, and click **BigQuery Notebook** . A new `.ipynb` file containing sample code is created and opened in the editor.
 
 3.  In the new notebook, click **Select Kernel** , and select a Python kernel. BigQuery notebooks require a local Python kernel for execution. You can create a new virtual environment or use one of the existing ones.
     
     ![The select kernel interface in the VS Code console.](https://docs.cloud.google.com/static/bigquery/images/vs-code-python-kernel.png)
 
-4.  If it hasn't already been installed in your virtual environment, install the `  bigframes  ` client library:
+4.  If it hasn't already been installed in your virtual environment, install the `bigframes` client library:
     
     1.  Open the **Terminal** window.
-    2.  Run the `  pip install bigframes  ` command.
+    2.  Run the `pip install bigframes` command.
 
 You can now write and execute code in your BigQuery notebook.
 
@@ -97,7 +97,7 @@ You can now write and execute code in your BigQuery notebook.
 
 ## Pricing
 
-The Visual Studio Code extension is free, but you are charged for any Google Cloud services (BigQuery, Dataproc, Cloud Storage) that you use.
+The Visual Studio Code extension is free, but you are charged for any Google Cloud services (BigQuery, Managed Service for Apache Spark, Cloud Storage) that you use.
 
 ## What's next
 

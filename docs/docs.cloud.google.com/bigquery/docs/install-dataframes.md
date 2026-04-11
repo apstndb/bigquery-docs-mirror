@@ -4,26 +4,26 @@ BigQuery DataFrames provides a Python DataFrame and machine learning (ML) API po
 
 ## Install BigQuery DataFrames
 
-To install the latest version of BigQuery DataFrames, run `  pip install --upgrade bigframes  ` .
+To install the latest version of BigQuery DataFrames, run `pip install --upgrade bigframes` .
 
 ## Available libraries
 
 BigQuery DataFrames provides three libraries:
 
-  - `  bigframes.pandas  ` provides a [pandas API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) that you can use to analyze and manipulate data in BigQuery. Many workloads can be migrated from pandas to bigframes by just changing a few imports. The `  bigframes.pandas  ` API is scalable to support processing terabytes of BigQuery data, and the API uses the BigQuery query engine to perform calculations.
-  - `  bigframes.bigquery  ` provides many BigQuery SQL functions that might not have a pandas equivalent.
-  - `  bigframes.ml  ` provides an API similar to the scikit-learn API for ML. The ML capabilities in BigQuery DataFrames let you preprocess data, and then train models on that data. You can also chain these actions together to create data pipelines.
+  - `bigframes.pandas` provides a [pandas API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) that you can use to analyze and manipulate data in BigQuery. Many workloads can be migrated from pandas to bigframes by just changing a few imports. The `bigframes.pandas` API is scalable to support processing terabytes of BigQuery data, and the API uses the BigQuery query engine to perform calculations.
+  - `bigframes.bigquery` provides many BigQuery SQL functions that might not have a pandas equivalent.
+  - `bigframes.ml` provides an API similar to the scikit-learn API for ML. The ML capabilities in BigQuery DataFrames let you preprocess data, and then train models on that data. You can also chain these actions together to create data pipelines.
 
 ## Required roles
 
 To get the permissions that you need to complete the tasks in this document, ask your administrator to grant you the following IAM roles on your project:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
   - Use BigQuery DataFrames in a BigQuery notebook:
-      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
-      - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
+      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+      - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -59,7 +59,7 @@ You can define the location and project in your notebook in the following way:
 
 ### Data processing location
 
-BigQuery DataFrames is designed for scale, which it achieves by keeping data and processing on the BigQuery service. However, you can bring data into the memory of your client machine by calling `  .to_pandas()  ` on a DataFrame or `  Series  ` object. If you choose to do this, the memory limitation of your client machine applies.
+BigQuery DataFrames is designed for scale, which it achieves by keeping data and processing on the BigQuery service. However, you can bring data into the memory of your client machine by calling `.to_pandas()` on a DataFrame or `Series` object. If you choose to do this, the memory limitation of your client machine applies.
 
 ## What's next
 

@@ -16,8 +16,8 @@ To authorize a data preparation with a service account when [manually running th
 
 Before scheduling data preparations with a custom service account, do the following:
 
-  - Ask your administrator to grant you the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) on the custom service account.
-  - Grant the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) and the [Service Account Token Creator role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `  roles/iam.serviceAccountTokenCreator  ` ) to the default Dataform service agent on the custom service account.
+  - Ask your administrator to grant you the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account.
+  - Grant the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) and the [Service Account Token Creator role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `roles/iam.serviceAccountTokenCreator` ) to the default Dataform service agent on the custom service account.
 
 To enhance security for scheduling, see [Implement enhanced scheduling permissions](https://docs.cloud.google.com/dataform/docs/access-control#enhanced-scheduling-permissions) .
 

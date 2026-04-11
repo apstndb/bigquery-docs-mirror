@@ -16,7 +16,7 @@ Grant users the necessary Identity and Access Management (IAM) roles to perform 
 
 ## Add labels to datasets
 
-You can add a label to a BigQuery dataset when you create it by using the bq command-line tool's `  bq mk  ` command or by calling the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) API method. You cannot add a label to a dataset when you create it using the Google Cloud console. However, you can add a dataset label after creation. For more information about creating a dataset, see [Creating a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) .
+You can add a label to a BigQuery dataset when you create it by using the bq command-line tool's `bq mk` command or by calling the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) API method. You cannot add a label to a dataset when you create it using the Google Cloud console. However, you can add a dataset label after creation. For more information about creating a dataset, see [Creating a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) .
 
 When you add a label to a dataset, the label does not propagate to resources within the dataset. Tables or views do not inherit dataset labels. Also, when you add a label to a dataset, it is included in your storage billing data, but not in your job-related billing data.
 
@@ -24,9 +24,9 @@ For more information about label format, see [Requirements for labels](https://d
 
 ### Required IAM roles
 
-To get the permission that you need to add a label to an existing dataset, ask your administrator to grant you the [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to add a label to an existing dataset, ask your administrator to grant you the [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.datasets.update  ` permission, which is required to add a label to an existing dataset.
+This predefined role contains the `bigquery.datasets.update` permission, which is required to add a label to an existing dataset.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -53,7 +53,7 @@ To add a label to a dataset after it is created:
 
 ### SQL
 
-Use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the labels on an existing dataset. This action overwrites any existing labels on the dataset. The following example sets a label on the `  mydataset  ` dataset:
+Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the labels on an existing dataset. This action overwrites any existing labels on the dataset. The following example sets a label on the `mydataset` dataset:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -73,7 +73,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To add a label to an existing dataset, use the `  bq update  ` command with the `  set_label  ` flag. To add multiple labels, repeat the flag.
+To add a label to an existing dataset, use the `bq update` command with the `set_label` flag. To add multiple labels, repeat the flag.
 
 If the dataset is in a project other than your default project, specify the project ID in the following format: `  PROJECT_ID:DATASET  ` .
 
@@ -89,13 +89,13 @@ Replace the following:
 
 Examples:
 
-To add a label to track departments, use the `  bq update  ` command and specify `  department  ` as the label key. For example, to add a `  department:shipping  ` label to `  mydataset  ` in your default project, use:
+To add a label to track departments, use the `bq update` command and specify `department` as the label key. For example, to add a `department:shipping` label to `mydataset` in your default project, use:
 
 ``` 
     bq update --set_label department:shipping mydataset
 ```
 
-To add multiple labels to a dataset, repeat the `  set_label  ` flag and specify a unique key for each label. For example, to add a `  department:shipping  ` label and `  cost_center:logistics  ` label to `  mydataset  ` in your default project, use:
+To add multiple labels to a dataset, repeat the `set_label` flag and specify a unique key for each label. For example, to add a `department:shipping` label and `cost_center:logistics` label to `mydataset` in your default project, use:
 
 ``` 
     bq update \
@@ -106,9 +106,9 @@ To add multiple labels to a dataset, repeat the `  set_label  ` flag and specify
 
 ### API
 
-To add a label to an existing dataset, call the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and populate the `  labels  ` property for the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+To add a label to an existing dataset, call the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and populate the `labels` property for the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-Because the `  datasets.update  ` method replaces the entire dataset resource, use the `  datasets.patch  ` method instead.
+Because the `datasets.update` method replaces the entire dataset resource, use the `datasets.patch` method instead.
 
 ### Go
 
@@ -246,13 +246,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 This document describes how to add a label to an existing table or view. For more information about adding a label when you create a table or view, see [Creating a table](https://docs.cloud.google.com/bigquery/docs/tables) or [Creating a view](https://docs.cloud.google.com/bigquery/docs/views) .
 
-Because views are treated like table resources, you use the `  tables.patch  ` method to modify both views and tables.
+Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables.
 
 Table and view labels are not included in billing data.
 
 ### Required IAM roles
 
-To get the permissions that you need to add a label to an existing table or view, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to add a label to an existing table or view, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to add a label to an existing table or view. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -260,8 +260,8 @@ This predefined role contains the permissions required to add a label to an exis
 
 The following permissions are required to add a label to an existing table or view:
 
-  - `  bigquery.tables.update  `
-  - `  bigquery.tables.get  `
+  - `bigquery.tables.update`
+  - `bigquery.tables.get`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -292,7 +292,7 @@ To add a label to an existing table or view:
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to set the labels on an existing table, or the [`  ALTER VIEW SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) to set the labels on an existing view. This action overwrites any existing labels on the table or view. The following example sets two labels on the `  mytable  ` table:
+Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to set the labels on an existing table, or the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) to set the labels on an existing view. This action overwrites any existing labels on the table or view. The following example sets two labels on the `mytable` table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -312,7 +312,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To add a label to an existing table or view, use the `  bq update  ` command with the `  set_label  ` flag. To add multiple labels, repeat the flag.
+To add a label to an existing table or view, use the `bq update` command with the `set_label` flag. To add multiple labels, repeat the flag.
 
 If the table or view is in a project other than your default project, specify the project ID in the following format: `  PROJECT_ID:DATASET  ` .
 
@@ -331,19 +331,19 @@ Replace the following:
 
 Examples:
 
-To add a table label that tracks departments, use the `  bq update  ` command and specify `  department  ` as the label key. For example, to add a `  department:shipping  ` label to `  mytable  ` in your default project, use:
+To add a table label that tracks departments, use the `bq update` command and specify `department` as the label key. For example, to add a `department:shipping` label to `mytable` in your default project, use:
 
 ``` 
     bq update --set_label department:shipping mydataset.mytable
 ```
 
-To add a view label that tracks departments, use the `  bq update  ` command and specify `  department  ` as the label key. For example, to add a `  department:shipping  ` label to `  myview  ` in your default project, use:
+To add a view label that tracks departments, use the `bq update` command and specify `department` as the label key. For example, to add a `department:shipping` label to `myview` in your default project, use:
 
 ``` 
     bq update --set_label department:shipping mydataset.myview
 ```
 
-To add multiple labels to a table or view, repeat the `  set_label  ` flag and specify a unique key for each label. For example, to add a `  department:shipping  ` label and `  cost_center:logistics  ` label to `  mytable  ` in your default project, use:
+To add multiple labels to a table or view, repeat the `set_label` flag and specify a unique key for each label. For example, to add a `department:shipping` label and `cost_center:logistics` label to `mytable` in your default project, use:
 
 ``` 
     bq update \
@@ -354,11 +354,11 @@ To add multiple labels to a table or view, repeat the `  set_label  ` flag and s
 
 ### API
 
-To add a label to an existing table or view, call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and populate the `  labels  ` property for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
+To add a label to an existing table or view, call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and populate the `labels` property for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
 
-Because views are treated like table resources, you use the `  tables.patch  ` method to modify both views and tables.
+Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables.
 
-Because the `  tables.update  ` method replaces the entire dataset resource, use the `  tables.patch  ` method instead.
+Because the `tables.update` method replaces the entire dataset resource, use the `tables.patch` method instead.
 
 ### Go
 
@@ -502,9 +502,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Add labels to jobs
 
-Labels can be added to query jobs through the command line by using the bq command-line tool's `  --label  ` flag. The bq tool supports adding labels only to query jobs.
+Labels can be added to query jobs through the command line by using the bq command-line tool's `--label` flag. The bq tool supports adding labels only to query jobs.
 
-You can also add a label to a job when it's submitted through the API by specifying the `  labels  ` property in the job configuration when you call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. The API can be used to add labels to any job type.
+You can also add a label to a job when it's submitted through the API by specifying the `labels` property in the job configuration when you call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method. The API can be used to add labels to any job type.
 
 You cannot add labels to or update labels on pending, running, or completed jobs.
 
@@ -512,9 +512,9 @@ When you add a label to a job, the label is included in your billing data.
 
 ### Required IAM roles
 
-To get the permission that you need to add a label to a job, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to add a label to a job, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.jobs.create  ` permission, which is required to add a label to a job.
+This predefined role contains the `bigquery.jobs.create` permission, which is required to add a label to a job.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -526,7 +526,7 @@ To add a label to a job:
 
 ### bq
 
-To add a label to a query job, use the `  bq query  ` command with the `  --label  ` flag. To add multiple labels, repeat the flag. The flag indicates that your query uses GoogleSQL syntax.
+To add a label to a query job, use the `bq query` command with the `--label` flag. To add multiple labels, repeat the flag. The flag indicates that your query uses GoogleSQL syntax.
 
 ``` notranslate
 bq query --label KEY:VALUE  'QUERY'
@@ -534,7 +534,7 @@ bq query --label KEY:VALUE  'QUERY'
 
 Replace the following:
 
-  - `  KEY:VALUE  ` : The key-value pair for a label you want to add to the query job. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To add multiple labels to a query job, repeat the `  --label  ` flag and specify a unique key for each label.
+  - `  KEY:VALUE  ` : The key-value pair for a label you want to add to the query job. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To add multiple labels to a query job, repeat the `--label` flag and specify a unique key for each label.
   - `  QUERY  ` : a valid GoogleSQL query.
 
 Examples:
@@ -551,7 +551,7 @@ To add a label to a query job, use:
        `mydataset.mytable`'
 ```
 
-To add multiple labels to a query job, repeat the `  --label  ` flag and specify a unique key for each label. For example, to add a `  department:shipping  ` label and `  cost_center:logistics  ` label to a query job, use:
+To add multiple labels to a query job, repeat the `--label` flag and specify a unique key for each label. For example, to add a `department:shipping` label and `cost_center:logistics` label to a query job, use:
 
 ``` 
     bq query \
@@ -566,7 +566,7 @@ To add multiple labels to a query job, repeat the `  --label  ` flag and specify
 
 ### API
 
-To add a label to a job, call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and populate the `  labels  ` property for the [job configuration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) . You can use the API to add labels to any job type.
+To add a label to a job, call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and populate the `labels` property for the [job configuration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) . You can use the API to add labels to any job type.
 
 ### Python
 
@@ -599,14 +599,14 @@ If you run queries in a [session](https://docs.cloud.google.com/bigquery/docs/se
 
 ### SQL
 
-Set the [`  @@query_label  `](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) system variable in the session by running the following query:
+Set the [`@@query_label`](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) system variable in the session by running the following query:
 
 ``` notranslate
   SET @@query_label = "KEY:VALUE";
   
 ```
 
-  - KEY:VALUE : The key-value pair for the label to assign to all future queries in the session. You can also add multiple key-value pairs, separated by a comma; for example, `  SET @@query_label = "key1:value1,key2:value2"  ` . The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed.
+  - KEY:VALUE : The key-value pair for the label to assign to all future queries in the session. You can also add multiple key-value pairs, separated by a comma; for example, `SET @@query_label = "key1:value1,key2:value2"` . The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed.
 
 Example:
 
@@ -617,7 +617,7 @@ Example:
 
 ### API
 
-To add a label to a query job in a session when you [run a query using an API call](https://docs.cloud.google.com/bigquery/docs/sessions#run-queries) , call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and populate the `  query_label  ` property for the [`  connectionProperties  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty) [job configuration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) .
+To add a label to a query job in a session when you [run a query using an API call](https://docs.cloud.google.com/bigquery/docs/sessions#run-queries) , call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and populate the `query_label` property for the [`connectionProperties`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty) [job configuration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) .
 
 After you associate a query label with a session and run queries in that session, you can collect audit logs for those queries. For more information, see the [Audit log reference for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
 
@@ -631,9 +631,9 @@ For more information about using labels in your billing data, see [Use **Filters
 
 ### Required IAM roles
 
-To get the permission that you need to add a label to a reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `  roles/bigquery.resourceEditor  ` ) IAM role on the administration project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to add a label to a reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `roles/bigquery.resourceEditor` ) IAM role on the administration project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.reservations.update  ` permission, which is required to add a label to a reservation.
+This predefined role contains the `bigquery.reservations.update` permission, which is required to add a label to a reservation.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -667,7 +667,7 @@ To add a label to a reservation:
 
 ### SQL
 
-To add a label to a reservation, use the [`  ALTER RESERVATION SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) . This action overwrites any existing labels on the reservation. The following example sets a label on the `  myreservation  ` reservation:
+To add a label to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) . This action overwrites any existing labels on the reservation. The following example sets a label on the `myreservation` reservation:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -687,7 +687,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To add a label to a reservation, use the `  bq update  ` command with the `  set_label  ` flag and the `  --reservation  ` flag. To add multiple labels, repeat the `  set_label  ` flag.
+To add a label to a reservation, use the `bq update` command with the `set_label` flag and the `--reservation` flag. To add multiple labels, repeat the `set_label` flag.
 
 ``` notranslate
 bq update --set_label KEY:VALUE --location LOCATION --reservation RESERVATION_NAME
@@ -695,15 +695,15 @@ bq update --set_label KEY:VALUE --location LOCATION --reservation RESERVATION_NA
 
 Replace the following:
 
-  - `  KEY:VALUE  ` : The key-value pair for a label you want to add to the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To add multiple labels to a reservation, repeat the `  --set_label  ` flag and specify a unique key for each label.
-  - `  LOCATION  ` : the location of the reservation. The `  location  ` flag can't be last in the command, otherwise the `  FATAL Flags positioning  ` error is returned.
+  - `  KEY:VALUE  ` : The key-value pair for a label you want to add to the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To add multiple labels to a reservation, repeat the `--set_label` flag and specify a unique key for each label.
+  - `  LOCATION  ` : the location of the reservation. The `location` flag can't be last in the command, otherwise the `FATAL Flags positioning` error is returned.
   - `  RESERVATION_NAME  ` : the name of the reservation.
 
 ## Add a label without a value
 
 A label that has a key with an empty value is sometimes called a tag. Do not confuse this with a [tag resource](https://docs.cloud.google.com/bigquery/docs/tags) . For more information, see [labels and tags](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview) . You can create a new label without a value, or remove a value from an existing label key.
 
-Labels without values are useful when you label a resource but you don't need the key-value format. For example, if a table contains test data used by multiple groups, such as support or development, you can add a `  test_data  ` label to the table to identify it.
+Labels without values are useful when you label a resource but you don't need the key-value format. For example, if a table contains test data used by multiple groups, such as support or development, you can add a `test_data` label to the table to identify it.
 
 To add a label without a value:
 
@@ -727,7 +727,7 @@ To add a label without a value:
 
 ### SQL
 
-To add a label without a value, use the [`  ALTER TABLE SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) :
+To add a label without a value, use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -747,7 +747,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To add a label without a value to an existing resource, use the `  bq update  ` command with the `  set_label  ` flag. Specify the key, followed by a colon, but leave the value unspecified.
+To add a label without a value to an existing resource, use the `bq update` command with the `set_label` flag. Specify the key, followed by a colon, but leave the value unspecified.
 
 ``` notranslate
 bq update --set_label KEY: RESOURCE_ID
@@ -755,20 +755,20 @@ bq update --set_label KEY: RESOURCE_ID
 
 Replace the following:
 
-  - `  KEY :  ` : the label key that you want to use.
+  - `  KEY : ` : the label key that you want to use.
   - `  RESOURCE_ID  ` : a valid dataset, table, or view name. If the resource is in a project other than your default project, specify the project ID in the following format: `  PROJECT_ID:DATASET  ` .
 
 Examples:
 
-Use the following command to create a `  test_data  ` label for `  mydataset.mytable  ` . `  mydataset  ` is in your default project.
+Use the following command to create a `test_data` label for `mydataset.mytable` . `mydataset` is in your default project.
 
     bq update --set_label test_data: mydataset
 
 ### API
 
-Call the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method or the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and add labels with the value set to the empty string ( `  ""  ` ) in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) or the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . You can remove values from existing labels by replacing their values with the empty string.
+Call the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method or the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and add labels with the value set to the empty string ( `""` ) in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) or the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) . You can remove values from existing labels by replacing their values with the empty string.
 
-Because views are treated like table resources, you use the `  tables.patch  ` method to modify both views and tables. Also, because the `  tables.update  ` method replaces the entire dataset resource, use the `  tables.patch  ` method instead.
+Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables. Also, because the `tables.update` method replaces the entire dataset resource, use the `tables.patch` method instead.
 
 ## What's next
 

@@ -40,11 +40,11 @@ You can either create your CMEK keys manually or use Cloud KMS Autokey. Autokey 
 
 For the Google Cloud project that runs Cloud KMS, create a key ring and a key as described in [Creating key rings and keys](https://docs.cloud.google.com/kms/docs/creating-keys) . Create the key ring in a location that matches the location of your BigQuery dataset:
 
-  - Any multi-regional dataset should use a multi-regional key ring from a matching location. For example, a dataset in region `  US  ` should be protected with a key ring from region `  us  ` , and a dataset in region `  EU  ` should be protected with a key ring from region `  europe  ` .
+  - Any multi-regional dataset should use a multi-regional key ring from a matching location. For example, a dataset in region `US` should be protected with a key ring from region `us` , and a dataset in region `EU` should be protected with a key ring from region `europe` .
 
-  - Regional datasets should use matching regional keys. For example, a dataset in region `  asia-northeast1  ` should be protected with a key ring from region `  asia-northeast1  ` .
+  - Regional datasets should use matching regional keys. For example, a dataset in region `asia-northeast1` should be protected with a key ring from region `asia-northeast1` .
 
-  - You can't use the `  global  ` region when configuring CMEK for BigQuery in the Google Cloud console. However, you can use the `  global  ` region when configuring CMEK for BigQuery by using the bq command-line tool or GoogleSQL.
+  - You can't use the `global` region when configuring CMEK for BigQuery in the Google Cloud console. However, you can use the `global` region when configuring CMEK for BigQuery by using the bq command-line tool or GoogleSQL.
 
 For more information about the supported locations for BigQuery and Cloud KMS, see [Cloud locations](https://cloud.google.com/about/locations/) .
 
@@ -56,7 +56,7 @@ Make sure your service account has been created, and then use the Google Cloud c
 
 ### Trigger creation of your service account
 
-Your BigQuery service account is not initially created when you create a project. To trigger the creation of your service account, enter a command that uses it, such as the [`  bq show --encryption_service_account  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#encryption_service_account_flag) command, or call the [projects.getServiceAccount](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/getServiceAccount) API method. For example:
+Your BigQuery service account is not initially created when you create a project. To trigger the creation of your service account, enter a command that uses it, such as the [`bq show --encryption_service_account`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#encryption_service_account_flag) command, or call the [projects.getServiceAccount](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/getServiceAccount) API method. For example:
 
 ``` notranslate
 bq show --encryption_service_account --project_id=PROJECT_ID
@@ -92,7 +92,7 @@ The following techniques show how you can determine the BigQuery service account
 
 ### bq
 
-Use the `  bq show  ` command with the `  --encryption_service_account  ` flag to determine the service account ID:
+Use the `bq show` command with the `--encryption_service_account` flag to determine the service account ID:
 
 ``` notranslate
 bq show --encryption_service_account
@@ -126,13 +126,13 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 4.  Click **Add member** .
 
-5.  Enter the email address of the service account, `  bq- PROJECT_NUMBER @bigquery-encryption.iam.gserviceaccount.com  ` .
+5.  Enter the email address of the service account, `bq- PROJECT_NUMBER @bigquery-encryption.iam.gserviceaccount.com` .
     
-      - If the service account is already on the members list, it has existing roles. Click the current role drop-down list for the `  bq- PROJECT_NUMBER @bigquery-encryption.iam.gserviceaccount.com  ` service account.
+      - If the service account is already on the members list, it has existing roles. Click the current role drop-down list for the `bq- PROJECT_NUMBER @bigquery-encryption.iam.gserviceaccount.com` service account.
 
 6.  Click the drop-down list for **Select a role** , click **Cloud KMS** , and then click the **Cloud KMS CryptoKey Encrypter/Decrypter** role.
 
-7.  Click **Save** to apply the role to the `  bq- PROJECT_NUMBER @bigquery-encryption.iam.gserviceaccount.com  ` service account.
+7.  Click **Save** to apply the role to the `bq- PROJECT_NUMBER @bigquery-encryption.iam.gserviceaccount.com` service account.
 
 ### gcloud
 
@@ -164,7 +164,7 @@ The resource ID for the Cloud KMS key is required for CMEK use, as shown in the 
 projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 ```
 
-**Note:** You cannot specify a key resource ID that includes the `  /cryptoKeyVersions/  ` token. BigQuery always uses the key version marked as `  primary  ` to protect a table when it is created.
+**Note:** You cannot specify a key resource ID that includes the `/cryptoKeyVersions/` token. BigQuery always uses the key version marked as `primary` to protect a table when it is created.
 
 ### Retrieve the key resource ID
 
@@ -208,7 +208,7 @@ To create a table that is protected by Cloud KMS:
 
 ### SQL
 
-Use the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `  kms_key_name  ` option:
+Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `kms_key_name` option:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -230,7 +230,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-You can use the bq command-line tool with the `  --destination_kms_key  ` flag to create the table. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the table.
+You can use the bq command-line tool with the `--destination_kms_key` flag to create the table. The `--destination_kms_key` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the table.
 
 To create an empty table with a schema:
 
@@ -252,11 +252,11 @@ For more information about the bq command-line tool, see [Using the bq command-l
 
 ### Terraform
 
-Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
+Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a table named `  mytable  ` , and also uses the [`  google_kms_crypto_key  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`  google_kms_key_ring  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for the table.
+The following example creates a table named `mytable` , and also uses the [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for the table.
 
 To run this example, you must enable the [Cloud Resource Manager API](https://console.cloud.google.com/flows/enableapi?apiid=cloudresourcemanager.googleapis.com) and the [Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com) .
 
@@ -345,13 +345,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -363,7 +363,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -375,7 +375,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -542,9 +542,9 @@ By default, query results are stored in a temporary table encrypted with a Googl
 
 ### bq
 
-Specify the flag `  --destination_kms_key  ` to protect the destination table or query results (if using a temporary table) with your Cloud KMS key. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination or resulting table.
+Specify the flag `--destination_kms_key` to protect the destination table or query results (if using a temporary table) with your Cloud KMS key. The `--destination_kms_key` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination or resulting table.
 
-Optionally use the `  --destination_table  ` flag to specify the destination for query results. If `  --destination_table  ` is not used, the query results are written to a temporary table.
+Optionally use the `--destination_table` flag to specify the destination for query results. If `--destination_table` is not used, the query results are written to a temporary table.
 
 To query a table:
 
@@ -746,7 +746,7 @@ Protect a load job destination table with a customer-managed encryption key by s
 
 ### bq
 
-Protect a load job destination table with a customer-managed encryption key by setting the `  --destination_kms_key  ` flag.
+Protect a load job destination table with a customer-managed encryption key by setting the `--destination_kms_key` flag.
 
 ``` notranslate
 bq --location=LOCATION load \
@@ -943,7 +943,7 @@ Learn more about streaming at [Streaming data using the BigQuery Storage Write A
 
 ### bq
 
-You can use the `  bq cp  ` command with the `  --destination_kms_key  ` flag to copy a table protected by default encryption into a new table, or into the original table, protected by Cloud KMS. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination table.
+You can use the `bq cp` command with the `--destination_kms_key` flag to copy a table protected by default encryption into a new table, or into the original table, protected by Cloud KMS. The `--destination_kms_key` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination table.
 
 To copy a table that has default encryption to a new table that has Cloud KMS protection:
 
@@ -961,7 +961,7 @@ bq cp -f \
 DATASET_ID.TABLE_ID DATASET_ID.TABLE_ID
 ```
 
-If you want to change a table from Cloud KMS protection to default encryption, copy the file to itself by running `  bq cp  ` without using the `  --destination_kms_key  ` flag.
+If you want to change a table from Cloud KMS protection to default encryption, copy the file to itself by running `bq cp` without using the `--destination_kms_key` flag.
 
 For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
@@ -1137,17 +1137,17 @@ For each of the keys you've created or that protect your tables, you can see wha
 
 ## Change the Cloud KMS key for a BigQuery table
 
-To change the Cloud KMS key of an existing CMEK-protected table, you can run an `  ALTER TABLE  ` query, use the API, or use the bq command-line tool. There are two ways to modify the Cloud KMS key using the API and the bq command-line tool: `  update  ` or `  cp  ` .
+To change the Cloud KMS key of an existing CMEK-protected table, you can run an `ALTER TABLE` query, use the API, or use the bq command-line tool. There are two ways to modify the Cloud KMS key using the API and the bq command-line tool: `update` or `cp` .
 
-If you use `  update  ` , you can change the Cloud KMS key used for a CMEK-protected table.
+If you use `update` , you can change the Cloud KMS key used for a CMEK-protected table.
 
-If you use `  cp  ` , you can change the Cloud KMS key used for a CMEK-protected table, change a table from default encryption to CMEK-protection, or change a table from CMEK-protection to default encryption.
+If you use `cp` , you can change the Cloud KMS key used for a CMEK-protected table, change a table from default encryption to CMEK-protection, or change a table from CMEK-protection to default encryption.
 
-An advantage of `  update  ` is it is faster than `  cp  ` and it lets you use [table decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators) .
+An advantage of `update` is it is faster than `cp` and it lets you use [table decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators) .
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to update the `  kms_key_name  ` field for a table:
+Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to update the `kms_key_name` field for a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1168,7 +1168,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-You can use the `  bq cp  ` command with the `  --destination_kms_key  ` flag to change the key for a table protected by Cloud KMS. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the table.
+You can use the `bq cp` command with the `--destination_kms_key` flag to change the key for a table protected by Cloud KMS. The `--destination_kms_key` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the table.
 
 ``` notranslate
 bq update \
@@ -1296,9 +1296,9 @@ You can set a dataset-wide default Cloud KMS key that applies to all newly creat
 
 You can apply, change, or remove a dataset default key by
 
-  - specifying the default key in the [`  EncryptionConfiguration.kmsKeyName  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name) field when you call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) or [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) methods
+  - specifying the default key in the [`EncryptionConfiguration.kmsKeyName`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name) field when you call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) or [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) methods
 
-  - specifying the default key in the `  --default_kms_key  ` flag when you run the [`  bq mk --dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command.
+  - specifying the default key in the `--default_kms_key` flag when you run the [`bq mk --dataset`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command.
     
     ``` notranslate
     bq mk \
@@ -1322,7 +1322,7 @@ The default key does not apply to existing tables. Changing the default key does
 
 ### SQL
 
-Use the [`  ALTER PROJECT SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `  default_kms_key_name  ` field for a project. You can find the resource name for the key on the Cloud KMS page.
+Use the [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `default_kms_key_name` field for a project. You can find the resource name for the key on the Cloud KMS page.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1343,7 +1343,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-You can use the `  bq  ` command to run an [`  ALTER PROJECT SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `  default_kms_key_name  ` field for a project:
+You can use the `bq` command to run an [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `default_kms_key_name` field for a project:
 
 ``` notranslate
 bq query --nouse_legacy_sql \
@@ -1359,7 +1359,7 @@ BigQuery ML supports CMEK. Along with the default encryption provided by BigQuer
 
 ### Create an encrypted model with a Cloud KMS key
 
-To create an encrypted model, use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) and specify `  KMS_KEY_NAME  ` in the training options:
+To create an encrypted model, use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) and specify `KMS_KEY_NAME` in the training options:
 
 ``` 
     CREATE MODEL my_dataset.my_model
@@ -1385,14 +1385,14 @@ The same syntax also applies to imported TensorFlow models:
 
 Customer-managed encryption keys have the following restrictions when encrypting machine learning models:
 
-  - `  Global  ` region CMEK keys are not supported for the following types of models:
+  - `Global` region CMEK keys are not supported for the following types of models:
     
       - [DNN](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
       - [Wide-and-Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
       - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
       - [Boosted tree](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
 
-  - `  Global  ` region CMEK keys and multi-region CMEK keys, for example `  EU  ` or `  US  ` , are not supported when creating the following types of models:
+  - `Global` region CMEK keys and multi-region CMEK keys, for example `EU` or `US` , are not supported when creating the following types of models:
     
       - [AutoML Tables models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
 
@@ -1404,7 +1404,7 @@ Customer-managed encryption keys have the following restrictions when encrypting
 
 ### Change a model from default encryption to Cloud KMS protection
 
-You can use the [`  bq cp  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) with the `  --destination_kms_key  ` flag to copy a model protected by default encryption into a new model that is protected by Cloud KMS. Alternatively, you can use the `  bq cp  ` command with the `  -f  ` flag to overwrite a model protected by default encryption and update it to use Cloud KMS protection instead. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination model.
+You can use the [`bq cp` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) with the `--destination_kms_key` flag to copy a model protected by default encryption into a new model that is protected by Cloud KMS. Alternatively, you can use the `bq cp` command with the `-f` flag to overwrite a model protected by default encryption and update it to use Cloud KMS protection instead. The `--destination_kms_key` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination model.
 
 To copy a model that has default encryption to a new model that has Cloud KMS protection:
 
@@ -1433,7 +1433,7 @@ For more information about the bq command-line tool, see [Using the bq command-l
 
 ### Determine if a model is protected by Cloud KMS
 
-Use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) to see if a model is protected by Cloud KMS key. The encryption key is in the `  kmsKeyName  ` field.
+Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) to see if a model is protected by Cloud KMS key. The encryption key is in the `kmsKeyName` field.
 
 ``` notranslate
 bq show -m my_dataset.my_model
@@ -1443,7 +1443,7 @@ You can also use the Google Cloud console to find the Cloud KMS key for an encry
 
 ### Change the Cloud KMS key for an encrypted model
 
-Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --destination_kms_key  ` flag to change the key for a model protected by Cloud KMS:
+Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--destination_kms_key` flag to change the key for a model protected by Cloud KMS:
 
 ``` notranslate
 bq update --destination_kms_key \
@@ -1453,7 +1453,7 @@ projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key \
 
 ### Use default project or dataset keys
 
-If you have a default Cloud KMS key set at the project or dataset level, BigQuery ML automatically uses this key when creating models. Use the `  CREATE MODEL  ` statement to specify a different key to encrypt the model if you don't want to use the default key.
+If you have a default Cloud KMS key set at the project or dataset level, BigQuery ML automatically uses this key when creating models. Use the `CREATE MODEL` statement to specify a different key to encrypt the model if you don't want to use the default key.
 
 ### Use BigQuery ML functions with encrypted models
 
@@ -1488,7 +1488,7 @@ You can remove BigQuery's access to the Cloud KMS key at any time, by revoking t
 
 If BigQuery loses access to the Cloud KMS key, the user experience can suffer significantly and data loss can occur:
 
-  - Data in these CMEK-protected tables can no longer be accessed: `  query  ` , `  cp  ` , `  extract  ` , and `  tabledata.list  ` will all fail.
+  - Data in these CMEK-protected tables can no longer be accessed: `query` , `cp` , `extract` , and `tabledata.list` will all fail.
 
   - No new data can be added to these CMEK-protected tables.
 
@@ -1506,7 +1506,7 @@ This integration lets you do the following:
 
 ### Require CMEKs for all resources
 
-A common policy is to require CMEKs to be used to protect all resources in a specific set of projects. You can use the `  constraints/gcp.restrictNonCmekServices  ` constraint to enforce this policy in BigQuery.
+A common policy is to require CMEKs to be used to protect all resources in a specific set of projects. You can use the `constraints/gcp.restrictNonCmekServices` constraint to enforce this policy in BigQuery.
 
 If set, this organization policy causes all resource creation requests without a specified Cloud KMS key to fail.
 
@@ -1520,7 +1520,7 @@ After you set this policy, it applies only to new resources in the project. Any 
     
     [Go to Organization policies](https://console.cloud.google.com/iam-admin/orgpolicies/list)
 
-2.  In the **Filter** field, enter `  constraints/gcp.restrictNonCmekServices  ` , and then click **Restrict which services may create resources without CMEK** .
+2.  In the **Filter** field, enter `constraints/gcp.restrictNonCmekServices` , and then click **Restrict which services may create resources without CMEK** .
 
 3.  Click edit **Edit** .
 
@@ -1528,13 +1528,13 @@ After you set this policy, it applies only to new resources in the project. Any 
 
 5.  Select **Custom** , then click **Deny** .
 
-6.  In the **Custom Value** field, enter `  is:bigquery.googleapis.com  ` .
+6.  In the **Custom Value** field, enter `is:bigquery.googleapis.com` .
 
 7.  Click **Done** , and then click **Save** .
 
 ### gcloud
 
-``` notranslate lang-sh
+``` lang-sh notranslate
   gcloud resource-manager org-policies --project=PROJECT_ID \
     deny gcp.restrictNonCmekServices is:bigquery.googleapis.com
 ```
@@ -1545,7 +1545,7 @@ This policy also applies to query results tables in the project. You can specify
 
 ### Restrict Cloud KMS keys for a BigQuery project
 
-You can use the `  constraints/gcp.restrictCmekCryptoKeyProjects  ` constraint to restrict the Cloud KMS keys that you can use to protect a resource in a BigQuery project.
+You can use the `constraints/gcp.restrictCmekCryptoKeyProjects` constraint to restrict the Cloud KMS keys that you can use to protect a resource in a BigQuery project.
 
 You might specify a rule - for example, "For all BigQuery resources in projects/my-company-data-project, Cloud KMS keys used in this project must come from projects/my-company-central-keys OR projects/team-specific-keys."
 
@@ -1555,7 +1555,7 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
     
     [Go to Organization policies](https://console.cloud.google.com/iam-admin/orgpolicies/list)
 
-2.  In the **Filter** field, enter `  constraints/gcp.restrictCmekCryptoKeyProjects  ` , and then click **Restrict which projects may supply KMS CryptoKeys for CMEK** .
+2.  In the **Filter** field, enter `constraints/gcp.restrictCmekCryptoKeyProjects` , and then click **Restrict which projects may supply KMS CryptoKeys for CMEK** .
 
 3.  Click edit **Edit** .
 
@@ -1563,13 +1563,13 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 
 5.  Select **Custom** , then click **Allow** .
 
-6.  In the **Custom Value** field, enter `  under:projects/<var>KMS_PROJECT_ID</var>  ` .
+6.  In the **Custom Value** field, enter `under:projects/<var>KMS_PROJECT_ID</var>` .
 
 7.  Click **Done** , and then click **Save** .
 
 ### gcloud
 
-``` notranslate lang-sh
+``` lang-sh notranslate
   gcloud resource-manager org-policies --project=PROJECT_ID \
     allow gcp.restrictCmekCryptoKeyProjects under:projects/KMS_PROJECT_ID
 ```
@@ -1602,9 +1602,9 @@ If there is a default key on the dataset, and you rotate the key, any new tables
 
 When you create or truncate a CMEK-protected table, BigQuery generates an intermediate key-encryption key which is then encrypted with the specified Cloud KMS key.
 
-For billing purposes, this means that neither your calls to Cloud KMS nor their associated costs scale with the table size. For CMEK-protected tables, you can expect one call to Cloud KMS [`  cryptoKeys.encrypt  `](https://docs.cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/encrypt) for each table creation or truncation and one call to Cloud KMS [`  cryptoKeys.decrypt  `](https://docs.cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/decrypt) for each table involved in a query. These methods both belong to the category of **Key operations: Cryptographic** listed in [Cloud KMS Pricing](https://cloud.google.com/kms/pricing) .
+For billing purposes, this means that neither your calls to Cloud KMS nor their associated costs scale with the table size. For CMEK-protected tables, you can expect one call to Cloud KMS [`cryptoKeys.encrypt`](https://docs.cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/encrypt) for each table creation or truncation and one call to Cloud KMS [`cryptoKeys.decrypt`](https://docs.cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/decrypt) for each table involved in a query. These methods both belong to the category of **Key operations: Cryptographic** listed in [Cloud KMS Pricing](https://cloud.google.com/kms/pricing) .
 
-Either reading from or writing to an existing CMEK-protected table invokes Cloud KMS `  cryptoKeys.decrypt  ` because the intermediate key must be decrypted.
+Either reading from or writing to an existing CMEK-protected table invokes Cloud KMS `cryptoKeys.decrypt` because the intermediate key must be decrypted.
 
 ## Limitations
 
@@ -1633,11 +1633,11 @@ BigQuery and [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglak
 
 ### Switching between CMEK-protected and default encryption
 
-You cannot switch a table in place between default encryptions and CMEK encryption. To switch encryption, [copy the table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) with destination encryption information set or use a `  SELECT *  ` query to select the table into itself with `  WRITE_TRUNCATE  ` disposition.
+You cannot switch a table in place between default encryptions and CMEK encryption. To switch encryption, [copy the table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) with destination encryption information set or use a `SELECT *` query to select the table into itself with `WRITE_TRUNCATE` disposition.
 
 ### Using table decorators
 
-If you protect a table with Cloud KMS and then replace the data in the table by using the value `  WRITE_TRUNCATE  ` for a `  load  ` , `  cp  ` , or `  query  ` operation, then [range decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#range_decorators) don't work across the encryption change boundary. You can still use table decorators, including range decorators, to query the data before or after the boundary, or query the snapshot at a point in time.
+If you protect a table with Cloud KMS and then replace the data in the table by using the value `WRITE_TRUNCATE` for a `load` , `cp` , or `query` operation, then [range decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#range_decorators) don't work across the encryption change boundary. You can still use table decorators, including range decorators, to query the data before or after the boundary, or query the snapshot at a point in time.
 
 ### Wildcard table queries
 
@@ -1674,15 +1674,15 @@ With customer-managed encryption keys, specifying permissions repeatedly is not 
 
 The BigQuery service account associated with the Google Cloud project of the table is used to decrypt that table's data. The BigQuery service accounts are unique for each project. For a job that writes data into a Cloud KMS-protected anonymous table, the job's project's service account is used.
 
-As an example, consider three CMEK-protected tables: `  table1  ` , `  table2  ` , and `  table3  ` . To query data from `  {project1.table1, project2.table2}  ` with destination table `  {project3.table3}  ` :
+As an example, consider three CMEK-protected tables: `table1` , `table2` , and `table3` . To query data from `{project1.table1, project2.table2}` with destination table `{project3.table3}` :
 
-  - Use the `  project1  ` service account for `  project1.table1  `
-  - Use the `  project2  ` service account for `  project2.table2  `
-  - Use the `  project3  ` service account for `  project3.table3  `
+  - Use the `project1` service account for `project1.table1`
+  - Use the `project2` service account for `project2.table2`
+  - Use the `project3` service account for `project3.table3`
 
 ### In what ways can BigQuery use my Cloud KMS key?
 
-BigQuery uses the Cloud KMS key to decrypt data in response to a user query, for example, [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) or [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) .
+BigQuery uses the Cloud KMS key to decrypt data in response to a user query, for example, [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) .
 
 BigQuery can also use the key for data maintenance and storage optimization tasks, like data conversion into a read-optimized format.
 
@@ -1701,7 +1701,7 @@ The following describes common errors and recommended mitigations.
 | Error                                                                                                                  | Recommendation                                                                                                                                                                                                                                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Please grant Cloud KMS CryptoKey Encrypter/Decrypter role                                                              | The BigQuery service account associated with your project doesn't have sufficient IAM permission to operate on the specified Cloud KMS key. Follow the instructions in the error or [in this documentation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) to grant the proper IAM permission. |
-| Existing table encryption settings don't match encryption settings specified in the request                            | This can occur in scenarios where the destination table has encryption settings that don't match the encryption settings in your request. As mitigation, use write disposition `        TRUNCATE       ` to replace the table, or specify a different destination table.                                                                  |
+| Existing table encryption settings don't match encryption settings specified in the request                            | This can occur in scenarios where the destination table has encryption settings that don't match the encryption settings in your request. As mitigation, use write disposition `TRUNCATE` to replace the table, or specify a different destination table.                                                                                 |
 | This region is not supported                                                                                           | The region of the Cloud KMS key does not match the region of the BigQuery dataset of the destination table. As a mitigation, select a key in a region that matches your dataset, or load into a dataset that matches the key region.                                                                                                      |
 | Your administrator requires that you specify an encryption key for queries in project PROJECT\_ID.                     | An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Requiring CMEKs for all resources in a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#services_constraint) .                                                                    |
 | Your administrator prevents using KMS keys from project KMS\_PROJECT\_ID to protect resources in project PROJECT\_ID . | An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Restrict Cloud KMS keys for a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#projects_constraint) .                                                                             |

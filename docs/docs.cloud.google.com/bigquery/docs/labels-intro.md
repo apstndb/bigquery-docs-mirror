@@ -24,15 +24,15 @@ These limits apply to the key and value for each label, and to the individual Go
 
 Here are some common use cases for labels:
 
-  - **Team or cost center labels** : Add labels based on team or cost center to distinguish BigQuery resources owned by different teams (for example, `  team:research  ` and `  team:analytics  ` ). You can use this type of label for cost accounting or budgeting.
+  - **Team or cost center labels** : Add labels based on team or cost center to distinguish BigQuery resources owned by different teams (for example, `team:research` and `team:analytics` ). You can use this type of label for cost accounting or budgeting.
 
-  - **Component labels** : For example, `  component:redis  ` , `  component:frontend  ` , `  component:ingest  ` , and `  component:dashboard  ` .
+  - **Component labels** : For example, `component:redis` , `component:frontend` , `component:ingest` , and `component:dashboard` .
 
-  - **Environment or stage labels** : For example, `  environment:production  ` and `  environment:test  ` .
+  - **Environment or stage labels** : For example, `environment:production` and `environment:test` .
 
-  - **State labels** : For example, `  state:active  ` , `  state:readytodelete  ` , and `  state:archive  ` .
+  - **State labels** : For example, `state:active` , `state:readytodelete` , and `state:archive` .
 
-  - **Ownership labels** : Used to identify the teams that are responsible for operations, for example: `  team:shopping-cart  ` .
+  - **Ownership labels** : Used to identify the teams that are responsible for operations, for example: `team:shopping-cart` .
 
 **Note:** Don't include sensitive information in labels, including personally identifiable information, such as an individual's name or title. Labels are not designed to handle sensitive information.
 

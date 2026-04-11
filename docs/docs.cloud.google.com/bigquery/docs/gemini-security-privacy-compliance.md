@@ -18,7 +18,7 @@ The following diagram shows the components of the Gemini in BigQuery architectur
 
 ![Chart of Gemini in BigQuery global and EU and US jurisdictions.](https://docs.cloud.google.com/static/bigquery/images/ginbq-region-jurisdictions.svg)
 
-**Important:** Gemini in BigQuery processes data in the `  US  ` or `  EU  ` jurisdictions where the data resides. Data outside these jurisdictions is processed globally. To learn more about where Gemini in BigQuery processes your data, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
+**Important:** Gemini in BigQuery processes data in the `US` or `EU` jurisdictions where the data resides. Data outside these jurisdictions is processed globally. To learn more about where Gemini in BigQuery processes your data, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
 
 ### How Gemini in BigQuery processes data
 
@@ -49,7 +49,7 @@ Gemini in BigQuery is designed to protect the privacy of your data. Google's pri
 
 Generally available (GA) Gemini in BigQuery features are covered by the certifications and security statements of Gemini for Google Cloud with exception of the following limitations:
 
-  - Gemini in BigQuery doesn't provide data residency for individual locations. Gemini processing can be specified for data with the `  US  ` - and `  EU  ` -supported jurisdictions. Data outside these jurisdictions is processed globally. To learn more, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
+  - Gemini in BigQuery doesn't provide data residency for individual locations. Gemini processing can be specified for data with the `US` - and `EU` -supported jurisdictions. Data outside these jurisdictions is processed globally. To learn more, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
   - Cloud logging audit logs are not available for Gemini in BigQuery user prompts and responses.
   - Gemini in BigQuery is not included in supported [Assured Workload packages](https://docs.cloud.google.com/assured-workloads/docs/supported-products) .
 

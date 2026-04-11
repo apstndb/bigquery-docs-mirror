@@ -2,14 +2,14 @@ Describes how the model metadata was changed.
 
 Enums
 
-`  REASON_UNSPECIFIED  `
+`REASON_UNSPECIFIED`
 
 Unknown.
 
-`  MODEL_PATCH_REQUEST  `
+`MODEL_PATCH_REQUEST`
 
 Model metadata was updated using the models.patch API.
 
-`  QUERY  `
+`QUERY`
 
 Model metadata was updated using a DDL query.

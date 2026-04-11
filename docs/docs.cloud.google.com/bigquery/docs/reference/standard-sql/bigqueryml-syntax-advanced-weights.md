@@ -1,14 +1,14 @@
 # The ML.ADVANCED\_WEIGHTS function
 
-This document describes the `  ML.ADVANCED_WEIGHTS  ` function, which lets you see the underlying weights that a linear or binary logistic regression model uses during prediction, along with the associated p-values and standard errors for that weight. `  ML.ADVANCED_WEIGHTS  ` is an extended version of `  ML.WEIGHTS  ` for linear and binary logistic regression models.
+This document describes the `ML.ADVANCED_WEIGHTS` function, which lets you see the underlying weights that a linear or binary logistic regression model uses during prediction, along with the associated p-values and standard errors for that weight. `ML.ADVANCED_WEIGHTS` is an extended version of `ML.WEIGHTS` for linear and binary logistic regression models.
 
 ## Usage requirements
 
-You can only use `  ML.ADVANCED_WEIGHTS  ` on linear and binary logistic regression models that are trained with the following option settings:
+You can only use `ML.ADVANCED_WEIGHTS` on linear and binary logistic regression models that are trained with the following option settings:
 
-  - The [`  CALCULATE_P_VALUES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#calculate_p_values) value is `  TRUE  ` .
-  - The [`  CATEGORY_ENCODING_METHOD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#category_encoding_method) value is `  DUMMY_ENCODING  ` .
-  - The [`  L1_REG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#l1_reg) value is `  0  ` .
+  - The [`CALCULATE_P_VALUES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#calculate_p_values) value is `TRUE` .
+  - The [`CATEGORY_ENCODING_METHOD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#category_encoding_method) value is `DUMMY_ENCODING` .
+  - The [`L1_REG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#l1_reg) value is `0` .
 
 It's common to require standard errors or p-values for either the regression coefficients or other estimated quantities for these penalized regression methods. In principle, such standard errors can be calculated—for example, using the bootstrap. In practice, this calculation isn't done for reasons that the authors of the [R package](https://cran.r-project.org/web/packages/penalized/vignettes/penalized.pdf) explain as follows:
 
@@ -27,50 +27,50 @@ ML.ADVANCED_WEIGHTS(
 
 ### Arguments
 
-`  ML.ADVANCED_WEIGHTS  ` takes the following arguments:
+`ML.ADVANCED_WEIGHTS` takes the following arguments:
 
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET  ` : the BigQuery dataset that contains the model.
   - `  MODEL  ` : the name of the model.
-  - `  STANDARDIZE  ` : a `  BOOL  ` value that specifies whether the model weights should be standardized to assume that all features have a mean of zero and a standard deviation of one. Standardizing the weights allows the absolute magnitude of the weights to be compared to each other. The default value is `  FALSE  ` .
+  - `  STANDARDIZE  ` : a `BOOL` value that specifies whether the model weights should be standardized to assume that all features have a mean of zero and a standard deviation of one. Standardizing the weights allows the absolute magnitude of the weights to be compared to each other. The default value is `FALSE` .
 
 ## Output
 
-`  ML.ADVANCED_WEIGHTS  ` returns the following columns:
+`ML.ADVANCED_WEIGHTS` returns the following columns:
 
-  - `  processed_input  ` : a `  STRING  ` value that contains the name of the feature column. The value of this column is the name of the feature column that's provided in the [`  query_statement  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) used during model training. If the feature is non-numeric, then there are multiple rows with the same `  processed_input  ` value, one for each category of the feature.
+  - `processed_input` : a `STRING` value that contains the name of the feature column. The value of this column is the name of the feature column that's provided in the [`query_statement` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) used during model training. If the feature is non-numeric, then there are multiple rows with the same `processed_input` value, one for each category of the feature.
 
-  - `  category  ` : a `  STRING  ` value that contains the category name if the column identified in the `  processed_input  ` value is non-numeric. Returns a `  NULL  ` value for numeric columns.
+  - `category` : a `STRING` value that contains the category name if the column identified in the `processed_input` value is non-numeric. Returns a `NULL` value for numeric columns.
 
-  - `  weight  ` : a `  FLOAT64  ` value that contains the [weight](https://developers.google.com/machine-learning/glossary/#weight) of each feature.
+  - `weight` : a `FLOAT64` value that contains the [weight](https://developers.google.com/machine-learning/glossary/#weight) of each feature.
 
-  - `  standard_error  ` : a `  FLOAT64  ` value that contains the [standard error](https://en.wikipedia.org/wiki/Standard_error) of the weight.
+  - `standard_error` : a `FLOAT64` value that contains the [standard error](https://en.wikipedia.org/wiki/Standard_error) of the weight.
 
-  - `  p_value  ` : a `  FLOAT64  ` value that contains the [p-value](https://en.wikipedia.org/wiki/P-value) that was tested against the null hypothesis. The p-value for feature $j$ is calculated using the following formula:
+  - `p_value` : a `FLOAT64` value that contains the [p-value](https://en.wikipedia.org/wiki/P-value) that was tested against the null hypothesis. The p-value for feature $j$ is calculated using the following formula:
     
     $$ p(j) = 2 \* (1 - stats.norm.cdf(abs(\\hat\\beta\_j), loc=0, scale=\\sigma\_j)) $$
     
     such that $\\hat\\beta\_j$ is the weight of feature $j$ after training and $\\sigma\_j$ is its standard error.
 
-If the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) was used in the `  CREATE MODEL  ` statement that created the model, `  ML.ADVANCED_WEIGHTS  ` outputs the weights of the `  TRANSFORM  ` output features. The weights are denormalized by default, with the option to get normalized weights, exactly like models that are created without `  TRANSFORM  ` .
+If the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) was used in the `CREATE MODEL` statement that created the model, `ML.ADVANCED_WEIGHTS` outputs the weights of the `TRANSFORM` output features. The weights are denormalized by default, with the option to get normalized weights, exactly like models that are created without `TRANSFORM` .
 
 ## Permissions
 
-You must have the `  bigquery.models.create  ` and `  bigquery.models.getData  ` [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) in order to run `  ML.ADVANCED_WEIGHTS  ` .
+You must have the `bigquery.models.create` and `bigquery.models.getData` [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) in order to run `ML.ADVANCED_WEIGHTS` .
 
 ## Limitations
 
-The total cardinality of training features must be less than 1,000. This limitation is the result of the [limitations of computing p-values and standard error](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights#usage_requirements) when you set the `  CALCULATE_P_VALUES  ` option to `  TRUE  ` when training the model.
+The total cardinality of training features must be less than 1,000. This limitation is the result of the [limitations of computing p-values and standard error](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights#usage_requirements) when you set the `CALCULATE_P_VALUES` option to `TRUE` when training the model.
 
 ## Examples
 
-The following examples demonstrate `  ML.ADVANCED_WEIGHTS  ` with and without standardization.
+The following examples demonstrate `ML.ADVANCED_WEIGHTS` with and without standardization.
 
 ### Without standardization
 
-The following example retrieves weight information from `  mymodel  ` in `  mydataset  ` where the dataset is in your default project.
+The following example retrieves weight information from `mymodel` in `mydataset` where the dataset is in your default project.
 
-The query returns the weights associated with each one-hot encoded category for the input column `  input_col  ` .
+The query returns the weights associated with each one-hot encoded category for the input column `input_col` .
 
 ``` notranslate
 SELECT
@@ -80,13 +80,13 @@ FROM
     STRUCT(FALSE AS standardize))
 ```
 
-**Note:** Because un-standardizing the standard error for the intercept column is computationally expensive, the standard error and p-value aren't provided. If the standard error and p-value for the intercept are required, then set the `  STANDARDIZE  ` argument to `  TRUE  ` .
+**Note:** Because un-standardizing the standard error for the intercept column is computationally expensive, the standard error and p-value aren't provided. If the standard error and p-value for the intercept are required, then set the `STANDARDIZE` argument to `TRUE` .
 
 ### With standardization
 
-The following example retrieves weight information from `  mymodel  ` in `  mydataset  ` . The dataset is in your default project.
+The following example retrieves weight information from `mymodel` in `mydataset` . The dataset is in your default project.
 
-The query retrieves standardized weights, which assume all features have a mean of `  0  ` and a standard deviation of `  1.0  ` .
+The query retrieves standardized weights, which assume all features have a mean of `0` and a standard deviation of `1.0` .
 
 ``` notranslate
 SELECT

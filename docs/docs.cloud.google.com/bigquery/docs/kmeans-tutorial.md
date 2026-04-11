@@ -13,7 +13,7 @@ This tutorial guides you through completing the following tasks:
   - Examine the data used to train the model.
   - Create a k-means clustering model.
   - Interpret the data clusters produced, using BigQuery ML's visualization of the clusters.
-  - Run the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) on the k-means model to predict the likely cluster for a set of bike hire stations.
+  - Run the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) on the k-means model to predict the likely cluster for a set of bike hire stations.
 
 ## Costs
 
@@ -34,25 +34,25 @@ For information on BigQuery ML costs, see [BigQuery ML pricing](https://cloud.go
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
-  - To create the dataset, you need the `  bigquery.datasets.create  ` IAM permission.
+  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
   - To create the model, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following permissions:
     
-      - `  bigquery.models.getData  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.models.getData`
+      - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -78,11 +78,11 @@ Create a BigQuery dataset to store your k-means model:
 
 5.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **EU (multiple regions in European Union)** .
         
-        The London Bicycle Hires public dataset is stored in the `  EU  ` [multi-region](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . Your dataset must be in the same location.
+        The London Bicycle Hires public dataset is stored in the `EU` [multi-region](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . Your dataset must be in the same location.
     
       - Leave the remaining default settings as they are, and click **Create dataset** .
         
@@ -98,7 +98,7 @@ Examine the data you will use to train your k-means model. In this tutorial, you
 
 ### SQL
 
-This query extracts data on cycle hires, including the `  start_station_name  ` and `  duration  ` columns, and joins this data with station information. This includes creating a calculated column that contains the station distance from the city center. Then, it computes attributes of the station in a `  stationstats  ` column, including the average duration of rides and the number of trips, and the calculated `  distance_from_city_center  ` column.
+This query extracts data on cycle hires, including the `start_station_name` and `duration` columns, and joins this data with station information. This includes creating a calculated column that contains the station distance from the city center. Then, it computes attributes of the station in a `stationstats` column, including the average duration of rides and the number of trips, and the calculated `distance_from_city_center` column.
 
 Follow these steps to examine the training data:
 
@@ -264,7 +264,7 @@ Create a k-means model using London Bicycle Hires training data.
 
 ### SQL
 
-In the following query, the `  CREATE MODEL  ` statement specifies the number of clusters to use — four. In the `  SELECT  ` statement, the `  EXCEPT  ` clause excludes the `  station_name  ` column because this column doesn't contain a feature. The query creates a unique row per station\_name, and only the features are mentioned in the `  SELECT  ` statement.
+In the following query, the `CREATE MODEL` statement specifies the number of clusters to use — four. In the `SELECT` statement, the `EXCEPT` clause excludes the `station_name` column because this column doesn't contain a feature. The query creates a unique row per station\_name, and only the features are mentioned in the `SELECT` statement.
 
 Follow these steps to create a k-means model:
 
@@ -342,7 +342,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Interpret the data clusters
 
-The information in the models's **Evaluation** tab can help you to interpret the clusters produced by the model.
+The information in the model's **Evaluation** tab can help you to interpret the clusters produced by the model.
 
 Follow these steps to view the model's evaluation information:
 
@@ -356,9 +356,9 @@ Follow these steps to view the model's evaluation information:
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
-4.  Click the `  bqml_tutorial  ` dataset, and then go to the **Models** tab.
+4.  Click the `bqml_tutorial` dataset, and then go to the **Models** tab.
 
-5.  Select the `  london_station_clusters  ` model.
+5.  Select the `london_station_clusters` model.
 
 6.  Select the **Evaluation** tab. This tab displays visualizations of the clusters identified by the k-means model. In the **Numeric features** section, bar graphs display the most important numeric feature values for each centroid. Each centroid represents a given cluster of data. You can select which features to visualize from the drop-down menu.
     
@@ -377,15 +377,15 @@ Follow these steps to view the model's evaluation information:
     
       - Assume that you want to stock some stations with racing bikes. Which stations should you choose? Centroid 4 is the group of stations that are far from the city center, and they have the longest trips. These are likely candidates for racing bikes.
 
-## Use the `       ML.PREDICT      ` function to predict a station's cluster
+## Use the `ML.PREDICT` function to predict a station's cluster
 
-Identify the cluster to which a particular station belongs by using the `  ML.PREDICT  ` SQL function or the [`  predict  ` BigQuery DataFrames function](https://dataframes.bigquery.dev/reference/api/bigframes.ml.cluster.KMeans.html#bigframes.ml.cluster.KMeans.predict) .
+Identify the cluster to which a particular station belongs by using the `ML.PREDICT` SQL function or the [`predict` BigQuery DataFrames function](https://dataframes.bigquery.dev/reference/api/bigframes.ml.cluster.KMeans.html#bigframes.ml.cluster.KMeans.predict) .
 
 ### SQL
 
-The following query uses the [`  REGEXP_CONTAINS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_contains) function to find all entries in the `  station_name  ` column that contain the string `  Kennington  ` . The `  ML.PREDICT  ` function uses those values to predict which clusters might contain those stations.
+The following query uses the [`REGEXP_CONTAINS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_contains) function to find all entries in the `station_name` column that contain the string `Kennington` . The `ML.PREDICT` function uses those values to predict which clusters might contain those stations.
 
-Follow these steps to predicts the cluster of every station that has the string `  Kennington  ` in its name:
+Follow these steps to predict the cluster of every station that has the string `Kennington` in its name:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -495,7 +495,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset and the model.
 
-4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `  bqml_tutorial  ` ) and then click **Delete** .
+4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `bqml_tutorial` ) and then click **Delete** .
 
 ### Delete your project
 
@@ -504,7 +504,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -519,4 +519,4 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 ## What's next
 
   - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - For information about creating models, see the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.
+  - For information about creating models, see the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.

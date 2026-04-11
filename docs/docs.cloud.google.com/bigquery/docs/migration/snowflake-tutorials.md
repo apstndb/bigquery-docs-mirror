@@ -20,7 +20,7 @@ To [extract data from Snowflake](https://docs.snowflake.com/en/user-guide/data-u
 You can then load your data from Cloud Storage to BigQuery using one of the following tools:
 
   - [The BigQuery Data Transfer Service for Cloud Storage connector](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview)
-  - The [`  LOAD  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) using the bq command-line tool
+  - The [`LOAD` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) using the bq command-line tool
   - BigQuery API client libraries
 
 #### Other tools to extract data from Snowflake
@@ -32,12 +32,12 @@ You can also use the following tools to extract data from Snowflake:
       - [SnowflakeIO connector](https://beam.apache.org/documentation/io/built-in/snowflake/)
   - [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion/docs)
       - [JDBC drivers](https://docs.cloud.google.com/data-fusion/docs/how-to/using-jdbc-drivers)
-  - Dataproc
+  - Managed Service for Apache Spark
       - [Apache Spark BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example)
       - [Snowflake connector for Apache Spark](https://docs.snowflake.com/en/user-guide/spark-connector.html)
       - [Hadoop BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery)
       - The JDBC driver from Snowflake and Sqoop to extract data from Snowflake into Cloud Storage:
-          - [Moving data with Apache Sqoop in Dataproc](https://medium.com/google-cloud/moving-data-with-apache-sqoop-in-google-cloud-dataproc-4056b8fa2600)
+          - [Moving data with Apache Sqoop in Managed Service for Apache Spark](https://medium.com/google-cloud/moving-data-with-apache-sqoop-in-google-cloud-dataproc-4056b8fa2600)
 
 #### Other tools to load data to BigQuery
 
@@ -49,7 +49,7 @@ You can also use the following tools to load data to BigQuery:
       - [Cloud Storage Text to BigQuery template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/cloud-storage-to-bigquery)
   - Cloud Data Fusion
       - [Create a target campaign pipeline](https://docs.cloud.google.com/data-fusion/docs/tutorials/targeting-campaign-pipeline)
-  - Dataproc
+  - Managed Service for Apache Spark
       - [Cloud Storage connector with Spark](https://docs.cloud.google.com/dataproc/docs/tutorials/gcs-connector-spark-tutorial)
       - [Spark BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example)
       - [Hadoop Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage)
@@ -66,7 +66,7 @@ If you want to transform your data before loading it into BigQuery, consider the
       - Clone the [JDBC to BigQuery template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/jdbc-to-bigquery) code and modify the template to add [Apache Beam transforms](https://beam.apache.org/documentation/programming-guide/#transforms) .
   - Cloud Data Fusion
       - Create a reusable pipeline and transform your data using [CDAP plugins](https://cdap.io/resources/plugins/) .
-  - Dataproc
+  - Managed Service for Apache Spark
       - Transform your data using [Spark SQL](https://spark.apache.org/docs/latest/sql-programming-guide.html) or custom code in any of the supported Spark languages, such as Scala, Java, Python, or R.
 
 ### Partner tools for migration
@@ -75,7 +75,7 @@ There are multiple vendors that specialize in the EDW migration space. For a lis
 
 ## Snowflake export tutorial
 
-The following tutorial show a sample data export from Snowflake to BigQuery that uses the `  COPY INTO <location>  ` Snowflake command. For a detailed, step-by step process that includes code samples, see the [Google Cloud professional services Snowflake to BigQuery tool](https://github.com/GoogleCloudPlatform/professional-services/tree/master/tools/snowflake2bq)
+The following tutorial show a sample data export from Snowflake to BigQuery that uses the `COPY INTO <location>` Snowflake command. For a detailed, step-by step process that includes code samples, see the [Google Cloud professional services Snowflake to BigQuery tool](https://github.com/GoogleCloudPlatform/professional-services/tree/master/tools/snowflake2bq)
 
 ### Prepare for the export
 
@@ -83,16 +83,16 @@ You can prepare your Snowflake data for an export by extracting your Snowflake d
 
 ### Cloud Storage
 
-This tutorial prepares the file in `  PARQUET  ` format.
+This tutorial prepares the file in `PARQUET` format.
 
 1.  Use Snowflake SQL statements to create a [named file format specification](https://docs.snowflake.com/en/user-guide/data-unload-prepare.html#creating-a-named-file-format) .
     
         create or replace file format NAMED_FILE_FORMAT
             type = 'PARQUET'
     
-    Replace `  NAMED_FILE_FORMAT  ` with a name for the file format. For example, `  my_parquet_unload_format  ` .
+    Replace `NAMED_FILE_FORMAT` with a name for the file format. For example, `my_parquet_unload_format` .
 
-2.  Create an integration with the [`  CREATE STORAGE INTEGRATION  `](https://docs.snowflake.com/en/sql-reference/sql/create-storage-integration) command.
+2.  Create an integration with the [`CREATE STORAGE INTEGRATION`](https://docs.snowflake.com/en/sql-reference/sql/create-storage-integration) command.
     
         create storage integration INTEGRATION_NAME
             type = external_stage
@@ -102,10 +102,10 @@ This tutorial prepares the file in `  PARQUET  ` format.
     
     Replace the following:
     
-      - `  INTEGRATION_NAME  ` : a name for the storage integration. For example, `  gcs_int  `
-      - `  BUCKET_NAME  ` : the path to the Cloud Storage bucket. For example, `  gcs://mybucket/extract/  `
+      - `INTEGRATION_NAME` : a name for the storage integration. For example, `gcs_int`
+      - `BUCKET_NAME` : the path to the Cloud Storage bucket. For example, `gcs://mybucket/extract/`
 
-3.  [Retrieve the Cloud Storage service account for Snowflake](https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html#step-2-retrieve-the-cloud-storage-service-account-for-your-snowflake-account) with the [`  DESCRIBE INTEGRATION  `](https://docs.snowflake.com/en/sql-reference/sql/desc-integration.html) command.
+3.  [Retrieve the Cloud Storage service account for Snowflake](https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html#step-2-retrieve-the-cloud-storage-service-account-for-your-snowflake-account) with the [`DESCRIBE INTEGRATION`](https://docs.snowflake.com/en/sql-reference/sql/desc-integration.html) command.
     
         desc storage integration INTEGRATION_NAME;
     
@@ -120,7 +120,7 @@ This tutorial prepares the file in `  PARQUET  ` format.
         | STORAGE_GCP_SERVICE_ACCOUNT | String        | service-account-id@iam.gserviceaccount.com                 |                  |
         +-----------------------------+---------------+-----------------------------------------------------------------------------+------------------+
 
-4.  Grant the service account listed as `  STORAGE_GCP_SERVICE_ACCOUNT  ` read and write access to the bucket specified in the storage integration command. In this example, grant the `  service-account-id@  ` service account read and write access to the `  <var>UNLOAD_BUCKET</var>  ` bucket.
+4.  Grant the service account listed as `STORAGE_GCP_SERVICE_ACCOUNT` read and write access to the bucket specified in the storage integration command. In this example, grant the `service-account-id@` service account read and write access to the `<var>UNLOAD_BUCKET</var>` bucket.
 
 5.  Create an external Cloud Storage stage that references the integration that you created previously.
     
@@ -131,7 +131,7 @@ This tutorial prepares the file in `  PARQUET  ` format.
     
     Replace the following:
     
-      - `  STAGE_NAME  ` : a name for the Cloud Storage stage object. For example, `  my_ext_unload_stage  `
+      - `STAGE_NAME` : a name for the Cloud Storage stage object. For example, `my_ext_unload_stage`
 
 ### Amazon S3
 
@@ -139,7 +139,7 @@ The following example shows how to [move data from a Snowflake table to an Amazo
 
 1.  In Snowflake, [configure a storage integration object](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#option-1-configuring-a-snowflake-storage-integration) to allow Snowflake to write to an Amazon S3 bucket referenced in an external Cloud Storage stage.
     
-    This step involves [configuring access permissions](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-1-configure-access-permissions-for-the-s3-bucket) to the Amazon S3 bucket, [creating the Amazon Web Services (AWS) IAM role](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-2-create-the-iam-role-in-aws) , and creating a storage integration in Snowflake with the `  CREATE STORAGE INTEGRATION  ` command:
+    This step involves [configuring access permissions](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-1-configure-access-permissions-for-the-s3-bucket) to the Amazon S3 bucket, [creating the Amazon Web Services (AWS) IAM role](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-2-create-the-iam-role-in-aws) , and creating a storage integration in Snowflake with the `CREATE STORAGE INTEGRATION` command:
     
         create storage integration INTEGRATION_NAME
         type = external_stage
@@ -150,10 +150,10 @@ The following example shows how to [move data from a Snowflake table to an Amazo
     
     Replace the following:
     
-      - `  INTEGRATION_NAME  ` : a name for the storage integration. For example, `  s3_int  `
-      - `  BUCKET_NAME  ` : the path to the Amazon S3 bucket to load files to. For example, `  s3://unload/files/  `
+      - `INTEGRATION_NAME` : a name for the storage integration. For example, `s3_int`
+      - `BUCKET_NAME` : the path to the Amazon S3 bucket to load files to. For example, `s3://unload/files/`
 
-2.  [Retrieve the AWS IAM user](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration.html#step-4-retrieve-the-aws-iam-user-for-your-snowflake-account) with the [`  DESCRIBE INTEGRATION  `](https://docs.snowflake.com/en/sql-reference/sql/desc-integration.html) command.
+2.  [Retrieve the AWS IAM user](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration.html#step-4-retrieve-the-aws-iam-user-for-your-snowflake-account) with the [`DESCRIBE INTEGRATION`](https://docs.snowflake.com/en/sql-reference/sql/desc-integration.html) command.
     
         desc integration INTEGRATION_NAME;
     
@@ -170,7 +170,7 @@ The following example shows how to [move data from a Snowflake table to an Amazo
         | STORAGE_AWS_EXTERNAL_ID   | String        | MYACCOUNT_SFCRole=                                                   |                  |
         +---------------------------+---------------+================================================================================+------------------+
 
-3.  Create a role that has the `  CREATE STAGE  ` privilege for the schema, and the `  USAGE  ` privilege for the storage integration:
+3.  Create a role that has the `CREATE STAGE` privilege for the schema, and the `USAGE` privilege for the storage integration:
     
     ``` 
         CREATE role ROLE_NAME;  
@@ -178,9 +178,9 @@ The following example shows how to [move data from a Snowflake table to an Amazo
         GRANT USAGE ON INTEGRATION s3_int TO ROLE ROLE_NAME;
     ```
     
-    Replace `  ROLE_NAME  ` with a name for the role. For example, `  myrole  ` .
+    Replace `ROLE_NAME` with a name for the role. For example, `myrole` .
 
-4.  Grant the AWS IAM user permissions to access the Amazon S3 bucket, and [create an external stage](https://docs.snowflake.com/en/user-guide/data-load-s3-create-stage) with the `  CREATE STAGE  ` command:
+4.  Grant the AWS IAM user permissions to access the Amazon S3 bucket, and [create an external stage](https://docs.snowflake.com/en/user-guide/data-load-s3-create-stage) with the `CREATE STAGE` command:
     
     ``` 
         USE SCHEMA mydb.public;
@@ -193,20 +193,20 @@ The following example shows how to [move data from a Snowflake table to an Amazo
     
     Replace the following:
     
-      - `  STAGE_NAME  ` : a name for the Cloud Storage stage object. For example, `  my_ext_unload_stage  `
+      - `STAGE_NAME` : a name for the Cloud Storage stage object. For example, `my_ext_unload_stage`
 
 ### Export Snowflake data
 
-After you have prepared your data, you can move your data to Google Cloud. Use the `  COPY INTO  ` command to copy data from the Snowflake database table into a Cloud Storage or Amazon S3 bucket by specifying the external stage object, `  STAGE_NAME  ` .
+After you have prepared your data, you can move your data to Google Cloud. Use the `COPY INTO` command to copy data from the Snowflake database table into a Cloud Storage or Amazon S3 bucket by specifying the external stage object, `STAGE_NAME` .
 
 ``` 
     copy into @STAGE_NAME/d1
     from TABLE_NAME;
 ```
 
-Replace `  TABLE_NAME  ` with the name of your Snowflake database table.
+Replace `TABLE_NAME` with the name of your Snowflake database table.
 
-As a result of this command, the table data is copied to the stage object, which is linked to the Cloud Storage or Amazon S3 bucket. The file includes the `  d1  ` prefix.
+As a result of this command, the table data is copied to the stage object, which is linked to the Cloud Storage or Amazon S3 bucket. The file includes the `d1` prefix.
 
 ### Other export methods
 

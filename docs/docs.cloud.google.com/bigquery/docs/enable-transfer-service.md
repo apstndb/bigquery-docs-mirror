@@ -24,7 +24,7 @@ To create a project and enable the BigQuery API:
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
@@ -65,7 +65,7 @@ The service agent is created automatically on your behalf after you enable the B
 
 ### Cross-project Service Account Authorization
 
-If you authorize the data transfer using a service account from a project that is different from the project with the BigQuery Data Transfer Service enabled, you must grant the `  roles/iam.serviceAccountTokenCreator  ` role to the service agent using the following Google Cloud CLI command:
+If you authorize the data transfer using a service account from a project that is different from the project with the BigQuery Data Transfer Service enabled, you must grant the `roles/iam.serviceAccountTokenCreator` role to the service agent using the following Google Cloud CLI command:
 
 ``` notranslate
 gcloud iam service-accounts add-iam-policy-binding service_account \
@@ -82,7 +82,7 @@ For more information about cross-project resource configuration, see [Configurin
 
 When you enable the BigQuery Data Transfer Service API through the Google Cloud console, Google automatically attempts to grant the required permissions. However, if you enable the API or create transfers through Terraform, the Google Cloud CLI, or other programmatic methods, you must manually establish the required permissions. To authorize a transfer using a service account from a different project, consider the following:
 
-  - **Establish permissions for cross-project transfers:** To securely access cross-project data sources, grant the DTS service agent (resident in the destination project) the `  roles/iam.serviceAccountTokenCreator  ` role on the source service account identity.
+  - **Establish permissions for cross-project transfers:** To securely access cross-project data sources, grant the DTS service agent (resident in the destination project) the `roles/iam.serviceAccountTokenCreator` role on the source service account identity.
 
   - **Enforce the principle of least privilege:** Grant this role at the resource level (on the specific service account being used) rather than the project level.
 
@@ -108,27 +108,27 @@ Where:
 
 **Warning:** Don't revoke the service agent role from the service agent. If you revoke the role, the BigQuery Data Transfer Service will no longer work.
 
-## Grant `     bigquery.admin    ` access
+## Grant `bigquery.admin` access
 
-We recommend granting the `  bigquery.admin  ` predefined IAM role to users who create BigQuery Data Transfer Service transfers. The `  bigquery.admin  ` role includes the IAM permissions needed to perform the most common tasks. The `  bigquery.admin  ` role includes the following BigQuery Data Transfer Service permissions:
+We recommend granting the `bigquery.admin` predefined IAM role to users who create BigQuery Data Transfer Service transfers. The `bigquery.admin` role includes the IAM permissions needed to perform the most common tasks. The `bigquery.admin` role includes the following BigQuery Data Transfer Service permissions:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
-**Note:** Starting March 17, 2026, the BigQuery Data Transfer Service will require the `  bigquery.datasets.getIamPolicy  ` and `  bigquery.datasets.setIamPolicy  ` permissions. For more information, see [Changes to dataset-level access controls](https://docs.cloud.google.com/bigquery/docs/dataset-access-control) .
+**Note:** Starting March 17, 2026, the BigQuery Data Transfer Service will require the `bigquery.datasets.getIamPolicy` and `bigquery.datasets.setIamPolicy` permissions. For more information, see [Changes to dataset-level access controls](https://docs.cloud.google.com/bigquery/docs/dataset-access-control) .
 
-**Note:** If the `  bigquery.admin  ` role is too broad for a specific use case, you can [create a custom IAM role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) with only the necessary permissions.
+**Note:** If the `bigquery.admin` role is too broad for a specific use case, you can [create a custom IAM role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) with only the necessary permissions.
 
 In some cases, the required permissions might differ between different data sources. Refer to the "Required permissions" section in each data source transfer guide for specific IAM information. For example, see [Amazon S3 transfer permissions](https://docs.cloud.google.com/bigquery/docs/s3-transfer#required_permissions) or [Cloud Storage transfer permissions](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#required_permissions) .
 
-To grant the `  bigquery.admin  ` role:
+To grant the `bigquery.admin` role:
 
 ### Console
 
@@ -154,11 +154,11 @@ To grant the `  bigquery.admin  ` role:
 
 ### gcloud
 
-You can use the Google Cloud CLI to grant a user or group the `  bigquery.admin  ` role.
+You can use the Google Cloud CLI to grant a user or group the `bigquery.admin` role.
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
-To add a single binding to your project's IAM policy, type the following command. To add a user, supply the `  --member  ` flag in the format `  user:user@example.com  ` . To add a group, supply the `  --member  ` flag in the format `  group:group@example.com  ` .
+To add a single binding to your project's IAM policy, type the following command. To add a user, supply the `--member` flag in the format `user:user@example.com` . To add a group, supply the `--member` flag in the format `group:group@example.com` .
 
 ``` notranslate
 gcloud projects add-iam-policy-binding project_id \
@@ -169,7 +169,7 @@ gcloud projects add-iam-policy-binding project_id \
 Where:
 
   - project\_id is your project ID.
-  - principal is either `  group  ` or `  user  ` .
+  - principal is either `group` or `user` .
   - address is the user or group's email address.
 
 For example:

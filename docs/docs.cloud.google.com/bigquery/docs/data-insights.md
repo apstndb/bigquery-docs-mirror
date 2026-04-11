@@ -38,21 +38,21 @@ Dataset insights help you understand the relationships and join paths across mul
 
 ## Example of table data insights
 
-Consider a table called `  telco_churn  ` with columns such as `  CustomerID  ` , `  Tenure  ` , `  InternetService  ` , `  Contract  ` , `  MonthlyCharges  ` , and `  Churn  ` . The following table describes the table's metadata.
+Consider a table called `telco_churn` with columns such as `CustomerID` , `Tenure` , `InternetService` , `Contract` , `MonthlyCharges` , and `Churn` . The following table describes the table's metadata.
 
-| Field name                       | Type                     |
-| -------------------------------- | ------------------------ |
-| `        CustomerID       `      | `        STRING       `  |
-| `        Gender       `          | `        STRING       `  |
-| `        Tenure       `          | `        INT64       `   |
-| `        InternetService       ` | `        STRING       `  |
-| `        StreamingTV       `     | `        STRING       `  |
-| `        OnlineBackup       `    | `        STRING       `  |
-| `        Contract       `        | `        STRING       `  |
-| `        TechSupport       `     | `        STRING       `  |
-| `        PaymentMethod       `   | `        STRING       `  |
-| `        MonthlyCharges       `  | `        FLOAT64       ` |
-| `        Churn       `           | `        BOOL       `    |
+| Field name        | Type      |
+| ----------------- | --------- |
+| `CustomerID`      | `STRING`  |
+| `Gender`          | `STRING`  |
+| `Tenure`          | `INT64`   |
+| `InternetService` | `STRING`  |
+| `StreamingTV`     | `STRING`  |
+| `OnlineBackup`    | `STRING`  |
+| `Contract`        | `STRING`  |
+| `TechSupport`     | `STRING`  |
+| `PaymentMethod`   | `STRING`  |
+| `MonthlyCharges`  | `FLOAT64` |
+| `Churn`           | `BOOL`    |
 
 Data insights generates the following sample queries for this table:
 
@@ -87,7 +87,7 @@ Data insights generates the following sample queries for this table:
 
 ## Example of dataset data insights
 
-Consider a dataset containing `  order_items  ` and `  inventory_items  ` tables. Dataset insights can infer that `  order_items.inventory_item_id  ` relates to `  inventory_items.id  ` .
+Consider a dataset containing `order_items` and `inventory_items` tables. Dataset insights can infer that `order_items.inventory_item_id` relates to `inventory_items.id` .
 
 Based on these relationships, Gemini might generate the following cross-table query:
 
@@ -188,7 +188,7 @@ Data insights have the following limitations:
 
   - For multi-cloud customers, data from other clouds is not available.
 
-  - Data insights doesn't support `  GEO  ` or `  JSON  ` column types.
+  - Data insights doesn't support `GEO` or `JSON` column types.
 
   - Insights runs don't guarantee the presentation of queries every time. To increase the likelihood of generating more engaging queries, re-initiate the insights pipeline.
 

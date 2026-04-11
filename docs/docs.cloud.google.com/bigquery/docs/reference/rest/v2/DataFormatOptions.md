@@ -22,8 +22,8 @@ Options for data format adjustments.
 
 Fields
 
-`  useInt64Timestamp  `
+`useInt64Timestamp`
 
-`  boolean  `
+`boolean`
 
 Optional. Output timestamp as usec int64. Default is false.

@@ -6,27 +6,27 @@ This document describes how to view and subscribe to listings and data exchanges
 
 To get the permissions that you need to use listings, ask your BigQuery sharing administrator to grant you the following Identity and Access Management (IAM) roles on the BigQuery sharing subscriber project:
 
-  - [Discover listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) : [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `  roles/analyticshub.viewer  ` )
+  - [Discover listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) : [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `roles/analyticshub.viewer` )
 
-  - [Discover data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-data-exchanges) : [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `  roles/analyticshub.viewer  ` )
+  - [Discover data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-data-exchanges) : [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `roles/analyticshub.viewer` )
 
-  - [Subscribe to listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) : [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `  roles/bigquery.user  ` )
+  - [Subscribe to listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) : [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` )
     
-      - To subscribe to listings, you must also ask the BigQuery sharing listing publisher to grant you the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.subscriber) ( `  roles/analyticshub.subscriber  ` ) on their listing, exchange, or project, depending on the scope that's most appropriate for your use case.
+      - To subscribe to listings, you must also ask the BigQuery sharing listing publisher to grant you the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.subscriber) ( `roles/analyticshub.subscriber` ) on their listing, exchange, or project, depending on the scope that's most appropriate for your use case.
 
-  - [Subscribe to data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-data-exchanges) : [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `  roles/bigquery.user  ` )
+  - [Subscribe to data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-data-exchanges) : [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` )
     
-      - To subscribe to data exchanges in the context of data clean room exchanges, you must also ask the BigQuery sharing exchange publisher to grant you the Analytics Hub Subscriber role ( `  roles/analyticshub.subscriber  ` ) on the specific data clean room. Additionally, you must ask the destination project owners in the BigQuery sharing subscriber organization to grant you the [Analytics Hub Subscription Owner role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.subscriptionOwner) ( `  roles/analyticshub.subscriptionOwner  ` ) on the destination project.
+      - To subscribe to data exchanges in the context of data clean room exchanges, you must also ask the BigQuery sharing exchange publisher to grant you the Analytics Hub Subscriber role ( `roles/analyticshub.subscriber` ) on the specific data clean room. Additionally, you must ask the destination project owners in the BigQuery sharing subscriber organization to grant you the [Analytics Hub Subscription Owner role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.subscriptionOwner) ( `roles/analyticshub.subscriptionOwner` ) on the destination project.
 
-  - [View linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view-linked-datasets) : [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
+  - [View linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view-linked-datasets) : [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
 
-  - [Query linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#query-linked-datasets) : [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
+  - [Query linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#query-linked-datasets) : [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
 
-  - [Update linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#update-linked-datasets) : [BigQuery Data Owner](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` )
+  - [Update linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#update-linked-datasets) : [BigQuery Data Owner](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) ( `roles/bigquery.dataOwner` )
 
-  - [View table metadata](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view-table-metadata) : [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
+  - [View table metadata](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view-table-metadata) : [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
 
-  - [Delete linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#delete-linked-datasets) : [BigQuery Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) ( `  roles/bigquery.admin  ` )
+  - [Delete linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#delete-linked-datasets) : [BigQuery Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) ( `roles/bigquery.admin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -34,8 +34,8 @@ These predefined roles contain the permissions required to perform the tasks in 
 
 #### Required permissions
 
-  - Create new datasets: `  bigquery.datasets.create  ` or `  bigquery.datasets.*  ` to perform additional actions on datasets.
-  - Query datasets: `  bigquery.jobs.create  ` or `  bigquery.jobs.*  ` to perform additional actions on jobs.
+  - Create new datasets: `bigquery.datasets.create` or `bigquery.datasets.*` to perform additional actions on datasets.
+  - Query datasets: `bigquery.jobs.create` or `bigquery.jobs.*` to perform additional actions on jobs.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -113,7 +113,7 @@ To subscribe to a listing, follow these steps:
         
         **Note:** The selected primary region doesn't need to be the same as the provider's primary region. You might choose to colocate your linked dataset in the same region as the provider to minimize data replication latency.
     
-      - Optional: **Replica regions** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): select the region or regions where you want to create additional linked dataset secondary replicas. You might choose to colocate your linked dataset in the same region as your other data to minimize egress and facilitate cross-dataset joins. To create linked dataset replicas, you must have the `  bigquery.datasets.update  ` permission on the linked dataset.
+      - Optional: **Replica regions** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): select the region or regions where you want to create additional linked dataset secondary replicas. You might choose to colocate your linked dataset in the same region as your other data to minimize egress and facilitate cross-dataset joins. To create linked dataset replicas, you must have the `bigquery.datasets.update` permission on the linked dataset.
     
     **Note:** Linked dataset replicas are created on a best-effort basis. If permissions are missing, replicas aren't created.
 
@@ -121,7 +121,7 @@ To subscribe to a listing, follow these steps:
 
 ### API
 
-Use the [`  projects.locations.dataExchanges.listings.subscribe  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe) .
+Use the [`projects.locations.dataExchanges.listings.subscribe` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe) .
 
     POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID:subscribe
 
@@ -134,15 +134,15 @@ Replace the following:
 
 In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
 
-To create a subscription with linked dataset replicas available in multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), specify the primary region of the linked dataset using the `  location  ` field in the request body. For the secondary regions where you want to create linked dataset replicas, you can optionally use the `  destinationDataset.replica_locations  ` field in the request body and list all the selected secondary replica regions. Ensure that the specified regions in the `  location  ` property and in the `  destinationDataset.replica_locations  ` field are regions where the associated listing is available.
+To create a subscription with linked dataset replicas available in multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), specify the primary region of the linked dataset using the `location` field in the request body. For the secondary regions where you want to create linked dataset replicas, you can optionally use the `destinationDataset.replica_locations` field in the request body and list all the selected secondary replica regions. Ensure that the specified regions in the `location` property and in the `destinationDataset.replica_locations` field are regions where the associated listing is available.
 
-**Note:** Linked dataset replicas are created on a best-effort basis. If the `  bigquery.datasets.update  ` permission is missing on the linked dataset, replicas aren't created.
+**Note:** Linked dataset replicas are created on a best-effort basis. If the `bigquery.datasets.update` permission is missing on the linked dataset, replicas aren't created.
 
 If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#response-body) .
 
-If you enable subscriber email logging for the data exchange or listing with the `  logLinkedDatasetQueryUserEmail  ` field, the subscription response contains `  log_linked_dataset_query_user_email: true  ` . The logged data is available in the `  job_principal_subject  ` field of the [`  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
+If you enable subscriber email logging for the data exchange or listing with the `logLinkedDatasetQueryUserEmail` field, the subscription response contains `log_linked_dataset_query_user_email: true` . The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
 
-If you enable stored procedure sharing ( [Preview](https://cloud.google.com/products#product-launch-stages) ), the listing response contains `  stored_procedure_config: true  ` .
+If you enable stored procedure sharing ( [Preview](https://cloud.google.com/products#product-launch-stages) ), the listing response contains `stored_procedure_config: true` .
 
 **Note:** BigQuery sharing subscribers must [authorize shared stored procedures](https://docs.cloud.google.com/bigquery/docs/authorized-routines) in a linked dataset to read from and write to certain resources owned by the subscriber.
 
@@ -170,7 +170,7 @@ To subscribe to a data clean room exchange, follow these steps:
 
 ### API
 
-Use the [`  projects.locations.dataExchanges.subscribe  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe) .
+Use the [`projects.locations.dataExchanges.subscribe` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe) .
 
     POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID:subscribe
 
@@ -182,7 +182,7 @@ Replace the following:
 
 In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
 
-If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe#response-body) . If you have enabled subscriber email logging ( [Preview](https://cloud.google.com/products#product-launch-stages) ) for the data exchange, the subscription response contains `  log_linked_dataset_query_user_email: true  ` .
+If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe#response-body) . If you have enabled subscriber email logging ( [Preview](https://cloud.google.com/products#product-launch-stages) ) for the data exchange, the subscription response contains `log_linked_dataset_query_user_email: true` .
 
 ## View linked datasets
 
@@ -204,7 +204,7 @@ To view linked datasets in your project, follow these steps:
 
 3.  In the **Classic Explorer** pane, click the project name that contains the ![Analytics Hub linked dataset icon](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-linked-dataset.png) linked dataset.
 
-Alternatively, you can also use [Data Catalog (deprecated)](https://docs.cloud.google.com/data-catalog/docs/how-to/search#how_to_search_for_data_assets) or [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) to search and view linked datasets. To match all BigQuery sharing linked datasets, use the `  type=dataset.linked  ` predicate. For more information, see [Data Catalog search syntax](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference) or [Dataplex Universal Catalog search syntax](https://docs.cloud.google.com/dataplex/docs/search-syntax) .
+Alternatively, you can also use [Data Catalog (deprecated)](https://docs.cloud.google.com/data-catalog/docs/how-to/search#how_to_search_for_data_assets) or [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) to search and view linked datasets. To match all BigQuery sharing linked datasets, use the `type=dataset.linked` predicate. For more information, see [Data Catalog search syntax](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference) or [Dataplex Universal Catalog search syntax](https://docs.cloud.google.com/dataplex/docs/search-syntax) .
 
 ### Cloud Shell
 
@@ -252,13 +252,13 @@ To update the description and labels of a linked dataset, follow these steps:
 
 ## View table metadata
 
-To view the underlying table metadata, query the [`  INFORMATION_SCHEMA.TABLES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) view:
+To view the underlying table metadata, query the [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) view:
 
     SELECT * FROM `LINKED-DATASET.INFORMATION_SCHEMA.TABLES`
 
 Replace LINKED-DATASET with the name of your linked dataset.
 
-**Note:** [Region-based `  INFORMATION_SCHEMA  ` queries](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) don't return metadata of linked tables. To learn about `  INFORMATION_SCHEMA  ` views that don't support dataset qualifiers for linked datasets, see [Limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) .
+**Note:** [Region-based `INFORMATION_SCHEMA` queries](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) don't return metadata of linked tables. To learn about `INFORMATION_SCHEMA` views that don't support dataset qualifiers for linked datasets, see [Limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) .
 
 ## Unsubscribe from or delete linked datasets
 

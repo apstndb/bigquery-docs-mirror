@@ -11,7 +11,7 @@ Updates an existing QueryTemplate
 
 ### HTTP request
 
-`  PATCH https://analyticshub.googleapis.com/v1/{queryTemplate.name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}  `
+`PATCH https://analyticshub.googleapis.com/v1/{queryTemplate.name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,23 +19,23 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  queryTemplate.name  `
+`queryTemplate.name`
 
-`  string  `
+`string`
 
-Output only. The resource name of the QueryTemplate. e.g. `  projects/myproject/locations/us/dataExchanges/123/queryTemplates/456  `
+Output only. The resource name of the QueryTemplate. e.g. `projects/myproject/locations/us/dataExchanges/123/queryTemplates/456`
 
 ### Query parameters
 
 Parameters
 
-`  updateMask  `
+`updateMask`
 
-`  string ( FieldMask  ` format)
+` string ( FieldMask  ` format)
 
-Optional. Field mask specifies the fields to update in the query template resource. The fields specified in the `  updateMask  ` are relative to the resource and are not a full request.
+Optional. Field mask specifies the fields to update in the query template resource. The fields specified in the `updateMask` are relative to the resource and are not a full request.
 
-This is a comma-separated list of fully qualified names of fields. Example: `  "user.displayName,photo"  ` .
+This is a comma-separated list of fully qualified names of fields. Example: `"user.displayName,photo"` .
 
 ### Request body
 
@@ -49,15 +49,15 @@ If successful, the response body contains an instance of `  QueryTemplate  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  analyticshub.queryTemplates.update  `
+  - `analyticshub.queryTemplates.update`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

@@ -22,42 +22,22 @@ A reservation is a mechanism used to guarantee slots to users.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;slotCapacity&quot;: string,
-  &quot;ignoreIdleSlots&quot;: boolean,
-  &quot;autoscale&quot;: {
-    object (Autoscale)
-  },
-  &quot;concurrency&quot;: string,
-  &quot;creationTime&quot;: string,
-  &quot;updateTime&quot;: string,
-  &quot;edition&quot;: enum (Edition),
-  &quot;primaryLocation&quot;: string,
-  &quot;secondaryLocation&quot;: string,
-  &quot;originalPrimaryLocation&quot;: string,
-  &quot;scalingMode&quot;: enum (ScalingMode),
-  &quot;reservationGroup&quot;: string,
-  &quot;replicationStatus&quot;: {
-    object (ReplicationStatus)
-  },
-  &quot;maxSlots&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;slotCapacity&quot;: string,&quot;ignoreIdleSlots&quot;: boolean,&quot;autoscale&quot;: {object (Autoscale)},&quot;concurrency&quot;: string,&quot;creationTime&quot;: string,&quot;updateTime&quot;: string,&quot;edition&quot;: enum (Edition),&quot;primaryLocation&quot;: string,&quot;secondaryLocation&quot;: string,&quot;originalPrimaryLocation&quot;: string,&quot;scalingMode&quot;: enum (ScalingMode),&quot;reservationGroup&quot;: string,&quot;replicationStatus&quot;: {object (ReplicationStatus)},&quot;maxSlots&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Identifier. The resource name of the reservation, e.g., `  projects/*/locations/*/reservations/team1-prod  ` . The reservationId must only contain lower case alphanumeric characters or dashes. It must start with a letter and must not end with a dash. Its maximum length is 64 characters.
+Identifier. The resource name of the reservation, e.g., `projects/*/locations/*/reservations/team1-prod` . The reservationId must only contain lower case alphanumeric characters or dashes. It must start with a letter and must not end with a dash. Its maximum length is 64 characters.
 
-`  slotCapacity  `
+`slotCapacity`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Baseline slots available to this reservation. A slot is a unit of computational power in BigQuery, and serves as the unit of parallelism.
 
@@ -65,99 +45,99 @@ Queries using this reservation might use more slots during runtime if ignoreIdle
 
 The total slotCapacity of the reservation and its siblings may exceed the total slotCount of capacity commitments. In that case, the exceeding slots will be charged with the autoscale SKU. You can increase the number of baseline slots in a reservation every few minutes. If you want to decrease your baseline slots, you are limited to once an hour if you have recently changed your baseline slot capacity and your baseline slots exceed your committed slots. Otherwise, you can decrease your baseline slots every few minutes.
 
-`  ignoreIdleSlots  `
+`ignoreIdleSlots`
 
-`  boolean  `
+`boolean`
 
 Optional. If false, any query or pipeline job using this reservation will use idle slots from other reservations within the same admin project. If true, a query or pipeline job using this reservation will execute with the slot capacity specified in the slotCapacity field at most.
 
-`  autoscale  `
+`autoscale`
 
-`  object ( Autoscale  ` )
+` object ( Autoscale  ` )
 
 Optional. The configuration parameters for the auto scaling feature.
 
-`  concurrency  `
+`concurrency`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Job concurrency target which sets a soft upper bound on the number of jobs that can run concurrently in this reservation. This is a soft target due to asynchronous nature of the system and various optimizations for small queries. Default value is 0 which means that concurrency target will be automatically computed by the system. NOTE: this field is exposed as target job concurrency in the Information Schema, DDL and BigQuery CLI.
 
-`  creationTime  `
+`creationTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Creation time of the reservation.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Last update time of the reservation.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  edition  `
+`edition`
 
-`  enum ( Edition  ` )
+` enum ( Edition  ` )
 
 Optional. Edition of the reservation.
 
-`  primaryLocation  `
+`primaryLocation`
 
-`  string  `
+`string`
 
 Output only. The current location of the reservation's primary replica. This field is only set for reservations using the managed disaster recovery feature.
 
-`  secondaryLocation  `
+`secondaryLocation`
 
-`  string  `
+`string`
 
 Optional. The current location of the reservation's secondary replica. This field is only set for reservations using the managed disaster recovery feature. Users can set this in create reservation calls to create a failover reservation or in update reservation calls to convert a non-failover reservation to a failover reservation(or vice versa).
 
-`  originalPrimaryLocation  `
+`originalPrimaryLocation`
 
-`  string  `
+`string`
 
 Output only. The location where the reservation was originally created. This is set only during the failover reservation's creation. All billing charges for the failover reservation will be applied to this location.
 
-`  scalingMode  `
+`scalingMode`
 
-`  enum ( ScalingMode  ` )
+` enum ( ScalingMode  ` )
 
-Optional. The scaling mode for the reservation. If the field is present but maxSlots is not present, requests will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` .
+Optional. The scaling mode for the reservation. If the field is present but maxSlots is not present, requests will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 
-`  reservationGroup  `
+`reservationGroup`
 
-`  string  `
+`string`
 
 Optional. The reservation group that this reservation belongs to. You can set this property when you create or update a reservation. Reservations do not need to belong to a reservation group. Format: projects/{project}/locations/{location}/reservationGroups/{reservationGroup} or just {reservationGroup}
 
-`  replicationStatus  `
+`replicationStatus`
 
-`  object ( ReplicationStatus  ` )
+` object ( ReplicationStatus  ` )
 
 Output only. The Disaster Recovery(DR) replication status of the reservation. This is only available for the primary replicas of DR/failover reservations and provides information about the both the staleness of the secondary and the last error encountered while trying to replicate changes from the primary to the secondary. If this field is blank, it means that the reservation is either not a DR reservation or the reservation is a DR secondary or that any replication operations on the reservation have succeeded.
 
-`  maxSlots  `
+`maxSlots`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. The overall max slots for the reservation, covering slotCapacity (baseline), idle slots (if ignoreIdleSlots is false) and scaled slots. If present, the reservation won't use more than the specified number of slots, even if there is demand and supply (from idle slots). NOTE: capping a reservation's idle slot usage is best effort and its usage may exceed the maxSlots value. However, in terms of autoscale.current\_slots (which accounts for the additional added slots), it will never exceed the maxSlots - baseline.
 
-This field must be set together with the scalingMode enum value, otherwise the request will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` .
+This field must be set together with the scalingMode enum value, otherwise the request will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 
-If the maxSlots and scalingMode are set, the autoscale or autoscale.max\_slots field must be unset. Otherwise the request will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` . However, the autoscale field may still be in the output. The autopscale.max\_slots will always show as 0 and the autoscaler.current\_slots will represent the current slots from autoscaler excluding idle slots. For example, if the maxSlots is 1000 and scalingMode is AUTOSCALE\_ONLY, then in the output, the autoscaler.max\_slots will be 0 and the autoscaler.current\_slots may be any value between 0 and 1000.
+If the maxSlots and scalingMode are set, the autoscale or autoscale.max\_slots field must be unset. Otherwise the request will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` . However, the autoscale field may still be in the output. The autopscale.max\_slots will always show as 0 and the autoscaler.current\_slots will represent the current slots from autoscaler excluding idle slots. For example, if the maxSlots is 1000 and scalingMode is AUTOSCALE\_ONLY, then in the output, the autoscaler.max\_slots will be 0 and the autoscaler.current\_slots may be any value between 0 and 1000.
 
 If the maxSlots is 1000, scalingMode is ALL\_SLOTS, the baseline is 100 and idle slots usage is 200, then in the output, the autoscaler.max\_slots will be 0 and the autoscaler.current\_slots will not be higher than 700.
 
 If the maxSlots is 1000, scalingMode is IDLE\_SLOTS\_ONLY, then in the output, the autoscaler field will be null.
 
-If the maxSlots and scalingMode are set, then the ignoreIdleSlots field must be aligned with the scalingMode enum value.(See details in ScalingMode comments). Otherwise the request will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` .
+If the maxSlots and scalingMode are set, then the ignoreIdleSlots field must be aligned with the scalingMode enum value.(See details in ScalingMode comments). Otherwise the request will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 
-Please note, the maxSlots is for user to manage the part of slots greater than the baseline. Therefore, we don't allow users to set maxSlots smaller or equal to the baseline as it will not be meaningful. If the field is present and slotCapacity\>=maxSlots, requests will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` .
+Please note, the maxSlots is for user to manage the part of slots greater than the baseline. Therefore, we don't allow users to set maxSlots smaller or equal to the baseline as it will not be meaningful. If the field is present and slotCapacity\>=maxSlots, requests will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 
 Please note that if maxSlots is set to 0, we will treat it as unset. Customers can set maxSlots to 0 and set scalingMode to SCALING\_MODE\_UNSPECIFIED to disable the maxSlots feature.
 
@@ -186,15 +166,15 @@ Auto scaling settings.
 
 Fields
 
-`  currentSlots  `
+`currentSlots`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The slot capacity added to this reservation when autoscale happens. Will be between \[0, maxSlots\]. Note: after users reduce maxSlots, it may take a while before it can be propagated, so currentSlots may stay in the original value and could be larger than maxSlots for that brief period (less than one minute)
 
-`  maxSlots  `
+`maxSlots`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Optional. Number of slots to be scaled when needed.
 
@@ -204,27 +184,27 @@ The scaling mode for the reservation. This enum determines how the reservation s
 
 Enums
 
-`  SCALING_MODE_UNSPECIFIED  `
+`SCALING_MODE_UNSPECIFIED`
 
 Default value of ScalingMode.
 
-`  AUTOSCALE_ONLY  `
+`AUTOSCALE_ONLY`
 
 The reservation will scale up only using slots from autoscaling. It will not use any idle slots even if there may be some available. The upper limit that autoscaling can scale up to will be maxSlots - baseline. For example, if maxSlots is 1000, baseline is 200 and customer sets ScalingMode to AUTOSCALE\_ONLY, then autoscalerg will scale up to 800 slots and no idle slots will be used.
 
-Please note, in this mode, the ignoreIdleSlots field must be set to true. Otherwise the request will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` .
+Please note, in this mode, the ignoreIdleSlots field must be set to true. Otherwise the request will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 
-`  IDLE_SLOTS_ONLY  `
+`IDLE_SLOTS_ONLY`
 
-The reservation will scale up using only idle slots contributed by other reservations or from unassigned commitments. If no idle slots are available it will not scale up further. If the idle slots which it is using are reclaimed by the contributing reservation(s) it may be forced to scale down. The max idle slots the reservation can be maxSlots - baseline capacity. For example, if maxSlots is 1000, baseline is 200 and customer sets ScalingMode to IDLE\_SLOTS\_ONLY, 1. if there are 1000 idle slots available in other reservations, the reservation will scale up to 1000 slots with 200 baseline and 800 idle slots. 2. if there are 500 idle slots available in other reservations, the reservation will scale up to 700 slots with 200 baseline and 300 idle slots. Please note, in this mode, the reservation might not be able to scale up to maxSlots.
+The reservation will scale up using only idle slots contributed by other reservations or from unassigned commitments. If no idle slots are available it will not scale up further. If the idle slots which it is using are reclaimed by the contributing reservation(s) it may be forced to scale down. The max idle slots the reservation can be maxSlots - baseline capacity. For example, if maxSlots is 1000, baseline is 200 and customer sets ScalingMode to IDLE\_SLOTS\_ONLY, 1. if there are 1000 idle slots available in other reservations, the reservation will scale up to 1000 slots with 200 baseline and 800 idle slots. 2. if there are 500 idle slots available in other reservations, the reservation will scale up to 700 slots with 200 baseline and 500 idle slots. Please note, in this mode, the reservation might not be able to scale up to maxSlots.
 
-Please note, in this mode, the ignoreIdleSlots field must be set to false. Otherwise the request will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` .
+Please note, in this mode, the ignoreIdleSlots field must be set to false. Otherwise the request will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 
-`  ALL_SLOTS  `
+`ALL_SLOTS`
 
 The reservation will scale up using all slots available to it. It will use idle slots contributed by other reservations or from unassigned commitments first. If no idle slots are available it will scale up using autoscaling. For example, if maxSlots is 1000, baseline is 200 and customer sets ScalingMode to ALL\_SLOTS, 1. if there are 800 idle slots available in other reservations, the reservation will scale up to 1000 slots with 200 baseline and 800 idle slots. 2. if there are 500 idle slots available in other reservations, the reservation will scale up to 1000 slots with 200 baseline, 500 idle slots and 300 autoscaling slots. 3. if there are no idle slots available in other reservations, it will scale up to 1000 slots with 200 baseline and 800 autoscaling slots.
 
-Please note, in this mode, the ignoreIdleSlots field must be set to false. Otherwise the request will be rejected with error code `  google.rpc.Code.INVALID_ARGUMENT  ` .
+Please note, in this mode, the ignoreIdleSlots field must be set to false. Otherwise the request will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 
 ## ReplicationStatus
 
@@ -241,84 +221,77 @@ Disaster Recovery(DR) replication status of the reservation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;error&quot;: {
-    object (Status)
-  },
-  &quot;lastErrorTime&quot;: string,
-  &quot;lastReplicationTime&quot;: string,
-  &quot;softFailoverStartTime&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;error&quot;: {object (Status)},&quot;lastErrorTime&quot;: string,&quot;lastReplicationTime&quot;: string,&quot;softFailoverStartTime&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  error  `
+`error`
 
-`  object ( Status  ` )
+` object ( Status  ` )
 
 Output only. The last error encountered while trying to replicate changes from the primary to the secondary. This field is only available if the replication has not succeeded since.
 
-`  lastErrorTime  `
+`lastErrorTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. The time at which the last error was encountered while trying to replicate changes from the primary to the secondary. This field is only available if the replication has not succeeded since.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  lastReplicationTime  `
+`lastReplicationTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. A timestamp corresponding to the last change on the primary that was successfully replicated to the secondary.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  softFailoverStartTime  `
+`softFailoverStartTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. The time at which a soft failover for the reservation and its associated datasets was initiated. After this field is set, all subsequent changes to the reservation will be rejected unless a hard failover overrides this operation. This field will be cleared once the failover is complete.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
 ## Methods
 
-### `             create           `
+### `            create           `
 
 Creates a new reservation resource.
 
-### `             delete           `
+### `            delete           `
 
 Deletes a reservation.
 
-### `             failoverReservation           `
+### `            failoverReservation           `
 
 Fail over a reservation to the secondary location.
 
-### `             get           `
+### `            get           `
 
 Returns information about the reservation.
 
-### `             getIamPolicy           `
+### `            getIamPolicy           `
 
 Gets the access control policy for a resource.
 
-### `             list           `
+### `            list           `
 
 Lists all the reservations for the project in the specified location.
 
-### `             patch           `
+### `            patch           `
 
 Updates an existing reservation resource.
 
-### `             setIamPolicy           `
+### `            setIamPolicy           `
 
 Sets an access control policy for a resource.
 
-### `             testIamPermissions           `
+### `            testIamPermissions           `
 
 Gets your permissions on a resource.

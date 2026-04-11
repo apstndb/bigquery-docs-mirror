@@ -1,8 +1,8 @@
-This tutorial teaches you how to use an [`  ARIMA_PLUS  ` univariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) to forecast the future value of a given column, based on the historical values for that column.
+This tutorial teaches you how to use an [`ARIMA_PLUS` univariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) to forecast the future value of a given column, based on the historical values for that column.
 
 This tutorial forecasts for multiple time series. Forecasted values are calculated for each time point, for each value in one or more specified columns. For example, if you wanted to forecast weather and specified a column containing city data, the forecasted data would contain forecasts for all time points for City A, then forecasted values for all time points for City B, and so forth.
 
-This tutorial uses data from the public [`  bigquery-public-data.new_york.citibike_trips  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=new_york&t=citibike_trips&page=table) table. This table contains information about Citi Bike trips in New York City.
+This tutorial uses data from the public [`bigquery-public-data.new_york.citibike_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=new_york&t=citibike_trips&page=table) table. This table contains information about Citi Bike trips in New York City.
 
 Before reading this tutorial, we highly recommend that you read [Forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial) .
 
@@ -10,11 +10,11 @@ Before reading this tutorial, we highly recommend that you read [Forecast a sing
 
 This tutorial guides you through completing the following tasks:
 
-  - Creating a time series model to forecast the number of bike trips by using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) .
-  - Evaluating the autoregressive integrated moving average (ARIMA) information in the model by using the [`  ML.ARIMA_EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) .
-  - Inspecting the model coefficients by using the [`  ML.ARIMA_COEFFICIENTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients) .
-  - Retrieving the forecasted bike ride information from the model by using the [`  ML.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
-  - Retrieving components of the time series, such as seasonality and trend, by using the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) . You can inspect these time series components in order to explain the forecasted values.
+  - Creating a time series model to forecast the number of bike trips by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) .
+  - Evaluating the autoregressive integrated moving average (ARIMA) information in the model by using the [`ML.ARIMA_EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) .
+  - Inspecting the model coefficients by using the [`ML.ARIMA_COEFFICIENTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients) .
+  - Retrieving the forecasted bike ride information from the model by using the [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
+  - Retrieving components of the time series, such as seasonality and trend, by using the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) . You can inspect these time series components in order to explain the forecasted values.
 
 ## Costs
 
@@ -35,25 +35,25 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
-  - To create the dataset, you need the `  bigquery.datasets.create  ` IAM permission.
+  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
   - To create the model, you need the following permissions:
     
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
 
   - To run inference, you need the following permissions:
     
-      - `  bigquery.models.getData  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.models.getData`
+      - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -73,7 +73,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -81,9 +81,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -100,7 +100,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -127,7 +127,7 @@ Before creating the model, you can optionally visualize your input time series d
 
 ### SQL
 
-The `  SELECT  ` statement of the following query uses the [`  EXTRACT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#extract) to extract the date information from the `  starttime  ` column. The query uses the `  COUNT(*)  ` clause to get the daily total number of Citi Bike trips.
+The `SELECT` statement of the following query uses the [`EXTRACT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#extract) to extract the date information from the `starttime` column. The query uses the `COUNT(*)` clause to get the daily total number of Citi Bike trips.
 
 Follow these steps to visualize the time series data:
 
@@ -217,7 +217,7 @@ You want to forecast the number of bike trips for each Citi Bike station, which 
 
 ### SQL
 
-In the following query, the `  OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)  ` clause indicates that you are creating an [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) -based time series model. You use the [`  time_series_id_col  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_id_col) of the `  CREATE MODEL  ` statement to specify one or more columns in the input data that you want to get forecasts for, in this case the Citi Bike station, as represented by the `  start_station_name  ` column. You use the `  WHERE  ` clause to limit the start stations to those with `  Central Park  ` in their names. The [`  auto_arima_max_order  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) of the `  CREATE MODEL  ` statement controls the search space for hyperparameter tuning in the `  auto.ARIMA  ` algorithm. The [`  decompose_time_series  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) of the `  CREATE MODEL  ` statement defaults to `  TRUE  ` , so that information about the time series data is returned when you evaluate the model in the next step.
+In the following query, the `OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)` clause indicates that you are creating an [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) -based time series model. You use the [`time_series_id_col` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_id_col) of the `CREATE MODEL` statement to specify one or more columns in the input data that you want to get forecasts for, in this case the Citi Bike station, as represented by the `start_station_name` column. You use the `WHERE` clause to limit the start stations to those with `Central Park` in their names. The [`auto_arima_max_order` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) of the `CREATE MODEL` statement controls the search space for hyperparameter tuning in the `auto.ARIMA` algorithm. The [`decompose_time_series` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) of the `CREATE MODEL` statement defaults to `TRUE` , so that information about the time series data is returned when you evaluate the model in the next step.
 
 Follow these steps to create the model:
 
@@ -246,9 +246,9 @@ Follow these steps to create the model:
     GROUP BY start_station_name, date;
     ```
     
-    The query takes approximately 24 seconds to complete, after which you can access the `  nyc_citibike_arima_model_group  ` model. Because the query uses a `  CREATE MODEL  ` statement, you don't see query results.
+    The query takes approximately 24 seconds to complete, after which you can access the `nyc_citibike_arima_model_group` model. Because the query uses a `CREATE MODEL` statement, you don't see query results.
 
-This query creates twelve time series models, one for each of the twelve Citi Bike start stations in the input data. The time cost, approximately 24 seconds, is only 1.4 times more than that of creating a single time series model because of the parallelism. However, if you remove the `  WHERE ... LIKE ...  ` clause, there would be 600+ time series to forecast, and they wouldn't be forecast completely in parallel because of slot capacity limitations. In that case, the query would take approximately 15 minutes to finish. To reduce the query runtime with the compromise of a potential slight drop in model quality, you could decrease the value of the `  auto_arima_max_order  ` . This shrinks the search space of hyperparameter tuning in the `  auto.ARIMA  ` algorithm. For more information, see [`  Large-scale time series forecasting best practices  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#large-scale-time-series-forecasting-best-practices) .
+This query creates twelve time series models, one for each of the twelve Citi Bike start stations in the input data. The time cost, approximately 24 seconds, is only 1.4 times more than that of creating a single time series model because of the parallelism. However, if you remove the `WHERE ... LIKE ...` clause, there would be 600+ time series to forecast, and they wouldn't be forecast completely in parallel because of slot capacity limitations. In that case, the query would take approximately 15 minutes to finish. To reduce the query runtime with the compromise of a potential slight drop in model quality, you could decrease the value of the `auto_arima_max_order` . This shrinks the search space of hyperparameter tuning in the `auto.ARIMA` algorithm. For more information, see [`Large-scale time series forecasting best practices`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#large-scale-time-series-forecasting-best-practices) .
 
 ### BigQuery DataFrames
 
@@ -313,7 +313,7 @@ This creates twelve time series models, one for each of the twelve Citi Bike sta
 
 ### SQL
 
-Evaluate the time series model by using the `  ML.ARIMA_EVALUATE  ` function. The `  ML.ARIMA_EVALUATE  ` function shows you the evaluation metrics that were generated for the model during the process of automatic hyperparameter tuning.
+Evaluate the time series model by using the `ML.ARIMA_EVALUATE` function. The `ML.ARIMA_EVALUATE` function shows you the evaluation metrics that were generated for the model during the process of automatic hyperparameter tuning.
 
 Follow these steps to evaluate the model:
 
@@ -334,7 +334,7 @@ Follow these steps to evaluate the model:
     
     ![Evaluation metrics for the time series model.](https://docs.cloud.google.com/static/bigquery/images/arima-multi-series-ml-arima-evaluate.png)
     
-    While `  auto.ARIMA  ` evaluates dozens of candidate ARIMA models for each time series, `  ML.ARIMA_EVALUATE  ` by default only outputs the information of the best model to make the output table compact. To view all the candidate models, you can set the `  ML.ARIMA_EVALUATE  ` function's [`  show_all_candidate_model  ` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate#arguments) to `  TRUE  ` .
+    While `auto.ARIMA` evaluates dozens of candidate ARIMA models for each time series, `ML.ARIMA_EVALUATE` by default only outputs the information of the best model to make the output table compact. To view all the candidate models, you can set the `ML.ARIMA_EVALUATE` function's [`show_all_candidate_model` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate#arguments) to `TRUE` .
 
 ### BigQuery DataFrames
 
@@ -356,21 +356,21 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # 11        Central Park West & W 76 St               1               1                2      False    -1700.456924   3408.913848   383.254161 ...
     # 4   Grand Army Plaza & Central Park S               0               1                5      False    -5507.553498  11027.106996   624.138741 ...
 
-The `  start_station_name  ` column identifies the input data column for which time series were created. This is the column that you specified with the `  time_series_id_col  ` option when creating the model.
+The `start_station_name` column identifies the input data column for which time series were created. This is the column that you specified with the `time_series_id_col` option when creating the model.
 
-The `  non_seasonal_p  ` , `  non_seasonal_d  ` , `  non_seasonal_q  ` , and `  has_drift  ` output columns define an ARIMA model in the training pipeline. The `  log_likelihood  ` , `  AIC  ` , and `  variance  ` output columns are relevant to the ARIMA model fitting process. The fitting process determines the best ARIMA model by using the `  auto.ARIMA  ` algorithm, one for each time series.
+The `non_seasonal_p` , `non_seasonal_d` , `non_seasonal_q` , and `has_drift` output columns define an ARIMA model in the training pipeline. The `log_likelihood` , `AIC` , and `variance` output columns are relevant to the ARIMA model fitting process. The fitting process determines the best ARIMA model by using the `auto.ARIMA` algorithm, one for each time series.
 
-The `  auto.ARIMA  ` algorithm uses the [KPSS test](https://en.wikipedia.org/wiki/KPSS_test) to determine the best value for `  non_seasonal_d  ` , which in this case is `  1  ` . When `  non_seasonal_d  ` is `  1  ` , the auto.ARIMA algorithm trains 42 different candidate ARIMA models in parallel. In this example, all 42 candidate models are valid, so the output contains 42 rows, one for each candidate ARIMA model; in cases where some of the models aren't valid, they are excluded from the output. These candidate models are returned in ascending order by AIC. The model in the first row has the lowest AIC, and is considered as the best model. This best model is saved as the final model and is used when you forecast data, evaluate the model, and inspect the model's coefficients as shown in the following steps.
+The `auto.ARIMA` algorithm uses the [KPSS test](https://en.wikipedia.org/wiki/KPSS_test) to determine the best value for `non_seasonal_d` , which in this case is `1` . When `non_seasonal_d` is `1` , the auto.ARIMA algorithm trains 42 different candidate ARIMA models in parallel. In this example, all 42 candidate models are valid, so the output contains 42 rows, one for each candidate ARIMA model; in cases where some of the models aren't valid, they are excluded from the output. These candidate models are returned in ascending order by AIC. The model in the first row has the lowest AIC, and is considered as the best model. This best model is saved as the final model and is used when you forecast data, evaluate the model, and inspect the model's coefficients as shown in the following steps.
 
-The `  seasonal_periods  ` column contains information about the seasonal pattern identified in the time series data. Each time series can have different seasonal patterns. For example, from the figure, you can see that one time series has a yearly pattern, while others don't.
+The `seasonal_periods` column contains information about the seasonal pattern identified in the time series data. Each time series can have different seasonal patterns. For example, from the figure, you can see that one time series has a yearly pattern, while others don't.
 
-The `  has_holiday_effect  ` , `  has_spikes_and_dips  ` , and `  has_step_changes  ` columns are only populated when `  decompose_time_series=TRUE  ` . These columns also reflect information about the input time series data, and are not related to the ARIMA modeling. These columns also have the same values across all output rows.
+The `has_holiday_effect` , `has_spikes_and_dips` , and `has_step_changes` columns are only populated when `decompose_time_series=TRUE` . These columns also reflect information about the input time series data, and are not related to the ARIMA modeling. These columns also have the same values across all output rows.
 
 ## Inspect the model's coefficients
 
 ### SQL
 
-Inspect the time series model's coefficients by using the `  ML.ARIMA_COEFFICIENTS  ` function.
+Inspect the time series model's coefficients by using the `ML.ARIMA_COEFFICIENTS` function.
 
 Follow these steps to retrieve the model's coefficients:
 
@@ -391,11 +391,11 @@ Follow these steps to retrieve the model's coefficients:
     
     ![Coefficients for the time series model.](https://docs.cloud.google.com/static/bigquery/images/arima-nyc-citibike-coefficients-group.png)
     
-    For more information about the output columns, see [`  ML.ARIMA_COEFFICIENTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients) .
+    For more information about the output columns, see [`ML.ARIMA_COEFFICIENTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients) .
 
 ### BigQuery DataFrames
 
-Inspect the time series model's coefficients by using the `  coef_  ` function.
+Inspect the time series model's coefficients by using the `coef_` function.
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
@@ -412,17 +412,17 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # 3    W 82 St & Central Park West                         [-0.50219511 -0.64820817]             [-0.20665325  0.67683137 -0.68108631]                0.0
     # 11  W 106 St & Central Park West [-0.70442887 -0.66885553 -0.25030325 -0.34160669]                                                []                0.0
 
-The `  start_station_name  ` column identifies the input data column for which time series were created. This is the column that you specified in the `  time_series_id_col  ` option when creating the model.
+The `start_station_name` column identifies the input data column for which time series were created. This is the column that you specified in the `time_series_id_col` option when creating the model.
 
-The `  ar_coefficients  ` output column shows the model coefficients of the autoregressive (AR) part of the ARIMA model. Similarly, the `  ma_coefficients  ` output column shows the model coefficients of the moving-average (MA) part of the ARIMA model. Both of these columns contain array values, whose lengths are equal to `  non_seasonal_p  ` and `  non_seasonal_q  ` , respectively. The `  intercept_or_drift  ` value is the constant term in the ARIMA model.
+The `ar_coefficients` output column shows the model coefficients of the autoregressive (AR) part of the ARIMA model. Similarly, the `ma_coefficients` output column shows the model coefficients of the moving-average (MA) part of the ARIMA model. Both of these columns contain array values, whose lengths are equal to `non_seasonal_p` and `non_seasonal_q` , respectively. The `intercept_or_drift` value is the constant term in the ARIMA model.
 
 ## Use the model to forecast data
 
 ### SQL
 
-Forecast future time series values by using the `  ML.FORECAST  ` function.
+Forecast future time series values by using the `ML.FORECAST` function.
 
-In the following GoogleSQL query, the `  STRUCT(3 AS horizon, 0.9 AS confidence_level)  ` clause indicates that the query forecasts 3 future time points, and generates a prediction interval with a 90% confidence level.
+In the following GoogleSQL query, the `STRUCT(3 AS horizon, 0.9 AS confidence_level)` clause indicates that the query forecasts 3 future time points, and generates a prediction interval with a 90% confidence level.
 
 Follow these steps to forecast data with the model:
 
@@ -446,11 +446,11 @@ Follow these steps to forecast data with the model:
     
     ![ML.FORECAST output.](https://docs.cloud.google.com/static/bigquery/images/arima-nyc-citibike-forecast-multiple-series.png)
 
-For more information about the output columns, see [`  ML.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
+For more information about the output columns, see [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
 
 ### BigQuery DataFrames
 
-Forecast future time series values by using the `  predict  ` function.
+Forecast future time series values by using the `predict` function.
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
@@ -467,17 +467,17 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # 20  2016-10-02 00:00:00+00:00                    Central Park West & W 72 St      175.474862       40.940794               0.9 ...
     # 12  2016-10-01 00:00:00+00:00                   W 106 St & Central Park West        63.88163       18.088868               0.9 ...
 
-The first column, `  start_station_name  ` , annotates the time series that each time series model is fitted against. Each `  start_station_name  ` has three rows of forecasted results, as specified by the `  horizon  ` value.
+The first column, `start_station_name` , annotates the time series that each time series model is fitted against. Each `start_station_name` has three rows of forecasted results, as specified by the `horizon` value.
 
-For each `  start_station_name  ` , the output rows are in chronological order by the `  forecast_timestamp  ` column value. In time series forecasting, the prediction interval, as represented by the `  prediction_interval_lower_bound  ` and `  prediction_interval_upper_bound  ` column values, is as important as the `  forecast_value  ` column value. The `  forecast_value  ` value is the middle point of the prediction interval. The prediction interval depends on the `  standard_error  ` and `  confidence_level  ` column values.
+For each `start_station_name` , the output rows are in chronological order by the `forecast_timestamp` column value. In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the `forecast_value` column value. The `forecast_value` value is the middle point of the prediction interval. The prediction interval depends on the `standard_error` and `confidence_level` column values.
 
 ## Explain the forecasting results
 
 ### SQL
 
-You can get explainability metrics in addition to forecast data by using the `  ML.EXPLAIN_FORECAST  ` function. The `  ML.EXPLAIN_FORECAST  ` function forecasts future time series values and also returns all the separate components of the time series. If you just want to return forecast data, use the `  ML.FORECAST  ` function instead, as shown in [Use the model to forecast data](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial#use_the_model_to_forecast_data) .
+You can get explainability metrics in addition to forecast data by using the `ML.EXPLAIN_FORECAST` function. The `ML.EXPLAIN_FORECAST` function forecasts future time series values and also returns all the separate components of the time series. If you just want to return forecast data, use the `ML.FORECAST` function instead, as shown in [Use the model to forecast data](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial#use_the_model_to_forecast_data) .
 
-The `  STRUCT(3 AS horizon, 0.9 AS confidence_level)  ` clause used in the `  ML.EXPLAIN_FORECAST  ` function indicates that the query forecasts 3 future time points and generates a prediction interval with 90% confidence.
+The `STRUCT(3 AS horizon, 0.9 AS confidence_level)` clause used in the `ML.EXPLAIN_FORECAST` function indicates that the query forecasts 3 future time points and generates a prediction interval with 90% confidence.
 
 Follow these steps to explain the model's results:
 
@@ -501,15 +501,15 @@ Follow these steps to explain the model's results:
     
     The first thousand rows returned are all history data. You must scroll through the results to see the forecast data.
     
-    The output rows are ordered first by `  start_station_name  ` , then chronologically by the `  time_series_timestamp  ` column value. In time series forecasting, the prediction interval, as represented by the `  prediction_interval_lower_bound  ` and `  prediction_interval_upper_bound  ` column values, is as important as the `  forecast_value  ` column value. The `  forecast_value  ` value is the middle point of the prediction interval. The prediction interval depends on the `  standard_error  ` and `  confidence_level  ` column values.
+    The output rows are ordered first by `start_station_name` , then chronologically by the `time_series_timestamp` column value. In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the `forecast_value` column value. The `forecast_value` value is the middle point of the prediction interval. The prediction interval depends on the `standard_error` and `confidence_level` column values.
     
-    For more information about the output columns, see [`  ML.EXPLAIN_FORECAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
+    For more information about the output columns, see [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
 
 ### BigQuery DataFrames
 
-You can get explainability metrics in addition to forecast data by using the `  predict_explain  ` function. The `  predict_explain  ` function forecasts future time series values and also returns all the separate components of the time series. If you just want to return forecast data, use the `  predict  ` function instead, as shown in [Use the model to forecast data](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial#use_the_model_to_forecast_data) .
+You can get explainability metrics in addition to forecast data by using the `predict_explain` function. The `predict_explain` function forecasts future time series values and also returns all the separate components of the time series. If you just want to return forecast data, use the `predict` function instead, as shown in [Use the model to forecast data](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial#use_the_model_to_forecast_data) .
 
-The `  horizon=3, confidence_level=0.9  ` clause used in the `  predict_explain  ` function indicates that the query forecasts 3 future time points and generates a prediction interval with 90% confidence.
+The `horizon=3, confidence_level=0.9` clause used in the `predict_explain` function indicates that the query forecasts 3 future time points and generates a prediction interval with 90% confidence.
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
@@ -526,7 +526,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # 3 2013-07-02 00:00:00+00:00   Grand Army Plaza & Central Park S       history                   129.0                     99.556269                 24.982769              <NA>                         <NA>                              <NA>                 65.551665          45.836432                        <NA>                           <NA>                    -11.831828                     <NA>                 <NA>                 0.0              0.0              29.443731
     # 4 2013-07-03 00:00:00+00:00   Central Park S & 6 Ave                  history                   115.0                    205.968236                 32.572948              <NA>                         <NA>                              <NA>                 191.32754          59.220766                        <NA>                           <NA>                    -44.580071                     <NA>                 <NA>                 0.0           -85.168527         -5.799709
 
-The output rows are ordered first by `  time_series_timestamp  ` , then chronologically by the `  start_station_name  ` column value. In time series forecasting, the prediction interval, as represented by the `  prediction_interval_lower_bound  ` and `  prediction_interval_upper_bound  ` column values, is as important as the `  forecast_value  ` column value. The `  forecast_value  ` value is the middle point of the prediction interval. The prediction interval depends on the `  standard_error  ` and `  confidence_level  ` column values.
+The output rows are ordered first by `time_series_timestamp` , then chronologically by the `start_station_name` column value. In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the `forecast_value` column value. The `forecast_value` value is the middle point of the prediction interval. The prediction interval depends on the `standard_error` and `confidence_level` column values.
 
 ## Clean up
 
@@ -547,7 +547,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 3.  Click **Delete dataset** to delete the dataset, the table, and all of the data.
 
-4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `  bqml_tutorial  ` ) and then click **Delete** .
+4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `bqml_tutorial` ) and then click **Delete** .
 
 ### Delete your project
 
@@ -556,7 +556,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

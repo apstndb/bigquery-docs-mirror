@@ -217,7 +217,7 @@ p_sa_WebpageConversionActionAndDeviceStats_customer_id</td>
 
 ### Field mapping
 
-The BigQuery Data Transfer Service supports a subset of Search Ads 360 report fields as listed in [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) . BigQuery does not support `  .  ` in column names, so all transferred reports replace `  .  ` with `  _  ` . For example, the field `  ad_group_ad.ad.text_ad.description1  ` in a Search Ads 360 resource is transferred to BigQuery as `  ad_group_ad_ad_text_ad_description1  ` .
+The BigQuery Data Transfer Service supports a subset of Search Ads 360 report fields as listed in [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) . BigQuery does not support `.` in column names, so all transferred reports replace `.` with `_` . For example, the field `ad_group_ad.ad.text_ad.description1` in a Search Ads 360 resource is transferred to BigQuery as `ad_group_ad_ad_text_ad_description1` .
 
 ### ID mapping
 

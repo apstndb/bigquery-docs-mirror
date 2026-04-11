@@ -1,14 +1,14 @@
 # The CREATE MODEL statement for AutoML models
 
-This document describes the `  CREATE MODEL  ` statement for creating [AutoML classification and regression models](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/overview) in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. AutoML lets you quickly build large-scale machine learning models on tabular data.
+This document describes the `CREATE MODEL` statement for creating [AutoML classification and regression models](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/overview) in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. AutoML lets you quickly build large-scale machine learning models on tabular data.
 
-You can use AutoML regressor models with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to perform [regression](https://docs.cloud.google.com/bigquery/docs/regression-overview) , and you can use AutoML classifier models with the `  ML.PREDICT  ` function to perform [classification](https://docs.cloud.google.com/bigquery/docs/classification-overview) . You can use both types of AutoML models with the `  ML.PREDICT  ` function to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
+You can use AutoML regressor models with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to perform [regression](https://docs.cloud.google.com/bigquery/docs/regression-overview) , and you can use AutoML classifier models with the `ML.PREDICT` function to perform [classification](https://docs.cloud.google.com/bigquery/docs/classification-overview) . You can use both types of AutoML models with the `ML.PREDICT` function to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
 BigQuery ML uses the default values for [AutoML training options](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/train-model) , including [data splitting](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/data-splits) and [optimization functions](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/train-model#optimization-objectives) .
 
 For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
-## `     CREATE MODEL    ` syntax
+## `CREATE MODEL` syntax
 
 ``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
@@ -25,26 +25,26 @@ MODEL_TYPE = { 'AUTOML_REGRESSOR' | 'AUTOML_CLASSIFIER' }
     [, KMS_KEY_NAME = string_value ]
 ```
 
-### `     CREATE MODEL    `
+### `CREATE MODEL`
 
-Creates and trains a new model in the specified dataset. If the model name exists, `  CREATE MODEL  ` returns an error.
+Creates and trains a new model in the specified dataset. If the model name exists, `CREATE MODEL` returns an error.
 
-### `     CREATE MODEL IF NOT EXISTS    `
+### `CREATE MODEL IF NOT EXISTS`
 
 Creates and trains a new model only if the model doesn't exist in the specified dataset.
 
-### `     CREATE OR REPLACE MODEL    `
+### `CREATE OR REPLACE MODEL`
 
 Creates and trains a model and replaces an existing model with the same name in the specified dataset.
 
-### `     model_name    `
+### `model_name`
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
   - Contain up to 1,024 characters
   - Contain letters (upper or lower case), numbers, and underscores
 
-`  model_name  ` is case-sensitive.
+`model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
@@ -52,7 +52,7 @@ If you don't have a default project configured, then you must prepend the projec
 
 For example, \`myproject.mydataset.mymodel\`.
 
-### `     MODEL_TYPE    `
+### `MODEL_TYPE`
 
 **Syntax**
 
@@ -66,14 +66,14 @@ Specifies the model type. This option is required.
 
 This option accepts the following values:
 
-  - `  AUTOML_REGRESSOR  ` : This creates a regression model that uses a label column with a numeric data type.
-  - `  AUTOML_CLASSIFIER  ` : This creates a classification model that uses a label column with either a string or a numeric data type.
+  - `AUTOML_REGRESSOR` : This creates a regression model that uses a label column with a numeric data type.
+  - `AUTOML_CLASSIFIER` : This creates a classification model that uses a label column with either a string or a numeric data type.
 
-### `     BUDGET_HOURS    `
+### `BUDGET_HOURS`
 
 **Syntax**
 
-`  BUDGET_HOURS = float64_value  `
+` BUDGET_HOURS = float64_value  `
 
 **Description**
 
@@ -83,13 +83,13 @@ After training an AutoML model, BigQuery ML compresses the model to ensure it is
 
 **Arguments**
 
-A `  FLOAT64  ` value between `  1.0  ` and `  72.0  ` . The default value is `  1.0  ` .
+A `FLOAT64` value between `1.0` and `72.0` . The default value is `1.0` .
 
-### `     OPTIMIZATION_OBJECTIVE    `
+### `OPTIMIZATION_OBJECTIVE`
 
 **Syntax**
 
-`  OPTIMIZATION_OBJECTIVE = { string_value | struct_value }  `
+`OPTIMIZATION_OBJECTIVE = { string_value | struct_value }`
 
 **Description**
 
@@ -99,52 +99,52 @@ For more details on the optimization objective functions, see the [AutoML docume
 
 **Arguments**
 
-This option can be specified as a `  STRING  ` or `  STRUCT  ` value.
+This option can be specified as a `STRING` or `STRUCT` value.
 
 This option accepts the following string values for optimization objective functions:
 
   - For regression:
-      - `  MINIMIZE_RMSE  ` (default)
-      - `  MINIMIZE_MAE  `
-      - `  MINIMIZE_RMSLE  `
+      - `MINIMIZE_RMSE` (default)
+      - `MINIMIZE_MAE`
+      - `MINIMIZE_RMSLE`
   - For binary classification:
-      - `  MAXIMIZE_AU_ROC  ` (default)
-      - `  MINIMIZE_LOG_LOSS  `
-      - `  MAXIMIZE_AU_PRC  `
-      - `  MAXIMIZE_PRECISION_AT_RECALL  `
-      - `  MAXIMIZE_RECALL_AT_PRECISION  `
+      - `MAXIMIZE_AU_ROC` (default)
+      - `MINIMIZE_LOG_LOSS`
+      - `MAXIMIZE_AU_PRC`
+      - `MAXIMIZE_PRECISION_AT_RECALL`
+      - `MAXIMIZE_RECALL_AT_PRECISION`
   - For multiclass classification:
-      - `  MINIMIZE_LOG_LOSS  `
+      - `MINIMIZE_LOG_LOSS`
 
 For example:
 
     OPTIMIZATION_OBJECTIVE = 'MAXIMIZE_AU_ROC'
 
-For binary classification models, you can alternatively specify a struct value for this option. The struct must contain a `  STRING  ` value and a `  FLOAT64  ` value in one of the following combinations:
+For binary classification models, you can alternatively specify a struct value for this option. The struct must contain a `STRING` value and a `FLOAT64` value in one of the following combinations:
 
-  - The string value is `  MAXIMIZE_PRECISION_AT_RECALL  ` and the float value specifies the fixed recall value, which must be in the range of `  [0,1]  ` .
+  - The string value is `MAXIMIZE_PRECISION_AT_RECALL` and the float value specifies the fixed recall value, which must be in the range of `[0,1]` .
 
-  - The string value is `  MAXIMIZE_RECALL_AT_PRECISION  ` and the float value specifies the fixed precision value, which must be in the range of `  [0,1]  ` .
+  - The string value is `MAXIMIZE_RECALL_AT_PRECISION` and the float value specifies the fixed precision value, which must be in the range of `[0,1]` .
 
 For example:
 
     OPTIMIZATION_OBJECTIVE = STRUCT('MAXIMIZE_PRECISION_AT_RECALL', 0.3)
 
-### `     INPUT_LABEL_COLS    `
+### `INPUT_LABEL_COLS`
 
 **Syntax**
 
-`  INPUT_LABEL_COLS = string_array  `
+` INPUT_LABEL_COLS = string_array  `
 
 **Description**
 
-The name of the label column in the training data. The label column contains the expected machine learning result for the given record. For example, in a spam detection dataset, the label column value would probably be either `  spam  ` or `  not spam  ` . In a rainfall dataset, the label column value might be the amount of rain that fell during a certain period.
+The name of the label column in the training data. The label column contains the expected machine learning result for the given record. For example, in a spam detection dataset, the label column value would probably be either `spam` or `not spam` . In a rainfall dataset, the label column value might be the amount of rain that fell during a certain period.
 
 **Arguments**
 
-A one-element `  ARRAY  ` of string values. Defaults to `  label  ` .
+A one-element `ARRAY` of string values. Defaults to `label` .
 
-Supported data types for `  input_label_cols  ` include the following:
+Supported data types for `input_label_cols` include the following:
 
 <table>
 <colgroup>
@@ -153,30 +153,30 @@ Supported data types for `  input_label_cols  ` include the following:
 </colgroup>
 <thead>
 <tr class="header">
-<th><code dir="ltr" translate="no">       Model type      </code></th>
-<th><code dir="ltr" translate="no">       Supported label types      </code></th>
+<th><code dir="ltr" translate="no">Model type</code></th>
+<th><code dir="ltr" translate="no">Supported label types</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       automl_regressor      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">        NUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">        BIGNUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
+<td><code dir="ltr" translate="no">automl_regressor</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">INT64</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">NUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">BIGNUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">FLOAT64</code></a></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       automl_classifier      </code></td>
+<td><code dir="ltr" translate="no">automl_classifier</code></td>
 <td>Any <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties">groupable</a> data type</td>
 </tr>
 </tbody>
 </table>
 
-### `     DATA_SPLIT_COL    `
+### `DATA_SPLIT_COL`
 
 **Syntax**
 
-`  DATA_SPLIT_COL = string_value  `
+` DATA_SPLIT_COL = string_value  `
 
 **Description**
 
@@ -188,20 +188,20 @@ The string value must be the name of one of the columns in the training data. Th
 
 If you use a string column, rows are assigned to the appropriate dataset based on the column's value, which must be one of the following options:
 
-  - `  TRAIN  `
-  - `  VALIDATE  `
-  - `  TEST  `
-  - `  UNASSIGNED  `
+  - `TRAIN`
+  - `VALIDATE`
+  - `TEST`
+  - `UNASSIGNED`
 
 For more information about how to use these values, see [Manual split](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/data-splits#classification-manual) .
 
 Timestamp columns are used to perform a [chronological split](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/data-splits#classification-time) .
 
-### `     KMS_KEY_NAME    `
+### `KMS_KEY_NAME`
 
 **Syntax**
 
-`  KMS_KEY_NAME = string_value  `
+` KMS_KEY_NAME = string_value  `
 
 **Description**
 
@@ -209,7 +209,7 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 **Arguments**
 
-A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
+A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
     'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
@@ -224,39 +224,39 @@ For columns other than the label column, any [groupable](https://docs.cloud.goog
 </colgroup>
 <thead>
 <tr class="header">
-<th><code dir="ltr" translate="no">       BigQuery type      </code></th>
-<th><code dir="ltr" translate="no">       AutoML type      </code></th>
+<th><code dir="ltr" translate="no">BigQuery type</code></th>
+<th><code dir="ltr" translate="no">AutoML type</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">        NUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">        BIGNUMERIC       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
-<td><a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#numeric-transf"><code dir="ltr" translate="no">        NUMERIC       </code></a> or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">        TIMESTAMP       </code></a> if AutoML determines that it is a UNIX timestamp</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">INT64</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">NUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">BIGNUMERIC</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">FLOAT64</code></a></td>
+<td><a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#numeric-transf"><code dir="ltr" translate="no">NUMERIC</code></a> or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> if AutoML determines that it is a UNIX timestamp</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">        BOOL       </code></a></td>
-<td><a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">        CATEGORICAL       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">BOOL</code></a></td>
+<td><a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a></td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">        STRING       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type"><code dir="ltr" translate="no">        BYTES       </code></a></td>
-<td>Either <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">        CATEGORICAL       </code></a> or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">        TEXT       </code></a> , auto-selected by AutoML.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">STRING</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type"><code dir="ltr" translate="no">BYTES</code></a></td>
+<td>Either <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type"><code dir="ltr" translate="no">        TIMESTAMP       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type"><code dir="ltr" translate="no">        DATETIME       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type"><code dir="ltr" translate="no">        TIME       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type"><code dir="ltr" translate="no">        DATE       </code></a><br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type"><code dir="ltr" translate="no">TIMESTAMP</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type"><code dir="ltr" translate="no">DATETIME</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type"><code dir="ltr" translate="no">TIME</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type"><code dir="ltr" translate="no">DATE</code></a><br />
 </td>
-<td>Either <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">        TIMESTAMP       </code></a> , <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">        CATEGORICAL       </code></a> , or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">        TEXT       </code></a> , auto-selected by AutoML.</td>
+<td>Either <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> , <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> , or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
 </tr>
 </tbody>
 </table>
 
-To force a numeric column to be treated as categorical, use the [`  CAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) to cast it to a BigQuery string. Arrays of supported types are allowed and remain arrays during AutoML training.
+To force a numeric column to be treated as categorical, use the [`CAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) to cast it to a BigQuery string. Arrays of supported types are allowed and remain arrays during AutoML training.
 
 ## Locations
 
@@ -267,15 +267,15 @@ For information about supported locations, see [Locations for non-remote models]
 AutoML models have the following limitations:
 
   - The input data to AutoML must be between 1,000 and 200,000,000 rows, and must be less than 100 GB.
-  - `  Global  ` region customer-managed encryption keys (CMEKs) and multi-region CMEKs, for example `  eu  ` or `  us  ` , are not supported.
+  - `Global` region customer-managed encryption keys (CMEKs) and multi-region CMEKs, for example `eu` or `us` , are not supported.
   - BigQuery ML AutoML models aren't visible in the AutoML user interface, and aren't available for batch or online predictions in AutoML.
-  - The [default maximum number of concurrent training jobs](https://docs.cloud.google.com/vertex-ai/docs/quotas) is 5. Raising the Vertex AI quota does not modify this quota. If you receive the error `  Too many AutoML training queries have been issued within a short period of time  ` , you can submit a request to raise the maximum number of concurrent training jobs. To request an increase, email bqml-feedback@google.com with your project ID and the details of your request.
+  - The [default maximum number of concurrent training jobs](https://docs.cloud.google.com/vertex-ai/docs/quotas) is 5. Raising the Vertex AI quota does not modify this quota. If you receive the error `Too many AutoML training queries have been issued within a short period of time` , you can submit a request to raise the maximum number of concurrent training jobs. To request an increase, email bqml-feedback@google.com with your project ID and the details of your request.
   - Column names for feature columns must be 125 characters or fewer.
-  - For `  AUTOML_CLASSIFIER  ` models, the `  label  ` column can contain up to 1,000 unique values; that is, the number of classes is less than or equal to 1,000. If you need to classify into more than 1,000 labels, contact <bqml-feedback@google.com> .
+  - For `AUTOML_CLASSIFIER` models, the `label` column can contain up to 1,000 unique values; that is, the number of classes is less than or equal to 1,000. If you need to classify into more than 1,000 labels, contact <bqml-feedback@google.com> .
 
-## `     CREATE MODEL    ` example
+## `CREATE MODEL` example
 
-The following example creates a model named `  mymodel  ` in `  mydataset  ` in your default project. It uses the public `  nyc-tlc.yellow.trips  ` taxi trip data available in BigQuery. The job takes approximately 3 hours to complete, including training, model compression, temporary data movement (to AutoML), and setup tasks.
+The following example creates a model named `mymodel` in `mydataset` in your default project. It uses the public `nyc-tlc.yellow.trips` taxi trip data available in BigQuery. The job takes approximately 3 hours to complete, including training, model compression, temporary data movement (to AutoML), and setup tasks.
 
 Create the model:
 

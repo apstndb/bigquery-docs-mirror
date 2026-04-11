@@ -21,8 +21,8 @@ To determine if one or more permissions are included in a predefined IAM role, y
 
   - The [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) reference
   - The [IAM roles and permissions index](https://docs.cloud.google.com/iam/docs/roles-permissions)
-  - The [`  gcloud iam roles describe  `](https://docs.cloud.google.com/sdk/gcloud/reference/iam/roles/describe) command
-  - The [`  roles.get()  `](https://docs.cloud.google.com/iam/reference/rest/v1/roles/get) method in the IAM API
+  - The [`gcloud iam roles describe`](https://docs.cloud.google.com/sdk/gcloud/reference/iam/roles/describe) command
+  - The [`roles.get()`](https://docs.cloud.google.com/iam/reference/rest/v1/roles/get) method in the IAM API
 
 ## IAM roles in BigQuery
 
@@ -54,7 +54,7 @@ For additional information on using IAM to manage access to Resource Manager res
 
 You can assign roles at the dataset level to provide access to a specific dataset, without providing complete access to the project's other resources. In the [IAM resource hierarchy](https://docs.cloud.google.com/iam/docs/overview#policy_hierarchy) , BigQuery datasets are child resources of projects. For more information on assigning roles at the dataset level, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 
-**Caution:** Don't grant BigQuery basic roles to datasets. BigQuery's dataset-level basic roles existed prior to the introduction of IAM. BigQuery basic roles provide excessive and uneven access, and you are discouraged from using them. For example, the `  Owner  ` basic role does *not* provide table access permissions. For more information, see [Basic roles & permissions](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) .
+**Caution:** Don't grant BigQuery basic roles to datasets. BigQuery's dataset-level basic roles existed prior to the introduction of IAM. BigQuery basic roles provide excessive and uneven access, and you are discouraged from using them. For example, the `Owner` basic role does *not* provide table access permissions. For more information, see [Basic roles & permissions](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) .
 
 ### Grant access to individual resources within datasets
 

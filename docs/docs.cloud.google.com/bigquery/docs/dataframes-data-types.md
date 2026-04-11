@@ -26,121 +26,121 @@ The following table shows data type equivalents in BigQuery, BigQuery DataFrames
 <tbody>
 <tr class="odd">
 <td>Boolean</td>
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><code dir="ltr" translate="no">       pandas.BooleanDtype()      </code></td>
-<td><code dir="ltr" translate="no">       bool      </code></td>
-<td><code dir="ltr" translate="no">       bool_()      </code></td>
+<td><code dir="ltr" translate="no">BOOL</code></td>
+<td><code dir="ltr" translate="no">pandas.BooleanDtype()</code></td>
+<td><code dir="ltr" translate="no">bool</code></td>
+<td><code dir="ltr" translate="no">bool_()</code></td>
 </tr>
 <tr class="even">
 <td>Integer</td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       pandas.Int64Dtype()      </code></td>
-<td><code dir="ltr" translate="no">       int      </code></td>
-<td><code dir="ltr" translate="no">       int64()      </code></td>
+<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code dir="ltr" translate="no">pandas.Int64Dtype()</code></td>
+<td><code dir="ltr" translate="no">int</code></td>
+<td><code dir="ltr" translate="no">int64()</code></td>
 </tr>
 <tr class="odd">
 <td>Float</td>
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-<td><code dir="ltr" translate="no">       pandas.Float64Dtype()      </code></td>
-<td><code dir="ltr" translate="no">       float      </code></td>
-<td><code dir="ltr" translate="no">       float64()      </code></td>
+<td><code dir="ltr" translate="no">FLOAT64</code></td>
+<td><code dir="ltr" translate="no">pandas.Float64Dtype()</code></td>
+<td><code dir="ltr" translate="no">float</code></td>
+<td><code dir="ltr" translate="no">float64()</code></td>
 </tr>
 <tr class="even">
 <td>String</td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       pandas.StringDtype(storage="pyarrow")      </code></td>
-<td><code dir="ltr" translate="no">       str      </code></td>
-<td><code dir="ltr" translate="no">       string()      </code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code dir="ltr" translate="no">pandas.StringDtype(storage="pyarrow")</code></td>
+<td><code dir="ltr" translate="no">str</code></td>
+<td><code dir="ltr" translate="no">string()</code></td>
 </tr>
 <tr class="odd">
 <td>Bytes</td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.binary())      </code></td>
-<td><code dir="ltr" translate="no">       bytes      </code></td>
-<td><code dir="ltr" translate="no">       binary()      </code></td>
+<td><code dir="ltr" translate="no">BYTES</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.binary())</code></td>
+<td><code dir="ltr" translate="no">bytes</code></td>
+<td><code dir="ltr" translate="no">binary()</code></td>
 </tr>
 <tr class="even">
 <td>Date</td>
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.date32())      </code></td>
-<td><code dir="ltr" translate="no">       datetime.date      </code></td>
-<td><code dir="ltr" translate="no">       date32()      </code></td>
+<td><code dir="ltr" translate="no">DATE</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.date32())</code></td>
+<td><code dir="ltr" translate="no">datetime.date</code></td>
+<td><code dir="ltr" translate="no">date32()</code></td>
 </tr>
 <tr class="odd">
 <td>Time</td>
-<td><code dir="ltr" translate="no">       TIME      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.time64("us"))      </code></td>
-<td><code dir="ltr" translate="no">       datetime.time      </code></td>
-<td><code dir="ltr" translate="no">       time64("us")      </code></td>
+<td><code dir="ltr" translate="no">TIME</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.time64("us"))</code></td>
+<td><code dir="ltr" translate="no">datetime.time</code></td>
+<td><code dir="ltr" translate="no">time64("us")</code></td>
 </tr>
 <tr class="even">
 <td>Datetime</td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.timestamp("us"))      </code></td>
-<td><code dir="ltr" translate="no">       datetime.datetime      </code></td>
-<td><code dir="ltr" translate="no">       timestamp("us")      </code></td>
+<td><code dir="ltr" translate="no">DATETIME</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.timestamp("us"))</code></td>
+<td><code dir="ltr" translate="no">datetime.datetime</code></td>
+<td><code dir="ltr" translate="no">timestamp("us")</code></td>
 </tr>
 <tr class="odd">
 <td>Timestamp</td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.timestamp("us", tz="UTC"))      </code></td>
-<td><code dir="ltr" translate="no">       Datetime.datetime      </code> with timezone</td>
-<td><code dir="ltr" translate="no">       timestamp("us", tz="UTC")      </code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.timestamp("us", tz="UTC"))</code></td>
+<td><code dir="ltr" translate="no">Datetime.datetime</code> with timezone</td>
+<td><code dir="ltr" translate="no">timestamp("us", tz="UTC")</code></td>
 </tr>
 <tr class="even">
 <td>Numeric</td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.decimal128(38, 9))      </code></td>
-<td><code dir="ltr" translate="no">       decimal.Decimal      </code></td>
-<td><code dir="ltr" translate="no">       decimal128(38, 9)      </code></td>
+<td><code dir="ltr" translate="no">NUMERIC</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.decimal128(38, 9))</code></td>
+<td><code dir="ltr" translate="no">decimal.Decimal</code></td>
+<td><code dir="ltr" translate="no">decimal128(38, 9)</code></td>
 </tr>
 <tr class="odd">
 <td>Big numeric</td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.decimal256(76, 38))      </code></td>
-<td><code dir="ltr" translate="no">       decimal.Decimal      </code></td>
-<td><code dir="ltr" translate="no">       decimal256(76, 38)      </code></td>
+<td><code dir="ltr" translate="no">BIGNUMERIC</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.decimal256(76, 38))</code></td>
+<td><code dir="ltr" translate="no">decimal.Decimal</code></td>
+<td><code dir="ltr" translate="no">decimal256(76, 38)</code></td>
 </tr>
 <tr class="even">
 <td>List&lt;T&gt;</td>
-<td><code dir="ltr" translate="no">       ARRAY      </code> <code dir="ltr" translate="no">       &lt;T&gt;      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.list_(T))      </code></td>
-<td><code dir="ltr" translate="no">       list[T]      </code></td>
-<td><code dir="ltr" translate="no">       list_(T)      </code></td>
+<td><code dir="ltr" translate="no">ARRAY</code> <code dir="ltr" translate="no">&lt;T&gt;</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.list_(T))</code></td>
+<td><code dir="ltr" translate="no">list[T]</code></td>
+<td><code dir="ltr" translate="no">list_(T)</code></td>
 </tr>
 <tr class="odd">
 <td>Struct</td>
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.struct())      </code></td>
-<td><code dir="ltr" translate="no">       dict      </code></td>
-<td><code dir="ltr" translate="no">       struct()      </code></td>
+<td><code dir="ltr" translate="no">STRUCT</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.struct())</code></td>
+<td><code dir="ltr" translate="no">dict</code></td>
+<td><code dir="ltr" translate="no">struct()</code></td>
 </tr>
 <tr class="even">
 <td>JSON</td>
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.json_(pa.string())      </code> in pandas version 3.0 or later and PyArrow version 19.0 or later; otherwise, JSON columns are exposed as <code dir="ltr" translate="no">       pandas.ArrowDtype(db_dtypes.JSONArrowType())      </code> . This feature is in <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> .</td>
+<td><code dir="ltr" translate="no">JSON</code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.json_(pa.string())</code> in pandas version 3.0 or later and PyArrow version 19.0 or later; otherwise, JSON columns are exposed as <code dir="ltr" translate="no">pandas.ArrowDtype(db_dtypes.JSONArrowType())</code> . This feature is in <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> .</td>
 <td>Not supported</td>
-<td><code dir="ltr" translate="no">       json_()      </code> ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
+<td><code dir="ltr" translate="no">json_()</code> ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 </tr>
 <tr class="odd">
 <td>Geography</td>
-<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
-<td><code dir="ltr" translate="no">       Geopandas.array.GeometryDtype()      </code><br />
-Supported by <code dir="ltr" translate="no">       to_pandas()      </code> only.</td>
+<td><code dir="ltr" translate="no">GEOGRAPHY</code></td>
+<td><code dir="ltr" translate="no">Geopandas.array.GeometryDtype()</code><br />
+Supported by <code dir="ltr" translate="no">to_pandas()</code> only.</td>
 <td>Not supported</td>
 <td>Not supported</td>
 </tr>
 <tr class="even">
 <td>Timedelta</td>
 <td>Not supported</td>
-<td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.duration("us"))      </code></td>
-<td><code dir="ltr" translate="no">       datetime.timedelta      </code></td>
-<td><code dir="ltr" translate="no">       duration("us")      </code></td>
+<td><code dir="ltr" translate="no">pandas.ArrowDtype(pyarrow.duration("us"))</code></td>
+<td><code dir="ltr" translate="no">datetime.timedelta</code></td>
+<td><code dir="ltr" translate="no">duration("us")</code></td>
 </tr>
 </tbody>
 </table>
 
-**Note:** BigQuery DataFrames doesn't support the following BigQuery data types: `  INTERVAL  ` and `  RANGE  ` . All other BigQuery data types display as the object type.
+**Note:** BigQuery DataFrames doesn't support the following BigQuery data types: `INTERVAL` and `RANGE` . All other BigQuery data types display as the object type.
 
 ### Type conversions
 
@@ -156,7 +156,7 @@ When used with local data, BigQuery DataFrames converts data types to their corr
 
 PyArrow dictates behavior when there are discrepancies between the data type equivalents. In rare cases when the Python built-in type functions differently from its PyArrow counterpart, BigQuery DataFrames generally favors the PyArrow behavior to ensure consistency.
 
-The following code sample uses the `  datetime.date + timedelta  ` operation to show that, unlike the Python datetime library that still returns a date instance, BigQuery DataFrames follows the PyArrow behavior by returning a timestamp instance:
+The following code sample uses the `datetime.date + timedelta` operation to show that, unlike the Python datetime library that still returns a date instance, BigQuery DataFrames follows the PyArrow behavior by returning a timestamp instance:
 
     import datetime
     
@@ -179,13 +179,13 @@ The following sections describe the special data types that BigQuery DataFrames 
 
 ### JSON
 
-Within BigQuery DataFrames, columns using the BigQuery [JSON format](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) (a lightweight standard) are represented by `  pandas.ArrowDtype  ` . The exact underlying Arrow type depends on your library versions. Older environments typically use `  db_dtypes.JSONArrowType()  ` for compatibility, which is an Arrow extension type that acts as a light wrapper around `  pa.string()  ` . In contrast, newer setups (pandas 3.0 and later and PyArrow 19.0 and later) use the more recent `  pa.json_(pa.string())  ` representation.
+Within BigQuery DataFrames, columns using the BigQuery [JSON format](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) (a lightweight standard) are represented by `pandas.ArrowDtype` . The exact underlying Arrow type depends on your library versions. Older environments typically use `db_dtypes.JSONArrowType()` for compatibility, which is an Arrow extension type that acts as a light wrapper around `pa.string()` . In contrast, newer setups (pandas 3.0 and later and PyArrow 19.0 and later) use the more recent `pa.json_(pa.string())` representation.
 
-### `     timedelta    `
+### `timedelta`
 
-The `  timedelta  ` type lacks a direct equivalent within the BigQuery built-in type system. To manage duration data, BigQuery DataFrames utilizes the `  INT64  ` type as the underlying storage format in BigQuery tables. You can expect the results of your computations to be consistent with the behavior you would expect from equivalent operations performed with the pandas library.
+The `timedelta` type lacks a direct equivalent within the BigQuery built-in type system. To manage duration data, BigQuery DataFrames utilizes the `INT64` type as the underlying storage format in BigQuery tables. You can expect the results of your computations to be consistent with the behavior you would expect from equivalent operations performed with the pandas library.
 
-You can directly load `  timedelta  ` values into BigQuery DataFrames and `  Series  ` objects, as shown in the following example:
+You can directly load `timedelta` values into BigQuery DataFrames and `Series` objects, as shown in the following example:
 
     import pandas as pd
     
@@ -197,7 +197,7 @@ You can directly load `  timedelta  ` values into BigQuery DataFrames and `  Ser
     # 1    0 days 00:02:00
     # dtype: duration[us][pyarrow]
 
-Unlike pandas, BigQuery DataFrames only supports `  timedelta  ` values with microsecond precision. If your data includes nanoseconds, you must round them to avoid potential exceptions, as shown in the following example:
+Unlike pandas, BigQuery DataFrames only supports `timedelta` values with microsecond precision. If your data includes nanoseconds, you must round them to avoid potential exceptions, as shown in the following example:
 
     import pandas as pd
     
@@ -206,7 +206,7 @@ Unlike pandas, BigQuery DataFrames only supports `  timedelta  ` values with mic
     # 0    0 days 00:00:00.000001
     # dtype: duration[us][pyarrow]
 
-You can use the `  bigframes.pandas.to_timedelta  ` function to cast a BigQuery DataFrames `  Series  ` object to the `  timedelta  ` type, as shown in the following example:
+You can use the `bigframes.pandas.to_timedelta` function to cast a BigQuery DataFrames `Series` object to the `timedelta` type, as shown in the following example:
 
     import bigframes.pandas as bpd
     
@@ -216,7 +216,7 @@ You can use the `  bigframes.pandas.to_timedelta  ` function to cast a BigQuery 
     # 2    0 days 00:00:03
     # dtype: duration[us][pyarrow]
 
-When you load data containing `  timedelta  ` values to a BigQuery table, the values are converted to microseconds and stored in `  INT64  ` columns. To preserve the type information, BigQuery DataFrames appends the `  #microseconds  ` string to the descriptions of these columns. Some operations, such as SQL query executions and UDF invocations, don't preserve column descriptions, and the `  timedelta  ` type information is lost after these operations are completed.
+When you load data containing `timedelta` values to a BigQuery table, the values are converted to microseconds and stored in `INT64` columns. To preserve the type information, BigQuery DataFrames appends the `#microseconds` string to the descriptions of these columns. Some operations, such as SQL query executions and UDF invocations, don't preserve column descriptions, and the `timedelta` type information is lost after these operations are completed.
 
 ## Tools for composite types
 
@@ -224,7 +224,7 @@ For certain composite types, BigQuery DataFrames provides tools that let you acc
 
 ### List accessor
 
-The `  ListAccessor  ` object can help you perform operations on each list element by using the list property of the `  Series  ` object, as shown in the following example:
+The `ListAccessor` object can help you perform operations on each list element by using the list property of the `Series` object, as shown in the following example:
 
     import bigframes.pandas as bpd
     
@@ -246,7 +246,7 @@ The `  ListAccessor  ` object can help you perform operations on each list eleme
 
 ### Struct accessor
 
-The `  StructAccessor  ` object can access and process fields in a series of structs. The API accessor object is `  series.struct  ` , as shown in the following example:
+The `StructAccessor` object can access and process fields in a series of structs. The API accessor object is `series.struct` , as shown in the following example:
 
     import bigframes.pandas as bpd
     
@@ -263,7 +263,7 @@ The `  StructAccessor  ` object can access and process fields in a series of str
     # 2    103
     # Name: id, dtype: Int64
 
-If the `  struct  ` field you plan to access is unambiguous from other `  Series  ` properties, you can skip calling `  struct  ` , as shown in the following example:
+If the `struct` field you plan to access is unambiguous from other `Series` properties, you can skip calling `struct` , as shown in the following example:
 
     import bigframes.pandas as bpd
     
@@ -281,11 +281,11 @@ If the `  struct  ` field you plan to access is unambiguous from other `  Series
     # 2    103
     # Name: id, dtype: Int64
 
-However, it's a best practice to use `  struct  ` for accessing fields, because it makes your code easier to understand and less error-prone.
+However, it's a best practice to use `struct` for accessing fields, because it makes your code easier to understand and less error-prone.
 
 ### String accessor
 
-You can access the `  StringAccessor  ` object with the `  str  ` property on a `  Series  ` object, as shown in the following example:
+You can access the `StringAccessor` object with the `str` property on a `Series` object, as shown in the following example:
 
     import bigframes.pandas as bpd
     
@@ -314,7 +314,7 @@ You can access the `  StringAccessor  ` object with the `  str  ` property on a 
 
 ### Geography accessor
 
-BigQuery DataFrames provides a `  GeographyAccessor  ` object that shares similar APIs with the GeoSeries structure provided by the GeoPandas library. You can invoke the `  GeographyAccessor  ` object with the `  geo  ` property on a `  Series  ` object, as shown in the following example:
+BigQuery DataFrames provides a `GeographyAccessor` object that shares similar APIs with the GeoSeries structure provided by the GeoPandas library. You can invoke the `GeographyAccessor` object with the `geo` property on a `Series` object, as shown in the following example:
 
     from shapely.geometry import Point
     

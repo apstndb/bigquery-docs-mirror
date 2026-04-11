@@ -1,6 +1,6 @@
 # Export data to Spanner (reverse ETL)
 
-This document describes how you can set up a reverse extract, transform, and load (reverse ETL) workflow from BigQuery to Spanner. You can do this by using the [`  EXPORT DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from BigQuery data sources, including [Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) , to a [Spanner](https://docs.cloud.google.com/spanner/docs/overview) table.
+This document describes how you can set up a reverse extract, transform, and load (reverse ETL) workflow from BigQuery to Spanner. You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from BigQuery data sources, including [Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) , to a [Spanner](https://docs.cloud.google.com/spanner/docs/overview) table.
 
 This reverse ETL workflow combines analytic capabilities in BigQuery with low latency and high throughput in Spanner. This workflow lets you serve data to application users without exhausting quotas and limits on BigQuery.
 
@@ -16,10 +16,10 @@ This reverse ETL workflow combines analytic capabilities in BigQuery with low la
 
 To get the permissions that you need to export BigQuery data to Spanner, ask your administrator to grant you the following IAM roles on your project:
 
-  - Export data from a BigQuery table: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
-  - Run an extract job: [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
-  - Check parameters of the Spanner instance: [Cloud Spanner Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/spanner#spanner.viewer) ( `  roles/spanner.viewer  ` )
-  - Write data to a Spanner table: [Cloud Spanner Database User](https://docs.cloud.google.com/iam/docs/roles-permissions/spanner#spanner.databaseUser) ( `  roles/spanner.databaseUser  ` )
+  - Export data from a BigQuery table: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
+  - Run an extract job: [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+  - Check parameters of the Spanner instance: [Cloud Spanner Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/spanner#spanner.viewer) ( `roles/spanner.viewer` )
+  - Write data to a Spanner table: [Cloud Spanner Database User](https://docs.cloud.google.com/iam/docs/roles-permissions/spanner#spanner.databaseUser) ( `roles/spanner.databaseUser` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -46,17 +46,17 @@ You might also be able to get the required permissions through [custom roles](ht
 <tr class="odd">
 <td>All dialects</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         STRUCT        </code></li>
-<li><code dir="ltr" translate="no">         GEOGRAPHY        </code></li>
-<li><code dir="ltr" translate="no">         DATETIME        </code></li>
-<li><code dir="ltr" translate="no">         RANGE        </code></li>
-<li><code dir="ltr" translate="no">         TIME        </code></li>
+<li><code dir="ltr" translate="no">STRUCT</code></li>
+<li><code dir="ltr" translate="no">GEOGRAPHY</code></li>
+<li><code dir="ltr" translate="no">DATETIME</code></li>
+<li><code dir="ltr" translate="no">RANGE</code></li>
+<li><code dir="ltr" translate="no">TIME</code></li>
 </ul></td>
 </tr>
 <tr class="even">
 <td>GoogleSQL</td>
 <td><ul>
-<li><code dir="ltr" translate="no">         BIGNUMERIC        </code> : The supported <code dir="ltr" translate="no">         NUMERIC        </code> type is not wide enough. Consider adding explicit casts to the <code dir="ltr" translate="no">         NUMERIC        </code> type in the query.</li>
+<li><code dir="ltr" translate="no">BIGNUMERIC</code> : The supported <code dir="ltr" translate="no">NUMERIC</code> type is not wide enough. Consider adding explicit casts to the <code dir="ltr" translate="no">NUMERIC</code> type in the query.</li>
 </ul></td>
 </tr>
 </tbody>
@@ -78,20 +78,11 @@ You might also be able to get the required permissions through [custom roles](ht
 
   - When using continuous queries to export to a Spanner table, ensure that you choose a primary key that doesn't correspond to a monotonically increasing integer in your BigQuery table. Doing so might cause performance issues in your export. For information about primary keys in Spanner, and ways to mitigate these performance issues, see [Choose a primary key](https://docs.cloud.google.com/spanner/docs/schema-and-data-model#choose_a_primary_key) .
 
-## Configure exports with `     spanner_options    ` option
+## Configure exports with `spanner_options` option
 
-You can use the `  spanner_options  ` option to specify a destination Spanner database and table. The configuration is expressed in the form of a JSON string, as the following example shows:
+You can use the `spanner_options` option to specify a destination Spanner database and table. The configuration is expressed in the form of a JSON string, as the following example shows:
 
-    EXPORT DATA OPTIONS(
-       uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
-      format='CLOUD_SPANNER',
-       spanner_options = """{
-          "table": "TABLE_NAME",
-          "change_timestamp_column": "CHANGE_TIMESTAMP",
-          "priority": "PRIORITY",
-          "tag": "TAG",
-       }"""
-    )
+    EXPORT DATA OPTIONS(   uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',   spanner_options = """{      "table": "TABLE_NAME",      "change_timestamp_column": "CHANGE_TIMESTAMP",      "priority": "PRIORITY",      "tag": "TAG",   }""")
 
 Replace the following:
 
@@ -99,16 +90,16 @@ Replace the following:
   - `  INSTANCE_ID  ` : the name of your database instance.
   - `  DATABASE_ID  ` : the name of your database.
   - `  TABLE_NAME  ` : the name of an existing destination table.
-  - `  CHANGE_TIMESTAMP  ` : the name of the `  TIMESTAMP  ` type column in the destination Spanner table. This option is used during export to track the timestamp of the most recent row update. When this option is specified, the export first performs a read of the row in the Spanner table, to ensure that only the latest row update is written. We recommend specifying a `  TIMESTAMP  ` type column when you run a [continuous export](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#export_continuously) , where the ordering of changes to rows with the same primary key is important.
-  - `  PRIORITY  ` (optional): [priority](https://docs.cloud.google.com/spanner/docs/reference/rest/v1/RequestOptions#priority) of the write requests. Allowed values: `  LOW  ` , `  MEDIUM  ` , `  HIGH  ` . Default value: `  MEDIUM  ` .
-  - `  TAG  ` (optional): [request tag](https://docs.cloud.google.com/spanner/docs/introspection/troubleshooting-with-tags) to help identify exporter traffic in Spanner monitoring. Default value: `  bq_export  ` .
+  - `  CHANGE_TIMESTAMP  ` : the name of the `TIMESTAMP` type column in the destination Spanner table. This option is used during export to track the timestamp of the most recent row update. When this option is specified, the export first performs a read of the row in the Spanner table, to ensure that only the latest row update is written. We recommend specifying a `TIMESTAMP` type column when you run a [continuous export](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#export_continuously) , where the ordering of changes to rows with the same primary key is important.
+  - `  PRIORITY  ` (optional): [priority](https://docs.cloud.google.com/spanner/docs/reference/rest/v1/RequestOptions#priority) of the write requests. Allowed values: `LOW` , `MEDIUM` , `HIGH` . Default value: `MEDIUM` .
+  - `  TAG  ` (optional): [request tag](https://docs.cloud.google.com/spanner/docs/introspection/troubleshooting-with-tags) to help identify exporter traffic in Spanner monitoring. Default value: `bq_export` .
 
 ## Export query requirements
 
 To export query results to Spanner, the results must meet the following requirements:
 
   - All columns in the result set must exist in the destination table, and their types must match or be [convertible](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#type_conversions) .
-  - The result set must contain all `  NOT NULL  ` columns for the destination table.
+  - The result set must contain all `NOT NULL` columns for the destination table.
   - Column values must not exceed Spanner [data size limits within tables](https://docs.cloud.google.com/spanner/quotas#tables) .
   - Any unsupported column types must be converted to one of the supported types before exporting to Spanner.
 
@@ -125,17 +116,12 @@ For ease of use, Spanner exporter automatically applies the following type conve
 
 ## Export data
 
-You can use the [`  EXPORT DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from a BigQuery table into a Spanner table.
+You can use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from a BigQuery table into a Spanner table.
 
-The following example exports selected fields from a table that's named `  mydataset.table1  ` :
+The following example exports selected fields from a table that's named `mydataset.table1` :
 
 ``` notranslate
-EXPORT DATA OPTIONS (
-  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
-  format='CLOUD_SPANNER',
-  spanner_options="""{ "table": "TABLE_NAME" }"""
-)
-AS SELECT * FROM mydataset.table1;
+EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME" }""")AS SELECT * FROM mydataset.table1;
 ```
 
 Replace the following:
@@ -145,19 +131,19 @@ Replace the following:
   - `  DATABASE_ID  ` : the name of your database
   - `  TABLE_NAME  ` : the name of an existing destination table
 
-## Export multiple results with the same `     rowkey    ` value
+## Export multiple results with the same `rowkey` value
 
-When you export a result containing multiple rows with the same `  rowkey  ` value, values written to Spanner end up in the same Spanner row. Only single matching BigQuery row (there is no guarantee which one) will be present in the Spanner row set produced by export.
+When you export a result containing multiple rows with the same `rowkey` value, values written to Spanner end up in the same Spanner row. Only single matching BigQuery row (there is no guarantee which one) will be present in the Spanner row set produced by export.
 
-## Export using a `     CLOUD_RESOURCE    ` Connection
+## Export using a `CLOUD_RESOURCE` Connection
 
-You can delegate write permissions to a BigQuery [`  CLOUD_RESOURCE  `](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) connection to run exports without giving a user access direct access to the Spanner database.
+You can delegate write permissions to a BigQuery [`CLOUD_RESOURCE`](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) connection to run exports without giving a user access direct access to the Spanner database.
 
-Before you export to Spanner with a `  CLOUD_RESOURCE  ` connection, do the following:
+Before you export to Spanner with a `CLOUD_RESOURCE` connection, do the following:
 
 ### Create a connection
 
-You can create or use an existing [`  CLOUD_RESOURCE  ` connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to Spanner.
+You can create or use an existing [`CLOUD_RESOURCE` connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to Spanner.
 
 Select one of the following options:
 
@@ -191,7 +177,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -227,7 +213,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -365,13 +351,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -405,13 +391,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -423,7 +409,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -435,7 +421,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -449,7 +435,7 @@ After you create the connection, open it. In the **Connection info** pane, copy 
 
 ### Set up access
 
-You must give the service account that is associated with the new connection write access to your Spanner instance or database. We recommend that you use the **Cloud Spanner Database User** ( `  roles/spanner.databaseUser  ` ) predefined IAM role. These steps require the service account ID that you copied when you created your connection.
+You must give the service account that is associated with the new connection write access to your Spanner instance or database. We recommend that you use the **Cloud Spanner Database User** ( `roles/spanner.databaseUser` ) predefined IAM role. These steps require the service account ID that you copied when you created your connection.
 
 To grant access to database-level roles for the service account, do the following:
 
@@ -465,28 +451,23 @@ To grant access to database-level roles for the service account, do the followin
 
 5.  For **New principals** , enter the service account ID that you copied earlier.
 
-6.  In the **Select a role** field, select a role with `  spanner.databases.write  ` permissions. We recommend that you use the **Cloud Spanner Database User** role.
+6.  In the **Select a role** field, select a role with `spanner.databases.write` permissions. We recommend that you use the **Cloud Spanner Database User** role.
 
 7.  Click **Save** .
 
-### Run the export using the `     CLOUD_RESOURCE    ` connection
+### Run the export using the `CLOUD_RESOURCE` connection
 
-With the connection created and the appropriate access granted to it, you can run the export using the `  CLOUD_RESOURCE  ` connection. The following example shows an `  EXPORT  ` command that exports with a `  CLOUD_RESOURCE  ` connection.
+With the connection created and the appropriate access granted to it, you can run the export using the `CLOUD_RESOURCE` connection. The following example shows an `EXPORT` command that exports with a `CLOUD_RESOURCE` connection.
 
 ``` notranslate
-EXPORT DATA WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_NAME` OPTIONS (
-  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
-  format='CLOUD_SPANNER',
-  spanner_options="""{ "table": "SPANNER_TABLE_NAME" }"""
-)
-AS SELECT * FROM my_bq_dataset.table1;
+EXPORT DATA WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_NAME` OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "SPANNER_TABLE_NAME" }""")AS SELECT * FROM my_bq_dataset.table1;
 ```
 
 Replace the following:
 
   - `  PROJECT_ID  ` : the name of your Google Cloud project.
-  - `  LOCATION  ` : the location where you created the connection—for example, `  us  ` .
-  - `  CONNECTION_NAME  ` : the name of the connection being used to run the export—for example, `  myconnection  ` .
+  - `  LOCATION  ` : the location where you created the connection—for example, `us` .
+  - `  CONNECTION_NAME  ` : the name of the connection being used to run the export—for example, `myconnection` .
   - `  INSTANCE_ID  ` : the name of your Spanner database instance.
   - `  DATABASE_ID  ` : the name of your Spanner database.
   - `  SPANNER_TABLE_NAME  ` : The name of the existing destination Spanner table.
@@ -499,27 +480,23 @@ To continuously process an export query, see [Create continuous queries](https:/
 
 To optimize the export of records from BigQuery to Spanner, you can try the following:
 
-  - [Increase the number of nodes in the Spanner destination instance](https://docs.cloud.google.com/spanner/docs/compute-capacity) . During the early stages of the export, increasing the number of nodes in the instance might not immediately increase export throughput. A slight delay can occur while Spanner performs [load-based splitting](https://docs.cloud.google.com/spanner/docs/schema-and-data-model#load-based_splitting) . With load-based splitting, the export throughput grows and stabilizes. Using the `  EXPORT DATA  ` statement batches data to optimize writes to Spanner. For more information, see [Performance overview](https://docs.cloud.google.com/spanner/docs/performance) .
+  - [Increase the number of nodes in the Spanner destination instance](https://docs.cloud.google.com/spanner/docs/compute-capacity) . During the early stages of the export, increasing the number of nodes in the instance might not immediately increase export throughput. A slight delay can occur while Spanner performs [load-based splitting](https://docs.cloud.google.com/spanner/docs/schema-and-data-model#load-based_splitting) . With load-based splitting, the export throughput grows and stabilizes. Using the `EXPORT DATA` statement batches data to optimize writes to Spanner. For more information, see [Performance overview](https://docs.cloud.google.com/spanner/docs/performance) .
 
-  - Specify `  HIGH  ` priority within [`  spanner_options  `](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#spanner_options) . If your Spanner instance has [autoscaling](https://docs.cloud.google.com/spanner/docs/autoscaling-overview) enabled, setting `  HIGH  ` priority helps ensure that CPU utilization reaches the necessary threshold to trigger scaling. This allows the autoscaler to add compute resources in response to the export load, which can improve overall export throughput.
+  - Specify `HIGH` priority within [`spanner_options`](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#spanner_options) . If your Spanner instance has [autoscaling](https://docs.cloud.google.com/spanner/docs/autoscaling-overview) enabled, setting `HIGH` priority helps ensure that CPU utilization reaches the necessary threshold to trigger scaling. This allows the autoscaler to add compute resources in response to the export load, which can improve overall export throughput.
     
-    **Caution:** using `  HIGH  ` priority can cause significant performance degradation for other workloads served by the same Spanner instance. Consider using `  HIGH  ` priority only if the Spanner instance is dedicated to this export, or if other workloads are not sensitive to performance impacts.
+    **Caution:** using `HIGH` priority can cause significant performance degradation for other workloads served by the same Spanner instance. Consider using `HIGH` priority only if the Spanner instance is dedicated to this export, or if other workloads are not sensitive to performance impacts.
     
-    The following example shows a Spanner export command set to `  HIGH  ` priority:
+    The following example shows a Spanner export command set to `HIGH` priority:
     
     ``` notranslate
-    EXPORT DATA OPTIONS (
-      uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
-      format='CLOUD_SPANNER',
-      spanner_options="""{ "table": "TABLE_NAME", "priority": "LOW" }"""
-    )
+    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "LOW" }""")
     ```
 
   - Avoid ordering the query results. If the result set contains all primary key columns, the exporter automatically sorts the primary keys of the destination table to streamline writes and minimize contention.
     
     If the destination table's primary key includes generated columns, add the generated columns' expressions to the query to ensure that the exported data is sorted and batched properly.
     
-    For example, in the following Spanner schema, `  SaleYear  ` and `  SaleMonth  ` are generated columns that make up the beginning of the Spanner primary key:
+    For example, in the following Spanner schema, `SaleYear` and `SaleMonth` are generated columns that make up the beginning of the Spanner primary key:
     
     ``` notranslate
     CREATE TABLE Sales (
@@ -533,40 +510,18 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
     ) PRIMARY KEY (SaleYear, SaleMonth, SaleId);
     ```
     
-    When you export data from BigQuery to a Spanner table with generated columns used in the primary key, it is recommended, but not required, to include the expressions for these generated columns in your `  EXPORT DATA  ` query. This lets BigQuery pre-sort the data correctly, which is critical for efficient batching and writing to Spanner. The values for the generated columns in the `  EXPORT DATA  ` statement aren't committed in Spanner, because they are auto-generated by Spanner, but they are used to optimize the export.
+    When you export data from BigQuery to a Spanner table with generated columns used in the primary key, it is recommended, but not required, to include the expressions for these generated columns in your `EXPORT DATA` query. This lets BigQuery pre-sort the data correctly, which is critical for efficient batching and writing to Spanner. The values for the generated columns in the `EXPORT DATA` statement aren't committed in Spanner, because they are auto-generated by Spanner, but they are used to optimize the export.
     
-    The following example exports data to a Spanner `  Sales  ` table whose primary key uses generated columns. To optimize write performance, the query includes `  EXTRACT  ` expressions that match the generated `  SaleYear  ` and `  SaleMonth  ` columns, letting BigQuery pre-sort the data before export:
+    The following example exports data to a Spanner `Sales` table whose primary key uses generated columns. To optimize write performance, the query includes `EXTRACT` expressions that match the generated `SaleYear` and `SaleMonth` columns, letting BigQuery pre-sort the data before export:
     
     ``` notranslate
-    EXPORT DATA OPTIONS (
-      uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
-      format='CLOUD_SPANNER',
-      spanner_options="""{ "table": "Sales" }"""
-    )
-    AS SELECT
-      s.SaleId,
-      s.ProductId,
-      s.SaleTimestamp,
-      s.Amount,
-      -- Add expressions that match the generated columns in the Spanner PK
-      EXTRACT(YEAR FROM s.SaleTimestamp) AS SaleYear,
-      EXTRACT(MONTH FROM s.SaleTimestamp) AS SaleMonth
-    FROM my_dataset.sales_export AS s;
+    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "Sales" }""")AS SELECT  s.SaleId,  s.ProductId,  s.SaleTimestamp,  s.Amount,  -- Add expressions that match the generated columns in the Spanner PK  EXTRACT(YEAR FROM s.SaleTimestamp) AS SaleYear,  EXTRACT(MONTH FROM s.SaleTimestamp) AS SaleMonthFROM my_dataset.sales_export AS s;
     ```
 
   - To prevent long running jobs, export data by partition. Shard your BigQuery data using a partition key, such as a timestamp in your query:
     
     ``` notranslate
-    EXPORT DATA OPTIONS (
-      uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
-      format='CLOUD_SPANNER',
-      spanner_options="""{ "table": "TABLE_NAME", "priority": "MEDIUM" }"""
-    )
-    AS SELECT *
-    FROM 'mydataset.table1' d
-    WHERE
-    d.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' AND
-    d.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
+    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "MEDIUM" }""")AS SELECT *FROM 'mydataset.table1' dWHEREd.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' ANDd.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
     ```
     
     This lets the query complete within the 6-hour job runtime. For more information about these limits, see the [query job limits](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
@@ -577,9 +532,9 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
 
 ## Pricing
 
-When you export data to Spanner using the `  EXPORT DATA  ` statement, you are billed using [BigQuery capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+When you export data to Spanner using the `EXPORT DATA` statement, you are billed using [BigQuery capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
-To export continuously to Spanner using a continuous query, you must have a [BigQuery Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) slot reservation and a [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) that uses the `  CONTINUOUS  ` job type.
+To export continuously to Spanner using a continuous query, you must have a [BigQuery Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) slot reservation and a [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) that uses the `CONTINUOUS` job type.
 
 BigQuery exports to Spanner that cross regional boundaries are charged using data extraction rates. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing) . To avoid data transfer charges, make sure that your BigQuery export runs in the same region as the Spanner [default leader](https://docs.cloud.google.com/spanner/docs/instance-configurations#configure-leader-region) .
 

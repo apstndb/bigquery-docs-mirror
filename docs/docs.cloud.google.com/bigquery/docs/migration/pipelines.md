@@ -200,13 +200,13 @@ For the part that loads data into your data warehouse (the EL part), you can fol
 
 If your data sources are supported by the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) (DTS) either [directly](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) or through [third-party integrations](https://docs.cloud.google.com/bigquery/docs/third-party-transfer) , you can use DTS to replace your EL pipeline.
 
-### Migrating existing OSS data pipelines to Dataproc
+### Migrating existing OSS data pipelines to Managed Service for Apache Spark
 
 When you migrate your data pipeline to Google Cloud, you might want to migrate some legacy jobs that are written with an open source software framework like [Apache Hadoop](https://hadoop.apache.org/) , [Apache Spark](https://spark.apache.org/) , or [Apache Flink](https://flink.apache.org/) .
 
-[Dataproc](https://docs.cloud.google.com/dataproc) lets you deploy fast, easy-to-use, fully managed Hadoop and Spark clusters in a simple, cost-efficient way. Dataproc integrates with the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery) , a Java library that enables Hadoop and Spark to directly write data to BigQuery by using abstracted versions of the Apache Hadoop [InputFormat](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/InputFormat.html) and [OutputFormat](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/OutputFormat.html) classes.
+[Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) lets you deploy fast, easy-to-use, fully managed Hadoop and Spark clusters in a simple, cost-efficient way. Managed Service for Apache Spark integrates with the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery) , a Java library that enables Hadoop and Spark to directly write data to BigQuery by using abstracted versions of the Apache Hadoop [InputFormat](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/InputFormat.html) and [OutputFormat](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/OutputFormat.html) classes.
 
-Dataproc makes it easy to create and delete clusters so that instead of using one monolithic cluster, you can use many ephemeral clusters. This approach has several advantages:
+Managed Service for Apache Spark makes it easy to create and delete clusters so that instead of using one monolithic cluster, you can use many ephemeral clusters. This approach has several advantages:
 
   - You can use different cluster configurations for individual jobs, eliminating the administrative burden of managing tools across jobs.
   - You can scale clusters to suit individual jobs or groups of jobs.
@@ -222,9 +222,9 @@ When you migrate your jobs, we recommend that you take an incremental approach. 
   - Create a proof of concept for each complex process without affecting your production environment.
   - Move your jobs to the recommended ephemeral model thoughtfully and deliberately.
 
-When you migrate your existing Hadoop and Spark jobs to Dataproc, you can check that your jobs' dependencies are covered by the supported [Dataproc versions](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions) . If you need to install custom software, you might consider [creating your own Dataproc image](https://docs.cloud.google.com/dataproc/docs/guides/dataproc-images) , using some of the available [initialization actions](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/init-actions) (for example, for [Apache Flink](https://github.com/GoogleCloudDataproc/initialization-actions/tree/master/flink) ), writing your own initialization action, or [specifying custom Python package requirements](https://docs.cloud.google.com/dataproc/docs/tutorials/python-configuration) .
+When you migrate your existing Hadoop and Spark jobs to Managed Service for Apache Spark, you can check that your jobs' dependencies are covered by the supported [Managed Service for Apache Spark versions](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions) . If you need to install custom software, you might consider [creating your own Managed Service for Apache Spark image](https://docs.cloud.google.com/dataproc/docs/guides/dataproc-images) , using some of the available [initialization actions](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/init-actions) (for example, for [Apache Flink](https://github.com/GoogleCloudDataproc/initialization-actions/tree/master/flink) ), writing your own initialization action, or [specifying custom Python package requirements](https://docs.cloud.google.com/dataproc/docs/tutorials/python-configuration) .
 
-To get started, see the Dataproc [quickstart guides](https://docs.cloud.google.com/dataproc/docs/quickstarts) and the [BigQuery connector code samples](https://docs.cloud.google.com/dataproc/docs/examples/bigquery-example) .
+To get started, see the Managed Service for Apache Spark [quickstart guides](https://docs.cloud.google.com/dataproc/docs/quickstarts) and the [BigQuery connector code samples](https://docs.cloud.google.com/dataproc/docs/examples/bigquery-example) .
 
 ### Rehost third-party data pipelines to run on Google Cloud
 
@@ -283,7 +283,7 @@ The following sections present fully managed Google Cloud services that let you 
 
 [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion) , which is built on the open source [CDAP](https://cdap.io/) project, is a fully managed data integration service for building and managing data pipelines through a graphical interface.
 
-You develop the data pipelines in the Cloud Data Fusion UI by connecting sources to transformations, sinks, and other nodes to form a DAG. When you deploy your data pipeline, the Cloud Data Fusion planner transforms this DAG into a series of parallel computations which will be executed as an Apache Spark job on [Dataproc](https://docs.cloud.google.com/dataproc) .
+You develop the data pipelines in the Cloud Data Fusion UI by connecting sources to transformations, sinks, and other nodes to form a DAG. When you deploy your data pipeline, the Cloud Data Fusion planner transforms this DAG into a series of parallel computations which will be executed as an Apache Spark job on [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) .
 
 When using Cloud Data Fusion, you can connect to a source system's database by using the Java Database Connectivity (JDBC) drivers to read data, transform it, and load it into a destination of your choice (for example, BigQuery), without having to write any code. To do this, you need to upload a JDBC driver to your Cloud Data Fusion instance and configure it so that you can use it in your data pipelines. For more details, see the guide on [using JDBC drivers with Cloud Data Fusion](https://docs.cloud.google.com/data-fusion/docs/how-to/using-jdbc-drivers) .
 
@@ -384,7 +384,7 @@ In subsequent iterations, the migration team can solve any remaining functional 
   - [Dataflow](https://docs.cloud.google.com/dataflow) : Enables you to define each data pipeline as a self-contained DAG using the [Beam model](https://beam.apache.org/documentation/execution-model/) .
   - [Cloud Composer](https://docs.cloud.google.com/composer) : Enables you to define the broader orchestration as one or more [Airflow DAGs](https://airflow.apache.org/concepts.html#dags) .
 
-Even though Airflow supports sub-DAGs natively, this functionality might limit its performance and is therefore [discouraged](https://docs.cloud.google.com/composer/docs/faq#using_operators) . In their place, use independent DAGs with the [`  TriggerDagRunOperator  `](https://github.com/apache/airflow/blob/main/providers/src/airflow/providers/standard/operators/trigger_dagrun.py) operator.
+Even though Airflow supports sub-DAGs natively, this functionality might limit its performance and is therefore [discouraged](https://docs.cloud.google.com/composer/docs/faq#using_operators) . In their place, use independent DAGs with the [`TriggerDagRunOperator`](https://github.com/apache/airflow/blob/main/providers/src/airflow/providers/standard/operators/trigger_dagrun.py) operator.
 
 ## What's next
 

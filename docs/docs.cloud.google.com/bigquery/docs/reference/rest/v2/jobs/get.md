@@ -10,7 +10,7 @@ Returns information about a specific job. Job information is available for a six
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs/{jobId}  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs/{jobId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,15 +18,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the requested job.
 
-`  jobId  `
+`jobId`
 
-`  string  `
+`string`
 
 Required. Job ID of the requested job.
 
@@ -34,14 +34,14 @@ Required. Job ID of the requested job.
 
 Parameters
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 The geographic location of the job. You must specify the location to run the job for the following scenarios:
 
-  - If the location to run a job is not in the `  us  ` or the `  eu  ` multi-regional location
-  - If the job's location is in a single region (for example, `  us-central1  ` )
+  - If the location to run a job is not in the `us` or the `eu` multi-regional location
+  - If the job's location is in a single region (for example, `us-central1` )
 
 For more information, see how to [specify locations](https://cloud.google.com/bigquery/docs/locations#specify_locations) .
 
@@ -57,9 +57,9 @@ If successful, the response body contains an instance of `  Job  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

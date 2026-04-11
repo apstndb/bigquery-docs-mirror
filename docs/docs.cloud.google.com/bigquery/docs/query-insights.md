@@ -12,26 +12,26 @@ You can also use the query execution graph to get performance insights for queri
 
 To use the query execution graph, you must have the following permissions:
 
-  - `  bigquery.jobs.get  `
-  - `  bigquery.jobs.listAll  `
+  - `bigquery.jobs.get`
+  - `bigquery.jobs.listAll`
 
 These permissions are available through the following BigQuery predefined Identity and Access Management (IAM) roles:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.resourceAdmin  `
-  - `  roles/bigquery.resourceEditor  `
-  - `  roles/bigquery.resourceViewer  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.resourceAdmin`
+  - `roles/bigquery.resourceEditor`
+  - `roles/bigquery.resourceViewer`
 
 ## Execution graph structure
 
 The query execution graph provides a graphical view of the query plan in the console. Each box represents a [stage](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#stage-overview) in the query plan such as the following:
 
   - **Input** : Reading data from a table or selecting specific columns
-  - **Join** : Merging data from two tables based on the `  JOIN  ` condition
-  - **Aggregate** : Performing calculations such as `  SUM  `
+  - **Join** : Merging data from two tables based on the `JOIN` condition
+  - **Aggregate** : Performing calculations such as `SUM`
   - **Sort** : Ordering the results
 
-Stages are made up of [steps](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#per-stage_step_information) that describe the individual operations that each worker within a stage executes. You can click a stage to open it and view its steps. Stages also include [relative and absolute timing information](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#per-stage_timing_classification) . Stage names summarize the steps they perform. For example, a stage with *join* in its name means that the principal step in the stage is a `  JOIN  ` operation. Stage names that have `  +  ` at the end mean that they perform additional important steps. For example, a stage with `  JOIN+  ` in its name means that the stage performs a join operation and other important steps.
+Stages are made up of [steps](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#per-stage_step_information) that describe the individual operations that each worker within a stage executes. You can click a stage to open it and view its steps. Stages also include [relative and absolute timing information](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#per-stage_timing_classification) . Stage names summarize the steps they perform. For example, a stage with *join* in its name means that the principal step in the stage is a `JOIN` operation. Stage names that have `+` at the end mean that they perform additional important steps. For example, a stage with `JOIN+` in its name means that the stage performs a join operation and other important steps.
 
 The lines that connect stages represent the exchange of intermediary data between stages. BigQuery stores the intermediary data in shuffle memory while stages are executing. Numbers on the edges indicate the estimated number of rows exchanged between stages. Shuffle memory quota is correlated with the number of slots allocated to the account. If the shuffle quota is exceeded, shuffle memory can spill to disk and cause query performance to slow dramatically.
 
@@ -142,7 +142,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-You can get query performance insights in a non-graphical format by calling the [`  jobs.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list) API method and inspecting the [`  JobStatistics2  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics2) information that is returned.
+You can get query performance insights in a non-graphical format by calling the [`jobs.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list) API method and inspecting the [`JobStatistics2`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics2) information that is returned.
 
 ## Interpret query performance insights
 
@@ -193,7 +193,7 @@ Before running your query, BigQuery [breaks up your query's logic into *stages*]
 
 Similarly to slot contention, reducing the amount of data that your query processes might reduce shuffle usage. To do this, follow the guidance in [Reduce data processed in queries](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-communication) .
 
-Certain operations in SQL tend to make more extensive usage of shuffle, particularly [`  JOIN  ` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) and [`  GROUP BY  ` clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) . Where possible, reducing the amount of data in these operations might reduce shuffle usage.
+Certain operations in SQL tend to make more extensive usage of shuffle, particularly [`JOIN` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) and [`GROUP BY` clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) . Where possible, reducing the amount of data in these operations might reduce shuffle usage.
 
 #### What to do if you're an administrator
 
@@ -201,7 +201,7 @@ Reduce shuffle quota contention by taking the following actions:
 
   - Similarly to slot contention, if you use BigQuery's [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , your queries use a shared pool of slots. Consider switching to [capacity-based analysis pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) by purchasing [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) instead. Reservations give you dedicated slots and shuffle capacity for your projects' queries.
 
-  - If you are using BigQuery reservations, slots come with dedicated shuffle capacity. If your reservation is running some queries that make extensive use of shuffle, this might cause other queries running in parallel to not get enough shuffle capacity. You can identify which jobs use shuffle capacity extensively by querying the `  period_shuffle_ram_usage_ratio  ` column in the [`  INFORMATION_SCHEMA.JOBS_TIMELINE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) .
+  - If you are using BigQuery reservations, slots come with dedicated shuffle capacity. If your reservation is running some queries that make extensive use of shuffle, this might cause other queries running in parallel to not get enough shuffle capacity. You can identify which jobs use shuffle capacity extensively by querying the `period_shuffle_ram_usage_ratio` column in the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) .
     
     To address this, you can try one or more of the following solutions:
     
@@ -225,7 +225,7 @@ When a query contains a join with non-unique keys on both sides of the join, the
 
 #### What to do if you're an analyst
 
-Check your join conditions to confirm that the increase in the size of the output table is expected. Avoid using [cross joins](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join) . If you must use a cross join, try using a `  GROUP BY  ` clause to pre-aggregate results, or use a window function. For more information, see [Reduce data before using a `  JOIN  `](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-communication#reduce_data_before_using_a_join) .
+Check your join conditions to confirm that the increase in the size of the output table is expected. Avoid using [cross joins](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join) . If you must use a cross join, try using a `GROUP BY` clause to pre-aggregate results, or use a window function. For more information, see [Reduce data before using a `JOIN`](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-communication#reduce_data_before_using_a_join) .
 
 ### Partition skew
 
@@ -233,11 +233,11 @@ Check your join conditions to confirm that the increase in the size of the outpu
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-To provide feedback or request support with this feature, send email to [`  bq-query-inspector-feedback@google.com  `](mailto:%0Abq-query-inspector-feedback@google.com) .
+To provide feedback or request support with this feature, send email to [`bq-query-inspector-feedback@google.com`](mailto:%0Abq-query-inspector-feedback@google.com) .
 
 Skewed data distribution can cause queries to run slowly. When a query is executing, BigQuery splits data into small partitions for parallel processing. Skew occurs when data is unevenly distributed across these partitions, often due to frequently occurring values in join or grouping keys, making some partitions significantly larger than others. Since a single slot processes an entire partition and cannot share the work, an oversized partition can slow down processing, cause "resource exceeded" errors, and in extreme cases crash the slot.
 
-While you run a `  JOIN  ` operation, BigQuery partitions the data on the left and right sides of the join based on the join keys. If a partition is too large, BigQuery attempts to rebalance the data. If the skew is too severe to be fully rebalanced, a partition skew insight is added to the `  JOIN  ` stage in the execution graph.
+While you run a `JOIN` operation, BigQuery partitions the data on the left and right sides of the join based on the join keys. If a partition is too large, BigQuery attempts to rebalance the data. If the skew is too severe to be fully rebalanced, a partition skew insight is added to the `JOIN` stage in the execution graph.
 
 #### Identify partition skew
 
@@ -254,16 +254,16 @@ The following query joins repository information with file information. Skew can
     WHERE r.watch_count > 10
     GROUP BY r.repo_name
 
-The join key is `  repo_name  ` . In the `  sample_repos  ` table, `  repo_name  ` is expected to be unique. However, in the `  sample_files  ` table, `  repo_name  ` can appear many times. If a few `  repo_name  ` values appear disproportionately frequently in `  sample_files  ` , this creates data skew.
+The join key is `repo_name` . In the `sample_repos` table, `repo_name` is expected to be unique. However, in the `sample_files` table, `repo_name` can appear many times. If a few `repo_name` values appear disproportionately frequently in `sample_files` , this creates data skew.
 
-To confirm if data skew exists, analyze the distribution of the join key in the larger table ( `  sample_files  ` in this case). Run the following query to assess the distribution of `  repo_name  ` :
+To confirm if data skew exists, analyze the distribution of the join key in the larger table ( `sample_files` in this case). Run the following query to assess the distribution of `repo_name` :
 
     SELECT repo_name, COUNT(*) AS occurrences
     FROM `bigquery-public-data.github_repos.sample_files`
     GROUP BY repo_name
     ORDER BY occurrences DESC
 
-For very large tables, use the [`  APPROX_TOP_COUNT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count) function to efficiently estimate the most frequent values.
+For very large tables, use the [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count) function to efficiently estimate the most frequent values.
 
     SELECT APPROX_TOP_COUNT(repo_name, 100)
     FROM `bigquery-public-data.github_repos.sample_files`
@@ -274,9 +274,9 @@ If the counts for the top values are orders of magnitude larger than others, dat
 
 You can use the following strategies to address partition skew:
 
-  - **Filter your data early** . Reduce the amount of data being processed by applying filters as early as possible in your query. This can decrease the number of rows associated with skewed keys before they reach operations like `  JOIN  ` or `  GROUP BY  ` .
+  - **Filter your data early** . Reduce the amount of data being processed by applying filters as early as possible in your query. This can decrease the number of rows associated with skewed keys before they reach operations like `JOIN` or `GROUP BY` .
 
-  - **Split the query to isolate skewed keys** . If skew is caused by a few specific key values, similar to the `  repo_name  ` field in the preceding example, consider splitting the query. Process the data for the skewed keys separately from the rest of the data, then combine the results using `  UNION ALL  ` .
+  - **Split the query to isolate skewed keys** . If skew is caused by a few specific key values, similar to the `repo_name` field in the preceding example, consider splitting the query. Process the data for the skewed keys separately from the rest of the data, then combine the results using `UNION ALL` .
     
     **Example** : Isolating a frequently used key.
     
@@ -298,11 +298,11 @@ You can use the following strategies to address partition skew:
         WHERE r.watch_count > 10 AND r.repo_name != 'popular_repo'
         GROUP BY r.repo_name
 
-  - **Handle `  NULL  ` and default values** : A common cause of skew is a large number of rows with `  NULL  ` or empty string values in key columns. If you don't need these rows for analysis, filter them out using a `  WHERE  ` clause before the `  JOIN  ` or `  GROUP BY  ` .
+  - **Handle `NULL` and default values** : A common cause of skew is a large number of rows with `NULL` or empty string values in key columns. If you don't need these rows for analysis, filter them out using a `WHERE` clause before the `JOIN` or `GROUP BY` .
 
   - **Reorder operations** : In queries with multiple joins, the order can matter. If possible, perform joins that significantly reduce row counts earlier in the query.
 
-  - **Use approximate functions** : For aggregations on skewed data, consider if an approximate result is acceptable. Functions like [`  APPROX_COUNT_DISTINCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct) are more tolerant of data skew than exact functions like [`  COUNT(DISTINCT)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count) .
+  - **Use approximate functions** : For aggregations on skewed data, consider if an approximate result is acceptable. Functions like [`APPROX_COUNT_DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct) are more tolerant of data skew than exact functions like [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count) .
 
 ## Interpret query stage information
 
@@ -311,7 +311,7 @@ In addition to using [query performance insights](https://docs.cloud.google.com/
   - If the **Wait ms** value for one or more stages is high compared to previous runs of the query:
       - See if you have enough [slots](https://docs.cloud.google.com/bigquery/docs/slots) available to accommodate your workload. If not, load-balance when you run resource-intensive queries so they don't compete with each other.
       - If the **Wait ms** value is higher than it has been for just one stage, look at the stage prior to it to see if a bottleneck has been introduced there. Things like substantial changes to the data or schema of the tables involved in the query might affect the query performance.
-  - If the **Shuffle output bytes** value for a stage is high compared to previous runs of the query, or compared to a previous stage, evaluate the steps processed in that stage to see if any create unexpectedly large amounts of data. One common cause for this is when a step processes an [`  INNER JOIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#inner_join) where there are duplicate keys on both sides of the join. This can return an unexpectedly large amount of data.
+  - If the **Shuffle output bytes** value for a stage is high compared to previous runs of the query, or compared to a previous stage, evaluate the steps processed in that stage to see if any create unexpectedly large amounts of data. One common cause for this is when a step processes an [`INNER JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#inner_join) where there are duplicate keys on both sides of the join. This can return an unexpectedly large amount of data.
   - Use the execution graph to look at the top stages by duration and processing. Consider the amount of data they produce and whether it is commensurate with the size of the tables referenced in the query. If it isn't, review the steps in those stages to see if any of them might produce an unexpected amount of interim data.
 
 ## What's next

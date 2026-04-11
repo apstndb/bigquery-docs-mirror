@@ -1,8 +1,8 @@
-## Tool: `       get_data_source      `
+## Tool: `get_data_source`
 
 Get details about a data source.
 
-The following sample demonstrate how to use `  curl  ` to invoke the `  get_data_source  ` MCP tool.
+The following sample demonstrate how to use `curl` to invoke the `get_data_source` MCP tool.
 
 <table>
 <colgroup>
@@ -52,25 +52,22 @@ Request for getting a data source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;projectId&quot;: string,
-  &quot;dataSource&quot;: enum (DataSource)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;projectId&quot;: string,&quot;dataSource&quot;: enum (DataSource)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID or project number.
 
-`  dataSource  `
+`dataSource`
 
-`  enum ( DataSource  ` )
+`enum ( DataSource` )
 
 Required. Data source.
 
@@ -91,151 +88,126 @@ Defines the properties and custom parameters for a data source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;dataSourceId&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;clientId&quot;: string,
-  &quot;scopes&quot;: [
-    string
-  ],
-  &quot;transferType&quot;: enum (TransferType),
-  &quot;supportsMultipleTransfers&quot;: boolean,
-  &quot;updateDeadlineSeconds&quot;: integer,
-  &quot;defaultSchedule&quot;: string,
-  &quot;supportsCustomSchedule&quot;: boolean,
-  &quot;parameters&quot;: [
-    {
-      object (DataSourceParameter)
-    }
-  ],
-  &quot;helpUrl&quot;: string,
-  &quot;authorizationType&quot;: enum (AuthorizationType),
-  &quot;dataRefreshType&quot;: enum (DataRefreshType),
-  &quot;defaultDataRefreshWindowDays&quot;: integer,
-  &quot;manualRunsDisabled&quot;: boolean,
-  &quot;minimumScheduleInterval&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataSourceId&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;clientId&quot;: string,&quot;scopes&quot;: [string],&quot;transferType&quot;: enum (TransferType),&quot;supportsMultipleTransfers&quot;: boolean,&quot;updateDeadlineSeconds&quot;: integer,&quot;defaultSchedule&quot;: string,&quot;supportsCustomSchedule&quot;: boolean,&quot;parameters&quot;: [{object (DataSourceParameter)}],&quot;helpUrl&quot;: string,&quot;authorizationType&quot;: enum (AuthorizationType),&quot;dataRefreshType&quot;: enum (DataRefreshType),&quot;defaultDataRefreshWindowDays&quot;: integer,&quot;manualRunsDisabled&quot;: boolean,&quot;minimumScheduleInterval&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Output only. Data source resource name.
 
-`  dataSourceId  `
+`dataSourceId`
 
-`  string  `
+`string`
 
 Data source id.
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 User friendly data source name.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 User friendly data source description string.
 
-`  clientId  `
+`clientId`
 
-`  string  `
+`string`
 
 Data source client id which should be used to receive refresh token.
 
-`  scopes[]  `
+`scopes[]`
 
-`  string  `
+`string`
 
 Api auth scopes for which refresh token needs to be obtained. These are scopes needed by a data source to prepare data and ingest them into BigQuery, e.g., <https://www.googleapis.com/auth/bigquery>
 
-`  transferType (deprecated)  `
+` transferType (deprecated)  `
 
-`  enum ( TransferType  ` )
-
-This item is deprecated\!
-
-Deprecated. This field has no effect.
-
-`  supportsMultipleTransfers (deprecated)  `
-
-`  boolean  `
+`enum ( TransferType` )
 
 This item is deprecated\!
 
 Deprecated. This field has no effect.
 
-`  updateDeadlineSeconds  `
+` supportsMultipleTransfers (deprecated)  `
 
-`  integer  `
+`boolean`
+
+This item is deprecated\!
+
+Deprecated. This field has no effect.
+
+`updateDeadlineSeconds`
+
+`integer`
 
 The number of seconds to wait for an update from the data source before the Data Transfer Service marks the transfer as FAILED.
 
-`  defaultSchedule  `
+`defaultSchedule`
 
-`  string  `
+`string`
 
-Default data transfer schedule. Examples of valid schedules include: `  1st,3rd monday of month 15:30  ` , `  every wed,fri of jan,jun 13:15  ` , and `  first sunday of quarter 00:00  ` .
+Default data transfer schedule. Examples of valid schedules include: `1st,3rd monday of month 15:30` , `every wed,fri of jan,jun 13:15` , and `first sunday of quarter 00:00` .
 
-`  supportsCustomSchedule  `
+`supportsCustomSchedule`
 
-`  boolean  `
+`boolean`
 
-Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `  true  ` , user can override default schedule.
+Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `true` , user can override default schedule.
 
-`  parameters[]  `
+`parameters[]`
 
-`  object ( DataSourceParameter  ` )
+` object ( DataSourceParameter  ` )
 
 Data source parameters.
 
-`  helpUrl  `
+`helpUrl`
 
-`  string  `
+`string`
 
 Url for the help document for this data source.
 
-`  authorizationType  `
+`authorizationType`
 
-`  enum ( AuthorizationType  ` )
+`enum ( AuthorizationType` )
 
 Indicates the type of authorization.
 
-`  dataRefreshType  `
+`dataRefreshType`
 
-`  enum ( DataRefreshType  ` )
+`enum ( DataRefreshType` )
 
 Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data might not be complete until a few days later, so it's useful to refresh data automatically.
 
-`  defaultDataRefreshWindowDays  `
+`defaultDataRefreshWindowDays`
 
-`  integer  `
+`integer`
 
-Default data refresh window on days. Only meaningful when `  data_refresh_type  ` = `  SLIDING_WINDOW  ` .
+Default data refresh window on days. Only meaningful when `data_refresh_type` = `SLIDING_WINDOW` .
 
-`  manualRunsDisabled  `
+`manualRunsDisabled`
 
-`  boolean  `
+`boolean`
 
 Disables backfilling and manual run scheduling for the data source.
 
-`  minimumScheduleInterval  `
+`minimumScheduleInterval`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
 The minimum interval for scheduler to schedule runs.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
 ### DataSourceParameter
 
@@ -250,143 +222,116 @@ A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;paramId&quot;: string,
-  &quot;displayName&quot;: string,
-  &quot;description&quot;: string,
-  &quot;type&quot;: enum (Type),
-  &quot;required&quot;: boolean,
-  &quot;repeated&quot;: boolean,
-  &quot;validationRegex&quot;: string,
-  &quot;allowedValues&quot;: [
-    string
-  ],
-  &quot;minValue&quot;: number,
-  &quot;maxValue&quot;: number,
-  &quot;fields&quot;: [
-    {
-      object (DataSourceParameter)
-    }
-  ],
-  &quot;validationDescription&quot;: string,
-  &quot;validationHelpUrl&quot;: string,
-  &quot;immutable&quot;: boolean,
-  &quot;recurse&quot;: boolean,
-  &quot;deprecated&quot;: boolean,
-
-  // Union field _max_list_size can be only one of the following:
-  &quot;maxListSize&quot;: string
-  // End of list of possible types for union field _max_list_size.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;paramId&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;type&quot;: enum (Type),&quot;required&quot;: boolean,&quot;repeated&quot;: boolean,&quot;validationRegex&quot;: string,&quot;allowedValues&quot;: [string],&quot;minValue&quot;: number,&quot;maxValue&quot;: number,&quot;fields&quot;: [{object (DataSourceParameter)}],&quot;validationDescription&quot;: string,&quot;validationHelpUrl&quot;: string,&quot;immutable&quot;: boolean,&quot;recurse&quot;: boolean,&quot;deprecated&quot;: boolean,// Union field _max_list_size can be only one of the following:&quot;maxListSize&quot;: string// End of list of possible types for union field _max_list_size.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  paramId  `
+`paramId`
 
-`  string  `
+`string`
 
 Parameter identifier.
 
-`  displayName  `
+`displayName`
 
-`  string  `
+`string`
 
 Parameter display name in the user interface.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Parameter description.
 
-`  type  `
+`type`
 
-`  enum ( Type  ` )
+`enum ( Type` )
 
 Parameter type.
 
-`  required  `
+`required`
 
-`  boolean  `
+`boolean`
 
 Is parameter required.
 
-`  repeated  `
+`repeated`
 
-`  boolean  `
+`boolean`
 
 Deprecated. This field has no effect.
 
-`  validationRegex  `
+`validationRegex`
 
-`  string  `
+`string`
 
 Regular expression which can be used for parameter validation.
 
-`  allowedValues[]  `
+`allowedValues[]`
 
-`  string  `
+`string`
 
 All possible values for the parameter.
 
-`  minValue  `
+`minValue`
 
-`  number  `
+`number`
 
 For integer and double values specifies minimum allowed value.
 
-`  maxValue  `
+`maxValue`
 
-`  number  `
+`number`
 
 For integer and double values specifies maximum allowed value.
 
-`  fields[]  `
+`fields[]`
 
-`  object ( DataSourceParameter  ` )
+` object ( DataSourceParameter  ` )
 
 Deprecated. This field has no effect.
 
-`  validationDescription  `
+`validationDescription`
 
-`  string  `
+`string`
 
 Description of the requirements for this field, in case the user input does not fulfill the regex pattern or min/max values.
 
-`  validationHelpUrl  `
+`validationHelpUrl`
 
-`  string  `
+`string`
 
 URL to a help document to further explain the naming requirements.
 
-`  immutable  `
+`immutable`
 
-`  boolean  `
+`boolean`
 
 Cannot be changed after initial creation.
 
-`  recurse  `
+`recurse`
 
-`  boolean  `
+`boolean`
 
 Deprecated. This field has no effect.
 
-`  deprecated  `
+`deprecated`
 
-`  boolean  `
+`boolean`
 
 If true, it should not be used in new transfers, and it should not be visible to users.
 
-Union field `  _max_list_size  ` .
+Union field `_max_list_size` .
 
-`  _max_list_size  ` can be only one of the following:
+`_max_list_size` can be only one of the following:
 
-`  maxListSize  `
+`maxListSize`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 For list parameters, the max size of the list.
 
@@ -412,9 +357,9 @@ For list parameters, the max size of the list.
 
 Fields
 
-`  value  `
+`value`
 
-`  number  `
+`number`
 
 The double value.
 
@@ -441,17 +386,17 @@ The double value.
 
 Fields
 
-`  seconds  `
+`seconds`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Signed seconds of the span of time. Must be from -315,576,000,000 to +315,576,000,000 inclusive. Note: these bounds are computed from: 60 sec/min \* 60 min/hr \* 24 hr/day \* 365.25 days/year \* 10000 years
 
-`  nanos  `
+`nanos`
 
-`  integer  `
+`integer`
 
-Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `  seconds  ` field and a positive or negative `  nanos  ` field. For durations of one second or more, a non-zero value for the `  nanos  ` field must be of the same sign as the `  seconds  ` field. Must be from -999,999,999 to +999,999,999 inclusive.
+Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field. Must be from -999,999,999 to +999,999,999 inclusive.
 
 ### Tool Annotations
 

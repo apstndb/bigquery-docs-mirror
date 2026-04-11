@@ -2,8 +2,8 @@
 
 This document describes the user journeys for BigQuery ML time series forecasting models, including the statements and functions that you can use to work with time series forecasting models. BigQuery ML offers the following types of time series forecasting models:
 
-  - [`  ARIMA_PLUS  ` univariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-  - [`  ARIMA_PLUS_XREG  ` multivariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
+  - [`ARIMA_PLUS` univariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+  - [`ARIMA_PLUS_XREG` multivariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
   - [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model)
 
 ## Model creation user journeys
@@ -31,11 +31,11 @@ The following table describes the statements and functions you can use to create
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ARIMA_PLUS      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series"><code dir="ltr" translate="no">        CREATE MODEL       </code></a></td>
+<td><code dir="ltr" translate="no">ARIMA_PLUS</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/auto-preprocessing">Automatic preprocessing</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima">auto.ARIMA <sup>1</sup></a> automatic tuning</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients"><code dir="ltr" translate="no">        ML.ARIMA_COEFFICIENTS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients"><code dir="ltr" translate="no">ML.ARIMA_COEFFICIENTS</code></a></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial">Forecast a single time series</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial">Forecast multiple time series</a></li>
@@ -47,11 +47,11 @@ The following table describes the statements and functions you can use to create
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ARIMA_PLUS_XREG      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series"><code dir="ltr" translate="no">        CREATE MODEL       </code></a></td>
+<td><code dir="ltr" translate="no">ARIMA_PLUS_XREG</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/auto-preprocessing">Automatic preprocessing</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#auto_arima">auto.ARIMA <sup>1</sup></a> automatic tuning</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients"><code dir="ltr" translate="no">        ML.ARIMA_COEFFICIENTS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients"><code dir="ltr" translate="no">ML.ARIMA_COEFFICIENTS</code></a></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial">Forecast a single time series</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-multiple-time-series-forecasting-tutorial">Forecast multiple time series</a></li>
@@ -91,32 +91,32 @@ The following table describes the statements and functions you can use to evalua
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       ARIMA_PLUS      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate"><code dir="ltr" translate="no">        ML.EVALUATE       </code></a> <sup>1</sup><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate"><code dir="ltr" translate="no">        ML.ARIMA_EVALUATE       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info"><code dir="ltr" translate="no">        ML.HOLIDAY_INFO       </code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast"><code dir="ltr" translate="no">        ML.FORECAST       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies"><code dir="ltr" translate="no">        ML.DETECT_ANOMALIES       </code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast"><code dir="ltr" translate="no">        ML.EXPLAIN_FORECAST       </code> <sup>2</sup></a></td>
+<td><code dir="ltr" translate="no">ARIMA_PLUS</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate"><code dir="ltr" translate="no">ML.EVALUATE</code></a> <sup>1</sup><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate"><code dir="ltr" translate="no">ML.ARIMA_EVALUATE</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info"><code dir="ltr" translate="no">ML.HOLIDAY_INFO</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast"><code dir="ltr" translate="no">ML.FORECAST</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies"><code dir="ltr" translate="no">ML.DETECT_ANOMALIES</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast"><code dir="ltr" translate="no">ML.EXPLAIN_FORECAST</code> <sup>2</sup></a></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ARIMA_PLUS_XREG      </code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate"><code dir="ltr" translate="no">        ML.EVALUATE       </code></a> <sup>1</sup><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate"><code dir="ltr" translate="no">        ML.ARIMA_EVALUATE       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info"><code dir="ltr" translate="no">        ML.HOLIDAY_INFO       </code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast"><code dir="ltr" translate="no">        ML.FORECAST       </code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies"><code dir="ltr" translate="no">        ML.DETECT_ANOMALIES       </code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast"><code dir="ltr" translate="no">        ML.EXPLAIN_FORECAST       </code> <sup>2</sup></a></td>
+<td><code dir="ltr" translate="no">ARIMA_PLUS_XREG</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate"><code dir="ltr" translate="no">ML.EVALUATE</code></a> <sup>1</sup><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate"><code dir="ltr" translate="no">ML.ARIMA_EVALUATE</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info"><code dir="ltr" translate="no">ML.HOLIDAY_INFO</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast"><code dir="ltr" translate="no">ML.FORECAST</code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies"><code dir="ltr" translate="no">ML.DETECT_ANOMALIES</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast"><code dir="ltr" translate="no">ML.EXPLAIN_FORECAST</code> <sup>2</sup></a></td>
 </tr>
 <tr class="odd">
 <td>TimesFM</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate"><code dir="ltr" translate="no">        AI.EVALUATE       </code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast"><code dir="ltr" translate="no">        AI.FORECAST       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate"><code dir="ltr" translate="no">AI.EVALUATE</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast"><code dir="ltr" translate="no">AI.FORECAST</code></a></td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
 
-<sup>1</sup> You can input evaluation data to the `  ML.EVALUATE  ` function to compute forecasting metrics such as mean absolute percentage error (MAPE). If you don't have evaluation data, you can use the `  ML.ARIMA_EVALUATE  ` function to output information about the model like drift and variance.
+<sup>1</sup> You can input evaluation data to the `ML.EVALUATE` function to compute forecasting metrics such as mean absolute percentage error (MAPE). If you don't have evaluation data, you can use the `ML.ARIMA_EVALUATE` function to output information about the model like drift and variance.
 
-<sup>2</sup> The `  ML.EXPLAIN_FORECAST  ` function encompasses the `  ML.FORECAST  ` function because its output is a superset of the results of `  ML.FORECAST  ` .
+<sup>2</sup> The `ML.EXPLAIN_FORECAST` function encompasses the `ML.FORECAST` function because its output is a superset of the results of `ML.FORECAST` .

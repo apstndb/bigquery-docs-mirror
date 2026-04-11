@@ -6,7 +6,7 @@ This document provides an overview of BigQuery managed disaster recovery and how
 
 BigQuery supports disaster recovery scenarios in the case of a total region outage. BigQuery disaster recovery relies on [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) to manage storage failover. After creating a dataset replica in a secondary region, you can control failover behavior for compute and storage to maintain business continuity during an outage. After a failover, you can access compute capacity (slots) and replicated datasets in the promoted region. Disaster recovery is only supported with the [Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-Managed disaster recovery offers two failover options: hard failover and soft failover. A hard failover immediately promotes the secondary region's reservation and dataset replicas to become the primary. This action proceeds even if the current primary region is offline and does not wait for the replication of any unreplicated data. Because of this, data loss can occur during hard failover. Any jobs that committed data in the source region before the replica's value of [`  replication_time  `](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas#schema) may need to be rerun in the destination region after failover. In contrast to a hard failover, a soft failover waits until all reservation and dataset changes committed in the primary region are replicated to the secondary region before completing the failover process. A soft failover requires both the primary and secondary region to be available. Initiating a soft failover sets the [`  softFailoverStartTime  `](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) for the reservation. The [`  softFailoverStartTime  `](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) is cleared on soft failover completion.
+Managed disaster recovery offers two failover options: hard failover and soft failover. A hard failover immediately promotes the secondary region's reservation and dataset replicas to become the primary. This action proceeds even if the current primary region is offline and does not wait for the replication of any unreplicated data. Because of this, data loss can occur during hard failover. Any jobs that committed data in the source region before the replica's value of [`replication_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas#schema) may need to be rerun in the destination region after failover. In contrast to a hard failover, a soft failover waits until all reservation and dataset changes committed in the primary region are replicated to the secondary region before completing the failover process. A soft failover requires both the primary and secondary region to be available. Initiating a soft failover sets the [`softFailoverStartTime`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) for the reservation. The [`softFailoverStartTime`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) is cleared on soft failover completion.
 
 To enable disaster recovery, you are required to create an Enterprise Plus edition reservation in the primary region, which is the region the dataset is in before failover. Standby compute capacity in the paired region is included in the Enterprise Plus reservation. You then attach a dataset to this reservation to enable failover for that dataset. You can only attach a dataset to a reservation if the dataset is backfilled and has the same paired primary and secondary locations as the reservation. After a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to those datasets and you can't perform a [cross-region replication](https://docs.cloud.google.com/bigquery/docs/data-replication) promotion on the dataset. You can read from datasets attached to a failover reservation with any capacity model. For more information about reservations, see [Introduction to workload management](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
@@ -28,9 +28,9 @@ The following limitations apply to BigQuery disaster recovery:
 
   - Autoscaling after a failover depends on compute capacity availability in the secondary region. Only the reservation baseline is available in the secondary region.
 
-  - The [`  INFORMATION_SCHEMA.RESERVATIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't have failover details.
+  - The [`INFORMATION_SCHEMA.RESERVATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't have failover details.
 
-  - The primary region's data in the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) isn't replicated to the secondary region. This view only contains the job history for the specific region where the jobs were executed. In the event of a failover, job history from the primary region isn't visible in the secondary region using the `  INFORMATION_SCHEMA.JOBS  ` view.
+  - The primary region's data in the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) isn't replicated to the secondary region. This view only contains the job history for the specific region where the jobs were executed. In the event of a failover, job history from the primary region isn't visible in the secondary region using the `INFORMATION_SCHEMA.JOBS` view.
 
   - If you have multiple failover reservations with the same administration project but whose attached datasets use different secondary locations, don't use one failover reservation with the datasets attached to a different failover reservation.
 
@@ -46,7 +46,7 @@ The following limitations apply to BigQuery disaster recovery:
 
   - Jobs running on a failover reservation during an active soft failover may not run on the reservation due to transient changes in the dataset and reservation routing during the failover operation. However these jobs will use the reservation slots before any soft failover is initiated and after it completes.
 
-  - For datasets using BigQuery disaster recovery, load and extract jobs cannot use the free shared slot pool. You must create a `  PIPELINE  ` type reservation assignment, as only the Enterprise Plus edition supports writing to MDR configured datasets. This requirement ensures that all data ingestion is handled by the dedicated infrastructure necessary to support MDR's cross-region replication and the recovery point objective (RPO).
+  - For datasets using BigQuery disaster recovery, load and extract jobs cannot use the free shared slot pool. You must create a `PIPELINE` type reservation assignment, as only the Enterprise Plus edition supports writing to MDR configured datasets. This requirement ensures that all data ingestion is handled by the dedicated infrastructure necessary to support MDR's cross-region replication and the recovery point objective (RPO).
 
   - [Scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to the new primary location after a failover because they are bound to the location specified during their creation. To resume scheduled queries in the new primary location, you must manually recreate them in that location.
 
@@ -54,57 +54,57 @@ The following limitations apply to BigQuery disaster recovery:
 
 The following regions are available when creating a failover reservation:
 
-| Location code         | Region Name                              | Region Description |
-| --------------------- | ---------------------------------------- | ------------------ |
-| `        ASIA       ` |                                          |                    |
-|                       | `        ASIA-EAST1       `              | Taiwan             |
-|                       | `        ASIA-SOUTHEAST1       `         | Singapore          |
-| `        AU       `   |                                          |                    |
-|                       | `        AUSTRALIA-SOUTHEAST1       `    | Sydney             |
-|                       | `        AUSTRALIA-SOUTHEAST2       `    | Melbourne          |
-| `        CA       `   |                                          |                    |
-|                       | `        NORTHAMERICA-NORTHEAST1       ` | Montréal           |
-|                       | `        NORTHAMERICA-NORTHEAST2       ` | Toronto            |
-| `        DE       `   |                                          |                    |
-|                       | `        EUROPE-WEST3       `            | Frankfurt          |
-|                       | `        EUROPE-WEST10       `           | Berlin             |
-| `        EU       `   |                                          |                    |
-|                       | `        EU       `                      | EU multi-region    |
-|                       | `        EUROPE-CENTRAL2       `         | Warsaw             |
-|                       | `        EUROPE-NORTH1       `           | Finland            |
-|                       | `        EUROPE-SOUTHWEST1       `       | Madrid             |
-|                       | `        EUROPE-WEST1       `            | Belgium            |
-|                       | `        EUROPE-WEST3       `            | Frankfurt          |
-|                       | `        EUROPE-WEST4       `            | Netherlands        |
-|                       | `        EUROPE-WEST8       `            | Milan              |
-|                       | `        EUROPE-WEST9       `            | Paris              |
-| `        IN       `   |                                          |                    |
-|                       | `        ASIA-SOUTH1       `             | Mumbai             |
-|                       | `        ASIA-SOUTH2       `             | Delhi              |
-| `        US       `   |                                          |                    |
-|                       | `        US       `                      | US multi-region    |
-|                       | `        US-CENTRAL1       `             | Iowa               |
-|                       | `        US-EAST1       `                | South Carolina     |
-|                       | `        US-EAST4       `                | Northern Virginia  |
-|                       | `        US-EAST5       `                | Columbus           |
-|                       | `        US-SOUTH1       `               | Dallas             |
-|                       | `        US-WEST1       `                | Oregon             |
-|                       | `        US-WEST2       `                | Los Angeles        |
-|                       | `        US-WEST3       `                | Salt Lake City     |
-|                       | `        US-WEST4       `                | Las Vegas          |
+| Location code | Region Name               | Region Description |
+| ------------- | ------------------------- | ------------------ |
+| `ASIA`        |                           |                    |
+|               | `ASIA-EAST1`              | Taiwan             |
+|               | `ASIA-SOUTHEAST1`         | Singapore          |
+| `AU`          |                           |                    |
+|               | `AUSTRALIA-SOUTHEAST1`    | Sydney             |
+|               | `AUSTRALIA-SOUTHEAST2`    | Melbourne          |
+| `CA`          |                           |                    |
+|               | `NORTHAMERICA-NORTHEAST1` | Montréal           |
+|               | `NORTHAMERICA-NORTHEAST2` | Toronto            |
+| `DE`          |                           |                    |
+|               | `EUROPE-WEST3`            | Frankfurt          |
+|               | `EUROPE-WEST10`           | Berlin             |
+| `EU`          |                           |                    |
+|               | `EU`                      | EU multi-region    |
+|               | `EUROPE-CENTRAL2`         | Warsaw             |
+|               | `EUROPE-NORTH1`           | Finland            |
+|               | `EUROPE-SOUTHWEST1`       | Madrid             |
+|               | `EUROPE-WEST1`            | Belgium            |
+|               | `EUROPE-WEST3`            | Frankfurt          |
+|               | `EUROPE-WEST4`            | Netherlands        |
+|               | `EUROPE-WEST8`            | Milan              |
+|               | `EUROPE-WEST9`            | Paris              |
+| `IN`          |                           |                    |
+|               | `ASIA-SOUTH1`             | Mumbai             |
+|               | `ASIA-SOUTH2`             | Delhi              |
+| `US`          |                           |                    |
+|               | `US`                      | US multi-region    |
+|               | `US-CENTRAL1`             | Iowa               |
+|               | `US-EAST1`                | South Carolina     |
+|               | `US-EAST4`                | Northern Virginia  |
+|               | `US-EAST5`                | Columbus           |
+|               | `US-SOUTH1`               | Dallas             |
+|               | `US-WEST1`                | Oregon             |
+|               | `US-WEST2`                | Los Angeles        |
+|               | `US-WEST3`                | Salt Lake City     |
+|               | `US-WEST4`                | Las Vegas          |
 
-Region pairs must be selected within `  ASIA  ` , `  AU  ` , `  CA  ` , `  DE  ` , `  EU  ` , `  IN  ` or the `  US  ` . For example, a region within the `  US  ` cannot be paired with a region within `  EU  ` .
+Region pairs must be selected within `ASIA` , `AU` , `CA` , `DE` , `EU` , `IN` or the `US` . For example, a region within the `US` cannot be paired with a region within `EU` .
 
 If your BigQuery dataset is in a multi-region location, you can't use the following region pairs. This limitation is required to make sure that your failover reservation and data are geographically separated after replication. For more information about regions that are contained within multi-regions, see [Multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) .
 
-  - `  us-central1  ` - `  us  ` multi-region
-  - `  us-west1  ` - `  us  ` multi-region
-  - `  eu-west1  ` - `  eu  ` multi-region
-  - `  eu-west4  ` - `  eu  ` multi-region
+  - `us-central1` - `us` multi-region
+  - `us-west1` - `us` multi-region
+  - `eu-west1` - `eu` multi-region
+  - `eu-west4` - `eu` multi-region
 
 ## Before you begin
 
-1.  Verify that you have the `  bigquery.reservations.update  ` Identity and Access Management (IAM) permission to update reservations.
+1.  Verify that you have the `bigquery.reservations.update` Identity and Access Management (IAM) permission to update reservations.
 2.  Verify that you have existing datasets that are configured for replication. For more information, see [Replicate a dataset](https://docs.cloud.google.com/bigquery/docs/data-replication#replicate_a_dataset) .
 
 ## Turbo replication
@@ -185,7 +185,7 @@ The new reservation is visible in the **Slot reservations** tab.
 
 ### SQL
 
-To create a reservation, use the [`  CREATE RESERVATION  ` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
+To create a reservation, use the [`CREATE RESERVATION` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -212,7 +212,7 @@ To create a reservation, use the [`  CREATE RESERVATION  ` data definition langu
         
         The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
     
-      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `  slot_capacity  ` option and the `  edition  ` option in the same reservation.
+      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `edition` option in the same reservation.
     
       - `  SECONDARY_LOCATION  ` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
@@ -244,7 +244,7 @@ Select one of the following:
 
 ### SQL
 
-To add or change a secondary location to a reservation, use the [`  ALTER RESERVATION SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) .
+To add or change a secondary location to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -263,7 +263,7 @@ To add or change a secondary location to a reservation, use the [`  ALTER RESERV
     
       - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
     
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `  europe-west9  ` .
+      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `europe-west9` .
     
       - `  RESERVATION_NAME  ` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
     
@@ -299,7 +299,7 @@ To enable disaster recovery for the previously created reservation, complete the
 
 ### SQL
 
-To attach a dataset to a reservation, use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
+To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -346,7 +346,7 @@ To stop managing the failover behavior of a dataset through a reservation, detac
 
 ### SQL
 
-To detach a dataset from a reservation, use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
+To detach a dataset from a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -389,7 +389,7 @@ In the event of a regional outage, you must manually failover your reservation t
 
 ### SQL
 
-To add or change a secondary location to a reservation, use the [`  ALTER RESERVATION SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) and set `  is_primary  ` to `  TRUE  ` .
+To add or change a secondary location to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) and set `is_primary` to `TRUE` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -408,13 +408,13 @@ To add or change a secondary location to a reservation, use the [`  ALTER RESERV
     
       - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
     
-      - `  LOCATION  ` : the new primary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, that is the current secondary location before the failover - for example, `  europe-west9  ` .
+      - `  LOCATION  ` : the new primary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, that is the current secondary location before the failover - for example, `europe-west9` .
     
       - `  RESERVATION_NAME  ` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
     
       - `  PRIMARY_STATUS  ` : a boolean status that declares whether the reservation is the primary replica.
     
-      - `  FAILOVER_MODE  ` : an optional parameter used to describe the failover mode. This can be set to either `  HARD  ` or `  SOFT  ` . If this parameter is not specified, `  HARD  ` is used by default.
+      - `  FAILOVER_MODE  ` : an optional parameter used to describe the failover mode. This can be set to either `HARD` or `SOFT` . If this parameter is not specified, `HARD` is used by default.
 
 3.  Click play\_circle **Run** .
 
@@ -422,7 +422,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ## Monitor replication
 
-You can monitor the status of your dataset replicas through BigQuery, Cloud Monitoring, or `  INFORMATION_SCHEMA  ` views.
+You can monitor the status of your dataset replicas through BigQuery, Cloud Monitoring, or `INFORMATION_SCHEMA` views.
 
 For information about creating alerts on these metrics, see [Create dashboards, charts, and alerts](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard) .
 
@@ -459,7 +459,7 @@ To view these metrics in Monitoring, do the following:
 
 3.  In the **Select a metric** field, search for and select **BigQuery Dataset** .
 
-4.  Select **Replication latency** ( `  bigquery.googleapis.com/storage/replication/dataset_staleness  ` ) or **Network egress bytes** ( `  bigquery.googleapis.com/storage/replication/network_egress_bytes_count  ` ).
+4.  Select **Replication latency** ( `bigquery.googleapis.com/storage/replication/dataset_staleness` ) or **Network egress bytes** ( `bigquery.googleapis.com/storage/replication/network_egress_bytes_count` ).
 
 5.  Click **Apply** .
 
@@ -467,9 +467,9 @@ To view these metrics in Monitoring, do the following:
 
 7.  Optional: To view metrics for a specific dataset or secondary region, click **Add filter** , select the **dataset\_id** or **location** option, and then enter a value. If you replicate data to multiple secondary regions, you can group by location to view metrics for each region.
 
-### View replication status with `     INFORMATION_SCHEMA    `
+### View replication status with `INFORMATION_SCHEMA`
 
-To determine the state of your replicas, query the [`  INFORMATION_SCHEMA.SCHEMATA_REPLICAS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) . For example:
+To determine the state of your replicas, query the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) . For example:
 
 ``` notranslate
 SELECT

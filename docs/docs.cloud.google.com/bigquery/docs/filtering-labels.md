@@ -18,27 +18,27 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To filter resources using labels, you must be able to retrieve resource metadata. To filter resources using labels, you need the following IAM permissions:
 
-  - `  bigquery.datasets.get  ` (lets you filter datasets)
-  - `  bigquery.tables.get  ` (lets you filter tables and views)
+  - `bigquery.datasets.get` (lets you filter datasets)
+  - `bigquery.tables.get` (lets you filter tables and views)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to filter datasets:
 
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.user`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to filter tables and views:
 
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can filter the resources that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can filter the resources that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -48,9 +48,9 @@ To generate a filtered list of resources, use the Google Cloud console:
 
 1.  In the Google Cloud console, go to the **Explorer** pane.
 
-2.  In the search bar, enter the `  key  ` or `  key:value  ` pair. Your results include any partial matches.
+2.  In the search bar, enter the `key` or `key:value` pair. Your results include any partial matches.
     
-    For example, to show only datasets with the label `  department:shipping  ` , you can enter `  department  ` or `  department:shipping  ` .
+    For example, to show only datasets with the label `department:shipping` , you can enter `department` or `department:shipping` .
 
 ## Filter datasets in the API or bq command-line tool
 
@@ -58,16 +58,16 @@ The API, bq command-line tool, and client libraries support filtering only for d
 
 To filter datasets by using the API, bq tool, or client libraries, create a filter specification and use the specification:
 
-  - As the parameter for the `  --filter  ` flag in the bq tool
-  - As the value for the `  filter  ` property in the API's `  datasets.list  ` method
+  - As the parameter for the `--filter` flag in the bq tool
+  - As the value for the `filter` property in the API's `datasets.list` method
 
 ### Limitations on filter specifications
 
 Filter specifications have the following limitations:
 
-  - Only the `  AND  ` logical operator is supported. Space-separated comparisons are treated as having implicit `  AND  ` operators.
-  - The only field eligible for filtering is `  labels.key  ` where `  key  ` is the name of a label.
-  - Each `  key  ` in a filtering expression must be unique.
+  - Only the `AND` logical operator is supported. Space-separated comparisons are treated as having implicit `AND` operators.
+  - The only field eligible for filtering is `labels.key` where `key` is the name of a label.
+  - Each `key` in a filtering expression must be unique.
   - The filter can include up to ten expressions.
   - Filtering is case-sensitive.
   - The API, bq command-line tool, and client libraries support filtering only for datasets.
@@ -76,34 +76,34 @@ Filter specifications have the following limitations:
 
 A filter specification uses the following syntax:
 
-`  "field[:value][ field[:value]]..."  `
+`"field[:value][ field[:value]]..."`
 
 Replace the following:
 
-  - `  field  ` is expressed as `  labels. key  ` where key is a label key.
-  - `  value  ` is an optional label value.
+  - `field` is expressed as ` labels. key  ` where key is a label key.
+  - `value` is an optional label value.
 
 The following examples show how to generate filter expressions.
 
-To list resources that have a `  department:shipping  ` label, use the following filter specification:
+To list resources that have a `department:shipping` label, use the following filter specification:
 
-`  labels.department:shipping  `
+`labels.department:shipping`
 
-To list resources using multiple labels, separate the `  key:value  ` pairs with a space. The space is treated as a logical `  AND  ` operator. For example, to list datasets with the `  department:shipping  ` label and the `  location:usa  ` label, use the following filter specification:
+To list resources using multiple labels, separate the `key:value` pairs with a space. The space is treated as a logical `AND` operator. For example, to list datasets with the `department:shipping` label and the `location:usa` label, use the following filter specification:
 
-`  labels.department:shipping labels.location:usa  `
+`labels.department:shipping labels.location:usa`
 
-You can filter on the presence of a key alone, rather than matching against a key:value pair. The following filter specification lists all datasets labeled `  department  ` regardless of the value.
+You can filter on the presence of a key alone, rather than matching against a key:value pair. The following filter specification lists all datasets labeled `department` regardless of the value.
 
-`  labels.department  `
+`labels.department`
 
-An equivalent filter specification uses an asterisk to represent all possible values associated with the `  department  ` key.
+An equivalent filter specification uses an asterisk to represent all possible values associated with the `department` key.
 
-`  labels.department:*  `
+`labels.department:*`
 
-You can also use tags in a filter specification. For example, to list resources with the `  department:shipping  ` label and `  test_data  ` tag, use the following filter specification:
+You can also use tags in a filter specification. For example, to list resources with the `department:shipping` label and `test_data` tag, use the following filter specification:
 
-`  labels.department:shipping labels.test_data  `
+`labels.department:shipping labels.test_data`
 
 ### Filtering datasets in the bq command-line tool and the API
 
@@ -111,7 +111,7 @@ To filter datasets by using the API, bq command-line tool, or client libraries:
 
 ### bq
 
-Issue the `  bq ls  ` command with the `  --filter  ` flag. If you are listing datasets in a project other than your default project, specify the `  --project_id  ` flag.
+Issue the `bq ls` command with the `--filter` flag. If you are listing datasets in a project other than your default project, specify the `--project_id` flag.
 
 ``` notranslate
 bq ls \
@@ -126,15 +126,15 @@ Replace the following:
 
 Examples:
 
-Enter the following command to list datasets in your default project that have a `  department:shipping  ` label:
+Enter the following command to list datasets in your default project that have a `department:shipping` label:
 
     bq ls --filter "labels.department:shipping"
 
-Enter the following command to list datasets in your default project that have a `  department:shipping  ` label and a `  test_data  ` tag.
+Enter the following command to list datasets in your default project that have a `department:shipping` label and a `test_data` tag.
 
     bq ls --filter "labels.department:shipping labels.test_data"
 
-Enter the following command to list datasets in `  myotherproject  ` that have a `  department:shipping  ` label:
+Enter the following command to list datasets in `myotherproject` that have a `department:shipping` label:
 
     bq ls --filter "labels.department:shipping" --project_id myotherproject
 
@@ -149,7 +149,7 @@ The output for each of these commands returns a list of datasets like the follow
 
 ### API
 
-Call the [`  datasets.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list) API method and provide the filter specification using the `  filter  ` property.
+Call the [`datasets.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list) API method and provide the filter specification using the `filter` property.
 
 ### Go
 

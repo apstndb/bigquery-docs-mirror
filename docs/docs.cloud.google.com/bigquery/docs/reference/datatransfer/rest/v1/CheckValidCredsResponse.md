@@ -22,8 +22,8 @@ A response indicating whether the credentials exist and are valid.
 
 Fields
 
-`  hasValidCreds  `
+`hasValidCreds`
 
-`  boolean  `
+`boolean`
 
-If set to `  true  ` , the credentials exist and are valid.
+If set to `true` , the credentials exist and are valid.

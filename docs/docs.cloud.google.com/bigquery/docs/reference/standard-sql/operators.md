@@ -2,9 +2,9 @@ GoogleSQL for BigQuery supports operators. Operators are represented by special 
 
 Common conventions:
 
-  - Unless otherwise specified, all operators return `  NULL  ` when one of the operands is `  NULL  ` .
+  - Unless otherwise specified, all operators return `NULL` when one of the operands is `NULL` .
   - All operators will throw an error if the computation result overflows.
-  - For all floating point operations, `  +/-inf  ` and `  NaN  ` may only be returned if one of the operands is `  +/-inf  ` or `  NaN  ` . In other cases, an error is returned.
+  - For all floating point operations, `+/-inf` and `NaN` may only be returned if one of the operands is `+/-inf` or `NaN` . In other cases, an error is returned.
 
 ### Operator precedence
 
@@ -24,8 +24,8 @@ Operator Arity
 
 Field access operator
 
-`  STRUCT  `  
-`  JSON  `  
+`STRUCT`  
+`JSON`  
 
 Field access operator
 
@@ -33,15 +33,15 @@ Binary
 
 Array subscript operator
 
-`  ARRAY  `
+`ARRAY`
 
-Array position. Must be used with `  OFFSET  ` or `  ORDINAL  ` —see [Array Functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions) .
+Array position. Must be used with `OFFSET` or `ORDINAL` —see [Array Functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions) .
 
 Binary
 
 JSON subscript operator
 
-`  JSON  `
+`JSON`
 
 Field name or array position in JSON.
 
@@ -49,7 +49,7 @@ Binary
 
 2
 
-`  +  `
+`+`
 
 All numeric types
 
@@ -57,7 +57,7 @@ Unary plus
 
 Unary
 
-`  -  `
+`-`
 
 All numeric types
 
@@ -65,9 +65,9 @@ Unary minus
 
 Unary
 
-`  ~  `
+`~`
 
-Integer or `  BYTES  `
+Integer or `BYTES`
 
 Bitwise not
 
@@ -75,7 +75,7 @@ Unary
 
 3
 
-`  *  `
+`*`
 
 All numeric types
 
@@ -83,7 +83,7 @@ Multiplication
 
 Binary
 
-`  /  `
+`/`
 
 All numeric types
 
@@ -91,9 +91,9 @@ Division
 
 Binary
 
-`  ||  `
+`||`
 
-`  STRING  ` , `  BYTES  ` , or `  ARRAY<T>  `
+`STRING` , `BYTES` , or `ARRAY<T>`
 
 Concatenation operator
 
@@ -101,17 +101,17 @@ Binary
 
 4
 
-`  +  `
+`+`
 
-All numeric types, `  DATE  ` with `  INT64  ` , `  INTERVAL  `
+All numeric types, `DATE` with `INT64` , `INTERVAL`
 
 Addition
 
 Binary
 
-`  -  `
+`-`
 
-All numeric types, `  DATE  ` with `  INT64  ` , `  INTERVAL  `
+All numeric types, `DATE` with `INT64` , `INTERVAL`
 
 Subtraction
 
@@ -119,17 +119,17 @@ Binary
 
 5
 
-`  <<  `
+`<<`
 
-Integer or `  BYTES  `
+Integer or `BYTES`
 
 Bitwise left-shift
 
 Binary
 
-`  >>  `
+`>>`
 
-Integer or `  BYTES  `
+Integer or `BYTES`
 
 Bitwise right-shift
 
@@ -137,9 +137,9 @@ Binary
 
 6
 
-`  &  `
+`&`
 
-Integer or `  BYTES  `
+Integer or `BYTES`
 
 Bitwise and
 
@@ -147,9 +147,9 @@ Binary
 
 7
 
-`  ^  `
+`^`
 
-Integer or `  BYTES  `
+Integer or `BYTES`
 
 Bitwise xor
 
@@ -157,9 +157,9 @@ Binary
 
 8
 
-`  |  `
+`|`
 
-Integer or `  BYTES  `
+Integer or `BYTES`
 
 Bitwise or
 
@@ -167,7 +167,7 @@ Binary
 
 9 (Comparison Operators)
 
-`  =  `
+`=`
 
 Any comparable type. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -175,7 +175,7 @@ Equal
 
 Binary
 
-`  <  `
+`<`
 
 Any comparable type. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -183,7 +183,7 @@ Less than
 
 Binary
 
-`  >  `
+`>`
 
 Any comparable type. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -191,7 +191,7 @@ Greater than
 
 Binary
 
-`  <=  `
+`<=`
 
 Any comparable type. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -199,7 +199,7 @@ Less than or equal to
 
 Binary
 
-`  >=  `
+`>=`
 
 Any comparable type. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -207,7 +207,7 @@ Greater than or equal to
 
 Binary
 
-`  !=  ` , `  <>  `
+`!=` , `<>`
 
 Any comparable type. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -215,9 +215,9 @@ Not equal
 
 Binary
 
-`  [NOT] LIKE  `
+`[NOT] LIKE`
 
-`  STRING  ` and `  BYTES  `
+`STRING` and `BYTES`
 
 Value does \[not\] match the pattern specified
 
@@ -225,13 +225,13 @@ Binary
 
 Quantified LIKE
 
-`  STRING  ` and `  BYTES  `
+`STRING` and `BYTES`
 
 Checks a search value for matches against several patterns.
 
 Binary
 
-`  [NOT] BETWEEN  `
+`[NOT] BETWEEN`
 
 Any comparable types. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -241,7 +241,7 @@ Value is \[not\] within the range specified
 
 Binary
 
-`  [NOT] IN  `
+`[NOT] IN`
 
 Any comparable types. See [Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for a complete list.
 
@@ -249,119 +249,119 @@ Value is \[not\] in the set of values specified
 
 Binary
 
-`  IS [NOT] DISTINCT FROM  `
+`IS [NOT] DISTINCT FROM`
 
 All
 
-Value is \[not\] `  DISTINCT FROM  `
+Value is \[not\] `DISTINCT FROM`
 
 Binary
 
-`  IS [NOT] NULL  `
+`IS [NOT] NULL`
 
 All
 
-Value is \[not\] `  NULL  `
+Value is \[not\] `NULL`
 
 Unary
 
-`  IS [NOT] TRUE  `
+`IS [NOT] TRUE`
 
-`  BOOL  `
+`BOOL`
 
-Value is \[not\] `  TRUE  ` .
+Value is \[not\] `TRUE` .
 
 Unary
 
-`  IS [NOT] FALSE  `
+`IS [NOT] FALSE`
 
-`  BOOL  `
+`BOOL`
 
-Value is \[not\] `  FALSE  ` .
+Value is \[not\] `FALSE` .
 
 Unary
 
 10
 
-`  NOT  `
+`NOT`
 
-`  BOOL  `
+`BOOL`
 
-Logical `  NOT  `
+Logical `NOT`
 
 Unary
 
 11
 
-`  AND  `
+`AND`
 
-`  BOOL  `
+`BOOL`
 
-Logical `  AND  `
+Logical `AND`
 
 Binary
 
 12
 
-`  OR  `
+`OR`
 
-`  BOOL  `
+`BOOL`
 
-Logical `  OR  `
+Logical `OR`
 
 Binary
 
 For example, the logical expression:
 
-`  x OR y AND z  `
+`x OR y AND z`
 
 is interpreted as:
 
-`  ( x OR ( y AND z ) )  `
+`( x OR ( y AND z ) )`
 
 Operators with the same precedence are left associative. This means that those operators are grouped together starting from the left and moving right. For example, the expression:
 
-`  x AND y AND z  `
+`x AND y AND z`
 
 is interpreted as:
 
-`  ( ( x AND y ) AND z )  `
+`( ( x AND y ) AND z )`
 
 The expression:
 
-`  x * y / z  `
+`x * y / z`
 
 is interpreted as:
 
-`  ( ( x * y ) / z )  `
+`( ( x * y ) / z )`
 
 All comparison operators have the same priority, but comparison operators aren't associative. Therefore, parentheses are required to resolve ambiguity. For example:
 
-`  (x < y) IS FALSE  `
+`(x < y) IS FALSE`
 
 ### Operator list
 
-| Name                                                                                                                                                 | Summary                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [Field access operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator)                          | Gets the value of a field.                                                                                                     |
-| [Array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator)                    | Gets a value from an array at a specific position.                                                                             |
-| [Struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator)                  | Gets the value of a field at a selected position in a struct.                                                                  |
-| [JSON subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#json_subscript_operator)                      | Gets a value of an array element or field in a JSON expression.                                                                |
-| [Arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#arithmetic_operators)                            | Performs arithmetic operations.                                                                                                |
-| [Date arithmetics operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#date_arithmetics_operators)                | Performs arithmetic operations on dates.                                                                                       |
-| [Datetime subtraction](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#datetime_subtraction)                            | Computes the difference between two datetimes as an interval.                                                                  |
-| [Interval arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#interval_arithmetic_operators)          | Adds an interval to a datetime or subtracts an interval from a datetime.                                                       |
-| [Bitwise operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators)                                  | Performs bit manipulation.                                                                                                     |
-| [Logical operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators)                                  | Tests for the truth of some condition and produces `        TRUE       ` , `        FALSE       ` , or `        NULL       ` . |
-| [Comparison operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                            | Compares operands and produces the results of the comparison as a `        BOOL       ` value.                                 |
-| [`         EXISTS        ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#exists_operator)                   | Checks if a subquery produces one or more rows.                                                                                |
-| [`         IN        ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators)                          | Checks for an equal value in a set of values.                                                                                  |
-| [`         IS        ` operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_operators)                         | Checks for the truth of a condition and produces either `        TRUE       ` or `        FALSE       ` .                      |
-| [`         IS DISTINCT FROM        ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_distinct)             | Checks if values are considered to be distinct from each other.                                                                |
-| [`         LIKE        ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator)                       | Checks if values are like or not like one another.                                                                             |
-| [Quantified `         LIKE        ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified) | Checks a search value for matches against several patterns.                                                                    |
-| [Concatenation operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#concatenation_operator)                        | Combines multiple values into one.                                                                                             |
-| [`         WITH        ` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#with_expression)                   | Creates variables for re-use and produces a result expression.                                                                 |
+| Name                                                                                                                                        | Summary                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [Field access operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator)                 | Gets the value of a field.                                                        |
+| [Array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator)           | Gets a value from an array at a specific position.                                |
+| [Struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator)         | Gets the value of a field at a selected position in a struct.                     |
+| [JSON subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#json_subscript_operator)             | Gets a value of an array element or field in a JSON expression.                   |
+| [Arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#arithmetic_operators)                   | Performs arithmetic operations.                                                   |
+| [Date arithmetics operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#date_arithmetics_operators)       | Performs arithmetic operations on dates.                                          |
+| [Datetime subtraction](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#datetime_subtraction)                   | Computes the difference between two datetimes as an interval.                     |
+| [Interval arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#interval_arithmetic_operators) | Adds an interval to a datetime or subtracts an interval from a datetime.          |
+| [Bitwise operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators)                         | Performs bit manipulation.                                                        |
+| [Logical operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators)                         | Tests for the truth of some condition and produces `TRUE` , `FALSE` , or `NULL` . |
+| [Comparison operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                   | Compares operands and produces the results of the comparison as a `BOOL` value.   |
+| [`EXISTS` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#exists_operator)                           | Checks if a subquery produces one or more rows.                                   |
+| [`IN` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators)                                  | Checks for an equal value in a set of values.                                     |
+| [`IS` operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_operators)                                 | Checks for the truth of a condition and produces either `TRUE` or `FALSE` .       |
+| [`IS DISTINCT FROM` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_distinct)                     | Checks if values are considered to be distinct from each other.                   |
+| [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator)                               | Checks if values are like or not like one another.                                |
+| [Quantified `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified)         | Checks a search value for matches against several patterns.                       |
+| [Concatenation operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#concatenation_operator)               | Combines multiple values into one.                                                |
+| [`WITH` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#with_expression)                           | Creates variables for re-use and produces a result expression.                    |
 
 ### Field access operator
 
@@ -369,23 +369,23 @@ All comparison operators have the same priority, but comparison operators aren't
 
 **Description**
 
-Gets the value of a field. Alternatively known as the dot operator. Can be used to access nested fields. For example, `  expression.fieldname1.fieldname2  ` .
+Gets the value of a field. Alternatively known as the dot operator. Can be used to access nested fields. For example, `expression.fieldname1.fieldname2` .
 
 Input values:
 
-  - `  STRUCT  `
-  - `  JSON  `
+  - `STRUCT`
+  - `JSON`
 
-**Note:** If the field to access is within a `  STRUCT  ` , you can use the [struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator) to access the field by its position within the `  STRUCT  ` instead of by its name. Accessing by a field by position is useful when fields are un-named or have ambiguous names.
+**Note:** If the field to access is within a `STRUCT` , you can use the [struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator) to access the field by its position within the `STRUCT` instead of by its name. Accessing by a field by position is useful when fields are un-named or have ambiguous names.
 
 **Return type**
 
-  - For `  STRUCT  ` : SQL data type of `  fieldname  ` . If a field isn't found in the struct, an error is thrown.
-  - For `  JSON  ` : `  JSON  ` . If a field isn't found in a JSON value, a SQL `  NULL  ` is returned.
+  - For `STRUCT` : SQL data type of `fieldname` . If a field isn't found in the struct, an error is thrown.
+  - For `JSON` : `JSON` . If a field isn't found in a JSON value, a SQL `NULL` is returned.
 
 **Example**
 
-In the following example, the field access operations are `  .address  ` and `  .country  ` .
+In the following example, the field access operations are `.address` and `.country` .
 
     SELECT
       STRUCT(
@@ -400,7 +400,7 @@ In the following example, the field access operations are `  .address  ` and `  
 
 ### Array subscript operator
 
-**Note:** Syntax characters enclosed in double quotes ( `  ""  ` ) are literal and required.
+**Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
 
     array_expression "[" array_subscript_specifier "]"
     
@@ -416,21 +416,21 @@ Gets a value from an array at a specific position.
 
 Input values:
 
-  - `  array_expression  ` : The input array.
-  - `  position_keyword(index)  ` : Determines where the index for the array should start and how out-of-range indexes are handled. The index is an integer that represents a specific position in the array.
-      - `  OFFSET(index)  ` : The index starts at zero. Produces an error if the index is out of range. To produce `  NULL  ` instead of an error, use `  SAFE_OFFSET(index)  ` . This position keyword produces the same result as `  index  ` by itself.
-      - `  SAFE_OFFSET(index)  ` : The index starts at zero. Returns `  NULL  ` if the index is out of range.
-      - `  ORDINAL(index)  ` : The index starts at one. Produces an error if the index is out of range. To produce `  NULL  ` instead of an error, use `  SAFE_ORDINAL(index)  ` .
-      - `  SAFE_ORDINAL(index)  ` : The index starts at one. Returns `  NULL  ` if the index is out of range.
-  - `  index  ` : An integer that represents a specific position in the array. If used by itself without a position keyword, the index starts at zero and produces an error if the index is out of range. To produce `  NULL  ` instead of an error, use the `  SAFE_OFFSET(index)  ` or `  SAFE_ORDINAL(index)  ` position keyword.
+  - `array_expression` : The input array.
+  - `position_keyword(index)` : Determines where the index for the array should start and how out-of-range indexes are handled. The index is an integer that represents a specific position in the array.
+      - `OFFSET(index)` : The index starts at zero. Produces an error if the index is out of range. To produce `NULL` instead of an error, use `SAFE_OFFSET(index)` . This position keyword produces the same result as `index` by itself.
+      - `SAFE_OFFSET(index)` : The index starts at zero. Returns `NULL` if the index is out of range.
+      - `ORDINAL(index)` : The index starts at one. Produces an error if the index is out of range. To produce `NULL` instead of an error, use `SAFE_ORDINAL(index)` .
+      - `SAFE_ORDINAL(index)` : The index starts at one. Returns `NULL` if the index is out of range.
+  - `index` : An integer that represents a specific position in the array. If used by itself without a position keyword, the index starts at zero and produces an error if the index is out of range. To produce `NULL` instead of an error, use the `SAFE_OFFSET(index)` or `SAFE_ORDINAL(index)` position keyword.
 
 **Return type**
 
-`  T  ` where `  array_expression  ` is `  ARRAY<T>  ` .
+`T` where `array_expression` is `ARRAY<T>` .
 
 **Examples**
 
-In following query, the array subscript operator is used to return values at specific position in `  item_array  ` . This query also shows what happens when you reference an index ( `  6  ` ) in an array that's out of range. If the `  SAFE  ` prefix is included, `  NULL  ` is returned, otherwise an error is produced.
+In following query, the array subscript operator is used to return values at specific position in `item_array` . This query also shows what happens when you reference an index ( `6` ) in an array that's out of range. If the `SAFE` prefix is included, `NULL` is returned, otherwise an error is produced.
 
     SELECT
       ["coffee", "tea", "milk"] AS item_array,
@@ -445,7 +445,7 @@ In following query, the array subscript operator is used to return values at spe
      | [coffee, tea, milk] | coffee     | coffee      | coffee       | NULL             |
      +----------------------------------+-------------+--------------+------------------*/
 
-When you reference an index that's out of range in an array, and a positional keyword that begins with `  SAFE  ` isn't included, an error is produced. For example:
+When you reference an index that's out of range in an array, and a positional keyword that begins with `SAFE` isn't included, an error is produced. For example:
 
     -- Error. Array index 6 is out of bounds.
     SELECT ["coffee", "tea", "milk"][6] AS item_offset
@@ -455,7 +455,7 @@ When you reference an index that's out of range in an array, and a positional ke
 
 ### Struct subscript operator
 
-**Note:** Syntax characters enclosed in double quotes ( `  ""  ` ) are literal and required.
+**Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
 
     struct_expression "[" struct_subscript_specifier "]"
     
@@ -471,17 +471,17 @@ Gets the value of a field at a selected position in a struct.
 
 **Input types**
 
-  - `  struct_expression  ` : The input struct.
-  - `  position_keyword(index)  ` : Determines where the index for the struct should start and how out-of-range indexes are handled. The index is an integer literal or constant that represents a specific position in the struct.
-      - `  OFFSET(index)  ` : The index starts at zero. Produces an error if the index is out of range. Produces the same result as `  index  ` by itself.
-      - `  ORDINAL(index)  ` : The index starts at one. Produces an error if the index is out of range.
-  - `  index  ` : An integer literal or constant that represents a specific position in the struct. If used by itself without a position keyword, the index starts at zero and produces an error if the index is out of range.
+  - `struct_expression` : The input struct.
+  - `position_keyword(index)` : Determines where the index for the struct should start and how out-of-range indexes are handled. The index is an integer literal or constant that represents a specific position in the struct.
+      - `OFFSET(index)` : The index starts at zero. Produces an error if the index is out of range. Produces the same result as `index` by itself.
+      - `ORDINAL(index)` : The index starts at one. Produces an error if the index is out of range.
+  - `index` : An integer literal or constant that represents a specific position in the struct. If used by itself without a position keyword, the index starts at zero and produces an error if the index is out of range.
 
-**Note:** The struct subscript operator doesn't support `  SAFE  ` positional keywords at this time.
+**Note:** The struct subscript operator doesn't support `SAFE` positional keywords at this time.
 
 **Examples**
 
-In following query, the struct subscript operator is used to return values at specific locations in `  item_struct  ` using position keywords. This query also shows what happens when you reference an index ( `  6  ` ) in an struct that's out of range.
+In following query, the struct subscript operator is used to return values at specific locations in `item_struct` using position keywords. This query also shows what happens when you reference an index ( `6` ) in an struct that's out of range.
 
     SELECT
       STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[0] AS field_index,
@@ -504,7 +504,7 @@ When you reference an index that's out of range in a struct, an error is produce
 
 ### JSON subscript operator
 
-**Note:** Syntax characters enclosed in double quotes ( `  ""  ` ) are literal and required.
+**Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
 
     json_expression "[" array_element_id "]"
 
@@ -516,23 +516,23 @@ Gets a value of an array element or field in a JSON expression. Can be used to a
 
 Input values:
 
-  - `  JSON expression  ` : The `  JSON  ` expression that contains an array element or field to return.
-  - `  [array_element_id]  ` : An `  INT64  ` expression that represents a zero-based index in the array. If a negative value is entered, or the value is greater than or equal to the size of the array, or the JSON expression doesn't represent a JSON array, a SQL `  NULL  ` is returned.
-  - `  [field_name]  ` : A `  STRING  ` expression that represents the name of a field in JSON. If the field name isn't found, or the JSON expression isn't a JSON object, a SQL `  NULL  ` is returned.
+  - `JSON expression` : The `JSON` expression that contains an array element or field to return.
+  - `[array_element_id]` : An `INT64` expression that represents a zero-based index in the array. If a negative value is entered, or the value is greater than or equal to the size of the array, or the JSON expression doesn't represent a JSON array, a SQL `NULL` is returned.
+  - `[field_name]` : A `STRING` expression that represents the name of a field in JSON. If the field name isn't found, or the JSON expression isn't a JSON object, a SQL `NULL` is returned.
 
 **Return type**
 
-`  JSON  `
+`JSON`
 
 **Example**
 
 In the following example:
 
-  - `  json_value  ` is a JSON expression.
-  - `  .class  ` is a JSON field access.
-  - `  .students  ` is a JSON field access.
-  - `  [0]  ` is a JSON subscript expression with an element offset that accesses the zeroth element of an array in the JSON value.
-  - `  ['name']  ` is a JSON subscript expression with a field name that accesses a field.
+  - `json_value` is a JSON expression.
+  - `.class` is a JSON field access.
+  - `.students` is a JSON field access.
+  - `[0]` is a JSON subscript expression with an element offset that accesses the zeroth element of an array in the JSON value.
+  - `['name']` is a JSON subscript expression with a field name that accesses a field.
 
 <!-- end list -->
 
@@ -555,48 +555,48 @@ In the following example:
 
 ### Arithmetic operators
 
-All arithmetic operators accept input of numeric type `  T  ` , and the result type has type `  T  ` unless otherwise indicated in the description below:
+All arithmetic operators accept input of numeric type `T` , and the result type has type `T` unless otherwise indicated in the description below:
 
-| Name           | Syntax                 |
-| -------------- | ---------------------- |
-| Addition       | `        X + Y       ` |
-| Subtraction    | `        X - Y       ` |
-| Multiplication | `        X * Y       ` |
-| Division       | `        X / Y       ` |
-| Unary Plus     | `        + X       `   |
-| Unary Minus    | `        - X       `   |
+| Name           | Syntax  |
+| -------------- | ------- |
+| Addition       | `X + Y` |
+| Subtraction    | `X - Y` |
+| Multiplication | `X * Y` |
+| Division       | `X / Y` |
+| Unary Plus     | `+ X`   |
+| Unary Minus    | `- X`   |
 
-NOTE: Divide by zero operations return an error. To return a different result, consider the `  IEEE_DIVIDE  ` or `  SAFE_DIVIDE  ` functions.
+NOTE: Divide by zero operations return an error. To return a different result, consider the `IEEE_DIVIDE` or `SAFE_DIVIDE` functions.
 
 Result types for Addition, Subtraction and Multiplication:
 
-| INPUT                       | `        INT64       `      | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| --------------------------- | --------------------------- | --------------------------- | --------------------------- | ------------------------ |
-| `        INT64       `      | `        INT64       `      | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        NUMERIC       `    | `        NUMERIC       `    | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       ` |
+| INPUT        | `INT64`      | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| ------------ | ------------ | ------------ | ------------ | --------- |
+| `INT64`      | `INT64`      | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| `NUMERIC`    | `NUMERIC`    | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| `BIGNUMERIC` | `BIGNUMERIC` | `BIGNUMERIC` | `BIGNUMERIC` | `FLOAT64` |
+| `FLOAT64`    | `FLOAT64`    | `FLOAT64`    | `FLOAT64`    | `FLOAT64` |
 
 Result types for Division:
 
-| INPUT                       | `        INT64       `      | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| --------------------------- | --------------------------- | --------------------------- | --------------------------- | ------------------------ |
-| `        INT64       `      | `        FLOAT64       `    | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        NUMERIC       `    | `        NUMERIC       `    | `        NUMERIC       `    | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       `    | `        FLOAT64       ` |
+| INPUT        | `INT64`      | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| ------------ | ------------ | ------------ | ------------ | --------- |
+| `INT64`      | `FLOAT64`    | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| `NUMERIC`    | `NUMERIC`    | `NUMERIC`    | `BIGNUMERIC` | `FLOAT64` |
+| `BIGNUMERIC` | `BIGNUMERIC` | `BIGNUMERIC` | `BIGNUMERIC` | `FLOAT64` |
+| `FLOAT64`    | `FLOAT64`    | `FLOAT64`    | `FLOAT64`    | `FLOAT64` |
 
 Result types for Unary Plus:
 
-| INPUT  | `        INT64       ` | `        NUMERIC       ` | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| ------ | ---------------------- | ------------------------ | --------------------------- | ------------------------ |
-| OUTPUT | `        INT64       ` | `        NUMERIC       ` | `        BIGNUMERIC       ` | `        FLOAT64       ` |
+| INPUT  | `INT64` | `NUMERIC` | `BIGNUMERIC` | `FLOAT64` |
+| ------ | ------- | --------- | ------------ | --------- |
+| OUTPUT | `INT64` | `NUMERIC` | `BIGNUMERIC` | `FLOAT64` |
 
 Result types for Unary Minus:
 
-| INPUT  | `        INT64       ` | `        NUMERIC       ` | `        BIGNUMERIC       ` | `        FLOAT64       ` |
-| ------ | ---------------------- | ------------------------ | --------------------------- | ------------------------ |
-| OUTPUT | `        INT64       ` | `        NUMERIC       ` | `        BIGNUMERIC       ` | `        FLOAT64       ` |
+| INPUT  | `INT64` | `NUMERIC` | `BIGNUMERIC` | `FLOAT64` |
+| ------ | ------- | --------- | ------------ | --------- |
+| OUTPUT | `INT64` | `NUMERIC` | `BIGNUMERIC` | `FLOAT64` |
 
 ### Date arithmetics operators
 
@@ -608,11 +608,11 @@ Operators '+' and '-' can be used for arithmetic operations on dates.
 
 **Description**
 
-Adds or subtracts `  int64_expression  ` days to or from `  date_expression  ` . This is equivalent to `  DATE_ADD  ` or `  DATE_SUB  ` functions, when interval is expressed in days.
+Adds or subtracts `int64_expression` days to or from `date_expression` . This is equivalent to `DATE_ADD` or `DATE_SUB` functions, when interval is expressed in days.
 
 **Return Data Type**
 
-`  DATE  `
+`DATE`
 
 **Example**
 
@@ -636,7 +636,7 @@ Computes the difference between two datetime values as an interval.
 
 **Return Data Type**
 
-`  INTERVAL  `
+`INTERVAL`
 
 **Example**
 
@@ -722,75 +722,75 @@ All bitwise operators return the same type and the same length as the first oper
 <tbody>
 <tr class="odd">
 <td>Bitwise not</td>
-<td><code dir="ltr" translate="no">       ~ X      </code></td>
-<td>Integer or <code dir="ltr" translate="no">       BYTES      </code></td>
+<td><code dir="ltr" translate="no">~ X</code></td>
+<td>Integer or <code dir="ltr" translate="no">BYTES</code></td>
 <td>Performs logical negation on each bit, forming the ones' complement of the given binary value.</td>
 </tr>
 <tr class="even">
 <td>Bitwise or</td>
-<td><code dir="ltr" translate="no">       X | Y      </code></td>
-<td><code dir="ltr" translate="no">       X      </code> : Integer or <code dir="ltr" translate="no">       BYTES      </code><br />
-<code dir="ltr" translate="no">       Y      </code> : Same type as <code dir="ltr" translate="no">       X      </code></td>
-<td>Takes two bit patterns of equal length and performs the logical inclusive <code dir="ltr" translate="no">       OR      </code> operation on each pair of the corresponding bits. This operator throws an error if <code dir="ltr" translate="no">       X      </code> and <code dir="ltr" translate="no">       Y      </code> are bytes of different lengths.</td>
+<td><code dir="ltr" translate="no">X | Y</code></td>
+<td><code dir="ltr" translate="no">X</code> : Integer or <code dir="ltr" translate="no">BYTES</code><br />
+<code dir="ltr" translate="no">Y</code> : Same type as <code dir="ltr" translate="no">X</code></td>
+<td>Takes two bit patterns of equal length and performs the logical inclusive <code dir="ltr" translate="no">OR</code> operation on each pair of the corresponding bits. This operator throws an error if <code dir="ltr" translate="no">X</code> and <code dir="ltr" translate="no">Y</code> are bytes of different lengths.</td>
 </tr>
 <tr class="odd">
 <td>Bitwise xor</td>
-<td><code dir="ltr" translate="no">       X ^ Y      </code></td>
-<td><code dir="ltr" translate="no">       X      </code> : Integer or <code dir="ltr" translate="no">       BYTES      </code><br />
-<code dir="ltr" translate="no">       Y      </code> : Same type as <code dir="ltr" translate="no">       X      </code></td>
-<td>Takes two bit patterns of equal length and performs the logical exclusive <code dir="ltr" translate="no">       OR      </code> operation on each pair of the corresponding bits. This operator throws an error if <code dir="ltr" translate="no">       X      </code> and <code dir="ltr" translate="no">       Y      </code> are bytes of different lengths.</td>
+<td><code dir="ltr" translate="no">X ^ Y</code></td>
+<td><code dir="ltr" translate="no">X</code> : Integer or <code dir="ltr" translate="no">BYTES</code><br />
+<code dir="ltr" translate="no">Y</code> : Same type as <code dir="ltr" translate="no">X</code></td>
+<td>Takes two bit patterns of equal length and performs the logical exclusive <code dir="ltr" translate="no">OR</code> operation on each pair of the corresponding bits. This operator throws an error if <code dir="ltr" translate="no">X</code> and <code dir="ltr" translate="no">Y</code> are bytes of different lengths.</td>
 </tr>
 <tr class="even">
 <td>Bitwise and</td>
-<td><code dir="ltr" translate="no">       X &amp; Y      </code></td>
-<td><code dir="ltr" translate="no">       X      </code> : Integer or <code dir="ltr" translate="no">       BYTES      </code><br />
-<code dir="ltr" translate="no">       Y      </code> : Same type as <code dir="ltr" translate="no">       X      </code></td>
-<td>Takes two bit patterns of equal length and performs the logical <code dir="ltr" translate="no">       AND      </code> operation on each pair of the corresponding bits. This operator throws an error if <code dir="ltr" translate="no">       X      </code> and <code dir="ltr" translate="no">       Y      </code> are bytes of different lengths.</td>
+<td><code dir="ltr" translate="no">X &amp; Y</code></td>
+<td><code dir="ltr" translate="no">X</code> : Integer or <code dir="ltr" translate="no">BYTES</code><br />
+<code dir="ltr" translate="no">Y</code> : Same type as <code dir="ltr" translate="no">X</code></td>
+<td>Takes two bit patterns of equal length and performs the logical <code dir="ltr" translate="no">AND</code> operation on each pair of the corresponding bits. This operator throws an error if <code dir="ltr" translate="no">X</code> and <code dir="ltr" translate="no">Y</code> are bytes of different lengths.</td>
 </tr>
 <tr class="odd">
 <td>Left shift</td>
-<td><code dir="ltr" translate="no">       X &lt;&lt; Y      </code></td>
-<td><code dir="ltr" translate="no">       X      </code> : Integer or <code dir="ltr" translate="no">       BYTES      </code><br />
-<code dir="ltr" translate="no">       Y      </code> : <code dir="ltr" translate="no">       INT64      </code></td>
-<td>Shifts the first operand <code dir="ltr" translate="no">       X      </code> to the left. This operator returns <code dir="ltr" translate="no">       0      </code> or a byte sequence of <code dir="ltr" translate="no">       b'\x00'      </code> if the second operand <code dir="ltr" translate="no">       Y      </code> is greater than or equal to the bit length of the first operand <code dir="ltr" translate="no">       X      </code> (for example, <code dir="ltr" translate="no">       64      </code> if <code dir="ltr" translate="no">       X      </code> has the type <code dir="ltr" translate="no">       INT64      </code> ). This operator throws an error if <code dir="ltr" translate="no">       Y      </code> is negative.</td>
+<td><code dir="ltr" translate="no">X &lt;&lt; Y</code></td>
+<td><code dir="ltr" translate="no">X</code> : Integer or <code dir="ltr" translate="no">BYTES</code><br />
+<code dir="ltr" translate="no">Y</code> : <code dir="ltr" translate="no">INT64</code></td>
+<td>Shifts the first operand <code dir="ltr" translate="no">X</code> to the left. This operator returns <code dir="ltr" translate="no">0</code> or a byte sequence of <code dir="ltr" translate="no">b'\x00'</code> if the second operand <code dir="ltr" translate="no">Y</code> is greater than or equal to the bit length of the first operand <code dir="ltr" translate="no">X</code> (for example, <code dir="ltr" translate="no">64</code> if <code dir="ltr" translate="no">X</code> has the type <code dir="ltr" translate="no">INT64</code> ). This operator throws an error if <code dir="ltr" translate="no">Y</code> is negative.</td>
 </tr>
 <tr class="even">
 <td>Right shift</td>
-<td><code dir="ltr" translate="no">       X &gt;&gt; Y      </code></td>
-<td><code dir="ltr" translate="no">       X      </code> : Integer or <code dir="ltr" translate="no">       BYTES      </code><br />
-<code dir="ltr" translate="no">       Y      </code> : <code dir="ltr" translate="no">       INT64      </code></td>
-<td>Shifts the first operand <code dir="ltr" translate="no">       X      </code> to the right. This operator doesn't perform sign bit extension with a signed type (i.e., it fills vacant bits on the left with <code dir="ltr" translate="no">       0      </code> ). This operator returns <code dir="ltr" translate="no">       0      </code> or a byte sequence of <code dir="ltr" translate="no">       b'\x00'      </code> if the second operand <code dir="ltr" translate="no">       Y      </code> is greater than or equal to the bit length of the first operand <code dir="ltr" translate="no">       X      </code> (for example, <code dir="ltr" translate="no">       64      </code> if <code dir="ltr" translate="no">       X      </code> has the type <code dir="ltr" translate="no">       INT64      </code> ). This operator throws an error if <code dir="ltr" translate="no">       Y      </code> is negative.</td>
+<td><code dir="ltr" translate="no">X &gt;&gt; Y</code></td>
+<td><code dir="ltr" translate="no">X</code> : Integer or <code dir="ltr" translate="no">BYTES</code><br />
+<code dir="ltr" translate="no">Y</code> : <code dir="ltr" translate="no">INT64</code></td>
+<td>Shifts the first operand <code dir="ltr" translate="no">X</code> to the right. This operator doesn't perform sign bit extension with a signed type (i.e., it fills vacant bits on the left with <code dir="ltr" translate="no">0</code> ). This operator returns <code dir="ltr" translate="no">0</code> or a byte sequence of <code dir="ltr" translate="no">b'\x00'</code> if the second operand <code dir="ltr" translate="no">Y</code> is greater than or equal to the bit length of the first operand <code dir="ltr" translate="no">X</code> (for example, <code dir="ltr" translate="no">64</code> if <code dir="ltr" translate="no">X</code> has the type <code dir="ltr" translate="no">INT64</code> ). This operator throws an error if <code dir="ltr" translate="no">Y</code> is negative.</td>
 </tr>
 </tbody>
 </table>
 
 ### Logical operators
 
-GoogleSQL supports the `  AND  ` , `  OR  ` , and `  NOT  ` logical operators. Logical operators allow only `  BOOL  ` or `  NULL  ` input and use [three-valued logic](https://en.wikipedia.org/wiki/Three-valued_logic) to produce a result. The result can be `  TRUE  ` , `  FALSE  ` , or `  NULL  ` :
+GoogleSQL supports the `AND` , `OR` , and `NOT` logical operators. Logical operators allow only `BOOL` or `NULL` input and use [three-valued logic](https://en.wikipedia.org/wiki/Three-valued_logic) to produce a result. The result can be `TRUE` , `FALSE` , or `NULL` :
 
-| `        x       `     | `        y       `     | `        x AND y       ` | `        x OR y       ` |
-| ---------------------- | ---------------------- | ------------------------ | ----------------------- |
-| `        TRUE       `  | `        TRUE       `  | `        TRUE       `    | `        TRUE       `   |
-| `        TRUE       `  | `        FALSE       ` | `        FALSE       `   | `        TRUE       `   |
-| `        TRUE       `  | `        NULL       `  | `        NULL       `    | `        TRUE       `   |
-| `        FALSE       ` | `        TRUE       `  | `        FALSE       `   | `        TRUE       `   |
-| `        FALSE       ` | `        FALSE       ` | `        FALSE       `   | `        FALSE       `  |
-| `        FALSE       ` | `        NULL       `  | `        FALSE       `   | `        NULL       `   |
-| `        NULL       `  | `        TRUE       `  | `        NULL       `    | `        TRUE       `   |
-| `        NULL       `  | `        FALSE       ` | `        FALSE       `   | `        NULL       `   |
-| `        NULL       `  | `        NULL       `  | `        NULL       `    | `        NULL       `   |
+| `x`     | `y`     | `x AND y` | `x OR y` |
+| ------- | ------- | --------- | -------- |
+| `TRUE`  | `TRUE`  | `TRUE`    | `TRUE`   |
+| `TRUE`  | `FALSE` | `FALSE`   | `TRUE`   |
+| `TRUE`  | `NULL`  | `NULL`    | `TRUE`   |
+| `FALSE` | `TRUE`  | `FALSE`   | `TRUE`   |
+| `FALSE` | `FALSE` | `FALSE`   | `FALSE`  |
+| `FALSE` | `NULL`  | `FALSE`   | `NULL`   |
+| `NULL`  | `TRUE`  | `NULL`    | `TRUE`   |
+| `NULL`  | `FALSE` | `FALSE`   | `NULL`   |
+| `NULL`  | `NULL`  | `NULL`    | `NULL`   |
 
-| `        x       `     | `        NOT x       ` |
-| ---------------------- | ---------------------- |
-| `        TRUE       `  | `        FALSE       ` |
-| `        FALSE       ` | `        TRUE       `  |
-| `        NULL       `  | `        NULL       `  |
+| `x`     | `NOT x` |
+| ------- | ------- |
+| `TRUE`  | `FALSE` |
+| `FALSE` | `TRUE`  |
+| `NULL`  | `NULL`  |
 
-The order of evaluation of operands to `  AND  ` and `  OR  ` can vary, and evaluation can be skipped if unnecessary.
+The order of evaluation of operands to `AND` and `OR` can vary, and evaluation can be skipped if unnecessary.
 
 **Examples**
 
-The examples in this section reference a table called `  entry_table  ` :
+The examples in this section reference a table called `entry_table` :
 
     /*-------+
      | entry |
@@ -840,7 +840,7 @@ The examples in this section reference a table called `  entry_table  ` :
 
 ### Comparison operators
 
-Compares operands and produces the results of the comparison as a `  BOOL  ` value. These comparison operators are available:
+Compares operands and produces the results of the comparison as a `BOOL` value. These comparison operators are available:
 
 <table>
 <colgroup>
@@ -858,54 +858,54 @@ Compares operands and produces the results of the comparison as a `  BOOL  ` val
 <tbody>
 <tr class="odd">
 <td>Less Than</td>
-<td><code dir="ltr" translate="no">       X &lt; Y      </code></td>
-<td>Returns <code dir="ltr" translate="no">       TRUE      </code> if <code dir="ltr" translate="no">       X      </code> is less than <code dir="ltr" translate="no">       Y      </code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
+<td><code dir="ltr" translate="no">X &lt; Y</code></td>
+<td>Returns <code dir="ltr" translate="no">TRUE</code> if <code dir="ltr" translate="no">X</code> is less than <code dir="ltr" translate="no">Y</code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
 </tr>
 <tr class="even">
 <td>Less Than or Equal To</td>
-<td><code dir="ltr" translate="no">       X &lt;= Y      </code></td>
-<td>Returns <code dir="ltr" translate="no">       TRUE      </code> if <code dir="ltr" translate="no">       X      </code> is less than or equal to <code dir="ltr" translate="no">       Y      </code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
+<td><code dir="ltr" translate="no">X &lt;= Y</code></td>
+<td>Returns <code dir="ltr" translate="no">TRUE</code> if <code dir="ltr" translate="no">X</code> is less than or equal to <code dir="ltr" translate="no">Y</code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
 </tr>
 <tr class="odd">
 <td>Greater Than</td>
-<td><code dir="ltr" translate="no">       X &gt; Y      </code></td>
-<td>Returns <code dir="ltr" translate="no">       TRUE      </code> if <code dir="ltr" translate="no">       X      </code> is greater than <code dir="ltr" translate="no">       Y      </code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
+<td><code dir="ltr" translate="no">X &gt; Y</code></td>
+<td>Returns <code dir="ltr" translate="no">TRUE</code> if <code dir="ltr" translate="no">X</code> is greater than <code dir="ltr" translate="no">Y</code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
 </tr>
 <tr class="even">
 <td>Greater Than or Equal To</td>
-<td><code dir="ltr" translate="no">       X &gt;= Y      </code></td>
-<td>Returns <code dir="ltr" translate="no">       TRUE      </code> if <code dir="ltr" translate="no">       X      </code> is greater than or equal to <code dir="ltr" translate="no">       Y      </code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
+<td><code dir="ltr" translate="no">X &gt;= Y</code></td>
+<td>Returns <code dir="ltr" translate="no">TRUE</code> if <code dir="ltr" translate="no">X</code> is greater than or equal to <code dir="ltr" translate="no">Y</code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
 </tr>
 <tr class="odd">
 <td>Equal</td>
-<td><code dir="ltr" translate="no">       X = Y      </code></td>
-<td>Returns <code dir="ltr" translate="no">       TRUE      </code> if <code dir="ltr" translate="no">       X      </code> is equal to <code dir="ltr" translate="no">       Y      </code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
+<td><code dir="ltr" translate="no">X = Y</code></td>
+<td>Returns <code dir="ltr" translate="no">TRUE</code> if <code dir="ltr" translate="no">X</code> is equal to <code dir="ltr" translate="no">Y</code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
 </tr>
 <tr class="even">
 <td>Not Equal</td>
-<td><code dir="ltr" translate="no">       X != Y      </code><br />
-<code dir="ltr" translate="no">       X &lt;&gt; Y      </code></td>
-<td>Returns <code dir="ltr" translate="no">       TRUE      </code> if <code dir="ltr" translate="no">       X      </code> isn't equal to <code dir="ltr" translate="no">       Y      </code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
+<td><code dir="ltr" translate="no">X != Y</code><br />
+<code dir="ltr" translate="no">X &lt;&gt; Y</code></td>
+<td>Returns <code dir="ltr" translate="no">TRUE</code> if <code dir="ltr" translate="no">X</code> isn't equal to <code dir="ltr" translate="no">Y</code> . This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       BETWEEN      </code></td>
-<td><code dir="ltr" translate="no">       X [NOT] BETWEEN Y AND Z      </code></td>
-<td><p>Returns <code dir="ltr" translate="no">        TRUE       </code> if <code dir="ltr" translate="no">        X       </code> is [not] within the range specified. The result of <code dir="ltr" translate="no">        X BETWEEN Y AND Z       </code> is equivalent to <code dir="ltr" translate="no">        Y &lt;= X AND X &lt;= Z       </code> but <code dir="ltr" translate="no">        X       </code> is evaluated only once in the former. This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</p></td>
+<td><code dir="ltr" translate="no">BETWEEN</code></td>
+<td><code dir="ltr" translate="no">X [NOT] BETWEEN Y AND Z</code></td>
+<td><p>Returns <code dir="ltr" translate="no">TRUE</code> if <code dir="ltr" translate="no">X</code> is [not] within the range specified. The result of <code dir="ltr" translate="no">X BETWEEN Y AND Z</code> is equivalent to <code dir="ltr" translate="no">Y &lt;= X AND X &lt;= Z</code> but <code dir="ltr" translate="no">X</code> is evaluated only once in the former. This operator supports specifying <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation</a> .</p></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       LIKE      </code></td>
-<td><code dir="ltr" translate="no">       X [NOT] LIKE Y      </code></td>
-<td>See the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator"><code dir="ltr" translate="no">        LIKE       </code> operator</a> for details.</td>
+<td><code dir="ltr" translate="no">LIKE</code></td>
+<td><code dir="ltr" translate="no">X [NOT] LIKE Y</code></td>
+<td>See the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator"><code dir="ltr" translate="no">LIKE</code> operator</a> for details.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       IN      </code></td>
+<td><code dir="ltr" translate="no">IN</code></td>
 <td>Multiple</td>
-<td>See the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operator"><code dir="ltr" translate="no">        IN       </code> operator</a> for details.</td>
+<td>See the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operator"><code dir="ltr" translate="no">IN</code> operator</a> for details.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       IS DISTINCT FROM      </code></td>
-<td><code dir="ltr" translate="no">       x IS [NOT] DISTINCT FROM y      </code></td>
-<td>See the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_distinct"><code dir="ltr" translate="no">        IS DISTINCT FROM       </code> operator</a> for details.</td>
+<td><code dir="ltr" translate="no">IS DISTINCT FROM</code></td>
+<td><code dir="ltr" translate="no">x IS [NOT] DISTINCT FROM y</code></td>
+<td>See the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_distinct"><code dir="ltr" translate="no">IS DISTINCT FROM</code> operator</a> for details.</td>
 </tr>
 </tbody>
 </table>
@@ -916,45 +916,45 @@ The following rules apply to operands in a comparison operator:
   - A comparison operator generally requires both operands to be of the same type.
   - If the operands are of different types, and the values of those types can be converted to a common type without loss of precision, they are generally coerced to that common type for the comparison.
   - A literal operand is generally coerced to the same data type of a non-literal operand that's part of the comparison.
-  - Struct operands support only these comparison operators: equal ( `  =  ` ), not equal ( `  !=  ` and `  <>  ` ), and `  IN  ` .
+  - Struct operands support only these comparison operators: equal ( `=` ), not equal ( `!=` and `<>` ), and `IN` .
 
 The following rules apply when comparing these data types:
 
-  - `  FLOAT64  ` : All comparisons with `  NaN  ` return `  FALSE  ` , except for `  !=  ` and `  <>  ` , which return `  TRUE  ` .
+  - `FLOAT64` : All comparisons with `NaN` return `FALSE` , except for `!=` and `<>` , which return `TRUE` .
 
-  - `  BOOL  ` : `  FALSE  ` is less than `  TRUE  ` .
+  - `BOOL` : `FALSE` is less than `TRUE` .
 
-  - `  STRING  ` : Strings are compared codepoint-by-codepoint, which means that canonically equivalent strings are only guaranteed to compare as equal if they have been normalized first.
+  - `STRING` : Strings are compared codepoint-by-codepoint, which means that canonically equivalent strings are only guaranteed to compare as equal if they have been normalized first.
 
-  - `  JSON  ` : You can't compare JSON, but you can compare the values inside of JSON if you convert the values to SQL values first. For more information, see [`  JSON  ` functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions) .
+  - `JSON` : You can't compare JSON, but you can compare the values inside of JSON if you convert the values to SQL values first. For more information, see [`JSON` functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions) .
 
-  - `  NULL  ` : Any operation with a `  NULL  ` input returns `  NULL  ` .
+  - `NULL` : Any operation with a `NULL` input returns `NULL` .
 
-  - `  STRUCT  ` : When testing a struct for equality, it's possible that one or more fields are `  NULL  ` . In such cases:
+  - `STRUCT` : When testing a struct for equality, it's possible that one or more fields are `NULL` . In such cases:
     
-      - If all non- `  NULL  ` field values are equal, the comparison returns `  NULL  ` .
-      - If any non- `  NULL  ` field values aren't equal, the comparison returns `  FALSE  ` .
+      - If all non- `NULL` field values are equal, the comparison returns `NULL` .
+      - If any non- `NULL` field values aren't equal, the comparison returns `FALSE` .
     
-    The following table demonstrates how `  STRUCT  ` data types are compared when they have fields that are `  NULL  ` valued.
+    The following table demonstrates how `STRUCT` data types are compared when they have fields that are `NULL` valued.
     
-    | Struct1                              | Struct2                              | Struct1 = Struct2          |
-    | ------------------------------------ | ------------------------------------ | -------------------------- |
-    | `          STRUCT(1, NULL)         ` | `          STRUCT(1, NULL)         ` | `          NULL         `  |
-    | `          STRUCT(1, NULL)         ` | `          STRUCT(2, NULL)         ` | `          FALSE         ` |
-    | `          STRUCT(1,2)         `     | `          STRUCT(1, NULL)         ` | `          NULL         `  |
+    | Struct1           | Struct2           | Struct1 = Struct2 |
+    | ----------------- | ----------------- | ----------------- |
+    | `STRUCT(1, NULL)` | `STRUCT(1, NULL)` | `NULL`            |
+    | `STRUCT(1, NULL)` | `STRUCT(2, NULL)` | `FALSE`           |
+    | `STRUCT(1,2)`     | `STRUCT(1, NULL)` | `NULL`            |
     
 
-### `     EXISTS    ` operator
+### `EXISTS` operator
 
     EXISTS( subquery )
 
 **Description**
 
-Returns `  TRUE  ` if the subquery produces one or more rows. Returns `  FALSE  ` if the subquery produces zero rows. Never returns `  NULL  ` . To learn more about how you can use a subquery with `  EXISTS  ` , see [`  EXISTS  ` subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#exists_subquery_concepts) .
+Returns `TRUE` if the subquery produces one or more rows. Returns `FALSE` if the subquery produces zero rows. Never returns `NULL` . To learn more about how you can use a subquery with `EXISTS` , see [`EXISTS` subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#exists_subquery_concepts) .
 
 **Examples**
 
-In this example, the `  EXISTS  ` operator returns `  FALSE  ` because there are no rows in `  Words  ` where the direction is `  south  ` :
+In this example, the `EXISTS` operator returns `FALSE` because there are no rows in `Words` where the direction is `south` :
 
     WITH Words AS (
       SELECT 'Intend' as value, 'east' as direction UNION ALL
@@ -969,9 +969,9 @@ In this example, the `  EXISTS  ` operator returns `  FALSE  ` because there are
      | FALSE  |
      +--------*/
 
-### `     IN    ` operator
+### `IN` operator
 
-The `  IN  ` operator supports the following syntax:
+The `IN` operator supports the following syntax:
 
     search_value [NOT] IN value_set
     
@@ -984,44 +984,44 @@ The `  IN  ` operator supports the following syntax:
 
 **Description**
 
-Checks for an equal value in a set of values. [Semantic rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#semantic_rules_in) apply, but in general, `  IN  ` returns `  TRUE  ` if an equal value is found, `  FALSE  ` if an equal value is excluded, otherwise `  NULL  ` . `  NOT IN  ` returns `  FALSE  ` if an equal value is found, `  TRUE  ` if an equal value is excluded, otherwise `  NULL  ` .
+Checks for an equal value in a set of values. [Semantic rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#semantic_rules_in) apply, but in general, `IN` returns `TRUE` if an equal value is found, `FALSE` if an equal value is excluded, otherwise `NULL` . `NOT IN` returns `FALSE` if an equal value is found, `TRUE` if an equal value is excluded, otherwise `NULL` .
 
-  - `  search_value  ` : The expression that's compared to a set of values.
+  - `search_value` : The expression that's compared to a set of values.
 
-  - `  value_set  ` : One or more values to compare to a search value.
+  - `value_set` : One or more values to compare to a search value.
     
-      - `  (expression[, ...])  ` : A list of expressions.
+      - `(expression[, ...])` : A list of expressions.
     
-      - `  (subquery)  ` : A [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#about_subqueries) that returns a single column. The values in that column are the set of values. If no rows are produced, the set of values is empty.
+      - `(subquery)` : A [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#about_subqueries) that returns a single column. The values in that column are the set of values. If no rows are produced, the set of values is empty.
     
-      - `  UNNEST(array_expression)  ` : An [UNNEST operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) that returns a column of values from an array expression. This is equivalent to:
+      - `UNNEST(array_expression)` : An [UNNEST operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) that returns a column of values from an array expression. This is equivalent to:
         
             IN (SELECT element FROM UNNEST(array_expression) AS element)
 
 This operator supports [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_funcs) , but these limitations apply:
 
-  - `  [NOT] IN UNNEST  ` doesn't support collation.
+  - `[NOT] IN UNNEST` doesn't support collation.
   - If collation is used with a list of expressions, there must be at least one item in the list.
 
 <span id="semantic_rules_in"></span>
 
 **Semantic rules**
 
-When using the `  IN  ` operator, the following semantics apply in this order:
+When using the `IN` operator, the following semantics apply in this order:
 
-  - Returns `  FALSE  ` if `  value_set  ` is empty.
-  - Returns `  NULL  ` if `  search_value  ` is `  NULL  ` .
-  - Returns `  TRUE  ` if `  value_set  ` contains a value equal to `  search_value  ` .
-  - Returns `  NULL  ` if `  value_set  ` contains a `  NULL  ` .
-  - Returns `  FALSE  ` .
+  - Returns `FALSE` if `value_set` is empty.
+  - Returns `NULL` if `search_value` is `NULL` .
+  - Returns `TRUE` if `value_set` contains a value equal to `search_value` .
+  - Returns `NULL` if `value_set` contains a `NULL` .
+  - Returns `FALSE` .
 
-When using the `  NOT IN  ` operator, the following semantics apply in this order:
+When using the `NOT IN` operator, the following semantics apply in this order:
 
-  - Returns `  TRUE  ` if `  value_set  ` is empty.
-  - Returns `  NULL  ` if `  search_value  ` is `  NULL  ` .
-  - Returns `  FALSE  ` if `  value_set  ` contains a value equal to `  search_value  ` .
-  - Returns `  NULL  ` if `  value_set  ` contains a `  NULL  ` .
-  - Returns `  TRUE  ` .
+  - Returns `TRUE` if `value_set` is empty.
+  - Returns `NULL` if `search_value` is `NULL` .
+  - Returns `FALSE` if `value_set` contains a value equal to `search_value` .
+  - Returns `NULL` if `value_set` contains a `NULL` .
+  - Returns `TRUE` .
 
 The semantics of:
 
@@ -1039,7 +1039,7 @@ is equivalent to:
 
     NOT(x IN ...)
 
-The `  UNNEST  ` form treats an array scan like `  UNNEST  ` in the [`  FROM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) clause:
+The `UNNEST` form treats an array scan like `UNNEST` in the [`FROM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) clause:
 
     x [NOT] IN UNNEST(<array expression>)
 
@@ -1049,7 +1049,7 @@ This form is often used with array parameters. For example:
 
 See the [Arrays](https://docs.cloud.google.com/bigquery/docs/arrays#filtering_arrays) topic for more information on how to use this syntax.
 
-`  IN  ` can be used with multi-part keys by using the struct constructor syntax. For example:
+`IN` can be used with multi-part keys by using the struct constructor syntax. For example:
 
     (Key1, Key2) IN ( (12,34), (56,78) )
     (Key1, Key2) IN ( SELECT (table.a, table.b) FROM table )
@@ -1058,11 +1058,11 @@ See the [Struct Type](https://docs.cloud.google.com/bigquery/docs/reference/stan
 
 **Return Data Type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
-You can use these `  WITH  ` clauses to emulate temporary tables for `  Words  ` and `  Items  ` in the following examples:
+You can use these `WITH` clauses to emulate temporary tables for `Words` and `Items` in the following examples:
 
     WITH Words AS (
       SELECT 'Intend' as value UNION ALL
@@ -1099,7 +1099,7 @@ You can use these `  WITH  ` clauses to emulate temporary tables for `  Words  `
      | {red color, round shape}   |
      +----------------------------*/
 
-Example with `  IN  ` and an expression:
+Example with `IN` and an expression:
 
     SELECT * FROM Words WHERE value IN ('Intend', 'Secure');
     
@@ -1111,7 +1111,7 @@ Example with `  IN  ` and an expression:
      | Intend   |
      +----------*/
 
-Example with `  NOT IN  ` and an expression:
+Example with `NOT IN` and an expression:
 
     SELECT * FROM Words WHERE value NOT IN ('Intend');
     
@@ -1123,7 +1123,7 @@ Example with `  NOT IN  ` and an expression:
      | Peace    |
      +----------*/
 
-Example with `  IN  ` , a scalar subquery, and an expression:
+Example with `IN` , a scalar subquery, and an expression:
 
     SELECT * FROM Words WHERE value IN ((SELECT 'Intend'), 'Clarity');
     
@@ -1135,7 +1135,7 @@ Example with `  IN  ` , a scalar subquery, and an expression:
      | Intend   |
      +----------*/
 
-Example with `  IN  ` and an `  UNNEST  ` operation:
+Example with `IN` and an `UNNEST` operation:
 
     SELECT * FROM Words WHERE value IN UNNEST(['Secure', 'Clarity']);
     
@@ -1146,7 +1146,7 @@ Example with `  IN  ` and an `  UNNEST  ` operation:
      | Clarity  |
      +----------*/
 
-Example with `  IN  ` and a struct:
+Example with `IN` and a struct:
 
     SELECT
       (SELECT AS STRUCT Items.info) as item
@@ -1160,57 +1160,57 @@ Example with `  IN  ` and a struct:
      | { {blue color, round shape} info } |
      +------------------------------------*/
 
-### `     IS    ` operators
+### `IS` operators
 
-IS operators return TRUE or FALSE for the condition they are testing. They never return `  NULL  ` , even for `  NULL  ` inputs, unlike the `  IS_INF  ` and `  IS_NAN  ` functions defined in [Mathematical Functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions) . If `  NOT  ` is present, the output `  BOOL  ` value is inverted.
+IS operators return TRUE or FALSE for the condition they are testing. They never return `NULL` , even for `NULL` inputs, unlike the `IS_INF` and `IS_NAN` functions defined in [Mathematical Functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions) . If `NOT` is present, the output `BOOL` value is inverted.
 
-| Function Syntax                   | Input Data Type       | Result Data Type      | Description                                                                                                                                     |
-| --------------------------------- | --------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        X IS TRUE       `        | `        BOOL       ` | `        BOOL       ` | Evaluates to `        TRUE       ` if `        X       ` evaluates to `        TRUE       ` . Otherwise, evaluates to `        FALSE       ` .  |
-| `        X IS NOT TRUE       `    | `        BOOL       ` | `        BOOL       ` | Evaluates to `        FALSE       ` if `        X       ` evaluates to `        TRUE       ` . Otherwise, evaluates to `        TRUE       ` .  |
-| `        X IS FALSE       `       | `        BOOL       ` | `        BOOL       ` | Evaluates to `        TRUE       ` if `        X       ` evaluates to `        FALSE       ` . Otherwise, evaluates to `        FALSE       ` . |
-| `        X IS NOT FALSE       `   | `        BOOL       ` | `        BOOL       ` | Evaluates to `        FALSE       ` if `        X       ` evaluates to `        FALSE       ` . Otherwise, evaluates to `        TRUE       ` . |
-| `        X IS NULL       `        | Any value type        | `        BOOL       ` | Evaluates to `        TRUE       ` if `        X       ` evaluates to `        NULL       ` . Otherwise evaluates to `        FALSE       ` .   |
-| `        X IS NOT NULL       `    | Any value type        | `        BOOL       ` | Evaluates to `        FALSE       ` if `        X       ` evaluates to `        NULL       ` . Otherwise evaluates to `        TRUE       ` .   |
-| `        X IS UNKNOWN       `     | `        BOOL       ` | `        BOOL       ` | Evaluates to `        TRUE       ` if `        X       ` evaluates to `        NULL       ` . Otherwise evaluates to `        FALSE       ` .   |
-| `        X IS NOT UNKNOWN       ` | `        BOOL       ` | `        BOOL       ` | Evaluates to `        FALSE       ` if `        X       ` evaluates to `        NULL       ` . Otherwise, evaluates to `        TRUE       ` .  |
+| Function Syntax    | Input Data Type | Result Data Type | Description                                                                         |
+| ------------------ | --------------- | ---------------- | ----------------------------------------------------------------------------------- |
+| `X IS TRUE`        | `BOOL`          | `BOOL`           | Evaluates to `TRUE` if `X` evaluates to `TRUE` . Otherwise, evaluates to `FALSE` .  |
+| `X IS NOT TRUE`    | `BOOL`          | `BOOL`           | Evaluates to `FALSE` if `X` evaluates to `TRUE` . Otherwise, evaluates to `TRUE` .  |
+| `X IS FALSE`       | `BOOL`          | `BOOL`           | Evaluates to `TRUE` if `X` evaluates to `FALSE` . Otherwise, evaluates to `FALSE` . |
+| `X IS NOT FALSE`   | `BOOL`          | `BOOL`           | Evaluates to `FALSE` if `X` evaluates to `FALSE` . Otherwise, evaluates to `TRUE` . |
+| `X IS NULL`        | Any value type  | `BOOL`           | Evaluates to `TRUE` if `X` evaluates to `NULL` . Otherwise evaluates to `FALSE` .   |
+| `X IS NOT NULL`    | Any value type  | `BOOL`           | Evaluates to `FALSE` if `X` evaluates to `NULL` . Otherwise evaluates to `TRUE` .   |
+| `X IS UNKNOWN`     | `BOOL`          | `BOOL`           | Evaluates to `TRUE` if `X` evaluates to `NULL` . Otherwise evaluates to `FALSE` .   |
+| `X IS NOT UNKNOWN` | `BOOL`          | `BOOL`           | Evaluates to `FALSE` if `X` evaluates to `NULL` . Otherwise, evaluates to `TRUE` .  |
 
-### `     IS DISTINCT FROM    ` operator
+### `IS DISTINCT FROM` operator
 
     expression_1 IS [NOT] DISTINCT FROM expression_2
 
 **Description**
 
-`  IS DISTINCT FROM  ` returns `  TRUE  ` if the input values are considered to be distinct from each other by the [`  DISTINCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct) and [`  GROUP BY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) clauses. Otherwise, returns `  FALSE  ` .
+`IS DISTINCT FROM` returns `TRUE` if the input values are considered to be distinct from each other by the [`DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct) and [`GROUP BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) clauses. Otherwise, returns `FALSE` .
 
-`  a IS DISTINCT FROM b  ` being `  TRUE  ` is equivalent to:
+`a IS DISTINCT FROM b` being `TRUE` is equivalent to:
 
-  - `  SELECT COUNT(DISTINCT x) FROM UNNEST([a,b]) x  ` returning `  2  ` .
-  - `  SELECT * FROM UNNEST([a,b]) x GROUP BY x  ` returning 2 rows.
+  - `SELECT COUNT(DISTINCT x) FROM UNNEST([a,b]) x` returning `2` .
+  - `SELECT * FROM UNNEST([a,b]) x GROUP BY x` returning 2 rows.
 
-`  a IS DISTINCT FROM b  ` is equivalent to `  NOT (a = b)  ` , except for the following cases:
+`a IS DISTINCT FROM b` is equivalent to `NOT (a = b)` , except for the following cases:
 
-  - This operator never returns `  NULL  ` so `  NULL  ` values are considered to be distinct from non- `  NULL  ` values, not other `  NULL  ` values.
-  - `  NaN  ` values are considered to be distinct from non- `  NaN  ` values, but not other `  NaN  ` values.
+  - This operator never returns `NULL` so `NULL` values are considered to be distinct from non- `NULL` values, not other `NULL` values.
+  - `NaN` values are considered to be distinct from non- `NaN` values, but not other `NaN` values.
 
 You can use this operation with fields in a complex data type, but not on the complex data types themselves. These complex data types can't be compared directly:
 
-  - `  STRUCT  `
-  - `  ARRAY  `
+  - `STRUCT`
+  - `ARRAY`
 
 Input values:
 
-  - `  expression_1  ` : The first value to compare. This can be a groupable data type, `  NULL  ` or `  NaN  ` .
-  - `  expression_2  ` : The second value to compare. This can be a groupable data type, `  NULL  ` or `  NaN  ` .
-  - `  NOT  ` : If present, the output `  BOOL  ` value is inverted.
+  - `expression_1` : The first value to compare. This can be a groupable data type, `NULL` or `NaN` .
+  - `expression_2` : The second value to compare. This can be a groupable data type, `NULL` or `NaN` .
+  - `NOT` : If present, the output `BOOL` value is inverted.
 
 **Return type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
-These return `  TRUE  ` :
+These return `TRUE` :
 
     SELECT 1 IS DISTINCT FROM 2
 
@@ -1220,7 +1220,7 @@ These return `  TRUE  ` :
 
     SELECT NULL IS NOT DISTINCT FROM NULL
 
-These return `  FALSE  ` :
+These return `FALSE` :
 
     SELECT NULL IS DISTINCT FROM NULL
 
@@ -1230,57 +1230,57 @@ These return `  FALSE  ` :
 
     SELECT 1 IS NOT DISTINCT FROM NULL
 
-### `     LIKE    ` operator
+### `LIKE` operator
 
     expression [NOT] LIKE pattern
 
 **Description**
 
-`  LIKE  ` returns `  TRUE  ` if the string in the first operand `  expression  ` matches a pattern specified by the second operand `  pattern  ` , otherwise returns `  FALSE  ` .
+`LIKE` returns `TRUE` if the string in the first operand `expression` matches a pattern specified by the second operand `pattern` , otherwise returns `FALSE` .
 
-`  NOT LIKE  ` returns `  TRUE  ` if the string in the first operand `  expression  ` doesn't match a pattern specified by the second operand `  pattern  ` , otherwise returns `  FALSE  ` .
+`NOT LIKE` returns `TRUE` if the string in the first operand `expression` doesn't match a pattern specified by the second operand `pattern` , otherwise returns `FALSE` .
 
 Expressions can contain these characters:
 
-  - A percent sign ( `  %  ` ) matches any number of characters or bytes.
-  - An underscore ( `  _  ` ) matches a single character or byte.
-  - You can escape `  \  ` , `  _  ` , or `  %  ` using two backslashes. For example, `  \\%  ` . If you are using raw strings, only a single backslash is required. For example, `  r'\%'  ` .
+  - A percent sign ( `%` ) matches any number of characters or bytes.
+  - An underscore ( `_` ) matches a single character or byte.
+  - You can escape `\` , `_` , or `%` using two backslashes. For example, `\\%` . If you are using raw strings, only a single backslash is required. For example, `r'\%'` .
 
 This operator supports [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_funcs) , but caveats apply:
 
-  - Each `  %  ` character in `  pattern  ` represents an *arbitrary string specifier* . An arbitrary string specifier can represent any sequence of `  0  ` or more characters.
+  - Each `%` character in `pattern` represents an *arbitrary string specifier* . An arbitrary string specifier can represent any sequence of `0` or more characters.
 
   - A character in the expression represents itself and is considered a *single character specifier* unless:
     
-      - The character is a percent sign ( `  %  ` ).
+      - The character is a percent sign ( `%` ).
     
-      - The character is an underscore ( `  _  ` ) and the collator isn't `  und:ci  ` .
+      - The character is an underscore ( `_` ) and the collator isn't `und:ci` .
 
-  - These additional rules apply to the underscore ( `  _  ` ) character:
+  - These additional rules apply to the underscore ( `_` ) character:
     
-      - If the collator isn't `  und:ci  ` , an error is produced when an underscore isn't escaped in `  pattern  ` .
+      - If the collator isn't `und:ci` , an error is produced when an underscore isn't escaped in `pattern` .
     
-      - If the collator isn't `  und:ci  ` , the underscore isn't allowed when the operands have collation specified.
+      - If the collator isn't `und:ci` , the underscore isn't allowed when the operands have collation specified.
     
-      - Some *compatibility composites* , such as the fi-ligature ( `  ﬁ  ` ) and the telephone sign ( `  ℡  ` ), will produce a match if they are compared to an underscore.
+      - Some *compatibility composites* , such as the fi-ligature ( `ﬁ` ) and the telephone sign ( `℡` ), will produce a match if they are compared to an underscore.
     
       - A single underscore matches the idea of what a character is, based on an approximation known as a [*grapheme cluster*](https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries) .
 
   - For a contiguous sequence of single character specifiers, equality depends on the collator and its language tags and tailoring.
     
-      - By default, the `  und:ci  ` collator doesn't fully normalize a string. Some canonically equivalent strings are considered unequal for both the `  =  ` and `  LIKE  ` operators.
+      - By default, the `und:ci` collator doesn't fully normalize a string. Some canonically equivalent strings are considered unequal for both the `=` and `LIKE` operators.
     
-      - The `  LIKE  ` operator with collation has the same behavior as the `  =  ` operator when there are no wildcards in the strings.
+      - The `LIKE` operator with collation has the same behavior as the `=` operator when there are no wildcards in the strings.
     
       - Character sequences with secondary or higher-weighted differences are considered unequal. This includes accent differences and some special cases.
         
-        For example there are three ways to produce German sharp `  ß  ` :
+        For example there are three ways to produce German sharp `ß` :
         
-          - `  \u1E9E  `
-          - `  \U00DF  `
-          - `  ss  `
+          - `\u1E9E`
+          - `\U00DF`
+          - `ss`
         
-        `  \u1E9E  ` and `  \U00DF  ` are considered equal but differ in tertiary. They are considered equal with `  und:ci  ` collation but different from `  ss  ` , which has secondary differences.
+        `\u1E9E` and `\U00DF` are considered equal but differ in tertiary. They are considered equal with `und:ci` collation but different from `ss` , which has secondary differences.
     
       - Character sequences with tertiary or lower-weighted differences are considered equal. This includes case differences and kana subtype differences, which are considered equal.
 
@@ -1288,7 +1288,7 @@ This operator supports [collation](https://docs.cloud.google.com/bigquery/docs/r
 
 **Return type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
@@ -1312,7 +1312,7 @@ The following examples illustrate how you can check to see if the string in the 
     -- Produces an error
     SELECT 'apple' LIKE NULL;
 
-The following example illustrates how to search multiple patterns in an array to find a match with the `  LIKE  ` operator:
+The following example illustrates how to search multiple patterns in an array to find a match with the `LIKE` operator:
 
     WITH Words AS
      (SELECT 'Intend with clarity.' as value UNION ALL
@@ -1332,7 +1332,7 @@ The following example illustrates how to search multiple patterns in an array to
      | Clarity and security.  |
      +------------------------*/
 
-The following examples illustrate how collation can be used with the `  LIKE  ` operator.
+The following examples illustrate how collation can be used with the `LIKE` operator.
 
     -- Returns FALSE
     'Foo' LIKE '%foo%'
@@ -1352,7 +1352,7 @@ The following examples illustrate how collation can be used with the `  LIKE  ` 
     -- Returns TRUE
     COLLATE('Foo_', 'und:ci') LIKE COLLATE('%foo\\_%', 'und:ci');
 
-There are two capital forms of `  ß  ` . We can use either `  SS  ` or `  ẞ  ` as upper case. While the difference between `  ß  ` and `  ẞ  ` is case difference (tertiary difference), the difference between sharp `  s  ` and `  ss  ` is secondary and considered not equal using the `  und:ci  ` collator. For example:
+There are two capital forms of `ß` . We can use either `SS` or `ẞ` as upper case. While the difference between `ß` and `ẞ` is case difference (tertiary difference), the difference between sharp `s` and `ss` is secondary and considered not equal using the `und:ci` collator. For example:
 
     -- Returns FALSE
     'MASSE' LIKE 'Maße';
@@ -1363,10 +1363,10 @@ There are two capital forms of `  ß  ` . We can use either `  SS  ` or `  ẞ  
     -- Returns FALSE
     COLLATE('MASSE', 'und:ci') = COLLATE('Maße', 'und:ci');
 
-The kana differences in Japanese are considered as tertiary or quaternary differences, and should be considered as equal in the `  und:ci  ` collator with secondary strength.
+The kana differences in Japanese are considered as tertiary or quaternary differences, and should be considered as equal in the `und:ci` collator with secondary strength.
 
-  - `  '\u3042'  ` is `  'あ'  ` (hiragana)
-  - `  '\u30A2'  ` is `  'ア'  ` (katakana)
+  - `'\u3042'` is `'あ'` (hiragana)
+  - `'\u30A2'` is `'ア'` (katakana)
 
 For example:
 
@@ -1379,13 +1379,13 @@ For example:
     -- Returns TRUE
     COLLATE('\u3042', 'und:ci') = COLLATE('\u30A2', 'und:ci');
 
-When comparing two strings, the `  und:ci  ` collator compares the collation units based on the specification of the collation. Even though the number of code points is different, the two strings are considered equal when the collation units are considered the same.
+When comparing two strings, the `und:ci` collator compares the collation units based on the specification of the collation. Even though the number of code points is different, the two strings are considered equal when the collation units are considered the same.
 
-  - `  '\u0041\u030A'  ` is `  'Å'  ` (two code points)
-  - `  '\u0061\u030A'  ` is `  'å'  ` (two code points)
-  - `  '\u00C5'  ` is `  'Å'  ` (one code point)
+  - `'\u0041\u030A'` is `'Å'` (two code points)
+  - `'\u0061\u030A'` is `'å'` (two code points)
+  - `'\u00C5'` is `'Å'` (one code point)
 
-In the following examples, the difference between `  '\u0061\u030A'  ` and `  '\u00C5'  ` is tertiary.
+In the following examples, the difference between `'\u0061\u030A'` and `'\u00C5'` is tertiary.
 
     -- Returns FALSE
     '\u0061\u030A' LIKE '%\u00C5%';
@@ -1396,7 +1396,7 @@ In the following examples, the difference between `  '\u0061\u030A'  ` and `  '\
     -- Returns TRUE
     COLLATE('\u0061\u030A', 'und:ci') = COLLATE('\u00C5', 'und:ci');
 
-In the following example, `  '\u0083'  ` is a `  NO BREAK HERE  ` character and is ignored.
+In the following example, `'\u0083'` is a `NO BREAK HERE` character and is ignored.
 
     -- Returns FALSE
     '\u0083' LIKE '';
@@ -1404,9 +1404,9 @@ In the following example, `  '\u0083'  ` is a `  NO BREAK HERE  ` character and 
     -- Returns TRUE
     COLLATE('\u0083', 'und:ci') LIKE '';
 
-### Quantified `     LIKE    ` operator
+### Quantified `LIKE` operator
 
-The quantified `  LIKE  ` operator supports the following syntax:
+The quantified `LIKE` operator supports the following syntax:
 
     search_value [NOT] LIKE quantifier patterns
     
@@ -1421,31 +1421,31 @@ The quantified `  LIKE  ` operator supports the following syntax:
 
 **Description**
 
-Checks `  search_value  ` for matches against several patterns. Each comparison is case-sensitive. Wildcard searches are supported. [Semantic rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#semantic_rules_quant_like) apply, but in general, `  LIKE  ` returns `  TRUE  ` if a matching pattern is found, `  FALSE  ` if a matching pattern isn't found, or otherwise `  NULL  ` . `  NOT LIKE  ` returns `  FALSE  ` if a matching pattern is found, `  TRUE  ` if a matching pattern isn't found, or otherwise `  NULL  ` .
+Checks `search_value` for matches against several patterns. Each comparison is case-sensitive. Wildcard searches are supported. [Semantic rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#semantic_rules_quant_like) apply, but in general, `LIKE` returns `TRUE` if a matching pattern is found, `FALSE` if a matching pattern isn't found, or otherwise `NULL` . `NOT LIKE` returns `FALSE` if a matching pattern is found, `TRUE` if a matching pattern isn't found, or otherwise `NULL` .
 
-  - `  search_value  ` : The value to search for matching patterns. This value can be a `  STRING  ` or `  BYTES  ` type.
+  - `search_value` : The value to search for matching patterns. This value can be a `STRING` or `BYTES` type.
 
-  - `  patterns  ` : The patterns to look for in the search value. Each pattern must resolve to the same type as `  search_value  ` . Each pattern is one of the following:
+  - `patterns` : The patterns to look for in the search value. Each pattern must resolve to the same type as `search_value` . Each pattern is one of the following:
     
-      - A list of one or more patterns that match the `  search_value  ` type.
+      - A list of one or more patterns that match the `search_value` type.
     
-      - An [`  UNNEST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) operation that returns a column of values with the same type as `  search_value  ` from an array expression.
+      - An [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) operation that returns a column of values with the same type as `search_value` from an array expression.
     
-    The regular expressions that are supported by the [`  LIKE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) are also supported by `  patterns  ` in the [quantified `  LIKE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) .
+    The regular expressions that are supported by the [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) are also supported by `patterns` in the [quantified `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) .
 
-  - `  quantifier  ` : Condition for pattern matching.
+  - `quantifier` : Condition for pattern matching.
     
-      - `  ANY  ` : Checks if the set of patterns contains at least one pattern that matches the search value.
+      - `ANY` : Checks if the set of patterns contains at least one pattern that matches the search value.
     
-      - `  SOME  ` : Synonym for `  ANY  ` .
+      - `SOME` : Synonym for `ANY` .
     
-      - `  ALL  ` : Checks if every pattern in the set of patterns matches the search value.
+      - `ALL` : Checks if every pattern in the set of patterns matches the search value.
 
 **Collation caveats**
 
 [Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_funcs) is supported, but with the following caveats:
 
-  - The collation caveats that apply to the [`  LIKE  ` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) also apply to the quantified `  LIKE  ` operator.
+  - The collation caveats that apply to the [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) also apply to the quantified `LIKE` operator.
   - If a collation-supported input contains no collation specification or an empty collation specification and another input contains an explicitly defined collation, the explicitly defined collation is used for all of the inputs.
   - All inputs with a non-empty, explicitly defined collation specification must have the same type of collation specification, otherwise an error is thrown.
 
@@ -1453,46 +1453,46 @@ Checks `  search_value  ` for matches against several patterns. Each comparison 
 
 **Semantics rules**
 
-When using the quantified `  LIKE  ` operator with `  ANY  ` or `  SOME  ` , the following semantics apply in this order:
+When using the quantified `LIKE` operator with `ANY` or `SOME` , the following semantics apply in this order:
 
-1.  Returns `  FALSE  ` if `  patterns  ` is empty.
-2.  Returns `  NULL  ` if `  search_value  ` is `  NULL  ` .
-3.  Returns `  TRUE  ` `  search_value LIKE pattern  ` is `  TRUE  ` for at least one value in `  patterns  ` .
-4.  Returns `  NULL  ` if a pattern in `  patterns  ` is `  NULL  ` .
-5.  Returns `  FALSE  ` .
+1.  Returns `FALSE` if `patterns` is empty.
+2.  Returns `NULL` if `search_value` is `NULL` .
+3.  Returns `TRUE` `search_value LIKE pattern` is `TRUE` for at least one value in `patterns` .
+4.  Returns `NULL` if a pattern in `patterns` is `NULL` .
+5.  Returns `FALSE` .
 
-When using the quantified `  LIKE  ` operator with `  ALL  ` , the following semantics apply in this order:
+When using the quantified `LIKE` operator with `ALL` , the following semantics apply in this order:
 
-1.  Returns `  TRUE  ` if `  patterns  ` is empty.
-2.  Returns `  NULL  ` if `  search_value  ` is `  NULL  ` .
-3.  Returns `  FALSE  ` if `  search_value LIKE pattern  ` is `  FALSE  ` for at least one value in `  patterns  ` .
-4.  Returns `  NULL  ` if a pattern in `  patterns  ` is `  NULL  ` .
-5.  Returns `  TRUE  ` .
+1.  Returns `TRUE` if `patterns` is empty.
+2.  Returns `NULL` if `search_value` is `NULL` .
+3.  Returns `FALSE` if `search_value LIKE pattern` is `FALSE` for at least one value in `patterns` .
+4.  Returns `NULL` if a pattern in `patterns` is `NULL` .
+5.  Returns `TRUE` .
 
-When using the quantified `  NOT LIKE  ` operator with `  ANY  ` or `  SOME  ` , the following semantics apply in this order:
+When using the quantified `NOT LIKE` operator with `ANY` or `SOME` , the following semantics apply in this order:
 
-1.  Returns `  FALSE  ` if `  patterns  ` is empty.
-2.  Returns `  NULL  ` if `  search_value  ` is `  NULL  ` .
-3.  Returns `  TRUE  ` if `  search_value LIKE pattern  ` is `  FALSE  ` for at least one value in `  patterns  ` .
-4.  Returns `  NULL  ` if a pattern in `  patterns  ` is `  NULL  ` .
-5.  Returns `  FALSE  ` .
+1.  Returns `FALSE` if `patterns` is empty.
+2.  Returns `NULL` if `search_value` is `NULL` .
+3.  Returns `TRUE` if `search_value LIKE pattern` is `FALSE` for at least one value in `patterns` .
+4.  Returns `NULL` if a pattern in `patterns` is `NULL` .
+5.  Returns `FALSE` .
 
-When using the quantified `  NOT LIKE  ` operator with `  ALL  ` , the following semantics apply in this order:
+When using the quantified `NOT LIKE` operator with `ALL` , the following semantics apply in this order:
 
-1.  Returns `  TRUE  ` if `  patterns  ` is empty.
-2.  For `  pattern_array  ` , returns `  TRUE  ` if `  patterns  ` is empty.
-3.  Returns `  NULL  ` if `  search_value  ` is `  NULL  ` .
-4.  Returns `  FALSE  ` if `  search_value LIKE pattern  ` is `  TRUE  ` for at least one value in `  patterns  ` .
-5.  Returns `  NULL  ` if a pattern in `  patterns  ` is `  NULL  ` .
-6.  Returns `  TRUE  ` .
+1.  Returns `TRUE` if `patterns` is empty.
+2.  For `pattern_array` , returns `TRUE` if `patterns` is empty.
+3.  Returns `NULL` if `search_value` is `NULL` .
+4.  Returns `FALSE` if `search_value LIKE pattern` is `TRUE` for at least one value in `patterns` .
+5.  Returns `NULL` if a pattern in `patterns` is `NULL` .
+6.  Returns `TRUE` .
 
 **Return Data Type**
 
-`  BOOL  `
+`BOOL`
 
 **Examples**
 
-You can use these `  WITH  ` clauses to emulate temporary tables for `  Words  ` in the following examples:
+You can use these `WITH` clauses to emulate temporary tables for `Words` in the following examples:
 
     WITH Words AS
      (SELECT 'Intend with clarity.' as value UNION ALL
@@ -1507,7 +1507,7 @@ You can use these `  WITH  ` clauses to emulate temporary tables for `  Words  `
      | Clarity and security.  |
      +------------------------*/
 
-The following example checks to see if the `  Intend%  ` or `  %intention%  ` pattern exists in a value and produces that value if either pattern is found:
+The following example checks to see if the `Intend%` or `%intention%` pattern exists in a value and produces that value if either pattern is found:
 
     SELECT * FROM Words WHERE value LIKE ANY ('Intend%', '%intention%');
     
@@ -1518,9 +1518,9 @@ The following example checks to see if the `  Intend%  ` or `  %intention%  ` pa
      | Secure with intention. |
      +------------------------*/
 
-The following example checks to see if the `  %ity%  ` pattern exists in a value and produces that value if the pattern is found.
+The following example checks to see if the `%ity%` pattern exists in a value and produces that value if the pattern is found.
 
-Example with `  LIKE ALL  ` :
+Example with `LIKE ALL` :
 
     SELECT * FROM Words WHERE value LIKE ALL ('%ity%');
     
@@ -1531,7 +1531,7 @@ Example with `  LIKE ALL  ` :
      | Clarity and security. |
      +-----------------------*/
 
-The following example checks to see if the `  %ity%  ` pattern exists in a value produces that value if the pattern isn't found:
+The following example checks to see if the `%ity%` pattern exists in a value produces that value if the pattern isn't found:
 
     SELECT * FROM Words WHERE value NOT LIKE ('%ity%');
     
@@ -1541,7 +1541,7 @@ The following example checks to see if the `  %ity%  ` pattern exists in a value
      | Secure with intention. |
      +------------------------*/
 
-You can pass in an array for `  patterns  ` . For example:
+You can pass in an array for `patterns` . For example:
 
     SELECT * FROM Words WHERE value LIKE ANY UNNEST(['%ion%', '%and%']);
     
@@ -1552,7 +1552,7 @@ You can pass in an array for `  patterns  ` . For example:
      | Clarity and security.  |
      +------------------------*/
 
-The following queries illustrate some of the semantic rules for the quantified `  LIKE  ` operator:
+The following queries illustrate some of the semantic rules for the quantified `LIKE` operator:
 
     SELECT
       NULL LIKE ANY ('a', 'b'), -- NULL
@@ -1590,7 +1590,7 @@ The following queries illustrate some of the semantic rules for the quantified `
       'a' NOT LIKE ALL ('a', NULL), -- FALSE
       'a' NOT LIKE ALL ('b', NULL); -- NULL
 
-The following queries illustrate some of the semantic rules for the quantified `  LIKE  ` operator and collation:
+The following queries illustrate some of the semantic rules for the quantified `LIKE` operator and collation:
 
     SELECT
       COLLATE('a', 'und:ci') LIKE ALL ('a', 'A'), -- TRUE
@@ -1604,15 +1604,15 @@ The following queries illustrate some of the semantic rules for the quantified `
 
 The concatenation operator combines multiple values into one.
 
-| Function Syntax                                      | Input Data Type           | Result Data Type          |
-| ---------------------------------------------------- | ------------------------- | ------------------------- |
-| `        STRING \|\| STRING [ \|\| ... ]       `     | `        STRING       `   | `        STRING       `   |
-| `        BYTES \|\| BYTES [ \|\| ... ]       `       | `        BYTES       `    | `        BYTES       `    |
-| `        ARRAY<T> \|\| ARRAY<T> [ \|\| ... ]       ` | `        ARRAY<T>       ` | `        ARRAY<T>       ` |
+| Function Syntax                       | Input Data Type | Result Data Type |
+| ------------------------------------- | --------------- | ---------------- |
+| `STRING \|\| STRING [ \|\| ... ]`     | `STRING`        | `STRING`         |
+| `BYTES \|\| BYTES [ \|\| ... ]`       | `BYTES`         | `BYTES`          |
+| `ARRAY<T> \|\| ARRAY<T> [ \|\| ... ]` | `ARRAY<T>`      | `ARRAY<T>`       |
 
-**Note:** The concatenation operator is translated into a nested [`  CONCAT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat) function call. For example, `  'A' || 'B' || 'C'  ` becomes `  CONCAT('A', CONCAT('B', 'C'))  ` .
+**Note:** The concatenation operator is translated into a nested [`CONCAT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat) function call. For example, `'A' || 'B' || 'C'` becomes `CONCAT('A', CONCAT('B', 'C'))` .
 
-### `     WITH    ` expression
+### `WITH` expression
 
     WITH(variable_assignment[, ...], result_expression)
     
@@ -1621,30 +1621,30 @@ The concatenation operator combines multiple values into one.
 
 **Description**
 
-Creates one or more variables. Each variable can be used in subsequent expressions within the `  WITH  ` expression. Returns the value of `  result_expression  ` .
+Creates one or more variables. Each variable can be used in subsequent expressions within the `WITH` expression. Returns the value of `result_expression` .
 
-  - `  variable_assignment  ` : Introduces a variable. The variable name must be unique within a given `  WITH  ` expression. Each expression can reference the variables that come before it. For example, if you create variable `  a  ` , then follow it with variable `  b  ` , then you can reference `  a  ` inside of the expression for `  b  ` .
+  - `variable_assignment` : Introduces a variable. The variable name must be unique within a given `WITH` expression. Each expression can reference the variables that come before it. For example, if you create variable `a` , then follow it with variable `b` , then you can reference `a` inside of the expression for `b` .
     
-      - `  variable_name  ` : The name of the variable.
+      - `variable_name` : The name of the variable.
     
-      - `  expression  ` : The value to assign to the variable.
+      - `expression` : The value to assign to the variable.
 
-  - `  result_expression  ` : An expression that can use all of the variables defined before it. The value of `  result_expression  ` is returned by the `  WITH  ` expression.
+  - `result_expression` : An expression that can use all of the variables defined before it. The value of `result_expression` is returned by the `WITH` expression.
 
 **Return Type**
 
-  - The type of the `  result_expression  ` .
+  - The type of the `result_expression` .
 
 **Requirements and Caveats**
 
-  - A variable can only be assigned once within a `  WITH  ` expression.
-  - Variables created during `  WITH  ` may not be used in analytic or aggregate function arguments. For example, `  WITH(a AS ..., SUM(a))  ` produces an error.
-  - A `  WITH  ` expression cannot be used within a user-defined function with `  ANY TYPE  ` arguments.
+  - A variable can only be assigned once within a `WITH` expression.
+  - Variables created during `WITH` may not be used in analytic or aggregate function arguments. For example, `WITH(a AS ..., SUM(a))` produces an error.
+  - A `WITH` expression cannot be used within a user-defined function with `ANY TYPE` arguments.
   - Each variable's expression is evaluated only once.
 
 **Examples**
 
-The following example first concatenates variable `  a  ` with `  b  ` , then variable `  b  ` with `  c  ` :
+The following example first concatenates variable `a` with `b` , then variable `b` with `c` :
 
     SELECT WITH(a AS '123',               -- a is '123'
                 b AS CONCAT(a, '456'),    -- b is '123456'
@@ -1657,7 +1657,7 @@ The following example first concatenates variable `  a  ` with `  b  ` , then va
      | '123456789' |
      +-------------*/
 
-In the following example, the volatile expression `  RAND()  ` is evaluated once. The value of the result expression is always `  0.0  ` :
+In the following example, the volatile expression `RAND()` is evaluated once. The value of the result expression is always `0.0` :
 
     SELECT WITH(a AS RAND(), a - a);
     
@@ -1690,7 +1690,7 @@ Variables can't be used in aggregate or analytic function call arguments.
     -- ERROR: WITH variables like 'diff' can't be used in aggregate or analytic
     -- function arguments.
 
-A `  WITH  ` expression is different from a `  WITH  ` clause. The following example shows a query that uses both:
+A `WITH` expression is different from a `WITH` clause. The following example shows a query that uses both:
 
     WITH my_table AS (
       SELECT 1 AS x, 2 AS y

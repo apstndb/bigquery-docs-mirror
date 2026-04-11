@@ -14,33 +14,33 @@ When you create or update the schedule for a query, the scheduled time for the q
 
 ## Limitations
 
-  - Scheduled queries running exactly on the hour (for example, 09:00) might trigger multiple times, which can cause unintended results like data duplication from `  INSERT  ` operations. To prevent such unintended results, use an off-the-hour schedule (for example, 08:58 or 09:03).
+  - Scheduled queries running exactly on the hour (for example, 09:00) might trigger multiple times, which can cause unintended results like data duplication from `INSERT` operations. To prevent such unintended results, use an off-the-hour schedule (for example, 08:58 or 09:03).
 
 ### Required permissions
 
 To schedule a query, you need the following IAM permissions:
 
-  - To create the transfer, you must either have the `  bigquery.transfers.update  ` and `  bigquery.datasets.get  ` permissions, or the `  bigquery.jobs.create  ` , `  bigquery.transfers.get  ` , and `  bigquery.datasets.get  ` permissions.
+  - To create the transfer, you must either have the `bigquery.transfers.update` and `bigquery.datasets.get` permissions, or the `bigquery.jobs.create` , `bigquery.transfers.get` , and `bigquery.datasets.get` permissions.
     
-    **Note:** If you are using the Google Cloud console or the bq command-line tool to schedule a query, you must have the `  bigquery.transfers.get  ` permission.
+    **Note:** If you are using the Google Cloud console or the bq command-line tool to schedule a query, you must have the `bigquery.transfers.get` permission.
 
   - To run a scheduled query, you must have:
     
-      - `  bigquery.datasets.get  ` permissions on the target dataset
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get` permissions on the target dataset
+      - `bigquery.jobs.create`
 
-To modify or delete a scheduled query, you must either have the `  bigquery.transfers.update  ` and `  bigquery.transfers.get  ` permissions, or the `  bigquery.jobs.create  ` permission and ownership over the scheduled query.
+To modify or delete a scheduled query, you must either have the `bigquery.transfers.update` and `bigquery.transfers.get` permissions, or the `bigquery.jobs.create` permission and ownership over the scheduled query.
 
-The predefined [BigQuery Admin ( `  roles/bigquery.admin  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) IAM role includes the permissions that you need in order to schedule or modify a query.
+The predefined [BigQuery Admin ( `roles/bigquery.admin` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) IAM role includes the permissions that you need in order to schedule or modify a query.
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 To create or update scheduled queries run by a service account, you must have access to that service account. For more information on granting users the service account role, see [Service Account user role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) . To select a service account in the scheduled query UI of the Google Cloud console, you need the following IAM permissions:
 
-  - `  iam.serviceAccounts.list  ` to list your service accounts.
-  - `  iam.serviceAccountUser  ` to assign a service account to a scheduled query.
+  - `iam.serviceAccounts.list` to list your service accounts.
+  - `iam.serviceAccountUser` to assign a service account to a scheduled query.
 
-**Note:** If you are using the bq command-line tool, use the `  --service_account_name  ` flag instead of authenticating as a service account.
+**Note:** If you are using the bq command-line tool, use the `--service_account_name` flag instead of authenticating as a service account.
 
 ## Configuration options
 
@@ -50,18 +50,18 @@ The following sections describe the configuration options.
 
 The query string must be valid and written in [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) . Each run of a scheduled query can receive the following [query parameters](https://docs.cloud.google.com/bigquery/docs/parameterized-queries#parameterized-timestamps) .
 
-To manually test a query string with `  @run_time  ` and `  @run_date  ` parameters before scheduling a query, use the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) .
+To manually test a query string with `@run_time` and `@run_date` parameters before scheduling a query, use the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) .
 
 #### Available parameters
 
-| Parameter                  | GoogleSQL Type                                                                                                               | Value                                                                                                                                                                                                                                                                                                                                                   |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        @run_time       ` | [`         TIMESTAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) | Represented in UTC time. For regularly scheduled queries, `        run_time       ` represents the intended time of execution. For example, if the scheduled query is set to "every 24 hours", the `        run_time       ` difference between two consecutive queries is exactly 24 hours, even though the actual execution time might slightly vary. |
-| `        @run_date       ` | [`         DATE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type)           | Represents a logical calendar date.                                                                                                                                                                                                                                                                                                                     |
+| Parameter   | GoogleSQL Type                                                                                              | Value                                                                                                                                                                                                                                                                                                                     |
+| ----------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@run_time` | [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) | Represented in UTC time. For regularly scheduled queries, `run_time` represents the intended time of execution. For example, if the scheduled query is set to "every 24 hours", the `run_time` difference between two consecutive queries is exactly 24 hours, even though the actual execution time might slightly vary. |
+| `@run_date` | [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type)           | Represents a logical calendar date.                                                                                                                                                                                                                                                                                       |
 
 #### Example
 
-The `  @run_time  ` parameter is part of the query string in this example, which queries a public dataset named [`  hacker_news.stories  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=hacker_news&page=dataset) .
+The `@run_time` parameter is part of the query string in this example, which queries a public dataset named [`hacker_news.stories`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=hacker_news&page=dataset) .
 
 ``` notranslate
 SELECT @run_time AS time,
@@ -79,7 +79,7 @@ If the destination table for your results doesn't exist when you set up the sche
 
 If you are using a DDL or DML query, then in the Google Cloud console, choose the **Processing location** or region. Processing location is required for DDL or DML queries that create the destination table.
 
-If the destination table does exist and you are using the `  WRITE_APPEND  ` [write preference](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#write_preference) , BigQuery appends data to the destination table and tries to map the schema. BigQuery automatically allows field additions and reordering, and accommodates missing optional fields. If the table schema changes so much between runs that BigQuery can't process the changes automatically, the scheduled query fails.
+If the destination table does exist and you are using the `WRITE_APPEND` [write preference](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#write_preference) , BigQuery appends data to the destination table and tries to map the schema. BigQuery automatically allows field additions and reordering, and accommodates missing optional fields. If the table schema changes so much between runs that BigQuery can't process the changes automatically, the scheduled query fails.
 
 Queries can reference tables from different projects and different datasets. When configuring your scheduled query, you don't need to include the destination dataset in the table name. You specify the destination dataset separately.
 
@@ -89,8 +89,8 @@ The destination dataset and table for a scheduled query must be in the same proj
 
 The write preference you select determines how your query results are written to an existing destination table.
 
-  - `  WRITE_TRUNCATE  ` : If the table exists, BigQuery overwrites the table data.
-  - `  WRITE_APPEND  ` : If the table exists, BigQuery appends the data to the table.
+  - `WRITE_TRUNCATE` : If the table exists, BigQuery overwrites the table data.
+  - `WRITE_APPEND` : If the table exists, BigQuery appends the data to the table.
 
 If you're using a DDL or DML query, you can't use the write preference option.
 
@@ -98,7 +98,7 @@ Creating, truncating, or appending a destination table only happens if BigQuery 
 
 #### Clustering
 
-Scheduled queries can create clustering on new tables only, when the table is made with a DDL `  CREATE TABLE AS SELECT  ` statement. See [Creating a clustered table from a query result](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_clustered_table_from_the_result_of_a_query) on the [Using data definition language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) page.
+Scheduled queries can create clustering on new tables only, when the table is made with a DDL `CREATE TABLE AS SELECT` statement. See [Creating a clustered table from a query result](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_clustered_table_from_the_result_of_a_query) on the [Using data definition language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) page.
 
 #### Partitioning options
 
@@ -106,8 +106,8 @@ Scheduled queries can create partitioned or non-partitioned destination tables. 
 
 You can use the following types of table partitioning in BigQuery:
 
-  - [Integer range partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#integer_range) : Tables partitioned based on ranges of values in a specific `  INTEGER  ` column.
-  - [Time-unit column partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables partitioned based on a [`  TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) , [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) , or [`  DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) column.
+  - [Integer range partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#integer_range) : Tables partitioned based on ranges of values in a specific `INTEGER` column.
+  - [Time-unit column partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables partitioned based on a [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) , [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) , or [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) column.
   - [Ingestion time partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time) : Tables partitioned by ingestion time. BigQuery automatically assigns rows to partitions based on the time when BigQuery ingests the data.
 
 To create a partitioned table by using a scheduled query in the Google Cloud console, use the following options:
@@ -116,7 +116,7 @@ To create a partitioned table by using a scheduled query in the Google Cloud con
 
   - To use time-unit column partitioning, specify the column name in the **Destination table partitioning field** when you [set up a scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#set_up_scheduled_queries) .
 
-  - To use ingestion time partitioning, leave the **Destination table partitioning field** blank and indicate the date partitioning in the destination table's name. For example, `  mytable${run_date}  ` . For more information, see [Parameter templating syntax](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#param-templating-syntax) .
+  - To use ingestion time partitioning, leave the **Destination table partitioning field** blank and indicate the date partitioning in the destination table's name. For example, `mytable${run_date}` . For more information, see [Parameter templating syntax](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#param-templating-syntax) .
 
 #### Available parameters
 
@@ -137,16 +137,16 @@ When setting up the scheduled query, you can specify how you want to partition t
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       run_time      </code></td>
+<td><code dir="ltr" translate="no">run_time</code></td>
 <td>Formatted timestamp</td>
-<td>In UTC time, per the schedule. For regularly scheduled queries, <code dir="ltr" translate="no">       run_time      </code> represents the intended time of execution. For example, if the scheduled query is set to "every 24 hours", the <code dir="ltr" translate="no">       run_time      </code> difference between two consecutive queries is exactly 24 hours, even though the actual execution time may vary slightly.<br />
+<td>In UTC time, per the schedule. For regularly scheduled queries, <code dir="ltr" translate="no">run_time</code> represents the intended time of execution. For example, if the scheduled query is set to "every 24 hours", the <code dir="ltr" translate="no">run_time</code> difference between two consecutive queries is exactly 24 hours, even though the actual execution time may vary slightly.<br />
 <br />
-See <a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs"><code dir="ltr" translate="no">        TransferRun.runTime       </code></a> .</td>
+See <a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs"><code dir="ltr" translate="no">TransferRun.runTime</code></a> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       run_date      </code></td>
+<td><code dir="ltr" translate="no">run_date</code></td>
 <td>Date string</td>
-<td>The date of the <code dir="ltr" translate="no">       run_time      </code> parameter in the following format: <code dir="ltr" translate="no">       %Y-%m-%d      </code> ; for example, <code dir="ltr" translate="no">       2018-01-01      </code> . This format is compatible with ingestion-time partitioned tables.</td>
+<td>The date of the <code dir="ltr" translate="no">run_time</code> parameter in the following format: <code dir="ltr" translate="no">%Y-%m-%d</code> ; for example, <code dir="ltr" translate="no">2018-01-01</code> . This format is compatible with ingestion-time partitioned tables.</td>
 </tr>
 </tbody>
 </table>
@@ -159,8 +159,8 @@ Scheduled queries support runtime parameters in the destination table name with 
 
 The templating syntax supports basic string templating and time offsetting. Parameters are referenced in the following formats:
 
-  - `  {run_date}  `
-  - `  {run_time[+\-offset]|"time_format"}  `
+  - `{run_date}`
+  - `{run_time[+\-offset]|"time_format"}`
 
 <table>
 <colgroup>
@@ -175,18 +175,18 @@ The templating syntax supports basic string templating and time offsetting. Para
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       run_date      </code></td>
-<td>This parameter is replaced by the date in format <code dir="ltr" translate="no">       YYYYMMDD      </code> .</td>
+<td><code dir="ltr" translate="no">run_date</code></td>
+<td>This parameter is replaced by the date in format <code dir="ltr" translate="no">YYYYMMDD</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       run_time      </code></td>
+<td><code dir="ltr" translate="no">run_time</code></td>
 <td>This parameter supports the following properties:
 <p><br />
-<code dir="ltr" translate="no">        offset       </code><br />
+<code dir="ltr" translate="no">offset</code><br />
 Time offset expressed in hours (h), minutes (m), and seconds (s) in that order.<br />
 Days (d) are not supported.<br />
-Decimals are allowed, for example: <code dir="ltr" translate="no">        1.5h       </code> .</p>
-<p><code dir="ltr" translate="no">        time_format       </code><br />
+Decimals are allowed, for example: <code dir="ltr" translate="no">1.5h</code> .</p>
+<p><code dir="ltr" translate="no">time_format</code><br />
 A formatting string. The most common formatting parameters are years (%Y), months (%m), and days (%d).<br />
 For partitioned tables, YYYYMMDD is the required suffix - this is equivalent to "%Y%m%d".<br />
 <br />
@@ -198,8 +198,8 @@ Read more about <a href="https://docs.cloud.google.com/bigquery/docs/reference/s
 **Usage notes:**
 
   - No whitespace is allowed between run\_time, offset, and time format.
-  - To include literal curly braces in the string, you can escape them as `  '\{' and '\}'  ` .
-  - To include literal quotes or a vertical bar in the time\_format, such as `  "YYYY|MM|DD"  ` , you can escape them in the format string as: `  '\"'  ` or `  '\|'  ` .
+  - To include literal curly braces in the string, you can escape them as `'\{' and '\}'` .
+  - To include literal quotes or a vertical bar in the time\_format, such as `"YYYY|MM|DD"` , you can escape them in the format string as: `'\"'` or `'\|'` .
 
 #### Parameter templating examples
 
@@ -221,40 +221,40 @@ These examples demonstrate specifying destination table names with different tim
 <tbody>
 <tr class="odd">
 <td>2018-02-15 00:00:00</td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
+<td><code dir="ltr" translate="no">mytable</code></td>
+<td><code dir="ltr" translate="no">mytable</code></td>
 </tr>
 <tr class="even">
 <td>2018-02-15 00:00:00</td>
-<td><code dir="ltr" translate="no">       mytable_{               run_time|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       mytable_20180215      </code></td>
+<td><code dir="ltr" translate="no">mytable_{         run_time|"%Y%m%d"        }</code></td>
+<td><code dir="ltr" translate="no">mytable_20180215</code></td>
 </tr>
 <tr class="odd">
 <td>2018-02-15 00:00:00</td>
-<td><code dir="ltr" translate="no">       mytable_{               run_time+25h|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       mytable_20180216      </code></td>
+<td><code dir="ltr" translate="no">mytable_{         run_time+25h|"%Y%m%d"        }</code></td>
+<td><code dir="ltr" translate="no">mytable_20180216</code></td>
 </tr>
 <tr class="even">
 <td>2018-02-15 00:00:00</td>
-<td><code dir="ltr" translate="no">       mytable_{               run_time-1h|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       mytable_20180214      </code></td>
+<td><code dir="ltr" translate="no">mytable_{         run_time-1h|"%Y%m%d"        }</code></td>
+<td><code dir="ltr" translate="no">mytable_20180214</code></td>
 </tr>
 <tr class="odd">
 <td>2018-02-15 00:00:00</td>
-<td><code dir="ltr" translate="no">       mytable_{               run_time+1.5h|"%Y%m%d%H"              }      </code><br />
+<td><code dir="ltr" translate="no">mytable_{         run_time+1.5h|"%Y%m%d%H"        }</code><br />
 or<br />
-<code dir="ltr" translate="no">       mytable_{               run_time+90m|"%Y%m%d%H"              }      </code></td>
-<td><code dir="ltr" translate="no">       mytable_2018021501      </code></td>
+<code dir="ltr" translate="no">mytable_{         run_time+90m|"%Y%m%d%H"        }</code></td>
+<td><code dir="ltr" translate="no">mytable_2018021501</code></td>
 </tr>
 <tr class="even">
 <td>2018-02-15 00:00:00</td>
-<td><code dir="ltr" translate="no">       {               run_time+97s|"%Y%m%d"              }_mytable_{               run_time+97s|"%H%M%S"              }      </code></td>
-<td><code dir="ltr" translate="no">       20180215_mytable_000137      </code></td>
+<td><code dir="ltr" translate="no">{         run_time+97s|"%Y%m%d"        }_mytable_{         run_time+97s|"%H%M%S"        }</code></td>
+<td><code dir="ltr" translate="no">20180215_mytable_000137</code></td>
 </tr>
 </tbody>
 </table>
 
-**Note:** When you use date or time parameters to create tables with names ending in a date format such as `  YYYYMMDD  ` , BigQuery [groups these tables together](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `  mytable_(1)  ` , which represents the collection of sharded tables.
+**Note:** When you use date or time parameters to create tables with names ending in a date format such as `YYYYMMDD` , BigQuery [groups these tables together](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `mytable_(1)` , which represents the collection of sharded tables.
 
 ### Using a service account
 
@@ -282,7 +282,7 @@ You can also use [project default keys](https://docs.cloud.google.com/bigquery/d
 
 **Tip:** You can also use the [**Pipelines & Connections** page](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) to set up a scheduled query. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
-For a description of the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . For details about schedule syntax, see [Resource: `  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
+For a description of the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . For details about schedule syntax, see [Resource: `TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
 
 ### Console
 
@@ -300,11 +300,11 @@ For a description of the schedule syntax, see [Formatting the schedule](https://
 
 4.  On the **New scheduled query** pane:
     
-      - For **Name for the scheduled query** , enter a name such as `  My scheduled query  ` . The scheduled query name can be any value that you can identify later if you need to modify the query.
+      - For **Name for the scheduled query** , enter a name such as `My scheduled query` . The scheduled query name can be any value that you can identify later if you need to modify the query.
     
       - Optional: By default, the query is scheduled to run **Daily** . You can change the default schedule by selecting an option from the **Repeats** drop-down menu:
         
-          - To specify a custom frequency, select **Custom** , then enter a Cron-like time specification in the **Custom schedule** field— for example, `  every mon 23:30  ` , `  every 6 hours  ` , or `  every hour on mon,tue,wed,thu,fri  ` . For details about valid schedules including custom intervals, see the `  schedule  ` field under [Resource: `  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
+          - To specify a custom frequency, select **Custom** , then enter a Cron-like time specification in the **Custom schedule** field— for example, `every mon 23:30` , `every 6 hours` , or `every hour on mon,tue,wed,thu,fri` . For details about valid schedules including custom intervals, see the `schedule` field under [Resource: `TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
             
             ![Formatting a custom scheduled query.](https://docs.cloud.google.com/static/bigquery/images/custom-scheduled-query.png)
             
@@ -312,13 +312,13 @@ For a description of the schedule syntax, see [Formatting the schedule](https://
         
           - To change the start time, select the **Start at set time** option, enter the selected start date and time.
             
-            **Note:** If the specified start time is later than the time in the schedule, then the first run of the query will be in the next iteration of the cycle. For example, a query created at `  2022-06-05 23:50  ` with schedule `  daily 00:00  ` and start time `  2022-06-06 10:00  ` won't run until `  2022-06-07 00:00  ` .
+            **Note:** If the specified start time is later than the time in the schedule, then the first run of the query will be in the next iteration of the cycle. For example, a query created at `2022-06-05 23:50` with schedule `daily 00:00` and start time `2022-06-06 10:00` won't run until `2022-06-07 00:00` .
         
           - To specify an end time, select the **Schedule end time** option, enter the selected end date and time.
         
           - To save the query without a schedule, so you can run it on demand later, select **On-demand** in the **Repeats** menu.
 
-5.  For a GoogleSQL `  SELECT  ` query, select the **Set a destination table for query results** option and provide the following information about the destination dataset.
+5.  For a GoogleSQL `SELECT` query, select the **Set a destination table for query results** option and provide the following information about the destination dataset.
     
       - For **Dataset name** , choose the appropriate destination dataset.
     
@@ -346,7 +346,7 @@ For a description of the schedule syntax, see [Formatting the schedule](https://
     
       - Optional: Check [**Send email notifications**](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) to allow email notifications of transfer run failures.
     
-      - Optional: For **Pub/Sub topic** , enter your Pub/Sub [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name, for example: `  projects/myproject/topics/mytopic  ` .
+      - Optional: For **Pub/Sub topic** , enter your Pub/Sub [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name, for example: `projects/myproject/topics/mytopic` .
         
         ![New scheduled query DDL and DML.](https://docs.cloud.google.com/static/bigquery/images/new-scheduled-query-console-DDL.png)
 
@@ -356,9 +356,9 @@ For a description of the schedule syntax, see [Formatting the schedule](https://
 
 There are two ways to schedule a query by using the bq command-line tool. **Option 2** lets you schedule the query with more options.
 
-**Option 1:** Use the **`  bq query  `** command.
+**Option 1:** Use the **`bq query`** command.
 
-To create a scheduled query, add the options `  destination_table  ` (or `  target_dataset  ` ), `  --schedule  ` , and `  --display_name  ` to your `  bq query  ` command.
+To create a scheduled query, add the options `destination_table` (or `target_dataset` ), `--schedule` , and `--display_name` to your `bq query` command.
 
 ``` notranslate
 bq query \
@@ -371,27 +371,27 @@ Replace the following:
 
   - `  name  ` . The display name for the scheduled query. The display name can be any value that you can identify later if you need to modify the query.
   - `  table  ` . The destination table for the query results.
-      - `  --target_dataset  ` is an alternative way to name the target dataset for the query results, when used with DDL and DML queries.
-      - Use either `  --destination_table  ` or `  --target_dataset  ` , but not both.
-  - `  interval  ` . When used with `  bq query  ` , makes a query a recurring scheduled query. A schedule for how often the query should run is required. For details about valid schedules including custom intervals, see the `  schedule  ` field under [Resource: `  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) . Examples:
-      - `  --schedule='every 24 hours'  `
-      - `  --schedule='every 3 hours'  `
-      - `  --schedule='every monday 09:00'  `
-      - `  --schedule='1st sunday of sep,oct,nov 00:00'  `
+      - `--target_dataset` is an alternative way to name the target dataset for the query results, when used with DDL and DML queries.
+      - Use either `--destination_table` or `--target_dataset` , but not both.
+  - `  interval  ` . When used with `bq query` , makes a query a recurring scheduled query. A schedule for how often the query should run is required. For details about valid schedules including custom intervals, see the `schedule` field under [Resource: `TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) . Examples:
+      - `--schedule='every 24 hours'`
+      - `--schedule='every 3 hours'`
+      - `--schedule='every monday 09:00'`
+      - `--schedule='1st sunday of sep,oct,nov 00:00'`
 
 Optional flags:
 
-  - `  --project_id  ` is your project ID. If `  --project_id  ` isn't specified, the default project is used.
+  - `--project_id` is your project ID. If `--project_id` isn't specified, the default project is used.
 
-  - `  --replace  ` overwrites the destination table with the query results after every run of the scheduled query. Any existing data is erased. For non-partitioned tables, the schema is also erased.
+  - `--replace` overwrites the destination table with the query results after every run of the scheduled query. Any existing data is erased. For non-partitioned tables, the schema is also erased.
 
-  - `  --append_table  ` appends results to the destination table.
+  - `--append_table` appends results to the destination table.
 
-  - For DDL and DML queries, you can also supply the `  --location  ` flag to specify a particular region for processing. If `  --location  ` isn't specified, the nearest Google Cloud location is used.
+  - For DDL and DML queries, you can also supply the `--location` flag to specify a particular region for processing. If `--location` isn't specified, the nearest Google Cloud location is used.
 
 If both \`--replace\` and \`--append\_table\` aren't specified when scheduling the query, no write preference is set. Depending on the query, an error in subsequent scheduled runs might result.
 
-For example, the following command creates a scheduled query named `  My Scheduled Query  ` using the query `  SELECT 1 from mydataset.test  ` . The destination table is `  mytable  ` in the dataset `  mydataset  ` . The scheduled query is created in the default project:
+For example, the following command creates a scheduled query named `My Scheduled Query` using the query `SELECT 1 from mydataset.test` . The destination table is `mytable` in the dataset `mydataset` . The scheduled query is created in the default project:
 
 ``` 
     bq query \
@@ -407,31 +407,31 @@ For example, the following command creates a scheduled query named `  My Schedul
 ```
 
   
-**Option 2:** Use the **`  bq mk  `** command.
+**Option 2:** Use the **`bq mk`** command.
 
 Scheduled queries are a kind of transfer. To schedule a query, you can use the bq command-line tool to make a transfer configuration.
 
 Queries must be in StandardSQL dialect to be scheduled.
 
-Enter the `  bq mk  ` command and supply the following required flags:
+Enter the `bq mk` command and supply the following required flags:
 
-  - `  --transfer_config  `
-  - `  --data_source  `
-  - `  --target_dataset  ` (optional for DDL and DML queries)
-  - `  --display_name  `
-  - `  --params  `
+  - `--transfer_config`
+  - `--data_source`
+  - `--target_dataset` (optional for DDL and DML queries)
+  - `--display_name`
+  - `--params`
 
 Optional flags:
 
-  - `  --project_id  ` is your project ID. If `  --project_id  ` isn't specified, the default project is used.
+  - `--project_id` is your project ID. If `--project_id` isn't specified, the default project is used.
 
-  - `  --schedule  ` is how often you want the query to run. If `  --schedule  ` isn't specified, the default is 'every 24 hours' based on creation time.
+  - `--schedule` is how often you want the query to run. If `--schedule` isn't specified, the default is 'every 24 hours' based on creation time.
 
-  - For DDL and DML queries, you can also supply the `  --location  ` flag to specify a particular region for processing. If `  --location  ` isn't specified, the nearest Google Cloud location is used.
+  - For DDL and DML queries, you can also supply the `--location` flag to specify a particular region for processing. If `--location` isn't specified, the nearest Google Cloud location is used.
 
-  - `  --service_account_name  ` is for authenticating your scheduled query with a service account instead of your individual user account.
+  - `--service_account_name` is for authenticating your scheduled query with a service account instead of your individual user account.
 
-  - `  --destination_kms_key  ` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the key if you use a customer-managed encryption key (CMEK) for this transfer. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#CMEK) .
+  - `--destination_kms_key` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the key if you use a customer-managed encryption key (CMEK) for this transfer. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#CMEK) .
 
 <!-- end list -->
 
@@ -449,21 +449,21 @@ Replace the following:
   - `  dataset  ` . The target dataset for the transfer configuration.
       - This parameter is optional for DDL and DML queries. It is required for all other queries.
   - `  name  ` . The display name for the transfer configuration. The display name can be any value that you can identify later if you need to modify the query.
-  - `  parameters  ` . Contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
-      - For a scheduled query, you must supply the `  query  ` parameter.
-      - The `  destination_table_name_template  ` parameter is the name of your destination table.
+  - `  parameters  ` . Contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` .
+      - For a scheduled query, you must supply the `query` parameter.
+      - The `destination_table_name_template` parameter is the name of your destination table.
           - This parameter is optional for DDL and DML queries. It is required for all other queries.
-      - For the `  write_disposition  ` parameter, you can choose `  WRITE_TRUNCATE  ` to truncate (overwrite) the destination table or `  WRITE_APPEND  ` to append the query results to the destination table.
+      - For the `write_disposition` parameter, you can choose `WRITE_TRUNCATE` to truncate (overwrite) the destination table or `WRITE_APPEND` to append the query results to the destination table.
           - This parameter is optional for DDL and DML queries. It is required for all other queries.
-  - `  data_source  ` . The data source: `  scheduled_query  ` .
-  - Optional: The `  --service_account_name  ` flag is for authenticating with a service account instead of an individual user account.
-  - Optional: The `  --destination_kms_key  ` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key—for example, `  projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name  ` .
+  - `  data_source  ` . The data source: `scheduled_query` .
+  - Optional: The `--service_account_name` flag is for authenticating with a service account instead of an individual user account.
+  - Optional: The `--destination_kms_key` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key—for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` .
 
-**Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `  destination_table_name_template  ` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `  partitioning_field  ` parameter.
+**Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `destination_table_name_template` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `partitioning_field` parameter.
 
 **Note:** You cannot configure notifications using the command-line tool.
 
-For example, the following command creates a scheduled query transfer configuration named `  My Scheduled Query  ` using the query `  SELECT 1 from mydataset.test  ` . The destination table `  mytable  ` is truncated for every write, and the target dataset is `  mydataset  ` . The scheduled query is created in the default project, and authenticates as a service account:
+For example, the following command creates a scheduled query transfer configuration named `My Scheduled Query` using the query `SELECT 1 from mydataset.test` . The destination table `mytable` is truncated for every write, and the target dataset is `mydataset` . The scheduled query is created in the default project, and authenticates as a service account:
 
     bq mk \
     --transfer_config \
@@ -475,13 +475,13 @@ For example, the following command creates a scheduled query transfer configurat
 
 The first time you run the command, you receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions in the message and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -730,9 +730,9 @@ To view the status of your scheduled queries, in the navigation menu, click **Sc
 
 Scheduled queries are a kind of transfer. To show the details of a scheduled query, you can first use the bq command-line tool to list your transfer configurations.
 
-Enter the `  bq ls  ` command and supply the transfer flag `  --transfer_config  ` . The following flags are also required:
+Enter the `bq ls` command and supply the transfer flag `--transfer_config` . The following flags are also required:
 
-  - `  --transfer_location  `
+  - `--transfer_location`
 
 For example:
 
@@ -740,7 +740,7 @@ For example:
     --transfer_config \
     --transfer_location=us
 
-To show the details of a single scheduled query, enter the `  bq show  ` command and supply the `  transfer_path  ` for that scheduled query or transfer config.
+To show the details of a single scheduled query, enter the `bq show` command and supply the `  transfer_path  ` for that scheduled query or transfer config.
 
 For example:
 
@@ -750,7 +750,7 @@ For example:
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.list  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -852,23 +852,23 @@ To update a scheduled query, follow these steps:
 
 Scheduled queries are a kind of transfer. To update scheduled query, you can use the bq command-line tool to make a transfer configuration.
 
-Enter the `  bq update  ` command with the required `  --transfer_config  ` flag.
+Enter the `bq update` command with the required `--transfer_config` flag.
 
 Optional flags:
 
-  - `  --project_id  ` is your project ID. If `  --project_id  ` isn't specified, the default project is used.
+  - `--project_id` is your project ID. If `--project_id` isn't specified, the default project is used.
 
-  - `  --schedule  ` is how often you want the query to run. If `  --schedule  ` isn't specified, the default is 'every 24 hours' based on creation time.
+  - `--schedule` is how often you want the query to run. If `--schedule` isn't specified, the default is 'every 24 hours' based on creation time.
 
-  - `  --service_account_name  ` only takes effect if `  --update_credentials  ` is also set. For more information, see [Update scheduled query credentials](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#update_scheduled_query_credentials) .
+  - `--service_account_name` only takes effect if `--update_credentials` is also set. For more information, see [Update scheduled query credentials](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#update_scheduled_query_credentials) .
 
-  - `  --target_dataset  ` (optional for DDL and DML queries) is an alternative way to name the target dataset for the query results, when used with DDL and DML queries.
+  - `--target_dataset` (optional for DDL and DML queries) is an alternative way to name the target dataset for the query results, when used with DDL and DML queries.
 
-  - `  --display_name  ` is the name for the scheduled query.
+  - `--display_name` is the name for the scheduled query.
 
-  - `  --params  ` the parameters for the created transfer configuration in JSON format. For example: --params='{"param":"param\_value"}'.
+  - `--params` the parameters for the created transfer configuration in JSON format. For example: --params='{"param":"param\_value"}'.
 
-  - `  --destination_kms_key  ` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key if you use a customer-managed encryption key (CMEK) for this transfer. For information about how customer-managed encryption keys (CMEK) works with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#CMEK) .
+  - `--destination_kms_key` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key if you use a customer-managed encryption key (CMEK) for this transfer. For information about how customer-managed encryption keys (CMEK) works with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#CMEK) .
 
 <!-- end list -->
 
@@ -885,18 +885,18 @@ Replace the following:
 
   - `  dataset  ` . The target dataset for the transfer configuration. This parameter is optional for DDL and DML queries. It is required for all other queries.
   - `  name  ` . The display name for the transfer configuration. The display name can be any value that you can identify later if you need to modify the query.
-  - `  parameters  ` . Contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
-      - For a scheduled query, you must supply the `  query  ` parameter.
-      - The `  destination_table_name_template  ` parameter is the name of your destination table. This parameter is optional for DDL and DML queries. It is required for all other queries.
-      - For the `  write_disposition  ` parameter, you can choose `  WRITE_TRUNCATE  ` to truncate (overwrite) the destination table or `  WRITE_APPEND  ` to append the query results to the destination table. This parameter is optional for DDL and DML queries. It is required for all other queries.
-  - Optional: The `  --destination_kms_key  ` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key—for example, `  projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name  ` .
-  - `  RESOURCE_NAME  ` : The transfer's resource name (also referred to as the transfer configuration). If you don't know the transfer's resource name, find the resource name with: [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
+  - `  parameters  ` . Contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` .
+      - For a scheduled query, you must supply the `query` parameter.
+      - The `destination_table_name_template` parameter is the name of your destination table. This parameter is optional for DDL and DML queries. It is required for all other queries.
+      - For the `write_disposition` parameter, you can choose `WRITE_TRUNCATE` to truncate (overwrite) the destination table or `WRITE_APPEND` to append the query results to the destination table. This parameter is optional for DDL and DML queries. It is required for all other queries.
+  - Optional: The `--destination_kms_key` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key—for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` .
+  - `  RESOURCE_NAME  ` : The transfer's resource name (also referred to as the transfer configuration). If you don't know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
 
-**Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `  destination_table_name_template  ` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `  partitioning_field  ` parameter.
+**Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `destination_table_name_template` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `partitioning_field` parameter.
 
 **Note:** You cannot configure notifications using the command-line tool.
 
-For example, the following command updates a scheduled query transfer configuration named `  My Scheduled Query  ` using the query `  SELECT 1 from mydataset.test  ` . The destination table `  mytable  ` is truncated for every write, and the target dataset is `  mydataset  ` :
+For example, the following command updates a scheduled query transfer configuration named `My Scheduled Query` using the query `SELECT 1 from mydataset.test` . The destination table `mytable` is truncated for every write, and the target dataset is `mydataset` :
 
     bq update \
     --target_dataset=mydataset \
@@ -907,7 +907,7 @@ For example, the following command updates a scheduled query transfer configurat
 
 ### API
 
-Use the [`  projects.transferConfigs.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch) method and supply the transfer's Resource Name using the `  transferConfig.name  ` parameter. If you don't know the transfer's Resource Name, use the [`  bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#viewing_a_scheduled_query) command to list all transfers or call the [`  projects.locations.transferConfigs.list  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) method and supply the project ID using the `  parent  ` parameter.
+Use the [`projects.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch) method and supply the transfer's Resource Name using the `transferConfig.name` parameter. If you don't know the transfer's Resource Name, use the [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#viewing_a_scheduled_query) command to list all transfers or call the [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list) method and supply the project ID using the `parent` parameter.
 
 ### Java
 
@@ -1011,7 +1011,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 If you try to update a scheduled query you don't own, the update might fail with the following error message:
 
-`  Cannot modify restricted parameters without taking ownership of the transfer configuration.  `
+`Cannot modify restricted parameters without taking ownership of the transfer configuration.`
 
 The owner of the scheduled query is the user associated with the scheduled query or the user who has access to the service account associated with the scheduled query. The associated user can be seen in the configuration details of the scheduled query. For information on how to update the scheduled query to take ownership, see [Update scheduled query credentials](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#update_scheduled_query_credentials) . To grant users access to a service account, you must have the [Service Account user role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) .
 
@@ -1033,13 +1033,13 @@ Some other situations that could require updating credentials include the follow
 
   - You receive an **INVALID\_USER** error when you attempt to schedule the query:
     
-    `  Error code 5 : Authentication failure: User Id not found. Error code: INVALID_USERID  `
+    `Error code 5 : Authentication failure: User Id not found. Error code: INVALID_USERID`
 
   - You receive the following restricted parameters error when you attempt to update the query:
     
-    `  Cannot modify restricted parameters without taking ownership of the transfer configuration.  `
+    `Cannot modify restricted parameters without taking ownership of the transfer configuration.`
 
-**Note:** If you're not the owner of the scheduled query, you must have the `  bigquery.transfers.update  ` permission on your Google Cloud project to update the scheduled query credentials. For more information, see [Required permissions](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#required_permissions) .
+**Note:** If you're not the owner of the scheduled query, you must have the `bigquery.transfers.update` permission on your Google Cloud project to update the scheduled query credentials. For more information, see [Required permissions](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#required_permissions) .
 
 ### Console
 
@@ -1059,13 +1059,13 @@ To *refresh the existing credentials* on a scheduled query:
 
 Scheduled queries are a kind of transfer. To update the credentials of a scheduled query, you can use the bq command-line tool to update the transfer configuration.
 
-Enter the `  bq update  ` command and supply the transfer flag `  --transfer_config  ` . The following flags are also required:
+Enter the `bq update` command and supply the transfer flag `--transfer_config` . The following flags are also required:
 
-  - `  --update_credentials  `
+  - `--update_credentials`
 
 Optional flag:
 
-  - `  --service_account_name  ` is for authenticating your scheduled query with a service account instead of your individual user account.
+  - `--service_account_name` is for authenticating your scheduled query with a service account instead of your individual user account.
 
 For example, the following command updates a scheduled query transfer configuration to authenticate as a service account:
 
@@ -1147,9 +1147,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Set up a manual run on historical dates
 
-In addition to scheduling a query to run in the future, you can also trigger immediate runs manually. Triggering an immediate run would be necessary if your query uses the `  run_date  ` parameter, and there were issues during a prior run.
+In addition to scheduling a query to run in the future, you can also trigger immediate runs manually. Triggering an immediate run would be necessary if your query uses the `run_date` parameter, and there were issues during a prior run.
 
-For example, every day at 09:00 you query a source table for rows that match the current date. However, you find that data wasn't added to the source table for the last three days. In this situation, you can set the query to run on historical data within a date range that you specify. Your query runs using combinations of `  run_date  ` and `  run_time  ` parameters that correspond to the dates you configured in your scheduled query.
+For example, every day at 09:00 you query a source table for rows that match the current date. However, you find that data wasn't added to the source table for the last three days. In this situation, you can set the query to run on historical data within a date range that you specify. Your query runs using combinations of `run_date` and `run_time` parameters that correspond to the dates you configured in your scheduled query.
 
 After [setting up a scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#set_up_scheduled_queries) , here's how you can run the query by using a historical date range:
 
@@ -1167,12 +1167,12 @@ The chosen runtimes are all within your selected range, including the first date
 
 **Example 1**
 
-Your scheduled query is set to run `  every day 09:00  ` Pacific Time. You're missing data from January 1, January 2, and January 3. Choose the following historic date range:
+Your scheduled query is set to run `every day 09:00` Pacific Time. You're missing data from January 1, January 2, and January 3. Choose the following historic date range:
 
-`  Start Time = 1/1/19  `  
-`  End Time = 1/4/19  `
+`Start Time = 1/1/19`  
+`End Time = 1/4/19`
 
-Your query runs using `  run_date  ` and `  run_time  ` parameters that correspond to the following times:
+Your query runs using `run_date` and `run_time` parameters that correspond to the following times:
 
   - 1/1/19 09:00 Pacific Time
   - 1/2/19 09:00 Pacific Time
@@ -1180,12 +1180,12 @@ Your query runs using `  run_date  ` and `  run_time  ` parameters that correspo
 
 **Example 2**
 
-Your scheduled query is set to run `  every day 23:00  ` Pacific Time. You're missing data from January 1, January 2, and January 3. Choose the following historic date ranges (later dates are chosen because UTC has a different date at 23:00 Pacific Time):
+Your scheduled query is set to run `every day 23:00` Pacific Time. You're missing data from January 1, January 2, and January 3. Choose the following historic date ranges (later dates are chosen because UTC has a different date at 23:00 Pacific Time):
 
-`  Start Time = 1/2/19  `  
-`  End Time = 1/5/19  `
+`Start Time = 1/2/19`  
+`End Time = 1/5/19`
 
-Your query runs using `  run_date  ` and `  run_time  ` parameters that correspond to the following times:
+Your query runs using `run_date` and `run_time` parameters that correspond to the following times:
 
   - 1/2/19 06:00 UTC, or 1/1/2019 23:00 Pacific Time
   - 1/3/19 06:00 UTC, or 1/2/2019 23:00 Pacific Time
@@ -1197,10 +1197,10 @@ After setting up manual runs, refresh the page to see them in the list of runs.
 
 To manually run the query on a historical date range:
 
-Enter the `  bq mk  ` command and supply the transfer run flag `  --transfer_run  ` . The following flags are also required:
+Enter the `bq mk` command and supply the transfer run flag `--transfer_run` . The following flags are also required:
 
-  - `  --start_time  `
-  - `  --end_time  `
+  - `--start_time`
+  - `--end_time`
 
 <!-- end list -->
 
@@ -1219,7 +1219,7 @@ Replace the following:
       - 2017-05-25T00:00:00+00:00
   - `  resource_name  ` . The scheduled query's (or transfer's) Resource Name. The Resource Name is also known as the transfer configuration.
 
-For example, the following command schedules a backfill for scheduled query resource (or transfer configuration): `  projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7  ` .
+For example, the following command schedules a backfill for scheduled query resource (or transfer configuration): `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` .
 
 ``` 
   bq mk \
@@ -1229,7 +1229,7 @@ For example, the following command schedules a backfill for scheduled query reso
   projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7
 ```
 
-For more information, see [`  bq mk --transfer_run  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-run) .
+For more information, see [`bq mk --transfer_run`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-run) .
 
 ### API
 
@@ -1486,122 +1486,122 @@ The following table lists the regions in the Americas where BigQuery is availabl
 
 Columbus, Ohio
 
-`  us-east5  `
+`us-east5`
 
 Dallas
 
-`  us-south1  `
+`us-south1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
-`  us-central1  `
+`us-central1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
-`  us-west4  `
+`us-west4`
 
 Los Angeles
 
-`  us-west2  `
+`us-west2`
 
 Mexico
 
-`  northamerica-south1  `
+`northamerica-south1`
 
 Montréal
 
-`  northamerica-northeast1  `
+`northamerica-northeast1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Northern Virginia
 
-`  us-east4  `
+`us-east4`
 
 Oregon
 
-`  us-west1  `
+`us-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
-`  us-west3  `
+`us-west3`
 
 São Paulo
 
-`  southamerica-east1  `
+`southamerica-east1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Santiago
 
-`  southamerica-west1  `
+`southamerica-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
-`  us-east1  `
+`us-east1`
 
 Toronto
 
-`  northamerica-northeast2  `
+`northamerica-northeast2`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 The following table lists the regions in Asia Pacific where BigQuery is available.
 
-| **Region description** | **Region name**                       | **Details** |
-| ---------------------- | ------------------------------------- | ----------- |
-| Bangkok                | `        asia-southeast3       `      |             |
-| Delhi                  | `        asia-south2       `          |             |
-| Hong Kong              | `        asia-east2       `           |             |
-| Jakarta                | `        asia-southeast2       `      |             |
-| Melbourne              | `        australia-southeast2       ` |             |
-| Mumbai                 | `        asia-south1       `          |             |
-| Osaka                  | `        asia-northeast2       `      |             |
-| Seoul                  | `        asia-northeast3       `      |             |
-| Singapore              | `        asia-southeast1       `      |             |
-| Sydney                 | `        australia-southeast1       ` |             |
-| Taiwan                 | `        asia-east1       `           |             |
-| Tokyo                  | `        asia-northeast1       `      |             |
+| **Region description** | **Region name**        | **Details** |
+| ---------------------- | ---------------------- | ----------- |
+| Bangkok                | `asia-southeast3`      |             |
+| Delhi                  | `asia-south2`          |             |
+| Hong Kong              | `asia-east2`           |             |
+| Jakarta                | `asia-southeast2`      |             |
+| Melbourne              | `australia-southeast2` |             |
+| Mumbai                 | `asia-south1`          |             |
+| Osaka                  | `asia-northeast2`      |             |
+| Seoul                  | `asia-northeast3`      |             |
+| Singapore              | `asia-southeast1`      |             |
+| Sydney                 | `australia-southeast1` |             |
+| Taiwan                 | `asia-east1`           |             |
+| Tokyo                  | `asia-northeast1`      |             |
 
 The following table lists the regions in Europe where BigQuery is available.
 
-| **Region description** | **Region name**                    | **Details**                                                                                                                                                              |
-| ---------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Belgium                | `        europe-west1       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Berlin                 | `        europe-west10       `     |                                                                                                                                                                          |
-| Finland                | `        europe-north1       `     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Frankfurt              | `        europe-west3       `      |                                                                                                                                                                          |
-| London                 | `        europe-west2       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Madrid                 | `        europe-southwest1       ` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Milan                  | `        europe-west8       `      |                                                                                                                                                                          |
-| Netherlands            | `        europe-west4       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Paris                  | `        europe-west9       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Stockholm              | `        europe-north2       `     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Turin                  | `        europe-west12       `     |                                                                                                                                                                          |
-| Warsaw                 | `        europe-central2       `   |                                                                                                                                                                          |
-| Zürich                 | `        europe-west6       `      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| **Region description** | **Region name**     | **Details**                                                                                                                                                              |
+| ---------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Belgium                | `europe-west1`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Berlin                 | `europe-west10`     |                                                                                                                                                                          |
+| Finland                | `europe-north1`     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Frankfurt              | `europe-west3`      |                                                                                                                                                                          |
+| London                 | `europe-west2`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Madrid                 | `europe-southwest1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Milan                  | `europe-west8`      |                                                                                                                                                                          |
+| Netherlands            | `europe-west4`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Paris                  | `europe-west9`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Stockholm              | `europe-north2`     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Turin                  | `europe-west12`     |                                                                                                                                                                          |
+| Warsaw                 | `europe-central2`   |                                                                                                                                                                          |
+| Zürich                 | `europe-west6`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 
 The following table lists the regions in the Middle East where BigQuery is available.
 
-| **Region description** | **Region name**              | **Details** |
-| ---------------------- | ---------------------------- | ----------- |
-| Dammam                 | `        me-central2       ` |             |
-| Doha                   | `        me-central1       ` |             |
-| Tel Aviv               | `        me-west1       `    |             |
+| **Region description** | **Region name** | **Details** |
+| ---------------------- | --------------- | ----------- |
+| Dammam                 | `me-central2`   |             |
+| Doha                   | `me-central1`   |             |
+| Tel Aviv               | `me-west1`      |             |
 
 The following table lists the regions in Africa where BigQuery is available.
 
-| **Region description** | **Region name**                | **Details** |
-| ---------------------- | ------------------------------ | ----------- |
-| Johannesburg           | `        africa-south1       ` |             |
+| **Region description** | **Region name** | **Details** |
+| ---------------------- | --------------- | ----------- |
+| Johannesburg           | `africa-south1` |             |
 
 ### Multi-regions
 
@@ -1609,15 +1609,15 @@ The following table lists the multi-regions where BigQuery is available. When yo
 
 | **Multi-region description**                                                                                                   | **Multi-region name** |
 | ------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
-| Data centers within [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union <sup>1</sup> | `        EU       `   |
-| Data centers in the United States <sup>2</sup>                                                                                 | `        US       `   |
+| Data centers within [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union <sup>1</sup> | `EU`                  |
+| Data centers in the United States <sup>2</sup>                                                                                 | `US`                  |
 
 **Note:** Selecting a multi-region location does not provide cross-region replication or regional redundancy, so there is no increase in dataset availability in the event of a regional outage. Data is stored in a single region within the geographic location.
 
-<sup>1</sup> Data located in the `  EU  ` multi-region is only stored in one of the following locations: `  europe-west1  ` (Belgium) or `  europe-west4  ` (Netherlands). The exact location in which the data is stored and processed is determined automatically by BigQuery.
+<sup>1</sup> Data located in the `EU` multi-region is only stored in one of the following locations: `europe-west1` (Belgium) or `europe-west4` (Netherlands). The exact location in which the data is stored and processed is determined automatically by BigQuery.
 
-<sup>2</sup> Data located in the `  US  ` multi-region is only stored in one of the following locations: `  us-central1  ` (Iowa), `  us-west1  ` (Oregon), or `  us-central2  ` (Oklahoma). The exact location in which the data is stored and processed is determined automatically by BigQuery.
+<sup>2</sup> Data located in the `US` multi-region is only stored in one of the following locations: `us-central1` (Iowa), `us-west1` (Oregon), or `us-central2` (Oklahoma). The exact location in which the data is stored and processed is determined automatically by BigQuery.
 
 ## What's next
 
-  - For an example of a scheduled query that uses a service account and includes the `  @run_date  ` and `  @run_time  ` parameters, see [Creating table snapshots with a scheduled query](https://docs.cloud.google.com/bigquery/docs/table-snapshots-scheduled) .
+  - For an example of a scheduled query that uses a service account and includes the `@run_date` and `@run_time` parameters, see [Creating table snapshots with a scheduled query](https://docs.cloud.google.com/bigquery/docs/table-snapshots-scheduled) .

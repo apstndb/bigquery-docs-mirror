@@ -1,6 +1,6 @@
 A window function, also known as an analytic function, computes values over a group of rows and returns a single result for *each* row. This is different from an aggregate function, which returns a single result for *a group* of rows.
 
-A window function includes an `  OVER  ` clause, which defines a window of rows around the row being evaluated. For each row, the window function result is computed using the selected window of rows as input, possibly doing aggregation.
+A window function includes an `OVER` clause, which defines a window of rows around the row being evaluated. For each row, the window function result is computed using the selected window of rows as input, possibly doing aggregation.
 
 With window functions you can compute moving averages, rank items, calculate cumulative sums, and perform other analyses.
 
@@ -27,39 +27,39 @@ With window functions you can compute moving averages, rank items, calculate cum
 
 A window function computes results over a group of rows. You can use the following syntax to build a window function:
 
-  - `  function_name  ` : The function that performs a window operation.
+  - `function_name` : The function that performs a window operation.
     
-    For example, the numbering function `  RANK()  ` could be used here.
+    For example, the numbering function `RANK()` could be used here.
 
-  - `  argument_list  ` : Arguments that are specific to the function. Some functions have them, some don't.
+  - `argument_list` : Arguments that are specific to the function. Some functions have them, some don't.
 
-  - `  OVER  ` : Keyword required in the window function syntax preceding the [`  OVER  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) .
+  - `OVER` : Keyword required in the window function syntax preceding the [`OVER` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) .
 
-  - [`  over_clause  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) : References a window that defines a group of rows in a table upon which to use a window function.
+  - [`over_clause`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) : References a window that defines a group of rows in a table upon which to use a window function.
 
-  - [`  window_specification  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) : Defines the specifications for the window.
+  - [`window_specification`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) : Defines the specifications for the window.
 
-  - [`  window_frame_clause  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : Defines the window frame for the window.
+  - [`window_frame_clause`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : Defines the window frame for the window.
 
-  - [`  rows_range  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : Defines the physical rows or a logical range for a window frame.
+  - [`rows_range`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : Defines the physical rows or a logical range for a window frame.
 
 **Notes**
 
 A window function can appear as a scalar expression operand in the following places in the query:
 
-  - The `  SELECT  ` list. If the window function appears in the `  SELECT  ` list, its argument list and `  OVER  ` clause can't refer to aliases introduced in the same `  SELECT  ` list.
-  - The `  ORDER BY  ` clause. If the window function appears in the `  ORDER BY  ` clause of the query, its argument list can refer to `  SELECT  ` list aliases.
-  - The `  QUALIFY  ` clause.
+  - The `SELECT` list. If the window function appears in the `SELECT` list, its argument list and `OVER` clause can't refer to aliases introduced in the same `SELECT` list.
+  - The `ORDER BY` clause. If the window function appears in the `ORDER BY` clause of the query, its argument list can refer to `SELECT` list aliases.
+  - The `QUALIFY` clause.
 
-A window function can't refer to another window function in its argument list or its `  OVER  ` clause, even indirectly through an alias.
+A window function can't refer to another window function in its argument list or its `OVER` clause, even indirectly through an alias.
 
-A window function is evaluated after aggregation. For example, the `  GROUP BY  ` clause and non-window aggregate functions are evaluated first. Because aggregate functions are evaluated before window functions, aggregate functions can be used as input operands to window functions.
+A window function is evaluated after aggregation. For example, the `GROUP BY` clause and non-window aggregate functions are evaluated first. Because aggregate functions are evaluated before window functions, aggregate functions can be used as input operands to window functions.
 
 **Returns**
 
 A single result for each row in the input.
 
-### Defining the `     OVER    ` clause
+### Defining the `OVER` clause
 
     function_name ( [ argument_list ] ) OVER over_clause
     
@@ -68,13 +68,13 @@ A single result for each row in the input.
 
 **Description**
 
-The `  OVER  ` clause references a window that defines a group of rows in a table upon which to use a window function. You can provide a [`  named_window  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#ref_named_window) that is [defined in your query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , or you can define the [specifications for a new window](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) .
+The `OVER` clause references a window that defines a group of rows in a table upon which to use a window function. You can provide a [`named_window`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#ref_named_window) that is [defined in your query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , or you can define the [specifications for a new window](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) .
 
 **Notes**
 
 If neither a named window nor window specification is provided, all input rows are included in the window for every row.
 
-**Examples using the `  OVER  ` clause**
+**Examples using the `OVER` clause**
 
 These queries use window specifications:
 
@@ -104,28 +104,28 @@ These queries use a named window:
 
 Defines the specifications for the window.
 
-  - [`  named_window  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#ref_named_window) : The name of an existing window that was defined with a [`  WINDOW  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) .
+  - [`named_window`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#ref_named_window) : The name of an existing window that was defined with a [`WINDOW` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) .
 
-**Important:** If you use a named window, special rules apply to `  PARTITION BY  ` , `  ORDER BY  ` , and `  window_frame_clause  ` . See [Rules for using a named window in the window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#named_window_rules) .
+**Important:** If you use a named window, special rules apply to `PARTITION BY` , `ORDER BY` , and `window_frame_clause` . See [Rules for using a named window in the window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#named_window_rules) .
 
-  - `  PARTITION BY  ` : Breaks up the input rows into separate partitions, over which the window function is independently evaluated.
+  - `PARTITION BY` : Breaks up the input rows into separate partitions, over which the window function is independently evaluated.
     
-      - A `  partition_expression  ` computes a value that determines which partition each row falls into.
-      - Multiple partition expressions are allowed in the `  PARTITION BY  ` clause.
+      - A `partition_expression` computes a value that determines which partition each row falls into.
+      - Multiple partition expressions are allowed in the `PARTITION BY` clause.
       - An expression can't contain floating point types, non-groupable types, constants, or window functions.
       - If this optional clause isn't used, all rows in the input table comprise a single partition.
 
-  - `  ORDER BY  ` : Defines how rows are ordered within a partition.
+  - `ORDER BY` : Defines how rows are ordered within a partition.
     
     This clause is optional in most situations, but is required in some cases for [navigation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions) .
 
-  - [`  window_frame_clause  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : For aggregate analytic functions, defines the window frame within the current partition. The window frame determines what to include in the window. If this clause is used, `  ORDER BY  ` is required except for fully unbounded windows.
+  - [`window_frame_clause`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : For aggregate analytic functions, defines the window frame within the current partition. The window frame determines what to include in the window. If this clause is used, `ORDER BY` is required except for fully unbounded windows.
 
 **Notes**
 
-If neither the `  ORDER BY  ` clause nor window frame clause are present, the window frame includes all rows in that partition.
+If neither the `ORDER BY` clause nor window frame clause are present, the window frame includes all rows in that partition.
 
-For aggregate analytic functions, if the `  ORDER BY  ` clause is present but the window frame clause isn't, the following window frame clause is used by default:
+For aggregate analytic functions, if the `ORDER BY` clause is present but the window frame clause isn't, the following window frame clause is used by default:
 
     RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
 
@@ -147,9 +147,9 @@ If you use a named window in your window specifications, these rules apply:
 
   - The specifications in the named window can be extended with new specifications that you define in the window specification clause.
 
-  - You can't have redundant definitions. If you have an `  ORDER BY  ` clause in the named window and the window specification clause, an error is thrown.
+  - You can't have redundant definitions. If you have an `ORDER BY` clause in the named window and the window specification clause, an error is thrown.
 
-  - The order of clauses matters. `  PARTITION BY  ` must come first, followed by `  ORDER BY  ` and `  window_frame_clause  ` . If you add a named window, its window specifications are processed first.
+  - The order of clauses matters. `PARTITION BY` must come first, followed by `ORDER BY` and `window_frame_clause` . If you add a named window, its window specifications are processed first.
     
         --this works:
         SELECT item, purchases, LAST_VALUE(item)
@@ -163,9 +163,9 @@ If you use a named window in your window specifications, these rules apply:
         FROM Produce
         WINDOW ItemWindow AS (ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
 
-  - A named window and `  PARTITION BY  ` can't appear together in the window specification. If you need `  PARTITION BY  ` , add it to the named window.
+  - A named window and `PARTITION BY` can't appear together in the window specification. If you need `PARTITION BY` , add it to the named window.
 
-  - You can't refer to a named window in an `  ORDER BY  ` clause, an outer query, or any subquery.
+  - You can't refer to a named window in an `ORDER BY` clause, an outer query, or any subquery.
 
 **Examples using the window specification**
 
@@ -239,41 +239,41 @@ These queries define how rows are ordered in a partition:
 
 The window frame clause defines the window frame around the current row within a partition, over which the window function is evaluated. Only aggregate analytic functions can use a window frame clause.
 
-  - `  rows_range  ` : A clause that defines a window frame with physical rows or a logical range.
+  - `rows_range` : A clause that defines a window frame with physical rows or a logical range.
     
-      - `  ROWS  ` : Computes the window frame based on physical offsets from the current row. For example, you could include two rows before and after the current row.
-      - `  RANGE  ` : Computes the window frame based on a logical range of rows around the current row, based on the current row’s `  ORDER BY  ` key value. The provided range value is added or subtracted to the current row's key value to define a starting or ending range boundary for the window frame. In a range-based window frame, there must be exactly one expression in the `  ORDER BY  ` clause, and the expression must have a numeric type.
+      - `ROWS` : Computes the window frame based on physical offsets from the current row. For example, you could include two rows before and after the current row.
+      - `RANGE` : Computes the window frame based on a logical range of rows around the current row, based on the current row’s `ORDER BY` key value. The provided range value is added or subtracted to the current row's key value to define a starting or ending range boundary for the window frame. In a range-based window frame, there must be exactly one expression in the `ORDER BY` clause, and the expression must have a numeric type.
     
-    **Tip:** If you want to use a range with a date, use `  ORDER BY  ` with the `  UNIX_DATE()  ` function. If you want to use a range with a timestamp, use the `  UNIX_SECONDS()  ` , `  UNIX_MILLIS()  ` , or `  UNIX_MICROS()  ` function.
+    **Tip:** If you want to use a range with a date, use `ORDER BY` with the `UNIX_DATE()` function. If you want to use a range with a timestamp, use the `UNIX_SECONDS()` , `UNIX_MILLIS()` , or `UNIX_MICROS()` function.
 
-  - `  frame_between  ` : Creates a window frame with a lower and upper boundary. The first boundary represents the lower boundary. The second boundary represents the upper boundary. Only certain boundary combinations can be used, as show in the preceding syntax.
+  - `frame_between` : Creates a window frame with a lower and upper boundary. The first boundary represents the lower boundary. The second boundary represents the upper boundary. Only certain boundary combinations can be used, as show in the preceding syntax.
     
-      - Define the beginning of the window frame with `  unbounded_preceding  ` , `  numeric_preceding  ` , `  numeric_following  ` , or `  current_row  ` .
-          - `  unbounded_preceding  ` : The window frame starts at the beginning of the partition.
-          - `  numeric_preceding  ` or `  numeric_following  ` : The start of the window frame is relative to the current row.
-          - `  current_row  ` : The window frame starts at the current row.
-      - Define the end of the window frame with `  numeric_preceding  ` , `  numeric_following  ` , `  current_row  ` , or `  unbounded_following  ` .
-          - `  numeric_preceding  ` or `  numeric_following  ` : The end of the window frame is relative to the current row.
-          - `  current_row  ` : The window frame ends at the current row.
-          - `  unbounded_following  ` : The window frame ends at the end of the partition.
+      - Define the beginning of the window frame with `unbounded_preceding` , `numeric_preceding` , `numeric_following` , or `current_row` .
+          - `unbounded_preceding` : The window frame starts at the beginning of the partition.
+          - `numeric_preceding` or `numeric_following` : The start of the window frame is relative to the current row.
+          - `current_row` : The window frame starts at the current row.
+      - Define the end of the window frame with `numeric_preceding` , `numeric_following` , `current_row` , or `unbounded_following` .
+          - `numeric_preceding` or `numeric_following` : The end of the window frame is relative to the current row.
+          - `current_row` : The window frame ends at the current row.
+          - `unbounded_following` : The window frame ends at the end of the partition.
 
-  - `  frame_start  ` : Creates a window frame with a lower boundary. The window frame ends at the current row.
+  - `frame_start` : Creates a window frame with a lower boundary. The window frame ends at the current row.
     
-      - `  unbounded_preceding  ` : The window frame starts at the beginning of the partition.
-      - `  numeric_preceding  ` : The start of the window frame is relative to the current row.
-      - `  current_row  ` : The window frame starts at the current row.
+      - `unbounded_preceding` : The window frame starts at the beginning of the partition.
+      - `numeric_preceding` : The start of the window frame is relative to the current row.
+      - `current_row` : The window frame starts at the current row.
 
-  - `  numeric_expression  ` : An expression that represents a numeric type. The numeric expression must be a constant, non-negative integer or parameter.
+  - `numeric_expression` : An expression that represents a numeric type. The numeric expression must be a constant, non-negative integer or parameter.
 
 **Notes**
 
 If a boundary extends beyond the beginning or end of a partition, the window frame will only include rows from within that partition.
 
-You can't use a window frame clause with some [navigation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions) and [numbering functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions) , such as `  RANK()  ` .
+You can't use a window frame clause with some [navigation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions) and [numbering functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions) , such as `RANK()` .
 
 **Examples using the window frame clause**
 
-These queries compute values with `  ROWS  ` :
+These queries compute values with `ROWS` :
 
   - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
   - [Compute a moving average](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_moving_average)
@@ -281,7 +281,7 @@ These queries compute values with `  ROWS  ` :
   - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
   - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
-These queries compute values with `  RANGE  ` :
+These queries compute values with `RANGE` :
 
   - [Compute the number of items within a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_the_number_of_items_within_a_range)
 
@@ -326,7 +326,7 @@ These queries compute values with the current row as a boundary:
     named_window_expression:
       named_window AS { named_window | ( [ window_specification ] ) }
 
-A named window represents a group of rows in a table upon which to use an window function. A named window is defined in the [`  WINDOW  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , and referenced in a window function's [`  OVER  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) . In an `  OVER  ` clause, a named window can appear either by itself or embedded within a [window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) .
+A named window represents a group of rows in a table upon which to use an window function. A named window is defined in the [`WINDOW` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , and referenced in a window function's [`OVER` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) . In an `OVER` clause, a named window can appear either by itself or embedded within a [window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) .
 
 **Examples**
 
@@ -335,7 +335,7 @@ A named window represents a group of rows in a table upon which to use an window
 
 ## Filtering results with the QUALIFY clause
 
-The `  QUALIFY  ` clause can be used to filter the results of a window function. For more information and examples, see the [`  QUALIFY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) .
+The `QUALIFY` clause can be used to filter the results of a window function. For more information and examples, see the [`QUALIFY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) .
 
 ## Window function examples
 
@@ -343,11 +343,11 @@ In these examples, the highlighted item is the current row. The **bolded items**
 
 ### Common tables used in examples
 
-The following tables are used in the subsequent aggregate analytic query examples: [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) , [`  Employees  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#employees_table) , and [`  Farm  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#farm_table) .
+The following tables are used in the subsequent aggregate analytic query examples: [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) , [`Employees`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#employees_table) , and [`Farm`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#farm_table) .
 
 #### Produce table
 
-Some examples reference a table called `  Produce  ` :
+Some examples reference a table called `Produce` :
 
     WITH Produce AS
      (SELECT 'kale' as item, 23 as purchases, 'vegetable' as category
@@ -371,7 +371,7 @@ Some examples reference a table called `  Produce  ` :
 
 #### Employees table
 
-Some examples reference a table called `  Employees  ` :
+Some examples reference a table called `Employees` :
 
     WITH Employees AS
      (SELECT 'Isabella' as name, 2 as department, DATE(1997, 09, 28) as start_date
@@ -395,7 +395,7 @@ Some examples reference a table called `  Employees  ` :
 
 #### Farm table
 
-Some examples reference a table called `  Farm  ` :
+Some examples reference a table called `Farm` :
 
     WITH Farm AS
      (SELECT 'cat' as animal, 23 as population, 'mammal' as category
@@ -419,7 +419,7 @@ Some examples reference a table called `  Farm  ` :
 
 ### Compute a grand total
 
-This computes a grand total for all items in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
+This computes a grand total for all items in the [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
 
   - ( **banana** , **apple** , **leek** , **cabbage** , **lettuce** , **kale** ) = 54 total purchases
   - ( **banana** , **apple** , **leek** , **cabbage** , **lettuce** , **kale** ) = 54 total purchases
@@ -447,7 +447,7 @@ This computes a grand total for all items in the [`  Produce  `](https://docs.cl
 
 ### Compute a subtotal
 
-This computes a subtotal for each category in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
+This computes a subtotal for each category in the [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
 
   - fruit
       - ( **banana** , **apple** ) = 10 total purchases
@@ -481,7 +481,7 @@ This computes a subtotal for each category in the [`  Produce  `](https://docs.c
 
 ### Compute a cumulative sum
 
-This computes a cumulative sum for each category in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The sum is computed with respect to the order defined using the `  ORDER BY  ` clause.
+This computes a cumulative sum for each category in the [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The sum is computed with respect to the order defined using the `ORDER BY` clause.
 
   - fruit
       - ( **banana** , apple) = 2 total purchases
@@ -513,7 +513,7 @@ This computes a cumulative sum for each category in the [`  Produce  `](https://
      | kale      | 23         | vegetable  | 44              |
      +-------------------------------------------------------*/
 
-This does the same thing as the preceding example. You don't have to add `  CURRENT ROW  ` as a boundary unless you would like to for readability.
+This does the same thing as the preceding example. You don't have to add `CURRENT ROW` as a boundary unless you would like to for readability.
 
     SELECT item, purchases, category, SUM(purchases)
       OVER (
@@ -523,7 +523,7 @@ This does the same thing as the preceding example. You don't have to add `  CURR
       ) AS total_purchases
     FROM Produce
 
-In this example, all items in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table are included in the partition. Only preceding rows are analyzed. The analysis starts two rows prior to the current row in the partition.
+In this example, all items in the [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table are included in the partition. Only preceding rows are analyzed. The analysis starts two rows prior to the current row in the partition.
 
   - ( banana , leek, apple, cabbage, lettuce, kale) = NULL
   - (banana, leek , apple, cabbage, lettuce, kale) = NULL
@@ -554,7 +554,7 @@ In this example, all items in the [`  Produce  `](https://docs.cloud.google.com/
 
 ### Compute a moving average
 
-This computes a moving average in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The lower boundary is 1 row before the current row. The upper boundary is 1 row after the current row.
+This computes a moving average in the [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The lower boundary is 1 row before the current row. The upper boundary is 1 row after the current row.
 
   - ( **banana** , **leek** , apple, cabbage, lettuce, kale) = 2 average purchases
   - ( **banana** , **leek** , **apple** , cabbage, lettuce, kale) = 4 average purchases
@@ -585,7 +585,7 @@ This computes a moving average in the [`  Produce  `](https://docs.cloud.google.
 
 ### Compute the number of items within a range
 
-This example gets the number of animals that have a similar population count in the [`  Farm  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#farm_table) table.
+This example gets the number of animals that have a similar population count in the [`Farm`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#farm_table) table.
 
   - ( **goose** , **dog** , **ox** , **goat** , duck, cat) = 4 animals between population range 0-2.
   - ( **goose** , **dog** , **ox** , **goat** , **duck** , cat) = 5 animals between population range 1-3.
@@ -616,7 +616,7 @@ This example gets the number of animals that have a similar population count in 
 
 ### Get the most popular item in each category
 
-This example gets the most popular item in each category. It defines how rows in a window are partitioned and ordered in each partition. The [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table is referenced.
+This example gets the most popular item in each category. It defines how rows in a window are partitioned and ordered in each partition. The [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table is referenced.
 
   - fruit
       - ( **banana** , **apple** ) = apple is most popular
@@ -650,7 +650,7 @@ This example gets the most popular item in each category. It defines how rows in
 
 ### Get the last value in a range
 
-This example gets the most popular item in a specific window frame, using the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The window frame analyzes up to three rows at a time. Take a close look at the `  most_popular  ` column for vegetables. Instead of getting the most popular item in a specific category, it gets the most popular item in a specific range in that category.
+This example gets the most popular item in a specific window frame, using the [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The window frame analyzes up to three rows at a time. Take a close look at the `most_popular` column for vegetables. Instead of getting the most popular item in a specific category, it gets the most popular item in a specific range in that category.
 
   - fruit
       - ( **banana** , **apple** ) = apple is most popular
@@ -682,7 +682,7 @@ This example gets the most popular item in a specific window frame, using the [`
      | kale      | 23         | vegetable  | kale         |
      +----------------------------------------------------*/
 
-This example returns the same results as the preceding example, but it includes a named window called `  ItemWindow  ` . Some of the window specifications are defined directly in the `  OVER  ` clause and some are defined in the named window.
+This example returns the same results as the preceding example, but it includes a named window called `ItemWindow` . Some of the window specifications are defined directly in the `OVER` clause and some are defined in the named window.
 
     SELECT item, purchases, category, LAST_VALUE(item)
       OVER (
@@ -696,7 +696,7 @@ This example returns the same results as the preceding example, but it includes 
 
 ### Compute rank
 
-This example calculates the rank of each employee within their department, based on their start date. The window specification is defined directly in the `  OVER  ` clause. The [`  Employees  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#employees_table) table is referenced.
+This example calculates the rank of each employee within their department, based on their start date. The window specification is defined directly in the `OVER` clause. The [`Employees`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#employees_table) table is referenced.
 
   - department 1
       - ( **Jacob** , **Anthony** , **Andrew** ) = Assign rank 1 to Jacob
@@ -726,7 +726,7 @@ This example calculates the rank of each employee within their department, based
 
 ### Use a named window in a window frame clause
 
-You can define some of your logic in a named window and some of it in a window frame clause. This logic is combined. Here is an example, using the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
+You can define some of your logic in a named window and some of it in a window frame clause. This logic is combined. Here is an example, using the [`Produce`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
 
     SELECT item, purchases, category, LAST_VALUE(item)
       OVER (ItemWindow) AS most_popular

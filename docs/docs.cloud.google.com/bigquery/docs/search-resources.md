@@ -32,10 +32,10 @@ The search results in BigQuery are scoped according to your IAM permissions over
 
 For example, to search for BigQuery datasets, tables, views, and models, you need respective permissions to access those resources. For more information, see [BigQuery permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) . The following list describes the minimum permissions required:
 
-  - To search for a table, you need `  bigquery.tables.get  ` permission for that table.
-  - To search for a dataset, you need `  bigquery.datasets.get  ` permission for that dataset.
+  - To search for a table, you need `bigquery.tables.get` permission for that table.
+  - To search for a dataset, you need `bigquery.datasets.get` permission for that dataset.
 
-The [BigQuery Metadata Viewer role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` ) includes both the permissions `  bigquery.tables.get  ` and `  bigquery.datasets.get  ` , and it lets you search for any BigQuery resource.
+The [BigQuery Metadata Viewer role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` ) includes both the permissions `bigquery.tables.get` and `bigquery.datasets.get` , and it lets you search for any BigQuery resource.
 
 For more information about granting roles, see [Manage access](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -53,11 +53,11 @@ To use search, ensure that you have enabled the Dataplex API. The Dataplex API i
 
 2.  In the search field, enter your query in natural language and then press Enter . The following are some sample queries:
     
-      - `  Show me the datasets that contain taxi information  `
-      - `  Find data on vaccine distribution across different countries  `
-      - `  Get tables with historical temperature data for major world cities  `
-      - `  Search for hurricane tracking and storm activity datasets  `
-      - `  Population data by country  `
+      - `Show me the datasets that contain taxi information`
+      - `Find data on vaccine distribution across different countries`
+      - `Get tables with historical temperature data for major world cities`
+      - `Search for hurricane tracking and storm activity datasets`
+      - `Population data by country`
 
 3.  To filter your search, click **Filters** . The following filters are available:
     
@@ -88,9 +88,9 @@ Alternatively, you can [search for resources by using Gemini Cloud Assist](https
 
 Filters let you narrow down the search results.
 
-When you provide filters in multiple sections, the filters are evaluated using the `  AND  ` logical operator. The search results contain resources that match at least one condition from every selected section. For example, if you select the BigQuery system and the `  dataset  ` resource type, the search results include BigQuery datasets but not Vertex AI datasets.
+When you provide filters in multiple sections, the filters are evaluated using the `AND` logical operator. The search results contain resources that match at least one condition from every selected section. For example, if you select the BigQuery system and the `dataset` resource type, the search results include BigQuery datasets but not Vertex AI datasets.
 
-If you select multiple filters within a single section, the filters are evaluated using the `  OR  ` logical operator. For example, if you select the `  dataset  ` resource type and the `  table  ` resource type, the search results include both datasets and tables.
+If you select multiple filters within a single section, the filters are evaluated using the `OR` logical operator. For example, if you select the `dataset` resource type and the `table` resource type, the search results include both datasets and tables.
 
 ## Search scope
 

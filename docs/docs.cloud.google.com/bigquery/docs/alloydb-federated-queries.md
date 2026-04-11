@@ -8,21 +8,21 @@ BigQuery AlloyDB federation lets BigQuery query data residing in AlloyDB in real
 
   - Ensure that your BigQuery administrator has created an [AlloyDB connection](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#create-alloydb-connection) and [shared](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#share_connections) it with you.
 
-  - To get the permissions that you need to query an AlloyDB instance, ask your administrator to grant you the [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+  - To get the permissions that you need to query an AlloyDB instance, ask your administrator to grant you the [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Query data
 
-To send a federated query to AlloyDB from a GoogleSQL query, use the [`  EXTERNAL_QUERY  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) .
+To send a federated query to AlloyDB from a GoogleSQL query, use the [`EXTERNAL_QUERY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) .
 
-Suppose that you store a customer table in BigQuery, while storing a sales table in AlloyDB, and want to join the two tables in a single query. The following example makes a federated query to an AlloyDB table named `  orders  ` and joins the results with a BigQuery table named `  mydataset.customers  ` .
+Suppose that you store a customer table in BigQuery, while storing a sales table in AlloyDB, and want to join the two tables in a single query. The following example makes a federated query to an AlloyDB table named `orders` and joins the results with a BigQuery table named `mydataset.customers` .
 
 The example query includes 3 parts:
 
-1.  Run the external query `  SELECT customer_id, MIN(order_date) AS first_order_date FROM orders GROUP BY customer_id  ` in the AlloyDB database to get the first order date for each customer through the `  EXTERNAL_QUERY  ` function.
+1.  Run the external query `SELECT customer_id, MIN(order_date) AS first_order_date FROM orders GROUP BY customer_id` in the AlloyDB database to get the first order date for each customer through the `EXTERNAL_QUERY` function.
 
-2.  Join the external query results table with the customers table in BigQuery by `  customer_id  ` .
+2.  Join the external query results table with the customers table in BigQuery by `customer_id` .
 
 3.  Select customer information and first order date in the final result set.
 
@@ -39,7 +39,7 @@ The example query includes 3 parts:
 
 ## View an AlloyDB table schema
 
-You can use the `  EXTERNAL_QUERY  ` function to query `  information_schema  ` tables to access database metadata. For example, you can list all of the tables in the database or view the table schema. For more information, see [PostgreSQL information\_schema tables](https://www.postgresql.org/docs/9.1/information-schema.html) .
+You can use the `EXTERNAL_QUERY` function to query `information_schema` tables to access database metadata. For example, you can list all of the tables in the database or view the table schema. For more information, see [PostgreSQL information\_schema tables](https://www.postgresql.org/docs/9.1/information-schema.html) .
 
     -- List all tables in a database.
     SELECT * FROM EXTERNAL_QUERY("region.connection_id",
@@ -91,9 +91,9 @@ If you are monitoring logs for query usage, the following annotation can help yo
 
 This section describes potential errors you might encounter when sending a federated query to AlloyDB and provides possible troubleshooting resolutions.
 
-**Issue:** Failed to connect to the database server with this error: `  Invalid table-valued function EXTERNAL_QUERY Connect to PostgreSQL server failed: server closed the connection unexpectedly. This probably means the server terminated abnormally before or while processing the request.  `
+**Issue:** Failed to connect to the database server with this error: `Invalid table-valued function EXTERNAL_QUERY Connect to PostgreSQL server failed: server closed the connection unexpectedly. This probably means the server terminated abnormally before or while processing the request.`
 
-**Resolution:** Ensure that you used valid credentials and followed all prerequisites while creating the [connection to AlloyDB](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#create-alloydb-connection) . Check if the service account that is automatically created when a connection to AlloyDB is created has the AlloyDB Client ( `  roles/alloydb.client  ` ) role. For more information, see [Grant access to the service account](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#access-alloydb) .
+**Resolution:** Ensure that you used valid credentials and followed all prerequisites while creating the [connection to AlloyDB](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#create-alloydb-connection) . Check if the service account that is automatically created when a connection to AlloyDB is created has the AlloyDB Client ( `roles/alloydb.client` ) role. For more information, see [Grant access to the service account](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#access-alloydb) .
 
 ## What's next
 

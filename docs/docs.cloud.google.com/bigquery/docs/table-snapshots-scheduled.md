@@ -2,10 +2,10 @@
 
 This document describes how to create monthly snapshots of a table using a [service account](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#using_a_service_account) that runs a scheduled [DDL query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) . The document steps you through the following example:
 
-1.  In the `  PROJECT  ` project, create a service account named `  snapshot-bot  ` .
-2.  Grant the `  snapshot-bot  ` service account the permissions that it needs to take [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of the `  TABLE  ` table, which is located in the `  DATASET  ` dataset, and store the table snapshots in the `  BACKUP  ` dataset.
-3.  Write a query that creates monthly snapshots of the `  TABLE  ` table and places them in the `  BACKUP  ` dataset. Because you can't overwrite an existing table snapshot, the table snapshots must have unique names. To achieve this, the query appends the current date to the table snapshot names; for example, `  TABLE _20220521  ` . The table snapshots expire after 40 days.
-4.  Schedule the `  snapshot-bot  ` service account to run the query on the first day of every month.
+1.  In the `  PROJECT  ` project, create a service account named `snapshot-bot` .
+2.  Grant the `snapshot-bot` service account the permissions that it needs to take [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of the `  TABLE  ` table, which is located in the `  DATASET  ` dataset, and store the table snapshots in the `  BACKUP  ` dataset.
+3.  Write a query that creates monthly snapshots of the `  TABLE  ` table and places them in the `  BACKUP  ` dataset. Because you can't overwrite an existing table snapshot, the table snapshots must have unique names. To achieve this, the query appends the current date to the table snapshot names; for example, `  TABLE _20220521 ` . The table snapshots expire after 40 days.
+4.  Schedule the `snapshot-bot` service account to run the query on the first day of every month.
 
 **Note:** To customize this document to use your own project, dataset, and/or table names in the text and examples, edit these variables: `  PROJECT  ` , `  DATASET  ` , `  BACKUP  ` , `  TABLE  ` .
 
@@ -19,15 +19,15 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 
 To work with a service account, you need the following permissions:
 
-| **Permission**                         | **Resource**                | **Resource type** |
-| -------------------------------------- | --------------------------- | ----------------- |
-| `        iam.serviceAccounts.*       ` | `          PROJECT        ` | Project           |
+| **Permission**          | **Resource**               | **Resource type** |
+| ----------------------- | -------------------------- | ----------------- |
+| `iam.serviceAccounts.*` | `         PROJECT        ` | Project           |
 
 To schedule a query, you need the following permission:
 
-| **Permission**                        | **Resource**                | **Resource type** |
-| ------------------------------------- | --------------------------- | ----------------- |
-| `        bigquery.jobs.create       ` | `          PROJECT        ` | Project           |
+| **Permission**         | **Resource**               | **Resource type** |
+| ---------------------- | -------------------------- | ----------------- |
+| `bigquery.jobs.create` | `         PROJECT        ` | Project           |
 
 ### Roles
 
@@ -50,10 +50,10 @@ The predefined roles that provide the permissions that are required to work with
 <tr class="odd">
 <td>Any of the following:<br />
 <br />
-<code dir="ltr" translate="no">       roles/iam.serviceAccountAdmin      </code><br />
-<code dir="ltr" translate="no">       roles/editor      </code><br />
-<code dir="ltr" translate="no">       roles/owner      </code></td>
-<td><code dir="ltr" translate="no">         PROJECT       </code></td>
+<code dir="ltr" translate="no">roles/iam.serviceAccountAdmin</code><br />
+<code dir="ltr" translate="no">roles/editor</code><br />
+<code dir="ltr" translate="no">roles/owner</code></td>
+<td><code dir="ltr" translate="no">        PROJECT       </code></td>
 <td>Project</td>
 </tr>
 </tbody>
@@ -78,18 +78,18 @@ The predefined BigQuery roles that provide the permissions that are required to 
 <tr class="odd">
 <td>Any of the following:<br />
 <br />
-<code dir="ltr" translate="no">       roles/bigquery.user      </code><br />
-<code dir="ltr" translate="no">       roles/bigquery.jobuser      </code><br />
-<code dir="ltr" translate="no">       roles/bigquery.admin      </code> `</td>
-<td><code dir="ltr" translate="no">         PROJECT       </code></td>
+<code dir="ltr" translate="no">roles/bigquery.user</code><br />
+<code dir="ltr" translate="no">roles/bigquery.jobuser</code><br />
+<code dir="ltr" translate="no">roles/bigquery.admin</code> `</td>
+<td><code dir="ltr" translate="no">        PROJECT       </code></td>
 <td>Project</td>
 </tr>
 </tbody>
 </table>
 
-## Create the `     snapshot-bot    ` service account
+## Create the `snapshot-bot` service account
 
-Follow these steps to create the `  snapshot-bot  ` [service account](https://docs.cloud.google.com/iam/docs/service-accounts) and grant it the [permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that it needs to run queries in the `  PROJECT  ` project:
+Follow these steps to create the `snapshot-bot` [service account](https://docs.cloud.google.com/iam/docs/service-accounts) and grant it the [permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that it needs to run queries in the `  PROJECT  ` project:
 
 ### Console
 
@@ -99,7 +99,7 @@ Follow these steps to create the `  snapshot-bot  ` [service account](https://do
 
 2.  Select the `  PROJECT  ` project.
 
-3.  Create the `  snapshot-bot  ` service account:
+3.  Create the `snapshot-bot` service account:
     
     1.  Click **Create service account** .
     
@@ -113,7 +113,7 @@ Follow these steps to create the `  snapshot-bot  ` [service account](https://do
     
     2.  Click **Done** .
 
-BigQuery creates the service account with the email address `  snapshot-bot@ PROJECT .iam.gserviceaccount.com  ` .
+BigQuery creates the service account with the email address `snapshot-bot@ PROJECT .iam.gserviceaccount.com` .
 
 To verify that BigQuery created the service account with the permissions that you specified, follow these steps:
 
@@ -147,11 +147,11 @@ Verify that BigQuery has granted your service account the permission that it nee
 
 ## Grant permissions to the service account
 
-This section describes how to grant the `  snapshot-bot  ` service account the permissions it needs to create table snapshots of the `  DATASET . TABLE  ` table in the `  BACKUP  ` dataset.
+This section describes how to grant the `snapshot-bot` service account the permissions it needs to create table snapshots of the `  DATASET . TABLE  ` table in the `  BACKUP  ` dataset.
 
 ### Permission to take snapshots of the base table
 
-To give the `  snapshot-bot  ` service account the permissions that it needs to take snapshots of the `  DATASET . TABLE  ` table, follow these steps:
+To give the `snapshot-bot` service account the permissions that it needs to take snapshots of the `  DATASET . TABLE  ` table, follow these steps:
 
 ### Console
 
@@ -191,7 +191,7 @@ To give the `  snapshot-bot  ` service account the permissions that it needs to 
     
     [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
-2.  Enter the following [`  bq add-iam-policy-binding  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_add-iam-policy-binding) command:
+2.  Enter the following [`bq add-iam-policy-binding`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_add-iam-policy-binding) command:
     
     ``` notranslate
     bq add-iam-policy-binding \
@@ -203,7 +203,7 @@ BigQuery confirms that the new policy binding has been added.
 
 ### Permission to create tables in the destination dataset
 
-Give the `  snapshot-bot  ` service account the permissions that it needs to create table snapshots in the `  BACKUP  ` dataset as follows:
+Give the `snapshot-bot` service account the permissions that it needs to create table snapshots in the `  BACKUP  ` dataset as follows:
 
 ### Console
 
@@ -231,19 +231,19 @@ Give the `  snapshot-bot  ` service account the permissions that it needs to cre
 
 10. Click **Close** .
 
-Your `  snapshot-bot  ` service account now has the following IAM roles for the following resources:
+Your `snapshot-bot` service account now has the following IAM roles for the following resources:
 
-| Role                 | Resource                                                                                            | Resource type | Purpose                                                                      |
-| -------------------- | --------------------------------------------------------------------------------------------------- | ------------- | ---------------------------------------------------------------------------- |
-| BigQuery Data Editor | `          PROJECT              :               DATASET              .               TABLE        ` | Table         | Take snapshots of the `          TABLE        ` table.                       |
-| BigQuery Data Owner  | `          PROJECT              :               BACKUP        `                                     | Dataset       | Create and delete table snapshots in the `          BACKUP        ` dataset. |
-| BigQuery User        | `          PROJECT        `                                                                         | Project       | Run the scheduled query that creates the table snapshots.                    |
+| Role                 | Resource                                                                   | Resource type | Purpose                                                                     |
+| -------------------- | -------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------- |
+| BigQuery Data Editor | `         PROJECT        :         DATASET        .         TABLE        ` | Table         | Take snapshots of the `         TABLE        ` table.                       |
+| BigQuery Data Owner  | `         PROJECT        :         BACKUP        `                         | Dataset       | Create and delete table snapshots in the `         BACKUP        ` dataset. |
+| BigQuery User        | `         PROJECT        `                                                 | Project       | Run the scheduled query that creates the table snapshots.                   |
 
-These roles provide the permissions that the `  snapshot-bot  ` service account needs to run queries that create table snapshots of the `  DATASET . TABLE  ` table and place the table snapshots in the `  BACKUP  ` dataset.
+These roles provide the permissions that the `snapshot-bot` service account needs to run queries that create table snapshots of the `  DATASET . TABLE  ` table and place the table snapshots in the `  BACKUP  ` dataset.
 
 ## Write a multi-statement query
 
-This section describes how to write a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) that creates a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of the `  DATASET . TABLE  ` table by using the [`  CREATE SNAPSHOT TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) . The snapshot is saved in the `  BACKUP  ` dataset and it expires after one day.
+This section describes how to write a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) that creates a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of the `  DATASET . TABLE  ` table by using the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) . The snapshot is saved in the `  BACKUP  ` dataset and it expires after one day.
 
 ``` notranslate
 -- Declare variables
@@ -279,7 +279,7 @@ EXECUTE IMMEDIATE query;
     
     [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
-2.  Enter the following [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
+2.  Enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
     
     ``` notranslate
     bq query --use_legacy_sql=false --display_name="Monthly snapshots of the TABLE table" \
@@ -301,15 +301,15 @@ EXECUTE IMMEDIATE query;
 
 The multi-statement query in the bq command-line tool command differs from the query you ran in Google Cloud console as follows:
 
-  - The bq command-line tool query uses `  @run_date  ` instead of `  current_date()  ` . In a scheduled query, the `  @run_date  ` parameter contains the current date. But in an interactive query, the `  @run_date  ` parameter is not supported. You can use `  current_date()  ` instead of `  @run_date  ` for testing an interactive query before you schedule it.
-  - The bq command-line tool query uses `  @run_time  ` instead of `  current_timestamp()  ` for a similar reason—the `  @run_time  ` parameter is not supported in interactive queries, but `  current_timestamp()  ` can be used instead of `  @run_time  ` for testing the interactive query.
-  - The bq command-line tool query uses a slash and a double quote `  \"  ` instead of a single quote `  '  ` because single quotes are used to enclose the query.
+  - The bq command-line tool query uses `@run_date` instead of `current_date()` . In a scheduled query, the `@run_date` parameter contains the current date. But in an interactive query, the `@run_date` parameter is not supported. You can use `current_date()` instead of `@run_date` for testing an interactive query before you schedule it.
+  - The bq command-line tool query uses `@run_time` instead of `current_timestamp()` for a similar reason—the `@run_time` parameter is not supported in interactive queries, but `current_timestamp()` can be used instead of `@run_time` for testing the interactive query.
+  - The bq command-line tool query uses a slash and a double quote `\"` instead of a single quote `'` because single quotes are used to enclose the query.
 
 ## Configure the service account to run the scheduled query
 
-The query is currently scheduled to run using your credentials. Update your scheduled query to run with the `  snapshot-bot  ` service account credentials as follows:
+The query is currently scheduled to run using your credentials. Update your scheduled query to run with the `snapshot-bot` service account credentials as follows:
 
-1.  Run the [`  bq ls  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to get the identity of the scheduled query job:
+1.  Run the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to get the identity of the scheduled query job:
     
     ``` notranslate
     bq ls --transfer_config=true --transfer_location=us
@@ -317,12 +317,12 @@ The query is currently scheduled to run using your credentials. Update your sche
     
     The output looks similar to the following:
     
-    | `          name         `                                              | `          displayName         `                                                             | `          dataSourceId         `    | `          state         `   |
-    | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------ | ---------------------------- |
-    | `          projects/12345/locations/us/transferConfigs/12345         ` | `          Monthly snapshots of the                   TABLE                  table         ` | `          scheduled_query         ` | `          RUNNING         ` |
+    | `name`                                              | `displayName`                                             | `dataSourceId`    | `state`   |
+    | --------------------------------------------------- | --------------------------------------------------------- | ----------------- | --------- |
+    | `projects/12345/locations/us/transferConfigs/12345` | `Monthly snapshots of the           TABLE          table` | `scheduled_query` | `RUNNING` |
     
 
-2.  Using the identifier in the **`  name  `** field, run the following [`  bq update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command:
+2.  Using the identifier in the **`name`** field, run the following [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command:
     
     ``` notranslate
     bq update --transfer_config --update_credentials \
@@ -382,13 +382,13 @@ To verify that the table snapshots are being created, follow these steps:
     
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-3.  In the **Explorer** pane, open the `  BACKUP  ` dataset and verify that the `  TABLE _YYYYMMDD  ` snapshots have been created, where `  YYYYMMDD  ` is the first day of each month.
+3.  In the **Explorer** pane, open the `  BACKUP  ` dataset and verify that the `  TABLE _YYYYMMDD ` snapshots have been created, where `YYYYMMDD` is the first day of each month.
     
     For example:
     
-      - `  TABLE _20220601  `
-      - `  TABLE _20220701  `
-      - `  TABLE _20220801  `
+      - `  TABLE _20220601 `
+      - `  TABLE _20220701 `
+      - `  TABLE _20220801 `
 
 ## What's next
 

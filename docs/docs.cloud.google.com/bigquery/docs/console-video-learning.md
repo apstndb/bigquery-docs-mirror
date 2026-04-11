@@ -10,7 +10,7 @@ The following interactive walkthroughs help you get started with BigQuery.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
@@ -27,7 +27,7 @@ These walkthroughs are launched in the Google Cloud console. Click the links to 
 | **Loading and querying data**                                                                                                                           |                                                                                                              |
 | [Query a public dataset in BigQuery Studio](https://console.cloud.google.com/welcome?walkthrough_id=bigquery--bigquery-quickstart-query-public-dataset) | Use the BigQuery sandbox to query and visualize data in a public dataset.                                    |
 | [Load and query data using BigQuery Studio](https://console.cloud.google.com/welcome?walkthrough_id=bigquery--bigquery-quickstart-load-data-console)    | Use BigQuery Studio to create a dataset, load data, and query the data.                                      |
-| [Load and query data with the `         bq        ` command-line tool](https://console.cloud.google.com/welcome?walkthrough_id=bigquery--load-data-bq)  | Use the BigQuery command-line tool to create a dataset, load data, and query the data.                       |
+| [Load and query data with the `bq` command-line tool](https://console.cloud.google.com/welcome?walkthrough_id=bigquery--load-data-bq)                   | Use the BigQuery command-line tool to create a dataset, load data, and query the data.                       |
 | [Import data from Cloud Storage to BigQuery](https://console.cloud.google.com/welcome?tutorial=bigquery_import_data_from_cloud_storage)                 | Use the Google Cloud console to import data from Cloud Storage into BigQuery, and query the data.            |
 | **Workload management**                                                                                                                                 |                                                                                                              |
 | [Get started with reservations](https://console.cloud.google.com/welcome?walkthrough_id=bigquery--reservations-get-started)                             | Use the Google Cloud console to purchase slots, create a reservation, and assign a project to a reservation. |

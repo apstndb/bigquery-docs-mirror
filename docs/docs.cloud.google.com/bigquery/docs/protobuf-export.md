@@ -20,16 +20,16 @@ However, there are limitations to exporting BigQuery data as Protobuf columns:
 
 If these limitations apply to the export workflow, you might consider other methods of exporting BigQuery data:
 
-  - Use [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) with [`  EXPORT DATA  ` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) to sort the exported BigQuery data by date or time, and to schedule exports on a recurring basis. BigQuery supports exporting data into Avro, CSV, JSON, and Parquet formats.
+  - Use [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) with [`EXPORT DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) to sort the exported BigQuery data by date or time, and to schedule exports on a recurring basis. BigQuery supports exporting data into Avro, CSV, JSON, and Parquet formats.
   - Use [Dataflow](https://docs.cloud.google.com/dataflow/docs/overview) to export BigQuery data in either the Avro or CSV file format.
 
 ## Required roles
 
 To get the permissions that you need to export BigQuery data as Protobuf columns, ask your administrator to grant you the following IAM roles on your project:
 
-  - Create a user-defined function: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
-  - Export data from a BigQuery table: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
-  - Read and upload files to Cloud Storage: [Storage Object Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectCreator) ( `  roles/storage.objectCreator  ` )
+  - Create a user-defined function: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+  - Export data from a BigQuery table: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
+  - Read and upload files to Cloud Storage: [Storage Object Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectCreator) ( `roles/storage.objectCreator` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -37,9 +37,9 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## Create a UDF
 
-Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf column:
+Create a UDF that converts a BigQuery `STRUCT` data type into a Protobuf column:
 
-1.  In a command line, clone the `  bigquery-utils.git  ` repository:
+1.  In a command line, clone the `bigquery-utils.git` repository:
     
         git clone https://github.com/GoogleCloudPlatform/bigquery-utils.git
 
@@ -47,9 +47,9 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
     
         cd bigquery-utils/tools/protobuf_export
 
-3.  Use the [`  cp  ` command](https://man7.org/linux/man-pages/man1/cp.1.html) or your operating system's file browser to copy your proto file to the `  ./protos  ` child folder.
+3.  Use the [`cp` command](https://man7.org/linux/man-pages/man1/cp.1.html) or your operating system's file browser to copy your proto file to the `./protos` child folder.
     
-    There is a sample proto file named `  dummy.proto  ` already in the `  ./protos  ` folder.
+    There is a sample proto file named `dummy.proto` already in the `./protos` folder.
 
 4.  Install the necessary packages from the GitHub repository:
     
@@ -59,13 +59,13 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
     
         npx webpack --config webpack.config.js --stats-error-details
 
-6.  Locate the `  pbwrapper.js  ` file in the `  ./dist  ` child folder, and then [upload the file to a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects) .
+6.  Locate the `pbwrapper.js` file in the `./dist` child folder, and then [upload the file to a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 7.  Go to the **BigQuery** page.
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-8.  Using the query editor, create a UDF named `  toMyProtoMessage  ` that builds a Protobuf column from existing BigQuery table columns:
+8.  Using the query editor, create a UDF named `toMyProtoMessage` that builds a Protobuf column from existing BigQuery table columns:
     
         CREATE FUNCTION
           DATASET_ID.toMyProtoMessage(input STRUCT<INPUT_FIELDS>)
@@ -78,24 +78,24 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
     
     Replace the following:
     
-      - `  DATASET_ID  ` : the ID of the dataset to contain the UDF.
+      - `DATASET_ID` : the ID of the dataset to contain the UDF.
     
-      - `  INPUT_FIELDS  ` : the fields used in the [proto message type](https://protobuf.dev/programming-guides/proto3/#simple) for the proto file, in the format `  field_name_1 field_type_1 [, field_name_2 field_type_2, ...]  ` .
+      - `INPUT_FIELDS` : the fields used in the [proto message type](https://protobuf.dev/programming-guides/proto3/#simple) for the proto file, in the format `field_name_1 field_type_1 [, field_name_2 field_type_2, ...]` .
         
-        You must translate any message type fields that use underscores to use [camel case](https://en.wikipedia.org/wiki/Camel_case) instead. For example, if the message type looks like the following, then the input fields value must be `  itemId int64, itemDescription string  ` :
+        You must translate any message type fields that use underscores to use [camel case](https://en.wikipedia.org/wiki/Camel_case) instead. For example, if the message type looks like the following, then the input fields value must be `itemId int64, itemDescription string` :
         
             message ThisMessage {
               int64 item_id = 1;
               string item_description = 2;
             }
     
-      - `  BUCKET_NAME  ` : the name of the Cloud Storage bucket that contains the `  pbwrapper.js  ` file.
+      - `BUCKET_NAME` : the name of the Cloud Storage bucket that contains the `pbwrapper.js` file.
     
-      - `  PROTO_PACKAGE  ` : the [package](https://protobuf.dev/programming-guides/proto3/#packages) for the proto file.
+      - `PROTO_PACKAGE` : the [package](https://protobuf.dev/programming-guides/proto3/#packages) for the proto file.
     
-      - `  PROTO_MESSAGE  ` : the message type for the proto file.
+      - `PROTO_MESSAGE` : the message type for the proto file.
     
-    For example, if you use the provided `  dummy.proto  ` file, the `  CREATE FUNCTION  ` statement looks as follows:
+    For example, if you use the provided `dummy.proto` file, the `CREATE FUNCTION` statement looks as follows:
     
         CREATE OR REPLACE FUNCTION
           mydataset.toMyProtoMessage(input STRUCT<dummyField STRING>)
@@ -108,7 +108,7 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
 
 ## Format columns as Protobuf values
 
-Run the `  toMyProtoMessage  ` UDF to format BigQuery table columns as Protobuf values:
+Run the `toMyProtoMessage` UDF to format BigQuery table columns as Protobuf values:
 
 ``` 
   SELECT
@@ -121,13 +121,13 @@ Run the `  toMyProtoMessage  ` UDF to format BigQuery table columns as Protobuf 
 
 Replace the following:
 
-  - `  UDF_DATASET_ID  ` : the ID of the dataset that contains the UDF.
-  - `  INPUT_COLUMNS  ` : the names of the columns to format as a Protobuf value, in the format `  column_name_1 [, column_name_2, ...]  ` . Columns can be of any supported [scalar value type](https://protobuf.dev/programming-guides/proto3/#scalar) or non-scalar type, including `  ARRAY  ` and `  STRUCT  ` . Input columns must match the type and number of the proto message type fields.
-  - `  PROJECT_ID  ` : the ID of the project that contains the table. You can skip identifying the project if the dataset is in your current project.
-  - `  DATASET_ID  ` : the ID of the dataset that contains the table.
-  - `  TABLE_NAME  ` : the name of the table that contains the columns to format.
+  - `UDF_DATASET_ID` : the ID of the dataset that contains the UDF.
+  - `INPUT_COLUMNS` : the names of the columns to format as a Protobuf value, in the format `column_name_1 [, column_name_2, ...]` . Columns can be of any supported [scalar value type](https://protobuf.dev/programming-guides/proto3/#scalar) or non-scalar type, including `ARRAY` and `STRUCT` . Input columns must match the type and number of the proto message type fields.
+  - `PROJECT_ID` : the ID of the project that contains the table. You can skip identifying the project if the dataset is in your current project.
+  - `DATASET_ID` : the ID of the dataset that contains the table.
+  - `TABLE_NAME` : the name of the table that contains the columns to format.
 
-For example, if you use a `  toMyProtoMessage  ` UDF based on `  dummy.proto  ` , the following `  SELECT  ` statement works:
+For example, if you use a `toMyProtoMessage` UDF based on `dummy.proto` , the following `SELECT` statement works:
 
     SELECT
       mydataset.toMyProtoMessage(STRUCT(word)) AS protoResult

@@ -5,10 +5,10 @@ This document describes how to create logical views in BigQuery.
 You can create a logical view in the following ways:
 
   - Using the Google Cloud console.
-  - Using the bq command-line tool's `  bq mk  ` command.
-  - Calling the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert) API method.
+  - Using the bq command-line tool's `bq mk` command.
+  - Calling the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert) API method.
   - Using the client libraries.
-  - Submitting a [`  CREATE VIEW  `](https://docs.cloud.google.com/bigquery/docs/data-definition-language#create_view_statement) data definition language (DDL) statement.
+  - Submitting a [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/data-definition-language#create_view_statement) data definition language (DDL) statement.
 
 ## View limitations
 
@@ -17,13 +17,13 @@ BigQuery views are subject to the following limitations:
   - Views are read-only. For example, you can't run queries that insert, update, or delete data.
   - If your view references tables from remote [locations](https://docs.cloud.google.com/bigquery/docs/locations) , you must enable [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries) before you create the view.
   - A reference inside of a view must be qualified with a dataset. The default dataset doesn't affect a view body.
-  - You cannot use the `  TableDataList  ` JSON API method to retrieve data from a view. For more information, see [Tabledata: list](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) .
+  - You cannot use the `TableDataList` JSON API method to retrieve data from a view. For more information, see [Tabledata: list](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) .
   - You cannot mix GoogleSQL and legacy SQL queries when using views. A GoogleSQL query cannot reference a view defined using legacy SQL syntax.
   - You cannot reference [query parameters](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) in views.
   - The schemas of the underlying tables are stored with the view when the view is created. If columns are added, deleted, or modified after the view is created, the view isn't automatically updated and the reported schema will remain inaccurate until the view SQL definition is changed or the view is recreated. Even though the reported schema may be inaccurate, all submitted queries produce accurate results.
   - You cannot automatically update a legacy SQL view to GoogleSQL syntax. To modify the query used to define a view, you can use the following:
       - The [**Edit query**](https://docs.cloud.google.com/bigquery/docs/updating-views#update-sql) option in the Google Cloud console
-      - The [`  bq update --view  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command in the bq command-line tool
+      - The [`bq update --view`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command in the bq command-line tool
       - The [BigQuery Client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)
       - The [update](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) or [patch](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API methods.
   - You cannot include a temporary user-defined function or a temporary table in the SQL query that defines a view.
@@ -39,9 +39,9 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 Views are treated as table resources in BigQuery, so creating a view requires the same permissions as creating a table. You must also have permissions to query any tables that are referenced by the view's SQL query.
 
-To create a view, you need the `  bigquery.tables.create  ` IAM permission. The `  roles/bigquery.dataEditor  ` predefined IAM role includes the permissions that you need to create a view.
+To create a view, you need the `bigquery.tables.create` IAM permission. The `roles/bigquery.dataEditor` predefined IAM role includes the permissions that you need to create a view.
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create views in the datasets that you create. To create a view for data that you don't own, you must have `  bigquery.tables.getData  ` permission for that table.
+Additionally, if you have the `bigquery.datasets.create` permission, you can create views in the datasets that you create. To create a view for data that you don't own, you must have `bigquery.tables.getData` permission for that table.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -54,23 +54,23 @@ When you create a view in BigQuery, the view name must be unique per dataset. Th
   - Contain characters with a total of up to 1,024 UTF-8 bytes.
   - Contain Unicode characters in category L (letter), M (mark), N (number), Pc (connector, including underscore), Pd (dash), Zs (space). For more information, see [General Category](https://wikipedia.org/wiki/Unicode_character_property#General_Category) .
 
-The following are all examples of valid view names: `  view 01  ` , `  ग्राहक  ` , `  00_お客様  ` , `  étudiant-01  ` .
+The following are all examples of valid view names: `view 01` , `ग्राहक` , `00_お客様` , `étudiant-01` .
 
 Caveats:
 
-  - Table names are case-sensitive by default. `  mytable  ` and `  MyTable  ` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
+  - Table names are case-sensitive by default. `mytable` and `MyTable` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
 
   - Some view names and view name prefixes are reserved. If you receive an error saying that your view name or prefix is reserved, then select a different name and try again.
 
-  - If you include multiple dot operators ( `  .  ` ) in a sequence, the duplicate operators are implicitly stripped.
+  - If you include multiple dot operators ( `.` ) in a sequence, the duplicate operators are implicitly stripped.
     
-    For example, this: `  project_name....dataset_name..table_name  `
+    For example, this: `project_name....dataset_name..table_name`
     
-    Becomes this: `  project_name.dataset_name.table_name  `
+    Becomes this: `project_name.dataset_name.table_name`
 
 ## Create a view
 
-You can create a view by composing a SQL query that is used to define the data accessible to the view. The SQL query must consist of a `  SELECT  ` statement. Other statement types (such as DML statements) and [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) aren't allowed in view queries.
+You can create a view by composing a SQL query that is used to define the data accessible to the view. The SQL query must consist of a `SELECT` statement. Other statement types (such as DML statements) and [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) aren't allowed in view queries, with the exception of the `@@session_id` [system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) .
 
 To create a view:
 
@@ -101,7 +101,7 @@ To create a view:
 
 ### SQL
 
-Use the [`  CREATE VIEW  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) . The following example creates a view named `  usa_male_names  ` from the USA names public dataset:
+Use the [`CREATE VIEW` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) . The following example creates a view named `usa_male_names` from the USA names public dataset:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -129,11 +129,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) with the `  --view  ` flag. For GoogleSQL queries, add the `  --use_legacy_sql  ` flag and set it to `  false  ` . Some optional parameters include `  --add_tags  ` , `  --expiration  ` , `  --description  ` , and `  --label  ` . For a full list of parameters, see the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) reference.
+Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) with the `--view` flag. For GoogleSQL queries, add the `--use_legacy_sql` flag and set it to `false` . Some optional parameters include `--add_tags` , `--expiration` , `--description` , and `--label` . For a full list of parameters, see the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) reference.
 
-If your query references external user-defined function (UDF) resources stored in Cloud Storage or in local files, use the `  --view_udf_resource  ` flag to specify those resources. The `  --view_udf_resource  ` flag is not demonstrated here. For more information about using UDFs, see [UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) .
+If your query references external user-defined function (UDF) resources stored in Cloud Storage or in local files, use the `--view_udf_resource` flag to specify those resources. The `--view_udf_resource` flag is not demonstrated here. For more information about using UDFs, see [UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) .
 
-If you are creating a view in a project other than your default project, specify the project ID using the `  --project_id  ` flag.
+If you are creating a view in a project other than your default project, specify the project ID using the `--project_id` flag.
 
 **Note:** The dataset that contains your view and the dataset that contains the tables referenced by the view must be in the same [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
@@ -151,9 +151,9 @@ If you are creating a view in a project other than your default project, specify
 Replace the following:
 
   - `  PATH_TO_FILE  ` is the URI or local file system path to a code file to be loaded and evaluated immediately as a UDF resource used by the view. Repeat the flag to specify multiple files.
-  - `  INTEGER  ` sets the lifetime (in seconds) for the view. If `  INTEGER  ` is `  0  ` , the view doesn't expire. If you don't include the `  --expiration  ` flag, BigQuery creates the view with the dataset's default table lifetime.
+  - `  INTEGER  ` sets the lifetime (in seconds) for the view. If `  INTEGER  ` is `0` , the view doesn't expire. If you don't include the `--expiration` flag, BigQuery creates the view with the dataset's default table lifetime.
   - `  DESCRIPTION  ` is a description of the view in quotes.
-  - `  KEY_1:VALUE_1  ` is the key-value pair that represents a [label](https://docs.cloud.google.com/bigquery/docs/labels) . Repeat the `  --label  ` flag to specify multiple labels.
+  - `  KEY_1:VALUE_1  ` is the key-value pair that represents a [label](https://docs.cloud.google.com/bigquery/docs/labels) . Repeat the `--label` flag to specify multiple labels.
   - `  KEY_2:VALUE_2  ` is the key-value pair that represents a [tag](https://docs.cloud.google.com/bigquery/docs/labels) . Add multiple tags under the same flag with commas between key:value pairs.
   - `  QUERY  ` is a valid query.
   - `  PROJECT_ID  ` is your project ID (if you don't have a default project configured).
@@ -162,7 +162,7 @@ Replace the following:
 
 Examples:
 
-Enter the following command to create a view named `  myview  ` in `  mydataset  ` in your default project. The expiration time is set to 3600 seconds (1 hour), the description is set to `  This is my view  ` , and the label is set to `  organization:development  ` . The query used to create the view queries data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) .
+Enter the following command to create a view named `myview` in `mydataset` in your default project. The expiration time is set to 3600 seconds (1 hour), the description is set to `This is my view` , and the label is set to `organization:development` . The query used to create the view queries data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) .
 
     bq mk \
     --use_legacy_sql=false \
@@ -181,7 +181,7 @@ Enter the following command to create a view named `  myview  ` in `  mydataset 
       number DESC' \
     mydataset.myview
 
-Enter the following command to create a view named `  myview  ` in `  mydataset  ` in `  myotherproject  ` . The description is set to `  This is my view  ` , the label is set to `  organization:development  ` , and the view's expiration is set to the dataset's default table expiration. The query used to create the view queries data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) .
+Enter the following command to create a view named `myview` in `mydataset` in `myotherproject` . The description is set to `This is my view` , the label is set to `organization:development` , and the view's expiration is set to the dataset's default table expiration. The query used to create the view queries data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) .
 
     bq mk \
     --use_legacy_sql=false \
@@ -204,13 +204,13 @@ After the view is created, you can update the view's expiration, description, an
 
 ### Terraform
 
-Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
+Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a view named `  myview  ` :
+The following example creates a view named `myview` :
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -257,13 +257,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -275,7 +275,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -287,7 +287,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -299,7 +299,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert) method with a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) that contains a `  view  ` property.
+Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert) method with a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) that contains a `view` property.
 
 ### Go
 

@@ -18,7 +18,7 @@ A [Discovery Document](https://developers.google.com/discovery/v1/reference/apis
 
 A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_endpoint) is a base URL that specifies the network address of an API service. One service might have multiple service endpoints. This service has the following service endpoint and all URIs below are relative to this service endpoint:
 
-  - `  https://bigqueryconnection.googleapis.com  `
+  - `https://bigqueryconnection.googleapis.com`
 
 ## REST Resource: [v1beta1.projects.locations.connections](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections)
 
@@ -26,47 +26,47 @@ Methods
 
 `  create  `
 
-`  POST /v1beta1/{parent=projects/*/locations/*}/connections  `  
+`POST /v1beta1/{parent=projects/*/locations/*}/connections`  
 Creates a new connection.
 
 `  delete  `
 
-`  DELETE /v1beta1/{name=projects/*/locations/*/connections/*}  `  
+`DELETE /v1beta1/{name=projects/*/locations/*/connections/*}`  
 Deletes connection and associated credential.
 
 `  get  `
 
-`  GET /v1beta1/{name=projects/*/locations/*/connections/*}  `  
+`GET /v1beta1/{name=projects/*/locations/*/connections/*}`  
 Returns specified connection.
 
 `  getIamPolicy  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/connections/*}:getIamPolicy  `  
+`POST /v1beta1/{resource=projects/*/locations/*/connections/*}:getIamPolicy`  
 Gets the access control policy for a resource.
 
 `  list  `
 
-`  GET /v1beta1/{parent=projects/*/locations/*}/connections  `  
+`GET /v1beta1/{parent=projects/*/locations/*}/connections`  
 Returns a list of connections in the given project.
 
 `  patch  `
 
-`  PATCH /v1beta1/{name=projects/*/locations/*/connections/*}  `  
+`PATCH /v1beta1/{name=projects/*/locations/*/connections/*}`  
 Updates the specified connection.
 
 `  setIamPolicy  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/connections/*}:setIamPolicy  `  
+`POST /v1beta1/{resource=projects/*/locations/*/connections/*}:setIamPolicy`  
 Sets the access control policy on the specified resource.
 
 `  testIamPermissions  `
 
-`  POST /v1beta1/{resource=projects/*/locations/*/connections/*}:testIamPermissions  `  
+`POST /v1beta1/{resource=projects/*/locations/*/connections/*}:testIamPermissions`  
 Returns permissions that a caller has on the specified resource.
 
 `  updateCredential  `
 
-`  PATCH /v1beta1/{name=projects/*/locations/*/connections/*/credential}  `  
+`PATCH /v1beta1/{name=projects/*/locations/*/connections/*/credential}`  
 Sets the credential for the specified connection.
 
 ## REST Resource: [v1.projects.locations.connections](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections)
@@ -75,40 +75,40 @@ Methods
 
 `  create  `
 
-`  POST /v1/{parent=projects/*/locations/*}/connections  `  
+`POST /v1/{parent=projects/*/locations/*}/connections`  
 Creates a new connection.
 
 `  delete  `
 
-`  DELETE /v1/{name=projects/*/locations/*/connections/*}  `  
+`DELETE /v1/{name=projects/*/locations/*/connections/*}`  
 Deletes connection and associated credential.
 
 `  get  `
 
-`  GET /v1/{name=projects/*/locations/*/connections/*}  `  
+`GET /v1/{name=projects/*/locations/*/connections/*}`  
 Returns specified connection.
 
 `  getIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/connections/*}:getIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/connections/*}:getIamPolicy`  
 Gets the access control policy for a resource.
 
 `  list  `
 
-`  GET /v1/{parent=projects/*/locations/*}/connections  `  
+`GET /v1/{parent=projects/*/locations/*}/connections`  
 Returns a list of connections in the given project.
 
 `  patch  `
 
-`  PATCH /v1/{name=projects/*/locations/*/connections/*}  `  
+`PATCH /v1/{name=projects/*/locations/*/connections/*}`  
 Updates the specified connection.
 
 `  setIamPolicy  `
 
-`  POST /v1/{resource=projects/*/locations/*/connections/*}:setIamPolicy  `  
+`POST /v1/{resource=projects/*/locations/*/connections/*}:setIamPolicy`  
 Sets the access control policy on the specified resource.
 
 `  testIamPermissions  `
 
-`  POST /v1/{resource=projects/*/locations/*/connections/*}:testIamPermissions  `  
+`POST /v1/{resource=projects/*/locations/*/connections/*}:testIamPermissions`  
 Returns permissions that a caller has on the specified resource.

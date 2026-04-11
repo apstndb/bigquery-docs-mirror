@@ -12,7 +12,7 @@ Lists all subscriptions in a given project and location.
 
 ### HTTP request
 
-`  GET https://analyticshub.googleapis.com/v1/{parent=projects/*/locations/*}/subscriptions  `
+`GET https://analyticshub.googleapis.com/v1/{parent=projects/*/locations/*}/subscriptions`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,9 +20,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
 Required. The parent resource path of the subscription. e.g. projects/myproject/locations/us
 
@@ -30,14 +30,14 @@ Required. The parent resource path of the subscription. e.g. projects/myproject/
 
 Parameters
 
-`  filter  `
+`filter`
 
-`  string  `
+`string`
 
 An expression for filtering the results of the request. Eligible fields for filtering are:
 
-  - `  listing  `
-  - `  dataExchange  `
+  - `listing`
+  - `dataExchange`
 
 Alternatively, a literal wrapped in double quotes may be provided. This will be checked for an exact match against both fields above.
 
@@ -47,15 +47,15 @@ In all cases, the full Data Exchange or Listing resource name must be provided. 
   - listing="projects/123/locations/us/dataExchanges/456/listings/789"
   - "projects/myproject/locations/us/dataExchanges/123"
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 The maximum number of results to return in a single response page.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token, returned by a previous call.
 
@@ -80,29 +80,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;subscriptions&quot;: [
-    {
-      object (Subscription)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;subscriptions&quot;: [{object (Subscription)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  subscriptions[]  `
+`subscriptions[]`
 
-`  object ( Subscription  ` )
+` object ( Subscription  ` )
 
 The list of subscriptions.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 Next page token.
 
@@ -110,15 +103,15 @@ Next page token.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  parent  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:
 
-  - `  analyticshub.subscriptions.list  `
+  - `analyticshub.subscriptions.list`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

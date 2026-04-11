@@ -11,7 +11,7 @@ Returns a list of connections in the given project.
 
 ### HTTP request
 
-`  GET https://bigqueryconnection.googleapis.com/v1/{parent=projects/*/locations/*}/connections  `
+`GET https://bigqueryconnection.googleapis.com/v1/{parent=projects/*/locations/*}/connections`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,29 +19,29 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Parent resource name. Must be in the form: `  projects/{projectId}/locations/{locationId}  `
+Required. Parent resource name. Must be in the form: `projects/{projectId}/locations/{locationId}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.connections.list  `
+  - `bigquery.connections.list`
 
 ### Query parameters
 
 Parameters
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 Required. Page size.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token.
 
@@ -66,29 +66,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;nextPageToken&quot;: string,
-  &quot;connections&quot;: [
-    {
-      object (Connection)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;nextPageToken&quot;: string,&quot;connections&quot;: [{object (Connection)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 Next page token.
 
-`  connections[]  `
+`connections[]`
 
-`  object ( Connection  ` )
+` object ( Connection  ` )
 
 List of connections.
 
@@ -96,7 +89,7 @@ List of connections.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

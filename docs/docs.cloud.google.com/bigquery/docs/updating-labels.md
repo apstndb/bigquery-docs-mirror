@@ -12,20 +12,20 @@ A dataset label can be updated by:
 
   - Using the Google Cloud console
   - Using SQL [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
-  - Using the bq command-line tool's `  bq update  ` command
-  - Calling the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method
+  - Using the bq command-line tool's `bq update` command
+  - Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method
   - Using the client libraries
 
 ### Required permissions
 
-To update a dataset label, you need the `  bigquery.datasets.update  ` IAM permission.
+To update a dataset label, you need the `bigquery.datasets.update` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to update a dataset label:
 
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can update labels of the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can update labels of the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -49,7 +49,7 @@ To update labels on a dataset, select one of the following options:
 
 ### SQL
 
-Use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the labels on an existing dataset. Setting labels overwrites any existing labels on the dataset. The following example sets a single label on the dataset `  mydataset  ` :
+Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the labels on an existing dataset. Setting labels overwrites any existing labels on the dataset. The following example sets a single label on the dataset `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -68,9 +68,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To add additional labels or to update a dataset label, issue the `  bq update  ` command with the `  set_label  ` flag. Repeat the flag to add or update multiple labels.
+To add additional labels or to update a dataset label, issue the `bq update` command with the `set_label` flag. Repeat the flag to add or update multiple labels.
 
-If the dataset is in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+If the dataset is in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
 ``` notranslate
 bq update \
@@ -86,7 +86,7 @@ Where:
 
 Example:
 
-To update the `  department  ` label on `  mydataset  ` , enter the `  bq update  ` command and specify `  department  ` as the label key. For example, to update the `  department:shipping  ` label to `  department:logistics  ` , enter the following command. `  mydataset  ` is in `  myotherproject  ` , not your default project.
+To update the `department` label on `mydataset` , enter the `bq update` command and specify `department` as the label key. For example, to update the `department:shipping` label to `department:logistics` , enter the following command. `mydataset` is in `myotherproject` , not your default project.
 
 ``` 
     bq update \
@@ -100,9 +100,9 @@ The output looks like the following.
 
 ### API
 
-To add additional labels or to update a label for an existing dataset, call the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and add to or update the `  labels  ` property for the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+To add additional labels or to update a label for an existing dataset, call the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method and add to or update the `labels` property for the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-Because the `  datasets.update  ` method replaces the entire dataset resource, the `  datasets.patch  ` method is preferred.
+Because the `datasets.update` method replaces the entire dataset resource, the `datasets.patch` method is preferred.
 
 ### Go
 
@@ -241,22 +241,22 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 A label can be updated after a table or view is created by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq update  ` command
-  - Calling the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
-      - Because views are treated like table resources, you use the `  tables.patch  ` method to modify both views and tables.
+  - Using the bq command-line tool's `bq update` command
+  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+      - Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables.
   - Using the client libraries
 
 ### Required permissions
 
-To update a table or view label, you need the `  bigquery.tables.update  ` IAM permission.
+To update a table or view label, you need the `bigquery.tables.update` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to update a table or view label:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can update labels of the tables and views in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can update labels of the tables and views in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -278,7 +278,7 @@ To update a table or view label:
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to set the labels on an existing table, or the [`  ALTER VIEW SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) to set the labels on an existing view. Setting labels overwrites any existing labels on the table or view. The following example sets two labels on the table `  mytable  ` :
+Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to set the labels on an existing table, or the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) to set the labels on an existing view. Setting labels overwrites any existing labels on the table or view. The following example sets two labels on the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -298,9 +298,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To add additional labels or to update a table or view label, issue the `  bq update  ` command with the `  set_label  ` flag. Repeat the flag to add or update multiple labels.
+To add additional labels or to update a table or view label, issue the `bq update` command with the `set_label` flag. Repeat the flag to add or update multiple labels.
 
-If the table or view is in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
+If the table or view is in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
 
 ``` notranslate
 bq update \
@@ -317,7 +317,7 @@ Where:
 
 Example:
 
-To update the `  department  ` label for `  mytable  ` , enter the `  bq update  ` command and specify `  department  ` as the label key. For example, to update the `  department:shipping  ` label to `  department:logistics  ` for `  mytable  ` , enter the following command. `  mytable  ` is in `  myotherproject  ` , not your default project.
+To update the `department` label for `mytable` , enter the `bq update` command and specify `department` as the label key. For example, to update the `department:shipping` label to `department:logistics` for `mytable` , enter the following command. `mytable` is in `myotherproject` , not your default project.
 
 ``` 
     bq update \
@@ -331,11 +331,11 @@ The output looks like the following:
 
 ### API
 
-To add labels or to update a label for an existing table or view, call the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and add to or update the `  labels  ` property for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
+To add labels or to update a label for an existing table or view, call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and add to or update the `labels` property for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
 
-Because views are treated like table resources, you use the `  tables.patch  ` method to modify both views and tables.
+Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables.
 
-Because the `  tables.update  ` method replaces the entire dataset resource, the `  tables.patch  ` method is preferred.
+Because the `tables.update` method replaces the entire dataset resource, the `tables.patch` method is preferred.
 
 ### Go
 
@@ -486,9 +486,9 @@ You can update a label on a reservation. Updating a label using SQL overwrites a
 
 ### Required IAM roles
 
-To get the permission that you need to update a label to a reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `  roles/bigquery.resourceEditor  ` ) IAM role on the administration project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to update a label to a reservation, ask your administrator to grant you the [BigQuery Resource Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceEditor) ( `roles/bigquery.resourceEditor` ) IAM role on the administration project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.reservations.update  ` permission, which is required to update a label to a reservation.
+This predefined role contains the `bigquery.reservations.update` permission, which is required to update a label to a reservation.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -520,7 +520,7 @@ To update a label to a reservation:
 
 ### bq
 
-To update a label to a reservation, issue the `  bq update  ` command with the `  set_label  ` flag and `  --reservation  ` flag. To update multiple labels, repeat the flag.
+To update a label to a reservation, issue the `bq update` command with the `set_label` flag and `--reservation` flag. To update multiple labels, repeat the flag.
 
 ``` notranslate
 bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
@@ -528,12 +528,12 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 
 Replace the following:
 
-  - `  KEY:VALUE  ` : a key-value pair for a label that you want to update on the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To update multiple labels on a reservation, repeat the `  --label  ` flag and specify a unique key for each label.
+  - `  KEY:VALUE  ` : a key-value pair for a label that you want to update on the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To update multiple labels on a reservation, repeat the `--label` flag and specify a unique key for each label.
   - `  RESERVATION_NAME  ` : the name of the reservation.
 
 ### SQL
 
-To update a label to a reservation, use the [`  ALTER RESERVATION SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) to set the labels on an existing reservation. Setting labels overwrites any existing labels on the reservation. The following example sets a label on the reservation `  myreservation  ` :
+To update a label to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) to set the labels on an existing reservation. Setting labels overwrites any existing labels on the reservation. The following example sets a label on the reservation `myreservation` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -555,27 +555,27 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 A label that has a key with an empty value is used as a tag. You can create a new label with no value, or you can turn an existing label into a tag on a dataset, table, or view. You cannot convert a job label to a tag.
 
-Tags can be useful in situations where you are labeling a resource, but you don't need the `  key:value  ` format. For example, if you have a table that contains test data that is used by multiple groups (support, development, and so on), you can add a `  test_data  ` tag to the table to identify it.
+Tags can be useful in situations where you are labeling a resource, but you don't need the `key:value` format. For example, if you have a table that contains test data that is used by multiple groups (support, development, and so on), you can add a `test_data` tag to the table to identify it.
 
 ### Required permissions
 
 To convert a label to a tag, you need the following IAM permissions:
 
-  - `  bigquery.datasets.update  ` (lets you convert a dataset label)
-  - `  bigquery.tables.update  ` (lets you convert a table or view label)
+  - `bigquery.datasets.update` (lets you convert a dataset label)
+  - `bigquery.tables.update` (lets you convert a table or view label)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to convert a dataset label:
 
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to convert a table or view label:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can update labels of the datasets that you create and the tables and views in those datasets.
+Additionally, if you have the `bigquery.datasets.create` permission, you can update labels of the datasets that you create and the tables and views in those datasets.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -602,7 +602,7 @@ To convert a label to a tag:
 
 ### bq
 
-To convert a label to a tag, use the `  bq update  ` command with the `  set_label  ` flag. Specify the key, followed by a colon, but leave the value unspecified. This updates an existing label to a tag.
+To convert a label to a tag, use the `bq update` command with the `set_label` flag. Specify the key, followed by a colon, but leave the value unspecified. This updates an existing label to a tag.
 
 ``` notranslate
 bq update \
@@ -613,11 +613,11 @@ resource_id
 Where:
 
   - key: is the label key that you want update to a tag.
-  - resource\_id is a valid dataset, table, or view name. If the resource is in a project other than your default project, add the project ID in the following format: `  project_id:dataset  ` .
+  - resource\_id is a valid dataset, table, or view name. If the resource is in a project other than your default project, add the project ID in the following format: `project_id:dataset` .
 
 Examples:
 
-Enter the following command to change the existing `  test_data:development  ` label on `  mydataset  ` to a tag. `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to change the existing `test_data:development` label on `mydataset` to a tag. `mydataset` is in `myotherproject` , not your default project.
 
     bq update --set_label test_data: myotherproject:mydataset
 
@@ -627,9 +627,9 @@ The output looks like the following:
 
 ### API
 
-To turn an existing label into a tag, call the [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method or the [`  tables.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and replace the label values with the empty string ( `  ""  ` ) in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) or the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
+To turn an existing label into a tag, call the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method or the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method and replace the label values with the empty string ( `""` ) in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) or the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
 
-Because views are treated like table resources, you use the `  tables.patch  ` method to modify both views and tables. Also, because the `  tables.update  ` method replaces the entire dataset resource, the `  tables.patch  ` method is preferred.
+Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables. Also, because the `tables.update` method replaces the entire dataset resource, the `tables.patch` method is preferred.
 
 ## What's next
 

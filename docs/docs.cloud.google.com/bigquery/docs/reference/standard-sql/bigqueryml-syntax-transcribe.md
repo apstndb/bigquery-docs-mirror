@@ -2,7 +2,7 @@
 
 **Note:** This feature is automatically available in the [Enterprise and Enterprise Plus editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) . If you use the Standard edition or [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) and would like to use this feature, send an email to bqml-feedback@google.com.
 
-This document describes the `  ML.TRANSCRIBE  ` function, which lets you transcribe audio files from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using the [Speech-to-Text API](https://docs.cloud.google.com/speech-to-text) .
+This document describes the `ML.TRANSCRIBE` function, which lets you transcribe audio files from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using the [Speech-to-Text API](https://docs.cloud.google.com/speech-to-text) .
 
 ## Syntax
 
@@ -16,31 +16,31 @@ ML.TRANSCRIBE(
 
 ### Arguments
 
-`  ML.TRANSCRIBE  ` takes the following arguments:
+`ML.TRANSCRIBE` takes the following arguments:
 
   - `  PROJECT_ID  ` : the project that contains the resource.
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`  REMOTE_SERVICE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_SPEECH_TO_TEXT_V2  ` .
+  - `  MODEL_NAME  ` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_SPEECH_TO_TEXT_V2` .
 
   - `  OBJECT_TABLE  ` : the name of the [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains URIs of the audio files.
     
     The audio files in the object table must be of a [supported type](https://docs.cloud.google.com/speech-to-text/docs/encoding#audio-encodings) . An error is returned for any row that contains an audio files of an unsupported type.
 
-  - `  RECOGNITION_CONFIG  ` : a `  STRING  ` value that contains a [`  RecognitionConfig  ` resource](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers#recognitionconfig) in JSON format.
+  - `  RECOGNITION_CONFIG  ` : a `STRING` value that contains a [`RecognitionConfig` resource](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers#recognitionconfig) in JSON format.
     
-    If a recognizer has been specified for the remote model by using the [`  SPEECH_RECOGNIZER  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) , you can't specify a `  RECOGNITION_CONFIG  ` value.
+    If a recognizer has been specified for the remote model by using the [`SPEECH_RECOGNIZER` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) , you can't specify a `RECOGNITION_CONFIG` value.
     
-    If no recognizer has been specified for the remote model by using the `  SPEECH_RECOGNIZER  ` option, you must specify a `  RECOGNITION_CONFIG  ` value. This value is used to provide a configuration for the default recognizer. You can only use the `  chirp  ` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the speech recognizer or `  RECOGNITION_CONFIG  ` value that you provide.
+    If no recognizer has been specified for the remote model by using the `SPEECH_RECOGNIZER` option, you must specify a `RECOGNITION_CONFIG` value. This value is used to provide a configuration for the default recognizer. You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the speech recognizer or `RECOGNITION_CONFIG` value that you provide.
 
 ## Output
 
-`  ML.TRANSCRIBE  ` returns the following columns:
+`ML.TRANSCRIBE` returns the following columns:
 
-  - `  transcripts  ` : a `  STRING  ` value that contains the transcripts from processing the audio files.
-  - `  ml_transcribe_result  ` : a `  JSON  ` value that contains the result from the Speech-to-Text API.
-  - `  ml_transcribe_status  ` : a `  STRING  ` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
+  - `transcripts` : a `STRING` value that contains the transcripts from processing the audio files.
+  - `ml_transcribe_result` : a `JSON` value that contains the result from the Speech-to-Text API.
+  - `ml_transcribe_status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
   - The object table columns.
 
 ## Quotas
@@ -57,7 +57,7 @@ Sometimes after a query job that uses this function finishes successfully, some 
 
     A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
 
-This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `  resource exhausted  ` error message is returned.
+This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `resource exhausted` error message is returned.
 
 To iterate through inference calls until all rows are successfully processed, you can use the [BigQuery remote inference SQL scripts](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/tree/master/sql_scripts/remote_inference) or the [BigQuery remote inference pipeline Dataform package](https://github.com/dataform-co/dataform-bqml) .
 
@@ -71,15 +71,15 @@ This issue occurs because one of the audio files being processed is too long. Ch
 
 ## Locations
 
-You can run the `  ML.TRANSCRIBE  ` function in the following [locations](https://docs.cloud.google.com/bigquery/docs/locations) :
+You can run the `ML.TRANSCRIBE` function in the following [locations](https://docs.cloud.google.com/bigquery/docs/locations) :
 
-  - `  asia-southeast1  `
-  - `  europe-west4  `
-  - `  us-central1  `
-  - `  US  `
-  - `  EU  `
+  - `asia-southeast1`
+  - `europe-west4`
+  - `us-central1`
+  - `US`
+  - `EU`
 
-`  ML.TRANSCRIBE  ` must run in the same region as the remote model that the function references.
+`ML.TRANSCRIBE` must run in the same region as the remote model that the function references.
 
 ## Limitations
 
@@ -87,7 +87,7 @@ The function can't process audio files that are longer than 30 minutes. Any row 
 
 ## Example
 
-The following example transcribes the audio files represented by the `  audio  ` table:
+The following example transcribes the audio files represented by the `audio` table:
 
 Create the model:
 
@@ -125,6 +125,6 @@ The result is similar to the following:
 
 ## What's next
 
-  - Get step-by-step instructions on how to [transcribe audio files from an object table](https://docs.cloud.google.com/bigquery/docs/transcribe) using the `  ML.TRANSCRIBE  ` function.
+  - Get step-by-step instructions on how to [transcribe audio files from an object table](https://docs.cloud.google.com/bigquery/docs/transcribe) using the `ML.TRANSCRIBE` function.
   - To learn more about model inference, including other functions you can use to analyze BigQuery data, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

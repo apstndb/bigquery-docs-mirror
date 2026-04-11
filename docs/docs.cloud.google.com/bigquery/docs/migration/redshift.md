@@ -18,12 +18,12 @@ Before creating an Amazon Redshift transfer:
 
 1.  Ensure that the principal creating the transfer has the following permissions in the project containing the transfer job:
     
-      - `  bigquery.transfers.update  ` permissions to create the transfer
-      - Both `  bigquery.datasets.get  ` and `  bigquery.datasets.update  ` permissions on the target dataset
+      - `bigquery.transfers.update` permissions to create the transfer
+      - Both `bigquery.datasets.get` and `bigquery.datasets.update` permissions on the target dataset
     
-    The `  roles/bigquery.admin  ` predefined Identity and Access Management (IAM) role includes `  bigquery.transfers.update  ` , `  bigquery.datasets.update  ` and `  bigquery.datasets.get  ` permissions. For more information on IAM roles in BigQuery Data Transfer Service, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
+    The `roles/bigquery.admin` predefined Identity and Access Management (IAM) role includes `bigquery.transfers.update` , `bigquery.datasets.update` and `bigquery.datasets.get` permissions. For more information on IAM roles in BigQuery Data Transfer Service, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-2.  Consult the documentation for Amazon S3 to ensure you have configured any permissions necessary to enable the transfer. At a minimum, the Amazon S3 source data must have the AWS managed policy [`  AmazonS3ReadOnlyAccess  `](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console) applied to it.
+2.  Consult the documentation for Amazon S3 to ensure you have configured any permissions necessary to enable the transfer. At a minimum, the Amazon S3 source data must have the AWS managed policy [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console) applied to it.
 
 ### Create a dataset
 
@@ -47,7 +47,7 @@ IP addresses
 
 Columbus, Ohio
 
-`  us-east5  `
+`us-east5`
 
 34.162.72.184  
 34.162.173.185  
@@ -60,7 +60,7 @@ Columbus, Ohio
 
 Dallas
 
-`  us-south1  `
+`us-south1`
 
 34.174.172.89  
 34.174.40.67  
@@ -73,7 +73,7 @@ Dallas
 
 Iowa
 
-`  us-central1  `
+`us-central1`
 
 34.121.70.114  
 34.71.81.17  
@@ -86,7 +86,7 @@ Iowa
 
 Las Vegas
 
-`  us-west4  `
+`us-west4`
 
 34.125.53.201  
 34.125.69.174  
@@ -99,7 +99,7 @@ Las Vegas
 
 Los Angeles
 
-`  us-west2  `
+`us-west2`
 
 35.236.59.167  
 34.94.132.139  
@@ -112,7 +112,7 @@ Los Angeles
 
 Mexico
 
-`  northamerica-south1  `
+`northamerica-south1`
 
 34.51.6.35  
 34.51.7.113  
@@ -125,7 +125,7 @@ Mexico
 
 Montréal
 
-`  northamerica-northeast1  `
+`northamerica-northeast1`
 
 34.95.20.253  
 35.203.31.219  
@@ -138,7 +138,7 @@ Montréal
 
 Northern Virginia
 
-`  us-east4  `
+`us-east4`
 
 35.245.95.250  
 35.245.126.228  
@@ -153,7 +153,7 @@ Northern Virginia
 
 Oregon
 
-`  us-west1  `
+`us-west1`
 
 35.197.117.207  
 35.199.178.12  
@@ -166,7 +166,7 @@ Oregon
 
 Salt Lake City
 
-`  us-west3  `
+`us-west3`
 
 34.106.37.58  
 34.106.85.113  
@@ -179,7 +179,7 @@ Salt Lake City
 
 São Paolo
 
-`  southamerica-east1  `
+`southamerica-east1`
 
 35.199.88.228  
 34.95.169.140  
@@ -192,7 +192,7 @@ São Paolo
 
 Santiago
 
-`  southamerica-west1  `
+`southamerica-west1`
 
 34.176.188.48  
 34.176.38.192  
@@ -205,7 +205,7 @@ Santiago
 
 South Carolina
 
-`  us-east1  `
+`us-east1`
 
 35.196.207.183  
 35.237.231.98  
@@ -218,7 +218,7 @@ South Carolina
 
 Toronto
 
-`  northamerica-northeast2  `
+`northamerica-northeast2`
 
 34.124.116.108  
 34.124.116.107  
@@ -233,7 +233,7 @@ Toronto
 
 Belgium
 
-`  europe-west1  `
+`europe-west1`
 
 35.240.36.149  
 35.205.171.56  
@@ -246,7 +246,7 @@ Belgium
 
 Berlin
 
-`  europe-west10  `
+`europe-west10`
 
 34.32.28.80  
 34.32.31.206  
@@ -259,7 +259,7 @@ Berlin
 
 Finland
 
-`  europe-north1  `
+`europe-north1`
 
 35.228.35.94  
 35.228.183.156  
@@ -272,7 +272,7 @@ Finland
 
 Frankfurt
 
-`  europe-west3  `
+`europe-west3`
 
 35.246.153.144  
 35.198.80.78  
@@ -285,7 +285,7 @@ Frankfurt
 
 London
 
-`  europe-west2  `
+`europe-west2`
 
 35.189.119.113  
 35.189.101.107  
@@ -298,7 +298,7 @@ London
 
 Madrid
 
-`  europe-southwest1  `
+`europe-southwest1`
 
 34.175.99.115  
 34.175.186.237  
@@ -311,7 +311,7 @@ Madrid
 
 Milan
 
-`  europe-west8  `
+`europe-west8`
 
 34.154.183.149  
 34.154.40.104  
@@ -324,7 +324,7 @@ Milan
 
 Netherlands
 
-`  europe-west4  `
+`europe-west4`
 
 35.204.237.173  
 35.204.18.163  
@@ -337,7 +337,7 @@ Netherlands
 
 Paris
 
-`  europe-west9  `
+`europe-west9`
 
 34.163.76.229  
 34.163.153.68  
@@ -350,7 +350,7 @@ Paris
 
 Stockholm
 
-`  europe-north2  `
+`europe-north2`
 
 34.51.133.48  
 34.51.136.177  
@@ -363,7 +363,7 @@ Stockholm
 
 Turin
 
-`  europe-west12  `
+`europe-west12`
 
 34.17.15.186  
 34.17.44.123  
@@ -376,7 +376,7 @@ Turin
 
 Warsaw
 
-`  europe-central2  `
+`europe-central2`
 
 34.118.72.8  
 34.118.45.245  
@@ -389,7 +389,7 @@ Warsaw
 
 Zürich
 
-`  europe-west6  `
+`europe-west6`
 
 34.65.205.160  
 34.65.121.140  
@@ -404,7 +404,7 @@ Zürich
 
 Bangkok
 
-`  asia-southeast3  `
+`asia-southeast3`
 
 34.15.142.80  
 34.15.131.78  
@@ -417,7 +417,7 @@ Bangkok
 
 Delhi
 
-`  asia-south2  `
+`asia-south2`
 
 34.126.212.96  
 34.126.212.85  
@@ -430,7 +430,7 @@ Delhi
 
 Hong Kong
 
-`  asia-east2  `
+`asia-east2`
 
 34.92.245.180  
 35.241.116.105  
@@ -443,7 +443,7 @@ Hong Kong
 
 Jakarta
 
-`  asia-southeast2  `
+`asia-southeast2`
 
 34.101.79.105  
 34.101.129.32  
@@ -456,7 +456,7 @@ Jakarta
 
 Melbourne
 
-`  australia-southeast2  `
+`australia-southeast2`
 
 34.126.196.95  
 34.126.196.106  
@@ -469,7 +469,7 @@ Melbourne
 
 Mumbai
 
-`  asia-south1  `
+`asia-south1`
 
 34.93.67.112  
 35.244.0.1  
@@ -482,7 +482,7 @@ Mumbai
 
 Osaka
 
-`  asia-northeast2  `
+`asia-northeast2`
 
 34.97.94.51  
 34.97.118.176  
@@ -495,7 +495,7 @@ Osaka
 
 Seoul
 
-`  asia-northeast3  `
+`asia-northeast3`
 
 34.64.152.215  
 34.64.140.241  
@@ -508,7 +508,7 @@ Seoul
 
 Singapore
 
-`  asia-southeast1  `
+`asia-southeast1`
 
 34.87.12.235  
 34.87.63.5  
@@ -521,7 +521,7 @@ Singapore
 
 Sydney
 
-`  australia-southeast1  `
+`australia-southeast1`
 
 35.189.33.150  
 35.189.38.5  
@@ -534,7 +534,7 @@ Sydney
 
 Taiwan
 
-`  asia-east1  `
+`asia-east1`
 
 35.221.201.20  
 35.194.177.253  
@@ -549,7 +549,7 @@ Taiwan
 
 Tokyo
 
-`  asia-northeast1  `
+`asia-northeast1`
 
 34.85.11.246  
 34.85.30.58  
@@ -566,7 +566,7 @@ Tokyo
 
 Dammam
 
-`  me-central2  `
+`me-central2`
 
 34.166.20.177  
 34.166.10.104  
@@ -579,7 +579,7 @@ Dammam
 
 Doha
 
-`  me-central1  `
+`me-central1`
 
 34.18.48.121  
 34.18.25.208  
@@ -592,7 +592,7 @@ Doha
 
 Tel Aviv
 
-`  me-west1  `
+`me-west1`
 
 34.165.184.115  
 34.165.110.74  
@@ -607,7 +607,7 @@ Tel Aviv
 
 Johannesburg
 
-`  africa-south1  `
+`africa-south1`
 
 34.35.11.24  
 34.35.10.66  
@@ -636,7 +636,7 @@ Johannesburg
 <tbody>
 <tr class="odd">
 <td>Data centers within <a href="https://europa.eu/european-union/about-eu/countries_en" class="external">member states</a> of the European Union <sup>1</sup></td>
-<td><code dir="ltr" translate="no">       EU      </code></td>
+<td><code dir="ltr" translate="no">EU</code></td>
 <td>34.76.156.158<br />
 34.76.156.172<br />
 34.76.136.146<br />
@@ -650,7 +650,7 @@ Johannesburg
 </tr>
 <tr class="even">
 <td>Data centers in the United States</td>
-<td><code dir="ltr" translate="no">       US      </code></td>
+<td><code dir="ltr" translate="no">US</code></td>
 <td>35.185.196.212<br />
 35.197.102.120<br />
 35.185.224.10<br />
@@ -665,7 +665,7 @@ Johannesburg
 </tbody>
 </table>
 
-<sup>1</sup> Data located in the `  EU  ` multi-region is not stored in the `  europe-west2  ` (London) or `  europe-west6  ` (Zürich) data centers.
+<sup>1</sup> Data located in the `EU` multi-region is not stored in the `europe-west2` (London) or `europe-west6` (Zürich) data centers.
 
 ### Grant access to your Amazon S3 bucket
 
@@ -710,7 +710,7 @@ Select one of the following options:
 
 4.  In the **Source type** section, select **Migration: Amazon Redshift** from the **Source** list.
 
-5.  In the **Transfer config name** section, enter a name for the transfer, such as `  My migration  ` , in the **Display name** field. The display name can be any value that allows you to easily identify the transfer if you need to modify it later.
+5.  In the **Transfer config name** section, enter a name for the transfer, such as `My migration` , in the **Display name** field. The display name can be any value that allows you to easily identify the transfer if you need to modify it later.
 
 6.  In the **Destination settings** section, choose [the dataset you created](https://docs.cloud.google.com/bigquery/docs/migration/redshift#create_a_dataset) from the **Dataset** list.
 
@@ -730,10 +730,10 @@ Select one of the following options:
     
     6.  For **Amazon Redshift Schema** , enter the Amazon Redshift schema you're migrating.
     
-    7.  For **Table name patterns** , specify a name or a pattern for matching the table names in the schema. You can use regular expressions to specify the pattern in the form: `  <table1Regex>;<table2Regex>  ` . The pattern should follow Java regular expression syntax. For example:
+    7.  For **Table name patterns** , specify a name or a pattern for matching the table names in the schema. You can use regular expressions to specify the pattern in the form: `<table1Regex>;<table2Regex>` . The pattern should follow Java regular expression syntax. For example:
         
-          - `  lineitem;ordertb  ` matches tables that are named `  lineitem  ` and `  ordertb  ` .
-          - `  .*  ` matches all tables.
+          - `lineitem;ordertb` matches tables that are named `lineitem` and `ordertb` .
+          - `.*` matches all tables.
         
         Leave this field empty to migrate all tables from the specified schema.
         
@@ -757,13 +757,13 @@ Select one of the following options:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag `  --transfer_config  ` . The following flags are also required:
+Enter the `bq mk` command and supply the transfer creation flag `--transfer_config` . The following flags are also required:
 
-  - `  --project_id  `
-  - `  --data_source  `
-  - `  --target_dataset  `
-  - `  --display_name  `
-  - `  --params  `
+  - `--project_id`
+  - `--data_source`
+  - `--target_dataset`
+  - `--display_name`
+  - `--params`
 
 <!-- end list -->
 
@@ -780,25 +780,25 @@ bq mk \
 
 Where:
 
-  - project\_id is your Google Cloud project ID. If `  --project_id  ` isn't specified, the default project is used.
-  - data\_source is the data source: `  redshift  ` .
+  - project\_id is your Google Cloud project ID. If `--project_id` isn't specified, the default project is used.
+  - data\_source is the data source: `redshift` .
   - dataset is the BigQuery target dataset for the transfer configuration.
   - name is the display name for the transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - service\_account : is the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set_required_permissions) .
-  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
+  - service\_account : is the service account name used to authenticate your transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set_required_permissions) .
+  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` .
 
 Parameters required for an Amazon Redshift transfer configuration are:
 
-  - `  jdbc_url  ` : The JDBC connection URL is used to locate the Amazon Redshift cluster.
-  - `  database_username  ` : The username to access your database to unload specified tables.
-  - `  database_password  ` : The password used with the username to access your database to unload specified tables.
-  - `  access_key_id  ` : The access key ID to sign requests made to AWS.
-  - `  secret_access_key  ` : The secret access key used with the access key ID to sign requests made to AWS.
-  - `  s3_bucket  ` : The Amazon S3 URI beginning with "s3://" and specifying a prefix for temporary files to be used.
-  - `  redshift_schema  ` : The Amazon Redshift schema that contains all the tables to be migrated.
-  - `  table_name_patterns  ` : Table name patterns separated by a semicolon (;). The table pattern is a regular expression for table(s) to migrate. If not provided, all tables under the database schema are migrated.
+  - `jdbc_url` : The JDBC connection URL is used to locate the Amazon Redshift cluster.
+  - `database_username` : The username to access your database to unload specified tables.
+  - `database_password` : The password used with the username to access your database to unload specified tables.
+  - `access_key_id` : The access key ID to sign requests made to AWS.
+  - `secret_access_key` : The secret access key used with the access key ID to sign requests made to AWS.
+  - `s3_bucket` : The Amazon S3 URI beginning with "s3://" and specifying a prefix for temporary files to be used.
+  - `redshift_schema` : The Amazon Redshift schema that contains all the tables to be migrated.
+  - `table_name_patterns` : Table name patterns separated by a semicolon (;). The table pattern is a regular expression for table(s) to migrate. If not provided, all tables under the database schema are migrated.
 
-For example, the following command creates an Amazon Redshift transfer named `  My Transfer  ` with a target dataset named `  mydataset  ` and a project with the ID of `  google.com:myproject  ` .
+For example, the following command creates an Amazon Redshift transfer named `My Transfer` with a target dataset named `mydataset` and a project with the ID of `google.com:myproject` .
 
     bq mk \
         --transfer_config \
@@ -812,7 +812,7 @@ For example, the following command creates an Amazon Redshift transfer named `  
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 

@@ -1,64 +1,64 @@
 # Transcribe audio files with the ML.TRANSCRIBE function
 
-This document describes how to use the [`  ML.TRANSCRIBE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to transcribe audio files from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+This document describes how to use the [`ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to transcribe audio files from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 ## Supported locations
 
 You must create the remote model used in this procedure in one of the following [locations](https://docs.cloud.google.com/bigquery/docs/locations) :
 
-  - `  asia-northeast1  `
-  - `  asia-south1  `
-  - `  asia-southeast1  `
-  - `  australia-southeast1  `
-  - `  eu  `
-  - `  europe-west1  `
-  - `  europe-west2  `
-  - `  europe-west3  `
-  - `  europe-west4  `
-  - `  northamerica-northeast1  `
-  - `  us  `
-  - `  us-central1  `
-  - `  us-east1  `
-  - `  us-east4  `
-  - `  us-west1  `
+  - `asia-northeast1`
+  - `asia-south1`
+  - `asia-southeast1`
+  - `australia-southeast1`
+  - `eu`
+  - `europe-west1`
+  - `europe-west2`
+  - `europe-west3`
+  - `europe-west4`
+  - `northamerica-northeast1`
+  - `us`
+  - `us-central1`
+  - `us-east1`
+  - `us-east4`
+  - `us-west1`
 
-You must run the `  ML.TRANSCRIBE  ` function in the same region as the remote model.
+You must run the `ML.TRANSCRIBE` function in the same region as the remote model.
 
 ## Required roles
 
 To create a remote model and transcribe audio files, you need the following Identity and Access Management (IAM) roles at the project level:
 
-  - Create a speech recognizer: Cloud Speech Editor ( `  roles/speech.editor  ` )
+  - Create a speech recognizer: Cloud Speech Editor ( `roles/speech.editor` )
 
-  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )
+  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` )
 
-  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` )
+  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` )
     
-    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
+    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` )
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` )
 
-  - Create BigQuery jobs: BigQuery Job User ( `  roles/bigquery.jobUser  ` )
+  - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` )
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
-  - Create an object table: `  bigquery.tables.create  ` and `  bigquery.tables.update  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
+  - Create an object table: `bigquery.tables.create` and `bigquery.tables.update`
   - Create a speech recognizer:
-      - `  speech.recognizers.create  `
-      - `  speech.recognizers.get  `
-      - `  speech.recognizers.recognize  `
-      - `  speech.recognizers.update  `
+      - `speech.recognizers.create`
+      - `speech.recognizers.get`
+      - `speech.recognizers.recognize`
+      - `speech.recognizers.update`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
 
@@ -68,9 +68,9 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 Speech-to-Text supports resources called recognizers. Recognizers represent stored and reusable recognition configurations. You can [create a recognizer](https://docs.cloud.google.com/speech-to-text/v2/docs/recognizers) to logically group together transcriptions or traffic for your application.
 
-Creating a speech recognizer is optional. If you choose to create a speech recognizer, note the project ID, location, and recognizer ID of the recognizer for use in the `  CREATE MODEL  ` statement, as described in [`  SPEECH_RECOGNIZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) . If you choose not to create a speech recognizer, you must specify a value for the [`  recognition_config  ` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe#arguments) of the `  ML.TRANSCRIBE  ` function.
+Creating a speech recognizer is optional. If you choose to create a speech recognizer, note the project ID, location, and recognizer ID of the recognizer for use in the `CREATE MODEL` statement, as described in [`SPEECH_RECOGNIZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) . If you choose not to create a speech recognizer, you must specify a value for the [`recognition_config` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe#arguments) of the `ML.TRANSCRIBE` function.
 
-You can only use the `  chirp  ` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the speech recognizer or `  recognition_config  ` value that you provide.
+You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the speech recognizer or `recognition_config` value that you provide.
 
 ## Create a dataset
 
@@ -105,7 +105,7 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
     ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
@@ -160,7 +160,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -196,7 +196,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -334,13 +334,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -374,13 +374,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -392,7 +392,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -404,7 +404,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -430,7 +430,7 @@ Select one of the following options:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  Click the **Select a role** field and then type `  Cloud Speech Client  ` in **Filter** .
+4.  Click the **Select a role** field and then type `Cloud Speech Client` in **Filter** .
 
 5.  Click **Add another role** .
 
@@ -440,7 +440,7 @@ Select one of the following options:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
 
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/speech.client' --condition=None
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/storage.objectViewer' --condition=None
@@ -450,23 +450,23 @@ Replace the following:
   - `  PROJECT_NUMBER  ` : your project number.
   - `  MEMBER  ` : the service account ID that you copied earlier.
 
-Failure to grant the permission results in a `  Permission denied  ` error.
+Failure to grant the permission results in a `Permission denied` error.
 
 **Note:** If you create the recognizer in a different project than the Cloud Storage bucket used by the object table, grant the service account Identity and Access Management (IAM) roles as follows:
 
   - Grant the service account the Cloud Speech Client role in the project that contains the recognizer.
   - Grant the service account the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
-  - Grant the Speech-to-Text service agent ( `  service- my_project_number @gcp-sa-speech.iam.gserviceaccount.com  ` ) the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
+  - Grant the Speech-to-Text service agent ( `service- my_project_number @gcp-sa-speech.iam.gserviceaccount.com` ) the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
 
 ## Create an object table
 
 [Create an object table](https://docs.cloud.google.com/bigquery/docs/object-tables) over a set of audio files in Cloud Storage. The audio files in the object table must be of a [supported type](https://docs.cloud.google.com/speech-to-text/docs/encoding#audio-encodings) .
 
-The Cloud Storage bucket used by the object table should be in the same project where you plan to create the model and call the `  ML.TRANSCRIBE  ` function. If you want to call the `  ML.TRANSCRIBE  ` function in a different project than the one that contains the Cloud Storage bucket used by the object table, you must [grant the Storage Admin role at the bucket level](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to the `  service-A@gcp-sa-aiplatform.iam.gserviceaccount.com  ` service account.
+The Cloud Storage bucket used by the object table should be in the same project where you plan to create the model and call the `ML.TRANSCRIBE` function. If you want to call the `ML.TRANSCRIBE` function in a different project than the one that contains the Cloud Storage bucket used by the object table, you must [grant the Storage Admin role at the bucket level](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to the `service-A@gcp-sa-aiplatform.iam.gserviceaccount.com` service account.
 
 ## Create a model
 
-Create a remote model with a [`  REMOTE_SERVICE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_SPEECH_TO_TEXT_V2  ` :
+Create a remote model with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_SPEECH_TO_TEXT_V2` :
 
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
@@ -486,9 +486,9 @@ Replace the following:
 
   - `  REGION  ` : the region used by the connection.
 
-  - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
+  - `  CONNECTION_ID  ` : the connection ID—for example, `myconnection` .
     
-    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
 
   - `  PROJECT_NUMBER  ` : the project number of the project that contains the speech recognizer. You can find this value on the **Project info** card in the **Dashboard** page of the Google Cloud console.
 
@@ -496,15 +496,15 @@ Replace the following:
 
   - `  RECOGNIZER_ID  ` : the speech recognizer ID. You can find this value in the **ID** field on the [**List recognizers** page](https://console.cloud.google.com/speech/recognizers/list) of the Google Cloud console.
     
-    This option isn't required. If you don't specify a value for it, a default recognizer is used. In that case, you must specify a value for the `  recognition_config  ` parameter of the `  ML.TRANSCRIBE  ` function in order to provide a configuration for the default recognizer.
+    This option isn't required. If you don't specify a value for it, a default recognizer is used. In that case, you must specify a value for the `recognition_config` parameter of the `ML.TRANSCRIBE` function in order to provide a configuration for the default recognizer.
     
-    You can only use the `  chirp  ` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the `  recognition_config  ` value that you provide.
+    You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the `recognition_config` value that you provide.
 
 **Important:** You must specify the project ID for the connection even if the connection is in the default project.
 
 ## Transcribe audio files
 
-Transcribe audio files with the `  ML.TRANSCRIBE  ` function:
+Transcribe audio files with the `ML.TRANSCRIBE` function:
 
     SELECT *
     FROM ML.TRANSCRIBE(
@@ -523,19 +523,19 @@ Replace the following:
 
   - `  OBJECT_TABLE_NAME  ` : the name of the object table that contains the URIs of the audio files to process.
 
-  - `  recognition_config  ` : a [`  RecognitionConfig  ` resource](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers#recognitionconfig) in JSON format.
+  - `  recognition_config  ` : a [`RecognitionConfig` resource](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers#recognitionconfig) in JSON format.
     
-    If a recognizer has been specified for the remote model by using the [`  SPEECH_RECOGNIZER  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) , you can't specify a `  recognition_config  ` value.
+    If a recognizer has been specified for the remote model by using the [`SPEECH_RECOGNIZER` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) , you can't specify a `recognition_config` value.
     
-    If no recognizer has been specified for the remote model by using the `  SPEECH_RECOGNIZER  ` option, you must specify a `  recognition_config  ` value. This value is used to provide a configuration for the default recognizer.
+    If no recognizer has been specified for the remote model by using the `SPEECH_RECOGNIZER` option, you must specify a `recognition_config` value. This value is used to provide a configuration for the default recognizer.
     
-    You can only use the `  chirp  ` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the `  recognition_config  ` value that you provide.
+    You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the `recognition_config` value that you provide.
 
 ## Examples
 
 **Example 1**
 
-The following example transcribes the audio files represented by the `  audio  ` table without overriding the recognizer's default configuration:
+The following example transcribes the audio files represented by the `audio` table without overriding the recognizer's default configuration:
 
     SELECT *
     FROM ML.TRANSCRIBE(
@@ -543,7 +543,7 @@ The following example transcribes the audio files represented by the `  audio  `
       TABLE `myproject.mydataset.audio`
     );
 
-The following example transcribes the audio files represented by the `  audio  ` table and provides a configuration for the default recognizer:
+The following example transcribes the audio files represented by the `audio` table and provides a configuration for the default recognizer:
 
     SELECT *
     FROM ML.TRANSCRIBE(

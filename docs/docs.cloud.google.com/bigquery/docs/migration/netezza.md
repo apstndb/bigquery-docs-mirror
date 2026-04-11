@@ -33,7 +33,7 @@ The diagram shows the following data abstraction layers:
 
   - **Disk enclosure.** The physical space inside of the appliance where the disks are mounted.
   - **Disks.** Physical drives within the disk enclosures store the databases and tables.
-  - **Data slices.** Logical representation of the data that is saved on a disk. Data is distributed across the data slices using a distribution key. You can monitor the status of data slices by using `  nzds  ` commands.
+  - **Data slices.** Logical representation of the data that is saved on a disk. Data is distributed across the data slices using a distribution key. You can monitor the status of data slices by using `nzds` commands.
   - **Data partitions.** Logical representation of a data slice that is managed by a specific [Snippet Processing Units (SPUs)](https://www.ibm.com/support/knowledgecenter/en/SSULQD_7.2.1/com.ibm.nz.adm.doc/r_sysadm_nz_hardware_components.html) . Each SPU owns one or more data partition containing the user data that the SPU is responsible for processing during queries.
 
 All of the system components are connected by network fabric. The Netezza appliance runs a customized protocol based on IP addresses.
@@ -146,7 +146,7 @@ To help with your SQL code migration, use [batch SQL translation](https://docs.c
 
 ### Function comparison
 
-It is important to understand how Netezza functions map to BigQuery functions. For example, the Netezza `  Months_Between  ` function outputs a decimal, while the BigQuery `  DateDiff  ` function outputs an integer. Therefore, you must use a [custom UDF function](https://docs.cloud.google.com/bigquery/docs/migration/netezza#replacing_months_between) to output the correct data type. For a detailed comparison between Netezza SQL and GoogleSQL functions, see the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .
+It is important to understand how Netezza functions map to BigQuery functions. For example, the Netezza `Months_Between` function outputs a decimal, while the BigQuery `DateDiff` function outputs an integer. Therefore, you must use a [custom UDF function](https://docs.cloud.google.com/bigquery/docs/migration/netezza#replacing_months_between) to output the correct data type. For a detailed comparison between Netezza SQL and GoogleSQL functions, see the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .
 
 ## Data migration
 
@@ -156,7 +156,7 @@ To migrate data from Netezza to BigQuery, you export data out of Netezza, transf
 
 To explore data from Netezza database tables, we recommend that you export to an external table in the CSV format. For more information, see [Unloading data to a remote client system](https://www.ibm.com/docs/en/psfa/7.2.1?topic=tables-unloading-data-remote-client-system) . You can also read data using third-party systems like Informatica (or custom ETL) using JDBC/ODBC connectors to produce CSV files.
 
-Netezza only supports export of uncompressed flat files (CSV) for each table. However, if you're exporting large tables, the uncompressed CSV can become very large. If possible, consider converting the CSV to a schema-aware format such as Parquet, Avro, or ORC, which results in smaller export files with higher reliability. If CSV is the only available format, we recommend that you compress the export files to reduce file size before you upload to Google Cloud. Reducing the file size helps to make the upload faster and increases the reliability of the transfer. If you transfer files to Cloud Storage, you can use the `  --gzip-local  ` flag in a [`  gcloud storage cp  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cp) , which compresses the files before uploading them.
+Netezza only supports export of uncompressed flat files (CSV) for each table. However, if you're exporting large tables, the uncompressed CSV can become very large. If possible, consider converting the CSV to a schema-aware format such as Parquet, Avro, or ORC, which results in smaller export files with higher reliability. If CSV is the only available format, we recommend that you compress the export files to reduce file size before you upload to Google Cloud. Reducing the file size helps to make the upload faster and increases the reliability of the transfer. If you transfer files to Cloud Storage, you can use the `--gzip-local` flag in a [`gcloud storage cp` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cp) , which compresses the files before uploading them.
 
 ### Data transfer and staging
 
@@ -164,7 +164,7 @@ After data is exported, it needs to be transferred and staged on Google Cloud. T
 
 When you use the Google Cloud CLI, you can automate and parallelize the transfer of files to Cloud Storage. Limit file sizes to 4 TB (uncompressed) for faster loading into BigQuery. However, you have to export the schema beforehand. This is a good opportunity to optimize BigQuery using partitioning and clustering.
 
-Use [`  gcloud storage bucket create  `](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create) to create the staging buckets for storage of the exported data, and use [`  gcloud storage cp  `](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cp) to transfer the data export files into Cloud Storage buckets.
+Use [`gcloud storage bucket create`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create) to create the staging buckets for storage of the exported data, and use [`gcloud storage cp`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cp) to transfer the data export files into Cloud Storage buckets.
 
 The gcloud CLI automatically performs the copy operation using a combination of multithreading and multiprocessing.
 

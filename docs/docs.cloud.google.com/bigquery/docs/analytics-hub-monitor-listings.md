@@ -2,9 +2,9 @@
 
 This document describes how to monitor listings in BigQuery sharing (formerly Analytics Hub). As a data provider, you can track the usage metrics for your listings. There are two methods to get the usage metrics for your shared data:
 
-  - [Use BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-analytics-hub) . You can use Sharing to view the usage metrics dashboard for your listings. This dashboard includes daily subscriptions, daily executed jobs, the number of subscribers for each organization, and job frequency for each table. You can retrieve the usage metrics for your shared data by querying the `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view.
+  - [Use BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-analytics-hub) . You can use Sharing to view the usage metrics dashboard for your listings. This dashboard includes daily subscriptions, daily executed jobs, the number of subscribers for each organization, and job frequency for each table. You can retrieve the usage metrics for your shared data by querying the `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view.
 
-  - [Use the `  INFORMATION_SCHEMA  ` view](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-information-schema) . You can track how subscribers use your datasets by querying the `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view.
+  - [Use the `INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-information-schema) . You can track how subscribers use your datasets by querying the `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view.
 
 ## Use Sharing
 
@@ -35,9 +35,9 @@ The page displays the following usage metrics:
 
 **Note:** You can also use the [BigQuery sharing subscriber APIs](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) to retrieve the **Total Subscriptions** , **Total Subscribers** , and **Daily Subscriptions** fields.
 
-## Use `     INFORMATION_SCHEMA    ` view
+## Use `INFORMATION_SCHEMA` view
 
-Data providers can track how subscribers use datasets by querying the [`  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) . Ensure that you have the required role to query this view.
+Data providers can track how subscribers use datasets by querying the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) . Ensure that you have the required role to query this view.
 
 To run the query against a Google Cloud project other than your default project, use the following format:
 
@@ -48,9 +48,9 @@ Replace the following:
   - `  PROJECT_ID  ` : the Google Cloud project ID
   - `  REGION_NAME  ` : the BigQuery dataset region name
 
-For example, `  myproject.region-us.INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` .
+For example, `myproject.region-us.INFORMATION_SCHEMA.SHARED_DATASET_USAGE` .
 
-The following examples describe how to view the usage metrics by querying the `  INFORMATION_SCHEMA  ` view.
+The following examples describe how to view the usage metrics by querying the `INFORMATION_SCHEMA` view.
 
 ### Get the total number of jobs executed on all shared tables
 
@@ -73,10 +73,10 @@ The result is similar to the following:
 +------------+
 ```
 
-To check the total jobs run by subscribers, use the `  WHERE  ` clause:
+To check the total jobs run by subscribers, use the `WHERE` clause:
 
-  - For datasets, use `  WHERE dataset_id = "..."  ` .
-  - For tables, use `  WHERE dataset_id = "..." AND table_id = "..."  ` .
+  - For datasets, use `WHERE dataset_id = "..."` .
+  - For tables, use `WHERE dataset_id = "..." AND table_id = "..."` .
 
 ### Get the most used table based on the number of rows processed
 
@@ -108,7 +108,7 @@ The output is similar to the following:
 
 ### Find the top organizations that consume your tables
 
-The following query calculates the top subscribers based on the number of bytes processed from your tables. You can also use the `  num_rows_processed  ` column as a metric.
+The following query calculates the top subscribers based on the number of bytes processed from your tables. You can also use the `num_rows_processed` column as a metric.
 
 ``` notranslate
 SELECT
@@ -129,11 +129,11 @@ The output is similar to the following:
     | 12345                    | myorganization                 | 15             |
     +--------------------------+--------------------------------+----------------+
 
-For subscribers without an organization, you can use `  job_project_number  ` instead of `  subscriber_org_number  ` .
+For subscribers without an organization, you can use `job_project_number` instead of `subscriber_org_number` .
 
 ### Get usage metrics for your data exchange
 
-If your [data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) and source dataset are in different projects, follow these step to view the usage metrics for your data exchange:
+If your [data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) and source dataset are in different projects, follow these steps to view the usage metrics for your data exchange:
 
 1.  Find all [listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#listings) that belong to your data exchange.
 2.  Retrieve the source dataset attached to the listing.

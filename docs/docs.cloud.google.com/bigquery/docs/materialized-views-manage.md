@@ -23,25 +23,25 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ## Alter materialized views
 
-You can alter a materialized view through the Google Cloud console or the bq command-line tool, by using data definition language (DDL) with `  ALTER MATERIALIZED VIEW  ` and `  SET OPTIONS  ` . For a list of materialized view options, see [`  materialized_view_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_set_options_list) .
+You can alter a materialized view through the Google Cloud console or the bq command-line tool, by using data definition language (DDL) with `ALTER MATERIALIZED VIEW` and `SET OPTIONS` . For a list of materialized view options, see [`materialized_view_set_options_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_set_options_list) .
 
-The following shows an example that sets `  enable_refresh  ` to `  true  ` . Adjust as needed for your use case.
+The following shows an example that sets `enable_refresh` to `true` . Adjust as needed for your use case.
 
 ### Required permissions
 
-To alter materialized views, you need the `  bigquery.tables.get  ` and `  bigquery.tables.update  ` IAM permissions.
+To alter materialized views, you need the `bigquery.tables.get` and `bigquery.tables.update` IAM permissions.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to alter a materialized view:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
 For more information about BigQuery Identity and Access Management (IAM), see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### SQL
 
-To alter a materialized view, use the [`  ALTER MATERIALIZED VIEW SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_materialized_view_set_options_statement) :
+To alter a materialized view, use the [`ALTER MATERIALIZED VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_materialized_view_set_options_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -66,7 +66,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Run the `  bq update  ` command:
+Run the `bq update` command:
 
 ``` notranslate
 bq update \
@@ -129,16 +129,16 @@ You can list materialized views through the Google Cloud console, the bq command
 
 ### Required permissions
 
-To list materialized views in a dataset, you need the `  bigquery.tables.list  ` IAM permission.
+To list materialized views in a dataset, you need the `bigquery.tables.list` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to list materialized views in a dataset:
 
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.user`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
 For more information on IAM roles and permissions in IAM, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -158,7 +158,7 @@ The process to list materialized views is identical to the process for listing t
 
 ### bq
 
-Issue the `  bq ls  ` command. The `  --format  ` flag can be used to control the output. If you are listing materialized views in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
+Issue the `bq ls` command. The `--format` flag can be used to control the output. If you are listing materialized views in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
 ``` notranslate
 bq ls --format=pretty project_id:dataset
@@ -169,7 +169,7 @@ Where:
   - project\_id is your project ID.
   - dataset is the name of the dataset.
 
-When you run the command, the `  Type  ` field displays the table type. For example:
+When you run the command, the `Type` field displays the table type. For example:
 
     +-------------------------+--------------------+----------------------+-------------------+
     |         tableId         | Type               |        Labels        | Time Partitioning |
@@ -180,17 +180,17 @@ When you run the command, the `  Type  ` field displays the table type. For exam
 
 Examples:
 
-Enter the following command to list materialized views in dataset `  mydataset  ` in your default project.
+Enter the following command to list materialized views in dataset `mydataset` in your default project.
 
     bq ls --format=pretty mydataset
 
-Enter the following command to list materialized views in dataset `  mydataset  ` in `  myotherproject  ` .
+Enter the following command to list materialized views in dataset `mydataset` in `myotherproject` .
 
     bq ls --format=pretty myotherproject:mydataset
 
 ### API
 
-To list materialized views using the API, call the [`  tables.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) method.
+To list materialized views using the API, call the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) method.
 
 ### Go
 
@@ -262,16 +262,16 @@ You can get information about a materialized view by using SQL, the bq command-l
 
 To query information about a materialized view, you need the following Identity and Access Management (IAM) permissions:
 
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.list  `
-  - `  bigquery.routines.get  `
-  - `  bigquery.routines.list  `
+  - `bigquery.tables.get`
+  - `bigquery.tables.list`
+  - `bigquery.routines.get`
+  - `bigquery.routines.list`
 
 Each of the following predefined IAM roles includes the preceding permissions:
 
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.admin`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -279,7 +279,7 @@ To get information about a materialized view, including any dependent [materiali
 
 ### SQL
 
-To get information about materialized views, query the [`  INFORMATION_SCHEMA.TABLES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) :
+To get information about materialized views, query the [`INFORMATION_SCHEMA.TABLES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -303,7 +303,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
 
 ``` notranslate
 bq show --project=project_id --format=prettyjson dataset.materialized_view
@@ -317,13 +317,13 @@ Replace the following:
 
 Example:
 
-Enter the following command to show information about the materialized view `  my_mv  ` in the `  report_views  ` dataset in the `  myproject  ` project.
+Enter the following command to show information about the materialized view `my_mv` in the `report_views` dataset in the `myproject` project.
 
     bq show --project=myproject --format=prettyjson report_views.my_mv
 
 ### API
 
-To get materialized view information by using the API, call the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method.
+To get materialized view information by using the API, call the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method.
 
 ## Delete materialized views
 
@@ -335,19 +335,19 @@ Deleting a materialized view also deletes any permissions associated with this m
 
 ### Required permissions
 
-To delete materialized views, you need the `  bigquery.tables.delete  ` IAM permission.
+To delete materialized views, you need the `bigquery.tables.delete` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to delete a materialized view:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
 For more information about BigQuery Identity and Access Management (IAM), see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### SQL
 
-To delete a materialized view, use the [`  DROP MATERIALIZED VIEW  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_materialized_view_statement) :
+To delete a materialized view, use the [`DROP MATERIALIZED VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_materialized_view_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -371,15 +371,15 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq rm  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) to delete the materialized view.
+Use the [`bq rm` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) to delete the materialized view.
 
 ### API
 
-Call the [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) method and specify values for the `  projectId  ` , `  datasetId  ` , and `  tableId  ` [parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete#path-parameters) :
+Call the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) method and specify values for the `projectId` , `datasetId` , and `tableId` [parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete#path-parameters) :
 
-  - Assign the `  projectId  ` parameter to your project ID.
-  - Assign the `  datasetId  ` parameter to your dataset ID.
-  - Assign the `  tableId  ` parameter to the table ID of the materialized view that you're deleting.
+  - Assign the `projectId` parameter to your project ID.
+  - Assign the `datasetId` parameter to your dataset ID.
+  - Assign the `tableId` parameter to the table ID of the materialized view that you're deleting.
 
 ### Java
 
@@ -441,7 +441,7 @@ This section describes how to do the following:
 
 ### Automatic refresh
 
-You can enable or disable automatic refresh at any time. The automatic refresh job is performed by the `  bigquery-adminbot@system.gserviceaccount.com  ` service account and appears in the materialized view project's job history.
+You can enable or disable automatic refresh at any time. The automatic refresh job is performed by the `bigquery-adminbot@system.gserviceaccount.com` service account and appears in the materialized view project's job history.
 
 By default, cached data in a materialized view is automatically refreshed from the base table within 5 to 30 minutes of a change to the base table, for example, row insertions or row deletions.
 
@@ -449,7 +449,7 @@ You can set the [refresh frequency cap](https://docs.cloud.google.com/bigquery/d
 
 #### Enable and disable automatic refresh
 
-To turn automatic refresh off when you create a materialized view, set `  enable_refresh  ` to `  false  ` .
+To turn automatic refresh off when you create a materialized view, set `enable_refresh` to `false` .
 
 ``` notranslate
 CREATE MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
@@ -458,7 +458,7 @@ OPTIONS (enable_refresh = false)
 AS SELECT ...
 ```
 
-For an existing materialized view, you can modify the `  enable_refresh  ` value using `  ALTER MATERIALIZED VIEW  ` .
+For an existing materialized view, you can modify the `enable_refresh` value using `ALTER MATERIALIZED VIEW` .
 
 ``` notranslate
 ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
@@ -473,7 +473,7 @@ You can configure a frequency cap on how often automatic refresh is run. By defa
 
 The refresh frequency cap can be changed at any time.
 
-To set a refresh frequency cap when you create a materialized view, set `  refresh_interval_minutes  ` in DDL (or `  refresh_interval_ms  ` in the API and bq command-line tool), to the value you want.
+To set a refresh frequency cap when you create a materialized view, set `refresh_interval_minutes` in DDL (or `refresh_interval_ms` in the API and bq command-line tool), to the value you want.
 
 ``` notranslate
 CREATE MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
@@ -506,17 +506,17 @@ You can manually refresh a materialized view at any time.
 
 #### Required permissions
 
-To manually refresh materialized views, you need the `  bigquery.tables.getData  ` , `  bigquery.tables.update  ` , and `  bigquery.tables.updateData  ` IAM permissions.
+To manually refresh materialized views, you need the `bigquery.tables.getData` , `bigquery.tables.update` , and `bigquery.tables.updateData` IAM permissions.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to manually refresh a materialized view:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
 For more information about BigQuery Identity and Access Management (IAM), see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To update the data in the materialized view, call the [`  BQ.REFRESH_MATERIALIZED_VIEW  `](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_materialized_view) system procedure. When this procedure is called, BigQuery identifies the changes that have taken place in the base tables and applies those changes to the materialized view. The query to run `  BQ.REFRESH_MATERIALIZED_VIEW  ` finishes when the refresh is complete.
+To update the data in the materialized view, call the [`BQ.REFRESH_MATERIALIZED_VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_materialized_view) system procedure. When this procedure is called, BigQuery identifies the changes that have taken place in the base tables and applies those changes to the materialized view. The query to run `BQ.REFRESH_MATERIALIZED_VIEW` finishes when the refresh is complete.
 
 ``` notranslate
 CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT.DATASET.MATERIALIZED_VIEW');

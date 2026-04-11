@@ -17,84 +17,67 @@ Resource (table/partition) that is being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;type&quot;: enum (ResourceType),
-  &quot;destination&quot;: enum (ResourceDestination),
-  &quot;latestRun&quot;: {
-    object (TransferRunBrief)
-  },
-  &quot;latestStatusDetail&quot;: {
-    object (TransferResourceStatusDetail)
-  },
-  &quot;lastSuccessfulRun&quot;: {
-    object (TransferRunBrief)
-  },
-  &quot;hierarchyDetail&quot;: {
-    object (HierarchyDetail)
-  },
-  &quot;updateTime&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: enum (ResourceType),&quot;destination&quot;: enum (ResourceDestination),&quot;latestRun&quot;: {object (TransferRunBrief)},&quot;latestStatusDetail&quot;: {object (TransferResourceStatusDetail)},&quot;lastSuccessfulRun&quot;: {object (TransferRunBrief)},&quot;hierarchyDetail&quot;: {object (HierarchyDetail)},&quot;updateTime&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Identifier. Resource name.
 
-`  type  `
+`type`
 
-`  enum ( ResourceType  ` )
+` enum ( ResourceType  ` )
 
 Optional. Resource type.
 
-`  destination  `
+`destination`
 
-`  enum ( ResourceDestination  ` )
+` enum ( ResourceDestination  ` )
 
 Optional. Resource destination.
 
-`  latestRun  `
+`latestRun`
 
-`  object ( TransferRunBrief  ` )
+` object ( TransferRunBrief  ` )
 
 Optional. Run details for the latest run.
 
-`  latestStatusDetail  `
+`latestStatusDetail`
 
-`  object ( TransferResourceStatusDetail  ` )
+` object ( TransferResourceStatusDetail  ` )
 
 Optional. Status details for the latest run.
 
-`  lastSuccessfulRun  `
+`lastSuccessfulRun`
 
-`  object ( TransferRunBrief  ` )
+` object ( TransferRunBrief  ` )
 
 Output only. Run details for the last successful run.
 
-`  hierarchyDetail  `
+`hierarchyDetail`
 
-`  object ( HierarchyDetail  ` )
+` object ( HierarchyDetail  ` )
 
 Optional. Details about the hierarchy.
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Output only. Time when the resource was last updated.
 
 ## Methods
 
-### `             get           `
+### `            get           `
 
 Returns a transfer resource.
 
-### `             list           `
+### `            list           `
 
 Returns information about transfer resources.

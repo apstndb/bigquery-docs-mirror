@@ -12,7 +12,7 @@ Lists all tables in the specified dataset. Requires the READER dataset role.
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,15 +20,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the tables to list
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the tables to list
 
@@ -36,15 +36,15 @@ Required. Dataset ID of the tables to list
 
 Parameters
 
-`  maxResults  `
+`maxResults`
 
-`  integer  `
+`integer`
 
 The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token, returned by a previous call, to request the next page of results
 
@@ -69,177 +69,136 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;kind&quot;: string,
-  &quot;etag&quot;: string,
-  &quot;nextPageToken&quot;: string,
-  &quot;tables&quot;: [
-    {
-      &quot;kind&quot;: string,
-      &quot;id&quot;: string,
-      &quot;tableReference&quot;: {
-        object (TableReference)
-      },
-      &quot;friendlyName&quot;: string,
-      &quot;type&quot;: string,
-      &quot;timePartitioning&quot;: {
-        object (TimePartitioning)
-      },
-      &quot;rangePartitioning&quot;: {
-        object (RangePartitioning)
-      },
-      &quot;clustering&quot;: {
-        object (Clustering)
-      },
-      &quot;hivePartitioningOptions&quot;: {
-        object (HivePartitioningOptions)
-      },
-      &quot;labels&quot;: {
-        string: string,
-        ...
-      },
-      &quot;view&quot;: {
-        &quot;useLegacySql&quot;: boolean,
-        &quot;privacyPolicy&quot;: {
-          object (PrivacyPolicy)
-        }
-      },
-      &quot;creationTime&quot;: string,
-      &quot;expirationTime&quot;: string,
-      &quot;requirePartitionFilter&quot;: boolean
-    }
-  ],
-  &quot;totalItems&quot;: integer
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;etag&quot;: string,&quot;nextPageToken&quot;: string,&quot;tables&quot;: [{&quot;kind&quot;: string,&quot;id&quot;: string,&quot;tableReference&quot;: {object (TableReference)},&quot;friendlyName&quot;: string,&quot;type&quot;: string,&quot;timePartitioning&quot;: {object (TimePartitioning)},&quot;rangePartitioning&quot;: {object (RangePartitioning)},&quot;clustering&quot;: {object (Clustering)},&quot;hivePartitioningOptions&quot;: {object (HivePartitioningOptions)},&quot;labels&quot;: {string: string,...},&quot;view&quot;: {&quot;useLegacySql&quot;: boolean,&quot;privacyPolicy&quot;: {object (PrivacyPolicy)}},&quot;creationTime&quot;: string,&quot;expirationTime&quot;: string,&quot;requirePartitionFilter&quot;: boolean}],&quot;totalItems&quot;: integer}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  kind  `
+`kind`
 
-`  string  `
+`string`
 
 The type of list.
 
-`  etag  `
+`etag`
 
-`  string  `
+`string`
 
 A hash of this page of results.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 A token to request the next page of results.
 
-`  tables[]  `
+`tables[]`
 
-`  object  `
+`object`
 
 Tables in the requested dataset.
 
-`  tables[].kind  `
+`tables[].kind`
 
-`  string  `
+`string`
 
 The resource type.
 
-`  tables[].id  `
+`tables[].id`
 
-`  string  `
+`string`
 
 An opaque ID of the table.
 
-`  tables[].tableReference  `
+`tables[].tableReference`
 
-`  object ( TableReference  ` )
+` object ( TableReference  ` )
 
 A reference uniquely identifying table.
 
-`  tables[].friendlyName  `
+`tables[].friendlyName`
 
-`  string  `
+`string`
 
 The user-friendly name for this table.
 
-`  tables[].type  `
+`tables[].type`
 
-`  string  `
+`string`
 
 The type of table.
 
-`  tables[].timePartitioning  `
+`tables[].timePartitioning`
 
-`  object ( TimePartitioning  ` )
+` object ( TimePartitioning  ` )
 
 The time-based partitioning for this table.
 
-`  tables[].rangePartitioning  `
+`tables[].rangePartitioning`
 
-`  object ( RangePartitioning  ` )
+` object ( RangePartitioning  ` )
 
 The range partitioning for this table.
 
-`  tables[].clustering  `
+`tables[].clustering`
 
-`  object ( Clustering  ` )
+` object ( Clustering  ` )
 
 Clustering specification for this table, if configured.
 
-`  tables[].hivePartitioningOptions  `
+`tables[].hivePartitioningOptions`
 
-`  object ( HivePartitioningOptions  ` )
+` object ( HivePartitioningOptions  ` )
 
 The hive partitioning configuration for this table, when applicable.
 
-`  tables[].labels  `
+`tables[].labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 The labels associated with this table. You can use these to organize and group your tables.
 
-`  tables[].view  `
+`tables[].view`
 
-`  object  `
+`object`
 
 Additional details for a view.
 
-`  tables[].view.useLegacySql  `
+`tables[].view.useLegacySql`
 
-`  boolean  `
+`boolean`
 
 True if view is defined in legacy SQL dialect, false if in GoogleSQL.
 
-`  tables[].view.privacyPolicy  `
+`tables[].view.privacyPolicy`
 
-`  object ( PrivacyPolicy  ` )
+` object ( PrivacyPolicy  ` )
 
 Specifies the privacy policy for the view.
 
-`  tables[].creationTime  `
+`tables[].creationTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Output only. The time when this table was created, in milliseconds since the epoch.
 
-`  tables[].expirationTime  `
+`tables[].expirationTime`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed.
 
-`  tables[].requirePartitionFilter  `
+`tables[].requirePartitionFilter`
 
-`  boolean  `
+`boolean`
 
 Optional. If set to true, queries including this table must specify a partition filter. This filter is used for partition elimination.
 
-`  totalItems  `
+`totalItems`
 
-`  integer  `
+`integer`
 
 The total number of tables in the dataset.
 
@@ -247,9 +206,9 @@ The total number of tables in the dataset.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

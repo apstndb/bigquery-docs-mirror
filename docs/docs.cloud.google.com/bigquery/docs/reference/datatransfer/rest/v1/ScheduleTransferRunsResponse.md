@@ -13,21 +13,15 @@ A response to schedule transfer runs for a time range.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;runs&quot;: [
-    {
-      object (TransferRun)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;runs&quot;: [{object (TransferRun)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  runs[]  `
+`runs[]`
 
-`  object ( TransferRun  ` )
+` object ( TransferRun  ` )
 
 The transfer runs that were scheduled.

@@ -50,7 +50,7 @@ BigQuery DataFrames also contains code derived from the following third-party pa
   - [scikit-learn](https://scikit-learn.org/)
   - [XGBoost](https://xgboost.readthedocs.io/en/stable/)
 
-For details, see the [`  third_party/bigframes_vendored  `](https://github.com/googleapis/python-bigquery-dataframes/tree/main/third_party/bigframes_vendored) directory in the BigQuery DataFrames GitHub repository.
+For details, see the [`third_party/bigframes_vendored`](https://github.com/googleapis/python-bigquery-dataframes/tree/main/third_party/bigframes_vendored) directory in the BigQuery DataFrames GitHub repository.
 
 ## Quotas and limits
 
@@ -62,11 +62,11 @@ For details, see the [`  third_party/bigframes_vendored  `](https://github.com/g
 
   - BigQuery DataFrames is a set of open source Python libraries available for download at no extra cost.
   - BigQuery DataFrames uses BigQuery, Cloud Run functions, Vertex AI, and other Google Cloud services, which incur their own costs.
-  - During regular usage, BigQuery DataFrames stores temporary data, such as intermediate results, in BigQuery tables. These tables persist for seven days by default, and you are charged for the data stored in them. The tables are created in the `  _anonymous_  ` dataset in the Google Cloud project you specify in the [`  bf.options.bigquery.project  ` option](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html) .
+  - During regular usage, BigQuery DataFrames stores temporary data, such as intermediate results, in BigQuery tables. These tables persist for seven days by default, and you are charged for the data stored in them. The tables are created in the `_anonymous_` dataset in the Google Cloud project you specify in the [`bf.options.bigquery.project` option](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html) .
 
 ## What's next
 
   - Try the [BigQuery DataFrames quickstart](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .
   - [Install BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/install-dataframes) .
   - Learn how to [visualize graphs using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations) .
-  - Learn how to [use the `  dbt-bigquery  ` adapter](https://docs.cloud.google.com/bigquery/docs/dataframes-dbt) .
+  - Learn how to [use the `dbt-bigquery` adapter](https://docs.cloud.google.com/bigquery/docs/dataframes-dbt) .

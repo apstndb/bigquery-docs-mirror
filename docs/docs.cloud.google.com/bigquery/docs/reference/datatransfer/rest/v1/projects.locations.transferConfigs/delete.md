@@ -11,7 +11,7 @@ Deletes a data transfer configuration, including any associated transfer runs an
 
 ### HTTP request
 
-`  DELETE https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*/transferConfigs/*}  `
+`DELETE https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*/transferConfigs/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,21 +19,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The name of the resource to delete. If you are using the regionless method, the location must be `  US  ` and the name should be in the following form:
+Required. The name of the resource to delete. If you are using the regionless method, the location must be `US` and the name should be in the following form:
 
-  - `  projects/{projectId}/transferConfigs/{configId}  `
+  - `projects/{projectId}/transferConfigs/{configId}`
 
 If you are using the regionalized method, the name should be in the following form:
 
-  - `  projects/{projectId}/locations/{locationId}/transferConfigs/{configId}  `
+  - `projects/{projectId}/locations/{locationId}/transferConfigs/{configId}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.transfers.update  `
+  - `bigquery.transfers.update`
 
 ### Request body
 
@@ -47,6 +47,6 @@ If successful, the response body is an empty JSON object.
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -6,7 +6,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 This tutorial shows you how to export a transformer model to [Open Neural Network Exchange (ONNX)](https://onnx.ai) format, import the ONNX model into a BigQuery dataset, and then use the model to generate embeddings from a SQL query.
 
-This tutorial uses the [`  sentence-transformers/all-MiniLM-L6-v2  ` model](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) . This sentence transformer model is known for its fast and effective performance at generating sentence embeddings. Sentence embedding enables tasks like semantic search, clustering, and sentence similarity by capturing the underlying meaning of the text.
+This tutorial uses the [`sentence-transformers/all-MiniLM-L6-v2` model](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) . This sentence transformer model is known for its fast and effective performance at generating sentence embeddings. Sentence embedding enables tasks like semantic search, clustering, and sentence similarity by capturing the underlying meaning of the text.
 
 ONNX provides a uniform format that is designed to represent any machine learning (ML) framework. BigQuery ML support for ONNX lets you do the following:
 
@@ -16,9 +16,9 @@ ONNX provides a uniform format that is designed to represent any machine learnin
 
 ## Objectives
 
-  - Use the [Hugging Face Optimum CLI](https://huggingface.co/docs/optimum-onnx/onnx/overview) to export the `  sentence-transformers/all-MiniLM-L6-v2  ` model to ONNX.
-  - Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) to import the ONNX model into BigQuery.
-  - Use the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate embeddings with the imported ONNX model.
+  - Use the [Hugging Face Optimum CLI](https://huggingface.co/docs/optimum-onnx/onnx/overview) to export the `sentence-transformers/all-MiniLM-L6-v2` model to ONNX.
+  - Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) to import the ONNX model into BigQuery.
+  - Use the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate embeddings with the imported ONNX model.
 
 ## Costs
 
@@ -42,7 +42,7 @@ When you finish the tasks that are described in this document, you can avoid con
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,storage-component.googleapis.com)
 
@@ -56,8 +56,8 @@ If you're using an existing project, do the following.
 
 Make sure that you have the following role or roles on the project:
 
-  - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioAdmin  ` )
-  - [Storage Object Creator](https://docs.cloud.google.com/storage/docs/access-control/iam-roles#standard-roles) ( `  roles/storage.objectCreator  ` )
+  - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioAdmin` )
+  - [Storage Object Creator](https://docs.cloud.google.com/storage/docs/access-control/iam-roles#standard-roles) ( `roles/storage.objectCreator` )
 
 #### Check for the roles
 
@@ -93,13 +93,13 @@ For more information about IAM permissions in BigQuery, see [IAM permissions](ht
 
 ## Convert the transformer model files to ONNX
 
-Optionally, you can follow the steps in this section to manually convert the `  sentence-transformers/all-MiniLM-L6-v2  ` model and tokenizer to ONNX. Otherwise, you can use sample files from the public `  gs://cloud-samples-data  ` Cloud Storage bucket that have already been converted.
+Optionally, you can follow the steps in this section to manually convert the `sentence-transformers/all-MiniLM-L6-v2` model and tokenizer to ONNX. Otherwise, you can use sample files from the public `gs://cloud-samples-data` Cloud Storage bucket that have already been converted.
 
 If you choose to manually convert the files, you must have a local command-line environment that has Python installed. For more information on installing Python, see [Python downloads](https://www.python.org/downloads/) .
 
 ### Export the transformer model to ONNX
 
-Use the Hugging Face Optimum CLI to export the `  sentence-transformers/all-MiniLM-L6-v2  ` model to ONNX. For more information about exporting models with the Optimum CLI, see [Export a model to ONNX with `  optimum.exporters.onnx  `](https://huggingface.co/docs/optimum-onnx/onnx/usage_guides/export_a_model#exporting-a-model-to-onnx-using-the-cli) .
+Use the Hugging Face Optimum CLI to export the `sentence-transformers/all-MiniLM-L6-v2` model to ONNX. For more information about exporting models with the Optimum CLI, see [Export a model to ONNX with `optimum.exporters.onnx`](https://huggingface.co/docs/optimum-onnx/onnx/usage_guides/export_a_model#exporting-a-model-to-onnx-using-the-cli) .
 
 To export the model, open a command-line environment and follow these steps:
 
@@ -107,14 +107,14 @@ To export the model, open a command-line environment and follow these steps:
     
         pip install optimum[onnx]
 
-2.  Export the model. The `  --model  ` argument specifies the Hugging Face model ID. The `  --opset  ` argument specifies the ONNXRuntime library version, and is set to `  17  ` to maintain compatibility with the ONNXRuntime library supported by BigQuery.
+2.  Export the model. The `--model` argument specifies the Hugging Face model ID. The `--opset` argument specifies the ONNXRuntime library version, and is set to `17` to maintain compatibility with the ONNXRuntime library supported by BigQuery.
     
         optimum-cli export onnx \
           --model sentence-transformers/all-MiniLM-L6-v2 \
           --task sentence-similarity \
           --opset 17 all-MiniLM-L6-v2/
 
-The model file is exported to the `  all-MiniLM-L6-v2  ` directory as `  model.onnx  ` .
+The model file is exported to the `all-MiniLM-L6-v2` directory as `model.onnx` .
 
 ### Apply quantization to the transformer model
 
@@ -126,13 +126,13 @@ To apply quantization to the model, run the following command on the command-lin
       --onnx_model all-MiniLM-L6-v2/ \
       --avx512_vnni -o all-MiniLM-L6-v2_quantized
 
-The quantized model file is exported to the `  all-MiniLM-L6-v2_quantized  ` directory as `  model_quantized.onnx  ` .
+The quantized model file is exported to the `all-MiniLM-L6-v2_quantized` directory as `model_quantized.onnx` .
 
 ### Convert the tokenizer to ONNX
 
-To generate embeddings using a transformer model in ONNX format, you typically use a [tokenizer](https://huggingface.co/docs/transformers/en/main_classes/tokenizer) to produce two inputs to the model, [`  input_ids  `](https://huggingface.co/docs/transformers/glossary#input-ids) and [`  attention_mask  `](https://huggingface.co/docs/transformers/glossary#attention-mask) .
+To generate embeddings using a transformer model in ONNX format, you typically use a [tokenizer](https://huggingface.co/docs/transformers/en/main_classes/tokenizer) to produce two inputs to the model, [`input_ids`](https://huggingface.co/docs/transformers/glossary#input-ids) and [`attention_mask`](https://huggingface.co/docs/transformers/glossary#attention-mask) .
 
-To produce these inputs, convert the tokenizer for the `  sentence-transformers/all-MiniLM-L6-v2  ` model to ONNX format by using the [`  onnxruntime-extensions  `](https://github.com/microsoft/onnxruntime-extensions) library. After you convert the tokenizer, you can perform tokenization directly on raw text inputs to generate ONNX predictions.
+To produce these inputs, convert the tokenizer for the `sentence-transformers/all-MiniLM-L6-v2` model to ONNX format by using the [`onnxruntime-extensions`](https://github.com/microsoft/onnxruntime-extensions) library. After you convert the tokenizer, you can perform tokenization directly on raw text inputs to generate ONNX predictions.
 
 To convert the tokenizer, follow these steps on the command-line:
 
@@ -140,11 +140,11 @@ To convert the tokenizer, follow these steps on the command-line:
     
         pip install optimum[onnx]
 
-2.  Using the text editor of your choice, create a file named `  convert-tokenizer.py  ` . The following example uses the nano text editor:
+2.  Using the text editor of your choice, create a file named `convert-tokenizer.py` . The following example uses the nano text editor:
     
         nano convert-tokenizer.py
 
-3.  Copy and paste the following Python script into the `  convert-tokenizer.py  ` file:
+3.  Copy and paste the following Python script into the `convert-tokenizer.py` file:
     
         from onnxruntime_extensions import gen_processing_models
         
@@ -166,13 +166,13 @@ To convert the tokenizer, follow these steps on the command-line:
         with open(onnx_tokenizer_path, "wb") as f:
           f.write(tokenizer_onnx_model.SerializeToString())
 
-4.  Save the `  convert-tokenizer.py  ` file.
+4.  Save the `convert-tokenizer.py` file.
 
 5.  Run the Python script to convert the tokenizer:
     
         python convert-tokenizer.py
 
-The converted tokenizer is exported to the `  all-MiniLM-L6-v2_quantized  ` directory as `  tokenizer.onnx  ` .
+The converted tokenizer is exported to the `all-MiniLM-L6-v2_quantized` directory as `tokenizer.onnx` .
 
 ### Upload the converted model files to Cloud Storage
 
@@ -197,7 +197,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -205,9 +205,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -224,7 +224,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -257,7 +257,7 @@ Select one of the following options:
     
     [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
-2.  In the query editor, run the following `  CREATE MODEL  ` statement to create the `  tokenizer  ` model.
+2.  In the query editor, run the following `CREATE MODEL` statement to create the `tokenizer` model.
     
     ``` notranslate
      CREATE OR REPLACE MODEL `bqml_tutorial.tokenizer`
@@ -265,9 +265,9 @@ Select one of the following options:
        MODEL_PATH='TOKENIZER_BUCKET_PATH')
     ```
     
-    Replace `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx  ` .
+    Replace `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx` .
     
-    When the operation is complete, you see a message similar to the following: `  Successfully created model named tokenizer  ` in the **Query results** pane.
+    When the operation is complete, you see a message similar to the following: `Successfully created model named tokenizer` in the **Query results** pane.
 
 3.  Click **Go to model** to open the **Details** pane.
 
@@ -275,7 +275,7 @@ Select one of the following options:
     
     ![The \*\*Details\*\* pane for the \`tokenizer\` model](https://docs.cloud.google.com/static/bigquery/images/tokenizer-details.png)
 
-5.  In the query editor, run the following `  CREATE MODEL  ` statement to create the `  all-MiniLM-L6-v2  ` model.
+5.  In the query editor, run the following `CREATE MODEL` statement to create the `all-MiniLM-L6-v2` model.
     
     ``` notranslate
      CREATE OR REPLACE MODEL `bqml_tutorial.all-MiniLM-L6-v2`
@@ -283,9 +283,9 @@ Select one of the following options:
        MODEL_PATH='TRANSFORMER_BUCKET_PATH')
     ```
     
-    Replace `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx  ` .
+    Replace `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx` .
     
-    When the operation is complete, you see a message similar to the following: `  Successfully created model named all-MiniLM-L6-v2  ` in the **Query results** pane.
+    When the operation is complete, you see a message similar to the following: `Successfully created model named all-MiniLM-L6-v2` in the **Query results** pane.
 
 6.  Click **Go to model** to open the **Details** pane.
 
@@ -295,9 +295,9 @@ Select one of the following options:
 
 ### bq
 
-Use the bq command-line tool [`  query  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) to run the `  CREATE MODEL  ` statement.
+Use the bq command-line tool [`query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) to run the `CREATE MODEL` statement.
 
-1.  On the command line, run the following command to create the `  tokenizer  ` model.
+1.  On the command line, run the following command to create the `tokenizer` model.
     
     ``` notranslate
     bq query --use_legacy_sql=false \
@@ -308,11 +308,11 @@ Use the bq command-line tool [`  query  ` command](https://docs.cloud.google.com
     MODEL_PATH='TOKENIZER_BUCKET_PATH')"
     ```
     
-    Replace `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx  ` .
+    Replace `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx` .
     
-    When the operation is complete, you see a message similar to the following: `  Successfully created model named tokenizer  ` .
+    When the operation is complete, you see a message similar to the following: `Successfully created model named tokenizer` .
 
-2.  On the command line, run the following command to create the `  all-MiniLM-L6-v2  ` model.
+2.  On the command line, run the following command to create the `all-MiniLM-L6-v2` model.
     
     ``` notranslate
     bq query --use_legacy_sql=false \
@@ -323,9 +323,9 @@ Use the bq command-line tool [`  query  ` command](https://docs.cloud.google.com
       MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
     ```
     
-    Replace `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx  ` .
+    Replace `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx` .
     
-    When the operation is complete, you see a message similar to the following: `  Successfully created model named all-MiniLM-L6-v2  ` .
+    When the operation is complete, you see a message similar to the following: `Successfully created model named all-MiniLM-L6-v2` .
 
 3.  After you import the models, verify that the models appear in the dataset.
     
@@ -344,9 +344,9 @@ Use the bq command-line tool [`  query  ` command](https://docs.cloud.google.com
 
 ### API
 
-Use the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) to import the models. Populate the `  query  ` parameter of the [`  QueryRequest  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) in the request body with the `  CREATE MODEL  ` statement.
+Use the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) to import the models. Populate the `query` parameter of the [`QueryRequest` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) in the request body with the `CREATE MODEL` statement.
 
-1.  Use the following `  query  ` parameter value to create the `  tokenizer  ` model.
+1.  Use the following `query` parameter value to create the `tokenizer` model.
     
     ``` notranslate
     {
@@ -357,9 +357,9 @@ Use the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/r
     Replace the following:
     
       - `  PROJECT_ID  ` with your project ID.
-      - `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx  ` .
+      - `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx` .
 
-2.  Use the following `  query  ` parameter value to create the `  all-MiniLM-L6-v2  ` model.
+2.  Use the following `query` parameter value to create the `all-MiniLM-L6-v2` model.
     
     ``` notranslate
     {
@@ -370,7 +370,7 @@ Use the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/r
     Replace the following:
     
       - `  PROJECT_ID  ` with your project ID.
-      - `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx  ` .
+      - `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx` .
 
 ### BigQuery DataFrames
 
@@ -378,7 +378,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Import the tokenizer and sentence transformer models by using the `  ONNXModel  ` object.
+Import the tokenizer and sentence transformer models by using the `ONNXModel` object.
 
 ``` notranslate
 import bigframes
@@ -399,25 +399,25 @@ imported_onnx_model = ONNXModel(
 Replace the following:
 
   - `  PROJECT_ID  ` with your project ID.
-  - `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx  ` .
-  - `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `  gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx  ` .
+  - `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx` .
+  - `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx` .
 
 ## Generate embeddings with the imported ONNX models
 
-Use the imported tokenizer and the sentence transformer models to generate embeddings based on data from the `  bigquery-public-data.imdb.reviews  ` public dataset.
+Use the imported tokenizer and the sentence transformer models to generate embeddings based on data from the `bigquery-public-data.imdb.reviews` public dataset.
 
 Select one of the following options:
 
 ### Console
 
-Use the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate embeddings with the models.
+Use the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate embeddings with the models.
 
-The query uses a nested `  ML.PREDICT  ` call, to process raw text directly through the tokenizer and the embedding model, as follows:
+The query uses a nested `ML.PREDICT` call, to process raw text directly through the tokenizer and the embedding model, as follows:
 
-  - **Tokenization (inner query):** the inner `  ML.PREDICT  ` call uses the `  bqml_tutorial.tokenizer  ` model. It takes the `  title  ` column from the `  bigquery-public-data.imdb.reviews  ` public dataset as its `  text  ` input. The `  tokenizer  ` model converts the raw text strings into the numerical token inputs that the main model requires, including the `  input_ids  ` and `  attention_mask  ` inputs.
-  - **Embedding generation (outer query):** the outer `  ML.PREDICT  ` call uses the `  bqml_tutorial.all-MiniLM-L6-v2  ` model. The query takes the `  input_ids  ` and `  attention_mask  ` columns from the inner query's output as its input.
+  - **Tokenization (inner query):** the inner `ML.PREDICT` call uses the `bqml_tutorial.tokenizer` model. It takes the `title` column from the `bigquery-public-data.imdb.reviews` public dataset as its `text` input. The `tokenizer` model converts the raw text strings into the numerical token inputs that the main model requires, including the `input_ids` and `attention_mask` inputs.
+  - **Embedding generation (outer query):** the outer `ML.PREDICT` call uses the `bqml_tutorial.all-MiniLM-L6-v2` model. The query takes the `input_ids` and `attention_mask` columns from the inner query's output as its input.
 
-The `  SELECT  ` statement retrieves the `  sentence_embedding  ` column, which is an array of `  FLOAT  ` values that represent the text's semantic embedding.
+The `SELECT` statement retrieves the `sentence_embedding` column, which is an array of `FLOAT` values that represent the text's semantic embedding.
 
 1.  In the Google Cloud console, open BigQuery Studio.
     
@@ -457,14 +457,14 @@ The `  SELECT  ` statement retrieves the `  sentence_embedding  ` column, which 
 
 ### bq
 
-Use the bq command-line tool [`  query  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) to run a query. The query uses the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate embeddings with the models.
+Use the bq command-line tool [`query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) to run a query. The query uses the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate embeddings with the models.
 
-The query uses a nested `  ML.PREDICT  ` call, to process raw text directly through the tokenizer and the embedding model, as follows:
+The query uses a nested `ML.PREDICT` call, to process raw text directly through the tokenizer and the embedding model, as follows:
 
-  - **Tokenization (inner query):** the inner `  ML.PREDICT  ` call uses the `  bqml_tutorial.tokenizer  ` model. It takes the `  title  ` column from the `  bigquery-public-data.imdb.reviews  ` public dataset as its `  text  ` input. The `  tokenizer  ` model converts the raw text strings into the numerical token inputs that the main model requires, including the `  input_ids  ` and `  attention_mask  ` inputs.
-  - **Embedding generation (outer query):** the outer `  ML.PREDICT  ` call uses the `  bqml_tutorial.all-MiniLM-L6-v2  ` model. The query takes the `  input_ids  ` and `  attention_mask  ` columns from the inner query's output as its input.
+  - **Tokenization (inner query):** the inner `ML.PREDICT` call uses the `bqml_tutorial.tokenizer` model. It takes the `title` column from the `bigquery-public-data.imdb.reviews` public dataset as its `text` input. The `tokenizer` model converts the raw text strings into the numerical token inputs that the main model requires, including the `input_ids` and `attention_mask` inputs.
+  - **Embedding generation (outer query):** the outer `ML.PREDICT` call uses the `bqml_tutorial.all-MiniLM-L6-v2` model. The query takes the `input_ids` and `attention_mask` columns from the inner query's output as its input.
 
-The `  SELECT  ` statement retrieves the `  sentence_embedding  ` column, which is an array of `  FLOAT  ` values that represent the text's semantic embedding.
+The `SELECT` statement retrieves the `sentence_embedding` column, which is an array of `FLOAT` values that represent the text's semantic embedding.
 
 On the command line, run the following command to run the query.
 
@@ -505,7 +505,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Use the [`  predict  ` method](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.TextEmbeddingGenerator.predict.html#bigframes.ml.llm.TextEmbeddingGenerator.predict) to generate embeddings using the ONNX models.
+Use the [`predict` method](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.TextEmbeddingGenerator.predict.html#bigframes.ml.llm.TextEmbeddingGenerator.predict) to generate embeddings using the ONNX models.
 
     import bigframes.pandas as bpd
     
@@ -530,7 +530,7 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -547,7 +547,7 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -566,8 +566,8 @@ Alternatively, to remove the individual resources used in this tutorial, do the 
 ## What's next
 
   - Learn how to [use text embeddings for semantic search and retrieval-augmented generation (RAG)](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) .
-  - For more information about converting transformers models to ONNX, see [Export a model to ONNX with `  optimum.exporters.onnx  `](https://huggingface.co/docs/optimum-onnx/onnx/usage_guides/export_a_model) .
-  - For more information about importing ONNX models, see [The `  CREATE MODEL  ` statement for ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
-  - For more information about performing prediction, see [The `  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+  - For more information about converting transformers models to ONNX, see [Export a model to ONNX with `optimum.exporters.onnx`](https://huggingface.co/docs/optimum-onnx/onnx/usage_guides/export_a_model) .
+  - For more information about importing ONNX models, see [The `CREATE MODEL` statement for ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
+  - For more information about performing prediction, see [The `ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
   - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
   - To get started using BigQuery ML, see [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model) .

@@ -10,7 +10,7 @@ In relational databases, a time series is modeled as a table with the following 
 
   - Time column
   - Might have partitioning columns, for example, zip code
-  - One or more value columns, or a `  STRUCT  ` type combining multiple values, for example, temperature and AQI
+  - One or more value columns, or a `STRUCT` type combining multiple values, for example, temperature and AQI
 
 The following is an example of time series data modeled as a table:
 
@@ -20,11 +20,11 @@ The following is an example of time series data modeled as a table:
 
 In time series analysis, time aggregation is an aggregation performed along the time axis.
 
-You can perform time aggregation in BigQuery with the help of time bucketing functions ( [`  TIMESTAMP_BUCKET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#timestamp_bucket) , [`  DATE_BUCKET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#date_bucket) , and [`  DATETIME_BUCKET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#datetime_bucket) ). Time bucketing functions map input time values to the bucket they belong to.
+You can perform time aggregation in BigQuery with the help of time bucketing functions ( [`TIMESTAMP_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#timestamp_bucket) , [`DATE_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#date_bucket) , and [`DATETIME_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#datetime_bucket) ). Time bucketing functions map input time values to the bucket they belong to.
 
-Typically, time aggregation is performed to combine multiple data points in a time window into a single data point, using an aggregation function, such as `  AVG  ` , `  MIN  ` , `  MAX  ` , `  COUNT  ` , or `  SUM  ` . For example, 15-minute average request latency, daily minimum and maximum temperatures, and daily number of taxi trips.
+Typically, time aggregation is performed to combine multiple data points in a time window into a single data point, using an aggregation function, such as `AVG` , `MIN` , `MAX` , `COUNT` , or `SUM` . For example, 15-minute average request latency, daily minimum and maximum temperatures, and daily number of taxi trips.
 
-For the queries in this section, create a table called `  mydataset.environmental_data_hourly  ` :
+For the queries in this section, create a table called `mydataset.environmental_data_hourly` :
 
     CREATE OR REPLACE TABLE mydataset.environmental_data_hourly AS
     SELECT * FROM UNNEST(
@@ -83,7 +83,7 @@ One interesting observation about the preceding data is that measurements are ta
 
 ### Get a 3-hour average
 
-The following query computes a 3-hour average air quality index (AQI) and temperature for each zip code. The `  TIMESTAMP_BUCKET  ` function performs time aggregation by assigning each time value to a particular day.
+The following query computes a 3-hour average air quality index (AQI) and temperature for each zip code. The `TIMESTAMP_BUCKET` function performs time aggregation by assigning each time value to a particular day.
 
     SELECT
       TIMESTAMP_BUCKET(time, INTERVAL 3 HOUR) AS time,
@@ -151,9 +151,9 @@ In the following query, you compute 3-hour minimum and maximum temperatures for 
 
 ### Get a 3-hour average with custom alignment
 
-When you perform time series aggregation, you use a specific alignment for time series windows, either implicitly or explicitly. The preceding queries used implicit alignment, which produced buckets that started at times like `  00:00:00  ` , `  03:00:00  ` , and `  06:00:00  ` . To explicitly set this alignment in the `  TIMESTAMP_BUCKET  ` function, pass an optional argument that specifies the origin.
+When you perform time series aggregation, you use a specific alignment for time series windows, either implicitly or explicitly. The preceding queries used implicit alignment, which produced buckets that started at times like `00:00:00` , `03:00:00` , and `06:00:00` . To explicitly set this alignment in the `TIMESTAMP_BUCKET` function, pass an optional argument that specifies the origin.
 
-In the following query, the origin is set as `  2020-01-01 02:00:00  ` . This changes the alignment and produces buckets that start at times like `  02:00:00  ` , `  05:00:00  ` , and `  08:00:00  ` :
+In the following query, the origin is set as `2020-01-01 02:00:00` . This changes the alignment and produces buckets that start at times like `02:00:00` , `05:00:00` , and `08:00:00` :
 
     SELECT
       TIMESTAMP_BUCKET(time, INTERVAL 3 HOUR, TIMESTAMP '2020-01-01 02:00:00') AS time,
@@ -189,13 +189,13 @@ In the following query, the origin is set as `  2020-01-01 02:00:00  ` . This ch
 
 ## Aggregate a time series with gap filling
 
-Sometimes after you aggregate a time series, the data might have gaps that need to be filled with some values for further analysis or presentation of the data. The technique used to fill in those gaps is called *gap filling* . In BigQuery, you can use the [`  GAP_FILL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#gap_fill) table function for filling gaps in time series data, using one of the provided gap-filling methods:
+Sometimes after you aggregate a time series, the data might have gaps that need to be filled with some values for further analysis or presentation of the data. The technique used to fill in those gaps is called *gap filling* . In BigQuery, you can use the [`GAP_FILL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#gap_fill) table function for filling gaps in time series data, using one of the provided gap-filling methods:
 
   - NULL, also known as constant
   - LOCF, last observation carried forward
   - Linear, linear interpolation between the two neighboring data points
 
-For the queries in this section, create a table called `  mydataset.environmental_data_hourly_with_gaps  ` , which is based on the data used in the preceding section, but with gaps in it. In the real world scenarios, data could have missing data points due to a short-term weather station malfunction.
+For the queries in this section, create a table called `mydataset.environmental_data_hourly_with_gaps` , which is based on the data used in the preceding section, but with gaps in it. In the real world scenarios, data could have missing data points due to a short-term weather station malfunction.
 
     CREATE OR REPLACE TABLE mydataset.environmental_data_hourly_with_gaps AS
     SELECT * FROM UNNEST(
@@ -276,11 +276,11 @@ The following query computes 3-hour average AQI and temperature for each zip cod
      | 2020-09-08 21:00:00 |    94105 | 143 |          74 |
      +---------------------+----------+-----+-------------*/
 
-Note how the output has gaps at certain time intervals. For example, the time series for zip code `  60606  ` doesn't have a data point at `  2020-09-08 12:00:00  ` , and the time series for zip code `  94105  ` doesn't have a data point at `  2020-09-08 15:00:00  ` .
+Note how the output has gaps at certain time intervals. For example, the time series for zip code `60606` doesn't have a data point at `2020-09-08 12:00:00` , and the time series for zip code `94105` doesn't have a data point at `2020-09-08 15:00:00` .
 
 ### Get a 3-hour average (fill gaps)
 
-Use the query from the previous section and add the `  GAP_FILL  ` function to fill the gaps:
+Use the query from the previous section and add the `GAP_FILL` function to fill the gaps:
 
     WITH aggregated_3_hr AS (
       SELECT
@@ -321,11 +321,11 @@ Use the query from the previous section and add the `  GAP_FILL  ` function to f
      | 2020-09-08 21:00:00 |    94105 |  143 |          74 |
      +---------------------+----------+------+-------------*/
 
-The output table now contains a missing row at `  2020-09-08 12:00:00  ` for zip code `  60606  ` and at `  2020-09-08 15:00:00  ` for zip code `  94105  ` , with `  NULL  ` values in the corresponding metric columns. Since you didn't specify any gap-filling method, `  GAP_FILL  ` used the default gap-filling method, NULL.
+The output table now contains a missing row at `2020-09-08 12:00:00` for zip code `60606` and at `2020-09-08 15:00:00` for zip code `94105` , with `NULL` values in the corresponding metric columns. Since you didn't specify any gap-filling method, `GAP_FILL` used the default gap-filling method, NULL.
 
 ### Fill gaps with linear and LOCF gap filling
 
-In the following query, the `  GAP_FILL  ` function is used with the LOCF gap-filling method for the `  aqi  ` column and linear interpolation for the `  temperature  ` column:
+In the following query, the `GAP_FILL` function is used with the LOCF gap-filling method for the `aqi` column and linear interpolation for the `temperature` column:
 
     WITH aggregated_3_hr AS (
       SELECT
@@ -370,7 +370,7 @@ In the following query, the `  GAP_FILL  ` function is used with the LOCF gap-fi
      | 2020-09-08 21:00:00 |    94105 | 143 |          74 |
      +---------------------+----------+-----+-------------*/
 
-In this query, the first gap-filled row has `  aqi  ` value `  36  ` , which is taken from the previous data point of this time series (zip code `  60606  ` ) at `  2020-09-08 09:00:00  ` . The `  temperature  ` value `  62  ` is a result of linear interpolation between data points `  2020-09-08 09:00:00  ` and `  2020-09-08 15:00:00  ` . The other missing row was created in a similar way - `  aqi  ` value `  125  ` was carried over from the previous data point of this time series (zip code `  94105  ` ), and the temperature value `  65  ` is a result of linear interpolation between the previous and the next available data points.
+In this query, the first gap-filled row has `aqi` value `36` , which is taken from the previous data point of this time series (zip code `60606` ) at `2020-09-08 09:00:00` . The `temperature` value `62` is a result of linear interpolation between data points `2020-09-08 09:00:00` and `2020-09-08 15:00:00` . The other missing row was created in a similar way - `aqi` value `125` was carried over from the previous data point of this time series (zip code `94105` ), and the temperature value `65` is a result of linear interpolation between the previous and the next available data points.
 
 ## Align a time series with gap filling
 
@@ -378,15 +378,15 @@ Time series can be aligned or unaligned. A time series is aligned when data poin
 
 In the real world, at the time of collection, time series are rarely aligned and usually require some further processing to align them.
 
-For example, consider IoT devices that send their metrics to a centralized collector every minute. It would be unreasonable to expect the devices to send their metrics at exactly the same instants of time. Usually, each device sends its metrics with the same frequency (period) but with different time offset (alignment). The following diagram illustrates this example. You can see each device sending its data with a one-minute interval with some instances of missing data (Device 3 at `  9:36:39  ` ) and delayed data (Device 1 at `  9:37:28  ` ).
+For example, consider IoT devices that send their metrics to a centralized collector every minute. It would be unreasonable to expect the devices to send their metrics at exactly the same instants of time. Usually, each device sends its metrics with the same frequency (period) but with different time offset (alignment). The following diagram illustrates this example. You can see each device sending its data with a one-minute interval with some instances of missing data (Device 3 at `9:36:39` ) and delayed data (Device 1 at `9:37:28` ).
 
 ![Align time series example](https://docs.cloud.google.com/static/bigquery/images/align-time-series.png)
 
 You can perform *time series alignment* on unaligned data, using [time aggregation](https://docs.cloud.google.com/bigquery/docs/working-with-time-series#aggregate_a_time_series) . This is helpful if you want to change the sampling period of the time series, such as changing from the original 1-minute sampling period to a 15-minute period. You can align data for further time series processing, such as joining the time series data, or for display purposes (such as graphing).
 
-You can use the `  GAP_FILL  ` table function with LOCF or linear gap-filling methods to perform time series alignment. The idea is to use `  GAP_FILL  ` with the selected output period and alignment (controlled by the optional origin argument). The result of the operation is a table with aligned time series, where values for each data point are derived from the input time series with the gap-filling method used for that particular value column (LOCF of linear).
+You can use the `GAP_FILL` table function with LOCF or linear gap-filling methods to perform time series alignment. The idea is to use `GAP_FILL` with the selected output period and alignment (controlled by the optional origin argument). The result of the operation is a table with aligned time series, where values for each data point are derived from the input time series with the gap-filling method used for that particular value column (LOCF of linear).
 
-Create a table `  mydataset.device_data  ` , which resembles the previous illustration:
+Create a table `mydataset.device_data` , which resembles the previous illustration:
 
     CREATE OR REPLACE TABLE mydataset.device_data AS
     SELECT * FROM UNNEST(
@@ -404,7 +404,7 @@ Create a table `  mydataset.device_data  ` , which resembles the previous illust
         STRUCT(3, TIMESTAMP '2023-11-01 09:38:39', 77, 'ACTIVE')
     ]);
 
-The following is the actual data ordered by `  time  ` and `  device_id  ` columns:
+The following is the actual data ordered by `time` and `device_id` columns:
 
     SELECT * FROM mydataset.device_data ORDER BY time, device_id;
     
@@ -426,10 +426,10 @@ The following is the actual data ordered by `  time  ` and `  device_id  ` colum
 
 The table contains the time series for each device with two metric columns:
 
-  - `  signal  ` - signal level as observed by the device at the time of sampling, represented as an integer value between `  0  ` and `  100  ` .
-  - `  state  ` - state of the device at the time of sampling, represented as a free form string.
+  - `signal` - signal level as observed by the device at the time of sampling, represented as an integer value between `0` and `100` .
+  - `state` - state of the device at the time of sampling, represented as a free form string.
 
-In the following query, the `  GAP_FILL  ` function is used to align the time series at 1-minute intervals. Note how linear interpolation is used to compute values for the `  signal  ` column and LOCF for the `  state  ` column. For this example data, linear interpolation is a suitable choice to compute the output values.
+In the following query, the `GAP_FILL` function is used to align the time series at 1-minute intervals. Note how linear interpolation is used to compute values for the `signal` column and LOCF for the `state` column. For this example data, linear interpolation is a suitable choice to compute the output values.
 
     SELECT *
     FROM GAP_FILL(
@@ -458,18 +458,18 @@ In the following query, the `  GAP_FILL  ` function is used to align the time se
      | 2023-11-01 09:38:00 |         3 |     77 | ACTIVE   |
      +---------------------+-----------+--------+----------*/
 
-The output table contains an aligned time series for each device and value columns ( `  signal  ` and `  state  ` ), computed using the gap-filling methods specified in the function call.
+The output table contains an aligned time series for each device and value columns ( `signal` and `state` ), computed using the gap-filling methods specified in the function call.
 
 ## Join time series data
 
-You can join time series data using a windowed join or `  AS OF  ` join.
+You can join time series data using a windowed join or `AS OF` join.
 
 ### Windowed join
 
 Sometimes you need to join two or more tables with time series data. Consider the following two tables:
 
-  - `  mydataset.sensor_temperatures  ` , contains temperature data reported by each sensor every 15 seconds.
-  - `  mydataset.sensor_fuel_rates  ` , contains the fuel consumption rate measured by each sensor every 15 seconds.
+  - `mydataset.sensor_temperatures` , contains temperature data reported by each sensor every 15 seconds.
+  - `mydataset.sensor_fuel_rates` , contains the fuel consumption rate measured by each sensor every 15 seconds.
 
 To create these tables, run the following queries:
 
@@ -527,7 +527,7 @@ To check the fuel consumption rate at the temperature reported by each sensor, y
 
 Although the data in the two time series is unaligned, it is sampled at the same interval (15 seconds), therefore such data is a good candidate for windowed join. Use the [time bucketing functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#datetime_bucket) to align timestamps used as join keys.
 
-The following queries illustrate how each timestamp can be assigned to 15-second windows using the [`  TIMESTAMP_BUCKET  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#timestamp_bucket) function:
+The following queries illustrate how each timestamp can be assigned to 15-second windows using the [`TIMESTAMP_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#timestamp_bucket) function:
 
     SELECT *, TIMESTAMP_BUCKET(ts, INTERVAL 15 SECOND) ts_window
     FROM mydataset.sensor_temperatures
@@ -585,11 +585,11 @@ You can use this concept to join the fuel consumption rate data with the tempera
      |         2 | 2020-01-01 12:00:31 | 38.3 | 2020-01-01 12:00:38 | 11.3 |
      +-----------+---------------------+------+---------------------+------*/
 
-### `     AS OF    ` join
+### `AS OF` join
 
-For this section, use the `  mydataset.sensor_temperatures  ` table and create a new table, `  mydataset.sensor_location  ` .
+For this section, use the `mydataset.sensor_temperatures` table and create a new table, `mydataset.sensor_location` .
 
-The `  mydataset.sensor_temperatures  ` table contains temperature data from different sensors, reported every 15 seconds:
+The `mydataset.sensor_temperatures` table contains temperature data from different sensors, reported every 15 seconds:
 
     SELECT * FROM mydataset.sensor_temperatures ORDER BY sensor_id, ts;
     
@@ -604,7 +604,7 @@ The `  mydataset.sensor_temperatures  ` table contains temperature data from dif
      |         2 | 2020-01-01 12:01:15 | 38.3 |
      +-----------+---------------------+------*/
 
-To create `  mydataset.sensor_location  ` , run the following query:
+To create `mydataset.sensor_location` , run the following query:
 
     CREATE OR REPLACE TABLE mydataset.sensor_locations AS
     SELECT * FROM UNNEST(
@@ -624,13 +624,13 @@ To create `  mydataset.sensor_location  ` , run the following query:
      |         2 | 2020-01-01 07:28:41 |   POINT(-122.39 37.79) |
      +-----------+---------------------+------------------------*/
 
-Now join data from `  mydataset.sensor_temperatures  ` with data from `  mydataset.sensor_location  ` .
+Now join data from `mydataset.sensor_temperatures` with data from `mydataset.sensor_location` .
 
 In this scenario, you can't use a windowed join, since the temperature data and location date are not reported at the same interval.
 
-One way to do this in BigQuery is to transform the timestamp data into a range, using the [`  RANGE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range) data type. The range represents the temporal validity of a row, providing the start and end time for which the row is valid.
+One way to do this in BigQuery is to transform the timestamp data into a range, using the [`RANGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range) data type. The range represents the temporal validity of a row, providing the start and end time for which the row is valid.
 
-Use the [`  LEAD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lead) window function to find the next data point in the time series, relative to the current data point, which is also the end-boundary of the temporal validity of the current row. The following queries demonstrate this, converting location data to validity ranges:
+Use the [`LEAD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lead) window function to find the next data point in the time series, relative to the current data point, which is also the end-boundary of the temporal validity of the current row. The following queries demonstrate this, converting location data to validity ranges:
 
     WITH locations_ranges AS (
       SELECT
@@ -719,7 +719,7 @@ The following query on the table shows several overlapping ranges:
      |         2 | [2020-01-01 12:10:22, 2020-01-01 12:15:42) | 21   |    10 |
      +-----------+--------------------------------------------+------+-------*/
 
-For some of the overlapping ranges, the value in the `  flow  ` column is the same. For example, rows 1 and 2 overlap, and also have the same `  flow  ` readings. You can combine these two rows to reduce the number of rows in the table. You can use the `  RANGE_SESSIONIZE  ` table function to find ranges that overlap with each row, and provide an additional `  session_range  ` column that contains a range that is the union of all ranges that overlap. To display the session ranges for each row, run the following query:
+For some of the overlapping ranges, the value in the `flow` column is the same. For example, rows 1 and 2 overlap, and also have the same `flow` readings. You can combine these two rows to reduce the number of rows in the table. You can use the `RANGE_SESSIONIZE` table function to find ranges that overlap with each row, and provide an additional `session_range` column that contains a range that is the union of all ranges that overlap. To display the session ranges for each row, run the following query:
 
     SELECT sensor_id, session_range, flow
     FROM RANGE_SESSIONIZE(
@@ -746,9 +746,9 @@ For some of the overlapping ranges, the value in the `  flow  ` column is the sa
      |         2 | [2020-01-01 12:05:08, 2020-01-01 12:15:42) | 21   |
      +-----------+--------------------------------------------+------*/
 
-Note that for `  sensor_id  ` having value `  2  ` , the first row's end boundary has the same datetime value as the second row's start boundary. However, because end boundaries are exclusive, they don't overlap (only meet) and hence were not in the same session ranges. If you want to place these two rows in the same session ranges, use the [`  MEETS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_sessionize) sessionize mode.
+Note that for `sensor_id` having value `2` , the first row's end boundary has the same datetime value as the second row's start boundary. However, because end boundaries are exclusive, they don't overlap (only meet) and hence were not in the same session ranges. If you want to place these two rows in the same session ranges, use the [`MEETS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_sessionize) sessionize mode.
 
-To combine the ranges, group the results by `  session_range  ` and the partitioning columns ( `  sensor_id  ` and `  flow  ` ):
+To combine the ranges, group the results by `session_range` and the partitioning columns ( `sensor_id` and `flow` ):
 
     SELECT sensor_id, session_range, flow
     FROM RANGE_SESSIONIZE(
@@ -769,7 +769,7 @@ To combine the ranges, group the results by `  session_range  ` and the partitio
      |         2 | [2020-01-01 12:05:08, 2020-01-01 12:15:42) | 21   |
      +-----------+--------------------------------------------+------*/
 
-Finally, add the `  spins  ` column in the session data by aggregating it using `  SUM  ` .
+Finally, add the `spins` column in the session data by aggregating it using `SUM` .
 
     SELECT sensor_id, session_range, flow, SUM(spins) as spins
     FROM RANGE_SESSIONIZE(
@@ -838,7 +838,7 @@ Now, split the original ranges into 3-month intervals:
      |         2 | [2022-01-15, 2022-04-15) |   21 |    12 |
      +-----------+--------------------------+------+-------*/
 
-In the previous query, each original range was broken down into smaller ranges, with width set to `  INTERVAL 3 MONTH  ` . However, the 3-month ranges are not aligned to a common origin. To align these ranges to a common origin `  2020-01-01  ` , run the following query:
+In the previous query, each original range was broken down into smaller ranges, with width set to `INTERVAL 3 MONTH` . However, the 3-month ranges are not aligned to a common origin. To align these ranges to a common origin `2020-01-01` , run the following query:
 
     WITH sensor_data AS (
       SELECT * FROM UNNEST(
@@ -877,7 +877,7 @@ In the previous query, each original range was broken down into smaller ranges, 
      |         2 | [2022-04-01, 2022-07-01) |   21 |    12 |
      +-----------+--------------------------+------+-------*/
 
-In the previous query, the row with the range `  [2020-04-15, 2021-04-15)  ` is split into 5 ranges, starting with the range `  [2020-04-01, 2020-07-01)  ` . Note that the start boundary now extends beyond the original start boundary, in order to align with the common origin. If you don't want the start boundary to not extend beyond the original start boundary, you can restrict the `  JOIN  ` condition:
+In the previous query, the row with the range `[2020-04-15, 2021-04-15)` is split into 5 ranges, starting with the range `[2020-04-01, 2020-07-01)` . Note that the start boundary now extends beyond the original start boundary, in order to align with the common origin. If you don't want the start boundary to not extend beyond the original start boundary, you can restrict the `JOIN` condition:
 
     WITH sensor_data AS (
       SELECT * FROM UNNEST(
@@ -914,7 +914,7 @@ In the previous query, the row with the range `  [2020-04-15, 2021-04-15)  ` is 
      |         2 | [2022-04-01, 2022-07-01) |   21 |    12 |
      +-----------+--------------------------+------+-------*/
 
-You now see that the range `  [2020-04-15, 2021-04-15)  ` was split into 4 ranges, starting with the range `  [2020-07-01, 2020-10-01)  ` .
+You now see that the range `[2020-04-15, 2021-04-15)` was split into 4 ranges, starting with the range `[2020-07-01, 2020-10-01)` .
 
 ## Best practices for storing data
 

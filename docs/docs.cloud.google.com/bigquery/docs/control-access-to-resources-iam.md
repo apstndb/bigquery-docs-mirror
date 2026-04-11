@@ -17,7 +17,7 @@ This document assumes familiarity with the [Identity and Access Management (IAM)
   - Routine access controls can't be set with the Google Cloud SDK.
   - Routine access controls can't be set using the [BigQuery data control language (DCL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) .
   - Data Catalog doesn't support routine access controls. If a user has conditionally granted routine-level access, they won't see their routines in the BigQuery side panel. As a workaround, grant dataset-level access instead.
-  - The [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) doesn't show access controls for routines.
+  - The [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) doesn't show access controls for routines.
 
 ## Before you begin
 
@@ -25,7 +25,7 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required roles
 
-To get the permissions that you need to modify IAM policies for resources, ask your administrator to grant you the [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to modify IAM policies for resources, ask your administrator to grant you the [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to modify IAM policies for resources. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -33,15 +33,15 @@ This predefined role contains the permissions required to modify IAM policies fo
 
 The following permissions are required to modify IAM policies for resources:
 
-  - To get a dataset's access policy: `  bigquery.datasets.get  `
-  - To set a dataset's access policy: `  bigquery.datasets.update  `
-  - To get a dataset's access policy (Google Cloud console only): `  bigquery.datasets.getIamPolicy  `
-  - To set a dataset's access policy (console only): `  bigquery.datasets.setIamPolicy  `
-  - To get a table or view's policy: `  bigquery.tables.getIamPolicy  `
-  - To set a table or view's policy: `  bigquery.tables.setIamPolicy  `
-  - To get a routine's access policy: `  bigquery.routines.getIamPolicy  `
-  - To set a routine's access policy: `  bigquery.routines.setIamPolicy  `
-  - To create bq tool or [SQL BigQuery jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) (optional): `  bigquery.jobs.create  `
+  - To get a dataset's access policy: `bigquery.datasets.get`
+  - To set a dataset's access policy: `bigquery.datasets.update`
+  - To get a dataset's access policy (Google Cloud console only): `bigquery.datasets.getIamPolicy`
+  - To set a dataset's access policy (console only): `bigquery.datasets.setIamPolicy`
+  - To get a table or view's policy: `bigquery.tables.getIamPolicy`
+  - To set a table or view's policy: `bigquery.tables.setIamPolicy`
+  - To get a routine's access policy: `bigquery.routines.getIamPolicy`
+  - To set a routine's access policy: `bigquery.routines.setIamPolicy`
+  - To create bq tool or [SQL BigQuery jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) (optional): `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -51,7 +51,7 @@ You can provide access to a dataset by granting an [IAM principal](https://docs.
 
 ### Grant access to a dataset
 
-You can't grant access to a dataset when you create it using the BigQuery web UI or the bq command-line tool. You must create the dataset first and then grant access to it. The API lets you grant access during dataset creation by calling the [`  datasets.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+You can't grant access to a dataset when you create it using the BigQuery web UI or the bq command-line tool. You must create the dataset first and then grant access to it. The API lets you grant access during dataset creation by calling the [`datasets.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 A project is the parent resource for a dataset, and a dataset is the parent resource for tables and views, routines, and models. When you grant a role at the project level, the role and its permissions are inherited by the dataset and by the dataset's resources. Similarly, when you grant a role at the dataset level, the role and its permissions are inherited by the resources within the dataset.
 
@@ -89,7 +89,7 @@ To grant an IAM role access to a dataset without using conditions, select one of
 
 ### SQL
 
-To grant principals access to datasets, use the [`  GRANT  ` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
+To grant principals access to datasets, use the [`GRANT` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -111,13 +111,13 @@ To grant principals access to datasets, use the [`  GRANT  ` DCL statement](http
     
       - `  USER_LIST  ` : a comma-separated list of users that the role is granted to
         
-        For a list of valid formats, see [`  user_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
+        For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
 3.  Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The following example grants the BigQuery Data Viewer role to `  myDataset  ` :
+The following example grants the BigQuery Data Viewer role to `myDataset` :
 
     GRANT `roles/bigquery.dataViewer`
     ON SCHEMA `myProject`.myDataset
@@ -131,7 +131,7 @@ The following example grants the BigQuery Data Viewer role to `  myDataset  ` :
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To write the existing dataset information (including access controls) to a JSON file, use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+2.  To write the existing dataset information (including access controls) to a JSON file, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
     
     ``` notranslate
     bq show \
@@ -145,9 +145,9 @@ The following example grants the BigQuery Data Viewer role to `  myDataset  ` :
       - DATASET : the name of your dataset
       - PATH\_TO\_FILE : the path to the JSON file on your local machine
 
-3.  Make changes to the `  access  ` section of the JSON file. You can add to any of the `  specialGroup  ` entries: `  projectOwners  ` , `  projectWriters  ` , `  projectReaders  ` , and `  allAuthenticatedUsers  ` . You can also add any of the following: `  userByEmail  ` , `  groupByEmail  ` , and `  domain  ` .
+3.  Make changes to the `access` section of the JSON file. You can add to any of the `specialGroup` entries: `projectOwners` , `projectWriters` , `projectReaders` , and `allAuthenticatedUsers` . You can also add any of the following: `userByEmail` , `groupByEmail` , and `domain` .
     
-    For example, the `  access  ` section of a dataset's JSON file would look like the following:
+    For example, the `access` section of a dataset's JSON file would look like the following:
     
     ``` notranslate
     {
@@ -185,7 +185,7 @@ The following example grants the BigQuery Data Viewer role to `  myDataset  ` :
     }
     ```
 
-4.  When your edits are complete, use the `  bq update  ` command and include the JSON file using the `  --source  ` flag. If the dataset is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` .
+4.  When your edits are complete, use the `bq update` command and include the JSON file using the `--source` flag. If the dataset is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` .
     
     **Caution:** When you apply the JSON file that contains the access controls, the existing access controls are overwritten.
     
@@ -198,7 +198,7 @@ The following example grants the BigQuery Data Viewer role to `  myDataset  ` :
       
     ```
 
-5.  To verify your access control changes, use the `  bq show  ` command again without writing the information to a file:
+5.  To verify your access control changes, use the `bq show` command again without writing the information to a file:
     
     ``` notranslate
     bq show --format=prettyjson PROJECT_ID:DATASET
@@ -206,13 +206,13 @@ The following example grants the BigQuery Data Viewer role to `  myDataset  ` :
 
 ### Terraform
 
-Use the [`  google_bigquery_dataset_iam  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) resources to update access to a dataset.
+Use the [`google_bigquery_dataset_iam`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) resources to update access to a dataset.
 
-**Important:** The different resources provided by `  google_bigquery_dataset_iam  ` can conflict with each other as well as with the [google\_bigquery\_dataset\_access](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) resource. Read the [`  google_bigquery_dataset_iam  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) documentation carefully before making access control changes using Terraform.
+**Important:** The different resources provided by `google_bigquery_dataset_iam` can conflict with each other as well as with the [google\_bigquery\_dataset\_access](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) resource. Read the [`google_bigquery_dataset_iam`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) documentation carefully before making access control changes using Terraform.
 
 **Set the access policy for a dataset**
 
-The following example shows how to use the [`  google_bigquery_dataset_iam_policy  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy) to set the IAM policy for the `  mydataset  ` dataset. This replaces any existing policy already attached to the dataset:
+The following example shows how to use the [`google_bigquery_dataset_iam_policy` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy) to set the IAM policy for the `mydataset` dataset. This replaces any existing policy already attached to the dataset:
 
 ``` notranslate
 # This file sets the IAM policy for the dataset created by
@@ -250,7 +250,7 @@ resource "google_bigquery_dataset_iam_policy" "dataset_iam_policy" {
 
 **Set role membership for a dataset**
 
-The following example shows how to use the [`  google_bigquery_dataset_iam_binding  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_binding) to set membership in a given role for the `  mydataset  ` dataset. This replaces any existing membership in that role. Other roles within the IAM policy for the dataset are preserved:
+The following example shows how to use the [`google_bigquery_dataset_iam_binding` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_binding) to set membership in a given role for the `mydataset` dataset. This replaces any existing membership in that role. Other roles within the IAM policy for the dataset are preserved:
 
 ``` notranslate
 # This file sets membership in an IAM role for the dataset created by
@@ -272,7 +272,7 @@ resource "google_bigquery_dataset_iam_binding" "dataset_iam_binding" {
 
 **Set role membership for a single principal**
 
-The following example shows how to use the [`  google_bigquery_dataset_iam_member  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_member) to update the IAM policy for the `  mydataset  ` dataset to grant a role to one principal. Updating this IAM policy does not affect access for any other principals that have been granted that role for the dataset.
+The following example shows how to use the [`google_bigquery_dataset_iam_member` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_member) to update the IAM policy for the `mydataset` dataset to grant a role to one principal. Updating this IAM policy does not affect access for any other principals that have been granted that role for the dataset.
 
 ``` notranslate
 # This file adds a member to an IAM role for the dataset created by
@@ -306,13 +306,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -324,7 +324,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -336,7 +336,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -348,9 +348,9 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-To apply access controls when the dataset is created, call the [`  datasets.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . To update your access controls, call the [`  datasets.patch  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and use the `  access  ` property in the `  Dataset  ` resource.
+To apply access controls when the dataset is created, call the [`datasets.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) . To update your access controls, call the [`datasets.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and use the `access` property in the `Dataset` resource.
 
-Because the `  datasets.update  ` method replaces the entire dataset resource, `  datasets.patch  ` is the preferred method for updating access controls.
+Because the `datasets.update` method replaces the entire dataset resource, `datasets.patch` is the preferred method for updating access controls.
 
 ### Go
 
@@ -358,7 +358,7 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Set the new access list by appending the new entry to the existing list with [`  DatasetMetadataToUpdate  ` type](https://pkg.go.dev/cloud.google.com/go/bigquery#DatasetMetadataToUpdate) . Then call the [`  dataset.Update()  ` function](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Update) to update the property.
+Set the new access list by appending the new entry to the existing list with [`DatasetMetadataToUpdate` type](https://pkg.go.dev/cloud.google.com/go/bigquery#DatasetMetadataToUpdate) . Then call the [`dataset.Update()` function](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Update) to update the property.
 
     import (
      "context"
@@ -572,7 +572,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Set the [`  dataset.access_entries  ` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.dataset.Dataset#google_cloud_bigquery_dataset_Dataset_access_entries) with the access controls for a dataset. Then call the [`  client.update_dataset()  ` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_dataset) to update the property.
+Set the [`dataset.access_entries` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.dataset.Dataset#google_cloud_bigquery_dataset_Dataset_access_entries) with the access controls for a dataset. Then call the [`client.update_dataset()` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_dataset) to update the property.
 
     from google.api_core.exceptions import PreconditionFailed
     from google.cloud import bigquery
@@ -663,7 +663,7 @@ You can grant the following IAM predefined roles access to a dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataOwner      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">roles/bigquery.dataOwner</code> )</td>
 <td>When granted on a dataset, this role grants these permissions:<br />
 
 <ul>
@@ -672,7 +672,7 @@ You can grant the following IAM predefined roles access to a dataset.
 <strong>Note:</strong> Principals that are granted the Data Owner role at the project level can also create new datasets and list datasets in the project that they have access to.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataEditor      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">roles/bigquery.dataEditor</code> )</td>
 <td>When granted on a dataset, this role grants these permissions:<br />
 
 Get metadata and permissions for the dataset.
@@ -687,7 +687,7 @@ All permissions for the dataset's routines and models.
 <strong>Note:</strong> Principals that are granted the Data Editor role at the project level can also create new datasets and list datasets in the project that they have access to.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataViewer      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.dataViewer</code> )</td>
 <td>When granted on a dataset, this role grants these permissions:<br />
 
 <ul>
@@ -699,7 +699,7 @@ All permissions for the dataset's routines and models.
 </ul></td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer">BigQuery Metadata Viewer</a> ( <code dir="ltr" translate="no">       roles/bigquery.metadataViewer      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer">BigQuery Metadata Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.metadataViewer</code> )</td>
 <td>When granted on a dataset, this role grants these permissions:<br />
 
 <ul>
@@ -714,24 +714,24 @@ All permissions for the dataset's routines and models.
 
 ### Dataset permissions
 
-Most permissions that begin with `  bigquery.datasets  ` apply at the dataset level. `  bigquery.datasets.create  ` doesn't. In order to create datasets, `  bigquery.datasets.create  ` permission must be granted to a role on the parent container–the project.
+Most permissions that begin with `bigquery.datasets` apply at the dataset level. `bigquery.datasets.create` doesn't. In order to create datasets, `bigquery.datasets.create` permission must be granted to a role on the parent container–the project.
 
 The following table lists all permissions for datasets and the lowest-level resource the permission can be applied to.
 
-| Permission                                                | Resource | Action                                                                                                                                                                                                         |
-| --------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        bigquery.datasets.create       `                 | Project  | Create new datasets in the project.                                                                                                                                                                            |
-| `        bigquery.datasets.get       `                    | Dataset  | Get metadata and access controls for the dataset. Viewing permissions in the console also requires the `        bigquery.datasets.getIamPolicy       ` permission.                                             |
-| `        bigquery.datasets.getIamPolicy       `           | Dataset  | Required by the console to grant the user permission to get a dataset's access controls. Fails open. The console also requires the `        bigquery.datasets.get       ` permission to view the dataset.      |
-| `        bigquery.datasets.update       `                 | Dataset  | Update metadata and access controls for the dataset. Updating access controls in the console also requires the `        bigquery.datasets.setIamPolicy       ` permission.                                     |
-| `        bigquery.datasets.setIamPolicy       `           | Dataset  | Required by the console to grant the user permission to set a dataset's access controls. Fails open. The console also requires the `        bigquery.datasets.update       ` permission to update the dataset. |
-| `        bigquery.datasets.delete       `                 | Dataset  | Delete a dataset.                                                                                                                                                                                              |
-| `        bigquery.datasets.createTagBinding       `       | Dataset  | Attach tags to the dataset.                                                                                                                                                                                    |
-| `        bigquery.datasets.deleteTagBinding       `       | Dataset  | Detach tags from the dataset.                                                                                                                                                                                  |
-| `        bigquery.datasets.listTagBindings       `        | Dataset  | List tags for the dataset.                                                                                                                                                                                     |
-| `        bigquery.datasets.listEffectiveTags       `      | Dataset  | List effective tags (applied and inherited) for the dataset.                                                                                                                                                   |
-| `        bigquery.datasets.link       `                   | Dataset  | Create a [linked dataset](https://docs.cloud.google.com/logging/docs/analyze/query-linked-dataset) .                                                                                                           |
-| `        bigquery.datasets.listSharedDatasetUsage       ` | Project  | List shared dataset usage statistics for datasets that you have access to in the project. This permission is required to query the `        INFORMATION_SCHEMA.SHARED_DATASET_USAGE       ` view.              |
+| Permission                                 | Resource | Action                                                                                                                                                                                          |
+| ------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bigquery.datasets.create`                 | Project  | Create new datasets in the project.                                                                                                                                                             |
+| `bigquery.datasets.get`                    | Dataset  | Get metadata and access controls for the dataset. Viewing permissions in the console also requires the `bigquery.datasets.getIamPolicy` permission.                                             |
+| `bigquery.datasets.getIamPolicy`           | Dataset  | Required by the console to grant the user permission to get a dataset's access controls. Fails open. The console also requires the `bigquery.datasets.get` permission to view the dataset.      |
+| `bigquery.datasets.update`                 | Dataset  | Update metadata and access controls for the dataset. Updating access controls in the console also requires the `bigquery.datasets.setIamPolicy` permission.                                     |
+| `bigquery.datasets.setIamPolicy`           | Dataset  | Required by the console to grant the user permission to set a dataset's access controls. Fails open. The console also requires the `bigquery.datasets.update` permission to update the dataset. |
+| `bigquery.datasets.delete`                 | Dataset  | Delete a dataset.                                                                                                                                                                               |
+| `bigquery.datasets.createTagBinding`       | Dataset  | Attach tags to the dataset.                                                                                                                                                                     |
+| `bigquery.datasets.deleteTagBinding`       | Dataset  | Detach tags from the dataset.                                                                                                                                                                   |
+| `bigquery.datasets.listTagBindings`        | Dataset  | List tags for the dataset.                                                                                                                                                                      |
+| `bigquery.datasets.listEffectiveTags`      | Dataset  | List effective tags (applied and inherited) for the dataset.                                                                                                                                    |
+| `bigquery.datasets.link`                   | Dataset  | Create a [linked dataset](https://docs.cloud.google.com/logging/docs/analyze/query-linked-dataset) .                                                                                            |
+| `bigquery.datasets.listSharedDatasetUsage` | Project  | List shared dataset usage statistics for datasets that you have access to in the project. This permission is required to query the `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view.              |
 
 ### View access controls for a dataset
 
@@ -761,7 +761,7 @@ You can view the explicitly set access controls for a dataset by choosing one of
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To get an existing policy and output it to a local file in JSON, use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) in Cloud Shell:
+2.  To get an existing policy and output it to a local file in JSON, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) in Cloud Shell:
     
     ``` notranslate
     bq show \
@@ -781,7 +781,7 @@ You can view the explicitly set access controls for a dataset by choosing one of
 
 This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) . Queries to retrieve access controls for a dataset must specify the `  object_name  ` .
+Query the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) . Queries to retrieve access controls for a dataset must specify the `object_name` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -800,7 +800,7 @@ Query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.g
     
     Replace the following:
     
-      - COLUMN\_LIST : a comma-separated list of columns from the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges)
+      - COLUMN\_LIST : a comma-separated list of columns from the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges)
       - PROJECT\_ID : your project ID
       - REGION : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier)
       - DATASET : the name of a dataset in your project
@@ -811,7 +811,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Example:
 
-This query gets access controls for `  mydataset  ` .
+This query gets access controls for `mydataset` .
 
 ``` notranslate
 SELECT
@@ -833,9 +833,9 @@ The output should look like the following:
 
 ### API
 
-To view the access controls for a dataset, call the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method with a defined [`  dataset  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+To view the access controls for a dataset, call the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method with a defined [`dataset` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-The access controls appear in the `  access  ` property of the `  dataset  ` resource.
+The access controls appear in the `access` property of the `dataset` resource.
 
 ### Go
 
@@ -843,7 +843,7 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the [`  client.Dataset().Metadata()  ` function](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Metadata) . The access policy is available in the [`  Access  `](https://pkg.go.dev/cloud.google.com/go/bigquery@v1.66.0#DatasetMetadata.Access) property.
+Call the [`client.Dataset().Metadata()` function](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Metadata) . The access policy is available in the [`Access`](https://pkg.go.dev/cloud.google.com/go/bigquery@v1.66.0#DatasetMetadata.Access) property.
 
     import (
      "context"
@@ -946,7 +946,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Retrieve the dataset metadata using the [`  Dataset#getMetadata()  ` function](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#getMetadata) . The access policy is available in the access property of the resulting metadata object.
+Retrieve the dataset metadata using the [`Dataset#getMetadata()` function](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#getMetadata) . The access policy is available in the access property of the resulting metadata object.
 
     /**
      * TODO(developer): Update and un-comment below lines
@@ -983,7 +983,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the [`  client.get_dataset()  ` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_get_dataset) . The access policy is available in the [`  dataset.access_entries  ` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.dataset.Dataset#google_cloud_bigquery_dataset_Dataset_access_entries) .
+Call the [`client.get_dataset()` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_get_dataset) . The access policy is available in the [`dataset.access_entries` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.dataset.Dataset#google_cloud_bigquery_dataset_Dataset_access_entries) .
 
     from google.cloud import bigquery
     
@@ -1042,7 +1042,7 @@ To revoke access to a dataset, select one of the following options:
 
 ### SQL
 
-To remove a principal's access to a dataset, use the [`  REVOKE  ` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement) :
+To remove a principal's access to a dataset, use the [`REVOKE` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1064,13 +1064,13 @@ To remove a principal's access to a dataset, use the [`  REVOKE  ` DCL statement
     
       - `  USER_LIST  ` : a comma-separated list of users who will have their roles revoked
         
-        For a list of valid formats, see [`  user_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
+        For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
 3.  Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The following example revokes the BigQuery Data Owner role from `  myDataset  ` :
+The following example revokes the BigQuery Data Owner role from `myDataset` :
 
     REVOKE `roles/bigquery.dataOwner`
     ON SCHEMA `myProject`.myDataset
@@ -1084,7 +1084,7 @@ The following example revokes the BigQuery Data Owner role from `  myDataset  ` 
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To write the existing dataset information (including access controls) to a JSON file, use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+2.  To write the existing dataset information (including access controls) to a JSON file, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
     
     ``` notranslate
     bq show \
@@ -1098,9 +1098,9 @@ The following example revokes the BigQuery Data Owner role from `  myDataset  ` 
       - DATASET : the name of your dataset
       - PATH\_TO\_FILE : the path to the JSON file on your local machine
 
-3.  Make changes to the `  access  ` section of the JSON file. You can remove any of the `  specialGroup  ` entries: `  projectOwners  ` , `  projectWriters  ` , `  projectReaders  ` , and `  allAuthenticatedUsers  ` . You can also remove any of the following: `  userByEmail  ` , `  groupByEmail  ` , and `  domain  ` .
+3.  Make changes to the `access` section of the JSON file. You can remove any of the `specialGroup` entries: `projectOwners` , `projectWriters` , `projectReaders` , and `allAuthenticatedUsers` . You can also remove any of the following: `userByEmail` , `groupByEmail` , and `domain` .
     
-    For example, the `  access  ` section of a dataset's JSON file would look like the following:
+    For example, the `access` section of a dataset's JSON file would look like the following:
     
     ``` notranslate
     {
@@ -1138,7 +1138,7 @@ The following example revokes the BigQuery Data Owner role from `  myDataset  ` 
     }
     ```
 
-4.  When your edits are complete, use the `  bq update  ` command and include the JSON file using the `  --source  ` flag. If the dataset is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` .
+4.  When your edits are complete, use the `bq update` command and include the JSON file using the `--source` flag. If the dataset is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` .
     
     **Caution:** When you apply the JSON file that contains the access controls, the existing access controls are overwritten.
     
@@ -1151,7 +1151,7 @@ The following example revokes the BigQuery Data Owner role from `  myDataset  ` 
       
     ```
 
-5.  To verify your access control changes, use the `  show  ` command without writing the information to a file:
+5.  To verify your access control changes, use the `show` command without writing the information to a file:
     
     ``` notranslate
     bq show --format=prettyjson PROJECT_ID:DATASET
@@ -1159,9 +1159,9 @@ The following example revokes the BigQuery Data Owner role from `  myDataset  ` 
 
 ### API
 
-Call the [`  datasets.patch  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and use the `  access  ` property in the `  Dataset  ` resource to update your access controls.
+Call the [`datasets.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) and use the `access` property in the `Dataset` resource to update your access controls.
 
-Because the `  datasets.update  ` method replaces the entire dataset resource, `  datasets.patch  ` is the preferred method for updating access controls.
+Because the `datasets.update` method replaces the entire dataset resource, `datasets.patch` is the preferred method for updating access controls.
 
 ### Go
 
@@ -1169,7 +1169,7 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Set the new access list by removing the entry from the existing list with [`  DatasetMetadataToUpdate  ` type](https://pkg.go.dev/cloud.google.com/go/bigquery#DatasetMetadataToUpdate) . Then call the [`  dataset.Update()  ` function](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Update) to update the property.
+Set the new access list by removing the entry from the existing list with [`DatasetMetadataToUpdate` type](https://pkg.go.dev/cloud.google.com/go/bigquery#DatasetMetadataToUpdate) . Then call the [`dataset.Update()` function](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Update) to update the property.
 
     import (
      "context"
@@ -1310,7 +1310,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Update the dataset access list by removing the specified entry from the existing list using the [`  Dataset#get()  `](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#get) method to retrieve the current metadata. Modify the access property to exclude the desired entity, and then call the [`  Dataset#setMetadata()  `](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#setMetadata) function to apply the updated access list.
+Update the dataset access list by removing the specified entry from the existing list using the [`Dataset#get()`](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#get) method to retrieve the current metadata. Modify the access property to exclude the desired entity, and then call the [`Dataset#setMetadata()`](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#setMetadata) function to apply the updated access list.
 
     /**
      * TODO(developer): Update and un-comment below lines
@@ -1362,7 +1362,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Set the [`  dataset.access_entries  ` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.dataset.Dataset#google_cloud_bigquery_dataset_Dataset_access_entries) with the access controls for a dataset. Then call the [`  client.update_dataset()  ` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_dataset) to update the property.
+Set the [`dataset.access_entries` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.dataset.Dataset#google_cloud_bigquery_dataset_Dataset_access_entries) with the access controls for a dataset. Then call the [`client.update_dataset()` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_dataset) to update the property.
 
     from google.cloud import bigquery
     from google.api_core.exceptions import PreconditionFailed
@@ -1454,7 +1454,7 @@ To grant access to a table or view, select one of the following options:
 
 ### SQL
 
-To grant principals access to tables or views, use the [`  GRANT  ` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
+To grant principals access to tables or views, use the [`GRANT` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -1474,19 +1474,19 @@ To grant principals access to tables or views, use the [`  GRANT  ` DCL statemen
     
       - `  RESOURCE_TYPE  ` : the type of resource that the role is applied to
         
-        Supported values include `  TABLE  ` , `  VIEW  ` , `  MATERIALIZED VIEW  ` and `  EXTERNAL TABLE  ` .
+        Supported values include `TABLE` , `VIEW` , `MATERIALIZED VIEW` and `EXTERNAL TABLE` .
     
       - `  RESOURCE_NAME  ` : the name of the resource that you want to grant the permission on
     
       - `  USER_LIST  ` : a comma-separated list of users that the role is granted to
         
-        For a list of valid formats, see [`  user_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
+        For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
 3.  Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The following example grants the BigQuery Data Viewer role on `  myTable  ` :
+The following example grants the BigQuery Data Viewer role on `myTable` :
 
     GRANT `roles/bigquery.dataViewer`
     ON TABLE `myProject`.myDataset.myTable
@@ -1500,7 +1500,7 @@ The following example grants the BigQuery Data Viewer role on `  myTable  ` :
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To grant access to a table or view, use the [`  bq add-iam-policy-binding  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_add-iam-policy-binding) :
+2.  To grant access to a table or view, use the [`bq add-iam-policy-binding` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_add-iam-policy-binding) :
     
     ``` notranslate
     bq add-iam-policy-binding --member=MEMBER_TYPE:MEMBER --role=ROLE
@@ -1509,20 +1509,20 @@ The following example grants the BigQuery Data Viewer role on `  myTable  ` :
     
     Replace the following:
     
-      - MEMBER\_TYPE : the type of member, such as `  user  ` , `  group  ` , `  serviceAccount  ` , or `  domain  ` .
+      - MEMBER\_TYPE : the type of member, such as `user` , `group` , `serviceAccount` , or `domain` .
       - MEMBER : the member's email address or domain name.
       - ROLE : the role that you want to grant to the member.
       - RESOURCE : the name of the table or view whose policy you want to update.
 
 ### Terraform
 
-Use the [`  google_bigquery_table_iam  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam) resources to update access to a table.
+Use the [`google_bigquery_table_iam`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam) resources to update access to a table.
 
-**Important:** The different resources provided by `  google_bigquery_table_iam  ` can conflict with each other. We recommend reading the [`  google_bigquery_table_iam  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam) documentation carefully before making access control changes by using Terraform.
+**Important:** The different resources provided by `google_bigquery_table_iam` can conflict with each other. We recommend reading the [`google_bigquery_table_iam`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam) documentation carefully before making access control changes by using Terraform.
 
 **Set the access policy for a table**
 
-The following example shows how to use the [`  google_bigquery_table_iam_policy  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_policy) to set the IAM policy for the `  mytable  ` table. This replaces any existing policy already attached to the table:
+The following example shows how to use the [`google_bigquery_table_iam_policy` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_policy) to set the IAM policy for the `mytable` table. This replaces any existing policy already attached to the table:
 
 ``` notranslate
 # This file sets the IAM policy for the table created by
@@ -1549,7 +1549,7 @@ resource "google_bigquery_table_iam_policy" "table_iam_policy" {
 
 **Set role membership for a table**
 
-The following example shows how to use the [`  google_bigquery_table_iam_binding  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_binding) to set membership in a given role for the `  mytable  ` table. This replaces any existing membership in that role. Other roles within the IAM policy for the table are preserved.
+The following example shows how to use the [`google_bigquery_table_iam_binding` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_binding) to set membership in a given role for the `mytable` table. This replaces any existing membership in that role. Other roles within the IAM policy for the table are preserved.
 
 ``` notranslate
 # This file sets membership in an IAM role for the table created by
@@ -1571,7 +1571,7 @@ resource "google_bigquery_table_iam_binding" "table_iam_binding" {
 
 **Set role membership for a single principal**
 
-The following example shows how to use the [`  google_bigquery_table_iam_member  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_member) to update the IAM policy for the `  mytable  ` table to grant a role to one principal. Updating this IAM policy does not affect access for any other principals that have been granted that role for the dataset.
+The following example shows how to use the [`google_bigquery_table_iam_member` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_member) to update the IAM policy for the `mytable` table to grant a role to one principal. Updating this IAM policy does not affect access for any other principals that have been granted that role for the dataset.
 
 ``` notranslate
 # This file adds a member to an IAM role for the table created by
@@ -1606,13 +1606,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -1624,7 +1624,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -1636,7 +1636,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -1648,15 +1648,15 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-1.  To retrieve the current policy, call the [`  tables.getIamPolicy  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/getIamPolicy) .
+1.  To retrieve the current policy, call the [`tables.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/getIamPolicy) .
 
 2.  Edit the policy to add members or access controls, or both. For the format required for the policy, see the [Policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) reference topic.
     
-    **Caution:** Before you set the policy, always retrieve the current policy to obtain the current value for `  etag  ` . Your updated policy file must include the same value for `  etag  ` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
+    **Caution:** Before you set the policy, always retrieve the current policy to obtain the current value for `etag` . Your updated policy file must include the same value for `etag` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
       
-    In the policy file, the value for `  version  ` remains `  1  ` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `  etag  ` is the policy version number.
+    In the policy file, the value for `version` remains `1` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `etag` is the policy version number.
 
-3.  Call [`  tables.setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/setIamPolicy) to write the updated policy.
+3.  Call [`tables.setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/setIamPolicy) to write the updated policy.
     
     **Note:** Empty bindings with no members are not allowed and result in an error.
 
@@ -1666,7 +1666,7 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the resource's [`  IAM().SetPolicy()  ` function](https://pkg.go.dev/cloud.google.com/go/iam@v1.4.0#Handle.SetPolicy) to save changes to the access policy for a table or view.
+Call the resource's [`IAM().SetPolicy()` function](https://pkg.go.dev/cloud.google.com/go/iam@v1.4.0#Handle.SetPolicy) to save changes to the access policy for a table or view.
 
     import (
      "context"
@@ -1793,7 +1793,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the [`  Table#getIamPolicy()  ` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_) to retrieve the current IAM policy for a table or view, modify the policy by adding new bindings, and then use [`  Table#setIamPolicy()  ` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) to save changes to the access policy.
+Call the [`Table#getIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_) to retrieve the current IAM policy for a table or view, modify the policy by adding new bindings, and then use [`Table#setIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) to save changes to the access policy.
 
     /**
      * TODO(developer): Update and un-comment below lines
@@ -1850,7 +1850,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the [`  client.set_iam_policy()  ` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_set_iam_policy) to save changes to the access policy for a table or view.
+Call the [`client.set_iam_policy()` function](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_set_iam_policy) to save changes to the access policy for a table or view.
 
     from google.cloud import bigquery
     
@@ -1925,7 +1925,7 @@ The following predefined IAM roles have permissions on tables or views.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataOwner      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">roles/bigquery.dataOwner</code> )</td>
 <td>When granted on a table or view, this role grants these permissions:<br />
 
 <ul>
@@ -1936,7 +1936,7 @@ The following predefined IAM roles have permissions on tables or views.
 <strong>Note:</strong> Principals that are granted the Data Owner role at the dataset level can also create new tables and list tables in the dataset.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataEditor      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">roles/bigquery.dataEditor</code> )</td>
 <td>When granted on a table or view, this role grants these permissions:<br />
 
 <ul>
@@ -1948,7 +1948,7 @@ The following predefined IAM roles have permissions on tables or views.
 <strong>Note:</strong> Principals that are granted the Data Editor role at the dataset level can also create new tables and list tables in the dataset.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataViewer      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.dataViewer</code> )</td>
 <td>When granted on a table or view, this role grants these permissions:<br />
 
 <ul>
@@ -1959,7 +1959,7 @@ The following predefined IAM roles have permissions on tables or views.
 <strong>Note:</strong> Principals that are granted the Data Viewer role at the dataset level can also list tables in the dataset.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer">BigQuery Metadata Viewer</a> ( <code dir="ltr" translate="no">       roles/bigquery.metadataViewer      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer">BigQuery Metadata Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.metadataViewer</code> )</td>
 <td>When granted on a table or view, this role grants these permissions:<br />
 
 <ul>
@@ -1974,35 +1974,35 @@ The following predefined IAM roles have permissions on tables or views.
 
 Views are treated as table resources in BigQuery. All table-level permissions apply to views.
 
-Most permissions that begin with `  bigquery.tables  ` apply at the table level. `  bigquery.tables.create  ` and `  bigquery.tables.list  ` don't. In order to create and list tables or views, `  bigquery.tables.create  ` and `  bigquery.tables.list  ` permissions must be granted to a role on a parent container–the dataset or the project.
+Most permissions that begin with `bigquery.tables` apply at the table level. `bigquery.tables.create` and `bigquery.tables.list` don't. In order to create and list tables or views, `bigquery.tables.create` and `bigquery.tables.list` permissions must be granted to a role on a parent container–the dataset or the project.
 
 The following table lists all permissions for tables and views and the lowest-level resource they can be granted to.
 
-| Permission                                           | Resource | Action                                                                                                                                                                                                                                                                                       |
-| ---------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        bigquery.tables.create       `              | Dataset  | Create new tables in the dataset.                                                                                                                                                                                                                                                            |
-| `        bigquery.tables.createIndex       `         | Table    | Create a search index on the table.                                                                                                                                                                                                                                                          |
-| `        bigquery.tables.deleteIndex       `         | Table    | Delete a search index on the table.                                                                                                                                                                                                                                                          |
-| `        bigquery.tables.createSnapshot       `      | Table    | Create a snapshot of the table. Creating a snapshot requires several additional permissions at the table and dataset level. For details, see [Permissions and roles](https://docs.cloud.google.com/bigquery/docs/table-snapshots-create#permissions_and_roles) for creating table snapshots. |
-| `        bigquery.tables.deleteSnapshot       `      | Table    | Delete a snapshot of the table.                                                                                                                                                                                                                                                              |
-| `        bigquery.tables.delete       `              | Table    | Delete a table.                                                                                                                                                                                                                                                                              |
-| `        bigquery.tables.createTagBinding       `    | Table    | Create [resource tag](https://docs.cloud.google.com/bigquery/docs/tags) bindings on a table.                                                                                                                                                                                                 |
-| `        bigquery.tables.deleteTagBinding       `    | Table    | Delete [resource tag](https://docs.cloud.google.com/bigquery/docs/tags) bindings on a table.                                                                                                                                                                                                 |
-| `        bigquery.tables.listTagBindings       `     | Table    | List [resource tag](https://docs.cloud.google.com/bigquery/docs/tags) bindings on a table.                                                                                                                                                                                                   |
-| `        bigquery.tables.listEffectiveTags       `   | Table    | List effective tags (applied and inherited) for the table.                                                                                                                                                                                                                                   |
-| `        bigquery.tables.export       `              | Table    | Export the table's data. Running an extract job also requires `        bigquery.jobs.create       ` permissions.                                                                                                                                                                             |
-| `        bigquery.tables.get       `                 | Table    | Get metadata for a table.                                                                                                                                                                                                                                                                    |
-| `        bigquery.tables.getData       `             | Table    | Query the table's data. Running a query job also requires `        bigquery.jobs.create       ` permissions.                                                                                                                                                                                 |
-| `        bigquery.tables.getIamPolicy       `        | Table    | Get access controls for the table.                                                                                                                                                                                                                                                           |
-| `        bigquery.tables.list       `                | Dataset  | List all tables and table metadata in the dataset.                                                                                                                                                                                                                                           |
-| `        bigquery.tables.replicateData       `       | Table    | Replicate table data. This permission is required for creating replica materialized views.                                                                                                                                                                                                   |
-| `        bigquery.tables.restoreSnapshot       `     | Table    | Restore a table snapshot.                                                                                                                                                                                                                                                                    |
-| `        bigquery.tables.setCategory       `         | Table    | Set policy tags in the table's schema.                                                                                                                                                                                                                                                       |
-| `        bigquery.tables.setColumnDataPolicy       ` | Table    | Set column-level access policies on a table.                                                                                                                                                                                                                                                 |
-| `        bigquery.tables.setIamPolicy       `        | Table    | Set access controls on a table.                                                                                                                                                                                                                                                              |
-| `        bigquery.tables.update       `              | Table    | Update table. `        metadata. bigquery.tables.get       ` is also required to update table metadata in the console.                                                                                                                                                                       |
-| `        bigquery.tables.updateData       `          | Table    | Update table data.                                                                                                                                                                                                                                                                           |
-| `        bigquery.tables.updateIndex       `         | Table    | Update a search index on the table.                                                                                                                                                                                                                                                          |
+| Permission                            | Resource | Action                                                                                                                                                                                                                                                                                       |
+| ------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bigquery.tables.create`              | Dataset  | Create new tables in the dataset.                                                                                                                                                                                                                                                            |
+| `bigquery.tables.createIndex`         | Table    | Create a search index on the table.                                                                                                                                                                                                                                                          |
+| `bigquery.tables.deleteIndex`         | Table    | Delete a search index on the table.                                                                                                                                                                                                                                                          |
+| `bigquery.tables.createSnapshot`      | Table    | Create a snapshot of the table. Creating a snapshot requires several additional permissions at the table and dataset level. For details, see [Permissions and roles](https://docs.cloud.google.com/bigquery/docs/table-snapshots-create#permissions_and_roles) for creating table snapshots. |
+| `bigquery.tables.deleteSnapshot`      | Table    | Delete a snapshot of the table.                                                                                                                                                                                                                                                              |
+| `bigquery.tables.delete`              | Table    | Delete a table.                                                                                                                                                                                                                                                                              |
+| `bigquery.tables.createTagBinding`    | Table    | Create [resource tag](https://docs.cloud.google.com/bigquery/docs/tags) bindings on a table.                                                                                                                                                                                                 |
+| `bigquery.tables.deleteTagBinding`    | Table    | Delete [resource tag](https://docs.cloud.google.com/bigquery/docs/tags) bindings on a table.                                                                                                                                                                                                 |
+| `bigquery.tables.listTagBindings`     | Table    | List [resource tag](https://docs.cloud.google.com/bigquery/docs/tags) bindings on a table.                                                                                                                                                                                                   |
+| `bigquery.tables.listEffectiveTags`   | Table    | List effective tags (applied and inherited) for the table.                                                                                                                                                                                                                                   |
+| `bigquery.tables.export`              | Table    | Export the table's data. Running an extract job also requires `bigquery.jobs.create` permissions.                                                                                                                                                                                            |
+| `bigquery.tables.get`                 | Table    | Get metadata for a table.                                                                                                                                                                                                                                                                    |
+| `bigquery.tables.getData`             | Table    | Query the table's data. Running a query job also requires `bigquery.jobs.create` permissions.                                                                                                                                                                                                |
+| `bigquery.tables.getIamPolicy`        | Table    | Get access controls for the table.                                                                                                                                                                                                                                                           |
+| `bigquery.tables.list`                | Dataset  | List all tables and table metadata in the dataset.                                                                                                                                                                                                                                           |
+| `bigquery.tables.replicateData`       | Table    | Replicate table data. This permission is required for creating replica materialized views.                                                                                                                                                                                                   |
+| `bigquery.tables.restoreSnapshot`     | Table    | Restore a table snapshot.                                                                                                                                                                                                                                                                    |
+| `bigquery.tables.setCategory`         | Table    | Set policy tags in the table's schema.                                                                                                                                                                                                                                                       |
+| `bigquery.tables.setColumnDataPolicy` | Table    | Set column-level access policies on a table.                                                                                                                                                                                                                                                 |
+| `bigquery.tables.setIamPolicy`        | Table    | Set access controls on a table.                                                                                                                                                                                                                                                              |
+| `bigquery.tables.update`              | Table    | Update table. `metadata. bigquery.tables.get` is also required to update table metadata in the console.                                                                                                                                                                                      |
+| `bigquery.tables.updateData`          | Table    | Update table data.                                                                                                                                                                                                                                                                           |
+| `bigquery.tables.updateIndex`         | Table    | Update a search index on the table.                                                                                                                                                                                                                                                          |
 
 ### View access controls for a table or view
 
@@ -2034,7 +2034,7 @@ To view the access controls for a table or view, choose one of the following opt
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To get an existing access policy and output it to a local file in JSON, use the [`  bq get-iam-policy  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) in Cloud Shell:
+2.  To get an existing access policy and output it to a local file in JSON, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) in Cloud Shell:
     
     ``` notranslate
     bq get-iam-policy \
@@ -2055,7 +2055,7 @@ To view the access controls for a table or view, choose one of the following opt
 
 This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) . Queries to retrieve access controls for a table or view must specify the `  object_schema  ` and `  object_name  ` .
+Query the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) . Queries to retrieve access controls for a table or view must specify the `object_schema` and `object_name` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -2074,7 +2074,7 @@ Query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.g
     
     Replace the following:
     
-      - COLUMN\_LIST : a comma-separated list of columns from the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges)
+      - COLUMN\_LIST : a comma-separated list of columns from the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges)
       - PROJECT\_ID : your project ID
       - REGION : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier)
       - DATASET : the name of a dataset that contains the table or view
@@ -2104,9 +2104,9 @@ object_schema = "mydataset" AND object_name = "mytable";
 
 ### API
 
-To retrieve the current policy, call the [`  tables.getIamPolicy  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/getIamPolicy) .
+To retrieve the current policy, call the [`tables.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/getIamPolicy) .
 
-**Note:** For views, use `  tables  ` as the value for `  resource  ` in this API call.
+**Note:** For views, use `tables` as the value for `resource` in this API call.
 
 ### Go
 
@@ -2114,7 +2114,7 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the resource's [`  IAM().Policy()  ` function](https://pkg.go.dev/cloud.google.com/go/iam@v1.4.0#Handle.Policy) . Then call the [`  Roles()  ` function](https://pkg.go.dev/cloud.google.com/go/iam@v1.4.0#Policy.Roles) to get the access policy for a table or view.
+Call the resource's [`IAM().Policy()` function](https://pkg.go.dev/cloud.google.com/go/iam@v1.4.0#Handle.Policy) . Then call the [`Roles()` function](https://pkg.go.dev/cloud.google.com/go/iam@v1.4.0#Policy.Roles) to get the access policy for a table or view.
 
     import (
      "context"
@@ -2216,7 +2216,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Retrieve the IAM policy for a table or view using the [`  Table#getIamPolicy()  ` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) . The access policy details are available in the returned policy object.
+Retrieve the IAM policy for a table or view using the [`Table#getIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) . The access policy details are available in the returned policy object.
 
     /**
      * TODO(developer): Update and un-comment below lines
@@ -2283,7 +2283,7 @@ To revoke access to a table or view, select one of the following options:
 
 ### SQL
 
-To remove access to tables or views from principals, use the [`  REVOKE  ` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement) :
+To remove access to tables or views from principals, use the [`REVOKE` DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -2303,19 +2303,19 @@ To remove access to tables or views from principals, use the [`  REVOKE  ` DCL s
     
       - `  RESOURCE_TYPE  ` : the type of resource that the role is revoked from
         
-        Supported values include `  TABLE  ` , `  VIEW  ` , `  MATERIALIZED VIEW  ` and `  EXTERNAL TABLE  ` .
+        Supported values include `TABLE` , `VIEW` , `MATERIALIZED VIEW` and `EXTERNAL TABLE` .
     
       - `  RESOURCE_NAME  ` : the name of the resource that you want to revoke permission on
     
       - `  USER_LIST  ` : a comma-separated list of users who will have their roles revoked
         
-        For a list of valid formats, see [`  user_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
+        For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
 3.  Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-The following example revokes the BigQuery Data Owner role on `  myTable  ` :
+The following example revokes the BigQuery Data Owner role on `myTable` :
 
     REVOKE `roles/bigquery.dataOwner`
     ON TABLE `myProject`.myDataset.myTable
@@ -2329,7 +2329,7 @@ The following example revokes the BigQuery Data Owner role on `  myTable  ` :
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To revoke access to a table or view, use the [`  bq remove-iam-policy-binding  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_remove-iam-policy-binding) :
+2.  To revoke access to a table or view, use the [`bq remove-iam-policy-binding` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_remove-iam-policy-binding) :
     
     ``` notranslate
     bq remove-iam-policy-binding --member=MEMBER_TYPE:MEMBER --role=ROLE
@@ -2338,22 +2338,22 @@ The following example revokes the BigQuery Data Owner role on `  myTable  ` :
     
     Replace the following:
     
-      - MEMBER\_TYPE : the type of member, such as `  user  ` , `  group  ` , `  serviceAccount  ` , or `  domain  `
+      - MEMBER\_TYPE : the type of member, such as `user` , `group` , `serviceAccount` , or `domain`
       - MEMBER : the member's email address or domain name
       - ROLE : the role that you want to revoke from the member
       - RESOURCE : the name of the table or view whose policy you want to update
 
 ### API
 
-1.  To retrieve the current policy, call the [`  tables.getIamPolicy  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/getIamPolicy) .
+1.  To retrieve the current policy, call the [`tables.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/getIamPolicy) .
 
 2.  Edit the policy to remove members or bindings, or both. For the format required for the policy, see the [Policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) reference topic.
     
-    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `  etag  ` . Your updated policy file must include the same value for `  etag  ` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
+    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `etag` . Your updated policy file must include the same value for `etag` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
       
-    In the policy file, the value for `  version  ` remains `  1  ` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `  etag  ` is the policy version number.
+    In the policy file, the value for `version` remains `1` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `etag` is the policy version number.
 
-3.  Call [`  tables.setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/setIamPolicy) to write the updated policy.
+3.  Call [`tables.setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/setIamPolicy) to write the updated policy.
 
 **Note:** Empty bindings with no members are not allowed and result in an error.
 
@@ -2363,7 +2363,7 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the [`  policy.Remove()  ` function](https://pkg.go.dev/cloud.google.com/go/iam#Policy.Remove) to remove the access. Then call the [`  IAM().SetPolicy()  ` function](https://pkg.go.dev/cloud.google.com/go/iam#Policy.Remove) to save changes to the access policy for a table or view.
+Call the [`policy.Remove()` function](https://pkg.go.dev/cloud.google.com/go/iam#Policy.Remove) to remove the access. Then call the [`IAM().SetPolicy()` function](https://pkg.go.dev/cloud.google.com/go/iam#Policy.Remove) to save changes to the access policy for a table or view.
 
     import (
      "context"
@@ -2518,7 +2518,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Retrieve the current IAM policy for a table or view using the [`  Table#getIamPolicy()  `](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) method. Modify the policy to remove the desired role or principal, and then apply the updated policy using the [`  Table#setIamPolicy()  `](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) method.
+Retrieve the current IAM policy for a table or view using the [`Table#getIamPolicy()`](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) method. Modify the policy to remove the desired role or principal, and then apply the updated policy using the [`Table#setIamPolicy()`](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) method.
 
     /**
      * TODO(developer): Update and un-comment below lines
@@ -2659,7 +2659,7 @@ Select one of the following options:
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To write the existing routine information (including access controls) to a JSON file, use the [`  bq get-iam-policy  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) :
+2.  To write the existing routine information (including access controls) to a JSON file, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) :
     
     ``` notranslate
     bq get-iam-policy \
@@ -2674,11 +2674,11 @@ Select one of the following options:
       - ROUTINE : the name of the resource to update
       - PATH\_TO\_FILE : the path to the JSON file on your local machine
     
-    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `  etag  ` . Your updated policy file must include the same value for `  etag  ` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
+    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `etag` . Your updated policy file must include the same value for `etag` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
       
-    In the policy file, the value for `  version  ` remains `  1  ` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `  etag  ` is the policy version number.
+    In the policy file, the value for `version` remains `1` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `etag` is the policy version number.
 
-3.  Make changes to the `  bindings  ` section of the JSON file. A binding binds one or more principals to a single `  role  ` . Principals can be user accounts, service accounts, Google groups, and domains. For example, the `  bindings  ` section of a routine's JSON file would look like the following:
+3.  Make changes to the `bindings` section of the JSON file. A binding binds one or more principals to a single `role` . Principals can be user accounts, service accounts, Google groups, and domains. For example, the `bindings` section of a routine's JSON file would look like the following:
     
     ``` notranslate
     {
@@ -2699,13 +2699,13 @@ Select one of the following options:
     
     **Note:** Empty bindings with no members are not allowed and result in an error.
 
-4.  To update the access policy, use the `  bq set-iam-policy  ` command:
+4.  To update the access policy, use the `bq set-iam-policy` command:
     
     ``` notranslate
     bq set-iam-policy PROJECT_ID:DATASET.ROUTINE PATH_TO_FILE
     ```
 
-5.  To verify your access control changes, use the [`  bq get-iam-policy  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) again without writing the information to a file:
+5.  To verify your access control changes, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) again without writing the information to a file:
     
     ``` notranslate
     bq get-iam-policy --format=prettyjson \\
@@ -2714,15 +2714,15 @@ Select one of the following options:
 
 ### API
 
-1.  To retrieve the current policy, call the [`  routines.getIamPolicy  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/getIamPolicy) .
+1.  To retrieve the current policy, call the [`routines.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/getIamPolicy) .
 
 2.  Edit the policy to add principals, bindings, or both. For the format required for the policy, see the [Policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) reference topic.
     
-    **Caution:** Before you set the policy, always retrieve the current policy to obtain the current value for `  etag  ` . Your updated policy file must include the same value for `  etag  ` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
+    **Caution:** Before you set the policy, always retrieve the current policy to obtain the current value for `etag` . Your updated policy file must include the same value for `etag` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
       
-    In the policy file, the value for `  version  ` remains `  1  ` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `  etag  ` is the policy version number.
+    In the policy file, the value for `version` remains `1` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `etag` is the policy version number.
 
-3.  Call [`  routines.setIamPolicy  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/setIamPolicy) to write the updated policy.
+3.  Call [`routines.setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/setIamPolicy) to write the updated policy.
 
 **Note:** Empty bindings with no members are not allowed and result in an error.
 
@@ -2747,7 +2747,7 @@ The following predefined IAM roles have permissions on routines.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataOwner      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">roles/bigquery.dataOwner</code> )</td>
 <td>When granted on a routine, this role grants these permissions:<br />
 
 <ul>
@@ -2757,7 +2757,7 @@ The following predefined IAM roles have permissions on routines.
 <strong>Note:</strong> Principals that are granted the Data Owner role at the dataset level can create routines and list routines in the dataset.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataEditor      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">roles/bigquery.dataEditor</code> )</td>
 <td>When granted on a routine, this role grants these permissions:<br />
 
 <ul>
@@ -2766,7 +2766,7 @@ The following predefined IAM roles have permissions on routines.
 <strong>Note:</strong> Principals that are granted the Data Editor role at the dataset level can create routines and list routines in the dataset.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">       roles/bigquery.dataViewer      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.dataViewer</code> )</td>
 <td>When granted on a routine, this role grants these permissions:<br />
 
 <ul>
@@ -2775,7 +2775,7 @@ The following predefined IAM roles have permissions on routines.
 <strong>Note:</strong> Principals that are granted the Data Viewer role at the dataset level can also list routines in the dataset.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer">BigQuery Metadata Viewer</a> ( <code dir="ltr" translate="no">       roles/bigquery.metadataViewer      </code> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer">BigQuery Metadata Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.metadataViewer</code> )</td>
 <td>When granted on a routine, this role grants these permissions:<br />
 
 <ul>
@@ -2788,19 +2788,19 @@ The following predefined IAM roles have permissions on routines.
 
 ### Permissions for routines
 
-Most permissions that begin with `  bigquery.routines  ` apply at the routine level. `  bigquery.routines.create  ` and `  bigquery.routines.list  ` don't. In order to create and list routines, `  bigquery.routines.create  ` and `  bigquery.routines.list  ` permissions must be granted to a role on the parent container–the dataset.
+Most permissions that begin with `bigquery.routines` apply at the routine level. `bigquery.routines.create` and `bigquery.routines.list` don't. In order to create and list routines, `bigquery.routines.create` and `bigquery.routines.list` permissions must be granted to a role on the parent container–the dataset.
 
 The following table lists all permissions for routines and the lowest-level resource they can be granted to.
 
-| Permission                                      | Resource | Description                                                                                                                                                                                                                                                                 |
-| ----------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `        bigquery.routines.create       `       | Dataset  | Create a routine in the dataset. This permission also requires `        bigquery.jobs.create       ` to run a query job that contains a `        CREATE FUNCTION       ` statement.                                                                                         |
-| `        bigquery.routines.delete       `       | Routine  | Delete a routine.                                                                                                                                                                                                                                                           |
-| `        bigquery.routines.get       `          | Routine  | Reference a routine created by someone else. This permission also requires `        bigquery.jobs.create       ` to run a query job that references the routine, and you also need permission to access any resources that the routine references, such as tables or views. |
-| `        bigquery.routines.list       `         | Dataset  | List routines in the dataset and show metadata for routines.                                                                                                                                                                                                                |
-| `        bigquery.routines.update       `       | Routine  | Update routine definitions and metadata.                                                                                                                                                                                                                                    |
-| `        bigquery.routines.getIamPolicy       ` | Routine  | Get access controls for the routine.                                                                                                                                                                                                                                        |
-| `        bigquery.routines.setIamPolicy       ` | Routine  | Set access controls for the routine.                                                                                                                                                                                                                                        |
+| Permission                       | Resource | Description                                                                                                                                                                                                                                                  |
+| -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `bigquery.routines.create`       | Dataset  | Create a routine in the dataset. This permission also requires `bigquery.jobs.create` to run a query job that contains a `CREATE FUNCTION` statement.                                                                                                        |
+| `bigquery.routines.delete`       | Routine  | Delete a routine.                                                                                                                                                                                                                                            |
+| `bigquery.routines.get`          | Routine  | Reference a routine created by someone else. This permission also requires `bigquery.jobs.create` to run a query job that references the routine, and you also need permission to access any resources that the routine references, such as tables or views. |
+| `bigquery.routines.list`         | Dataset  | List routines in the dataset and show metadata for routines.                                                                                                                                                                                                 |
+| `bigquery.routines.update`       | Routine  | Update routine definitions and metadata.                                                                                                                                                                                                                     |
+| `bigquery.routines.getIamPolicy` | Routine  | Get access controls for the routine.                                                                                                                                                                                                                         |
+| `bigquery.routines.setIamPolicy` | Routine  | Set access controls for the routine.                                                                                                                                                                                                                         |
 
 ### View the access controls for a routine
 
@@ -2826,15 +2826,15 @@ To view the access controls for a routine, choose one of the following options:
 
 ### bq
 
-The `  bq get-iam-policy  ` command does not provide support for viewing access controls on a routine.
+The `bq get-iam-policy` command does not provide support for viewing access controls on a routine.
 
 ### SQL
 
-The [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) doesn't show access controls for routines.
+The [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) doesn't show access controls for routines.
 
 ### API
 
-To retrieve the current policy, call the [`  routines.getIamPolicy  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/getIamPolicy) .
+To retrieve the current policy, call the [`routines.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/getIamPolicy) .
 
 ### Revoke access to a routine
 
@@ -2874,7 +2874,7 @@ To revoke access to a routine, select one of the following options:
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To write the existing routine information (including access controls) to a JSON file, use the [`  bq get-iam-policy  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) :
+2.  To write the existing routine information (including access controls) to a JSON file, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) :
     
     ``` notranslate
     bq get-iam-policy --routine PROJECT_ID:DATASET.ROUTINE > PATH_TO_FILE
@@ -2887,13 +2887,13 @@ To revoke access to a routine, select one of the following options:
       - ROUTINE : the name of the resource to update
       - PATH\_TO\_FILE : the path to the JSON file on your local machine
     
-    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `  etag  ` . Your updated policy file must include the same `  etag  ` value as the current policy that you are replacing, or the update fails. This feature prevents concurrent updates from occurring.
+    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `etag` . Your updated policy file must include the same `etag` value as the current policy that you are replacing, or the update fails. This feature prevents concurrent updates from occurring.
     
-    In the policy file, the value for `  version  ` remains `  1  ` . This number refers to the IAM policy *schema* version, not the version of the policy. The value for `  etag  ` value is the policy version number.
+    In the policy file, the value for `version` remains `1` . This number refers to the IAM policy *schema* version, not the version of the policy. The value for `etag` value is the policy version number.
 
-3.  Make changes to the `  access  ` section of the JSON file. You can remove any of the `  specialGroup  ` entries: `  projectOwners  ` , `  projectWriters  ` , `  projectReaders  ` , and `  allAuthenticatedUsers  ` . You can also remove any of the following: `  userByEmail  ` , `  groupByEmail  ` , and `  domain  ` .
+3.  Make changes to the `access` section of the JSON file. You can remove any of the `specialGroup` entries: `projectOwners` , `projectWriters` , `projectReaders` , and `allAuthenticatedUsers` . You can also remove any of the following: `userByEmail` , `groupByEmail` , and `domain` .
     
-    For example, the `  access  ` section of a routine's JSON file would look like the following:
+    For example, the `access` section of a routine's JSON file would look like the following:
     
     ``` notranslate
     {
@@ -2914,13 +2914,13 @@ To revoke access to a routine, select one of the following options:
     
     **Note:** Empty bindings with no members are not allowed and result in an error.
 
-4.  To update the access policy, use the `  bq set-iam-policy  ` command:
+4.  To update the access policy, use the `bq set-iam-policy` command:
     
     ``` notranslate
     bq set-iam-policy --routine PROJECT_ID:DATASET.ROUTINE PATH_TO_FILE
     ```
 
-5.  To verify your access control changes, use the `  get-iam-policy  ` command again without writing the information to a file:
+5.  To verify your access control changes, use the `get-iam-policy` command again without writing the information to a file:
     
     ``` notranslate
     bq get-iam-policy --routine --format=prettyjson PROJECT_ID:DATASET.ROUTINE
@@ -2928,13 +2928,13 @@ To revoke access to a routine, select one of the following options:
 
 ### API
 
-1.  To retrieve the current policy, call the [`  routines.getIamPolicy  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/getIamPolicy) .
+1.  To retrieve the current policy, call the [`routines.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/getIamPolicy) .
 
 2.  Edit the policy to add principals or bindings, or both. For the format required for the policy, see the [Policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy) reference topic.
     
-    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `  etag  ` . Your updated policy file must include the same value for `  etag  ` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
+    **Caution:** When you set the policy, always retrieve the current policy as a first step to obtain the current value for `etag` . Your updated policy file must include the same value for `etag` as the current policy you are replacing, or the update fails. This feature prevents concurrent updates from occurring.  
       
-    In the policy file, the value for `  version  ` remains `  1  ` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `  etag  ` is the policy version number.
+    In the policy file, the value for `version` remains `1` . This version number refers to the IAM policy *schema* version, not the version of the policy. The value for `etag` is the policy version number.
 
 ## View inherited access controls for a resource
 
@@ -2962,7 +2962,7 @@ You can examine the inherited IAM roles for a resource by using the BigQuery web
     
     ![The Inherited from a parent resource icon](https://docs.cloud.google.com/bigquery/images/inherited-icon.png)
 
-**Note:** You can also [view all allow and deny policies](https://docs.cloud.google.com/iam/docs/troubleshoot-policies#applicable-policies) for a resource's parent project, folder, and organization by using the [`  gcloud beta projects get-ancestors-iam-policy  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/beta/projects/get-ancestors-iam-policy) .
+**Note:** You can also [view all allow and deny policies](https://docs.cloud.google.com/iam/docs/troubleshoot-policies#applicable-policies) for a resource's parent project, folder, and organization by using the [`gcloud beta projects get-ancestors-iam-policy` command](https://docs.cloud.google.com/sdk/gcloud/reference/beta/projects/get-ancestors-iam-policy) .
 
 ## Deny access to a resource
 
@@ -2982,42 +2982,42 @@ Consider the following scenarios when you create [IAM deny policies](https://doc
 
   - Access to authorized resources ( [views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , [routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) , [datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , or [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#authorize_routines) ) lets you [create](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , [drop](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement) , or [manipulate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) a table, along with reading and modifying table data, even if you don't have direct permission to perform those operations. It can also [get model data or metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) and [invoke other stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#call_a_stored_procedure) on the underlying table. This capability implies that the authorized resources have the following permissions:
     
-      - `  bigquery.tables.get  `
-      - `  bigquery.tables.list  `
-      - `  bigquery.tables.getData  `
-      - `  bigquery.tables.updateData  `
-      - `  bigquery.tables.create  `
-      - `  bigquery.tables.delete  `
-      - `  bigquery.routines.get  `
-      - `  bigquery.routines.list  `
-      - `  bigquery.datasets.get  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.getMetadata  `
+      - `bigquery.tables.get`
+      - `bigquery.tables.list`
+      - `bigquery.tables.getData`
+      - `bigquery.tables.updateData`
+      - `bigquery.tables.create`
+      - `bigquery.tables.delete`
+      - `bigquery.routines.get`
+      - `bigquery.routines.list`
+      - `bigquery.datasets.get`
+      - `bigquery.models.getData`
+      - `bigquery.models.getMetadata`
     
-    To deny access to these authorized resources, add one of the following values to the [`  deniedPrincipal  `](https://docs.cloud.google.com/iam/docs/deny-overview#deny-rules) field when you create the deny policy:
+    To deny access to these authorized resources, add one of the following values to the [`deniedPrincipal`](https://docs.cloud.google.com/iam/docs/deny-overview#deny-rules) field when you create the deny policy:
     
-    | Value                                                                                                                      | Use case                                                                                                                                                                                                                                                                                                                 |
-    | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-    | `          principalSet://goog/public:all         `                                                                        | Blocks all principals including authorized resources.                                                                                                                                                                                                                                                                    |
-    | `          principalSet://bigquery.googleapis.com/projects/                   PROJECT_NUMBER                  /*         ` | Blocks all BigQuery authorized resources in the specified project. [`             PROJECT_NUMBER           `](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) is an automatically generated unique identifier for your project of type `          INT64         ` . |
+    | Value                                                                                   | Use case                                                                                                                                                                                                                                                                                             |
+    | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `principalSet://goog/public:all`                                                        | Blocks all principals including authorized resources.                                                                                                                                                                                                                                                |
+    | `principalSet://bigquery.googleapis.com/projects/           PROJECT_NUMBER          /*` | Blocks all BigQuery authorized resources in the specified project. [`            PROJECT_NUMBER           `](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) is an automatically generated unique identifier for your project of type `INT64` . |
     
 
-  - To exempt certain principals from the deny policy, specify those principals in the [`  exceptionPrincipals  `](https://docs.cloud.google.com/iam/docs/deny-overview#deny-rules) field of your deny policy. For example, `  exceptionPrincipals: "principalSet://bigquery.googleapis.com/projects/1234/*"  ` .
+  - To exempt certain principals from the deny policy, specify those principals in the [`exceptionPrincipals`](https://docs.cloud.google.com/iam/docs/deny-overview#deny-rules) field of your deny policy. For example, `exceptionPrincipals: "principalSet://bigquery.googleapis.com/projects/1234/*"` .
 
-  - BigQuery [caches query results](https://docs.cloud.google.com/bigquery/docs/cached-results#how_cached_results_are_stored) of a job owner for 24 hours, which the job owner can access without needing the `  bigquery.tables.getData  ` permission on the table containing the data. Hence, adding an IAM deny policy to the `  bigquery.tables.getData  ` permission doesn't block access to cached results for the job owner until the cache expires. To block the job owner access to cached results, create a separate deny policy on the `  bigquery.jobs.create  ` permission.
+  - BigQuery [caches query results](https://docs.cloud.google.com/bigquery/docs/cached-results#how_cached_results_are_stored) of a job owner for 24 hours, which the job owner can access without needing the `bigquery.tables.getData` permission on the table containing the data. Hence, adding an IAM deny policy to the `bigquery.tables.getData` permission doesn't block access to cached results for the job owner until the cache expires. To block the job owner access to cached results, create a separate deny policy on the `bigquery.jobs.create` permission.
 
   - To prevent unintended data access when using deny policies to block data read operations, we recommend that you also review and revoke any existing subscriptions on the dataset.
 
   - To create a [IAM deny policy](https://docs.cloud.google.com/iam/docs/deny-overview) for viewing dataset access controls, deny the following permissions:
     
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
 
   - To create a [IAM deny policy](https://docs.cloud.google.com/iam/docs/deny-overview) for updating dataset access controls, deny the following permissions:
     
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
 
 ## What's next
 
-Learn how to use the [`  projects.testIamPermissions  ` method](https://docs.cloud.google.com/resource-manager/reference/rest/v1/projects/testIamPermissions) to test user access to a resource.
+Learn how to use the [`projects.testIamPermissions` method](https://docs.cloud.google.com/resource-manager/reference/rest/v1/projects/testIamPermissions) to test user access to a resource.

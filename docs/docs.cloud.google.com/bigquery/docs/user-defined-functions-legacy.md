@@ -50,8 +50,8 @@ function name(row, emit) {
 
 BigQuery UDFs operate on individual rows of a table or subselect query results. The UDF has two formal parameters:
 
-  - `  row  ` : an input row.
-  - `  emit  ` : a hook used by BigQuery to collect output data. The `  emit  ` function takes one parameter: a JavaScript object that represents a single row of output data. The `  emit  ` function can be called more than once, such as in a loop, to output multiple rows of data.
+  - `row` : an input row.
+  - `emit` : a hook used by BigQuery to collect output data. The `emit` function takes one parameter: a JavaScript object that represents a single row of output data. The `emit` function can be called more than once, such as in a loop, to output multiple rows of data.
 
 The following code example shows a basic UDF.
 
@@ -96,7 +96,7 @@ The input specifier for the name and age would be:
 
     ['person.name', 'person.age']
 
-Use of `  ['person']  ` without the name or age would generate an error.
+Use of `['person']` without the name or age would generate an error.
 
 The resulting output will match the schema; you'll have an array of JavaScript objects, where each object has a "name" and an "age" property. For example:
 
@@ -113,7 +113,7 @@ You must provide BigQuery with the schema or structure of the records your UDF p
   - string
   - timestamp
 
-The following code example shows the syntax for records in the output schema. Each output field requires a `  name  ` and `  type  ` attribute. Nested fields must also contain a `  fields  ` attribute.
+The following code example shows the syntax for records in the output schema. Each output field requires a `name` and `type` attribute. Nested fields must also contain a `fields` attribute.
 
 ``` notranslate
 [{name: 'foo_bar', type: 'record', fields:
@@ -123,17 +123,17 @@ The following code example shows the syntax for records in the output schema. Ea
 }]
 ```
 
-Each field can contain an optional `  mode  ` attribute, which supports the following values:
+Each field can contain an optional `mode` attribute, which supports the following values:
 
   - nullable : this is the default and may be omitted.
   - required : if specified, the given field must be set to a value and cannot be undefined.
   - repeated : if specified, the given field must be an array.
 
-Rows passed to the `  emit()  ` function must match the data types of the output schema. Fields represented in the output schema that are omitted in the emit function will output as nulls.
+Rows passed to the `emit()` function must match the data types of the output schema. Fields represented in the output schema that are omitted in the emit function will output as nulls.
 
 #### UDF definition or reference
 
-If you prefer, you can define the UDF inline in `  bigquery.defineFunction  ` . For example:
+If you prefer, you can define the UDF inline in `bigquery.defineFunction` . For example:
 
 ``` notranslate
 bigquery.defineFunction(
@@ -153,7 +153,7 @@ bigquery.defineFunction(
 );
 ```
 
-Otherwise, you can define the UDF separately, and pass a reference to the function in `  bigquery.defineFunction  ` . For example:
+Otherwise, you can define the UDF separately, and pass a reference to the function in `bigquery.defineFunction` . For example:
 
 ``` notranslate
 // The UDF
@@ -218,7 +218,7 @@ You can use UDFs in legacy SQL with the [bq command-line tool](https://docs.clou
 
 ### Using the bq command-line tool
 
-To run a query containing one or more UDFs, specify the `  --udf_resource  ` flag in the bq command-line tool from the Google Cloud CLI. The value of the flag can be either a Cloud Storage ( `  gs://...  ` ) URI or the path to a local file. To specify multiple UDF resource files, repeat this flag.
+To run a query containing one or more UDFs, specify the `--udf_resource` flag in the bq command-line tool from the Google Cloud CLI. The value of the flag can be either a Cloud Storage ( `gs://...` ) URI or the path to a local file. To specify multiple UDF resource files, repeat this flag.
 
 Use the following syntax to run a query with a UDF:
 
@@ -228,7 +228,7 @@ The following example runs a query that uses a UDF stored in a local file and a 
 
 #### Creating the UDF
 
-You can store the UDF in Cloud Storage or as a local text file. For example, to store the following `  urlDecode  ` UDF, create a file named `  urldecode.js  ` and paste the following JavaScript code into the file before saving the file.
+You can store the UDF in Cloud Storage or as a local text file. For example, to store the following `urlDecode` UDF, create a file named `urldecode.js` and paste the following JavaScript code into the file before saving the file.
 
     // UDF definition
     function urlDecode(row, emit) {
@@ -260,7 +260,7 @@ You can store the UDF in Cloud Storage or as a local text file. For example, to 
 
 #### Creating the query
 
-You can also store the query in a file to keep your command line from becoming too verbose. For example, you can create a local file named `  query.sql  ` and paste the following BigQuery statement into the file.
+You can also store the query in a file to keep your command line from becoming too verbose. For example, you can create a local file named `query.sql` and paste the following BigQuery statement into the file.
 
     #legacySQL
     SELECT requests, title
@@ -281,7 +281,7 @@ After saving the file you can reference the file on the command line.
 
 #### Running the query
 
-After defining the UDF and the query in separate files, you can reference them in the command line. For example, the following command runs the query that you saved as the file named `  query.sql  ` and references the UDF that you created.
+After defining the UDF and the query in separate files, you can reference them in the command line. For example, the following command runs the query that you saved as the file named `query.sql` and references the UDF that you created.
 
     $ bq query --udf_resource=urldecode.js "$(cat query.sql)"
 
@@ -289,21 +289,21 @@ After defining the UDF and the query in separate files, you can reference them i
 
 #### configuration.query
 
-Queries that use UDFs must contain [`  userDefinedFunctionResources  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#userdefinedfunctionresource) elements that provide the code, or locations to code resources, to be used in the query. The supplied code must include registration function invocations for any UDFs referenced by the query.
+Queries that use UDFs must contain [`userDefinedFunctionResources`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#userdefinedfunctionresource) elements that provide the code, or locations to code resources, to be used in the query. The supplied code must include registration function invocations for any UDFs referenced by the query.
 
 #### Code resources
 
 Your query configuration may include JavaScript code blobs, as well as references to JavaScript source files stored in Cloud Storage.
 
-Inline JavaScript code blobs are populated in the [`  inlineCode  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#UserDefinedFunctionResource.FIELDS.inline_code) section of a `  userDefinedFunctionResource  ` element. However, code that will be reused or referenced across multiple queries should be persisted in Cloud Storage and referenced as an external resource.
+Inline JavaScript code blobs are populated in the [`inlineCode`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#UserDefinedFunctionResource.FIELDS.inline_code) section of a `userDefinedFunctionResource` element. However, code that will be reused or referenced across multiple queries should be persisted in Cloud Storage and referenced as an external resource.
 
-To reference a JavaScript source file from Cloud Storage, set the [`  resourceURI  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#UserDefinedFunctionResource.FIELDS.resource_uri) section of the `  userDefinedFunctionResource  ` element to the file's `  gs://  ` URI.
+To reference a JavaScript source file from Cloud Storage, set the [`resourceURI`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#UserDefinedFunctionResource.FIELDS.resource_uri) section of the `userDefinedFunctionResource` element to the file's `gs://` URI.
 
-The query configuration may contain multiple `  userDefinedFunctionResource  ` elements. Each element may contain either an `  inlineCode  ` or a `  resourceUri  ` section.
+The query configuration may contain multiple `userDefinedFunctionResource` elements. Each element may contain either an `inlineCode` or a `resourceUri` section.
 
 #### Example
 
-The following JSON example illustrates a query request that references two UDF resources: one blob of inline code, and one file `  lib.js  ` to be read from Cloud Storage. In this example, `  myFunc  ` and the registration invocation for `  myFunc  ` are provided by `  lib.js  ` .
+The following JSON example illustrates a query request that references two UDF resources: one blob of inline code, and one file `lib.js` to be read from Cloud Storage. In this example, `myFunc` and the registration invocation for `myFunc` are provided by `lib.js` .
 
 ``` notranslate
 {
@@ -335,7 +335,7 @@ You can use [our UDF test tool](https://github.com/GoogleCloudPlatform/bigquery-
 
 If your input can be easily filtered down before being passed to a UDF, your query will likely be faster and cheaper.
 
-In the [running a query](https://docs.cloud.google.com/bigquery/user-defined-functions#queryui) example, a subquery is passed as the input to `  urlDecode  ` , instead of a full table. A table might have billions of rows, and if we ran the UDF on the entire table, the JavaScript framework would need to process many more rows than it would with the filtered subquery.
+In the [running a query](https://docs.cloud.google.com/bigquery/user-defined-functions#queryui) example, a subquery is passed as the input to `urlDecode` , instead of a full table. A table might have billions of rows, and if we ran the UDF on the entire table, the JavaScript framework would need to process many more rows than it would with the filtered subquery.
 
 #### Avoid persistent mutable state
 
@@ -353,7 +353,7 @@ function dontDoThis(r, emit) {
 SELECT max(rowCount) FROM dontDoThis(t);
 ```
 
-The above example will not behave as expected, because BigQuery shards your query across many nodes. Each node has a standalone JavaScript processing environment that accumulates separate values for `  numRows  ` .
+The above example will not behave as expected, because BigQuery shards your query across many nodes. Each node has a standalone JavaScript processing environment that accumulates separate values for `numRows` .
 
 #### Use memory efficiently
 
@@ -361,9 +361,9 @@ The JavaScript processing environment has limited memory available per query. UD
 
 #### Expand select queries
 
-You must explicitly list the columns being selected from a UDF. `  SELECT * FROM <UDF name> (...)  ` isn't supported.
+You must explicitly list the columns being selected from a UDF. `SELECT * FROM <UDF name> (...)` isn't supported.
 
-To examine the structure of the input row data, you can use `  JSON.stringify()  ` to emit a string output column:
+To examine the structure of the input row data, you can use `JSON.stringify()` to emit a string output column:
 
 ``` notranslate
 bigquery.defineFunction(
@@ -392,7 +392,7 @@ bigquery.defineFunction(
 
 ## Limitations
 
-  - The DOM objects `  Window  ` , `  Document  ` and `  Node  ` , and functions that require them, are unsupported.
+  - The DOM objects `Window` , `Document` and `Node` , and functions that require them, are unsupported.
   - JavaScript functions that rely on native code are unsupported.
   - Bitwise operations in JavaScript handle only the most significant 32 bits.
   - Because of their non-deterministic nature, queries that invoke user-defined functions cannot use cached results.

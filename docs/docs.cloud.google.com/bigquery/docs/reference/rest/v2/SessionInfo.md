@@ -22,8 +22,8 @@
 
 Fields
 
-`  sessionId  `
+`sessionId`
 
-`  string  `
+`string`
 
 Output only. The id of the session.

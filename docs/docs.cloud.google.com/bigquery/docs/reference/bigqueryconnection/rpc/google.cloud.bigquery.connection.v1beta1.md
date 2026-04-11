@@ -29,14 +29,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc CreateConnection(                         CreateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Connection            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc CreateConnection(              CreateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Connection            </code> )</p>
 <p>Creates a new connection.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -56,14 +56,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc DeleteConnection(                         DeleteConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Empty            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc DeleteConnection(              DeleteConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Empty            </code> )</p>
 <p>Deletes connection and associated credential.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -83,14 +83,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc GetConnection(                         GetConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Connection            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc GetConnection(              GetConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Connection            </code> )</p>
 <p>Returns specified connection.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -110,14 +110,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc GetIamPolicy(                         GetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">              Policy            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc GetIamPolicy(              GetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">             Policy            </code> )</p>
 <p>Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -137,14 +137,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc ListConnections(                         ListConnectionsRequest            </code> ) returns ( <code dir="ltr" translate="no">              ListConnectionsResponse            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc ListConnections(              ListConnectionsRequest            </code> ) returns ( <code dir="ltr" translate="no">             ListConnectionsResponse            </code> )</p>
 <p>Returns a list of connections in the given project.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -164,15 +164,15 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc SetIamPolicy(                         SetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">              Policy            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc SetIamPolicy(              SetIamPolicyRequest            </code> ) returns ( <code dir="ltr" translate="no">             Policy            </code> )</p>
 <p>Sets the access control policy on the specified resource. Replaces any existing policy.</p>
-<p>Can return <code dir="ltr" translate="no">           NOT_FOUND          </code> , <code dir="ltr" translate="no">           INVALID_ARGUMENT          </code> , and <code dir="ltr" translate="no">           PERMISSION_DENIED          </code> errors.</p>
+<p>Can return <code dir="ltr" translate="no">NOT_FOUND</code> , <code dir="ltr" translate="no">INVALID_ARGUMENT</code> , and <code dir="ltr" translate="no">PERMISSION_DENIED</code> errors.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -192,15 +192,15 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc TestIamPermissions(                         TestIamPermissionsRequest            </code> ) returns ( <code dir="ltr" translate="no">              TestIamPermissionsResponse            </code> )</p>
-<p>Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a <code dir="ltr" translate="no">           NOT_FOUND          </code> error.</p>
+<td><p><code dir="ltr" translate="no">rpc TestIamPermissions(              TestIamPermissionsRequest            </code> ) returns ( <code dir="ltr" translate="no">             TestIamPermissionsResponse            </code> )</p>
+<p>Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a <code dir="ltr" translate="no">NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -220,14 +220,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc UpdateConnection(                         UpdateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">              Connection            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc UpdateConnection(              UpdateConnectionRequest            </code> ) returns ( <code dir="ltr" translate="no">             Connection            </code> )</p>
 <p>Updates the specified connection. For security reasons, also resets credential if connection properties are in the update field mask.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -247,14 +247,14 @@ Manages external data source connections and credentials.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc UpdateConnectionCredential(                         UpdateConnectionCredentialRequest            </code> ) returns ( <code dir="ltr" translate="no">              Empty            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc UpdateConnectionCredential(              UpdateConnectionCredentialRequest            </code> ) returns ( <code dir="ltr" translate="no">             Empty            </code> )</p>
 <p>Sets the credential for the specified connection.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires one of the following OAuth scopes:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/bigquery             </code></li>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
@@ -269,15 +269,15 @@ Credential info for the Cloud SQL.
 
 Fields
 
-`  username  `
+`username`
 
-`  string  `
+`string`
 
 The username for the credential.
 
-`  password  `
+`password`
 
-`  string  `
+`string`
 
 The password for the credential.
 
@@ -287,33 +287,33 @@ Connection properties specific to the Cloud SQL.
 
 Fields
 
-`  instance_id  `
+`instance_id`
 
-`  string  `
+`string`
 
-Cloud SQL instance ID in the form `  project:location:instance  ` .
+Cloud SQL instance ID in the form `project:location:instance` .
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 Database name.
 
-`  type  `
+`type`
 
 `  DatabaseType  `
 
 Type of the Cloud SQL database.
 
-`  credential  `
+`credential`
 
 `  CloudSqlCredential  `
 
 Input only. Cloud SQL credential.
 
-`  service_account_id  `
+`service_account_id`
 
-`  string  `
+`string`
 
 Output only. The account ID of the service used for the purpose of this connection.
 
@@ -325,15 +325,15 @@ Supported Cloud SQL database types.
 
 Enums
 
-`  DATABASE_TYPE_UNSPECIFIED  `
+`DATABASE_TYPE_UNSPECIFIED`
 
 Unspecified database type.
 
-`  POSTGRES  `
+`POSTGRES`
 
 Cloud SQL for PostgreSQL.
 
-`  MYSQL  `
+`MYSQL`
 
 Cloud SQL for MySQL.
 
@@ -343,45 +343,45 @@ Configuration parameters to establish connection with an external data source, e
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-The resource name of the connection in the form of: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+The resource name of the connection in the form of: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-`  friendly_name  `
+`friendly_name`
 
-`  string  `
+`string`
 
 User provided display name for the connection.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 User provided description.
 
-`  creation_time  `
+`creation_time`
 
-`  int64  `
+`int64`
 
 Output only. The creation timestamp of the connection.
 
-`  last_modified_time  `
+`last_modified_time`
 
-`  int64  `
+`int64`
 
 Output only. The last update timestamp of the connection.
 
-`  has_credential  `
+`has_credential`
 
-`  bool  `
+`bool`
 
 Output only. True, if credential is configured for this connection.
 
-Union field `  properties  ` . Properties specific to the underlying data source. `  properties  ` can be only one of the following:
+Union field `properties` . Properties specific to the underlying data source. `properties` can be only one of the following:
 
-`  cloud_sql  `
+`cloud_sql`
 
 `  CloudSqlProperties  `
 
@@ -393,9 +393,9 @@ Credential to use with a connection.
 
 Fields
 
-Union field `  credential  ` . Credential specific to the underlying data source. `  credential  ` can be only one of the following:
+Union field `credential` . Credential specific to the underlying data source. `credential` can be only one of the following:
 
-`  cloud_sql  `
+`cloud_sql`
 
 `  CloudSqlCredential  `
 
@@ -407,23 +407,23 @@ The request for `  ConnectionService.CreateConnection  ` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Parent resource name. Must be in the format `  projects/{project_id}/locations/{location_id}  `
+Required. Parent resource name. Must be in the format `projects/{project_id}/locations/{location_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.connections.create  `
+  - `bigquery.connections.create`
 
-`  connection_id  `
+`connection_id`
 
-`  string  `
+`string`
 
 Optional. Connection id that should be assigned to the created connection.
 
-`  connection  `
+`connection`
 
 `  Connection  `
 
@@ -435,15 +435,15 @@ The request for \[ConnectionService.DeleteConnectionRequest\]\[\].
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the deleted connection, for example: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+Required. Name of the deleted connection, for example: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.delete  `
+  - `bigquery.connections.delete`
 
 ## GetConnectionRequest
 
@@ -451,15 +451,15 @@ The request for `  ConnectionService.GetConnection  ` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the requested connection, for example: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+Required. Name of the requested connection, for example: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.get  `
+  - `bigquery.connections.get`
 
 ## ListConnectionsRequest
 
@@ -467,25 +467,25 @@ The request for `  ConnectionService.ListConnections  ` .
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Parent resource name. Must be in the form: `  projects/{project_id}/locations/{location_id}  `
+Required. Parent resource name. Must be in the form: `projects/{project_id}/locations/{location_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.connections.list  `
+  - `bigquery.connections.list`
 
-`  max_results  `
+`max_results`
 
 `  UInt32Value  `
 
 Required. Maximum number of results per page.
 
-`  page_token  `
+`page_token`
 
-`  string  `
+`string`
 
 Page token.
 
@@ -495,13 +495,13 @@ The response for `  ConnectionService.ListConnections  ` .
 
 Fields
 
-`  next_page_token  `
+`next_page_token`
 
-`  string  `
+`string`
 
 Next page token.
 
-`  connections[]  `
+`connections[]`
 
 `  Connection  `
 
@@ -513,17 +513,17 @@ The request for `  ConnectionService.UpdateConnectionCredential  ` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the connection, for example: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}/credential  `
+Required. Name of the connection, for example: `projects/{project_id}/locations/{location_id}/connections/{connection_id}/credential`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.update  `
+  - `bigquery.connections.update`
 
-`  credential  `
+`credential`
 
 `  ConnectionCredential  `
 
@@ -535,23 +535,23 @@ The request for `  ConnectionService.UpdateConnection  ` .
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Name of the connection to update, for example: `  projects/{project_id}/locations/{location_id}/connections/{connection_id}  `
+Required. Name of the connection to update, for example: `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.connections.update  `
+  - `bigquery.connections.update`
 
-`  connection  `
+`connection`
 
 `  Connection  `
 
 Required. Connection containing the updated fields.
 
-`  update_mask  `
+`update_mask`
 
 `  FieldMask  `
 

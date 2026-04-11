@@ -10,7 +10,7 @@ Lists all subscriptions on a given Data Exchange or Listing.
 
 ### HTTP request
 
-`  GET https://analyticshub.googleapis.com/v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:listSubscriptions  `
+`GET https://analyticshub.googleapis.com/v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:listSubscriptions`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,9 +18,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  resource  `
+`resource`
 
-`  string  `
+`string`
 
 Required. Resource name of the requested target. This resource may be either a Listing or a DataExchange. e.g. projects/123/locations/us/dataExchanges/456 OR e.g. projects/123/locations/us/dataExchanges/456/listings/789
 
@@ -28,21 +28,21 @@ Required. Resource name of the requested target. This resource may be either a L
 
 Parameters
 
-`  includeDeletedSubscriptions  `
+`includeDeletedSubscriptions`
 
-`  boolean  `
+`boolean`
 
 If selected, includes deleted subscriptions in the response (up to 63 days after deletion).
 
-`  pageSize  `
+`pageSize`
 
-`  integer  `
+`integer`
 
 The maximum number of results to return in a single response page.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token, returned by a previous call.
 
@@ -58,7 +58,7 @@ If successful, the response body contains an instance of `  ListSharedResourceSu
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

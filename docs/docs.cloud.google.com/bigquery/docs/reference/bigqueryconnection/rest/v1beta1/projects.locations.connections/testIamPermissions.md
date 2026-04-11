@@ -6,13 +6,13 @@
   - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections/testIamPermissions#body.aspect)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections/testIamPermissions#try-it)
 
-Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `  NOT_FOUND  ` error.
+Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error.
 
 Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.
 
 ### HTTP request
 
-`  POST https://bigqueryconnection.googleapis.com/v1beta1/{resource=projects/*/locations/*/connections/*}:testIamPermissions  `
+`POST https://bigqueryconnection.googleapis.com/v1beta1/{resource=projects/*/locations/*/connections/*}:testIamPermissions`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -20,9 +20,9 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  resource  `
+`resource`
 
-`  string  `
+`string`
 
 REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
 
@@ -52,11 +52,11 @@ The request body contains data with the following structure:
 
 Fields
 
-`  permissions[]  `
+`permissions[]`
 
-`  string  `
+`string`
 
-The set of permissions to check for the `  resource  ` . Permissions with wildcards (such as `  *  ` or `  storage.*  ` ) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions) .
+The set of permissions to check for the `resource` . Permissions with wildcards (such as `*` or `storage.*` ) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions) .
 
 ### Response body
 
@@ -66,7 +66,7 @@ If successful, the response body contains an instance of `  TestIamPermissionsRe
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

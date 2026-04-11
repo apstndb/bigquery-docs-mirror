@@ -67,24 +67,24 @@ For more information on using query results to append to or overwrite data, see 
 You can browse or read table data by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq head  ` command
-  - Calling the [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) API method
+  - Using the bq command-line tool's `bq head` command
+  - Calling the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) API method
   - Using the client libraries
 
 ### Required permissions
 
-To read table and partition data, you need the `  bigquery.tables.getData  ` Identity and Access Management (IAM) permission.
+To read table and partition data, you need the `bigquery.tables.getData` Identity and Access Management (IAM) permission.
 
-**Note:** Consider [special cases](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#special_cases) when creating an [IAM deny policy](https://docs.cloud.google.com/iam/docs/deny-overview) on the `  bigquery.tables.getData  ` permission.
+**Note:** Consider [special cases](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#special_cases) when creating an [IAM deny policy](https://docs.cloud.google.com/iam/docs/deny-overview) on the `bigquery.tables.getData` permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to browse table and partition data:
 
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin`
 
-If you have the `  bigquery.datasets.create  ` permission, you can browse data in the tables and partitions of the datasets you create.
+If you have the `bigquery.datasets.create` permission, you can browse data in the tables and partitions of the datasets you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -116,11 +116,11 @@ To browse table data:
 
 ### Command-line
 
-Issue the `  bq head  ` command with the `  --max_rows  ` flag to list all columns in a particular number of table rows. If `  --max_rows  ` is not specified, the default is 100.
+Issue the `bq head` command with the `--max_rows` flag to list all columns in a particular number of table rows. If `--max_rows` is not specified, the default is 100.
 
-To browse a subset of columns in the table (including nested and repeated columns), use the `  --selected_fields  ` flag and enter the columns as a comma- separated list.
+To browse a subset of columns in the table (including nested and repeated columns), use the `--selected_fields` flag and enter the columns as a comma- separated list.
 
-To specify the number of rows to skip before displaying table data, use the `  --start_row= integer  ` flag (or the `  -s  ` shortcut). The default value is `  0  ` . You can retrieve the number of rows in a table by using the `  bq show  ` command to [retrieve table information](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) .
+To specify the number of rows to skip before displaying table data, use the ` --start_row= integer  ` flag (or the `-s` shortcut). The default value is `0` . You can retrieve the number of rows in a table by using the `bq show` command to [retrieve table information](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) .
 
 If the table you're browsing is in a project other than your default project, add the project ID to the command in the following format: `  project_id:dataset.table  ` .
 
@@ -143,33 +143,33 @@ Where:
 
 Examples:
 
-Enter the following command to list all columns in the first 10 rows in `  mydataset.mytable  ` . `  mydataset  ` is in your default project.
+Enter the following command to list all columns in the first 10 rows in `mydataset.mytable` . `mydataset` is in your default project.
 
     bq head --max_rows=10 mydataset.mytable
 
-Enter the following command to list all columns in the first 100 rows in `  mydataset.mytable  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to list all columns in the first 100 rows in `mydataset.mytable` . `mydataset` is in `myotherproject` , not your default project.
 
     bq head myotherproject:mydataset.mytable
 
-Enter the following command to display only `  field1  ` and `  field2  ` in `  mydataset.mytable  ` . The command uses the `  --start_row  ` flag to skip to row 100. `  mydataset.mytable  ` is in your default project.
+Enter the following command to display only `field1` and `field2` in `mydataset.mytable` . The command uses the `--start_row` flag to skip to row 100. `mydataset.mytable` is in your default project.
 
     bq head --start_row 100 --selected_fields "field1,field2" mydataset.mytable
 
-Because the `  bq head  ` command does not create a query job, `  bq head  ` commands do not appear in your query history, and you are not charged for them.
+Because the `bq head` command does not create a query job, `bq head` commands do not appear in your query history, and you are not charged for them.
 
 ### API
 
-Browse through a table's data by calling [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) . Specify the name of the table in the `  tableId  ` parameter.
+Browse through a table's data by calling [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) . Specify the name of the table in the `tableId` parameter.
 
 Configure these optional parameters to control the output:
 
-  - `  maxResults  ` — Maximum number of results to return
-  - `  selectedFields  ` — Comma-separated list of columns to return; If unspecified, all columns are returned
-  - `  startIndex  ` — Zero-based index of the starting row to read
+  - `maxResults` — Maximum number of results to return
+  - `selectedFields` — Comma-separated list of columns to return; If unspecified, all columns are returned
+  - `startIndex` — Zero-based index of the starting row to read
 
-**Note:** If you request a `  startIndex  ` beyond the last row, the method will return successfully but without a `  rows  ` property. You can find out how many rows are in your table by calling the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and examining the `  numRows  ` property.
+**Note:** If you request a `startIndex` beyond the last row, the method will return successfully but without a `rows` property. You can find out how many rows are in your table by calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and examining the `numRows` property.
 
-Values are returned wrapped in a JSON object that you must parse, as described in the [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) reference documentation.
+Values are returned wrapped in a JSON object that you must parse, as described in the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) reference documentation.
 
 ### C\#
 
@@ -343,7 +343,7 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Pagination happens automatically in the [Cloud Client Libraries for PHP](https://docs.cloud.google.com/bigquery/docs/reference/libraries) using the generator function `  rows  ` , which fetches the next page of results during iteration.
+Pagination happens automatically in the [Cloud Client Libraries for PHP](https://docs.cloud.google.com/bigquery/docs/reference/libraries) using the generator function `rows` , which fetches the next page of results during iteration.
 
     use Google\Cloud\BigQuery\BigQueryClient;
     
@@ -422,7 +422,7 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Pagination happens automatically in the [Cloud Client Libraries for Ruby](https://docs.cloud.google.com/bigquery/docs/reference/libraries) using `  Table#data  ` and `  Data#next  ` .
+Pagination happens automatically in the [Cloud Client Libraries for Ruby](https://docs.cloud.google.com/bigquery/docs/reference/libraries) using `Table#data` and `Data#next` .
 
     require "google/cloud/bigquery"
     
@@ -454,8 +454,8 @@ You can [query BigQuery data](https://docs.cloud.google.com/bigquery/docs/runnin
 You can run query jobs by using the following methods:
 
   - Compose and run a query in the [Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui#overview) .
-  - Run the `  bq query  ` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
-  - Programmatically call the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
+  - Run the `bq query` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+  - Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
   - Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
 
 For more information on querying BigQuery tables, see [Introduction to querying BigQuery data](https://docs.cloud.google.com/bigquery/docs/query-overview) .
@@ -473,8 +473,8 @@ The legacy SQL dialect does not support DML statements. To update or delete data
 You can copy a table by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq cp  ` command
-  - Calling the [`  jobs.insert  ` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and configuring a [copy job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationTableCopy)
+  - Using the bq command-line tool's `bq cp` command
+  - Calling the [`jobs.insert` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and configuring a [copy job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationTableCopy)
   - Using the client libraries
 
 For more information on copying tables, see [Copying a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) .

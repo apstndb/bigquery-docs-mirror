@@ -26,7 +26,7 @@ Customers who use Enterprise edition, Enterprise Plus edition, or on-demand bill
 ## Limitations
 
   - Data is limited to the past 30 days.
-  - The models do not include [`  ML_EXTERNAL  `](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) assignments. If a large percentage of your slots are used for `  ML_EXTERNAL  ` assignments, then the modeled results are less accurate.
+  - The models do not include [`ML_EXTERNAL`](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) assignments. If a large percentage of your slots are used for `ML_EXTERNAL` assignments, then the modeled results are less accurate.
 
 ## Before you begin
 
@@ -36,29 +36,29 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To use the slot estimator for reservations data, you need the following IAM permissions on the administration project:
 
-  - `  bigquery.reservations.list  `
-  - `  bigquery.reservationAssignments.list  `
-  - `  bigquery.capacityCommitments.list  `
+  - `bigquery.reservations.list`
+  - `bigquery.reservationAssignments.list`
+  - `bigquery.capacityCommitments.list`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to use the slot estimator:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.resourceAdmin  `
-  - `  roles/bigquery.resourceEditor  `
-  - `  roles/bigquery.resourceViewer  `
-  - `  roles/bigquery.user  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.resourceAdmin`
+  - `roles/bigquery.resourceEditor`
+  - `roles/bigquery.resourceViewer`
+  - `roles/bigquery.user`
 
 To use the slot estimator for on-demand usage data, you need to [enable the Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) on a project you intend to use as the administration project to manage reservations. Other than the permissions above, you also need one of the following IAM permissions on your organization to see organization-level data or the project to see project-level data:
 
-  - `  bigquery.jobs.listExecutionMetadata  ` (can only be applied on organization level)
-  - `  bigquery.jobs.listAll  ` (can be applied on both organization or project level)
+  - `bigquery.jobs.listExecutionMetadata` (can only be applied on organization level)
+  - `bigquery.jobs.listAll` (can be applied on both organization or project level)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to use the slot estimator:
 
-  - `  roles/bigquery.admin  `
-  - `  roles/bigquery.resourceAdmin  `
-  - `  roles/bigquery.resourceEditor  `
-  - `  roles/bigquery.resourceViewer  `
+  - `roles/bigquery.admin`
+  - `roles/bigquery.resourceAdmin`
+  - `roles/bigquery.resourceEditor`
+  - `roles/bigquery.resourceViewer`
 
 To view the commitment slots recommendations, you also need the permissions described in [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender#required_permissions) .
 

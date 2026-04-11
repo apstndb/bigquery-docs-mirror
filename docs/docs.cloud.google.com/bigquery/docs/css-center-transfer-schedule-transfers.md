@@ -16,15 +16,15 @@ Before you create a CSS Center data transfer:
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the CSS Center data.
       - For dataset region, we support using the default option, Multi-region, in either US or EU.
       - If you want to create a dataset in a specific region, the CSS Center data transfer is only supported in the following regions:
-      - `  us-east4 (Northern Virginia)  ` ,
-      - `  asia-northeast1 (Tokyo)  ` ,
-      - `  asia-southeast1 (Singapore)  ` ,
-      - `  australia-southeast1 (Sydney)  ` ,
-      - `  europe-north1 (Finland)  ` ,
-      - `  europe-west2 (London)  ` ,
-      - `  europe-west6 (Zurich)  ` .
+      - `us-east4 (Northern Virginia)` ,
+      - `asia-northeast1 (Tokyo)` ,
+      - `asia-southeast1 (Singapore)` ,
+      - `australia-southeast1 (Sydney)` ,
+      - `europe-north1 (Finland)` ,
+      - `europe-west2 (London)` ,
+      - `europe-west6 (Zurich)` .
   - You must have your CSS domain ID in order to create a CSS Center data transfer.
-  - If you intend to setup transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service Run Notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service Run Notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -32,7 +32,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -41,18 +41,18 @@ This predefined role contains the permissions required to create a BigQuery Data
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
   - BigQuery Data Transfer Service permissions:
-      - `  bigquery.transfers.update  `
-      - `  bigquery.transfers.get  `
+      - `bigquery.transfers.update`
+      - `bigquery.transfers.get`
   - BigQuery permissions:
-      - `  bigquery.datasets.get  `
-      - `  bigquery.datasets.getIamPolicy  `
-      - `  bigquery.datasets.update  `
-      - `  bigquery.datasets.setIamPolicy  `
-      - `  bigquery.jobs.create  `
+      - `bigquery.datasets.get`
+      - `bigquery.datasets.getIamPolicy`
+      - `bigquery.datasets.update`
+      - `bigquery.datasets.setIamPolicy`
+      - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required CSS Center roles
 
@@ -74,7 +74,7 @@ To create a data transfer for CSS Center reporting:
     
       - In the **Source type** section, for **Source** , choose **Google CSS Center** .
     
-      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `  My Transfer  ` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
         
         ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
     
@@ -97,14 +97,14 @@ To create a data transfer for CSS Center reporting:
 
 ### bq
 
-Enter the `  bq mk  ` command and supply the transfer creation flag — `  --transfer_config  ` . The following flags are also required:
+Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `  --data_source  `
-  - `  --target_dataset  `
-  - `  --display_name  `
-  - `  --params  `
+  - `--data_source`
+  - `--target_dataset`
+  - `--display_name`
+  - `--params`
 
-You can also supply the `  --project_id  ` flag to specify a particular project. If `  --project_id  ` isn't specified, the default project is used.
+You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
 ``` notranslate
 bq mk \
@@ -121,14 +121,14 @@ Where:
   - project\_id is your project ID.
   - dataset is the target dataset for the data transfer configuration.
   - name is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - parameters contains the parameters for the created data transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
-      - `  css_id  ` : the CSS domain ID.
-      - `  export_products  ` : whether or not to transfer product and product issues data. This parameter is included by default, even if you don't specify the `  export_products  ` parameter. We recommend that you include this parameter explicitly and set it to `  true  ` .
-  - data\_source is the data source — `  css_center  ` .
+  - parameters contains the parameters for the created data transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` .
+      - `css_id` : the CSS domain ID.
+      - `export_products` : whether or not to transfer product and product issues data. This parameter is included by default, even if you don't specify the `export_products` parameter. We recommend that you include this parameter explicitly and set it to `true` .
+  - data\_source is the data source — `css_center` .
 
 **Caution:** You cannot configure notifications by using the command-line tool.
 
-For example, the following command creates a CSS Center data transfer named `  My Transfer  ` using CSS domain ID `  1234  ` and target dataset `  mydataset  ` . The data transfer is created in your default project.
+For example, the following command creates a CSS Center data transfer named `My Transfer` using CSS domain ID `1234` and target dataset `mydataset` . The data transfer is created in your default project.
 
     bq mk \
     --transfer_config \
@@ -139,10 +139,10 @@ For example, the following command creates a CSS Center data transfer named `  M
 
 The first time you run the command, you receive a message like the following:
 
-`  [URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.  `
+`[URL omitted] Please copy and paste the above URL into your web browser and follow the instructions to retrieve an authentication code.`
 
 Follow the instructions in the message and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.

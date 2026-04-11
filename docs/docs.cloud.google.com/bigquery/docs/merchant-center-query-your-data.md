@@ -6,9 +6,9 @@ This product is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-When you query your Google Merchant Center table, you must use the `  _PARTITIONTIME  ` or `  _PARTITIONDATE  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+When you query your Google Merchant Center table, you must use the `_PARTITIONTIME` or `_PARTITIONDATE` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-The `  Products_  ` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) in the GoogleSQL documentation.
+The `Products_` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) in the GoogleSQL documentation.
 
 ## Google Merchant Center sample queries
 
@@ -80,4 +80,4 @@ ORDER BY
   date DESC
 ```
 
-**Note:** This query constructs a unique key by using `  merchant_id  ` and `  product_id  ` . This is only required if you have an MCA account. When you use an MCA account, there is the potential for `  product_id  ` collisions across multiple sub-accounts.
+**Note:** This query constructs a unique key by using `merchant_id` and `product_id` . This is only required if you have an MCA account. When you use an MCA account, there is the potential for `product_id` collisions across multiple sub-accounts.

@@ -19,35 +19,35 @@ You can only use differentially private aggregate functions with [differentially
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg"><code dir="ltr" translate="no">        AVG       </code> (Differential Privacy)</a></td>
-<td><code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> -supported <code dir="ltr" translate="no">       AVG      </code> .<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg"><code dir="ltr" translate="no">AVG</code> (Differential Privacy)</a></td>
+<td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">AVG</code> .<br />
 <br />
-Gets the differentially-private average of non- <code dir="ltr" translate="no">       NULL      </code> , non- <code dir="ltr" translate="no">       NaN      </code> values in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.</td>
+Gets the differentially-private average of non- <code dir="ltr" translate="no">NULL</code> , non- <code dir="ltr" translate="no">NaN</code> values in a query with a <code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> clause.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count"><code dir="ltr" translate="no">        COUNT       </code> (Differential Privacy)</a></td>
-<td><code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> -supported <code dir="ltr" translate="no">       COUNT      </code> .<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count"><code dir="ltr" translate="no">COUNT</code> (Differential Privacy)</a></td>
+<td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">COUNT</code> .<br />
 <br />
-Signature 1: Gets the differentially-private count of rows in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.<br />
+Signature 1: Gets the differentially-private count of rows in a query with a <code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> clause.<br />
 <br />
-Signature 2: Gets the differentially-private count of rows with a non- <code dir="ltr" translate="no">       NULL      </code> expression in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.</td>
+Signature 2: Gets the differentially-private count of rows with a non- <code dir="ltr" translate="no">NULL</code> expression in a query with a <code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> clause.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont"><code dir="ltr" translate="no">        PERCENTILE_CONT       </code> (Differential Privacy)</a></td>
-<td><code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> -supported <code dir="ltr" translate="no">       PERCENTILE_CONT      </code> .<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont"><code dir="ltr" translate="no">PERCENTILE_CONT</code> (Differential Privacy)</a></td>
+<td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">PERCENTILE_CONT</code> .<br />
 <br />
-Computes a differentially-private percentile across privacy unit columns in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.</td>
+Computes a differentially-private percentile across privacy unit columns in a query with a <code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> clause.</td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum"><code dir="ltr" translate="no">        SUM       </code> (Differential Privacy)</a></td>
-<td><code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> -supported <code dir="ltr" translate="no">       SUM      </code> .<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum"><code dir="ltr" translate="no">SUM</code> (Differential Privacy)</a></td>
+<td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">SUM</code> .<br />
 <br />
-Gets the differentially-private sum of non- <code dir="ltr" translate="no">       NULL      </code> , non- <code dir="ltr" translate="no">       NaN      </code> values in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.</td>
+Gets the differentially-private sum of non- <code dir="ltr" translate="no">NULL</code> , non- <code dir="ltr" translate="no">NaN</code> values in a query with a <code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> clause.</td>
 </tr>
 </tbody>
 </table>
 
-## `     AVG    ` ( `     DIFFERENTIAL_PRIVACY    ` )
+## `AVG` ( `DIFFERENTIAL_PRIVACY` )
 
     WITH DIFFERENTIAL_PRIVACY ...
       AVG(
@@ -57,20 +57,20 @@ Gets the differentially-private sum of non- <code dir="ltr" translate="no">     
 
 **Description**
 
-Returns the average of non- `  NULL  ` , non- `  NaN  ` values in the expression. This function first computes the average per privacy unit column, and then computes the final result by averaging these averages.
+Returns the average of non- `NULL` , non- `NaN` values in the expression. This function first computes the average per privacy unit column, and then computes the final result by averaging these averages.
 
-This function must be used with the [`  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support the following arguments:
+This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support the following arguments:
 
-  - `  expression  ` : The input expression. This can be any numeric input type, such as `  INT64  ` .
-  - `  contribution_bounds_per_group  ` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each group separately before performing intermediate grouping on the privacy unit column.
+  - `expression` : The input expression. This can be any numeric input type, such as `INT64` .
+  - `contribution_bounds_per_group` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each group separately before performing intermediate grouping on the privacy unit column.
 
 **Return type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
-The following differentially private query gets the average number of each item requested per professor. Smaller aggregations might not be included. This query references a table called [`  professors  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
+The following differentially private query gets the average number of each item requested per professor. Smaller aggregations might not be included. This query references a table called [`professors`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
 
     -- With noise, using the epsilon parameter.
     SELECT
@@ -111,10 +111,10 @@ The following differentially private query gets the average number of each item 
 
 **Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
 
-## `     COUNT    ` ( `     DIFFERENTIAL_PRIVACY    ` )
+## `COUNT` ( `DIFFERENTIAL_PRIVACY` )
 
-  - [Signature 1](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count_signature1) : Returns the number of rows in a differentially private `  FROM  ` clause.
-  - [Signature 2](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count_signature2) : Returns the number of non- `  NULL  ` values in an expression.
+  - [Signature 1](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count_signature1) : Returns the number of rows in a differentially private `FROM` clause.
+  - [Signature 2](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count_signature2) : Returns the number of non- `NULL` values in an expression.
 
 #### Signature 1
 
@@ -126,19 +126,19 @@ The following differentially private query gets the average number of each item 
 
 **Description**
 
-Returns the number of rows in the [differentially private](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) `  FROM  ` clause. The final result is an aggregation across a privacy unit column.
+Returns the number of rows in the [differentially private](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) `FROM` clause. The final result is an aggregation across a privacy unit column.
 
-This function must be used with the [`  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support the following arguments:
+This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support the following arguments:
 
-  - `  contribution_bounds_per_group  ` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each group separately before performing intermediate grouping on the privacy unit column.
+  - `contribution_bounds_per_group` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each group separately before performing intermediate grouping on the privacy unit column.
 
 **Return type**
 
-`  INT64  `
+`INT64`
 
 **Examples**
 
-The following differentially private query counts the number of requests for each item. This query references a table called [`  professors  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
+The following differentially private query counts the number of requests for each item. This query references a table called [`professors`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
 
     -- With noise, using the epsilon parameter.
     SELECT
@@ -189,20 +189,20 @@ The following differentially private query counts the number of requests for eac
 
 **Description**
 
-Returns the number of non- `  NULL  ` expression values. The final result is an aggregation across a privacy unit column.
+Returns the number of non- `NULL` expression values. The final result is an aggregation across a privacy unit column.
 
-This function must be used with the [`  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
+This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
 
-  - `  expression  ` : The input expression. This expression can be any numeric input type, such as `  INT64  ` .
-  - `  contribution_bounds_per_group  ` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping per each group separately before performing intermediate grouping on the privacy unit column.
+  - `expression` : The input expression. This expression can be any numeric input type, such as `INT64` .
+  - `contribution_bounds_per_group` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping per each group separately before performing intermediate grouping on the privacy unit column.
 
 **Return type**
 
-`  INT64  `
+`INT64`
 
 **Examples**
 
-The following differentially private query counts the number of requests made for each type of item. This query references a table called [`  professors  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
+The following differentially private query counts the number of requests made for each type of item. This query references a table called [`professors`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
 
     -- With noise, using the epsilon parameter.
     SELECT
@@ -243,7 +243,7 @@ The following differentially private query counts the number of requests made fo
 
 **Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
 
-## `     PERCENTILE_CONT    ` ( `     DIFFERENTIAL_PRIVACY    ` )
+## `PERCENTILE_CONT` ( `DIFFERENTIAL_PRIVACY` )
 
     WITH DIFFERENTIAL_PRIVACY ...
       PERCENTILE_CONT(
@@ -256,21 +256,21 @@ The following differentially private query counts the number of requests made fo
 
 Takes an expression and computes a percentile for it. The final result is an aggregation across privacy unit columns.
 
-This function must be used with the [`  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
+This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
 
-  - `  expression  ` : The input expression. This can be most numeric input types, such as `  INT64  ` . `  NULL  ` values are always ignored.
-  - `  percentile  ` : The percentile to compute. The percentile must be a literal in the range `  [0, 1]  ` .
-  - `  contribution_bounds_per_row  ` : A named argument with a [contribution bounds](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each row separately before performing intermediate grouping on the privacy unit column.
+  - `expression` : The input expression. This can be most numeric input types, such as `INT64` . `NULL` values are always ignored.
+  - `percentile` : The percentile to compute. The percentile must be a literal in the range `[0, 1]` .
+  - `contribution_bounds_per_row` : A named argument with a [contribution bounds](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each row separately before performing intermediate grouping on the privacy unit column.
 
-`  NUMERIC  ` and `  BIGNUMERIC  ` arguments aren't allowed. If you need them, cast them as the `  FLOAT64  ` data type first.
+`NUMERIC` and `BIGNUMERIC` arguments aren't allowed. If you need them, cast them as the `FLOAT64` data type first.
 
 **Return type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
-The following differentially private query gets the percentile of items requested. Smaller aggregations might not be included. This query references a view called [`  professors  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
+The following differentially private query gets the percentile of items requested. Smaller aggregations might not be included. This query references a view called [`professors`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
 
     -- With noise, using the epsilon parameter.
     SELECT
@@ -291,7 +291,7 @@ The following differentially private query gets the percentile of items requeste
       | pen      | 23.001075744628906   |
       +----------+----------------------*/
 
-## `     SUM    ` ( `     DIFFERENTIAL_PRIVACY    ` )
+## `SUM` ( `DIFFERENTIAL_PRIVACY` )
 
     WITH DIFFERENTIAL_PRIVACY ...
       SUM(
@@ -301,23 +301,23 @@ The following differentially private query gets the percentile of items requeste
 
 **Description**
 
-Returns the sum of non- `  NULL  ` , non- `  NaN  ` values in the expression. The final result is an aggregation across privacy unit columns.
+Returns the sum of non- `NULL` , non- `NaN` values in the expression. The final result is an aggregation across privacy unit columns.
 
-This function must be used with the [`  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
+This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
 
-  - `  expression  ` : The input expression. This can be any numeric input type, such as `  INT64  ` . `  NULL  ` values are always ignored.
-  - `  contribution_bounds_per_group  ` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each group separately before performing intermediate grouping on the privacy unit column.
+  - `expression` : The input expression. This can be any numeric input type, such as `INT64` . `NULL` values are always ignored.
+  - `contribution_bounds_per_group` : A named argument with a [contribution bound](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) . Performs clamping for each group separately before performing intermediate grouping on the privacy unit column.
 
 **Return type**
 
 One of the following [supertypes](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#supertypes) :
 
-  - `  INT64  `
-  - `  FLOAT64  `
+  - `INT64`
+  - `FLOAT64`
 
 **Examples**
 
-The following differentially private query gets the sum of items requested. Smaller aggregations might not be included. This query references a view called [`  professors  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
+The following differentially private query gets the sum of items requested. Smaller aggregations might not be included. This query references a view called [`professors`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables) .
 
     -- With noise, using the epsilon parameter.
     SELECT
@@ -364,12 +364,12 @@ The following differentially private query gets the sum of items requested. Smal
 
 In [differentially private queries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) , aggregation clamping is used to limit the contribution of outliers. You can clamp explicitly or implicitly as follows:
 
-  - [Clamp explicitly in the `  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) .
-  - [Clamp implicitly in the `  DIFFERENTIAL_PRIVACY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named_implicit) .
+  - [Clamp explicitly in the `DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named) .
+  - [Clamp implicitly in the `DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_clamped_named_implicit) .
 
 #### Implicitly clamp values
 
-If you don't include the contribution bounds named argument with the `  DIFFERENTIAL_PRIVACY  ` clause, clamping is implicit, which means bounds are derived from the data itself in a differentially private way.
+If you don't include the contribution bounds named argument with the `DIFFERENTIAL_PRIVACY` clause, clamping is implicit, which means bounds are derived from the data itself in a differentially private way.
 
 Implicit bounding works best when computed using large datasets. For more information, see [Implicit bounding limitations for small datasets](https://docs.cloud.google.com/bigquery/docs/differential-privacy#implicit_limits) .
 
@@ -387,18 +387,18 @@ When clamping is implicit, part of the total epsilon is spent picking bounds. Th
 
     contribution_bounds_per_row => (lower_bound,upper_bound)
 
-Use the contribution bounds named argument to explicitly clamp values per group or per row between a lower and upper bound in a `  DIFFERENTIAL_PRIVACY  ` clause.
+Use the contribution bounds named argument to explicitly clamp values per group or per row between a lower and upper bound in a `DIFFERENTIAL_PRIVACY` clause.
 
 Input values:
 
-  - `  contribution_bounds_per_row  ` : Contributions per privacy unit are clamped on a per-row (per-record) basis. This means the following:
+  - `contribution_bounds_per_row` : Contributions per privacy unit are clamped on a per-row (per-record) basis. This means the following:
       - Upper and lower bounds are applied to column values in individual rows produced by the input subquery independently.
-      - The maximum possible contribution per privacy unit (and per grouping set) is the product of the per-row contribution limit and `  max_groups_contributed  ` differential privacy parameter.
-  - `  contribution_bounds_per_group  ` : Contributions per privacy unit are clamped on a unique set of entity-specified `  GROUP BY  ` keys. The upper and lower bounds are applied to values per group after the values are aggregated per privacy unit.
-  - `  lower_bound  ` : Numeric literal that represents the smallest value to include in an aggregation.
-  - `  upper_bound  ` : Numeric literal that represents the largest value to include in an aggregation.
+      - The maximum possible contribution per privacy unit (and per grouping set) is the product of the per-row contribution limit and `max_groups_contributed` differential privacy parameter.
+  - `contribution_bounds_per_group` : Contributions per privacy unit are clamped on a unique set of entity-specified `GROUP BY` keys. The upper and lower bounds are applied to values per group after the values are aggregated per privacy unit.
+  - `lower_bound` : Numeric literal that represents the smallest value to include in an aggregation.
+  - `upper_bound` : Numeric literal that represents the largest value to include in an aggregation.
 
-`  NUMERIC  ` and `  BIGNUMERIC  ` arguments aren't allowed.
+`NUMERIC` and `BIGNUMERIC` arguments aren't allowed.
 
 **Details**
 

@@ -14,8 +14,8 @@ For limitations related to external tables, see [external table limitations](htt
 
 To query Drive external tables, ensure you have the following roles:
 
-  - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )
-  - BigQuery User ( `  roles/bigquery.user  ` )
+  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` )
+  - BigQuery User ( `roles/bigquery.user` )
 
 Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles) .
 
@@ -23,28 +23,28 @@ To see the exact BigQuery permissions that are required to query external tables
 
 #### Required permissions
 
-  - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  ` (Only required if you are [reading data with the BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) )
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.getData  `
+  - `bigquery.jobs.create`
+  - `bigquery.readsessions.create` (Only required if you are [reading data with the BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) )
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Drive permissions
 
-At a minimum, to query external data in Drive you must be granted [`  View  `](https://support.google.com/drive/answer/2494822?co=GENIE.Platform%3DDesktop) access to the Drive file linked to the external table.
+At a minimum, to query external data in Drive you must be granted [`View`](https://support.google.com/drive/answer/2494822?co=GENIE.Platform%3DDesktop) access to the Drive file linked to the external table.
 
 ## Scopes for Compute Engine instances
 
 When you create a Compute Engine instance, you can specify a list of scopes for the instance. The scopes control the instance's access to Google Cloud products, including Drive. Applications running on the VM use the service account to call Google Cloud APIs.
 
-If you set up a Compute Engine instance to run as a [service account](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) , and that service account accesses an external table linked to a Drive data source, you must add the [OAuth scope for Drive](https://developers.google.com/identity/protocols/googlescopes#drivev3) ( `  https://www.googleapis.com/auth/drive.readonly  ` ) to the instance.
+If you set up a Compute Engine instance to run as a [service account](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) , and that service account accesses an external table linked to a Drive data source, you must add the [OAuth scope for Drive](https://developers.google.com/identity/protocols/googlescopes#drivev3) ( `https://www.googleapis.com/auth/drive.readonly` ) to the instance.
 
 For information on applying scopes to a Compute Engine instance, see [Changing the service account and access scopes for an instance](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances#changeserviceaccountandscopes) . For more information on Compute Engine service accounts, see [Service accounts](https://docs.cloud.google.com/compute/docs/access/service-accounts) .
 
 ## Query Drive data using permanent external tables
 
-After creating a Drive external table, you can [query it using GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/running-queries) , the same as if it were a standard BigQuery table. For example, `  SELECT field1, field2 FROM mydataset.my_drive_table;  ` .
+After creating a Drive external table, you can [query it using GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/running-queries) , the same as if it were a standard BigQuery table. For example, `SELECT field1, field2 FROM mydataset.my_drive_table;` .
 
 ## Query Drive data using temporary tables
 
@@ -66,7 +66,7 @@ You can create and query a temporary table linked to an external data source by 
 
 ### bq
 
-You query a temporary table linked to an external data source using the `  bq query  ` command with the `  --external_table_definition  ` flag. When you use the bq command-line tool to query a temporary table linked to an external data source, you can identify the table's schema using:
+You query a temporary table linked to an external data source using the `bq query` command with the `--external_table_definition` flag. When you use the bq command-line tool to query a temporary table linked to an external data source, you can identify the table's schema using:
 
   - A [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) (stored on your local machine)
   - An inline schema definition
@@ -82,12 +82,12 @@ bq --location=LOCATION query \
 
 Where:
 
-  - `  LOCATION  ` is your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional.
+  - `  LOCATION  ` is your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `--location` flag is optional.
   - `  TABLE  ` is the name of the temporary table you're creating.
   - `  DEFINITION_FILE  ` is the path to the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) on your local machine.
   - `  QUERY  ` is the query you're submitting to the temporary table.
 
-For example, the following command creates and queries a temporary table named `  sales  ` using a table definition file named `  sales_def  ` .
+For example, the following command creates and queries a temporary table named `sales` using a table definition file named `sales_def` .
 
     bq query \
     --external_table_definition=sales::sales_def \
@@ -106,14 +106,14 @@ bq --location=LOCATION query \
 
 Where:
 
-  - `  LOCATION  ` is your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional.
+  - `  LOCATION  ` is your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `--location` flag is optional.
   - `  TABLE  ` is the name of the temporary table you're creating.
   - `  SCHEMA  ` is the inline schema definition in the format `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` .
-  - `  SOURCE_FORMAT  ` is `  CSV  ` , `  NEWLINE_DELIMITED_JSON  ` , `  AVRO  ` , or `  GOOGLE_SHEETS  ` .
+  - `  SOURCE_FORMAT  ` is `CSV` , `NEWLINE_DELIMITED_JSON` , `AVRO` , or `GOOGLE_SHEETS` .
   - `  DRIVE_URI  ` is your [Drive URI](https://docs.cloud.google.com/bigquery/docs/query-drive-data#drive-uri) .
   - `  QUERY  ` is the query you're submitting to the temporary table.
 
-For example, the following command creates and queries a temporary table named `  sales  ` linked to a CSV file stored in Drive with the following schema definition: `  Region:STRING,Quarter:STRING,Total_sales:INTEGER  ` .
+For example, the following command creates and queries a temporary table named `sales` linked to a CSV file stored in Drive with the following schema definition: `Region:STRING,Quarter:STRING,Total_sales:INTEGER` .
 
     bq --location=US query \
     --external_table_definition=sales::Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=https://drive.google.com/open?id=1234_AbCD12abCd \
@@ -132,13 +132,13 @@ bq --location=LOCATION query \
 
 Where:
 
-  - `  LOCATION  ` is your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional.
+  - `  LOCATION  ` is your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `--location` flag is optional.
   - `  SCHEMA_FILE  ` is the path to the JSON schema file on your local machine.
-  - `  SOURCE_FILE  ` is `  CSV  ` , `  NEWLINE_DELIMITED_JSON  ` , `  AVRO  ` , or `  GOOGLE_SHEETS  ` .
+  - `  SOURCE_FILE  ` is `CSV` , `NEWLINE_DELIMITED_JSON` , `AVRO` , or `GOOGLE_SHEETS` .
   - `  DRIVE_URI  ` is your [Drive URI](https://docs.cloud.google.com/bigquery/docs/query-drive-data#drive-uri) .
   - `  QUERY  ` is the query you're submitting to the temporary table.
 
-For example, the following command creates and queries a temporary table named `  sales  ` linked to a CSV file stored in Drive using the `  /tmp/sales_schema.json  ` schema file.
+For example, the following command creates and queries a temporary table named `sales` linked to a CSV file stored in Drive using the `/tmp/sales_schema.json` schema file.
 
     bq query \
     --external_table_definition=sales::/tmp/sales_schema.json@CSV=https://drive.google.com/open?id=1234_AbCD12abCd \
@@ -149,9 +149,9 @@ For example, the following command creates and queries a temporary table named `
 
 ### API
 
-  - Create a [query job configuration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery) . See [Querying data](https://docs.cloud.google.com/bigquery/querying-data) for information about calling [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) and [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) .
+  - Create a [query job configuration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery) . See [Querying data](https://docs.cloud.google.com/bigquery/querying-data) for information about calling [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) and [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) .
 
-  - Specify the external data source by creating an [`  ExternalDataConfiguration  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
+  - Specify the external data source by creating an [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
 
 ### Python
 
@@ -294,7 +294,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Troubleshooting
 
-Error string: `  Resources exceeded during query execution: Google Sheets service overloaded.  `
+Error string: `Resources exceeded during query execution: Google Sheets service overloaded.`
 
 This can be a transient error that can be fixed by rerunning the query. If the error persists after a query rerun, consider simplifying your spreadsheet; for example, by minimizing the use of formulas. For more information, see [external table limitations](https://docs.cloud.google.com/bigquery/docs/external-tables#limitations) .
 

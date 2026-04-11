@@ -21,13 +21,13 @@ To get started with BigQuery sharing (formerly Analytics Hub), you need to enabl
 
 To enable the Analytics Hub API, you need the following Identity and Access Management (IAM) permissions:
 
-  - `  serviceUsage.services.get  `
-  - `  serviceUsage.services.list  `
-  - `  serviceUsage.services.enable  `
+  - `serviceUsage.services.get`
+  - `serviceUsage.services.list`
+  - `serviceUsage.services.enable`
 
 The following predefined IAM role includes the permissions that you need to enable the Analytics Hub API:
 
-  - [Service Usage Admin](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageAdmin) ( `  roles/serviceusage.serviceUsageAdmin  ` )
+  - [Service Usage Admin](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageAdmin) ( `roles/serviceusage.serviceUsageAdmin` )
 
 To enable the Analytics Hub API, select one of the following options:
 
@@ -45,7 +45,7 @@ Run the [gcloud services enable](https://docs.cloud.google.com/sdk/gcloud/refere
 
 ### Required roles
 
-To get the permissions that you need to manage subscriptions, ask your administrator to grant you the [Analytics Hub Subscription Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriptionOwner) ( `  roles/analyticshub.subscriptionOwner  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to manage subscriptions, ask your administrator to grant you the [Analytics Hub Subscription Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.subscriptionOwner) ( `roles/analyticshub.subscriptionOwner` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -59,7 +59,7 @@ To subscribe to listings, follow the steps in [View and subscribe to listings an
 
 ### List subscriptions
 
-To list your current subscriptions in a given project, use the [`  projects.locations.subscriptions.list  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) :
+To list your current subscriptions in a given project, use the [`projects.locations.subscriptions.list` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) :
 
     GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions
 
@@ -70,7 +70,7 @@ Replace the following:
 
 ### Delete a subscription
 
-To delete a subscription, use the [`  projects.locations.subscriptions.delete  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/delete) :
+To delete a subscription, use the [`projects.locations.subscriptions.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/delete) :
 
     DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions/SUBSCRIPTION_ID
 
@@ -86,7 +86,7 @@ When a BigQuery sharing subscriber deletes a subscription, it also deletes the l
 
 When you delete a subscription from a multi-region listing ( [Preview](https://cloud.google.com/products#product-launch-stages) ), all the primary and secondary linked dataset replicas are also deleted from the subscriber's project.
 
-For more information about managing subscriptions using the API, see the [`  projects.locations.subscriptions  ` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#methods) .
+For more information about managing subscriptions using the API, see the [`projects.locations.subscriptions` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#methods) .
 
 ## Publisher workflows for managing subscriptions
 
@@ -110,7 +110,7 @@ To list all subscriptions, select one of the following options.
 
 ### API
 
-To list subscriptions for listings in a particular data exchange, use the [`  projects.locations.dataExchanges.listSubscriptions  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/listSubscriptions) .
+To list subscriptions for listings in a particular data exchange, use the [`projects.locations.dataExchanges.listSubscriptions` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/listSubscriptions) .
 
     GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID:listSubscriptions
 
@@ -148,7 +148,7 @@ To revoke a subscription, select one of the following options:
 
 ### API
 
-To revoke a subscription, use the [`  projects.locations.subscriptions.revoke  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) .
+To revoke a subscription, use the [`projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) .
 
     POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions/SUBSCRIPTION_ID:revoke
 

@@ -1,6 +1,6 @@
 In this tutorial, you use a [linear regression model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) in BigQuery ML to predict the weight of a penguin based on the penguin's demographic information. A linear regression is a type of regression model that generates a continuous value from a linear combination of input features.
 
-This tutorial uses the [`  bigquery-public-data.ml_datasets.penguins  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=penguins&page=table) dataset.
+This tutorial uses the [`bigquery-public-data.ml_datasets.penguins`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=penguins&page=table) dataset.
 
 ## Objectives
 
@@ -30,7 +30,7 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -42,7 +42,7 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
 
@@ -50,16 +50,16 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
 
 To create the model using BigQuery ML, you need the following IAM permissions:
 
-  - `  bigquery.jobs.create  `
-  - `  bigquery.models.create  `
-  - `  bigquery.models.getData  `
-  - `  bigquery.models.updateData  `
-  - `  bigquery.models.updateMetadata  `
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+  - `bigquery.models.updateMetadata`
 
 To run inference, you need the following permissions:
 
-  - `  bigquery.models.getData  ` on the model
-  - `  bigquery.jobs.create  `
+  - `bigquery.models.getData` on the model
+  - `bigquery.jobs.create`
 
 ## Create a dataset
 
@@ -77,7 +77,7 @@ Create a BigQuery dataset to store your ML model.
 
 4.  On the **Create dataset** page, do the following:
     
-      - For **Dataset ID** , enter `  bqml_tutorial  ` .
+      - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Location type** , select **Multi-region** , and then select **US** .
     
@@ -85,9 +85,9 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
     ``` notranslate
     bq mk --dataset \
@@ -104,7 +104,7 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cl
 
 ### API
 
-Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
 ``` notranslate
 {
@@ -131,22 +131,22 @@ Create a linear regression model using the Analytics sample dataset for BigQuery
 
 ### SQL
 
-You can create a linear regression model by using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) and specifying `  LINEAR_REG  ` for the model type. Creating the model includes training the model.
+You can create a linear regression model by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) and specifying `LINEAR_REG` for the model type. Creating the model includes training the model.
 
-The following are useful things to know about the `  CREATE MODEL  ` statement:
+The following are useful things to know about the `CREATE MODEL` statement:
 
-  - The [`  input_label_cols  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#input_label_cols) option specifies which column in the `  SELECT  ` statement to use as the label column. Here, the label column is `  body_mass_g  ` . For linear regression models, the label column must be real-valued, that is, the column values must be real numbers.
+  - The [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#input_label_cols) option specifies which column in the `SELECT` statement to use as the label column. Here, the label column is `body_mass_g` . For linear regression models, the label column must be real-valued, that is, the column values must be real numbers.
 
-  - This query's `  SELECT  ` statement uses the following columns in the `  bigquery-public-data.ml_datasets.penguins  ` table to predict a penguin's weight:
+  - This query's `SELECT` statement uses the following columns in the `bigquery-public-data.ml_datasets.penguins` table to predict a penguin's weight:
     
-      - `  species  ` : the species of penguin.
-      - `  island  ` : the island that the penguin resides on.
-      - `  culmen_length_mm  ` : the length of the penguin's culmen in millimeters.
-      - `  culmen_depth_mm  ` : the depth of the penguin's culmen in millimeters.
-      - `  flipper_length_mm  ` : the length of the penguin's flippers in millimeters.
-      - `  sex  ` : the sex of the penguin.
+      - `species` : the species of penguin.
+      - `island` : the island that the penguin resides on.
+      - `culmen_length_mm` : the length of the penguin's culmen in millimeters.
+      - `culmen_depth_mm` : the depth of the penguin's culmen in millimeters.
+      - `flipper_length_mm` : the length of the penguin's flippers in millimeters.
+      - `sex` : the sex of the penguin.
 
-  - The `  WHERE  ` clause in this query's `  SELECT  ` statement, `  WHERE body_mass_g IS NOT NULL  ` , excludes rows where the `  body_mass_g  ` column is `  NULL  ` .
+  - The `WHERE` clause in this query's `SELECT` statement, `WHERE body_mass_g IS NOT NULL` , excludes rows where the `body_mass_g` column is `NULL` .
 
 Run the query that creates your linear regression model:
 
@@ -169,7 +169,7 @@ Run the query that creates your linear regression model:
       body_mass_g IS NOT NULL;
     ```
 
-3.  It takes about 30 seconds to create the `  penguins_model  ` model.
+3.  It takes about 30 seconds to create the `penguins_model` model.
     
     To see the model, follow these steps:
     
@@ -181,7 +181,7 @@ Run the query that creates your linear regression model:
     
     2.  In the **Explorer** pane, expand your project and click **Datasets** .
     
-    3.  Click the `  bqml_tutorial  ` dataset.
+    3.  Click the `bqml_tutorial` dataset.
     
     4.  Click the **Models** tab.
 
@@ -220,19 +220,19 @@ It takes about 30 seconds to create the model. To see the model, follow these st
 
 2.  In the **Explorer** pane, expand your project and click **Datasets** .
 
-3.  Click the `  bqml_tutorial  ` dataset.
+3.  Click the `bqml_tutorial` dataset.
 
 4.  Click the **Models** tab.
 
 ## Get training statistics
 
-To see the results of the model training, you can use the [`  ML.TRAINING_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) , or you can view the statistics in the Google Cloud console. In this tutorial, you use the Google Cloud console.
+To see the results of the model training, you can use the [`ML.TRAINING_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) , or you can view the statistics in the Google Cloud console. In this tutorial, you use the Google Cloud console.
 
 A machine learning algorithm builds a model by examining many examples and attempting to find a model that minimizes loss. This process is called empirical risk minimization.
 
 Loss is the penalty for a bad prediction. It is a number indicating how bad the model's prediction was on a single example. If the model's prediction is perfect, the loss is zero; otherwise, the loss is greater. The goal of training a model is to find a set of weights and biases that have low loss, on average, across all examples.
 
-See the model training statistics that were generated when you ran the `  CREATE MODEL  ` query:
+See the model training statistics that were generated when you ran the `CREATE MODEL` query:
 
 1.  In the left pane, click explore **Explorer** :
     
@@ -240,7 +240,7 @@ See the model training statistics that were generated when you ran the `  CREATE
 
 2.  In the **Explorer** pane, expand your project and click **Datasets** .
 
-3.  Click the `  bqml_tutorial  ` dataset.
+3.  Click the `bqml_tutorial` dataset.
 
 4.  Click the **Models** tab.
 
@@ -250,25 +250,21 @@ See the model training statistics that were generated when you ran the `  CREATE
     
     ![ML.TRAINING\_INFO output](https://docs.cloud.google.com/static/bigquery/images/training-stats-penguins-insta-model.png)
     
-    The **Training Data Loss** column represents the loss metric calculated after the model is trained on the training dataset. Since you performed a linear regression, this column shows the [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) value. A [normal\_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) optimization strategy is automatically used for this training, so only one iteration is required to converge to the final model. For more information on setting the model optimization strategy, see [`  optimize_strategy  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) .
+    The **Training Data Loss** column represents the loss metric calculated after the model is trained on the training dataset. Since you performed a linear regression, this column shows the [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) value. A [normal\_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) optimization strategy is automatically used for this training, so only one iteration is required to converge to the final model. For more information on setting the model optimization strategy, see [`optimize_strategy`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) .
 
 ## Evaluate the model
 
-After creating the model, evaluate the model's performance by using the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) or the [`  score  ` BigQuery DataFrames function](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.html#bigframes.ml.linear_model.LinearRegression.score) to evaluate the predicted values generated by the model against the actual data.
+After creating the model, evaluate the model's performance by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) or the [`score` BigQuery DataFrames function](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.html#bigframes.ml.linear_model.LinearRegression.score) to evaluate the predicted values generated by the model against the actual data.
 
 ### SQL
 
-For input, the `  ML.EVALUATE  ` function takes the trained model and a dataset that matches the schema of the data that you used to train the model. In a production environment, you should evaluate the model on different data than the data you used to train the model. If you run `  ML.EVALUATE  ` without providing input data, the function retrieves the evaluation metrics calculated during training. These metrics are calculated by using the automatically reserved evaluation dataset:
+For input, the `ML.EVALUATE` function takes the trained model and a dataset that matches the schema of the data that you used to train the model. In a production environment, you should evaluate the model on different data than the data you used to train the model. If you run `ML.EVALUATE` without providing input data, the function retrieves the evaluation metrics calculated during training. These metrics are calculated by using the automatically reserved evaluation dataset:
 
 ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.EVALUATE(MODEL bqml_tutorial.penguins_model);
-    
+    SELECT      *    FROM      ML.EVALUATE(MODEL bqml_tutorial.penguins_model);    
 ```
 
-Run the `  ML.EVALUATE  ` query:
+Run the `ML.EVALUATE` query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -319,14 +315,14 @@ The results should look similar to the following:
 
 Because you performed a linear regression, the results include the following columns:
 
-  - `  mean_absolute_error  `
-  - `  mean_squared_error  `
-  - `  mean_squared_log_error  `
-  - `  median_absolute_error  `
-  - `  r2_score  `
-  - `  explained_variance  `
+  - `mean_absolute_error`
+  - `mean_squared_error`
+  - `mean_squared_log_error`
+  - `median_absolute_error`
+  - `r2_score`
+  - `explained_variance`
 
-An important metric in the evaluation results is the [R <sup>2</sup> score](https://en.wikipedia.org/wiki/Coefficient_of_determination) . The R <sup>2</sup> score is a statistical measure that determines if the linear regression predictions approximate the actual data. A value of `  0  ` indicates that the model explains none of the variability of the response data around the mean. A value of `  1  ` indicates that the model explains all the variability of the response data around the mean.
+An important metric in the evaluation results is the [R <sup>2</sup> score](https://en.wikipedia.org/wiki/Coefficient_of_determination) . The R <sup>2</sup> score is a statistical measure that determines if the linear regression predictions approximate the actual data. A value of `0` indicates that the model explains none of the variability of the response data around the mean. A value of `1` indicates that the model explains all the variability of the response data around the mean.
 
 You can also look at the model's information pane in the Google Cloud console to view the evaluation metrics:
 
@@ -334,13 +330,13 @@ You can also look at the model's information pane in the Google Cloud console to
 
 ## Use the model to predict outcomes
 
-Now that you have evaluated your model, the next step is to use it to predict an outcome. You can run the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or the [`  predict  ` BigQuery DataFrames function](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.html#bigframes.ml.linear_model.LinearRegression.predict) on the model to predict the body mass in grams of all penguins that reside on the Biscoe Islands.
+Now that you have evaluated your model, the next step is to use it to predict an outcome. You can run the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or the [`predict` BigQuery DataFrames function](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.html#bigframes.ml.linear_model.LinearRegression.predict) on the model to predict the body mass in grams of all penguins that reside on the Biscoe Islands.
 
 ### SQL
 
-For input, the `  ML.PREDICT  ` function takes the trained model and a dataset that matches the schema of the data that you used to train the model, excluding the label column.
+For input, the `ML.PREDICT` function takes the trained model and a dataset that matches the schema of the data that you used to train the model, excluding the label column.
 
-Run the `  ML.PREDICT  ` query:
+Run the `ML.PREDICT` query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -398,11 +394,11 @@ The results should look similar to the following:
 
 ### SQL
 
-To understand why the model is generating these prediction results, you can use the [`  ML.EXPLAIN_PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict) .
+To understand why the model is generating these prediction results, you can use the [`ML.EXPLAIN_PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict) .
 
-`  ML.EXPLAIN_PREDICT  ` is an extended version of the `  ML.PREDICT  ` function. `  ML.EXPLAIN_PREDICT  ` not only outputs prediction results, but also outputs additional columns to explain the prediction results. In practice, you can run `  ML.EXPLAIN_PREDICT  ` instead of `  ML.PREDICT  ` . For more information, see [BigQuery ML explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview#explainable_ai_offerings_in_bigquery_ml) .
+`ML.EXPLAIN_PREDICT` is an extended version of the `ML.PREDICT` function. `ML.EXPLAIN_PREDICT` not only outputs prediction results, but also outputs additional columns to explain the prediction results. In practice, you can run `ML.EXPLAIN_PREDICT` instead of `ML.PREDICT` . For more information, see [BigQuery ML explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview#explainable_ai_offerings_in_bigquery_ml) .
 
-Run the `  ML.EXPLAIN_PREDICT  ` query:
+Run the `ML.EXPLAIN_PREDICT` query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -430,7 +426,7 @@ FROM
     
     ![ML.EXPLAIN\_PREDICT output](https://docs.cloud.google.com/static/bigquery/images/explain-penguin.png)
 
-**Note:** The `  ML.EXPLAIN_PREDICT  ` query outputs all the input feature columns, similar to what `  ML.PREDICT  ` does. For readability purposes, only one feature column, `  species  ` , is shown in the preceding figure.
+**Note:** The `ML.EXPLAIN_PREDICT` query outputs all the input feature columns, similar to what `ML.PREDICT` does. For readability purposes, only one feature column, `species` , is shown in the preceding figure.
 
 ### BigQuery DataFrames
 
@@ -451,13 +447,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # 3  5349.603734            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              5349.603734               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.4                  15.6          221.0              5000.0       MALE
     # 4  4637.165037            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              4637.165037               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.1                  13.2          211.0              4500.0      FEMALE
 
-For linear regression models, Shapley values are used to generate feature attribution values for each feature in the model. The output includes the top three feature attributions per row of the `  penguins  ` table because `  top_k_features  ` was set to `  3  ` . These attributions are sorted by the absolute value of the attribution in descending order. In all examples, the feature `  sex  ` contributed the most to the overall prediction.
+For linear regression models, Shapley values are used to generate feature attribution values for each feature in the model. The output includes the top three feature attributions per row of the `penguins` table because `top_k_features` was set to `3` . These attributions are sorted by the absolute value of the attribution in descending order. In all examples, the feature `sex` contributed the most to the overall prediction.
 
 ## Globally explain the model
 
 ### SQL
 
-To know which features are generally the most important to determine penguin weight, you can use the [`  ML.GLOBAL_EXPLAIN  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain) . In order to use `  ML.GLOBAL_EXPLAIN  ` , you must retrain the model with the `  ENABLE_GLOBAL_EXPLAIN  ` option set to `  TRUE  ` .
+To know which features are generally the most important to determine penguin weight, you can use the [`ML.GLOBAL_EXPLAIN` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain) . In order to use `ML.GLOBAL_EXPLAIN` , you must retrain the model with the `ENABLE_GLOBAL_EXPLAIN` option set to `TRUE` .
 
 Retrain and get global explanations for the model:
 
@@ -544,7 +540,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
-4.  In the **Delete dataset** dialog box, confirm the delete command by typing the name of your dataset ( `  bqml_tutorial  ` ) and then click **Delete** .
+4.  In the **Delete dataset** dialog box, confirm the delete command by typing the name of your dataset ( `bqml_tutorial` ) and then click **Delete** .
 
 ### Delete your project
 
@@ -553,7 +549,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -568,4 +564,4 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 ## What's next
 
   - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - For information on creating models, see the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.
+  - For information on creating models, see the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.

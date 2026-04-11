@@ -70,7 +70,7 @@ If you don't have a Google Cloud project that is set up for billing, follow thes
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
@@ -162,9 +162,9 @@ To open a saved query in Connected Sheets, follow these steps:
 
 ## Monitor BigQuery usage from Connected Sheets
 
-As a BigQuery administrator, you can monitor and audit resource consumption from Connected Sheets to understand usage patterns, manage costs, and identify frequently-used reports. The following sections provide example SQL queries to help you monitor this usage at both the organization and project levels. For more information, see [`  JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
+As a BigQuery administrator, you can monitor and audit resource consumption from Connected Sheets to understand usage patterns, manage costs, and identify frequently-used reports. The following sections provide example SQL queries to help you monitor this usage at both the organization and project levels. For more information, see [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
-All queries that originate from Connected Sheets are assigned a unique job ID prefix: `  sheets_dataconnector  ` . You can use this prefix to filter jobs in the `  INFORMATION_SCHEMA.JOBS  ` views.
+All queries that originate from Connected Sheets are assigned a unique job ID prefix: `sheets_dataconnector` . You can use this prefix to filter jobs in the `INFORMATION_SCHEMA.JOBS` views.
 
 ### Aggregate Connected Sheets usage by user at the organization level
 
@@ -190,9 +190,9 @@ The following query provides a summary of the top Connected Sheets users in your
     ORDER BY
       total_bytes_billed DESC;
 
-Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
+Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -225,9 +225,9 @@ The following query provides a detailed log of every individual job run by Conne
     ORDER BY
       creation_time DESC;
 
-Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
+Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -266,9 +266,9 @@ If you don't have organization-level permissions or only need to monitor a speci
     LIMIT
       10;
 
-Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
+Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -302,9 +302,9 @@ If you don't have organization-level permissions or only need to monitor a speci
     ORDER BY
       creation_time DESC;
 
-Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
+Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -323,7 +323,7 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

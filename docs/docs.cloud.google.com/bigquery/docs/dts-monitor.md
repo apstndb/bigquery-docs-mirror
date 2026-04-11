@@ -24,9 +24,9 @@ To create custom dashboards, set up alerts, and query metrics with Monitoring, y
 
 4.  In the **Find resource type and metric** box, enter the following:
     
-      - For **Resource type** , enter `  BigQuery DTS Config  ` .
+      - For **Resource type** , enter `BigQuery DTS Config` .
     
-      - For **Metric** , select one of the metrics listed in [Monitoring metrics for transfer configurations](https://docs.cloud.google.com/bigquery/docs/dts-monitor#monitor_metrics_for_transfer_configurations) , for example, `  Completed run count  ` .
+      - For **Metric** , select one of the metrics listed in [Monitoring metrics for transfer configurations](https://docs.cloud.google.com/bigquery/docs/dts-monitor#monitor_metrics_for_transfer_configurations) , for example, `Completed run count` .
         
         ![Select metric.](https://docs.cloud.google.com/static/bigquery/images/cloud-monitoring-select-metric.png)
 
@@ -82,7 +82,7 @@ For more information, see [Manage custom dashboards](https://docs.cloud.google.c
 
 Metrics for BigQuery Data Transfer Service runs are exported to Monitoring in batches, at 1-minute intervals. Monitoring data is retained for 6 weeks.
 
-The dashboard provides data analysis in default intervals of `  1h  ` (1 hour), `  6H  ` (6 hours), `  1D  ` (1 day), `  1W  ` (1 week), and `  6W  ` (6 weeks). You can manually request analysis in any interval between `  1M  ` (1 minute) to `  6W  ` (6 weeks).
+The dashboard provides data analysis in default intervals of `1h` (1 hour), `6H` (6 hours), `1D` (1 day), `1W` (1 week), and `6W` (6 weeks). You can manually request analysis in any interval between `1M` (1 minute) to `6W` (6 weeks).
 
 ### Monitor metrics for transfer configurations
 
@@ -111,49 +111,49 @@ Metrics are aggregated for each BigQuery Data Transfer Service configuration. Yo
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       TRANSFER_STATE      </code></td>
+<td><code dir="ltr" translate="no">TRANSFER_STATE</code></td>
 <td>Represents the current transfer state of the transfer run. This dimension can have one of the following values:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">         unspecified        </code></li>
-<li><code dir="ltr" translate="no">         pending        </code></li>
-<li><code dir="ltr" translate="no">         running        </code></li>
-<li><code dir="ltr" translate="no">         succeeded        </code></li>
-<li><code dir="ltr" translate="no">         failed        </code></li>
-<li><code dir="ltr" translate="no">         cancelled        </code></li>
+<li><code dir="ltr" translate="no">unspecified</code></li>
+<li><code dir="ltr" translate="no">pending</code></li>
+<li><code dir="ltr" translate="no">running</code></li>
+<li><code dir="ltr" translate="no">succeeded</code></li>
+<li><code dir="ltr" translate="no">failed</code></li>
+<li><code dir="ltr" translate="no">cancelled</code></li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       ERROR_CODE      </code></td>
+<td><code dir="ltr" translate="no">ERROR_CODE</code></td>
 <td>Represents the final error code of the transfer run. This dimension can have one of the following values:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">         OK        </code></li>
-<li><code dir="ltr" translate="no">         CANCELLED        </code></li>
-<li><code dir="ltr" translate="no">         UNKNOWN        </code></li>
-<li><code dir="ltr" translate="no">         INVALID_ARGUMENT        </code></li>
-<li><code dir="ltr" translate="no">         DEADLINE_EXCEEDED        </code></li>
-<li><code dir="ltr" translate="no">         NOT_FOUND        </code></li>
-<li><code dir="ltr" translate="no">         ALREADY_EXISTS        </code></li>
-<li><code dir="ltr" translate="no">         PERMISSION_DENIED        </code></li>
-<li><code dir="ltr" translate="no">         UNAUTHENTICATED        </code></li>
-<li><code dir="ltr" translate="no">         RESOURCE_EXHAUSTED        </code></li>
-<li><code dir="ltr" translate="no">         FAILED_PRECONDITION        </code></li>
-<li><code dir="ltr" translate="no">         ABORTED        </code></li>
-<li><code dir="ltr" translate="no">         OUT_OF_RANGE        </code></li>
-<li><code dir="ltr" translate="no">         UNIMPLEMENTED        </code></li>
-<li><code dir="ltr" translate="no">         INTERNAL        </code></li>
-<li><code dir="ltr" translate="no">         UNAVAILABLE        </code></li>
-<li><code dir="ltr" translate="no">         DATA_LOSS        </code></li>
+<li><code dir="ltr" translate="no">OK</code></li>
+<li><code dir="ltr" translate="no">CANCELLED</code></li>
+<li><code dir="ltr" translate="no">UNKNOWN</code></li>
+<li><code dir="ltr" translate="no">INVALID_ARGUMENT</code></li>
+<li><code dir="ltr" translate="no">DEADLINE_EXCEEDED</code></li>
+<li><code dir="ltr" translate="no">NOT_FOUND</code></li>
+<li><code dir="ltr" translate="no">ALREADY_EXISTS</code></li>
+<li><code dir="ltr" translate="no">PERMISSION_DENIED</code></li>
+<li><code dir="ltr" translate="no">UNAUTHENTICATED</code></li>
+<li><code dir="ltr" translate="no">RESOURCE_EXHAUSTED</code></li>
+<li><code dir="ltr" translate="no">FAILED_PRECONDITION</code></li>
+<li><code dir="ltr" translate="no">ABORTED</code></li>
+<li><code dir="ltr" translate="no">OUT_OF_RANGE</code></li>
+<li><code dir="ltr" translate="no">UNIMPLEMENTED</code></li>
+<li><code dir="ltr" translate="no">INTERNAL</code></li>
+<li><code dir="ltr" translate="no">UNAVAILABLE</code></li>
+<li><code dir="ltr" translate="no">DATA_LOSS</code></li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       RUN_CAUSE      </code></td>
+<td><code dir="ltr" translate="no">RUN_CAUSE</code></td>
 <td>Represents how a transfer run was triggered. This dimension can have one of the following values:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">         USER_REQUESTED        </code></li>
-<li><code dir="ltr" translate="no">         AUTO_SCHEDULE        </code></li>
+<li><code dir="ltr" translate="no">USER_REQUESTED</code></li>
+<li><code dir="ltr" translate="no">AUTO_SCHEDULE</code></li>
 </ul></td>
 </tr>
 </tbody>
@@ -165,7 +165,7 @@ Each BigQuery Data Transfer Service run is logged using [Cloud Logging](https://
 
 ### Required roles
 
-The Logs Viewer role ( `  roles/logging.viewer  ` ) gives you read-only access to all features of Logging. For more information about the Identity and Access Management (IAM) permissions and roles that apply to Logging data, see the [Logging access control guide](https://docs.cloud.google.com/logging/docs/access-control) .
+The Logs Viewer role ( `roles/logging.viewer` ) gives you read-only access to all features of Logging. For more information about the Identity and Access Management (IAM) permissions and roles that apply to Logging data, see the [Logging access control guide](https://docs.cloud.google.com/logging/docs/access-control) .
 
 ### View logs
 
@@ -177,7 +177,7 @@ BigQuery Data Transfer Service logs are indexed first by the transfer configurat
 
 #### View transfer run logs
 
-To show only the log entries from a given transfer `  run_id  ` , in the **Query builder** , add the following filters:
+To show only the log entries from a given transfer `run_id` , in the **Query builder** , add the following filters:
 
 ``` notranslate
 resource.type="bigquery_dts_config"
@@ -188,7 +188,7 @@ labels.run_id="transfer_run_id"
 
 #### View transfer configuration logs
 
-To show log entries from a given transfer `  config_id  ` , in the **Query builder** , add the following filters:
+To show log entries from a given transfer `config_id` , in the **Query builder** , add the following filters:
 
 ``` notranslate
 resource.type="bigquery_dts_config"
@@ -243,9 +243,9 @@ BigQuery Data Transfer Service logs messages in the following format:
 
 BigQuery Data Transfer Service log entries contain information that is useful for monitoring and debugging your transfer runs. Log entries contain the following types of information:
 
-  - `  timestamp  ` : used to compute the log entry's age and to enforce the log's retention period
-  - `  severity  ` : can be `  INFO  ` , `  WARNING  ` or `  ERROR  `
-  - `  message_text  ` : holds a string that explains the current status of the transfer run
+  - `timestamp` : used to compute the log entry's age and to enforce the log's retention period
+  - `severity` : can be `INFO` , `WARNING` or `ERROR`
+  - `message_text` : holds a string that explains the current status of the transfer run
 
 ## What's next
 

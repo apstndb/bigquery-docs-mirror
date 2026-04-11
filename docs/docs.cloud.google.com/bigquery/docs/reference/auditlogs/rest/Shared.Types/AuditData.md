@@ -95,212 +95,140 @@ BigQuery AuditData represents the older AuditData.serviceData log messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;jobCompletedEvent&quot;: {
-    object (JobCompletedEvent)
-  },
-  &quot;tableDataReadEvents&quot;: [
-    {
-      object (TableDataReadEvent)
-    }
-  ],
-
-  // Union field request can be only one of the following:
-  &quot;tableInsertRequest&quot;: {
-    object (TableInsertRequest)
-  },
-  &quot;tableUpdateRequest&quot;: {
-    object (TableUpdateRequest)
-  },
-  &quot;datasetListRequest&quot;: {
-    object (DatasetListRequest)
-  },
-  &quot;datasetInsertRequest&quot;: {
-    object (DatasetInsertRequest)
-  },
-  &quot;datasetUpdateRequest&quot;: {
-    object (DatasetUpdateRequest)
-  },
-  &quot;jobInsertRequest&quot;: {
-    object (JobInsertRequest)
-  },
-  &quot;jobQueryRequest&quot;: {
-    object (JobQueryRequest)
-  },
-  &quot;jobGetQueryResultsRequest&quot;: {
-    object (JobGetQueryResultsRequest)
-  },
-  &quot;tableDataListRequest&quot;: {
-    object (TableDataListRequest)
-  },
-  &quot;setIamPolicyRequest&quot;: {
-    object (SetIamPolicyRequest)
-  }
-  // End of list of possible types for union field request.
-
-  // Union field response can be only one of the following:
-  &quot;tableInsertResponse&quot;: {
-    object (TableInsertResponse)
-  },
-  &quot;tableUpdateResponse&quot;: {
-    object (TableUpdateResponse)
-  },
-  &quot;datasetInsertResponse&quot;: {
-    object (DatasetInsertResponse)
-  },
-  &quot;datasetUpdateResponse&quot;: {
-    object (DatasetUpdateResponse)
-  },
-  &quot;jobInsertResponse&quot;: {
-    object (JobInsertResponse)
-  },
-  &quot;jobQueryResponse&quot;: {
-    object (JobQueryResponse)
-  },
-  &quot;jobGetQueryResultsResponse&quot;: {
-    object (JobGetQueryResultsResponse)
-  },
-  &quot;jobQueryDoneResponse&quot;: {
-    object (JobQueryDoneResponse)
-  },
-  &quot;policyResponse&quot;: {
-    object (Policy)
-  }
-  // End of list of possible types for union field response.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;jobCompletedEvent&quot;: {object (JobCompletedEvent)},&quot;tableDataReadEvents&quot;: [{object (TableDataReadEvent)}],// Union field request can be only one of the following:&quot;tableInsertRequest&quot;: {object (TableInsertRequest)},&quot;tableUpdateRequest&quot;: {object (TableUpdateRequest)},&quot;datasetListRequest&quot;: {object (DatasetListRequest)},&quot;datasetInsertRequest&quot;: {object (DatasetInsertRequest)},&quot;datasetUpdateRequest&quot;: {object (DatasetUpdateRequest)},&quot;jobInsertRequest&quot;: {object (JobInsertRequest)},&quot;jobQueryRequest&quot;: {object (JobQueryRequest)},&quot;jobGetQueryResultsRequest&quot;: {object (JobGetQueryResultsRequest)},&quot;tableDataListRequest&quot;: {object (TableDataListRequest)},&quot;setIamPolicyRequest&quot;: {object (SetIamPolicyRequest)}// End of list of possible types for union field request.// Union field response can be only one of the following:&quot;tableInsertResponse&quot;: {object (TableInsertResponse)},&quot;tableUpdateResponse&quot;: {object (TableUpdateResponse)},&quot;datasetInsertResponse&quot;: {object (DatasetInsertResponse)},&quot;datasetUpdateResponse&quot;: {object (DatasetUpdateResponse)},&quot;jobInsertResponse&quot;: {object (JobInsertResponse)},&quot;jobQueryResponse&quot;: {object (JobQueryResponse)},&quot;jobGetQueryResultsResponse&quot;: {object (JobGetQueryResultsResponse)},&quot;jobQueryDoneResponse&quot;: {object (JobQueryDoneResponse)},&quot;policyResponse&quot;: {object (Policy)}// End of list of possible types for union field response.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  jobCompletedEvent  `
+`jobCompletedEvent`
 
-`  object ( JobCompletedEvent  ` )
+` object ( JobCompletedEvent  ` )
 
 A job completion event.
 
-`  tableDataReadEvents[]  `
+`tableDataReadEvents[]`
 
-`  object ( TableDataReadEvent  ` )
+` object ( TableDataReadEvent  ` )
 
 Information about the table access events.
 
-Union field `  request  ` . Request data for each BigQuery method. `  request  ` can be only one of the following:
+Union field `request` . Request data for each BigQuery method. `request` can be only one of the following:
 
-`  tableInsertRequest  `
+`tableInsertRequest`
 
-`  object ( TableInsertRequest  ` )
+` object ( TableInsertRequest  ` )
 
 Table insert request.
 
-`  tableUpdateRequest  `
+`tableUpdateRequest`
 
-`  object ( TableUpdateRequest  ` )
+` object ( TableUpdateRequest  ` )
 
 Table update request.
 
-`  datasetListRequest  `
+`datasetListRequest`
 
-`  object ( DatasetListRequest  ` )
+` object ( DatasetListRequest  ` )
 
 Dataset list request.
 
-`  datasetInsertRequest  `
+`datasetInsertRequest`
 
-`  object ( DatasetInsertRequest  ` )
+` object ( DatasetInsertRequest  ` )
 
 Dataset insert request.
 
-`  datasetUpdateRequest  `
+`datasetUpdateRequest`
 
-`  object ( DatasetUpdateRequest  ` )
+` object ( DatasetUpdateRequest  ` )
 
 Dataset update request.
 
-`  jobInsertRequest  `
+`jobInsertRequest`
 
-`  object ( JobInsertRequest  ` )
+` object ( JobInsertRequest  ` )
 
 Job insert request.
 
-`  jobQueryRequest  `
+`jobQueryRequest`
 
-`  object ( JobQueryRequest  ` )
+` object ( JobQueryRequest  ` )
 
 Job query request.
 
-`  jobGetQueryResultsRequest  `
+`jobGetQueryResultsRequest`
 
-`  object ( JobGetQueryResultsRequest  ` )
+` object ( JobGetQueryResultsRequest  ` )
 
 Job get query results request.
 
-`  tableDataListRequest  `
+`tableDataListRequest`
 
-`  object ( TableDataListRequest  ` )
+` object ( TableDataListRequest  ` )
 
 Table data-list request.
 
-`  setIamPolicyRequest  `
+`setIamPolicyRequest`
 
-`  object ( SetIamPolicyRequest  ` )
+` object ( SetIamPolicyRequest  ` )
 
 Iam policy request.
 
-Union field `  response  ` . Response data for each BigQuery method. `  response  ` can be only one of the following:
+Union field `response` . Response data for each BigQuery method. `response` can be only one of the following:
 
-`  tableInsertResponse  `
+`tableInsertResponse`
 
-`  object ( TableInsertResponse  ` )
+` object ( TableInsertResponse  ` )
 
 Table insert response.
 
-`  tableUpdateResponse  `
+`tableUpdateResponse`
 
-`  object ( TableUpdateResponse  ` )
+` object ( TableUpdateResponse  ` )
 
 Table update response.
 
-`  datasetInsertResponse  `
+`datasetInsertResponse`
 
-`  object ( DatasetInsertResponse  ` )
+` object ( DatasetInsertResponse  ` )
 
 Dataset insert response.
 
-`  datasetUpdateResponse  `
+`datasetUpdateResponse`
 
-`  object ( DatasetUpdateResponse  ` )
+` object ( DatasetUpdateResponse  ` )
 
 Dataset update response.
 
-`  jobInsertResponse  `
+`jobInsertResponse`
 
-`  object ( JobInsertResponse  ` )
+` object ( JobInsertResponse  ` )
 
 Job insert response.
 
-`  jobQueryResponse  `
+`jobQueryResponse`
 
-`  object ( JobQueryResponse  ` )
+` object ( JobQueryResponse  ` )
 
 Job query response.
 
-`  jobGetQueryResultsResponse  `
+`jobGetQueryResultsResponse`
 
-`  object ( JobGetQueryResultsResponse  ` )
+` object ( JobGetQueryResultsResponse  ` )
 
 Job get query results response.
 
-`  jobQueryDoneResponse  `
+`jobQueryDoneResponse`
 
-`  object ( JobQueryDoneResponse  ` )
+` object ( JobQueryDoneResponse  ` )
 
 Deprecated: Job query-done response. Use this information for usage analysis.
 
-`  policyResponse  `
+`policyResponse`
 
-`  object ( Policy  ` )
+` object ( Policy  ` )
 
 Iam Policy.
 
@@ -319,26 +247,22 @@ Table insert request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Table)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Table)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Table  ` )
+` object ( Table  ` )
 
 The new table.
 
 ## Table
 
-Describes a BigQuery table. See the [Table](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) API resource for more details on individual fields. Note: `  Table.schema  ` has been deprecated in favor of `  Table.schemaJson  ` . `  Table.schema  ` may continue to be present in your logs during this transition.
+Describes a BigQuery table. See the [Table](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) API resource for more details on individual fields. Note: `Table.schema` has been deprecated in favor of `Table.schemaJson` . `Table.schema` may continue to be present in your logs during this transition.
 
 <table>
 <colgroup>
@@ -351,90 +275,72 @@ Describes a BigQuery table. See the [Table](https://docs.cloud.google.com/bigque
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;tableName&quot;: {
-    object (TableName)
-  },
-  &quot;info&quot;: {
-    object (TableInfo)
-  },
-  &quot;schemaJson&quot;: string,
-  &quot;view&quot;: {
-    object (TableViewDefinition)
-  },
-  &quot;expireTime&quot;: string,
-  &quot;createTime&quot;: string,
-  &quot;truncateTime&quot;: string,
-  &quot;updateTime&quot;: string,
-  &quot;encryption&quot;: {
-    object (EncryptionInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;tableName&quot;: {object (TableName)},&quot;info&quot;: {object (TableInfo)},&quot;schemaJson&quot;: string,&quot;view&quot;: {object (TableViewDefinition)},&quot;expireTime&quot;: string,&quot;createTime&quot;: string,&quot;truncateTime&quot;: string,&quot;updateTime&quot;: string,&quot;encryption&quot;: {object (EncryptionInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  tableName  `
+`tableName`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 The name of the table.
 
-`  info  `
+`info`
 
-`  object ( TableInfo  ` )
+` object ( TableInfo  ` )
 
 User-provided metadata for the table.
 
-`  schemaJson  `
+`schemaJson`
 
-`  string  `
+`string`
 
 A JSON representation of the table's schema.
 
-`  view  `
+`view`
 
-`  object ( TableViewDefinition  ` )
+` object ( TableViewDefinition  ` )
 
 If present, this is a virtual table defined by a SQL query.
 
-`  expireTime  `
+`expireTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The expiration date for the table, after which the table is deleted and the storage reclaimed. If not present, the table persists indefinitely.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The time the table was created.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  truncateTime  `
+`truncateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
-The time the table was last truncated by an operation with a `  writeDisposition  ` of `  WRITE_TRUNCATE  ` .
+The time the table was last truncated by an operation with a `writeDisposition` of `WRITE_TRUNCATE` .
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The time the table was last modified.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  encryption  `
+`encryption`
 
-`  object ( EncryptionInfo  ` )
+` object ( EncryptionInfo  ` )
 
 The table encryption information. Set when non-default encryption is used.
 
@@ -464,21 +370,21 @@ The fully-qualified name for a table.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 The project ID.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 The dataset ID within the project.
 
-`  tableId  `
+`tableId`
 
-`  string  `
+`string`
 
 The table ID of the table within the dataset.
 
@@ -511,25 +417,25 @@ User-provided metadata for a table.
 
 Fields
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
-A short name for the table, such as `  "Analytics Data - Jan 2011"  ` .
+A short name for the table, such as `"Analytics Data - Jan 2011"` .
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 A long description, perhaps several paragraphs, describing the table contents in detail.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Labels provided for the table.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
 ## TableViewDefinition
 
@@ -555,9 +461,9 @@ Describes a virtual table defined by a SQL query.
 
 Fields
 
-`  query  `
+`query`
 
-`  string  `
+`string`
 
 SQL query defining the view.
 
@@ -585,9 +491,9 @@ Describes encryption properties for a table or a job
 
 Fields
 
-`  kmsKeyName  `
+`kmsKeyName`
 
-`  string  `
+`string`
 
 unique identifier for cloud kms key
 
@@ -606,20 +512,16 @@ Table update request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Table)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Table)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Table  ` )
+` object ( Table  ` )
 
 The table to be updated.
 
@@ -647,9 +549,9 @@ Dataset list request.
 
 Fields
 
-`  listAll  `
+`listAll`
 
-`  boolean  `
+`boolean`
 
 Whether to list all datasets, including hidden ones.
 
@@ -668,20 +570,16 @@ Dataset insert request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Dataset)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Dataset)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Dataset  ` )
+` object ( Dataset  ` )
 
 The dataset to be inserted.
 
@@ -700,67 +598,54 @@ BigQuery dataset information. See the [Dataset](https://docs.cloud.google.com/bi
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;datasetName&quot;: {
-    object (DatasetName)
-  },
-  &quot;info&quot;: {
-    object (DatasetInfo)
-  },
-  &quot;createTime&quot;: string,
-  &quot;updateTime&quot;: string,
-  &quot;acl&quot;: {
-    object (BigQueryAcl)
-  },
-  &quot;defaultTableExpireDuration&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;datasetName&quot;: {object (DatasetName)},&quot;info&quot;: {object (DatasetInfo)},&quot;createTime&quot;: string,&quot;updateTime&quot;: string,&quot;acl&quot;: {object (BigQueryAcl)},&quot;defaultTableExpireDuration&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  datasetName  `
+`datasetName`
 
-`  object ( DatasetName  ` )
+` object ( DatasetName  ` )
 
 The name of the dataset.
 
-`  info  `
+`info`
 
-`  object ( DatasetInfo  ` )
+` object ( DatasetInfo  ` )
 
 User-provided metadata for the dataset.
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The time the dataset was created.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  updateTime  `
+`updateTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 The time the dataset was last modified.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  acl  `
+`acl`
 
-`  object ( BigQueryAcl  ` )
+` object ( BigQueryAcl  ` )
 
 The access control list for the dataset.
 
-`  defaultTableExpireDuration  `
+`defaultTableExpireDuration`
 
-`  string ( Duration  ` format)
+` string ( Duration  ` format)
 
-If this field is present, each table that does not specify an expiration time is assigned an expiration time by adding this duration to the table's `  createTime  ` . If this field is empty, there is no default table expiration time.
+If this field is present, each table that does not specify an expiration time is assigned an expiration time by adding this duration to the table's `createTime` . If this field is empty, there is no default table expiration time.
 
-A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
 
 ## DatasetName
 
@@ -787,15 +672,15 @@ The fully-qualified name for a dataset.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 The project ID.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 The dataset ID within the project.
 
@@ -828,25 +713,25 @@ User-provided metadata for a dataset.
 
 Fields
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
-A short name for the dataset, such as `  "Analytics Data 2011"  ` .
+A short name for the dataset, such as `"Analytics Data 2011"` .
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 A long description, perhaps several paragraphs, describing the dataset contents in detail.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Labels provided for the dataset.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
 ## BigQueryAcl
 
@@ -863,22 +748,16 @@ An access control list.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;entries&quot;: [
-    {
-      object (BigQueryAcl.Entry)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;entries&quot;: [{object (BigQueryAcl.Entry)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  entries[]  `
+`entries[]`
 
-`  object ( BigQueryAcl.Entry  ` )
+` object ( BigQueryAcl.Entry  ` )
 
 Access control entry list.
 
@@ -897,55 +776,46 @@ Access control entry.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;role&quot;: string,
-  &quot;groupEmail&quot;: string,
-  &quot;userEmail&quot;: string,
-  &quot;domain&quot;: string,
-  &quot;specialGroup&quot;: string,
-  &quot;viewName&quot;: {
-    object (TableName)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;role&quot;: string,&quot;groupEmail&quot;: string,&quot;userEmail&quot;: string,&quot;domain&quot;: string,&quot;specialGroup&quot;: string,&quot;viewName&quot;: {object (TableName)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  role  `
+`role`
 
-`  string  `
+`string`
 
-The granted role, which can be `  READER  ` , `  WRITER  ` , or `  OWNER  ` .
+The granted role, which can be `READER` , `WRITER` , or `OWNER` .
 
-`  groupEmail  `
+`groupEmail`
 
-`  string  `
+`string`
 
 Grants access to a group identified by an email address.
 
-`  userEmail  `
+`userEmail`
 
-`  string  `
+`string`
 
 Grants access to a user identified by an email address.
 
-`  domain  `
+`domain`
 
-`  string  `
+`string`
 
 Grants access to all members of a domain.
 
-`  specialGroup  `
+`specialGroup`
 
-`  string  `
+`string`
 
-Grants access to special groups. Valid groups are `  PROJECT_OWNERS  ` , `  PROJECT_READERS  ` , `  PROJECT_WRITERS  ` and `  ALL_AUTHENTICATED_USERS  ` .
+Grants access to special groups. Valid groups are `PROJECT_OWNERS` , `PROJECT_READERS` , `PROJECT_WRITERS` and `ALL_AUTHENTICATED_USERS` .
 
-`  viewName  `
+`viewName`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 Grants access to a BigQuery View.
 
@@ -964,20 +834,16 @@ Dataset update request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Dataset)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Dataset)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Dataset  ` )
+` object ( Dataset  ` )
 
 The dataset to be updated.
 
@@ -996,20 +862,16 @@ Job insert request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Job  ` )
+` object ( Job  ` )
 
 Job insert request.
 
@@ -1028,47 +890,34 @@ Describes a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;jobName&quot;: {
-    object (JobName)
-  },
-  &quot;jobConfiguration&quot;: {
-    object (JobConfiguration)
-  },
-  &quot;jobStatus&quot;: {
-    object (JobStatus)
-  },
-  &quot;jobStatistics&quot;: {
-    object (JobStatistics)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;jobName&quot;: {object (JobName)},&quot;jobConfiguration&quot;: {object (JobConfiguration)},&quot;jobStatus&quot;: {object (JobStatus)},&quot;jobStatistics&quot;: {object (JobStatistics)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  jobName  `
+`jobName`
 
-`  object ( JobName  ` )
+` object ( JobName  ` )
 
 Job name.
 
-`  jobConfiguration  `
+`jobConfiguration`
 
-`  object ( JobConfiguration  ` )
+` object ( JobConfiguration  ` )
 
 Job configuration.
 
-`  jobStatus  `
+`jobStatus`
 
-`  object ( JobStatus  ` )
+` object ( JobStatus  ` )
 
 Job status.
 
-`  jobStatistics  `
+`jobStatistics`
 
-`  object ( JobStatistics  ` )
+` object ( JobStatistics  ` )
 
 Job statistics.
 
@@ -1098,21 +947,21 @@ The fully-qualified name for a job.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 The project ID.
 
-`  jobId  `
+`jobId`
 
-`  string  `
+`string`
 
 The job ID within the project.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 The job location.
 
@@ -1131,71 +980,50 @@ Job configuration information. See the [Jobs](https://docs.cloud.google.com/bigq
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dryRun&quot;: boolean,
-  &quot;labels&quot;: {
-    string: string,
-    ...
-  },
-
-  // Union field configuration can be only one of the following:
-  &quot;query&quot;: {
-    object (JobConfiguration.Query)
-  },
-  &quot;load&quot;: {
-    object (JobConfiguration.Load)
-  },
-  &quot;extract&quot;: {
-    object (JobConfiguration.Extract)
-  },
-  &quot;tableCopy&quot;: {
-    object (JobConfiguration.TableCopy)
-  }
-  // End of list of possible types for union field configuration.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dryRun&quot;: boolean,&quot;labels&quot;: {string: string,...},// Union field configuration can be only one of the following:&quot;query&quot;: {object (JobConfiguration.Query)},&quot;load&quot;: {object (JobConfiguration.Load)},&quot;extract&quot;: {object (JobConfiguration.Extract)},&quot;tableCopy&quot;: {object (JobConfiguration.TableCopy)}// End of list of possible types for union field configuration.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dryRun  `
+`dryRun`
 
-`  boolean  `
+`boolean`
 
 If true, don't actually run the job. Just check that it would run.
 
-`  labels  `
+`labels`
 
-`  map (key: string, value: string)  `
+`map (key: string, value: string)`
 
 Labels provided for the job.
 
-An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-Union field `  configuration  ` . Job configuration information. `  configuration  ` can be only one of the following:
+Union field `configuration` . Job configuration information. `configuration` can be only one of the following:
 
-`  query  `
+`query`
 
-`  object ( JobConfiguration.Query  ` )
+` object ( JobConfiguration.Query  ` )
 
 Query job information.
 
-`  load  `
+`load`
 
-`  object ( JobConfiguration.Load  ` )
+` object ( JobConfiguration.Load  ` )
 
 Load job information.
 
-`  extract  `
+`extract`
 
-`  object ( JobConfiguration.Extract  ` )
+` object ( JobConfiguration.Extract  ` )
 
 Extract job information.
 
-`  tableCopy  `
+`tableCopy`
 
-`  object ( JobConfiguration.TableCopy  ` )
+` object ( JobConfiguration.TableCopy  ` )
 
 TableCopy job information.
 
@@ -1214,84 +1042,64 @@ Describes a query job, which executes a SQL-like query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;query&quot;: string,
-  &quot;destinationTable&quot;: {
-    object (TableName)
-  },
-  &quot;createDisposition&quot;: string,
-  &quot;writeDisposition&quot;: string,
-  &quot;defaultDataset&quot;: {
-    object (DatasetName)
-  },
-  &quot;tableDefinitions&quot;: [
-    {
-      object (TableDefinition)
-    }
-  ],
-  &quot;queryPriority&quot;: string,
-  &quot;destinationTableEncryption&quot;: {
-    object (EncryptionInfo)
-  },
-  &quot;statementType&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;destinationTable&quot;: {object (TableName)},&quot;createDisposition&quot;: string,&quot;writeDisposition&quot;: string,&quot;defaultDataset&quot;: {object (DatasetName)},&quot;tableDefinitions&quot;: [{object (TableDefinition)}],&quot;queryPriority&quot;: string,&quot;destinationTableEncryption&quot;: {object (EncryptionInfo)},&quot;statementType&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  query  `
+`query`
 
-`  string  `
+`string`
 
 The SQL query to run.
 
-`  destinationTable  `
+`destinationTable`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 The table where results are written.
 
-`  createDisposition  `
+`createDisposition`
 
-`  string  `
+`string`
 
-Describes when a job is allowed to create a table: `  CREATE_IF_NEEDED  ` , `  CREATE_NEVER  ` .
+Describes when a job is allowed to create a table: `CREATE_IF_NEEDED` , `CREATE_NEVER` .
 
-`  writeDisposition  `
+`writeDisposition`
 
-`  string  `
+`string`
 
-Describes how writes affect existing tables: `  WRITE_TRUNCATE  ` , `  WRITE_APPEND  ` , `  WRITE_EMPTY  ` .
+Describes how writes affect existing tables: `WRITE_TRUNCATE` , `WRITE_APPEND` , `WRITE_EMPTY` .
 
-`  defaultDataset  `
+`defaultDataset`
 
-`  object ( DatasetName  ` )
+` object ( DatasetName  ` )
 
 If a table name is specified without a dataset in a query, this dataset will be added to table name.
 
-`  tableDefinitions[]  `
+`tableDefinitions[]`
 
-`  object ( TableDefinition  ` )
+` object ( TableDefinition  ` )
 
 Describes data sources outside BigQuery, if needed.
 
-`  queryPriority  `
+`queryPriority`
 
-`  string  `
+`string`
 
-Describes the priority given to the query: `  QUERY_INTERACTIVE  ` or `  QUERY_BATCH  ` .
+Describes the priority given to the query: `QUERY_INTERACTIVE` or `QUERY_BATCH` .
 
-`  destinationTableEncryption  `
+`destinationTableEncryption`
 
-`  object ( EncryptionInfo  ` )
+` object ( EncryptionInfo  ` )
 
 Result table encryption information. Set when non-default encryption is used.
 
-`  statementType  `
+`statementType`
 
-`  string  `
+`string`
 
 Type of the statement (e.g. SELECT, INSERT, CREATE\_TABLE, CREATE\_MODEL..)
 
@@ -1322,15 +1130,15 @@ Describes an external data source used in a query.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Name of the table, used in queries.
 
-`  sourceUris[]  `
+`sourceUris[]`
 
-`  string  `
+`string`
 
 Google Cloud Storage URIs for the data to be imported.
 
@@ -1349,59 +1157,46 @@ Describes a load job, which loads data from an external source via the import pi
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceUris&quot;: [
-    string
-  ],
-  &quot;schemaJson&quot;: string,
-  &quot;destinationTable&quot;: {
-    object (TableName)
-  },
-  &quot;createDisposition&quot;: string,
-  &quot;writeDisposition&quot;: string,
-  &quot;destinationTableEncryption&quot;: {
-    object (EncryptionInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceUris&quot;: [string],&quot;schemaJson&quot;: string,&quot;destinationTable&quot;: {object (TableName)},&quot;createDisposition&quot;: string,&quot;writeDisposition&quot;: string,&quot;destinationTableEncryption&quot;: {object (EncryptionInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceUris[]  `
+`sourceUris[]`
 
-`  string  `
+`string`
 
 URIs for the data to be imported. Only Google Cloud Storage URIs are supported.
 
-`  schemaJson  `
+`schemaJson`
 
-`  string  `
+`string`
 
 The table schema in JSON format representation of a TableSchema.
 
-`  destinationTable  `
+`destinationTable`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 The table where the imported data is written.
 
-`  createDisposition  `
+`createDisposition`
 
-`  string  `
+`string`
 
-Describes when a job is allowed to create a table: `  CREATE_IF_NEEDED  ` , `  CREATE_NEVER  ` .
+Describes when a job is allowed to create a table: `CREATE_IF_NEEDED` , `CREATE_NEVER` .
 
-`  writeDisposition  `
+`writeDisposition`
 
-`  string  `
+`string`
 
-Describes how writes affect existing tables: `  WRITE_TRUNCATE  ` , `  WRITE_APPEND  ` , `  WRITE_EMPTY  ` .
+Describes how writes affect existing tables: `WRITE_TRUNCATE` , `WRITE_APPEND` , `WRITE_EMPTY` .
 
-`  destinationTableEncryption  `
+`destinationTableEncryption`
 
-`  object ( EncryptionInfo  ` )
+` object ( EncryptionInfo  ` )
 
 Result table encryption information. Set when non-default encryption is used.
 
@@ -1420,29 +1215,22 @@ Describes an extract job, which exports data to an external source via the expor
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;destinationUris&quot;: [
-    string
-  ],
-  &quot;sourceTable&quot;: {
-    object (TableName)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destinationUris&quot;: [string],&quot;sourceTable&quot;: {object (TableName)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  destinationUris[]  `
+`destinationUris[]`
 
-`  string  `
+`string`
 
 Google Cloud Storage URIs where extracted data should be written.
 
-`  sourceTable  `
+`sourceTable`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 The source table.
 
@@ -1461,54 +1249,40 @@ Describes a copy job, which copies an existing table to another table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;sourceTables&quot;: [
-    {
-      object (TableName)
-    }
-  ],
-  &quot;destinationTable&quot;: {
-    object (TableName)
-  },
-  &quot;createDisposition&quot;: string,
-  &quot;writeDisposition&quot;: string,
-  &quot;destinationTableEncryption&quot;: {
-    object (EncryptionInfo)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceTables&quot;: [{object (TableName)}],&quot;destinationTable&quot;: {object (TableName)},&quot;createDisposition&quot;: string,&quot;writeDisposition&quot;: string,&quot;destinationTableEncryption&quot;: {object (EncryptionInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  sourceTables[]  `
+`sourceTables[]`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 Source tables.
 
-`  destinationTable  `
+`destinationTable`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 Destination table.
 
-`  createDisposition  `
+`createDisposition`
 
-`  string  `
+`string`
 
-Describes when a job is allowed to create a table: `  CREATE_IF_NEEDED  ` , `  CREATE_NEVER  ` .
+Describes when a job is allowed to create a table: `CREATE_IF_NEEDED` , `CREATE_NEVER` .
 
-`  writeDisposition  `
+`writeDisposition`
 
-`  string  `
+`string`
 
-Describes how writes affect existing tables: `  WRITE_TRUNCATE  ` , `  WRITE_APPEND  ` , `  WRITE_EMPTY  ` .
+Describes how writes affect existing tables: `WRITE_TRUNCATE` , `WRITE_APPEND` , `WRITE_EMPTY` .
 
-`  destinationTableEncryption  `
+`destinationTableEncryption`
 
-`  object ( EncryptionInfo  ` )
+` object ( EncryptionInfo  ` )
 
 Result table encryption information. Set when non-default encryption is used.
 
@@ -1527,38 +1301,28 @@ Running state of a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;state&quot;: string,
-  &quot;error&quot;: {
-    object (Status)
-  },
-  &quot;additionalErrors&quot;: [
-    {
-      object (Status)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;state&quot;: string,&quot;error&quot;: {object (Status)},&quot;additionalErrors&quot;: [{object (Status)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  state  `
+`state`
 
-`  string  `
+`string`
 
-State of a job: `  PENDING  ` , `  RUNNING  ` , or `  DONE  ` .
+State of a job: `PENDING` , `RUNNING` , or `DONE` .
 
-`  error  `
+`error`
 
-`  object ( Status  ` )
+` object ( Status  ` )
 
 If the job did not complete successfully, this field describes why.
 
-`  additionalErrors[]  `
+`additionalErrors[]`
 
-`  object ( Status  ` )
+` object ( Status  ` )
 
 Errors encountered during the running of the job. Do not necessarily mean that the job has completed or was unsuccessful.
 
@@ -1577,136 +1341,108 @@ Job statistics that may change after a job starts.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;createTime&quot;: string,
-  &quot;startTime&quot;: string,
-  &quot;endTime&quot;: string,
-  &quot;totalProcessedBytes&quot;: string,
-  &quot;totalBilledBytes&quot;: string,
-  &quot;billingTier&quot;: integer,
-  &quot;totalSlotMs&quot;: string,
-  &quot;reservationUsage&quot;: [
-    {
-      object (JobStatistics.ReservationResourceUsage)
-    }
-  ],
-  &quot;reservation&quot;: string,
-  &quot;referencedTables&quot;: [
-    {
-      object (TableName)
-    }
-  ],
-  &quot;totalTablesProcessed&quot;: integer,
-  &quot;referencedViews&quot;: [
-    {
-      object (TableName)
-    }
-  ],
-  &quot;totalViewsProcessed&quot;: integer,
-  &quot;queryOutputRowCount&quot;: string,
-  &quot;totalLoadOutputBytes&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalProcessedBytes&quot;: string,&quot;totalBilledBytes&quot;: string,&quot;billingTier&quot;: integer,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (JobStatistics.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;referencedTables&quot;: [{object (TableName)}],&quot;totalTablesProcessed&quot;: integer,&quot;referencedViews&quot;: [{object (TableName)}],&quot;totalViewsProcessed&quot;: integer,&quot;queryOutputRowCount&quot;: string,&quot;totalLoadOutputBytes&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  createTime  `
+`createTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Time when the job was created.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  startTime  `
+`startTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Time when the job started.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  endTime  `
+`endTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 Time when the job ended.
 
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `  "2014-10-02T15:01:23Z"  ` , `  "2014-10-02T15:01:23.045123456Z"  ` or `  "2014-10-02T15:01:23+05:30"  ` .
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
-`  totalProcessedBytes  `
+`totalProcessedBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total bytes processed for a job.
 
-`  totalBilledBytes  `
+`totalBilledBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Processed bytes, adjusted by the job's CPU usage.
 
-`  billingTier  `
+`billingTier`
 
-`  integer  `
+`integer`
 
 The tier assigned by CPU-based billing.
 
-`  totalSlotMs  `
+`totalSlotMs`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 The total number of slot-ms consumed by the query job.
 
-`  reservationUsage[] (deprecated)  `
+` reservationUsage[] (deprecated)  `
 
-`  object ( JobStatistics.ReservationResourceUsage  ` )
+` object ( JobStatistics.ReservationResourceUsage  ` )
 
 This item is deprecated\!
 
 Deprecated as of 12/15/2022.
 
-`  reservation  `
+`reservation`
 
-`  string  `
+`string`
 
 Reservation name or "unreserved" for on-demand resource usage.
 
-`  referencedTables[]  `
+`referencedTables[]`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 The first N tables accessed by the query job. Older queries that reference a large number of tables may not have all of their tables in this list. You can use the totalTablesProcessed count to know how many total tables were read in the query. For new queries, there is currently no limit.
 
-`  totalTablesProcessed  `
+`totalTablesProcessed`
 
-`  integer  `
+`integer`
 
 Total number of unique tables referenced in the query.
 
-`  referencedViews[]  `
+`referencedViews[]`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 The first N views accessed by the query job. Older queries that reference a large number of views may not have all of their views in this list. You can use the totalTablesProcessed count to know how many total tables were read in the query. For new queries, there is currently no limit.
 
-`  totalViewsProcessed  `
+`totalViewsProcessed`
 
-`  integer  `
+`integer`
 
 Total number of unique views referenced in the query.
 
-`  queryOutputRowCount  `
+`queryOutputRowCount`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Number of output rows produced by the query job.
 
-`  totalLoadOutputBytes  `
+`totalLoadOutputBytes`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total bytes loaded for an import job.
 
@@ -1735,15 +1471,15 @@ This field is deprecated. Job resource usage breakdown by reservation.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Reservation name or "unreserved" for on-demand resources usage.
 
-`  slotMs  `
+`slotMs`
 
-`  string ( int64 format)  `
+`string ( int64 format)`
 
 Total slot milliseconds used by the reservation for a particular job.
 
@@ -1762,48 +1498,40 @@ Job query request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;query&quot;: string,
-  &quot;maxResults&quot;: integer,
-  &quot;defaultDataset&quot;: {
-    object (DatasetName)
-  },
-  &quot;projectId&quot;: string,
-  &quot;dryRun&quot;: boolean
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;maxResults&quot;: integer,&quot;defaultDataset&quot;: {object (DatasetName)},&quot;projectId&quot;: string,&quot;dryRun&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  query  `
+`query`
 
-`  string  `
+`string`
 
 The query.
 
-`  maxResults  `
+`maxResults`
 
-`  integer ( uint32 format)  `
+`integer ( uint32 format)`
 
 The maximum number of results.
 
-`  defaultDataset  `
+`defaultDataset`
 
-`  object ( DatasetName  ` )
+` object ( DatasetName  ` )
 
 The default dataset for tables that do not have a dataset specified.
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Project that the query should be charged to.
 
-`  dryRun  `
+`dryRun`
 
-`  boolean  `
+`boolean`
 
 If true, don't actually run the job. Just check that it would run.
 
@@ -1832,15 +1560,15 @@ Job getQueryResults request.
 
 Fields
 
-`  maxResults  `
+`maxResults`
 
-`  integer ( uint32 format)  `
+`integer ( uint32 format)`
 
 Maximum number of results to return.
 
-`  startRow  `
+`startRow`
 
-`  string  `
+`string`
 
 Zero-based row number at which to start.
 
@@ -1869,21 +1597,21 @@ Table data-list request.
 
 Fields
 
-`  startRow  `
+`startRow`
 
-`  string  `
+`string`
 
 Starting row offset.
 
-`  maxResults  `
+`maxResults`
 
-`  integer ( uint32 format)  `
+`integer ( uint32 format)`
 
 Maximum number of results to return.
 
 ## SetIamPolicyRequest
 
-Request message for `  SetIamPolicy  ` method.
+Request message for `SetIamPolicy` method.
 
 <table>
 <colgroup>
@@ -1896,40 +1624,34 @@ Request message for `  SetIamPolicy  ` method.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: string,
-  &quot;policy&quot;: {
-    object (Policy)
-  },
-  &quot;updateMask&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: string,&quot;policy&quot;: {object (Policy)},&quot;updateMask&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  string  `
+`string`
 
 REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
 
-`  policy  `
+`policy`
 
-`  object ( Policy  ` )
+` object ( Policy  ` )
 
-REQUIRED: The complete policy to be applied to the `  resource  ` . The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
+REQUIRED: The complete policy to be applied to the `resource` . The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
 
-`  updateMask  `
+`updateMask`
 
-`  string ( FieldMask  ` format)
+` string ( FieldMask  ` format)
 
 OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used:
 
-`  paths: "bindings, etag"  `
+`paths: "bindings, etag"`
 
-This is a comma-separated list of fully qualified names of fields. Example: `  "user.displayName,photo"  ` .
+This is a comma-separated list of fully qualified names of fields. Example: `"user.displayName,photo"` .
 
 ## TableInsertResponse
 
@@ -1946,20 +1668,16 @@ Table insert response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Table)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Table)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Table  ` )
+` object ( Table  ` )
 
 Final state of the inserted table.
 
@@ -1978,20 +1696,16 @@ Table update response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Table)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Table)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Table  ` )
+` object ( Table  ` )
 
 Final state of the updated table.
 
@@ -2010,20 +1724,16 @@ Dataset insert response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Dataset)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Dataset)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Dataset  ` )
+` object ( Dataset  ` )
 
 Final state of the inserted dataset.
 
@@ -2042,20 +1752,16 @@ Dataset update response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Dataset)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Dataset)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Dataset  ` )
+` object ( Dataset  ` )
 
 Final state of the updated dataset.
 
@@ -2074,20 +1780,16 @@ Job insert response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;resource&quot;: {
-    object (Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;resource&quot;: {object (Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  resource  `
+`resource`
 
-`  object ( Job  ` )
+` object ( Job  ` )
 
 Job insert response.
 
@@ -2106,27 +1808,22 @@ Job query response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;totalResults&quot;: string,
-  &quot;job&quot;: {
-    object (Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;totalResults&quot;: string,&quot;job&quot;: {object (Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  totalResults  `
+`totalResults`
 
-`  string  `
+`string`
 
 The total number of rows in the full query result set.
 
-`  job  `
+`job`
 
-`  object ( Job  ` )
+` object ( Job  ` )
 
 Information about the queried job.
 
@@ -2145,29 +1842,24 @@ Job getQueryResults response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;totalResults&quot;: string,
-  &quot;job&quot;: {
-    object (Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;totalResults&quot;: string,&quot;job&quot;: {object (Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  totalResults  `
+`totalResults`
 
-`  string  `
+`string`
 
 Total number of results in query results.
 
-`  job  `
+`job`
 
-`  object ( Job  ` )
+` object ( Job  ` )
 
-The job that was created to run the query. It completed if `  job.status.state  ` is `  DONE  ` . It failed if `  job.status.errorResult  ` is also present.
+The job that was created to run the query. It completed if `job.status.state` is `DONE` . It failed if `job.status.errorResult` is also present.
 
 ## JobQueryDoneResponse
 
@@ -2184,22 +1876,18 @@ Job getQueryDone response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;job&quot;: {
-    object (Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;job&quot;: {object (Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  job  `
+`job`
 
-`  object ( Job  ` )
+` object ( Job  ` )
 
-The job and status information. The job completed if `  job.status.state  ` is `  DONE  ` .
+The job and status information. The job completed if `job.status.state` is `DONE` .
 
 ## JobCompletedEvent
 
@@ -2216,27 +1904,22 @@ Query job completed event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;eventName&quot;: string,
-  &quot;job&quot;: {
-    object (Job)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;eventName&quot;: string,&quot;job&quot;: {object (Job)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  eventName  `
+`eventName`
 
-`  string  `
+`string`
 
 Name of the event.
 
-`  job  `
+`job`
 
-`  object ( Job  ` )
+` object ( Job  ` )
 
 Job information.
 
@@ -2255,28 +1938,21 @@ Table data read event. Only present for tables, not views, and is only included 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;tableName&quot;: {
-    object (TableName)
-  },
-  &quot;referencedFields&quot;: [
-    string
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;tableName&quot;: {object (TableName)},&quot;referencedFields&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  tableName  `
+`tableName`
 
-`  object ( TableName  ` )
+` object ( TableName  ` )
 
 Name of the accessed table.
 
-`  referencedFields[]  `
+`referencedFields[]`
 
-`  string  `
+`string`
 
 A list of referenced fields. This information is not included by default. To enable this in the logs, please contact BigQuery support or open a bug in the BigQuery issue tracker.

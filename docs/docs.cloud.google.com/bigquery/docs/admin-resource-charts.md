@@ -14,8 +14,8 @@ As a BigQuery administrator, you can monitor your organization's health, slots u
 
 To get the permissions that you need to view all data in the operational health and resource utilization charts, ask your administrator to grant you the following IAM roles on your organization:
 
-  - [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `  roles/bigquery.resourceViewer  ` )
-  - [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` )
+  - [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` )
+  - [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -26,15 +26,15 @@ These predefined roles contain the permissions required to view all data in the 
 The following permissions are required to view all data in the operational health and resource utilization charts:
 
   - To view all data in the operational health and resource utilization charts for an organization:
-      - `  bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll  ` on the organization
-      - `  bigquery.reservationAssignments.list  ` on the administration project used to create the reservations
-      - `  bigquery.capacityCommitments.list  ` on the administration project used to create the reservations
-  - As an on-demand user, to view all data in the resource utilization charts for an organization: `  bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll  ` on the organization
-  - To view operational health summary data for BigQuery table storage: `  bigquery.tables.get or bigquery.tables.list  ` on the organization
+      - `bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll` on the organization
+      - `bigquery.reservationAssignments.list` on the administration project used to create the reservations
+      - `bigquery.capacityCommitments.list` on the administration project used to create the reservations
+  - As an on-demand user, to view all data in the resource utilization charts for an organization: `bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll` on the organization
+  - To view operational health summary data for BigQuery table storage: `bigquery.tables.get or bigquery.tables.list` on the organization
   - To view operational health and resource utilization charts at the reservation level:
-      - `  bigquery.reservations.list  ` on the administration project used to create the reservations
-      - `  bigquery.reservationAssignments.list  ` on the administration project used to create the reservations
-  - To view resource utilization charts at the project level: `  bigquery.jobs.listAll  ` on the project
+      - `bigquery.reservations.list` on the administration project used to create the reservations
+      - `bigquery.reservationAssignments.list` on the administration project used to create the reservations
+  - To view resource utilization charts at the project level: `bigquery.jobs.listAll` on the project
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -77,12 +77,12 @@ To view information about the operational health of your organization, follow th
 
 6.  Optional: To view more details about operational health with a [resource utilization chart](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-admin-resource-charts) or [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) , click **Explore more** .
 
-BigQuery gathers the metrics by querying the following [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) :
+BigQuery gathers the metrics by querying the following [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) :
 
-  - [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
-  - [`  INFORMATION_SCHEMA.JOBS_TIMELINE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
-  - [`  INFORMATION_SCHEMA.RESERVATIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations)
-  - [`  INFORMATION_SCHEMA.TABLE_STORAGE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
+  - [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
+  - [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
+  - [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations)
+  - [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
 
 For an example query that replicates the slot usage timeline chart found in administrative resource charts, see [Match slot usage behavior from administrative resource charts](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#charts_example) .
 
@@ -201,11 +201,11 @@ BigQuery resource charts help you track past resource use to plan for future nee
 
 ![Resource utilization view, showing a timeline of metrics for an organization or administration project and the pane where you configure the chart](https://docs.cloud.google.com/static/bigquery/images/admin_chart_overview.png)
 
-The charts gather metrics by querying the following `  INFORMATION_SCHEMA  ` views:
+The charts gather metrics by querying the following `INFORMATION_SCHEMA` views:
 
-  - [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
-  - [`  INFORMATION_SCHEMA.JOBS_TIMELINE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
-  - [`  INFORMATION_SCHEMA.RESERVATION_CHANGES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes)
+  - [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
+  - [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
+  - [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes)
 
 The data can be updated in real time, going back a maximum of 30 days.
 
@@ -513,7 +513,7 @@ For the **Failed Jobs** chart, the table component displays the following data:
   - **Average slot usage.** Same as the **Slot Usage** chart, but only for failed jobs.
   - **Total failed jobs.** The number of jobs that failed within the selected time period.
 
-**Note:** In addition to resource charts, you can write your own queries or dashboards. For example queries and Looker Studio templates, see [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/monitoring#information-schema) .
+**Note:** In addition to resource charts, you can write your own queries or dashboards. For example queries and Looker Studio templates, see [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/monitoring#information-schema) .
 
 ##### Group by options
 
@@ -560,7 +560,7 @@ For information about viewing your slot usage, see [View administrative resource
 
 ### Monitor job performance
 
-You may need to adjust your autoscaling `  max_slots  ` to avoid higher costs. The following query provides context on your job performance so you can choose the correct amount of autoscaling slots for your workload.
+You may need to adjust your autoscaling `max_slots` to avoid higher costs. The following query provides context on your job performance so you can choose the correct amount of autoscaling slots for your workload.
 
 The following query provides details on your reservations past job performance:
 
@@ -626,7 +626,7 @@ If jobs are taking significantly longer to complete, check the [Detailed view](h
 
 ### Slot contention messages
 
-The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#insights-table) can display messages such as `  There were NUMBER jobs detected with slot_contention in the reservation.  ` that indicate slot contention issues. Check the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to review details about the specific jobs flagged in these messages.
+The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#insights-table) can display messages such as `There were NUMBER jobs detected with slot_contention in the reservation.` that indicate slot contention issues. Check the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to review details about the specific jobs flagged in these messages.
 
   - **Best practice** : Optimize the identified queries or adjust your reservation's slot allocation.
 

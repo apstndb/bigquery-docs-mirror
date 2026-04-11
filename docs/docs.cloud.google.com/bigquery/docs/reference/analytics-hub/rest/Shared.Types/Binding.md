@@ -2,7 +2,7 @@
   - [Expr](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Binding#Expr)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Binding#Expr.SCHEMA_REPRESENTATION)
 
-Associates `  members  ` , or principals, with a `  role  ` .
+Associates `members` , or principals, with a `role` .
 
 <table>
 <colgroup>
@@ -15,88 +15,80 @@ Associates `  members  ` , or principals, with a `  role  ` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;role&quot;: string,
-  &quot;members&quot;: [
-    string
-  ],
-  &quot;condition&quot;: {
-    object (Expr)
-  }
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;role&quot;: string,&quot;members&quot;: [string],&quot;condition&quot;: {object (Expr)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  role  `
+`role`
 
-`  string  `
+`string`
 
-Role that is assigned to the list of `  members  ` , or principals. For example, `  roles/viewer  ` , `  roles/editor  ` , or `  roles/owner  ` .
+Role that is assigned to the list of `members` , or principals. For example, `roles/viewer` , `roles/editor` , or `roles/owner` .
 
 For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview) . For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles) .
 
-`  members[]  `
+`members[]`
 
-`  string  `
+`string`
 
-Specifies the principals requesting access for a Google Cloud resource. `  members  ` can have the following values:
+Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values:
 
-  - `  allUsers  ` : A special identifier that represents anyone who is on the internet; with or without a Google account.
+  - `allUsers` : A special identifier that represents anyone who is on the internet; with or without a Google account.
 
-  - `  allAuthenticatedUsers  ` : A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation.
+  - `allAuthenticatedUsers` : A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation.
 
-  - `  user:{emailid}  ` : An email address that represents a specific Google account. For example, `  alice@example.com  ` .
-
-<!-- end list -->
-
-  - `  serviceAccount:{emailid}  ` : An email address that represents a Google service account. For example, `  my-other-app@appspot.gserviceaccount.com  ` .
-
-  - `  serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]  ` : An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts) . For example, `  my-project.svc.id.goog[my-namespace/my-kubernetes-sa]  ` .
-
-  - `  group:{emailid}  ` : An email address that represents a Google group. For example, `  admins@example.com  ` .
+  - `user:{emailid}` : An email address that represents a specific Google account. For example, `alice@example.com` .
 
 <!-- end list -->
 
-  - `  domain:{domain}  ` : The G Suite domain (primary) that represents all the users of that domain. For example, `  google.com  ` or `  example.com  ` .
+  - `serviceAccount:{emailid}` : An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com` .
+
+  - `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]` : An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts) . For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]` .
+
+  - `group:{emailid}` : An email address that represents a Google group. For example, `admins@example.com` .
 
 <!-- end list -->
 
-  - `  principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}  ` : A single identity in a workforce identity pool.
+  - `domain:{domain}` : The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com` .
 
-  - `  principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/group/{groupId}  ` : All workforce identities in a group.
+<!-- end list -->
 
-  - `  principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/attribute.{attribute_name}/{attribute_value}  ` : All workforce identities with a specific attribute value.
+  - `principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}` : A single identity in a workforce identity pool.
 
-  - `  principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/*  ` : All identities in a workforce identity pool.
+  - `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/group/{groupId}` : All workforce identities in a group.
 
-  - `  principal://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/subject/{subject_attribute_value}  ` : A single identity in a workload identity pool.
+  - `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/attribute.{attribute_name}/{attribute_value}` : All workforce identities with a specific attribute value.
 
-  - `  principalSet://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/group/{groupId}  ` : A workload identity pool group.
+  - `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/*` : All identities in a workforce identity pool.
 
-  - `  principalSet://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/attribute.{attribute_name}/{attribute_value}  ` : All identities in a workload identity pool with a certain attribute.
+  - `principal://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/subject/{subject_attribute_value}` : A single identity in a workload identity pool.
 
-  - `  principalSet://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/*  ` : All identities in a workload identity pool.
+  - `principalSet://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/group/{groupId}` : A workload identity pool group.
 
-  - `  deleted:user:{emailid}?uid={uniqueid}  ` : An email address (plus unique identifier) representing a user that has been recently deleted. For example, `  alice@example.com?uid=123456789012345678901  ` . If the user is recovered, this value reverts to `  user:{emailid}  ` and the recovered user retains the role in the binding.
+  - `principalSet://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/attribute.{attribute_name}/{attribute_value}` : All identities in a workload identity pool with a certain attribute.
 
-  - `  deleted:serviceAccount:{emailid}?uid={uniqueid}  ` : An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `  my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901  ` . If the service account is undeleted, this value reverts to `  serviceAccount:{emailid}  ` and the undeleted service account retains the role in the binding.
+  - `principalSet://iam.googleapis.com/projects/{projectNumber}/locations/global/workloadIdentityPools/{pool_id}/*` : All identities in a workload identity pool.
 
-  - `  deleted:group:{emailid}?uid={uniqueid}  ` : An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `  admins@example.com?uid=123456789012345678901  ` . If the group is recovered, this value reverts to `  group:{emailid}  ` and the recovered group retains the role in the binding.
+  - `deleted:user:{emailid}?uid={uniqueid}` : An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901` . If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding.
 
-  - `  deleted:principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}  ` : Deleted single identity in a workforce identity pool. For example, `  deleted:principal://iam.googleapis.com/locations/global/workforcePools/my-pool-id/subject/my-subject-attribute-value  ` .
+  - `deleted:serviceAccount:{emailid}?uid={uniqueid}` : An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901` . If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding.
 
-`  condition  `
+  - `deleted:group:{emailid}?uid={uniqueid}` : An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901` . If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding.
 
-`  object ( Expr  ` )
+  - `deleted:principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}` : Deleted single identity in a workforce identity pool. For example, `deleted:principal://iam.googleapis.com/locations/global/workforcePools/my-pool-id/subject/my-subject-attribute-value` .
+
+`condition`
+
+` object ( Expr  ` )
 
 The condition that is associated with this binding.
 
-If the condition evaluates to `  true  ` , then this binding applies to the current request.
+If the condition evaluates to `true` , then this binding applies to the current request.
 
-If the condition evaluates to `  false  ` , then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding.
+If the condition evaluates to `false` , then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding.
 
 To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies) .
 
@@ -153,26 +145,26 @@ The exact variables and functions that may be referenced within an expression ar
 
 Fields
 
-`  expression  `
+`expression`
 
-`  string  `
+`string`
 
 Textual representation of an expression in Common Expression Language syntax.
 
-`  title  `
+`title`
 
-`  string  `
+`string`
 
 Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
 
-`  description  `
+`description`
 
-`  string  `
+`string`
 
 Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.

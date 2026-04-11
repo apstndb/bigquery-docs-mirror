@@ -42,25 +42,25 @@ BigQuery saves all query results to a table, which can be either permanent or te
 
 At a minimum, to write query results to a table, you must be granted the following permissions:
 
-  - `  bigquery.tables.create  ` permissions to create a new table
-  - `  bigquery.tables.updateData  ` to write data to a new table, overwrite a table, or append data to a table
-  - `  bigquery.jobs.create  ` to run a query job
+  - `bigquery.tables.create` permissions to create a new table
+  - `bigquery.tables.updateData` to write data to a new table, overwrite a table, or append data to a table
+  - `bigquery.jobs.create` to run a query job
 
-Additional permissions such as `  bigquery.tables.getData  ` may be required to access the data you're querying.
+Additional permissions such as `bigquery.tables.getData` may be required to access the data you're querying.
 
-The following predefined IAM roles include both `  bigquery.tables.create  ` and `  bigquery.tables.updateData  ` permissions:
+The following predefined IAM roles include both `bigquery.tables.create` and `bigquery.tables.updateData` permissions:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
-The following predefined IAM roles include `  bigquery.jobs.create  ` permissions:
+The following predefined IAM roles include `bigquery.jobs.create` permissions:
 
-  - `  bigquery.user  `
-  - `  bigquery.jobUser  `
-  - `  bigquery.admin  `
+  - `bigquery.user`
+  - `bigquery.jobUser`
+  - `bigquery.admin`
 
-In addition, if a user has `  bigquery.datasets.create  ` permissions, when that user creates a dataset, they are granted `  bigquery.dataOwner  ` access to it. `  bigquery.dataOwner  ` access gives the user the ability to create and update tables in the dataset.
+In addition, if a user has `bigquery.datasets.create` permissions, when that user creates a dataset, they are granted `bigquery.dataOwner` access to it. `bigquery.dataOwner` access gives the user the ability to create and update tables in the dataset.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -114,7 +114,7 @@ Alternatively, if you forget to specify a destination table before running your 
 
 ### SQL
 
-The following example uses the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create the `  trips  ` table from data in the public `  bikeshare_trips  ` table:
+The following example uses the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create the `trips` table from data in the public `bikeshare_trips` table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -147,15 +147,15 @@ For more information, see [Creating a new table from an existing table](https://
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Enter the [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and specify the `  --destination_table  ` flag to create a permanent table based on the query results. Specify the `  use_legacy_sql=false  ` flag to use GoogleSQL syntax. To write the query results to a table that is not in your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
+2.  Enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and specify the `--destination_table` flag to create a permanent table based on the query results. Specify the `use_legacy_sql=false` flag to use GoogleSQL syntax. To write the query results to a table that is not in your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
     
-    Optional: Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+    Optional: Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
     
     To control the write disposition for an existing destination table, specify one of the following optional flags:
     
-      - `  --append_table  ` : If the destination table exists, the query results are appended to it.
+      - `--append_table` : If the destination table exists, the query results are appended to it.
     
-      - `  --replace  ` : If the destination table exists, it is overwritten with the query results.
+      - `--replace` : If the destination table exists, it is overwritten with the query results.
         
         ``` notranslate
         bq --location=location query \
@@ -165,7 +165,7 @@ For more information, see [Creating a new table from an existing table](https://
         
         Replace the following:
     
-      - `  location  ` is the name of the location used to process the query. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location by using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+      - `  location  ` is the name of the location used to process the query. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
     
       - `  project_id  ` is your project ID.
     
@@ -175,13 +175,13 @@ For more information, see [Creating a new table from an existing table](https://
     
       - `  query  ` is a query in GoogleSQL syntax.
         
-        If no write disposition flag is specified, the default behavior is to write the results to the table only if it is empty. If the table exists and it is not empty, the following error is returned: `  BigQuery error in query operation: Error processing job project_id :bqjob_123abc456789_00000e1234f_1: Already Exists: Table project_id:dataset.table  ` .
+        If no write disposition flag is specified, the default behavior is to write the results to the table only if it is empty. If the table exists and it is not empty, the following error is returned: ` BigQuery error in query operation: Error processing job project_id :bqjob_123abc456789_00000e1234f_1: Already Exists: Table project_id:dataset.table  ` .
         
         Examples:
         
         **Note:** These examples query a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
         
-        Enter the following command to write query results to a destination table named `  mytable  ` in `  mydataset  ` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `  Already exists  ` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
+        Enter the following command to write query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
         
         ``` notranslate
         bq query \
@@ -198,7 +198,7 @@ For more information, see [Creating a new table from an existing table](https://
         number DESC'
         ```
         
-        Enter the following command to use query results to overwrite a destination table named `  mytable  ` in `  mydataset  ` . The dataset is in your default project. The command uses the `  --replace  ` flag to overwrite the destination table.
+        Enter the following command to use query results to overwrite a destination table named `mytable` in `mydataset` . The dataset is in your default project. The command uses the `--replace` flag to overwrite the destination table.
         
         ``` notranslate
         bq query \
@@ -216,7 +216,7 @@ For more information, see [Creating a new table from an existing table](https://
         number DESC'
         ```
         
-        Enter the following command to append query results to a destination table named `  mytable  ` in `  mydataset  ` . The dataset is in `  my-other-project  ` , not your default project. The command uses the `  --append_table  ` flag to append the query results to the destination table.
+        Enter the following command to append query results to a destination table named `mytable` in `mydataset` . The dataset is in `my-other-project` , not your default project. The command uses the `--append_table` flag to append the query results to the destination table.
         
         ``` notranslate
         bq query \
@@ -248,9 +248,9 @@ For more information, see [Creating a new table from an existing table](https://
 
 ### API
 
-To save query results to a permanent table, call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configure a `  query  ` job, and include a value for the `  destinationTable  ` property. To control the write disposition for an existing destination table, configure the `  writeDisposition  ` property.
+To save query results to a permanent table, call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configure a `query` job, and include a value for the `destinationTable` property. To control the write disposition for an existing destination table, configure the `writeDisposition` property.
 
-To control the processing location for the query job, specify the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+To control the processing location for the query job, specify the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
 ### Go
 
@@ -440,7 +440,7 @@ To save query results to a permanent table, create a [QueryJobConfig](https://do
 Normally, queries have a [maximum response size](https://docs.cloud.google.com/bigquery/quotas#query_jobs) . If you plan to run a query that might return larger results, you can do one of the following:
 
   - In GoogleSQL, specify a destination table for the query results.
-  - In legacy SQL, specify a destination table and set the `  allowLargeResults  ` option.
+  - In legacy SQL, specify a destination table and set the `allowLargeResults` option.
 
 When you specify a destination table for large query results, you are charged for [storing](https://cloud.google.com/bigquery/pricing#storage) the data.
 
@@ -449,8 +449,8 @@ When you specify a destination table for large query results, you are charged fo
 In legacy SQL, writing large results is subject to these limitations:
 
   - You must specify a destination table.
-  - You cannot specify a top-level `  ORDER BY  ` , `  TOP  ` or `  LIMIT  ` clause. Doing so negates the benefit of using `  allowLargeResults  ` , because the query output can no longer be computed in parallel.
-  - [Window functions](https://docs.cloud.google.com/bigquery/query-reference#windowfunctions) can return large query results only if used in conjunction with a `  PARTITION BY  ` clause.
+  - You cannot specify a top-level `ORDER BY` , `TOP` or `LIMIT` clause. Doing so negates the benefit of using `allowLargeResults` , because the query output can no longer be computed in parallel.
+  - [Window functions](https://docs.cloud.google.com/bigquery/query-reference#windowfunctions) can return large query results only if used in conjunction with a `PARTITION BY` clause.
 
 ### Writing large results using legacy SQL
 
@@ -464,7 +464,7 @@ To write large result sets using legacy SQL:
 
 2.  Click **Compose new query** .
 
-3.  Enter a valid SQL query in the **Query editor** text area. Use the `  #legacySQL  ` prefix or be sure you have **Use Legacy SQL** checked in the query settings.
+3.  Enter a valid SQL query in the **Query editor** text area. Use the `#legacySQL` prefix or be sure you have **Use Legacy SQL** checked in the query settings.
 
 4.  Click **More** then select **Query settings** .
     
@@ -494,12 +494,12 @@ To write large result sets using legacy SQL:
 
 ### bq
 
-Use the `  --allow_large_results  ` flag with the `  --destination_table  ` flag to create a destination table to hold the large results set. Because the `  --allow_large_results  ` option only applies to legacy SQL, you must also specify the `  --use_legacy_sql=true  ` flag. To write the query results to a table that is not in your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` . Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+Use the `--allow_large_results` flag with the `--destination_table` flag to create a destination table to hold the large results set. Because the `--allow_large_results` option only applies to legacy SQL, you must also specify the `--use_legacy_sql=true` flag. To write the query results to a table that is not in your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` . Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 To control the write disposition for an existing destination table, specify one of the following optional flags:
 
-  - `  --append_table  ` : If the destination table exists, the query results are appended to it.
-  - `  --replace  ` : If the destination table exists, it is overwritten with the query results.
+  - `--append_table` : If the destination table exists, the query results are appended to it.
+  - `--replace` : If the destination table exists, it is overwritten with the query results.
 
 <!-- end list -->
 
@@ -510,7 +510,7 @@ To control the write disposition for an existing destination table, specify one 
 
 Replace the following:
 
-  - `  LOCATION  ` is the name of the location used to process the query. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` is the name of the location used to process the query. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - `  PROJECT_ID  ` is your project ID.
   - `  DATASET  ` is the name of the dataset that contains the table to which you are writing the query results.
   - `  TABLE  ` is the name of the table to which you're writing the query results.
@@ -518,9 +518,9 @@ Replace the following:
 
 Examples:
 
-**Note:** These examples query a public dataset. Because the dataset is stored in the `  US  ` multi-region location, your destination dataset must also be in the US. You cannot write public data query results to a table in another region.
+**Note:** These examples query a public dataset. Because the dataset is stored in the `US` multi-region location, your destination dataset must also be in the US. You cannot write public data query results to a table in another region.
 
-Enter the following command to write large query results to a destination table named `  mytable  ` in `  mydataset  ` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `  Already exists  ` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) . This query is used for example purposes only. The results set returned does not exceed the maximum response size.
+Enter the following command to write large query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) . This query is used for example purposes only. The results set returned does not exceed the maximum response size.
 
     bq query \
     --destination_table mydataset.mytable \
@@ -536,7 +536,7 @@ Enter the following command to write large query results to a destination table 
     ORDER BY
       number DESC"
 
-Enter the following command to use large query results to overwrite a destination table named `  mytable  ` in `  mydataset  ` . The dataset is in `  myotherproject  ` , not your default project. The command uses the `  --replace  ` flag to overwrite the destination table.
+Enter the following command to use large query results to overwrite a destination table named `mytable` in `mydataset` . The dataset is in `myotherproject` , not your default project. The command uses the `--replace` flag to overwrite the destination table.
 
     bq query \
     --destination_table mydataset.mytable \
@@ -553,7 +553,7 @@ Enter the following command to use large query results to overwrite a destinatio
     ORDER BY
       number DESC"
 
-Enter the following command to append large query results to a destination table named `  mytable  ` in `  mydataset  ` . The dataset is in `  myotherproject  ` , not your default project. The command uses the `  --append_table  ` flag to append the query results to the destination table.
+Enter the following command to append large query results to a destination table named `mytable` in `mydataset` . The dataset is in `myotherproject` , not your default project. The command uses the `--append_table` flag to append the query results to the destination table.
 
     bq query \
     --destination_table myotherproject:mydataset.mytable \
@@ -572,9 +572,9 @@ Enter the following command to append large query results to a destination table
 
 ### API
 
-To write large results to a destination table, call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configure a `  query  ` job, and set the `  allowLargeResults  ` property to `  true  ` . Specify the destination table using the `  destinationTable  ` property. To control the write disposition for an existing destination table, configure the `  writeDisposition  ` property.
+To write large results to a destination table, call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configure a `query` job, and set the `allowLargeResults` property to `true` . Specify the destination table using the `destinationTable` property. To control the write disposition for an existing destination table, configure the `writeDisposition` property.
 
-Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+Specify your location in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
 ### Go
 
@@ -638,7 +638,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Java
 
-To enable large results, set [allow large results](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration.Builder#com_google_cloud_bigquery_QueryJobConfiguration_Builder_setAllowLargeResults_java_lang_Boolean_) to `  true  ` and set the [destination table](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) to the desired [TableId](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) in a [QueryJobConfiguration](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration) .
+To enable large results, set [allow large results](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration.Builder#com_google_cloud_bigquery_QueryJobConfiguration_Builder_setAllowLargeResults_java_lang_Boolean_) to `true` and set the [destination table](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) to the desired [TableId](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) in a [QueryJobConfiguration](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration) .
 
 Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
@@ -783,7 +783,7 @@ Downloading and saving query results are subject to the following limitations:
   - You can download query results locally only in CSV or newline-delimited JSON format.
   - You cannot save query results containing nested and repeated data to Google Sheets.
   - To save query results to Google Drive using the Google Cloud console, the results set must be 1 GB or less. If your results are larger, you can save them to a table instead.
-  - When saving query results to a local CSV file, the maximum download size is 10 MB. The maximum download size is based on the size of each row returned in the [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method response, and can vary based on the schema of the query results. As a result, the size of the downloaded CSV file can vary, and might be less than the maximum download size limit.
+  - When saving query results to a local CSV file, the maximum download size is 10 MB. The maximum download size is based on the size of each row returned in the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method response, and can vary based on the schema of the query results. As a result, the size of the downloaded CSV file can vary, and might be less than the maximum download size limit.
   - You can save query results to Google Drive only in CSV or newline-delimited JSON format.
 
 ## What's next

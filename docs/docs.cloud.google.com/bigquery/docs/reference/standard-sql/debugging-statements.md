@@ -1,22 +1,22 @@
 GoogleSQL for BigQuery supports the following debugging statements.
 
-## `     ASSERT    `
+## `ASSERT`
 
     ASSERT expression [AS description]
 
 **Description**
 
-Evaluates `  expression  ` .
+Evaluates `expression` .
 
-If `  expression  ` evaluates to `  TRUE  ` , the statement returns successfully without any result.
+If `expression` evaluates to `TRUE` , the statement returns successfully without any result.
 
-If `  expression  ` evaluates to `  FALSE  ` or `  NULL  ` , the statement generates an error. If `  AS description  ` is present, `  description  ` will appear in the error message.
+If `expression` evaluates to `FALSE` or `NULL` , the statement generates an error. If `AS description` is present, `description` will appear in the error message.
 
-`  expression  ` must evaluate to a `  BOOL  ` .
+`expression` must evaluate to a `BOOL` .
 
-`  description  ` must be a `  STRING  ` literal.
+`description` must be a `STRING` literal.
 
-An `  ASSERT  ` statement is billed in the same way as the query `  SELECT expression  ` , except that the result of an `  ASSERT  ` statement is never cached.
+An `ASSERT` statement is billed in the same way as the query `SELECT expression` , except that the result of an `ASSERT` statement is never cached.
 
 **Examples**
 

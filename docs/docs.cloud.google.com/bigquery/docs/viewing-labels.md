@@ -5,12 +5,12 @@ This page explains how to view labels on your BigQuery resources.
 You can view labels by:
 
   - Using the Google Cloud console
-  - Querying `  INFORMATION_SCHEMA  ` views
-  - Using the bq command-line tool's `  bq show  ` command
-  - Calling the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) or [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API methods
+  - Querying `INFORMATION_SCHEMA` views
+  - Using the bq command-line tool's `bq show` command
+  - Calling the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) or [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API methods
   - Using the client libraries
 
-Because views are treated like table resources, you use the `  tables.get  ` method to get label information for both views and tables.
+Because views are treated like table resources, you use the `tables.get` method to get label information for both views and tables.
 
 ## Before you begin
 
@@ -22,40 +22,40 @@ The permissions required for viewing labels depend on the types of resources you
 
 #### Permissions to view dataset details
 
-To view dataset details, you need the `  bigquery.datasets.get  ` IAM permission.
+To view dataset details, you need the `bigquery.datasets.get` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to view dataset details:
 
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.user`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can view details of the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can view details of the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 #### Permissions to view table or view details
 
-To view table or view details, you need the `  bigquery.tables.get  ` IAM permission.
+To view table or view details, you need the `bigquery.tables.get` IAM permission.
 
-All predefined IAM roles include the permissions that you need in order to view table or view details **except for** `  roles/bigquery.user  ` and `  roles/bigquery.jobUser  ` .
+All predefined IAM roles include the permissions that you need in order to view table or view details **except for** `roles/bigquery.user` and `roles/bigquery.jobUser` .
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can view details of the tables and views in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can view details of the tables and views in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 #### Permissions to view job details
 
-To view job details, you need the `  bigquery.jobs.get  ` IAM permission.
+To view job details, you need the `bigquery.jobs.get` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to view job details:
 
-  - `  roles/bigquery.admin  ` (lets you view details of all the jobs in the project)
-  - `  roles/bigquery.user  ` (lets you view details of your jobs)
-  - `  roles/bigquery.jobUser  ` (lets you view details of your jobs)
+  - `roles/bigquery.admin` (lets you view details of all the jobs in the project)
+  - `roles/bigquery.user` (lets you view details of your jobs)
+  - `roles/bigquery.jobUser` (lets you view details of your jobs)
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -71,7 +71,7 @@ To view a resource's labels, select one of the following options:
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.SCHEMATA_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets#schemata_options_view) to see the labels on a dataset, or the [`  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) to see the labels on a table. For example, the following SQL query returns the labels on the dataset named `  mydataset  ` :
+Query the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets#schemata_options_view) to see the labels on a dataset, or the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) to see the labels on a table. For example, the following SQL query returns the labels on the dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -95,15 +95,15 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the `  bq show  ` command with the resource ID. The `  --format  ` flag can be used to control the output. If the resource is in a project other than your default project, add the project ID in the following format: `  [PROJECT_ID]:[DATASET]  ` . For readability, the output is controlled by setting the `  --format  ` flag to `  pretty  ` .
+Use the `bq show` command with the resource ID. The `--format` flag can be used to control the output. If the resource is in a project other than your default project, add the project ID in the following format: `[PROJECT_ID]:[DATASET]` . For readability, the output is controlled by setting the `--format` flag to `pretty` .
 
     bq show --format=pretty [RESOURCE_ID]
 
-Where `  [RESOURCE_ID]  ` is a valid dataset, table, view, or job ID.
+Where `[RESOURCE_ID]` is a valid dataset, table, view, or job ID.
 
 Examples:
 
-Enter the following command to display labels for `  mydataset  ` in your default project.
+Enter the following command to display labels for `mydataset` in your default project.
 
     bq show --format=pretty mydataset
 
@@ -120,7 +120,7 @@ The output looks like the following:
     |                 |   projectReaders                                       |                     |
     +-----------------+--------------------------------------------------------+---------------------+
 
-Enter the following command to display labels for `  mydataset.mytable  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to display labels for `mydataset.mytable` . `mydataset` is in `myotherproject` , not your default project.
 
     bq show --format=pretty myotherproject:mydataset.mytable
 
@@ -136,11 +136,11 @@ The output looks like the following for a clustered table:
 
 ### API
 
-Call the [`  datasets.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method or the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method. The response includes all labels associated with that resource.
+Call the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method or the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method. The response includes all labels associated with that resource.
 
-Alternatively, you can use [`  datasets.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list) to view the labels for multiple datasets or [`  tables.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) to view the labels for multiple tables and views.
+Alternatively, you can use [`datasets.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list) to view the labels for multiple datasets or [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) to view the labels for multiple tables and views.
 
-Because views are treated like table resources, you use the `  tables.get  ` and `  tables.list  ` methods to view label information for both views and tables.
+Because views are treated like table resources, you use the `tables.get` and `tables.list` methods to view label information for both views and tables.
 
 ### Go
 
@@ -416,7 +416,7 @@ To see the labels on a job, select one of the following options:
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.JOB_BY_*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see the labels on a job. For example, the following SQL query returns the query text and labels on the jobs submitted by the current user in the current project:
+Query the [`INFORMATION_SCHEMA.JOB_BY_*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see the labels on a job. For example, the following SQL query returns the query text and labels on the jobs submitted by the current user in the current project:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -438,7 +438,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-To see the labels for a query job using the bq command-line tool, enter the `  bq show -j  ` command with the query job's job ID. The `  --format  ` flag can be used to control the output. For example, if your query job has job ID `  bqjob_r1234d57f78901_000023746d4q12_1  ` , enter the following command:
+To see the labels for a query job using the bq command-line tool, enter the `bq show -j` command with the query job's job ID. The `--format` flag can be used to control the output. For example, if your query job has job ID `bqjob_r1234d57f78901_000023746d4q12_1` , enter the following command:
 
     bq show -j --format=pretty bqjob_r1234d57f78901_000023746d4q12_1
 
@@ -453,7 +453,7 @@ The output should look like the following:
 
 ### API
 
-Call the [`  jobs.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) method. The response includes all labels associated with that resource.
+Call the [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) method. The response includes all labels associated with that resource.
 
 ## View reservation labels
 
@@ -473,7 +473,7 @@ To see the labels on a reservation, select one of the following options:
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.RESERVATIONS  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) to see the labels on a reservation. For example, the following SQL query returns the reservation name and labels:
+Query the [`INFORMATION_SCHEMA.RESERVATIONS` views](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) to see the labels on a reservation. For example, the following SQL query returns the reservation name and labels:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -500,7 +500,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command to view the reservation labels.
+Use the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command to view the reservation labels.
 
 ``` notranslate
 bq show --format=prettyjson --reservation=true --location=LOCATION RESERVATION_NAME

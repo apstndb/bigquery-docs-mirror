@@ -2,19 +2,19 @@ GoogleSQL for BigQuery supports statistical aggregate functions. To learn about 
 
 ## Function list
 
-| Name                                                                                                                                             | Summary                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| [`         CORR        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)               | Computes the Pearson coefficient of correlation of a set of number pairs. |
-| [`         COVAR_POP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)     | Computes the population covariance of a set of number pairs.              |
-| [`         COVAR_SAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)   | Computes the sample covariance of a set of number pairs.                  |
-| [`         STDDEV        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev)           | An alias of the `        STDDEV_SAMP       ` function.                    |
-| [`         STDDEV_POP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)   | Computes the population (biased) standard deviation of the values.        |
-| [`         STDDEV_SAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp) | Computes the sample (unbiased) standard deviation of the values.          |
-| [`         VAR_POP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)         | Computes the population (biased) variance of the values.                  |
-| [`         VAR_SAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp)       | Computes the sample (unbiased) variance of the values.                    |
-| [`         VARIANCE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance)       | An alias of `        VAR_SAMP       ` .                                   |
+| Name                                                                                                                            | Summary                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [`CORR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)               | Computes the Pearson coefficient of correlation of a set of number pairs. |
+| [`COVAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)     | Computes the population covariance of a set of number pairs.              |
+| [`COVAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)   | Computes the sample covariance of a set of number pairs.                  |
+| [`STDDEV`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev)           | An alias of the `STDDEV_SAMP` function.                                   |
+| [`STDDEV_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)   | Computes the population (biased) standard deviation of the values.        |
+| [`STDDEV_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp) | Computes the sample (unbiased) standard deviation of the values.          |
+| [`VAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)         | Computes the population (biased) variance of the values.                  |
+| [`VAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp)       | Computes the sample (unbiased) variance of the values.                    |
+| [`VARIANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance)       | An alias of `VAR_SAMP` .                                                  |
 
-## `     CORR    `
+## `CORR`
 
     CORR(
       X1, X2
@@ -32,26 +32,26 @@ GoogleSQL for BigQuery supports statistical aggregate functions. To learn about 
 
 **Description**
 
-Returns the [Pearson coefficient](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient) of correlation of a set of number pairs. For each number pair, the first number is the dependent variable and the second number is the independent variable. The return result is between `  -1  ` and `  1  ` . A result of `  0  ` indicates no correlation.
+Returns the [Pearson coefficient](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient) of correlation of a set of number pairs. For each number pair, the first number is the dependent variable and the second number is the independent variable. The return result is between `-1` and `1` . A result of `0` indicates no correlation.
 
-All numeric types are supported. If the input is `  NUMERIC  ` or `  BIGNUMERIC  ` then the internal aggregation is stable with the final output converted to a `  FLOAT64  ` . Otherwise the input is converted to a `  FLOAT64  ` before aggregation, resulting in a potentially unstable result.
+All numeric types are supported. If the input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is stable with the final output converted to a `FLOAT64` . Otherwise the input is converted to a `FLOAT64` before aggregation, resulting in a potentially unstable result.
 
-This function ignores any input pairs that contain one or more `  NULL  ` values. If there are fewer than two input pairs without `  NULL  ` values, this function returns `  NULL  ` .
+This function ignores any input pairs that contain one or more `NULL` values. If there are fewer than two input pairs without `NULL` values, this function returns `NULL` .
 
-`  NaN  ` is produced if:
+`NaN` is produced if:
 
-  - Any input value is `  NaN  `
+  - Any input value is `NaN`
   - Any input value is positive infinity or negative infinity.
-  - The variance of `  X1  ` or `  X2  ` is `  0  ` .
-  - The covariance of `  X1  ` and `  X2  ` is `  0  ` .
+  - The variance of `X1` or `X2` is `0` .
+  - The covariance of `X1` and `X2` is `0` .
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
@@ -131,7 +131,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | NaN     |
      +---------*/
 
-## `     COVAR_POP    `
+## `COVAR_POP`
 
     COVAR_POP(
       X1, X2
@@ -149,26 +149,26 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Description**
 
-Returns the population [covariance](https://en.wikipedia.org/wiki/Covariance) of a set of number pairs. The first number is the dependent variable; the second number is the independent variable. The return result is between `  -Inf  ` and `  +Inf  ` .
+Returns the population [covariance](https://en.wikipedia.org/wiki/Covariance) of a set of number pairs. The first number is the dependent variable; the second number is the independent variable. The return result is between `-Inf` and `+Inf` .
 
-All numeric types are supported. If the input is `  NUMERIC  ` or `  BIGNUMERIC  ` then the internal aggregation is stable with the final output converted to a `  FLOAT64  ` . Otherwise the input is converted to a `  FLOAT64  ` before aggregation, resulting in a potentially unstable result.
+All numeric types are supported. If the input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is stable with the final output converted to a `FLOAT64` . Otherwise the input is converted to a `FLOAT64` before aggregation, resulting in a potentially unstable result.
 
-This function ignores any input pairs that contain one or more `  NULL  ` values. If there is no input pair without `  NULL  ` values, this function returns `  NULL  ` . If there is exactly one input pair without `  NULL  ` values, this function returns `  0  ` .
+This function ignores any input pairs that contain one or more `NULL` values. If there is no input pair without `NULL` values, this function returns `NULL` . If there is exactly one input pair without `NULL` values, this function returns `0` .
 
-`  NaN  ` is produced if:
+`NaN` is produced if:
 
-  - Any input value is `  NaN  `
+  - Any input value is `NaN`
   - Any input value is positive infinity or negative infinity.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`AGGREGATION_THRESHOLD` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
@@ -238,7 +238,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | NaN     |
      +---------*/
 
-## `     COVAR_SAMP    `
+## `COVAR_SAMP`
 
     COVAR_SAMP(
       X1, X2
@@ -256,26 +256,26 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Description**
 
-Returns the sample [covariance](https://en.wikipedia.org/wiki/Covariance) of a set of number pairs. The first number is the dependent variable; the second number is the independent variable. The return result is between `  -Inf  ` and `  +Inf  ` .
+Returns the sample [covariance](https://en.wikipedia.org/wiki/Covariance) of a set of number pairs. The first number is the dependent variable; the second number is the independent variable. The return result is between `-Inf` and `+Inf` .
 
-All numeric types are supported. If the input is `  NUMERIC  ` or `  BIGNUMERIC  ` then the internal aggregation is stable with the final output converted to a `  FLOAT64  ` . Otherwise the input is converted to a `  FLOAT64  ` before aggregation, resulting in a potentially unstable result.
+All numeric types are supported. If the input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is stable with the final output converted to a `FLOAT64` . Otherwise the input is converted to a `FLOAT64` before aggregation, resulting in a potentially unstable result.
 
-This function ignores any input pairs that contain one or more `  NULL  ` values. If there are fewer than two input pairs without `  NULL  ` values, this function returns `  NULL  ` .
+This function ignores any input pairs that contain one or more `NULL` values. If there are fewer than two input pairs without `NULL` values, this function returns `NULL` .
 
-`  NaN  ` is produced if:
+`NaN` is produced if:
 
-  - Any input value is `  NaN  `
+  - Any input value is `NaN`
   - Any input value is positive infinity or negative infinity.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`AGGREGATION_THRESHOLD` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
@@ -345,7 +345,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
      | NaN     |
      +---------*/
 
-## `     STDDEV    `
+## `STDDEV`
 
     STDDEV(
       [ DISTINCT ]
@@ -366,7 +366,7 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 An alias of [STDDEV\_SAMP](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp) .
 
-## `     STDDEV_POP    `
+## `STDDEV_POP`
 
     STDDEV_POP(
       [ DISTINCT ]
@@ -385,26 +385,26 @@ An alias of [STDDEV\_SAMP](https://docs.cloud.google.com/bigquery/docs/reference
 
 **Description**
 
-Returns the population (biased) standard deviation of the values. The return result is between `  0  ` and `  +Inf  ` .
+Returns the population (biased) standard deviation of the values. The return result is between `0` and `+Inf` .
 
-All numeric types are supported. If the input is `  NUMERIC  ` or `  BIGNUMERIC  ` then the internal aggregation is stable with the final output converted to a `  FLOAT64  ` . Otherwise the input is converted to a `  FLOAT64  ` before aggregation, resulting in a potentially unstable result.
+All numeric types are supported. If the input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is stable with the final output converted to a `FLOAT64` . Otherwise the input is converted to a `FLOAT64` before aggregation, resulting in a potentially unstable result.
 
-This function ignores any `  NULL  ` inputs. If all inputs are ignored, this function returns `  NULL  ` . If this function receives a single non- `  NULL  ` input, it returns `  0  ` .
+This function ignores any `NULL` inputs. If all inputs are ignored, this function returns `NULL` . If this function receives a single non- `NULL` input, it returns `0` .
 
-`  NaN  ` is produced if:
+`NaN` is produced if:
 
-  - Any input value is `  NaN  `
+  - Any input value is `NaN`
   - Any input value is positive infinity or negative infinity.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`AGGREGATION_THRESHOLD` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `OVER` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
@@ -448,7 +448,7 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
      | NaN     |
      +---------*/
 
-## `     STDDEV_SAMP    `
+## `STDDEV_SAMP`
 
     STDDEV_SAMP(
       [ DISTINCT ]
@@ -467,26 +467,26 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
 
 **Description**
 
-Returns the sample (unbiased) standard deviation of the values. The return result is between `  0  ` and `  +Inf  ` .
+Returns the sample (unbiased) standard deviation of the values. The return result is between `0` and `+Inf` .
 
-All numeric types are supported. If the input is `  NUMERIC  ` or `  BIGNUMERIC  ` then the internal aggregation is stable with the final output converted to a `  FLOAT64  ` . Otherwise the input is converted to a `  FLOAT64  ` before aggregation, resulting in a potentially unstable result.
+All numeric types are supported. If the input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is stable with the final output converted to a `FLOAT64` . Otherwise the input is converted to a `FLOAT64` before aggregation, resulting in a potentially unstable result.
 
-This function ignores any `  NULL  ` inputs. If there are fewer than two non- `  NULL  ` inputs, this function returns `  NULL  ` .
+This function ignores any `NULL` inputs. If there are fewer than two non- `NULL` inputs, this function returns `NULL` .
 
-`  NaN  ` is produced if:
+`NaN` is produced if:
 
-  - Any input value is `  NaN  `
+  - Any input value is `NaN`
   - Any input value is positive infinity or negative infinity.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`AGGREGATION_THRESHOLD` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `OVER` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
@@ -530,7 +530,7 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
      | NaN     |
      +---------*/
 
-## `     VAR_POP    `
+## `VAR_POP`
 
     VAR_POP(
       [ DISTINCT ]
@@ -549,22 +549,22 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
 
 **Description**
 
-Returns the population (biased) variance of the values. The return result is between `  0  ` and `  +Inf  ` .
+Returns the population (biased) variance of the values. The return result is between `0` and `+Inf` .
 
-All numeric types are supported. If the input is `  NUMERIC  ` or `  BIGNUMERIC  ` then the internal aggregation is stable with the final output converted to a `  FLOAT64  ` . Otherwise the input is converted to a `  FLOAT64  ` before aggregation, resulting in a potentially unstable result.
+All numeric types are supported. If the input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is stable with the final output converted to a `FLOAT64` . Otherwise the input is converted to a `FLOAT64` before aggregation, resulting in a potentially unstable result.
 
-This function ignores any `  NULL  ` inputs. If all inputs are ignored, this function returns `  NULL  ` . If this function receives a single non- `  NULL  ` input, it returns `  0  ` .
+This function ignores any `NULL` inputs. If all inputs are ignored, this function returns `NULL` . If this function receives a single non- `NULL` input, it returns `0` .
 
-`  NaN  ` is produced if:
+`NaN` is produced if:
 
-  - Any input value is `  NaN  `
+  - Any input value is `NaN`
   - Any input value is positive infinity or negative infinity.
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `OVER` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
@@ -608,7 +608,7 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
      | NaN     |
      +---------*/
 
-## `     VAR_SAMP    `
+## `VAR_SAMP`
 
     VAR_SAMP(
       [ DISTINCT ]
@@ -627,26 +627,26 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
 
 **Description**
 
-Returns the sample (unbiased) variance of the values. The return result is between `  0  ` and `  +Inf  ` .
+Returns the sample (unbiased) variance of the values. The return result is between `0` and `+Inf` .
 
-All numeric types are supported. If the input is `  NUMERIC  ` or `  BIGNUMERIC  ` then the internal aggregation is stable with the final output converted to a `  FLOAT64  ` . Otherwise the input is converted to a `  FLOAT64  ` before aggregation, resulting in a potentially unstable result.
+All numeric types are supported. If the input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is stable with the final output converted to a `FLOAT64` . Otherwise the input is converted to a `FLOAT64` before aggregation, resulting in a potentially unstable result.
 
-This function ignores any `  NULL  ` inputs. If there are fewer than two non- `  NULL  ` inputs, this function returns `  NULL  ` .
+This function ignores any `NULL` inputs. If there are fewer than two non- `NULL` inputs, this function returns `NULL` .
 
-`  NaN  ` is produced if:
+`NaN` is produced if:
 
-  - Any input value is `  NaN  `
+  - Any input value is `NaN`
   - Any input value is positive infinity or negative infinity.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`AGGREGATION_THRESHOLD` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `OVER` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
-`  FLOAT64  `
+`FLOAT64`
 
 **Examples**
 
@@ -690,7 +690,7 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
      | NaN     |
      +---------*/
 
-## `     VARIANCE    `
+## `VARIANCE`
 
     VARIANCE(
       [ DISTINCT ]

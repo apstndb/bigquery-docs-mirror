@@ -21,58 +21,44 @@ Represents the label-policy binding.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
-  &quot;dataPolicyType&quot;: enum (DataPolicyType),
-  &quot;dataPolicyId&quot;: string,
-
-  // Union field matching_label can be only one of the following:
-  &quot;policyTag&quot;: string
-  // End of list of possible types for union field matching_label.
-
-  // Union field policy can be only one of the following:
-  &quot;dataMaskingPolicy&quot;: {
-    object (DataMaskingPolicy)
-  }
-  // End of list of possible types for union field policy.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;dataPolicyId&quot;: string,// Union field matching_label can be only one of the following:&quot;policyTag&quot;: string// End of list of possible types for union field matching_label.// Union field policy can be only one of the following:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of list of possible types for union field policy.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Output only. Resource name of this data policy, in the format of `  projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}  ` .
+Output only. Resource name of this data policy, in the format of `projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}` .
 
-`  dataPolicyType  `
+`dataPolicyType`
 
-`  enum ( DataPolicyType  ` )
+` enum ( DataPolicyType  ` )
 
 Required. Data policy type. Type of data policy.
 
-`  dataPolicyId  `
+`dataPolicyId`
 
-`  string  `
+`string`
 
 User-assigned (human readable) ID of the data policy that needs to be unique within a project. Used as {dataPolicyId} in part of the resource name.
 
-Union field `  matching_label  ` . Label that is bound to this data policy. `  matching_label  ` can be only one of the following:
+Union field `matching_label` . Label that is bound to this data policy. `matching_label` can be only one of the following:
 
-`  policyTag  `
+`policyTag`
 
-`  string  `
+`string`
 
-Policy tag resource name, in the format of `  projects/{projectNumber}/locations/{locationId}/taxonomies/{taxonomyId}/policyTags/{policyTag_id}  ` .
+Policy tag resource name, in the format of `projects/{projectNumber}/locations/{locationId}/taxonomies/{taxonomyId}/policyTags/{policyTag_id}` .
 
-Union field `  policy  ` . The policy that is bound to this data policy. `  policy  ` can be only one of the following:
+Union field `policy` . The policy that is bound to this data policy. `policy` can be only one of the following:
 
-`  dataMaskingPolicy  `
+`dataMaskingPolicy`
 
-`  object ( DataMaskingPolicy  ` )
+` object ( DataMaskingPolicy  ` )
 
 The data masking policy that specifies the data masking rule to use.
 
@@ -91,23 +77,18 @@ The data masking policy that is used to specify data masking rule.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field masking_expression can be only one of the following:
-  &quot;predefinedExpression&quot;: enum (PredefinedExpression)
-  // End of list of possible types for union field masking_expression.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field masking_expression can be only one of the following:&quot;predefinedExpression&quot;: enum (PredefinedExpression)// End of list of possible types for union field masking_expression.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  masking_expression  ` . A masking expression to bind to the data masking rule. `  masking_expression  ` can be only one of the following:
+Union field `masking_expression` . A masking expression to bind to the data masking rule. `masking_expression` can be only one of the following:
 
-`  predefinedExpression  `
+`predefinedExpression`
 
-`  enum ( PredefinedExpression  ` )
+` enum ( PredefinedExpression  ` )
 
 A predefined masking expression.
 
@@ -117,19 +98,19 @@ The available masking rules. Learn more here: <https://cloud.google.com/bigquery
 
 Enums
 
-`  PREDEFINED_EXPRESSION_UNSPECIFIED  `
+`PREDEFINED_EXPRESSION_UNSPECIFIED`
 
 Default, unspecified predefined expression. No masking will take place since no expression is specified.
 
-`  SHA256  `
+`SHA256`
 
 Masking expression to replace data with SHA-256 hash.
 
-`  ALWAYS_NULL  `
+`ALWAYS_NULL`
 
 Masking expression to replace data with NULLs.
 
-`  DEFAULT_MASKING_VALUE  `
+`DEFAULT_MASKING_VALUE`
 
 Masking expression to replace data with their default masking values. The default masking values for each type listed as below:
 
@@ -155,48 +136,48 @@ A list of supported data policy types.
 
 Enums
 
-`  DATA_POLICY_TYPE_UNSPECIFIED  `
+`DATA_POLICY_TYPE_UNSPECIFIED`
 
 Default value for the data policy type. This should not be used.
 
-`  COLUMN_LEVEL_SECURITY_POLICY  `
+`COLUMN_LEVEL_SECURITY_POLICY`
 
 Used to create a data policy for column-level security, without data masking.
 
-`  DATA_MASKING_POLICY  `
+`DATA_MASKING_POLICY`
 
 Used to create a data policy for data masking.
 
 ## Methods
 
-### `             create           `
+### `            create           `
 
-Creates a new data policy under a project with the given `  dataPolicyId  ` (used as the display name), policy tag, and data policy type.
+Creates a new data policy under a project with the given `dataPolicyId` (used as the display name), policy tag, and data policy type.
 
-### `             delete           `
+### `            delete           `
 
 Deletes the data policy specified by its resource name.
 
-### `             get           `
+### `            get           `
 
 Gets the data policy specified by its resource name.
 
-### `             getIamPolicy           `
+### `            getIamPolicy           `
 
 Gets the IAM policy for the specified data policy.
 
-### `             list           `
+### `            list           `
 
 List all of the data policies in the specified parent project.
 
-### `             patch           `
+### `            patch           `
 
 Updates the metadata for an existing data policy.
 
-### `             setIamPolicy           `
+### `            setIamPolicy           `
 
 Sets the IAM policy for the specified data policy.
 
-### `             testIamPermissions           `
+### `            testIamPermissions           `
 
 Returns the caller's permission on the specified data policy resource.

@@ -21,7 +21,7 @@ When you use the Simba ODBC and JDBC drivers for BigQuery, you have the option t
 
 ### Required roles for the High-Throughput API
 
-To get the permissions that you need to use the High-Throughput API, ask your administrator to grant you the [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` ) IAM role on your BigQuery project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to use the High-Throughput API, ask your administrator to grant you the [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` ) IAM role on your BigQuery project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to use the High-Throughput API. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -29,11 +29,11 @@ This predefined role contains the permissions required to use the High-Throughpu
 
 The following permissions are required to use the High-Throughput API:
 
-  - `  resourcemanager.projects.get  `
-  - `  resourcemanager.projects.list  `
-  - `  bigquery.readsessions.create  `
-  - `  bigquery.readsessions.getData  `
-  - `  bigquery.readsessions.update  `
+  - `resourcemanager.projects.get`
+  - `resourcemanager.projects.list`
+  - `bigquery.readsessions.create`
+  - `bigquery.readsessions.getData`
+  - `bigquery.readsessions.update`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -41,10 +41,10 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 1.  Download the 3.1.6.3037 version of the driver for your operating system:
     
-      - [Windows 32-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.1.6.3037.msi) ( `  .msi  ` file)
-      - [Windows 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.1.6.3037.msi) ( `  .msi  ` file)
-      - [Linux 32-bit and 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.1.6.3037-Linux.tar.gz) ( `  .tar.gz  ` file)
-      - [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.1.6.3037.dmg) ( `  .dmg  ` file)
+      - [Windows 32-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.1.6.3037.msi) ( `.msi` file)
+      - [Windows 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.1.6.3037.msi) ( `.msi` file)
+      - [Linux 32-bit and 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.1.6.3037-Linux.tar.gz) ( `.tar.gz` file)
+      - [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.1.6.3037.dmg) ( `.dmg` file)
 
 2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-3.1.6.3037.pdf) .
 

@@ -54,7 +54,7 @@ The following query sample uses KMS SQL functions to decrypt non-deterministic c
 
 #### Use-case example
 
-Assume an implementation where zip codes are considered sensitive information. Zip code data can be inserted into the BigQuery table using the AEAD encrypt function, thereby encrypting the `  Zipcode  ` column. In this example, we use the `  AEAD.ENCRYPT  ` function with the wrapped keyset management function. The `  KEYS.KEYSET_CHAIN  ` function decrypts the digital encryption key with the KEK, and the `  AEAD.ENCRYPT  ` function passes the information to KMS.
+Assume an implementation where zip codes are considered sensitive information. Zip code data can be inserted into the BigQuery table using the AEAD encrypt function, thereby encrypting the `Zipcode` column. In this example, we use the `AEAD.ENCRYPT` function with the wrapped keyset management function. The `KEYS.KEYSET_CHAIN` function decrypts the digital encryption key with the KEK, and the `AEAD.ENCRYPT` function passes the information to KMS.
 
 The keyset chain for encryption and decryption ensures that the data encryption key (DEK) is encrypted or wrapped with a KEK and passed with that KEK. The wrapped DEK is decrypted or unwrapped within the SQL function, and then used to encrypt or decrypt data.
 
@@ -85,7 +85,7 @@ The supported syntax for using non-deterministic functions includes the followin
       ciphertext,
       additional_authenticated_data)
 
-See [`  AEAD.DECRYPT_BYTES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_bytes) , [`  AEAD.ENCRYPT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeadencrypt) , [`  AEAD.DECRYPT_STRING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string) , and [`  KEYS.KEYSET_CHAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) function syntax.
+See [`AEAD.DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_bytes) , [`AEAD.ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeadencrypt) , [`AEAD.DECRYPT_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string) , and [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) function syntax.
 
 ### Deterministic function syntax
 
@@ -106,7 +106,7 @@ The supported syntax for using deterministic functions includes the following:
       ciphertext,
       additional_data)
 
-See [`  DETERMINISTIC_DECRYPT_BYTES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_bytes) , [`  DETERMINISTIC_ENCRYPT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_encrypt) , [`  DETERMINISTIC_DECRYPT_STRING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_string) , and [`  KEYS.KEYSET_CHAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) function syntax.
+See [`DETERMINISTIC_DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_bytes) , [`DETERMINISTIC_ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_encrypt) , [`DETERMINISTIC_DECRYPT_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_string) , and [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) function syntax.
 
 ## Roles and permissions
 
@@ -118,9 +118,9 @@ Encryption with Cloud KMS has the following limitations and restrictions:
 
   - The Cloud KMS keys are restricted to the same [region or multi-region](https://docs.cloud.google.com/kms/docs/locations) as the query. Using global Cloud KMS keys is disallowed for reliability reasons.
 
-  - It is not possible to rotate a wrapped keyset using the `  KEYS.ROTATE_KEYSET  ` function.
+  - It is not possible to rotate a wrapped keyset using the `KEYS.ROTATE_KEYSET` function.
 
-  - The constant parameters in a BigQuery query are visible to users in the [diagnostic query plan](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) . This factor can affect the `  kms_resource_name  ` and `  first_level_keyset  ` parameters of the `  KEYSET_CHAIN  ` function. Keys are never exposed in plaintext, and permission to the Cloud KMS key is required to decrypt the wrapped keyset. This approach ensures that keys are not exposed through the diagnostic query plan unless the user has permission to decrypt the keyset.
+  - The constant parameters in a BigQuery query are visible to users in the [diagnostic query plan](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) . This factor can affect the `kms_resource_name` and `first_level_keyset` parameters of the `KEYSET_CHAIN` function. Keys are never exposed in plaintext, and permission to the Cloud KMS key is required to decrypt the wrapped keyset. This approach ensures that keys are not exposed through the diagnostic query plan unless the user has permission to decrypt the keyset.
 
   - Column-level encryption has the following limitations when used with type-based security classifications:
     
@@ -146,19 +146,19 @@ To work with Cloud KMS keys, keysets, encrypted tables, deterministic, and non-d
 
 Take note of the following concepts, as they are referenced in the next sections:
 
-  - `  PROJECT_ID  ` : The name of the Google Cloud project.
+  - `PROJECT_ID` : The name of the Google Cloud project.
 
-  - `  DATASET_NAME  ` : The name of the BigQuery dataset.
+  - `DATASET_NAME` : The name of the BigQuery dataset.
 
-  - `  LOCATION_ID  ` : The location of the BigQuery dataset.
+  - `LOCATION_ID` : The location of the BigQuery dataset.
 
-  - `  TABLE_NAME  ` : The name of the BigQuery table.
+  - `TABLE_NAME` : The name of the BigQuery table.
 
-  - `  KEY_RING_ID  ` : The name of the Cloud KMS key ring.
+  - `KEY_RING_ID` : The name of the Cloud KMS key ring.
 
-  - `  KEY_ID  ` : The name of the Cloud KMS key.
+  - `KEY_ID` : The name of the Cloud KMS key.
 
-  - `  KMS_KEY  ` : Cloud KMS key (KEK) in this format:
+  - `KMS_KEY` : Cloud KMS key (KEK) in this format:
     
     ``` notranslate
     'gcp-kms://projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID'
@@ -168,21 +168,21 @@ Take note of the following concepts, as they are referenced in the next sections
     
         'gcp-kms://projects/myProject/locations/us/keyRings/myKeyRing/cryptoKeys/myKeyName'
 
-  - `  KMS_KEY_SHORT  ` : Similar to `  KMS_KEY  ` but in this format:
+  - `KMS_KEY_SHORT` : Similar to `KMS_KEY` but in this format:
     
     ``` notranslate
     projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID
     ```
 
-  - `  KEYSET_DECODED  ` : A decoded keyset as a `  BYTES  ` sequence. The output looks similar to that for a decoded wrapped keyset.
+  - `KEYSET_DECODED` : A decoded keyset as a `BYTES` sequence. The output looks similar to that for a decoded wrapped keyset.
     
     Although keyset functions return keysets as bytes, the user output is displayed as an encoded string. To convert an encoded keyset to a decoded keyset, see [Decode a Cloud KMS keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#decode-wrapped-keyset)
 
-  - `  KEYSET_ENCODED  ` : An encoded keyset as a `  STRING  ` . The output looks similar to that for an encoded wrapped keyset.
+  - `KEYSET_ENCODED` : An encoded keyset as a `STRING` . The output looks similar to that for an encoded wrapped keyset.
     
     To convert an encoded keyset to a decoded keyset, see [Decode a Cloud KMS keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#decode-wrapped-keyset)
 
-  - `  WRAPPED_KEYSET_DECODED  ` : A decoded wrapped keyset as a `  BYTES  ` sequence. Here is an example of what the output for this looks like:
+  - `WRAPPED_KEYSET_DECODED` : A decoded wrapped keyset as a `BYTES` sequence. Here is an example of what the output for this looks like:
     
         b'\x0a$\x00\xa6\xee\x12Y\x8d|l"\xf7\xfa\xc6\xeafM\xdeefy\xe9\x7f\xf2z\xb3M\
         xf6"\xd0\xe0Le\xa8\x8e\x0fR\xed\x12\xb7\x01\x00\xf0\xa80\xbd\xc1\x07Z\\
@@ -190,7 +190,7 @@ Take note of the following concepts, as they are referenced in the next sections
     
     Although wrapped keyset functions return wrapped keysets as bytes, the user output is displayed as an encoded string. To convert an encoded wrapped keyset to a decoded wrapped keyset, see [Decode a Cloud KMS keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#decode-wrapped-keyset)
 
-  - `  WRAPPED_KEYSET_ENCODED  ` : An encoded wrapped keyset as a `  STRING  ` . Here is an example of what the output for this looks like:
+  - `WRAPPED_KEYSET_ENCODED` : An encoded wrapped keyset as a `STRING` . Here is an example of what the output for this looks like:
     
         'CiQApu4SWTozQ7lNwITxpEvGlo5sT2rv1tyuSv3UAMtoTq/lhDwStwEA8KgwvX7CpVVzhWWMkRw
         WZNr3pf8uBIlzHeunCy8ZsQ6CofQYFpiBRBB6k/QqATbiFV+3opnDk/6dBL/S8OO1WoDC+DdD9
@@ -208,13 +208,13 @@ You can create wrapped keysets or raw keysets. To do this, complete the steps in
 
 #### Create a raw keyset
 
-Run the following query to create a keyset with a key of type `  DETERMINISTIC_AEAD_AES_SIV_CMAC_256  ` .
+Run the following query to create a keyset with a key of type `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` .
 
     SELECT KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS raw_keyset
 
 #### Create a wrapped keyset
 
-Run the following query to create a Cloud KMS wrapped keyset with a key of type `  DETERMINISTIC_AEAD_AES_SIV_CMAC_256  ` .
+Run the following query to create a Cloud KMS wrapped keyset with a key of type `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` .
 
 ``` notranslate
 SELECT KEYS.NEW_WRAPPED_KEYSET(
@@ -224,7 +224,7 @@ SELECT KEYS.NEW_WRAPPED_KEYSET(
 
 ### Decode a keyset
 
-Although SQL functions that return keysets produce the keysets in `  BYTES  ` format, the user-displayed result is encoded and displayed in `  STRING  ` format. If you would like to convert this encoded string to a decoded bytes sequence that you can use as literal key encryption functions, use the following query.
+Although SQL functions that return keysets produce the keysets in `BYTES` format, the user-displayed result is encoded and displayed in `STRING` format. If you would like to convert this encoded string to a decoded bytes sequence that you can use as literal key encryption functions, use the following query.
 
 #### Decode a wrapped keyset
 
@@ -244,7 +244,7 @@ SELECT FORMAT('%T', FROM_BASE64(KEYSET_ENCODED'))
 
 ### Rewrap a wrapped keyset
 
-Run the following query to rewrap a Cloud KMS wrapped keyset with a new Cloud KMS key. `  KMS_KEY_CURRENT  ` represents the new `  KMS_KEY  ` that is used to encrypt the keyset. `  KMS_KEY_NEW  ` represents the new `  KMS_KEY  ` that is used to encrypt the keyset.
+Run the following query to rewrap a Cloud KMS wrapped keyset with a new Cloud KMS key. `KMS_KEY_CURRENT` represents the new `KMS_KEY` that is used to encrypt the keyset. `KMS_KEY_NEW` represents the new `KMS_KEY` that is used to encrypt the keyset.
 
 ``` notranslate
 SELECT KEYS.REWRAP_KEYSET(
@@ -255,7 +255,7 @@ SELECT KEYS.REWRAP_KEYSET(
 
 ### Rotate a wrapped keyset
 
-Run the following query to rotate a Cloud KMS wrapped keyset with a key of type `  DETERMINISTIC_AEAD_AES_SIV_CMAC_256  ` .
+Run the following query to rotate a Cloud KMS wrapped keyset with a key of type `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` .
 
 ``` notranslate
 SELECT KEYS.ROTATE_WRAPPED_KEYSET(
@@ -270,7 +270,7 @@ Some encryption functions require a raw keyset. To decrypt a Cloud KMS wrapped k
 
 1.  [Create a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrap-keyset) .
 
-2.  In the bq command-line tool enter the following commands to save a wrapped keyset in a file called `  keyset_to_unwrap  ` , decrypt the wrapped keyset, and produce the output in the `  KEYSET_DECODED  ` format:
+2.  In the bq command-line tool enter the following commands to save a wrapped keyset in a file called `keyset_to_unwrap` , decrypt the wrapped keyset, and produce the output in the `KEYSET_DECODED` format:
     
     ``` notranslate
     echo WRAPPED_KEYSET_ENCODED | base64 -d > /tmp/decoded_wrapped_key
@@ -294,7 +294,7 @@ Some encryption functions require a Cloud KMS wrapped keyset. To encrypt a raw k
 
 1.  [Create a raw keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#raw-keyset) .
 
-2.  In the bq command-line tool enter the following commands to save a raw keyset in a file called `  keyset_to_wrap  ` , encrypt the raw keyset, and produce the output in the `  WRAPPED_KEYSET_DECODED  ` format:
+2.  In the bq command-line tool enter the following commands to save a raw keyset in a file called `keyset_to_wrap` , encrypt the raw keyset, and produce the output in the `WRAPPED_KEYSET_DECODED` format:
     
     ``` notranslate
     echo KEYSET_ENCODED | base64 -d > /tmp/decoded_key
@@ -328,7 +328,7 @@ For [DLP functions](https://docs.cloud.google.com/bigquery/docs/reference/standa
         
         gcloud kms encrypt --project $PROJECT --location us --keyring $KEYRING --key $KEY --plaintext-file ./rand.key.16.bin --ciphertext-file ./rand.key.16.wrapped
 
-3.  You can now get the `  BYTES  ` literal of the wrapped key or the base64 format of the wrapped key.
+3.  You can now get the `BYTES` literal of the wrapped key or the base64 format of the wrapped key.
     
       - **Bytes literal**
         
@@ -376,7 +376,7 @@ You can use raw keysets or wrapped keysets to encrypt a column in a table. You c
 
 ### Deterministically encrypt a column with a wrapped keyset
 
-Run the following query to create a table and store a Cloud KMS wrapped keyset with deterministic encryption in a column called `  encrypted_content  ` .
+Run the following query to create a table and store a Cloud KMS wrapped keyset with deterministic encryption in a column called `encrypted_content` .
 
 1.  [Create a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrap-keyset) .
 
@@ -392,7 +392,7 @@ Run the following query to create a table and store a Cloud KMS wrapped keyset w
 
 ### Deterministically decrypt a column with a wrapped keyset
 
-Run the following query to deterministically decrypt a column that contains encrypted content, using a Cloud KMS wrapped keyset. This query assumes you are referencing a table with a column called `  encrypted_content  ` .
+Run the following query to deterministically decrypt a column that contains encrypted content, using a Cloud KMS wrapped keyset. This query assumes you are referencing a table with a column called `encrypted_content` .
 
 ``` notranslate
 SELECT DETERMINISTIC_DECRYPT_STRING(
@@ -404,11 +404,11 @@ FROM DATASET_NAME.TABLE_NAME
 
 ### Non-deterministically encrypt a column with a wrapped keyset
 
-See [Deterministically encrypt a column with a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#determine-encrypt-column) , but replace `  DETERMINISTIC_ENCRYPT  ` with `  AEAD.ENCRYPT  ` . Make sure that your keyset is of type `  AEAD_AES_GCM_256  ` .
+See [Deterministically encrypt a column with a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#determine-encrypt-column) , but replace `DETERMINISTIC_ENCRYPT` with `AEAD.ENCRYPT` . Make sure that your keyset is of type `AEAD_AES_GCM_256` .
 
 ### Non-deterministically decrypt a column with a wrapped keyset
 
-See [Deterministically decrypt a column with a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#determine-decrypt-column) , but replace `  DETERMINISTIC_DECRYPT_STRING  ` with `  AEAD.DECRYPT_STRING  ` . Make sure that your keyset is of type `  AEAD_AES_GCM_256  ` .
+See [Deterministically decrypt a column with a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#determine-decrypt-column) , but replace `DETERMINISTIC_DECRYPT_STRING` with `AEAD.DECRYPT_STRING` . Make sure that your keyset is of type `AEAD_AES_GCM_256` .
 
 ## What's next
 

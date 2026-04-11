@@ -6,11 +6,11 @@
   - [IAM Permissions](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies/create#body.aspect_1)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies/create#try-it)
 
-Creates a new data policy under a project with the given `  dataPolicyId  ` (used as the display name), policy tag, and data policy type.
+Creates a new data policy under a project with the given `dataPolicyId` (used as the display name), policy tag, and data policy type.
 
 ### HTTP request
 
-`  POST https://bigquerydatapolicy.googleapis.com/v1/{parent=projects/*/locations/*}/dataPolicies  `
+`POST https://bigquerydatapolicy.googleapis.com/v1/{parent=projects/*/locations/*}/dataPolicies`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,11 +18,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Resource name of the project that the data policy will belong to. The format is `  projects/{projectNumber}/locations/{locationId}  ` .
+Required. Resource name of the project that the data policy will belong to. The format is `projects/{projectNumber}/locations/{locationId}` .
 
 ### Request body
 
@@ -36,23 +36,23 @@ If successful, the response body contains a newly created instance of `  DataPol
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  routine  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `routine` resource:
 
-  - `  bigquery.routines.get  `
+  - `bigquery.routines.get`
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  taxonomy  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `taxonomy` resource:
 
-  - `  datacatalog.taxonomies.get  `
+  - `datacatalog.taxonomies.get`
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  parent  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:
 
-  - `  bigquery.dataPolicies.create  `
+  - `bigquery.dataPolicies.create`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

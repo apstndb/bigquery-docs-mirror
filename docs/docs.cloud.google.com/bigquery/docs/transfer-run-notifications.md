@@ -13,9 +13,9 @@ You can configure each type individually, or you can use both Pub/Sub and email 
 
 Pub/Sub notifications send information about transfer runs to a [Pub/Sub](https://docs.cloud.google.com/pubsub) topic. Pub/Sub notifications are triggered by completed transfer runs in the following [states](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/TransferState) :
 
-  - `  SUCCEEDED  `
-  - `  FAILED  `
-  - `  CANCELLED  `
+  - `SUCCEEDED`
+  - `FAILED`
+  - `CANCELLED`
 
 You can send notifications to any Pub/Sub topic in any project for which you have sufficient permissions. Once received by the Pub/Sub topic, the resulting message can be sent to any number of subscribers to the topic.
 
@@ -31,13 +31,13 @@ Before configuring Pub/Sub transfer run notifications, you should:
     
       - If you own the project that will receive notifications, you most likely have the necessary permission.
     
-      - If you plan to create topics for receiving notifications, you should have [`  pubsub.topics.create  `](https://docs.cloud.google.com/pubsub/docs/access_control#tbl_roles) permissions.
+      - If you plan to create topics for receiving notifications, you should have [`pubsub.topics.create`](https://docs.cloud.google.com/pubsub/docs/access_control#tbl_roles) permissions.
     
-      - Whether you plan to use new or existing topics, you should have [`  pubsub.topics.getIamPolicy  `](https://docs.cloud.google.com/pubsub/docs/access_control#tbl_roles) and [`  pubsub.topics.setIamPolicy  `](https://docs.cloud.google.com/pubsub/docs/access_control#tbl_roles) permissions. If you create a topic, you typically have permission for it already. The following predefined IAM role has both `  pubsub.topics.getIamPolicy  ` and `  pubsub.topics.setIamPolicy  ` permissions: `  pubsub.admin  ` . See [Pub/Sub access control](https://docs.cloud.google.com/pubsub/docs/access_control#console) for more information.
+      - Whether you plan to use new or existing topics, you should have [`pubsub.topics.getIamPolicy`](https://docs.cloud.google.com/pubsub/docs/access_control#tbl_roles) and [`pubsub.topics.setIamPolicy`](https://docs.cloud.google.com/pubsub/docs/access_control#tbl_roles) permissions. If you create a topic, you typically have permission for it already. The following predefined IAM role has both `pubsub.topics.getIamPolicy` and `pubsub.topics.setIamPolicy` permissions: `pubsub.admin` . See [Pub/Sub access control](https://docs.cloud.google.com/pubsub/docs/access_control#console) for more information.
 
 3.  [Have an existing Pub/Sub topic](https://docs.cloud.google.com/pubsub/docs/create-topic) that you want to send notifications to.
 
-**Caution:** Don't remove the [BigQuery Data Transfer Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquerydatatransfer.serviceAgent) from the `  pubsub.publisher  ` predefined IAM role. The removal can cause publishing notification failures to the Pub/Sub topic.
+**Caution:** Don't remove the [BigQuery Data Transfer Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquerydatatransfer.serviceAgent) from the `pubsub.publisher` predefined IAM role. The removal can cause publishing notification failures to the Pub/Sub topic.
 
 **Caution:** Don't specify any custom schema when creating the Pub/Sub topic. Specifying a custom schema can cause the notification publication to fail.
 
@@ -52,18 +52,18 @@ Notifications sent to the Pub/Sub topic consist of two parts:
 
 Attributes are key:value pairs contained in all notifications sent by BigQuery Data Transfer Service to your Pub/Sub topic. Notifications always contain the following set of key:value pairs, regardless of the notification's payload:
 
-| **Attribute name** | **Example**                            | **Description**                                                                                              |
-| ------------------ | -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **eventType**      | `        TRANSFER_RUN_FINISHED       ` | The type of event that has just occurred. `        TRANSFER_RUN_FINISHED       ` is the only possible value. |
-| **payloadFormat**  | `        JSON_API_V1       `           | The format of the object payload. `        JSON_API_V1       ` is the only possible value.                   |
+| **Attribute name** | **Example**             | **Description**                                                                               |
+| ------------------ | ----------------------- | --------------------------------------------------------------------------------------------- |
+| **eventType**      | `TRANSFER_RUN_FINISHED` | The type of event that has just occurred. `TRANSFER_RUN_FINISHED` is the only possible value. |
+| **payloadFormat**  | `JSON_API_V1`           | The format of the object payload. `JSON_API_V1` is the only possible value.                   |
 
 #### Payload
 
 The payload is a string that contains the metadata of the transfer run. The type of payload is not configurable at this time and is provided to accommodate future API version changes.
 
-| **Payload type**  | **Description**                                                                                                                                                                                                                                                   |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **JSON\_API\_V1** | The payload will be a UTF-8 JSON-serialized string containing the [resource representation of a `         TransferRun        `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs#TransferRun) . |
+| **Payload type**  | **Description**                                                                                                                                                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **JSON\_API\_V1** | The payload will be a UTF-8 JSON-serialized string containing the [resource representation of a `TransferRun`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs#TransferRun) . |
 
 ## Email notifications
 

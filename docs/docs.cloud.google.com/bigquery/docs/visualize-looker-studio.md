@@ -6,7 +6,7 @@ Looker Studio offers a premium version, Looker Studio Pro, which includes enhanc
 
 You can use BigQuery BI Engine to improve report performance while reducing compute costs. To learn about BI Engine, see [Introduction to BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
-These examples use Looker Studio to visualize data in the BigQuery [`  austin_bikeshare  `](https://console.cloud.google.com/bigquery?cloudshell=false&d=austin_bikeshare&p=bigquery-public-data&t=bikeshare_trips&page=table&ws=!1m10!1m4!4m3!1sbigquery-public-data!2sfaa!3sus_airports!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) dataset. For more information about public data sets, see [BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) .
+These examples use Looker Studio to visualize data in the BigQuery [`austin_bikeshare`](https://console.cloud.google.com/bigquery?cloudshell=false&d=austin_bikeshare&p=bigquery-public-data&t=bikeshare_trips&page=table&ws=!1m10!1m4!4m3!1sbigquery-public-data!2sfaa!3sus_airports!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) dataset. For more information about public data sets, see [BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) .
 
 ### Explore query results
 
@@ -26,7 +26,7 @@ You can construct an arbitrary SQL query and visualize the data in Looker Studio
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-4.  In the **Explorer** pane, enter `  bikeshare_trips  ` in the search field.
+4.  In the **Explorer** pane, enter `bikeshare_trips` in the search field.
 
 5.  Go to **bigquery-public-data \> austin\_bikeshare \> bikeshare\_trips** .
 
@@ -109,7 +109,7 @@ You can export table schema to see the metadata of your data in Looker Studio. T
     
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-4.  In the **Explorer** pane, enter `  bigquery-public-data  ` in the **Type to search** field.
+4.  In the **Explorer** pane, enter `bigquery-public-data` in the **Type to search** field.
 
 5.  Go to **bigquery-public-data \> austin\_bikeshare \> bikeshare\_trips** .
 
@@ -142,7 +142,7 @@ When data source credentials are set to the current user, the user is called *da
 
 ### View Looker Studio information schema details
 
-You can track which Looker Studio reports and data sources are used by BigQuery by viewing the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . Every Looker Studio job has `  looker_studio_report_id  ` and `  looker_studio_datasource_id  ` labels. Those IDs appear at the end of the Looker Studio URLs when opening a report or data source page. For example, a report with the URL of `  https://lookerstudio.google.com/navigation/reporting/XXXX-YYY-ZZ  ` has a report ID of "XXXX-YYY-ZZ".
+You can track which Looker Studio reports and data sources are used by BigQuery by viewing the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . Every Looker Studio job has `looker_studio_report_id` and `looker_studio_datasource_id` labels. Those IDs appear at the end of the Looker Studio URLs when opening a report or data source page. For example, a report with the URL of `https://lookerstudio.google.com/navigation/reporting/XXXX-YYY-ZZ` has a report ID of "XXXX-YYY-ZZ".
 
 The following examples show how to view reports and data sources:
 

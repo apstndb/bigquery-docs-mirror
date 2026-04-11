@@ -11,7 +11,7 @@ Lists all models in the specified dataset. Requires the READER dataset role. Aft
 
 ### HTTP request
 
-`  GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/models  `
+`GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/models`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,15 +19,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the models to list.
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of the models to list.
 
@@ -35,15 +35,15 @@ Required. Dataset ID of the models to list.
 
 Parameters
 
-`  maxResults  `
+`maxResults`
 
-`  integer  `
+`integer`
 
 The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
 
-`  pageToken  `
+`pageToken`
 
-`  string  `
+`string`
 
 Page token, returned by a previous call to request the next page of results
 
@@ -68,29 +68,22 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;models&quot;: [
-    {
-      object (Model)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;models&quot;: [{object (Model)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  models[]  `
+`models[]`
 
-`  object ( Model  ` )
+` object ( Model  ` )
 
 Models in the requested dataset. Only the following fields are populated: modelReference, modelType, creationTime, lastModifiedTime and labels.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
 A token to request the next page of results.
 
@@ -98,9 +91,9 @@ A token to request the next page of results.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
-  - `  https://www.googleapis.com/auth/bigquery.readonly  `
-  - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
+  - `https://www.googleapis.com/auth/bigquery.readonly`
+  - `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

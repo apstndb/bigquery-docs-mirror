@@ -12,9 +12,9 @@ Ensure that you have a [Amazon S3 BigLake table](https://docs.cloud.google.com/b
 
 To query Amazon S3 BigLake tables, ensure that the caller of the BigQuery API has the following roles:
 
-  - BigQuery Connection User ( `  roles/bigquery.connectionUser  ` )
-  - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )
-  - BigQuery User ( `  roles/bigquery.user  ` )
+  - BigQuery Connection User ( `roles/bigquery.connectionUser` )
+  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` )
+  - BigQuery User ( `roles/bigquery.user` )
 
 The caller can be your account or an [Amazon S3 connection service account](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-connection) . Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles) .
 
@@ -22,11 +22,11 @@ To see the exact permissions that are required to query Amazon S3 BigLake tables
 
 #### Required permissions
 
-  - `  bigquery.connections.use  `
-  - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  ` (Only required if you are [reading data with the BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) )
-  - `  bigquery.tables.get  `
-  - `  bigquery.tables.getData  `
+  - `bigquery.connections.use`
+  - `bigquery.jobs.create`
+  - `bigquery.readsessions.create` (Only required if you are [reading data with the BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) )
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -134,26 +134,17 @@ When you [query a BigLake table](https://docs.cloud.google.com/bigquery/docs/que
 To query a BigLake table using the API, follow these steps:
 
 1.  Create a [Job object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) .
-2.  Call the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) to run the query asynchronously or the [`  jobs.query  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) to run the query synchronously, passing in the `  Job  ` object.
-3.  Read rows with the [`  jobs.getQueryResults  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) by passing the given job reference, and the [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) methods by passing the given table reference of the query result.
+2.  Call the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) to run the query asynchronously or the [`jobs.query` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) to run the query synchronously, passing in the `Job` object.
+3.  Read rows with the [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) by passing the given job reference, and the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) methods by passing the given table reference of the query result.
 
-## Query the `     _FILE_NAME    ` pseudocolumn
+## Query the `_FILE_NAME` pseudocolumn
 
-Tables based on external data sources provide a pseudocolumn named `  _FILE_NAME  ` . This column contains the fully qualified path to the file to which the row belongs. This column is available only for tables that reference external data stored in **Cloud Storage** , **Google Drive** , **Amazon S3** , and **Azure Blob Storage** .
+Tables based on external data sources provide a pseudocolumn named `_FILE_NAME` . This column contains the fully qualified path to the file to which the row belongs. This column is available only for tables that reference external data stored in **Cloud Storage** , **Google Drive** , **Amazon S3** , and **Azure Blob Storage** .
 
-The `  _FILE_NAME  ` column name is reserved, which means that you cannot create a column by that name in any of your tables. To select the value of `  _FILE_NAME  ` , you must use an alias. The following example query demonstrates selecting `  _FILE_NAME  ` by assigning the alias `  fn  ` to the pseudocolumn.
+The `_FILE_NAME` column name is reserved, which means that you cannot create a column by that name in any of your tables. To select the value of `_FILE_NAME` , you must use an alias. The following example query demonstrates selecting `_FILE_NAME` by assigning the alias `fn` to the pseudocolumn.
 
 ``` notranslate
-  bq query \
-  --project_id=PROJECT_ID \
-  --use_legacy_sql=false \
-  'SELECT
-     name,
-     _FILE_NAME AS fn
-   FROM
-     `DATASET.TABLE_NAME`
-   WHERE
-     name contains "Alex"' 
+  bq query \  --project_id=PROJECT_ID \  --use_legacy_sql=false \  'SELECT     name,     _FILE_NAME AS fn   FROM     `DATASET.TABLE_NAME`   WHERE     name contains "Alex"' 
 ```
 
 Replace the following:
@@ -162,7 +153,7 @@ Replace the following:
   - `  DATASET  ` is the name of the dataset that stores the permanent external table
   - `  TABLE_NAME  ` is the name of the permanent external table
 
-When the query has a filter predicate on the `  _FILE_NAME  ` pseudocolumn, BigQuery attempts to skip reading files that do not satisfy the filter. Similar recommendations to [querying ingestion-time partitioned tables using pseudocolumns](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) apply when constructing query predicates with the `  _FILE_NAME  ` pseudocolumn.
+When the query has a filter predicate on the `_FILE_NAME` pseudocolumn, BigQuery attempts to skip reading files that do not satisfy the filter. Similar recommendations to [querying ingestion-time partitioned tables using pseudocolumns](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) apply when constructing query predicates with the `_FILE_NAME` pseudocolumn.
 
 ## What's next
 

@@ -5,36 +5,36 @@ This document shows you how to generate structured data using a Gemini model, an
 You do this by completing the following tasks:
 
   - Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.
-  - Using the model with the [`  AI.GENERATE_TABLE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) to generate structured data based on data from [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+  - Using the model with the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) to generate structured data based on data from [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
 ## Required roles
 
-To create a remote model and use the `  AI.GENERATE_TABLE  ` function, you need the following Identity and Access Management (IAM) roles:
+To create a remote model and use the `AI.GENERATE_TABLE` function, you need the following Identity and Access Management (IAM) roles:
 
-  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) on your project.
+  - Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` ) on your project.
 
-  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` ) on your project.
+  - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` ) on your project.
     
-    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
+    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` ) on the project that contains the Vertex AI endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Vertex AI endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
 
-  - Create BigQuery jobs: BigQuery Job User ( `  roles/bigquery.jobUser  ` ) on your project.
+  - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` ) on your project.
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
+  - Create a dataset: `bigquery.datasets.create`
+  - Create, delegate, and use a connection: `bigquery.connections.*`
+  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
   - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
-  - Query table data: `  bigquery.tables.getData  `
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+      - `bigquery.models.updateMetadata`
+  - Query table data: `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -45,7 +45,7 @@ You might also be able to get these permissions with [custom roles](https://docs
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -57,7 +57,7 @@ You might also be able to get these permissions with [custom roles](https://docs
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
@@ -94,7 +94,7 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
     ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
@@ -149,7 +149,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -185,7 +185,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -323,13 +323,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -363,13 +363,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -381,7 +381,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -393,7 +393,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -407,11 +407,11 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 Grant the connection's service account the Vertex AI User role.
 
-If you plan to specify the endpoint as a URL when you create the remote model— for example `  endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-flash'  ` — grant this role in the same project you specify in the URL.
+If you plan to specify the endpoint as a URL when you create the remote model— for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-flash'` — grant this role in the same project you specify in the URL.
 
-If you plan to specify the endpoint by using the model name when you create the remote model, for example `  endpoint = 'gemini-2.5-flash'  ` , grant this role in the same project where you plan to create the remote model.
+If you plan to specify the endpoint by using the model name when you create the remote model, for example `endpoint = 'gemini-2.5-flash'` , grant this role in the same project where you plan to create the remote model.
 
-Granting the role in a different project results in the error `  bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource  ` .
+Granting the role in a different project results in the error `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 To grant the role, follow these steps:
 
@@ -433,7 +433,7 @@ To grant the role, follow these steps:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) .
+Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) .
 
     gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
 
@@ -469,13 +469,13 @@ Replace the following:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection
         
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  `
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  `
     
-      - `  ENDPOINT  ` : the name of the Gemini model to use. For supported Gemini models, you can specify the [global endpoint](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#global-endpoint) to improve availability. For more information, see [`  ENDPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+      - `  ENDPOINT  ` : the name of the Gemini model to use. For supported Gemini models, you can specify the [global endpoint](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#global-endpoint) to improve availability. For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
 
 ## Generate structured data
 
-Generate structured data by using the [`  AI.GENERATE_TABLE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) with a remote model, and using prompt data from a table column:
+Generate structured data by using the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) with a remote model, and using prompt data from a table column:
 
 ``` notranslate
 SELECT *
@@ -497,49 +497,49 @@ Replace the following:
 
   - `  MODEL_NAME  ` : the name of the model.
 
-  - `  TABLE_NAME  ` : the name of the table that contains the prompt. This table must have a column that's named `  prompt  ` , or you can use an alias to use a differently named column.
+  - `  TABLE_NAME  ` : the name of the table that contains the prompt. This table must have a column that's named `prompt` , or you can use an alias to use a differently named column.
 
-  - `  PROMPT_QUERY  ` : the GoogleSQL query that generates the prompt data. The prompt value itself can be pulled from a column, or you can specify it as a struct value with an arbitrary number of string and column name subfields. For example, `  SELECT ('Analyze the sentiment in ', feedback_column, 'using the following categories: positive, negative, neutral') AS prompt  ` .
+  - `  PROMPT_QUERY  ` : the GoogleSQL query that generates the prompt data. The prompt value itself can be pulled from a column, or you can specify it as a struct value with an arbitrary number of string and column name subfields. For example, `SELECT ('Analyze the sentiment in ', feedback_column, 'using the following categories: positive, negative, neutral') AS prompt` .
 
-  - `  TOKENS  ` : an `  INT64  ` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `  [1,8192]  ` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `  128  ` .
+  - `  TOKENS  ` : an `INT64` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `[1,8192]` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `128` .
 
-  - `  TEMPERATURE  ` : a `  FLOAT64  ` value in the range `  [0.0,2.0]  ` that controls the degree of randomness in token selection. The default is `  1.0  ` .
+  - `  TEMPERATURE  ` : a `FLOAT64` value in the range `[0.0,2.0]` that controls the degree of randomness in token selection. The default is `1.0` .
     
-    Lower values for `  temperature  ` are good for prompts that require a more deterministic and less open-ended or creative response, while higher values for `  temperature  ` can lead to more diverse or creative results. A value of `  0  ` for `  temperature  ` is deterministic, meaning that the highest probability response is always selected.
+    Lower values for `temperature` are good for prompts that require a more deterministic and less open-ended or creative response, while higher values for `temperature` can lead to more diverse or creative results. A value of `0` for `temperature` is deterministic, meaning that the highest probability response is always selected.
 
-  - `  TOP_P  ` : a `  FLOAT64  ` value in the range `  [0.0,1.0]  ` helps determine the probability of the tokens selected. Specify a lower value for less random responses and a higher value for more random responses. The default is `  0.95  ` .
+  - `  TOP_P  ` : a `FLOAT64` value in the range `[0.0,1.0]` helps determine the probability of the tokens selected. Specify a lower value for less random responses and a higher value for more random responses. The default is `0.95` .
 
-  - `  STOP_SEQUENCES  ` : an `  ARRAY<STRING>  ` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
+  - `  STOP_SEQUENCES  ` : an `ARRAY<STRING>` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
 
-  - `  SAFETY_SETTINGS  ` : an `  ARRAY<STRUCT<STRING AS category, STRING AS threshold>>  ` value that configures content safety thresholds to filter responses. The first element in the struct specifies a harm category, and the second element in the struct specifies a corresponding blocking threshold. The model filters out content that violate these settings. You can only specify each category once. For example, you can't specify both `  STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)  ` and `  STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)  ` . If there is no safety setting for a given category, the `  BLOCK_MEDIUM_AND_ABOVE  ` safety setting is used.
+  - `  SAFETY_SETTINGS  ` : an `ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` value that configures content safety thresholds to filter responses. The first element in the struct specifies a harm category, and the second element in the struct specifies a corresponding blocking threshold. The model filters out content that violate these settings. You can only specify each category once. For example, you can't specify both `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` and `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)` . If there is no safety setting for a given category, the `BLOCK_MEDIUM_AND_ABOVE` safety setting is used.
     
     Supported categories are as follows:
     
-      - `  HARM_CATEGORY_HATE_SPEECH  `
-      - `  HARM_CATEGORY_DANGEROUS_CONTENT  `
-      - `  HARM_CATEGORY_HARASSMENT  `
-      - `  HARM_CATEGORY_SEXUALLY_EXPLICIT  `
+      - `HARM_CATEGORY_HATE_SPEECH`
+      - `HARM_CATEGORY_DANGEROUS_CONTENT`
+      - `HARM_CATEGORY_HARASSMENT`
+      - `HARM_CATEGORY_SEXUALLY_EXPLICIT`
     
     Supported thresholds are as follows:
     
-      - `  BLOCK_NONE  ` ( [Restricted](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how_to_configure_content_filters) )
-      - `  BLOCK_LOW_AND_ABOVE  `
-      - `  BLOCK_MEDIUM_AND_ABOVE  ` (Default)
-      - `  BLOCK_ONLY_HIGH  `
-      - `  HARM_BLOCK_THRESHOLD_UNSPECIFIED  `
+      - `BLOCK_NONE` ( [Restricted](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how_to_configure_content_filters) )
+      - `BLOCK_LOW_AND_ABOVE`
+      - `BLOCK_MEDIUM_AND_ABOVE` (Default)
+      - `BLOCK_ONLY_HIGH`
+      - `HARM_BLOCK_THRESHOLD_UNSPECIFIED`
     
     For more information, see [Harm categories](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#harm_categories) and [How to configure content filters](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how_to_configure_content_filters) .
 
-  - `  OUTPUT_SCHEMA  ` : a `  STRING  ` value that specifies the format for the model's response. The `  output_schema  ` value must be a SQL schema definition, similar to that used in the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) . The following data types are supported:
+  - `  OUTPUT_SCHEMA  ` : a `STRING` value that specifies the format for the model's response. The `output_schema` value must be a SQL schema definition, similar to that used in the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) . The following data types are supported:
     
-      - `  INT64  `
-      - `  FLOAT64  `
-      - `  BOOL  `
-      - `  STRING  `
-      - `  ARRAY  `
-      - `  STRUCT  `
+      - `INT64`
+      - `FLOAT64`
+      - `BOOL`
+      - `STRING`
+      - `ARRAY`
+      - `STRUCT`
     
-    When using the `  output_schema  ` argument to generate structured data based on prompts from a table, it is important to understand the prompt data in order to specify an appropriate schema.
+    When using the `output_schema` argument to generate structured data based on prompts from a table, it is important to understand the prompt data in order to specify an appropriate schema.
     
     For example, say you are analyzing movie review content from a table that has the following fields:
     
@@ -550,12 +550,10 @@ Replace the following:
     Then you might create prompt text by running a query similar to the following:
     
     ``` notranslate
-    UPDATE mydataset.movie_review
-    SET prompt = CONCAT('Extract the key words and key sentiment from the text below: ', review)
-    WHERE review IS NOT NULL;
+    UPDATE mydataset.movie_reviewSET prompt = CONCAT('Extract the key words and key sentiment from the text below: ', review)WHERE review IS NOT NULL;
     ```
     
-    And you might specify a `  output_schema  ` value similar to `  "keywords ARRAY<STRING>, sentiment STRING" AS output_schema  ` .
+    And you might specify a `output_schema` value similar to `"keywords ARRAY<STRING>, sentiment STRING" AS output_schema` .
 
 ### Examples
 

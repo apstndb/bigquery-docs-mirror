@@ -13,28 +13,21 @@ Returns list of supported data sources and their metadata.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataSources&quot;: [
-    {
-      object (DataSource)
-    }
-  ],
-  &quot;nextPageToken&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataSources&quot;: [{object (DataSource)}],&quot;nextPageToken&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  dataSources[]  `
+`dataSources[]`
 
-`  object ( DataSource  ` )
+` object ( DataSource  ` )
 
 List of supported data sources and their transfer settings.
 
-`  nextPageToken  `
+`nextPageToken`
 
-`  string  `
+`string`
 
-Output only. The next-pagination token. For multiple-page list results, this token can be used as the `  ListDataSourcesRequest.page_token  ` to request the next page of list results.
+Output only. The next-pagination token. For multiple-page list results, this token can be used as the `ListDataSourcesRequest.page_token` to request the next page of list results.

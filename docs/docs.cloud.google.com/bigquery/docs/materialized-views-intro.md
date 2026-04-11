@@ -24,7 +24,7 @@ There are two basic kinds of materialized views:
   - *Incremental materialized views* support a limited set of features. To learn more about supported SQL syntax for materialized views, see [Create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create) . Only incremental materialized views can take advantage of [smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#smart_tuning) .
   - *Non-incremental functions* support most of the syntaxes that incremental materialized views don't support.
 
-When you create materialized views, by default BigQuery only lets you create views based upon *incremental* queries. To create a non-incremental view, you can specify `  allow_non_incremental_definition = true  ` in the materialized view's definition.
+When you create materialized views, by default BigQuery only lets you create views based upon *incremental* queries. To create a non-incremental view, you can specify `allow_non_incremental_definition = true` in the materialized view's definition.
 
 The best type of materialized view to use depends on your situation. The following table compares the features of incremental and non-incremental materialized views:
 
@@ -53,7 +53,7 @@ The following BigQuery features work transparently with materialized views:
 
   - **[Cost estimation using dry run](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#perform-dry-run) :** A dry run repeats query rewrite logic using the available materialized views and provides a cost estimate. You can use this feature as a way to test whether a specific query uses any materialized views.
 
-  - **[Cross-region data replication](https://docs.cloud.google.com/bigquery/docs/data-replication) :** Materialized views can be created on top of BigQuery tables that have cross-region replication enabled, but only on the primary region. If the secondary region is used, you can encounter the following error message: `  The dataset replica of the cross region dataset {PROJECT}:{DATASET} in region {REGION} is read-only because it's not the primary replica.  `
+  - **[Cross-region data replication](https://docs.cloud.google.com/bigquery/docs/data-replication) :** Materialized views can be created on top of BigQuery tables that have cross-region replication enabled, but only on the primary region. If the secondary region is used, you can encounter the following error message: `The dataset replica of the cross region dataset {PROJECT}:{DATASET} in region {REGION} is read-only because it's not the primary replica.`
 
 ### BigLake metadata cache-enabled tables
 
@@ -68,18 +68,19 @@ When you create a materialized view over an Amazon S3 BigLake table, the data in
 ## Limitations
 
   - Limits on base table references and other restrictions might apply. For more information about materialized view limits, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#materialized_view_limits) .
-  - The data of a materialized view cannot be updated or manipulated directly using operations such as `  COPY  ` , `  EXPORT  ` , `  LOAD  ` , `  WRITE  ` , or data manipulation language (DML) statements.
+  - The data of a materialized view cannot be updated or manipulated directly using operations such as `COPY` , `EXPORT` , `LOAD` , `WRITE` , or data manipulation language (DML) statements.
   - You cannot replace an existing materialized view with a materialized view of the same name.
   - The materialized view SQL cannot be updated after the materialized view is created.
   - A materialized view must reside in the same organization as its base tables, or in the same project if the project does not belong to an organization.
   - Materialized views use a restricted SQL syntax and a limited set of aggregation functions. For more information, see [Supported materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views#supported-mvs) .
   - Materialized views cannot be nested on other materialized views.
   - Materialized views cannot query external or wildcard tables, logical views <sup>1</sup> , or snapshots.
+  - [System variables](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) , including the `@@session_id` system variable, aren't supported with materialized views.
   - Only the GoogleSQL dialect is supported for materialized views.
   - You can set descriptions for materialized views, but you cannot set descriptions for the individual columns in the materialized view.
   - If you delete a base table without first deleting the materialized view, queries and refreshes of the materialized view fail. If you recreate the base table, you must also recreate the materialized view.
   - If a materialized view has a [change data capture-enabled](https://docs.cloud.google.com/bigquery/docs/change-data-capture) base table, then that table can't be referenced in the same query as the materialized view.
-  - Only non-incremental materialized view can have [Spanner external dataset base tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) . If a non-incremental materialized view's last refresh occurred outside the `  max_staleness  ` interval, then the query reads the base Spanner external dataset tables. To learn more about Spanner external dataset tables, see [Create materialized views over Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#spanner) .
+  - Only non-incremental materialized view can have [Spanner external dataset base tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) . If a non-incremental materialized view's last refresh occurred outside the `max_staleness` interval, then the query reads the base Spanner external dataset tables. To learn more about Spanner external dataset tables, see [Create materialized views over Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#spanner) .
   - Query results are not cached if the query runs against non-incremental materialized views that reference [Spanner external dataset tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
 
 <sup>1</sup> Logical view reference support is in [preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Reference logical views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#reference_logical_views) .
@@ -87,7 +88,7 @@ When you create a materialized view over an Amazon S3 BigLake table, the data in
 ### Limitations of materialized views over BigLake tables
 
   - Partitioning of the materialized view is not supported. The base tables can use hive partitioning but the materialized view storage cannot be partitioned in BigLake tables. This means that any deletion in a base table causes a full refresh of the materialized view. For more details see [Incremental updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) .
-  - The [`  --max_staleness  ` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) value of the materialized view must be greater than that of the BigLake base table.
+  - The [`--max_staleness` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) value of the materialized view must be greater than that of the BigLake base table.
   - Joins between BigQuery managed tables and BigLake tables are not supported in a single materialized view definition.
   - BigQuery BI Engine doesn't support acceleration of materialized views over BigLake tables.
 
@@ -109,7 +110,7 @@ Costs are associated with the following aspects of materialized views:
 
 ### Storage cost details
 
-For `  AVG  ` , `  ARRAY_AGG  ` , and `  APPROX_COUNT_DISTINCT  ` aggregate values in a materialized view, the final value is not directly stored. Instead, BigQuery internally stores a materialized view as an intermediate *sketch* , which is used to produce the final value.
+For `AVG` , `ARRAY_AGG` , and `APPROX_COUNT_DISTINCT` aggregate values in a materialized view, the final value is not directly stored. Instead, BigQuery internally stores a materialized view as an intermediate *sketch* , which is used to produce the final value.
 
 As an example, consider a materialized view that's created with the following command:
 
@@ -118,7 +119,7 @@ As an example, consider a materialized view that's created with the following co
     FROM project-id.my_dataset.my_base_table
     GROUP BY date
 
-While the `  avg_paid  ` column is rendered as `  NUMERIC  ` or `  FLOAT64  ` to the user, internally it is stored as `  BYTES  ` , with its content being an intermediate sketch in proprietary format. For [data size calculation](https://cloud.google.com/bigquery/pricing#data) , the column is treated as `  BYTES  ` .
+While the `avg_paid` column is rendered as `NUMERIC` or `FLOAT64` to the user, internally it is stored as `BYTES` , with its content being an intermediate sketch in proprietary format. For [data size calculation](https://cloud.google.com/bigquery/pricing#data) , the column is treated as `BYTES` .
 
 ## What's next
 

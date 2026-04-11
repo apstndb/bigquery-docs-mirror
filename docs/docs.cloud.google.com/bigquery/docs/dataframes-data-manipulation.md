@@ -1,17 +1,17 @@
 # Manipulate data with BigQuery DataFrames
 
-This document describes the data manipulation capabilities available with BigQuery DataFrames. You can find the functions that are described in the `  bigframes.bigquery  ` library.
+This document describes the data manipulation capabilities available with BigQuery DataFrames. You can find the functions that are described in the `bigframes.bigquery` library.
 
 ## Required roles
 
 To get the permissions that you need to complete the tasks in this document, ask your administrator to grant you the following IAM roles on your project:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
   - Use BigQuery DataFrames in a BigQuery notebook:
-      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
-      - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
+      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+      - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -21,13 +21,13 @@ When you perform end user authentication in an interactive environment like a no
 
 ## pandas API
 
-A notable feature of BigQuery DataFrames is that the [`  bigframes.pandas  ` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) is designed to be similar to APIs in the pandas library. This design lets you employ familiar syntax patterns for data manipulation tasks. Operations defined through the BigQuery DataFrames API are executed server-side, operating directly on data stored within BigQuery and eliminating the need to transfer datasets out of BigQuery.
+A notable feature of BigQuery DataFrames is that the [`bigframes.pandas` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) is designed to be similar to APIs in the pandas library. This design lets you employ familiar syntax patterns for data manipulation tasks. Operations defined through the BigQuery DataFrames API are executed server-side, operating directly on data stored within BigQuery and eliminating the need to transfer datasets out of BigQuery.
 
 To check which pandas APIs are supported by BigQuery DataFrames, see [Supported pandas APIs](https://dataframes.bigquery.dev/supported_pandas_apis.html) .
 
 ## Inspect and manipulate data
 
-You can use the `  bigframes.pandas  ` API to perform data inspection and calculation operations. The following code sample uses the `  bigframes.pandas  ` library to inspect the `  body_mass_g  ` column, calculate the mean `  body_mass  ` , and calculate the mean `  body_mass  ` by `  species  ` :
+You can use the `bigframes.pandas` API to perform data inspection and calculation operations. The following code sample uses the `bigframes.pandas` library to inspect the `body_mass_g` column, calculate the mean `body_mass` , and calculate the mean `body_mass` by `species` :
 
     import bigframes.pandas as bpd
     
@@ -58,7 +58,7 @@ The BigQuery library provides BigQuery SQL functions that might not have a panda
 
 ### Process array values
 
-You can use the `  bigframes.bigquery.array_agg()  ` function in the `  bigframes.bigquery  ` library to aggregate values after a `  groupby  ` operation:
+You can use the `bigframes.bigquery.array_agg()` function in the `bigframes.bigquery` library to aggregate values after a `groupby` operation:
 
     import bigframes.bigquery as bbq
     import bigframes.pandas as bpd
@@ -71,11 +71,11 @@ You can use the `  bigframes.bigquery.array_agg()  ` function in the `  bigframe
     # True     [0 2 4]
     # dtype: list<item: int64>[pyarrow]
 
-You can also use the `  array_length()  ` and `  array_to_string()  ` array functions.
+You can also use the `array_length()` and `array_to_string()` array functions.
 
-### Create a struct `     Series    ` object
+### Create a struct `Series` object
 
-You can use the `  bigframes.bigquery.struct()  ` function in the `  bigframes.bigquery  ` library to create a new struct `  Series  ` object with subfields for each column in a DataFrame:
+You can use the `bigframes.bigquery.struct()` function in the `bigframes.bigquery` library to create a new struct `Series` object with subfields for each column in a DataFrame:
 
     import bigframes.bigquery as bbq
     import bigframes.pandas as bpd
@@ -99,7 +99,7 @@ You can use the `  bigframes.bigquery.struct()  ` function in the `  bigframes.b
 
 ### Convert timestamps to Unix epochs
 
-You can use the `  bigframes.bigquery.unix_micros()  ` function in the `  bigframes.bigquery  ` library to convert timestamps into Unix microseconds:
+You can use the `bigframes.bigquery.unix_micros()` function in the `bigframes.bigquery` library to convert timestamps into Unix microseconds:
 
     import pandas as pd
     
@@ -115,11 +115,11 @@ You can use the `  bigframes.bigquery.unix_micros()  ` function in the `  bigfra
     # 2    172800000000
     # dtype: Int64
 
-You can also use the `  unix_seconds()  ` and `  unix_millis()  ` time functions.
+You can also use the `unix_seconds()` and `unix_millis()` time functions.
 
 ### Use the SQL scalar function
 
-You can use the `  bigframes.bigquery.sql_scalar()  ` function in the `  bigframes.bigquery  ` library to access arbitrary SQL syntax representing a single-column expression:
+You can use the `bigframes.bigquery.sql_scalar()` function in the `bigframes.bigquery` library to access arbitrary SQL syntax representing a single-column expression:
 
     import bigframes.bigquery as bbq
     import bigframes.pandas as bpd

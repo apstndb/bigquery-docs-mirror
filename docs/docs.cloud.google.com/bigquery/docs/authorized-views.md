@@ -83,9 +83,9 @@ You also need to grant users or groups access to the project and dataset that co
 
 Views are treated as table resources in BigQuery, so creating a view requires the same permissions as creating a table. You must also have permissions to query any tables that are referenced by the view's SQL query.
 
-To create a view, you need the `  bigquery.tables.create  ` IAM permission. The `  roles/bigquery.dataEditor  ` predefined IAM role includes the permissions that you need to create a view.
+To create a view, you need the `bigquery.tables.create` IAM permission. The `roles/bigquery.dataEditor` predefined IAM role includes the permissions that you need to create a view.
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create views in the datasets that you create. To create a view for data that you don't own, you must have `  bigquery.tables.getData  ` permission for that table.
+Additionally, if you have the `bigquery.datasets.create` permission, you can create views in the datasets that you create. To create a view for data that you don't own, you must have `bigquery.tables.getData` permission for that table.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -93,12 +93,12 @@ For more information on IAM roles and permissions in BigQuery, see [Predefined r
 
 To update dataset properties, you need the following IAM permissions:
 
-  - `  bigquery.datasets.update  `
-  - `  bigquery.datasets.setIamPolicy  ` (only required when updating dataset access controls in the Google Cloud console)
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy` (only required when updating dataset access controls in the Google Cloud console)
 
-The `  roles/bigquery.dataOwner  ` predefined IAM role includes the permissions that you need to update dataset properties.
+The `roles/bigquery.dataOwner` predefined IAM role includes the permissions that you need to update dataset properties.
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can update properties of the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can update properties of the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -106,8 +106,8 @@ For more information on IAM roles and permissions in BigQuery, see [Predefined r
 
 To share an authorized view with users or groups, you must grant the users or groups the following IAM permissions:
 
-  - The `  roles/bigquery.jobUser  ` IAM role to the project that contains the authorized view. This role grants the `  bigquery.jobs.create  ` permission which is required to run query jobs against the view.
-  - The `  roles/bigquery.dataViewer  ` IAM role to the dataset that contains the authorized view. This role grants the `  bigquery.tables.getData  ` which is required to query the view.
+  - The `roles/bigquery.jobUser` IAM role to the project that contains the authorized view. This role grants the `bigquery.jobs.create` permission which is required to run query jobs against the view.
+  - The `roles/bigquery.dataViewer` IAM role to the dataset that contains the authorized view. This role grants the `bigquery.tables.getData` which is required to query the view.
 
 ## Work with authorized views
 
@@ -229,13 +229,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -247,7 +247,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -259,7 +259,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -310,7 +310,7 @@ To remove authorization to a view, select one of the following options:
 
 ### bq
 
-To remove authorization from a view, use the `  bq rm  ` command. Enter the `  table_id  ` for the view you want to remove authorization from.
+To remove authorization from a view, use the `bq rm` command. Enter the `table_id` for the view you want to remove authorization from.
 
 ``` notranslate
     bq rm \
@@ -320,7 +320,7 @@ To remove authorization from a view, use the `  bq rm  ` command. Enter the `  t
 
 ### API
 
-Call the [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) method and use the `  projectID  ` , `  datasetID  ` , and `  tableID  ` properties to remove the authorized view for your dataset. For more information, see [Tables](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
+Call the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) method and use the `projectID` , `datasetID` , and `tableID` properties to remove the authorized view for your dataset. For more information, see [Tables](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
 
 ## Quotas and limits
 

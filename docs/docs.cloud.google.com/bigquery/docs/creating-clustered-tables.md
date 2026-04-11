@@ -15,8 +15,8 @@ For more information, see the following:
 
 To get the permissions that you need to create a table, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project if you're creating a table by loading data or by saving query results to a table.
-  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the dataset where you're creating the table.
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project if you're creating a table by loading data or by saving query results to a table.
+  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the dataset where you're creating the table.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -26,10 +26,10 @@ These predefined roles contain the permissions required to create a table. To se
 
 The following permissions are required to create a table:
 
-  - `  bigquery.tables.create  ` on the dataset where you're creating the table.
-  - `  bigquery.tables.getData  ` on all tables and views that your query references if you're saving query results as a table.
-  - `  bigquery.jobs.create  ` on the project if you're creating the table by loading data or by saving query results to a table.
-  - `  bigquery.tables.updateData  ` on the table if you're appending to or overwriting a table with query results.
+  - `bigquery.tables.create` on the dataset where you're creating the table.
+  - `bigquery.tables.getData` on all tables and views that your query references if you're saving query results as a table.
+  - `bigquery.jobs.create` on the project if you're creating the table by loading data or by saving query results to a table.
+  - `bigquery.tables.updateData` on the table if you're appending to or overwriting a table with query results.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -40,19 +40,19 @@ When you create a table in BigQuery, the table name must be unique per dataset. 
   - Contain characters with a total of up to 1,024 UTF-8 bytes.
   - Contain Unicode characters in category L (letter), M (mark), N (number), Pc (connector, including underscore), Pd (dash), Zs (space). For more information, see [General Category](https://wikipedia.org/wiki/Unicode_character_property#General_Category) .
 
-The following are all examples of valid table names: `  table 01  ` , `  ग्राहक  ` , `  00_お客様  ` , `  étudiant-01  ` .
+The following are all examples of valid table names: `table 01` , `ग्राहक` , `00_お客様` , `étudiant-01` .
 
 Caveats:
 
-  - Table names are case-sensitive by default. `  mytable  ` and `  MyTable  ` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
+  - Table names are case-sensitive by default. `mytable` and `MyTable` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
 
   - Some table names and table name prefixes are reserved. If you receive an error saying that your table name or prefix is reserved, then select a different name and try again.
 
-  - If you include multiple dot operators ( `  .  ` ) in a sequence, the duplicate operators are implicitly stripped.
+  - If you include multiple dot operators ( `.` ) in a sequence, the duplicate operators are implicitly stripped.
     
-    For example, this: `  project_name....dataset_name..table_name  `
+    For example, this: `project_name....dataset_name..table_name`
     
-    Becomes this: `  project_name.dataset_name.table_name  `
+    Becomes this: `project_name.dataset_name.table_name`
 
 ### Clustered column requirements
 
@@ -60,16 +60,16 @@ You can specify the columns used to create the clustered table when you create a
 
 Clustering columns must be top-level, non-repeated columns, and they must be one of the following data types:
 
-  - `  BIGNUMERIC  `
-  - `  BOOL  `
-  - `  DATE  `
-  - `  DATETIME  `
-  - `  GEOGRAPHY  `
-  - `  INT64  `
-  - `  NUMERIC  `
-  - `  RANGE  `
-  - `  STRING  `
-  - `  TIMESTAMP  `
+  - `BIGNUMERIC`
+  - `BOOL`
+  - `DATE`
+  - `DATETIME`
+  - `GEOGRAPHY`
+  - `INT64`
+  - `NUMERIC`
+  - `RANGE`
+  - `STRING`
+  - `TIMESTAMP`
 
 You can specify up to four clustering columns. When you specify multiple columns, the order of the columns determines how the data is sorted. For example, if the table is clustered by columns a, b and c, the data is sorted in the same order: first by column a, then by column b, and then by column c. As a best practice, place the most frequently filtered or aggregated column first.
 
@@ -113,7 +113,7 @@ In the **Create table** pane, specify the following details:
 
 ### SQL
 
-Use the [`  CREATE TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) command with the `  CLUSTER BY  ` option. The following example creates a clustered table named `  myclusteredtable  ` in `  mydataset  ` :
+Use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) command with the `CLUSTER BY` option. The following example creates a clustered table named `myclusteredtable` in `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -139,17 +139,17 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command with the following flags:
+Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command with the following flags:
 
-  - `  --table  ` (or the `  -t  ` shortcut).
-  - `  --schema  ` . You can supply the table's schema definition inline or use a JSON schema file.
-  - `  --clustering_fields  ` . You can specify up to four clustering columns.
+  - `--table` (or the `-t` shortcut).
+  - `--schema` . You can supply the table's schema definition inline or use a JSON schema file.
+  - `--clustering_fields` . You can specify up to four clustering columns.
 
-Optional parameters include `  --expiration  ` , `  --description  ` , `  --time_partitioning_type  ` , `  --time_partitioning_field  ` , `  --time_partitioning_expiration  ` , `  --destination_kms_key  ` , and `  --label  ` .
+Optional parameters include `--expiration` , `--description` , `--time_partitioning_type` , `--time_partitioning_field` , `--time_partitioning_expiration` , `--destination_kms_key` , and `--label` .
 
 If you are creating a table in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
-`  --destination_kms_key  ` is not demonstrated here. For information about using `  --destination_kms_key  ` , see [customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) .
+`--destination_kms_key` is not demonstrated here. For information about using `--destination_kms_key` , see [customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) .
 
 Enter the following command to create an empty clustered table with a schema definition:
 
@@ -175,13 +175,13 @@ Replace the following:
   - `  DATASET  ` : a dataset in your project.
   - `  TABLE  ` : the name of the table you're creating.
 
-When you specify the schema on the command line, you cannot include a `  RECORD  ` ( [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type, you cannot include a column description, and you cannot specify the column's mode. All modes default to `  NULLABLE  ` . To include descriptions, modes, and `  RECORD  ` types, [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
+When you specify the schema on the command line, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type, you cannot include a column description, and you cannot specify the column's mode. All modes default to `NULLABLE` . To include descriptions, modes, and `RECORD` types, [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
 
 Examples:
 
-Enter the following command to create a clustered table named `  myclusteredtable  ` in `  mydataset  ` in your default project. The table's expiration is set to 2,592,000 (1 30-day month), the description is set to `  This is my clustered table  ` , and the label is set to `  organization:development  ` . The command uses the `  -t  ` shortcut instead of `  --table  ` .
+Enter the following command to create a clustered table named `myclusteredtable` in `mydataset` in your default project. The table's expiration is set to 2,592,000 (1 30-day month), the description is set to `This is my clustered table` , and the label is set to `organization:development` . The command uses the `-t` shortcut instead of `--table` .
 
-The schema is specified inline as: `  timestamp:timestamp,customer_id:string,transaction_amount:float  ` . The specified clustering field `  customer_id  ` is used to cluster the table.
+The schema is specified inline as: `timestamp:timestamp,customer_id:string,transaction_amount:float` . The specified clustering field `customer_id` is used to cluster the table.
 
     bq mk \
         -t \
@@ -192,9 +192,9 @@ The schema is specified inline as: `  timestamp:timestamp,customer_id:string,tra
         --label org:dev \
         mydataset.myclusteredtable
 
-Enter the following command to create a clustered table named `  myclusteredtable  ` in `  myotherproject  ` , not your default project. The description is set to `  This is my clustered table  ` , and the label is set to `  organization:development  ` . The command uses the `  -t  ` shortcut instead of `  --table  ` . This command does not specify a table expiration. If the dataset has a default table expiration, it is applied. If the dataset has no default table expiration, the table never expires.
+Enter the following command to create a clustered table named `myclusteredtable` in `myotherproject` , not your default project. The description is set to `This is my clustered table` , and the label is set to `organization:development` . The command uses the `-t` shortcut instead of `--table` . This command does not specify a table expiration. If the dataset has a default table expiration, it is applied. If the dataset has no default table expiration, the table never expires.
 
-The schema is specified in a local JSON file: `  /tmp/myschema.json  ` . The `  customer_id  ` field is used to cluster the table.
+The schema is specified in a local JSON file: `/tmp/myschema.json` . The `customer_id` field is used to cluster the table.
 
     bq mk \
         -t \
@@ -209,13 +209,13 @@ After the table is created, you can update the table's [description](https://doc
 
 ### Terraform
 
-Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
+Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a table named `  mytable  ` that is clustered on the `  ID  ` and `  Created  ` columns:
+The following example creates a table named `mytable` that is clustered on the `ID` and `Created` columns:
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -278,13 +278,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -296,7 +296,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -308,7 +308,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -320,7 +320,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `  clustering.fields  ` property and the `  schema  ` property.
+Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that specifies the `clustering.fields` property and the `schema` property.
 
 ### Python
 
@@ -469,7 +469,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 There are two ways to create a clustered table from a query result:
 
   - Write the results to a new destination table and specify the clustering columns.
-  - By using a DDL `  CREATE TABLE AS SELECT  ` statement. For more information about this method, see [Creating a clustered table from the result of a query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_clustered_table_from_the_result_of_a_query) on the [Using data definition language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) page.
+  - By using a DDL `CREATE TABLE AS SELECT` statement. For more information about this method, see [Creating a clustered table from the result of a query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_clustered_table_from_the_result_of_a_query) on the [Using data definition language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) page.
 
 You can create a clustered table by querying either a partitioned table or a non-partitioned table. You cannot change an existing table to a clustered table by using query results.
 
@@ -477,7 +477,7 @@ When you create a clustered table from a query result, you must use standard SQL
 
 ### SQL
 
-To create a clustered table from a query result, use the [`  CREATE TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `  CLUSTER BY  ` option. The following example creates a new table clustered by `  customer_id  ` by querying an existing unclustered table:
+To create a clustered table from a query result, use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `CLUSTER BY` option. The following example creates a new table clustered by `customer_id` by querying an existing unclustered table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -513,12 +513,12 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  QUERY  ` : a query in GoogleSQL syntax. You cannot use legacy SQL to query clustered tables or to write query results to clustered tables. The query can contain a `  CREATE TABLE  ` [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statement that specifies the options for creating your clustered table. You can use DDL rather than specifying the individual command-line flags.
+  - `  LOCATION  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  QUERY  ` : a query in GoogleSQL syntax. You cannot use legacy SQL to query clustered tables or to write query results to clustered tables. The query can contain a `CREATE TABLE` [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statement that specifies the options for creating your clustered table. You can use DDL rather than specifying the individual command-line flags.
 
 Examples:
 
-Enter the following command to write query results to a clustered destination table named `  myclusteredtable  ` in `  mydataset  ` . `  mydataset  ` is in your default project. The query retrieves data from a non-partitioned table: mytable. The table's `  customer_id  ` column is used to cluster the table. The table's `  timestamp  ` column is used to create a partitioned table.
+Enter the following command to write query results to a clustered destination table named `myclusteredtable` in `mydataset` . `mydataset` is in your default project. The query retrieves data from a non-partitioned table: mytable. The table's `customer_id` column is used to cluster the table. The table's `timestamp` column is used to create a partitioned table.
 
     bq query --use_legacy_sql=false \
         'CREATE TABLE
@@ -536,9 +536,9 @@ Enter the following command to write query results to a clustered destination ta
 
 ### API
 
-To save query results to a clustered table, call the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) , configure a [`  query  ` job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery) , and include a `  CREATE TABLE  ` [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statement that creates your clustered table.
+To save query results to a clustered table, call the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) , configure a [`query` job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery) , and include a `CREATE TABLE` [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statement that creates your clustered table.
 
-Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+Specify your location in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
 ## Create a clustered table when you load data
 
@@ -550,7 +550,7 @@ To define clustering when defining a load job:
 
 ### SQL
 
-Use the [`  LOAD DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads AVRO data to create a table that is partitioned by the `  transaction_date  ` field and clustered by the `  customer_id  ` field. It also configures the partitions to expire after three days.
+Use the [`LOAD DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads AVRO data to create a table that is partitioned by the `transaction_date` field and clustered by the `customer_id` field. It also configures the partitions to expire after three days.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -575,7 +575,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-To define a clustering configuration when creating a table through a load job, you can populate the [`  Clustering  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#clustering) properties for the table.
+To define a clustering configuration when creating a table through a load job, you can populate the [`Clustering`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#clustering) properties for the table.
 
 ### Go
 
@@ -765,4 +765,4 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
   - For information about querying clustered tables, see [Querying clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
   - For an overview of partitioned table support in BigQuery, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
   - To learn how to create partitioned tables, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
-  - To see an overview of `  INFORMATION_SCHEMA  ` , see [Introduction to BigQuery `  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+  - To see an overview of `INFORMATION_SCHEMA` , see [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .

@@ -70,7 +70,7 @@ The following table shows the type of tasks you can perform for each type of rou
 <ul>
 <li>Run multiple statements in a sequence, with shared state.</li>
 <li>Automate management tasks such as creating or dropping tables.</li>
-<li>Implement complex logic using programming constructs such as <code dir="ltr" translate="no">         IF        </code> and <code dir="ltr" translate="no">         WHILE        </code> .</li>
+<li>Implement complex logic using programming constructs such as <code dir="ltr" translate="no">IF</code> and <code dir="ltr" translate="no">WHILE</code> .</li>
 </ul>
 <p>Create and call stored procedures for Apache Spark in BigQuery.</p></td>
 <td><p>Stored procedures</p></td>
@@ -104,7 +104,7 @@ For more information about UDFs, see the following resources:
 
 ### Community contributed UDFs
 
-In addition to the UDFs you create, community contributed UDFs are available in the `  bigquery-public-data.persistent_udfs  ` public dataset and the open source [`  bigquery-utils  ` GitHub repository](https://github.com/GoogleCloudPlatform/bigquery-utils) .
+In addition to the UDFs you create, community contributed UDFs are available in the `bigquery-public-data.persistent_udfs` public dataset and the open source [`bigquery-utils` GitHub repository](https://github.com/GoogleCloudPlatform/bigquery-utils) .
 
 ## User-defined aggregate functions (UDAFs)
 
@@ -120,7 +120,7 @@ For more information, see the following resources:
 
 ### SQL UDAFs
 
-SQL UDAFs normally aggregate function parameters across all rows in a [group](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) . However, you can specify a function parameter as non-aggregate by using the `  NOT AGGREGATE  ` keyword. A non-aggregate function parameter is a scalar function parameter with a constant value for all rows in a group. SQL UDAFs can contain both aggregate and non-aggregate parameters.
+SQL UDAFs normally aggregate function parameters across all rows in a [group](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) . However, you can specify a function parameter as non-aggregate by using the `NOT AGGREGATE` keyword. A non-aggregate function parameter is a scalar function parameter with a constant value for all rows in a group. SQL UDAFs can contain both aggregate and non-aggregate parameters.
 
 ### Javascript UDAFs
 
@@ -189,7 +189,7 @@ UDFs and UDAFs have the following differences:
 <tr class="even">
 <td><p>Arguments and data types</p></td>
 <td><p>UDFs accept parameter values that conform to GoogleSQL for BigQuery <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">data types</a> . Some SQL types have a direct mapping to JavaScript types, but others don't. See <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#supported-javascript-udf-data-types">supported types for Javascript</a> .</p>
-<p>For a SQL UDF, parameter values can be <code dir="ltr" translate="no">        ANY TYPE       </code> , which can match more than one argument type when the function is called.</p>
+<p>For a SQL UDF, parameter values can be <code dir="ltr" translate="no">ANY TYPE</code> , which can match more than one argument type when the function is called.</p>
 <p>Only Javascript UDFs have a determinism specifier that provides a hint to BigQuery as to whether the query result can be cached.</p></td>
 <td><p>SQL and Javascript UDAFs accept parameters values that conform to GoogleSQL for BigQuery <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">data types</a> .</p>
 <p>Function parameters can be aggregate or non-aggregate.</p></td>
@@ -229,7 +229,7 @@ The following tasks are examples of what you can do with remote functions:
 Creating a remote function requires the following steps:
 
 1.  Create the HTTP endpoint in Cloud Run functions or Cloud Run.
-2.  Create a remote function in BigQuery using the `  CLOUD_RESOURCE  ` connection type.
+2.  Create a remote function in BigQuery using the `CLOUD_RESOURCE` connection type.
 3.  Use the remote function in a query just like any other UDF for BigQuery.
 
 For more information about remote functions, see [Remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) , [Limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#limitations) , and [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#remote_function_limits) .

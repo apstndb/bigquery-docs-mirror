@@ -1,12 +1,12 @@
 # Troubleshoot IAM permissions in BigQuery
 
-This document shows you how to troubleshoot issues with Identity and Access Management (IAM) permissions in BigQuery. IAM permission issues typically result in `  Access Denied  ` errors like the following:
+This document shows you how to troubleshoot issues with Identity and Access Management (IAM) permissions in BigQuery. IAM permission issues typically result in `Access Denied` errors like the following:
 
-  - `  Access Denied: Project PROJECT_ID : User does not have bigquery.jobs.create permission in project PROJECT_ID .  `
-  - `  Access Denied: Project PROJECT_ID : User does not have bigquery.datasets.get permission on dataset DATASET .  `
-  - `  User does not have permission to query table PROJECT_ID:DATASET.TABLE .  `
-  - `  Access Denied: Table PROJECT_ID:DATASET.TABLE : User does not have permission to query table PROJECT_ID:DATASET.TABLE , or perhaps it does not exist.  `
-  - `  Access Denied: User PRINCIPAL does not have permission to perform bigquery.tables.getData on resource 'projects/ PROJECT_ID /datasets/ DATASET /tables/ TABLE '.  `
+  - `Access Denied: Project PROJECT_ID : User does not have bigquery.jobs.create permission in project PROJECT_ID .`
+  - `Access Denied: Project PROJECT_ID : User does not have bigquery.datasets.get permission on dataset DATASET .`
+  - `User does not have permission to query table PROJECT_ID:DATASET.TABLE .`
+  - `Access Denied: Table PROJECT_ID:DATASET.TABLE : User does not have permission to query table PROJECT_ID:DATASET.TABLE , or perhaps it does not exist.`
+  - `Access Denied: User PRINCIPAL does not have permission to perform bigquery.tables.getData on resource 'projects/ PROJECT_ID /datasets/ DATASET /tables/ TABLE '.`
 
 ## Before you begin
 
@@ -54,15 +54,15 @@ If the error message is generic, missing information, or if the action failed in
 
 4.  In the query results, expand the log entry that corresponds to your failed operation.
 
-5.  In the `  protoPayload  ` section, expand the `  authorizationInfo  ` array, and then expand each node in the `  authorizationInfo  ` array.
+5.  In the `protoPayload` section, expand the `authorizationInfo` array, and then expand each node in the `authorizationInfo` array.
     
-    The `  authorizationInfo  ` array shows every permission check performed during the API call.
+    The `authorizationInfo` array shows every permission check performed during the API call.
 
-6.  To see the cause of the error, look for the `  granted: false  ` entry. The `  granted: false  ` entry shows the following information:
+6.  To see the cause of the error, look for the `granted: false` entry. The `granted: false` entry shows the following information:
     
-      - `  permission  ` : The IAM permission string that was checked. For example, `  bigquery.tables.getData  ` .
-      - `  resource  ` : The fully qualified name of the resource that the principal attempted to access. For example, `  projects/myproject/datasets/mydataset/tables/mytable  ` .
-      - `  principalEmail  ` (if available): Referenced in `  protoPayload.authenticationInfo  ` , this is the principal that attempted the action.
+      - `permission` : The IAM permission string that was checked. For example, `bigquery.tables.getData` .
+      - `resource` : The fully qualified name of the resource that the principal attempted to access. For example, `projects/myproject/datasets/mydataset/tables/mytable` .
+      - `principalEmail` (if available): Referenced in `protoPayload.authenticationInfo` , this is the principal that attempted the action.
     
     ![The authorizationInfo section of the protoPayload that shows the permission, resource, and principalEmail.](https://docs.cloud.google.com/bigquery/images/authinfo.png)
 
@@ -94,15 +94,15 @@ To use Policy Analyzer for allow policies, you create an analysis query, specify
     
     3.  Click add **Add parameter** .
     
-    4.  For **Parameter 2** , choose **Permission** , and in the **Permission** field, click **Select** , choose the BigQuery permission, and then click **Add** . For example, select **`  bigquery.tables.getData  `** .
+    4.  For **Parameter 2** , choose **Permission** , and in the **Permission** field, click **Select** , choose the BigQuery permission, and then click **Add** . For example, select **`bigquery.tables.getData`** .
     
     5.  Click add **Add parameter** .
     
     6.  For **Parameter 3** , choose **Resource** , and in the **Resource** field, enter the fully qualified resource name. The resource name must include the service prefix as in the following examples:
         
-          - **BigQuery project** : `  //cloudresourcemanager.googleapis.com/projects/ PROJECT_ID  `
-          - **BigQuery dataset** : `  //bigquery.googleapis.com/projects/ PROJECT_ID /datasets/ DATASET  `
-          - **BigQuery table** : `  //bigquery.googleapis.com/projects/ PROJECT /datasets/ DATASET /tables/ TABLE  `
+          - **BigQuery project** : ` //cloudresourcemanager.googleapis.com/projects/ PROJECT_ID  `
+          - **BigQuery dataset** : ` //bigquery.googleapis.com/projects/ PROJECT_ID /datasets/ DATASET  `
+          - **BigQuery table** : ` //bigquery.googleapis.com/projects/ PROJECT /datasets/ DATASET /tables/ TABLE  `
 
 4.  In the **Custom query** pane, click **Analyze \> Run query** .
 
@@ -121,11 +121,11 @@ To find the correct predefined IAM role, follow these steps.
 
 1.  Open the [BigQuery permissions section](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) of the BigQuery IAM roles and permissions page.
 
-2.  In the **Enter a permission** search bar, enter the permission you retrieved from the error message, job history, or audit logs. For example, `  bigquery.tables.getData  ` .
+2.  In the **Enter a permission** search bar, enter the permission you retrieved from the error message, job history, or audit logs. For example, `bigquery.tables.getData` .
     
     The search results show all predefined BigQuery roles that grant the permission.
 
-3.  Apply the principle of least privilege: in the list of roles, choose the least permissive role that grants the required permissions. For example, if you searched for `  bigquery.tables.getData  ` to grant the ability to query table data, [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) is the least permissive role that grants that permission.
+3.  Apply the principle of least privilege: in the list of roles, choose the least permissive role that grants the required permissions. For example, if you searched for `bigquery.tables.getData` to grant the ability to query table data, [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) is the least permissive role that grants that permission.
 
 4.  Grant the principal the appropriate role. For information about how to grant an IAM role to a BigQuery resource, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 

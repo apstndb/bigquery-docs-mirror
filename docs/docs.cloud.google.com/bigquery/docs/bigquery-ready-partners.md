@@ -1938,7 +1938,7 @@ Data Governance, Security, & MDM
 
 **Description**
 
-Tamr Mastering is a template-based SaaS MDM solution, built on Google Cloud technologies such as Dataproc, Bigtable, and BigQuery. It helps customers scale modern data pipelines with excellent performance and controlled costs.
+Tamr Mastering is a template-based SaaS MDM solution, built on Google Cloud technologies such as Managed Service for Apache Spark, Bigtable, and BigQuery. It helps customers scale modern data pipelines with excellent performance and controlled costs.
 
 **Partner references**
 

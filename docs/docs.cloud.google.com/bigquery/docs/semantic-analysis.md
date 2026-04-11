@@ -8,9 +8,9 @@ In this tutorial, you:
 
   - Create a dataset and load sentiment data into a table
   - Use the following AI functions to perform semantic analysis:
-      - [`  AI.IF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) : to filter your data with natural language conditions
-      - [`  AI.SCORE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) : to rate input by sentiment
-      - [`  AI.CLASSIFY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : to classify input into user-defined categories
+      - [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) : to filter your data with natural language conditions
+      - [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) : to rate input by sentiment
+      - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : to classify input into user-defined categories
 
 ## Costs
 
@@ -29,7 +29,7 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
@@ -43,8 +43,8 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
 
 To get the permissions that you need to use AI functions, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run query jobs and load jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
+  - Run query jobs and load jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -52,11 +52,11 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## Create sample data
 
-To create a dataset called `  my_dataset  ` for this tutorial, run the following query.
+To create a dataset called `my_dataset` for this tutorial, run the following query.
 
     CREATE SCHEMA my_dataset OPTIONS (location = 'LOCATION');
 
-Next, create a table called `  customer_feedback  ` that contains sample customer reviews for a device:
+Next, create a table called `customer_feedback` that contains sample customer reviews for a device:
 
     CREATE TABLE my_dataset.customer_feedback AS (
       SELECT
@@ -82,7 +82,7 @@ It can be helpful to extract the overall sentiment expressed in text to support 
   - Monitor brand perception on social media.
   - Prioritize support tickets based on how upset users are.
 
-The following query shows how to use the `  AI.CLASSIFY  ` function to classify reviews from the `  customer_feedback  ` table as *positive* , *negative* , or *neutral* :
+The following query shows how to use the `AI.CLASSIFY` function to classify reviews from the `customer_feedback` table as *positive* , *negative* , or *neutral* :
 
     SELECT
       review_id,
@@ -142,7 +142,7 @@ The result looks similar to the following:
 
 If an overall sentiment such as *positive* or *negative* isn't sufficient for your use case, you can analyze a specific aspect of the meaning of text. For example, you might want to understand a user's attitude towards the quality of the product, without regard for their thoughts on its price. You can even ask for a custom value to indicate that a particular aspect doesn't apply.
 
-The following example shows how to use the `  AI.SCORE  ` function to rate user sentiment from 1 to 10 based on how favorable each review in the `  customer_feedback  ` table is toward price, customer service, and quality. The function returns the custom value -1 in cases where an aspect isn't mentioned in the review so that you can filter these out later.
+The following example shows how to use the `AI.SCORE` function to rate user sentiment from 1 to 10 based on how favorable each review in the `customer_feedback` table is toward price, customer service, and quality. The function returns the custom value -1 in cases where an aspect isn't mentioned in the review so that you can filter these out later.
 
     SELECT
       review_id,
@@ -244,7 +244,7 @@ The result looks similar to the following:
 
 ## Categorize reviews by topic
 
-You can use the `  AI.CLASSIFY  ` function to group reviews into predefined topics. For example, you can do the following:
+You can use the `AI.CLASSIFY` function to group reviews into predefined topics. For example, you can do the following:
 
   - Discover common themes in customer feedback.
   - Organize documents by subject matter.
@@ -278,7 +278,7 @@ The result looks similar to the following:
 
 ## Identify semantically similar reviews
 
-You can use the `  AI.SCORE  ` function to assess how semantically similar two pieces of text are by asking it to rate similarity of meaning. This can help you with tasks such as the following:
+You can use the `AI.SCORE` function to assess how semantically similar two pieces of text are by asking it to rate similarity of meaning. This can help you with tasks such as the following:
 
   - Find duplicate or near-duplicate entries.
   - Group similar pieces of feedback.
@@ -315,7 +315,7 @@ The result looks similar to the following:
 +-----------+------------------------------------------+------------------+
 ```
 
-You can also use the `  AI.IF  ` function to find reviews that relate to text:
+You can also use the `AI.IF` function to find reviews that relate to text:
 
     SELECT
       review_id,
@@ -345,7 +345,7 @@ It can be helpful to combine these functions in a single query. For example, the
 
 ## Create reusable prompt UDFs
 
-To keep your queries readable, you can reuse your prompt logic by creating [user-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) . The following query creates a function to detect negative sentiment by calling `  AI.IF  ` with a custom prompt. Then, it calls that function to filter by negative review.
+To keep your queries readable, you can reuse your prompt logic by creating [user-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) . The following query creates a function to detect negative sentiment by calling `AI.IF` with a custom prompt. Then, it calls that function to filter by negative review.
 
     CREATE OR REPLACE FUNCTION my_dataset.is_negative_sentiment(review_text STRING)
     RETURNS BOOL
@@ -371,7 +371,7 @@ To delete the project:
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 

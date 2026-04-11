@@ -10,23 +10,23 @@ When you query Spanner, query results are by default saved in temporary tables. 
 
 ## Required permissions
 
-To get the permission that you need to create an external dataset, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to create an external dataset, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  bigquery.datasets.create  ` permission, which is required to create an external dataset.
+This predefined role contains the `bigquery.datasets.create` permission, which is required to create an external dataset.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-## Use a `     CLOUD_RESOURCE    ` connection
+## Use a `CLOUD_RESOURCE` connection
 
-Optionally, Spanner external datasets can use a `  CLOUD_RESOURCE  ` connection to interact with your Spanner database, so that you can provide a user access to Spanner data through BigQuery, without giving them direct access to the Spanner database. Because the service account from `  CLOUD_RESOURCE  ` connection handles retrieving data from the Spanner, you only have to grant users access to the Spanner external dataset.
+Optionally, Spanner external datasets can use a `CLOUD_RESOURCE` connection to interact with your Spanner database, so that you can provide a user access to Spanner data through BigQuery, without giving them direct access to the Spanner database. Because the service account from `CLOUD_RESOURCE` connection handles retrieving data from the Spanner, you only have to grant users access to the Spanner external dataset.
 
-Before you create Spanner external datasets with a `  CLOUD_RESOURCE  ` connection, do the following:
+Before you create Spanner external datasets with a `CLOUD_RESOURCE` connection, do the following:
 
 ### Create a connection
 
-You can create or use an existing [`  CLOUD_RESOURCE  ` connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to Spanner. Make sure to create the connection in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) that you plan to create your Spanner external dataset.
+You can create or use an existing [`CLOUD_RESOURCE` connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to Spanner. Make sure to create the connection in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) that you plan to create your Spanner external dataset.
 
 Select one of the following options:
 
@@ -60,7 +60,7 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -96,7 +96,7 @@ For more information about how to run queries, see [Run an interactive query](ht
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
     
-    The `  --project_id  ` parameter overrides the default project.
+    The `--project_id` parameter overrides the default project.
     
     Replace the following:
     
@@ -234,13 +234,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Terraform
 
-Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
 ``` lang-terraform
 # This queries the provider for project information.
@@ -274,13 +274,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -292,7 +292,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -304,7 +304,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -318,7 +318,7 @@ After you create the connection, open it, and in the **Connection info** pane, c
 
 ### Set up access
 
-You must give the service account that is associated with the new connection read access to your Spanner instance or database. It is recommended to use Cloud Spanner Database Reader with DataBoost ( `  roles/spanner.databaseReaderWithDataBoost  ` ) predefined IAM role.
+You must give the service account that is associated with the new connection read access to your Spanner instance or database. It is recommended to use Cloud Spanner Database Reader with DataBoost ( `roles/spanner.databaseReaderWithDataBoost` ) predefined IAM role.
 
 Follow these steps to grant access to database-level roles for the service account that you copied earlier from the connection:
 
@@ -363,13 +363,13 @@ To create an external dataset, do the following:
     
       - For **Dataset ID** , enter a unique dataset name.
     
-      - For **Location type** , choose a location for the dataset, such as `  us-central1  ` or multiregion `  us  ` . After you create a dataset, the location can't be changed.
+      - For **Location type** , choose a location for the dataset, such as `us-central1` or multiregion `us` . After you create a dataset, the location can't be changed.
     
       - For **External Dataset** , do the following:
         
           - Check the box next to **Link to an external dataset** .
-          - For **External dataset type** , select `  Spanner  ` .
-          - For **External source** , enter the full identifier of your Spanner database in the following format: `  projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `  projects/my_project/instances/my_instance/databases/my_database  ` .
+          - For **External dataset type** , select `Spanner` .
+          - For **External source** , enter the full identifier of your Spanner database in the following format: ` projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `projects/my_project/instances/my_instance/databases/my_database` .
           - Optionally, for **Database role** enter the name of a Spanner database role. For more information read about Database roles used for [creating Spanner Connections](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner#create-spanner-connection)
           - Optionally, check the box next to **Use a Cloud Resource connection** to create the external dataset with a connection.
     
@@ -379,7 +379,7 @@ To create an external dataset, do the following:
 
 ### SQL
 
-Use the [`  CREATE EXTERNAL SCHEMA  ` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_schema_statement) .
+Use the [`CREATE EXTERNAL SCHEMA` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_schema_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -388,25 +388,14 @@ Use the [`  CREATE EXTERNAL SCHEMA  ` data definition language (DDL) statement](
 2.  In the query editor, enter the following statement:
     
     ``` notranslate
-    CREATE EXTERNAL SCHEMA DATASET_NAME
-      OPTIONS (
-        external_source = 'SPANNER_EXTERNAL_SOURCE',
-        location = 'LOCATION');
-    /*
-      Alternatively, create with a connection:
-    */
-    CREATE EXTERNAL SCHEMA DATASET_NAME
-      WITH CONNECTION PROJECT_ID.LOCATION.CONNECTION_NAME
-      OPTIONS (
-        external_source = 'SPANNER_EXTERNAL_SOURCE',
-        location = 'LOCATION');
+    CREATE EXTERNAL SCHEMA DATASET_NAME  OPTIONS (    external_source = 'SPANNER_EXTERNAL_SOURCE',    location = 'LOCATION');/*  Alternatively, create with a connection:*/CREATE EXTERNAL SCHEMA DATASET_NAME  WITH CONNECTION PROJECT_ID.LOCATION.CONNECTION_NAME  OPTIONS (    external_source = 'SPANNER_EXTERNAL_SOURCE',    location = 'LOCATION');
     ```
     
     Replace the following:
     
       - `  DATASET_NAME  ` : the name of your new dataset in BigQuery.
-      - `  SPANNER_EXTERNAL_SOURCE  ` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: `  google-cloudspanner://[ DATABASE_ROLE @]/projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `  google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database  ` or `  google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database  ` .
-      - `  LOCATION  ` : the location of your new dataset in BigQuery, for example, `  us-central1  ` . After you create a dataset, you can't change its location.
+      - `  SPANNER_EXTERNAL_SOURCE  ` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: ` google-cloudspanner://[ DATABASE_ROLE @]/projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` or `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database` .
+      - `  LOCATION  ` : the location of your new dataset in BigQuery, for example, `us-central1` . After you create a dataset, you can't change its location.
       - (Optional) `  CONNECTION_NAME  ` : the name of your Cloud resource connection.
 
 3.  Click play\_circle **Run** .
@@ -415,7 +404,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-In a command-line environment, create an external dataset by using the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
+In a command-line environment, create an external dataset by using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
 
 ``` notranslate
 bq --location=LOCATION mk --dataset \
@@ -434,14 +423,14 @@ bq --location=LOCATION mk --dataset \
 
 Replace the following:
 
-  - `  LOCATION  ` : the location of your new dataset in BigQuery—for example, `  us-central1  ` . After you create a dataset, you can't change its location. You can set a default location value by using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  SPANNER_EXTERNAL_SOURCE  ` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: `  google-cloudspanner://[ DATABASE_ROLE @]/projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `  google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database  ` or `  google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database  ` .
+  - `  LOCATION  ` : the location of your new dataset in BigQuery—for example, `us-central1` . After you create a dataset, you can't change its location. You can set a default location value by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  SPANNER_EXTERNAL_SOURCE  ` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: ` google-cloudspanner://[ DATABASE_ROLE @]/projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` or `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database` .
   - `  DATASET_NAME  ` : the name of your new dataset in BigQuery. To create a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID  ` : `  DATASET_NAME  ` .
   - (Optional) `  CONNECTION_NAME  ` : the name of your Cloud resource connection.
 
 ### Terraform
 
-Use the [`  google_bigquery_dataset  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset#example-usage---bigquery-dataset-external-reference-aws-docs) .
+Use the [`google_bigquery_dataset` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset#example-usage---bigquery-dataset-external-reference-aws-docs) .
 
 **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
@@ -482,13 +471,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
     
         mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
-    Copy the sample code into the newly created `  main.tf  ` .
+    Copy the sample code into the newly created `main.tf` .
     
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
@@ -500,7 +489,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
         terraform init
     
-    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
     
         terraform init -upgrade
 
@@ -512,7 +501,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
     
     Make corrections to the configuration as necessary.
 
-2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
     
         terraform apply
     
@@ -524,11 +513,11 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  datasets.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) and [`  externalDatasetReference  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference) for your Spanner database.
+Call the [`datasets.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) and [`externalDatasetReference` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference) for your Spanner database.
 
 Note that names of the tables in the external datasets are case insensitive.
 
-When you create the external datasets with a `  CLOUD_RESOURCE  ` connection, you need to have the `  bigquery.connections.delegate  ` permission (available from the BigQuery Connection Admin role) on the connection that is used by the external datasets.
+When you create the external datasets with a `CLOUD_RESOURCE` connection, you need to have the `bigquery.connections.delegate` permission (available from the BigQuery Connection Admin role) on the connection that is used by the external datasets.
 
 ## Control access to tables
 
@@ -560,9 +549,9 @@ Deleting an external dataset is the same as deleting any other BigQuery dataset.
 
 ## Create a non-incremental materialized view based on tables from an external dataset
 
-Before you proceed, you must create the underlying Spanner external dataset using a [`  CLOUD_RESOURCE  ` connection](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets#use_a_cloud_resource_connection) .
+Before you proceed, you must create the underlying Spanner external dataset using a [`CLOUD_RESOURCE` connection](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets#use_a_cloud_resource_connection) .
 
-You can create non-incremental materialized views that reference [Spanner external dataset tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) by using the `  allow_non_incremental_definition  ` option. The following example uses a base Spanner external dataset table:
+You can create non-incremental materialized views that reference [Spanner external dataset tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) by using the `allow_non_incremental_definition` option. The following example uses a base Spanner external dataset table:
 
 ``` notranslate
 /*
@@ -585,7 +574,7 @@ AS
   - If a table in Spanner database contains a column of a type that isn't supported by BigQuery then this column won't be accessible on BigQuery side.
   - You can't add, delete, or update data or metadata in tables in a Spanner external dataset.
   - You can't create new tables, views, or materialized views in a Spanner external dataset.
-  - [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) aren't supported.
+  - [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) aren't supported.
   - [Metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) isn't supported.
   - Dataset-level settings that are related to table creation defaults don't affect external datasets because you can't create tables manually.
   - Write API and Read API aren't supported.

@@ -6,7 +6,7 @@ To learn how to create a Datastore export file, see [Exporting and importing ent
 
 **Note:** If you intend to load a Datastore export into BigQuery, you must specify an entity filter in your [export command](https://docs.cloud.google.com/datastore/docs/export-import-entities#exporting_entities) . Data exported without specifying an entity filter cannot be loaded into BigQuery.
 
-You can control which properties BigQuery should load by setting the [`  projectionFields  ` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.projection_fields) in the API or by using the `  --projection_fields  ` flag in the bq command-line tool.
+You can control which properties BigQuery should load by setting the [`projectionFields` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.projection_fields) in the API or by using the `--projection_fields` flag in the bq command-line tool.
 
 If you prefer to skip the loading process, you can query the export directly by setting it up as an external data source. For more information, see [External data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
@@ -35,26 +35,26 @@ To load data into BigQuery, you need IAM permissions to run a load job and load 
 
 To load data into a new BigQuery table or partition or to append or overwrite an existing table or partition, you need the following IAM permissions:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.tables.updateData  `
-  - `  bigquery.tables.update  `
-  - `  bigquery.jobs.create  `
+  - `bigquery.tables.create`
+  - `bigquery.tables.updateData`
+  - `bigquery.tables.update`
+  - `bigquery.jobs.create`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to load data into a BigQuery table or partition:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.user  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.jobUser  ` (includes the `  bigquery.jobs.create  ` permission)
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.user` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.jobUser` (includes the `bigquery.jobs.create` permission)
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create and update tables using a load job in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can create and update tables using a load job in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### Permissions to load data from Cloud Storage
 
-To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to load data from a Cloud Storage bucket. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -62,9 +62,9 @@ This predefined role contains the permissions required to load data from a Cloud
 
 The following permissions are required to load data from a Cloud Storage bucket:
 
-  - `  storage.buckets.get  `
-  - `  storage.objects.get  `
-  - `  storage.objects.list (required if you are using a URI wildcard )  `
+  - `storage.buckets.get`
+  - `storage.objects.get`
+  - `storage.objects.list (required if you are using a URI wildcard )`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -88,7 +88,7 @@ In the **Create table** pane, specify the following details:
 
 1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
     1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite.  
-        The URI for your Datastore export file must end with `  KIND_NAME .export_metadata  ` or `  export[NUM].export_metadata  ` . For example, in `  default_namespace_kind_Book.export_metadata  ` , `  Book  ` is the kind name, and `  default_namespace_kind_Book  ` is the filename generated by Datastore. ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
+        The URI for your Datastore export file must end with `  KIND_NAME .export_metadata ` or `export[NUM].export_metadata` . For example, in `default_namespace_kind_Book.export_metadata` , `Book` is the kind name, and `default_namespace_kind_Book` is the filename generated by Datastore. ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
     2.  For **File format** , select **Cloud Datastore Backup** .
 2.  In the **Destination** section, specify the following details:
     1.  For **Dataset** , select the dataset in which you want to create the table.
@@ -104,7 +104,7 @@ In the **Create table** pane, specify the following details:
 
 ### bq
 
-Use the `  bq load  ` command with `  source_format  ` set to `  DATASTORE_BACKUP  ` . Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+Use the `bq load` command with `source_format` set to `DATASTORE_BACKUP` . Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
     bq --location=LOCATION load \
     --source_format=FORMAT \
@@ -113,13 +113,13 @@ Use the `  bq load  ` command with `  source_format  ` set to `  DATASTORE_BACKU
 
 Replace the following:
 
-  - `  LOCATION  ` : your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  FORMAT  ` : `  DATASTORE_BACKUP  ` .
+  - `  LOCATION  ` : your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  FORMAT  ` : `DATASTORE_BACKUP` .
   - `  DATASET  ` : the dataset that contains the table into which you're loading data.
   - `  TABLE  ` : the table into which you're loading data. If the table does not exist, it is created.
   - `  PATH_TO_SOURCE  ` : the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) .
 
-For example, the following command loads the `  gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_Book.export_metadata  ` Datastore export file into a table named `  book_data  ` . `  mybucket  ` and `  mydataset  ` were created in the `  US  ` multi-region location.
+For example, the following command loads the `gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_Book.export_metadata` Datastore export file into a table named `book_data` . `mybucket` and `mydataset` were created in the `US` multi-region location.
 
     bq --location=US load \
     --source_format=DATASTORE_BACKUP \
@@ -132,17 +132,17 @@ Set the following properties to load Datastore export data using the [API](https
 
 1.  Create a [load job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) that points to the source data in Cloud Storage.
 
-2.  Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The [source URIs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_uris) must be fully qualified, in the format gs://\[BUCKET\]/\[OBJECT\]. The file (object) name must end in `  [KIND_NAME].export_metadata  ` . Only one URI is allowed for Datastore exports, and you cannot use a wildcard.
+3.  The [source URIs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_uris) must be fully qualified, in the format gs://\[BUCKET\]/\[OBJECT\]. The file (object) name must end in `[KIND_NAME].export_metadata` . Only one URI is allowed for Datastore exports, and you cannot use a wildcard.
 
-4.  Specify the data format by setting the [`  JobConfigurationLoad.sourceFormat  ` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_format) to `  DATASTORE_BACKUP  ` .
+4.  Specify the data format by setting the [`JobConfigurationLoad.sourceFormat` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_format) to `DATASTORE_BACKUP` .
 
 ## Appending to or overwriting a table with Datastore data
 
 When you load Datastore export data into BigQuery, you can create a new table to store the data, or you can overwrite an existing table. You cannot append Datastore export data to an existing table.
 
-If you attempt to append Datastore export data to an existing table, the following error results: `  Cannot append a datastore backup to a table that already has a schema. Try using the WRITE_TRUNCATE write disposition to replace the existing table  ` .
+If you attempt to append Datastore export data to an existing table, the following error results: `Cannot append a datastore backup to a table that already has a schema. Try using the WRITE_TRUNCATE write disposition to replace the existing table` .
 
 To overwrite an existing table with Datastore export data:
 
@@ -162,7 +162,7 @@ In the **Create table** pane, specify the following details:
 
 1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
     1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite.  
-        The URI for your Datastore export file must end with `  KIND_NAME .export_metadata  ` or `  export[NUM].export_metadata  ` . For example, in `  default_namespace_kind_Book.export_metadata  ` , `  Book  ` is the kind name, and `  default_namespace_kind_Book  ` is the filename generated by Datastore. ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
+        The URI for your Datastore export file must end with `  KIND_NAME .export_metadata ` or `export[NUM].export_metadata` . For example, in `default_namespace_kind_Book.export_metadata` , `Book` is the kind name, and `default_namespace_kind_Book` is the filename generated by Datastore. ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
     2.  For **File format** , select **Cloud Datastore Backup** .
 2.  In the **Destination** section, specify the following details:
     1.  For **Dataset** , select the dataset in which you want to create the table.
@@ -178,7 +178,7 @@ In the **Create table** pane, specify the following details:
 
 ### bq
 
-Use the `  bq load  ` command with the `  --replace  ` flag and with `  source_format  ` set to `  DATASTORE_BACKUP  ` . Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+Use the `bq load` command with the `--replace` flag and with `source_format` set to `DATASTORE_BACKUP` . Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
     bq --location=LOCATION load \
     --source_format=FORMAT \
@@ -188,13 +188,13 @@ Use the `  bq load  ` command with the `  --replace  ` flag and with `  source_f
 
 Replace the following:
 
-  - `  LOCATION  ` : your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  FORMAT  ` : `  DATASTORE_BACKUP  ` .
+  - `  LOCATION  ` : your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  FORMAT  ` : `DATASTORE_BACKUP` .
   - `  DATASET  ` : the dataset containing the table into which you're loading data.
   - `  TABLE  ` : the table you're overwriting.
   - `  PATH_TO_SOURCE  ` : the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) .
 
-For example, the following command loads the `  gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_Book.export_metadata  ` Datastore export file and overwrites a table named `  book_data  ` :
+For example, the following command loads the `gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_Book.export_metadata` Datastore export file and overwrites a table named `book_data` :
 
     bq load --source_format=DATASTORE_BACKUP \
     --replace \
@@ -207,21 +207,21 @@ Set the following properties to load data from the [API](https://docs.cloud.goog
 
 1.  Create a [load job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) that points to the source data in Cloud Storage.
 
-2.  Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The [source URIs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_uris) must be fully qualified, in the format gs://\[BUCKET\]/\[OBJECT\]. The file (object) name must end in `  [KIND_NAME].export_metadata  ` . Only one URI is allowed for Datastore exports, and you cannot use a wildcard.
+3.  The [source URIs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_uris) must be fully qualified, in the format gs://\[BUCKET\]/\[OBJECT\]. The file (object) name must end in `[KIND_NAME].export_metadata` . Only one URI is allowed for Datastore exports, and you cannot use a wildcard.
 
-4.  Specify the data format by setting the [`  JobConfigurationLoad.sourceFormat  ` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_format) to `  DATASTORE_BACKUP  ` .
+4.  Specify the data format by setting the [`JobConfigurationLoad.sourceFormat` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.source_format) to `DATASTORE_BACKUP` .
 
-5.  Specify the write disposition by setting the [`  JobConfigurationLoad.writeDisposition  ` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) to `  WRITE_TRUNCATE  ` .
+5.  Specify the write disposition by setting the [`JobConfigurationLoad.writeDisposition` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) to `WRITE_TRUNCATE` .
 
 ## Datastore options
 
 To change how BigQuery parses Datastore export data, specify the following option:
 
-| Console option | bq tool flag                         | BigQuery API property                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                         |
-| -------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Not available  | `        --projection_fields       ` | [projectionFields](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.projection_fields) | A comma-separated list that indicates which entity properties to load into BigQuery from a Datastore export. Property names are case-sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn't found in the Datastore export, an invalid error is returned in the job result. The default value is ''. |
+| Console option | bq tool flag          | BigQuery API property                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                         |
+| -------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Not available  | `--projection_fields` | [projectionFields](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.projection_fields) | A comma-separated list that indicates which entity properties to load into BigQuery from a Datastore export. Property names are case-sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn't found in the Datastore export, an invalid error is returned in the job result. The default value is ''. |
 
 ## Data type conversion
 
@@ -241,63 +241,63 @@ BigQuery converts data from each entity in Datastore export files to BigQuery [d
 <tbody>
 <tr class="odd">
 <td>Array</td>
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
+<td><code dir="ltr" translate="no">ARRAY</code></td>
 </tr>
 <tr class="even">
 <td>Blob</td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td><code dir="ltr" translate="no">BYTES</code></td>
 </tr>
 <tr class="odd">
 <td>Boolean</td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td><code dir="ltr" translate="no">BOOLEAN</code></td>
 </tr>
 <tr class="even">
 <td>Date and time</td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 </tr>
 <tr class="odd">
 <td>Embedded entity</td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 </tr>
 <tr class="even">
 <td>Floating-point number</td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
+<td><code dir="ltr" translate="no">FLOAT</code></td>
 </tr>
 <tr class="odd">
 <td>Geographical point</td>
-<td><p><code dir="ltr" translate="no">        RECORD       </code></p>
+<td><p><code dir="ltr" translate="no">RECORD</code></p>
 <pre dir="ltr" data-is-upgraded="" translate="no"><code>[{&quot;lat&quot;,&quot;DOUBLE&quot;},
  {&quot;long&quot;,&quot;DOUBLE&quot;}]
         </code></pre></td>
 </tr>
 <tr class="even">
 <td>Integer</td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
 </tr>
 <tr class="odd">
 <td>Key</td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
 </tr>
 <tr class="even">
 <td>Null</td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 </tr>
 <tr class="odd">
 <td>Text string</td>
-<td><code dir="ltr" translate="no">       STRING      </code> (truncated to 64 KB)</td>
+<td><code dir="ltr" translate="no">STRING</code> (truncated to 64 KB)</td>
 </tr>
 </tbody>
 </table>
 
 ## Datastore key properties
 
-Each entity in Datastore has a unique key that contains information such as the namespace and the path. BigQuery creates a `  RECORD  ` data type for the key, with nested fields for each piece of information, as described in the following table.
+Each entity in Datastore has a unique key that contains information such as the namespace and the path. BigQuery creates a `RECORD` data type for the key, with nested fields for each piece of information, as described in the following table.
 
-| Key property                       | Description                                                                                                                                                                                                                                                                                                                          | BigQuery data type |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| `        __key__.app       `       | The Datastore app name.                                                                                                                                                                                                                                                                                                              | STRING             |
-| `        __key__.id       `        | The entity's ID, or `        null       ` if `        __key__.name       ` is set.                                                                                                                                                                                                                                                   | INTEGER            |
-| `        __key__.kind       `      | The entity's kind.                                                                                                                                                                                                                                                                                                                   | STRING             |
-| `        __key__.name       `      | The entity's name, or `        null       ` if `        __key__.id       ` is set.                                                                                                                                                                                                                                                   | STRING             |
-| `        __key__.namespace       ` | If the Datastore app uses a custom namespace, the entity's namespace. Else, the default namespace is represented by an empty string.                                                                                                                                                                                                 | STRING             |
-| `        __key__.path       `      | The flattened [ancestral path of the entity](https://docs.cloud.google.com/appengine/docs/java/datastore/entities#Java_Ancestor_paths) , consisting of the sequence of kind-identifier pairs from the root entity to the entity itself. For example: `        "Country", "USA", "PostalCode",         10011, "Route", 1234       ` . | STRING             |
+| Key property        | Description                                                                                                                                                                                                                                                                                                   | BigQuery data type |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `__key__.app`       | The Datastore app name.                                                                                                                                                                                                                                                                                       | STRING             |
+| `__key__.id`        | The entity's ID, or `null` if `__key__.name` is set.                                                                                                                                                                                                                                                          | INTEGER            |
+| `__key__.kind`      | The entity's kind.                                                                                                                                                                                                                                                                                            | STRING             |
+| `__key__.name`      | The entity's name, or `null` if `__key__.id` is set.                                                                                                                                                                                                                                                          | STRING             |
+| `__key__.namespace` | If the Datastore app uses a custom namespace, the entity's namespace. Else, the default namespace is represented by an empty string.                                                                                                                                                                          | STRING             |
+| `__key__.path`      | The flattened [ancestral path of the entity](https://docs.cloud.google.com/appengine/docs/java/datastore/entities#Java_Ancestor_paths) , consisting of the sequence of kind-identifier pairs from the root entity to the entity itself. For example: `"Country", "USA", "PostalCode", 10011, "Route", 1234` . | STRING             |

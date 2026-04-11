@@ -15,7 +15,7 @@ Ensure that you have the necessary Identity and Access Management (IAM) permissi
 
 ### Required roles
 
-To get the permissions that you need to restore a deleted table, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to restore a deleted table, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -25,13 +25,13 @@ You can restore a table from historical data by copying the historical data into
 
 When you restore a table from historical data, [tags](https://docs.cloud.google.com/bigquery/docs/tags) from the source table aren't copied to the destination table. Table partitioning information also isn't copied to the destination table. To recreate the partitioning scheme of the original table, you can view the initial table creation request in [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface) and use that information to partition the restored table.
 
-You can restore a table that was deleted but is still within the time travel window by copying the table to a new table, using the `  @<time>  ` time decorator. You can't query a deleted table, even if you use a time decorator. You must restore it first.
+You can restore a table that was deleted but is still within the time travel window by copying the table to a new table, using the `@<time>` time decorator. You can't query a deleted table, even if you use a time decorator. You must restore it first.
 
-Use the following syntax with the `  @<time>  ` time decorator:
+Use the following syntax with the `@<time>` time decorator:
 
-  - `  tableid@ TIME  ` where `  TIME  ` is the number of milliseconds since the Unix epoch.
-  - `  tableid@- TIME_OFFSET  ` where `  TIME_OFFSET  ` is the relative offset from the current time, in milliseconds.
-  - `  tableid@0  ` : Specifies the oldest available historical data.
+  - ` tableid@ TIME  ` where `  TIME  ` is the number of milliseconds since the Unix epoch.
+  - ` tableid@- TIME_OFFSET  ` where `  TIME_OFFSET  ` is the relative offset from the current time, in milliseconds.
+  - `tableid@0` : Specifies the oldest available historical data.
 
 To restore a table, select one of the following options:
 
@@ -47,21 +47,21 @@ You can't undelete a table by using the Google Cloud console.
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  To restore a table, first determine a UNIX timestamp of when the table existed (in milliseconds). You can use the Linux `  date  ` command to generate the Unix timestamp from a regular timestamp value:
+2.  To restore a table, first determine a UNIX timestamp of when the table existed (in milliseconds). You can use the Linux `date` command to generate the Unix timestamp from a regular timestamp value:
     
     ``` lang-sh
     date -d '2023-08-04 16:00:34.456789Z' +%s000
     ```
 
-3.  Then, use the `  bq copy  ` command with the `  @<time>  ` time travel decorator to perform the table copy operation.
+3.  Then, use the `bq copy` command with the `@<time>` time travel decorator to perform the table copy operation.
     
-    For example, enter the following command to copy the `  mydataset.mytable  ` table at the time `  1418864998000  ` into a new table `  mydataset.newtable  ` .
+    For example, enter the following command to copy the `mydataset.mytable` table at the time `1418864998000` into a new table `mydataset.newtable` .
     
     ``` lang-sh
     bq cp mydataset.mytable@1418864998000 mydataset.newtable
     ```
     
-    (Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+    (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
     
     You can also specify a relative offset. The following example copies the version of a table from one hour ago:
     
@@ -69,7 +69,7 @@ You can't undelete a table by using the Google Cloud console.
     bq cp mydataset.mytable@-3600000 mydataset.newtable
     ```
     
-    **Note:** If you attempt to recover data prior to the time travel window or from a time before the table was created, you'll receive an `  Invalid time travel timestamp  ` error. For more information, see [Troubleshoot table recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#troubleshoot_table_recovery) .
+    **Note:** If you attempt to recover data prior to the time travel window or from a time before the table was created, you'll receive an `Invalid time travel timestamp` error. For more information, see [Troubleshoot table recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#troubleshoot_table_recovery) .
 
 ### Go
 
@@ -326,11 +326,11 @@ Replace the following:
 
 ## Identify the cause of table deletion
 
-You can use the [`  INFORMATION_SCHEMA.TABLE_STORAGE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) view to determine how a table was deleted.
+You can use the [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) view to determine how a table was deleted.
 
-The `  INFORMATION_SCHEMA.TABLE_STORAGE  ` view contains information about current tables and tables deleted within the time travel window. If a table was deleted, the `  table_deletion_time  ` column contains the deletion timestamp, and the `  table_deletion_reason  ` column contains the deletion method.
+The `INFORMATION_SCHEMA.TABLE_STORAGE` view contains information about current tables and tables deleted within the time travel window. If a table was deleted, the `table_deletion_time` column contains the deletion timestamp, and the `table_deletion_reason` column contains the deletion method.
 
-To determine the reason a table was deleted, query the `  INFORMATION_SCHEMA.TABLE_STORAGE  ` view:
+To determine the reason a table was deleted, query the `INFORMATION_SCHEMA.TABLE_STORAGE` view:
 
 ``` notranslate
 SELECT
@@ -352,23 +352,23 @@ Replace the following variables:
   - `  DATASET_ID  ` : the ID of the dataset that contained the table.
   - `  TABLE_ID  ` : the ID of the deleted table.
 
-The `  table_deletion_reason  ` column explains why the table was deleted:
+The `table_deletion_reason` column explains why the table was deleted:
 
-  - `  TABLE_EXPIRATION  ` : The table was deleted after the set expiration time.
-  - `  DATASET_DELETION  ` : The dataset the table belonged to was deleted by a user.
-  - `  USER_DELETED  ` : The table was deleted by a user.
+  - `TABLE_EXPIRATION` : The table was deleted after the set expiration time.
+  - `DATASET_DELETION` : The dataset the table belonged to was deleted by a user.
+  - `USER_DELETED` : The table was deleted by a user.
 
 ## Troubleshoot table recovery
 
 ### Querying the deleted table using a timestamp in the past
 
-You cannot restore table data by querying a deleted table in the past using a timestamp decorator or by using [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) to save the result in a destination table. Using either of these methods generates the following error:
+You cannot restore table data by querying a deleted table in the past using a timestamp decorator or by using [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) to save the result in a destination table. Using either of these methods generates the following error:
 
     Not found: Table myproject:mydataset.table was not found in location LOCATION
 
 Instead, to copy the table, follow the steps in [Restore a table](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#restore_a_table) .
 
-### Error: `     VPC Service Controls: Request is prohibited by organization's policy    `
+### Error: `VPC Service Controls: Request is prohibited by organization's policy`
 
 When you attempt to run the copy command from Google Cloud Shell you may encounter an error like the following:
 
@@ -376,7 +376,7 @@ When you attempt to run the copy command from Google Cloud Shell you may encount
 
 Using Cloud Shell from the Google Cloud console with VPC SC is [not supported](https://docs.cloud.google.com/vpc-service-controls/docs/supported-products#shell) , because it gets treated as a request outside of the service perimeters and access to data that VPC Service Controls protects is denied. To work around this issue, launch and [connect to Cloud Shell locally](https://docs.cloud.google.com/shell/docs/launching-cloud-shell#launch_and_connect_locally_to_with_the) with the Google Cloud CLI.
 
-### Error: `     Latest categories are incompatible with schema    `
+### Error: `Latest categories are incompatible with schema`
 
 If you run the copy command from Google Cloud Shell, you may receive an error like the following:
 
@@ -392,23 +392,23 @@ To resolve this error:
 1.  Ensure that the schema of the destination table is identical, and ensure that none of the columns in the original table are missing from the destination table.
 2.  Remove any column-level policy tags from the destination table that aren't in the original table's schema.
 
-### Error: `     BigQuery error in cp operation: Invalid time travel timestamp    `
+### Error: `BigQuery error in cp operation: Invalid time travel timestamp`
 
-If you run the `  bq copy  ` command from Google Cloud Shell, you may receive an error like the following:
+If you run the `bq copy` command from Google Cloud Shell, you may receive an error like the following:
 
     BigQuery error in cp operation: Invalid time travel timestamp 1744343690000 for
     table PROJECT_ID:DATASET_ID.TABLE_ID@1744343690000.
     Cannot read before 1744843691075
 
-This error indicates that you are trying to recover data from the table state prior to the time travel window or before the table was created. This is not supported. The error message contains the latest timestamp that can be used to read the table data. Use the timestamp in the error in the `  bq copy  ` command.
+This error indicates that you are trying to recover data from the table state prior to the time travel window or before the table was created. This is not supported. The error message contains the latest timestamp that can be used to read the table data. Use the timestamp in the error in the `bq copy` command.
 
-This error can also occur when you provide a negative timestamp value, for example, `  TABLE@-1744963620000  ` . Instead, use a time-offset that can be used with the `  -  ` sign.
+This error can also occur when you provide a negative timestamp value, for example, `TABLE@-1744963620000` . Instead, use a time-offset that can be used with the `-` sign.
 
     BigQuery error in cp operation: Invalid time travel timestamp 584878816 for
     table PROJECT_ID:DATASET_ID.TABLE_ID@584878816.
     Cannot read before 1744843691075
 
-This error message indicates that the `  bq cp  ` command contains a negative timestamp value as an offset, and that you attempted to read the table at `  CURRENT_TIMESTAMP - PROVIDED TIMESTAMP  ` . This value is normally a timestamp in 1970. To work around this issue, verify the offset or timestamp values when you set the table decorator value and use the `  -  ` sign appropriately.
+This error message indicates that the `bq cp` command contains a negative timestamp value as an offset, and that you attempted to read the table at `CURRENT_TIMESTAMP - PROVIDED TIMESTAMP` . This value is normally a timestamp in 1970. To work around this issue, verify the offset or timestamp values when you set the table decorator value and use the `-` sign appropriately.
 
 ### Materialized views
 
@@ -424,7 +424,7 @@ You can't restore a deleted external table directly. If you delete an external t
   - The source URI(s) pointing to the external data
   - The format of the external data
 
-You can obtain this information from [Cloud Logging](https://cloud.google.com/logging) by looking for the table creation log entry. You can also try to get the URI(s) by querying the [`  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) if the table was just deleted.
+You can obtain this information from [Cloud Logging](https://cloud.google.com/logging) by looking for the table creation log entry. You can also try to get the URI(s) by querying the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) if the table was just deleted.
 
 Deleting the external table doesn't delete the underlying data.
 

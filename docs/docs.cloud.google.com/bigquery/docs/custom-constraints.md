@@ -6,11 +6,11 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 This page shows you how to use Organization Policy Service custom constraints to restrict specific operations on the following Google Cloud resources:
 
-  - `  bigquery.googleapis.com/Dataset  `
-  - `  bigquery.googleapis.com/Routine  `
-  - `  bigquery.googleapis.com/Table  `
-  - `  bigquery.googleapis.com/RowAccessPolicy  `
-  - `  bigquerydatapolicy.googleapis.com/DataPolicy  `
+  - `bigquery.googleapis.com/Dataset`
+  - `bigquery.googleapis.com/Routine`
+  - `bigquery.googleapis.com/Table`
+  - `bigquery.googleapis.com/RowAccessPolicy`
+  - `bigquerydatapolicy.googleapis.com/DataPolicy`
 
 To learn more about Organization Policy, see [Custom organization policies](https://docs.cloud.google.com/organization-policy/overview#custom-organization-policies) .
 
@@ -30,7 +30,7 @@ You can use a custom organization policy to allow or deny specific operations on
 
 ## Limitations
 
-  - [`  PolicyViolationInfo  `](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Audit/latest/Google.Cloud.Audit.PolicyViolationInfo) isn't published in the [BigQuery audit logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) when access is denied due to custom constraints on resources other than datasets. The error message provides the `  constraintId  ` that denied the operation.
+  - [`PolicyViolationInfo`](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Audit/latest/Google.Cloud.Audit.PolicyViolationInfo) isn't published in the [BigQuery audit logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) when access is denied due to custom constraints on resources other than datasets. The error message provides the `constraintId` that denied the operation.
 
 ## Before you begin
 
@@ -38,9 +38,9 @@ You can use a custom organization policy to allow or deny specific operations on
 
 ### Required roles
 
-To get the permission that you need to manage organization policies, ask your administrator to grant you the [Organization Policy Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `  roles/orgpolicy.policyAdmin  ` ) IAM role on the organization resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to manage organization policies, ask your administrator to grant you the [Organization Policy Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `roles/orgpolicy.policyAdmin` ) IAM role on the organization resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `  orgpolicy.*  ` permission, which is required to manage organization policies.
+This predefined role contains the `orgpolicy.*` permission, which is required to manage organization policies.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -64,19 +64,19 @@ Click add **Custom constraint** .
 
 In the **Display name** box, enter a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use personally identifiable information (PII) or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
 
-In the **Constraint ID** box, enter the ID that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example `  custom.enforceDatasetId  ` . This field can contain up to 70 characters, not counting the prefix ( `  custom.  ` ), for example, `  organizations/123456789/customConstraints/custom  ` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
+In the **Constraint ID** box, enter the ID that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example `custom.enforceDatasetId` . This field can contain up to 70 characters, not counting the prefix ( `custom.` ), for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
 
 In the **Description** box, enter a human-readable description of the constraint. This description is used as an error message when the policy is violated. Include details about why the policy violation occurred and how to resolve the policy violation. Don't include PII or sensitive data in your description, because it could be exposed in error messages. This field can contain up to 2000 characters.
 
-In the **Resource type** box, select the name of the Google Cloud REST resource containing the object and field that you want to restrict—for example, `  container.googleapis.com/NodePool  ` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
+In the **Resource type** box, select the name of the Google Cloud REST resource containing the object and field that you want to restrict—for example, `container.googleapis.com/NodePool` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
 
-Under **Enforcement method** , select whether to enforce the constraint on a REST `  CREATE  ` method or both `  CREATE  ` and `  UPDATE  ` methods. If you enforce the constraint with the `  UPDATE  ` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
+Under **Enforcement method** , select whether to enforce the constraint on a REST `CREATE` method or both `CREATE` and `UPDATE` methods. If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
 
 To see supported methods for each service, find the service in [Services that support custom constraints](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services) .
 
 To define a condition, click edit **Edit condition** .
 
-1.  In the **Add condition** panel, create a CEL condition that refers to a supported service resource, for example, `  resource.management.autoUpgrade == false  ` . This field can contain up to 1000 characters. For details about CEL usage, see [Common Expression Language](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) . For more information about the service resources you can use in your custom constraints, see [Custom constraint supported services](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services) .
+1.  In the **Add condition** panel, create a CEL condition that refers to a supported service resource, for example, `resource.management.autoUpgrade == false` . This field can contain up to 1000 characters. For details about CEL usage, see [Common Expression Language](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) . For more information about the service resources you can use in your custom constraints, see [Custom constraint supported services](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services) .
 2.  Click **Save** .
 
 Under **Action** , select whether to allow or deny the evaluated method if the condition is met.
@@ -105,24 +105,24 @@ To create a custom constraint, create a YAML file using the following format:
 
 Replace the following:
 
-  - `  ORGANIZATION_ID  ` : your organization ID, such as `  123456789  ` .
-  - `  CONSTRAINT_NAME  ` : the name that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example, `  custom.enforceDatasetId  ` . This field can contain up to 70 characters, not counting the prefix ( `  custom.  ` )— for example, `  organizations/123456789/customConstraints/custom  ` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
-  - `  RESOURCE_NAME  ` : the fully qualified name of the Google Cloud resource containing the object and field that you want to restrict. For example, `  bigquery.googleapis.com/Dataset  ` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
-  - `  methodTypes  ` : the REST methods that the constraint is enforced on. Can be `  CREATE  ` or both `  CREATE  ` and `  UPDATE  ` . If you enforce the constraint with the `  UPDATE  ` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
-  - `  CONDITION  ` : a [CEL condition](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) that is written against a representation of a supported service resource. This field can contain up to 1000 characters. For example, `  "datasetReference.datasetId.startsWith('test')"  ` .
-  - `  ACTION  ` : the action to take if the `  condition  ` is met. Possible values are `  ALLOW  ` and `  DENY  ` .
+  - `  ORGANIZATION_ID  ` : your organization ID, such as `123456789` .
+  - `  CONSTRAINT_NAME  ` : the name that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example, `custom.enforceDatasetId` . This field can contain up to 70 characters, not counting the prefix ( `custom.` )— for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
+  - `  RESOURCE_NAME  ` : the fully qualified name of the Google Cloud resource containing the object and field that you want to restrict. For example, `bigquery.googleapis.com/Dataset` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
+  - `methodTypes` : the REST methods that the constraint is enforced on. Can be `CREATE` or both `CREATE` and `UPDATE` . If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
+  - `  CONDITION  ` : a [CEL condition](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) that is written against a representation of a supported service resource. This field can contain up to 1000 characters. For example, `"datasetReference.datasetId.startsWith('test')"` .
+  - `  ACTION  ` : the action to take if the `condition` is met. Possible values are `ALLOW` and `DENY` .
   - `  DISPLAY_NAME  ` : a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use PII or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
   - `  DESCRIPTION  ` : a human-friendly description of the constraint to display as an error message when the policy is violated. This field can contain up to 2000 characters.
 
-After you have created the YAML file for a new custom constraint, you must set it up to make it available for organization policies in your organization. To set up a custom constraint, use the [`  gcloud org-policies set-custom-constraint  `](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint) command:
+After you have created the YAML file for a new custom constraint, you must set it up to make it available for organization policies in your organization. To set up a custom constraint, use the [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint) command:
 
     gcloud org-policies set-custom-constraint CONSTRAINT_PATH
 
-Replace `  CONSTRAINT_PATH  ` with the full path to your custom constraint file. For example, `  /home/user/customconstraint.yaml  ` .
+Replace `  CONSTRAINT_PATH  ` with the full path to your custom constraint file. For example, `/home/user/customconstraint.yaml` .
 
 After this operation is complete, your custom constraints are available as organization policies in your list of Google Cloud organization policies.
 
-To verify that the custom constraint exists, use the [`  gcloud org-policies list-custom-constraints  `](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints) command:
+To verify that the custom constraint exists, use the [`gcloud org-policies list-custom-constraints`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints) command:
 
     gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
 
@@ -176,15 +176,15 @@ To create an organization policy with boolean rules, create a policy YAML file t
 Replace the following:
 
   - `  PROJECT_ID  ` : the project that you want to enforce your constraint on.
-  - `  CONSTRAINT_NAME  ` : the name you defined for your custom constraint. For example, `  custom.enforceDatasetId  ` .
+  - `  CONSTRAINT_NAME  ` : the name you defined for your custom constraint. For example, `custom.enforceDatasetId` .
 
-To enforce the organization policy in [dry-run mode](https://docs.cloud.google.com/organization-policy/test-policies) , run the following command with the `  dryRunSpec  ` flag:
+To enforce the organization policy in [dry-run mode](https://docs.cloud.google.com/organization-policy/test-policies) , run the following command with the `dryRunSpec` flag:
 
     gcloud org-policies set-policy POLICY_PATH --update-mask=dryRunSpec
 
 Replace `  POLICY_PATH  ` with the full path to your organization policy YAML file. The policy requires up to 15 minutes to take effect.
 
-After you verify that the organization policy in dry-run mode works as intended, set the live policy with the `  org-policies set-policy  ` command and the `  spec  ` flag:
+After you verify that the organization policy in dry-run mode works as intended, set the live policy with the `org-policies set-policy` command and the `spec` flag:
 
     gcloud org-policies set-policy POLICY_PATH --update-mask=spec
 
@@ -192,7 +192,7 @@ Replace `  POLICY_PATH  ` with the full path to your organization policy YAML fi
 
 ## Test the custom organization policy
 
-The following example creates a custom constraint and policy that forbids all new dataset IDs in a specific project from beginning with `  test  ` .
+The following example creates a custom constraint and policy that forbids all new dataset IDs in a specific project from beginning with `test` .
 
 Before you begin, you must have the following:
 
@@ -203,7 +203,7 @@ Before you begin, you must have the following:
 
 To create a custom constraint, follow these steps:
 
-1.  Create the following YAML file and save it as `  constraint-enforce-datasetId.yaml  ` :
+1.  Create the following YAML file and save it as `constraint-enforce-datasetId.yaml` :
     
         name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceDatasetId
         resourceTypes:
@@ -237,7 +237,7 @@ To create a custom constraint, follow these steps:
 
 Now create a policy and apply it to the custom constraint that you created.
 
-1.  Save the following file as `  policy-enforce-datasetId.yaml  ` :
+1.  Save the following file as `policy-enforce-datasetId.yaml` :
     
         name: projects/PROJECT_ID/policies/custom.enforceDatasetId
         spec:
@@ -357,71 +357,71 @@ Field
 
 bigquery.googleapis.com/Dataset
 
-`  resource.datasetReference.datasetId  `
+`resource.datasetReference.datasetId`
 
-`  resource.defaultCollation  `
+`resource.defaultCollation`
 
-`  resource.defaultEncryptionConfiguration.kmsKeyName  `
+`resource.defaultEncryptionConfiguration.kmsKeyName`
 
-`  resource.defaultPartitionExpirationMs  `
+`resource.defaultPartitionExpirationMs`
 
-`  resource.defaultRoundingMode  `
+`resource.defaultRoundingMode`
 
-`  resource.defaultTableExpirationMs  `
+`resource.defaultTableExpirationMs`
 
-`  resource.description  `
+`resource.description`
 
-`  resource.externalCatalogDatasetOptions.defaultStorageLocationUri  `
+`resource.externalCatalogDatasetOptions.defaultStorageLocationUri`
 
-`  resource.externalCatalogDatasetOptions.parameters  `
+`resource.externalCatalogDatasetOptions.parameters`
 
-`  resource.externalDatasetReference.connection  `
+`resource.externalDatasetReference.connection`
 
-`  resource.externalDatasetReference.externalSource  `
+`resource.externalDatasetReference.externalSource`
 
-`  resource.friendlyName  `
+`resource.friendlyName`
 
-`  resource.isCaseInsensitive  `
+`resource.isCaseInsensitive`
 
-`  resource.linkedDatasetSource.sourceDataset.datasetId  `
+`resource.linkedDatasetSource.sourceDataset.datasetId`
 
-`  resource.location  `
+`resource.location`
 
-`  resource.maxTimeTravelHours  `
+`resource.maxTimeTravelHours`
 
-`  resource.storageBillingModel  `
+`resource.storageBillingModel`
 
 bigquery.googleapis.com/Routine
 
-`  resource.routineReference.datasetId  `
+`resource.routineReference.datasetId`
 
-`  resource.routineReference.projectId  `
+`resource.routineReference.projectId`
 
-`  resource.routineReference.routineId  `
+`resource.routineReference.routineId`
 
 bigquery.googleapis.com/RowAccessPolicy
 
-`  resource.rowAccessPolicyReference.datasetId  `
+`resource.rowAccessPolicyReference.datasetId`
 
-`  resource.rowAccessPolicyReference.policyId  `
+`resource.rowAccessPolicyReference.policyId`
 
-`  resource.rowAccessPolicyReference.projectId  `
+`resource.rowAccessPolicyReference.projectId`
 
-`  resource.rowAccessPolicyReference.tableId  `
+`resource.rowAccessPolicyReference.tableId`
 
 bigquery.googleapis.com/Table
 
-`  resource.tableReference.datasetId  `
+`resource.tableReference.datasetId`
 
-`  resource.tableReference.projectId  `
+`resource.tableReference.projectId`
 
-`  resource.tableReference.tableId  `
+`resource.tableReference.tableId`
 
 bigquerydatapolicy.googleapis.com/DataPolicy
 
-`  resource.dataMaskingPolicy.predefinedExpression  `
+`resource.dataMaskingPolicy.predefinedExpression`
 
-`  resource.dataPolicyType  `
+`resource.dataPolicyType`
 
 ## What's next
 

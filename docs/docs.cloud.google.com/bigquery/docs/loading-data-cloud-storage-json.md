@@ -23,13 +23,13 @@ When you load JSON files into BigQuery, note the following:
 
   - The maximum size for a gzip file is 4 GB.
 
-  - BigQuery supports the `  JSON  ` type even if schema information is not known at the time of ingestion. A field that is declared as `  JSON  ` type is loaded with the raw JSON values.
+  - BigQuery supports the `JSON` type even if schema information is not known at the time of ingestion. A field that is declared as `JSON` type is loaded with the raw JSON values.
 
   - If you use the BigQuery API to load an integer outside the range of \[-2 <sup>53</sup> +1, 2 <sup>53</sup> -1\] (usually this means larger than 9,007,199,254,740,991), into an integer (INT64) column, pass it as a string to avoid data corruption. This issue is caused by a limitation on integer size in JSON or ECMAScript. For more information, see [the Numbers section of RFC 7159](https://www.rfc-editor.org/rfc/rfc7159.html#section-6) .
 
-  - When you load CSV or JSON data, values in `  DATE  ` columns must use the dash ( `  -  ` ) separator and the date must be in the following format: `  YYYY-MM-DD  ` (year-month-day).
+  - When you load CSV or JSON data, values in `DATE` columns must use the dash ( `-` ) separator and the date must be in the following format: `YYYY-MM-DD` (year-month-day).
 
-  - When you load JSON or CSV data, values in `  TIMESTAMP  ` columns must use a dash ( `  -  ` ) or slash ( `  /  ` ) separator for the date portion of the timestamp, and the date must be in one of the following formats: `  YYYY-MM-DD  ` (year-month-day) or `  YYYY/MM/DD  ` (year/month/day). The `  hh:mm:ss  ` (hour-minute-second) portion of the timestamp must use a colon ( `  :  ` ) separator.
+  - When you load JSON or CSV data, values in `TIMESTAMP` columns must use a dash ( `-` ) or slash ( `/` ) separator for the date portion of the timestamp, and the date must be in one of the following formats: `YYYY-MM-DD` (year-month-day) or `YYYY/MM/DD` (year/month/day). The `hh:mm:ss` (hour-minute-second) portion of the timestamp must use a colon ( `:` ) separator.
 
   - Your files must meet the JSON file size limits described in the [load jobs limits](https://docs.cloud.google.com/bigquery/quotas#load_jobs) .
 
@@ -45,26 +45,26 @@ To load data into BigQuery, you need IAM permissions to run a load job and load 
 
 To load data into a new BigQuery table or partition or to append or overwrite an existing table or partition, you need the following IAM permissions:
 
-  - `  bigquery.tables.create  `
-  - `  bigquery.tables.updateData  `
-  - `  bigquery.tables.update  `
-  - `  bigquery.jobs.create  `
+  - `bigquery.tables.create`
+  - `bigquery.tables.updateData`
+  - `bigquery.tables.update`
+  - `bigquery.jobs.create`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to load data into a BigQuery table or partition:
 
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.admin  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.user  ` (includes the `  bigquery.jobs.create  ` permission)
-  - `  bigquery.jobUser  ` (includes the `  bigquery.jobs.create  ` permission)
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.admin` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.user` (includes the `bigquery.jobs.create` permission)
+  - `bigquery.jobUser` (includes the `bigquery.jobs.create` permission)
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create and update tables using a load job in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can create and update tables using a load job in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### Permissions to load data from Cloud Storage
 
-To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to load data from a Cloud Storage bucket. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -72,9 +72,9 @@ This predefined role contains the permissions required to load data from a Cloud
 
 The following permissions are required to load data from a Cloud Storage bucket:
 
-  - `  storage.buckets.get  `
-  - `  storage.objects.get  `
-  - `  storage.objects.list (required if you are using a URI wildcard )  `
+  - `storage.buckets.get`
+  - `storage.objects.get`
+  - `storage.objects.list (required if you are using a URI wildcard )`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -84,7 +84,7 @@ Create a [BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets
 
 ## JSON compression
 
-You can use the `  gzip  ` utility to compress JSON files. Note that `  gzip  ` performs full file compression, unlike the file content compression performed by compression codecs for other file formats, such as Avro. Using `  gzip  ` to compress your JSON files might have a performance impact; for more information about the trade-offs, see [Loading compressed and uncompressed data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_compressed_and_uncompressed_data) .
+You can use the `gzip` utility to compress JSON files. Note that `gzip` performs full file compression, unlike the file content compression performed by compression codecs for other file formats, such as Avro. Using `gzip` to compress your JSON files might have a performance impact; for more information about the trade-offs, see [Loading compressed and uncompressed data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_compressed_and_uncompressed_data) .
 
 ## Loading JSON data into a new table
 
@@ -123,12 +123,12 @@ In the **Create table** pane, specify the following details:
 4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 5.  Click **Advanced options** and do the following:
       - For **Write preference** , leave **Write if empty** selected. This option creates a new table and loads your data into it.
-      - For **Number of errors allowed** , accept the default value of `  0  ` or enter the maximum number of rows containing errors that can be ignored. If the number of rows with errors exceeds this value, the job will result in an `  invalid  ` message and fail. This option applies only to CSV and JSON files.
+      - For **Number of errors allowed** , accept the default value of `0` or enter the maximum number of rows containing errors that can be ignored. If the number of rows with errors exceeds this value, the job will result in an `invalid` message and fail. This option applies only to CSV and JSON files.
       - For **Time zone** , enter the default time zone that will apply when parsing timestamp values that have no specific time zone. Check [here](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) for more valid time zone names. If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.
-      - For **Date Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files. This field expects SQL styles format (for example, `  MM/DD/YYYY  ` ). If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format. If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-      - For **Datetime Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files. This field expects SQL styles format (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ). If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format. If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-      - For **Time Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files. This field expects SQL styles format (for example, `  HH24:MI:SS.FF3  ` ). If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format. If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-      - For **Timestamp Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files. This field expects SQL styles format (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ). If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format. If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Date Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files. This field expects SQL styles format (for example, `MM/DD/YYYY` ). If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format. If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Datetime Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files. This field expects SQL styles format (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format. If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Time Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files. This field expects SQL styles format (for example, `HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format. If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Timestamp Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files. This field expects SQL styles format (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format. If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
       - If you want to ignore values in a row that are not present in the table's schema, then select **Unknown values** .
       - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) .
 6.  Click **Create table** .
@@ -139,7 +139,7 @@ After the table is created, you can update the table's expiration, description, 
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads a JSON file into the new table `  mytable  ` :
+Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads a JSON file into the new table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -161,39 +161,39 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the `  bq load  ` command, specify `  NEWLINE_DELIMITED_JSON  ` using the `  --source_format  ` flag, and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) . Supply the schema inline, in a schema definition file, or use [schema auto-detect](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
+Use the `bq load` command, specify `NEWLINE_DELIMITED_JSON` using the `--source_format` flag, and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) . Supply the schema inline, in a schema definition file, or use [schema auto-detect](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 Other optional flags include:
 
-  - `  --max_bad_records  ` : An integer that specifies the maximum number of bad records allowed before the entire job fails. The default value is `  0  ` . At most, five errors of any type are returned regardless of the `  --max_bad_records  ` value.
+  - `--max_bad_records` : An integer that specifies the maximum number of bad records allowed before the entire job fails. The default value is `0` . At most, five errors of any type are returned regardless of the `--max_bad_records` value.
 
-  - `  --ignore_unknown_values  ` : When specified, allows and ignores extra, unrecognized values in CSV or JSON data.
+  - `--ignore_unknown_values` : When specified, allows and ignores extra, unrecognized values in CSV or JSON data.
 
-  - `  --time_zone  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional default time zone that will apply when parsing timestamp values that have no specific time zone in CSV or JSON data.
+  - `--time_zone` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional default time zone that will apply when parsing timestamp values that have no specific time zone in CSV or JSON data.
 
-  - `  --date_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATE values are formatted in CSV or JSON data.
+  - `--date_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATE values are formatted in CSV or JSON data.
 
-  - `  --datetime_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATETIME values are formatted in CSV or JSON data.
+  - `--datetime_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATETIME values are formatted in CSV or JSON data.
 
-  - `  --time_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIME values are formatted in CSV or JSON data.
+  - `--time_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIME values are formatted in CSV or JSON data.
 
-  - `  --timestamp_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIMESTAMP values are formatted in CSV or JSON data.
+  - `--timestamp_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIMESTAMP values are formatted in CSV or JSON data.
 
-  - `  --autodetect  ` : When specified, enable schema auto-detection for CSV and JSON data.
+  - `--autodetect` : When specified, enable schema auto-detection for CSV and JSON data.
 
-  - `  --time_partitioning_type  ` : Enables time-based partitioning on a table and sets the partition type. Possible values are `  HOUR  ` , `  DAY  ` , `  MONTH  ` , and `  YEAR  ` . This flag is optional when you create a table partitioned on a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` column. The default partition type for time-based partitioning is `  DAY  ` . You cannot change the partitioning specification on an existing table.
+  - `--time_partitioning_type` : Enables time-based partitioning on a table and sets the partition type. Possible values are `HOUR` , `DAY` , `MONTH` , and `YEAR` . This flag is optional when you create a table partitioned on a `DATE` , `DATETIME` , or `TIMESTAMP` column. The default partition type for time-based partitioning is `DAY` . You cannot change the partitioning specification on an existing table.
 
-  - `  --time_partitioning_expiration  ` : An integer that specifies (in seconds) when a time-based partition should be deleted. The expiration time evaluates to the partition's UTC date plus the integer value.
+  - `--time_partitioning_expiration` : An integer that specifies (in seconds) when a time-based partition should be deleted. The expiration time evaluates to the partition's UTC date plus the integer value.
 
-  - `  --time_partitioning_field  ` : The `  DATE  ` or `  TIMESTAMP  ` column used to create a partitioned table. If time-based partitioning is enabled without this value, an ingestion-time partitioned table is created.
+  - `--time_partitioning_field` : The `DATE` or `TIMESTAMP` column used to create a partitioned table. If time-based partitioning is enabled without this value, an ingestion-time partitioned table is created.
 
-  - `  --require_partition_filter  ` : When enabled, this option requires users to include a `  WHERE  ` clause that specifies the partitions to query. Requiring a partition filter can reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+  - `--require_partition_filter` : When enabled, this option requires users to include a `WHERE` clause that specifies the partitions to query. Requiring a partition filter can reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-  - `  --clustering_fields  ` : A comma-separated list of up to four column names used to create a [clustered table](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+  - `--clustering_fields` : A comma-separated list of up to four column names used to create a [clustered table](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 
-  - `  --destination_kms_key  ` : The Cloud KMS key for encryption of the table data.
+  - `--destination_kms_key` : The Cloud KMS key for encryption of the table data.
     
     For more information on partitioned tables, see:
     
@@ -219,16 +219,16 @@ SCHEMA
 
 Replace the following:
 
-  - `  LOCATION  ` : your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  FORMAT  ` : `  NEWLINE_DELIMITED_JSON  ` .
+  - `  LOCATION  ` : your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  FORMAT  ` : `NEWLINE_DELIMITED_JSON` .
   - `  DATASET  ` : an existing dataset.
   - `  TABLE  ` : the name of the table into which you're loading data.
   - `  PATH_TO_SOURCE  ` : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
-  - `  SCHEMA  ` : a valid schema. The schema can be a local JSON file, or it can be typed inline as part of the command. If you use a schema file, do not give it an extension. You can also use the `  --autodetect  ` flag instead of supplying a schema definition.
+  - `  SCHEMA  ` : a valid schema. The schema can be a local JSON file, or it can be typed inline as part of the command. If you use a schema file, do not give it an extension. You can also use the `--autodetect` flag instead of supplying a schema definition.
 
 Examples:
 
-The following command loads data from `  gs://mybucket/mydata.json  ` into a table named `  mytable  ` in `  mydataset  ` . The schema is defined in a local schema file named `  myschema  ` .
+The following command loads data from `gs://mybucket/mydata.json` into a table named `mytable` in `mydataset` . The schema is defined in a local schema file named `myschema` .
 
 ``` 
     bq load \
@@ -238,7 +238,7 @@ The following command loads data from `  gs://mybucket/mydata.json  ` into a tab
     ./myschema
 ```
 
-The following command loads data from `  gs://mybucket/mydata.json  ` into a new ingestion-time partitioned table named `  mytable  ` in `  mydataset  ` . The schema is defined in a local schema file named `  myschema  ` .
+The following command loads data from `gs://mybucket/mydata.json` into a new ingestion-time partitioned table named `mytable` in `mydataset` . The schema is defined in a local schema file named `myschema` .
 
 ``` 
     bq load \
@@ -249,7 +249,7 @@ The following command loads data from `  gs://mybucket/mydata.json  ` into a new
     ./myschema
 ```
 
-The following command loads data from `  gs://mybucket/mydata.json  ` into a partitioned table named `  mytable  ` in `  mydataset  ` . The table is partitioned on the `  mytimestamp  ` column. The schema is defined in a local schema file named `  myschema  ` .
+The following command loads data from `gs://mybucket/mydata.json` into a partitioned table named `mytable` in `mydataset` . The table is partitioned on the `mytimestamp` column. The schema is defined in a local schema file named `myschema` .
 
 ``` 
     bq load \
@@ -260,7 +260,7 @@ The following command loads data from `  gs://mybucket/mydata.json  ` into a par
     ./myschema
 ```
 
-The following command loads data from `  gs://mybucket/mydata.json  ` into a table named `  mytable  ` in `  mydataset  ` . The schema is auto detected.
+The following command loads data from `gs://mybucket/mydata.json` into a table named `mytable` in `mydataset` . The schema is auto detected.
 
 ``` 
     bq load \
@@ -270,7 +270,7 @@ The following command loads data from `  gs://mybucket/mydata.json  ` into a tab
     gs://mybucket/mydata.json
 ```
 
-The following command loads data from `  gs://mybucket/mydata.json  ` into a table named `  mytable  ` in `  mydataset  ` . The schema is defined inline in the format `  FIELD:DATA_TYPE , FIELD:DATA_TYPE  ` .
+The following command loads data from `gs://mybucket/mydata.json` into a table named `mytable` in `mydataset` . The schema is defined inline in the format `  FIELD:DATA_TYPE , FIELD:DATA_TYPE  ` .
 
 ``` 
     bq load \
@@ -280,9 +280,9 @@ The following command loads data from `  gs://mybucket/mydata.json  ` into a tab
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-**Note:** When you specify the schema using the bq tool, you cannot include a `  RECORD  ` ( [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `  NULLABLE  ` . To include field descriptions, modes, and `  RECORD  ` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#specifying_a_schema_file) instead.
+**Note:** When you specify the schema using the bq tool, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#specifying_a_schema_file) instead.
 
-The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The Cloud Storage URI uses a wildcard. The schema is auto detected.
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard. The schema is auto detected.
 
 ``` 
     bq load \
@@ -292,7 +292,7 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
     gs://mybucket/mydata*.json
 ```
 
-The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The command includes a comma- separated list of Cloud Storage URIs with wildcards. The schema is defined in a local schema file named `  myschema  ` .
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The command includes a comma- separated list of Cloud Storage URIs with wildcards. The schema is defined in a local schema file named `myschema` .
 
 ``` 
     bq load \
@@ -304,27 +304,27 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
 
 ### API
 
-1.  Create a `  load  ` job that points to the source data in Cloud Storage.
+1.  Create a `load` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully qualified, in the format `  gs:// BUCKET / OBJECT  ` . Each URI can contain one '\*' [wildcard character](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
+3.  The `source URIs` property must be fully qualified, in the format ` gs:// BUCKET / OBJECT  ` . Each URI can contain one '\*' [wildcard character](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
-4.  Specify the `  JSON  ` data format by setting the `  sourceFormat  ` property to `  NEWLINE_DELIMITED_JSON  ` .
+4.  Specify the `JSON` data format by setting the `sourceFormat` property to `NEWLINE_DELIMITED_JSON` .
 
-5.  To check the job status, call [`  jobs.get( JOB_ID *)  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , replacing `  JOB_ID  ` with the ID of the job returned by the initial request.
+5.  To check the job status, call [`jobs.get( JOB_ID *)`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , replacing `  JOB_ID  ` with the ID of the job returned by the initial request.
     
-      - If `  status.state = DONE  ` , the job completed successfully.
-      - If the `  status.errorResult  ` property is present, the request failed, and that object includes information describing what went wrong. When a request fails, no table is created and no data is loaded.
-      - If `  status.errorResult  ` is absent, the job finished successfully; although, there might have been some nonfatal errors, such as problems importing a few rows. Nonfatal errors are listed in the returned job object's `  status.errors  ` property.
+      - If `status.state = DONE` , the job completed successfully.
+      - If the `status.errorResult` property is present, the request failed, and that object includes information describing what went wrong. When a request fails, no table is created and no data is loaded.
+      - If `status.errorResult` is absent, the job finished successfully; although, there might have been some nonfatal errors, such as problems importing a few rows. Nonfatal errors are listed in the returned job object's `status.errors` property.
 
 **API notes:**
 
   - Load jobs are atomic and consistent; if a load job fails, none of the data is available, and if a load job succeeds, all of the data is available.
 
-  - As a best practice, generate a unique ID and pass it as `  jobReference.jobId  ` when calling `  jobs.insert  ` to create a load job. This approach is more robust to network failure because the client can poll or retry on the known job ID.
+  - As a best practice, generate a unique ID and pass it as `jobReference.jobId` when calling `jobs.insert` to create a load job. This approach is more robust to network failure because the client can poll or retry on the known job ID.
 
-  - Calling `  jobs.insert  ` on a given job ID is idempotent. You can retry as many times as you like on the same job ID, and at most, one of those operations succeed.
+  - Calling `jobs.insert` on a given job ID is idempotent. You can retry as many times as you like on the same job ID, and at most, one of those operations succeed.
 
 ### C\#
 
@@ -332,7 +332,7 @@ Before trying this sample, follow the C\# setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Use the [`  BigQueryClient.CreateLoadJob()  `](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.BigQueryClient#Google_Cloud_BigQuery_V2_BigQueryClient_CreateLoadJob_System_Collections_Generic_IEnumerable_System_String__Google_Apis_Bigquery_v2_Data_TableReference_Google_Apis_Bigquery_v2_Data_TableSchema_Google_Cloud_BigQuery_V2_CreateLoadJobOptions_) method to start a load job from Cloud Storage. To use JSONL, create a [`  CreateLoadJobOptions  `](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.CreateLoadJobOptions) object and set its [`  SourceFormat  `](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.CreateLoadJobOptions#Google_Cloud_BigQuery_V2_CreateLoadJobOptions_SourceFormat) property to [`  FileFormat.NewlineDelimitedJson  `](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.FileFormat) .
+Use the [`BigQueryClient.CreateLoadJob()`](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.BigQueryClient#Google_Cloud_BigQuery_V2_BigQueryClient_CreateLoadJob_System_Collections_Generic_IEnumerable_System_String__Google_Apis_Bigquery_v2_Data_TableReference_Google_Apis_Bigquery_v2_Data_TableSchema_Google_Cloud_BigQuery_V2_CreateLoadJobOptions_) method to start a load job from Cloud Storage. To use JSONL, create a [`CreateLoadJobOptions`](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.CreateLoadJobOptions) object and set its [`SourceFormat`](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.CreateLoadJobOptions#Google_Cloud_BigQuery_V2_CreateLoadJobOptions_SourceFormat) property to [`FileFormat.NewlineDelimitedJson`](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.FileFormat) .
 
     using Google.Apis.Bigquery.v2.Data;
     using Google.Cloud.BigQuery.V2;
@@ -600,7 +600,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Use the [Client.load\_table\_from\_uri()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_load_table_from_uri) method to start a load job from Cloud Storage. To use JSONL, set the [LoadJobConfig.source\_format property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_source_format) to the string `  NEWLINE_DELIMITED_JSON  ` and pass the job config as the `  job_config  ` argument to the `  load_table_from_uri()  ` method.
+Use the [Client.load\_table\_from\_uri()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_load_table_from_uri) method to start a load job from Cloud Storage. To use JSONL, set the [LoadJobConfig.source\_format property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_source_format) to the string `NEWLINE_DELIMITED_JSON` and pass the job config as the `job_config` argument to the `load_table_from_uri()` method.
 
     from google.cloud import bigquery
     
@@ -637,7 +637,7 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Use the [Dataset.load\_job()](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery/Dataset.html?method=load_job-instance) method to start a load job from Cloud Storage. To use JSONL, set the `  format  ` parameter to `  "json"  ` .
+Use the [Dataset.load\_job()](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery/Dataset.html?method=load_job-instance) method to start a load job from Cloud Storage. To use JSONL, set the `format` parameter to `"json"` .
 
     require "google/cloud/bigquery"
     
@@ -668,19 +668,19 @@ One [JSON](http://www.json.org) object, including any nested or repeated fields,
 
 The following example shows sample nested or repeated data. This table contains information about people. It consists of the following fields:
 
-  - `  id  `
-  - `  first_name  `
-  - `  last_name  `
-  - `  dob  ` (date of birth)
-  - `  addresses  ` (a nested and repeated field)
-      - `  addresses.status  ` (current or previous)
-      - `  addresses.address  `
-      - `  addresses.city  `
-      - `  addresses.state  `
-      - `  addresses.zip  `
-      - `  addresses.numberOfYears  ` (years at the address)
+  - `id`
+  - `first_name`
+  - `last_name`
+  - `dob` (date of birth)
+  - `addresses` (a nested and repeated field)
+      - `addresses.status` (current or previous)
+      - `addresses.address`
+      - `addresses.city`
+      - `addresses.state`
+      - `addresses.zip`
+      - `addresses.numberOfYears` (years at the address)
 
-The JSON data file would look like the following. Notice that the address field contains an array of values (indicated by `  [ ]  ` ).
+The JSON data file would look like the following. Notice that the address field contains an array of values (indicated by `[ ]` ).
 
     {"id":"1","first_name":"John","last_name":"Doe","dob":"1968-01-22","addresses":[{"status":"current","address":"123 First Avenue","city":"Seattle","state":"WA","zip":"11111","numberOfYears":"1"},{"status":"previous","address":"456 Main Street","city":"Portland","state":"OR","zip":"22222","numberOfYears":"5"}]}
     {"id":"2","first_name":"Jane","last_name":"Doe","dob":"1980-10-16","addresses":[{"status":"current","address":"789 Any Avenue","city":"New York","state":"NY","zip":"33333","numberOfYears":"2"},{"status":"previous","address":"321 Main Street","city":"Hoboken","state":"NJ","zip":"44444","numberOfYears":"3"}]}
@@ -753,7 +753,7 @@ For information on specifying a nested and repeated schema, see [Specifying nest
 
 ## Loading semi-structured JSON data
 
-BigQuery supports loading semi-structured data, in which a field can take values of different types. The following example shows data similar to the preceding [nested and repeated JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#loading_nested_and_repeated_json_data) example, except that the `  address  ` field can be a `  STRING  ` , a `  STRUCT  ` , or an `  ARRAY  ` :
+BigQuery supports loading semi-structured data, in which a field can take values of different types. The following example shows data similar to the preceding [nested and repeated JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#loading_nested_and_repeated_json_data) example, except that the `address` field can be a `STRING` , a `STRUCT` , or an `ARRAY` :
 
     {"id":"1","first_name":"John","last_name":"Doe","dob":"1968-01-22","address":"123 First Avenue, Seattle WA 11111"}
     
@@ -793,7 +793,7 @@ You can load this data into BigQuery by using the following schema:
 ]
 ```
 
-The `  address  ` field is loaded into a column with type [`  JSON  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) that allows it to hold the mixed types in the example. You can ingest data as `  JSON  ` whether it contains mixed types or not. For example, you could specify `  JSON  ` instead of `  STRING  ` as the type for the `  first_name  ` field. For more information, see [Working with JSON data in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/json-data) .
+The `address` field is loaded into a column with type [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) that allows it to hold the mixed types in the example. You can ingest data as `JSON` whether it contains mixed types or not. For example, you could specify `JSON` instead of `STRING` as the type for the `first_name` field. For more information, see [Working with JSON data in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/json-data) .
 
 ## Appending to or overwriting a table with JSON data
 
@@ -803,19 +803,19 @@ In the Google Cloud console, use the **Write preference** option to specify what
 
 You have the following options when you load additional data into a table:
 
-| Console option  | bq tool flag                                                                                                                               | BigQuery API property           | Description                                                                                                                                                              |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Write if empty  | Not supported                                                                                                                              | `        WRITE_EMPTY       `    | Writes the data only if the table is empty.                                                                                                                              |
-| Append to table | `        --noreplace       ` or `        --replace=false       ` ; if `        --[no]replace       ` is unspecified, the default is append | `        WRITE_APPEND       `   | ( [Default](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) ) Appends the data to the end of the table. |
-| Overwrite table | `        --replace       ` or `        --replace=true       `                                                                              | `        WRITE_TRUNCATE       ` | Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.           |
+| Console option  | bq tool flag                                                                                  | BigQuery API property | Description                                                                                                                                                              |
+| --------------- | --------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Write if empty  | Not supported                                                                                 | `WRITE_EMPTY`         | Writes the data only if the table is empty.                                                                                                                              |
+| Append to table | `--noreplace` or `--replace=false` ; if `--[no]replace` is unspecified, the default is append | `WRITE_APPEND`        | ( [Default](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) ) Appends the data to the end of the table. |
+| Overwrite table | `--replace` or `--replace=true`                                                               | `WRITE_TRUNCATE`      | Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.           |
 
 If you load data into an existing table, the load job can append the data or overwrite the table.
 
 You can append or overwrite a table by using one of the following:
 
   - The Google Cloud console
-  - The bq command-line tool's `  bq load  ` command
-  - The `  jobs.insert  ` API method and configuring a `  load  ` job
+  - The bq command-line tool's `bq load` command
+  - The `jobs.insert` API method and configuring a `load` job
   - The client libraries
 
 **Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
@@ -853,19 +853,19 @@ In the **Create table** pane, specify the following details:
 4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) . You cannot convert a table to a partitioned or clustered table by appending or overwriting it. The Google Cloud console does not support appending to or overwriting partitioned or clustered tables in a load job.
 5.  Click **Advanced options** and do the following:
       - For **Write preference** , choose **Append to table** or **Overwrite table** .
-      - For **Number of errors allowed** , accept the default value of `  0  ` or enter the maximum number of rows containing errors that can be ignored. If the number of rows with errors exceeds this value, the job will result in an `  invalid  ` message and fail. This option applies only to CSV and JSON files.
+      - For **Number of errors allowed** , accept the default value of `0` or enter the maximum number of rows containing errors that can be ignored. If the number of rows with errors exceeds this value, the job will result in an `invalid` message and fail. This option applies only to CSV and JSON files.
       - For **Time zone** , enter the default time zone that will apply when parsing timestamp values that have no specific time zone. Check [here](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) for more valid time zone names. If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.
-      - For **Date Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files. This field expects SQL styles format (for example, `  MM/DD/YYYY  ` ). If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format. If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-      - For **Datetime Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files. This field expects SQL styles format (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ). If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format. If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-      - For **Time Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files. This field expects SQL styles format (for example, `  HH24:MI:SS.FF3  ` ). If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format. If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-      - For **Timestamp Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files. This field expects SQL styles format (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ). If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format. If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Date Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files. This field expects SQL styles format (for example, `MM/DD/YYYY` ). If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format. If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Datetime Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files. This field expects SQL styles format (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format. If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Time Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files. This field expects SQL styles format (for example, `HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format. If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+      - For **Timestamp Format** , enter the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files. This field expects SQL styles format (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format. If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
       - If you want to ignore values in a row that are not present in the table's schema, then select **Unknown values** .
       - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) .
 6.  Click **Create table** .
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends a JSON file to the table `  mytable  ` :
+Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends a JSON file to the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -886,27 +886,27 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the `  bq load  ` command, specify `  NEWLINE_DELIMITED_JSON  ` using the `  --source_format  ` flag, and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
+Use the `bq load` command, specify `NEWLINE_DELIMITED_JSON` using the `--source_format` flag, and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
 Supply the schema inline, in a schema definition file, or use [schema auto-detect](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
 
-Specify the `  --replace  ` flag to overwrite the table. Use the `  --noreplace  ` flag to append data to the table. If no flag is specified, the default is to append data.
+Specify the `--replace` flag to overwrite the table. Use the `--noreplace` flag to append data to the table. If no flag is specified, the default is to append data.
 
 It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 Other optional flags include:
 
-  - `  --max_bad_records  ` : An integer that specifies the maximum number of bad records allowed before the entire job fails. The default value is `  0  ` . At most, five errors of any type are returned regardless of the `  --max_bad_records  ` value.
-  - `  --ignore_unknown_values  ` : When specified, allows and ignores extra, unrecognized values in CSV or JSON data.
-  - `  --time_zone  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional default time zone that will apply when parsing timestamp values that have no specific time zone in CSV or JSON data.
-  - `  --date_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATE values are formatted in CSV or JSON data.
-  - `  --datetime_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATETIME values are formatted in CSV or JSON data.
-  - `  --time_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIME values are formatted in CSV or JSON data.
-  - `  --timestamp_format  ` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIMESTAMP values are formatted in CSV or JSON data.
-  - `  --autodetect  ` : When specified, enable schema auto-detection for CSV and JSON data.
-  - `  --destination_kms_key  ` : The Cloud KMS key for encryption of the table data.
+  - `--max_bad_records` : An integer that specifies the maximum number of bad records allowed before the entire job fails. The default value is `0` . At most, five errors of any type are returned regardless of the `--max_bad_records` value.
+  - `--ignore_unknown_values` : When specified, allows and ignores extra, unrecognized values in CSV or JSON data.
+  - `--time_zone` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional default time zone that will apply when parsing timestamp values that have no specific time zone in CSV or JSON data.
+  - `--date_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATE values are formatted in CSV or JSON data.
+  - `--datetime_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the DATETIME values are formatted in CSV or JSON data.
+  - `--time_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIME values are formatted in CSV or JSON data.
+  - `--timestamp_format` : ( [Preview](https://cloud.google.com/products/#product-launch-stages) ) An optional custom string that defines how the TIMESTAMP values are formatted in CSV or JSON data.
+  - `--autodetect` : When specified, enable schema auto-detection for CSV and JSON data.
+  - `--destination_kms_key` : The Cloud KMS key for encryption of the table data.
 
 <!-- end list -->
 
@@ -921,16 +921,16 @@ SCHEMA
 
 Replace the following:
 
-  - `  LOCATION  ` : your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) . The `  --location  ` flag is optional. You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  FORMAT  ` : `  NEWLINE_DELIMITED_JSON  ` .
+  - `  LOCATION  ` : your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) . The `--location` flag is optional. You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  FORMAT  ` : `NEWLINE_DELIMITED_JSON` .
   - `  DATASET  ` : an existing dataset.
   - `  TABLE  ` : the name of the table into which you're loading data.
   - `  PATH_TO_SOURCE  ` : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
-  - `  SCHEMA  ` : a valid schema. The schema can be a local JSON file, or it can be typed inline as part of the command. You can also use the `  --autodetect  ` flag instead of supplying a schema definition.
+  - `  SCHEMA  ` : a valid schema. The schema can be a local JSON file, or it can be typed inline as part of the command. You can also use the `--autodetect` flag instead of supplying a schema definition.
 
 Examples:
 
-The following command loads data from `  gs://mybucket/mydata.json  ` and overwrites a table named `  mytable  ` in `  mydataset  ` . The schema is defined using [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
+The following command loads data from `gs://mybucket/mydata.json` and overwrites a table named `mytable` in `mydataset` . The schema is defined using [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
 
 ``` 
     bq load \
@@ -941,7 +941,7 @@ The following command loads data from `  gs://mybucket/mydata.json  ` and overwr
     gs://mybucket/mydata.json
 ```
 
-The following command loads data from `  gs://mybucket/mydata.json  ` and appends data to a table named `  mytable  ` in `  mydataset  ` . The schema is defined using a JSON schema file — `  myschema  ` .
+The following command loads data from `gs://mybucket/mydata.json` and appends data to a table named `mytable` in `mydataset` . The schema is defined using a JSON schema file — `myschema` .
 
 ``` 
     bq load \
@@ -954,15 +954,15 @@ The following command loads data from `  gs://mybucket/mydata.json  ` and append
 
 ### API
 
-1.  Create a `  load  ` job that points to the source data in Cloud Storage.
+1.  Create a `load` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully-qualified, in the format `  gs:// BUCKET / OBJECT  ` . You can include multiple URIs as a comma-separated list. The [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
+3.  The `source URIs` property must be fully-qualified, in the format ` gs:// BUCKET / OBJECT  ` . You can include multiple URIs as a comma-separated list. The [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
-4.  Specify the data format by setting the `  configuration.load.sourceFormat  ` property to `  NEWLINE_DELIMITED_JSON  ` .
+4.  Specify the data format by setting the `configuration.load.sourceFormat` property to `NEWLINE_DELIMITED_JSON` .
 
-5.  Specify the write preference by setting the `  configuration.load.writeDisposition  ` property to `  WRITE_TRUNCATE  ` or `  WRITE_APPEND  ` .
+5.  Specify the write preference by setting the `configuration.load.writeDisposition` property to `WRITE_TRUNCATE` or `WRITE_APPEND` .
 
 ### Go
 
@@ -1183,7 +1183,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Python
 
-To replace the rows in an existing table, set the [LoadJobConfig.write\_disposition property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_write_disposition) to the string `  WRITE_TRUNCATE  ` .
+To replace the rows in an existing table, set the [LoadJobConfig.write\_disposition property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_write_disposition) to the string `WRITE_TRUNCATE` .
 
 Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
@@ -1228,7 +1228,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Ruby
 
-To replace the rows in an existing table, set the `  write  ` parameter of [Table.load\_job()](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery/Table.html?method=load_job-instance) to `  "WRITE_TRUNCATE"  ` .
+To replace the rows in an existing table, set the `write` parameter of [Table.load\_job()](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery/Table.html?method=load_job-instance) to `"WRITE_TRUNCATE"` .
 
 Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html) .
 
@@ -1269,9 +1269,9 @@ This section describes how BigQuery parses various data types when loading JSON 
 
 **Bytes** . Columns with BYTES types must be encoded as Base64.
 
-**Date** . Columns with DATE types must be in the format `  YYYY-MM-DD  ` .
+**Date** . Columns with DATE types must be in the format `YYYY-MM-DD` .
 
-**Datetime** . Columns with DATETIME types must be in the format `  YYYY-MM-DD HH:MM:SS[.SSSSSS]  ` .
+**Datetime** . Columns with DATETIME types must be in the format `YYYY-MM-DD HH:MM:SS[.SSSSSS]` .
 
 **Geography** . Columns with GEOGRAPHY types must contain strings in one of the following formats:
 
@@ -1283,13 +1283,13 @@ If you use WKB, the value should be hex encoded.
 
 The following list shows examples of valid data:
 
-  - WKT: `  POINT(1 2)  `
-  - GeoJSON: `  { "type": "Point", "coordinates": [1, 2] }  `
-  - Hex encoded WKB: `  0101000000feffffffffffef3f0000000000000040  `
+  - WKT: `POINT(1 2)`
+  - GeoJSON: `{ "type": "Point", "coordinates": [1, 2] }`
+  - Hex encoded WKB: `0101000000feffffffffffef3f0000000000000040`
 
 Before loading GEOGRAPHY data, also read [Loading geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data#loading_geospatial_data) .
 
-**Interval** . Columns with INTERVAL types must be in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format `  PYMDTHMS  ` , where:
+**Interval** . Columns with INTERVAL types must be in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format `PYMDTHMS` , where:
 
   - P = Designator that indicates that the value represents a duration. You must always include this.
   - Y = Year
@@ -1304,23 +1304,23 @@ You can indicate a negative value by prepending a dash (-).
 
 The following list shows examples of valid data:
 
-  - `  P-10000Y0M-3660000DT-87840000H0M0S  `
-  - `  P0Y0M0DT0H0M0.000001S  `
-  - `  P10000Y0M3660000DT87840000H0M0S  `
+  - `P-10000Y0M-3660000DT-87840000H0M0S`
+  - `P0Y0M0DT0H0M0.000001S`
+  - `P10000Y0M3660000DT87840000H0M0S`
 
-To load INTERVAL data, you must use the `  bq load  ` command and use the `  --schema  ` flag to specify a schema. You can't upload INTERVAL data by using the console.
+To load INTERVAL data, you must use the `bq load` command and use the `--schema` flag to specify a schema. You can't upload INTERVAL data by using the console.
 
-**Time** . Columns with TIME types must be in the format `  HH:MM:SS[.SSSSSS]  ` .
+**Time** . Columns with TIME types must be in the format `HH:MM:SS[.SSSSSS]` .
 
 **Timestamp** . BigQuery accepts various timestamp formats. The timestamp must include a date portion and a time portion.
 
-  - The date portion can be formatted as `  YYYY-MM-DD  ` or `  YYYY/MM/DD  ` .
+  - The date portion can be formatted as `YYYY-MM-DD` or `YYYY/MM/DD` .
 
-  - The timestamp portion must be formatted as `  HH:MM[:SS[.SSSSSS]]  ` (seconds and fractions of seconds are optional).
+  - The timestamp portion must be formatted as `HH:MM[:SS[.SSSSSS]]` (seconds and fractions of seconds are optional).
 
   - The date and time must be separated by a space or 'T'.
 
-  - Optionally, the date and time can be followed by a UTC offset or the UTC zone designator ( `  Z  ` ). For more information, see [Time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
+  - Optionally, the date and time can be followed by a UTC offset or the UTC zone designator ( `Z` ). For more information, see [Time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
 
 For example, any of the following are valid timestamp values:
 
@@ -1339,7 +1339,7 @@ Examples of Unix epoch timestamp values:
   - 1534680695
   - 1.534680695e12
 
-**Array** (repeated field). The value must be a JSON array or `  null  ` . JSON `  null  ` is converted to SQL `  NULL  ` . The array itself cannot contain `  null  ` values.
+**Array** (repeated field). The value must be a JSON array or `null` . JSON `null` is converted to SQL `NULL` . The array itself cannot contain `null` values.
 
 ### Schema auto-detection
 
@@ -1347,11 +1347,11 @@ This section describes the behavior of [schema auto-detection](https://docs.clou
 
 #### JSON nested and repeated fields
 
-BigQuery infers nested and repeated fields in JSON files. If a field value is a JSON object, then BigQuery loads the column as a `  RECORD  ` type. If a field value is an array, then BigQuery loads the column as a repeated column. For an example of JSON data with nested and repeated data, see [Loading nested and repeated JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#loading_nested_and_repeated_json_data) .
+BigQuery infers nested and repeated fields in JSON files. If a field value is a JSON object, then BigQuery loads the column as a `RECORD` type. If a field value is an array, then BigQuery loads the column as a repeated column. For an example of JSON data with nested and repeated data, see [Loading nested and repeated JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#loading_nested_and_repeated_json_data) .
 
 #### String conversion
 
-If you enable schema auto-detection, then BigQuery converts strings into Boolean, numeric, or date/time types when possible. For example, using the following JSON data, schema auto-detection converts the `  id  ` field to an `  INTEGER  ` column:
+If you enable schema auto-detection, then BigQuery converts strings into Boolean, numeric, or date/time types when possible. For example, using the following JSON data, schema auto-detection converts the `id` field to an `INTEGER` column:
 
     { "name":"Alice","id":"12"}
     { "name":"Bob","id":"34"}
@@ -1359,7 +1359,7 @@ If you enable schema auto-detection, then BigQuery converts strings into Boolean
 
 ### Encoding types
 
-BigQuery expects JSON data to be UTF-8 encoded. If you have JSON files with other supported encoding types, you should explicitly specify the encoding by using the [`  --encoding  ` flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#json-options) so that BigQuery converts the data to UTF-8.
+BigQuery expects JSON data to be UTF-8 encoded. If you have JSON files with other supported encoding types, you should explicitly specify the encoding by using the [`--encoding` flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#json-options) so that BigQuery converts the data to UTF-8.
 
 BigQuery supports the following encoding types for JSON files:
 
@@ -1374,16 +1374,16 @@ BigQuery supports the following encoding types for JSON files:
 
 To change how BigQuery parses JSON data, specify additional options in the Google Cloud console, the bq command-line tool, the API, or the client libraries.
 
-| JSON option                   | Console option           | bq tool flag                                       | BigQuery API property                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ----------------------------- | ------------------------ | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Number of bad records allowed | Number of errors allowed | `        --max_bad_records       `                 | `        maxBadRecords       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setMaxBadRecords_java_lang_Integer_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_max_bad_records) )                   | (Optional) The maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an invalid error is returned in the job result. The default value is \`0\`, which requires that all records are valid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Unknown values                | Ignore unknown values    | `        --ignore_unknown_values       `           | `        ignoreUnknownValues       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setIgnoreUnknownValues_java_lang_Boolean_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_ignore_unknown_values) ) | (Optional) Indicates whether BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The \`sourceFormat\` property determines what BigQuery treats as an extra value: CSV: trailing columns, JSON: named values that don't match any column names.                                                                                                                                                                                                                                         |
-| Encoding                      | None                     | `        -E       ` or `        --encoding       ` | `        encoding       ` ( [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_encoding) )                                                                                                                                                                                                                                                                          | (Optional) The character encoding of the data. The supported values are UTF-8, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-32BE, or UTF-32LE. The default value is UTF-8.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Time Zone                     | Time Zone                | `        --time_zone       `                       | `        timeZone       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setTimeZone_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_time_zone) )                                    | (Optional) Default time zone that is applied when parsing timestamp values that have no specific time zone. Check [valid time zone names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) . If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.                                                                                                                                                                                                                                                                                                                                                                                 |
-| Date Format                   | Date Format              | `        --date_format       `                     | `        dateFormat       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setDateFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_date_format) )                              | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `        MM/DD/YYYY       ` ). If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format. If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .                                    |
-| Datetime Format               | Datetime Format          | `        --datetime_format       `                 | `        datetimeFormat       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setDatetimeFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_datetime_format) )                  | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `        MM/DD/YYYY HH24:MI:SS.FF3       ` ). If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format. If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .     |
-| Time Format                   | Time Format              | `        --time_format       `                     | `        timeFormat       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setTimeFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_time_format) )                              | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `        HH24:MI:SS.FF3       ` ). If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format. If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .                                |
-| Timestamp Format              | Timestamp Format         | `        --timestamp_format       `                | `        timestampFormat       ` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setTimestampFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_timestamp_format) )               | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `        MM/DD/YYYY HH24:MI:SS.FF3       ` ). If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format. If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) . |
+| JSON option                   | Console option           | bq tool flag              | BigQuery API property                                                                                                                                                                                                                                                                                                                                                                                                                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------------------------- | ------------------------ | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Number of bad records allowed | Number of errors allowed | `--max_bad_records`       | `maxBadRecords` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setMaxBadRecords_java_lang_Integer_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_max_bad_records) )                   | (Optional) The maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an invalid error is returned in the job result. The default value is \`0\`, which requires that all records are valid.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Unknown values                | Ignore unknown values    | `--ignore_unknown_values` | `ignoreUnknownValues` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setIgnoreUnknownValues_java_lang_Boolean_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_ignore_unknown_values) ) | (Optional) Indicates whether BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The \`sourceFormat\` property determines what BigQuery treats as an extra value: CSV: trailing columns, JSON: named values that don't match any column names.                                                                                                                                                                                                                          |
+| Encoding                      | None                     | `-E` or `--encoding`      | `encoding` ( [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_encoding) )                                                                                                                                                                                                                                                                          | (Optional) The character encoding of the data. The supported values are UTF-8, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-32BE, or UTF-32LE. The default value is UTF-8.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Time Zone                     | Time Zone                | `--time_zone`             | `timeZone` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setTimeZone_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_time_zone) )                                    | (Optional) Default time zone that is applied when parsing timestamp values that have no specific time zone. Check [valid time zone names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) . If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.                                                                                                                                                                                                                                                                                                                                                                  |
+| Date Format                   | Date Format              | `--date_format`           | `dateFormat` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setDateFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_date_format) )                              | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `MM/DD/YYYY` ). If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format. If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .                                    |
+| Datetime Format               | Datetime Format          | `--datetime_format`       | `datetimeFormat` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setDatetimeFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_datetime_format) )                  | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format. If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .     |
+| Time Format                   | Time Format              | `--time_format`           | `timeFormat` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setTimeFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_time_format) )                              | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format. If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .                                |
+| Timestamp Format              | Timestamp Format         | `--timestamp_format`      | `timestampFormat` ( [Java](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.LoadJobConfiguration.Builder#com_google_cloud_bigquery_LoadJobConfiguration_Builder_setTimestampFormat_java_lang_String_) , [Python](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_timestamp_format) )               | (Optional) [Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ). If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format. If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) . |
 
 ## What's next
 

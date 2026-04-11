@@ -1,43 +1,43 @@
 # ORGANIZATION\_OPTIONS view
 
-You can query the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` view to retrieve real-time metadata about BigQuery organization options. This view contains configuration options that are set at the organization level. To view the default values for a configuration option, see [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings) .
+You can query the `INFORMATION_SCHEMA.ORGANIZATION_OPTIONS` view to retrieve real-time metadata about BigQuery organization options. This view contains configuration options that are set at the organization level. To view the default values for a configuration option, see [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings) .
 
 ## Required permissions
 
 To get organization options metadata, you need the following Identity and Access Management (IAM) permissions:
 
-  - `  bigquery.config.get  `
+  - `bigquery.config.get`
 
 The following predefined IAM role includes the permissions that you need in order to get organization options metadata:
 
-  - `  roles/bigquery.jobUser  `
+  - `roles/bigquery.jobUser`
 
 For more information about granular BigQuery permissions, see [roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` view, the query results contain one row for each configuration option in a project, if that option differs from the default value at the organization level.
+When you query the `INFORMATION_SCHEMA.ORGANIZATION_OPTIONS` view, the query results contain one row for each configuration option in a project, if that option differs from the default value at the organization level.
 
-The `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` view has the following schema:
+The `INFORMATION_SCHEMA.ORGANIZATION_OPTIONS` view has the following schema:
 
-| Column name                         | Data type               | Value                                                                                                                                              |
-| ----------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `          option_name        `     | `        STRING       ` | One of the name values in the [options table](https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options#options_table) . |
-| `        option_description       ` | `        STRING       ` | The option description.                                                                                                                            |
-| `        option_type       `        | `        STRING       ` | The data type of the `        option_value       ` .                                                                                               |
-| `        option_value       `       | `        STRING       ` | The current value of the option.                                                                                                                   |
+| Column name                    | Data type | Value                                                                                                                                              |
+| ------------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `         option_name        ` | `STRING`  | One of the name values in the [options table](https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options#options_table) . |
+| `option_description`           | `STRING`  | The option description.                                                                                                                            |
+| `option_type`                  | `STRING`  | The data type of the `option_value` .                                                                                                              |
+| `option_value`                 | `STRING`  | The current value of the option.                                                                                                                   |
 
 ##### Options table
 
-| `        option_name       `                                | `        option_type       ` | `        option_value       `                                                             |
-| ----------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------- |
-| `        default_time_zone       `                          | `        STRING       `      | The default time zone for this organization.                                              |
-| `        default_kms_key_name       `                       | `        STRING       `      | The default key name for this organization.                                               |
-| `        default_query_job_timeout_ms       `               | `        STRING       `      | The default query timeout in milliseconds for this organization.                          |
-| `        default_interactive_query_queue_timeout_ms       ` | `        STRING       `      | The default timeout in milliseconds for queued interactive queries for this organization. |
-| `        default_batch_query_queue_timeout_ms       `       | `        STRING       `      | The default timeout in milliseconds for queued batch queries for this organization.       |
+| `option_name`                                | `option_type` | `option_value`                                                                            |
+| -------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------- |
+| `default_time_zone`                          | `STRING`      | The default time zone for this organization.                                              |
+| `default_kms_key_name`                       | `STRING`      | The default key name for this organization.                                               |
+| `default_query_job_timeout_ms`               | `STRING`      | The default query timeout in milliseconds for this organization.                          |
+| `default_interactive_query_queue_timeout_ms` | `STRING`      | The default timeout in milliseconds for queued interactive queries for this organization. |
+| `default_batch_query_queue_timeout_ms`       | `STRING`      | The default timeout in milliseconds for queued batch queries for this organization.       |
 
-For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
+For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Data retention
 
@@ -47,17 +47,17 @@ This view contains currently running sessions and the history of sessions comple
 
 Queries against this view must have a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) .
 
-| View name                                                                                               | Resource scope                                           | Region scope               |
-| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | -------------------------- |
-| ``        `region-               REGION              `.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS       `` | Configuration options within the specified organization. | `          REGION        ` |
+| View name                                                                      | Resource scope                                           | Region scope              |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------- | ------------------------- |
+| `` `region-         REGION        `.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS `` | Configuration options within the specified organization. | `         REGION        ` |
 
 Replace the following:
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  region-us  ` .
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `region-us` .
 
 ## Examples
 
-The following example retrieves the `  OPTION_NAME  ` , `  OPTION_TYPE  ` , and `  OPTION_VALUE  ` columns from the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` .
+The following example retrieves the `OPTION_NAME` , `OPTION_TYPE` , and `OPTION_VALUE` columns from the `INFORMATION_SCHEMA.ORGANIZATION_OPTIONS` .
 
 ``` notranslate
 SELECT
@@ -66,7 +66,7 @@ FROM
   `region-us`.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS;
 ```
 
-**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

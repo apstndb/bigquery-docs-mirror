@@ -26,7 +26,7 @@ You can share streaming data to do the following:
 
 The roles for sharing Pub/Sub topics are analogous to sharing BigQuery datasets:
 
-  - **Administrator** : manages permissions, visibility, and membership of exchanges and listings. This role is analogous to the [Analytics Hub Admin](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `  roles/analyticshub.admin  ` ) IAM role.
+  - **Administrator** : manages permissions, visibility, and membership of exchanges and listings. This role is analogous to the [Analytics Hub Admin](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ) IAM role.
   - **Shared topic publisher** : creates, manages, and grants access to listings of the shared Pub/Sub topics. This role is analogous to the [Analytics Hub Publisher or Analytics Hub Listing Admin](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) IAM role. The publisher is a user, not the [publisher application](https://docs.cloud.google.com/pubsub/docs/publisher) that creates and sends messages to the topic.
   - **Shared topic subscriber** : subscribes to the shared topic listing. Shared topic subscribers can configure how topic messages are delivered. This role is analogous to the [Analytics Hub Subscriber](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) or [Analytics Hub Subscription Owner](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) IAM role. Depending on how the message data is delivered, additional permissions may be required, such as [Pub/Sub service account permissions](https://docs.cloud.google.com/pubsub/docs/bigquery#service_account_permissions) for writing messages to BigQuery.
 
@@ -60,7 +60,7 @@ Stream sharing with Pub/Sub has the following limitations:
 
   - Shared topics are indexed in Data Catalog (deprecated) and Dataplex Universal Catalog, but you cannot filter specifically for their resource type.
 
-  - Usage metrics are captured and displayed in the Metrics dashboard for shared Pub/Sub topics and subscriptions, but are not available in `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` .
+  - Usage metrics are captured and displayed in the Metrics dashboard for shared Pub/Sub topics and subscriptions, but are not available in `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` .
     
     To monitor metrics, see [Monitor Pub/Sub in Cloud Monitoring](https://docs.cloud.google.com/pubsub/docs/monitoring) .
     
@@ -85,7 +85,7 @@ Go to the API library and enable the Analytics Hub API for your Google Cloud pro
 
 ### gcloud
 
-Run the [`  gcloud services enable  `](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) command:
+Run the [`gcloud services enable`](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) command:
 
     gcloud services enable analyticshub.googleapis.com
 
@@ -108,9 +108,9 @@ As a shared topic publisher, you can do the following:
 
 ### Additional publisher permissions
 
-To perform shared topic publisher tasks, you must have the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `  roles/analyticshub.publisher  ` ) on an exchange or listing. To view all the [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) across projects in an organization that you have access to, you must have the `  resourcemanager.organizations.get  ` permission.
+To perform shared topic publisher tasks, you must have the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) on an exchange or listing. To view all the [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) across projects in an organization that you have access to, you must have the `resourcemanager.organizations.get` permission.
 
-In addition, you need the `  pubsub.topics.setIamPolicy  ` permission on the Pub/Sub topic you want to list. To share topics with a schema attached, you must grant BigQuery sharing subscribers the `  pubsub.schemas.get  ` permission on the schema attached to the topic. This permission lets BigQuery sharing subscribers properly parse messages from the Pub/Sub subscription.
+In addition, you need the `pubsub.topics.setIamPolicy` permission on the Pub/Sub topic you want to list. To share topics with a schema attached, you must grant BigQuery sharing subscribers the `pubsub.schemas.get` permission on the schema attached to the topic. This permission lets BigQuery sharing subscribers properly parse messages from the Pub/Sub subscription.
 
 ### Create a listing (to add a shared topic)
 
@@ -144,7 +144,7 @@ To add a shared topic to a listing, select one of the following options:
     
       - **Description** : a brief description of your listing. Shared topic subscribers can [search for listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) based on the description.
     
-      - **Public Discoverability** : enable public discoverability for your listing in the BigQuery sharing catalog. You must also set permissions for the listing. Click **Actions** for the exchange, and then click **Set permissions** . Grant `  allUsers  ` or `  allAuthenticatedusers  ` the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `  roles/analyticshub.viewer  ` ). Click **Allow Public Access** .
+      - **Public Discoverability** : enable public discoverability for your listing in the BigQuery sharing catalog. You must also set permissions for the listing. Click **Actions** for the exchange, and then click **Set permissions** . Grant `allUsers` or `allAuthenticatedusers` the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.viewer` ). Click **Allow Public Access** .
     
       - **Documentation \> Markdown** : additional information, such as links to relevant documentation and other details that help shared topic subscribers use your topic.
 
@@ -172,7 +172,7 @@ To add a shared topic to a listing, select one of the following options:
 
 ### API
 
-Use the [`  projects.locations.dataExchanges.listings.create  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/create) .
+Use the [`projects.locations.dataExchanges.listings.create` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/create) .
 
     POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings?listingId=LISTING_ID
 
@@ -185,7 +185,7 @@ Replace the following:
 
 In the body of the request, provide the [listing details](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#resource:-listing) . If the request is successful, the response body contains the listing details.
 
-For more information about the tasks that you can perform on listings using APIs, see [`  projects.locations.dataExchanges.listings  ` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
+For more information about the tasks that you can perform on listings using APIs, see [`projects.locations.dataExchanges.listings` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
 
 ### Update a listing
 
@@ -209,7 +209,7 @@ To update a listing, select one of the following options:
 
 ### API
 
-Use the [`  projects.locations.dataExchanges.listings.patch  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/patch) .
+Use the [`projects.locations.dataExchanges.listings.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/patch) .
 
     PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID?updateMask=UPDATEMASK
 
@@ -223,7 +223,7 @@ Replace the following:
 
 In the body of the request, specify the updated values.
 
-For more information about the tasks that you can perform on listings using APIs, see [`  projects.locations.dataExchanges.listings  ` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
+For more information about the tasks that you can perform on listings using APIs, see [`projects.locations.dataExchanges.listings` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
 
 ### Delete a listing
 
@@ -243,13 +243,13 @@ To delete a listing, select one of the following options:
 
 4.  Click delete **Delete** .
 
-5.  In the **Delete listing?** dialog, confirm deletion by typing `  delete  ` .
+5.  In the **Delete listing?** dialog, confirm deletion by typing `delete` .
 
 6.  Click **Delete** .
 
 ### API
 
-Use the [`  projects.locations.dataExchanges.listings.delete  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/delete) .
+Use the [`projects.locations.dataExchanges.listings.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/delete) .
 
     DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID
 
@@ -260,11 +260,11 @@ Replace the following:
   - `  DATAEXCHANGE_ID  ` : the data exchange ID.
   - `  LISTING_ID  ` : the listing ID.
 
-For more information about the tasks that you can perform on listings using APIs, see [`  projects.locations.dataExchanges.listings  ` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
+For more information about the tasks that you can perform on listings using APIs, see [`projects.locations.dataExchanges.listings` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
 
 ### Share a listing
 
-To give users access to a private listing, set an IAM policy for an individual or a group for that listing. For a commercial listing, your [data exchange must be public](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#make-data-exchange-public) . Listings in a public data exchange appear in Sharing for all [Google Cloud users (allAuthenticatedUsers)](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) . To let users request access for commercial listings, grant them the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `  roles/analyticshub.viewer  ` ).
+To give users access to a private listing, set an IAM policy for an individual or a group for that listing. For a commercial listing, your [data exchange must be public](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#make-data-exchange-public) . Listings in a public data exchange appear in Sharing for all [Google Cloud users (allAuthenticatedUsers)](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) . To let users request access for commercial listings, grant them the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.viewer` ).
 
 To give users access to view or subscribe to your listing, do the following:
 
@@ -283,7 +283,7 @@ To give users access to view or subscribe to your listing, do the following:
 6.  In the **New principals** field, add details based on the listing type:
     
       - For a private listing, enter the email addresses of the identities to whom you want to grant access.
-      - For a public listing, add `  allAuthenticatedUsers  ` .
+      - For a public listing, add `allAuthenticatedUsers` .
 
 7.  From the **Select a role** menu, select **Analytics Hub** , and then select one of the following roles based on the listing type:
     
@@ -296,7 +296,7 @@ For more information, see [Analytics Hub Subscriber and Viewer roles](https://do
 
 ### Manage subscriptions
 
-To let a user subscribe to a listing with a shared topic, grant them the [Analytics Hub Subscriber](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `  roles/analyticshub.subscriber  ` ) and [Analytics Hub Subscription Owner](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) ( `  roles/analyticshub.subscriptionOwner  ` ) roles on a specific listing:
+To let a user subscribe to a listing with a shared topic, grant them the [Analytics Hub Subscriber](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) and [Analytics Hub Subscription Owner](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) ( `roles/analyticshub.subscriptionOwner` ) roles on a specific listing:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
     
@@ -334,13 +334,13 @@ To remove a subscription to a shared topic listing from BigQuery sharing, select
 
 3.  Select the checkbox next to the subscriptions you want to remove, or select all subscriptions.
 
-4.  In the **Revoke subscription?** dialog, enter `  revoke  ` to confirm.
+4.  In the **Revoke subscription?** dialog, enter `revoke` to confirm.
 
 5.  Click **Revoke** .
 
 ### API
 
-To remove a subscription, use the [`  projects.locations.subscriptions.revoke  `](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) method.
+To remove a subscription, use the [`projects.locations.subscriptions.revoke`](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) method.
 
     POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions/SUBSCRIPTION_ID:revoke
 
@@ -358,7 +358,7 @@ As a BigQuery sharing subscriber, you can view and subscribe to a listing. Subsc
 
 ### Additional subscriber permissions
 
-You must have the [Analytics Hub Subscriber](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `  roles/analyticshub.subscriber  ` ) role granted at the project, exchange, or listing-level to perform subscriber tasks.
+You must have the [Analytics Hub Subscriber](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) role granted at the project, exchange, or listing-level to perform subscriber tasks.
 
 ### Subscribe to a shared topic listing
 
@@ -393,7 +393,7 @@ To subscribe to a listing with a shared topic, select one of the following optio
 
 ### API
 
-Use the [`  projects.locations.dataExchanges.listings.subscribe  ` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe) .
+Use the [`projects.locations.dataExchanges.listings.subscribe` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe) .
 
     POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID:subscribe
 

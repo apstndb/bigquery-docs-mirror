@@ -4,7 +4,7 @@
 
 BigQuery provides fine-grained access to sensitive columns using *policy tags* , or type-based classification, of data. Using BigQuery column-level access control, you can create policies that check, at query time, whether a user has proper access. For example, a policy can enforce access checks such as:
 
-  - You must be in `  group:high-access  ` to see the columns containing `  TYPE_SSN  ` .
+  - You must be in `group:high-access` to see the columns containing `TYPE_SSN` .
 
 To enhance column-level access control, you can optionally use [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . Data masking lets you mask sensitive data by substituting null, default, or hashed content in place of the column's actual value.
 
@@ -50,13 +50,13 @@ To set up column level security, a data steward, who has the [appropriate permis
 
 4.  The data steward assigns a policy tag to specific table columns. In this example, the data steward assigns the **High** access policy to the *employee\_ssn* column in a table.
 
-5.  In the **Current schema** page of the console, the data steward can see the policy tag that governs a particular column. In this example, the **employee\_ssn** column is under the **High** policy tag, so when viewing the schema for **employee\_ssn** , the console displays the taxonomy name and the policy tag in the `  Policy tags  ` field: `  Business criticality:High  ` .
+5.  In the **Current schema** page of the console, the data steward can see the policy tag that governs a particular column. In this example, the **employee\_ssn** column is under the **High** policy tag, so when viewing the schema for **employee\_ssn** , the console displays the taxonomy name and the policy tag in the `Policy tags` field: `Business criticality:High` .
     
     ![Policy tag UI](https://docs.cloud.google.com/static/bigquery/images/schema-ui-policy-tags3.png)
     
     For details on using the console to set a policy tag, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
     
-    Alternatively, you can set the policy tag using the `  bq update  ` command. The `  names  ` field of `  policyTags  ` includes the ID of the **High** policy tag, `  projects/ project-id /locations/ location /taxonomies/ taxonomy-id /policyTags/ policytag-id  ` :
+    Alternatively, you can set the policy tag using the `bq update` command. The `names` field of `policyTags` includes the ID of the **High** policy tag, ` projects/ project-id /locations/ location /taxonomies/ taxonomy-id /policyTags/ policytag-id  ` :
     
     ``` notranslate
     [
@@ -73,7 +73,7 @@ To set up column level security, a data steward, who has the [appropriate permis
     ]
     ```
     
-    For details on using the `  bq update  ` command to set a policy tag, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
+    For details on using the `bq update` command to set a policy tag, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
     
     **Note:** You can assign only one policy tag per column.
 
@@ -104,18 +104,18 @@ The Data Catalog Policy Tag Admin role is required for users who need to create 
 </thead>
 <tbody>
 <tr class="odd">
-<td>Data Catalog Policy Tag Admin ( <code dir="ltr" translate="no">       datacatalog.categoryAdmin      </code> )</td>
-<td><code dir="ltr" translate="no">       datacatalog.categories.getIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.categories.setIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.create      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.delete      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.get      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.getIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.list      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.setIamPolicy      </code><br />
-<code dir="ltr" translate="no">       datacatalog.taxonomies.update      </code><br />
-<code dir="ltr" translate="no">       resourcemanager.projects.get      </code><br />
-<code dir="ltr" translate="no">       resourcemanager.projects.list      </code></td>
+<td>Data Catalog Policy Tag Admin ( <code dir="ltr" translate="no">datacatalog.categoryAdmin</code> )</td>
+<td><code dir="ltr" translate="no">datacatalog.categories.getIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.categories.setIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.create</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.delete</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.get</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.getIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.list</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.setIamPolicy</code><br />
+<code dir="ltr" translate="no">datacatalog.taxonomies.update</code><br />
+<code dir="ltr" translate="no">resourcemanager.projects.get</code><br />
+<code dir="ltr" translate="no">resourcemanager.projects.list</code></td>
 <td><p>Applies at the project level.</p>
 <p>This role grants the ability to do the following:</p>
 <ul>
@@ -143,19 +143,19 @@ The BigQuery Data Policy Admin role, the BigQuery Admin role or the BigQuery Dat
 </thead>
 <tbody>
 <tr class="odd">
-<td>BigQuery Data Policy Admin ( <code dir="ltr" translate="no">       bigquerydatapolicy.admin      </code> )<br />
+<td>BigQuery Data Policy Admin ( <code dir="ltr" translate="no">bigquerydatapolicy.admin</code> )<br />
 <br />
-BigQuery Admin ( <code dir="ltr" translate="no">       bigquery.admin      </code> )<br />
+BigQuery Admin ( <code dir="ltr" translate="no">bigquery.admin</code> )<br />
 <br />
-BigQuery Data Owner ( <code dir="ltr" translate="no">       bigquery.dataOwner      </code> )</td>
-<td><code dir="ltr" translate="no">       bigquery.dataPolicies.create      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.delete      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.get      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.getIamPolicy      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.list      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.setIamPolicy      </code><br />
-<code dir="ltr" translate="no">       bigquery.dataPolicies.update      </code></td>
-<td><p>The <code dir="ltr" translate="no">        bigquery.dataPolicies.create       </code> and <code dir="ltr" translate="no">        bigquery.dataPolicies.list       </code> permissions apply at the project level. The other permissions apply at the data policy level.</p>
+BigQuery Data Owner ( <code dir="ltr" translate="no">bigquery.dataOwner</code> )</td>
+<td><code dir="ltr" translate="no">bigquery.dataPolicies.create</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.delete</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.get</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.getIamPolicy</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.list</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.setIamPolicy</code><br />
+<code dir="ltr" translate="no">bigquery.dataPolicies.update</code></td>
+<td><p>The <code dir="ltr" translate="no">bigquery.dataPolicies.create</code> and <code dir="ltr" translate="no">bigquery.dataPolicies.list</code> permissions apply at the project level. The other permissions apply at the data policy level.</p>
 <p>This role grants the ability to do the following:</p>
 <ul>
 <li>Create, read, update, and delete data policies.</li>
@@ -165,7 +165,7 @@ BigQuery Data Owner ( <code dir="ltr" translate="no">       bigquery.dataOwner  
 </tbody>
 </table>
 
-You also need the `  datacatalog.taxonomies.get  ` permission, which you can get from several of the [Data Catalog predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog) .
+You also need the `datacatalog.taxonomies.get` permission, which you can get from several of the [Data Catalog predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog) .
 
 The Data Catalog Fine-Grained Reader role is required for users who need access to data in secured columns.
 
@@ -184,8 +184,8 @@ The Data Catalog Fine-Grained Reader role is required for users who need access 
 </thead>
 <tbody>
 <tr class="odd">
-<td>Fine-Grained Reader/ <code dir="ltr" translate="no">       datacatalog.categoryFineGrainedReader      </code></td>
-<td><code dir="ltr" translate="no">       datacatalog.categories.fineGrainedGet      </code></td>
+<td>Fine-Grained Reader/ <code dir="ltr" translate="no">datacatalog.categoryFineGrainedReader</code></td>
+<td><code dir="ltr" translate="no">datacatalog.categories.fineGrainedGet</code></td>
 <td><p>Applies at the policy tag level.</p>
 <p>This role grants the ability to access the content of columns restricted by a policy tag.</p></td>
 </tr>
@@ -220,15 +220,15 @@ For more information, see [Impact on writes with column-level access control](ht
 
 If a user has dataset access and has the Data Catalog Fine-Grained Reader role, the column data is available to the user. The user runs a query as normal.
 
-If a user has dataset access but does not have the Data Catalog Fine-Grained Reader role, the column data is not available to the user. If such a user runs `  SELECT *  ` , they receive an error which lists the columns that the user cannot access. To resolve the error, you can either:
+If a user has dataset access but does not have the Data Catalog Fine-Grained Reader role, the column data is not available to the user. If such a user runs `SELECT *` , they receive an error which lists the columns that the user cannot access. To resolve the error, you can either:
 
-  - Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `  ssn  ` column, but does have access to the remaining columns, the user can run the following query:
+  - Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `ssn` column, but does have access to the remaining columns, the user can run the following query:
     
     ``` notranslate
     SELECT * EXCEPT (ssn) FROM ...
     ```
     
-    In the preceding example, the `  EXCEPT  ` clause excludes the `  ssn  ` column.
+    In the preceding example, the `EXCEPT` clause excludes the `ssn` column.
 
   - Ask a Data Catalog Administrator to add the user as a Data Catalog Fine-Grained Reader to the relevant data class. The error message provides the full name of the policy tag for which the user would need access.
 
@@ -259,9 +259,9 @@ The following diagram shows how access to a view is evaluated.
 
 BigQuery lets you query a table in an earlier state. This capability lets you query the rows from a previous point in time. It also lets you restore a table from a point in time.
 
-In legacy SQL, you query historical data by using [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) on the table name. In GoogleSQL, you query historical data by using the [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause on the table.
+In legacy SQL, you query historical data by using [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) on the table name. In GoogleSQL, you query historical data by using the [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause on the table.
 
-Materialized views with the [`  max_staleness  `](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) option set return historical data from within their staleness interval. This behavior is similar to a query using [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) at the time of the view's last refresh, as it allows BigQuery to query records that have been deleted or updated. Suppose that you query a table's historical data at time *t* . In that case:
+Materialized views with the [`max_staleness`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) option set return historical data from within their staleness interval. This behavior is similar to a query using [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) at the time of the view's last refresh, as it allows BigQuery to query records that have been deleted or updated. Suppose that you query a table's historical data at time *t* . In that case:
 
   - If the schema at time *t* is identical to, or a subset of, the table's current schema, then BigQuery checks against the latest column-level security on the current table. If the user is allowed to read the current columns, then the user can query the historical data of those columns. In order to delete or mask sensitive data of columns that are protected by column-level security, the column-level security can be safely relaxed only after [the configured time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) has passed since the clean-up of the sensitive data.
 
@@ -291,13 +291,13 @@ You can't use references across organizations. A table and any policy tags that 
 
   - BigQuery only supports column-level access control for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , [BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) , and [BigQuery Omni tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
 
-  - If you overwrite to a destination table, any existing policy tags are removed from the table, unless you use the `  --destination_schema  ` flag to specify a schema with policy tags. The following example shows how to use `  --destination_schema  ` .
+  - If you overwrite to a destination table, any existing policy tags are removed from the table, unless you use the `--destination_schema` flag to specify a schema with policy tags. The following example shows how to use `--destination_schema` .
     
         bq query --destination_table mydataset.mytable2 \
           --use_legacy_sql=false --destination_schema=schema.json \
           'SELECT * FROM mydataset.mytable1'
     
-    Schema changes happen in a separate operation from query execution. If you write query results to a table by specifying the `  --destination_table  ` flag, and the query subsequently raises an exception, it is possible that any schema changes will be skipped. If this occurs, check the destination table schema and [manually update it](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) if necessary.
+    Schema changes happen in a separate operation from query execution. If you write query results to a table by specifying the `--destination_table` flag, and the query subsequently raises an exception, it is possible that any schema changes will be skipped. If this occurs, check the destination table schema and [manually update it](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) if necessary.
 
   - A column can have only one policy tag.
 

@@ -11,7 +11,7 @@ Removes grantees from a data policy. The grantees will be removed from the exist
 
 ### HTTP request
 
-`  POST https://bigquerydatapolicy.googleapis.com/v2/{dataPolicy=projects/*/locations/*/dataPolicies/*}:removeGrantees  `
+`POST https://bigquerydatapolicy.googleapis.com/v2/{dataPolicy=projects/*/locations/*/dataPolicies/*}:removeGrantees`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,11 +19,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  dataPolicy  `
+`dataPolicy`
 
-`  string  `
+`string`
 
-Required. Resource name of this data policy, in the format of `  projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}  ` .
+Required. Resource name of this data policy, in the format of `projects/{projectNumber}/locations/{locationId}/dataPolicies/{dataPolicyId}` .
 
 ### Request body
 
@@ -51,11 +51,11 @@ The request body contains data with the following structure:
 
 Fields
 
-`  grantees[]  `
+`grantees[]`
 
-`  string  `
+`string`
 
-Required. IAM principal that should be revoked from Fine Grained Access to the underlying data goverened by the data policy. The target data policy is determined by the `  dataPolicy  ` field.
+Required. IAM principal that should be revoked from Fine Grained Access to the underlying data goverened by the data policy. The target data policy is determined by the `dataPolicy` field.
 
 Uses the [IAM V2 principal syntax](https://cloud.google.com/iam/docs/principal-identifiers#v2) . Supported principal types:
 
@@ -71,15 +71,15 @@ If successful, the response body contains an instance of `  DataPolicy  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  dataPolicy  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `dataPolicy` resource:
 
-  - `  bigquery.dataPolicies.update  `
+  - `bigquery.dataPolicies.update`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

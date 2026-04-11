@@ -17,7 +17,7 @@ If scheduling a single run, it is set to execute immediately (scheduleTime equal
 
 ### HTTP request
 
-`  POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/locations/*/transferConfigs/*}:startManualRuns  `
+`POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/locations/*/transferConfigs/*}:startManualRuns`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -25,21 +25,21 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. Transfer configuration name. If you are using the regionless method, the location must be `  US  ` and the name should be in the following form:
+Required. Transfer configuration name. If you are using the regionless method, the location must be `US` and the name should be in the following form:
 
-  - `  projects/{projectId}/transferConfigs/{configId}  `
+  - `projects/{projectId}/transferConfigs/{configId}`
 
 If you are using the regionalized method, the name should be in the following form:
 
-  - `  projects/{projectId}/locations/{locationId}/transferConfigs/{configId}  `
+  - `projects/{projectId}/locations/{locationId}/transferConfigs/{configId}`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
 
-  - `  bigquery.transfers.update  `
+  - `bigquery.transfers.update`
 
 ### Request body
 
@@ -56,32 +56,24 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-
-  // Union field time can be only one of the following:
-  &quot;requestedTimeRange&quot;: {
-    object (TimeRange)
-  },
-  &quot;requestedRunTime&quot;: string
-  // End of list of possible types for union field time.
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field time can be only one of the following:&quot;requestedTimeRange&quot;: {object (TimeRange)},&quot;requestedRunTime&quot;: string// End of list of possible types for union field time.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `  time  ` . The requested time specification - this can be a time range or a specific run\_time. `  time  ` can be only one of the following:
+Union field `time` . The requested time specification - this can be a time range or a specific run\_time. `time` can be only one of the following:
 
-`  requestedTimeRange  `
+`requestedTimeRange`
 
-`  object ( TimeRange  ` )
+` object ( TimeRange  ` )
 
 A time\_range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedTimeRange must be a past time and cannot include future time values.
 
-`  requestedRunTime  `
+`requestedRunTime`
 
-`  string ( Timestamp  ` format)
+` string ( Timestamp  ` format)
 
 A runTime timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedRunTime must be a past time and cannot include future time values.
 
@@ -93,6 +85,6 @@ If successful, the response body contains an instance of `  StartManualTransferR
 
 Requires the following OAuth scope:
 
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

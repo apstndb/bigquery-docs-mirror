@@ -7,11 +7,11 @@
   - [FailoverMode](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations/failoverReservation#FailoverMode)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations/failoverReservation#try-it)
 
-Fail over a reservation to the secondary location. The operation should be done in the current secondary location, which will be promoted to the new primary location for the reservation. Attempting to failover a reservation in the current primary location will fail with the error code `  google.rpc.Code.FAILED_PRECONDITION  ` .
+Fail over a reservation to the secondary location. The operation should be done in the current secondary location, which will be promoted to the new primary location for the reservation. Attempting to failover a reservation in the current primary location will fail with the error code `google.rpc.Code.FAILED_PRECONDITION` .
 
 ### HTTP request
 
-`  POST https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/reservations/*}:failoverReservation  `
+`POST https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/reservations/*}:failoverReservation`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -19,15 +19,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the reservation to failover. E.g., `  projects/myproject/locations/US/reservations/team1-prod  `
+Required. Resource name of the reservation to failover. E.g., `projects/myproject/locations/US/reservations/team1-prod`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.reservations.update  `
+  - `bigquery.reservations.update`
 
 ### Request body
 
@@ -44,18 +44,16 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;failoverMode&quot;: enum (FailoverMode)
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;failoverMode&quot;: enum (FailoverMode)}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  failoverMode  `
+`failoverMode`
 
-`  enum ( FailoverMode  ` )
+` enum ( FailoverMode  ` )
 
 Optional. A parameter that determines how writes that are pending replication are handled after a failover is initiated. If not specified, HARD failover mode is used by default.
 
@@ -67,8 +65,8 @@ If successful, the response body contains an instance of `  Reservation  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
@@ -78,14 +76,14 @@ The failover mode when a user initiates a failover on a reservation determines h
 
 Enums
 
-`  FAILOVER_MODE_UNSPECIFIED  `
+`FAILOVER_MODE_UNSPECIFIED`
 
 Invalid value.
 
-`  SOFT  `
+`SOFT`
 
 When customers initiate a soft failover, BigQuery will wait until all committed writes are replicated to the secondary. This mode requires both regions to be available for the failover to succeed and prevents data loss.
 
-`  HARD  `
+`HARD`
 
 When customers initiate a hard failover, BigQuery will not wait until all committed writes are replicated to the secondary. There can be data loss for hard failover.

@@ -90,8 +90,8 @@ For detailed information about transfers and region compatibility for BigQuery D
 
 Jobs triggered by the BigQuery Data Transfer Service only use reservation slots if the project, folder, or organization is assigned to a reservation with any of the following [job types](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) :
 
-  - Query jobs using `  QUERY  `
-  - Load jobs using `  PIPELINE  `
+  - Query jobs using `QUERY`
+  - Load jobs using `PIPELINE`
 
 Jobs that [copy datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) don't use reservation slots.
 

@@ -30,11 +30,11 @@ Enabling data lineage in your BigQuery project causes Dataplex Universal Catalog
 
   - [Query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries) that use the following data definition language (DDL) or data manipulation language (DML) statements in GoogleSQL:
     
-      - [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) (including the `  CREATE TABLE AS SELECT  ` statement)
-      - [`  INSERT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
-      - [`  UPDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement)
-      - [`  DELETE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#delete_statement)
-      - [`  MERGE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement)
+      - [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) (including the `CREATE TABLE AS SELECT` statement)
+      - [`INSERT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
+      - [`UPDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement)
+      - [`DELETE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#delete_statement)
+      - [`MERGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement)
 
 ### Before you begin
 
@@ -58,9 +58,9 @@ Lineage information is tracked automatically when you enable the Data Lineage AP
 
 To get the permissions that you need to view lineage graphs, ask your administrator to grant you the following IAM roles:
 
-  - [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `  roles/datacatalog.viewer  ` ) on a Data Catalog resource project.
-  - [Data lineage viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datalineage#datalineage.viewer) ( `  roles/datalineage.viewer  ` ) on the project where you use systems supported by data lineage.
-  - [BigQuery Metadata](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` )
+  - [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `roles/datacatalog.viewer` ) on a Data Catalog resource project.
+  - [Data lineage viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datalineage#datalineage.viewer) ( `roles/datalineage.viewer` ) on the project where you use systems supported by data lineage.
+  - [BigQuery Metadata](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -116,19 +116,19 @@ Data Catalog provides two types of tags: private tags and public tags.
 
 Private tags provide strict access controls. You can search or view the tags and the data entries associated with the tags only if you are granted the [required view permissions](https://docs.cloud.google.com/data-catalog/docs/concepts/iam#roles_to_view_public_and_private_tags) on both the private tag template and the data entries.
 
-Searching for private tags in the Data Catalog page requires that you use the `  tag:  ` search syntax or the search filters.
+Searching for private tags in the Data Catalog page requires that you use the `tag:` search syntax or the search filters.
 
 Private tags are suitable for scenarios where you need to store some sensitive information in the tag and you want to apply additional access restrictions beyond checking whether the user has the permissions to view the tagged entry.
 
 #### Public tags
 
-Public tags provide less strict access control for searching and viewing the tag as compared to private tags. Any user who has the required view permissions for a data entry can view all the public tags associated with it. View permissions for public tags are only required when you perform a search in Data Catalog using the `  tag:  ` syntax or when you view an unattached tag template.
+Public tags provide less strict access control for searching and viewing the tag as compared to private tags. Any user who has the required view permissions for a data entry can view all the public tags associated with it. View permissions for public tags are only required when you perform a search in Data Catalog using the `tag:` syntax or when you view an unattached tag template.
 
 Public tags support both simple search and search with predicates in the Data Catalog search page. When you create a tag template, the option to create a public tag template is the default and recommended option in the Google Cloud console.
 
-For example, let's assume you have a public tag template called `  employee data  ` that you used to create tags for three data entries called `  Name  ` , `  Location  ` , and `  Salary  ` . Among the three data entries, only members of a specific group called `  HR  ` can view the `  Salary  ` data entry. The other two data entries have view permissions for all employees of the company.
+For example, let's assume you have a public tag template called `employee data` that you used to create tags for three data entries called `Name` , `Location` , and `Salary` . Among the three data entries, only members of a specific group called `HR` can view the `Salary` data entry. The other two data entries have view permissions for all employees of the company.
 
-If any employee who is not a member of the `  HR  ` group uses the Data Catalog search page and searches with the word `  employee  ` , the search result displays only `  Name  ` and `  Location  ` data entries with the associated public tags.
+If any employee who is not a member of the `HR` group uses the Data Catalog search page and searches with the word `employee` , the search result displays only `Name` and `Location` data entries with the associated public tags.
 
 Public tags are useful for a broad set of scenarios. Public tags support simple search and search with predicates, while private tags support only search with predicates.
 
@@ -138,9 +138,9 @@ To start tagging metadata, you first need to create one or more tag templates. A
 
 You can structure your tags by topic. For example:
 
-  - A `  data governance  ` tag with fields for data governor, retention date, deletion date, PII (yes or no), data classification (public, confidential, sensitive, regulatory)
-  - A `  data quality  ` tag with fields for quality issues, update frequency, SLO information
-  - A `  data usage  ` tag with fields for top users, top queries, average daily users
+  - A `data governance` tag with fields for data governor, retention date, deletion date, PII (yes or no), data classification (public, confidential, sensitive, regulatory)
+  - A `data quality` tag with fields for quality issues, update frequency, SLO information
+  - A `data usage` tag with fields for top users, top queries, average daily users
 
 You can then mix and match tags, using only the tags relevant for each data asset and your business needs.
 

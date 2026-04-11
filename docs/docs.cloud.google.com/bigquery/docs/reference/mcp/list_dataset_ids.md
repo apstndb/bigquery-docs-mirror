@@ -1,8 +1,8 @@
-## Tool: `       list_dataset_ids      `
+## Tool: `list_dataset_ids`
 
 List BigQuery dataset IDs in a Google Cloud project.
 
-The following sample demonstrate how to use `  curl  ` to invoke the `  list_dataset_ids  ` MCP tool.
+The following sample demonstrate how to use `curl` to invoke the `list_dataset_ids` MCP tool.
 
 <table>
 <colgroup>
@@ -61,9 +61,9 @@ Request for a list of datasets in a project.
 
 Fields
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the dataset request.
 
@@ -84,22 +84,16 @@ Response for a list of datasets.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;datasets&quot;: [
-    {
-      object (ListFormatDataset)
-    }
-  ]
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;datasets&quot;: [{object (ListFormatDataset)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`  datasets[]  `
+`datasets[]`
 
-`  object ( ListFormatDataset  ` )
+` object ( ListFormatDataset  ` )
 
 The datasets that matched the request.
 
@@ -127,21 +121,21 @@ The datasets that matched the request.
 
 Fields
 
-`  id  `
+`id`
 
-`  string  `
+`string`
 
 The ID of the dataset.
 
-`  friendlyName  `
+`friendlyName`
 
-`  string  `
+`string`
 
 An alternate name for the dataset. The friendly name is purely decorative in nature. This can be useful to derive additional information about the dataset.
 
-`  location  `
+`location`
 
-`  string  `
+`string`
 
 The geographic location where the dataset resides.
 
@@ -167,9 +161,9 @@ The geographic location where the dataset resides.
 
 Fields
 
-`  value  `
+`value`
 
-`  string  `
+`string`
 
 The string value.
 

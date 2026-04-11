@@ -10,7 +10,7 @@ Deletes the dataset specified by the datasetId value. Before you can delete a da
 
 ### HTTP request
 
-`  DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}  `
+`DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,15 +18,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  projectId  `
+`projectId`
 
-`  string  `
+`string`
 
 Required. Project ID of the dataset being deleted
 
-`  datasetId  `
+`datasetId`
 
-`  string  `
+`string`
 
 Required. Dataset ID of dataset being deleted
 
@@ -34,9 +34,9 @@ Required. Dataset ID of dataset being deleted
 
 Parameters
 
-`  deleteContents  `
+`deleteContents`
 
-`  boolean  `
+`boolean`
 
 If True, delete all the tables in the dataset. If False and the dataset contains tables, the request will fail. Default is False
 
@@ -52,7 +52,7 @@ If successful, the response body is an empty JSON object.
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

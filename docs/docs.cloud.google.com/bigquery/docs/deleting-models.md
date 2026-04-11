@@ -3,8 +3,8 @@
 This page shows you how to delete BigQuery ML models. You can delete a model by:
 
   - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq rm  ` command or `  bq query  ` command
-  - Calling the [`  models.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/models/delete) API method or calling the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method
+  - Using the bq command-line tool's `bq rm` command or `bq query` command
+  - Calling the [`models.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/models/delete) API method or calling the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method
   - Using the client libraries
 
 You can only delete one model at a time. When you delete a model, any data in the model is also deleted.
@@ -20,11 +20,11 @@ Deleting a model is subject to the following limitations:
 
 ## Required permissions
 
-To delete models in a dataset, you must be assigned the [`  WRITER  `](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `  bigquery.models.delete  ` permissions. If you are granted `  bigquery.models.delete  ` permissions at the project level, you can delete models in any dataset in the project. The following project-level IAM roles include `  bigquery.models.delete  ` permissions:
+To delete models in a dataset, you must be assigned the [`WRITER`](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `bigquery.models.delete` permissions. If you are granted `bigquery.models.delete` permissions at the project level, you can delete models in any dataset in the project. The following project-level IAM roles include `bigquery.models.delete` permissions:
 
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.admin  `
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.admin`
 
 For more information about IAM roles and permissions in BigQuery ML, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -34,7 +34,7 @@ To delete a model, do the following:
 
 ### Console
 
-You can delete a model in the Google Cloud console by using the **Delete Model** option or by running a query that contains a [`  DROP MODEL | DROP MODEL IF EXISTS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-drop-model) DDL statement.
+You can delete a model in the Google Cloud console by using the **Delete Model** option or by running a query that contains a [`DROP MODEL | DROP MODEL IF EXISTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-drop-model) DDL statement.
 
 **Option one:** Use the **Delete Model** option.
 
@@ -50,7 +50,7 @@ You can delete a model in the Google Cloud console by using the **Delete Model**
 
 4.  Click the options icon more\_vert for the model and then click **Delete** .
 
-5.  In the **Delete model** dialog, type `  delete  ` and then click **Delete** .
+5.  In the **Delete model** dialog, type `delete` and then click **Delete** .
 
 **Option two:** Use a DDL statement.
 
@@ -72,14 +72,14 @@ You can delete a model in the Google Cloud console by using the **Delete Model**
 
 You can delete a model using the bq command-line tool by entering the:
 
-  - `  bq rm  ` command with the `  --model  ` or `  -m  ` flag
-  - `  bq query  ` command with the DDL statement as the query parameter
+  - `bq rm` command with the `--model` or `-m` flag
+  - `bq query` command with the DDL statement as the query parameter
 
-If you are deleting a model in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET].[MODEL]  ` .
+If you are deleting a model in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET].[MODEL]` .
 
-**Option one:** Enter the `  bq rm  ` command
+**Option one:** Enter the `bq rm` command
 
-When you use the `  bq rm  ` command to remove a model, you must confirm the action. You can use the `  --force flag  ` (or `  -f  ` shortcut) to skip confirmation.
+When you use the `bq rm` command to remove a model, you must confirm the action. You can use the `--force flag` (or `-f` shortcut) to skip confirmation.
 
     bq rm -f --model PROJECT_ID:DATASET.MODEL
 
@@ -89,48 +89,48 @@ Replace the following:
   - `  DATASET  ` is the name of the dataset.
   - `  MODEL  ` is the name of the model.
 
-The `  rm  ` command produces no output.
+The `rm` command produces no output.
 
 Examples:
 
-Enter the following command to delete `  mymodel  ` from `  mydataset  ` . `  mydataset  ` is in your default project.
+Enter the following command to delete `mymodel` from `mydataset` . `mydataset` is in your default project.
 
     bq rm --model mydataset.mymodel
 
-Enter the following command to delete `  mymodel  ` from `  mydataset  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to delete `mymodel` from `mydataset` . `mydataset` is in `myotherproject` , not your default project.
 
     bq rm --model myotherproject:mydataset.mymodel
 
-Enter the following command to delete `  mymodel  ` from `  mydataset  ` . `  mydataset  ` is in your default project. The command uses the `  -f  ` shortcut to bypass confirmation.
+Enter the following command to delete `mymodel` from `mydataset` . `mydataset` is in your default project. The command uses the `-f` shortcut to bypass confirmation.
 
     bq rm -f --model mydataset.mymodel
 
-You can confirm that the model was deleted by issuing the `  bq ls  ` command. For more information, see [List models](https://docs.cloud.google.com/bigquery/docs/listing-models) .
+You can confirm that the model was deleted by issuing the `bq ls` command. For more information, see [List models](https://docs.cloud.google.com/bigquery/docs/listing-models) .
 
-**Option two:** Enter the `  bq query  ` command
+**Option two:** Enter the `bq query` command
 
-To delete a model by using the `  bq query  ` command, supply the `  DROP MODEL  ` statement in the query parameter and supply the `  --use_legacy_sql=false  ` flag to specify GoogleSQL query syntax.
+To delete a model by using the `bq query` command, supply the `DROP MODEL` statement in the query parameter and supply the `--use_legacy_sql=false` flag to specify GoogleSQL query syntax.
 
 Examples:
 
-Enter the following command to delete `  mymodel  ` from `  mydataset  ` . `  mydataset  ` is in your default project.
+Enter the following command to delete `mymodel` from `mydataset` . `mydataset` is in your default project.
 
     bq query --use_legacy_sql=false 'DROP MODEL mydataset.mymodel'
 
-Enter the following command to delete `  mymodel  ` from `  mydataset  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to delete `mymodel` from `mydataset` . `mydataset` is in `myotherproject` , not your default project.
 
     bq query --use_legacy_sql=false \
     'DROP MODEL myotherproject:mydataset.mymodel'
 
 ### API
 
-**Option one:** Call the `  models.delete  ` method
+**Option one:** Call the `models.delete` method
 
-To delete a model, call the [`  models.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/delete) method and provide the `  projectId  ` , `  datasetId  ` , and `  modelId  ` .
+To delete a model, call the [`models.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/delete) method and provide the `projectId` , `datasetId` , and `modelId` .
 
-**Option two:** Call the `  jobs.query  ` method
+**Option two:** Call the `jobs.query` method
 
-To delete a model, call the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method and supply the `  DROP MODEL  ` DDL statement in the request body's [query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest) property.
+To delete a model, call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method and supply the `DROP MODEL` DDL statement in the request body's [query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest) property.
 
 ### Go
 

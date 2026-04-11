@@ -6,7 +6,7 @@ In BigQuery, a *clustered column* is a user-defined table property that sorts [s
 
 A clustered table maintains the sort properties in the context of each operation that modifies it. Queries that filter or aggregate by the clustered columns only scan the relevant blocks based on the clustered columns, instead of the entire table or table partition. As a result, BigQuery might not be able to accurately estimate the bytes to be processed by the query or the query costs, but it attempts to reduce the total bytes at execution.
 
-When you cluster a table using multiple columns, the column order determines which columns take precedence when BigQuery sorts and groups the data into storage blocks, as seen in the following example. Table 1 shows the logical storage block layout of an unclustered table. In comparison, table 2 is only clustered by the `  Country  ` column, whereas table 3 is clustered by multiple columns, `  Country  ` and `  Status  ` .
+When you cluster a table using multiple columns, the column order determines which columns take precedence when BigQuery sorts and groups the data into storage blocks, as seen in the following example. Table 1 shows the logical storage block layout of an unclustered table. In comparison, table 2 is only clustered by the `Country` column, whereas table 3 is clustered by multiple columns, `Country` and `Status` .
 
 ![BigQuery sorts data in clustered tables to improve query performance.](https://docs.cloud.google.com/static/bigquery/images/clustering-tables.png)
 
@@ -39,22 +39,22 @@ This section describes column types and how column order works in table clusteri
 
 Cluster columns must be top-level, non-repeated columns that are one of the following types:
 
-  - `  BIGNUMERIC  `
-  - `  BOOL  `
-  - `  DATE  `
-  - `  DATETIME  `
-  - `  GEOGRAPHY  `
-  - `  INT64  `
-  - `  NUMERIC  `
-  - `  RANGE  `
-  - `  STRING  `
-  - `  TIMESTAMP  `
+  - `BIGNUMERIC`
+  - `BOOL`
+  - `DATE`
+  - `DATETIME`
+  - `GEOGRAPHY`
+  - `INT64`
+  - `NUMERIC`
+  - `RANGE`
+  - `STRING`
+  - `TIMESTAMP`
 
 For more information about data types, see [GoogleSQL data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
 
 ### Cluster column ordering
 
-The order of clustered columns affects query performance. In the following example, the `  Orders  ` table is clustered using a column sort order of `  Order_Date  ` , `  Country  ` , and `  Status  ` . The first clustered column in this example is `  Order_Date  ` , so a query that filters on `  Order_Date  ` and `  Country  ` is optimized for clustering, whereas a query that filters on only `  Country  ` and `  Status  ` is not optimized.
+The order of clustered columns affects query performance. In the following example, the `Orders` table is clustered using a column sort order of `Order_Date` , `Country` , and `Status` . The first clustered column in this example is `Order_Date` , so a query that filters on `Order_Date` and `Country` is optimized for clustering, whereas a query that filters on only `Country` and `Status` is not optimized.
 
 ![Queries on clustered tables must include clustered columns in order starting from the first.](https://docs.cloud.google.com/static/bigquery/images/optimize-query-clustering-tables.png)
 
@@ -80,7 +80,7 @@ When you create a table that is clustered and partitioned, you can achieve more 
 
 ### Example
 
-You have a clustered table named `  ClusteredSalesData  ` . The table is partitioned by the `  timestamp  ` column, and it is clustered by the `  customer_id  ` column. The data is organized into the following set of blocks:
+You have a clustered table named `ClusteredSalesData` . The table is partitioned by the `timestamp` column, and it is clustered by the `customer_id` column. The data is organized into the following set of blocks:
 
 | Partition identifier | Block ID | Minimum value for customer\_id in the block | Maximum value for customer\_id in the block |
 | -------------------- | -------- | ------------------------------------------- | ------------------------------------------- |
@@ -89,7 +89,7 @@ You have a clustered table named `  ClusteredSalesData  ` . The table is partiti
 | 20160502             | B3       | 15000                                       | 17999                                       |
 | 20160501             | B4       | 22000                                       | 27999                                       |
 
-You run the following query against the table. The query contains a filter on the `  customer_id  ` column.
+You run the following query against the table. The query contains a filter on the `customer_id` column.
 
     SELECT
       SUM(totalSale)
@@ -102,9 +102,9 @@ You run the following query against the table. The query contains a filter on th
 
 The preceding query involves the following steps:
 
-  - Scans the `  timestamp  ` , `  customer_id  ` , and `  totalSale  ` columns in blocks B2 and B4.
-  - Prunes the B3 block because of the `  DATE(timestamp) = "2016-05-01"  ` filter predicate on the `  timestamp  ` partitioning column.
-  - Prunes the B1 block because of the `  customer_id BETWEEN 20000 AND 23000  ` filter predicate on the `  customer_id  ` clustering column.
+  - Scans the `timestamp` , `customer_id` , and `totalSale` columns in blocks B2 and B4.
+  - Prunes the B3 block because of the `DATE(timestamp) = "2016-05-01"` filter predicate on the `timestamp` partitioning column.
+  - Prunes the B1 block because of the `customer_id BETWEEN 20000 AND 23000` filter predicate on the `customer_id` clustering column.
 
 ## Automatic reclustering
 
@@ -118,8 +118,8 @@ To maintain the performance characteristics of a clustered table, BigQuery perfo
 
   - Only GoogleSQL is supported for querying clustered tables and for writing query results to clustered tables.
   - You can only specify up to four clustering columns. If you need additional columns, consider combining clustering with partitioning.
-  - When using `  STRING  ` type columns for clustering, BigQuery uses only the first 1,024 characters to cluster the data. The values in the columns can themselves be longer than 1,024 characters.
-  - If you alter an existing non-clustered table to be clustered, the existing data is not automatically clustered. Only new data that's stored using the clustered columns is subject to automatic reclustering. For more information about reclustering existing data using an [`  UPDATE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) , see [Modify clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
+  - When using `STRING` type columns for clustering, BigQuery uses only the first 1,024 characters to cluster the data. The values in the columns can themselves be longer than 1,024 characters.
+  - If you alter an existing non-clustered table to be clustered, the existing data is not automatically clustered. Only new data that's stored using the clustered columns is subject to automatic reclustering. For more information about reclustering existing data using an [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) , see [Modify clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
 
 ## Clustered table quotas and limits
 

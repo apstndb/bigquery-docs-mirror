@@ -93,22 +93,22 @@ Service to handle EDW migrations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc CreateMigrationWorkflow(                         CreateMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">              MigrationWorkflow            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc CreateMigrationWorkflow(              CreateMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">             MigrationWorkflow            </code> )</p>
 <p>Creates a migration workflow.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
 </dl>
 <dl>
 <dt>IAM Permissions</dt>
-<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">             parent            </code> resource:</p>
+<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">parent</code> resource:</p>
 <ul>
-<li><code dir="ltr" translate="no">              bigquerymigration.workflows.create             </code></li>
+<li><code dir="ltr" translate="no">bigquerymigration.workflows.create</code></li>
 </ul>
 <p>For more information, see the <a href="https://cloud.google.com/iam/docs">IAM documentation</a> .</p>
 </dd>
@@ -128,22 +128,22 @@ Service to handle EDW migrations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc DeleteMigrationWorkflow(                         DeleteMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">              Empty            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc DeleteMigrationWorkflow(              DeleteMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">             Empty            </code> )</p>
 <p>Deletes a migration workflow by name.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
 </dl>
 <dl>
 <dt>IAM Permissions</dt>
-<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">             name            </code> resource:</p>
+<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">name</code> resource:</p>
 <ul>
-<li><code dir="ltr" translate="no">              bigquerymigration.workflows.delete             </code></li>
+<li><code dir="ltr" translate="no">bigquerymigration.workflows.delete</code></li>
 </ul>
 <p>For more information, see the <a href="https://cloud.google.com/iam/docs">IAM documentation</a> .</p>
 </dd>
@@ -163,22 +163,22 @@ Service to handle EDW migrations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc GetMigrationSubtask(                         GetMigrationSubtaskRequest            </code> ) returns ( <code dir="ltr" translate="no">              MigrationSubtask            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc GetMigrationSubtask(              GetMigrationSubtaskRequest            </code> ) returns ( <code dir="ltr" translate="no">             MigrationSubtask            </code> )</p>
 <p>Gets a previously created migration subtask.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
 </dl>
 <dl>
 <dt>IAM Permissions</dt>
-<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">             name            </code> resource:</p>
+<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">name</code> resource:</p>
 <ul>
-<li><code dir="ltr" translate="no">              bigquerymigration.subtasks.get             </code></li>
+<li><code dir="ltr" translate="no">bigquerymigration.subtasks.get</code></li>
 </ul>
 <p>For more information, see the <a href="https://cloud.google.com/iam/docs">IAM documentation</a> .</p>
 </dd>
@@ -198,22 +198,22 @@ Service to handle EDW migrations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc GetMigrationWorkflow(                         GetMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">              MigrationWorkflow            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc GetMigrationWorkflow(              GetMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">             MigrationWorkflow            </code> )</p>
 <p>Gets a previously created migration workflow.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
 </dl>
 <dl>
 <dt>IAM Permissions</dt>
-<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">             name            </code> resource:</p>
+<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">name</code> resource:</p>
 <ul>
-<li><code dir="ltr" translate="no">              bigquerymigration.workflows.get             </code></li>
+<li><code dir="ltr" translate="no">bigquerymigration.workflows.get</code></li>
 </ul>
 <p>For more information, see the <a href="https://cloud.google.com/iam/docs">IAM documentation</a> .</p>
 </dd>
@@ -233,22 +233,22 @@ Service to handle EDW migrations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc ListMigrationSubtasks(                         ListMigrationSubtasksRequest            </code> ) returns ( <code dir="ltr" translate="no">              ListMigrationSubtasksResponse            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc ListMigrationSubtasks(              ListMigrationSubtasksRequest            </code> ) returns ( <code dir="ltr" translate="no">             ListMigrationSubtasksResponse            </code> )</p>
 <p>Lists previously created migration subtasks.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
 </dl>
 <dl>
 <dt>IAM Permissions</dt>
-<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">             parent            </code> resource:</p>
+<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">parent</code> resource:</p>
 <ul>
-<li><code dir="ltr" translate="no">              bigquerymigration.subtasks.list             </code></li>
+<li><code dir="ltr" translate="no">bigquerymigration.subtasks.list</code></li>
 </ul>
 <p>For more information, see the <a href="https://cloud.google.com/iam/docs">IAM documentation</a> .</p>
 </dd>
@@ -268,22 +268,22 @@ Service to handle EDW migrations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc ListMigrationWorkflows(                         ListMigrationWorkflowsRequest            </code> ) returns ( <code dir="ltr" translate="no">              ListMigrationWorkflowsResponse            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc ListMigrationWorkflows(              ListMigrationWorkflowsRequest            </code> ) returns ( <code dir="ltr" translate="no">             ListMigrationWorkflowsResponse            </code> )</p>
 <p>Lists previously created migration workflow.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
 </dl>
 <dl>
 <dt>IAM Permissions</dt>
-<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">             parent            </code> resource:</p>
+<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">parent</code> resource:</p>
 <ul>
-<li><code dir="ltr" translate="no">              bigquerymigration.workflows.list             </code></li>
+<li><code dir="ltr" translate="no">bigquerymigration.workflows.list</code></li>
 </ul>
 <p>For more information, see the <a href="https://cloud.google.com/iam/docs">IAM documentation</a> .</p>
 </dd>
@@ -303,22 +303,22 @@ Service to handle EDW migrations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><code dir="ltr" translate="no">           rpc StartMigrationWorkflow(                         StartMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">              Empty            </code> )</p>
+<td><p><code dir="ltr" translate="no">rpc StartMigrationWorkflow(              StartMigrationWorkflowRequest            </code> ) returns ( <code dir="ltr" translate="no">             Empty            </code> )</p>
 <p>Starts a previously created migration workflow. I.e., the state transitions from DRAFT to RUNNING. This is a no-op if the state is already RUNNING. An error will be signaled if the state is anything other than DRAFT or RUNNING.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
 <ul>
-<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+<li><code dir="ltr" translate="no">https://www.googleapis.com/auth/cloud-platform</code></li>
 </ul>
 <p>For more information, see the <a href="https://docs.cloud.google.com/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
 </dd>
 </dl>
 <dl>
 <dt>IAM Permissions</dt>
-<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">             name            </code> resource:</p>
+<dd><p>Requires the following <a href="https://cloud.google.com/iam/docs">IAM</a> permission on the <code dir="ltr" translate="no">name</code> resource:</p>
 <ul>
-<li><code dir="ltr" translate="no">              bigquerymigration.workflows.update             </code></li>
+<li><code dir="ltr" translate="no">bigquerymigration.workflows.update</code></li>
 </ul>
 <p>For more information, see the <a href="https://cloud.google.com/iam/docs">IAM documentation</a> .</p>
 </dd>
@@ -333,9 +333,9 @@ User-definable feature flags for assessment tasks.
 
 Fields
 
-`  add_shareable_dataset  `
+`add_shareable_dataset`
 
-`  bool  `
+`bool`
 
 Optional. Whether to create a dataset containing non-PII data in addition to the output dataset.
 
@@ -345,21 +345,21 @@ Details for an assessment task orchestration result.
 
 Fields
 
-`  output_tables_schema_version  `
+`output_tables_schema_version`
 
-`  string  `
+`string`
 
 Optional. The version used for the output table schemas.
 
-`  report_uri  `
+`report_uri`
 
-`  string  `
+`string`
 
 Optional. The URI of the Data Studio report.
 
-`  additional_report_uris  `
+`additional_report_uris`
 
-`  map<string, string>  `
+`map<string, string>`
 
 Optional. Mapping with additional report URIs. This gives a mapping of report names to their URIs. The possible values for the keys are documented in the user guide.
 
@@ -369,31 +369,31 @@ Assessment task config.
 
 Fields
 
-`  input_path  `
+`input_path`
 
-`  string  `
+`string`
 
 Required. The Cloud Storage path for assessment input files.
 
-`  output_dataset  `
+`output_dataset`
 
-`  string  `
+`string`
 
 Required. The BigQuery dataset for output.
 
-`  querylogs_path  `
+`querylogs_path`
 
-`  string  `
+`string`
 
 Optional. An optional Cloud Storage path to write the query logs (which is then used as an input path on the translation task)
 
-`  data_source  `
+`data_source`
 
-`  string  `
+`string`
 
 Required. The data source or data warehouse type (eg: TERADATA/REDSHIFT) from which the input data is extracted.
 
-`  feature_handle  `
+`feature_handle`
 
 `  AssessmentFeatureHandle  `
 
@@ -417,21 +417,21 @@ BTEQ translation task related settings.
 
 Fields
 
-`  project_dataset  `
+`project_dataset`
 
 `  DatasetReference  `
 
 Specifies the project and dataset in BigQuery that will be used for external table creation during the translation.
 
-`  default_path_uri  `
+`default_path_uri`
 
-`  string  `
+`string`
 
 The Cloud Storage location to be used as the default path for files that are not otherwise specified in the file replacement map.
 
-`  file_replacement_map  `
+`file_replacement_map`
 
-`  map<string, string>  `
+`map<string, string>`
 
 Maps the local paths that are used in BTEQ scripts (the keys) to the paths in Cloud Storage that should be used in their stead in the translation (the value).
 
@@ -441,13 +441,13 @@ Request to create a migration workflow resource.
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The name of the project to which this migration workflow belongs. Example: `  projects/foo/locations/bar  `
+Required. The name of the project to which this migration workflow belongs. Example: `projects/foo/locations/bar`
 
-`  migration_workflow  `
+`migration_workflow`
 
 `  MigrationWorkflow  `
 
@@ -465,27 +465,27 @@ Reference to a BigQuery dataset.
 
 Fields
 
-`  dataset_id  `
+`dataset_id`
 
-`  string  `
+`string`
 
 A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 1,024 characters.
 
-`  project_id  `
+`project_id`
 
-`  string  `
+`string`
 
 The ID of the project containing this dataset.
 
-`  dataset_id_alternative[]  `
+`dataset_id_alternative[]`
 
-`  string  `
+`string`
 
 The alternative field that will be used when the service is not able to translate the received data to the dataset\_id field.
 
-`  project_id_alternative[]  `
+`project_id_alternative[]`
 
-`  string  `
+`string`
 
 The alternative field that will be used when the service is not able to translate the received data to the project\_id field.
 
@@ -495,11 +495,11 @@ A request to delete a previously created migration workflow.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The unique identifier for the migration workflow. Example: `  projects/123/locations/us/workflows/1234  `
+Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234`
 
 ## Dialect
 
@@ -507,105 +507,105 @@ The possible dialect options for translation.
 
 Fields
 
-Union field `  dialect_value  ` . The possible dialect options that this message represents. `  dialect_value  ` can be only one of the following:
+Union field `dialect_value` . The possible dialect options that this message represents. `dialect_value` can be only one of the following:
 
-`  bigquery_dialect  `
+`bigquery_dialect`
 
 `  BigQueryDialect  `
 
 The BigQuery dialect
 
-`  hiveql_dialect  `
+`hiveql_dialect`
 
 `  HiveQLDialect  `
 
 The HiveQL dialect
 
-`  redshift_dialect  `
+`redshift_dialect`
 
 `  RedshiftDialect  `
 
 The Redshift dialect
 
-`  teradata_dialect  `
+`teradata_dialect`
 
 `  TeradataDialect  `
 
 The Teradata dialect
 
-`  oracle_dialect  `
+`oracle_dialect`
 
 `  OracleDialect  `
 
 The Oracle dialect
 
-`  sparksql_dialect  `
+`sparksql_dialect`
 
 `  SparkSQLDialect  `
 
 The SparkSQL dialect
 
-`  snowflake_dialect  `
+`snowflake_dialect`
 
 `  SnowflakeDialect  `
 
 The Snowflake dialect
 
-`  netezza_dialect  `
+`netezza_dialect`
 
 `  NetezzaDialect  `
 
 The Netezza dialect
 
-`  azure_synapse_dialect  `
+`azure_synapse_dialect`
 
 `  AzureSynapseDialect  `
 
 The Azure Synapse dialect
 
-`  vertica_dialect  `
+`vertica_dialect`
 
 `  VerticaDialect  `
 
 The Vertica dialect
 
-`  sql_server_dialect  `
+`sql_server_dialect`
 
 `  SQLServerDialect  `
 
 The SQL Server dialect
 
-`  postgresql_dialect  `
+`postgresql_dialect`
 
 `  PostgresqlDialect  `
 
 The Postgresql dialect
 
-`  presto_dialect  `
+`presto_dialect`
 
 `  PrestoDialect  `
 
 The Presto dialect
 
-`  mysql_dialect  `
+`mysql_dialect`
 
 `  MySQLDialect  `
 
 The MySQL dialect
 
-`  db2_dialect  `
+`db2_dialect`
 
 `  DB2Dialect  `
 
 DB2 dialect
 
-`  sqlite_dialect  `
+`sqlite_dialect`
 
 `  SQLiteDialect  `
 
 SQLite dialect
 
-`  greenplum_dialect  `
+`greenplum_dialect`
 
 `  GreenplumDialect  `
 
@@ -617,13 +617,13 @@ Provides details for errors, e.g. issues that where encountered when processing 
 
 Fields
 
-`  location  `
+`location`
 
 `  ErrorLocation  `
 
 Optional. The exact location within the resource (if applicable).
 
-`  error_info  `
+`error_info`
 
 `  ErrorInfo  `
 
@@ -635,15 +635,15 @@ Holds information about where the error is located.
 
 Fields
 
-`  line  `
+`line`
 
-`  int32  `
+`int32`
 
 Optional. If applicable, denotes the line where the error occurred. A zero value means that there is no line information.
 
-`  column  `
+`column`
 
-`  int32  `
+`int32`
 
 Optional. If applicable, denotes the column where the error occurred. A zero value means that there is no columns information.
 
@@ -653,9 +653,9 @@ The filter applied to fields of translation details.
 
 Fields
 
-`  input_file_exclusion_prefixes[]  `
+`input_file_exclusion_prefixes[]`
 
-`  string  `
+`string`
 
 The list of prefixes used to exclude processing for input files.
 
@@ -665,69 +665,69 @@ A record in the aggregate CSV report for a migration workflow
 
 Fields
 
-`  severity  `
+`severity`
 
-`  string  `
+`string`
 
 Severity of the translation record.
 
-`  category  `
+`category`
 
-`  string  `
+`string`
 
 Category of the error/warning. Example: SyntaxError
 
-`  file_path  `
+`file_path`
 
-`  string  `
+`string`
 
 The file path in which the error occurred
 
-`  filename  `
+`filename`
 
-`  string  `
+`string`
 
 The file name in which the error occurred
 
-`  source_script_line  `
+`source_script_line`
 
-`  int32  `
+`int32`
 
 Specifies the row from the source text where the error occurred (0 based, -1 for messages without line location). Example: 2
 
-`  source_script_column  `
+`source_script_column`
 
-`  int32  `
+`int32`
 
 Specifies the column from the source texts where the error occurred. (0 based, -1 for messages without column location) example: 6
 
-`  message  `
+`message`
 
-`  string  `
+`string`
 
 Detailed message of the record.
 
-`  script_context  `
+`script_context`
 
-`  string  `
+`string`
 
 The script context (obfuscated) in which the error occurred
 
-`  action  `
+`action`
 
-`  string  `
+`string`
 
 Category of the error/warning. Example: SyntaxError
 
-`  effect  `
+`effect`
 
-`  string  `
+`string`
 
 Effect of the error/warning. Example: COMPATIBILITY
 
-`  object_name  `
+`object_name`
 
-`  string  `
+`string`
 
 Name of the affected object in the log message.
 
@@ -737,13 +737,13 @@ A request to get a previously created migration subtasks.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The unique identifier for the migration subtask. Example: `  projects/123/locations/us/workflows/1234/subtasks/543  `
+Required. The unique identifier for the migration subtask. Example: `projects/123/locations/us/workflows/1234/subtasks/543`
 
-`  read_mask  `
+`read_mask`
 
 `  FieldMask  `
 
@@ -755,13 +755,13 @@ A request to get a previously created migration workflow.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The unique identifier for the migration workflow. Example: `  projects/123/locations/us/workflows/1234  `
+Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234`
 
-`  read_mask  `
+`read_mask`
 
 `  FieldMask  `
 
@@ -785,13 +785,13 @@ Settings related to SQL identifiers.
 
 Fields
 
-`  output_identifier_case  `
+`output_identifier_case`
 
 `  IdentifierCase  `
 
 The setting to control output queries' identifier case.
 
-`  identifier_rewrite_mode  `
+`identifier_rewrite_mode`
 
 `  IdentifierRewriteMode  `
 
@@ -803,19 +803,19 @@ The identifier case type.
 
 Enums
 
-`  IDENTIFIER_CASE_UNSPECIFIED  `
+`IDENTIFIER_CASE_UNSPECIFIED`
 
 The identifier case is not specified.
 
-`  ORIGINAL  `
+`ORIGINAL`
 
 Identifiers' cases will be kept as the original cases.
 
-`  UPPER  `
+`UPPER`
 
 Identifiers will be in upper cases.
 
-`  LOWER  `
+`LOWER`
 
 Identifiers will be in lower cases.
 
@@ -825,15 +825,15 @@ The SQL identifier rewrite mode.
 
 Enums
 
-`  IDENTIFIER_REWRITE_MODE_UNSPECIFIED  `
+`IDENTIFIER_REWRITE_MODE_UNSPECIFIED`
 
 SQL Identifier rewrite mode is unspecified.
 
-`  NONE  `
+`NONE`
 
 SQL identifiers won't be rewrite.
 
-`  REWRITE_ALL  `
+`REWRITE_ALL`
 
 All SQL identifiers will be rewrite.
 
@@ -843,55 +843,55 @@ A request to list previously created migration subtasks.
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The migration task of the subtasks to list. Example: `  projects/123/locations/us/workflows/1234  `
+Required. The migration task of the subtasks to list. Example: `projects/123/locations/us/workflows/1234`
 
-`  read_mask  `
+`read_mask`
 
 `  FieldMask  `
 
 Optional. The list of fields to be retrieved.
 
-`  page_size  `
+`page_size`
 
-`  int32  `
+`int32`
 
 Optional. The maximum number of migration tasks to return. The service may return fewer than this number.
 
-`  page_token  `
+`page_token`
 
-`  string  `
+`string`
 
-Optional. A page token, received from previous `  ListMigrationSubtasks  ` call. Provide this to retrieve the subsequent page.
+Optional. A page token, received from previous `ListMigrationSubtasks` call. Provide this to retrieve the subsequent page.
 
-When paginating, all other parameters provided to `  ListMigrationSubtasks  ` must match the call that provided the page token.
+When paginating, all other parameters provided to `ListMigrationSubtasks` must match the call that provided the page token.
 
-`  filter  `
+`filter`
 
-`  string  `
+`string`
 
-Optional. The filter to apply. This can be used to get the subtasks of a specific tasks in a workflow, e.g. `  migration_task = "ab012"  ` where `  "ab012"  ` is the task ID (not the name in the named map).
+Optional. The filter to apply. This can be used to get the subtasks of a specific tasks in a workflow, e.g. `migration_task = "ab012"` where `"ab012"` is the task ID (not the name in the named map).
 
 ## ListMigrationSubtasksResponse
 
-Response object for a `  ListMigrationSubtasks  ` call.
+Response object for a `ListMigrationSubtasks` call.
 
 Fields
 
-`  migration_subtasks[]  `
+`migration_subtasks[]`
 
 `  MigrationSubtask  `
 
 The migration subtasks for the specified task.
 
-`  next_page_token  `
+`next_page_token`
 
-`  string  `
+`string`
 
-A token, which can be sent as `  page_token  ` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
 
 ## ListMigrationWorkflowsRequest
 
@@ -899,61 +899,61 @@ A request to list previously created migration workflows.
 
 Fields
 
-`  parent  `
+`parent`
 
-`  string  `
+`string`
 
-Required. The project and location of the migration workflows to list. Example: `  projects/123/locations/us  `
+Required. The project and location of the migration workflows to list. Example: `projects/123/locations/us`
 
-`  read_mask  `
+`read_mask`
 
 `  FieldMask  `
 
 The list of fields to be retrieved.
 
-`  page_size  `
+`page_size`
 
-`  int32  `
+`int32`
 
 The maximum number of migration workflows to return. The service may return fewer than this number.
 
-`  page_token  `
+`page_token`
 
-`  string  `
+`string`
 
-A page token, received from previous `  ListMigrationWorkflows  ` call. Provide this to retrieve the subsequent page.
+A page token, received from previous `ListMigrationWorkflows` call. Provide this to retrieve the subsequent page.
 
-When paginating, all other parameters provided to `  ListMigrationWorkflows  ` must match the call that provided the page token.
+When paginating, all other parameters provided to `ListMigrationWorkflows` must match the call that provided the page token.
 
-`  filter  `
+`filter`
 
-`  string  `
+`string`
 
-Optional. An optional AIP-160 filter to apply. The following attributes are supported: `  display_name  ` , `  state  ` , `  task.name  ` , and `  task.type  ` .
+Optional. An optional AIP-160 filter to apply. The following attributes are supported: `display_name` , `state` , `task.name` , and `task.type` .
 
-`  order_by  `
+`order_by`
 
-`  string  `
+`string`
 
-Optional. An optional AIP-132 order by field. The following attributes are supported: `  display_name  ` , `  state  ` , `  task.name  ` , and `  task.type  ` .
+Optional. An optional AIP-132 order by field. The following attributes are supported: `display_name` , `state` , `task.name` , and `task.type` .
 
 ## ListMigrationWorkflowsResponse
 
-Response object for a `  ListMigrationWorkflows  ` call.
+Response object for a `ListMigrationWorkflows` call.
 
 Fields
 
-`  migration_workflows[]  `
+`migration_workflows[]`
 
 `  MigrationWorkflow  `
 
 The migration workflows for the specified project / location.
 
-`  next_page_token  `
+`next_page_token`
 
-`  string  `
+`string`
 
-A token, which can be sent as `  page_token  ` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
 
 ## Literal
 
@@ -961,23 +961,23 @@ Literal data.
 
 Fields
 
-`  relative_path  `
+`relative_path`
 
-`  string  `
+`string`
 
 Required. The identifier of the literal entry.
 
-Union field `  literal_data  ` . The literal SQL contents. `  literal_data  ` can be only one of the following:
+Union field `literal_data` . The literal SQL contents. `literal_data` can be only one of the following:
 
-`  literal_string  `
+`literal_string`
 
-`  string  `
+`string`
 
 Literal string data.
 
-`  literal_bytes  `
+`literal_bytes`
 
-`  bytes  `
+`bytes`
 
 Literal byte data.
 
@@ -987,7 +987,7 @@ Metadata caching settings.
 
 Fields
 
-`  max_cache_age  `
+`max_cache_age`
 
 `  Duration  `
 
@@ -1001,63 +1001,63 @@ A subtask for a migration which carries details about the configuration of the s
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Output only. Immutable. The resource name for the migration subtask. The ID is server-generated.
 
-Example: `  projects/123/locations/us/workflows/345/subtasks/678  `
+Example: `projects/123/locations/us/workflows/345/subtasks/678`
 
-`  task_id  `
+`task_id`
 
-`  string  `
+`string`
 
 The unique ID of the task to which this subtask belongs.
 
-`  type  `
+`type`
 
-`  string  `
+`string`
 
 The type of the Subtask. The migration service does not check whether this is a known type. It is up to the task creator (i.e. orchestrator or worker) to ensure it only creates subtasks for which there are compatible workers polling for Subtasks.
 
-`  state  `
+`state`
 
 `  State  `
 
 Output only. The current state of the subtask.
 
-`  processing_error  `
+`processing_error`
 
 `  ErrorInfo  `
 
 Output only. An explanation that may be populated when the task is in FAILED state.
 
-`  resource_error_details[]  `
+`resource_error_details[]`
 
 `  ResourceErrorDetail  `
 
 Output only. Provides details to errors and issues encountered while processing the subtask. Presence of error details does not mean that the subtask failed.
 
-`  resource_error_count  `
+`resource_error_count`
 
-`  int32  `
+`int32`
 
-Output only. The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `  resource_error_count  ` that is higher than the size of `  resource_error_details  ` .
+Output only. The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `resource_error_count` that is higher than the size of `resource_error_details` .
 
-`  create_time  `
+`create_time`
 
 `  Timestamp  `
 
 Output only. Time when the subtask was created.
 
-`  last_update_time  `
+`last_update_time`
 
 `  Timestamp  `
 
 Output only. Time when the subtask was last updated.
 
-`  metrics[]  `
+`metrics[]`
 
 `  TimeSeries  `
 
@@ -1069,31 +1069,31 @@ Possible states of a migration subtask.
 
 Enums
 
-`  STATE_UNSPECIFIED  `
+`STATE_UNSPECIFIED`
 
 The state is unspecified.
 
-`  ACTIVE  `
+`ACTIVE`
 
 The subtask is ready, i.e. it is ready for execution.
 
-`  RUNNING  `
+`RUNNING`
 
 The subtask is running, i.e. it is assigned to a worker for execution.
 
-`  SUCCEEDED  `
+`SUCCEEDED`
 
 The subtask finished successfully.
 
-`  FAILED  `
+`FAILED`
 
 The subtask finished unsuccessfully.
 
-`  PAUSED  `
+`PAUSED`
 
 The subtask is paused, i.e., it will not be scheduled. If it was already assigned,it might still finish but no new lease renewals will be granted.
 
-`  PENDING_DEPENDENCY  `
+`PENDING_DEPENDENCY`
 
 The subtask is pending a dependency. It will be scheduled once its dependencies are done.
 
@@ -1103,49 +1103,49 @@ A single task for a migration which has details about the configuration of the t
 
 Fields
 
-`  id  `
+`id`
 
-`  string  `
+`string`
 
 Output only. Immutable. The unique identifier for the migration task. The ID is server-generated.
 
-`  type  `
+`type`
 
-`  string  `
+`string`
 
 The type of the task. This must be one of the supported task types: Translation\_Teradata2BQ, Translation\_Redshift2BQ, Translation\_Bteq2BQ, Translation\_Oracle2BQ, Translation\_HiveQL2BQ, Translation\_SparkSQL2BQ, Translation\_Snowflake2BQ, Translation\_Netezza2BQ, Translation\_AzureSynapse2BQ, Translation\_Vertica2BQ, Translation\_SQLServer2BQ, Translation\_Presto2BQ, Translation\_MySQL2BQ, Translation\_Postgresql2BQ, Translation\_SQLite2BQ, Translation\_Greenplum2BQ.
 
-`  details  `
+`details`
 
 `  Any  `
 
 DEPRECATED\! Use one of the task\_details below. The details of the task. The type URL must be one of the supported task details messages and correspond to the Task's type.
 
-`  state  `
+`state`
 
 `  State  `
 
 Output only. The current state of the task.
 
-`  processing_error  `
+`processing_error`
 
 `  ErrorInfo  `
 
 Output only. An explanation that may be populated when the task is in FAILED state.
 
-`  create_time  `
+`create_time`
 
 `  Timestamp  `
 
 Output only. Time when the task was created.
 
-`  last_update_time  `
+`last_update_time`
 
 `  Timestamp  `
 
 Output only. Time when the task was last updated.
 
-`  orchestration_result (deprecated)  `
+` orchestration_result (deprecated)  `
 
 `  MigrationTaskOrchestrationResult  `
 
@@ -1153,63 +1153,63 @@ This item is deprecated\!
 
 Output only. Deprecated: Use the task\_result field below instead. Additional information about the orchestration.
 
-`  resource_error_details[]  `
+`resource_error_details[]`
 
 `  ResourceErrorDetail  `
 
 Output only. Provides details to errors and issues encountered while processing the task. Presence of error details does not mean that the task failed.
 
-`  resource_error_count  `
+`resource_error_count`
 
-`  int32  `
+`int32`
 
-The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `  resource_error_count  ` that is higher than the size of `  resource_error_details  ` .
+The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `resource_error_count` that is higher than the size of `resource_error_details` .
 
-`  metrics[]  `
+`metrics[]`
 
 `  TimeSeries  `
 
 Output only. The metrics for the task.
 
-`  task_result  `
+`task_result`
 
 `  MigrationTaskResult  `
 
 Output only. The result of the task.
 
-`  total_processing_error_count  `
+`total_processing_error_count`
 
-`  int32  `
+`int32`
 
 Output only. Count of all the processing errors in this task and its subtasks.
 
-`  total_resource_error_count  `
+`total_resource_error_count`
 
-`  int32  `
+`int32`
 
 Output only. Count of all the resource errors in this task and its subtasks.
 
-Union field `  task_details  ` . The details of the task. `  task_details  ` can be only one of the following:
+Union field `task_details` . The details of the task. `task_details` can be only one of the following:
 
-`  assessment_task_details  `
+`assessment_task_details`
 
 `  AssessmentTaskDetails  `
 
 Task configuration for Assessment.
 
-`  translation_task_details  `
+`translation_task_details`
 
 `  TranslationTaskDetails  `
 
 Task configuration for Batch SQL Translation.
 
-`  translation_config_details  `
+`translation_config_details`
 
 `  TranslationConfigDetails  `
 
 Task configuration for CW Batch/Offline SQL Translation.
 
-`  translation_details  `
+`translation_details`
 
 `  TranslationDetails  `
 
@@ -1221,31 +1221,31 @@ Possible states of a migration task.
 
 Enums
 
-`  STATE_UNSPECIFIED  `
+`STATE_UNSPECIFIED`
 
 The state is unspecified.
 
-`  PENDING  `
+`PENDING`
 
 The task is waiting for orchestration.
 
-`  ORCHESTRATING  `
+`ORCHESTRATING`
 
 The task is assigned to an orchestrator.
 
-`  RUNNING  `
+`RUNNING`
 
 The task is running, i.e. its subtasks are ready for execution.
 
-`  PAUSED  `
+`PAUSED`
 
 The task is paused. Assigned subtasks can continue, but no new subtasks will be scheduled.
 
-`  SUCCEEDED  `
+`SUCCEEDED`
 
 The task finished successfully.
 
-`  FAILED  `
+`FAILED`
 
 The task finished unsuccessfully.
 
@@ -1255,15 +1255,15 @@ Additional information from the orchestrator when it is done with the task orche
 
 Fields
 
-Union field `  details  ` . Details specific to the task type. `  details  ` can be only one of the following:
+Union field `details` . Details specific to the task type. `details` can be only one of the following:
 
-`  assessment_details  `
+`assessment_details`
 
 `  AssessmentOrchestrationResultDetails  `
 
 Details specific to assessment task types.
 
-`  translation_task_result  `
+`translation_task_result`
 
 `  TranslationTaskResult  `
 
@@ -1275,15 +1275,15 @@ The migration task result.
 
 Fields
 
-Union field `  details  ` . Details specific to the task type. `  details  ` can be only one of the following:
+Union field `details` . Details specific to the task type. `details` can be only one of the following:
 
-`  assessment_details  `
+`assessment_details`
 
 `  AssessmentOrchestrationResultDetails  `
 
 Details specific to assessment task types.
 
-`  translation_task_result  `
+`translation_task_result`
 
 `  TranslationTaskResult  `
 
@@ -1295,39 +1295,39 @@ A migration workflow which specifies what needs to be done for an EDW migration.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
 Output only. Immutable. Identifier. The unique identifier for the migration workflow. The ID is server-generated.
 
-Example: `  projects/123/locations/us/workflows/345  `
+Example: `projects/123/locations/us/workflows/345`
 
-`  display_name  `
+`display_name`
 
-`  string  `
+`string`
 
 The display name of the workflow. This can be set to give a workflow a descriptive name. There is no guarantee or enforcement of uniqueness.
 
-`  tasks  `
+`tasks`
 
-`  map<string, MigrationTask  ` \>
+` map<string, MigrationTask  ` \>
 
 The tasks in a workflow in a named map. The name (i.e. key) has no meaning and is merely a convenient way to address a specific task in a workflow.
 
-`  state  `
+`state`
 
 `  State  `
 
 Output only. That status of the workflow.
 
-`  create_time  `
+`create_time`
 
 `  Timestamp  `
 
 Output only. Time when the workflow was created.
 
-`  last_update_time  `
+`last_update_time`
 
 `  Timestamp  `
 
@@ -1339,23 +1339,23 @@ Possible migration workflow states.
 
 Enums
 
-`  STATE_UNSPECIFIED  `
+`STATE_UNSPECIFIED`
 
 Workflow state is unspecified.
 
-`  DRAFT  `
+`DRAFT`
 
 Workflow is in draft status, i.e. tasks are not yet eligible for execution.
 
-`  RUNNING  `
+`RUNNING`
 
 Workflow is running (i.e. tasks are eligible for execution).
 
-`  PAUSED  `
+`PAUSED`
 
 Workflow is paused. Tasks currently in progress may continue, but no further tasks will be scheduled.
 
-`  COMPLETED  `
+`COMPLETED`
 
 Workflow is complete. There should not be any task in a non-terminal state, but if they are (e.g. forced termination), they will not be scheduled.
 
@@ -1371,33 +1371,33 @@ The potential components of a full name mapping that will be mapped during trans
 
 Fields
 
-`  type  `
+`type`
 
 `  Type  `
 
 The type of object that is being mapped.
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 The database name (BigQuery project ID equivalent in the source data warehouse).
 
-`  schema  `
+`schema`
 
-`  string  `
+`string`
 
 The schema name (BigQuery dataset equivalent in the source data warehouse).
 
-`  relation  `
+`relation`
 
-`  string  `
+`string`
 
 The relation name (BigQuery table or view equivalent in the source data warehouse).
 
-`  attribute  `
+`attribute`
 
-`  string  `
+`string`
 
 The attribute name (BigQuery column equivalent in the source data warehouse).
 
@@ -1407,35 +1407,35 @@ The type of the object that is being mapped.
 
 Enums
 
-`  TYPE_UNSPECIFIED  `
+`TYPE_UNSPECIFIED`
 
 Unspecified name mapping type.
 
-`  DATABASE  `
+`DATABASE`
 
 The object being mapped is a database.
 
-`  SCHEMA  `
+`SCHEMA`
 
 The object being mapped is a schema.
 
-`  RELATION  `
+`RELATION`
 
 The object being mapped is a relation.
 
-`  ATTRIBUTE  `
+`ATTRIBUTE`
 
 The object being mapped is an attribute.
 
-`  RELATION_ALIAS  `
+`RELATION_ALIAS`
 
 The object being mapped is a relation alias.
 
-`  ATTRIBUTE_ALIAS  `
+`ATTRIBUTE_ALIAS`
 
 The object being mapped is a an attribute alias.
 
-`  FUNCTION  `
+`FUNCTION`
 
 The object being mapped is a function.
 
@@ -1445,27 +1445,27 @@ The potential components of a full name mapping that will be mapped during trans
 
 Fields
 
-`  database  `
+`database`
 
-`  string  `
+`string`
 
 The database name (BigQuery project ID equivalent in the target data warehouse).
 
-`  schema  `
+`schema`
 
-`  string  `
+`string`
 
 The schema name (BigQuery dataset equivalent in the target data warehouse).
 
-`  relation  `
+`relation`
 
-`  string  `
+`string`
 
 The relation name (BigQuery table or view equivalent in the target data warehouse).
 
-`  attribute  `
+`attribute`
 
-`  string  `
+`string`
 
 The attribute name (BigQuery column equivalent in the target data warehouse).
 
@@ -1481,13 +1481,13 @@ Represents a key-value pair of NameMappingKey to NameMappingValue to represent t
 
 Fields
 
-`  source  `
+`source`
 
 `  NameMappingKey  `
 
 The name of the object in source that is being mapped.
 
-`  target  `
+`target`
 
 `  NameMappingValue  `
 
@@ -1499,7 +1499,7 @@ Represents a map of name mappings using a list of key:value proto messages of ex
 
 Fields
 
-`  name_map[]  `
+`name_map[]`
 
 `  ObjectNameMapping  `
 
@@ -1517,13 +1517,13 @@ A single data point in a time series.
 
 Fields
 
-`  interval  `
+`interval`
 
 `  TimeInterval  `
 
-The time interval to which the data point applies. For `  GAUGE  ` metrics, the start time does not need to be supplied, but if it is supplied, it must equal the end time. For `  DELTA  ` metrics, the start and end time should specify a non-zero interval, with subsequent points specifying contiguous and non-overlapping intervals. For `  CUMULATIVE  ` metrics, the start and end time should specify a non-zero interval, with subsequent points specifying the same start time and increasing end times, until an event resets the cumulative value to zero and sets a new start time for the following points.
+The time interval to which the data point applies. For `GAUGE` metrics, the start time does not need to be supplied, but if it is supplied, it must equal the end time. For `DELTA` metrics, the start and end time should specify a non-zero interval, with subsequent points specifying contiguous and non-overlapping intervals. For `CUMULATIVE` metrics, the start and end time should specify a non-zero interval, with subsequent points specifying the same start time and increasing end times, until an event resets the cumulative value to zero and sets a new start time for the following points.
 
-`  value  `
+`value`
 
 `  TypedValue  `
 
@@ -1553,23 +1553,23 @@ Provides details for errors and the corresponding resources.
 
 Fields
 
-`  resource_info  `
+`resource_info`
 
 `  ResourceInfo  `
 
 Required. Information about the resource where the error is located.
 
-`  error_details[]  `
+`error_details[]`
 
 `  ErrorDetail  `
 
 Required. The error details for the resource.
 
-`  error_count  `
+`error_count`
 
-`  int32  `
+`int32`
 
-Required. How many errors there are in total for the resource. Truncation can be indicated by having an `  error_count  ` that is higher than the size of `  error_details  ` .
+Required. How many errors there are in total for the resource. Truncation can be indicated by having an `error_count` that is higher than the size of `error_details` .
 
 ## SQLServerDialect
 
@@ -1595,21 +1595,21 @@ Represents the default source environment values for the translation.
 
 Fields
 
-`  default_database  `
+`default_database`
 
-`  string  `
+`string`
 
 The default database name to fully qualify SQL objects when their database name is missing.
 
-`  schema_search_path[]  `
+`schema_search_path[]`
 
-`  string  `
+`string`
 
 The schema search path. When SQL objects are missing schema name, translation engine will search through this list to find the value.
 
-`  metadata_store_dataset  `
+`metadata_store_dataset`
 
-`  string  `
+`string`
 
 Optional. Expects a valid BigQuery dataset ID that exists, e.g., project-123.metadata\_store\_123. If specified, translation will search and read the required schema information from a metadata store in this dataset. If metadata store doesn't exist, translation will parse the metadata file and upload the schema info to a temp table in the dataset to speed up future translation jobs.
 
@@ -1619,25 +1619,25 @@ Represents the default source environment values for the translation.
 
 Fields
 
-`  default_database  `
+`default_database`
 
-`  string  `
+`string`
 
 The default database name to fully qualify SQL objects when their database name is missing.
 
-`  schema_search_path[]  `
+`schema_search_path[]`
 
-`  string  `
+`string`
 
 The schema search path. When SQL objects are missing schema name, translation engine will search through this list to find the value.
 
-`  metadata_store_dataset  `
+`metadata_store_dataset`
 
-`  string  `
+`string`
 
 Optional. Expects a validQ BigQuery dataset ID that exists, e.g., project-123.metadata\_store\_123. If specified, translation will search and read the required schema information from a metadata store in this dataset. If metadata store doesn't exist, translation will parse the metadata file and upload the schema info to a temp table in the dataset to speed up future translation jobs.
 
-`  metadata_caching  `
+`metadata_caching`
 
 `  MetadataCaching  `
 
@@ -1649,11 +1649,11 @@ Represents one path to the location that holds source data.
 
 Fields
 
-Union field `  location  ` . The location of the source data. `  location  ` can be only one of the following:
+Union field `location` . The location of the source data. `location` can be only one of the following:
 
-`  gcs_path  `
+`gcs_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for a directory of files.
 
@@ -1663,21 +1663,21 @@ Represents one path to the location that holds source data.
 
 Fields
 
-`  encoding  `
+`encoding`
 
-`  string  `
+`string`
 
 Optional. The optional field to specify the encoding of the sql bytes.
 
-Union field `  source  ` . The specific source SQL. `  source  ` can be only one of the following:
+Union field `source` . The specific source SQL. `source` can be only one of the following:
 
-`  base_uri  `
+`base_uri`
 
-`  string  `
+`string`
 
 The base URI for all files to be read in as sources for translation.
 
-`  literal  `
+`literal`
 
 `  Literal  `
 
@@ -1689,13 +1689,13 @@ Represents one mapping from a source location path to an optional target locatio
 
 Fields
 
-`  source_location  `
+`source_location`
 
 `  SourceLocation  `
 
 The path to the location of the source data.
 
-`  target_location  `
+`target_location`
 
 `  TargetLocation  `
 
@@ -1707,13 +1707,13 @@ Represents one mapping from a source SQL to a target SQL.
 
 Fields
 
-`  source_spec  `
+`source_spec`
 
 `  SourceSpec  `
 
 The source SQL or the path to it.
 
-`  target_spec  `
+`target_spec`
 
 `  TargetSpec  `
 
@@ -1731,11 +1731,11 @@ A request to start a previously created migration workflow.
 
 Fields
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The unique identifier for the migration workflow. Example: `  projects/123/locations/us/workflows/1234  `
+Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234`
 
 ## TargetLocation
 
@@ -1743,11 +1743,11 @@ Required. The unique identifier for the migration workflow. Example: `  projects
 
 Fields
 
-Union field `  location  ` . The location of the target data. `  location  ` can be only one of the following:
+Union field `location` . The location of the target data. `location` can be only one of the following:
 
-`  gcs_path  `
+`gcs_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for a directory of files.
 
@@ -1757,11 +1757,11 @@ Represents one path to the location that holds target data.
 
 Fields
 
-`  relative_path  `
+`relative_path`
 
-`  string  `
+`string`
 
-The relative path for the target data. Given source file `  base_uri/input/sql  ` , the output would be `  target_base_uri/sql/relative_path/input.sql  ` .
+The relative path for the target data. Given source file `base_uri/input/sql` , the output would be `target_base_uri/sql/relative_path/input.sql` .
 
 ## TeradataDialect
 
@@ -1769,7 +1769,7 @@ The dialect definition for Teradata.
 
 Fields
 
-`  mode  `
+`mode`
 
 `  Mode  `
 
@@ -1781,15 +1781,15 @@ The sub-dialect options for Teradata.
 
 Enums
 
-`  MODE_UNSPECIFIED  `
+`MODE_UNSPECIFIED`
 
 Unspecified mode.
 
-`  SQL  `
+`SQL`
 
 Teradata SQL mode.
 
-`  BTEQ  `
+`BTEQ`
 
 BTEQ mode (which includes SQL).
 
@@ -1805,13 +1805,13 @@ A time interval extending just after a start time through an end time. If the st
 
 Fields
 
-`  start_time  `
+`start_time`
 
 `  Timestamp  `
 
 Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
 
-`  end_time  `
+`end_time`
 
 `  Timestamp  `
 
@@ -1823,35 +1823,35 @@ The metrics object for a SubTask.
 
 Fields
 
-`  metric  `
+`metric`
 
-`  string  `
+`string`
 
 Required. The name of the metric.
 
 If the metric is not known by the service yet, it will be auto-created.
 
-`  value_type  `
+`value_type`
 
 `  ValueType  `
 
 Required. The value type of the time series.
 
-`  metric_kind  `
+`metric_kind`
 
 `  MetricKind  `
 
 Optional. The metric kind of the time series.
 
-If present, it must be the same as the metric kind of the associated metric. If the associated metric's descriptor must be auto-created, then this field specifies the metric kind of the new descriptor and must be either `  GAUGE  ` (the default) or `  CUMULATIVE  ` .
+If present, it must be the same as the metric kind of the associated metric. If the associated metric's descriptor must be auto-created, then this field specifies the metric kind of the new descriptor and must be either `GAUGE` (the default) or `CUMULATIVE` .
 
-`  points[]  `
+`points[]`
 
 `  Point  `
 
 Required. The data points of this time series. When listing time series, points are returned in reverse time order.
 
-When creating a time series, this field must contain exactly one point and the point's type must be the same as the value type of the associated metric. If the associated metric's descriptor must be auto-created, then the value type of the descriptor is determined by the point's type, which must be `  BOOL  ` , `  INT64  ` , `  DOUBLE  ` , or `  DISTRIBUTION  ` .
+When creating a time series, this field must contain exactly one point and the point's type must be the same as the value type of the associated metric. If the associated metric's descriptor must be auto-created, then the value type of the descriptor is determined by the point's type, which must be `BOOL` , `INT64` , `DOUBLE` , or `DISTRIBUTION` .
 
 ## TranslationConfigDetails
 
@@ -1859,61 +1859,61 @@ The translation config to capture necessary settings for a translation task and 
 
 Fields
 
-`  source_dialect  `
+`source_dialect`
 
 `  Dialect  `
 
 The dialect of the input files.
 
-`  target_dialect  `
+`target_dialect`
 
 `  Dialect  `
 
 The target dialect for the engine to translate the input to.
 
-`  source_env  `
+`source_env`
 
 `  SourceEnv  `
 
 The default source environment values for the translation.
 
-`  source_target_location_mapping[]  `
+`source_target_location_mapping[]`
 
 `  SourceTargetLocationMapping  `
 
 The mapping from source location paths to target location paths.
 
-`  request_source  `
+`request_source`
 
-`  string  `
+`string`
 
 The indicator to show translation request initiator.
 
-`  target_types[]  `
+`target_types[]`
 
-`  string  `
+`string`
 
 The types of output to generate, e.g. sql, metadata etc. If not specified, a default set of targets will be generated. Some additional target types may be slower to generate. See the documentation for the set of available target types.
 
-Union field `  source_location  ` . The chosen path where the source for input files will be found. `  source_location  ` can be only one of the following:
+Union field `source_location` . The chosen path where the source for input files will be found. `source_location` can be only one of the following:
 
-`  gcs_source_path  `
+`gcs_source_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for a directory of files to translate in a task.
 
-Union field `  target_location  ` . The chosen path where the destination for output files will be found. `  target_location  ` can be only one of the following:
+Union field `target_location` . The chosen path where the destination for output files will be found. `target_location` can be only one of the following:
 
-`  gcs_target_path  `
+`gcs_target_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path to write back the corresponding input files to.
 
-Union field `  output_name_mapping  ` . The mapping of full SQL object names from their current state to the desired output. `  output_name_mapping  ` can be only one of the following:
+Union field `output_name_mapping` . The mapping of full SQL object names from their current state to the desired output. `output_name_mapping` can be only one of the following:
 
-`  name_mapping_list  `
+`name_mapping_list`
 
 `  ObjectNameMappingList  `
 
@@ -1925,33 +1925,33 @@ The translation details to capture the necessary settings for a translation job.
 
 Fields
 
-`  source_target_mapping[]  `
+`source_target_mapping[]`
 
 `  SourceTargetMapping  `
 
 The mapping from source to target SQL.
 
-`  target_base_uri  `
+`target_base_uri`
 
-`  string  `
+`string`
 
 The base URI for all writes to persistent storage.
 
-`  source_environment  `
+`source_environment`
 
 `  SourceEnvironment  `
 
 The default source environment values for the translation.
 
-`  target_return_literals[]  `
+`target_return_literals[]`
 
-`  string  `
+`string`
 
 The list of literal targets that will be directly returned to the response. Each entry consists of the constructed path, EXCLUDING the base path. Not providing a target\_base\_uri will prevent writing to persistent storage.
 
-`  target_types[]  `
+`target_types[]`
 
-`  string  `
+`string`
 
 The types of output to generate, e.g. sql, metadata, lineage\_from\_sql\_scripts, etc. If not specified, a default set of targets will be generated. Some additional target types may be slower to generate. See the documentation for the set of available target types.
 
@@ -1961,15 +1961,15 @@ Mapping between an input and output file to be translated in a subtask.
 
 Fields
 
-`  input_path  `
+`input_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for a file to translation in a subtask.
 
-`  output_path  `
+`output_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path to write back the corresponding input file to.
 
@@ -1979,69 +1979,69 @@ The translation task config to capture necessary settings for a translation task
 
 Fields
 
-`  input_path  `
+`input_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for translation input files.
 
-`  output_path  `
+`output_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path for translation output files.
 
-`  file_paths[]  `
+`file_paths[]`
 
 `  TranslationFileMapping  `
 
 Cloud Storage files to be processed for translation.
 
-`  schema_path  `
+`schema_path`
 
-`  string  `
+`string`
 
 The Cloud Storage path to DDL files as table schema to assist semantic translation.
 
-`  file_encoding  `
+`file_encoding`
 
 `  FileEncoding  `
 
 The file encoding type.
 
-`  identifier_settings  `
+`identifier_settings`
 
 `  IdentifierSettings  `
 
 The settings for SQL identifiers.
 
-`  special_token_map  `
+`special_token_map`
 
-`  map<string, TokenType  ` \>
+` map<string, TokenType  ` \>
 
 The map capturing special tokens to be replaced during translation. The key is special token in string. The value is the token data type. This is used to translate SQL query template which contains special token as place holder. The special token makes a query invalid to parse. This map will be applied to annotate those special token with types to let parser understand how to parse them into proper structure with type information.
 
-`  filter  `
+`filter`
 
 `  Filter  `
 
 The filter applied to translation details.
 
-`  translation_exception_table  `
+`translation_exception_table`
 
-`  string  `
+`string`
 
 Specifies the exact name of the bigquery table ("dataset.table") to be used for surfacing raw translation errors. If the table does not exist, we will create it. If it already exists and the schema is the same, we will re-use. If the table exists and the schema is different, we will throw an error.
 
-Union field `  language_options  ` . The language specific settings for the translation task. `  language_options  ` can be only one of the following:
+Union field `language_options` . The language specific settings for the translation task. `language_options` can be only one of the following:
 
-`  teradata_options  `
+`teradata_options`
 
 `  TeradataOptions  `
 
 The Teradata SQL specific settings for the translation task.
 
-`  bteq_options  `
+`bteq_options`
 
 `  BteqOptions  `
 
@@ -2053,31 +2053,31 @@ The file encoding types.
 
 Enums
 
-`  FILE_ENCODING_UNSPECIFIED  `
+`FILE_ENCODING_UNSPECIFIED`
 
 File encoding setting is not specified.
 
-`  UTF_8  `
+`UTF_8`
 
 File encoding is UTF\_8.
 
-`  ISO_8859_1  `
+`ISO_8859_1`
 
 File encoding is ISO\_8859\_1.
 
-`  US_ASCII  `
+`US_ASCII`
 
 File encoding is US\_ASCII.
 
-`  UTF_16  `
+`UTF_16`
 
 File encoding is UTF\_16.
 
-`  UTF_16LE  `
+`UTF_16LE`
 
 File encoding is UTF\_16LE.
 
-`  UTF_16BE  `
+`UTF_16BE`
 
 File encoding is UTF\_16BE.
 
@@ -2087,35 +2087,35 @@ The special token data type.
 
 Enums
 
-`  TOKEN_TYPE_UNSPECIFIED  `
+`TOKEN_TYPE_UNSPECIFIED`
 
 Token type is not specified.
 
-`  STRING  `
+`STRING`
 
 Token type as string.
 
-`  INT64  `
+`INT64`
 
 Token type as integer.
 
-`  NUMERIC  `
+`NUMERIC`
 
 Token type as numeric.
 
-`  BOOL  `
+`BOOL`
 
 Token type as boolean.
 
-`  FLOAT64  `
+`FLOAT64`
 
 Token type as float.
 
-`  DATE  `
+`DATE`
 
 Token type as date.
 
-`  TIMESTAMP  `
+`TIMESTAMP`
 
 Token type as timestamp.
 
@@ -2125,21 +2125,21 @@ Translation specific result details from the migration task.
 
 Fields
 
-`  translated_literals[]  `
+`translated_literals[]`
 
 `  Literal  `
 
 The list of the translated literals.
 
-`  report_log_messages[]  `
+`report_log_messages[]`
 
 `  GcsReportLogMessage  `
 
 The records from the aggregate CSV report for a migration workflow.
 
-`  console_uri  `
+`console_uri`
 
-`  string  `
+`string`
 
 The Cloud Console URI for the migration workflow.
 
@@ -2149,33 +2149,33 @@ A single strongly-typed value.
 
 Fields
 
-Union field `  value  ` . The typed value field. `  value  ` can be only one of the following:
+Union field `value` . The typed value field. `value` can be only one of the following:
 
-`  bool_value  `
+`bool_value`
 
-`  bool  `
+`bool`
 
-A Boolean value: `  true  ` or `  false  ` .
+A Boolean value: `true` or `false` .
 
-`  int64_value  `
+`int64_value`
 
-`  int64  `
+`int64`
 
-A 64-bit integer. Its range is approximately `  +/-9.2x10^18  ` .
+A 64-bit integer. Its range is approximately `+/-9.2x10^18` .
 
-`  double_value  `
+`double_value`
 
-`  double  `
+`double`
 
-A 64-bit double-precision floating-point number. Its magnitude is approximately `  +/-10^(+/-300)  ` and it has 16 significant digits of precision.
+A 64-bit double-precision floating-point number. Its magnitude is approximately `+/-10^(+/-300)` and it has 16 significant digits of precision.
 
-`  string_value  `
+`string_value`
 
-`  string  `
+`string`
 
 A variable-length string value.
 
-`  distribution_value  `
+`distribution_value`
 
 `  Distribution  `
 

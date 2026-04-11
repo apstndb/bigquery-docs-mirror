@@ -12,16 +12,16 @@ Listing views is identical to the process for listing tables.
 
 ### Required permissions
 
-To list views in a dataset, you need the `  bigquery.tables.list  ` IAM permission.
+To list views in a dataset, you need the `bigquery.tables.list` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to list views in a dataset:
 
-  - `  roles/bigquery.user  `
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.user`
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -43,7 +43,7 @@ To list the views in a dataset:
 
 ### SQL
 
-Use the [`  INFORMATION_SCHEMA.VIEWS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) :
+Use the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -64,7 +64,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Issue the `  bq ls  ` command. The `  --format  ` flag can be used to control the output. If you are listing views in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
+Issue the `bq ls` command. The `--format` flag can be used to control the output. If you are listing views in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
 ``` notranslate
 bq ls --format=pretty project_id:dataset
@@ -75,7 +75,7 @@ Where:
   - project\_id is your project ID.
   - dataset is the name of the dataset.
 
-When you run the command, the `  Type  ` field displays either `  TABLE  ` or `  VIEW  ` . For example:
+When you run the command, the `Type` field displays either `TABLE` or `VIEW` . For example:
 
     +-------------------------+-------+----------------------+-------------------+
     |         tableId         | Type  |        Labels        | Time Partitioning |
@@ -86,17 +86,17 @@ When you run the command, the `  Type  ` field displays either `  TABLE  ` or ` 
 
 Examples:
 
-Enter the following command to list views in dataset `  mydataset  ` in your default project.
+Enter the following command to list views in dataset `mydataset` in your default project.
 
     bq ls --format=pretty mydataset
 
-Enter the following command to list views in dataset `  mydataset  ` in `  myotherproject  ` .
+Enter the following command to list views in dataset `mydataset` in `myotherproject` .
 
     bq ls --format=pretty myotherproject:mydataset
 
 ### API
 
-To list views using the API, call the [`  tables.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) method.
+To list views using the API, call the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) method.
 
 ### Go
 
@@ -166,17 +166,17 @@ Getting information about views is identical to the process for getting informat
 
 ### Required permissions
 
-To get information about a view, you need the `  bigquery.tables.get  ` IAM permission.
+To get information about a view, you need the `bigquery.tables.get` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to get information about a view:
 
-  - `  roles/bigquery.metadataViewer  `
-  - `  roles/bigquery.dataViewer  `
-  - `  roles/bigquery.dataOwner  `
-  - `  roles/bigquery.dataEditor  `
-  - `  roles/bigquery.admin  `
+  - `roles/bigquery.metadataViewer`
+  - `roles/bigquery.dataViewer`
+  - `roles/bigquery.dataOwner`
+  - `roles/bigquery.dataEditor`
+  - `roles/bigquery.admin`
 
-Additionally, if you have the `  bigquery.datasets.create  ` permission, you can get information about views in the datasets that you create.
+Additionally, if you have the `bigquery.datasets.create` permission, you can get information about views in the datasets that you create.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -196,7 +196,7 @@ To get information about views:
 
 ### SQL
 
-Query the [`  INFORMATION_SCHEMA.VIEWS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) . The following example retrieves all columns except for `  check_option  ` , which is reserved for future use. The metadata returned is for all views in DATASET\_ID in your default project:
+Query the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) . The following example retrieves all columns except for `check_option` , which is reserved for future use. The metadata returned is for all views in DATASET\_ID in your default project:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -220,7 +220,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Issue the `  bq show  ` command. The `  --format  ` flag can be used to control the output. If you are getting information about a view in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+Issue the `bq show` command. The `--format` flag can be used to control the output. If you are getting information about a view in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
     bq show \
     --format=prettyjson \
@@ -234,17 +234,17 @@ Where:
 
 Examples:
 
-Enter the following command to display information about `  myview  ` in dataset `  mydataset  ` in your default project.
+Enter the following command to display information about `myview` in dataset `mydataset` in your default project.
 
     bq show --format=prettyjson mydataset.myview
 
-Enter the following command to display information about `  myview  ` in dataset `  mydataset  ` in `  myotherproject  ` .
+Enter the following command to display information about `myview` in dataset `mydataset` in `myotherproject` .
 
     bq show --format=prettyjson myotherproject:mydataset.myview
 
 ### API
 
-Call the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and provide any relevant parameters.
+Call the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and provide any relevant parameters.
 
 ### Go
 
@@ -377,4 +377,4 @@ To control access to views in BigQuery, see [Authorized views](https://docs.clou
   - For information on creating views, see [Creating views](https://docs.cloud.google.com/bigquery/docs/views) .
   - For information on creating an authorized view, see [Creating authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
   - For more information on managing views, see [Managing views](https://docs.cloud.google.com/bigquery/docs/managing-views) .
-  - To see an overview of `  INFORMATION_SCHEMA  ` , go to [Introduction to BigQuery `  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+  - To see an overview of `INFORMATION_SCHEMA` , go to [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .

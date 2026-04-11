@@ -37,7 +37,7 @@ Ensure that you have the necessary Identity and Access Management (IAM) permissi
 
 ### Required roles
 
-To get the permissions that you need to restore a deleted dataset, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to restore a deleted dataset, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to restore a deleted dataset. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -45,8 +45,8 @@ This predefined role contains the permissions required to restore a deleted data
 
 The following permissions are required to restore a deleted dataset:
 
-  - `  bigquery.datasets.create  ` on the project
-  - `  bigquery.datasets.get  ` on the dataset
+  - `bigquery.datasets.create` on the project
+  - `bigquery.datasets.get` on the dataset
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -58,7 +58,7 @@ To restore a dataset, select one of the following options:
 
 ### SQL
 
-Use the [`  UNDROP SCHEMA  ` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#undrop_schema_statement) :
+Use the [`UNDROP SCHEMA` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#undrop_schema_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -72,7 +72,7 @@ Use the [`  UNDROP SCHEMA  ` data definition language (DDL) statement](https://d
     
     Replace `  DATASET_ID  ` with the dataset that you want to undelete.
 
-3.  [Specify the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) of the dataset that you want to undelete. To specify the location part of the SQL statement use `  location  ` options
+3.  [Specify the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) of the dataset that you want to undelete. To specify the location part of the SQL statement use `location` options
     
     ``` notranslate
     UNDROP SCHEMA DATASET_ID OPTIONS (location=location);
@@ -84,17 +84,17 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### API
 
-Call the [`  datasets.undelete  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/undelete) .
+Call the [`datasets.undelete` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/undelete) .
 
 **Note:** If you have two deleted datasets in your project with the same name in two different regions, undeleting a dataset with the BigQuery API undeletes only one, selected at random, unless a location is specified.
 
 When you restore a dataset, the following errors might occur:
 
-  - `  ALREADY_EXISTS  ` : a dataset with the same name already exists in the region in which you tried to restore. You can't use undelete to overwrite or merge datasets.
+  - `ALREADY_EXISTS` : a dataset with the same name already exists in the region in which you tried to restore. You can't use undelete to overwrite or merge datasets.
 
-  - `  NOT_FOUND  ` : the dataset you're trying to recover is past its time travel window, it never existed, or you didn't [specify the correct location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) of the dataset.
+  - `NOT_FOUND` : the dataset you're trying to recover is past its time travel window, it never existed, or you didn't [specify the correct location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) of the dataset.
 
-  - `  ACCESS_DENIED  ` : you don't have the required [permissions](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets#before-you-begin) to undelete this dataset.
+  - `ACCESS_DENIED` : you don't have the required [permissions](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets#before-you-begin) to undelete this dataset.
     
     ## What's next
 

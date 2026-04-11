@@ -2,18 +2,18 @@ The type of editions. Different features and behaviors are provided to different
 
 Enums
 
-`  EDITION_UNSPECIFIED  `
+`EDITION_UNSPECIFIED`
 
 Default value, which will be treated as ENTERPRISE.
 
-`  STANDARD  `
+`STANDARD`
 
 Standard edition.
 
-`  ENTERPRISE  `
+`ENTERPRISE`
 
 Enterprise edition.
 
-`  ENTERPRISE_PLUS  `
+`ENTERPRISE_PLUS`
 
 Enterprise Plus edition.

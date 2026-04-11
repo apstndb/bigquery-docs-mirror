@@ -12,7 +12,7 @@ For more information about automatic data quality, see the [Auto data quality ov
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com)
 
@@ -27,17 +27,17 @@ This section describes the IAM roles and permissions needed to use Dataplex Univ
 To get the permissions that you need to run and manage data quality scans, ask your administrator to grant you the following IAM roles:
 
   - Run a data quality scan on a BigQuery table:
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project to run scan jobs
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the BigQuery table to be scanned
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project to run scan jobs
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the BigQuery table to be scanned
   - Publish data quality scan results to Dataplex Universal Catalog:
-      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the scanned table
-      - [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` ) on the `  @bigquery  ` entry group in the same location as the table
-  - Perform specific tasks on `  DataScan  ` resources:
-      - [Dataplex DataScan Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanAdmin) ( `  roles/dataplex.dataScanAdmin  ` ) on the project for full access
-      - [Dataplex DataScan Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanCreator) ( `  roles/dataplex.dataScanCreator  ` ) on the project to create scans
-      - [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) on the project for write access
-      - [Dataplex DataScan Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `  roles/dataplex.dataScanViewer  ` ) on the project to read scan metadata
-      - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `  roles/dataplex.dataScanDataViewer  ` ) on the project to read scan data including rules and results
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the scanned table
+      - [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the `@bigquery` entry group in the same location as the table
+  - Perform specific tasks on `DataScan` resources:
+      - [Dataplex DataScan Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanAdmin) ( `roles/dataplex.dataScanAdmin` ) on the project for full access
+      - [Dataplex DataScan Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanCreator) ( `roles/dataplex.dataScanCreator` ) on the project to create scans
+      - [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `roles/dataplex.dataScanEditor` ) on the project for write access
+      - [Dataplex DataScan Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `roles/dataplex.dataScanViewer` ) on the project to read scan metadata
+      - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `roles/dataplex.dataScanDataViewer` ) on the project to read scan data including rules and results
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -48,43 +48,43 @@ These predefined roles contain the permissions required to run and manage data q
 The following permissions are required to run and manage data quality scans:
 
   - Run a data quality scan on a BigQuery table:
-      - `  bigquery.jobs.create  ` on the project to run scan jobs
-      - `  bigquery.tables.get  ` on the BigQuery table to be scanned
-      - `  bigquery.tables.getData  ` on the BigQuery table to be scanned
+      - `bigquery.jobs.create` on the project to run scan jobs
+      - `bigquery.tables.get` on the BigQuery table to be scanned
+      - `bigquery.tables.getData` on the BigQuery table to be scanned
   - Publish data quality scan results to Dataplex Universal Catalog:
-      - `  bigquery.tables.update  ` on the scanned table
-      - `  dataplex.entryGroups.useDataQualityScorecardAspect  ` on the `  @bigquery  ` entry group in the same location as the table
-  - Create a `  DataScan  ` : `  dataplex.datascans.create  ` on the project
-  - Delete a `  DataScan  ` : `  dataplex.datascans.delete  ` on the project
-  - View `  DataScan  ` metadata: `  dataplex.datascans.get  ` on the project
-  - View `  DataScan  ` details including rules and results: `  dataplex.datascans.getData  ` on the project
-  - List `  DataScan  ` s: `  dataplex.datascans.list  ` on the project
-  - Run a `  DataScan  ` : `  dataplex.datascans.run  ` on the project
-  - Update a `  DataScan  ` : `  dataplex.datascans.update  ` on the project
-  - Get or set IAM policy on a `  DataScan  ` :
-      - `  dataplex.datascans.getIamPolicy  ` on the project
-      - `  dataplex.datascans.setIamPolicy  ` on the project
+      - `bigquery.tables.update` on the scanned table
+      - `dataplex.entryGroups.useDataQualityScorecardAspect` on the `@bigquery` entry group in the same location as the table
+  - Create a `DataScan` : `dataplex.datascans.create` on the project
+  - Delete a `DataScan` : `dataplex.datascans.delete` on the project
+  - View `DataScan` metadata: `dataplex.datascans.get` on the project
+  - View `DataScan` details including rules and results: `dataplex.datascans.getData` on the project
+  - List `DataScan` s: `dataplex.datascans.list` on the project
+  - Run a `DataScan` : `dataplex.datascans.run` on the project
+  - Update a `DataScan` : `dataplex.datascans.update` on the project
+  - Get or set IAM policy on a `DataScan` :
+      - `dataplex.datascans.getIamPolicy` on the project
+      - `dataplex.datascans.setIamPolicy` on the project
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 If you need to access columns protected by BigQuery column-level access policies, then you also need permissions for those columns.
 
-**Note:** Dataplex Universal Catalog doesn't create a BigQuery job in your project for data quality scans. However, you need the `  bigquery.jobs.create  ` permission to create a `  DryRun  ` job to check for permissions for the table.
+**Note:** Dataplex Universal Catalog doesn't create a BigQuery job in your project for data quality scans. However, you need the `bigquery.jobs.create` permission to create a `DryRun` job to check for permissions for the table.
 
 ### Dataplex Universal Catalog service account roles and permissions
 
-If you haven't created any data quality or data profile scans or you don't have a Dataplex Universal Catalog lake in this project, create a service identifier by running: `  gcloud beta services identity create --service=dataplex.googleapis.com  ` . This command returns a Dataplex Universal Catalog service identifier if it exists.
+If you haven't created any data quality or data profile scans or you don't have a Dataplex Universal Catalog lake in this project, create a service identifier by running: `gcloud beta services identity create --service=dataplex.googleapis.com` . This command returns a Dataplex Universal Catalog service identifier if it exists.
 
 To ensure that the Dataplex Universal Catalog service account of the project containing the data quality scan has the necessary permissions to read data from various sources and export results, ask your administrator to grant the following IAM roles to the Dataplex Universal Catalog service account of the project containing the data quality scan:
 
 **Important:** You must grant these roles to the Dataplex Universal Catalog service account of the project containing the data quality scan, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
-  - Read BigQuery table data: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on BigQuery tables to be scanned and any other tables referenced in rules
-  - Export scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the results dataset and table
+  - Read BigQuery table data: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on BigQuery tables to be scanned and any other tables referenced in rules
+  - Export scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the results dataset and table
   - Scan BigQuery data organized in a Dataplex Universal Catalog lake:
-      - [Dataplex Metadata Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.metadataReader) ( `  roles/dataplex.metadataReader  ` ) on Dataplex resources
-      - [Dataplex Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.viewer) ( `  roles/dataplex.viewer  ` ) on Dataplex resources
-  - Scan a BigQuery external table from Cloud Storage: [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` ) on the Cloud Storage bucket
+      - [Dataplex Metadata Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.metadataReader) ( `roles/dataplex.metadataReader` ) on Dataplex resources
+      - [Dataplex Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.viewer) ( `roles/dataplex.viewer` ) on Dataplex resources
+  - Scan a BigQuery external table from Cloud Storage: [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on the Cloud Storage bucket
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -95,26 +95,26 @@ These predefined roles contain the permissions required to read data from variou
 The following permissions are required to read data from various sources and export results:
 
   - Read BigQuery table data:
-      - `  bigquery.tables.get  ` on BigQuery tables
-      - `  bigquery.tables.getData  ` on BigQuery tables
+      - `bigquery.tables.get` on BigQuery tables
+      - `bigquery.tables.getData` on BigQuery tables
   - Export scan results to a BigQuery table:
-      - `  bigquery.datasets.get  ` on results dataset and table
-      - `  bigquery.tables.create  ` on results dataset and table
-      - `  bigquery.tables.get  ` on results dataset and table
-      - `  bigquery.tables.getData  ` on results dataset and table
-      - `  bigquery.tables.update  ` on results dataset and table
-      - `  bigquery.tables.updateData  ` on results dataset and table
+      - `bigquery.datasets.get` on results dataset and table
+      - `bigquery.tables.create` on results dataset and table
+      - `bigquery.tables.get` on results dataset and table
+      - `bigquery.tables.getData` on results dataset and table
+      - `bigquery.tables.update` on results dataset and table
+      - `bigquery.tables.updateData` on results dataset and table
   - Scan BigQuery data organized in a Dataplex Universal Catalog lake:
-      - `  dataplex.lakes.list  ` on Dataplex resources
-      - `  dataplex.lakes.get  ` on Dataplex resources
-      - `  dataplex.zones.list  ` on Dataplex resources
-      - `  dataplex.zones.get  ` on Dataplex resources
-      - `  dataplex.entities.list  ` on Dataplex resources
-      - `  dataplex.entities.get  ` on Dataplex resources
-      - `  dataplex.operations.get  ` on Dataplex resources
+      - `dataplex.lakes.list` on Dataplex resources
+      - `dataplex.lakes.get` on Dataplex resources
+      - `dataplex.zones.list` on Dataplex resources
+      - `dataplex.zones.get` on Dataplex resources
+      - `dataplex.entities.list` on Dataplex resources
+      - `dataplex.entities.get` on Dataplex resources
+      - `dataplex.operations.get` on Dataplex resources
   - Scan a BigQuery external table from Cloud Storage:
-      - `  storage.buckets.get  ` on the Cloud Storage bucket
-      - `  storage.objects.get  ` on the Cloud Storage bucket
+      - `storage.buckets.get` on the Cloud Storage bucket
+      - `storage.objects.get` on the Cloud Storage bucket
 
 Your administrator might also be able to give the Dataplex Universal Catalog service account of the project containing the data quality scan these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -148,9 +148,9 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
     
     5.  In the **Scope** field, choose **Incremental** or **Entire data** .
         
-          - If you choose **Incremental** : In the **Timestamp column** field, select a column of type `  DATE  ` or `  TIMESTAMP  ` from your BigQuery table that increases as new records are added, and that can be used to identify new records. It can be a column that partitions the table.
+          - If you choose **Incremental** : In the **Timestamp column** field, select a column of type `DATE` or `TIMESTAMP` from your BigQuery table that increases as new records are added, and that can be used to identify new records. It can be a column that partitions the table.
     
-    6.  To filter your data, select the **Filter rows** checkbox. Provide a row filter consisting of a valid SQL expression that can be used as a part of a [`  WHERE  ` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example, `  col1 >= 0  ` . The filter can be a combination of multiple column conditions. For example, `  col1 >= 0 AND col2 < 10  ` .
+    6.  To filter your data, select the **Filter rows** checkbox. Provide a row filter consisting of a valid SQL expression that can be used as a part of a [`WHERE` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example, `col1 >= 0` . The filter can be a combination of multiple column conditions. For example, `col1 >= 0 AND col2 < 10` .
     
     7.  To sample your data, in the **Sampling size** list, select a sampling percentage. Choose a percentage value that ranges between 0.0% and 100.0% with up to 3 decimal digits. For larger datasets, choose a lower sampling percentage. For example, for a 1 PB table, if you enter a value between 0.1% and 1.0%, the data quality scan samples between 1-10 TB of data. For incremental data scans, the data quality scan applies sampling to the latest increment.
     
@@ -200,7 +200,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
             
             3.  In **Column name** , choose a column.
             
-            4.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `  true  ` (pass) or `  false  ` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#sample-rules) .
+            4.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `true` (pass) or `false` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#sample-rules) .
             
             5.  Click **Add** .
         
@@ -210,7 +210,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
             
             2.  In **Column name** , choose a column.
             
-            3.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `  true  ` (pass) or `  false  ` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#sample-rules) .
+            3.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `true` (pass) or `false` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#sample-rules) .
             
             4.  Click **Add** .
         
@@ -253,16 +253,16 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
 
 ### gcloud
 
-To create a data quality scan, use the [`  gcloud dataplex datascans create data-quality  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-quality) .
+To create a data quality scan, use the [`gcloud dataplex datascans create data-quality` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-quality) .
 
-If the source data is organized in a Dataplex Universal Catalog lake, include the `  --data-source-entity  ` flag:
+If the source data is organized in a Dataplex Universal Catalog lake, include the `--data-source-entity` flag:
 
     gcloud dataplex datascans create data-quality DATASCAN \
         --location=LOCATION \
         --data-quality-spec-file=DATA_QUALITY_SPEC_FILE \
         --data-source-entity=DATA_SOURCE_ENTITY
 
-If the source data isn't organized in a Dataplex Universal Catalog lake, include the `  --data-source-resource  ` flag:
+If the source data isn't organized in a Dataplex Universal Catalog lake, include the `--data-source-resource` flag:
 
     gcloud dataplex datascans create data-quality DATASCAN \
         --location=LOCATION \
@@ -273,9 +273,9 @@ Replace the following variables:
 
   - `  DATASCAN  ` : The name of the data quality scan.
   - `  LOCATION  ` : The Google Cloud region in which to create the data quality scan.
-  - `  DATA_QUALITY_SPEC_FILE  ` : The path to the JSON or YAML file containing the specifications for the data quality scan. The file can be a local file or a Cloud Storage path with the prefix `  gs://  ` . Use this file to specify the data quality rules for the scan. You can also specify additional details in this file, such as filters, sampling percent, and post-scan actions like exporting to BigQuery or sending email notification reports. See the [documentation for JSON representation](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and the [example YAML representation](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) .
-  - `  DATA_SOURCE_ENTITY  ` : The Dataplex Universal Catalog entity that contains the data for the data quality scan. For example, `  projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity  ` .
-  - `  DATA_SOURCE_RESOURCE  ` : The name of the resource that contains the data for the data quality scan. For example, `  //bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table  ` .
+  - `  DATA_QUALITY_SPEC_FILE  ` : The path to the JSON or YAML file containing the specifications for the data quality scan. The file can be a local file or a Cloud Storage path with the prefix `gs://` . Use this file to specify the data quality rules for the scan. You can also specify additional details in this file, such as filters, sampling percent, and post-scan actions like exporting to BigQuery or sending email notification reports. See the [documentation for JSON representation](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and the [example YAML representation](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) .
+  - `  DATA_SOURCE_ENTITY  ` : The Dataplex Universal Catalog entity that contains the data for the data quality scan. For example, `projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity` .
+  - `  DATA_SOURCE_RESOURCE  ` : The name of the resource that contains the data for the data quality scan. For example, `//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table` .
 
 ### C\#
 
@@ -584,7 +584,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To create a data quality scan, use the [`  dataScans.create  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+To create a data quality scan, use the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
 The following request creates a one-time data quality scan:
 
@@ -622,11 +622,11 @@ Replace the following:
   - `  DATASET_ID  ` : The ID of BigQuery dataset.
   - `  TABLE_ID  ` : The ID of BigQuery table.
   - `  COLUMN_NAME  ` : The column name for the rule.
-  - `  DIMENSION  ` : The dimension for the rule, for example `  VALIDITY  ` .
+  - `  DIMENSION  ` : The dimension for the rule, for example `VALIDITY` .
 
-If you want to build rules for the data quality scan by using rule recommendations that are based on the results of a data profiling scan, get the recommendations by calling the [`  dataScans.jobs.generateDataQualityRules  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/generateDataQualityRules) on the data profiling scan.
+If you want to build rules for the data quality scan by using rule recommendations that are based on the results of a data profiling scan, get the recommendations by calling the [`dataScans.jobs.generateDataQualityRules` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/generateDataQualityRules) on the data profiling scan.
 
-**Note:** If your BigQuery table is configured with the **Require partition filter** set to `  true  ` , use the BigQuery partition column as the data quality scan row filter or timestamp column.
+**Note:** If your BigQuery table is configured with the **Require partition filter** set to `true` , use the BigQuery partition column as the data quality scan row filter or timestamp column.
 
 ## Run a data quality scan
 
@@ -642,7 +642,7 @@ If you want to build rules for the data quality scan by using rule recommendatio
 
 ### gcloud
 
-To run a data quality scan, use the [`  gcloud dataplex datascans run  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/run) :
+To run a data quality scan, use the [`gcloud dataplex datascans run` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/run) :
 
     gcloud dataplex datascans run DATASCAN \
     --location=LOCATION \
@@ -824,7 +824,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To run a data quality scan, use the [`  dataScans.run  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
+To run a data quality scan, use the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
 
 **Note:** Run isn't supported for data quality scans that are on a one-time schedule.
 
@@ -848,7 +848,7 @@ To run a data quality scan, use the [`  dataScans.run  ` method](https://docs.cl
 
 ### gcloud
 
-To view the results of a data quality scan job, use the [`  gcloud dataplex datascans jobs describe  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/describe) :
+To view the results of a data quality scan job, use the [`gcloud dataplex datascans jobs describe` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/describe) :
 
     gcloud dataplex datascans jobs describe JOB \
     --location=LOCATION \
@@ -860,7 +860,7 @@ Replace the following variables:
   - `  JOB  ` : The job ID of the data quality scan job.
   - `  LOCATION  ` : The Google Cloud region in which the data quality scan was created.
   - `  DATASCAN  ` : The name of the data quality scan the job belongs to.
-  - `  --view=FULL  ` : To see the scan job result, specify `  FULL  ` .
+  - `--view=FULL` : To see the scan job result, specify `FULL` .
 
 ### C\#
 
@@ -1035,7 +1035,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To view the results of a data quality scan, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
+To view the results of a data quality scan, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
 
 ### View published results
 
@@ -1081,7 +1081,7 @@ Dataplex Universal Catalog saves the data quality scan history of the last 300 j
 
 ### gcloud
 
-To view historical data quality scan jobs, use the [`  gcloud dataplex datascans jobs list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/list) :
+To view historical data quality scan jobs, use the [`gcloud dataplex datascans jobs list` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/list) :
 
     gcloud dataplex datascans jobs list \
     --location=LOCATION \
@@ -1322,7 +1322,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To view historical data quality scan jobs, use the [`  dataScans.jobs.list  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
+To view historical data quality scan jobs, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
 
 ## Grant access to data quality scan results
 
@@ -1371,9 +1371,9 @@ Not supported.
 
 ### REST
 
-1.  To get the job that identified the data quality failures, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityResult) .
+1.  To get the job that identified the data quality failures, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityResult) .
     
-    In the response object, the `  failingRowsQuery  ` field shows the query.
+    In the response object, the `failingRowsQuery` field shows the query.
 
 2.  [Run the query in BigQuery](https://docs.cloud.google.com/bigquery/docs/running-queries) to see the records that caused the job to fail.
 
@@ -1389,7 +1389,7 @@ Not supported.
 
 ### REST
 
-To get the job that identified the data quality failures, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityResult) . In the response object, the `  debugQueriesResultSets  ` field shows the results of the debug queries.
+To get the job that identified the data quality failures, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityResult) . In the response object, the `debugQueriesResultSets` field shows the results of the debug queries.
 
 ## Manage data quality scans for a specific table
 
@@ -1461,7 +1461,7 @@ You can edit various settings for an existing data quality scan, such as the dis
 
 ### gcloud
 
-To update the description of a data quality scan, use the [`  gcloud dataplex datascans update data-quality  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/update/data-quality) :
+To update the description of a data quality scan, use the [`gcloud dataplex datascans update data-quality` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/update/data-quality) :
 
     gcloud dataplex datascans update data-quality DATASCAN \
     --location=LOCATION \
@@ -1473,7 +1473,7 @@ Replace the following:
   - `  LOCATION  ` : The Google Cloud region in which the data quality scan was created.
   - `  DESCRIPTION  ` : The new description for the data quality scan.
 
-**Note:** You can update specification fields, such as `  rules  ` , `  rowFilter  ` , or `  samplingPercent  ` , in the data quality specification file. Refer to [JSON](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and [YAML](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) representations.
+**Note:** You can update specification fields, such as `rules` , `rowFilter` , or `samplingPercent` , in the data quality specification file. Refer to [JSON](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and [YAML](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) representations.
 
 ### C\#
 
@@ -1688,7 +1688,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To edit a data quality scan, use the [`  dataScans.patch  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
+To edit a data quality scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
 
 **Note:** Update isn't supported for data quality scans that are on a one-time schedule.
 
@@ -1710,7 +1710,7 @@ To edit a data quality scan, use the [`  dataScans.patch  ` method](https://docs
 
 ### gcloud
 
-To delete a data quality scan, use the [`  gcloud dataplex datascans delete  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/delete) :
+To delete a data quality scan, use the [`gcloud dataplex datascans delete` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/delete) :
 
     gcloud dataplex datascans delete DATASCAN \
     --location=LOCATION \
@@ -1929,7 +1929,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To delete a data quality scan, use the [`  dataScans.delete  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
+To delete a data quality scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
 
 **Note:** Delete isn't supported for data quality scans that are on a one-time schedule.
 

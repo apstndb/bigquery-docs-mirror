@@ -3,20 +3,20 @@
 This page shows you how to get information or metadata about BigQuery ML models. You can get model metadata by:
 
   - Using the Google Cloud console
-  - Using the `  bq show  ` CLI command
-  - Calling the [`  models.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get) API method directly or by using the client libraries
+  - Using the `bq show` CLI command
+  - Calling the [`models.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get) API method directly or by using the client libraries
 
-**Note:** Getting information about models by querying the `  INFORMATION_SCHEMA  ` views is unsupported.
+**Note:** Getting information about models by querying the `INFORMATION_SCHEMA` views is unsupported.
 
 ## Required permissions
 
-To get model metadata, you must be assigned the [`  READER  `](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `  bigquery.models.getMetadata  ` permissions. If you are granted `  bigquery.models.getMetadata  ` permissions at the project level, you can get metadata on models in any dataset in the project. The following predefined, project-level IAM roles include `  bigquery.models.getMetadata  ` permissions:
+To get model metadata, you must be assigned the [`READER`](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `bigquery.models.getMetadata` permissions. If you are granted `bigquery.models.getMetadata` permissions at the project level, you can get metadata on models in any dataset in the project. The following predefined, project-level IAM roles include `bigquery.models.getMetadata` permissions:
 
-  - `  bigquery.dataViewer  `
-  - `  bigquery.dataEditor  `
-  - `  bigquery.dataOwner  `
-  - `  bigquery.metadataViewer  `
-  - `  bigquery.admin  `
+  - `bigquery.dataViewer`
+  - `bigquery.dataEditor`
+  - `bigquery.dataOwner`
+  - `bigquery.metadataViewer`
+  - `bigquery.admin`
 
 For more information on IAM roles and permissions in BigQuery ML, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -40,11 +40,11 @@ To get metadata about models:
 
 ### bq
 
-Issue the `  bq show  ` command with the `  --model  ` or `  -m  ` flag to display model metadata. The [`  --format  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) flag can be used to control the output.
+Issue the `bq show` command with the `--model` or `-m` flag to display model metadata. The [`--format`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) flag can be used to control the output.
 
-To see only the feature columns for your model, use the `  --schema  ` flag with the `  --model  ` flag. When you use the `  --schema  ` flag, `  --format  ` must be set to either `  json  ` or `  prettyjson  ` .
+To see only the feature columns for your model, use the `--schema` flag with the `--model` flag. When you use the `--schema` flag, `--format` must be set to either `json` or `prettyjson` .
 
-If you are getting information about a model in a project other than your default project, add the project ID to the dataset in the following format: `  [PROJECT_ID]:[DATASET]  ` .
+If you are getting information about a model in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
     bq show --model --format=prettyjson PROJECT_ID:DATASET.MODEL
 
@@ -54,7 +54,7 @@ Replace the following:
   - `  DATASET  ` is the name of the dataset.
   - `  MODEL  ` is the name of the model.
 
-The command output looks like the following when the `  --format=pretty  ` flag is used. To see full details, use the `  --format=prettyjson  ` format. The sample output shows metadata for a logistic regression model.
+The command output looks like the following when the `--format=pretty` flag is used. To see full details, use the `--format=prettyjson` format. The sample output shows metadata for a logistic regression model.
 
     +--------------+---------------------+---------------------+---------------------------+--------+-----------------+-----------------+
     |      Id      |     Model Type      |   Feature Columns   |       Label Columns       | Labels |  Creation Time  | Expiration Time |
@@ -67,22 +67,22 @@ The command output looks like the following when the `  --format=pretty  ` flag 
 
 Examples:
 
-Enter the following command to display all information about `  mymodel  ` in `  mydataset  ` . `  mydataset  ` is in your default project.
+Enter the following command to display all information about `mymodel` in `mydataset` . `mydataset` is in your default project.
 
     bq show --model --format=prettyjson mydataset.mymodel
 
-Enter the following command to display all information about `  mymodel  ` in `  mydataset  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to display all information about `mymodel` in `mydataset` . `mydataset` is in `myotherproject` , not your default project.
 
     bq show --model --format=prettyjson myotherproject:mydataset.mymodel
 
-Enter the following command to display only the feature columns for `  mymodel  ` in `  mydataset  ` . `  mydataset  ` is in `  myotherproject  ` , not your default project.
+Enter the following command to display only the feature columns for `mymodel` in `mydataset` . `mydataset` is in `myotherproject` , not your default project.
 
     bq show --model --schema --format=prettyjson \
     myotherproject:mydataset.mymodel
 
 ### API
 
-To get model metadata by using the API, call the [`  models.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get) method and provide the `  projectId  ` , `  datasetId  ` , and `  modelId  ` .
+To get model metadata by using the API, call the [`models.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get) method and provide the `projectId` , `datasetId` , and `modelId` .
 
 ### Go
 

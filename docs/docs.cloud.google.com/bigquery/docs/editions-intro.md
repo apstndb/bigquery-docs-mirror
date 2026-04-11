@@ -103,24 +103,24 @@ Don't use edition tiers to restrict access to specific features, because the fea
 </tr>
 <tr class="odd">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Supported assignment types</a></strong></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
-<code dir="ltr" translate="no">       PIPELINE      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
-<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
-<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
-<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
-<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
-<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
-<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
+<td><code dir="ltr" translate="no">QUERY</code> ,<br />
+<code dir="ltr" translate="no">PIPELINE</code></td>
+<td><code dir="ltr" translate="no">QUERY</code> ,<br />
+<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
+<code dir="ltr" translate="no">PIPELINE</code> ,<br />
+<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
+<td><code dir="ltr" translate="no">QUERY</code> ,<br />
+<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
+<code dir="ltr" translate="no">PIPELINE</code> ,<br />
+<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
 <td>On-demand pricing doesn't support assignments</td>
 </tr>
 <tr class="even">
@@ -216,14 +216,14 @@ Don't use edition tiers to restrict access to specific features, because the fea
 </tr>
 <tr class="odd">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Search</a></strong></td>
-<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search"><code dir="ltr" translate="no">        SEARCH       </code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/search-index">search indexes</a></td>
+<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search"><code dir="ltr" translate="no">SEARCH</code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/search-index">search indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Query acceleration with search indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Query acceleration with search indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Query acceleration with search indexes</a></td>
 </tr>
 <tr class="even">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/vector-search-intro">Vector search</a></strong></td>
-<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">        VECTOR_SEARCH       </code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/vector-index">vector indexes</a></td>
+<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">VECTOR_SEARCH</code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/vector-index">vector indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/vector-index">Query acceleration with vector indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/vector-index">Query acceleration with vector indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/vector-index">Query acceleration with vector indexes</a></td>
@@ -273,24 +273,24 @@ Don't use edition tiers to restrict access to specific features, because the fea
 </tr>
 <tr class="odd">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Supported assignment types</a></strong></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
-<code dir="ltr" translate="no">       PIPELINE      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
-<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
-<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
-<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
-<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
-<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
-<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
-<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
+<td><code dir="ltr" translate="no">QUERY</code> ,<br />
+<code dir="ltr" translate="no">PIPELINE</code></td>
+<td><code dir="ltr" translate="no">QUERY</code> ,<br />
+<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
+<code dir="ltr" translate="no">PIPELINE</code> ,<br />
+<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
+<td><code dir="ltr" translate="no">QUERY</code> ,<br />
+<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
+<code dir="ltr" translate="no">PIPELINE</code> ,<br />
+<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
+<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
 <td>On-demand pricing doesn't support assignments</td>
 </tr>
 <tr class="even">

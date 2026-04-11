@@ -2,9 +2,9 @@ Schedule queries or transfer external data from SaaS applications to Google BigQ
 
 ## Service: bigquerydatatransfer.googleapis.com
 
-The Service name `  bigquerydatatransfer.googleapis.com  ` is needed to create RPC client stubs.
+The Service name `bigquerydatatransfer.googleapis.com` is needed to create RPC client stubs.
 
-## `         google.cloud.bigquery.datatransfer.v1.DataTransferService       `
+## `        google.cloud.bigquery.datatransfer.v1.DataTransferService       `
 
 Methods
 
@@ -81,7 +81,7 @@ Unenroll data sources in a user project.
 
 Updates a data transfer configuration.
 
-## `         google.cloud.location.Locations       `
+## `        google.cloud.location.Locations       `
 
 Methods
 

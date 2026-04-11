@@ -1,6 +1,6 @@
 # The ML.ROC\_CURVE function
 
-This document describes the `  ML.ROC_CURVE  ` function, which you can use to evaluate binary class classification specific metrics.
+This document describes the `ML.ROC_CURVE` function, which you can use to evaluate binary class classification specific metrics.
 
 ## Syntax
 
@@ -14,7 +14,7 @@ ML.ROC_CURVE(
 
 ### Arguments
 
-`  ML.ROC_CURVE  ` takes the following arguments:
+`ML.ROC_CURVE` takes the following arguments:
 
   - `  PROJECT_ID  ` : the project that contains the resource.
 
@@ -24,38 +24,38 @@ ML.ROC_CURVE(
 
   - `  TABLE  ` : the name of the input table that contains the evaluation data.
     
-    If `  TABLE  ` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name that's provided during training. This value is provided using the `  input_label_cols  ` option. If `  input_label_cols  ` is unspecified, the column that's named `  label  ` in the training data is used.
+    If `TABLE` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name that's provided during training. This value is provided using the `input_label_cols` option. If `input_label_cols` is unspecified, the column that's named `label` in the training data is used.
     
-    If you don't specify either `  TABLE  ` or `  QUERY_STATEMENT  ` , `  ML.ROC_CURVE  ` computes the curve results as follows:
-    
-      - If the data is split during training, the split evaluation data is used to compute the curve results.
-      - If the data is not split during training, the entire training input is used to compute the curve results.
-
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
-    
-    If `  QUERY_STATEMENT  ` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name provided during training. This value is provided using the `  input_label_cols  ` option. If `  input_label_cols  ` is unspecified, the column named `  label  ` in the training data is used. The extra columns are ignored.
-    
-    If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then only the input columns present in the `  TRANSFORM  ` clause must appear in `  QUERY_STATEMENT  ` .
-    
-    If you don't specify either `  table  ` or `  QUERY_STATEMENT  ` , `  ML.ROC_CURVE  ` computes the curve results as follows:
+    If you don't specify either `TABLE` or `QUERY_STATEMENT` , `ML.ROC_CURVE` computes the curve results as follows:
     
       - If the data is split during training, the split evaluation data is used to compute the curve results.
       - If the data is not split during training, the entire training input is used to compute the curve results.
 
-  - `  THRESHOLDS  ` : an `  ARRAY<FLOAT64>  ` value that specifies the percentile values of the prediction output supplied by the [`  GENERATE_ARRAY  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_array) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `QUERY_STATEMENT` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+    
+    If `QUERY_STATEMENT` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name provided during training. This value is provided using the `input_label_cols` option. If `input_label_cols` is unspecified, the column named `label` in the training data is used. The extra columns are ignored.
+    
+    If you used the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `CREATE MODEL` statement that created the model, then only the input columns present in the `TRANSFORM` clause must appear in `QUERY_STATEMENT` .
+    
+    If you don't specify either `table` or `QUERY_STATEMENT` , `ML.ROC_CURVE` computes the curve results as follows:
+    
+      - If the data is split during training, the split evaluation data is used to compute the curve results.
+      - If the data is not split during training, the entire training input is used to compute the curve results.
 
-  - `  TRIAL_ID  ` : an `  INT64  ` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
+  - `  THRESHOLDS  ` : an `ARRAY<FLOAT64>` value that specifies the percentile values of the prediction output supplied by the [`GENERATE_ARRAY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_array) .
+
+  - `  TRIAL_ID  ` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
 
 ## Output
 
-`  ML.ROC_CURVE  ` returns multiple rows with metrics for different threshold values for the model. The metrics include the following:
+`ML.ROC_CURVE` returns multiple rows with metrics for different threshold values for the model. The metrics include the following:
 
-  - `  threshold  ` : a `  FLOAT64  ` value that contains the custom threshold for the binary class classification model.
-  - `  recall  ` : a `  FLOAT64  ` value that indicates the proportion of actual positive cases that were correctly predicted by the model.
-  - `  true_positives  ` : an `  INT64  ` value that contains the number of cases correctly predicted as positive by the model.
-  - `  false_positives  ` : an `  INT64  ` value that contains the number of cases incorrectly predicted as positive by the model.
-  - `  true_negatives  ` : an `  INT64  ` value that contains the number of cases correctly predicted as negative by the model.
-  - `  false_negatives  ` : an `  INT64  ` value that contains the number of cases incorrectly predicted as negative by the model.
+  - `threshold` : a `FLOAT64` value that contains the custom threshold for the binary class classification model.
+  - `recall` : a `FLOAT64` value that indicates the proportion of actual positive cases that were correctly predicted by the model.
+  - `true_positives` : an `INT64` value that contains the number of cases correctly predicted as positive by the model.
+  - `false_positives` : an `INT64` value that contains the number of cases incorrectly predicted as positive by the model.
+  - `true_negatives` : an `INT64` value that contains the number of cases correctly predicted as negative by the model.
+  - `false_negatives` : an `INT64` value that contains the number of cases incorrectly predicted as negative by the model.
 
 ## Examples
 
@@ -63,7 +63,7 @@ The following examples assume your model and input table are in your default pro
 
 ### Evaluate the ROC curve of a binary class logistic regression model
 
-The following query returns all of the output columns for `  ML.ROC_CURVE  ` . You can graph the `  recall  ` and `  false_positive_rate  ` values for an ROC curve. The threshold values returned are chosen based on the percentile values of the prediction output.
+The following query returns all of the output columns for `ML.ROC_CURVE` . You can graph the `recall` and `false_positive_rate` values for an ROC curve. The threshold values returned are chosen based on the percentile values of the prediction output.
 
 ``` notranslate
 SELECT
@@ -75,7 +75,7 @@ FROM
 
 ### Evaluate an ROC curve with custom thresholds
 
-The following query returns all of the output columns for `  ML.ROC_CURVE  ` . The threshold values returned are chosen based on the output of the `  GENERATE_ARRAY  ` function.
+The following query returns all of the output columns for `ML.ROC_CURVE` . The threshold values returned are chosen based on the output of the `GENERATE_ARRAY` function.
 
 ``` notranslate
 SELECT

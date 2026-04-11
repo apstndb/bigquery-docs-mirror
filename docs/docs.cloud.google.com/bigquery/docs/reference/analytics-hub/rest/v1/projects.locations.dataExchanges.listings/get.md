@@ -10,7 +10,7 @@ Gets the details of a listing.
 
 ### HTTP request
 
-`  GET https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}  `
+`GET https://analyticshub.googleapis.com/v1/{name=projects/*/locations/*/dataExchanges/*/listings/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -18,11 +18,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. The resource name of the listing. e.g. `  projects/myproject/locations/us/dataExchanges/123/listings/456  ` .
+Required. The resource name of the listing. e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456` .
 
 ### Request body
 
@@ -36,15 +36,15 @@ If successful, the response body contains an instance of `  Listing  ` .
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ### IAM Permissions
 
-Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `  name  ` resource:
+Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `name` resource:
 
-  - `  analyticshub.listings.get  `
+  - `analyticshub.listings.get`
 
 For more information, see the [IAM documentation](https://cloud.google.com/iam/docs) .

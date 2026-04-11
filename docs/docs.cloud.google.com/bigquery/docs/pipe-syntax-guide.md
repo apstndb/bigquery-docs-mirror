@@ -6,30 +6,30 @@ Queries that use pipe syntax are priced, executed, and optimized the same way as
 
 Standard syntax suffers from issues that can make it difficult to read, write, and maintain. The following table shows how pipe syntax addresses these issues:
 
-| Standard syntax                                                                                                                              | Pipe syntax                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Clauses must appear in a particular order.                                                                                                   | Pipe operators can be applied in any order.                                                  |
-| More complex queries, such as queries with multi-level aggregation, usually require CTEs or nested subqueries.                               | More complex queries are usually expressed by adding pipe operators to the end of the query. |
-| During aggregation, columns are repeated in the `        SELECT       ` , `        GROUP BY       ` , and `        ORDER BY       ` clauses. | Columns can be listed only once per aggregation.                                             |
+| Standard syntax                                                                                                | Pipe syntax                                                                                  |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Clauses must appear in a particular order.                                                                     | Pipe operators can be applied in any order.                                                  |
+| More complex queries, such as queries with multi-level aggregation, usually require CTEs or nested subqueries. | More complex queries are usually expressed by adding pipe operators to the end of the query. |
+| During aggregation, columns are repeated in the `SELECT` , `GROUP BY` , and `ORDER BY` clauses.                | Columns can be listed only once per aggregation.                                             |
 
 To build up a complex query step by step in pipe syntax, see [Analyze data using pipe syntax](https://docs.cloud.google.com/bigquery/docs/analyze-data-pipe-syntax) . For full syntax details, see the [Pipe query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax) reference documentation.
 
 ## Basic syntax
 
-In pipe syntax, queries start with a standard SQL query or a `  FROM  ` clause. For example, a standalone `  FROM  ` clause, such as `  FROM MyTable  ` , is valid pipe syntax. The result of the standard SQL query or the table from the `  FROM  ` clause can then be passed as input to a pipe symbol, `  |>  ` , followed by a pipe operator name and any arguments to that operator. The pipe operator transforms the table in some way, and the result of that transformation can be passed to another pipe operator.
+In pipe syntax, queries start with a standard SQL query or a `FROM` clause. For example, a standalone `FROM` clause, such as `FROM MyTable` , is valid pipe syntax. The result of the standard SQL query or the table from the `FROM` clause can then be passed as input to a pipe symbol, `|>` , followed by a pipe operator name and any arguments to that operator. The pipe operator transforms the table in some way, and the result of that transformation can be passed to another pipe operator.
 
 You can use any number of pipe operators in your query to do things such as select, order, filter, join, or aggregate columns. The names of pipe operators match their standard syntax counterparts and generally have the same behavior. The main difference between standard syntax and pipe syntax is the way you structure your query. As the logic expressed by your query becomes more complex, the query can still be expressed as a linear sequence of pipe operators, without using deeply nested subqueries, making it easier to read and understand.
 
 Pipe syntax has the following key characteristics:
 
-  - Each pipe operator in pipe syntax consists of the pipe symbol, `  |>  ` , an operator name, and any arguments:  
-    `  |> operator_name argument_list  `
+  - Each pipe operator in pipe syntax consists of the pipe symbol, `|>` , an operator name, and any arguments:  
+    `|> operator_name argument_list`
   - Pipe operators can be added to the end of any valid query.
   - Pipe operators can be applied in any order, any number of times.
   - Pipe syntax works anywhere standard syntax is supported: in queries, views, table-valued functions, and other contexts.
   - Pipe syntax can be mixed with standard syntax in the same query. For example, subqueries can use different syntax from the parent query.
   - A pipe operator can see every alias that exists in the table preceding the pipe.
-  - A query can [start with a `  FROM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) , and pipe operators can optionally be added after the `  FROM  ` clause.
+  - A query can [start with a `FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) , and pipe operators can optionally be added after the `FROM` clause.
 
 Consider the following table:
 
@@ -44,7 +44,7 @@ Consider the following table:
 
 The following queries each contain valid pipe syntax that shows how you can build a query sequentially.
 
-Queries can [start with a `  FROM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) and don't need to contain a pipe symbol:
+Queries can [start with a `FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) and don't need to contain a pipe symbol:
 
     -- View the table.
     FROM mydataset.Produce;
@@ -58,7 +58,7 @@ Queries can [start with a `  FROM  ` clause](https://docs.cloud.google.com/bigqu
      | bananas | 15    | fruit     |
      +---------+-------+-----------*/
 
-You can filter with a [`  WHERE  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#where_pipe_operator) :
+You can filter with a [`WHERE` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#where_pipe_operator) :
 
     -- Filter items with no sales.
     FROM mydataset.Produce
@@ -72,7 +72,7 @@ You can filter with a [`  WHERE  ` pipe operator](https://docs.cloud.google.com/
      | bananas | 15    | fruit     |
      +---------+-------+-----------*/
 
-To perform aggregation, use the [`  AGGREGATE  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) , followed by any number of aggregate functions, followed by a `  GROUP BY  ` clause. The `  GROUP BY  ` clause is part of the `  AGGREGATE  ` pipe operator and isn't separated by a pipe symbol ( `  |>  ` ).
+To perform aggregation, use the [`AGGREGATE` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) , followed by any number of aggregate functions, followed by a `GROUP BY` clause. The `GROUP BY` clause is part of the `AGGREGATE` pipe operator and isn't separated by a pipe symbol ( `|>` ).
 
     -- Compute total sales by item.
     FROM mydataset.Produce
@@ -97,7 +97,7 @@ Now suppose you have the following table that contains an ID for each item:
       SELECT 'carrots' AS item, '789' AS id
     );
 
-You can use the [`  JOIN  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#join_pipe_operator) to join the results of the previous query with this table to include each item's ID:
+You can use the [`JOIN` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#join_pipe_operator) to join the results of the previous query with this table to include each item's ID:
 
     FROM mydataset.Produce
     |> WHERE sales > 0
@@ -116,9 +116,9 @@ You can use the [`  JOIN  ` pipe operator](https://docs.cloud.google.com/bigquer
 
 Pipe syntax differs from standard syntax in the following ways:
 
-  - Queries can [start with a `  FROM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) .
-  - The `  SELECT  ` pipe operator doesn't perform aggregation. You must use the [`  AGGREGATE  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) instead.
-  - Filtering is always done with the [`  WHERE  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#where_pipe_operator) , which can be applied anywhere. The `  WHERE  ` pipe operator, which replaces `  HAVING  ` and `  QUALIFY  ` , can filter the results of aggregation or window functions.
+  - Queries can [start with a `FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#from_queries) .
+  - The `SELECT` pipe operator doesn't perform aggregation. You must use the [`AGGREGATE` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) instead.
+  - Filtering is always done with the [`WHERE` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#where_pipe_operator) , which can be applied anywhere. The `WHERE` pipe operator, which replaces `HAVING` and `QUALIFY` , can filter the results of aggregation or window functions.
 
 For more details, see the complete list of [pipe operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#pipe_operators) .
 
@@ -126,16 +126,16 @@ For more details, see the complete list of [pipe operators](https://docs.cloud.g
 
 Common use cases for pipe syntax include the following:
 
-  - **Ad-hoc analysis and incremental query building** : The logical order of operations makes it easier to write and debug queries. The prefix of any query up to a pipe symbol `  |>  ` is a valid query, which helps you view intermediate results in a long query. The productivity gains can speed up the development process across your organization.
+  - **Ad-hoc analysis and incremental query building** : The logical order of operations makes it easier to write and debug queries. The prefix of any query up to a pipe symbol `|>` is a valid query, which helps you view intermediate results in a long query. The productivity gains can speed up the development process across your organization.
   - **Log analytics** : There exist other types of pipe-like syntax that are popular among log analytics users. Pipe syntax provides a familiar structure that simplifies onboarding for those users to [Observability Analytics](https://docs.cloud.google.com/logging/docs/log-analytics#analytics) and BigQuery.
 
 ## Additional features in pipe syntax
 
 With few exceptions, pipe syntax supports all operators that standard syntax does with the same syntax. In addition, pipe syntax introduces additional pipe operators and uses a modified syntax for aggregations and joins. The following sections explain some of these operators. For all supported operators, see the complete list of [pipe operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#pipe_operators) .
 
-### `     EXTEND    ` pipe operator
+### `EXTEND` pipe operator
 
-The [`  EXTEND  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) lets you append computed columns to the current table. The `  EXTEND  ` pipe operator is similar to the `  SELECT *, new_column  ` statement, but it gives you more flexibility in referencing column aliases.
+The [`EXTEND` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) lets you append computed columns to the current table. The `EXTEND` pipe operator is similar to the `SELECT *, new_column` statement, but it gives you more flexibility in referencing column aliases.
 
 Consider the following table that contains two test scores for each person:
 
@@ -151,14 +151,14 @@ Consider the following table that contains two test scores for each person:
      | Dana    | 5      | 7      | 10              |
      +---------+--------+--------+-----------------*/
 
-Suppose you want to compute the average raw score and average percentage score that each student received on the test. In standard syntax, later columns in a `  SELECT  ` statement don't have visibility to earlier aliases. To avoid a subquery, you have to repeat the expression for the average:
+Suppose you want to compute the average raw score and average percentage score that each student received on the test. In standard syntax, later columns in a `SELECT` statement don't have visibility to earlier aliases. To avoid a subquery, you have to repeat the expression for the average:
 
     SELECT student,
       (score1 + score2) / 2 AS average_score,
       (score1 + score2) / 2 / points_possible AS average_percent
     FROM mydataset.Scores;
 
-The `  EXTEND  ` pipe operator can reference previously used aliases, making the query easier to read and less error prone:
+The `EXTEND` pipe operator can reference previously used aliases, making the query easier to read and less error prone:
 
     FROM mydataset.Scores
     |> EXTEND (score1 + score2) / 2 AS average_score
@@ -172,9 +172,9 @@ The `  EXTEND  ` pipe operator can reference previously used aliases, making the
      | Dana    | 6.0           | 0.6             |
      +---------+---------------+-----------------*/
 
-### `     SET    ` pipe operator
+### `SET` pipe operator
 
-The [`  SET  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#set_pipe_operator) lets you replace the value of columns in the current table. The `  SET  ` pipe operator is similar to the `  SELECT * REPLACE (expression AS column)  ` statement. You can reference the original value by qualifying the column name with a table alias.
+The [`SET` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#set_pipe_operator) lets you replace the value of columns in the current table. The `SET` pipe operator is similar to the `SELECT * REPLACE (expression AS column)` statement. You can reference the original value by qualifying the column name with a table alias.
 
     FROM (SELECT 3 AS x, 5 AS y)
     |> SET x = 2 * x;
@@ -185,9 +185,9 @@ The [`  SET  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/refere
      | 6 | 5 |
      +---+---*/
 
-### `     DROP    ` pipe operator
+### `DROP` pipe operator
 
-The [`  DROP  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#drop_pipe_operator) lets you remove columns from the current table. The `  DROP  ` pipe operator is similar to the `  SELECT * EXCEPT(column)  ` statement. After a column is dropped you can still reference the original value by qualifying the column name with a table alias.
+The [`DROP` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#drop_pipe_operator) lets you remove columns from the current table. The `DROP` pipe operator is similar to the `SELECT * EXCEPT(column)` statement. After a column is dropped you can still reference the original value by qualifying the column name with a table alias.
 
     FROM (SELECT 1 AS x, 2 AS y) AS t
     |> DROP x;
@@ -198,9 +198,9 @@ The [`  DROP  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/refer
      | 2 |
      +---*/
 
-### `     RENAME    ` pipe operator
+### `RENAME` pipe operator
 
-The [`  RENAME  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator) lets you rename columns from the current table. The `  RENAME  ` pipe operator is similar to the `  SELECT * EXCEPT(old_column), old_column AS new_column  ` statement.
+The [`RENAME` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator) lets you rename columns from the current table. The `RENAME` pipe operator is similar to the `SELECT * EXCEPT(old_column), old_column AS new_column` statement.
 
     FROM (SELECT 1 AS x, 2 AS y, 3 AS z) AS t
     |> RENAME y AS w;
@@ -211,11 +211,11 @@ The [`  RENAME  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/ref
      | 1 | 2 | 3 |
      +---+---+---*/
 
-### `     AGGREGATE    ` pipe operator
+### `AGGREGATE` pipe operator
 
-To perform aggregation in pipe syntax, use the [`  AGGREGATE  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) , followed by any number of aggregate functions, followed by a `  GROUP BY  ` clause. You don't need to repeat columns in a `  SELECT  ` clause.
+To perform aggregation in pipe syntax, use the [`AGGREGATE` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) , followed by any number of aggregate functions, followed by a `GROUP BY` clause. You don't need to repeat columns in a `SELECT` clause.
 
-The examples in this section use the `  Produce  ` table:
+The examples in this section use the `Produce` table:
 
     CREATE OR REPLACE TABLE mydataset.Produce AS (
       SELECT 'apples' AS item, 2 AS sales, 'fruit' AS category
@@ -247,9 +247,9 @@ The examples in this section use the `  Produce  ` table:
      | bananas | fruit     | 15    | 1           |
      +---------+-----------+-------+-------------*/
 
-If you are ready to order your results immediately following aggregation, you can mark the columns in the `  GROUP BY  ` clause that you want to order with `  ASC  ` or `  DESC  ` . Unmarked columns aren't ordered.
+If you are ready to order your results immediately following aggregation, you can mark the columns in the `GROUP BY` clause that you want to order with `ASC` or `DESC` . Unmarked columns aren't ordered.
 
-If you want to order all columns, then you can replace the `  GROUP BY  ` clause with a [`  GROUP AND ORDER BY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#shorthand_order_pipe_syntax) , which orders every column in ascending order by default. You can specify `  DESC  ` following the columns that you want to order in descending order. For example, the following three queries are equivalent:
+If you want to order all columns, then you can replace the `GROUP BY` clause with a [`GROUP AND ORDER BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#shorthand_order_pipe_syntax) , which orders every column in ascending order by default. You can specify `DESC` following the columns that you want to order in descending order. For example, the following three queries are equivalent:
 
     -- Use a separate ORDER BY clause.
     FROM mydataset.Produce
@@ -267,9 +267,9 @@ If you want to order all columns, then you can replace the `  GROUP BY  ` clause
     |> AGGREGATE SUM(sales) AS total, COUNT(*) AS num_records
        GROUP AND ORDER BY category DESC, item;
 
-The advantage of using a `  GROUP AND ORDER BY  ` clause is that you don't have to repeat column names in two places.
+The advantage of using a `GROUP AND ORDER BY` clause is that you don't have to repeat column names in two places.
 
-To perform full table aggregation, use `  GROUP BY()  ` or omit the `  GROUP BY  ` clause entirely:
+To perform full table aggregation, use `GROUP BY()` or omit the `GROUP BY` clause entirely:
 
     FROM mydataset.Produce
     |> AGGREGATE SUM(sales) AS total, COUNT(*) AS num_records;
@@ -280,11 +280,11 @@ To perform full table aggregation, use `  GROUP BY()  ` or omit the `  GROUP BY 
      | 24    | 4           |
      +-------+-------------*/
 
-### `     JOIN    ` pipe operator
+### `JOIN` pipe operator
 
-The [`  JOIN  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#join_pipe_operator) lets you join the current table with another table and supports the standard [join operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) , including `  CROSS  ` , `  INNER  ` , `  LEFT  ` , `  RIGHT  ` , and `  FULL  ` .
+The [`JOIN` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#join_pipe_operator) lets you join the current table with another table and supports the standard [join operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) , including `CROSS` , `INNER` , `LEFT` , `RIGHT` , and `FULL` .
 
-The following examples reference the `  Produce  ` and `  ItemData  ` tables:
+The following examples reference the `Produce` and `ItemData` tables:
 
     CREATE OR REPLACE TABLE mydataset.Produce AS (
       SELECT 'apples' AS item, 2 AS sales, 'fruit' AS category
@@ -303,7 +303,7 @@ The following examples reference the `  Produce  ` and `  ItemData  ` tables:
       SELECT 'carrots' AS item, '789' AS id
     );
 
-The following example uses a `  USING  ` clause and avoids column ambiguity:
+The following example uses a `USING` clause and avoids column ambiguity:
 
     FROM mydataset.Produce
     |> JOIN mydataset.ItemData USING(item)
@@ -316,7 +316,7 @@ The following example uses a `  USING  ` clause and avoids column ambiguity:
      | apples | 7     | fruit    | 123 |
      +--------+-------+----------+-----*/
 
-To reference columns in the current table, such as to disambiguate columns in an `  ON  ` clause, you need to alias the current table by using the [`  AS  ` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator) . You can optionally alias the joined table. You can reference both aliases following subsequent pipe operators:
+To reference columns in the current table, such as to disambiguate columns in an `ON` clause, you need to alias the current table by using the [`AS` pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator) . You can optionally alias the joined table. You can reference both aliases following subsequent pipe operators:
 
     FROM mydataset.Produce
     |> AS produce_table
@@ -338,7 +338,7 @@ The right-hand side of the join doesn't have visibility to the left-hand side of
     |> AS produce_table
     |> JOIN produce_table AS produce_table_2 USING(item);
 
-To perform a self-join with a modified table, you can use a common table expression (CTE) inside of a `  WITH  ` clause.
+To perform a self-join with a modified table, you can use a common table expression (CTE) inside of a `WITH` clause.
 
     WITH cte_table AS (
       FROM mydataset.Produce
@@ -384,9 +384,9 @@ Suppose you want to know, for each state and item type, the average amount spent
     GROUP BY state, item_type
     ORDER BY state DESC, item_type ASC;
 
-If you read the query from top to bottom, you encounter the column `  total_cost  ` before it has been defined. Even within the subquery, you read the names of columns before you see which table they come from.
+If you read the query from top to bottom, you encounter the column `total_cost` before it has been defined. Even within the subquery, you read the names of columns before you see which table they come from.
 
-To make sense of this query, it needs to be read from the inside out. The columns `  state  ` and `  item_type  ` are repeated numerous times in the `  SELECT  ` and `  GROUP BY  ` clauses, then again in the `  ORDER BY  ` clause.
+To make sense of this query, it needs to be read from the inside out. The columns `state` and `item_type` are repeated numerous times in the `SELECT` and `GROUP BY` clauses, then again in the `ORDER BY` clause.
 
 The following equivalent query is written using pipe syntax:
 
@@ -415,7 +415,7 @@ With pipe syntax, you can write the query to follow the logical steps you might 
 
 ## Limitations
 
-  - You can't include a [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) in a `  SELECT  ` statement following a pipe operator. Instead, use a differential privacy clause in standard syntax and apply pipe operators following the query.
+  - You can't include a [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) in a `SELECT` statement following a pipe operator. Instead, use a differential privacy clause in standard syntax and apply pipe operators following the query.
 
 ## What's next
 

@@ -2,13 +2,13 @@ GoogleSQL for BigQuery supports the following DLP functions that allow interoper
 
 ## Function list
 
-| Name                                                                                                                                                       | Summary                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| [`         DLP_DETERMINISTIC_ENCRYPT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_deterministic_encrypt) | Encrypts data with a DLP compatible algorithm.                             |
-| [`         DLP_DETERMINISTIC_DECRYPT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_deterministic_decrypt) | Decrypts DLP-encrypted data.                                               |
-| [`         DLP_KEY_CHAIN        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_key_chain)                         | Gets a data encryption key that's wrapped by Cloud Key Management Service. |
+| Name                                                                                                                                      | Summary                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| [`DLP_DETERMINISTIC_ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_deterministic_encrypt) | Encrypts data with a DLP compatible algorithm.                             |
+| [`DLP_DETERMINISTIC_DECRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_deterministic_decrypt) | Decrypts DLP-encrypted data.                                               |
+| [`DLP_KEY_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_key_chain)                         | Gets a data encryption key that's wrapped by Cloud Key Management Service. |
 
-## `     DLP_DETERMINISTIC_ENCRYPT    `
+## `DLP_DETERMINISTIC_ENCRYPT`
 
     DLP_DETERMINISTIC_ENCRYPT(key, plaintext, surrogate)
 
@@ -16,22 +16,22 @@ GoogleSQL for BigQuery supports the following DLP functions that allow interoper
 
 **Description**
 
-This function derives a data encryption key from `  key  ` and `  context  ` , and then encrypts `  plaintext  ` . You can use `  surrogate  ` to prepend the encryption result. To use DLP functions, you need a [new cryptographic key and then use that key to get a wrapped key](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions) .
+This function derives a data encryption key from `key` and `context` , and then encrypts `plaintext` . You can use `surrogate` to prepend the encryption result. To use DLP functions, you need a [new cryptographic key and then use that key to get a wrapped key](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions) .
 
 **Definitions**
 
-  - `  key  ` : A serialized `  BYTES  ` value that's returned by [`  DLP_KEY_CHAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_key_chain) . `  key  ` must be set to `  ENABLED  ` in Cloud KMS. For information about how to generate a wrapped key, see [gcloud kms encrypt](https://cloud.google.com/sdk/gcloud/reference/kms/encrypt) .
-  - `  plaintext  ` : The `  STRING  ` value to encrypt.
-  - `  surrogate  ` : A `  STRING  ` value that you can prepend to output. If you don't want to use `  surrogate  ` , pass an empty string (enclosed in `  ""  ` ).
-  - `  context  ` : A user-provided `  STRING  ` value that's used with a Cloud KMS key to derive a data encryption key. For more information, see [CryptoDeterministicConfig:context](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.deidentifyTemplates#cryptodeterministicconfig) .
+  - `key` : A serialized `BYTES` value that's returned by [`DLP_KEY_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_key_chain) . `key` must be set to `ENABLED` in Cloud KMS. For information about how to generate a wrapped key, see [gcloud kms encrypt](https://cloud.google.com/sdk/gcloud/reference/kms/encrypt) .
+  - `plaintext` : The `STRING` value to encrypt.
+  - `surrogate` : A `STRING` value that you can prepend to output. If you don't want to use `surrogate` , pass an empty string (enclosed in `""` ).
+  - `context` : A user-provided `STRING` value that's used with a Cloud KMS key to derive a data encryption key. For more information, see [CryptoDeterministicConfig:context](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.deidentifyTemplates#cryptodeterministicconfig) .
 
 **Return data type**
 
-`  STRING  `
+`STRING`
 
 **Examples**
 
-In the following query, the wrapped key is presented in a `  BYTES  ` literal format:
+In the following query, the wrapped key is presented in a `BYTES` literal format:
 
     SELECT
       DLP_DETERMINISTIC_ENCRYPT(
@@ -71,7 +71,7 @@ In the following query, the wrapped key is presented in the base64 format:
      | your_surrogate(36):AWDeSznl9C7+NzTaCgiqiEAZ8Y55fZSuvCQ= |
      +---------------------------------------------------------*/
 
-## `     DLP_DETERMINISTIC_DECRYPT    `
+## `DLP_DETERMINISTIC_DECRYPT`
 
     DLP_DETERMINISTIC_DECRYPT(key, ciphertext, surrogate)
 
@@ -79,22 +79,22 @@ In the following query, the wrapped key is presented in the base64 format:
 
 **Description**
 
-This function decrypts `  ciphertext  ` using an encryption key derived from `  key  ` and `  context  ` . You can use `  surrogate  ` to prepend the decryption result. To use DLP functions, you need a [new cryptographic key and then use that key to get a wrapped key](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions) .
+This function decrypts `ciphertext` using an encryption key derived from `key` and `context` . You can use `surrogate` to prepend the decryption result. To use DLP functions, you need a [new cryptographic key and then use that key to get a wrapped key](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions) .
 
 **Definitions**
 
-  - `  key  ` : A serialized `  BYTES  ` value returned by [`  DLP_KEY_CHAIN  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_key_chain) . `  key  ` must be set to `  ENABLED  ` in Cloud KMS. For information about how to generate a wrapped key, see [gcloud kms encrypt](https://cloud.google.com/sdk/gcloud/reference/kms/encrypt) .
-  - `  ciphertext  ` : The `  STRING  ` value to decrypt.
-  - `  surrogate  ` : A `  STRING  ` value that you can prepend to output. If you don't want to use `  surrogate  ` , pass an empty string (enclosed in `  ""  ` ).
-  - `  context  ` : A `  STRING  ` value that's used with a Cloud KMS key to derive a data encryption key. For more information, see [CryptoDeterministicConfig:context](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.deidentifyTemplates#cryptodeterministicconfig) .
+  - `key` : A serialized `BYTES` value returned by [`DLP_KEY_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions#dlp_key_chain) . `key` must be set to `ENABLED` in Cloud KMS. For information about how to generate a wrapped key, see [gcloud kms encrypt](https://cloud.google.com/sdk/gcloud/reference/kms/encrypt) .
+  - `ciphertext` : The `STRING` value to decrypt.
+  - `surrogate` : A `STRING` value that you can prepend to output. If you don't want to use `surrogate` , pass an empty string (enclosed in `""` ).
+  - `context` : A `STRING` value that's used with a Cloud KMS key to derive a data encryption key. For more information, see [CryptoDeterministicConfig:context](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.deidentifyTemplates#cryptodeterministicconfig) .
 
 **Return data type**
 
-`  STRING  `
+`STRING`
 
 **Examples**
 
-In the following query, the wrapped key is presented in a `  BYTES  ` literal format:
+In the following query, the wrapped key is presented in a `BYTES` literal format:
 
     SELECT
       DLP_DETERMINISTIC_DECRYPT(
@@ -134,29 +134,29 @@ In the following query, the wrapped key is presented in the base64 format:
      | Plaintext                            |
      +--------------------------------------*/
 
-## `     DLP_KEY_CHAIN    `
+## `DLP_KEY_CHAIN`
 
     DLP_KEY_CHAIN(kms_resource_name, wrapped_key)
 
 **Description**
 
-You can use this function instead of the `  key  ` argument for DLP deterministic encryption functions. This function lets you use the [AES-SIV encryption functions](https://cloud.google.com/dlp/docs/pseudonymization#aes-siv) without including `  plaintext  ` keys in a query. To use DLP functions, you need a [new cryptographic key and then use that key to get a wrapped key](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions) .
+You can use this function instead of the `key` argument for DLP deterministic encryption functions. This function lets you use the [AES-SIV encryption functions](https://cloud.google.com/dlp/docs/pseudonymization#aes-siv) without including `plaintext` keys in a query. To use DLP functions, you need a [new cryptographic key and then use that key to get a wrapped key](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions) .
 
 **Definitions**
 
-  - `  kms_resource_name  ` : A `  STRING  ` literal that contains the resource path to the Cloud KMS key. `  kms_resource_name  ` can't be `  NULL  ` and must reside in the same Cloud region where this function is executed. This argument is used to derive the data encryption key in the `  DLP_DETERMINISTIC_DECRYPT  ` and `  DLP_DETERMINISTIC_ENCRYPT  ` functions. A Cloud KMS key looks like this:
+  - `kms_resource_name` : A `STRING` literal that contains the resource path to the Cloud KMS key. `kms_resource_name` can't be `NULL` and must reside in the same Cloud region where this function is executed. This argument is used to derive the data encryption key in the `DLP_DETERMINISTIC_DECRYPT` and `DLP_DETERMINISTIC_ENCRYPT` functions. A Cloud KMS key looks like this:
     
         gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
 
-  - `  wrapped_key  ` : A `  BYTES  ` literal that represents a secret text chosen by the user. This secret text can be 16, 24, or 32 bytes. For information about how to generate a wrapped key, see [gcloud kms encrypt](https://cloud.google.com/sdk/gcloud/reference/kms/encrypt) .
+  - `wrapped_key` : A `BYTES` literal that represents a secret text chosen by the user. This secret text can be 16, 24, or 32 bytes. For information about how to generate a wrapped key, see [gcloud kms encrypt](https://cloud.google.com/sdk/gcloud/reference/kms/encrypt) .
 
 **Return data type**
 
-`  STRUCT  `
+`STRUCT`
 
 **Examples**
 
-In the following query, the wrapped key is presented in a `  BYTES  ` literal format:
+In the following query, the wrapped key is presented in a `BYTES` literal format:
 
     SELECT
       DLP_DETERMINISTIC_ENCRYPT(

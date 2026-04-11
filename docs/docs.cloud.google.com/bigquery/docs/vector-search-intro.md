@@ -26,23 +26,23 @@ The following sections describe the functions that BigQuery offers to help you g
 
 ### Generate single embeddings
 
-You can use the [`  AI.EMBED  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) with Vertex AI embedding models to generate a single embedding of your input.
+You can use the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) with Vertex AI embedding models to generate a single embedding of your input.
 
-The `  AI.EMBED  ` function supports the following types of input:
+The `AI.EMBED` function supports the following types of input:
 
   - Text data.
-  - Image data represented by [`  ObjectRef  `](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values.
-  - Image data represented by [`  ObjectRefRuntime  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values.
+  - Image data represented by [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values.
+  - Image data represented by [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values.
 
 ### Generate a table of embeddings
 
-You can use the [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create a table that has embeddings for all of the data in a column of your input table. For all types of supported models, `  AI.GENERATE_EMBEDDING  ` works with structured data in [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . For multimodal embedding models, `  AI.GENERATE_EMBEDDING  ` also works with visual content from either standard table [columns that contain `  ObjectRef  ` values](https://docs.cloud.google.com/bigquery/docs/objectref-columns) , or from [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+You can use the [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create a table that has embeddings for all of the data in a column of your input table. For all types of supported models, `AI.GENERATE_EMBEDDING` works with structured data in [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . For multimodal embedding models, `AI.GENERATE_EMBEDDING` also works with visual content from either standard table [columns that contain `ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/objectref-columns) , or from [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 For remote models, all inference occurs in Vertex AI. For other model types, all inference occurs in BigQuery. The results are stored in BigQuery.
 
 Use the following topics to try embedding generation in BigQuery ML:
 
-  - Generate [text](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) , [images](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) , or [video](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding) by using the `  AI.GENERATE_EMBEDDING  ` function.
+  - Generate [text](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) , [images](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) , or [video](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding) by using the `AI.GENERATE_EMBEDDING` function.
   - [Generate and search multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings)
   - [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial)
 
@@ -60,19 +60,19 @@ You can use [autonomous embedding generation](https://docs.cloud.google.com/bigq
 
 The following search functions are available:
 
-  - [`  VECTOR_SEARCH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a vector search by using SQL.
+  - [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a vector search by using SQL.
 
-  - [`  AI.SEARCH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
+  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
 
-  - [`  AI.SIMILARITY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `  VECTOR_SEARCH  ` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
+  - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `VECTOR_SEARCH` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
 
-Optionally, you can create a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) by using the [`  CREATE VECTOR INDEX  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) . When a vector index is used, the `  VECTOR_SEARCH  ` and `  AI.SEARCH  ` functions use the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique to improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. Without a vector index, these functions use [brute force search](https://en.wikipedia.org/wiki/Brute-force_search) to measure distance for every record. You can also choose to use brute force to get exact results even when a vector index is available.
+Optionally, you can create a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) by using the [`CREATE VECTOR INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) . When a vector index is used, the `VECTOR_SEARCH` and `AI.SEARCH` functions use the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique to improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. Without a vector index, these functions use [brute force search](https://en.wikipedia.org/wiki/Brute-force_search) to measure distance for every record. You can also choose to use brute force to get exact results even when a vector index is available.
 
 ## Pricing
 
-The `  VECTOR_SEARCH  ` and `  AI.SEARCH  ` functions and the `  CREATE VECTOR INDEX  ` statement use [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .
+The `VECTOR_SEARCH` and `AI.SEARCH` functions and the `CREATE VECTOR INDEX` statement use [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .
 
-  - `  VECTOR_SEARCH  ` and `  AI.SEARCH  ` functions: You are charged for similarity search, using on-demand or editions pricing.
+  - `VECTOR_SEARCH` and `AI.SEARCH` functions: You are charged for similarity search, using on-demand or editions pricing.
     
       - On-demand: You are charged for the amount of bytes scanned in the base table, the index, and the search query.
     
@@ -80,12 +80,12 @@ The `  VECTOR_SEARCH  ` and `  AI.SEARCH  ` functions and the `  CREATE VECTOR I
         
         **Note:** Using an index isn't supported in [Standard editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-  - `  CREATE VECTOR INDEX  ` statement: There is no charge for the processing required to build and refresh your vector indexes as long as the total size of the indexed table data is below your per-organization [limit](https://docs.cloud.google.com/bigquery/quotas#vector_index_maximum_table_size) . To support indexing beyond this limit, you must [provide your own reservation](https://docs.cloud.google.com/bigquery/docs/vector-index#use_your_own_reservation) for handling the index management jobs.
+  - `CREATE VECTOR INDEX` statement: There is no charge for the processing required to build and refresh your vector indexes as long as the total size of the indexed table data is below your per-organization [limit](https://docs.cloud.google.com/bigquery/quotas#vector_index_maximum_table_size) . To support indexing beyond this limit, you must [provide your own reservation](https://docs.cloud.google.com/bigquery/docs/vector-index#use_your_own_reservation) for handling the index management jobs.
 
 Storage is also a consideration for embeddings and indexes. The amount of bytes stored as embeddings and indexes are subject to [active storage costs](https://cloud.google.com/bigquery/pricing#storage) .
 
   - Vector indexes incur storage costs when they are active.
-  - You can find the index storage size by using the [`  INFORMATION_SCHEMA.VECTOR_INDEXES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the vector index is not yet at 100% coverage, you are still charged for whatever has been indexed. You can check index coverage by using the `  INFORMATION_SCHEMA.VECTOR_INDEXES  ` view.
+  - You can find the index storage size by using the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the vector index is not yet at 100% coverage, you are still charged for whatever has been indexed. You can check index coverage by using the `INFORMATION_SCHEMA.VECTOR_INDEXES` view.
 
 ## Quotas and limits
 
@@ -93,15 +93,15 @@ For more information, see [Vector index limits](https://docs.cloud.google.com/bi
 
 ## Limitations
 
-Queries that contain the `  VECTOR_SEARCH  ` or `  AI.SEARCH  ` function aren't accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
+Queries that contain the `VECTOR_SEARCH` or `AI.SEARCH` function aren't accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
 ## What's next
 
   - Learn more about [creating a vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) .
 
-  - Learn how to perform a vector search using the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) .
+  - Learn how to perform a vector search using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) .
 
-  - Learn how to perform semantic search using the [`  AI.SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
+  - Learn how to perform semantic search using the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
 
   - Learn more about [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) .
 

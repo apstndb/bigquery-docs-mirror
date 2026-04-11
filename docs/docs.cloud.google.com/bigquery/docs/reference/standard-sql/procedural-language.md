@@ -2,51 +2,51 @@ The GoogleSQL procedural language lets you execute multiple statements in one qu
 
   - Run multiple statements in a sequence, with shared state.
   - Automate management tasks such as creating or dropping tables.
-  - Implement complex logic using programming constructs such as `  IF  ` and `  WHILE  ` .
+  - Implement complex logic using programming constructs such as `IF` and `WHILE` .
 
 This reference contains the statements that are part of the GoogleSQL procedural language. To learn more about how you can use this procedural language to write multi-statement queries, see [Work with multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) . To learn how you can convert multi-statement queries into stored procedures, see [Work with stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
-## `     DECLARE    `
+## `DECLARE`
 
     DECLARE variable_name[, ...] [variable_type] [DEFAULT expression];
 
-`  variable_name  ` must be a valid identifier, and `  variable_type  ` is any GoogleSQL [type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
+`variable_name` must be a valid identifier, and `variable_type` is any GoogleSQL [type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
 
 **Description**
 
-Declares a variable of the specified type. If the `  DEFAULT  ` clause is specified, the variable is initialized with the value of the expression; if no `  DEFAULT  ` clause is present, the variable is initialized with the value `  NULL  ` .
+Declares a variable of the specified type. If the `DEFAULT` clause is specified, the variable is initialized with the value of the expression; if no `DEFAULT` clause is present, the variable is initialized with the value `NULL` .
 
-If `  [variable_type]  ` is omitted then a `  DEFAULT  ` clause must be specified. The variable’s type will be inferred by the type of the expression in the `  DEFAULT  ` clause.
+If `[variable_type]` is omitted then a `DEFAULT` clause must be specified. The variable’s type will be inferred by the type of the expression in the `DEFAULT` clause.
 
-Variable declarations must appear before other procedural statements, or at the start of a `  BEGIN  ` block. Variable names are case-insensitive.
+Variable declarations must appear before other procedural statements, or at the start of a `BEGIN` block. Variable names are case-insensitive.
 
-Multiple variable names can appear in a single `  DECLARE  ` statement, but only one `  variable_type  ` and `  expression  ` .
+Multiple variable names can appear in a single `DECLARE` statement, but only one `variable_type` and `expression` .
 
 It's an error to declare a variable with the same name as a variable declared earlier in the current block or in a containing block.
 
-If the `  DEFAULT  ` clause is present, the value of the expression must be coercible to the specified type. The expression may reference other variables declared previously within the same block or a containing block.
+If the `DEFAULT` clause is present, the value of the expression must be coercible to the specified type. The expression may reference other variables declared previously within the same block or a containing block.
 
 GoogleSQL also supports [system variables](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) . You don't need to declare system variables, but you can set any of them that aren't marked read-only. You can reference system variables in queries.
 
 **Examples**
 
-The following example initializes the variable `  x  ` as an `  INT64  ` with the value `  NULL  ` .
+The following example initializes the variable `x` as an `INT64` with the value `NULL` .
 
     DECLARE x INT64;
 
-The following example initializes the variable `  d  ` as a `  DATE  ` object with the value of the current date.
+The following example initializes the variable `d` as a `DATE` object with the value of the current date.
 
     DECLARE d DATE DEFAULT CURRENT_DATE();
 
-The following example initializes the variables `  x  ` , `  y  ` , and `  z  ` as `  INT64  ` with the value 0.
+The following example initializes the variables `x` , `y` , and `z` as `INT64` with the value 0.
 
     DECLARE x, y, z INT64 DEFAULT 0;
 
-The following example declares a variable named `  item  ` corresponding to an arbitrary item in the `  schema1.products  ` table. The type of `  item  ` is inferred from the table schema.
+The following example declares a variable named `item` corresponding to an arbitrary item in the `schema1.products` table. The type of `item` is inferred from the table schema.
 
     DECLARE item DEFAULT (SELECT item FROM schema1.products LIMIT 1);
 
-## `     SET    `
+## `SET`
 
 **Syntax**
 
@@ -58,19 +58,19 @@ The following example declares a variable named `  item  ` corresponding to an a
 
 Sets a variable to have the value of the provided expression, or sets multiple variables at the same time based on the result of multiple expressions.
 
-The `  SET  ` statement may appear anywhere within a multi-statement query.
+The `SET` statement may appear anywhere within a multi-statement query.
 
 **Examples**
 
-The following example sets the variable `  x  ` to have the value 5.
+The following example sets the variable `x` to have the value 5.
 
     SET x = 5;
 
-The following example sets the variable `  a  ` to have the value 4, `  b  ` to have the value 'foo', and the variable `  c  ` to have the value `  false  ` .
+The following example sets the variable `a` to have the value 4, `b` to have the value 'foo', and the variable `c` to have the value `false` .
 
     SET (a, b, c) = (1 + 3, 'foo', false);
 
-The following example assigns the result of a query to multiple variables. First, it declares two variables, `  target_word  ` and `  corpus_count  ` ; next, it assigns the results of a [`  SELECT AS STRUCT  ` query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_as_struct) to the two variables. The result of the query is a single row containing a `  STRUCT  ` with two fields; the first element is assigned to the first variable, and the second element is assigned to the second variable.
+The following example assigns the result of a query to multiple variables. First, it declares two variables, `target_word` and `corpus_count` ; next, it assigns the results of a [`SELECT AS STRUCT` query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_as_struct) to the two variables. The result of the query is a single row containing a `STRUCT` with two fields; the first element is assigned to the first variable, and the second element is assigned to the second variable.
 
     DECLARE target_word STRING DEFAULT 'methinks';
     DECLARE corpus_count, word_count INT64;
@@ -89,7 +89,7 @@ This statement list outputs the following string:
 
     Found 151 occurrences of "methinks" across 38 Shakespeare works
 
-## `     EXECUTE IMMEDIATE    `
+## `EXECUTE IMMEDIATE`
 
 **Syntax**
 
@@ -105,7 +105,7 @@ This statement list outputs the following string:
 
 Executes a dynamic SQL statement on the fly.
 
-  - `  sql_expression  ` : An expression that can represent one of the following:
+  - `sql_expression` : An expression that can represent one of the following:
     
       - A [query statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
     
@@ -117,39 +117,39 @@ Executes a dynamic SQL statement on the fly.
     
       - A single [DCL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language)
     
-    This expression can't be a control statement like `  IF  ` .
+    This expression can't be a control statement like `IF` .
 
-  - `  expression  ` : Can be a [function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all) , [conditional expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions) , or [expression subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#expression_subquery_concepts) .
+  - `expression` : Can be a [function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all) , [conditional expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions) , or [expression subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#expression_subquery_concepts) .
 
-  - `  query_statement  ` : Represents a valid standalone SQL statement to execute. If this returns a value, the `  INTO  ` clause must contain values of the same type. You may access both system variables and values present in the `  USING  ` clause; all other local variables and query parameters aren't exposed to the query statement.
+  - `query_statement` : Represents a valid standalone SQL statement to execute. If this returns a value, the `INTO` clause must contain values of the same type. You may access both system variables and values present in the `USING` clause; all other local variables and query parameters aren't exposed to the query statement.
 
-  - `  INTO  ` clause: After the SQL expression is executed, you can store the results in one or more [variables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#declare) , using the `  INTO  ` clause.
+  - `INTO` clause: After the SQL expression is executed, you can store the results in one or more [variables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#declare) , using the `INTO` clause.
 
-  - `  USING  ` clause: Before you execute your SQL expression, you can pass in one or more identifiers from the `  USING  ` clause into the SQL expression. These identifiers function similarly to query parameters, exposing values to the query statement. An identifier can be a variable or a value.
+  - `USING` clause: Before you execute your SQL expression, you can pass in one or more identifiers from the `USING` clause into the SQL expression. These identifiers function similarly to query parameters, exposing values to the query statement. An identifier can be a variable or a value.
 
-You can include these placeholders in the `  query_statement  ` for identifiers referenced in the `  USING  ` clause:
+You can include these placeholders in the `query_statement` for identifiers referenced in the `USING` clause:
 
-  - `  ?  ` : The value for this placeholder is bound to an identifier in the `  USING  ` clause by index.
+  - `?` : The value for this placeholder is bound to an identifier in the `USING` clause by index.
     
         DECLARE y INT64;
         -- y = 1 * (3 + 2) = 5
         EXECUTE IMMEDIATE "SELECT ? * (? + 2)" INTO y USING 1, 3;
 
-  - `  @identifier  ` : The value for this placeholder is bound to an identifier in the `  USING  ` clause by name. This syntax is identical to the query parameter syntax.
+  - `@identifier` : The value for this placeholder is bound to an identifier in the `USING` clause by name. This syntax is identical to the query parameter syntax.
     
         DECLARE y INT64;
         -- y = 1 * (3 + 2) = 5
         EXECUTE IMMEDIATE "SELECT @a * (@b + 2)" INTO y USING 1 as a, 3 as b;
 
-Here are some additional notes about the behavior of the `  EXECUTE IMMEDIATE  ` statement:
+Here are some additional notes about the behavior of the `EXECUTE IMMEDIATE` statement:
 
-  - `  EXECUTE IMMEDIATE  ` is restricted from being executed dynamically as a nested element. This means `  EXECUTE IMMEDIATE  ` can't be nested in another `  EXECUTE IMMEDIATE  ` statement.
-  - If an `  EXECUTE IMMEDIATE  ` statement returns results, then those results become the result of the entire statement and any appropriate system variables are updated.
-  - The same variable can appear in both the `  INTO  ` and `  USING  ` clauses.
-  - `  query_statement  ` can contain a single parsed statement that contains other statements (for example, BEGIN...END)
-  - If zero rows are returned from `  query_statement  ` , including from zero-row value tables, all variables in the `  INTO  ` clause are set to NULL.
-  - If one row is returned from `  query_statement  ` , including from zero-row value tables, values are assigned by position, not variable name.
-  - If an `  INTO  ` clause is present, an error is thrown if you attempt to return more than one row from `  query_statement  ` .
+  - `EXECUTE IMMEDIATE` is restricted from being executed dynamically as a nested element. This means `EXECUTE IMMEDIATE` can't be nested in another `EXECUTE IMMEDIATE` statement.
+  - If an `EXECUTE IMMEDIATE` statement returns results, then those results become the result of the entire statement and any appropriate system variables are updated.
+  - The same variable can appear in both the `INTO` and `USING` clauses.
+  - `query_statement` can contain a single parsed statement that contains other statements (for example, BEGIN...END)
+  - If zero rows are returned from `query_statement` , including from zero-row value tables, all variables in the `INTO` clause are set to NULL.
+  - If one row is returned from `query_statement` , including from zero-row value tables, values are assigned by position, not variable name.
+  - If an `INTO` clause is present, an error is thrown if you attempt to return more than one row from `query_statement` .
 
 **Examples**
 
@@ -198,7 +198,7 @@ In this example, we create a table of books and populate it with data. Note the 
     -- first_date.
     EXECUTE IMMEDIATE "SELECT MIN(publish_date) FROM Books LIMIT 1" INTO first_date;
 
-## `     BEGIN...END    `
+## `BEGIN...END`
 
 **Syntax**
 
@@ -208,19 +208,19 @@ In this example, we create a table of books and populate it with data. Note the 
 
 **Description**
 
-`  BEGIN  ` initiates a block of statements where declared variables exist only until the corresponding `  END  ` . `  sql_statement_list  ` is a list of zero or more SQL statements ending with semicolons.
+`BEGIN` initiates a block of statements where declared variables exist only until the corresponding `END` . `sql_statement_list` is a list of zero or more SQL statements ending with semicolons.
 
 Variable declarations must appear at the start of the block, prior to other types of statements. Variables declared inside a block may only be referenced within that block and in any nested blocks. It's an error to declare a variable with the same name as a variable declared in the same block or an outer block.
 
-There is a maximum nesting level of 50 for blocks and conditional statements such as `  BEGIN  ` / `  END  ` , `  IF  ` / `  ELSE  ` / `  END IF  ` , and `  WHILE  ` / `  END WHILE  ` .
+There is a maximum nesting level of 50 for blocks and conditional statements such as `BEGIN` / `END` , `IF` / `ELSE` / `END IF` , and `WHILE` / `END WHILE` .
 
-`  BEGIN  ` / `  END  ` is restricted from being executed dynamically as a nested element.
+`BEGIN` / `END` is restricted from being executed dynamically as a nested element.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
 **Examples**
 
-The following example declares a variable `  x  ` with the default value 10; then, it initiates a block, in which a variable `  y  ` is assigned the value of `  x  ` , which is 10, and returns this value; next, the `  END  ` statement ends the block, ending the scope of variable `  y  ` ; finally, it returns the value of `  x  ` .
+The following example declares a variable `x` with the default value 10; then, it initiates a block, in which a variable `y` is assigned the value of `x` , which is 10, and returns this value; next, the `END` statement ends the block, ending the scope of variable `y` ; finally, it returns the value of `x` .
 
     DECLARE x INT64 DEFAULT 10;
     BEGIN
@@ -230,7 +230,7 @@ The following example declares a variable `  x  ` with the default value 10; the
     END;
     SELECT x;
 
-## `     BEGIN...EXCEPTION...END    `
+## `BEGIN...EXCEPTION...END`
 
 **Syntax**
 
@@ -242,9 +242,9 @@ The following example declares a variable `  x  ` with the default value 10; the
 
 **Description**
 
-`  BEGIN...EXCEPTION  ` executes a block of statements. If any of the statements encounter an error, the remainder of the block is skipped and the statements in the `  EXCEPTION  ` clause are executed.
+`BEGIN...EXCEPTION` executes a block of statements. If any of the statements encounter an error, the remainder of the block is skipped and the statements in the `EXCEPTION` clause are executed.
 
-Within the `  EXCEPTION  ` clause, you can access details about the error using the following `  EXCEPTION  ` system variables:
+Within the `EXCEPTION` clause, you can access details about the error using the following `EXCEPTION` system variables:
 
 <table>
 <colgroup>
@@ -261,36 +261,36 @@ Within the `  EXCEPTION  ` clause, you can access details about the error using 
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       @@error.formatted_stack_trace      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The content of <code dir="ltr" translate="no">       @@error.stack_trace      </code> expressed as a human readable string. This value is intended for display purposes, and is subject to change without notice. Programmatic access to an error's stack trace should use <code dir="ltr" translate="no">       @@error.stack_trace      </code> instead.</td>
+<td><code dir="ltr" translate="no">@@error.formatted_stack_trace</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td>The content of <code dir="ltr" translate="no">@@error.stack_trace</code> expressed as a human readable string. This value is intended for display purposes, and is subject to change without notice. Programmatic access to an error's stack trace should use <code dir="ltr" translate="no">@@error.stack_trace</code> instead.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       @@error.message      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">@@error.message</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>Specifies a human-readable error message.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       @@error.stack_trace      </code></td>
+<td><code dir="ltr" translate="no">@@error.stack_trace</code></td>
 <td>See <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#footnote-1">1</a> .</td>
 <td>Each element of the array corresponds to a statement or procedure call executing at the time of the error, with the currently executing stack frame appearing first. The meaning of each field is defined as follows:
 <ul>
-<li>line/column: Specifies the line and column number of the stack frame, starting with 1. If the frame occurs within a procedure body, then <code dir="ltr" translate="no">         line 1 column 1        </code> corresponds to the <code dir="ltr" translate="no">         BEGIN        </code> keyword at the start of the procedure body.</li>
-<li>location: If the frame occurs within a procedure body, specifies the full name of the procedure, in the form <code dir="ltr" translate="no">         [project_name].[schema_name].[procedure_name]        </code> . If the frame refers to a location in a top-level multi-statement query, this field is <code dir="ltr" translate="no">         NULL        </code> .</li>
-<li>filename: Reserved for future use. Always <code dir="ltr" translate="no">         NULL        </code> .</li>
+<li>line/column: Specifies the line and column number of the stack frame, starting with 1. If the frame occurs within a procedure body, then <code dir="ltr" translate="no">line 1 column 1</code> corresponds to the <code dir="ltr" translate="no">BEGIN</code> keyword at the start of the procedure body.</li>
+<li>location: If the frame occurs within a procedure body, specifies the full name of the procedure, in the form <code dir="ltr" translate="no">[project_name].[schema_name].[procedure_name]</code> . If the frame refers to a location in a top-level multi-statement query, this field is <code dir="ltr" translate="no">NULL</code> .</li>
+<li>filename: Reserved for future use. Always <code dir="ltr" translate="no">NULL</code> .</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       @@error.statement_text      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">@@error.statement_text</code></td>
+<td><code dir="ltr" translate="no">STRING</code></td>
 <td>Specifies the text of the statement which caused the error.</td>
 </tr>
 </tbody>
 </table>
 
-<sup>1</sup> The type for `  @@error.stack_trace  ` is `  ARRAY<STRUCT<line INT64, column INT64, filename STRING, location STRING>>  ` .
+<sup>1</sup> The type for `@@error.stack_trace` is `ARRAY<STRUCT<line INT64, column INT64, filename STRING, location STRING>>` .
 
-As BigQuery reserves the right to revise error messages at any time, consumers of `  @@error.message  ` shouldn't rely on error messages remaining the same or following any particular pattern. Don't obtain error location information by extracting text out of the error message — use `  @@error.stack_trace  ` and `  @@error.statement_text  ` instead.
+As BigQuery reserves the right to revise error messages at any time, consumers of `@@error.message` shouldn't rely on error messages remaining the same or following any particular pattern. Don't obtain error location information by extracting text out of the error message — use `@@error.stack_trace` and `@@error.statement_text` instead.
 
 To handle exceptions that are thrown (and not handled) by an exception handler itself, you must wrap the block in an outer block with a separate exception handler.
 
@@ -306,13 +306,13 @@ The following shows how to use an outer block with a separate exception handler:
       -- The exception thrown from the inner exception handler lands here.
     END;
 
-`  BEGIN...EXCEPTION  ` blocks also support `  DECLARE  ` statements, just like any other `  BEGIN  ` block. Variables declared in a `  BEGIN  ` block are valid only in the `  BEGIN  ` section, and may not be used in the block’s exception handler.
+`BEGIN...EXCEPTION` blocks also support `DECLARE` statements, just like any other `BEGIN` block. Variables declared in a `BEGIN` block are valid only in the `BEGIN` section, and may not be used in the block’s exception handler.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
 **Examples**
 
-In this example, when the division by zero error occurs, instead of stopping the entire multi-statement query, GoogleSQL stops `  schema1.proc1()  ` and `  schema1.proc2()  ` and execute the `  SELECT  ` statement in the exception handler.
+In this example, when the division by zero error occurs, instead of stopping the entire multi-statement query, GoogleSQL stops `schema1.proc1()` and `schema1.proc2()` and execute the `SELECT` statement in the exception handler.
 
     CREATE OR REPLACE PROCEDURE schema1.proc1() BEGIN
       SELECT 1/0;
@@ -347,29 +347,29 @@ When the exception handler runs, the variables will have the following values:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       @@error.message      </code></td>
-<td><code dir="ltr" translate="no">       "Query error: division by zero: 1 / 0 at &lt;project&gt;.schema1.proc1:2:3]"      </code></td>
+<td><code dir="ltr" translate="no">@@error.message</code></td>
+<td><code dir="ltr" translate="no">"Query error: division by zero: 1 / 0 at &lt;project&gt;.schema1.proc1:2:3]"</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       @@error.stack_trace      </code></td>
-<td><code dir="ltr" translate="no">       [      </code><br />
-<code dir="ltr" translate="no">       STRUCT(2 AS line, 3 AS column, NULL AS filename, "&lt;project&gt;.schema1.proc1:2:3" AS location),      </code><br />
-<code dir="ltr" translate="no">       STRUCT(2 AS line, 3 AS column, NULL AS filename, "&lt;project&gt;.schema1.proc2:2:3" AS location),      </code><br />
-<code dir="ltr" translate="no">       STRUCT(10 AS line, 3 AS column, NULL AS filename, NULL AS location),      </code><br />
-<code dir="ltr" translate="no">       ]      </code></td>
+<td><code dir="ltr" translate="no">@@error.stack_trace</code></td>
+<td><code dir="ltr" translate="no">[</code><br />
+<code dir="ltr" translate="no">STRUCT(2 AS line, 3 AS column, NULL AS filename, "&lt;project&gt;.schema1.proc1:2:3" AS location),</code><br />
+<code dir="ltr" translate="no">STRUCT(2 AS line, 3 AS column, NULL AS filename, "&lt;project&gt;.schema1.proc2:2:3" AS location),</code><br />
+<code dir="ltr" translate="no">STRUCT(10 AS line, 3 AS column, NULL AS filename, NULL AS location),</code><br />
+<code dir="ltr" translate="no">]</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       @@error.statement_text      </code></td>
-<td><code dir="ltr" translate="no">       "SELECT 1/0"      </code></td>
+<td><code dir="ltr" translate="no">@@error.statement_text</code></td>
+<td><code dir="ltr" translate="no">"SELECT 1/0"</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       @@error.formatted_stack_trace      </code></td>
-<td><code dir="ltr" translate="no">       "At &lt;project&gt;.schema1.proc1[2:3]\nAt &lt;project&gt;.schema1.proc2[2:3]\nAt [10:3]"      </code></td>
+<td><code dir="ltr" translate="no">@@error.formatted_stack_trace</code></td>
+<td><code dir="ltr" translate="no">"At &lt;project&gt;.schema1.proc1[2:3]\nAt &lt;project&gt;.schema1.proc2[2:3]\nAt [10:3]"</code></td>
 </tr>
 </tbody>
 </table>
 
-## `     CASE    `
+## `CASE`
 
 **Syntax**
 
@@ -381,15 +381,15 @@ When the exception handler runs, the variables will have the following values:
 
 **Description**
 
-Executes the `  THEN sql_statement_list  ` where the boolean expression is true, or the optional `  ELSE sql_statement_list  ` if no conditions match.
+Executes the `THEN sql_statement_list` where the boolean expression is true, or the optional `ELSE sql_statement_list` if no conditions match.
 
-`  CASE  ` can have a maximum of 50 nesting levels.
+`CASE` can have a maximum of 50 nesting levels.
 
-`  CASE  ` is restricted from being executed dynamically as a nested element. This means `  CASE  ` can't be nested in an `  EXECUTE IMMEDIATE  ` statement.
+`CASE` is restricted from being executed dynamically as a nested element. This means `CASE` can't be nested in an `EXECUTE IMMEDIATE` statement.
 
 **Examples**
 
-In this example, a search if conducted for the `  target_product_ID  ` in the `  products_a  ` table. If the ID isn't found there, a search is conducted for the ID in the `  products_b  ` table. If the ID isn't found there, the statement in the `  ELSE  ` block is executed.
+In this example, a search if conducted for the `target_product_ID` in the `products_a` table. If the ID isn't found there, a search is conducted for the ID in the `products_b` table. If the ID isn't found there, the statement in the `ELSE` block is executed.
 
     DECLARE target_product_id INT64 DEFAULT 103;
     CASE
@@ -403,7 +403,7 @@ In this example, a search if conducted for the `  target_product_ID  ` in the ` 
         SELECT 'did not find product';
     END CASE;
 
-## `     CASE search_expression    `
+## `CASE search_expression`
 
 **Syntax**
 
@@ -415,15 +415,15 @@ In this example, a search if conducted for the `  target_product_ID  ` in the ` 
 
 **Description**
 
-Executes the first `  sql_statement_list  ` where the search expression is matches a `  WHEN  ` expression. The `  search_expression  ` is evaluated once and then tested against each `  WHEN  ` expression for equality until a match is found. If no match is found, then the optional `  ELSE  ` `  sql_statement_list  ` is executed.
+Executes the first `sql_statement_list` where the search expression is matches a `WHEN` expression. The `search_expression` is evaluated once and then tested against each `WHEN` expression for equality until a match is found. If no match is found, then the optional `ELSE` `sql_statement_list` is executed.
 
-`  CASE  ` can have a maximum of 50 nesting levels.
+`CASE` can have a maximum of 50 nesting levels.
 
-`  CASE  ` is restricted from being executed dynamically as a nested element. This means `  CASE  ` can't be nested in an `  EXECUTE IMMEDIATE  ` statement.
+`CASE` is restricted from being executed dynamically as a nested element. This means `CASE` can't be nested in an `EXECUTE IMMEDIATE` statement.
 
 **Examples**
 
-The following example uses the product ID as the search expression. If the ID is `  1  ` , `  'Product one'  ` is returned. If the ID is `  2  ` , `  'Product two'  ` is returned. If the ID is anything else, `  Invalid product  ` is returned.
+The following example uses the product ID as the search expression. If the ID is `1` , `'Product one'` is returned. If the ID is `2` , `'Product two'` is returned. If the ID is anything else, `Invalid product` is returned.
 
     DECLARE product_id INT64 DEFAULT 1;
     CASE product_id
@@ -435,7 +435,7 @@ The following example uses the product ID as the search expression. If the ID is
         SELECT CONCAT('Invalid product');
     END CASE;
 
-## `     IF    `
+## `IF`
 
 **Syntax**
 
@@ -447,15 +447,15 @@ The following example uses the product ID as the search expression. If the ID is
 
 **Description**
 
-Executes the first `  sql_statement_list  ` where the condition is true, or the optional `  ELSE  ` `  sql_statement_list  ` if no conditions match.
+Executes the first `sql_statement_list` where the condition is true, or the optional `ELSE` `sql_statement_list` if no conditions match.
 
-There is a maximum nesting level of 50 for blocks and conditional statements such as `  BEGIN  ` / `  END  ` , `  IF  ` / `  ELSE  ` / `  END IF  ` , and `  WHILE  ` / `  END WHILE  ` .
+There is a maximum nesting level of 50 for blocks and conditional statements such as `BEGIN` / `END` , `IF` / `ELSE` / `END IF` , and `WHILE` / `END WHILE` .
 
-`  IF  ` is restricted from being executed dynamically as a nested element. This means `  IF  ` can't be nested in an `  EXECUTE IMMEDIATE  ` statement.
+`IF` is restricted from being executed dynamically as a nested element. This means `IF` can't be nested in an `EXECUTE IMMEDIATE` statement.
 
 **Examples**
 
-The following example declares a INT64 variable `  target_product_id  ` with a default value of 103; then, it checks whether the table `  schema.products  ` contains a row with the `  product_id  ` column matches the value of `  target_product_id  ` ; if so, it outputs a string stating that the product has been found, along with the value of `  default_product_id  ` ; if not, it outputs a string stating that the product hasn't been found, also with the value of `  default_product_id  ` .
+The following example declares a INT64 variable `target_product_id` with a default value of 103; then, it checks whether the table `schema.products` contains a row with the `product_id` column matches the value of `target_product_id` ; if so, it outputs a string stating that the product has been found, along with the value of `default_product_id` ; if not, it outputs a string stating that the product hasn't been found, also with the value of `default_product_id` .
 
     DECLARE target_product_id INT64 DEFAULT 103;
     IF EXISTS(SELECT 1 FROM schema.products
@@ -527,7 +527,7 @@ A BREAK or CONTINUE statement with a label provides an unconditional jump to the
 
   - A label and variable with the same name is allowed.
 
-  - When the `  BREAK  ` , `  LEAVE  ` , `  CONTINUE  ` , or `  ITERATE  ` statement specifies a label, it exits or continues the loop matching the label name, rather than always picking the innermost loop.
+  - When the `BREAK` , `LEAVE` , `CONTINUE` , or `ITERATE` statement specifies a label, it exits or continues the loop matching the label name, rather than always picking the innermost loop.
 
 **Examples**
 
@@ -576,7 +576,7 @@ A label and variable can have same name. This works:
        BREAK label_1;
     END;
 
-The `  END  ` keyword terminating a block or loop may specify a label name, but this is optional. These both work:
+The `END` keyword terminating a block or loop may specify a label name, but this is optional. These both work:
 
     label_1: BEGIN
       BREAK label_1;
@@ -592,7 +592,7 @@ You can't have a label at the end of a block or loop if there isn't a label at t
       BREAK label_1;
     END label_1;
 
-In this example, the `  BREAK  ` and `  CONTINUE  ` statements target the outer `  label_1: LOOP  ` , rather than the inner `  WHILE x < 1 DO  ` loop:
+In this example, the `BREAK` and `CONTINUE` statements target the outer `label_1: LOOP` , rather than the inner `WHILE x < 1 DO` loop:
 
     label_1: LOOP
       WHILE x < 1 DO
@@ -603,7 +603,7 @@ In this example, the `  BREAK  ` and `  CONTINUE  ` statements target the outer 
       END WHILE;
     END LOOP label_1
 
-A `  BREAK  ` , `  LEAVE  ` , or `  CONTINUE  ` , or `  ITERATE  ` statement that specifies a label that doesn't exist throws an error:
+A `BREAK` , `LEAVE` , or `CONTINUE` , or `ITERATE` statement that specifies a label that doesn't exist throws an error:
 
     WHILE x < 1 DO
       BREAK label_1; -- Error
@@ -618,7 +618,7 @@ Exiting a block from within the exception handler section is allowed:
         SELECT 2; -- Unreached
     END;
 
-`  CONTINUE  ` can't be used with a block label. This throws an error:
+`CONTINUE` can't be used with a block label. This throws an error:
 
     label_1: BEGIN
       SELECT 1;
@@ -628,7 +628,7 @@ Exiting a block from within the exception handler section is allowed:
 
 ## Loops
 
-### `     LOOP    `
+### `LOOP`
 
 **Syntax**
 
@@ -638,15 +638,15 @@ Exiting a block from within the exception handler section is allowed:
 
 **Description**
 
-Executes `  sql_statement_list  ` until a `  BREAK  ` or `  LEAVE  ` statement exits the loop. `  sql_statement_list  ` is a list of zero or more SQL statements ending with semicolons.
+Executes `sql_statement_list` until a `BREAK` or `LEAVE` statement exits the loop. `sql_statement_list` is a list of zero or more SQL statements ending with semicolons.
 
-`  LOOP  ` is restricted from being executed dynamically as a nested element. This means `  LOOP  ` can't be nested in an `  EXECUTE IMMEDIATE  ` statement.
+`LOOP` is restricted from being executed dynamically as a nested element. This means `LOOP` can't be nested in an `EXECUTE IMMEDIATE` statement.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
 **Examples**
 
-The following example declares a variable `  x  ` with the default value 0; then, it uses the `  LOOP  ` statement to create a loop that executes until the variable `  x  ` is greater than or equal to 10; after the loop exits, the example outputs the value of `  x  ` .
+The following example declares a variable `x` with the default value 0; then, it uses the `LOOP` statement to create a loop that executes until the variable `x` is greater than or equal to 10; after the loop exits, the example outputs the value of `x` .
 
     DECLARE x INT64 DEFAULT 0;
     LOOP
@@ -665,7 +665,7 @@ This example outputs the following:
      | 10 |
      +----*/
 
-### `     REPEAT    `
+### `REPEAT`
 
 **Syntax**
 
@@ -676,15 +676,15 @@ This example outputs the following:
 
 **Description**
 
-Repeatedly executes a list of zero or more SQL statements until the boolean condition at the end of the list is `  TRUE  ` . The boolean condition must be an expression. You can exit this loop early with the `  BREAK  ` or `  LEAVE  ` statement.
+Repeatedly executes a list of zero or more SQL statements until the boolean condition at the end of the list is `TRUE` . The boolean condition must be an expression. You can exit this loop early with the `BREAK` or `LEAVE` statement.
 
-`  REPEAT  ` is restricted from being executed dynamically as a nested element. This means `  REPEAT  ` can't be nested in an `  EXECUTE IMMEDIATE  ` statement.
+`REPEAT` is restricted from being executed dynamically as a nested element. This means `REPEAT` can't be nested in an `EXECUTE IMMEDIATE` statement.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
 **Examples**
 
-The following example declares a variable `  x  ` with the default value `  0  ` ; then, it uses the `  REPEAT  ` statement to create a loop that executes until the variable `  x  ` is greater than or equal to `  3  ` .
+The following example declares a variable `x` with the default value `0` ; then, it uses the `REPEAT` statement to create a loop that executes until the variable `x` is greater than or equal to `3` .
 
     DECLARE x INT64 DEFAULT 0;
     
@@ -714,7 +714,7 @@ This example outputs the following:
      | 3 |
      +---*/
 
-### `     WHILE    `
+### `WHILE`
 
 **Syntax**
 
@@ -722,17 +722,17 @@ This example outputs the following:
       sql_statement_list
     END WHILE;
 
-There is a maximum nesting level of 50 for blocks and conditional statements such as `  BEGIN  ` / `  END  ` , `  IF  ` / `  ELSE  ` / `  END IF  ` , and `  WHILE  ` / `  END WHILE  ` .
+There is a maximum nesting level of 50 for blocks and conditional statements such as `BEGIN` / `END` , `IF` / `ELSE` / `END IF` , and `WHILE` / `END WHILE` .
 
 **Description**
 
-While `  boolean_expression  ` is true, executes `  sql_statement_list  ` . `  boolean_expression  ` is evaluated for each iteration of the loop.
+While `boolean_expression` is true, executes `sql_statement_list` . `boolean_expression` is evaluated for each iteration of the loop.
 
-`  WHILE  ` is restricted from being executed dynamically as a nested element. This means `  WHILE  ` can't be nested in an `  EXECUTE IMMEDIATE  ` statement.
+`WHILE` is restricted from being executed dynamically as a nested element. This means `WHILE` can't be nested in an `EXECUTE IMMEDIATE` statement.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
-### `     BREAK    `
+### `BREAK`
 
 **Syntax**
 
@@ -742,13 +742,13 @@ You can use a label with this statement. To learn more, see [Labels](https://doc
 
 Exit the current loop.
 
-It's an error to use `  BREAK  ` outside of a loop.
+It's an error to use `BREAK` outside of a loop.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
 **Examples**
 
-The following example declares two variables, `  heads  ` and `  heads_count  ` ; next, it initiates a loop, which assigns a random boolean value to `  heads  ` , then checks to see whether `  heads  ` is true; if so, it outputs "Heads\!" and increments `  heads_count  ` ; if not, it outputs "Tails\!" and exits the loop; finally, it outputs a string stating how many times the "coin flip" resulted in "heads."
+The following example declares two variables, `heads` and `heads_count` ; next, it initiates a loop, which assigns a random boolean value to `heads` , then checks to see whether `heads` is true; if so, it outputs "Heads\!" and increments `heads_count` ; if not, it outputs "Tails\!" and exits the loop; finally, it outputs a string stating how many times the "coin flip" resulted in "heads."
 
     DECLARE heads BOOL;
     DECLARE heads_count INT64 DEFAULT 0;
@@ -764,11 +764,11 @@ The following example declares two variables, `  heads  ` and `  heads_count  ` 
     END LOOP;
     SELECT CONCAT(CAST(heads_count AS STRING), ' heads in a row');
 
-### `     LEAVE    `
+### `LEAVE`
 
-Synonym for [`  BREAK  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#break) .
+Synonym for [`BREAK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#break) .
 
-### `     CONTINUE    `
+### `CONTINUE`
 
 **Syntax**
 
@@ -778,13 +778,13 @@ Synonym for [`  BREAK  `](https://docs.cloud.google.com/bigquery/docs/reference/
 
 Skip any following statements in the current loop and return to the start of the loop.
 
-It's an error to use `  CONTINUE  ` outside of a loop.
+It's an error to use `CONTINUE` outside of a loop.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
 **Examples**
 
-The following example declares two variables, `  heads  ` and `  heads_count  ` ; next, it initiates a loop, which assigns a random boolean value to `  heads  ` , then checks to see whether `  heads  ` is true; if so, it outputs "Heads\!", increments `  heads_count  ` , and restarts the loop, skipping any remaining statements; if not, it outputs "Tails\!" and exits the loop; finally, it outputs a string stating how many times the "coin flip" resulted in "heads."
+The following example declares two variables, `heads` and `heads_count` ; next, it initiates a loop, which assigns a random boolean value to `heads` , then checks to see whether `heads` is true; if so, it outputs "Heads\!", increments `heads_count` , and restarts the loop, skipping any remaining statements; if not, it outputs "Tails\!" and exits the loop; finally, it outputs a string stating how many times the "coin flip" resulted in "heads."
 
     DECLARE heads BOOL;
     DECLARE heads_count INT64 DEFAULT 0;
@@ -800,11 +800,11 @@ The following example declares two variables, `  heads  ` and `  heads_count  ` 
     END LOOP;
     SELECT CONCAT(CAST(heads_count AS STRING), ' heads in a row');
 
-### `     ITERATE    `
+### `ITERATE`
 
-Synonym for [`  CONTINUE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#continue) .
+Synonym for [`CONTINUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#continue) .
 
-### `     FOR...IN    `
+### `FOR...IN`
 
 **Syntax**
 
@@ -815,11 +815,11 @@ Synonym for [`  CONTINUE  `](https://docs.cloud.google.com/bigquery/docs/referen
 
 **Description**
 
-Loops over every row in `  table_expression  ` and assigns the row to `  loop_variable_name  ` . Inside each loop, the SQL statements in `  sql_expression_list  ` are executed using the current value of `  loop_variable_name  ` .
+Loops over every row in `table_expression` and assigns the row to `loop_variable_name` . Inside each loop, the SQL statements in `sql_expression_list` are executed using the current value of `loop_variable_name` .
 
-The value of `  table_expression  ` is evaluated once at the start of the loop. On each iteration, the value of `  loop_variable_name  ` is a `  STRUCT  ` that contains the top-level columns of the table expression as fields. The order in which values are assigned to `  loop_variable_name  ` isn't defined, unless the table expression has a top-level `  ORDER BY  ` clause or `  UNNEST  ` array operator.
+The value of `table_expression` is evaluated once at the start of the loop. On each iteration, the value of `loop_variable_name` is a `STRUCT` that contains the top-level columns of the table expression as fields. The order in which values are assigned to `loop_variable_name` isn't defined, unless the table expression has a top-level `ORDER BY` clause or `UNNEST` array operator.
 
-The scope of `  loop_variable_name  ` is the body of the loop. The name of `  loop_variable_name  ` can't conflict with other variables within the same scope.
+The scope of `loop_variable_name` is the body of the loop. The name of `loop_variable_name` can't conflict with other variables within the same scope.
 
 You can use a label with this statement. To learn more, see [Labels](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#labels) .
 
@@ -835,7 +835,7 @@ You can use a label with this statement. To learn more, see [Labels](https://doc
 
 ## Transactions
 
-### `     BEGIN TRANSACTION    `
+### `BEGIN TRANSACTION`
 
 **Syntax**
 
@@ -845,7 +845,7 @@ You can use a label with this statement. To learn more, see [Labels](https://doc
 
 Begins a transaction.
 
-The transaction ends when a [`  COMMIT TRANSACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#commit_transaction) or [`  ROLLBACK TRANSACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) statement is reached. If execution ends before reaching either of these statements, an automatic rollback occurs.
+The transaction ends when a [`COMMIT TRANSACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#commit_transaction) or [`ROLLBACK TRANSACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) statement is reached. If execution ends before reaching either of these statements, an automatic rollback occurs.
 
 For more information about transactions in BigQuery, see [Multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) .
 
@@ -876,7 +876,7 @@ The following example performs a transaction that selects rows from an existing 
     
     COMMIT TRANSACTION;
 
-### `     COMMIT TRANSACTION    `
+### `COMMIT TRANSACTION`
 
 **Syntax**
 
@@ -896,7 +896,7 @@ For more information about transactions in BigQuery, see [Multi-statement transa
     
     COMMIT TRANSACTION;
 
-### `     ROLLBACK TRANSACTION    `
+### `ROLLBACK TRANSACTION`
 
 **Syntax**
 
@@ -927,7 +927,7 @@ The following example rolls back a transaction if an error occurs during the tra
       ROLLBACK TRANSACTION;
     END;
 
-## `     RAISE    `
+## `RAISE`
 
 **Syntax**
 
@@ -935,29 +935,29 @@ The following example rolls back a transaction if an error occurs during the tra
 
 **Description**
 
-Raises an error, optionally using the specified error message when `  USING MESSAGE = message  ` is supplied.
+Raises an error, optionally using the specified error message when `USING MESSAGE = message` is supplied.
 
-#### When `     USING MESSAGE    ` isn't supplied
+#### When `USING MESSAGE` isn't supplied
 
-The `  RAISE  ` statement must only be used within an `  EXCEPTION  ` clause. The `  RAISE  ` statement will re-raise the exception that was caught, and preserve the original stack trace.
+The `RAISE` statement must only be used within an `EXCEPTION` clause. The `RAISE` statement will re-raise the exception that was caught, and preserve the original stack trace.
 
-#### When `     USING MESSAGE    ` is supplied
+#### When `USING MESSAGE` is supplied
 
-If the `  RAISE  ` statement is contained within the `  BEGIN  ` section of a `  BEGIN...EXCEPTION  ` block:
+If the `RAISE` statement is contained within the `BEGIN` section of a `BEGIN...EXCEPTION` block:
 
   - The handler will be invoked.
 
-  - The value of `  @@error.message  ` will exactly match the `  message  ` string supplied (which may be `  NULL  ` if `  message  ` is `  NULL  ` ).
+  - The value of `@@error.message` will exactly match the `message` string supplied (which may be `NULL` if `message` is `NULL` ).
 
-  - The stack trace will be set to the `  RAISE  ` statement.
+  - The stack trace will be set to the `RAISE` statement.
 
-If the `  RAISE  ` statement isn't contained within the `  BEGIN  ` section of a `  BEGIN...EXCEPTION  ` block, the `  RAISE  ` statement stops execution of the multi-statement query with the error message supplied.
+If the `RAISE` statement isn't contained within the `BEGIN` section of a `BEGIN...EXCEPTION` block, the `RAISE` statement stops execution of the multi-statement query with the error message supplied.
 
-## `     RETURN    `
+## `RETURN`
 
-`  RETURN  ` stops execution of the multi-statements query.
+`RETURN` stops execution of the multi-statements query.
 
-## `     CALL    `
+## `CALL`
 
 **Syntax**
 
@@ -965,17 +965,17 @@ If the `  RAISE  ` statement isn't contained within the `  BEGIN  ` section of a
 
 **Description**
 
-Calls a [procedure](https://docs.cloud.google.com/bigquery/docs/procedures) with an argument list. `  procedure_argument  ` may be a variable or an expression.
+Calls a [procedure](https://docs.cloud.google.com/bigquery/docs/procedures) with an argument list. `procedure_argument` may be a variable or an expression.
 
-For `  OUT  ` or `  INOUT  ` arguments, a variable passed as an argument must have the proper GoogleSQL [type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) . The same variable may not appear multiple times as an `  OUT  ` or `  INOUT  ` argument in the procedure's argument list.
+For `OUT` or `INOUT` arguments, a variable passed as an argument must have the proper GoogleSQL [type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) . The same variable may not appear multiple times as an `OUT` or `INOUT` argument in the procedure's argument list.
 
 The maximum depth of procedure calls is 50 frames.
 
-`  CALL  ` is restricted from being executed dynamically as a nested element. This means `  CALL  ` can't be nested in an `  EXECUTE IMMEDIATE  ` statement.
+`CALL` is restricted from being executed dynamically as a nested element. This means `CALL` can't be nested in an `EXECUTE IMMEDIATE` statement.
 
 **Examples**
 
-The following example declares a variable `  retCode  ` . Then, it calls the procedure `  updateSomeTables  ` in the schema `  mySchema  ` , passing the arguments `  'someAccountId'  ` and `  retCode  ` . Finally, it returns the value of `  retCode  ` .
+The following example declares a variable `retCode` . Then, it calls the procedure `updateSomeTables` in the schema `mySchema` , passing the arguments `'someAccountId'` and `retCode` . Finally, it returns the value of `retCode` .
 
     DECLARE retCode INT64;
     -- Procedure signature: (IN account_id STRING, OUT retCode INT64)

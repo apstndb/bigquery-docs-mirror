@@ -8,7 +8,7 @@ For more information on deleting saved queries and managing saved query history,
 
 Set the appropriate permissions to create, edit, or view saved queries.
 
-All users with the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) have owner access to all saved queries created in the project.
+All users with the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) have owner access to all saved queries created in the project.
 
 For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -16,49 +16,49 @@ For more information about BigQuery Identity and Access Management (IAM), see [A
 
 To create and run saved queries, you need the following IAM permissions:
 
-  - `  dataform.locations.get  `
+  - `dataform.locations.get`
 
-  - `  dataform.locations.list  `
+  - `dataform.locations.list`
 
-  - `  dataform.repositories.list  `
+  - `dataform.repositories.list`
 
-  - `  dataform.repositories.create  `
+  - `dataform.repositories.create`
     
-    **Note:** Users who have the `  dataform.repositories.create  ` permission can execute code using the default Dataform service account and all permissions granted to that service account. For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions) .
+    **Note:** Users who have the `dataform.repositories.create` permission can execute code using the default Dataform service account and all permissions granted to that service account. For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions) .
 
 You can get these permissions from the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-  - [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `roles/dataform.codeCreator` )
 
-**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `  dataform.repositories.list  ` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `  dataform.repositories.list  ` permission.
+**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
 
 **Note:** Users assigned the Code Creator role in a project can list the names of code assets in that project by using the Dataform API or the Dataform command-line interface (CLI).
 
-**Note:** When you create a saved query, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) on that saved query. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the saved queries created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
+**Note:** When you create a saved query, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that saved query. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the saved queries created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
 ### Permissions to edit saved queries
 
 To edit and run saved queries, you need the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-  - [Code Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [Code Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) ( `roles/dataform.codeEditor` )
 
 ### Permissions to view saved queries
 
 To view and run saved queries, you need the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-  - [Code Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ( `  roles/dataform.codeViewer  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [Code Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ( `roles/dataform.codeViewer` )
 
 ## Set the default region for code assets
 
 If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
 
-**Note:** If you create a saved query and choose a different default region than the one you have been using for code assets, for example choosing `  us-west1  ` when you have been using `  us-central1  ` , then that query and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+**Note:** If you create a saved query and choose a different default region than the one you have been using for code assets, for example choosing `us-west1` when you have been using `us-central1` , then that query and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
 
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
@@ -152,7 +152,7 @@ Users that you share a query with only see the most recent version of a query. A
       - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
       - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : can view the query.
     
-    **Note:** The principal must also have the [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
+    **Note:** The principal must also have the [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
@@ -252,14 +252,14 @@ The following IAM permissions are required to create, view, update, and delete c
   - **Private** classic saved queries:
       - Creating private classic saved queries requires no special permissions. You can save a private query in any project, but only you can view, update, or delete the query.
   - **Project-level** classic saved queries:
-      - **Creating** a project-level classic saved query requires `  bigquery.savedqueries.create  ` permissions. The `  bigquery.admin  ` predefined role includes `  bigquery.savedqueries.create  ` permissions.
-      - **Viewing** a project-level classic saved query requires `  bigquery.savedqueries.get  ` and `  bigquery.savedqueries.list  ` permissions. The `  bigquery.admin  ` and `  bigquery.user  ` predefined roles include `  bigquery.savedqueries.get  ` and `  bigquery.savedqueries.list  ` permissions.
-      - **Updating** a project-level classic saved query requires `  bigquery.savedqueries.update  ` permissions. The `  bigquery.admin  ` predefined role includes `  bigquery.savedqueries.update  ` permissions.
-      - **Deleting** a project-level classic saved query requires `  bigquery.savedqueries.delete  ` permissions. The `  bigquery.admin  ` predefined role includes `  bigquery.savedqueries.delete  ` permissions.
+      - **Creating** a project-level classic saved query requires `bigquery.savedqueries.create` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.create` permissions.
+      - **Viewing** a project-level classic saved query requires `bigquery.savedqueries.get` and `bigquery.savedqueries.list` permissions. The `bigquery.admin` and `bigquery.user` predefined roles include `bigquery.savedqueries.get` and `bigquery.savedqueries.list` permissions.
+      - **Updating** a project-level classic saved query requires `bigquery.savedqueries.update` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.update` permissions.
+      - **Deleting** a project-level classic saved query requires `bigquery.savedqueries.delete` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.delete` permissions.
   - **Public** classic saved queries:
       - Creating public classic saved queries requires no special permissions. You can save a public classic saved query in any project, but only you can update or delete the query. Anyone with the link can view a public classic saved query.
 
-**Note:** Users given the `  dataform.repository.list  ` permission at the project level can see all saved queries created in the project.
+**Note:** Users given the `dataform.repository.list` permission at the project level can see all saved queries created in the project.
 
 For more information on IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 

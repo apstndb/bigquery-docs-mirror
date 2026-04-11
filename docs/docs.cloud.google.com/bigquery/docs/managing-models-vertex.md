@@ -14,13 +14,13 @@ Enable the Vertex AI API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=aiplatform.googleapis.com)
 
 ## Required permissions
 
-To get the permissions that you need to register BigQuery ML models to the Model Registry, ask your administrator to grant you the [Vertex AI Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.admin) ( `  roles/aiplatform.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to register BigQuery ML models to the Model Registry, ask your administrator to grant you the [Vertex AI Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.admin) ( `roles/aiplatform.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -30,13 +30,13 @@ When you create a BigQuery ML model, you can register the model to the Model Reg
 
   - In the Google Cloud console, select the model in the **Explorer** pane and then click **Register** on the **Registry** tab. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
 
-  - Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) . In the `  CREATE MODEL  ` statement, you can use the following options to register the model to the Model Registry:
+  - Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) . In the `CREATE MODEL` statement, you can use the following options to register the model to the Model Registry:
     
-      - `  MODEL_REGISTRY  ` : register the model to the Model Registry.
-      - `  VERTEX_AI_MODEL_ID  ` : specify a model ID to use for the model in the Model Registry. The model ID is associated with your BigQuery ML model, and is visible from the Model Registry. Each BigQuery ML model can only be registered to one model ID in the Model Registry.
-      - `  VERTEX_AI_MODEL_VERSION_ALIASES  ` : specify one or more model version aliases, which you can use to streamline deployment, manage models, and enable [Vertex Explainable AI](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/overview) on models.
+      - `MODEL_REGISTRY` : register the model to the Model Registry.
+      - `VERTEX_AI_MODEL_ID` : specify a model ID to use for the model in the Model Registry. The model ID is associated with your BigQuery ML model, and is visible from the Model Registry. Each BigQuery ML model can only be registered to one model ID in the Model Registry.
+      - `VERTEX_AI_MODEL_VERSION_ALIASES` : specify one or more model version aliases, which you can use to streamline deployment, manage models, and enable [Vertex Explainable AI](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/overview) on models.
     
-    If you set the `  MODEL_REGISTRY  ` option when creating a model, the model is registered to the Model Registry, and automatically displays there once it has completed training in BigQuery ML. You can use the **Source** column in the **Model Registry** page of the Google Cloud console to see where a model is sourced from.
+    If you set the `MODEL_REGISTRY` option when creating a model, the model is registered to the Model Registry, and automatically displays there once it has completed training in BigQuery ML. You can use the **Source** column in the **Model Registry** page of the Google Cloud console to see where a model is sourced from.
 
 Once a BigQuery ML model is registered, you can use the following Model Registry capabilities with your model:
 
@@ -97,7 +97,7 @@ The following examples show how to register an existing model:
 
 ### SQL
 
-Use the [`  ALTER MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) :
+Use the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) :
 
 ``` notranslate
 ALTER MODEL IF EXISTS mymodel SET OPTIONS (vertex_ai_model_id='my_vertex_ai_model_id');
@@ -105,7 +105,7 @@ ALTER MODEL IF EXISTS mymodel SET OPTIONS (vertex_ai_model_id='my_vertex_ai_mode
 
 ### bq
 
-Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --model  ` flag:
+Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--model` flag:
 
 ``` notranslate
   bq update --model --vertex_ai_model_id 'my_vertex_ai_model_id' myproject:mydataset.mymodel
@@ -113,7 +113,7 @@ Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/re
 
 ### API
 
-Use the [`  models.patch  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) . Pass in an [`  Model  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) that contains a [`  trainingRuns  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrainingRun) with a populated `  vertexAiModelId  ` field:
+Use the [`models.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) . Pass in an [`Model` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) that contains a [`trainingRuns` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrainingRun) with a populated `vertexAiModelId` field:
 
 ``` notranslate
 {
@@ -128,17 +128,17 @@ Use the [`  models.patch  ` method](https://docs.cloud.google.com/bigquery/docs/
 
 The first BigQuery ML model that you register under a given model ID displays as version 1 of that model in the Model Registry. You can register additional BigQuery ML models as different versions of that registered model by specifying the same Vertex AI model ID when you create or alter those BigQuery ML models.
 
-For example, you could create `  model1  ` in BigQuery ML and register it in Model Registry as `  regression_model  ` . `  model1  ` displays as version 1 of `  regression_model  ` in Model Registry. If you then create `  model2  ` in BigQuery ML and register it in Model Registry as `  regression_model  ` , `  model2  ` displays as version 2 of `  regression_model  ` in Model Registry.
+For example, you could create `model1` in BigQuery ML and register it in Model Registry as `regression_model` . `model1` displays as version 1 of `regression_model` in Model Registry. If you then create `model2` in BigQuery ML and register it in Model Registry as `regression_model` , `model2` displays as version 2 of `regression_model` in Model Registry.
 
-If you create or replace a BigQuery ML model and use a BigQuery ML model name that is already associated with a model in the Model Registry, the existing Model Registry model version is deleted and replaced with the new model. Building on the prior example, if you create or replace `  model2  ` in BigQuery ML by using the `  CREATE OR REPLACE MODEL  ` statement with the `  MODEL_REGISTRY  ` and `  VERTEX_AI_MODEL_ID  ` options, version 2 of `  regression_model  ` in the Model Registry is replaced, and Model Registry displays version 1 and version 3 of `  regression_model  ` model.
+If you create or replace a BigQuery ML model and use a BigQuery ML model name that is already associated with a model in the Model Registry, the existing Model Registry model version is deleted and replaced with the new model. Building on the prior example, if you create or replace `model2` in BigQuery ML by using the `CREATE OR REPLACE MODEL` statement with the `MODEL_REGISTRY` and `VERTEX_AI_MODEL_ID` options, version 2 of `regression_model` in the Model Registry is replaced, and Model Registry displays version 1 and version 3 of `regression_model` model.
 
 ### Change the model ID of a registered BigQuery ML model
 
-Once a BigQuery ML model is registered to the Model Registry, you can't change the `  VERTEX_AI_MODEL_ID  ` value. To register the model with a new `  VERTEX_AI_MODEL_ID  ` , use one of the following options:
+Once a BigQuery ML model is registered to the Model Registry, you can't change the `VERTEX_AI_MODEL_ID` value. To register the model with a new `VERTEX_AI_MODEL_ID` , use one of the following options:
 
-  - [Delete the model](https://docs.cloud.google.com/bigquery/docs/deleting-models#delete_a_model) and recreate it, specifying a new value for the `  VERTEX_AI_MODEL_ID  ` option. This approach incurs re-training costs.
+  - [Delete the model](https://docs.cloud.google.com/bigquery/docs/deleting-models#delete_a_model) and recreate it, specifying a new value for the `VERTEX_AI_MODEL_ID` option. This approach incurs re-training costs.
 
-  - [Copy the model](https://docs.cloud.google.com/bigquery/docs/managing-models#copy_a_model) , and then use the `  ALTER MODEL  ` statement to register the new model with a new `  VERTEX_AI_MODEL_ID  ` value.
+  - [Copy the model](https://docs.cloud.google.com/bigquery/docs/managing-models#copy_a_model) , and then use the `ALTER MODEL` statement to register the new model with a new `VERTEX_AI_MODEL_ID` value.
 
 ### Location considerations
 
@@ -165,5 +165,5 @@ If you want to delete a model in BigQuery ML that has been registered in the Mod
   - The following models can be registered in Model Registry, but they can't be deployed in Vertex AI:
     
       - [Imported XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
-      - [`  ARIMA_PLUS  ` models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-      - [`  ARIMA_PLUS_XREG  ` models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
+      - [`ARIMA_PLUS` models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+      - [`ARIMA_PLUS_XREG` models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)

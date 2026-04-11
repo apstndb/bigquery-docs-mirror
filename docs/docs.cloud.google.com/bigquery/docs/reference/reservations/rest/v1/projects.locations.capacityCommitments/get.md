@@ -9,7 +9,7 @@ Returns information about the capacity commitment.
 
 ### HTTP request
 
-`  GET https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/capacityCommitments/*}  `
+`GET https://bigqueryreservation.googleapis.com/v1/{name=projects/*/locations/*/capacityCommitments/*}`
 
 The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
@@ -17,15 +17,15 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 Parameters
 
-`  name  `
+`name`
 
-`  string  `
+`string`
 
-Required. Resource name of the capacity commitment to retrieve. E.g., `  projects/myproject/locations/US/capacityCommitments/123  `
+Required. Resource name of the capacity commitment to retrieve. E.g., `projects/myproject/locations/US/capacityCommitments/123`
 
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
 
-  - `  bigquery.capacityCommitments.get  `
+  - `bigquery.capacityCommitments.get`
 
 ### Request body
 
@@ -39,7 +39,7 @@ If successful, the response body contains an instance of `  CapacityCommitment  
 
 Requires one of the following OAuth scopes:
 
-  - `  https://www.googleapis.com/auth/bigquery  `
-  - `  https://www.googleapis.com/auth/cloud-platform  `
+  - `https://www.googleapis.com/auth/bigquery`
+  - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

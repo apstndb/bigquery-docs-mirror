@@ -19,9 +19,9 @@ Grant these roles to copy a dataset. Copying datasets is in ( [Beta](https://clo
 
 To get the permissions that you need to copy datasets, ask your administrator to grant you the following IAM roles:
 
-  - BigQuery Admin ( `  roles/bigquery.admin  ` ) - the destination project
-  - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` ) - the source dataset
-  - BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) - the destination dataset
+  - BigQuery Admin ( `roles/bigquery.admin` ) - the destination project
+  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` ) - the source dataset
+  - BigQuery Data Editor ( `roles/bigquery.dataEditor` ) - the destination dataset
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -31,12 +31,12 @@ These predefined roles contain the permissions required to copy datasets. To see
 
 The following permissions are required to copy datasets:
 
-  - `  bigquery.transfers.update  ` on the destination project
-  - `  bigquery.jobs.create  ` on the destination project
-  - `  bigquery.datasets.get  ` on the source and destination dataset
-  - `  bigquery.tables.list  ` on the source and destination dataset
-  - `  bigquery.datasets.update  ` on the destination dataset
-  - `  bigquery.tables.create  ` on the destination dataset
+  - `bigquery.transfers.update` on the destination project
+  - `bigquery.jobs.create` on the destination project
+  - `bigquery.datasets.get` on the source and destination dataset
+  - `bigquery.tables.list` on the source and destination dataset
+  - `bigquery.datasets.update` on the destination dataset
+  - `bigquery.tables.create` on the destination dataset
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -44,7 +44,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 Grant these roles to delete a dataset.
 
-To get the permissions that you need to delete datasets, ask your administrator to grant you the [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to delete datasets, ask your administrator to grant you the [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to delete datasets. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -52,8 +52,8 @@ This predefined role contains the permissions required to delete datasets. To se
 
 The following permissions are required to delete datasets:
 
-  - `  bigquery.datasets.delete  ` on the project
-  - `  bigquery.tables.delete  ` on the project
+  - `bigquery.datasets.delete` on the project
+  - `bigquery.tables.delete` on the project
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -109,16 +109,16 @@ The following limitations apply when you copy datasets:
     
       - In the destination project's VPC Service Controls service perimeter configuration, the IAM principal must have the following methods:
         
-          - `  bigquery.datasets.get  `
-          - `  bigquery.tables.list  `
-          - `  bigquery.tables.get  ` ,
-          - `  bigquery.tables.getData  `
+          - `bigquery.datasets.get`
+          - `bigquery.tables.list`
+          - `bigquery.tables.get` ,
+          - `bigquery.tables.getData`
     
-      - In the source project's VPC Service Controls service perimeter configuration, the IAM principal being used must have the method set to `  All Methods  ` .
+      - In the source project's VPC Service Controls service perimeter configuration, the IAM principal being used must have the method set to `All Methods` .
 
   - If you try to update a dataset copy transfer configuration you don't own, the update might fail with the following error message:
     
-    `  Cannot modify restricted parameters without taking ownership of the transfer configuration.  `
+    `Cannot modify restricted parameters without taking ownership of the transfer configuration.`
     
     The owner of the dataset copy is the user associated with the dataset copy or the user who has access to the service account associated with the dataset copy. The associated user can be seen in the [configuration details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details) of the dataset copy. For information on how to update the dataset copy to take ownership, see [Update credentials](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_credentials) . To grant users access to a service account, you must have the [Service Account user role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) .
     
@@ -143,7 +143,7 @@ Select one of the following options:
 
 2.  Ensure that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/managing-datasets#required-roles) .
     
-    If you intend to set up transfer run notifications for Pub/Sub ( **Option 2** later in these steps), then you must have the `  pubsub.topics.setIamPolicy  ` permission.
+    If you intend to set up transfer run notifications for Pub/Sub ( **Option 2** later in these steps), then you must have the `pubsub.topics.setIamPolicy` permission.
     
     If you only set up email notifications, then Pub/Sub permissions are not required. For more information, see the BigQuery Data Transfer Service [run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
@@ -195,7 +195,7 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
     
     1.  For **Repeat frequency** , choose an option for how often to run the transfer:
         
-        If you select **Custom** , enter a custom frequency—for example, `  every day 00:00  ` . For more information, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
+        If you select **Custom** , enter a custom frequency—for example, `every day 00:00` . For more information, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
         
         **Note:** The minimum frequency between copy jobs is 12 hours.
     
@@ -228,7 +228,7 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
 
 2.  Ensure that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/managing-datasets#required-roles) .
 
-3.  To [create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) , use the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) with the dataset creation flag `  --dataset  ` and the `  location  ` flag:
+3.  To [create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) , use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) with the dataset creation flag `--dataset` and the `location` flag:
     
         bq mk \
           --dataset \
@@ -241,7 +241,7 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
       - `  PROJECT  ` : the project ID of your target dataset
       - `  DATASET  ` : the name of the target dataset
 
-4.  To copy a dataset, use the `  bq mk  ` command with the transfer creation flag [`  --transfer_config  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) and the `  --data_source  ` flag. You must set the `  --data_source  ` flag to `  cross_region_copy  ` . For a complete list of valid values for the `  --data_source  ` flag, see the [transfer-config flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) in the bq command-line tool reference.
+4.  To copy a dataset, use the `bq mk` command with the transfer creation flag [`--transfer_config`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) and the `--data_source` flag. You must set the `--data_source` flag to `cross_region_copy` . For a complete list of valid values for the `--data_source` flag, see the [transfer-config flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) in the bq command-line tool reference.
     
         bq mk \
           --transfer_config \
@@ -256,15 +256,15 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
     
       - `  NAME  ` : the display name for the copy job or the transfer configuration
     
-      - `  SERVICE_ACCOUNT  ` : the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/managing-datasets#required-roles) .
+      - `  SERVICE_ACCOUNT  ` : the service account name used to authenticate your transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/managing-datasets#required-roles) .
     
       - `  PARAMETERS  ` : the parameters for the transfer configuration in the JSON format
         
         Parameters for a dataset copy configuration include the following:
         
-          - `  source_dataset_id  ` : the ID of the source dataset that you want to copy
-          - `  source_project_id  ` : the ID of the project that your source dataset is in
-          - `  overwrite_destination_table  ` : an optional flag that lets you truncate the tables of a previous copy and refresh all the data
+          - `source_dataset_id` : the ID of the source dataset that you want to copy
+          - `source_project_id` : the ID of the project that your source dataset is in
+          - `overwrite_destination_table` : an optional flag that lets you truncate the tables of a previous copy and refresh all the data
         
         Both the source and destination tables must have the same partitioning schema.
     
@@ -282,7 +282,7 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
         
             '{\"source_dataset_id\":\"mydataset\",\"source_project_id\":\"mysourceproject\",\"overwrite_destination_table\":\"true\"}'
     
-    For example, the following command creates a dataset copy configuration that's named `  My Transfer  ` with a target dataset that's named `  mydataset  ` and a project with the ID of `  myproject  ` .
+    For example, the following command creates a dataset copy configuration that's named `My Transfer` with a target dataset that's named `mydataset` and a project with the ID of `myproject` .
     
         bq mk \
           --transfer_config \
@@ -302,9 +302,9 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
 
 2.  Ensure that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/managing-datasets#required-roles) .
 
-3.  To [create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) , call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+3.  To [create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) , call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-4.  To copy a dataset, use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+4.  To copy a dataset, use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
@@ -369,7 +369,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     from google.cloud import bigquery_datatransfer
     
@@ -419,7 +419,7 @@ To manually move a dataset from one location to another, follow these steps:
     
     There are no charges for exporting data from BigQuery, but you do incur charges for [storing the exported data](https://docs.cloud.google.com/storage/pricing#storage-pricing) in Cloud Storage. BigQuery exports are subject to the limits on [extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
 
-2.  Copy or move the data from your export Cloud Storage bucket to a new bucket you created in the destination location. For example, if you are moving your data from the `  US  ` multi-region to the `  asia-northeast1  ` Tokyo region, you would transfer the data to a bucket that you created in Tokyo. For information about transferring Cloud Storage objects, see [Copy, rename, and move objects](https://docs.cloud.google.com/storage/docs/copying-renaming-moving-objects) in the Cloud Storage documentation.
+2.  Copy or move the data from your export Cloud Storage bucket to a new bucket you created in the destination location. For example, if you are moving your data from the `US` multi-region to the `asia-northeast1` Tokyo region, you would transfer the data to a bucket that you created in Tokyo. For information about transferring Cloud Storage objects, see [Copy, rename, and move objects](https://docs.cloud.google.com/storage/docs/copying-renaming-moving-objects) in the Cloud Storage documentation.
     
     Transferring data between regions incurs [network egress charges](https://docs.cloud.google.com/storage/pricing#network-pricing) in Cloud Storage.
 
@@ -439,7 +439,7 @@ To control access to datasets in BigQuery, see [Controlling access to datasets](
 
 When you delete a dataset by using the Google Cloud console, tables and views in the dataset, including their data, are deleted automatically. However, when using any other method, you must either empty the dataset first or specify corresponding flags, parameters or keywords that force removal of the dataset contents.
 
-If you attempt to delete a non-empty dataset without the proper flags or parameters, the operation fails with the following error: `  Dataset project:dataset is still in use  ` .
+If you attempt to delete a non-empty dataset without the proper flags or parameters, the operation fails with the following error: `Dataset project:dataset is still in use` .
 
 Deleting a dataset creates one [audit log](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) entry for the dataset deletion. It doesn't create separate log entries for each deleted table within the dataset.
 
@@ -459,15 +459,15 @@ To delete a dataset, select one of the following options:
 
 4.  In the details pane, click delete **Delete** .
 
-5.  In the **Delete dataset** dialog, type `  delete  ` into the field, and then click **Delete** .
+5.  In the **Delete dataset** dialog, type `delete` into the field, and then click **Delete** .
 
 **Note:** When you delete a dataset using the Google Cloud console, the tables are automatically removed.
 
 ### SQL
 
-To delete a dataset, use the [`  DROP SCHEMA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement) .
+To delete a dataset, use the [`DROP SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement) .
 
-The following example deletes a dataset named `  mydataset  ` :
+The following example deletes a dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
@@ -479,7 +479,7 @@ The following example deletes a dataset named `  mydataset  ` :
     DROP SCHEMA IF EXISTS mydataset;
     ```
     
-    By default, this only works to delete an empty dataset. To delete a dataset and all of its contents, use the `  CASCADE  ` keyword:
+    By default, this only works to delete an empty dataset. To delete a dataset and all of its contents, use the `CASCADE` keyword:
     
     ``` notranslate
     DROP SCHEMA IF EXISTS mydataset CASCADE;
@@ -491,9 +491,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-Use the [`  bq rm  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) with the `  --dataset  ` or `  -d  ` flag, which is optional. If your dataset contains tables, you must use the `  -r  ` flag to remove all tables in the dataset. If you use the `  -r  ` flag, then you can omit the `  --dataset  ` or `  -d  ` flag.
+Use the [`bq rm` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) with the `--dataset` or `-d` flag, which is optional. If your dataset contains tables, you must use the `-r` flag to remove all tables in the dataset. If you use the `-r` flag, then you can omit the `--dataset` or `-d` flag.
 
-After you run the command, the system asks for confirmation. You can use the `  -f  ` flag to skip the confirmation.
+After you run the command, the system asks for confirmation. You can use the `-f` flag to skip the confirmation.
 
 If you are deleting a table in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` .
 
@@ -506,21 +506,21 @@ Replace the following:
 
 **Examples:**
 
-Enter the following command to remove a dataset that's named `  mydataset  ` and all the tables in it from your default project. The command uses the `  -d  ` flag.
+Enter the following command to remove a dataset that's named `mydataset` and all the tables in it from your default project. The command uses the `-d` flag.
 
     bq rm -r -d mydataset
 
-When prompted, type `  y  ` and press enter.
+When prompted, type `y` and press enter.
 
-Enter the following command to remove `  mydataset  ` and all the tables in it from `  myotherproject  ` . The command does not use the optional `  -d  ` flag. The `  -f  ` flag is used to skip confirmation.
+Enter the following command to remove `mydataset` and all the tables in it from `myotherproject` . The command does not use the optional `-d` flag. The `-f` flag is used to skip confirmation.
 
     bq rm -r -f myotherproject:mydataset
 
-You can use the `  bq ls  ` command to confirm that the dataset was deleted.
+You can use the `bq ls` command to confirm that the dataset was deleted.
 
 ### API
 
-Call the [`  datasets.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete) method to delete the dataset and set the `  deleteContents  ` parameter to `  true  ` to delete the tables in it.
+Call the [`datasets.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete) method to delete the dataset and set the `deleteContents` parameter to `true` to delete the tables in it.
 
 ### C\#
 
@@ -530,7 +530,7 @@ Before trying this sample, follow the C\# setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     using Google.Cloud.BigQuery.V2;
     using System;
@@ -592,7 +592,7 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     import (
      "context"
@@ -628,7 +628,7 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     import com.google.cloud.bigquery.BigQuery;
     import com.google.cloud.bigquery.BigQuery.DatasetDeleteOption;
@@ -725,7 +725,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     // Import the Google Cloud client library
     const {BigQuery} = require('@google-cloud/bigquery');
@@ -753,7 +753,7 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     use Google\Cloud\BigQuery\BigQueryClient;
     
@@ -774,7 +774,7 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     from google.cloud import bigquery
     
@@ -800,7 +800,7 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `  pip install google-cloud-bigquery-datatransfer  ` . Then create a transfer configuration to copy the dataset.
+Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     require "google/cloud/bigquery"
     
@@ -845,13 +845,13 @@ You can restore tables from a deleted dataset that are within the dataset's [tim
 
 1.  Create a dataset with the same name and in the same location as the original.
 
-2.  Choose a timestamp from before the original dataset was deleted by using a format of milliseconds since the epoch–for example, `  1418864998000  ` .
+2.  Choose a timestamp from before the original dataset was deleted by using a format of milliseconds since the epoch–for example, `1418864998000` .
 
-3.  Copy the `  originaldataset.table1  ` table at the time `  1418864998000  ` into the new dataset:
+3.  Copy the `originaldataset.table1` table at the time `1418864998000` into the new dataset:
     
         bq cp originaldataset.table1@1418864998000 mydataset.mytable
     
-    To find the names of the nonempty tables that were in the deleted dataset, query the dataset's [`  INFORMATION_SCHEMA.TABLE_STORAGE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) within the time travel window.
+    To find the names of the nonempty tables that were in the deleted dataset, query the dataset's [`INFORMATION_SCHEMA.TABLE_STORAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) within the time travel window.
 
 ## Restore deleted datasets
 
@@ -859,7 +859,7 @@ To learn how to restore (or *undelete* ) a deleted dataset, see [Restore deleted
 
 ## Quotas
 
-For information about copy quotas, see [Copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) . Usage for copy jobs are available in the `  INFORMATION_SCHEMA  ` . To learn how to query the `  INFORMATION_SCHEMA.JOBS  ` view, see [`  JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
+For information about copy quotas, see [Copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) . Usage for copy jobs are available in the `INFORMATION_SCHEMA` . To learn how to query the `INFORMATION_SCHEMA.JOBS` view, see [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
 ## Pricing
 

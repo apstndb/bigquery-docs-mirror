@@ -28,7 +28,7 @@ To estimate your costs based on your projected usage, use the [pricing calculato
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -40,7 +40,7 @@ To estimate your costs based on your projected usage, use the [pricing calculato
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-4.  [Create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) that's named `  bqml_tutorial  ` . You use the dataset to store database objects, including tables and models.
+4.  [Create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) that's named `bqml_tutorial` . You use the dataset to store database objects, including tables and models.
 
 5.  To turn on the Gemini in BigQuery features that you need to complete this tutorial, in the BigQuery toolbar, click pen\_spark **Gemini** , and then select the following options:
     
@@ -85,7 +85,7 @@ To get help, you can send Gemini in BigQuery a prompt like "How do I learn which
 
 2.  In the Google Cloud console toolbar, click spark **Open or close Gemini Cloud Assist chat** .
 
-3.  In the **Cloud Assist** panel, enter the prompt `  How do I learn which datasets and tables are available to me in BigQuery?  ` .
+3.  In the **Cloud Assist** panel, enter the prompt `How do I learn which datasets and tables are available to me in BigQuery?` .
 
 4.  Click send **Send prompt** .
     
@@ -136,7 +136,7 @@ Consider that you want to understand a complex query that someone else wrote. Ge
 
 #### Generate a SQL query that groups sales by day and product
 
-In this example, you want to generate a query that lists your top products for each day. You then use tables in the `  thelook_ecommerce  ` dataset and prompt Gemini in BigQuery to generate a query to calculate sales by order item and by product name.
+In this example, you want to generate a query that lists your top products for each day. You then use tables in the `thelook_ecommerce` dataset and prompt Gemini in BigQuery to generate a query to calculate sales by order item and by product name.
 
 This type of query is often complex, but using Gemini in BigQuery, you can automatically create a statement. You can provide a prompt to generate a SQL query based on your data's schema. Even if you start with no code, a limited knowledge of the data schema, or only a basic knowledge of SQL syntax, Gemini assistance can suggest one or more SQL statements.
 
@@ -154,7 +154,7 @@ To prompt Gemini in BigQuery to generate a query that lists your top products, f
     
         # select the sum of sales by date and product casted to day from bigquery-public-data.thelook_ecommerce.order_items joined with bigquery-public-data.thelook_ecommerce.products
     
-    The pound character ( `  #  ` ) prompts Gemini in BigQuery to generate SQL. Gemini in BigQuery suggests a SQL query similar to the following:
+    The pound character ( `#` ) prompts Gemini in BigQuery to generate SQL. Gemini in BigQuery suggests a SQL query similar to the following:
     
         SELECT
           sum(sale_price),
@@ -204,13 +204,13 @@ You use the following example query with actual sales, which are used as an inpu
     
     You can use Gemini in BigQuery to help you [understand this query](https://docs.cloud.google.com/bigquery/docs/gemini-analyze-data#prompt-gemini-explain-sql-queries) .
     
-    **Note:** While the model is running, you can also prompt Gemini in BigQuery in the **Cloud Assist** panel with questions like `  What is an ARIMA_PLUS model type?  `
+    **Note:** While the model is running, you can also prompt Gemini in BigQuery in the **Cloud Assist** panel with questions like `What is an ARIMA_PLUS model type?`
     
     When the model is created, the **Results** tab of the **Query results** pane displays a message that's similar to the following:
     
         Successfully created model named sales_forecasting_model.
 
-2.  In the **Cloud Assist** panel, enter a prompt for Gemini in BigQuery to help you write a query to get a forecast from the model when it's completed—for example, enter `  How can I get a forecast in SQL from the model?  `
+2.  In the **Cloud Assist** panel, enter a prompt for Gemini in BigQuery to help you write a query to get a forecast from the model when it's completed—for example, enter `How can I get a forecast in SQL from the model?`
     
     Based on the context of the prompt, the response includes an example of an ML model that forecasts sales:
     
@@ -240,7 +240,7 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `  appspot.com  ` URL, delete selected resources inside the project instead of deleting the whole project.
+  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
@@ -260,11 +260,11 @@ Deleting your project removes all datasets and all tables in the project. If you
     
     [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the navigation menu, select the **`  bqml_tutorial  `** dataset that you created.
+2.  In the navigation menu, select the **`bqml_tutorial`** dataset that you created.
 
 3.  To delete the dataset, the table, and all of the data, click **Delete dataset** .
 
-4.  To confirm deletion, in the **Delete dataset** dialog, type the name of your dataset ( `  bqml_tutorial  ` ), and then click **Delete** .
+4.  To confirm deletion, in the **Delete dataset** dialog, type the name of your dataset ( `bqml_tutorial` ), and then click **Delete** .
 
 ## What's next
 

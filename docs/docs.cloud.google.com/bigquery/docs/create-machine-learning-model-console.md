@@ -6,8 +6,8 @@ This document shows you how to use the Google Cloud console to create a BigQuery
 
   - To create a model and run inference, you must be granted the following roles:
     
-      - BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )
-      - BigQuery User ( `  roles/bigquery.user  ` )
+      - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
+      - BigQuery User ( `roles/bigquery.user` )
 
 ## Before you begin
 
@@ -16,7 +16,7 @@ This document shows you how to use the Google Cloud console to create a BigQuery
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
@@ -28,7 +28,7 @@ This document shows you how to use the Google Cloud console to create a BigQuery
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com)
 
@@ -84,7 +84,7 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
     ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
@@ -107,8 +107,8 @@ Use this procedure to create the following types of models:
 
   - Time series models:
     
-      - [`  ARIMA_PLUS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-      - [`  ARIMA_PLUS_XREG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
+      - [`ARIMA_PLUS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+      - [`ARIMA_PLUS_XREG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
 
   - Contribution analysis: [Contribution analysis](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis)
 
@@ -161,7 +161,7 @@ To create a model:
 
 5.  For **Model name** , type a name for the model.
 
-6.  If you want to create a saved query that contains the `  CREATE MODEL  ` statement for the model, select **Save Query** .
+6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
     
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
@@ -231,7 +231,7 @@ To create a model:
 
 5.  For **Model name** , type a name for the model.
 
-6.  If you want to create a saved query that contains the `  CREATE MODEL  ` statement for the model, select **Save Query** .
+6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
     
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
@@ -258,8 +258,8 @@ To create a model:
 
 11. In the **Required options** section, do one of the following:
     
-      - For remote models over Google models and partner models, specify the endpoint to use. This is the name of the model, for example `  gemini-2.0-flash  ` . For more information about supported models, see [`  ENDPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
-      - For remote models over open models, copy and paste in the endpoint to use. This is the shared public endpoint of a model deployed to Vertex AI, in the format `  https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`  ENDPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint) .
+      - For remote models over Google models and partner models, specify the endpoint to use. This is the name of the model, for example `gemini-2.0-flash` . For more information about supported models, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+      - For remote models over open models, copy and paste in the endpoint to use. This is the shared public endpoint of a model deployed to Vertex AI, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint) .
 
 12. Click **Create model** .
 
@@ -287,7 +287,7 @@ To create a model:
 
 5.  For **Model name** , type a name for the model.
 
-6.  If you want to create a saved query that contains the `  CREATE MODEL  ` statement for the model, select **Save Query** .
+6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
     
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
@@ -310,7 +310,7 @@ To create a model:
             
             **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
-10. In the **Required options** section, specify the endpoint to use. This is the shared public endpoint of a model deployed to Vertex AI, in the format `  https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`  ENDPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint) .
+10. In the **Required options** section, specify the endpoint to use. This is the shared public endpoint of a model deployed to Vertex AI, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint) .
 
 11. Click **Create model** .
 
@@ -338,7 +338,7 @@ To create a model:
 
 5.  For **Model name** , type a name for the model.
 
-6.  If you want to create a saved query that contains the `  CREATE MODEL  ` statement for the model, select **Save Query** .
+6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
     
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
@@ -365,7 +365,7 @@ To create a model:
 
 11. In the **Required options** section, select the Cloud AI service type to use.
 
-12. In the **Optional** section, specify [document processor](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#document_processor) information if you are using the `  CLOUD_AI_DOCUMENT_V1  ` service. Optionally, you can specify [speech recognizer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) information if you are using the `  CLOUD_AI_SPEECH_TO_TEXT_V2  ` service.
+12. In the **Optional** section, specify [document processor](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#document_processor) information if you are using the `CLOUD_AI_DOCUMENT_V1` service. Optionally, you can specify [speech recognizer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) information if you are using the `CLOUD_AI_SPEECH_TO_TEXT_V2` service.
 
 13. Click **Create model** .
 
@@ -398,7 +398,7 @@ To create a model:
 
 5.  For **Model name** , type a name for the model.
 
-6.  If you want to create a saved query that contains the `  CREATE MODEL  ` statement for the model, select **Save Query** .
+6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
     
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.

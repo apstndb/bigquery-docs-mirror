@@ -1,8 +1,8 @@
 # The ML.STANDARD\_SCALER function
 
-This document describes the `  ML.STANDARD_SCALER  ` function, which lets you scale a numerical expression by using [z-score](https://developers.google.com/machine-learning/data-prep/transform/normalization#z-score) .
+This document describes the `ML.STANDARD_SCALER` function, which lets you scale a numerical expression by using [z-score](https://developers.google.com/machine-learning/data-prep/transform/normalization#z-score) .
 
-When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) and [mean](https://en.wikipedia.org/wiki/Mean) values calculated to standardize the expression are automatically used in prediction.
+When used in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) and [mean](https://en.wikipedia.org/wiki/Mean) values calculated to standardize the expression are automatically used in prediction.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
@@ -17,17 +17,17 @@ ML.STANDARD_SCALER(numerical_expression) OVER()
 
 ### Arguments
 
-`  ML.STANDARD_SCALER  ` takes the following argument:
+`ML.STANDARD_SCALER` takes the following argument:
 
-  - `  numerical_expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
+  - `numerical_expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
 
 ## Output
 
-`  ML.STANDARD_SCALER  ` returns a `  FLOAT64  ` value that represents the scaled numerical expression.
+`ML.STANDARD_SCALER` returns a `FLOAT64` value that represents the scaled numerical expression.
 
 ## Example
 
-The following example scales a set of numerical expressions to have a mean of `  0  ` and standard deviation of `  1  ` :
+The following example scales a set of numerical expressions to have a mean of `0` and standard deviation of `1` :
 
 ``` notranslate
 SELECT

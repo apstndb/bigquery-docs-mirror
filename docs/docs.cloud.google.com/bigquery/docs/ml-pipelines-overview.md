@@ -25,14 +25,14 @@ You can use [GoogleSQL procedural language](https://docs.cloud.google.com/bigque
 
   - Run multiple statements in a sequence, with shared state.
   - Automate management tasks such as creating or dropping tables.
-  - Implement complex logic using programming constructs such as `  IF  ` and `  WHILE  ` .
+  - Implement complex logic using programming constructs such as `IF` and `WHILE` .
 
 After creating a multi-statement query, you can [save](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) and [schedule](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) the query to automate model training, inference, and monitoring.
 
-If your ML pipeline includes use of the [`  ML.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) , see [Handle quota errors by calling `  ML.GENERATE_TEXT  ` iteratively](https://docs.cloud.google.com/bigquery/docs/iterate-generate-text-calls) for more information on how to use SQL to iterate through calls to the function. Calling the function iteratively lets you address any retryable errors that occur due to exceeding the [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+If your ML pipeline includes use of the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) , see [Handle quota errors by calling `ML.GENERATE_TEXT` iteratively](https://docs.cloud.google.com/bigquery/docs/iterate-generate-text-calls) for more information on how to use SQL to iterate through calls to the function. Calling the function iteratively lets you address any retryable errors that occur due to exceeding the [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## Dataform
 
 You can use [Dataform](https://docs.cloud.google.com/dataform/docs/overview) to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery. You can use Dataform for such tasks as data transformation in the Extraction, Loading, and Transformation (ELT) process for data integration. After raw data is extracted from source systems and loaded into BigQuery, Dataform helps you to transform it into a well-defined, tested, and documented suite of data tables.
 
-If your ML pipeline includes use of the [`  ML.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) , you can adapt the [`  structured_table_ml.js  ` example library](https://github.com/dataform-co/dataform-bqml/blob/main/modules/structured_table_ml.js) to iterate through calls to the function. Calling the function iteratively lets you address any retryable errors that occur due to exceeding the quotas and limits that apply to the function.
+If your ML pipeline includes use of the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) , you can adapt the [`structured_table_ml.js` example library](https://github.com/dataform-co/dataform-bqml/blob/main/modules/structured_table_ml.js) to iterate through calls to the function. Calling the function iteratively lets you address any retryable errors that occur due to exceeding the quotas and limits that apply to the function.

@@ -14,14 +14,14 @@ Table explorer offers an automated way to visually explore table data and create
 
 In table explorer, you select table fields to examine. You can select up to 10 table fields at a time.
 
-Table explorer displays the selected fields as interactive cards with the list of up to 10 most common values for each field, sorted by the `  count  ` column. You can interact with the cards by selecting fields and distinct values which you want to examine more closely. Table explorer creates a data exploration query based on your selection.
+Table explorer displays the selected fields as interactive cards with the list of up to 10 most common values for each field, sorted by the `count` column. You can interact with the cards by selecting fields and distinct values which you want to examine more closely. Table explorer creates a data exploration query based on your selection.
 
 You can copy this query into a new query in query editor, or apply the query in table explorer. When you apply the query, table explorer runs it and refreshes the displayed cards with query results. To continue table data exploration, select more fields or values from the refreshed cards.
 
 ## Limitations
 
   - Table explorer is available for BigQuery tables, BigLake tables, external tables, and views.
-  - Table explorer lets you explore a single table at a time. The feature does not support simultaneous exploration of multiple tables or generating cross-table operations, for example, `  JOIN  ` operations.
+  - Table explorer lets you explore a single table at a time. The feature does not support simultaneous exploration of multiple tables or generating cross-table operations, for example, `JOIN` operations.
   - Table explorer creates SQL queries that directly reflect your selection of table fields and distinct values. You can execute queries created by table explorer or manually edit them in the query editor. Table explorer does not provide AI-powered assistance to generate, complete, or explain SQL queries.
   - To explore table data and generate queries for tables with column-level access control (ACLs) or restricted user permissions, you must have read access for all selected fields. To run the generated queries, you must have sufficient [permissions](https://docs.cloud.google.com/bigquery/docs/table-explorer#roles) .
 
@@ -39,8 +39,8 @@ For more information about BigQuery compute pricing, see [Pricing](https://cloud
 
 To get the permissions that you need to view table data and generate queries with table explorer, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project.
-  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on all tables and views that you want to explore.
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project.
+  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on all tables and views that you want to explore.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -50,8 +50,8 @@ These predefined roles contain the permissions required to view table data and g
 
 The following permissions are required to view table data and generate queries with table explorer:
 
-  - `  bigquery.jobs.create  ` on the project from which the query is being run, regardless of where the data is stored.
-  - `  bigquery.tables.getData  ` on all tables and views that you want to explore.
+  - `bigquery.jobs.create` on the project from which the query is being run, regardless of where the data is stored.
+  - `bigquery.tables.getData` on all tables and views that you want to explore.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -89,7 +89,7 @@ To explore table data and create a query based on your selection of table fields
     
     When you click **Save** , BigQuery runs a query to display common values for the selected fields, which incurs charges. You can see the amount of data which will be processed at the top of the **Select fields** pane.
     
-    Table explorer displays the selected fields as cards in a list of up to the ten most common values sorted by the `  Count  ` column. In the **Generated Query** section, you can see a query which you can run to show the same data.
+    Table explorer displays the selected fields as cards in a list of up to the ten most common values sorted by the `Count` column. In the **Generated Query** section, you can see a query which you can run to show the same data.
 
 9.  Optional: To modify your results, you can try the following:
     
@@ -110,7 +110,7 @@ To explore table data and create a query based on your selection of table fields
 
 This error occurs when a principal lacks permission to create a query jobs in the project.
 
-**Resolution** : An administrator must grant you the `  bigquery.jobs.create  ` permission on the project you are querying. This permission is required in addition to any permission required to access the queried data.
+**Resolution** : An administrator must grant you the `bigquery.jobs.create` permission on the project you are querying. This permission is required in addition to any permission required to access the queried data.
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 

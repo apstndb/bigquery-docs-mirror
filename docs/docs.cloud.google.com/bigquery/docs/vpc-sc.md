@@ -17,7 +17,7 @@ For more information, see the [overview of VPC Service Controls](https://docs.cl
 
 The following example shows how to create a VPC Service Controls perimeter that limits the range of external IP addresses that can access a BigQuery project.
 
-1.  Create an *access level* that only allows access to a specified range of IP addresses—for example, those within a corporate network. To create it, use the [`  gcloud access-context-manager levels create  `](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/levels/create) command:
+1.  Create an *access level* that only allows access to a specified range of IP addresses—for example, those within a corporate network. To create it, use the [`gcloud access-context-manager levels create`](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/levels/create) command:
     
         echo """
         - ipSubnetworks:
@@ -39,7 +39,7 @@ The following example shows how to create a VPC Service Controls perimeter that 
     
     ### Create perimeter
     
-    To create a new perimeter to protect the BigQuery project, use the [`  gcloud access-context-manager perimeters create  `](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create) command:
+    To create a new perimeter to protect the BigQuery project, use the [`gcloud access-context-manager perimeters create`](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create) command:
     
         echo """
         - ingressFrom:
@@ -73,7 +73,7 @@ The following example shows how to create a VPC Service Controls perimeter that 
     
     ### Update perimeter
     
-    To update an existing perimeter, use the [`  gcloud access-context-manager perimeters update  `](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/update) command:
+    To update an existing perimeter, use the [`gcloud access-context-manager perimeters update`](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/update) command:
     
     ``` wrap-code
     gcloud access-context-manager perimeters update BIGQUERY_PERIMETER --set-ingress-policies=ingress.yaml
@@ -141,7 +141,7 @@ The following examples show how to selectively allow communication between the B
       - `  PERIMETER  ` : the ID of the perimeter
       - `  POLICY_NAME  ` : the ID of the access policy
 
-3.  Optional: if the perimeter protecting the BigQuery project includes `  storage.googleapis.com  ` as a restricted service, you must update the ingress rule:
+3.  Optional: if the perimeter protecting the BigQuery project includes `storage.googleapis.com` as a restricted service, you must update the ingress rule:
     
         echo """
         - ingressFrom:

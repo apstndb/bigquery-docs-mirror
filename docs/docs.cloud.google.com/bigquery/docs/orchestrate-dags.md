@@ -22,7 +22,7 @@ Enable the Cloud Composer API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=composer.googleapis.com)
 
@@ -36,8 +36,8 @@ Make sure that your Google Cloud project has at least one Cloud Composer 3 envir
 
 To get the permissions that you need to schedule Airflow DAGs, ask your administrator to grant you the following IAM roles on the project:
 
-  - To view Airflow DAGs and their details: [Environment and Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectViewer) ( `  roles/composer.environmentAndStorageObjectViewer  ` )
-  - To trigger and pause Airflow DAGs: [Environment and Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectUser) ( `  roles/composer.environmentAndStorageObjectUser  ` )
+  - To view Airflow DAGs and their details: [Environment and Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectViewer) ( `roles/composer.environmentAndStorageObjectViewer` )
+  - To trigger and pause Airflow DAGs: [Environment and Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectUser) ( `roles/composer.environmentAndStorageObjectUser` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -47,8 +47,8 @@ These predefined roles contain the permissions required to schedule Airflow DAGs
 
 The following permissions are required to schedule Airflow DAGs:
 
-  - To view Airflow DAGs and their details: `  composers.dags.list, composer.environments.list  `
-  - To trigger and pause Airflow DAGs: `  composers.dags.list, composer.environments.list, composer.dags.execute  `
+  - To view Airflow DAGs and their details: `composers.dags.list, composer.environments.list`
+  - To trigger and pause Airflow DAGs: `composers.dags.list, composer.environments.list, composer.dags.execute`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 

@@ -4,7 +4,7 @@ A table function, also called a table-valued function (TVF), is a user-defined f
 
 ## Create table functions
 
-To create a table function, use the [`  CREATE TABLE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) statement. A table function contains a query that produces a table. The function returns the query result. The following table function takes an `  INT64  ` parameter and uses this value inside a `  WHERE  ` clause in a query over a [public dataset](https://docs.cloud.google.com/bigquery/public-data) called `  bigquery-public-data.usa_names.usa_1910_current  ` :
+To create a table function, use the [`CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) statement. A table function contains a query that produces a table. The function returns the query result. The following table function takes an `INT64` parameter and uses this value inside a `WHERE` clause in a query over a [public dataset](https://docs.cloud.google.com/bigquery/public-data) called `bigquery-public-data.usa_names.usa_1910_current` :
 
 ``` notranslate
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
@@ -41,7 +41,7 @@ Note: To request support or provide feedback for this feature, email <bq-dcr-eng
 
 You can set TVF parameters to be tables. Following the table parameter name, you must specify the required table schema explicitly, the same way that you specify the fields of a struct. The table argument that you pass to the TVF can contain additional columns besides those specified in the parameter schema, and the columns can appear in any order.
 
-The following table function returns a table that contains total sales for `  item_name  ` from the `  orders  ` table:
+The following table function returns a table that contains total sales for `item_name` from the `orders` table:
 
 ``` notranslate
 CREATE TABLE FUNCTION mydataset.compute_sales (
@@ -60,7 +60,7 @@ If a table function parameter matches the name of a table column, it can create 
 
 ## Use table functions
 
-You can call a table function in any context where a table is valid. The following example calls the `  mydataset.names_by_year  ` function in the `  FROM  ` clause of a `  SELECT  ` statement:
+You can call a table function in any context where a table is valid. The following example calls the `mydataset.names_by_year` function in the `FROM` clause of a `SELECT` statement:
 
     SELECT * FROM mydataset.names_by_year(1950)
       ORDER BY total DESC
@@ -92,7 +92,7 @@ You can also use a table function in a [subquery](https://docs.cloud.google.com/
       ORDER BY total DESC
       LIMIT 5)
 
-When you call a table function that has a table parameter, you must use the `  TABLE  ` keyword before the name of the table argument. The table argument can have columns not listed in the table parameter schema:
+When you call a table function that has a table parameter, you must use the `TABLE` keyword before the name of the table argument. The table argument can have columns not listed in the table parameter schema:
 
 ``` notranslate
 CREATE TABLE FUNCTION mydataset.compute_sales (
@@ -120,13 +120,17 @@ FROM mydataset.compute_sales(TABLE my_orders, "apple");
  +-------------+-------*/
 ```
 
+### Use system variables with TVFs
+
+The `@@session_id` and `@@location` [system variables](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) are supported with TVFs. You can include these system variables anywhere in your function creation statement to return the session ID or location of the current query. All other system variables aren't supported.
+
 ## List table functions
 
 Table functions are a type of routine. To list all of the routines in a dataset, see [List routines](https://docs.cloud.google.com/bigquery/docs/routines#list_routines) .
 
 ## Delete table functions
 
-To delete a table function, use the [`  DROP TABLE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function) statement:
+To delete a table function, use the [`DROP TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function) statement:
 
     DROP TABLE FUNCTION mydataset.names_by_year
 
@@ -136,7 +140,7 @@ You can authorize table functions as *routines* . Authorized routines let you sh
 
 ## Limitations
 
-  - The query body must be a `  SELECT  ` statement and cannot modify anything. For example, data definition language (DDL) and data manipulation language (DML) statements are not allowed in table functions. If you need side-effects, consider writing a [procedure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) instead.
+  - The query body must be a `SELECT` statement and cannot modify anything. For example, data definition language (DDL) and data manipulation language (DML) statements are not allowed in table functions. If you need side-effects, consider writing a [procedure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) instead.
 
   - Table functions must be stored in the same location as the tables they reference.
 

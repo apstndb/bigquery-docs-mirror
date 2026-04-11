@@ -12,13 +12,13 @@ Third-party BI and data analytics solutions that are deployed on on-premises hos
 
 If you opt to manage your own instance of a third-party BI solution, consider deploying it on [Compute Engine](https://docs.cloud.google.com/compute) to take advantage of Google's network backbone and minimize latency between your instance and BigQuery.
 
-If your BI solution supports it, you might consider setting filters in report or dashboard queries whenever possible. This step pushes the filters as `  WHERE  ` clauses to BigQuery. Although setting these filters doesn't reduce the amount of data that BigQuery scans, it does reduce the amount of data that comes back over the network.
+If your BI solution supports it, you might consider setting filters in report or dashboard queries whenever possible. This step pushes the filters as `WHERE` clauses to BigQuery. Although setting these filters doesn't reduce the amount of data that BigQuery scans, it does reduce the amount of data that comes back over the network.
 
 For more information on network and query optimizations, see [Migrating data warehouses to BigQuery: performance optimization](https://docs.cloud.google.com/architecture/dw2bq/dw-bq-performance-optimization) and the [Introduction to optimizing query performance](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) .
 
 ### API and ODBC/JDBC integrations
 
-Google's BI and data analytics products like [Looker Studio](https://docs.cloud.google.com/looker-studio) , [Looker](https://docs.cloud.google.com/looker) , [Dataproc](https://docs.cloud.google.com/dataproc) , and [Vertex AI Workbench instances](https://docs.cloud.google.com/vertex-ai/docs/workbench/instances/introduction) , and third-party solutions like [Tableau](https://www.tableau.com/) , offer direct BigQuery integration using the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) .
+Google's BI and data analytics products like [Looker Studio](https://docs.cloud.google.com/looker-studio) , [Looker](https://docs.cloud.google.com/looker) , [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) , and [Vertex AI Workbench instances](https://docs.cloud.google.com/vertex-ai/docs/workbench/instances/introduction) , and third-party solutions like [Tableau](https://www.tableau.com/) , offer direct BigQuery integration using the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) .
 
 For other third-party solutions and custom applications, Google has collaborated with [Magnitude Simba](https://www.magnitude.com/products/data-connectivity) to provide [ODBC](https://wikipedia.org/wiki/Open_Database_Connectivity) and [JDBC](https://wikipedia.org/wiki/Java_Database_Connectivity) drivers. The intent of these drivers is to help you leverage the power of BigQuery with existing tooling and infrastructure that doesn't integrate with the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) .
 
