@@ -1057,7 +1057,7 @@ Replace the following:
 
 To get a list of tag bindings attached to a resource, use the [`gcloud resource-manager tags bindings list` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/list) :
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 gcloud resource-manager tags bindings list \
     --parent=RESOURCE_ID \
     --location=LOCATION
