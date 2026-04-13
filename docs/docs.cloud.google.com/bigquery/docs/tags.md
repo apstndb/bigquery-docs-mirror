@@ -547,7 +547,7 @@ Use the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google.c
 
 For example, the following query shows all tags attached to all datasets in a region. This query returns a table with columns including `schema_name` (the dataset names), `option_name` (always `'tags'` ), `object_type` (always `ARRAY<STRUCT<STRING, STRING>>` ), and `option_value` , which contains arrays of `STRUCT` objects representing tags associated with each dataset. For datasets without assigned tags, the `option_value` column returns an empty array.
 
-``` lang-googlesql notranslate
+``` notranslate lang-googlesql
 SELECT * from region-REGION.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
 WHERE option_name='tags'
 ```
@@ -1095,7 +1095,7 @@ Use the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/
 
 For example, the following query shows all tags attached to all tables in a dataset. This query returns a table with columns including `schema_name` (the dataset name), `option_name` (always `'tags'` ), `object_type` (always `ARRAY<STRUCT<STRING, STRING>>` ), and `option_value` , which contains arrays of `STRUCT` objects representing tags associated with each dataset. For tables without assigned tags, the `option_value` column returns an empty array.
 
-``` lang-googlesql notranslate
+``` notranslate lang-googlesql
 SELECT * from DATASET_ID.INFORMATION_SCHEMA.TABLE_OPTIONS
 WHERE option_name='tags'
 ```

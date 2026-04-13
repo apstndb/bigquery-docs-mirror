@@ -2,6 +2,7 @@
 200 https://cloud.google.com/bigquery/sla
 200 https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery
 200 https://docs.cloud.google.com/bigquery/docs/continuous-query-joins
+200 https://docs.cloud.google.com/bigquery/docs/export-to-alloydb
 200 https://docs.cloud.google.com/bigquery/docs/graph-compare
 200 https://docs.cloud.google.com/bigquery/docs/graph-create
 200 https://docs.cloud.google.com/bigquery/docs/graph-iso-standards
@@ -12,9 +13,11 @@
 200 https://docs.cloud.google.com/bigquery/docs/graph-schema-overview
 200 https://docs.cloud.google.com/bigquery/docs/graph-visualization
 200 https://docs.cloud.google.com/bigquery/docs/graph-visualization-integrations
+200 https://docs.cloud.google.com/bigquery/docs/information-schema-property-graphs
 200 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental
 200 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-network-policies
 200 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema
+200 https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions
 200 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-conditional-expressions
 200 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-data-types
 200 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-gql-functions

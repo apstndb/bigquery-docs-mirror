@@ -820,7 +820,7 @@ In the bq command-line tool, you can grant access to an individual reservation r
 
 To grant access to a reservation, use the [`bq set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command:
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 bq set-iam-policy --reservation RESOURCE FILE_NAME
 ```
 
