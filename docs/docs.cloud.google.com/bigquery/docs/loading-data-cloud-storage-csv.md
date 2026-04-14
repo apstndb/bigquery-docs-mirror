@@ -1606,7 +1606,7 @@ Generally, these errors identify the start of the problematic line with a byte o
 
 For example, you run the [`bq load` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) and receive an error:
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 bq load
     --skip_leading_rows=1 \
     --source_format=CSV \
@@ -1617,7 +1617,7 @@ bq load
 
 The error in the output is similar to the following:
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 Waiting on bqjob_r5268069f5f49c9bf_0000018632e903d7_1 ... (0s)
 Current status: DONE
 BigQuery error in load operation: Error processing job
@@ -1637,13 +1637,13 @@ percent: 0
 
 Based on the preceding error, there's a format error in the file. To view the file's content, run the [`gcloud storage cat` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cat) :
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 gcloud storage cat 1405-1505 gs://my-bucket/mytable.csv --recursive
 ```
 
 The output is similar to the following:
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 16,Abraham Lincoln,"March 4, 1861","April 15, "1865,Republican
 18,Ulysses S. Grant,"March 4, 1869",
 ...
@@ -1655,13 +1655,13 @@ Based on the output of the file, the problem is a misplaced quote in `"April 15,
 
 Debugging parsing errors is more challenging for compressed CSV files, since the reported byte offset refers to the location in the *uncompressed* file. The following [`gcloud storage cat` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cat) streams the file from Cloud Storage, decompresses the file, identifies the appropriate byte offset, and prints the line with the format error:
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 gcloud storage cat gs://my-bucket/mytable.csv.gz | gunzip - | tail -c +1406 | head -n 1
 ```
 
 The output is similar to the following:
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 16,Abraham Lincoln,"March 4, 1861","April 15, "1865,Republican
 ```
 

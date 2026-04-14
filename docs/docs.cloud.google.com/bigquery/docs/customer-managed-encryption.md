@@ -1534,7 +1534,7 @@ After you set this policy, it applies only to new resources in the project. Any 
 
 ### gcloud
 
-``` notranslate lang-sh
+``` lang-sh notranslate
   gcloud resource-manager org-policies --project=PROJECT_ID \
     deny gcp.restrictNonCmekServices is:bigquery.googleapis.com
 ```
@@ -1569,7 +1569,7 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 
 ### gcloud
 
-``` notranslate lang-sh
+``` lang-sh notranslate
   gcloud resource-manager org-policies --project=PROJECT_ID \
     allow gcp.restrictCmekCryptoKeyProjects under:projects/KMS_PROJECT_ID
 ```

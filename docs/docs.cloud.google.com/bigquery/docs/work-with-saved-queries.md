@@ -88,7 +88,7 @@ To create a saved query, follow these steps:
 
 3.  In the query editor, enter a valid SQL query. For example, you can query a [public dataset](https://cloud.google.com/bigquery/public-data) :
     
-    ``` translate no
+    ``` no translate
     SELECT
       name,
       SUM(number) AS total
@@ -273,7 +273,7 @@ For more information on IAM roles in BigQuery, see [Predefined roles and permiss
 
 3.  In the query editor, enter a valid SQL query. For example, you can query a [public dataset](https://cloud.google.com/bigquery/public-data) :
     
-    ``` translate no
+    ``` no translate
     SELECT
       name,
       SUM(number) AS total
