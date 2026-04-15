@@ -1,6 +1,6 @@
 # Introduction to ML in BigQuery
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 BigQuery ML lets you [create and run machine learning (ML) models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) by using either GoogleSQL queries or the Google Cloud console. BigQuery ML models are stored in BigQuery datasets, similar to tables and views. BigQuery ML also lets you access [Vertex AI models](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) and [Cloud AI APIs](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) to perform artificial intelligence (AI) tasks like text generation or machine translation. Gemini for Google Cloud also provides AI-powered assistance for BigQuery tasks. To see a list of AI-powered features in BigQuery, see [Gemini in BigQuery overview](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
 

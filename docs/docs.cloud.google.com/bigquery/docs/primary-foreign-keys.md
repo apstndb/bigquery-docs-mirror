@@ -35,7 +35,7 @@ When you create and enforce primary and foreign keys on your tables, BigQuery ca
 
 In a production environment, you might create views that join many fact and dimension tables. Developers can query the views instead of querying the underlying tables and manually rewriting the joins each time. If you define the proper constraints, join optimizations happen automatically for any queries they apply to.
 
-**Caution:** Key constraints aren't enforced in BigQuery. You are responsible for maintaining the constraints at all times. Queries over tables with violated constraints might return incorrect results.
+> **Caution:** Key constraints aren't enforced in BigQuery. You are responsible for maintaining the constraints at all times. Queries over tables with violated constraints might return incorrect results.
 
 The examples in the following sections reference the `store_sales` and `customer` tables with constraints:
 

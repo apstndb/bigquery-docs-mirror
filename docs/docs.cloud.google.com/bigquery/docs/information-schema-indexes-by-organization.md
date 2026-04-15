@@ -2,7 +2,7 @@
 
 [BigQuery search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) provide free index management until your organization reaches the [limit](https://docs.cloud.google.com/bigquery/quotas#index_limits) in a given region. You can use the `INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view to understand your current consumption towards that limit, broken down by projects and tables. The `INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view contains one row for each search index for the whole organization associated with the current project.
 
-**Note:** The data in the `INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view isn't kept in real time, and might be delayed by a few seconds to a few minutes.
+> **Note:** The data in the `INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view isn't kept in real time, and might be delayed by a few seconds to a few minutes.
 
 ## Required permissions
 
@@ -122,7 +122,7 @@ Replace the following:
 
   - `  REGION  ` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) for your project. For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION `` .
     
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Index throttling
 

@@ -86,8 +86,6 @@ You can't add a description when you create a table using the Google Cloud conso
 Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the description of a table named `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -104,8 +102,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -249,8 +245,6 @@ You can generate a table description with Gemini in BigQuery by using data insig
 For more information about data insights, including setup steps, required IAM roles, and best practices to improve the accuracy of the generated insights, see [Generate data insights in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-insights) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -262,7 +256,7 @@ For more information about data insights, including setup steps, required IAM ro
 
 5.  Click **Generate** .
     
-    **Note:** If you don't see the **Generate** button, click **Describe data** . You might need to scroll to see this button.
+    > **Note:** If you don't see the **Generate** button, click **Describe data** . You might need to scroll to see this button.
     
     Gemini generates a table description and insights about the table. It takes a few minutes for the information to be populated. You can view the generated insights on the table's **Insights** tab.
 
@@ -298,7 +292,7 @@ At any point after the table is created, you can update the table's expiration t
   - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
   - Using the client libraries.
 
-**Note:** If you set an expiration time that has already passed, the table is deleted immediately.
+> **Note:** If you set an expiration time that has already passed, the table is deleted immediately.
 
 To update a table's expiration time:
 
@@ -325,8 +319,6 @@ You can't add an expiration time when you create a table using the Google Cloud 
 Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the expiration time of a table named `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -344,8 +336,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -666,7 +656,7 @@ The `ALTER TABLE RENAME TO` statement recreates the table in the destination dat
   - While a table can usually be renamed 5 hours after the last streaming operation, it might take longer.
   - Existing table ACLs and row access policies are preserved, but table ACL and row access policy updates made during the table rename are not preserved.
   - You can't concurrently rename a table and run a DML statement on that table.
-  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Dataplex Universal Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) on the table.
+  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) on the table.
   - Any search index or vector index created on the table is dropped when the table is renamed.
   - You can't rename external tables.
 
@@ -778,8 +768,6 @@ To copy a single source table:
 Use the [`CREATE TABLE COPY` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) to copy a table named `table1` to a new table named `table1copy` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -794,8 +782,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -1145,8 +1131,6 @@ To copy multiple source tables, select one of the following choices:
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
-    
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Issue the `bq cp` command and include multiple source tables as a comma-separated list. Optional flags can be used to control the write disposition of the destination table:
@@ -1388,9 +1372,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Copy tables across regions
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can copy a table, [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) , or [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) from one [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations) or multi-region to another. This includes any tables that have customer-managed Cloud KMS (CMEK) applied.
 
@@ -1401,8 +1385,6 @@ To copy a table across regions, select one of the following options:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -1729,7 +1711,7 @@ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
 WHERE date(creation_time)= CURRENT_DATE()
 ```
 
-**Note:** The `INFORMATION_SCHEMA` view does not display cross-region copy jobs.
+> **Note:** The `INFORMATION_SCHEMA` view does not display cross-region copy jobs.
 
 ### Maximum number of copy jobs per day per project quota errors
 
@@ -1822,8 +1804,6 @@ To delete a table:
 Use the [`DROP TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement) . The following example deletes a table named `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -1838,8 +1818,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -1880,7 +1858,7 @@ For more information about how to run queries, see [Run an interactive query](ht
     bq rm -f -t mydataset.mytable
     ```
     
-    **Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) command in the bq command-line tool to confirm that a table was removed from a dataset.
+    > **Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) command in the bq command-line tool to confirm that a table was removed from a dataset.
 
 ### API
 

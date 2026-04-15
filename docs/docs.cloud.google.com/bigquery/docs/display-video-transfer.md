@@ -105,7 +105,7 @@ Review the following prerequisites and information before you create a Display &
           - ` gs://dcdt_-dbm_partner PARTNER_ID  `
           - ` gs://dcdt_-dbm_advertiser ADVERTISER_ID  `
     
-    **Note:** The Google Cloud team does not have the ability to generate or grant access to Display & Video 360 DTv2 files on your behalf. Contact Display & Video 360 [support](https://support.google.com/displayvideo/answer/9026876) or your agency for access to Display & Video 360 DTv2 files.
+    > **Note:** The Google Cloud team does not have the ability to generate or grant access to Display & Video 360 DTv2 files on your behalf. Contact Display & Video 360 [support](https://support.google.com/displayvideo/answer/9026876) or your agency for access to Display & Video 360 DTv2 files.
 
   - To set up transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
@@ -131,8 +131,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 

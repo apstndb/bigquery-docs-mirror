@@ -263,8 +263,8 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <li><code dir="ltr" translate="no">DEFAULT_LEGACY_SQL</code> : No query dialect was specified in the job request. BigQuery used the default value of LegacySQL.</li>
 <li><code dir="ltr" translate="no">DEFAULT_GOOGLE_SQL</code> : No query dialect was specified in the job request. BigQuery used the default value of GoogleSQL.</li>
 </ul>
-<br />
-This field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</td>
+<p>For jobs submitted by users, this field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</p>
+<p>For background jobs, the value of this field isn't controlled by the default query dialect configuration settings, and doesn't impact jobs submitted by users. For some background jobs, the value is omitted.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">continuous</code></td>
@@ -301,10 +301,12 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
-**Note:** When you query `INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION` to find a summary cost of query jobs, exclude the `SCRIPT` statement type, otherwise some values might be counted twice. The `SCRIPT` row includes summary values for all child jobs that were executed as part of this job.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+
+> **Note:** When you query `INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION` to find a summary cost of query jobs, exclude the `SCRIPT` statement type, otherwise some values might be counted twice. The `SCRIPT` row includes summary values for all child jobs that were executed as part of this job.
 
 ## Limitations
 
@@ -341,7 +343,7 @@ ORDER BY
 LIMIT 5;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -379,7 +381,7 @@ The following query provides a summary of the top Connected Sheets users in your
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -414,7 +416,7 @@ The following query provides a detailed log of every individual job run by Conne
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 

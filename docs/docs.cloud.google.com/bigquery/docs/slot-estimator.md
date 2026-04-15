@@ -69,8 +69,6 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 To view slot capacity and utilization over time, navigate to the slot estimator:
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select your administration project.
     
@@ -111,13 +109,11 @@ The models assume a replay of the previous 30 days' usage pattern, where everyth
 
 The estimated performance improvement is based on several factors. The most important factors are the number of slots in the model, and the proportion of jobs in each percentile bucket that ran during peak periods versus regular periods. Peak periods are defined as durations in which almost all slots were used. Jobs running during these times are most impacted by slot contention, and therefore see the most performance gain from additional slots. As a result, different buckets of jobs can see different effects from the same capacity increase, depending on when they are run.
 
-**Caution:** The actual impact on job performance can vary based on future usage. The estimated performance information is only for guidance.
+> **Caution:** The actual impact on job performance can vary based on future usage. The estimated performance information is only for guidance.
 
 To model slot performance, perform the following steps:
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select your administration project.
     

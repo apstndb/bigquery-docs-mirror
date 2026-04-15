@@ -56,7 +56,7 @@ Learn about [configuring ingress and egress policies](https://docs.cloud.google.
       egressFrom:
         identityType: ANY_USER_ACCOUNT
 
-**Note:** Scheduled refreshes of Connected Sheets don't propagate any end-user context such as IP address or device information. VPC Service Controls perimeters that use end-user context to restrict access cause scheduled refreshes to fail.
+> **Note:** Scheduled refreshes of Connected Sheets don't propagate any end-user context such as IP address or device information. VPC Service Controls perimeters that use end-user context to restrict access cause scheduled refreshes to fail.
 
 ## Before you begin
 
@@ -71,8 +71,6 @@ If you don't have a Google Cloud project that is set up for billing, follow thes
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 To avoid continued billing, you can delete the resources that you created. See [Cleaning up](https://docs.cloud.google.com/bigquery/docs/connected-sheets#clean-up) for more detail.
 
@@ -84,7 +82,7 @@ The following example uses a public dataset to show you how to connect to BigQue
 
 2.  Click **Data** , click **Data connectors** , and then click **Connect to BigQuery** .
     
-    **Note:** If you don't see the **Data connectors** option, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/connected-sheets#before_you_begin) .
+    > **Note:** If you don't see the **Data connectors** option, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/connected-sheets#before_you_begin) .
 
 3.  Select a Google Cloud project that has billing enabled.
 
@@ -127,8 +125,6 @@ When you use Connected Sheets to create a chart, pivot table, formula, or other 
 To open a table in Connected Sheets, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -147,8 +143,6 @@ Ensure you have a [saved query](https://docs.cloud.google.com/bigquery/docs/mana
 To open a saved query in Connected Sheets, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -192,7 +186,7 @@ The following query provides a summary of the top Connected Sheets users in your
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -227,7 +221,7 @@ The following query provides a detailed log of every individual job run by Conne
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -268,7 +262,7 @@ If you don't have organization-level permissions or only need to monitor a speci
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -304,7 +298,7 @@ If you don't have organization-level permissions or only need to monitor a speci
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -320,16 +314,14 @@ The result looks similar to the following:
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

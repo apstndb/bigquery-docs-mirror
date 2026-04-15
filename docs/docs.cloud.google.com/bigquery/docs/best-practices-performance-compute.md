@@ -47,7 +47,7 @@ Use wildcards to query multiple tables by using concise SQL statements. Wildcard
   - Multiple, similarly named tables with compatible schemas
   - Sharded tables
 
-**Note:** If your data allows it, use time-partitioned tables instead of sharded tables. For more information, see [Avoid oversharding tables](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-oversharding-tables) .
+> **Note:** If your data allows it, use time-partitioned tables instead of sharded tables. For more information, see [Avoid oversharding tables](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-oversharding-tables) .
 
 When you query a wildcard table, specify a wildcard ( `*` ) after the common table prefix. For example, `FROM bigquery-public-data.noaa_gsod.gsod194*` queries all tables from the 1940s.
 
@@ -145,7 +145,7 @@ ON
 ORDER BY comments_count DESC;
 ```
 
-**Note:** `WITH` clauses with common table expressions (CTEs) are used for query readability, not performance. There is no guarantee that adding a `WITH` clause causes BigQuery to materialize temporary intermediate tables and reuse the temporary result for multiple references. The `WITH` clause might be evaluated multiple times within a query, depending on query optimizer decisions.
+> **Note:** `WITH` clauses with common table expressions (CTEs) are used for query readability, not performance. There is no guarantee that adding a `WITH` clause causes BigQuery to materialize temporary intermediate tables and reuse the temporary result for multiple references. The `WITH` clause might be evaluated multiple times within a query, depending on query optimizer decisions.
 
 ### Use the `WHERE` clause
 
@@ -326,7 +326,7 @@ You can overcome the limitation on cached result size by using the following opt
 
 You can page through the results using the BigQuery REST API. For more information, see [Paging through table data](https://docs.cloud.google.com/bigquery/docs/paging-results) .
 
-**Note:** Writing very large result sets to destination tables impacts query performance (I/O). In addition, you incur a small cost for storing the destination table. You can automatically delete a large destination table by using the dataset's [default table expiration](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) . For more information, see [Use the expiration settings](https://docs.cloud.google.com/bigquery/docs/best-practices-storage#use-expiration-settings) in the storage best practices.
+> **Note:** Writing very large result sets to destination tables impacts query performance (I/O). In addition, you incur a small cost for storing the destination table. You can automatically delete a large destination table by using the dataset's [default table expiration](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) . For more information, see [Use the expiration settings](https://docs.cloud.google.com/bigquery/docs/best-practices-storage#use-expiration-settings) in the storage best practices.
 
 ## Avoid anti-SQL patterns
 

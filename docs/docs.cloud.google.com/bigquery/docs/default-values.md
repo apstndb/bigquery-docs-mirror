@@ -63,8 +63,6 @@ To change the default value for a column, select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -91,8 +89,6 @@ To change the default value for a column, select one of the following options:
 Use the [`ALTER COLUMN SET DEFAULT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_default_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -134,8 +130,6 @@ To remove the default value for a column, select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -162,8 +156,6 @@ To remove the default value for a column, select one of the following options:
 Use the [`ALTER COLUMN DROP DEFAULT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_drop_default_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

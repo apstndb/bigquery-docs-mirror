@@ -2,7 +2,7 @@
 
 This document describes how to manage partitioned tables in BigQuery.
 
-**Note:** The information in [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) also applies to partitioned tables.
+> **Note:** The information in [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) also applies to partitioned tables.
 
 ## Get partition metadata
 
@@ -42,7 +42,7 @@ FROM
   [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__]
 ```
 
-**Note:** For migration to GoogleSQL refer to the [legacy SQL migration documentation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#migrating_partition_meta_table_decorator) .
+> **Note:** For migration to GoogleSQL refer to the [legacy SQL migration documentation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#migrating_partition_meta_table_decorator) .
 
 The `__PARTITIONS_SUMMARY__` meta-table has the following columns:
 
@@ -67,7 +67,7 @@ A partition's expiration time is calculated from the partition boundary in UTC. 
 
 You can also specify a [default partition expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#partition-expiration) at the dataset level. If you set the partition expiration on a table, then the value overrides the default partition expiration. If you don't specify any partition expiration (on the table or dataset), then partitions never expire.
 
-**Note:** Integer-range partitioned tables don't support partition expiration times.
+> **Note:** Integer-range partitioned tables don't support partition expiration times.
 
 If you set a table expiration, that value takes precedence over the partition expiration. For example, if the table expiration is set to 5 days, and the partition expiration is set to 7 days, then the table and all partitions in it are deleted after 5 days.
 
@@ -75,7 +75,7 @@ At any point after a table is created, you can update the table's partition expi
 
 When a partition expires, BigQuery deletes that partition. The partition data is retained in accordance with [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) and [fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) policies, and can be charged for, depending on your billing model. Until then, the partition counts for purposes of [table quotas](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) . To delete a partition immediately, you can [manually delete the partition](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#delete_a_partition) .
 
-**Note:** The automatic deletion of an expired partition isn't recorded in BigQuery audit logs.
+> **Note:** The automatic deletion of an expired partition isn't recorded in BigQuery audit logs.
 
 ### Update the partition expiration
 
@@ -90,8 +90,6 @@ You cannot update the partition expiration in the Google Cloud console.
 Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the expiration to 5 days. To remove the partition expiration for a table, set `partition_expiration_days` to `NULL` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -166,8 +164,6 @@ You cannot use the Google Cloud console to require partition filters after a par
 Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to update the partition filter requirement. The following example updates the requirement to `true` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -276,7 +272,7 @@ When you copy to an existing table, you can specify whether to append or overwri
 
 You can copy the data from one or more partitions to another table.
 
-**Note:** The required permissions are the same as for [copying a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) .
+> **Note:** The required permissions are the same as for [copying a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) .
 
 ### Console
 
@@ -320,7 +316,7 @@ Where:
 
 Examples:
 
-**Note:** The partition decorator separator ($) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
+> **Note:** The partition decorator separator ($) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
 
 **Copying a partition to a new table**
 
@@ -360,7 +356,7 @@ Enter the following command to copy the January 30, 2018 partition from `mydatas
     'mydataset.mytable$20180130' \
     myotherproject:mydataset2.mytable2
 
-**Note:** The `bq cp` command with a partition decorator works on column-based partitions in which the source partition and destination partition are identical. The `bq cp` command also works on ingestion-time based partitions where the partition represents either the same time unit or a coarser time unit that contains the source partition. For example, if `$20180130` is the source partition decorator, valid destination partition decorators include `$20180130` , `$201801` , and `$2018` . To copy a column-based partition to a completely different partition decorator or to a time-unit partition with finer granularity, use an [`INSERT SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
+> **Note:** The `bq cp` command with a partition decorator works on column-based partitions in which the source partition and destination partition are identical. The `bq cp` command also works on ingestion-time based partitions where the partition represents either the same time unit or a coarser time unit that contains the source partition. For example, if `$20180130` is the source partition decorator, valid destination partition decorators include `$20180130` , `$201801` , and `$2018` . To copy a column-based partition to a completely different partition decorator or to a time-unit partition with finer granularity, use an [`INSERT SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
 
 To copy multiple partitions, specify them as a comma-separated list:
 
@@ -388,7 +384,7 @@ You can delete an individual partition from a partitioned table. However, you ca
 
 You can only delete one partition at a time.
 
-**Note:** The required permissions are the same as for [deleting a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#deleting_tables) .
+> **Note:** The required permissions are the same as for [deleting a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#deleting_tables) .
 
 You can delete a partition by specifying the partition's decorator unless it is one of the two [special partitions](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) .
 
@@ -403,8 +399,6 @@ Deleting partitions is not supported by the Google Cloud console.
 If a [qualifying `DELETE` statement](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables#using_dml_delete_to_delete_partitions) covers all rows in a partition, BigQuery removes the entire partition. This removal is done without scanning bytes or consuming slots. The following example of a `DELETE` statement covers the entire partition of a filter on the `_PARTITIONDATE` pseudocolumn:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -442,7 +436,7 @@ Partition decorators have the following format, depending on the type of partiti
 
 The bq command-line tool prompts you to confirm the action. To skip the confirmation, use the `--force` flag (or `-f` shortcut).
 
-**Note:** The partition decorator separator ($) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
+> **Note:** The partition decorator separator ($) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
 
 Examples:
 

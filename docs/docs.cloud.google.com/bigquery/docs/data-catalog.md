@@ -1,6 +1,6 @@
 # Work with Data Catalog
 
-**Caution:** Data Catalog is [deprecated](https://docs.cloud.google.com/data-catalog/docs/deprecations) in favor of [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , which offers intelligent governance for data and AI assets across Google Cloud. Key Dataplex Universal Catalog capabilities are integrated with BigQuery and are also available in the BigQuery experience. See [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) for details on enriching your data with aspects, which are the equivalent of Data Catalog tags.
+> **Caution:** Data Catalog is [deprecated](https://docs.cloud.google.com/data-catalog/docs/deprecations) in favor of [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , which offers intelligent governance for data and AI assets across Google Cloud. Key Knowledge Catalog capabilities are integrated with BigQuery and are also available in the BigQuery experience. See [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) for details on enriching your data with aspects, which are the equivalent of Data Catalog tags.
 
 Data Catalog integrates with BigQuery by automatically cataloging metadata about BigQuery resources like tables, datasets, views, and models. This document describes how to search these resources, view data lineage, and add tags by using Data Catalog.
 
@@ -9,8 +9,6 @@ Data Catalog integrates with BigQuery by automatically cataloging metadata about
 To use Data Catalog to search for BigQuery datasets, tables, and starred projects, follow these steps:
 
 1.  In the Google Cloud console, go to the Data Catalog **Search** page.
-    
-    [Go to Search](https://console.cloud.google.com/dataplex)
 
 2.  In the **Search** field, enter a query, and then click **Search** .
     
@@ -22,9 +20,9 @@ You can perform basic searches in Data Catalog through the Google Cloud console.
 
 ## Data lineage
 
-[Data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) is a Dataplex Universal Catalog feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. You can access the data lineage feature directly from BigQuery.
+[Data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) is a Knowledge Catalog feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. You can access the data lineage feature directly from BigQuery.
 
-Enabling data lineage in your BigQuery project causes Dataplex Universal Catalog to automatically record lineage information for tables created by the following operations:
+Enabling data lineage in your BigQuery project causes Knowledge Catalog to automatically record lineage information for tables created by the following operations:
 
   - [Copy jobs](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) .
 
@@ -43,14 +41,9 @@ In this section, you enable the Data Lineage API and grant [Identity and Access 
 #### Enable data lineage
 
 1.  In the Google Cloud console, on the project selector page, select the project that contains the resources for which you want to track lineage.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
-
 2.  Enable the Data Lineage API and Dataplex API.
-    
-    [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=datalineage.googleapis.com,dataplex.googleapis.com)
 
-**Note:** Enabling the Data Lineage API may incur additional costs. For more information, see [Data lineage considerations](https://docs.cloud.google.com/dataplex/docs/lineage-considerations) .
+> **Note:** Enabling the Data Lineage API may incur additional costs. For more information, see [Data lineage considerations](https://docs.cloud.google.com/dataplex/docs/lineage-considerations) .
 
 #### Required IAM roles
 
@@ -73,8 +66,6 @@ For more information, see [Data lineage roles](https://docs.cloud.google.com/dat
 To view the data lineage graph from BigQuery follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -150,9 +141,7 @@ To help you get started, Data Catalog includes a gallery of sample tag templates
 
 To use a tag template gallery, perform the following steps:
 
-1.  In the Google Cloud console, go to the Dataplex Universal Catalog **Tag templates** page.
-    
-    [Go to Tag templates](https://console.cloud.google.com/dataplex/templates)
+1.  In the Google Cloud console, go to the Knowledge Catalog **Tag templates** page.
 
 2.  Click **Create tag template** .
     

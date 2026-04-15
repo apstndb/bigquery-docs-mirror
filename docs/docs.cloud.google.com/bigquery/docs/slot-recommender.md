@@ -30,7 +30,7 @@ The recommendation includes the following details:
 
 ### Best practices when applying recommendations
 
-**Note:** The recommendations provided are based on historical data, and the actual results may vary depending on the specific characteristics of your workloads.
+> **Note:** The recommendations provided are based on historical data, and the actual results may vary depending on the specific characteristics of your workloads.
 
 1.  Ensure that the sum of baseline slots for all reservations under the edition is equal or less than the commitment slots. This ensures that any slot usage exceeding the commitment slots can be covered by autoscale slots. If the baseline slots exceed the commitment slots, you are billed for additional baseline slots.
 2.  Autoscale slots in the settings is chosen so that available capacity matches the peak historical usage. This is to ensure the performance is not impacted. You can also adjust the autoscale slots to a value lower than the maximum, which can increase autoscale utilization. However, note that when your slot usage cannot be fully covered, it may affect query performance.
@@ -78,7 +78,7 @@ When you select a specific reservation workload, the slot recommender suggests t
 
 ![Slot recommender reservation recommendation in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/slot-recommender-reservation-recommendation.png)
 
-**Note:** Recommendations are based on historical data. Job performance can vary based on actual use.
+> **Note:** Recommendations are based on historical data. Job performance can vary based on actual use.
 
 To implement a recommendation, click **Apply** to be redirected to the page where you can update the reservation.
 
@@ -111,8 +111,6 @@ This recommender is displayed within the context of [slot estimator](https://doc
 To view slot recommendations using the Google Cloud console, perform the following steps.
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  For edition workloads recommendations, select the administrator project. For on-demand workloads recommendations, select any project within your organization that meets the predefined requirements.
 

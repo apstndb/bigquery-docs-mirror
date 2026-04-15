@@ -113,8 +113,6 @@ To create a new table with the previous nested and repeated columns, select one 
 Specify the nested and repeated `addresses` column:
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -169,8 +167,6 @@ Specify the nested and repeated `addresses` column:
 Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) . Specify the schema using the [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) option:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

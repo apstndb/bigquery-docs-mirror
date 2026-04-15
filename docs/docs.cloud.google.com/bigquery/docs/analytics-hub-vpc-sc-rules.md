@@ -230,7 +230,7 @@ In figure 7, the following components are labeled:
   - **Project L** : hosts the linked dataset.
   - **Project V** : hosts both the authorized view and the base tables associated with the view.
 
-**Caution:** If the shared dataset and the base table associated with the authorized view are not in the same project and VPC Service Controls perimeter, the service perimeter rejects the subscriber's query. To resolve this issue, verify that the shared dataset and the base table associated with the authorized view are in the same project.
+> **Caution:** If the shared dataset and the base table associated with the authorized view are not in the same project and VPC Service Controls perimeter, the service perimeter rejects the subscriber's query. To resolve this issue, verify that the shared dataset and the base table associated with the authorized view are in the same project.
 
 When you, as a BigQuery sharing subscriber, query a view in a linked dataset, you must add the following ingress and egress rules:
 

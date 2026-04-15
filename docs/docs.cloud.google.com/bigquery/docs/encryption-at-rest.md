@@ -22,7 +22,7 @@ If you want to encrypt individual values within a BigQuery table, use the Authen
 
 Client-side encryption is separate from BigQuery encryption at rest. If you choose to use client-side encryption, you are responsible for the client-side keys and cryptographic operations. You would encrypt data before writing it to BigQuery. In this case, your data is encrypted twice, first with your keys and then with Google's keys. Similarly, data read from BigQuery is decrypted twice, first with Google's keys and then with your keys.
 
-**Important:** BigQuery does not know if your data has already been encrypted client-side, nor does BigQuery have any knowledge of your client-side encryption keys. If you use client-side encryption, you must securely manage your encryption keys and all aspects of client-side encryption and decryption.
+> **Important:** BigQuery does not know if your data has already been encrypted client-side, nor does BigQuery have any knowledge of your client-side encryption keys. If you use client-side encryption, you must securely manage your encryption keys and all aspects of client-side encryption and decryption.
 
 ## Data in transit
 

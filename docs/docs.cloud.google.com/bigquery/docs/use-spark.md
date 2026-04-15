@@ -28,8 +28,6 @@ For pricing information, see BigQuery [Notebook runtime pricing](https://cloud.g
 ## Open a BigQuery Studio Python notebook
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the tab bar of the details pane, click the arrow\_drop\_down arrow next to the **+** sign, and then click **Notebook** .
 
@@ -148,9 +146,9 @@ After you create a Spark session in your notebook, use the session to run Spark 
 
 **Spark Connect PySpark API support:** Your Spark Connect notebook session supports most [PySpark APIs](https://spark.apache.org/docs/latest/api/python/reference/index.html) , including [DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html) , [Functions](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html) , and [Column](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/column.html) , but does not support [SparkContext](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.SparkContext.html) and [RDD](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.RDD.html) and other PySpark APIs. For more information, see [What is supported in Spark 3.5](https://spark.apache.org/docs/latest/spark-connect-overview.html#what-is-supported) .
 
-**Tip:** You can check the [Spark SQL API reference](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html) to find out if Spark Connect supports an API. The documentation for a supported API contains a "Supports Spark Connect." message:
-
-![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/supports-spark-connect.png)
+> **Tip:** You can check the [Spark SQL API reference](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html) to find out if Spark Connect supports an API. The documentation for a supported API contains a "Supports Spark Connect." message:
+> 
+> ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/supports-spark-connect.png)
 
 **Spark Connect notebook direct writes** : Spark sessions in a BigQuery Studio notebook pre-configure the [Spark BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example) to make DIRECT data writes. The DIRECT write method uses the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which writes data directly into BigQuery; the INDIRECT write method, which is the default for Managed Service for Apache Spark batches, writes data to an intermediate Cloud Storage bucket, then writes the data to BigQuery (for more information on INDIRECT writes, see [Read and write data from and to BigQuery](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example#read-and-write-data-from-and-to-bigquery) ).
 
@@ -166,7 +164,7 @@ In the following example, entering `DataprocSparkSession` and holding the pointe
 
 ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/bq-notebook-code-tips.png)
 
-**Tip:** See [Dataproc Spark Connect Client](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python) on GitHub for information on [using `DataprocSparkSession.builder` methods](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python?tab=readme-ov-file#builder-configuration) to configure Spark Connect sessions.
+> **Tip:** See [Dataproc Spark Connect Client](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python) on GitHub for information on [using `DataprocSparkSession.builder` methods](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python?tab=readme-ov-file#builder-configuration) to configure Spark Connect sessions.
 
 ### BigQuery Studio notebook PySpark examples
 
@@ -313,8 +311,6 @@ The cell output lists the `sample_iceberg_table` with the added column, and disp
 Perform the following steps to check Iceberg table details in BigQuery:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the project resources pane, click your project, then click your namespace to list the `sample_iceberg_table` table. Click the **Details** table to view the **Open Catalog Table Configuration** information.
     
@@ -348,9 +344,9 @@ Read from BigQuery using the [Spark-BigQuery](https://docs.cloud.google.com/data
 
 ### Write Spark code with Gemini Code Assist
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can ask Gemini Code Assist to generate PySpark code in your notebook. Gemini Code Assist fetches and uses relevant BigQuery and Dataproc Metastore tables and their schemas to generate a code response.
 
@@ -410,7 +406,7 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
 
 1.  Download notebook code into a file in a local terminal or in [Cloud Shell](https://console.cloud.google.com/?cloudshell=true) .
     
-    Downloading to and working in Cloud Shell is recommended since it pre-installs [text editors and other tools](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works#tools) and provides built-in [Python support](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works#language_support) .
+    > Downloading to and working in Cloud Shell is recommended since it pre-installs [text editors and other tools](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works#tools) and provides built-in [Python support](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works#language_support) .
     
     1.  In the Google Cloud console, on the [**BigQuery Studio** page](https://console.cloud.google.com/bigquery) , open the notebook in the **Explorer** pane.
     
@@ -507,7 +503,7 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
 
 If a failure occurs in a cell containing Spark code, you can troubleshoot the error by clicking the **Interactive Session Detail View** link in the cell output (see the [Wordcount and Iceberg table examples](https://docs.cloud.google.com/bigquery/docs/use-spark#dataproc_serverless_bq_notebook-Wordcount) ).
 
-When you encounter a notebook code error, navigating to the last Spark job in the **Spark UI** often provides additional information to help you debug the failed job.
+> When you encounter a notebook code error, navigating to the last Spark job in the **Spark UI** often provides additional information to help you debug the failed job.
 
 ### Known issues and solutions
 

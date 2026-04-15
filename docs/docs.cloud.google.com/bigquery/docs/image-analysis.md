@@ -59,9 +59,7 @@ For more information about Vertex AI generative AI pricing, see the [Vertex AI p
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -70,8 +68,6 @@ For more information about Vertex AI generative AI pricing, see the [Vertex AI p
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
 ## Create a dataset
 
@@ -80,8 +76,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -131,8 +125,6 @@ Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/referen
 Create an object table over the movie poster images in the public Cloud Storage [bucket](https://console.cloud.google.com/storage/browser/cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters;tab=objects?prefix=&forceOnObjectsSortingFiltering=false) . The object table makes it possible to analyze the images without moving them from Cloud Storage.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to create the object table:
     
@@ -150,8 +142,6 @@ Create an object table over the movie poster images in the public Cloud Storage 
 Create a remote model that represents a Vertex AI `gemini-2.5-flash` model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to create the remote model:
     
@@ -168,8 +158,6 @@ Create a remote model that represents a Vertex AI `gemini-2.5-flash` model:
 Use the remote model to analyze the movie posters and determine what movie each poster represents, and then write this data to a table.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to analyze the movie poster images:
     
@@ -227,8 +215,6 @@ Use the remote model to analyze the movie posters and determine what movie each 
 Format the movie analysis data returned by the model to make the movie title and year data more readable.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to format the data:
     
@@ -271,16 +257,14 @@ Format the movie analysis data returned by the model to make the movie title and
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

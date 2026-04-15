@@ -110,7 +110,7 @@ You can override this cap by setting the `sampling_n` parameter when plotting a 
 
 ![Example of a line chart visualizing a large dataset in BigQuery DataFrames.](https://docs.cloud.google.com/static/bigquery/images/dataframes-visualizing-large-dataset.png)
 
-**Note:** The `sampling_n` parameter has no effect on histograms because BigQuery DataFrames bucketizes the data on the server side for histograms.
+> **Note:** The `sampling_n` parameter has no effect on histograms because BigQuery DataFrames bucketizes the data on the server side for histograms.
 
 ## Advanced plotting with pandas and Matplotlib parameters
 

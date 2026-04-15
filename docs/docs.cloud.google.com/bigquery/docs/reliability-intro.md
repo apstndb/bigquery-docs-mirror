@@ -88,7 +88,7 @@ In either case, BigQuery automatically stores copies of your data in two differe
 
 In addition to storage redundancy, BigQuery also maintains redundant compute capacity across multiple zones. By combining redundant storage and compute across multiple availability zones, BigQuery provides both high availability and durability.
 
-**Note:** Selecting a multi-region location does not provide cross-region replication nor regional redundancy. Data will be stored in a single region within the geographic location.
+> **Note:** Selecting a multi-region location does not provide cross-region replication nor regional redundancy. Data will be stored in a single region within the geographic location.
 
 In the event of a machine-level failure, BigQuery continues to run with no more than a few milliseconds of delay. All currently running queries continue processing. In the event of either a soft or hard zonal failure, no data loss is expected. However, currently running queries might fail and need to be resubmitted. A soft zonal failure, such as resulting from a power outage, destroyed transformer, or network partition, is a well-tested path and is automatically mitigated within a few minutes.
 

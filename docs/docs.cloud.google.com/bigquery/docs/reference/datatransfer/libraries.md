@@ -60,7 +60,7 @@ If you're using Visual Studio Code or IntelliJ, you can add client libraries to 
 
 The plugins provide additional functionality, such as key management for service accounts. Refer to each plugin's documentation for details.
 
-**Note:** Cloud Java client libraries do not currently support Android.
+> **Note:** Cloud Java client libraries do not currently support Android.
 
 For more information, see [Setting Up a Java Development Environment](https://docs.cloud.google.com/java/docs/setup) .
 

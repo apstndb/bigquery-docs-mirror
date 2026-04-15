@@ -35,8 +35,6 @@ To create an AWS IAM policy, use the AWS console or Terraform:
 ### AWS console
 
 1.  Go to the AWS IAM console. Ensure that you're in the account that owns the Amazon S3 bucket that you want to access.
-    
-    [Go to the AWS IAM console](https://console.aws.amazon.com/iam/home)
 
 2.  Select **Policies \> Create policy** (opens in a new tab).
 
@@ -76,7 +74,7 @@ To create an AWS IAM policy, use the AWS console or Terraform:
       - `  EXPORT_PERM  ` (optional): additional permission if you want to [export data to an Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . Replace with `"s3:PutObject"`
           - To separate export access control, we recommend that you create another connection with a separate AWS IAM role and grant the role write-only access. For more granular access control, you can also limit a role's access to a specific path of the bucket.
     
-    **Note:** If you get an error after pasting the JSON into the editor, format the JSON text using a JSON editor.
+    > **Note:** If you get an error after pasting the JSON into the editor, format the JSON text using a JSON editor.
 
 4.  In the **Name** field, enter a policy name, such as `bq_omni_read_only` .
 
@@ -193,8 +191,6 @@ To create an AWS IAM role, use the AWS console or Terraform:
 ### AWS console
 
 1.  Go to the AWS IAM console. Ensure that you're in the account that owns the Amazon S3 bucket that you want to access.
-    
-    [Go to the AWS IAM console](https://console.aws.amazon.com/iam/home)
 
 2.  Select **Roles \> Create role** .
 
@@ -300,11 +296,9 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
 
 ### Console
 
-**Key Point:** Create your connection in the Google Cloud project that contains the Amazon S3 instance that you want to query.
+> **Key Point:** Create your connection in the Google Cloud project that contains the Amazon S3 instance that you want to query.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add data** .
     
@@ -403,7 +397,7 @@ The output contains the following:
 
 Take note of the `  IDENTITY_ID  ` value.
 
-**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+> **Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 ### Java
 
@@ -474,8 +468,6 @@ To add a trust relationship, use the AWS console or Terraform:
 ### AWS console
 
 1.  Go to the AWS IAM console. Ensure that you're in the account that owns the Amazon S3 bucket that you want to access.
-    
-    [Go to the AWS IAM console](https://console.aws.amazon.com/iam/home)
 
 2.  Select **Roles** .
 
@@ -595,7 +587,7 @@ Update the `aws_iam_role` resource in the Terraform configuration to add a trust
     }
 ```
 
-**Note:** There may be a propagation delay for role assignment in AWS. If you receive an error of this type when using a new connection, waiting and trying again later may resolve the issue.
+> **Note:** There may be a propagation delay for role assignment in AWS. If you receive an error of this type when using a new connection, waiting and trying again later may resolve the issue.
 
 The connection is now ready to use.
 
@@ -604,8 +596,6 @@ The connection is now ready to use.
 If your AWS account has a [custom identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) for `accounts.google.com` , you will need to add the IDENTITY\_ID as an audience to the provider. You can accomplish this by:
 
 1.  Go to the AWS IAM console. Ensure that you're in the account that owns the Amazon S3 bucket that you want to access.
-    
-    [Go to the AWS IAM console](https://console.aws.amazon.com/iam/home)
 
 2.  Navigate to the **IAM** \> **Identity Providers** .
 
@@ -630,8 +620,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 

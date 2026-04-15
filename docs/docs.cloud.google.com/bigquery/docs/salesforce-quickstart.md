@@ -26,8 +26,6 @@ This documentation demonstrates how to share data from Data Cloud to BigQuery - 
 To access a Data Cloud dataset in BigQuery, you must first link the dataset to BigQuery with the following steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Salesforce Data Cloud**
     
@@ -54,7 +52,7 @@ Once the linked dataset is created, you can explore the dataset and the tables i
 
 All of these objects are represented as views in BigQuery. These views point to hidden tables that are stored in Amazon S3.
 
-**Note:** If you are using VPC Service Controls and Analytics Hub API is restricted, then you will need to create a [Egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) in the VPC Service Controls perimeter to include the Data Cloud Sharing producer project.
+> **Note:** If you are using VPC Service Controls and Analytics Hub API is restricted, then you will need to create a [Egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) in the VPC Service Controls perimeter to include the Data Cloud Sharing producer project.
 
 ## Work with Data Cloud data
 
@@ -141,8 +139,6 @@ CREATE MATERIALIZED VIEW `aws_data.total_sales`
 You must authorize materialized views to create a CCMV. You can either authorize the view ( `aws_data.total_sales` ) or the dataset ( `aws_data` ). To authorize the materialized view:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Open the source dataset `listing_nto_john` .
 

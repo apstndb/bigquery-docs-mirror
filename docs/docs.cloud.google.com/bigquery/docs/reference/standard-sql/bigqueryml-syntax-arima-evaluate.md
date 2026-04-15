@@ -10,7 +10,7 @@ ML.ARIMA_EVALUATE(
   [, STRUCT(SHOW_ALL_CANDIDATE_MODELS AS show_all_candidate_models)])
 ```
 
-**Note:** No input data is required.
+> **Note:** No input data is required.
 
 ### Arguments
 

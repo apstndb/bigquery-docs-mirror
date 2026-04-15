@@ -60,9 +60,7 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -71,8 +69,6 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
 ## Create a dataset
 
@@ -81,8 +77,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -132,8 +126,6 @@ Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/referen
 Create a remote model that represents a hosted Vertex AI text embedding generation model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -150,8 +142,6 @@ Create a remote model that represents a hosted Vertex AI text embedding generati
 Generate text embeddings from patent abstracts using the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) , and then write them to a BigQuery table so that they can be searched.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -181,8 +171,6 @@ If you create a vector index on an embedding column, a vector search performed o
 To create a vector index, use the [`CREATE VECTOR INDEX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) data definition language (DDL) statement:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement:
     
@@ -201,8 +189,6 @@ Creating a vector index typically takes only a few seconds. It takes another 2 o
 The vector index is populated asynchronously. You can check whether the index is ready to be used by querying the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) and verifying that the `coverage_percentage` column value is greater than `0` and the `last_refresh_time` column value isn't `NULL` .
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement:
     
@@ -223,8 +209,6 @@ The `top_k` argument determines the number of matches to return, in this case fi
 The model you use to generate the embeddings in this query must be the same as the one you use to generate the embeddings in the table you are comparing against, otherwise the search results won't be accurate.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement:
     
@@ -258,8 +242,6 @@ The model you use to generate the embeddings in this query must be the same as t
 Create a remote model that represents a hosted Vertex AI text generation model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -276,8 +258,6 @@ Create a remote model that represents a hosted Vertex AI text generation model:
 Feed the search results as prompts to generate text with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -327,16 +307,14 @@ Feed the search results as prompts to generate text with the [`AI.GENERATE_TEXT`
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

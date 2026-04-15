@@ -19,12 +19,10 @@ To learn more about Sensitive Data Protection, see the [Sensitive Data Protectio
 1.  Get familiar with [Sensitive Data Protection pricing](https://cloud.google.com/sensitive-data-protection/pricing) and [how to keep Sensitive Data Protection costs under control](https://docs.cloud.google.com/sensitive-data-protection/docs/best-practices-costs) .
 
 2.  [Enable the DLP API](https://docs.cloud.google.com/apis/docs/enable-disable-apis) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dlp.googleapis.com)
 
 3.  Ensure that the user creating your Sensitive Data Protection jobs is granted an appropriate predefined Sensitive Data Protection [IAM role](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-roles) or sufficient [permissions](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions) to run Sensitive Data Protection jobs.
 
-**Note:** When you enable the DLP API, a service account is created with a name similar to `service- project_number @dlp-api.iam.gserviceaccount.com` . This service account is granted the DLP API Service Agent role, which lets the service account authenticate with the BigQuery API. For more information, see [Service account](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions#service_account) on the Sensitive Data Protection IAM permissions page.
+> **Note:** When you enable the DLP API, a service account is created with a name similar to `service- project_number @dlp-api.iam.gserviceaccount.com` . This service account is granted the DLP API Service Agent role, which lets the service account authenticate with the BigQuery API. For more information, see [Service account](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions#service_account) on the Sensitive Data Protection IAM permissions page.
 
 ## Scanning BigQuery data using the Google Cloud console
 
@@ -33,8 +31,6 @@ To scan BigQuery data, you create a Sensitive Data Protection job that analyzes 
 To scan a BigQuery table using Sensitive Data Protection:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

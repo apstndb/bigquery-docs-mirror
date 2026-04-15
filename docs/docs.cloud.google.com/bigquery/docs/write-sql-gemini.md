@@ -6,13 +6,11 @@ This document describes how to use AI-powered assistance in [Gemini in BigQuery]
 
 To follow step-by-step guidance for this task directly in the Google Cloud console, click **Guide me** :
 
-[Guide me](https://console.cloud.google.com/bigquery?walkthrough_id=bigquery--write-sql-gemini&start_index=1)
-
 -----
 
 Gemini for Google Cloud doesn't use your prompts or its responses as data to train its models without your express permission. For more information about how Google uses your data, see [How Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .
 
-**Note:** To opt in to data sharing for Gemini in BigQuery features in [Preview](https://cloud.google.com/products/#product-launch-stages) , see [Help improve suggestions](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#help_improve_suggestions_2) .
+> **Note:** To opt in to data sharing for Gemini in BigQuery features in [Preview](https://cloud.google.com/products/#product-launch-stages) , see [Help improve suggestions](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#help_improve_suggestions_2) .
 
 Only English language prompts are supported for Gemini in BigQuery.
 
@@ -33,13 +31,9 @@ This document is intended for data analysts, data scientists, and data developer
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 5.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 6.  In the BigQuery toolbar, click pen\_spark arrow\_drop\_down **Gemini** .
     
@@ -83,7 +77,7 @@ For more information about IAM roles and permissions in BigQuery, see [Introduct
 
 ## Generate a SQL query
 
-As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
+> As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
 To generate a SQL query based on your data's schema, you can provide Gemini in BigQuery with a natural language statement or question, also known as a *prompt* . You can also browse prompt recommendations from Gemini. Even if you're starting with no code, a limited knowledge of the data schema, or only a basic knowledge of GoogleSQL syntax, Gemini in BigQuery can generate SQL that can help you explore your data.
 
@@ -94,8 +88,6 @@ The SQL generation tool lets you use natural language to generate a SQL query ab
 To use the SQL generation tool, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  Next to the query editor, click pen\_spark **SQL generation tool** .
     
@@ -122,7 +114,7 @@ To use the SQL generation tool, follow these steps:
             duration_sec DESC
         LIMIT 10;
     
-    **Note:** Gemini in BigQuery might suggest different syntax each time that you enter the same prompt.
+    > **Note:** Gemini in BigQuery might suggest different syntax each time that you enter the same prompt.
 
 5.  Review the generated SQL query and take any of the following actions:
     
@@ -142,8 +134,6 @@ To learn how to turn off the SQL generation tool, see [Turn off Gemini query ass
 You can generate SQL in the query editor by describing the query that you want in a comment.
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click add\_box **SQL query** .
 
@@ -171,19 +161,17 @@ You can generate SQL in the query editor by describing the query that you want i
 
 ### Generate SQL with Gemini Cloud Assist
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
+> **Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
 
 You can generate a SQL query in BigQuery by using the [**Cloud Assist** panel](https://docs.cloud.google.com/cloud-assist/chat-panel) in the Google Cloud console.
 
 Before you can use Gemini Cloud Assist chat to generate SQL, you must enable Gemini Cloud Assist. For more information, see [Set up Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/set-up-gemini) .
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click add\_box **SQL query** to open a new SQL query.
 
@@ -234,19 +222,17 @@ The following tips can improve suggestions that Gemini in BigQuery provides:
 
 ### Convert comments to SQL
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
+> **Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
 
 You can use comments as prompts to create SQL queries that help you explore your data in BigQuery. You can embed comments containing natural language prompts that describe the information that you want from your data. Gemini responds with SQL that you can then compare or insert into your query. Natural language expressions can help you iterate on and transform your SQL code. Natural language expressions can also help with SQL syntax such as timestamps and window functions.
 
 To use natural language SQL generation, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **BigQuery Studio** query editor, click pen\_spark and ensure Gemini SQL **Auto-generation** is enabled.
     
@@ -291,17 +277,15 @@ To use natural language SQL generation, follow these steps:
 
 ## Complete a SQL query
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 SQL completion attempts to provide contextually appropriate recommendations that are based on content in the query editor. As you type, Gemini can suggest logical next steps that are relevant to your current query's context, or it can help you iterate on a query.
 
 To try SQL completion with Gemini in BigQuery, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, copy the following:
     
@@ -334,8 +318,6 @@ You can prompt Gemini in BigQuery to explain a SQL query in natural language. Th
 To get an explanation for a SQL query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, open or paste a query that you want explained.
 
@@ -349,11 +331,11 @@ To get an explanation for a SQL query, follow these steps:
 
 ## Fix and explain SQL errors
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
+> **Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
 
 You can use Gemini in BigQuery to fix and explain errors in your SQL queries. To fix an error in the text of your query before you run it, follow these steps:
 
@@ -382,8 +364,6 @@ You can ask Gemini in BigQuery to generate Python code with a natural language s
 In the following example, you generate code for a BigQuery public dataset, `bigquery-public-data.ml_datasets.penguins` .
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the tab bar of the query editor, click the arrow\_drop\_down drop-down arrow next to add\_box **SQL query** , and then click **Notebook** .
     
@@ -410,17 +390,15 @@ In the following example, you generate code for a BigQuery public dataset, `bigq
 
 ### Generate Python code with Gemini Cloud Assist
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
+> **Note:** To request support or provide feedback for this feature, send email to <gemini-in-bigquery-feedback@google.com> .
 
 You can use [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/overview) in the Google Cloud console to generate Python code in BigQuery. Before you can use Gemini Cloud Assist to generate code, you must enable Gemini Cloud Assist. For more information, see [Set up Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/set-up-gemini) .
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the tab bar of the query editor, click the arrow\_drop\_down drop-down arrow next to add\_box **SQL query** , and then click **Notebook** .
 
@@ -446,11 +424,11 @@ You can use [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/ove
 
 ### Generate BigQuery DataFrames code
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, send email to <bq-notebook-python-gen-feedback@google.com> .
+> **Note:** To request support or provide feedback for this feature, send email to <bq-notebook-python-gen-feedback@google.com> .
 
 You can generate [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) code with Gemini in BigQuery. To ask Gemini to use BigQuery DataFrames in the generated code, express your intent in your prompt. For example, you can start your prompt with "using bigframes" or "utilizing BigQuery DataFrames".
 
@@ -466,8 +444,6 @@ To learn more about BigQuery DataFrames and the permissions that are required to
 In the following example, you generate code for a BigQuery public dataset, `bigquery-public-data.ml_datasets.penguins` .
 
 1.  In the Google Cloud console, go to the BigQuery Studio page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the tab bar of the query editor, click the arrow\_drop\_down drop-down arrow next to add\_box **SQL query** , and then click **Notebook** .
     
@@ -503,8 +479,6 @@ Python code completion attempts to provide contextually appropriate recommendati
 To try Python code completion with Gemini in BigQuery, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the tab bar of the query editor, click the arrow\_drop\_down drop-down arrow next to add\_box **SQL query** , and then click **Notebook** .
     
@@ -516,9 +490,9 @@ To try Python code completion with Gemini in BigQuery, follow these steps:
 
 ## Explain Python code
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can use Gemini in BigQuery to explain Python code in your Colab Enterprise notebooks.
 
@@ -527,8 +501,6 @@ After getting an explanation, you can ask more questions in the prompt dialog to
 To get an explanation for Python code in your notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -550,17 +522,15 @@ To get an explanation for Python code in your notebook, follow these steps:
 
 ## Fix and explain Python errors
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can use Gemini in BigQuery to fix and explain Python code errors in your Colab Enterprise notebooks.
 
 To fix or understand the code errors with Gemini assistance, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -600,9 +570,9 @@ To fix or understand the code errors with Gemini assistance, follow these steps:
 
 ## Generate PySpark code
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can ask Gemini Code Assist to generate PySpark code in your notebook. Gemini Code Assist fetches and uses relevant BigQuery and Dataproc Metastore tables and their schemas to generate a code response. With its schema knowledge, Gemini Code Assist avoids hallucinations, and suggests join keys and column types.
 
@@ -632,8 +602,6 @@ To generate Gemini Code Assist code in your notebook, do the following:
 To turn off specific features in Gemini in BigQuery, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the BigQuery toolbar, click pen\_spark arrow\_drop\_down **Gemini** .
     
@@ -652,8 +620,6 @@ To turn off Gemini in Colab Enterprise for a specific user, an administrator nee
 ## Provide feedback
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the BigQuery toolbar, click pen\_spark arrow\_drop\_down **Gemini** .
     
@@ -668,8 +634,6 @@ You can help improve Gemini suggestions by sharing with Google the prompt data t
 To share your prompt data, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the BigQuery toolbar, click pen\_spark arrow\_drop\_down **Gemini** .
     

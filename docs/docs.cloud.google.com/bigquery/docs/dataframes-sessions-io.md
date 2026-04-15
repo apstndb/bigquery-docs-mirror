@@ -156,7 +156,7 @@ To use a SQL string with the `read_gbq()` function to read data into BigQuery Da
     
     df = bpd.read_gbq(sql)
 
-**Note:** If you specify a table when calling the `read_gbq()` , `read_gbq_table()` , or `read_gbq_query()` function, and you haven't set the `bigframes.pandas.options.bigquery.location` attribute before the function call, then BigQuery DataFrames automatically sets the `bigframes.pandas.options.bigquery.location` attribute to the table's location. For information on how to manually specify the location, see [Global session](https://docs.cloud.google.com/bigquery/docs/dataframes-sessions-io#global-session) .
+> **Note:** If you specify a table when calling the `read_gbq()` , `read_gbq_table()` , or `read_gbq_query()` function, and you haven't set the `bigframes.pandas.options.bigquery.location` attribute before the function call, then BigQuery DataFrames automatically sets the `bigframes.pandas.options.bigquery.location` attribute to the table's location. For information on how to manually specify the location, see [Global session](https://docs.cloud.google.com/bigquery/docs/dataframes-sessions-io#global-session) .
 
 To save your `DataFrame` object to a BigQuery table, use the `to_gbq()` method of your `DataFrame` object. The following code sample shows how to do that:
 

@@ -52,7 +52,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ## Restore a dataset
 
-**Caution:** Only the most recent dataset for a given dataset ID can be restored. If you delete a dataset and then create a new dataset with the same ID, you lose the ability to undelete the original dataset. However, you still might be able to [recover specific tables from the deleted dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#restore-delete-tables) .
+> **Caution:** Only the most recent dataset for a given dataset ID can be restored. If you delete a dataset and then create a new dataset with the same ID, you lose the ability to undelete the original dataset. However, you still might be able to [recover specific tables from the deleted dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#restore-delete-tables) .
 
 To restore a dataset, select one of the following options:
 
@@ -61,8 +61,6 @@ To restore a dataset, select one of the following options:
 Use the [`UNDROP SCHEMA` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#undrop_schema_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -86,7 +84,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Call the [`datasets.undelete` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/undelete) .
 
-**Note:** If you have two deleted datasets in your project with the same name in two different regions, undeleting a dataset with the BigQuery API undeletes only one, selected at random, unless a location is specified.
+> **Note:** If you have two deleted datasets in your project with the same name in two different regions, undeleting a dataset with the BigQuery API undeletes only one, selected at random, unless a location is specified.
 
 When you restore a dataset, the following errors might occur:
 

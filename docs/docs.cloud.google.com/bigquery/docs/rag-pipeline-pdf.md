@@ -52,9 +52,7 @@ For more information, see the following pricing pages:
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -63,8 +61,6 @@ For more information, see the following pricing pages:
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com,documentai.googleapis.com,storage.googleapis.com)
 
 ## Required roles
 
@@ -105,8 +101,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -162,8 +156,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -192,8 +184,6 @@ Select one of the following options:
 Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -365,7 +355,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -441,7 +431,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ## Grant access to the service account
 
@@ -450,8 +440,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
     
@@ -500,8 +488,6 @@ To upload the sample PDF to Cloud Storage, follow these steps:
 Create an object table over the PDF file in Cloud Storage:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -532,8 +518,6 @@ Create an object table over the PDF file in Cloud Storage:
 Create a remote model to access the Document AI processor:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -558,8 +542,6 @@ Create a remote model to access the Document AI processor:
 Use the document processor with the `ML.PROCESS_DOCUMENT` function to parse the PDF file into chunks, and then write that content to a table. The `ML.PROCESS_DOCUMENT` function returns the PDF chunks in JSON format.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -572,8 +554,6 @@ Use the document processor with the `ML.PROCESS_DOCUMENT` function to parse the 
 Extract the PDF content and metadata information from the JSON data returned by the `ML.PROCESS_DOCUMENT` function, and then write that content to a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement to parse the PDF content:
     
@@ -610,8 +590,6 @@ Extract the PDF content and metadata information from the JSON data returned by 
 Create a remote model that represents a hosted Vertex AI text embedding generation model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -634,8 +612,6 @@ Create a remote model that represents a hosted Vertex AI text embedding generati
 Generate embeddings for the parsed PDF content and then write them to a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -654,8 +630,6 @@ Run a vector search against the parsed PDF content.
 The following query takes text input, creates an embedding for that input using the `AI.GENERATE_EMBEDDING` function, and then uses the `VECTOR_SEARCH` function to match the input embedding with the most similar PDF content embeddings. The results are the top ten PDF chunks that are most semantically similar to the input.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement:
     
@@ -703,8 +677,6 @@ The following query takes text input, creates an embedding for that input using 
 Create a remote model that represents a hosted Vertex AI text generation model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -727,8 +699,6 @@ Create a remote model that represents a hosted Vertex AI text generation model:
 Perform a vector search on the embeddings to identify semantically similar PDF content, and then use the `AI.GENERATE_TEXT` function with the vector search results to augment the prompt input and improve the text generation results. In this case, the query uses information from the PDF chunks to answer a question about the change in family net worth over the past decade.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -783,16 +753,14 @@ Perform a vector search on the embeddings to identify semantically similar PDF c
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

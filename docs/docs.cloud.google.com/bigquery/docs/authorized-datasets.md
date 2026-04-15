@@ -18,7 +18,7 @@ If you want to give a *collection of views* access to a dataset, without having 
 
 A dataset that has access to another dataset is called an *authorized dataset* . The dataset that authorizes another dataset to access its data is called the *shared dataset.*
 
-**Note:** Because all current and future views in an authorized dataset have access to the tables in the shared dataset, BigQuery requires additional permissions to create or update the views in an authorized dataset, beyond the permissions that are required to create or update views in a standard dataset. For more information, see [Create or update a view in an authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#create_or_update_view) .
+> **Note:** Because all current and future views in an authorized dataset have access to the tables in the shared dataset, BigQuery requires additional permissions to create or update the views in an authorized dataset, beyond the permissions that are required to create or update views in a standard dataset. For more information, see [Create or update a view in an authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#create_or_update_view) .
 
 ## Required permissions and roles
 
@@ -51,8 +51,6 @@ You can authorize a dataset's current and future views to access another dataset
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -79,8 +77,6 @@ You can authorize a dataset's current and future views to access another dataset
 ### bq
 
 1.  Open the Cloud Shell:
-    
-    [Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 2.  Write the existing metadata (including the access control list) for the dataset you want to share into a JSON file by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
@@ -168,8 +164,6 @@ To revoke the access granted to the views in an authorized dataset, remove the a
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -188,8 +182,6 @@ To revoke the access granted to the views in an authorized dataset, remove the a
 ### bq
 
 1.  Open the Cloud Shell:
-    
-    [Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 2.  Write the existing metadata (including the access control list) for the shared dataset into a JSON file by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
@@ -272,7 +264,7 @@ The following table summarizes the necessary [Identity and Access Management (IA
 
 You don't need any additional permissions to [delete a view](https://docs.cloud.google.com/bigquery/docs/managing-views#delete_views) from an authorized dataset.
 
-**Note:** The `bigquery.datasets.update` permission isn't required on the shared dataset (or any other referenced datasets) to create or update a view within an authorized dataset. This permission is strictly reserved for administrative management of the dataset's authorization list, including the following:
+> **Note:** The `bigquery.datasets.update` permission isn't required on the shared dataset (or any other referenced datasets) to create or update a view within an authorized dataset. This permission is strictly reserved for administrative management of the dataset's authorization list, including the following:
 
   - Authorizing a dataset: initially granting a dataset access to a shared dataset.
 
@@ -280,7 +272,7 @@ You don't need any additional permissions to [delete a view](https://docs.cloud.
     
     For more information, see [Required roles](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) .
 
-**Note:** Statements that manage views, such as `ALTER VIEW` , can apply to both regular views and authorized views. Verify that you are managing the correct view when running these statements.
+> **Note:** Statements that manage views, such as `ALTER VIEW` , can apply to both regular views and authorized views. Verify that you are managing the correct view when running these statements.
 
 ## Query a view in an authorized dataset
 

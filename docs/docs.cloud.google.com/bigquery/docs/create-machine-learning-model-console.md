@@ -18,9 +18,7 @@ This document shows you how to use the Google Cloud console to create a BigQuery
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -29,8 +27,6 @@ This document shows you how to use the Google Cloud console to create a BigQuery
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com)
 
 ## Model-specific prerequisites
 
@@ -58,8 +54,6 @@ Create a BigQuery dataset to contain your resources:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -144,8 +138,6 @@ These models have different sets of options according to their type. While BigQu
 To create a model:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -216,8 +208,6 @@ Use this procedure to create the following types of remote models:
 To create a model:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -254,7 +244,7 @@ To create a model:
         
         3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
             
-            **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
+            > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
 11. In the **Required options** section, do one of the following:
     
@@ -272,8 +262,6 @@ Use this procedure to create remote models over [custom models deployed to Verte
 To create a model:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -308,7 +296,7 @@ To create a model:
         
         3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
             
-            **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
+            > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
 10. In the **Required options** section, specify the endpoint to use. This is the shared public endpoint of a model deployed to Vertex AI, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint) .
 
@@ -323,8 +311,6 @@ Use this procedure to create remote models over [Cloud AI services](https://docs
 To create a model:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -361,7 +347,7 @@ To create a model:
         
         3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
             
-            **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
+            > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
 11. In the **Required options** section, select the Cloud AI service type to use.
 
@@ -383,8 +369,6 @@ Use this procedure to create BigQuery ML models by importing the following types
 To create a model:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

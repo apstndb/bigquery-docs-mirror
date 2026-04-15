@@ -1,8 +1,8 @@
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
+> **Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
 
 GoogleSQL for BigQuery supports the following vector index functions.
 
@@ -14,11 +14,11 @@ GoogleSQL for BigQuery supports the following vector index functions.
 
 ## `VECTOR_INDEX.STATISTICS`
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
+> **Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
 
     VECTOR_INDEX.STATISTICS(
       TABLE table_name

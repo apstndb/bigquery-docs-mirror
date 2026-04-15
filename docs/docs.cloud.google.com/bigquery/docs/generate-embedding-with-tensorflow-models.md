@@ -62,7 +62,7 @@ For more information, see the following resources:
 
 ## Before you begin
 
-**Note:** The Vertex AI API and BigQuery Connection API are only required for the BERT model.
+> **Note:** The Vertex AI API and BigQuery Connection API are only required for the BERT model.
 
 ## Create a dataset
 
@@ -73,8 +73,6 @@ To create a dataset named `tf_models_tutorial` to store the models that you crea
 Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -91,8 +89,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
 
 2.  To create the dataset, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
     
@@ -211,8 +207,6 @@ Select one of the following models:
 Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -231,8 +225,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -253,8 +245,6 @@ To load the BERT model into BigQuery, import the BERT model to Vertex AI, deploy
 To import the BERT model to Vertex AI, follow these steps:
 
 1.  In the Google Cloud console, go to the Vertex AI **Model registry** page.
-    
-    [Go to Model registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  Click **Import** , and then do the following:
     
@@ -271,8 +261,6 @@ To import the BERT model to Vertex AI, follow these steps:
 To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, follow these steps:
 
 1.  In the Google Cloud console, go to the Vertex AI **Model registry** page.
-    
-    [Go to Model registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  Click on the name of your model.
 
@@ -293,8 +281,6 @@ To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, fol
 To create a remote model based on the Vertex AI endpoint, use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -417,16 +403,14 @@ The result is similar to the following:
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

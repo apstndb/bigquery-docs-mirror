@@ -62,8 +62,6 @@ To update a dataset's description, use the [`ALTER SCHEMA SET OPTIONS` statement
 The following example sets the description on a dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -285,8 +283,6 @@ To update the default table expiration time, use the [`ALTER SCHEMA SET OPTIONS`
 The following example updates the default table expiration for a dataset named `mydataset` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -516,8 +512,6 @@ To update the default partition expiration time, use the [`ALTER SCHEMA SET OPTI
 The following example updates the default partition expiration for a dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -606,8 +600,6 @@ To update the time travel window for a dataset:
 Use the [`ALTER SCHEMA SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) statement with the `max_time_travel_hours` option to specify the time travel window when altering a dataset. The `max_time_travel_hours` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -673,8 +665,6 @@ Once you change a dataset's storage billing model, you must wait 14 days before 
 To update the billing model for a dataset, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) and set the `storage_billing_model` option:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

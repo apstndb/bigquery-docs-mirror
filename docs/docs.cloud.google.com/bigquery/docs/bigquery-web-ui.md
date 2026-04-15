@@ -12,19 +12,15 @@ In this walkthrough, you explore the components of the BigQuery Google Cloud con
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
-    
     For new projects, the BigQuery API is automatically enabled.
 
 2.  Optional: [Enable billing](https://docs.cloud.google.com/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#setup) .
     
-    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
+    > **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
 
 ## Open the Google Cloud console
 
 1.  Go to the Google Cloud console.
-    
-    [Go to the console](https://console.cloud.google.com/)
 
 2.  In the Google Cloud console toolbar, click menu **Navigation menu** .
 
@@ -92,13 +88,11 @@ The BigQuery [**Studio**](https://docs.cloud.google.com/bigquery/docs/query-over
 
 The **Studio** page BigQuery is the central point for viewing your BigQuery resources and for performing common tasks such as creating datasets and creating and running notebooks.
 
-**Note:** To see how to use keyboard shortcuts in Studio, click keyboard **BigQuery Studio shortcuts** in the BigQuery Studio toolbar:
+> **Note:** To see how to use keyboard shortcuts in Studio, click keyboard **BigQuery Studio shortcuts** in the BigQuery Studio toolbar:
 
 To explore the **Studio** page, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery **Studio** page.
-    
-    [Go to Studio](https://console.cloud.google.com/bigquery)
     
     Alternatively, enter the following URL in your browser:
     
@@ -110,7 +104,7 @@ To explore the **Studio** page, follow these steps:
     
     The **Explorer** pane lists different code assets and data resources, and it lets you search for BigQuery resources.
     
-    **Note:** You can expand and collapse the left pane by clicking first\_page **Collapse left pane** or last\_page **Expand left pane** .
+    > **Note:** You can expand and collapse the left pane by clicking first\_page **Collapse left pane** or last\_page **Expand left pane** .
 
 3.  Go to the `bigquery-public-data` project, click arrow\_right **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
     
@@ -136,7 +130,7 @@ To explore the **Studio** page, follow these steps:
     
     2.  To view details of recent jobs in your project, click **Project history** .
         
-        **Note:** To see the details of a job or to open a query from a query job, in the **Actions** column for a job or query, click more\_vert **Actions** \> **Show job details** or **View job in editor** .
+        > **Note:** To see the details of a job or to open a query from a query job, in the **Actions** column for a job or query, click more\_vert **Actions** \> **Show job details** or **View job in editor** .
 
 9.  In the left pane, click the folder\_data **Repository** tab ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
     
@@ -186,7 +180,7 @@ To split tabs into two panes, follow these steps:
     
       - To place the selected tab in the right pane, select **Split tab to right** .
     
-    **Note:** If only one tab is open, these menu options are unavailable.
+    > **Note:** If only one tab is open, these menu options are unavailable.
 
 3.  To unsplit the tabs, select arrow\_drop\_down **Open menu** on one of the open tabs, and then select **Move tab to left pane** or **Move tab to right pane** .
 
@@ -226,11 +220,11 @@ To close all tabs except for one, follow these steps:
 
 ## The Overview page
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback on the Overview page, click **Help \> Send feedback** .
+> **Note:** To provide feedback on the Overview page, click **Help \> Send feedback** .
 
 The BigQuery **Overview** page is your hub for discovering tutorials, features, and resources to help you get the most out of BigQuery. It provides guided paths for users of all skill levels, whether you are running your first query or exploring advanced AI/ML capabilities.
 
@@ -239,8 +233,6 @@ You can use the **Overview** page to find resources organized by your role or in
 ### Explore the Overview page
 
 1.  In the console, go to the **Overview** page.
-    
-    [Go to Overview](https://console.cloud.google.com/bigquery/overview)
     
     You can also open the BigQuery **Overview** page by entering the following URL in your browser:
     

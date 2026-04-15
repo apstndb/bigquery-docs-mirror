@@ -109,7 +109,7 @@ The `MERGE` statement combines the `INSERT` , `UPDATE` , and `DELETE` operations
 
 BigQuery manages the concurrency of DML statements that add, modify, or delete rows in a table.
 
-**Note:** DML statements are subject to rate limits such as the [maximum rate of table writes](https://docs.cloud.google.com/bigquery/quotas#standard_tables) . You might hit a rate limit if you submit a high number of jobs against a table at one time. These rates do not limit the total number of DML statements that can be run. If you get an error message that says you've [exceeded a rate limit](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#overview) , retry the operation using exponential backoff between retries.
+> **Note:** DML statements are subject to rate limits such as the [maximum rate of table writes](https://docs.cloud.google.com/bigquery/quotas#standard_tables) . You might hit a rate limit if you submit a high number of jobs against a table at one time. These rates do not limit the total number of DML statements that can be run. If you get an error message that says you've [exceeded a rate limit](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#overview) , retry the operation using exponential backoff between retries.
 
 ### INSERT DML concurrency
 
@@ -135,11 +135,11 @@ Mutating DML statements that run concurrently on a table cause DML statement con
 
 ## Fine-grained DML
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . You can process personal data for this feature as outlined in the [Cloud Data Processing Addendum](https://docs.cloud.google.com/terms/data-processing-addendum) , subject to the obligations and restrictions described in the agreement under which you access Google Cloud. Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . You can process personal data for this feature as outlined in the [Cloud Data Processing Addendum](https://docs.cloud.google.com/terms/data-processing-addendum) , subject to the obligations and restrictions described in the agreement under which you access Google Cloud. Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bq-fine-grained-dml-feedback@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bq-fine-grained-dml-feedback@google.com> .
 
 Fine-grained DML is a performance enhancement designed to optimize the execution of `UPDATE` , `DELETE` , and `MERGE` statements (also known as *mutating* DML statements).
 

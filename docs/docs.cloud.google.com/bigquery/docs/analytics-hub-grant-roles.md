@@ -2,7 +2,7 @@
 
 This document describes the Identity and Access Management (IAM) roles for BigQuery sharing (formerly Analytics Hub) and how to grant them. For more information, see [BigQuery sharing roles and permissions](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub) .
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 ## BigQuery sharing IAM roles
 
@@ -71,8 +71,6 @@ If you want to set IAM policies on a project, you must have the [Project IAM Adm
 ### Console
 
 1.  Go to **IAM** for the project.
-    
-    [Go to IAM](https://console.cloud.google.com/console/iam-admin/iam)
 
 2.  Click person\_add **Grant access** .
 
@@ -156,8 +154,6 @@ To grant the role for a data exchange, follow these steps:
 ### Console
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name for which you want to set permissions.
 
@@ -231,8 +227,6 @@ To grant the role for a listing, follow these steps:
 ### Console
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing.
 

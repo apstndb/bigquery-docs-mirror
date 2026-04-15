@@ -128,8 +128,6 @@ When you run a federated query against Cloud SQL, BigQuery annotates the query w
 If you are monitoring logs for query usage on a MySQL or PostgreSQL database, the following annotation can help you identify queries coming from BigQuery.
 
 1.  Go to the **Logs Explorer** page.
-    
-    [Go to the Logs Explorer](https://console.cloud.google.com/logs/query)
 
 2.  In the **Query** tab, enter the following query:
     

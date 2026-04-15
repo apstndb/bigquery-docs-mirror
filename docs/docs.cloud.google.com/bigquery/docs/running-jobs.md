@@ -37,7 +37,7 @@ To run a job programmatically:
 
 3.  After calling the `jobs.insert` method, check the job status by calling `jobs.get` with the job ID and location, and check the `status.state` value to learn the job status. When `status.state` is `DONE` , the job has stopped running; however, a `DONE` status does not mean that the job completed successfully, only that it is no longer running.
     
-    **Note:** There are some wrapper functions that manage job status requests for you. For example, running `jobs.query` creates a job and periodically polls for `DONE` status for a specified period of time.
+    > **Note:** There are some wrapper functions that manage job status requests for you. For example, running `jobs.query` creates a job and periodically polls for `DONE` status for a specified period of time.
 
 4.  Check for job success. If the job has an `errorResult` property, the job has failed. The `status.errorResult` property holds information describing what went wrong in a failed job. If `status.errorResult` is absent, the job finished successfully, although there might have been some nonfatal errors, such as problems importing a few rows in a load job. Nonfatal errors are returned in the job's `status.errors` list.
 

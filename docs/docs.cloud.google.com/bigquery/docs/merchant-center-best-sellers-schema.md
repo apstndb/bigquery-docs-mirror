@@ -26,7 +26,7 @@ The mapping table `BestSellersEntityProductMapping_` contains ranking entity IDs
 
 While brands are ranked across many different categories, all products in the `Products_` table are in leaf categories. To join brands and products on non-leaf categories, use the `google_product_category_ids` field.
 
-**Note:** To access best sellers data, you must meet the [eligibility requirements for market insights](https://support.google.com/merchants/answer/9712881) .
+> **Note:** To access best sellers data, you must meet the [eligibility requirements for market insights](https://support.google.com/merchants/answer/9712881) .
 
 ## `BestSellersProductCluster<Weekly/Monthly>_` tables
 
@@ -56,7 +56,7 @@ While brands are ranked across many different categories, all products in the `P
 | `price_range.currency_code`     | `STRING`               | Currency of the price range of the item.                                                                                                                                                                                                       | AUD                                           |
 | `snapshot_date`                 | `STRING`               | The date for which the table is computed. Has the format `M%Y%m` for monthly tables and `W%Y%m%D` for weekly tables.                                                                                                                           | M202601, W20260216                            |
 
-**Note:** These tables don't have primary keys.
+> **Note:** These tables don't have primary keys.
 
 ## `BestSellersBrand<Weekly/Monthly>_` tables
 
@@ -72,7 +72,7 @@ While brands are ranked across many different categories, all products in the `P
 | `relative_demand_change`   | `STRING`               | Change in demand compared to the previous period (week or month). Set to `UNKNOWN` when no previous rank exists.                                                                       | FLAT, SINKER, RISER                      |
 | `snapshot_date`            | `STRING`               | The date for which the table is computed. Has the format `M%Y%m` for monthly tables and `W%Y%m%D` for weekly tables.                                                                   | M202601, W20260216                       |
 
-**Note:** These tables don't have primary keys.
+> **Note:** These tables don't have primary keys.
 
 ## `BestSellersEntityProductMapping_` table
 

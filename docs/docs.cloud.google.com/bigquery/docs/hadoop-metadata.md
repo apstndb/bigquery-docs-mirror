@@ -1,10 +1,10 @@
 # Extracting metadata from Apache Hive for migration
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for this feature, contact <bigquery-permission-migration-support@google.com> .
+> **Note:** To get support or provide feedback for this feature, contact <bigquery-permission-migration-support@google.com> .
 
 This document shows how you can use the `dwh-migration-dumper` tool to extract the necessary metadata before running a Apache Hive data or permissions migration.
 

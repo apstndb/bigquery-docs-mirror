@@ -44,9 +44,7 @@ You might also be able to get these permissions with [custom roles](https://docs
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -55,8 +53,6 @@ You might also be able to get these permissions with [custom roles](https://docs
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com,compute.googleapis.com)
 
 ## Costs
 
@@ -83,8 +79,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -156,8 +150,6 @@ Create tables of training and evaluation data based on the public [task955\_wiki
 Create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over the Vertex AI `gemini-2.0-flash-001` model.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement to create a remote model:
     
@@ -174,8 +166,6 @@ Create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/st
 Run the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with the remote model to see how it performs on the evaluation data without any tuning.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -199,8 +189,6 @@ Run the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/doc
 To perform a more detailed evaluation of the model performance, use the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) . This function computes model metrics that measure the accuracy and quality of the generated text, in order to see how the model's responses compare to ideal esponses.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -238,8 +226,6 @@ You can see that the baseline model performance isn't bad, but the similarity of
 Create a remote model very similar to the one you created in [Create a model](https://docs.cloud.google.com/bigquery/docs/tune-evaluate#create_a_baseline_model) , but this time specifying the [`AS SELECT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) to provide the training data in order to tune the model.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned) :
     
@@ -264,8 +250,6 @@ Create a remote model very similar to the one you created in [Create a model](ht
 Run the `AI.GENERATE_TEXT` function to see how the tuned model performs on the evaluation data.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -289,8 +273,6 @@ Run the `AI.GENERATE_TEXT` function to see how the tuned model performs on the e
 Use the `ML.EVALUATE` function to see how the tuned model's responses compare to ideal responses.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
@@ -325,16 +307,14 @@ You can see that even though the training dataset used only 1,408 examples, ther
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

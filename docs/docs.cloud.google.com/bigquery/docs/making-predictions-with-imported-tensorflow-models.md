@@ -23,8 +23,6 @@ When you finish the tasks that are described in this document, you can avoid con
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Ensure that the BigQuery API is enabled.
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models#required_permissions) to perform the tasks in this document.
 
@@ -39,8 +37,6 @@ Make sure that you have the following role or roles on the project: [BigQuery St
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -51,8 +47,6 @@ Make sure that you have the following role or roles on the project: [BigQuery St
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -75,8 +69,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -134,8 +126,6 @@ To import the TensorFlow model into your dataset, follow these steps.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  For **Create new** , click **SQL query** .
 
@@ -226,8 +216,6 @@ To make predictions with the imported TensorFlow model, follow these steps.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Under **Create new** , click **SQL query** .
 
@@ -312,16 +300,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Console
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -329,12 +315,12 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 
 ### gcloud
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 

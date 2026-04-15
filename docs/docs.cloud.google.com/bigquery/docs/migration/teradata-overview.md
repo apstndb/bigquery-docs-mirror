@@ -55,21 +55,21 @@ You can define the schema in several ways. The BigQuery Data Transfer Service pr
 
 #### Default schema detection
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for this feature, contact <bq-dts-migration@google.com> .
+> **Note:** To get support or provide feedback for this feature, contact <bq-dts-migration@google.com> .
 
 If you don't specify any schema configuration, the BigQuery Data Transfer Service automatically detects the schema of your Teradata source tables and perform data type mapping to the corresponding BigQuery data types during the data transfer. For more information on the default data type mapping, see [Data types](https://docs.cloud.google.com/bigquery/docs/migration/teradata-sql#data_types) .
 
 #### Using translation engine output for schema
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for this feature, contact <bq-dts-migration@google.com> .
+> **Note:** To get support or provide feedback for this feature, contact <bq-dts-migration@google.com> .
 
 The BigQuery Data Transfer Service uses the output of the BigQuery translation engine for schema mapping during the migration of Teradata tables to BigQuery. To use this option, ensure the following prerequisites are met:
 
@@ -303,7 +303,7 @@ For transfers after initial run, the migration agent will extract data using the
   - If a table has a column with the usage type of `COMMIT_TIMESTAMP` , then all rows with a timestamp between T1 and T2 are extracted and appended to the existing table in BigQuery.
   - If a table has a column with the usage type of `COMMIT_TIMESTAMP` and a column with usage type of `PRIMARY_KEY` , then all rows with a timestamp between T1 and T2 are extracted. Any new rows are appended and modified rows are updated in the existing table in BigQuery.
 
-**Note:** Incremental migration from Teradata does not support the syncing of deleted rows with BigQuery.
+> **Note:** Incremental migration from Teradata does not support the syncing of deleted rows with BigQuery.
 
 The following are example schema files for incremental transfers.
 

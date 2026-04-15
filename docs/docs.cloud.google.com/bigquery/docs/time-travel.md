@@ -53,13 +53,13 @@ If you reduce the time travel window duration, delete a table, and then realize 
 
 ### Time travel and row-level access
 
-If a table has, or has had, [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then only a table administrator can access historical data for the table. The following [Identity and Access Management (IAM)](https://docs.cloud.google.com/bigquery/docs/access-control) permission is required to restore tables with row access policies:
+If a table has, or has had, [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , only a principal that is granted the following [Identity and Access Management (IAM)](https://docs.cloud.google.com/bigquery/docs/access-control) permission can access historical data for the table:
 
 | **Permission**                                                                                                                                                                      | **Resource**                                      |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | [`bigquery.rowAccessPolicies.overrideTimeTravelRestrictions`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.rowAccessPolicies.overrideTimeTravelRestrictions) | The table whose historical data is being accessed |
 
-The `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission can't be added to a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) . The following roles provide the required permission:
+The following predefined IAM roles provide `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission:
 
 | **Role**                                                                                                        | **Resource**                                      |
 | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -67,7 +67,9 @@ The `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission can't
 | [`roles/bigquery.studioAdmin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) | The table whose historical data is being accessed |
 | [`roles/iam.databasesAdmin`](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.databasesAdmin)   | The table whose historical data is being accessed |
 
-**Note:** The **`roles/owner`** role does not contain all the permissions present in the table administrator roles, so you must grant one of these table administrator roles to any user who restores tables that have or had row-level access policies applied to them.
+You can also grant `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission using a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
+
+> **Note:** The **`roles/owner`** role does not contain all the permissions present in the table administrator roles, so you must grant one of these table administrator roles to any user who restores tables that have or had row-level access policies applied to them.
 
   - Run the following command to get the equivalent Unix epoch time by passing the UTC timestamp:
     
@@ -92,7 +94,7 @@ When you perform the following operations, the data that is replaced or removed 
 
 You can't query or directly recover data in fail-safe storage. To recover data from fail-safe storage, contact [Cloud Customer Care](https://cloud.google.com/support-hub) .
 
-**Warning:** Once the fail-safe period has passed, Cloud Customer Care can't recover any of your deleted data.
+> **Warning:** Once the fail-safe period has passed, Cloud Customer Care can't recover any of your deleted data.
 
 ## Billing
 

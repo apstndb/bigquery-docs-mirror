@@ -75,8 +75,6 @@ Create a dataset named `mobilenet_inference_test` :
 ### SQL
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
@@ -89,8 +87,6 @@ Create a dataset named `mobilenet_inference_test` :
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
 
 2.  Run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) to create the dataset:
     
@@ -107,8 +103,6 @@ Create a connection named `lake-connection` :
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -161,8 +155,6 @@ Create a connection named `lake-connection` :
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click **Grant Access** .
     
@@ -188,7 +180,7 @@ Replace `  MEMBER  ` with the service account ID that you copied earlier. Replac
 
 For more information, see [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) .
 
-**Note:** There can be a delay of up to a minute before new permissions take effect.
+> **Note:** There can be a delay of up to a minute before new permissions take effect.
 
 ## Upload the dataset to Cloud Storage
 
@@ -206,8 +198,6 @@ Create an object table named `sample_images` based on the flowers dataset you up
 ### SQL
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
@@ -244,8 +234,6 @@ Get the model files and make them available in Cloud Storage:
 ## Load the model into BigQuery ML
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
@@ -263,8 +251,6 @@ Get the model files and make them available in Cloud Storage:
 Inspect the uploaded model to see what its input and output fields are:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -287,8 +273,6 @@ Inspect the uploaded model to see what its input and output fields are:
 Run inference on the `sample_images` object table using the `mobilenet` model:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
@@ -317,16 +301,14 @@ Run inference on the `sample_images` object table using the `mobilenet` model:
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

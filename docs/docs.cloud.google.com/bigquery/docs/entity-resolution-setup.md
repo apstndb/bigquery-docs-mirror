@@ -173,7 +173,7 @@ Obtain the service account ID of the Apache Spark connection from the TransUnion
 
 You can invoke the application from within your environment by running the following script.
 
-**Note:** You can use multiple input tables, as long as they are mapped to different metadata configurations.
+> **Note:** You can use multiple input tables, as long as they are mapped to different metadata configurations.
 
     call `<project_id>.<dataset_id>.TransUnion_get_identities`("<project_id>.<dataset_id>.TransUnion_er_metadata","1");
     -- using metadata table, and 1 = config_id for the batch run
@@ -197,8 +197,6 @@ The following sections show you how to configure entity resolution in BigQuery. 
 2.  Get the name of the service account that's associated with the Cloud Run or Cloud Run function:
     
     1.  In the Google Cloud console, go to the **Cloud Functions** page.
-        
-        [Go to Cloud Functions](https://console.cloud.google.com/functions)
     
     2.  Click the function's name, and then click the **Details** tab.
     

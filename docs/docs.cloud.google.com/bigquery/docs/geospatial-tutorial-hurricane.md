@@ -24,12 +24,10 @@ Before you begin this tutorial, use the Google Cloud console to create or select
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 2.  Optional: [Enable billing](https://docs.cloud.google.com/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#setup) .
     
-    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
+    > **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
 
 ## Explore the sample data
 
@@ -44,8 +42,6 @@ The historical positions and intensities along the tracks of global tropical cyc
 IBTrACS collects data about TCs reported by international monitoring centers who have a responsibility to forecast and report on TCs (and also includes some important historical datasets). IBTrACS includes data from 9 different countries. Historically, the data describing these systems has included best estimates of their track and intensity (hence the term, best track).
 
 You can start exploring this data in the Google Cloud console by viewing the details of the `hurricanes` table:
-
-[Go to hurricanes schema](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=noaa_hurricanes&t=hurricanes&page=table)
 
 ## Query the path of hurricane Maria in 2017
 
@@ -96,8 +92,6 @@ The query clauses do the following:
 To run the query by using the Google Cloud console:
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Enter the following GoogleSQL query in the **Query editor** text area.
     
@@ -154,8 +148,6 @@ Before using Geo Viz, you must authenticate and grant access to data in BigQuery
 To set up Geo Viz:
 
 1.  Open the Geo Viz web tool.
-    
-    [Open the Geo Viz web tool](https://bigquerygeoviz.appspot.com/)
 
 2.  Under step one, **Select data** , click **Authorize** .
     
@@ -276,16 +268,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

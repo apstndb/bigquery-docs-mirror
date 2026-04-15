@@ -601,7 +601,7 @@ You can cast a string to bytes with a format element in the format string. If th
 
 In the string expression, whitespace characters, such as `\n` , are ignored if the `BASE64` or `BASE64M` format element is used.
 
-**Note:** The bytes output value is displayed as a base64-encoded string. For example, `b'\x00\x01\xEF\xFF'` is displayed as `0001efff` when you use the `HEX` format element.
+> **Note:** The bytes output value is displayed as a base64-encoded string. For example, `b'\x00\x01\xEF\xFF'` is displayed as `0001efff` when you use the `HEX` format element.
 
 <table>
 <colgroup>
@@ -2093,7 +2093,7 @@ You can cast a [numeric type](https://docs.cloud.google.com/bigquery/docs/refere
 
 Except for the exponent format element ( `EEEE` ), all of the format elements generate a fixed number of characters in the output, and the output is aligned by the decimal point. The first character outputs a `-` for negative numbers; otherwise a space. To suppress blank characters and trailing zeroes, use the `FM` flag.
 
-**Note:** Some format elements are locale-specific. GoogleSQL always uses the `'en-us'` locale.
+> **Note:** Some format elements are locale-specific. GoogleSQL always uses the `'en-us'` locale.
 
 **Return type**
 

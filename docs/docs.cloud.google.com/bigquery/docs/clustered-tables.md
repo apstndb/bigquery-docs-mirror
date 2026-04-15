@@ -112,7 +112,7 @@ As data is added to a clustered table, the new data is organized into blocks, wh
 
 To maintain the performance characteristics of a clustered table, BigQuery performs automatic reclustering in the background. For partitioned tables, clustering is maintained for data within the scope of each partition.
 
-**Note:** Automatic reclustering has no effect on query capacity.
+> **Note:** Automatic reclustering has no effect on query capacity.
 
 ## Limitations
 

@@ -632,7 +632,7 @@ This function ignores `NULL` values unless `RESPECT NULLS` is present.
 
 To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
-**Note:** If you're querying a large dataset, you can compute results faster and save resources by using [KLL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions) for approximate percentile values. For more information, see [Sketches](https://docs.cloud.google.com/bigquery/docs/sketches) .
+> **Note:** If you're querying a large dataset, you can compute results faster and save resources by using [KLL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions) for approximate percentile values. For more information, see [Sketches](https://docs.cloud.google.com/bigquery/docs/sketches) .
 
 **Supported Argument Types**
 

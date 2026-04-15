@@ -150,8 +150,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -180,8 +178,6 @@ Select one of the following options:
 Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -353,7 +349,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -429,7 +425,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 After you create the connection, open it. In the **Connection info** pane, copy the service account ID. You will need this ID when you configure permissions for the connection. When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
 
@@ -440,8 +436,6 @@ You must give the service account that is associated with the new connection wri
 To grant access to database-level roles for the service account, do the following:
 
 1.  Go to the Spanner instances page.
-    
-    [Go to the instances page](https://console.cloud.google.com/spanner/instances)
 
 2.  Click the name of the instance that contains your database.
 
@@ -484,7 +478,7 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
 
   - Specify `HIGH` priority within [`spanner_options`](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#spanner_options) . If your Spanner instance has [autoscaling](https://docs.cloud.google.com/spanner/docs/autoscaling-overview) enabled, setting `HIGH` priority helps ensure that CPU utilization reaches the necessary threshold to trigger scaling. This allows the autoscaler to add compute resources in response to the export load, which can improve overall export throughput.
     
-    **Caution:** using `HIGH` priority can cause significant performance degradation for other workloads served by the same Spanner instance. Consider using `HIGH` priority only if the Spanner instance is dedicated to this export, or if other workloads are not sensitive to performance impacts.
+    > **Caution:** using `HIGH` priority can cause significant performance degradation for other workloads served by the same Spanner instance. Consider using `HIGH` priority only if the Spanner instance is dedicated to this export, or if other workloads are not sensitive to performance impacts.
     
     The following example shows a Spanner export command set to `HIGH` priority:
     

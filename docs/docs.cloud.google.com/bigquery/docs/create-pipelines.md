@@ -17,7 +17,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 For more information about Dataform IAM, see [Control access with IAM](https://docs.cloud.google.com/dataform/docs/access-control) .
 
-**Note:** When you create a pipeline, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that pipeline. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the pipelines created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
+> **Note:** When you create a pipeline, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that pipeline. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the pipelines created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
 ### Required roles for notebook options
 
@@ -31,13 +31,11 @@ If you don't have this role, you can select the default notebook runtime specifi
 
 If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
 
-**Note:** If you create a pipeline and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that pipeline and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+> **Note:** If you create a pipeline and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that pipeline and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
 
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, find the project in which you have enabled code assets.
 
@@ -56,8 +54,6 @@ You can also use the BigQuery **Pipelines & Connections** page in the Google Clo
 To create a pipeline, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the tab bar of the editor pane, click the arrow\_drop\_down arrow next to the **+** sign, and then click **Pipeline** .
 
@@ -69,7 +65,7 @@ To create a pipeline, follow these steps:
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with my user credentials** .
         
-        **Note:** Authenticating API-based runs with user credentials isn't supported. To [run all the tasks in a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#run-pipeline-all-tasks) using the Dataform API, you must configure the pipeline to use a service account.
+        > **Note:** Authenticating API-based runs with user credentials isn't supported. To [run all the tasks in a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#run-pipeline-all-tasks) using the Dataform API, you must configure the pipeline to use a service account.
     
       - To use a service account, select **Run with selected service account** , and then select a service account. If you need to create a service account, click **New service account** .
 
@@ -93,11 +89,11 @@ To configure the SQLX settings for your pipeline, do the following in the **SQLX
 
 1.  In the **Default project** field, enter the name of an existing Google Cloud project. This value is used for `defaultProject` in the `workflow_settings.yaml` file and for `defaultDatabase` in the `dataform.json` file. The default project is used by pipeline tasks during their execution.
     
-    **Note:** The project name isn't validated, so it's possible to enter any non-empty string. However, if the project doesn't exist, the pipeline execution fails.
+    > **Note:** The project name isn't validated, so it's possible to enter any non-empty string. However, if the project doesn't exist, the pipeline execution fails.
 
 2.  Optional: In the **Default dataset** field, search for and select an existing dataset. The list of available datasets is filtered based on the selected project and processing location. This value is used for `defaultDataset` in the `workflow_settings.yaml` file. The default dataset is used by pipeline tasks during their execution.
     
-    **Note:** Setting the default dataset and then changing the pipeline's region invalidates the dataset selection. Changing the project can also invalidate the dataset selection. If a given dataset doesn't exist in the selected project, it is created.
+    > **Note:** Setting the default dataset and then changing the pipeline's region invalidates the dataset selection. Changing the project can also invalidate the dataset selection. If a given dataset doesn't exist in the selected project, it is created.
 
 ### Notebook options
 
@@ -108,9 +104,9 @@ To add a notebook to your pipeline, do the following in the **Notebook options**
       - To view specifications for the default runtime, click the adjacent arrow.
       - To create a new runtime, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
     
-    **Note:** A notebook runtime template must be located in the same region as the pipeline that specifies it.
+    > **Note:** A notebook runtime template must be located in the same region as the pipeline that specifies it.
     
-    **Note:** When you include a notebook in a BigQuery pipeline, you can't change the network of the Vertex AI runtime instance. The runtime is restricted to the default network, and selecting a different network isn't supported.
+    > **Note:** When you include a notebook in a BigQuery pipeline, you can't change the network of the Vertex AI runtime instance. The runtime is restricted to the default network, and selecting a different network isn't supported.
 
 2.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
 
@@ -123,8 +119,6 @@ To add a notebook to your pipeline, do the following in the **Notebook options**
 To add a task to a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -222,11 +216,11 @@ To add a task to a pipeline, follow these steps:
     
     ### Table
     
-    **Preview**
+    > **Preview**
+    > 
+    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
     
-    This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-    
-    **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
+    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
     
     1.  Click **Add task** , and then select **Table** .
     
@@ -250,7 +244,7 @@ To add a task to a pipeline, follow these steps:
         
         The editor validates your code and displays the validation status.
         
-        **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
+        > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
     
     8.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
     
@@ -260,11 +254,11 @@ To add a task to a pipeline, follow these steps:
     
     ### View
     
-    **Preview**
+    > **Preview**
+    > 
+    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
     
-    This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-    
-    **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
+    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
     
     1.  Click **Add task** , and then select **View** .
     
@@ -288,7 +282,7 @@ To add a task to a pipeline, follow these steps:
         
         The editor validates your code and displays the validation status.
         
-        **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
+        > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
     
     8.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
     
@@ -301,8 +295,6 @@ To add a task to a pipeline, follow these steps:
 To edit a pipeline task, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -325,8 +317,6 @@ To edit a pipeline task, follow these steps:
 To delete a task from a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -342,15 +332,13 @@ To delete a task from a pipeline, follow these steps:
 
 ## Share a pipeline
 
-**Important:** If you enhance security by setting the `enable_private_workspace` field [(Preview)](https://cloud.google.com/products#product-launch-stages) to `true` in the [`projects.locations.updateConfig` Dataform API method](https://docs.cloud.google.com/dataform/reference/rest/v1beta1/projects.locations/updateConfig) , only the pipeline creator can read and write code in that pipeline. For more information, see [Enable private workspaces](https://docs.cloud.google.com/dataform/docs/access-control#enable-private-workspaces) .
+> **Important:** If you enhance security by setting the `enable_private_workspace` field [(Preview)](https://cloud.google.com/products#product-launch-stages) to `true` in the [`projects.locations.updateConfig` Dataform API method](https://docs.cloud.google.com/dataform/reference/rest/v1beta1/projects.locations/updateConfig) , only the pipeline creator can read and write code in that pipeline. For more information, see [Enable private workspaces](https://docs.cloud.google.com/dataform/docs/access-control#enable-private-workspaces) .
 
-**Note:** You can share a pipeline but not a task within the pipeline.
+> **Note:** You can share a pipeline but not a task within the pipeline.
 
 To share a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -373,8 +361,6 @@ To share a pipeline, follow these steps:
 ## Share a link to a pipeline
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -399,8 +385,6 @@ To manually run the current version of a pipeline, select one of the following o
 To run all the tasks in a pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -416,7 +400,7 @@ To run all the tasks in a pipeline, do the following:
 
 ### API
 
-**Note:** The Dataform API doesn't support user credentials for pipeline runs. You must select a service account in the **Authentication** section of your pipeline settings to use the API.
+> **Note:** The Dataform API doesn't support user credentials for pipeline runs. You must select a service account in the **Authentication** section of your pipeline settings to use the API.
 
 To run a pipeline manually, compile the default workspace and use the compilation result to create a workflow invocation.
 
@@ -464,8 +448,6 @@ To run a pipeline manually, compile the default workspace and use the compilatio
 To run selected tasks in a pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -504,8 +486,6 @@ To run selected tasks in a pipeline, do the following:
 To run tasks with selected tags in a pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -544,11 +524,11 @@ To run tasks with selected tags in a pipeline, do the following:
 
 ### Authorize your Google Account
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
+> **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
 To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
 
@@ -560,7 +540,7 @@ To revoke the permission that you granted, follow these steps:
 2.  Click **BigQuery Pipelines** .
 3.  Click **Remove access** .
 
-**Warning:** Revoking access permissions prevents any future pipeline runs that this Google Account owns across all regions.
+> **Warning:** Revoking access permissions prevents any future pipeline runs that this Google Account owns across all regions.
 
 If your pipeline contains a notebook, you must also manually grant permission for Colab Enterprise to get the access token for your Google Account and access the source data on your behalf. You only need to give permission once. You can revoke this permission on the [Google Account page](https://myaccount.google.com/) .
 

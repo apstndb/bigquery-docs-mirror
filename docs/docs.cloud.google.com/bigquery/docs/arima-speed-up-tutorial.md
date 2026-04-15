@@ -34,8 +34,6 @@ For more information about costs, see the [BigQuery pricing](https://cloud.googl
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
@@ -62,8 +60,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -117,8 +113,6 @@ The `SELECT` statement of the following query uses the [`EXTRACT` function](http
 Follow these steps to create the input data table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -159,8 +153,6 @@ This example leaves out the time points in the time series after June 1, 2016 so
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -186,8 +178,6 @@ Evaluate the forecasting accuracy of the model by using the `ML.EVALUATE` functi
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -218,8 +208,6 @@ Of the forecasting metrics returned by [`ML.EVALUATE`](https://docs.cloud.google
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -244,8 +232,6 @@ In the model created by the following query, you use a smaller search space for 
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -270,8 +256,6 @@ Follow these steps to evaluate the model:
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -300,8 +284,6 @@ The following example uses the `max_time_series_length` option to achieve fast t
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -327,8 +309,6 @@ Follow these steps to create the model:
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -355,8 +335,6 @@ In this step, you forecast liquor sales for over 1 million liquor products in di
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -397,8 +375,6 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -410,16 +386,14 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

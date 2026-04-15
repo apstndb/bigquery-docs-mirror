@@ -52,7 +52,9 @@ The Product Targeting table has the following schema:
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Whether the product is targeted by Ads campaigns.<br />
 
-<strong>Note:</strong> Products targeted by Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code dir="ltr" translate="no">destinations.status</code> field of the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">Products report</a> .</td>
+<blockquote>
+<strong>Note:</strong> Products targeted by Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code dir="ltr" translate="no">destinations.status</code> field of the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">Products report</a> .
+</blockquote></td>
 <td>TARGETED, NOT_TARGETED</td>
 </tr>
 </tbody>

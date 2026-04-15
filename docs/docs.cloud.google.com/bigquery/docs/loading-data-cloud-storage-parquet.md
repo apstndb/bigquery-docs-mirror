@@ -133,8 +133,6 @@ To load Parquet data from Cloud Storage into a new BigQuery table:
 
 In the Google Cloud console, go to the **BigQuery** page.
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
-
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -158,17 +156,15 @@ In the **Create table** pane, specify the following details:
       - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) .
 6.  Click **Create table** .
 
-**Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
-  
-After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+> **Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
+>   
+> After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
 
 ### SQL
 
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads a Parquet file into the new table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -567,15 +563,13 @@ You can append or overwrite a table by using one of the following:
   - The `jobs.insert` API method and configuring a `load` job
   - The client libraries
 
-**Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
+> **Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
 
 To append or overwrite a table with Parquet data:
 
 ### Console
 
 In the Google Cloud console, go to the **BigQuery** page.
-
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -605,8 +599,6 @@ In the **Create table** pane, specify the following details:
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends a Parquet file to the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -625,7 +617,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the `bq load` command with the `--replace` flag to overwrite the table. Use the `--noreplace` flag to append data to the table. If no flag is specified, the default is to append data. Supply the `--source_format` flag and set it to `PARQUET` . Because Parquet schemas are automatically retrieved from the self-describing source data, you don't need to provide a schema definition.
 
-**Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+> **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 

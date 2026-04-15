@@ -50,8 +50,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -108,8 +106,6 @@ The PM2.5, temperature, and wind speed data are in separate tables. Create the `
 The new table has daily data from August 11, 2009 to January 31, 2022.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -157,8 +153,6 @@ The new table has daily data from August 11, 2009 to January 31, 2022.
 Create a multivariate time series model, using the data from `bqml_tutorial.seattle_air_quality_daily` as training data.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -188,8 +182,6 @@ Create a multivariate time series model, using the data from `bqml_tutorial.seat
 Run anomaly detection against the historical data that you used to train the model.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -222,8 +214,6 @@ Run anomaly detection against the historical data that you used to train the mod
 Run anomaly detection on the new data that you generate.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -271,16 +261,14 @@ Run anomaly detection on the new data that you generate.
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

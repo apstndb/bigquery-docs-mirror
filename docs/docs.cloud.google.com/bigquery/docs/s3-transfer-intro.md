@@ -60,7 +60,7 @@ Following the same example, suppose that the user then creates another file in t
 
 The preceding example shows that when a transfer fails, no files are transferred to the BigQuery destination table. Any file changes are transferred at the next successful transfer run. Any subsequent successful transfers following a failed transfer does not cause duplicate data. In the case of a failed transfer, you can also choose to [manually trigger a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) outside its regularly scheduled time.
 
-**Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`updated`](https://docs.cloud.google.com/storage/docs/metadata#timestamps) .
+> **Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`updated`](https://docs.cloud.google.com/storage/docs/metadata#timestamps) .
 
 ### Truncated transfers
 
@@ -171,7 +171,7 @@ To add IP ranges as allowed public IP addresses to Amazon S3, see [IP restrictio
 
 When you transfer data from Amazon S3, it is possible that some of your data won't be transferred to BigQuery, particularly if the files were added to the bucket very recently. It should take approximately 5 minutes for a file to become available to the BigQuery Data Transfer Service after it is added to the bucket.
 
-**Important:** To reduce the possibility of missing data, schedule your Amazon S3 transfers to occur at least 5 minutes after your files are added to the bucket.
+> **Important:** To reduce the possibility of missing data, schedule your Amazon S3 transfers to occur at least 5 minutes after your files are added to the bucket.
 
 ## Outbound data transfer costs best practice
 

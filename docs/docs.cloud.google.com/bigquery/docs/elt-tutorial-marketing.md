@@ -26,8 +26,6 @@ To keep BigQuery up to date with the latest marketing data from your data source
 In this tutorial, you use Google Ads as the example data source. For a full list of data sources supported by the BigQuery Data Transfer Service, see [Supported data sources](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) .
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -191,8 +189,6 @@ After you create the data transfer configuration to transfer the latest data fro
 Create a Dataform repository to store the [SQLX queries](https://docs.cloud.google.com/dataform/docs/overview#dataform-core) that make up your transformation code.
 
 1.  In the Google Cloud console, go to the **Dataform** page.
-    
-    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Click add **Create repository** .
 
@@ -211,8 +207,6 @@ For more information about Dataform repositories, see [About Dataform repositori
 Create a Dataform development workspace so that you can work on the transformation code within your repository before you commit and push your changes to your repository.
 
 1.  In the Google Cloud console, go to the **Dataform** page.
-    
-    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Click `marketing-tutorial-repository` .
 
@@ -240,8 +234,6 @@ Connect your newly-transferred Google Ads table to Dataform by declaring it as a
 In Dataform, you declare a data source destination by creating a SQLX file in the `definitions/` directory:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
-    
-    [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Select `marketing-tutorial-repository` .
 
@@ -330,8 +322,6 @@ After you have defined your data transformation file, schedule the data transfor
 A production release in Dataform ensures that your environment is consistently updated with the results of your data transformations. The following steps show you how to specify the `main` branch of the `marketing-tutorial-repository` repository to store your data transformations:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
-    
-    [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Select `marketing-tutorial-repository` .
 
@@ -352,8 +342,6 @@ A production release in Dataform ensures that your environment is consistently u
 Once you have created a production release, you can then create a workflow configuration that runs your data transformations on a specified schedule in your repository. The following steps show you how to schedule daily transformations from the `transformations` file:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
-    
-    [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Select `marketing-tutorial-repository` .
 
@@ -391,8 +379,6 @@ To avoid incurring charges to your Google Cloud account for the resources used o
 To avoid incurring charges for BigQuery assets, delete the dataset called `dataform` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** panel, expand your project and select `dataform` .
 
@@ -405,8 +391,6 @@ To avoid incurring charges for BigQuery assets, delete the dataset called `dataf
 Dataform development workspace creation incurs no costs, but to delete the development workspace you can follow these steps:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
-    
-    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Click `quickstart-repository` .
 
@@ -425,8 +409,6 @@ Dataform development workspace creation incurs no costs, but to delete the devel
 Dataform repository creation incurs no costs, but to delete the repository you can follow these steps:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
-    
-    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  By `quickstart-repository` , click the more\_vert **More** menu, and then select **Delete** .
 

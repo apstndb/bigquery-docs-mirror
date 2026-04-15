@@ -1,10 +1,10 @@
 # Use the JDBC driver for BigQuery
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request feedback or support for this feature, send an email to <bigquery-drivers-feedback@google.com> .
+> **Note:** To request feedback or support for this feature, send an email to <bigquery-drivers-feedback@google.com> .
 
 The Java Database Connectivity (JDBC) driver for BigQuery connects your Java applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. To connect non-Java applications to BigQuery, use the [Simba Open Database Connectivity (ODBC) driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
 
@@ -136,7 +136,7 @@ To establish a connection between your Java application and BigQuery with the JD
 
 JDBC driver connection properties are configuration parameters that you include in the connection string or pass through setter methods when you [establish a connection](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#establish_a_connection) to a database. The following connection properties are supported by the JDBC driver for BigQuery.
 
-**Note:** All connection property names are case-insensitive. Boolean connection properties accept both `TRUE` / `FALSE` and `1` / `0` .
+> **Note:** All connection property names are case-insensitive. Boolean connection properties accept both `TRUE` / `FALSE` and `1` / `0` .
 
 **Connection property**
 

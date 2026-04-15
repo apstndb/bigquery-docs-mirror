@@ -146,17 +146,17 @@ The differential privacy analysis rule enforces a privacy budget, which limits t
 
 A view that includes this analysis rule must include the [differential privacy policy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy) and can optionally include the [join restriction policy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy) .
 
-**Preview**
-
-Parameter-driven privacy budgeting for differential privacy is in [preview](https://cloud.google.com/products#product-launch-stages) while differential privacy enforcement in BigQuery data clean rooms is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-This preview product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-To provide feedback or request support for features in preview, send an email to <bq-dcr-feedback@google.com> .
+> **Preview**
+> 
+> Parameter-driven privacy budgeting for differential privacy is in [preview](https://cloud.google.com/products#product-launch-stages) while differential privacy enforcement in BigQuery data clean rooms is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+> 
+> This preview product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
+> 
+> To provide feedback or request support for features in preview, send an email to <bq-dcr-feedback@google.com> .
 
 ### Define a differential privacy analysis rule for a view
 
-**Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
+> **Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
 You can define a differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `CREATE VIEW` statement:
 
@@ -230,7 +230,7 @@ To review the `privacy_policy` syntax for `CREATE VIEW` , see the `OPTIONS` list
 
 ### Update a differential privacy analysis rule for a view
 
-**Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
+> **Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
 You can change the differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `ALTER VIEW` statement:
 
@@ -252,7 +252,7 @@ SET OPTIONS (
 
 For more information about the values you can set for the privacy policies in the preceding syntax, see [Define a differential privacy analysis rule for a view](https://docs.cloud.google.com/bigquery/docs/analysis-rules#dp_analysis_rules) .
 
-**Note:** When you update a differential privacy analysis rule, the privacy budgets are reset.
+> **Note:** When you update a differential privacy analysis rule, the privacy budgets are reset.
 
 Example:
 
@@ -270,11 +270,11 @@ To review the `privacy_policy` syntax for `ALTER VIEW` , see the `OPTIONS` list 
 
 ### Query a differential privacy analysis rule–enforced view
 
-**Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
+> **Note:** In this section, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
 You can query a view that has a differential privacy analysis rule with the `DIFFERENTIAL_PRIVACY` clause. To review the syntax and additional examples for the `DIFFERENTIAL_PRIVACY` clause, see [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
 
-**Note:** If you've just created a view with a differential privacy analysis rule, briefly wait before running any queries on it.
+> **Note:** If you've just created a view with a differential privacy analysis rule, briefly wait before running any queries on it.
 
 Example:
 
@@ -297,7 +297,7 @@ In the following example, a differential privacy analysis rule is queried on a v
      | U25     | 524.81202728847893 |
      *---------+--------------------*/
 
-**Warning:** When a privacy budget is exhausted over one or multiple queries, the view can no longer be queried and must be updated or re-created.
+> **Warning:** When a privacy budget is exhausted over one or multiple queries, the view can no longer be queried and must be updated or re-created.
 
 #### Block a query with an out-of-bounds epsilon
 
@@ -329,7 +329,7 @@ After you've created your view, briefly wait, and then run the following query:
     FROM mydataset.ExamView
     GROUP BY test_id;
 
-**Warning:** When a privacy budget is exhausted over one or multiple queries, the view can no longer be queried and must be updated or re-created.
+> **Warning:** When a privacy budget is exhausted over one or multiple queries, the view can no longer be queried and must be updated or re-created.
 
 #### Block queries that have exceeded an epsilon budget
 
@@ -362,7 +362,7 @@ After you've created your view, briefly wait, and then run the following query t
     FROM mydataset.ExamView
     GROUP BY test_id;
 
-**Warning:** When a privacy budget is exhausted over one or multiple queries, the view can no longer be queried and must be updated or re-created.
+> **Warning:** When a privacy budget is exhausted over one or multiple queries, the view can no longer be queried and must be updated or re-created.
 
 ## List overlap analysis rule
 

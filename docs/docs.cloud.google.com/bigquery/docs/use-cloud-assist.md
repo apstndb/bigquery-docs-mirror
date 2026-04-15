@@ -1,8 +1,8 @@
 # Use Gemini Cloud Assist
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This document describes how to use [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/overview) , a product of the [Gemini for Google Cloud](https://cloud.google.com/products/gemini) portfolio, to help you understand and work with your metadata, jobs, and queries in BigQuery. It provides supported use cases and sample prompts that you can use in Gemini Cloud Assist.
 
@@ -15,8 +15,6 @@ In order to support questions and requests about your Google Cloud resources, Ge
 ## Use Gemini Cloud Assist
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the Google Cloud toolbar, click spark **Open or close Gemini AI chat** to open Gemini Cloud Assist chat.
     
@@ -46,7 +44,7 @@ Learn more about jobs executed in your project, including your personal job hist
 
 ## Discover resources
 
-Search for and learn about datasets and table resources in a single project or across multiple projects. Gemini Cloud Assist uses Dataplex Universal Catalog to search your BigQuery resources. Searches are performed using your permissions. For example, if you don't have permission to view the metadata of a resource, then it won't show up in the results. Supported use cases include the following:
+Search for and learn about datasets and table resources in a single project or across multiple projects. Gemini Cloud Assist uses Knowledge Catalog to search your BigQuery resources. Searches are performed using your permissions. For example, if you don't have permission to view the metadata of a resource, then it won't show up in the results. Supported use cases include the following:
 
   - **Search for a resource by name** . In the **Cloud Assist** panel, enter a prompt similar to the following:
     

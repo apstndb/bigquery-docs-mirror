@@ -74,8 +74,6 @@ To view job details, follow these steps:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -92,7 +90,7 @@ To view job details, follow these steps:
 
 5.  To view job details, click a job.
     
-    **Note:** The duration of a job is calculated by subtracting start time (instead of creation time) from end time.
+    > **Note:** The duration of a job is calculated by subtracting start time (instead of creation time) from end time.
 
 ### bq
 
@@ -333,8 +331,6 @@ To list jobs in a project, follow these steps:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -548,15 +544,13 @@ You can cancel a `RUNNING` or `PENDING` job. It usually takes less than a minute
 
 Even if the job can be canceled, success is not guaranteed. The job might have completed by the time the cancel request is submitted, or the job might be in a stage where it cannot be canceled.
 
-**Note:** You can still incur costs after canceling a job depending on the stage at which it was canceled. For more information, see the [Pricing](https://cloud.google.com/bigquery/pricing) page.
+> **Note:** You can still incur costs after canceling a job depending on the stage at which it was canceled. For more information, see the [Pricing](https://cloud.google.com/bigquery/pricing) page.
 
 To cancel a job, follow these steps:
 
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** and enter a query.
 
@@ -832,8 +826,6 @@ To repeat a job, follow these steps:
 To repeat a query job, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -852,8 +844,6 @@ To repeat a query job, follow these steps:
 To repeat a load job, do the following:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -867,7 +857,7 @@ To repeat a load job, do the following:
 
 6.  To repeat a job, click **Repeat load job** .
 
-**Note:** You cannot repeat an extract job or a copy job using the Google Cloud console.
+> **Note:** You cannot repeat an extract job or a copy job using the Google Cloud console.
 
 ### bq
 

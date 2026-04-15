@@ -152,7 +152,7 @@ See [Feature Attribution Methods](https://docs.cloud.google.com/vertex-ai/docs/e
 
 When your BigQuery ML model is registered in Model Registry, and if it is a type of model that supports Explainable AI, you can enable Explainable AI on the model when deploying to an endpoint. When you register your BigQuery ML model, all of the associated metadata is populated for you.
 
-**Note:** Explainable AI incurs a minor additional cost. See [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing) to learn more.
+> **Note:** Explainable AI incurs a minor additional cost. See [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing) to learn more.
 
 1.  [Register your BigQuery ML model to the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) .
 2.  Go to the **Model Registry** page from the BigQuery section in the Google Cloud console.

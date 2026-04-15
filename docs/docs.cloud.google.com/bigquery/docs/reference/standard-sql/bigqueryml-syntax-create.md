@@ -31,7 +31,7 @@ For more information about IAM roles and permissions in BigQuery, see [Introduct
 
 ## `CREATE MODEL` syntax
 
-**Note:** This syntax statement provides a comprehensive list of model types with their model options. When you create a model, use that model specific `CREATE MODEL` statement for convenience. You can view specific `CREATE MODEL` statements by clicking the `MODEL_TYPE` name in the following list, in the table of contents in the left panel, or in the *create model* link in the [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) .
+> **Note:** This syntax statement provides a comprehensive list of model types with their model options. When you create a model, use that model specific `CREATE MODEL` statement for convenience. You can view specific `CREATE MODEL` statements by clicking the `MODEL_TYPE` name in the following list, in the table of contents in the left panel, or in the *create model* link in the [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) .
 
 ``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
@@ -502,7 +502,7 @@ Create a model by specifying a Cloud AI service, or the endpoint for a Vertex AI
   
 [CREATE MODEL statement for remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
 
-**Note:** We are deprecating `ARIMA` as the model type. While the model training pipelines of `ARIMA` and `ARIMA_PLUS` are the same, `ARIMA_PLUS` supports more capabilities, including support for a new training option, [`DECOMPOSE_TIME_SERIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#decompose_time_series) , and table-valued functions including [`ML.ARIMA_EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) and [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
+> **Note:** We are deprecating `ARIMA` as the model type. While the model training pipelines of `ARIMA` and `ARIMA_PLUS` are the same, `ARIMA_PLUS` supports more capabilities, including support for a new training option, [`DECOMPOSE_TIME_SERIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#decompose_time_series) , and table-valued functions including [`ML.ARIMA_EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) and [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
 
 #### Other model options
 

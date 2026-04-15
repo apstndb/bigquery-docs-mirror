@@ -54,7 +54,7 @@ For information about the data retention policy for Google Ad Manager, see <a hr
 </tbody>
 </table>
 
-**Note:** The BigQuery Data Transfer Service supports the following delimiters for Google Ad Manager DT files: Tab ( \\t ), Pipe ( | ), Caret ( ^ ), and Comma ( , ).
+> **Note:** The BigQuery Data Transfer Service supports the following delimiters for Google Ad Manager DT files: Tab ( \\t ), Pipe ( | ), Caret ( ^ ), and Comma ( , ).
 
 ## Data ingestion from Google Ad Manager transfers
 
@@ -154,8 +154,6 @@ To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create a transfer** .
 
@@ -227,7 +225,7 @@ Where:
   - data\_source is the data source — `dfp_dt` (Google Ad Manager).
   - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#required_permissions) .
 
-**Caution:** You cannot configure notifications using the command-line tool.
+> **Caution:** You cannot configure notifications using the command-line tool.
 
 You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
@@ -306,7 +304,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-**Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
+> **Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
 
 ## Troubleshoot Google Ad Manager transfer setup
 
@@ -322,7 +320,7 @@ If you query your tables directly instead of using the auto-generated views, you
 
 You can use the following Google Ad Manager sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Google Ad Manager data with BigQuery. For additional questions on what you can do with these reports, contact your Google Ad Manager technical representative.
 
-**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+> **Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 In each of the following queries, replace variables like dataset with your values. For example, replace network\_code with your Google Ad Manager network code.
 

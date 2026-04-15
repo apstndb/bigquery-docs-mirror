@@ -268,7 +268,7 @@ Optional. If set to true, BigQuery doesn't run the job. Instead, if the query is
 
 `boolean`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 This property is deprecated.
 

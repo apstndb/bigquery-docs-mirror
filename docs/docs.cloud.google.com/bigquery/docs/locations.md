@@ -156,7 +156,7 @@ The following table lists the multi-regions where BigQuery is available. When yo
 | Data centers within [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union <sup>1</sup> | `EU`                  |
 | Data centers in the United States <sup>2</sup>                                                                                 | `US`                  |
 
-**Note:** Selecting a multi-region location does not provide cross-region replication or regional redundancy, so there is no increase in dataset availability in the event of a regional outage. Data is stored in a single region within the geographic location.
+> **Note:** Selecting a multi-region location does not provide cross-region replication or regional redundancy, so there is no increase in dataset availability in the event of a regional outage. Data is stored in a single region within the geographic location.
 
 <sup>1</sup> Data located in the `EU` multi-region is only stored in one of the following locations: `europe-west1` (Belgium) or `europe-west4` (Netherlands). The exact location in which the data is stored and processed is determined automatically by BigQuery.
 

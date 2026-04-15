@@ -4,15 +4,13 @@ Before you can use [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/d
 
 Some Gemini in BigQuery features are available at no additional charge, while other features require [quota](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) that is earned by using compute capacity. To learn more about using Gemini in BigQuery features, see [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .
 
-**Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
+> **Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
 
 ## Enable required APIs and grant roles
 
 To use Gemini in BigQuery, you must enable required APIs and grant required Identity and Access Management (IAM) roles. A service administrator or project owner with the [`serviceusage.services.enable` IAM permission](https://docs.cloud.google.com/service-usage/docs/access-control#predefined_roles) usually performs this step. For a list of APIs and services used by BigQuery, see [Manage BigQuery API dependencies](https://docs.cloud.google.com/bigquery/docs/service-dependencies) .
 
 1.  In the the Google Cloud console, with your project selected, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  View a Gemini in BigQuery feature in the the Google Cloud console. For example, in BigQuery Studio hover over the pen\_spark arrow\_drop\_down **Gemini** icon.
     
@@ -66,8 +64,6 @@ To prevent a user from using Gemini in BigQuery features, revoke the specific `c
 To turn off specific Gemini in BigQuery features:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the toolbar, click pen\_spark **Gemini settings** .
 

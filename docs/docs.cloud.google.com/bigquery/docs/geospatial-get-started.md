@@ -28,8 +28,6 @@ You incur charges for:
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Explore the sample data
 
@@ -42,8 +40,6 @@ This tutorial uses a dataset available through the [Google Cloud Public Dataset 
 Citi Bike is the nation's largest bike share program, with 10,000 bikes and 600 stations across Manhattan, Brooklyn, Queens, and Jersey City. This dataset includes Citi Bike trips since Citi Bike launched in September 2013 and is updated daily. The data is processed by Citi Bike to remove trips that are taken by staff to service and inspect the system and any trips that are less than 60 seconds in duration, which are considered false starts.
 
 You can start exploring this data in the BigQuery console by viewing the details of the `citibike_stations` table:
-
-[Go to citibike\_stations schema](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=new_york_citibike&t=citibike_stations&page=table)
 
 Three columns in this table are relevant to this tutorial:
 
@@ -84,8 +80,6 @@ The query clauses do the following:
 To run the query by using the Google Cloud console:
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Enter the following GoogleSQL query in the **Query editor** text area.
     
@@ -136,8 +130,6 @@ Before using Geo Viz, you must authenticate and grant access to data in BigQuery
 To set up Geo Viz:
 
 1.  Open the Geo Viz web tool.
-    
-    [Open the Geo Viz web tool](https://bigquerygeoviz.appspot.com/)
     
     You might need to enable cookies to authorize and use this tool.
 
@@ -264,16 +256,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

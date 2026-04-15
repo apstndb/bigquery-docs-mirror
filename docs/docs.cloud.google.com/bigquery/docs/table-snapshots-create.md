@@ -117,8 +117,6 @@ You can create a snapshot of a table that expires after 24 hours by using one of
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -145,8 +143,6 @@ You can create a snapshot of a table that expires after 24 hours by using one of
 Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -171,13 +167,11 @@ Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-**Note:** The snapshot inherits the source table's encryption key.
+> **Note:** The snapshot inherits the source table's encryption key.
 
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq cp \
@@ -199,7 +193,7 @@ Replace the following:
 
 The `--no_clobber` flag is required.
 
-**Note:** The snapshot inherits the destination dataset's default encryption key.
+> **Note:** The snapshot inherits the destination dataset's default encryption key.
 
 ### API
 
@@ -260,7 +254,7 @@ Replace the following:
 
 As with tables, if an expiration is not specified, then the table snapshot expires after the [default table expiration time](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time) or the dataset that contains the table snapshot.
 
-**Note:** Because expiring a snapshot is the same as deleting it at a later time, creating a snapshot with an expiration time requires the `bigquery.tables.deleteSnapshot` permission.
+> **Note:** Because expiring a snapshot is the same as deleting it at a later time, creating a snapshot with an expiration time requires the `bigquery.tables.deleteSnapshot` permission.
 
 ### Create a table snapshot using time travel
 
@@ -269,8 +263,6 @@ You can create a table snapshot of a table as it was one hour ago by using one o
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -295,8 +287,6 @@ You can create a table snapshot of a table as it was one hour ago by using one o
 Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) with a [`FOR SYSTEM_TIME AS OF` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -323,8 +313,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq cp \

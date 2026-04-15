@@ -22,7 +22,7 @@ To schedule a query, you need the following IAM permissions:
 
   - To create the transfer, you must either have the `bigquery.transfers.update` and `bigquery.datasets.get` permissions, or the `bigquery.jobs.create` , `bigquery.transfers.get` , and `bigquery.datasets.get` permissions.
     
-    **Note:** If you are using the Google Cloud console or the bq command-line tool to schedule a query, you must have the `bigquery.transfers.get` permission.
+    > **Note:** If you are using the Google Cloud console or the bq command-line tool to schedule a query, you must have the `bigquery.transfers.get` permission.
 
   - To run a scheduled query, you must have:
     
@@ -40,7 +40,7 @@ To create or update scheduled queries run by a service account, you must have ac
   - `iam.serviceAccounts.list` to list your service accounts.
   - `iam.serviceAccountUser` to assign a service account to a scheduled query.
 
-**Note:** If you are using the bq command-line tool, use the `--service_account_name` flag instead of authenticating as a service account.
+> **Note:** If you are using the bq command-line tool, use the `--service_account_name` flag instead of authenticating as a service account.
 
 ## Configuration options
 
@@ -254,7 +254,7 @@ or<br />
 </tbody>
 </table>
 
-**Note:** When you use date or time parameters to create tables with names ending in a date format such as `YYYYMMDD` , BigQuery [groups these tables together](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `mytable_(1)` , which represents the collection of sharded tables.
+> **Note:** When you use date or time parameters to create tables with names ending in a date format such as `YYYYMMDD` , BigQuery [groups these tables together](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `mytable_(1)` , which represents the collection of sharded tables.
 
 ### Using a service account
 
@@ -280,15 +280,13 @@ You can also use [project default keys](https://docs.cloud.google.com/bigquery/d
 
 ## Set up scheduled queries
 
-**Tip:** You can also use the [**Pipelines & Connections** page](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) to set up a scheduled query. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+> **Tip:** You can also use the [**Pipelines & Connections** page](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) to set up a scheduled query. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 For a description of the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . For details about schedule syntax, see [Resource: `TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
 
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Run the query that you're interested in. When you are satisfied with your results, click **Schedule** .
     
@@ -308,11 +306,11 @@ For a description of the schedule syntax, see [Formatting the schedule](https://
             
             ![Formatting a custom scheduled query.](https://docs.cloud.google.com/static/bigquery/images/custom-scheduled-query.png)
             
-            **Note:** The minimum duration between scheduled queries is 5 minutes.
+            > **Note:** The minimum duration between scheduled queries is 5 minutes.
         
           - To change the start time, select the **Start at set time** option, enter the selected start date and time.
             
-            **Note:** If the specified start time is later than the time in the schedule, then the first run of the query will be in the next iteration of the cycle. For example, a query created at `2022-06-05 23:50` with schedule `daily 00:00` and start time `2022-06-06 10:00` won't run until `2022-06-07 00:00` .
+            > **Note:** If the specified start time is later than the time in the schedule, then the first run of the query will be in the next iteration of the cycle. For example, a query created at `2022-06-05 23:50` with schedule `daily 00:00` and start time `2022-06-06 10:00` won't run until `2022-06-07 00:00` .
         
           - To specify an end time, select the **Schedule end time** option, enter the selected end date and time.
         
@@ -354,7 +352,7 @@ For a description of the schedule syntax, see [Formatting the schedule](https://
 
 ### bq
 
-There are two ways to schedule a query by using the bq command-line tool. **Option 2** lets you schedule the query with more options.
+> There are two ways to schedule a query by using the bq command-line tool. **Option 2** lets you schedule the query with more options.
 
 **Option 1:** Use the **`bq query`** command.
 
@@ -389,7 +387,7 @@ Optional flags:
 
   - For DDL and DML queries, you can also supply the `--location` flag to specify a particular region for processing. If `--location` isn't specified, the nearest Google Cloud location is used.
 
-If both \`--replace\` and \`--append\_table\` aren't specified when scheduling the query, no write preference is set. Depending on the query, an error in subsequent scheduled runs might result.
+> If both \`--replace\` and \`--append\_table\` aren't specified when scheduling the query, no write preference is set. Depending on the query, an error in subsequent scheduled runs might result.
 
 For example, the following command creates a scheduled query named `My Scheduled Query` using the query `SELECT 1 from mydataset.test` . The destination table is `mytable` in the dataset `mydataset` . The scheduled query is created in the default project:
 
@@ -459,9 +457,9 @@ Replace the following:
   - Optional: The `--service_account_name` flag is for authenticating with a service account instead of an individual user account.
   - Optional: The `--destination_kms_key` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key—for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` .
 
-**Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `destination_table_name_template` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `partitioning_field` parameter.
+> **Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `destination_table_name_template` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `partitioning_field` parameter.
 
-**Note:** You cannot configure notifications using the command-line tool.
+> **Note:** You cannot configure notifications using the command-line tool.
 
 For example, the following command creates a scheduled query transfer configuration named `My Scheduled Query` using the query `SELECT 1 from mydataset.test` . The destination table `mytable` is truncated for every write, and the target dataset is `mydataset` . The scheduled query is created in the default project, and authenticates as a service account:
 
@@ -892,9 +890,9 @@ Replace the following:
   - Optional: The `--destination_kms_key` specifies the [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the Cloud KMS key—for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` .
   - `  RESOURCE_NAME  ` : The transfer's resource name (also referred to as the transfer configuration). If you don't know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
 
-**Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `destination_table_name_template` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `partitioning_field` parameter.
+> **Note:** To write results to an ingestion-time partitioned table, see the instructions in [Destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) . A scheduled query fails if you create a transfer configuration with the `destination_table_name_template` parameter set to an ingestion-time partitioned table while also supplying an error if setting to an ingestion-time partitioned the `partitioning_field` parameter.
 
-**Note:** You cannot configure notifications using the command-line tool.
+> **Note:** You cannot configure notifications using the command-line tool.
 
 For example, the following command updates a scheduled query transfer configuration named `My Scheduled Query` using the query `SELECT 1 from mydataset.test` . The destination table `mytable` is truncated for every write, and the target dataset is `mydataset` :
 
@@ -1005,7 +1003,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         except google.api_core.exceptions.NotFound:
             print(f"Error: Transfer config '{transfer_config_name}' not found.")
 
-**Note:** You can't update the location of a scheduled query. If you move a source or destination dataset used in a scheduled query, then you need to create a new scheduled query in the new location.
+> **Note:** You can't update the location of a scheduled query. If you move a source or destination dataset used in a scheduled query, then you need to create a new scheduled query in the new location.
 
 ### Update scheduled queries with ownership restrictions
 
@@ -1025,7 +1023,7 @@ The owner restricted parameters for scheduled queries are:
 
 If you're scheduling an existing query, you might need to update the user credentials on the query. Credentials are automatically up to date for new scheduled queries.
 
-**Caution:** Updating credentials runs the query with your identity and permissions. Verify the query has not been modified by others to access resources only you can view, which could result in unauthorized access to sensitive data.
+> **Caution:** Updating credentials runs the query with your identity and permissions. Verify the query has not been modified by others to access resources only you can view, which could result in unauthorized access to sensitive data.
 
 Some other situations that could require updating credentials include the following:
 
@@ -1039,7 +1037,7 @@ Some other situations that could require updating credentials include the follow
     
     `Cannot modify restricted parameters without taking ownership of the transfer configuration.`
 
-**Note:** If you're not the owner of the scheduled query, you must have the `bigquery.transfers.update` permission on your Google Cloud project to update the scheduled query credentials. For more information, see [Required permissions](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#required_permissions) .
+> **Note:** If you're not the owner of the scheduled query, you must have the `bigquery.transfers.update` permission on your Google Cloud project to update the scheduled query credentials. For more information, see [Required permissions](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#required_permissions) .
 
 ### Console
 
@@ -1053,7 +1051,7 @@ To *refresh the existing credentials* on a scheduled query:
 
 3.  Allow 10 to 20 minutes for the change to take effect. You might need to clear your browser's cache.
 
-**Caution:** Changing the credentials used in a scheduled query to a service account is not supported in the Google Cloud console.
+> **Caution:** Changing the credentials used in a scheduled query to a service account is not supported in the Google Cloud console.
 
 ### bq
 
@@ -1161,7 +1159,7 @@ After clicking **Schedule** to save your scheduled query, you can click the **Sc
 
 The chosen runtimes are all within your selected range, including the first date and excluding the last date.
 
-**Warning:** The date ranges you provide are in UTC, but your query's schedule is displayed in your local time zone (see **Example 2** to work around this issue).
+> **Warning:** The date ranges you provide are in UTC, but your query's schedule is displayed in your local time zone (see **Example 2** to work around this issue).
 
 ![set historic dates](https://docs.cloud.google.com/static/bigquery/images/scheduling-historic-runs-console.png)
 
@@ -1470,7 +1468,7 @@ Scheduled queries are priced the same as manual [BigQuery queries](https://cloud
 
 ## Supported regions
 
-**Caution:** Cross-region queries are not supported. The destination table for your scheduled query must be in the same region as the data being queried. The selected location for your scheduled query must also be the same region as the data being queried.
+> **Caution:** Cross-region queries are not supported. The destination table for your scheduled query must be in the same region as the data being queried. The selected location for your scheduled query must also be the same region as the data being queried.
 
 Scheduled queries are supported in the following locations.
 
@@ -1612,7 +1610,7 @@ The following table lists the multi-regions where BigQuery is available. When yo
 | Data centers within [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union <sup>1</sup> | `EU`                  |
 | Data centers in the United States <sup>2</sup>                                                                                 | `US`                  |
 
-**Note:** Selecting a multi-region location does not provide cross-region replication or regional redundancy, so there is no increase in dataset availability in the event of a regional outage. Data is stored in a single region within the geographic location.
+> **Note:** Selecting a multi-region location does not provide cross-region replication or regional redundancy, so there is no increase in dataset availability in the event of a regional outage. Data is stored in a single region within the geographic location.
 
 <sup>1</sup> Data located in the `EU` multi-region is only stored in one of the following locations: `europe-west1` (Belgium) or `europe-west4` (Netherlands). The exact location in which the data is stored and processed is determined automatically by BigQuery.
 

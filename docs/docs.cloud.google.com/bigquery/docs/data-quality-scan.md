@@ -1,10 +1,10 @@
 # Scan for data quality issues
 
-This document explains how to use BigQuery and Dataplex Universal Catalog together to ensure that data meets your quality expectations. Dataplex Universal Catalog automatic data quality lets you define and measure the quality of the data in your BigQuery tables. You can automate the scanning of data, validate data against defined rules, and log alerts if your data doesn't meet quality requirements.
+This document explains how to use BigQuery and Knowledge Catalog together to ensure that data meets your quality expectations. Knowledge Catalog automatic data quality lets you define and measure the quality of the data in your BigQuery tables. You can automate the scanning of data, validate data against defined rules, and log alerts if your data doesn't meet quality requirements.
 
 For more information about automatic data quality, see the [Auto data quality overview](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview) .
 
-**Tip:** The steps in this document show how to manage data quality scans across your project. You can also create and manage data quality scans when working with a specific table. For more information, see the [Manage data quality scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#start-from-table) section of this document.
+> **Tip:** The steps in this document show how to manage data quality scans across your project. You can also create and manage data quality scans when working with a specific table. For more information, see the [Manage data quality scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#start-from-table) section of this document.
 
 ## Before you begin
 
@@ -13,14 +13,12 @@ For more information about automatic data quality, see the [Auto data quality ov
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com)
 
-2.  Optional: If you want Dataplex Universal Catalog to generate recommendations for data quality rules based on the results of a data profile scan, [create and run the data profile scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .
+2.  Optional: If you want Knowledge Catalog to generate recommendations for data quality rules based on the results of a data profile scan, [create and run the data profile scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .
 
 ## Required roles
 
-This section describes the IAM roles and permissions needed to use Dataplex Universal Catalog data quality scans.
+This section describes the IAM roles and permissions needed to use Knowledge Catalog data quality scans.
 
 ### User roles and permissions
 
@@ -29,7 +27,7 @@ To get the permissions that you need to run and manage data quality scans, ask y
   - Run a data quality scan on a BigQuery table:
       - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project to run scan jobs
       - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the BigQuery table to be scanned
-  - Publish data quality scan results to Dataplex Universal Catalog:
+  - Publish data quality scan results to Knowledge Catalog:
       - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the scanned table
       - [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the `@bigquery` entry group in the same location as the table
   - Perform specific tasks on `DataScan` resources:
@@ -51,7 +49,7 @@ The following permissions are required to run and manage data quality scans:
       - `bigquery.jobs.create` on the project to run scan jobs
       - `bigquery.tables.get` on the BigQuery table to be scanned
       - `bigquery.tables.getData` on the BigQuery table to be scanned
-  - Publish data quality scan results to Dataplex Universal Catalog:
+  - Publish data quality scan results to Knowledge Catalog:
       - `bigquery.tables.update` on the scanned table
       - `dataplex.entryGroups.useDataQualityScorecardAspect` on the `@bigquery` entry group in the same location as the table
   - Create a `DataScan` : `dataplex.datascans.create` on the project
@@ -69,19 +67,19 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 If you need to access columns protected by BigQuery column-level access policies, then you also need permissions for those columns.
 
-**Note:** Dataplex Universal Catalog doesn't create a BigQuery job in your project for data quality scans. However, you need the `bigquery.jobs.create` permission to create a `DryRun` job to check for permissions for the table.
+> **Note:** Knowledge Catalog doesn't create a BigQuery job in your project for data quality scans. However, you need the `bigquery.jobs.create` permission to create a `DryRun` job to check for permissions for the table.
 
-### Dataplex Universal Catalog service account roles and permissions
+### Knowledge Catalog service account roles and permissions
 
-If you haven't created any data quality or data profile scans or you don't have a Dataplex Universal Catalog lake in this project, create a service identifier by running: `gcloud beta services identity create --service=dataplex.googleapis.com` . This command returns a Dataplex Universal Catalog service identifier if it exists.
+If you haven't created any data quality or data profile scans or you don't have a Knowledge Catalog lake in this project, create a service identifier by running: `gcloud beta services identity create --service=dataplex.googleapis.com` . This command returns a Knowledge Catalog service identifier if it exists.
 
-To ensure that the Dataplex Universal Catalog service account of the project containing the data quality scan has the necessary permissions to read data from various sources and export results, ask your administrator to grant the following IAM roles to the Dataplex Universal Catalog service account of the project containing the data quality scan:
+To ensure that the Knowledge Catalog service account of the project containing the data quality scan has the necessary permissions to read data from various sources and export results, ask your administrator to grant the following IAM roles to the Knowledge Catalog service account of the project containing the data quality scan:
 
-**Important:** You must grant these roles to the Dataplex Universal Catalog service account of the project containing the data quality scan, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+> **Important:** You must grant these roles to the Knowledge Catalog service account of the project containing the data quality scan, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - Read BigQuery table data: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on BigQuery tables to be scanned and any other tables referenced in rules
   - Export scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the results dataset and table
-  - Scan BigQuery data organized in a Dataplex Universal Catalog lake:
+  - Scan BigQuery data organized in a Knowledge Catalog lake:
       - [Dataplex Metadata Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.metadataReader) ( `roles/dataplex.metadataReader` ) on Dataplex resources
       - [Dataplex Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.viewer) ( `roles/dataplex.viewer` ) on Dataplex resources
   - Scan a BigQuery external table from Cloud Storage: [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on the Cloud Storage bucket
@@ -104,7 +102,7 @@ The following permissions are required to read data from various sources and exp
       - `bigquery.tables.getData` on results dataset and table
       - `bigquery.tables.update` on results dataset and table
       - `bigquery.tables.updateData` on results dataset and table
-  - Scan BigQuery data organized in a Dataplex Universal Catalog lake:
+  - Scan BigQuery data organized in a Knowledge Catalog lake:
       - `dataplex.lakes.list` on Dataplex resources
       - `dataplex.lakes.get` on Dataplex resources
       - `dataplex.zones.list` on Dataplex resources
@@ -116,19 +114,17 @@ The following permissions are required to read data from various sources and exp
       - `storage.buckets.get` on the Cloud Storage bucket
       - `storage.objects.get` on the Cloud Storage bucket
 
-Your administrator might also be able to give the Dataplex Universal Catalog service account of the project containing the data quality scan these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the Knowledge Catalog service account of the project containing the data quality scan these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-If you need to access columns protected by BigQuery column-level access policies, then assign the Dataplex Universal Catalog service account permissions for those columns.
+If you need to access columns protected by BigQuery column-level access policies, then assign the Knowledge Catalog service account permissions for those columns.
 
-If a table has BigQuery row-level access policies enabled, then you can only scan rows visible to the Dataplex Universal Catalog service account. Note that the individual user's access privileges are not evaluated for row-level policies.
+If a table has BigQuery row-level access policies enabled, then you can only scan rows visible to the Knowledge Catalog service account. Note that the individual user's access privileges are not evaluated for row-level policies.
 
 ## Create a data quality scan
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click **Create data quality scan** .
 
@@ -144,7 +140,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
         
         For tables in multi-region datasets, choose a region where to create the data scan.
         
-        To browse the tables organized within Dataplex Universal Catalog lakes, click **Browse within Dataplex Lakes** .
+        To browse the tables organized within Knowledge Catalog lakes, click **Browse within Knowledge Catalog Lakes** .
     
     5.  In the **Scope** field, choose **Incremental** or **Entire data** .
         
@@ -154,9 +150,9 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
     
     7.  To sample your data, in the **Sampling size** list, select a sampling percentage. Choose a percentage value that ranges between 0.0% and 100.0% with up to 3 decimal digits. For larger datasets, choose a lower sampling percentage. For example, for a 1 PB table, if you enter a value between 0.1% and 1.0%, the data quality scan samples between 1-10 TB of data. For incremental data scans, the data quality scan applies sampling to the latest increment.
     
-    8.  To publish the data quality scan results as Dataplex Universal Catalog metadata, select the **Publish results to Dataplex Catalog** checkbox.
+    8.  To publish the data quality scan results as Knowledge Catalog metadata, select the **Publish results to Knowledge Catalog** checkbox.
         
-        You can view the latest scan results on the **Data quality** tab in the BigQuery and Dataplex Universal Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data quality scan results](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#share-results) section of this document.
+        You can view the latest scan results on the **Data quality** tab in the BigQuery and Knowledge Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data quality scan results](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#share-results) section of this document.
     
     9.  In the **Schedule** section, choose one of the following options:
         
@@ -235,9 +231,9 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data quality scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data quality scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#table-schema) . If the specified table doesn't exist, Dataplex Universal Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data quality scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
         
-        **Note:** You can use the same results table for multiple data quality scans.
+        > **Note:** You can use the same results table for multiple data quality scans.
 
 6.  Optional: Add labels. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
 
@@ -255,14 +251,14 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
 
 To create a data quality scan, use the [`gcloud dataplex datascans create data-quality` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-quality) .
 
-If the source data is organized in a Dataplex Universal Catalog lake, include the `--data-source-entity` flag:
+If the source data is organized in a Knowledge Catalog lake, include the `--data-source-entity` flag:
 
     gcloud dataplex datascans create data-quality DATASCAN \
         --location=LOCATION \
         --data-quality-spec-file=DATA_QUALITY_SPEC_FILE \
         --data-source-entity=DATA_SOURCE_ENTITY
 
-If the source data isn't organized in a Dataplex Universal Catalog lake, include the `--data-source-resource` flag:
+If the source data isn't organized in a Knowledge Catalog lake, include the `--data-source-resource` flag:
 
     gcloud dataplex datascans create data-quality DATASCAN \
         --location=LOCATION \
@@ -274,7 +270,7 @@ Replace the following variables:
   - `  DATASCAN  ` : The name of the data quality scan.
   - `  LOCATION  ` : The Google Cloud region in which to create the data quality scan.
   - `  DATA_QUALITY_SPEC_FILE  ` : The path to the JSON or YAML file containing the specifications for the data quality scan. The file can be a local file or a Cloud Storage path with the prefix `gs://` . Use this file to specify the data quality rules for the scan. You can also specify additional details in this file, such as filters, sampling percent, and post-scan actions like exporting to BigQuery or sending email notification reports. See the [documentation for JSON representation](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and the [example YAML representation](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) .
-  - `  DATA_SOURCE_ENTITY  ` : The Dataplex Universal Catalog entity that contains the data for the data quality scan. For example, `projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity` .
+  - `  DATA_SOURCE_ENTITY  ` : The Knowledge Catalog entity that contains the data for the data quality scan. For example, `projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity` .
   - `  DATA_SOURCE_RESOURCE  ` : The name of the resource that contains the data for the data quality scan. For example, `//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table` .
 
 ### C\#
@@ -626,15 +622,13 @@ Replace the following:
 
 If you want to build rules for the data quality scan by using rule recommendations that are based on the results of a data profiling scan, get the recommendations by calling the [`dataScans.jobs.generateDataQualityRules` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/generateDataQualityRules) on the data profiling scan.
 
-**Note:** If your BigQuery table is configured with the **Require partition filter** set to `true` , use the BigQuery partition column as the data quality scan row filter or timestamp column.
+> **Note:** If your BigQuery table is configured with the **Require partition filter** set to `true` , use the BigQuery partition column as the data quality scan row filter or timestamp column.
 
 ## Run a data quality scan
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the data quality scan to run.
 
@@ -826,15 +820,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To run a data quality scan, use the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
 
-**Note:** Run isn't supported for data quality scans that are on a one-time schedule.
+> **Note:** Run isn't supported for data quality scans that are on a one-time schedule.
 
 ## View data quality scan results
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data quality scan.
     
@@ -844,7 +836,7 @@ To run a data quality scan, use the [`dataScans.run` method](https://docs.cloud.
 
 3.  To see detailed information about a job, such as data quality scores that indicate the percentage of rules that passed, which rules failed, and the job logs, click the **Jobs history** tab. Then, click a job ID.
 
-**Note:** If you exported the scan results to a BigQuery table, then you can also access the scan results from the table. The data quality scores are available if you published the scan results as Dataplex Universal Catalog metadata.
+> **Note:** If you exported the scan results to a BigQuery table, then you can also access the scan results from the table. The data quality scores are available if you published the scan results as Knowledge Catalog metadata.
 
 ### gcloud
 
@@ -1039,11 +1031,9 @@ To view the results of a data quality scan, use the [`dataScans.get` method](htt
 
 ### View published results
 
-If the data quality scan results are published as Dataplex Universal Catalog metadata, then you can see the latest scan results on the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console, on the source table's **Data quality** tab.
+If the data quality scan results are published as Knowledge Catalog metadata, then you can see the latest scan results on the BigQuery and Knowledge Catalog pages in the Google Cloud console, on the source table's **Data quality** tab.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -1059,17 +1049,15 @@ If the data quality scan results are published as Dataplex Universal Catalog met
     
     The latest published results are displayed.
     
-    **Note:** Published results might not be available if a scan is running for the first time.
+    > **Note:** Published results might not be available if a scan is running for the first time.
 
 ### View historical scan results
 
-Dataplex Universal Catalog saves the data quality scan history of the last 300 jobs or for the past year, whichever occurs first.
+Knowledge Catalog saves the data quality scan history of the last 300 jobs or for the past year, whichever occurs first.
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data quality scan.
 
@@ -1329,8 +1317,6 @@ To view historical data quality scan jobs, use the [`dataScans.jobs.list` method
 To enable the users in your organization to view the scan results, do the following:
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the data quality scan you want to share the results of.
 
@@ -1345,15 +1331,13 @@ To enable the users in your organization to view the scan results, do the follow
 
 You can set alerts for data quality failures using the logs in Cloud Logging. For more information, including sample queries, see [Set alerts in Cloud Logging](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#set-alerts) .
 
-For each job with row-level rules that fail, Dataplex Universal Catalog provides a query to get the failed records. Run this query to see the records that did not match your rule.
+For each job with row-level rules that fail, Knowledge Catalog provides a query to get the failed records. Run this query to see the records that did not match your rule.
 
-**Note:** The query returns all of the columns of the table, not just the failed column.
+> **Note:** The query returns all of the columns of the table, not just the failed column.
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of the data quality scan whose records you want to troubleshoot.
 
@@ -1377,7 +1361,7 @@ Not supported.
 
 2.  [Run the query in BigQuery](https://docs.cloud.google.com/bigquery/docs/running-queries) to see the records that caused the job to fail.
 
-Dataplex Universal Catalog also runs the debug query, provided it was included during the rule creation. The debug query results are included in each rule's output. This feature is in [Preview](https://docs.cloud.google.com/products#product-launch-stages) .
+Knowledge Catalog also runs the debug query, provided it was included during the rule creation. The debug query results are included in each rule's output. This feature is in [Preview](https://docs.cloud.google.com/products#product-launch-stages) .
 
 ### Console
 
@@ -1399,13 +1383,11 @@ You can also create and manage data quality scans when working with a specific t
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
-    
     In the **Explorer** pane (in the left pane), click **Datasets** , and then click your dataset. Click **Overview \> Tables** , and then select the table whose data quality scan results you want to see.
 
 2.  Click the **Data quality** tab.
 
-3.  Depending on whether the table has a data quality scan whose results are published as Dataplex Universal Catalog metadata, you can work with the table's data quality scans in the following ways:
+3.  Depending on whether the table has a data quality scan whose results are published as Knowledge Catalog metadata, you can work with the table's data quality scans in the following ways:
     
       - **Data quality scan results are published** : the latest scan results are displayed on the page.
         
@@ -1436,8 +1418,6 @@ You can also create and manage data quality scans when working with a specific t
 To view the data quality scans that apply to a specific table, do the following:
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Filter the list by table name and scan type.
 
@@ -1445,13 +1425,11 @@ To view the data quality scans that apply to a specific table, do the following:
 
 You can edit various settings for an existing data quality scan, such as the display name, filters, schedule, and data quality rules.
 
-**Note:** If an existing data quality scan publishes the results to the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console, and you instead want to publish future scan results as Dataplex Universal Catalog metadata, you must edit the scan and re-enable publishing. You might need additional permissions to enable catalog publishing.
+> **Note:** If an existing data quality scan publishes the results to the BigQuery and Knowledge Catalog pages in the Google Cloud console, and you instead want to publish future scan results as Knowledge Catalog metadata, you must edit the scan and re-enable publishing. You might need additional permissions to enable catalog publishing.
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data quality scan.
 
@@ -1473,7 +1451,7 @@ Replace the following:
   - `  LOCATION  ` : The Google Cloud region in which the data quality scan was created.
   - `  DESCRIPTION  ` : The new description for the data quality scan.
 
-**Note:** You can update specification fields, such as `rules` , `rowFilter` , or `samplingPercent` , in the data quality specification file. Refer to [JSON](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and [YAML](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) representations.
+> **Note:** You can update specification fields, such as `rules` , `rowFilter` , or `samplingPercent` , in the data quality specification file. Refer to [JSON](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and [YAML](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) representations.
 
 ### C\#
 
@@ -1690,7 +1668,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To edit a data quality scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
 
-**Note:** Update isn't supported for data quality scans that are on a one-time schedule.
+> **Note:** Update isn't supported for data quality scans that are on a one-time schedule.
 
 ## Delete a data quality scan
 
@@ -1699,8 +1677,6 @@ To edit a data quality scan, use the [`dataScans.patch` method](https://docs.clo
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the scan you want to delete.
 
@@ -1931,7 +1907,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To delete a data quality scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
 
-**Note:** Delete isn't supported for data quality scans that are on a one-time schedule.
+> **Note:** Delete isn't supported for data quality scans that are on a one-time schedule.
 
 ## What's next
 

@@ -6,7 +6,7 @@
   - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/scheduleRuns#body.aspect)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/scheduleRuns#try-it)
 
-This item is deprecated\!
+> This item is deprecated\!
 
 **Full name** : projects.transferConfigs.scheduleRuns
 

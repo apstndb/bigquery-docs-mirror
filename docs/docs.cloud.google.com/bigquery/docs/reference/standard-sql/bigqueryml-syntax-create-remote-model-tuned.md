@@ -103,7 +103,7 @@ The endpoint for a Vertex AI Gemini that [supports](https://docs.cloud.google.co
 
 A `STRING` value that contains the model name of a Vertex AI Gemini model that [supports fine-tuning](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) .
 
-**Note:** To provide feedback or request support for the models in preview, send an email to <bqml-feedback@google.com> .
+> **Note:** To provide feedback or request support for the models in preview, send an email to <bqml-feedback@google.com> .
 
 For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
 
@@ -111,7 +111,7 @@ For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative
 
 Using the global endpoint for your requests can improve overall availability while reducing resource exhausted (429) errors, which occur when you exceed your quota for a regional endpoint. If you want to use Gemini in a region where it isn't available, you can avoid migrating your data to a different region by using the global endpoint instead.
 
-**Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
+> **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
 
 For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models) .
 
@@ -217,7 +217,7 @@ This option accepts the following values:
     
     A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
     
-    **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas might get different splitting and different evaluation metrics.
+    > **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas might get different splitting and different evaluation metrics.
 
   - `CUSTOM` : Split data using the value provided in the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_col) . The `DATA_SPLIT_COL` value must be the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, and rows with a value of `FALSE` are used as training data.
 

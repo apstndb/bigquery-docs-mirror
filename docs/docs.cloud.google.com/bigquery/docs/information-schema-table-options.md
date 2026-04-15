@@ -437,9 +437,12 @@ Queries against this view must include a dataset or a region qualifier. For quer
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
   - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
@@ -449,7 +452,7 @@ The following example retrieves the default table expiration times for all table
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 ``` notranslate
   SELECT
@@ -472,7 +475,7 @@ The result is similar to the following:
   
 ```
 
-**Note:** Tables without an expiration time are excluded from the query results.
+> **Note:** Tables without an expiration time are excluded from the query results.
 
 ##### Example 2:
 

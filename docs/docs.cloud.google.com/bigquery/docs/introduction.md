@@ -4,7 +4,7 @@ BigQuery is a fully managed, AI-ready data platform that helps you manage and an
 
 BigQuery provides a uniform way to work with both structured and unstructured data and supports open table formats like Apache Iceberg, Delta, and Apache Hudi. BigQuery streaming supports continuous data ingestion and analysis while BigQuery's scalable, distributed analysis engine lets you query terabytes in seconds and petabytes in minutes.
 
-BigQuery offers built-in governance capabilities that let you discover and curate data, and manage metadata and data quality. Through features like semantic search and data lineage, you can find and validate relevant data for analysis. You can share data and AI assets across your organization with the benefits of access control. These features are powered by Dataplex Universal Catalog, which is a unified, intelligent governance solution for data and AI assets in Google Cloud.
+BigQuery offers built-in governance capabilities that let you discover and curate data, and manage metadata and data quality. Through features like semantic search and data lineage, you can find and validate relevant data for analysis. You can share data and AI assets across your organization with the benefits of access control. These features are powered by Knowledge Catalog, which is a unified, intelligent governance solution for data and AI assets in Google Cloud.
 
 BigQuery's architecture consists of two parts: a storage layer that ingests, stores, and optimizes data and a compute layer that provides analytics capabilities. These compute and storage layers efficiently operate independently of each other thanks to Google's petabit-scale network that enables the necessary communication between them.
 
@@ -48,6 +48,7 @@ For more information, see [Overview of BigQuery storage](https://docs.cloud.goog
 Descriptive and prescriptive analysis uses include business intelligence, ad hoc analysis, geospatial analytics, and machine learning. You can query data stored in BigQuery or run queries on data where it lives using external tables or federated queries including Cloud Storage, Bigtable, Spanner, or Google Sheets stored in Google Drive.
 
   - ANSI-standard SQL queries ( [ISO/IEC 9075 support](https://www.iso.org/standard/76583.html) ) including support for joins, nested and repeated fields, analytic and aggregation functions, multi-statement queries, and a variety of spatial functions with geospatial analytics - Geographic Information Systems.
+  - Pandas-compatible Python API, provided by [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .
   - [Create views](https://docs.cloud.google.com/bigquery/docs/views-intro) to share your analysis.
   - Business intelligence tool support including [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) with [Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) , [Looker](https://docs.cloud.google.com/bigquery/docs/looker) , [Google Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) , and 3rd party tools like Tableau and Power BI.
   - [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) provides machine learning and predictive analytics.
@@ -83,6 +84,7 @@ Reference materials for BigQuery developers and analysts:
 
   - [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) and [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) present overviews of BigQuery's features and their use.
   - [SQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) for details about using GoogleSQL.
+  - [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) for details about using the pandas-compatible Python API.
   - [BigQuery code samples](https://docs.cloud.google.com/bigquery/docs/samples) provide hundreds of snippets for client libraries in [C\#](https://docs.cloud.google.com/docs/samples?l=csharp&p=bigquery) , [Go](https://docs.cloud.google.com/docs/samples?l=go&p=bigquery) , [Java](https://docs.cloud.google.com/docs/samples?l=java&p=bigquery) , [Node.js](https://docs.cloud.google.com/docs/samples?l=nodejs&p=bigquery) , [Python](https://docs.cloud.google.com/docs/samples?l=python&p=bigquery) , [Ruby](https://docs.cloud.google.com/docs/samples?l=ruby&p=bigquery) . Or view the [sample browser](https://docs.cloud.google.com/docs/samples?p=bigquery) .
   - [DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) , [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) , and [user-defined functions (UDF)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) syntax lets you manage and transform your BigQuery data.
   - [bq command-line tool reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) documents the syntax, commands, flags, and arguments for the `bq` CLI interface.
@@ -124,6 +126,8 @@ Task guidance to help if you need to do the following:
 
   - [Query BigQuery data](https://docs.cloud.google.com/bigquery/docs/query-overview) using interactive or batch queries using [SQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
 
+  - [Analyze and transform BigQuery data](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) using the pandas-compatible [BigQuery DataFrames API](https://dataframes.bigquery.dev/reference/index.html) .
+
   - Reference SQL [functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all) , [operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators) , and [conditional expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions) to query data
 
   - Use tools to analyze and visualize BigQuery data including: [Looker](https://docs.cloud.google.com/bigquery/docs/looker) , [Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) , and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
@@ -150,8 +154,6 @@ Task guidance to help if you need to do the following:
 For more information, see [Introduction to BigQuery administration](https://docs.cloud.google.com/bigquery/docs/admin-intro) .
 
 To take a tour of BigQuery data administration features directly in the Google Cloud console, click **Take the tour** .
-
-[Take the tour](https://console.cloud.google.com/?walkthrough_id=bigquery--ui-tour-data-admin)
 
 ### Data Scientist
 

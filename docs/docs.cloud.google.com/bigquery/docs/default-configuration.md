@@ -39,15 +39,13 @@ You can configure global settings at the organization level by using the [`ALTER
 
 When you configure the default location, you don't specify a region where the setting applies. You can't mix global and regional settings in the same DDL statement.
 
-**Note:** When you modify the `default_location` global setting, it can take up to 10 minutes to propagate. Until the setting is propagated, it is possible for eligible queries to be routed to the previous default location.
+> **Note:** When you modify the `default_location` global setting, it can take up to 10 minutes to propagate. Until the setting is propagated, it is possible for eligible queries to be routed to the previous default location.
 
 To configure the `default_location` at the organization level, follow these steps:
 
 ### Console
 
 1.  Go to the **BigQuery** page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the query editor. This tab is labeled search\_insights **Untitled query** .
 
@@ -120,8 +118,6 @@ To configure the `default_location` at the project level, follow these steps:
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the query editor. This tab is labeled search\_insights **Untitled query** .
 
@@ -202,8 +198,6 @@ To see all regional organization settings, go to [`organization_set_options_list
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the query editor. This tab is labeled search\_insights **Untitled query** .
 
@@ -308,8 +302,6 @@ To see all regional project settings, go to [`project_set_options_list`](https:/
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the query editor. This tab is labeled search\_insights **Untitled query** .
 
@@ -498,7 +490,7 @@ Use the following settings to control how queries are executed, timed, and queue
 
   - `default_query_job_timeout_ms` : The default time after which a query job times out, including the time the job is queued and the time spent running. The timeout period must be between 5 minutes and 48 hours. This timeout only applies to individual query jobs and the child jobs of scripts. To set a timeout for script jobs, you should use the [jobs.insert](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method and set the `jobTimeoutMs` field.
     
-    **Note:** The `default_query_job_timeout_ms` setting also applies to [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) jobs. To override this project-level setting for an individual continuous query, assign a [job timeout](https://docs.cloud.google.com/bigquery/docs/continuous-queries#run_a_continuous_query_by_using_a_service_account) to the continuous query in question. Continuous queries still adhere to [maximum runtimes](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#authorization) .
+    > **Note:** The `default_query_job_timeout_ms` setting also applies to [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) jobs. To override this project-level setting for an individual continuous query, assign a [job timeout](https://docs.cloud.google.com/bigquery/docs/continuous-queries#run_a_continuous_query_by_using_a_service_account) to the continuous query in question. Continuous queries still adhere to [maximum runtimes](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#authorization) .
 
   - `default_location` : The [`default_location` configuration setting](https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings) is used to run jobs when the [location isn't set or can't be determined](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . If `default_location` isn't set, the job runs in the `US` multi-region.
 
@@ -506,7 +498,7 @@ Use the following settings to control how queries are executed, timed, and queue
 
   - `default_time_zone` : The default time zone to use in time zone-dependent GoogleSQL functions, when a time zone is not specified as an argument. This configuration does not apply to [time-unit column partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) (which use UTC as the time zone), the [Storage Transfer Service schedule transfers](https://docs.cloud.google.com/storage-transfer/docs/schedule-transfer-jobs) , or [loading data with the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#loading_data) . For more information, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
     
-    **Note:** If you want to set a default time zone, ensure any existing queries that use `DATETIME` literals aren't affected. This includes queries with the explicit `DATETIME` keyword, implicitly converted string literals passed as a parameter to time functions like `DATETIME_DIFF('2022-10-01', ...)` , the `PARSE_DATETIME()` function, and more. For this reason, it is safer to only set the `default_time_zone` parameter on new projects.
+    > **Note:** If you want to set a default time zone, ensure any existing queries that use `DATETIME` literals aren't affected. This includes queries with the explicit `DATETIME` keyword, implicitly converted string literals passed as a parameter to time functions like `DATETIME_DIFF('2022-10-01', ...)` , the `PARSE_DATETIME()` function, and more. For this reason, it is safer to only set the `default_time_zone` parameter on new projects.
 
   - `default_query_optimizer_options` : The history-based query optimizations. This option can be one of the following:
     
@@ -533,7 +525,7 @@ Use the following settings to define rules for data creation, security, and life
 
   - `default_kms_key_name` : The default Cloud Key Management Service key for encrypting table data, including temporary or anonymous tables. For more information, see [Customer-managed Cloud KMS keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) .
     
-    **Note:** to set a default Cloud KMS key, you must grant the Encrypter/Decrypter role to all BigQuery service accounts that are used within the project or organization. If a service account within the project or organization doesn't have appropriate permissions, all queries run by the service account fail. For information about assigning the Encrypter/Decrypter role, see [Assign the Encrypter/Decrypter role](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#assign_role) . If you set a default Cloud KMS key without first assigning the appropriate roles, you can clear the default key by setting the value to `NULL` . For examples, see [Configure organization settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configure-organization-settings) and [Configure project settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configure-project-settings) .
+    > **Note:** to set a default Cloud KMS key, you must grant the Encrypter/Decrypter role to all BigQuery service accounts that are used within the project or organization. If a service account within the project or organization doesn't have appropriate permissions, all queries run by the service account fail. For information about assigning the Encrypter/Decrypter role, see [Assign the Encrypter/Decrypter role](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#assign_role) . If you set a default Cloud KMS key without first assigning the appropriate roles, you can clear the default key by setting the value to `NULL` . For examples, see [Configure organization settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configure-organization-settings) and [Configure project settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configure-project-settings) .
 
   - `default_max_time_travel_hours` : The default time travel window in hours for new datasets. This duration must be within the range of 48 to 168, inclusive, and must be divisible by 24. Changing the default max time travel hours does not affect existing datasets. For more information, see [Time Travel and data retention](https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel) .
 

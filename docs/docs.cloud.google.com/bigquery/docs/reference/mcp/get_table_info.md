@@ -922,7 +922,7 @@ Optional. If not set, the table is partitioned by pseudo column '\_PARTITIONTIME
 
 `boolean`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified. This field is deprecated; please set the field with the same name on the table itself instead. This field needs a wrapper because we want to output the default value, false, if the user explicitly set it.
 

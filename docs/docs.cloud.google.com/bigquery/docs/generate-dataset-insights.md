@@ -1,8 +1,8 @@
 # Generate dataset insights
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This document describes how to generate dataset insights for BigQuery datasets. Dataset insights help you understand relationships between tables in a dataset by generating relationship graphs and cross-table queries.
 
@@ -14,19 +14,17 @@ For an overview of table and dataset insights, see [Data insights overview](http
 
 Data insights are generated using [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/overview) . To start generating insights, you must first [set up Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/set-up-gemini) .
 
-**Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
+> **Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
 
 ### Enable APIs
 
-**Important:** To enable any API in your project, ask your administrator to grant you the `serviceusage.services.enable` permission on your project.
+> **Important:** To enable any API in your project, ask your administrator to grant you the `serviceusage.services.enable` permission on your project.
 
 To use data insights, enable the following APIs in your project: Dataplex API, BigQuery API, and Gemini for Google Cloud API.
 
 **Roles required to enable APIs**
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-[Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com,bigquery.googleapis.com,cloudaicompanion.googleapis.com)
 
 For more information about enabling the Gemini for Google Cloud API, see [Enable the Gemini for Google Cloud API in a Google Cloud project](https://docs.cloud.google.com/gemini/docs/discover/set-up-gemini#enable-api) .
 
@@ -66,8 +64,6 @@ To see the exact permissions that are required to generate insights, expand the 
 ## Generate dataset insights
 
 1.  In the Google Cloud console, go to **BigQuery Studio** .
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, select the project and then the dataset for which you want to generate insights.
 
@@ -118,4 +114,4 @@ Based on the discovered relationships, Gemini generates sample queries. These ar
 
   - Learn about [data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
   - Learn how to [generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
-  - Learn more about [Dataplex Universal Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
+  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .

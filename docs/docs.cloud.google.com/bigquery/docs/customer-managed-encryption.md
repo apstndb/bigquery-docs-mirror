@@ -1,6 +1,6 @@
 # Customer-managed Cloud KMS keys
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 By default, BigQuery [encrypts your content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) . BigQuery handles and manages this default encryption for you without any additional actions on your part. First, data in a BigQuery table is encrypted using a *data encryption key* . Then, those data encryption keys are encrypted with *key encryption keys* , which is known as [envelope encryption](https://docs.cloud.google.com/kms/docs/envelope-encryption) . Key encryption keys don't directly encrypt your data but are used to encrypt the data encryption keys that Google uses to encrypt your data.
 
@@ -75,8 +75,6 @@ The following techniques show how you can determine the BigQuery service account
 ### Console
 
 1.  Go to the [**Dashboard** page](https://console.cloud.google.com/home) in the Google Cloud console.
-    
-    [Go to the Dashboard page](https://console.cloud.google.com/home)
 
 2.  Click the **Select from** drop-down list at the top of the page. In the **Select From** window that appears, select your project.
 
@@ -117,8 +115,6 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 ### Console
 
 1.  Open the **Cryptographic Keys** page in the Google Cloud console.
-    
-    [Open the Cryptographic Keys page](https://console.cloud.google.com/security/kms)
 
 2.  Click the name of the key ring that contains the key.
 
@@ -164,13 +160,11 @@ The resource ID for the Cloud KMS key is required for CMEK use, as shown in the 
 projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 ```
 
-**Note:** You cannot specify a key resource ID that includes the `/cryptoKeyVersions/` token. BigQuery always uses the key version marked as `primary` to protect a table when it is created.
+> **Note:** You cannot specify a key resource ID that includes the `/cryptoKeyVersions/` token. BigQuery always uses the key version marked as `primary` to protect a table when it is created.
 
 ### Retrieve the key resource ID
 
 1.  Open the **Cryptographic Keys** page in the Google Cloud console.
-    
-    [Open the Cryptographic Keys page](https://console.cloud.google.com/security/kms)
 
 2.  Click the name of the key ring that contains the key.
 
@@ -185,8 +179,6 @@ To create a table that is protected by Cloud KMS:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -211,8 +203,6 @@ To create a table that is protected by Cloud KMS:
 Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `kms_key_name` option:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -383,7 +373,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Go
 
@@ -523,8 +513,6 @@ By default, query results are stored in a temporary table encrypted with a Googl
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 
@@ -723,8 +711,6 @@ To load a data file into a table that is protected by Cloud KMS:
 Protect a load job destination table with a customer-managed encryption key by specifying the key when you load the table.
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -1150,8 +1136,6 @@ An advantage of `update` is it is faster than `cp` and it lets you use [table de
 Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to update the `kms_key_name` field for a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -1312,7 +1296,7 @@ You can apply, change, or remove a dataset default key by
     --dataset DATASET_ID
     ```
 
-**Note:** Within a dataset that has a default Cloud KMS key applied, it is not possible to encrypt new tables with a key other than a customer-managed encryption key. That is, if the dataset has a default Cloud KMS key, you cannot use a non-customer-managed encryption key to encrypt new tables in the dataset.
+> **Note:** Within a dataset that has a default Cloud KMS key applied, it is not possible to encrypt new tables with a key other than a customer-managed encryption key. That is, if the dataset has a default Cloud KMS key, you cannot use a non-customer-managed encryption key to encrypt new tables in the dataset.
 
 ## Set a project default key
 
@@ -1325,8 +1309,6 @@ The default key does not apply to existing tables. Changing the default key does
 Use the [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `default_kms_key_name` field for a project. You can find the resource name for the key on the Cloud KMS page.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -1484,7 +1466,7 @@ Setting Dataform default CMEK configuration for BigQuery code assets through Ter
 
 You can remove BigQuery's access to the Cloud KMS key at any time, by revoking the Identity and Access Management (IAM) permission for that key.
 
-**Note:** If you remove BigQuery's access to a key, this change doesn't take place instantly, but happens within an hour while the IAM permission change propagates. If you are running a query at the time the query still completes, but the results might not be viewable.
+> **Note:** If you remove BigQuery's access to a key, this change doesn't take place instantly, but happens within an hour while the IAM permission change propagates. If you are running a query at the time the query still completes, but the results might not be viewable.
 
 If BigQuery loses access to the Cloud KMS key, the user experience can suffer significantly and data loss can occur:
 
@@ -1512,13 +1494,11 @@ If set, this organization policy causes all resource creation requests without a
 
 After you set this policy, it applies only to new resources in the project. Any existing resources without Cloud KMS keys set continue to exist and are accessible without issue.
 
-**Note:** This constraint only applies to resources that contain data. Resources that only use their specified Cloud KMS key as a default for new resources (for instance, datasets and project config) can still be created or updated without a Cloud KMS key.
+> **Note:** This constraint only applies to resources that contain data. Resources that only use their specified Cloud KMS key as a default for new resources (for instance, datasets and project config) can still be created or updated without a Cloud KMS key.
 
 ### Console
 
 1.  Open the **Organization policies** page.
-    
-    [Go to Organization policies](https://console.cloud.google.com/iam-admin/orgpolicies/list)
 
 2.  In the **Filter** field, enter `constraints/gcp.restrictNonCmekServices` , and then click **Restrict which services may create resources without CMEK** .
 
@@ -1534,7 +1514,7 @@ After you set this policy, it applies only to new resources in the project. Any 
 
 ### gcloud
 
-``` lang-sh notranslate
+``` notranslate lang-sh
   gcloud resource-manager org-policies --project=PROJECT_ID \
     deny gcp.restrictNonCmekServices is:bigquery.googleapis.com
 ```
@@ -1552,8 +1532,6 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 ### Console
 
 1.  Open the **Organization policies** page.
-    
-    [Go to Organization policies](https://console.cloud.google.com/iam-admin/orgpolicies/list)
 
 2.  In the **Filter** field, enter `constraints/gcp.restrictCmekCryptoKeyProjects` , and then click **Restrict which projects may supply KMS CryptoKeys for CMEK** .
 
@@ -1569,7 +1547,7 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 
 ### gcloud
 
-``` lang-sh notranslate
+``` notranslate lang-sh
   gcloud resource-manager org-policies --project=PROJECT_ID \
     allow gcp.restrictCmekCryptoKeyProjects under:projects/KMS_PROJECT_ID
 ```
@@ -1651,7 +1629,7 @@ CMEK-protected tables cannot be queried with a [wildcard suffix](https://docs.cl
 
 CMEK support for BigQuery is only available for BigQuery Enterprise, BigQuery Enterprise Plus and BigQuery On-Demand.
 
-**Note:** Using CMEK to query data in a BigQuery project from a project that does not support CMEK is allowed, however the project storing the data must use a compatible [BigQuery edition](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#editions-support) and its service account must have the appropriate [Cloud KMS key permissions](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) .
+> **Note:** Using CMEK to query data in a BigQuery project from a project that does not support CMEK is allowed, however the project storing the data must use a compatible [BigQuery edition](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#editions-support) and its service account must have the appropriate [Cloud KMS key permissions](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) .
 
 ### BigQuery Studio support
 

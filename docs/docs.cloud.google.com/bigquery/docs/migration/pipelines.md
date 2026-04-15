@@ -46,7 +46,7 @@ The following diagram shows a typical ETL procedure.
 
 **Figure 1** . A typical ETL procedure.
 
-**Note:** The arrows denote the direction of data flow; the sources within the DAG typically pull their data from the source systems.
+> **Note:** The arrows denote the direction of data flow; the sources within the DAG typically pull their data from the source systems.
 
 A typical ETL data pipeline pulls data from one or more source systems (preferably, as few as possible to avoid failures caused by issues like unavailable systems). The pipeline then performs a series of transformations, including cleaning data, applying business rules to it, checking for data integrity, and create aggregates or disaggregates. For more information, see [Real-life ETL cycle](https://wikipedia.org/wiki/Extract,_transform,_load#Real-life_ETL_cycle) .
 
@@ -151,7 +151,7 @@ Independent software vendors (ISV) offer data processing technologies with BigQu
   - Informatica: [BigQuery connector guide](https://docs.informatica.com/integration-cloud/data-integration-connectors/current-version/google-bigquery-connectors/preface.html)
   - Talend: [Writing data in BigQuery](https://help.qlik.com/talend/en-US/components/8.0/google-bigquery/tbigqueryoutput-trowgenerator-tmysqlinput-tmap-writing-data-in-google-bigquery-standard-component-this)
 
-**Note:** It's important to check that the data processing software takes advantage of the BigQuery large-scale [ingestion mechanisms](https://docs.cloud.google.com/bigquery/docs/loading-data) , such as streaming inserts or batch loads from Cloud Storage. An approach that employs the [Magnitude Simba](https://www.simba.com) [JDBC](https://wikipedia.org/wiki/Java_Database_Connectivity) or [ODBC](https://wikipedia.org/wiki/Open_Database_Connectivity) BigQuery drivers isn't suitable for large-scale ingestion operations, because these drivers implement the query interface. While the drivers can perform inserts, this interface is intended for querying and data manipulation language (DML) statements on BigQuery, not for large-scale inserts or updates.
+> **Note:** It's important to check that the data processing software takes advantage of the BigQuery large-scale [ingestion mechanisms](https://docs.cloud.google.com/bigquery/docs/loading-data) , such as streaming inserts or batch loads from Cloud Storage. An approach that employs the [Magnitude Simba](https://www.simba.com) [JDBC](https://wikipedia.org/wiki/Java_Database_Connectivity) or [ODBC](https://wikipedia.org/wiki/Open_Database_Connectivity) BigQuery drivers isn't suitable for large-scale ingestion operations, because these drivers implement the query interface. While the drivers can perform inserts, this interface is intended for querying and data manipulation language (DML) statements on BigQuery, not for large-scale inserts or updates.
 
 If the data pipeline technology doesn't support data ingestion to BigQuery, consider using a [variation on this approach](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#intermediate-vehicle) that writes the data temporarily to files that are subsequently ingested by BigQuery.
 

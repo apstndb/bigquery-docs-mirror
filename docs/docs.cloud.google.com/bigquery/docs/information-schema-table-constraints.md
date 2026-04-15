@@ -15,7 +15,7 @@ Each of the following [predefined roles](https://docs.cloud.google.com/iam/docs/
   - `roles/bigquery.dataOwner`
   - `roles/bigquery.admin`
 
-**Note:** Roles are presented in ascending order of permissions granted. We recommend that you use predefined roles from earlier in the list to not allocate excess permissions.
+> **Note:** Roles are presented in ascending order of permissions granted. We recommend that you use predefined roles from earlier in the list to not allocate excess permissions.
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 

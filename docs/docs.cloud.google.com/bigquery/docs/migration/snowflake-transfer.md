@@ -40,7 +40,7 @@ Create and configure your Google Cloud project for a Snowflake transfer with the
 
 1.  [Create a Google Cloud project](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects) or select an existing project.
     
-    **Note:** If you don't plan on keeping the resources created during this Snowflake transfer, create a new Google Cloud project instead of selecting an existing one. You can then delete the project once you are done with your Snowflake transfer.
+    > **Note:** If you don't plan on keeping the resources created during this Snowflake transfer, create a new Google Cloud project instead of selecting an existing one. You can then delete the project once you are done with your Snowflake transfer.
 
 2.  Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 
@@ -70,7 +70,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
-**Note:** For ease of selection of your service account and the Cloud Storage bucket URI during transfer creation, we recommend that you grant the `iam.serviceAccounts.list` and `storage.buckets.list` permissions on the user creating the transfer configuration.
+> **Note:** For ease of selection of your service account and the Cloud Storage bucket URI during transfer creation, we recommend that you grant the `iam.serviceAccounts.list` and `storage.buckets.list` permissions on the user creating the transfer configuration.
 
 ### Prepare staging bucket
 
@@ -172,7 +172,7 @@ For public connectivity, the Snowflake account allows public connection with dat
 
 To define your schema, you can use the BigQuery Data Transfer Service to automatically detect schema and data-type mapping when transferring data from Snowflake to BigQuery. Alternatively, you can use the translation engine to define your schema and data types manually.
 
-For more information, see [Schema detection and mapping](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema) .
+For more information, see [Schema detection and mapping for Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema) .
 
 ### Enable incremental transfers
 
@@ -201,8 +201,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -415,13 +413,13 @@ bq mk --transfer_config \
     --data_source=snowflake_migration
 ```
 
-**Note:** You can't configure notifications using the command-line tool.
+> **Note:** You can't configure notifications using the command-line tool.
 
 ### API
 
 Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
-If multiple transfers are created for the same Snowflake tables or if the same transfer configuration is run multiple times, the data in the existing BigQuery destination tables is overwritten.
+> If multiple transfers are created for the same Snowflake tables or if the same transfer configuration is run multiple times, the data in the existing BigQuery destination tables is overwritten.
 
 ## Specify encryption key with transfers
 
@@ -435,7 +433,7 @@ You can update a CMEK for a transfer if the transfer configuration was originall
 
 You can also use [project default keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#project_default_key) . When you specify a project default key with a transfer, the BigQuery Data Transfer Service uses the project default key as the default key for any new transfer configurations.
 
-**Note:** For Snowflake transfers, CMEK encryption handles encryption of the data in the BigQuery destination tables as well as encryption of data in the intermediate Cloud Storage tenant bucket used during the transfer process for Snowflake on Amazon S3 or Azure Blob Storage.
+> **Note:** For Snowflake transfers, CMEK encryption handles encryption of the data in the BigQuery destination tables as well as encryption of data in the intermediate Cloud Storage tenant bucket used during the transfer process for Snowflake on Amazon S3 or Azure Blob Storage.
 
 ## Quotas and limits
 

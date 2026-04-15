@@ -1,3 +1,5 @@
+[Video](https://www.youtube.com/watch?v=mW2CLYr6w4M)
+
 Pipe query syntax is an extension to GoogleSQL that supports a linear query structure designed to make your queries easier to read, write, and maintain. You can use pipe syntax anywhere you write GoogleSQL.
 
 Pipe syntax supports the same operations as existing [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) , or *standard syntax* —for instance, selection, aggregation and grouping, joining, and filtering—but the operations can be applied in any order, any number of times. The linear structure of pipe syntax lets you write queries so that the order of the query syntax matches the order of logical steps taken to build the result table.

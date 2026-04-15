@@ -31,7 +31,7 @@ ML.ARIMA_COEFFICIENTS(
   - `category_weights.category` : a `STRING` value that contains the category name if the `processed_input` value is non-numeric.
   - `category_weights.weight` : a `FLOAT64` that contains the category's weight if the `processed_input` value is non-numeric.
 
-**Note:** For trained `ARIMA_PLUS` models, this function returns the ARIMA coefficients for all time series, in ascending order of the `time_series_id_col` or `time_series_id_cols` value.
+> **Note:** For trained `ARIMA_PLUS` models, this function returns the ARIMA coefficients for all time series, in ascending order of the `time_series_id_col` or `time_series_id_cols` value.
 
 ## Example
 

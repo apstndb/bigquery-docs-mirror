@@ -2,14 +2,14 @@
 
 This document describes how to manage [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) , including how to schedule and delete pipelines.
 
-This document also describes how to view and manage pipeline metadata in [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
+This document also describes how to view and manage pipeline metadata in [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
 
 Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
 ## Before you begin
 
 1.  [Create a BigQuery pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
-2.  To manage pipeline metadata in Dataplex Universal Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
+2.  To manage pipeline metadata in Knowledge Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
 
 ### Required roles
 
@@ -22,19 +22,17 @@ For more information about granting roles, see [Manage access to projects, folde
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-To manage pipeline metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles)
+To manage pipeline metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles)
 
 For more information about Dataform IAM, see [Control access with IAM](https://docs.cloud.google.com/dataform/docs/access-control) .
 
-**Note:** When you create a pipeline, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that pipeline. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all pipelines created in the project.
+> **Note:** When you create a pipeline, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that pipeline. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all pipelines created in the project.
 
 ## View all pipelines
 
 To view a list of all pipelines in your project, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -49,8 +47,6 @@ To view a list of all pipelines in your project, do the following:
 To view past manual runs of a selected pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -71,8 +67,6 @@ To receive alerts when a BigQuery pipeline run fails, you can create a log-based
 To find the Dataform repository ID of your pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -89,8 +83,6 @@ To find the Dataform repository ID of your pipeline, do the following:
 To permanently delete a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -104,13 +96,13 @@ To permanently delete a pipeline, follow these steps:
 
 6.  Click **Delete** .
 
-## Manage metadata in Dataplex Universal Catalog
+## Manage metadata in Knowledge Catalog
 
-Dataplex Universal Catalog lets you store and manage metadata for pipelines. Pipelines are available in Dataplex Universal Catalog by default, without additional configuration.
+Knowledge Catalog lets you store and manage metadata for pipelines. Pipelines are available in Knowledge Catalog by default, without additional configuration.
 
-You can use Dataplex Universal Catalog to manage pipelines in all [pipeline locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing pipelines in Dataplex Universal Catalog is subject to [Dataplex Universal Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Dataplex Universal Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Knowledge Catalog to manage pipelines in all [pipeline locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing pipelines in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
-Dataplex Universal Catalog automatically retrieves the following metadata from pipelines:
+Knowledge Catalog automatically retrieves the following metadata from pipelines:
 
   - Data asset name
   - Data asset parent
@@ -118,18 +110,18 @@ Dataplex Universal Catalog automatically retrieves the following metadata from p
   - Data asset type
   - Corresponding Google Cloud project
 
-Dataplex Universal Catalog logs pipelines as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Knowledge Catalog logs pipelines as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for pipelines is `@dataform` . To view details of pipeline entries in Dataplex Universal Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for pipelines is `@dataform` . To view details of pipeline entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for pipelines is `dataform-code-asset` . To view details of pipelines,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected pipeline. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for pipelines is `dataform-code-asset` . To view details of pipelines,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected pipeline. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for pipelines is `dataform-code-asset` . To provide additional context to pipelines in Dataplex Universal Catalog by annotating data pipeline entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for pipelines is `dataform-code-asset` . To provide additional context to pipelines in Knowledge Catalog by annotating data pipeline entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
   - Type  
     The type for data canvases is `WORKFLOW` . This type lets you filter pipelines in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=WORKFLOW` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
+For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Knowledge Catalog documentation.
 
 ## What's next
 

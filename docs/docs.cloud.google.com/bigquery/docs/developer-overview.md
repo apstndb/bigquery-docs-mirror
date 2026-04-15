@@ -41,9 +41,9 @@ Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers 
 
 ### Google Cloud for Visual Studio Code extension
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 If you're a Visual Studio Code (VS Code) user, you can use the [Google Cloud VS Code extension](https://docs.cloud.google.com/bigquery/docs/vs-code-extension) to run BigQuery notebooks and preview BigQuery datasets from your existing VS Code environment.
 
@@ -57,9 +57,9 @@ As you build complex solutions with BigQuery, Google offers many pathways to ass
 
 ### Repositories and workspaces
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can use [repositories](https://docs.cloud.google.com/bigquery/docs/repository-intro) to version control the files that you use in BigQuery, and you can use [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) within those repositories to edit code. BigQuery uses Git to record changes and manage file versions. You can use the Git capabilities that are built into BigQuery, or you can connect to a third-party Git repository.
 

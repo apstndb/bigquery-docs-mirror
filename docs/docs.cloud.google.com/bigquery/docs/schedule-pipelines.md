@@ -67,15 +67,13 @@ To use Colab notebook runtime templates when scheduling pipelines, you need the 
 
 ## Create a pipeline schedule
 
-**Tip:** You can also use the **Pipelines & Connections** page to schedule a Dataform pipeline using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+> **Tip:** You can also use the **Pipelines & Connections** page to schedule a Dataform pipeline using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 To create a pipeline schedule, follow these steps:
 
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -96,9 +94,9 @@ To create a pipeline schedule, follow these steps:
 
 7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
     
-    **Note:** A notebook runtime template must be in the same region as the pipeline.
+    > **Note:** A notebook runtime template must be in the same region as the pipeline.
     
-    **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
+    > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
 
 8.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
     
@@ -118,13 +116,11 @@ When you create the schedule, the current version of the pipeline is automatical
 
 The latest deployed version of the pipeline runs at the selected time and frequency.
 
-**Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
+> **Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click **Create** , and then select **Pipeline schedule** from the menu.
 
@@ -139,9 +135,9 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 6.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
     
-    **Note:** A notebook runtime template must be in the same region as the pipeline.
+    > **Note:** A notebook runtime template must be in the same region as the pipeline.
     
-    **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
+    > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
 
 7.  If your pipeline contains a notebook, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
     
@@ -157,15 +153,15 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 10. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
-**Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
+> **Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
 ### Authorize your Google Account
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
+> **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
 To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
 
@@ -177,7 +173,7 @@ To revoke the permission that you granted, follow these steps:
 2.  Click **BigQuery Pipelines** .
 3.  Click **Remove access** .
 
-**Warning:** Revoking access permissions prevents any future pipeline runs that this Google Account owns across all regions.
+> **Warning:** Revoking access permissions prevents any future pipeline runs that this Google Account owns across all regions.
 
 Changing the pipeline schedule owner by updating credentials also requires manual approval if the new Google Account owner has never created a schedule before.
 
@@ -190,8 +186,6 @@ Deploying a pipeline updates its schedule with the current version of the pipeli
 To deploy a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -212,8 +206,6 @@ To disable a schedule for a selected pipeline, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -228,8 +220,6 @@ To disable a schedule for a selected pipeline, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected pipeline.
 
@@ -242,8 +232,6 @@ To resume scheduled runs of a disabled pipeline schedule, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -258,8 +246,6 @@ To resume scheduled runs of a disabled pipeline schedule, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected pipeline.
 
@@ -272,8 +258,6 @@ When you manually run a pipeline deployed in a selected schedule, BigQuery execu
 To manually run a deployed pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected pipeline schedule.
 
@@ -284,8 +268,6 @@ To manually run a deployed pipeline, follow these steps:
 To view all pipeline schedules in your Google Cloud project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Optional: To display additional columns with pipeline schedule details, click view\_column **Column display options** , and then select columns and click **OK** .
 
@@ -296,8 +278,6 @@ To view details for a selected pipeline schedule, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -310,8 +290,6 @@ To view details for a selected pipeline schedule, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected pipeline schedule.
 
@@ -322,8 +300,6 @@ To view past runs of a selected pipeline schedule, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -338,8 +314,6 @@ To view past runs of a selected pipeline schedule, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected pipeline.
 
@@ -354,8 +328,6 @@ To edit a pipeline schedule, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -370,8 +342,6 @@ To edit a pipeline schedule, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected pipeline.
 
@@ -386,8 +356,6 @@ To edit a pipeline schedule, follow these steps:
 To permanently delete a pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Do either of the following:
     

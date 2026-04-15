@@ -79,9 +79,7 @@ To update data in a BigQuery table, the service account must have the `bigquery.
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -90,8 +88,6 @@ To update data in a BigQuery table, the service account must have the `bigquery.
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
 
 ### Create a reservation
 
@@ -100,6 +96,14 @@ To update data in a BigQuery table, the service account must have the `bigquery.
 ## Export to Pub/Sub
 
 Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Pub/Sub. For more information, see [Export to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
+
+### Processing mutations with `CHANGES`
+
+> ****
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+When you export data to Pub/Sub, you have the option of using the [`CHANGES` change history function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) . The `CHANGES` function processes all rows that have changed within the source table, including both appends and mutations.
 
 ### Embed custom attributes as metadata in Pub/Sub messages
 
@@ -136,7 +140,7 @@ When you use an AI function in a continuous query, consider whether the query ou
 
 ## Specify a starting time for the continuous query
 
-You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `FROM` clause of a continuous query to specify the earliest data to process. For example, `APPENDS(TABLE my_table, start_timestamp)` .
+You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) , or [`CHANGES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) in the case of [exports to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) , in the `FROM` clause of a continuous query to specify the earliest data to process. For example, `APPENDS(TABLE my_table, start_timestamp)` .
 
 The `start_timestamp` argument defines the point in time at which the continuous query begins processing data. For example, `APPENDS(TABLE my_table, CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)` tells BigQuery to process data that was added to the table `my_table` at most 10 minutes before the start of the continuous query. Data that's subsequently added to `my_table` is processed as it comes in. There is no imposed delay on data processing.
 
@@ -144,7 +148,7 @@ When specifying the `start_timestamp` argument, the value must fall within the t
 
 Don't provide an `end_timestamp` argument to the `APPENDS` function when you use it in a continuous query.
 
-**Note:** When used in a continuous query, the `APPENDS` function is considered to be at the [General Availability](https://cloud.google.com/products#product-launch-stages) (GA) launch stage.
+> **Note:** When used in a continuous query, the `APPENDS` function is considered to be at the [General Availability](https://cloud.google.com/products#product-launch-stages) (GA) launch stage.
 
 The following example shows how to start a continuous query from a particular point in time by using the `APPENDS` function, when querying a BigQuery table that is receiving streaming taxi ride information:
 
@@ -226,8 +230,6 @@ Follow these steps to run a continuous query:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click settings **More** .
     
@@ -242,8 +244,6 @@ Follow these steps to run a continuous query:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -287,8 +287,6 @@ Follow these steps to use a service account to run a continuous query:
 2.  [Grant](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) the required [permissions](https://docs.cloud.google.com/bigquery/docs/continuous-queries#service_account_permissions) to the service account.
 
 3.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 4.  In the query editor, click **More** .
 
@@ -315,8 +313,6 @@ Follow these steps to use a service account to run a continuous query:
 2.  [Grant](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) the required [permissions](https://docs.cloud.google.com/bigquery/docs/continuous-queries#service_account_permissions) to the service account.
 
 3.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -373,8 +369,6 @@ Follow these steps to use a service account to run a continuous query:
 Every query job is assigned a job ID that you can use to search for and manage the job. By default, job IDs are randomly generated. To make it easier to search for the job ID of a continuous query using [job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) or [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) , you can assign a custom job ID prefix:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click **More** .
 
@@ -388,13 +382,22 @@ Every query job is assigned a job ID that you can use to search for and manage t
 
 7.  Click **Save** .
 
+## Stateful processing with `JOIN` s and windowing aggregations
+
+Stateful operations let continuous queries perform complex analysis by retaining information across multiple rows or time intervals. These operations include `JOIN` s and windowing aggregations.
+
+For detailed information about how to use these stateful operations, see the following topics:
+
+  - [Continuous query `JOIN` s](https://docs.cloud.google.com/bigquery/docs/continuous-query-joins) perform real-time correlations between multiple time-oriented data streams.
+  - [Windowing aggregations](https://docs.cloud.google.com/bigquery/docs/window-aggregations) group streaming data into consistent time intervals for analysis using aggregation functions.
+
 ## Examples
 
 The following SQL examples show common use cases for continuous queries.
 
 ### Export data to a Pub/Sub topic
 
-The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data to a Pub/Sub topic in real time with message attributes:
+The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data for cancelled rides to a Pub/Sub topic in real time with message attributes:
 
 ``` notranslate
 EXPORT DATA
@@ -411,14 +414,14 @@ AS (
         longitude)) AS message,
     TO_JSON(
       STRUCT(
-        CAST(passenger_count AS STRING) AS passenger_count)) AS _ATTRIBUTES
+        CAST(passenger_comment AS STRING) AS passenger_comment))
   FROM
-    APPENDS(TABLE `myproject.real_time_taxi_streaming.taxi_rides`,
-      -- Configure the APPENDS TVF start_timestamp to specify when you want to
+    CHANGES(TABLE `myproject.real_time_taxi_streaming.taxi_rides`,
+      -- Configure the CHANGES TVF start_timestamp to specify when you want to
       -- start processing data using your continuous query.
       -- This example starts processing at 10 minutes before the current time.
       CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-  WHERE ride_status = 'enroute'
+  WHERE _CHANGE_TYPE = 'DELETE'
 );
 ```
 
@@ -565,6 +568,58 @@ AS (
         1.0 AS top_p))
       AS ml_output
 );
+```
+
+### Perform `JOIN` s and windowing aggregations
+
+The following example shows a continuous query that performs a `JOIN` and windowing aggregations.
+
+Suppose you want to join a taxi rides table to a taxi requests table to understand taxi health in each neighborhood every five minutes. Using aggregate functions, you can capture the taxi demand volume per neighborhood and the minimum, maximum, average, and standard deviation distance a rider was from a taxi when they requested a ride.
+
+``` notranslate
+INSERT INTO
+ `real_time_taxi_streaming.neighborhood_taxi_health`
+WITH potential_matches AS (
+ SELECT
+   requests._CHANGE_TIMESTAMP AS bq_changed_ts,
+   requests.geohash,
+   requests.latitude,
+   requests.longitude,
+   ST_DISTANCE(
+     ST_GEOGPOINT(requests.longitude, requests.latitude),
+     ST_GEOGPOINT(taxis.longitude, taxis.latitude)
+   ) AS distance_in_meters
+ FROM
+   APPENDS(TABLE `real_time_taxi_streaming.ride_requests`,
+     CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE) AS requests
+ INNER JOIN
+   APPENDS(TABLE `real_time_taxi_streaming.taxirides`,
+     CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE) AS taxis
+ ON requests.geohash = taxis.geohash
+ WHERE
+   taxis.ride_status = 'available'
+   AND taxis._CHANGE_TIMESTAMP BETWEEN (requests._CHANGE_TIMESTAMP - INTERVAL 5 MINUTE) AND requests._CHANGE_TIMESTAMP
+   AND ST_Dwithin(
+     ST_GEOGPOINT(requests.longitude, requests.latitude),
+     ST_GEOGPOINT(taxis.longitude, taxis.latitude),
+     2000 -- Distance in meters
+   )
+)
+SELECT
+ window_end,
+ geohash,
+ ROUND(AVG(latitude), 6) AS avg_latitude,
+ ROUND(AVG(longitude), 6) AS avg_longitude,
+ COUNT(*) AS taxi_demand_volume,
+ ROUND(AVG(distance_in_meters), 2) AS avg_proximity_meters,
+ ROUND(MIN(distance_in_meters), 2) AS min_proximity_meters,
+ ROUND(MAX(distance_in_meters), 2) AS max_proximity_meters,
+ ROUND(STDDEV(distance_in_meters), 2) AS proximity_stddev
+FROM
+ TUMBLE(TABLE potential_matches, "bq_changed_ts", INTERVAL 5 MINUTE)
+GROUP BY
+ window_end,
+ geohash;
 ```
 
 ## Modify the SQL of a continuous query

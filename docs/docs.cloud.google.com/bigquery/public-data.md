@@ -8,13 +8,9 @@ You can access BigQuery public datasets by using the [Google Cloud console](http
 
 Public datasets are not accessible by default from within a [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview) perimeter. There is no service-level agreement (SLA) for the Public Dataset Program.
 
-[Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
-
 You can find more details about each individual dataset by clicking the dataset's name in the Datasets section of Cloud Marketplace.
 
-[Go to Datasets in Cloud Marketplace](https://console.cloud.google.com/marketplace/browse?filter=solution-type:dataset)
-
-**Note:** The **Last Updated** date on a Cloud Marketplace dataset page indicates when the dataset page was last updated. To find out when the data itself was last updated, see [Accessing public datasets in the Google Cloud console](https://docs.cloud.google.com/bigquery/public-data#public-ui) .
+> **Note:** The **Last Updated** date on a Cloud Marketplace dataset page indicates when the dataset page was last updated. To find out when the data itself was last updated, see [Accessing public datasets in the Google Cloud console](https://docs.cloud.google.com/bigquery/public-data#public-ui) .
 
 ## Before you begin
 
@@ -27,8 +23,6 @@ To get started using a BigQuery public dataset, you must create or select a proj
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Public dataset locations
 

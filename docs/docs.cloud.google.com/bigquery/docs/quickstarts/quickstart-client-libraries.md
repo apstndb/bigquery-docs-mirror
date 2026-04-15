@@ -8,31 +8,17 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 
 ### C\#
 
-[Take the C\# tour](https://console.cloud.google.com/?walkthrough_id=bigquery--csharp-client-library)
-
 ### Go
-
-[Take the Go tour](https://console.cloud.google.com/?walkthrough_id=bigquery--go-client-library)
 
 ### Java
 
-[Take the Java tour](https://console.cloud.google.com/?walkthrough_id=bigquery--java-client-library)
-
 ### Node.js
-
-[Take the Node.js tour](https://console.cloud.google.com/?walkthrough_id=bigquery--node-client-library)
 
 ### PHP
 
-[Take the PHP tour](https://console.cloud.google.com/?walkthrough_id=bigquery--php-client-library)
-
 ### Python
 
-[Take the Python tour](https://console.cloud.google.com/?walkthrough_id=bigquery--python-client-library)
-
 ### Ruby
-
-[Take the Ruby tour](https://console.cloud.google.com/?walkthrough_id=bigquery--ruby-client-library)
 
 -----
 
@@ -45,7 +31,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
       - Create a Google Cloud project:
         
@@ -84,8 +70,6 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     For new projects, the BigQuery API is automatically enabled.
 
 5.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
 
 6.  Activate your Google Cloud project in Cloud Shell:
     
@@ -985,16 +969,14 @@ The easiest way to eliminate billing is to delete the project that you created f
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

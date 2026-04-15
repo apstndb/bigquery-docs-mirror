@@ -951,7 +951,7 @@ The total number of slot-ms consumed by the query job.
 
 ` object ( BigQueryAuditMetadata.JobStats.ReservationResourceUsage  ` )
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated: Reservation usage attributed from each tier of a reservation hierarchy. This field is empty because the provided reservation usage statistics are not accurate. Use the INFORMATION\_SCHEMA.JOBS view to find the average slot usage for a given period of time.
 
@@ -2342,7 +2342,7 @@ Optional. If not set, the table is partitioned by pseudo column '\_PARTITIONTIME
 
 `boolean`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified. This field is deprecated; please set the field with the same name on the table itself instead. This field needs a wrapper because we want to output the default value, false, if the user explicitly set it.
 

@@ -1,6 +1,6 @@
 # Analyze data with the Gemini CLI
 
-**Note:** The BigQuery CLI extensions are based on MCP Toolbox for Databases. MCP Toolbox for Databases is in beta (pre-v1.0) and may see breaking changes until the first stable release (v1.0).
+> **Note:** The BigQuery CLI extensions are based on MCP Toolbox for Databases. MCP Toolbox for Databases is in beta (pre-v1.0) and may see breaking changes until the first stable release (v1.0).
 
 This page explains how to interact with BigQuery data in your terminal by using natural-language prompts with the [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli) . Using the dedicated BigQuery [extensions](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#about-bigquery-extensions) with the Gemini CLI enables AI-driven data analysis and insights directly within your command line. You can analyze data from your BigQuery tables, or from tables in the BigQuery public datasets.
 
@@ -95,12 +95,12 @@ Before you begin, you need the following:
   - For the Data Analytics extension, enable the following APIs:
     
       - BigQuery
-      - To use the `search_catalog` tool: Dataplex Universal Catalog
+      - To use the `search_catalog` tool: Knowledge Catalog
 
   - For the Conversational Analytics extension, enable the following APIs:
     
       - BigQuery
-      - Dataplex Universal Catalog
+      - Knowledge Catalog
       - To use the `ask_data_insights` tool: Gemini for Google Cloud API, Gemini, and Data Analytics API with Gemini
 
 ### Required roles
@@ -148,7 +148,7 @@ Install the BigQuery extensions and then use them to explore and analyze your da
     
     The CLI automatically loads the BigQuery extension and its tools, which you can use to interact with your data.
 
-**Note:** if you install both of the BigQuery extensions, the Gemini CLI might use tools from either extension to answer your questions. This could have a billing impact, as there is additional billing impact when using Conversational Analytics tools. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#pricing) .
+> **Note:** if you install both of the BigQuery extensions, the Gemini CLI might use tools from either extension to answer your questions. This could have a billing impact, as there is additional billing impact when using Conversational Analytics tools. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#pricing) .
 
 ## Example prompts to explore and analyze your data
 

@@ -1,6 +1,6 @@
 # Introduction to data masking
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 BigQuery supports [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) at the column level. You can use data masking to selectively obscure column data for user groups, while still allowing them access to the column. Data masking functionality is built on top of [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , so you should familiarize yourself with that feature before you proceed.
 
@@ -72,7 +72,7 @@ You can use the following data masking rules:
     | `TIMESTAMP` | 2030-07-17 01:45:06 | 2030-01-01 00:00:00 |
     
 
-    **Note:** Truncation occurs according to the UTC time zone. To change this, adjust the default time zone using the **@@time\_zone** [system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) .
+    > **Note:** Truncation occurs according to the UTC time zone. To change this, adjust the default time zone using the **@@time\_zone** [system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) .
 
   - **Default masking value** . Returns a default masking value for the column based on the column's data type. Use this when you want to hide the value of the column but reveal the data type. When this data masking rule is applied to a column, it makes it less useful in query [`JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) operations for users with Masked Reader access. This is because a default value isn't sufficiently unique to be useful when joining tables.
     
@@ -169,7 +169,7 @@ You can use the following data masking rules:
     
     The SHA-256 function used in data masking is type preserving, so the hash value it returns has the same data type as the column value. For example, the hash value for a `STRING` column value also has a `STRING` data type.
     
-    **Important:** SHA-256 is a deterministic hashing function; an initial value always resolves to the same hash value. However, it does not require encryption keys. This makes it possible for a malicious actor to use a brute force attack to determine the original value, by running all possible original values through the SHA-256 algorithm and seeing which one produces a hash that matches the hash returned by data masking.
+    > **Important:** SHA-256 is a deterministic hashing function; an initial value always resolves to the same hash value. However, it does not require encryption keys. This makes it possible for a malicious actor to use a brute force attack to determine the original value, by running all possible original values through the SHA-256 algorithm and seeing which one produces a hash that matches the hash returned by data masking.
 
   - **Random hash** . Returns a hash of the column's value using a salted hash algorithm. Random hash provides stronger security than the standard `Hash (SHA-256)` rule. You can only use this rule with columns that use the `STRING` or `BYTES` data types.
     

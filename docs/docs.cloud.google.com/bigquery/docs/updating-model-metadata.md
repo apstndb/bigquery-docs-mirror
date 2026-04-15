@@ -31,8 +31,6 @@ To update a model's description:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -282,7 +280,7 @@ A model's expiration time is a timestamp value that dictates when a model is del
 
 If you don't set an expiration time on a model, the model never expires and you must [delete](https://docs.cloud.google.com/bigquery/docs/deleting-models) the model manually.
 
-**Note:** Setting or updating the expiration time on a model is not supported by the Google Cloud console.
+> **Note:** Setting or updating the expiration time on a model is not supported by the Google Cloud console.
 
 The value for the expiration time is expressed differently depending on where the value is set. Use the method that gives you the appropriate level of granularity:
 

@@ -8,7 +8,7 @@ You can modify a table schema in all the ways described on this page by [exporti
 
 Schema updates in BigQuery don't cause data loss.
 
-**Note:** When you update a schema, the changes might not be immediately reflected in the [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) views. To view immediate schema changes, call the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) .
+> **Note:** When you update a schema, the changes might not be immediately reflected in the [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) views. To view immediate schema changes, call the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) .
 
 ## Add a column
 
@@ -31,8 +31,6 @@ To add empty columns to a table's schema definition:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -56,15 +54,13 @@ To add empty columns to a table's schema definition:
 
 8.  When you are done adding columns, click **Save** .
 
-**Note:** You can't use the Google Cloud console to add a column to an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
+> **Note:** You can't use the Google Cloud console to add a column to an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ### SQL
 
 Use the [`ALTER TABLE ADD COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -77,7 +73,7 @@ Use the [`ALTER TABLE ADD COLUMN` DDL statement](https://docs.cloud.google.com/b
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-**Note:** You can't use the `ALTER TABLE ADD COLUMN` statement to add a column to an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
+> **Note:** You can't use the `ALTER TABLE ADD COLUMN` statement to add a column to an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ### bq
 
@@ -1288,8 +1284,6 @@ When using `CAST` , a query can fail if BigQuery is unable to perform the cast. 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Query editor** , enter the following query to select all of the data from `column_two` and `column_three` in `mydataset.mytable` and to cast `column_one` from `DATE` to `STRING` . The query uses an alias to cast `column_one` with the same name. `mydataset.mytable` is in your default project.
     
@@ -1362,8 +1356,6 @@ To change a column's mode from `REQUIRED` to `NULLABLE` , select one of the foll
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -1383,15 +1375,13 @@ To change a column's mode from `REQUIRED` to `NULLABLE` , select one of the foll
 
 9.  To update the settings, click **Save** .
 
-**Note:** You can't use the Google Cloud console to alter a column in an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
+> **Note:** You can't use the Google Cloud console to alter a column in an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ### SQL
 
 Use the [`ALTER COLUMN DROP NOT NULL` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_drop_not_null_statement) . The following example changes the mode of the column `mycolumn` from `REQUIRED` to `NULLABLE` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -1703,7 +1693,7 @@ You can relax a column's mode when you append data to a table in a load job. Sel
   - When appending data from CSV and JSON files, relax the mode for individual columns by specifying a JSON schema file.
   - When appending data from Avro, ORC, or Parquet files, relax columns to `NULL` in your schema and let schema inference detect the relaxed columns.
 
-**Note:** Column relaxation does not apply to Datastore export appends. The columns in tables created by loading Datastore export files are always `NULLABLE` .
+> **Note:** Column relaxation does not apply to Datastore export appends. The columns in tables created by loading Datastore export files are always `NULLABLE` .
 
 To relax a column from `REQUIRED` to `NULLABLE` when you append data to a table during a load job, select one of the following options:
 
@@ -2306,8 +2296,6 @@ To change the default value for a column, select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -2334,8 +2322,6 @@ To change the default value for a column, select one of the following options:
 Use the [`ALTER COLUMN SET DEFAULT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_default_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -2355,8 +2341,6 @@ To change the description for a column, select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -2381,8 +2365,6 @@ To change the description for a column, select one of the following options:
 Use the [`ALTER COLUMN SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -2403,8 +2385,6 @@ You can generate column descriptions with Gemini in BigQuery by using data insig
 For more information about data insights, including setup steps, required IAM roles, and best practices to improve the accuracy of the generated insights, see [Generate data insights in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-insights) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -2416,7 +2396,7 @@ For more information about data insights, including setup steps, required IAM ro
 
 5.  Click **Generate** .
     
-    **Note:** If you don't see the **Generate** button, click **Describe data** . You might need to scroll to see this button.
+    > **Note:** If you don't see the **Generate** button, click **Describe data** . You might need to scroll to see this button.
     
     Gemini generates column descriptions and insights about the table. It takes a few minutes for the information to be populated. You can view the generated insights on the table's **Insights** tab.
 

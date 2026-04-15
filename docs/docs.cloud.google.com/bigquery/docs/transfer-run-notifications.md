@@ -24,8 +24,6 @@ You can send notifications to any Pub/Sub topic in any project for which you hav
 Before configuring Pub/Sub transfer run notifications, you should:
 
 1.  Enable the Pub/Sub API for the project that will receive notifications.
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=pubsub)
 
 2.  Have sufficient permissions on the project that will receive notifications:
     
@@ -37,9 +35,9 @@ Before configuring Pub/Sub transfer run notifications, you should:
 
 3.  [Have an existing Pub/Sub topic](https://docs.cloud.google.com/pubsub/docs/create-topic) that you want to send notifications to.
 
-**Caution:** Don't remove the [BigQuery Data Transfer Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquerydatatransfer.serviceAgent) from the `pubsub.publisher` predefined IAM role. The removal can cause publishing notification failures to the Pub/Sub topic.
+> **Caution:** Don't remove the [BigQuery Data Transfer Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquerydatatransfer.serviceAgent) from the `pubsub.publisher` predefined IAM role. The removal can cause publishing notification failures to the Pub/Sub topic.
 
-**Caution:** Don't specify any custom schema when creating the Pub/Sub topic. Specifying a custom schema can cause the notification publication to fail.
+> **Caution:** Don't specify any custom schema when creating the Pub/Sub topic. Specifying a custom schema can cause the notification publication to fail.
 
 ### Notification format
 
@@ -106,8 +104,6 @@ To turn on notifications, or edit an existing one, choose one of the following:
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Data transfers** .
 

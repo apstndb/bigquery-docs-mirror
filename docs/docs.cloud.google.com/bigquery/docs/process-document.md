@@ -58,8 +58,6 @@ Create a BigQuery dataset to contain your resources:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -112,8 +110,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -142,8 +138,6 @@ Select one of the following options:
 Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -151,7 +145,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
     OPTIONS (
       connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
+      friendly_name = &quot;FRIENDLY_NAME";,
       description = "DESCRIPTION"
       );
     ```
@@ -252,9 +246,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
         except google.api_core.exceptions.AlreadyExists:
             print(f"Connection with ID '{connection_id}' already exists.")
-            print("Please use a different connection ID.")
-        except Exception as e:
-            print(f"An unexpected error occurred while creating the connection: {e}")
+            print("Please use a different connection ID.")exceptExceptionase:print(f"An unexpected error occurred while creating the connection: {e}")
 
 ### Node.js
 
@@ -263,7 +255,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     const {ConnectionServiceClient} =
-      require('@google-cloud/bigquery-connection').v1;
+      require(&#39;@google-cloud/bigquery-connection').v1;
     const {status} = require('@grpc/grpc-js');
     
     const client = new ConnectionServiceClient();
@@ -306,16 +298,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         if (err.code === status.ALREADY_EXISTS) {
           console.log(`Connection '${connectionId}' already exists.`);
         } else {
-          console.error(`Error creating connection: ${err.message}`);
-        }
-      }
-    }
+          console.error(`Error creating connection: ${err.message}`);    }  }}
 
 ### Terraform
 
 Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -391,7 +380,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Grant access to the service account
 
@@ -400,8 +389,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
     
@@ -431,10 +418,10 @@ Replace the following:
 
 Failure to grant the permission results in a `Permission denied` error.
 
-**Note:** If you create the processor in a different project than the Cloud Storage bucket used by the object table, grant the service account Identity and Access Management (IAM) roles as follows:
-
-  - Grant the service account the Document AI Viewer role in the project that contains the processor.
-  - Grant the service account the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
+> **Note:** If you create the processor in a different project than the Cloud Storage bucket used by the object table, grant the service account Identity and Access Management (IAM) roles as follows:
+> 
+>   - Grant the service account the Document AI Viewer role in the project that contains the processor.
+>   - Grant the service account the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
 
 ## Create a model
 
@@ -464,7 +451,7 @@ Replace the following:
 
   - `  PROCESSOR_ID  ` : the document processor ID. To find this value, [view the processor details](https://docs.cloud.google.com/document-ai/docs/create-processor#get-processor) , and then look at the **ID** row in the **Basic Information** section.
 
-**Important:** You must specify the project ID for the connection even if the connection is in the default project.
+> **Important:** You must specify the project ID for the connection even if the connection is in the default project.
 
 To see the model output columns, click **Go to model** in the query result after the model is created. The output columns are shown in the **Labels** section of the **Schema** tab.
 

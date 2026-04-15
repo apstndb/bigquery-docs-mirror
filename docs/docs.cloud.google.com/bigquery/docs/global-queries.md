@@ -1,10 +1,10 @@
 # Global queries
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for this preview feature, contact <bq-xregion-support@google.com> .
+> **Note:** To get support or provide feedback for this preview feature, contact <bq-xregion-support@google.com> .
 
 Global queries let you run SQL queries that reference data stored in more than one region. For example, you can run a global query that joins a table located in `us-central1` with a table located in `europe-central2` . This document explains how to enable and run global queries in your project.
 

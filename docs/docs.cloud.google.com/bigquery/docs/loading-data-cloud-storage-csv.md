@@ -88,13 +88,9 @@ To load CSV data from Cloud Storage into a new BigQuery table, select one of the
 
 To follow step-by-step guidance for this task directly in the Cloud Shell Editor, click **Guide me** :
 
-[Guide me](https://console.cloud.google.com/?tutorial=bigquery_import_data_from_cloud_storage)
-
 -----
 
 In the Google Cloud console, go to the **BigQuery** page.
-
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -166,17 +162,15 @@ For **Encryption** , click **Customer-managed key** to use a [Cloud Key Manageme
 
 Click **Create table** .
 
-**Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
-  
-After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+> **Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
+>   
+> After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
 
 ### SQL
 
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads a CSV file into the new table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -346,7 +340,7 @@ The following command loads data from `gs://mybucket/mydata.csv` into a table na
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-**Note:** When you specify the schema using the bq command-line tool, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
+> **Note:** When you specify the schema using the bq command-line tool, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
 
 The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard. The schema is auto detected.
 
@@ -990,13 +984,11 @@ You have the following options when you load additional data into a table:
 
 If you load data into an existing table, the load job can append the data or overwrite the table.
 
-**Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
+> **Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
 
 ### Console
 
 In the Google Cloud console, go to the **BigQuery** page.
-
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -1011,7 +1003,7 @@ In the **Source** section, select **Google Cloud Storage** in the **Create table
 1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite. ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
 2.  For **File format** , select **CSV** .
 
-**Note:** It is possible to modify the table's schema when you append or overwrite it. For more information about supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+> **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information about supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 In the **Destination** section, specify the following details:
 
@@ -1075,8 +1067,6 @@ Click **Create table** .
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends a CSV file to the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -1474,9 +1464,9 @@ BigQuery supports the following encoding types for CSV files:
 
 If you don't specify an encoding, or if you specify UTF-8 encoding when the CSV file is not UTF-8 encoded, BigQuery attempts to convert the data to UTF-8. Generally, if the CSV file is ISO-8859-1 encoded, your data will be loaded successfully, but it may not exactly match what you expect. If the CSV file is UTF-16BE, UTF-16LE, UTF-32BE, or UTF-32LE encoded, the load might fail. To avoid unexpected failures, specify the correct encoding by using the [`--encoding` flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) .
 
-**Note:** If the CSV file is UTF-16BE, UTF-16LE, UTF-32BE, or UTF-32LE encoded, and the [`--allow_quoted_newlines` flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) is set as `true` , then the CSV file has a maximum size limit of 1GB.
+> **Note:** If the CSV file is UTF-16BE, UTF-16LE, UTF-32BE, or UTF-32LE encoded, and the [`--allow_quoted_newlines` flag](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) is set as `true` , then the CSV file has a maximum size limit of 1GB.
 
-**Note:** By default, if the CSV file contains the ASCII `0` (NULL) character, you can't load the data into BigQuery. If you want to allow ASCII `0` and other ASCII control characters, then set `--preserve_ascii_control_characters=true` to your load jobs.
+> **Note:** By default, if the CSV file contains the ASCII `0` (NULL) character, you can't load the data into BigQuery. If you want to allow ASCII `0` and other ASCII control characters, then set `--preserve_ascii_control_characters=true` to your load jobs.
 
 If BigQuery can't convert a character other than the ASCII `0` character, BigQuery converts the character to the standard Unicode replacement character: �.
 
@@ -1565,7 +1555,7 @@ Examples of Unix epoch timestamp values:
 
 **RANGE** . Represented in CSV files in the format `[ LOWER_BOUND , UPPER_BOUND )` , where `  LOWER_BOUND  ` and `  UPPER_BOUND  ` are valid `DATE` , `DATETIME` , or `TIMESTAMP` strings. `NULL` and `UNBOUNDED` represent unbounded start or end values.
 
-**Note:** Since the range CSV format contains a comma, if the CSV delimiter is a comma, it must be surrounded by double quotes for the CSV file to be valid.
+> **Note:** Since the range CSV format contains a comma, if the CSV delimiter is a comma, it must be surrounded by double quotes for the CSV file to be valid.
 
 The following are example of CSV values for `RANGE<DATE>` :
 

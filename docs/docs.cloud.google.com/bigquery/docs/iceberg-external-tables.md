@@ -24,8 +24,6 @@ Enable the BigQuery Connection and BigQuery Reservation APIs.
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-[Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigqueryconnection.googleapis.com,%20bigqueryreservation.googleapis.com&redirect=https://console.cloud.google.com)
-
   - If you use a stored procedure for Spark in BigQuery to create Iceberg external tables, you must follow these steps:
     
     1.  [Create a Spark connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#create-spark-connection) .

@@ -35,8 +35,6 @@ To enable the Analytics Hub API, select one of the following options:
 
 Go to the **Analytics Hub API** page and enable the Analytics Hub API for your Google Cloud project.
 
-[Enable the Analytics Hub API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com)
-
 ### gcloud
 
 Run the [gcloud services enable](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) command:
@@ -100,8 +98,6 @@ To list all subscriptions, select one of the following options.
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
     
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
-    
     The page lists all the [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) you can access.
 
 2.  Select the data exchange name where you want to list subscriptions.
@@ -126,15 +122,13 @@ When a BigQuery sharing publisher revokes a subscription, the subscriber can no 
 
 If a publisher revokes a subscription from a multi-region listing ( [Preview](https://cloud.google.com/products#product-launch-stages) ), subscribers can no longer query any primary or secondary linked dataset replicas.
 
-**Caution:** Revoking [Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
+> **Caution:** Revoking [Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 
 To revoke a subscription, select one of the following options:
 
 ### Console
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
     
     The page lists all the data exchanges you can access.
 

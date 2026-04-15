@@ -420,7 +420,7 @@ Alternately, you can use `DELETE` with the `EXISTS` clause:
 
 The `TRUNCATE TABLE` statement removes all rows from a table but leaves the table metadata intact, including the table schema, description, and labels.
 
-**Note:** This statement is a metadata operation and does not incur a charge.
+> **Note:** This statement is a metadata operation and does not incur a charge.
 
     TRUNCATE TABLE [[project_name.]dataset_name.]table_name
 
@@ -544,7 +544,7 @@ Alternately, you can join the tables:
     FROM dataset.NewArrivals n
     WHERE i.product = n.product
 
-**Note:** The join predicate between Inventory and NewArrivals is specified using the `WHERE` clause.
+> **Note:** The join predicate between Inventory and NewArrivals is specified using the `WHERE` clause.
 
 Before:
 
@@ -764,7 +764,7 @@ After:
 
 A `MERGE` statement is a DML statement that can combine `INSERT` , `UPDATE` , and `DELETE` operations into a single statement and perform the operations atomically.
 
-**Note:** If as part of a `MERGE` a new row is inserted in the target table, the newly inserted row is not eligible for a match with rows from the source table. Matching is based on the state the tables are in when the query is started.
+> **Note:** If as part of a `MERGE` a new row is inserted in the target table, the newly inserted row is not eligible for a match with rows from the source table. Matching is based on the state the tables are in when the query is started.
 
     MERGE [INTO] target_name [[AS] alias]
     USING source_name [[AS] alias]

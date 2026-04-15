@@ -6,7 +6,7 @@ If a query uses a qualifying filter on the value of the partitioning column, Big
 
 In a partitioned table, data is stored in physical blocks, each of which holds one partition of data. Each partitioned table maintains various metadata about the sort properties across all operations that modify it. The metadata lets BigQuery more accurately estimate a query cost before the query is run.
 
-**Note:** The information in [Managing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data) also applies to partitioned tables.
+> **Note:** The information in [Managing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data) also applies to partitioned tables.
 
 ## When to use partitioning
 

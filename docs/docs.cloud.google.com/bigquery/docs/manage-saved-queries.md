@@ -1,6 +1,6 @@
 # Manage saved queries
 
-This document describes how to manage [saved queries and classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) and how to manage saved query metadata in [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
+This document describes how to manage [saved queries and classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) and how to manage saved query metadata in [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
 
 Saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
@@ -39,7 +39,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To manage saved query metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
+To manage saved query metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
 
 ## Share saved queries
 
@@ -48,8 +48,6 @@ To share a saved query with a user, you first grant that user access to the save
 Users that you share a query with only see the most recent version of a query. Autosaved changes that you haven't explicitly saved don't appear in the shared query.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -73,7 +71,7 @@ Users that you share a query with only see the most recent version of a query. A
       - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
       - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : can view the query.
     
-    **Note:** The principal must also have the [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
+    > **Note:** The principal must also have the [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
@@ -93,13 +91,11 @@ When you assign an IAM role to the `allAuthenticatedUsers` principal, service ac
 
 For example, when you grant the Code Viewer role to `allAuthenticatedUsers` on the `sales` saved query, all service accounts and users on the internet who have authenticated with a Google Account have read-only access to the `sales` saved query.
 
-**Caution:** Granting administrator, edit, or execution level permissions to `allAuthenticatedUsers` can allow bad actors to access your data. Grant only the minimal required permissions.
+> **Caution:** Granting administrator, edit, or execution level permissions to `allAuthenticatedUsers` can allow bad actors to access your data. Grant only the minimal required permissions.
 
 To grant public access to a BigQuery Studio saved query, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -137,13 +133,11 @@ For more information about the `iam.allowedPolicyMemberDomains` policy and instr
 
 If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
 
-**Note:** If you create a saved query and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that query and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+> **Note:** If you create a saved query and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that query and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
 
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, find the project in which you have enabled code assets.
 
@@ -160,8 +154,6 @@ For a list of supported regions, see [BigQuery Studio locations](https://docs.cl
 To view a list of all saved queries in your project, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -180,8 +172,6 @@ To view a list of all saved queries in your project, do the following:
 To view saved query metadata, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -210,8 +200,6 @@ Use the following sections to learn how to view, compare, and restore versions o
 To view saved query versions, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -228,8 +216,6 @@ To view saved query versions, do the following:
 To compare saved query versions, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -272,8 +258,6 @@ Restoring from the comparison pane lets you compare the previous version of the 
 To open a saved query in Connected Sheets, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -290,8 +274,6 @@ To open a saved query in Connected Sheets, follow these steps:
 To download a saved query, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -308,8 +290,6 @@ To download a saved query, do the following:
 To delete a saved query, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -327,11 +307,11 @@ To delete a saved query, do the following:
 
 ## Classic saved queries
 
-**Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic-saved-queries-deprecation) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
+> **Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic-saved-queries-deprecation) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
 
 Use the following sections to learn how to manage [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries) .
 
-**Note:** If you have not enabled BigQuery Studio, then classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Classic Explorer** pane instead of the **(Classic) Queries** folder.
+> **Note:** If you have not enabled BigQuery Studio, then classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Classic Explorer** pane instead of the **(Classic) Queries** folder.
 
 ### Share classic saved queries
 
@@ -358,8 +338,6 @@ If you are plan to share a classic saved query, consider including a comment in 
 ### Save a classic query as a saved query
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click category **Classic Explorer** :
     
@@ -415,15 +393,13 @@ After batch migration, you won't be able to modify migrated classic saved querie
 
 BigQuery will add migrated BigQuery Studio saved queries to your Google Cloud project using the Dataform API. Reverting these changes requires manual cleanup.
 
-**Warning:** Migration cannot be stopped or canceled once started.
+> **Warning:** Migration cannot be stopped or canceled once started.
 
 #### Batch migrate classic saved queries
 
 To batch migrate classic saved queries in your project to BigQuery Studio saved queries, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click category **Classic Explorer** :
     
@@ -462,7 +438,7 @@ To batch migrate classic saved queries in your project to BigQuery Studio saved 
 
 9.  To confirm that you understand the [migration risks](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migration-risks) and that you want to batch migrate classic saved queries, in the **Confirm** section, in the **Confirm** field, enter `confirm` , and then click **Next** .
     
-    **Warning:** Migration cannot be stopped or canceled once started.
+    > **Warning:** Migration cannot be stopped or canceled once started.
 
 10. Click **Submit** .
 
@@ -471,8 +447,6 @@ Migration can take over 15 minutes, depending on the number of migrating queries
 ### Delete classic saved queries
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click category **Classic Explorer** :
     
@@ -488,13 +462,13 @@ Migration can take over 15 minutes, depending on the number of migrating queries
 
 7.  Click **Delete** .
 
-## Manage metadata in Dataplex Universal Catalog
+## Manage metadata in Knowledge Catalog
 
-Dataplex Universal Catalog lets you store and manage metadata for saved queries. Saved queries are available in Dataplex Universal Catalog by default, without additional configuration.
+Knowledge Catalog lets you store and manage metadata for saved queries. Saved queries are available in Knowledge Catalog by default, without additional configuration.
 
-You can use Dataplex Universal Catalog to manage saved queries in all [saved query locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing saved queries in Dataplex Universal Catalog is subject to [Dataplex Universal Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Dataplex Universal Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Knowledge Catalog to manage saved queries in all [saved query locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing saved queries in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
-Dataplex Universal Catalog automatically retrieves the following metadata from saved queries:
+Knowledge Catalog automatically retrieves the following metadata from saved queries:
 
   - Data asset name
   - Data asset parent
@@ -502,18 +476,18 @@ Dataplex Universal Catalog automatically retrieves the following metadata from s
   - Data asset type
   - Corresponding Google Cloud project
 
-Dataplex Universal Catalog logs saved queries as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Knowledge Catalog logs saved queries as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for saved queries is `@dataform` . To view details of saved query entries in Dataplex Universal Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for saved queries is `@dataform` . To view details of saved query entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Dataplex Universal Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Knowledge Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
   - Type  
     The type for saved queries is `SQL_QUERY` . This type lets you filter saved queries in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
+For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Knowledge Catalog documentation.
 
 ## What's next
 

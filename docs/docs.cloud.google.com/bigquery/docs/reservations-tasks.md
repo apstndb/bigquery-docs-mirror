@@ -26,8 +26,6 @@ Select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -62,8 +60,6 @@ The new reservation is visible in the **Slot reservations** tab.
 To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -138,7 +134,7 @@ For information about the `--ignore_idle_slots` flag, see [Idle slots](https://d
 
 Use the [`google_bigquery_reservation`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_reservation) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -214,7 +210,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Python
 
@@ -290,8 +286,6 @@ To create a predictable reservation with a maximum number of slots, select one o
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation panel, go to the **Capacity management** section, and then click **Create reservation** .
 
@@ -363,8 +357,6 @@ For information about the `--ignore_idle_slots` flag, see [Idle slots](https://d
 To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -435,8 +427,6 @@ You can add or remove slots from an existing reservation.
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -463,8 +453,6 @@ You can add or remove slots from an existing reservation.
 To change the size of a reservation, use the [`ALTER RESERVATION SET OPTIONS` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -592,8 +580,6 @@ To list the [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_
 Query the `ignore_idle_slots` column of the [`INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations#schema) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -649,15 +635,13 @@ Each of the following predefined IAM roles includes this permission:
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-**Caution:** You can delete a reservation with active commitments, but you are still charged for the remaining duration of the commitment. Deleting the reservation or switching associated projects to on-demand pricing doesn't stop these charges. For more information about commitment expiration, see [commitment expiration](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#commitment_expiration) . For additional help with reservations, commitments, or costs, contact [Google Cloud Support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+> **Caution:** You can delete a reservation with active commitments, but you are still charged for the remaining duration of the commitment. Deleting the reservation or switching associated projects to on-demand pricing doesn't stop these charges. For more information about commitment expiration, see [commitment expiration](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#commitment_expiration) . For additional help with reservations, commitments, or costs, contact [Google Cloud Support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 ### Delete a reservation
 
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -676,8 +660,6 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 To delete a reservation, use the [`DROP RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -771,8 +753,6 @@ To control access to reservations, do one of the following:
 In the Google Cloud console, you can allow access to multiple reservation resources by using a condition.
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project,folder,organizationId)
 
 2.  Select a project, folder, or organization.
 
@@ -820,7 +800,7 @@ In the bq command-line tool, you can grant access to an individual reservation r
 
 To grant access to a reservation, use the [`bq set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command:
 
-``` lang-sh notranslate
+``` notranslate lang-sh
 bq set-iam-policy --reservation RESOURCE FILE_NAME
 ```
 
@@ -849,9 +829,9 @@ For more information about IAM, see [Manage access to other resources](https://d
 
 ## Prioritize idle slots with reservation groups
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
 
@@ -872,8 +852,6 @@ To create a reservation group:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -914,8 +892,6 @@ To add a reservation to a reservation group, update the `reservation_group` prop
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -955,8 +931,6 @@ To list the reservation group information for your reservations, do the followin
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -987,8 +961,6 @@ To remove a reservation from a reservation group, update the `reservation_group`
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -1005,8 +977,6 @@ The reservation group is updated with the latest member reservations.
 If the reservation to be removed is the last one in the group:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -1044,8 +1014,6 @@ A reservation group can only be deleted if it does not contain any member reserv
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 

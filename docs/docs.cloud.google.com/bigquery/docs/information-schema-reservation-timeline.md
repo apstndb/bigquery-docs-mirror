@@ -2,7 +2,7 @@
 
 The `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view shows time slices of reservation metadata for each reservation administration project for every minute in real time. Additionally, the `per_second_details` array shows autoscale details for each second.
 
-**Note:** The view names `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` and `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
+> **Note:** The view names `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` and `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required permission
 
@@ -42,8 +42,10 @@ The `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view has the following schema:
 <td><p>Contains information about the autoscale capacity of the reservation. Fields include the following:</p>
 <ul>
 <li><p><code dir="ltr" translate="no">current_slots</code> : the number of autoscaling slots available to the reservation.</p>
+<blockquote>
 <p>Because <code dir="ltr" translate="no">current_slots</code> could be updated multiple times within a minute, use <code dir="ltr" translate="no">per_second_details.autoscale_current_slots</code> instead. It reflects accurate state for each second.</p>
-<p>Also, after users reduce <code dir="ltr" translate="no">max_slots</code> , it may take a while before it can be propagated, so <code dir="ltr" translate="no">current_slots</code> may stay in the original value and could be larger than <code dir="ltr" translate="no">max_slots</code> for that brief period (less than one minute).</p></li>
+<p>Also, after users reduce <code dir="ltr" translate="no">max_slots</code> , it may take a while before it can be propagated, so <code dir="ltr" translate="no">current_slots</code> may stay in the original value and could be larger than <code dir="ltr" translate="no">max_slots</code> for that brief period (less than one minute).</p>
+</blockquote></li>
 <li><code dir="ltr" translate="no">max_slots</code> : the maximum number of slots that could be added to the reservation by autoscaling.</li>
 </ul></td>
 </tr>
@@ -78,8 +80,10 @@ The `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view has the following schema:
 <td><p>Contains information about the reservation capacity and usage at each second. Fields include the following:</p>
 <ul>
 <li><code dir="ltr" translate="no">start_time</code> : the exact timestamp of the second.</li>
-<li><code dir="ltr" translate="no">autoscale_current_slots</code> : the number of autoscaling slots available to the reservation at this second. This number excludes baseline slots.
-<strong>Note:</strong> When you reduce <code dir="ltr" translate="no">max_slots</code> , the change might not take effect immediately. During this brief period (under one minute), the <code dir="ltr" translate="no">current_slots</code> might remain at its original value that could be higher than the value of <code dir="ltr" translate="no">max_slots</code> .</li>
+<li><p><code dir="ltr" translate="no">autoscale_current_slots</code> : the number of autoscaling slots available to the reservation at this second. This number excludes baseline slots.</p>
+<blockquote>
+<strong>Note:</strong> When you reduce <code dir="ltr" translate="no">max_slots</code> , the change might not take effect immediately. During this brief period (under one minute), the <code dir="ltr" translate="no">current_slots</code> might remain at its original value that could be higher than the value of <code dir="ltr" translate="no">max_slots</code> .
+</blockquote></li>
 <li><code dir="ltr" translate="no">autoscale_max_slots</code> : the maximum number of slots that could be added to the reservation by autoscaling at this second. This number excludes baseline slots.</li>
 <li><code dir="ltr" translate="no">slots_assigned</code> : the number of slots assigned to this reservation at this second. It equals the baseline slot capacity of a reservation.</li>
 <li><code dir="ltr" translate="no">slots_max_assigned</code> : the maximum slot capacity for this reservation, including slot sharing at this second. If <code dir="ltr" translate="no">ignore_idle_slots</code> is true, this field is same as <code dir="ltr" translate="no">slots_assigned</code> . Otherwise, the <code dir="ltr" translate="no">slots_max_assigned</code> field is the total number of slots in all capacity commitments in the administration project.</li>
@@ -155,8 +159,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Examples
 
@@ -185,7 +191,7 @@ The result is similar to the following:
     | 2025-09-28 00:00:04 |                    1600 |
     +---------------------+-------------------------+
 
-**Note:** The `period_start` column is a partitioning key, so it's important to filter by `period_start` to make the query efficient.
+> **Note:** The `period_start` column is a partitioning key, so it's important to filter by `period_start` to make the query efficient.
 
 #### Example: See total slot usage per second
 

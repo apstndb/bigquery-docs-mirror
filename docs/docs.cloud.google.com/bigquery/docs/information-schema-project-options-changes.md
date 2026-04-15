@@ -40,7 +40,7 @@ Replace the following:
 
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `US` , or `us-west2` .
 
-**Note:** To learn how to extract a JSON scalar value from the `updated_options` column and convert it to a SQL STRING value such as `JSON_VALUE()` , see [JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#categories) .
+> **Note:** To learn how to extract a JSON scalar value from the `updated_options` column and convert it to a SQL STRING value such as `JSON_VALUE()` , see [JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#categories) .
 
 ## Examples
 
@@ -53,7 +53,7 @@ FROM
   `region-REGION`.INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

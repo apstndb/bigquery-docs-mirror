@@ -106,7 +106,7 @@ Defines the specifications for the window.
 
   - [`named_window`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#ref_named_window) : The name of an existing window that was defined with a [`WINDOW` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) .
 
-**Important:** If you use a named window, special rules apply to `PARTITION BY` , `ORDER BY` , and `window_frame_clause` . See [Rules for using a named window in the window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#named_window_rules) .
+> **Important:** If you use a named window, special rules apply to `PARTITION BY` , `ORDER BY` , and `window_frame_clause` . See [Rules for using a named window in the window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#named_window_rules) .
 
   - `PARTITION BY` : Breaks up the input rows into separate partitions, over which the window function is independently evaluated.
     
@@ -244,7 +244,7 @@ The window frame clause defines the window frame around the current row within a
       - `ROWS` : Computes the window frame based on physical offsets from the current row. For example, you could include two rows before and after the current row.
       - `RANGE` : Computes the window frame based on a logical range of rows around the current row, based on the current row’s `ORDER BY` key value. The provided range value is added or subtracted to the current row's key value to define a starting or ending range boundary for the window frame. In a range-based window frame, there must be exactly one expression in the `ORDER BY` clause, and the expression must have a numeric type.
     
-    **Tip:** If you want to use a range with a date, use `ORDER BY` with the `UNIX_DATE()` function. If you want to use a range with a timestamp, use the `UNIX_SECONDS()` , `UNIX_MILLIS()` , or `UNIX_MICROS()` function.
+    > **Tip:** If you want to use a range with a date, use `ORDER BY` with the `UNIX_DATE()` function. If you want to use a range with a timestamp, use the `UNIX_SECONDS()` , `UNIX_MILLIS()` , or `UNIX_MICROS()` function.
 
   - `frame_between` : Creates a window frame with a lower and upper boundary. The first boundary represents the lower boundary. The second boundary represents the upper boundary. Only certain boundary combinations can be used, as show in the preceding syntax.
     

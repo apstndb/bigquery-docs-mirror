@@ -10,7 +10,7 @@ The following types of routines can be authorized:
   - [User-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions)
   - [Stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures)
 
-**Caution:** Stored procedures authorized as routines have DDL and DML access. These procedures can create, modify, and delete database objects. Principals with access to authorized stored procedures can bypass Identity and Access Management (IAM) permissions and perform actions that are normally denied to them. Only grant authorized stored procedure access to principals that you trust to run the procedure in its entirety.
+> **Caution:** Stored procedures authorized as routines have DDL and DML access. These procedures can create, modify, and delete database objects. Principals with access to authorized stored procedures can bypass Identity and Access Management (IAM) permissions and perform actions that are normally denied to them. Only grant authorized stored procedure access to principals that you trust to run the procedure in its entirety.
 
 ## Authorize routines
 
@@ -19,8 +19,6 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -84,7 +82,7 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
       - [BigQuery Routine Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataEditor) ( `roles/bigquery.routineDataEditor` )
       - [BigQuery Routine Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineAdmin) ( `roles/bigquery.routineAdmin` )
     
-    **Note:** You can attach these roles only to stored procedures. Other types of routines don't support roles.
+    > **Note:** You can attach these roles only to stored procedures. Other types of routines don't support roles.
 
 4.  Use the `bq update` command to update the dataset:
     
@@ -134,11 +132,11 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
       - [BigQuery Routine Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataEditor) ( `roles/bigquery.routineDataEditor` )
       - [BigQuery Routine Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineAdmin) ( `roles/bigquery.routineAdmin` )
     
-    **Note:** You can attach these roles only to stored procedures. Other types of routines don't support roles.
+    > **Note:** You can attach these roles only to stored procedures. Other types of routines don't support roles.
 
 4.  Call the [`dataset.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) method with the modified `Dataset` representation.
 
-**Note:** If you modify a routine by running a `CREATE OR REPLACE` statement ( [`CREATE OR REPLACE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) , [`CREATE OR REPLACE PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) , [`CREATE OR REPLACE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) ), or by calling the [`routines.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/update) method, then you must re-authorize the routine.
+> **Note:** If you modify a routine by running a `CREATE OR REPLACE` statement ( [`CREATE OR REPLACE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) , [`CREATE OR REPLACE PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) , [`CREATE OR REPLACE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) ), or by calling the [`routines.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/update) method, then you must re-authorize the routine.
 
 ## Quotas and limits
 
@@ -166,7 +164,7 @@ The following is an end-to-end example of creating and using an authorized UDF.
 
 4.  Grant the `bigquery.dataViewer` role to a user on the `public_dataset` dataset. This role includes the `bigquery.routines.get` permission, which lets the user call the routine. For information about how to assign access controls to a dataset, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
     
-    **Note:** Instead of using a built-in role, consider creating a custom role with minimal permissions. For more information, see [Creating and managing custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
+    > **Note:** Instead of using a built-in role, consider creating a custom role with minimal permissions. For more information, see [Creating and managing custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 5.  At this point, the user has permission to call the `count_key` routine but cannot access the table in `private_dataset` . If the user tries to call the routine, they get an error message similar to the following:
     

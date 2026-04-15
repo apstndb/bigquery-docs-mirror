@@ -71,8 +71,6 @@ To create an Amazon S3 data transfer:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -205,7 +203,7 @@ Where:
     
       - allow\_jagged\_rows : Optional, and applies only when file\_format is `CSV` . Indicates whether to accept rows that are missing trailing optional columns. The missing values will be filled in with NULLs.
 
-**Caution:** You cannot configure notifications using the command-line tool.
+> **Caution:** You cannot configure notifications using the command-line tool.
 
 For example, the following command creates an Amazon S3 data transfer named `My Transfer` using a `data_path` value of `s3://mybucket/myfile/*.csv` , target dataset `mydataset` , and `file_format` `CSV` . This example includes non-default values for the optional params associated with the `CSV` file\_format.
 
@@ -232,7 +230,7 @@ After running the command, you receive a message like the following:
 
 Follow the instructions and paste the authentication code on the command line.
 
-**Caution:** When you create an Amazon S3 data transfer using the command-line tool, the transfer configuration is set up using the default value for **Schedule** (every 24 hours).
+> **Caution:** When you create an Amazon S3 data transfer using the command-line tool, the transfer configuration is set up using the default value for **Schedule** (every 24 hours).
 
 ### API
 

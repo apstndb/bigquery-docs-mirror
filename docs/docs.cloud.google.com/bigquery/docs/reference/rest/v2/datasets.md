@@ -285,7 +285,7 @@ Optional. Defines the time travel window in hours. The value can be from 48 to 1
 
 ` object ( GcpTag  ` )
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Output only. Tags for the dataset. To provide tags as inputs, use the `resourceTags` field.
 

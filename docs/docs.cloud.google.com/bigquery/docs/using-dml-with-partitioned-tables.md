@@ -77,7 +77,7 @@ SELECT
   "one"
 ```
 
-**Note:** The `_PARTITIONTIME` pseudocolumn can also be modified using an [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables#updating_data) .
+> **Note:** The `_PARTITIONTIME` pseudocolumn can also be modified using an [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables#updating_data) .
 
 ### Inserting data into partitioned tables
 

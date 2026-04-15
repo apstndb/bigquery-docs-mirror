@@ -31,12 +31,10 @@ You might also be able to get these permissions with [custom roles](https://docs
 If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
-    
-    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
-**Note:** Projects created after February 15, 2022 have this API enabled automatically.
+> **Note:** Projects created after February 15, 2022 have this API enabled automatically.
 
 ### Upload input files to Cloud Storage
 
@@ -386,7 +384,7 @@ To translate the Teradata SQL scripts in the Cloud Storage directory `gs://my_da
       }
     }
 
-**Note:** The string `"task_name"` in this example is an identifier for the translation task and can be set to any value you prefer.
+> **Note:** The string `"task_name"` in this example is an identifier for the translation task and can be set to any value you prefer.
 
 This call will return a message containing the created workflow ID in the `"name"` field:
 
@@ -402,11 +400,11 @@ To get the updated status for the workflow, [run a `GET` query](https://docs.clo
 
 #### Example batch translation with AI suggestions
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** The translation API can call Gemini using BigQuery Vertex AI integration to generate suggestions to your translated SQL query based on your AI configuration YAML file.
+> **Note:** The translation API can call Gemini using BigQuery Vertex AI integration to generate suggestions to your translated SQL query based on your AI configuration YAML file.
 
 The following example translates the Teradata SQL scripts located in the `gs://my_data_bucket/teradata/input/` Cloud Storage directory and stores results in the Cloud Storage directory `gs://my_data_bucket/teradata/output/` with additional AI suggestion:
 
@@ -427,7 +425,7 @@ The following example translates the Teradata SQL scripts located in the `gs://m
       }
     }
 
-**Note:** To generate AI suggestions, the Cloud Storage source directory must contain at least one configuration YAML file with a suffix of `.ai_config.yaml` . To learn how to write the configuration YAML file for AI suggestions, see [Create a Gemini-based configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
+> **Note:** To generate AI suggestions, the Cloud Storage source directory must contain at least one configuration YAML file with a suffix of `.ai_config.yaml` . To learn how to write the configuration YAML file for AI suggestions, see [Create a Gemini-based configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
 
 After the task runs successfully, AI suggestions can be found in `gs://my_data_bucket/teradata/output/suggestion` Cloud Storage directory.
 
@@ -491,7 +489,7 @@ To translate the Hive SQL string `select 1` interactively, you might use the fol
       }
     }
 
-**Note:** The string `"task_name"` in this example is an identifier for the translation task and can be set to any value you prefer.
+> **Note:** The string `"task_name"` in this example is an identifier for the translation task and can be set to any value you prefer.
 
 You can use any `relative_path` you would like for your literal, but the translated literal will only appear in the results if you include `sql/$relative_path` in your `target_return_literals` . You can also include multiple literals in a single query, in which case each of their relative paths must be included in `target_return_literals` .
 

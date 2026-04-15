@@ -136,8 +136,6 @@ To load Avro data from Cloud Storage into a new BigQuery table, select one of th
 ### Console
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -181,17 +179,15 @@ To load Avro data from Cloud Storage into a new BigQuery table, select one of th
 
 12. Click **Create table** .
 
-**Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
-  
-After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+> **Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
+>   
+> After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
 
 ### SQL
 
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads an Avro file into the new table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -538,15 +534,13 @@ You have the following options when you load additional data into a table:
 
 If you load data into an existing table, the load job can append the data or overwrite the table.
 
-**Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
+> **Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
 
 To append or overwrite a table with Avro data:
 
 ### Console
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -578,7 +572,7 @@ To append or overwrite a table with Avro data:
 
 7.  In the **Schema** section, no action is necessary. The schema is self-described in Avro files.
     
-    **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+    > **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 8.  For **Partition and cluster settings** , leave the default values. You cannot convert a table to a partitioned or clustered table by appending or overwriting it, and the Google Cloud console does not support appending to or overwriting partitioned or clustered tables in a load job.
 
@@ -595,8 +589,6 @@ To append or overwrite a table with Avro data:
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends an Avro file to the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -615,7 +607,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the `bq load` command with the `--replace` flag to overwrite the table. Use the `--noreplace` flag to append data to the table. If no flag is specified, the default is to append data. Supply the `--source_format` flag and set it to `AVRO` . Because Avro schemas are automatically retrieved from the self-describing source data, you do not need to provide a schema definition.
 
-**Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+> **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
@@ -927,7 +919,7 @@ The table below shows the conversion of Avro logical types to BigQuery data type
 
 For more information on Avro data types, see the [Apache Avro™ 1.8.2 Specification](https://avro.apache.org/docs/1.8.2/spec.html) .
 
-**Note:** When exporting to Avro from BigQuery, `DATETIME` is exported as a `STRING` with a custom logical time that is not recognized as a `DATETIME` upon importing back into BigQuery.
+> **Note:** When exporting to Avro from BigQuery, `DATETIME` is exported as a `STRING` with a custom logical time that is not recognized as a `DATETIME` upon importing back into BigQuery.
 
 #### Date logical type
 

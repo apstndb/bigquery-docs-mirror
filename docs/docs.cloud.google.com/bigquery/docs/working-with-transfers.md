@@ -27,8 +27,6 @@ To get information about a transfer configuration:
 ### Console
 
 1.  Go to the **Data transfers** page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Select the transfer for which you want to get the details.
 
@@ -98,8 +96,6 @@ To list all existing transfer configurations in a project:
 ### Console
 
 1.  In the Google Cloud console, go to the Data transfers page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  If there are any transfer configurations in the project, a list of the transfer configurations appears on the data transfers list.
 
@@ -278,8 +274,6 @@ To view the run history for a transfer configuration:
 ### Console
 
 1.  In the Google Cloud console, go to the Data transfers page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click on the transfer in the data transfers list.
 
@@ -393,8 +387,6 @@ To view transfer run details:
 ### Console
 
 1.  In the Google Cloud console, go to the Data transfers page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click on the transfer in the data transfers list.
 
@@ -534,8 +526,6 @@ To update a transfer:
 ### Console
 
 1.  In the Google Cloud console, go to the Data transfers page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click on the transfer in the data transfers list.
 
@@ -567,7 +557,7 @@ Replace the following:
   - SERVICE\_ACCOUNT : specify a service account to use with this transfer.
   - RESOURCE\_NAME : the transfer's resource name (also referred to as the transfer configuration). If you don't know the transfer's resource name, find the resource name with: [` bq ls --transfer_config --transfer_location= location  `](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#list_transfer_configurations) .
 
-**Note:** You cannot update notification settings using the bq tool.
+> **Note:** You cannot update notification settings using the bq tool.
 
 Examples:
 
@@ -700,8 +690,6 @@ To update the credentials for a transfer:
 1.  In the Google Cloud console, sign in as the user you want to transfer ownership to.
 
 2.  Navigate to the Data transfers page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 3.  Click the transfer in the data transfers list.
 
@@ -817,8 +805,6 @@ To disable a transfer:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Transfers** .
 
@@ -947,8 +933,6 @@ To delete a transfer:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Transfers** .
 
@@ -956,7 +940,7 @@ To delete a transfer:
 
 4.  Click on **DELETE** . As a safety measure you will need to type the word "delete" into a box to confirm your intention.
     
-    **Caution:** The delete operation cannot be undone.
+    > **Caution:** The delete operation cannot be undone.
 
 ### bq
 
@@ -1058,7 +1042,7 @@ You can manually trigger a transfer, also called a *backfill run* , to load addi
 
 You can manually initiate data backfills at any time. In addition to source limits, the BigQuery Data Transfer Service supports a maximum of 180 days per backfill request. Simultaneous backfill requests are not supported.
 
-**Caution:** When backfilling large date ranges, break your backfill requests into **180 day** chunks, and wait for the previous backfill request to finish before creating another one.
+> **Caution:** When backfilling large date ranges, break your backfill requests into **180 day** chunks, and wait for the previous backfill request to finish before creating another one.
 
 For information on how much data is available for backfill, see the transfer guide for your data source.
 
@@ -1081,8 +1065,6 @@ For detailed instructions about each method, select the corresponding tab:
 ### Console
 
 1.  In the Google Cloud console, go to the Data transfers page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Select your transfer from the list.
 
@@ -1258,7 +1240,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     for run in response.runs:
         print(f"backfill: {run.run_time} run: {run.name}")
 
-**Caution:** Depending on the data source, and the amount of data you request, backfills may take several hours or days to complete.
+> **Caution:** Depending on the data source, and the amount of data you request, backfills may take several hours or days to complete.
 
 ## Logging and monitoring
 

@@ -12,7 +12,7 @@ Finally, you can use a service such as [Dataflow](https://docs.cloud.google.com/
 
 When you export data from BigQuery, note the following:
 
-**Caution:** If you are exporting data to a Cloud Storage bucket, we strongly recommend that you disable the [Bucket Lock](https://docs.cloud.google.com/storage/docs/using-bucket-lock#set-policy) and [Soft Delete](https://docs.cloud.google.com/storage/docs/use-soft-delete) retention policies on your bucket. When you export to a bucket with these retention policies, BigQuery attempts to rewrite files to the bucket, which can fail if the bucket's retention policy prevents a file from being overwritten, resulting in additional incurred charges. You can re-enable these policies after the export completes.
+> **Caution:** If you are exporting data to a Cloud Storage bucket, we strongly recommend that you disable the [Bucket Lock](https://docs.cloud.google.com/storage/docs/using-bucket-lock#set-policy) and [Soft Delete](https://docs.cloud.google.com/storage/docs/use-soft-delete) retention policies on your bucket. When you export to a bucket with these retention policies, BigQuery attempts to rewrite files to the bucket, which can fail if the bucket's retention policy prevents a file from being overwritten, resulting in additional incurred charges. You can re-enable these policies after the export completes.
 
   - You cannot export table data to a local file, to Google Sheets, or to Google Drive. The only supported export location is Cloud Storage. For information on saving query results, see [Downloading and saving query results](https://docs.cloud.google.com/bigquery/docs/writing-results#downloading-saving-results-console) .
   - You can export up to 1 GB of logical table data size to a single file. If you are exporting more than 1 GB of data, use a [wildcard](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) to export the data into multiple files. When you export data to multiple files, the size of the files will vary. To [limit the exported file size](https://docs.cloud.google.com/bigquery/docs/exporting-data#limit_the_exported_file_size) , you can partition your data and export each partition.
@@ -130,8 +130,6 @@ Select one of the following:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -162,8 +160,6 @@ To export views to Cloud Storage, use [`EXPORT DATA OPTIONS` statement](https://
 Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) . The following example exports selected fields from a table named `mydataset.table1` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -186,7 +182,7 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-**Note:** `LIMIT` clauses in `EXPORT DATA` statements can often lead to slow export job execution. For this reason, we don't recommend using `LIMIT` clauses in `EXPORT DATA` statements.
+> **Note:** `LIMIT` clauses in `EXPORT DATA` statements can often lead to slow export job execution. For this reason, we don't recommend using `LIMIT` clauses in `EXPORT DATA` statements.
 
 ### bq
 
@@ -266,7 +262,7 @@ gs://example-bucket/single_partition.csv
 
 To export data, create an `extract` job and populate the job configuration.
 
-**Note:** If you are exporting data to the Parquet format, it might be faster to use the [BigQuery export to Parquet (via BigQuery Storage API) template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/bigquery-to-parquet) rather than writing a custom solution.
+> **Note:** If you are exporting data to the Parquet format, it might be faster to use the [BigQuery export to Parquet (via BigQuery Storage API) template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/bigquery-to-parquet) rather than writing a custom solution.
 
 (Optional) Specify your location in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
@@ -602,8 +598,6 @@ The exported metadata is located in the STORAGE\_URI `/metadata` folder, where S
 You can export your query results to Cloud Storage in the Google Cloud console with the following steps:
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -638,14 +632,14 @@ BigQuery expresses Avro formatted data in the following ways:
   - `DATETIME` data types are represented as Avro `STRING` types (a string type with custom named logical type `datetime` ) by default in Export Data SQL, but are represented as `string` type by default in Extract jobs. (Note: you can add `use_avro_logical_types=False` to `Export Data Options` to disable the logical type, or use the flag `--use_avro_logical_types=True` to enable logical type in Extract jobs.)
   - [RANGE types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type) aren't supported in Avro export.
 
-**Note:** The encoding of string type follows the Internet Engineering Task Force [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) spec.
+> **Note:** The encoding of string type follows the Internet Engineering Task Force [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) spec.
 
 Parameterized `NUMERIC(P[, S])` and `BIGNUMERIC(P[, S])` data types transfer their precision and scale type parameters to the Avro decimal logical type.
 
-**Caution:**
-
-  - If you export a `DATETIME` type to Avro, you cannot load the Avro file directly back into the same table schema, because the converted `STRING` won't match the schema. As a workaround, load the file into a staging table. Then use a SQL query to cast the field to a `DATETIME` type and save the result to a new table. For more information, see [Changing a column's data type](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas#changing_a_columns_data_type) .
-  - Export Data Option `use_avro_logical_types` and Extract Job flag `--use_avro_logical_types` are applied to all the logical types at the same time once specified.
+> **Caution:**
+> 
+>   - If you export a `DATETIME` type to Avro, you cannot load the Avro file directly back into the same table schema, because the converted `STRING` won't match the schema. As a workaround, load the file into a staging table. Then use a SQL query to cast the field to a `DATETIME` type and save the result to a new table. For more information, see [Changing a column's data type](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas#changing_a_columns_data_type) .
+>   - Export Data Option `use_avro_logical_types` and Extract Job flag `--use_avro_logical_types` are applied to all the logical types at the same time once specified.
 
 The Avro format can't be used in combination with GZIP compression. To compress Avro data, use the bq command-line tool or the API and specify one of the supported compression types for Avro data: `DEFLATE` or `SNAPPY` .
 
@@ -672,7 +666,7 @@ BigQuery converts GoogleSQL data types to the following Parquet data types:
 
 The Parquet schema represents nested data as a group and repeated records as repeated groups. For more information about using nested and repeated data in BigQuery, see [Specifying nested and repeated columns](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
-**Caution:** If you export a `DATETIME` type to Parquet, you cannot load the Parquet file directly back into the same table schema, because the converted value won't match the schema.
+> **Caution:** If you export a `DATETIME` type to Parquet, you cannot load the Parquet file directly back into the same table schema, because the converted value won't match the schema.
 
 You can use the following workarounds for `DATETIME` types:
 
@@ -990,8 +984,6 @@ WHERE date(creation_time)= CURRENT_DATE()
 You can set up a [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) alerting policy that monitors the number of bytes exported.
 
 1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
-    
-    [Go to **Alerting**](https://console.cloud.google.com/monitoring/alerting)
     
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 

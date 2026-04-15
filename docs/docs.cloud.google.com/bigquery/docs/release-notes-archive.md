@@ -4755,7 +4755,7 @@ Change
 
 BigQuery DML statements no longer have quota limits.
 
-**Note:** DML statements are counted toward the maximum number of table operations per day and partition modifications per day. However, DML statements will not fail due to these limits. (Updated April 6, 2021)
+> **Note:** DML statements are counted toward the maximum number of table operations per day and partition modifications per day. However, DML statements will not fail due to these limits. (Updated April 6, 2021)
 
 Feature
 

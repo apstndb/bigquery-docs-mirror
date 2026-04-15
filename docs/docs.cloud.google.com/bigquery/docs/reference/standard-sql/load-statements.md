@@ -77,7 +77,7 @@ You can't use the `LOAD DATA` statement to load data into a temporary table.
 
 `(column_name column_schema[, ...])` contains the table's schema information in a comma-separated list.
 
-**Note:** Constraints cannot be specified on `ARRAY` or `STRUCT` elements.
+> **Note:** Constraints cannot be specified on `ARRAY` or `STRUCT` elements.
 
     column :=
       column_name column_schema

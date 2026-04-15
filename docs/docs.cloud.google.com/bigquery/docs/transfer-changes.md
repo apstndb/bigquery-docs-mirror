@@ -386,7 +386,7 @@ The following sections outline the changes when updating to a new Google Analyti
 
 ### September 22, 2025
 
-**Note:** These changes only affect users who used the Google Analytics connector before April 25, 2025.
+> **Note:** These changes only affect users who used the Google Analytics connector before April 25, 2025.
 
 [The Google Analytics connector](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer) plans to deprecate tables and update schemas to reflect changes in [Google Analytics Data API v1](https://developers.google.com/analytics/devguides/reporting/data/v1/changelog) . These changes are listed in the following sections.
 

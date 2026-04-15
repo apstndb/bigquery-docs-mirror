@@ -1,6 +1,6 @@
 # Create materialized views
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 This document describes how to create materialized views in BigQuery. Before you read this document, familiarize yourself with [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
 
@@ -29,8 +29,6 @@ To create a materialized view, select one of the following options:
 Use the [`CREATE MATERIALIZED VIEW` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement) . The following example creates a materialized view for the number of clicks for each product ID:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -71,7 +69,7 @@ CREATE MATERIALIZED VIEW myproject.mydataset.my_mv_table AS (
 
 Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -162,7 +160,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -261,7 +259,7 @@ After the materialized view is successfully created, it appears in the **Explore
 
 Unless you disable [automatic refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) , BigQuery starts an asynchronous full refresh for the materialized view. The query finishes quickly, but the initial refresh might continue to run.
 
-**Note:** Each base table is limited to 100 materialized views within the same project, and 500 materialized views within the same organization.
+> **Note:** Each base table is limited to 100 materialized views within the same project, and 500 materialized views within the same organization.
 
 ## Access control
 
@@ -350,9 +348,9 @@ The following SQL features are not supported in materialized views:
 
 #### `LEFT OUTER JOIN` and `UNION ALL` support
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-mv-help@google.com> .
 
@@ -423,7 +421,7 @@ GROUP BY population;
 
 ### Materialized views over BigLake tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 To create [materialized views over BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) , the BigLake table must have [metadata caching enabled](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) over Cloud Storage data and the materialized view must have a [`max_staleness`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) option value greater than the base table. Materialized views over BigLake tables support the [same set of queries](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#query_limitations) as other materialized views.
 
@@ -513,7 +511,7 @@ If the base table is partitioned, consider partitioning your materialized view a
 
 Partition expiration can't be set on materialized views. A materialized view implicitly inherits the partition expiration time from the base table. Materialized view partitions are aligned with the base table partitions, so they expire synchronously.
 
-**Caution:** A non-partitioned materialized view based on a table with partition expiration is invalidated and must be fully refreshed when a partition expires. Therefore, you should partition the materialized view to avoid additional refresh and query cost.
+> **Caution:** A non-partitioned materialized view based on a table with partition expiration is invalidated and must be fully refreshed when a partition expires. Therefore, you should partition the materialized view to avoid additional refresh and query cost.
 
 #### Example 1
 
@@ -601,9 +599,9 @@ You can cluster materialized views by their output columns, subject to the BigQu
 
 ### Reference logical views
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-mv-help@google.com> .
 
@@ -694,8 +692,6 @@ Select one of the following options:
 To create a materialized view with the `max_staleness` option, add an `OPTIONS` clause to the DDL statement when you create the materialized view:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -817,8 +813,6 @@ To create a materialized view with the `allow_non_incremental_definition` option
 Add an `OPTIONS` clause to the DDL statement when you create the materialized view:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

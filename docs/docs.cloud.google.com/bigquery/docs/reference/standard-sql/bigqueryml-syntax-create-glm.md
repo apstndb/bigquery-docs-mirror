@@ -438,7 +438,7 @@ This option accepts the following values:
     
     A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
     
-    **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
+    > **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
 
   - `CUSTOM` : Split data using the value in a specified column:
     
@@ -533,7 +533,7 @@ The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` sub
 
 An `INT64` value between `1` and `100` , inclusive.
 
-**Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
+> **Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
 
 ### `MAX_PARALLEL_TRIALS`
 
@@ -549,7 +549,7 @@ The maximum number of trials to run at the same time. If you specify a value for
 
 An `INT64` value between `1` and `5` , inclusive. The default value is `1` .
 
-**Note:** Although specifying larger `MAX_PARALLEL_TRIALS` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `VIZIER_DEFAULT` as the [`HPARAM_TUNING_ALGORITHM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
+> **Note:** Although specifying larger `MAX_PARALLEL_TRIALS` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `VIZIER_DEFAULT` as the [`HPARAM_TUNING_ALGORITHM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
 
 ### `HPARAM_TUNING_ALGORITHM`
 

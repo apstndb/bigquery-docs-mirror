@@ -12,7 +12,7 @@ At query execution time, you provide the Cloud KMS resource path of the KEK and 
 
 If you use Cloud KMS in a [region](https://docs.cloud.google.com/kms/docs/ekm#regions) where [Cloud External Key Manager](https://docs.cloud.google.com/kms/docs/ekm) is supported, you can use Cloud EKM based keys in Cloud KMS.
 
-**Note:** Using Cloud EKM keys might introduce additional latency to each key access.
+> **Note:** Using Cloud EKM keys might introduce additional latency to each key access.
 
 ### Use cases
 

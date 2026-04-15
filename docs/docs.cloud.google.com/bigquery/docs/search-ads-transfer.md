@@ -122,8 +122,6 @@ To create a data transfer for Search Ads 360 reporting, you need either your Sea
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -273,7 +271,7 @@ Where:
     | `dimension` | ` segments_conversion_custom_dimensions_             bigquery_column_name_suffix            ` | ` segments_raw_event_conversion_dimensions_             bigquery_column_name_suffix            ` |
     
 
-**Caution:** You cannot configure notifications using the command-line tool.
+> **Caution:** You cannot configure notifications using the command-line tool.
 
 For example, the following command creates a Search Ads 360 data transfer named `My Transfer` using Customer ID `6828088731` and target dataset `mydataset` . The transfer also specifies a custom floodlight variable. The data transfer is created in the default project:
 
@@ -292,7 +290,7 @@ The first time you run the command, you receive a message like the following:
 
 Follow the instructions in the message and paste the authentication code on the command line.
 
-**Caution:** When you create a Search Ads 360 data transfer using the command-line tool, the transfer configuration is set up using the default values for **Schedule** (every 24 hours at creation time) and **Refresh window** (0 — configures the default refresh window of 7 days).
+> **Caution:** When you create a Search Ads 360 data transfer using the command-line tool, the transfer configuration is set up using the default values for **Schedule** (every 24 hours at creation time) and **Refresh window** (0 — configures the default refresh window of 7 days).
 
 ### API
 
@@ -348,7 +346,7 @@ For existing customers who have multiple Customer ID-specific Search Ads 360 dat
 
 For more information about Search Ads 360 manager accounts, see [About manager accounts in the new Search Ads 360](https://support.google.com/sa360/answer/9158072) and [See how accounts are linked to your manager account](https://support.google.com/sa360/answer/9227233) .
 
-**Note:** The BigQuery Data Transfer Service pulls reports for all listed Customer IDs, but you may not see Customer IDs in your reports if it doesn't report activity for the requested day.
+> **Note:** The BigQuery Data Transfer Service pulls reports for all listed Customer IDs, but you may not see Customer IDs in your reports if it doesn't report activity for the requested day.
 
 ### Example
 
@@ -515,7 +513,7 @@ Entities in the new Search Ads 360, such as customers, campaigns, and ad groups,
   - IdMapping\_FEED\_ITEM
   - IdMapping\_FEED\_TABLE
 
-**Note:** Similar to match tables, snapshots of ID mapping tables are taken once a day and stored in the partition for the latest run date. ID mapping table snapshots are not updated for backfills or for days loaded using the refresh window.
+> **Note:** Similar to match tables, snapshots of ID mapping tables are taken once a day and stored in the partition for the latest run date. ID mapping table snapshots are not updated for backfills or for days loaded using the refresh window.
 
 ### Example queries
 

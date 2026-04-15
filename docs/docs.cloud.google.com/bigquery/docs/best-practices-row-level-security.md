@@ -6,7 +6,7 @@ Before you read this document, familiarize yourself with row-level security by r
 
 ## Restrict user permissions to limit side-channel attacks
 
-**Best practice:** Don't grant sensitive permissions to users who should only see filtered data.
+> **Best practice:** Don't grant sensitive permissions to users who should only see filtered data.
 
 A side-channel attack is a security attack based on information gained from the system itself. An attacker with broader permissions than necessary can mount side-channel attacks, and learn sensitive data by **observing** or **searching** billing, logging, or system messages.
 
@@ -30,7 +30,7 @@ To mitigate such opportunities, BigQuery hides sensitive statistics on all queri
 
 ## Restrict user permissions to limit data tampering
 
-**Best practice:** Don't grant table write permissions to users who should only see filtered data.
+> **Best practice:** Don't grant table write permissions to users who should only see filtered data.
 
 Users with write permissions to a table can insert data into the table with the [`bq load` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) or with the BigQuery Storage Write API. This can allow the user with write permissions to alter the query results of other users.
 
@@ -38,7 +38,7 @@ Users with write permissions to a table can insert data into the table with the 
 
 ## Avoid inadvertent access when re-creating row-level access policies
 
-**Best practice:** If there is only one row-level access policy on a table, don't recreate that row-level access policy with the `CREATE OR REPLACE` command. Instead, first remove all access to the table with table access controls, recreate the policies as needed, and then re-enable access.
+> **Best practice:** If there is only one row-level access policy on a table, don't recreate that row-level access policy with the `CREATE OR REPLACE` command. Instead, first remove all access to the table with table access controls, recreate the policies as needed, and then re-enable access.
 
 When you add a row access policy on a table for the first time, you immediately begin filtering data in query results. When you remove the last row-level access policy on a table, even if you intend to only re-create the row-level access policy, you may inadvertently grant unfiltered access to a wider-than-intended audience.
 
@@ -53,7 +53,7 @@ Alternatively, you can first create new row-level access policies on the table, 
 
 ## Use row-level security only within organizations, not across organizations
 
-**Best practice:** Only use row-level security within your organization.
+> **Best practice:** Only use row-level security within your organization.
 
 Don't use the row-level security feature across organizations, to help prevent data leakage through side-channel attacks, and to maintain greater control over access to sensitive data.
 
@@ -67,7 +67,7 @@ Outside of your organization, you have less control over who has access to data.
 
 ## Manage the `Filtered Data Viewer` role through row-level access policies
 
-**Best practice:** `bigquery.filteredDataViewer` is a system-managed role granted through row-level access policies. Manage the role only through row-level access policies. Don't apply the role through Identity and Access Management (IAM).
+> **Best practice:** `bigquery.filteredDataViewer` is a system-managed role granted through row-level access policies. Manage the role only through row-level access policies. Don't apply the role through Identity and Access Management (IAM).
 
 When you [create a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) , the principals in the policy are automatically granted the `bigquery.filteredDataViewer` role. You can only add or remove principals from the access policy [with a DDL statement](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#examples) .
 
@@ -77,7 +77,7 @@ We recommend managing the `bigquery.filteredDataViewer` role exclusively through
 
 ## Performance impact of filters on partitioned columns
 
-**Best practice:** Try to avoid making row access policies that filter on clustered and partitioned columns.
+> **Best practice:** Try to avoid making row access policies that filter on clustered and partitioned columns.
 
 Row-level access policy filters don't participate in query [pruning on partitioned and clustered tables](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#partitioned_and_clustered_tables) .
 

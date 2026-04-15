@@ -1,10 +1,10 @@
 # Create and manage workspaces
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or ask questions that are related to this Preview feature, contact [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com) .
+> **Note:** To provide feedback or ask questions that are related to this Preview feature, contact [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com) .
 
 This document shows you how to work with workspaces in BigQuery, including the following tasks:
 
@@ -30,8 +30,6 @@ Workspace creation is handled differently based on whether you are using a BigQu
 To create a new workspace in a BigQuery repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -56,8 +54,6 @@ To create a new workspace in a BigQuery repository, follow these steps:
 To create a new workspace in a third-party repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -86,8 +82,6 @@ To create a new workspace in a third-party repository, follow these steps:
 To create a directory in a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -128,8 +122,6 @@ You can create or upload the following types of files to a repository:
 To create a file in a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -160,8 +152,6 @@ To create a file in a workspace, follow these steps:
 To upload a file to a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -195,8 +185,6 @@ To upload a file to a workspace, follow these steps:
 To delete a file from a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -246,8 +234,6 @@ If your workspace is out of sync with your repository, BigQuery displays the **P
 To pull changes from your repository to your workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -276,13 +262,11 @@ To pull changes from your repository to your workspace, follow these steps:
 
 After you make a change in a workspace, BigQuery displays the **Commit** option. You can commit all local changes or selected files. Files that you have added or modified are identified with a blue dot next to them in the workspace pane.
 
-**Note:** BigQuery defaults to using the authenticated Google Cloud user's email address for the commit author, but the Dataform API allows setting a custom email address for the commit author. This behavior is similar to the [`git commit --author` command](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorauthor) and affects only the Git commit history. The commit author identity is not cryptographically verified.
+> **Note:** BigQuery defaults to using the authenticated Google Cloud user's email address for the commit author, but the Dataform API allows setting a custom email address for the commit author. This behavior is similar to the [`git commit --author` command](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorauthor) and affects only the Git commit history. The commit author identity is not cryptographically verified.
 
 To commit changes from your workspace to your repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -319,8 +303,6 @@ BigQuery displays the **Push** option after you commit changes.
 To push changes from your workspace to your repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -350,8 +332,6 @@ To push changes from your workspace to your repository, follow these steps:
 To revert uncommitted changes, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -388,8 +368,6 @@ The following code sample shows a merge conflict displayed in a SQL file:
 To resolve a merge conflict, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -416,8 +394,6 @@ To resolve a merge conflict, follow these steps:
 To view commit history, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -440,8 +416,6 @@ To view commit history, follow these steps:
 To delete a workspace and all its contents, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

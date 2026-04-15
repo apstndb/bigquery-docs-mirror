@@ -62,8 +62,6 @@ Create a UDF that converts a BigQuery `STRUCT` data type into a Protobuf column:
 6.  Locate the `pbwrapper.js` file in the `./dist` child folder, and then [upload the file to a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 7.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 8.  Using the query editor, create a UDF named `toMyProtoMessage` that builds a Protobuf column from existing BigQuery table columns:
     

@@ -1,8 +1,8 @@
 # Recommendations overview
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 BigQuery works with Active Assist to provide various recommendations that you can use to optimize your BigQuery resources.
 
@@ -25,8 +25,6 @@ BigQuery offers the following recommenders:
 To view your recommendations using the Google Cloud console, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Recommendations** .
     
@@ -54,7 +52,7 @@ You can also view your recommendations and insights using `INFORMATION_SCHEMA` v
        slot_hours_saved_monthly DESC
     LIMIT 3;
 
-**Note:** `INFORMATION_SCHEMA` view names are case sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case sensitive.
 
 The result is similar to the following:
 

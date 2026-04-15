@@ -6,8 +6,6 @@ Get started with BigQuery by creating a dataset, loading data into a table, and 
 
 To follow step-by-step guidance for this task directly in the Google Cloud console, click **Guide me** :
 
-[Guide me](https://console.cloud.google.com/freetrial?redirectPath=/?walkthrough_id=bigquery--bigquery-quickstart-load-data-console)
-
 -----
 
 ## Before you begin
@@ -18,13 +16,11 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
-    
     For new projects, the BigQuery API is automatically enabled.
 
 2.  Optional: [Enable billing](https://docs.cloud.google.com/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#setup) .
     
-    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
+    > **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
 
 ### Required roles
 
@@ -42,8 +38,6 @@ You might also be able to get the required permissions through [custom roles](ht
 Use the Google Cloud console to create a dataset to store the data. You create your dataset in the US multi-region location. For information on BigQuery regions and multi-regions, see [Locations](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 In the Google Cloud console, open the BigQuery page.
-
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 

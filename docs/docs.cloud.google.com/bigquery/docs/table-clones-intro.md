@@ -55,11 +55,11 @@ The difference between base table and table clone storage charges is shown in th
 
 ![Table clone billing example](https://docs.cloud.google.com/static/bigquery/images/table-clone-billing.png)
 
-**Note:**
-
-  - Because BigQuery storage is column-based, small changes to the data in a base table can result in large increases in storage cost for a clone of the table.
-  - Some changes to a base table can result in you being charged the full storage amount for a table clone of the table. For example, if you modify a base table with [clustering](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) , that can lead to automatic re-clustering. Because re-clustering can rewrite the base table's storage blocks, the base table's storage is no longer the same as the storage of its clones. This causes the oldest of the base table's clones to be charged the full storage amount of the modified partition.
-  - Partitions can help reduce storage costs for table clones. In general, BigQuery only makes a copy of modified data within a partition, instead of the entire table clone.
+> **Note:**
+> 
+>   - Because BigQuery storage is column-based, small changes to the data in a base table can result in large increases in storage cost for a clone of the table.
+>   - Some changes to a base table can result in you being charged the full storage amount for a table clone of the table. For example, if you modify a base table with [clustering](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) , that can lead to automatic re-clustering. Because re-clustering can rewrite the base table's storage blocks, the base table's storage is no longer the same as the storage of its clones. This causes the oldest of the base table's clones to be charged the full storage amount of the modified partition.
+>   - Partitions can help reduce storage costs for table clones. In general, BigQuery only makes a copy of modified data within a partition, instead of the entire table clone.
 
 For more information, see [BigQuery storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 

@@ -41,8 +41,6 @@ To use schema auto-detection when you load JSON or CSV data:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

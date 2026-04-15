@@ -48,8 +48,6 @@ You might also be able to get these permissions with [custom roles](https://docs
 To find the dataset used for this tutorial, follow these steps:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click search **Search listings** .
 
@@ -130,8 +128,6 @@ To set up Geo Viz, do the following:
 
 1.  Open the Geo Viz web tool.
     
-    [Open Geo Viz](https://bigquerygeoviz.appspot.com/)
-    
     Alternatively, in the **Query results** pane, click **Open in \> GeoViz** .
 
 2.  In step one, **Query** , click **Authorize** .
@@ -204,16 +200,14 @@ To format your map, do the following:
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

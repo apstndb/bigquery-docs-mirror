@@ -1,6 +1,6 @@
 # Introduction to BigLake external tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document provides an overview of BigLake and assumes familiarity with database tables and Identity and Access Management (IAM). To query data stored in the [supported data stores](https://docs.cloud.google.com/bigquery/docs/biglake-intro#supported-data-stores) , you must first create BigLake tables and then query them using GoogleSQL syntax:
 
@@ -195,9 +195,9 @@ You can use [external tables](https://docs.cloud.google.com/bigquery/docs/extern
             --access-boundary=<(echo -n "{}") \
             mycluster
     
-    **Caution:** Using an empty credential access boundary removes one layer of protection against attacks through stolen credentials from Managed Service for Apache Spark clusters. Stolen credentials have a larger blast radius without downscoping.
-    
-    As an alternative, you can disable Personal Cluster Authentication and use the [Managed Service for Apache Spark virtual machine (VM) service account](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts) as a proxy for user groups.
+    > **Caution:** Using an empty credential access boundary removes one layer of protection against attacks through stolen credentials from Managed Service for Apache Spark clusters. Stolen credentials have a larger blast radius without downscoping.
+    > 
+    > As an alternative, you can disable Personal Cluster Authentication and use the [Managed Service for Apache Spark virtual machine (VM) service account](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts) as a proxy for user groups.
 
   - BigLake tables are read-only. You cannot modify BigLake tables using DML statements or other methods.
 
@@ -231,13 +231,13 @@ The following organizational roles are typically involved in managing and using 
 
 Data lake administrators are responsible for creating connections and sharing them with data warehouse administrators. In turn, data warehouse administrators create tables, set appropriate access controls, and share the tables with data analysts.
 
-**Caution:** Data analysts should **not** have the following:
-
-  - The ability to read objects directly from Cloud Storage (see the [Storage Object Viewer IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) ), which lets data analysts circumvent access controls placed by data warehouse administrators.
-
-  - The ability to bind tables to connections (like the BigQuery Connection Administrator).
-    
-    Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
+> **Caution:** Data analysts should **not** have the following:
+> 
+>   - The ability to read objects directly from Cloud Storage (see the [Storage Object Viewer IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) ), which lets data analysts circumvent access controls placed by data warehouse administrators.
+> 
+>   - The ability to bind tables to connections (like the BigQuery Connection Administrator).
+>     
+>     Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
 
 ## Metadata caching for performance
 
@@ -392,4 +392,4 @@ When BigQuery interacts with Cloud Storage, you might incur the following Cloud 
   - Learn how to [create a Cloud Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
   - Learn how to [create an Amazon S3 BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) .
   - Learn how to [create a Blob Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
-  - Learn how to [create data quality checks with Dataplex Universal Catalog](https://docs.cloud.google.com/bigquery/docs/dataplex-shared-introduction) .
+  - Learn how to [create data quality checks with Knowledge Catalog](https://docs.cloud.google.com/bigquery/docs/dataplex-shared-introduction) .

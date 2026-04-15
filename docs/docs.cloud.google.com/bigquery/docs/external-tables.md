@@ -1,6 +1,6 @@
 # Introduction to external tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes how to work with data stored outside of BigQuery in external tables. To work with external data sources, you can also use [External datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro#external_datasets) .
 
@@ -165,4 +165,4 @@ You are also charged for storing the data and any resources used by the source a
   - Learn how to [create a Bigtable external table](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) .
   - Learn how to [create a Cloud Storage external table](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) .
   - Learn how to [create a Drive external table](https://docs.cloud.google.com/bigquery/docs/external-data-drive) .
-  - Learn how to [schedule and run data quality checks with Dataplex Universal Catalog](https://docs.cloud.google.com/bigquery/docs/dataplex-shared-introduction) .
+  - Learn how to [schedule and run data quality checks with Knowledge Catalog](https://docs.cloud.google.com/bigquery/docs/dataplex-shared-introduction) .

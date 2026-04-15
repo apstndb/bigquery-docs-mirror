@@ -30,8 +30,6 @@ The following [metric](https://docs.cloud.google.com/monitoring/api/metrics_gcp_
 All scheduled queries write their row count to this metric, using different labels. You need the `config_id` label when you define an alert policy. To find the `config_id` label, follow these steps:
 
 1.  In Google Cloud console, go to the **Scheduled queries** page:
-    
-    [Go to Scheduled queries](https://console.cloud.google.com/bigquery/scheduled-queries)
 
 2.  Click the scheduled query for which you want to create an alert.
 
@@ -41,7 +39,7 @@ All scheduled queries write their row count to this metric, using different labe
     
     ![config\_id in resource name.](https://docs.cloud.google.com/static/bigquery/images/scheduled-query-config-id.png)
 
-**Note:** The last known value for the row count repeats continuously for 5 weeks. If you deactivate a scheduled query or the query fails, the metric remains constant at its last known value for 35 days. After 35 days, the metric disappears.
+> **Note:** The last known value for the row count repeats continuously for 5 weeks. If you deactivate a scheduled query or the query fails, the metric remains constant at its last known value for 35 days. After 35 days, the metric disappears.
 
 If a problem occurs with the scheduled query, an error message appears in the **Run history** tab of your scheduled query.
 
@@ -60,8 +58,6 @@ Use a [metric-threshold alert](https://docs.cloud.google.com/monitoring/alerts/u
 To set up an alert on the number of rows a scheduled query returns, follow these steps:
 
 1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
-    
-    [Go to **Alerting**](https://console.cloud.google.com/monitoring/alerting)
     
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 

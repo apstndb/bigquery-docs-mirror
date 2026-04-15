@@ -1,8 +1,8 @@
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@googlegroups.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@googlegroups.com> .
 
 GoogleSQL for BigQuery supports KLL functions.
 
@@ -12,7 +12,7 @@ KLL functions are approximate aggregate functions. Approximate aggregation requi
 
 Due to the non-deterministic nature of the KLL algorithm, sketches created on the same set of data with the same precision might not be identical, leading to variation in the approximate quantile results.
 
-**Note:** While `APPROX_QUANTILES` is also returning approximate quantile results, the functions from this section allow for partial aggregations and re-aggregations.
+> **Note:** While `APPROX_QUANTILES` is also returning approximate quantile results, the functions from this section allow for partial aggregations and re-aggregations.
 
 ## Function list
 
@@ -53,7 +53,7 @@ The number of returned values produced is always `num_quantiles + 1` as an array
 
 For example, if `num_quantiles` is `3` , and the result of this function is `[0, 34, 67, 100]` , this means that `0` is the minimum value, `34` and `67` are the approximate quantiles, and `100` is the maximum value. In addition, the result represents the following three segments: `0 to 34` , `34 to 67` , and `67 to 100` .
 
-**Note:** This scalar function is similar to the aggregate function `KLL_QUANTILES.MERGE_INT64` .
+> **Note:** This scalar function is similar to the aggregate function `KLL_QUANTILES.MERGE_INT64` .
 
 **Return Type**
 

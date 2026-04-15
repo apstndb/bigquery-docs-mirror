@@ -84,8 +84,6 @@ You can restore a table snapshot into a new table by using one of the following 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -110,8 +108,6 @@ You can restore a table snapshot into a new table by using one of the following 
 Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -136,8 +132,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq cp \
@@ -222,8 +216,6 @@ You can overwrite an existing table with a table snapshot by using one of the fo
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -248,8 +240,6 @@ You can overwrite an existing table with a table snapshot by using one of the fo
 Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -274,8 +264,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq cp \

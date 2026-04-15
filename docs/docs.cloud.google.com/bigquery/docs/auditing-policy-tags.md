@@ -15,8 +15,6 @@ For information about the permission you need to view logs, see the [Cloud Loggi
 ## Viewing logs for policy tag events
 
 1.  Go to the **Logs Explorer** page in the Google Cloud console.
-    
-    [Go to Logs Explorer](https://console.cloud.google.com/logs/query)
 
 2.  In the resources drop-down list, click **Audited Resource** , click **Audited Resources** again, and then click **datacatalog.googleapis.com** . You will see recent audit log entries of Data Catalog resources.
 

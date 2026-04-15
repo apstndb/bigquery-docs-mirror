@@ -1,10 +1,10 @@
 # Schedule a Comparison Shopping Service Center Transfer
 
-**Preview**
+> **Preview**
+> 
+> This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for Comparison Shopping Service (CSS) Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
+> **Note:** To get support or provide feedback for Comparison Shopping Service (CSS) Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
 This document shows you how to schedule and manage recurring load jobs for CSS Center reporting data using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
 
@@ -65,8 +65,6 @@ To create a data transfer for CSS Center reporting:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -126,7 +124,7 @@ Where:
       - `export_products` : whether or not to transfer product and product issues data. This parameter is included by default, even if you don't specify the `export_products` parameter. We recommend that you include this parameter explicitly and set it to `true` .
   - data\_source is the data source — `css_center` .
 
-**Caution:** You cannot configure notifications by using the command-line tool.
+> **Caution:** You cannot configure notifications by using the command-line tool.
 
 For example, the following command creates a CSS Center data transfer named `My Transfer` using CSS domain ID `1234` and target dataset `mydataset` . The data transfer is created in your default project.
 

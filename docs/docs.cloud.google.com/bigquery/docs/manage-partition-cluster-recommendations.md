@@ -24,7 +24,7 @@ Each recommendation consists of three parts:
 
 To calculate potential workload savings, the recommender assumes that the historical execution workload data from the past 30 days represents the future workload.
 
-**Note:** In some cases, the estimated savings might be overestimated. For more information, see [Overestimation of savings](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#overestimation) .
+> **Note:** In some cases, the estimated savings might be overestimated. For more information, see [Overestimation of savings](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#overestimation) .
 
 The recommender API also returns table workload information in the form of *insights* . [Insights](https://docs.cloud.google.com/recommender/docs/insights/using-insights) are findings that help you understand your project's workload, providing more context on how a partition or cluster recommendation might improve workload costs.
 
@@ -205,15 +205,13 @@ For more information about IAM roles and permissions in BigQuery, see [Introduct
 
 This section describes how to view partition and cluster recommendations and insights using the Google Cloud console, the Google Cloud CLI, or the Recommender API.
 
-**Note:** You can also export recommendations to BigQuery using the BigQuery Data Transfer Service. For more information, see [Export recommendations to BigQuery](https://docs.cloud.google.com/recommender/docs/bq-export/export-recommendations-to-bq) .
+> **Note:** You can also export recommendations to BigQuery using the BigQuery Data Transfer Service. For more information, see [Export recommendations to BigQuery](https://docs.cloud.google.com/recommender/docs/bq-export/export-recommendations-to-bq) .
 
 Select one of the following options:
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Recommendations** .
     
@@ -353,7 +351,7 @@ You can also view your recommendations and insights using `INFORMATION_SCHEMA` v
        slot_hours_saved_monthly DESC
     LIMIT 3;
 
-**Note:** `INFORMATION_SCHEMA` view names are case sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case sensitive.
 
 The result is similar to the following:
 
@@ -405,7 +403,7 @@ Follow these steps to apply a new clustering specification to unpartitioned or p
     UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
     ```
     
-    **Note:** If a new clustering specification is applied to a table that is in long-term storage, then the table reverts to active storage pricing. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
+    > **Note:** If a new clustering specification is applied to a table that is in long-term storage, then the table reverts to active storage pricing. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
 ### Apply clusters to a copied table
 
@@ -414,8 +412,6 @@ When you apply cluster recommendations to a BigQuery table, you can first copy t
 You can use this method to apply cluster recommendations to both unpartitioned and partitioned tables.
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, create an empty table with the same metadata (including the clustering specifications) of the original table by using the `LIKE` operator:
     
@@ -431,8 +427,6 @@ You can use this method to apply cluster recommendations to both unpartitioned a
       - `  ORIGINAL_TABLE  ` : the name of your original table—for example, `mytable`
 
 3.  In the Google Cloud console, open the Cloud Shell Editor.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 4.  In the Cloud Shell Editor, update the clustering specification of the copied table to match the recommended clustering by using the `bq update` command:
     
@@ -543,7 +537,7 @@ You can create a materialized view of the table to store data from the original 
 
 To apply partition recommendations, you must apply it to a copy of the original table. BigQuery does not support the changing of a partitioning scheme of a table in place, such as changing an unpartitioned table to a partitioned table, changing the partitioning scheme of a table, or creating a materialized view with a different partitioning scheme from the base table. You can only change the partitioning of a table on a copy of the table.
 
-**Caution:** Migrate your legacy SQL workflows to GoogleSQL before applying partition recommendations. For more information, see [Limitations](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#limitations) .
+> **Caution:** Migrate your legacy SQL workflows to GoogleSQL before applying partition recommendations. For more information, see [Limitations](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#limitations) .
 
 ### Apply partition recommendations to a copied table
 

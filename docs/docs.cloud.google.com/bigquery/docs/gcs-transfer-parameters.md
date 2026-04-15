@@ -143,7 +143,7 @@ or<br />
 </tbody>
 </table>
 
-**Note:** When you use date or time parameters to create tables with names ending in a date format such as `YYYYMMDD` , BigQuery [groups these tables together](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `mytable_(1)` , which represents the collection of sharded tables.
+> **Note:** When you use date or time parameters to create tables with names ending in a date format such as `YYYYMMDD` , BigQuery [groups these tables together](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `mytable_(1)` , which represents the collection of sharded tables.
 
 ## Partitioning options
 
@@ -154,7 +154,7 @@ There are two types of partitioned tables in BigQuery:
 
 If the destination table is partitioned on a column, you identify the partitioning column when you create the destination table and specify its schema. Learn more about creating column-based partitioned tables in [Creating and using partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-column-partitions) .
 
-**Note:** Minutes cannot be specified when partitioning a table.
+> **Note:** Minutes cannot be specified when partitioning a table.
 
 ### Partitioning examples
 

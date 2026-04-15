@@ -13,7 +13,7 @@ If you have a private Amazon Redshift instance in AWS, you can migrate that data
 7.  The BigQuery Data Transfer Service migration runs in the tenant project. It triggers an unload operation from Amazon Redshift to a staging area in an Amazon S3 bucket. Unload speed is determined by your cluster configuration.
 8.  The BigQuery Data Transfer Service migration transfers your data from the Amazon S3 bucket to BigQuery.
 
-**Caution:** The communication between BigQuery and Amazon Redshift happens over the VPN between the peered VPC networks. However, the data movement from Amazon S3 to BigQuery happens over the public internet.
+> **Caution:** The communication between BigQuery and Amazon Redshift happens over the VPN between the peered VPC networks. However, the data movement from Amazon S3 to BigQuery happens over the public internet.
 
 If you'd like to transfer data from your Amazon Redshift instance through public IPs, you can [migrate your Amazon Redshift data to BigQuery with these instructions](https://docs.cloud.google.com/bigquery/docs/migration/redshift) .
 
@@ -84,13 +84,11 @@ As part of the data transfer, BigQuery Data Transfer Service writes data from Am
 
 2.  Follow the [instructions in this guide](https://docs.cloud.google.com/network-connectivity/docs/vpn/tutorials/create-ha-vpn-connections-google-cloud-aws) to set up a Google Cloud VPC network, set up a VPN between your Google Cloud project's VPC network and the Amazon Redshift VPC network, and enable VPC peering.
     
-    **Caution:** The service uses your VPC network's name as the VPC peering connection name, so ensure there aren't any existing VPC peering connections already using that name.
+    > **Caution:** The service uses your VPC network's name as the VPC peering connection name, so ensure there aren't any existing VPC peering connections already using that name.
 
 3.  Configure Amazon Redshift to allow connection to your VPN. For more information, see [Amazon Redshift cluster security groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html) .
 
 4.  In the Google Cloud console, go to the **VPC networks** page to verify that your Google Cloud VPC network exists in your Google Cloud project is connected to Amazon Redshift through the VPN.
-    
-    [Go to VPC networks](https://console.cloud.google.com/networking/networks/list)
     
     The console page lists all of your VPC networks.
 
@@ -99,8 +97,6 @@ As part of the data transfer, BigQuery Data Transfer Service writes data from Am
 Use the following instructions to set up an Amazon Redshift transfer:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Data transfers** .
 
@@ -120,7 +116,7 @@ Use the following instructions to set up an Amazon Redshift transfer:
     
     3.  For **Password of your database** , enter the database password.
         
-        **Note:** By providing your Amazon credentials you acknowledge that the BigQuery Data Transfer Service is your agent solely for the limited purpose of accessing your data for transfers.
+        > **Note:** By providing your Amazon credentials you acknowledge that the BigQuery Data Transfer Service is your agent solely for the limited purpose of accessing your data for transfers.
     
     4.  For **Access key ID** and **Secret access key** , enter the access key pair you obtained from [Grant access to your S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#grant_access_to_your_S3_bucket) .
     
@@ -135,7 +131,7 @@ Use the following instructions to set up an Amazon Redshift transfer:
         
         Leave this field empty to migrate all tables from the specified schema.
         
-        **Caution:** For very large tables, we recommend transferring one table at a time. [BigQuery has a load quota of 15 TB](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#quotas_and_limits) per load job.
+        > **Caution:** For very large tables, we recommend transferring one table at a time. [BigQuery has a load quota of 15 TB](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#quotas_and_limits) per load job.
     
     8.  For **VPC and the reserved IP range** , specify your VPC network name and the private IP address range to use in the tenant project VPC network. Specify the IP address range as a CIDR block.
         
@@ -147,7 +143,7 @@ Use the following instructions to set up an Amazon Redshift transfer:
           - The IP range must not overlap with any subnet in your project VPC network or the Amazon Redshift VPC network.
           - If you have multiple transfers configured for the same Amazon Redshift instance, make sure to use the same `VPC_network_name:CIDR` value in each, so that multiple transfers can reuse the same migration infrastructure.
         
-        **Caution:** After being configured, the value of this CIDR block is immutable.
+        > **Caution:** After being configured, the value of this CIDR block is immutable.
 
 8.  Optional: In the **Notification options** section, do the following:
     

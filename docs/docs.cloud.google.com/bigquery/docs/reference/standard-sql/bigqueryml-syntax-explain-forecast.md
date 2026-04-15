@@ -21,7 +21,7 @@ ML.EXPLAIN_FORECAST(
     { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) })
 ```
 
-**Note:** No input data is required for `ARIMA_PLUS` models.
+> **Note:** No input data is required for `ARIMA_PLUS` models.
 
 ### Arguments
 
@@ -47,7 +47,7 @@ ML.EXPLAIN_FORECAST(
 
   - `  HORIZON  ` : an `INT64` value that specifies the number of time points to forecast. The maximum value is the horizon value specified in the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement for the time series model, or `1000` if unspecified. The default value is `3` . When forecasting multiple time series at the same time, this parameter applies to each time series.
     
-    **Note:** Forecasting takes place when the `CREATE MODEL` statement runs. The `ML.EXPLAIN_FORECAST` function retrieves the forecasting values and computes the prediction intervals. If you want to filter results when you're forecasting multiple time series, use the `ML.EXPLAIN_FORECAST` function. To save query time, specify a value for the `HORIZON` option in the `CREATE MODEL` statement.
+    > **Note:** Forecasting takes place when the `CREATE MODEL` statement runs. The `ML.EXPLAIN_FORECAST` function retrieves the forecasting values and computes the prediction intervals. If you want to filter results when you're forecasting multiple time series, use the `ML.EXPLAIN_FORECAST` function. To save query time, specify a value for the `HORIZON` option in the `CREATE MODEL` statement.
 
   - `  CONFIDENCE_LEVEL  ` : a `FLOAT64` value that specifies the percentage of the future values that fall in the prediction interval. The valid input range is `[0, 1)` . The default value is `0.95` .
 
@@ -180,7 +180,7 @@ The `time_series_adjusted_data` value is the value that remains after cleaning s
                                     + seasonal_period_monthly + seasonal_period_weekly + seasonal_period_daily
                                     + holiday_effect + (attribution_feature_1 + ... + attribution_feature_n)
 
-**Note:** For rows that have a value of `forecast` in the `time_series_type` column, you might notice that the `time_series_data` and `time_series_adjusted_data` values are the same .
+> **Note:** For rows that have a value of `forecast` in the `time_series_type` column, you might notice that the `time_series_data` and `time_series_adjusted_data` values are the same .
 
 ### `holiday_effect`
 

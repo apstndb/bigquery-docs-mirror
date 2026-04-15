@@ -10,7 +10,7 @@ Airflow DAGs that you schedule in BigQuery are executed in one or more Cloud Com
 
 During a DAG run, Airflow schedules and executes individual tasks that make up a DAG in a sequence defined by the DAG. On the **Scheduling** page in BigQuery, you can view statuses of past DAG runs, explore detailed logs of all DAG runs and all tasks from these DAG runs, and view details about DAGs.
 
-**Note:** You can't manage Cloud Composer environments in BigQuery. To manage environments, for example, to create an environment, install dependencies for your DAG files, upload, delete, or change individual DAGs, you use Cloud Composer.
+> **Note:** You can't manage Cloud Composer environments in BigQuery. To manage environments, for example, to create an environment, install dependencies for your DAG files, upload, delete, or change individual DAGs, you use Cloud Composer.
 
 To learn more about Airflow's core concepts such as Airflow DAGs, DAG runs, tasks, or operators, see the [Core Concepts](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/index.html) page in the Airflow documentation.
 
@@ -23,8 +23,6 @@ Enable the Cloud Composer API.
 **Roles required to enable APIs**
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=composer.googleapis.com)
 
 Make sure that your Google Cloud project has at least one Cloud Composer 3 environment, with at least one already uploaded DAG file:
 
@@ -61,8 +59,6 @@ When you manually trigger an Airflow DAG, Airflow runs the DAG once, independent
 To manually trigger a selected Airflow DAG, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Do either of the following:
     
@@ -75,8 +71,6 @@ To manually trigger a selected Airflow DAG, follow these steps:
 To view details of a selected Airflow DAG, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected DAG.
 
@@ -103,8 +97,6 @@ To view details of a selected Airflow DAG, follow these steps:
 To view Airflow DAGs from all Cloud Composer 3 environments in your Google Cloud project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Optional: To display additional columns with DAG details, click view\_column **Column display options** , and then select columns and click **OK** .
 
@@ -113,8 +105,6 @@ To view Airflow DAGs from all Cloud Composer 3 environments in your Google Cloud
 To pause a selected Airflow DAG, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Do either of the following:
     

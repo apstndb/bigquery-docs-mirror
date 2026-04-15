@@ -52,8 +52,6 @@ You can list table snapshots by using one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -70,8 +68,6 @@ You can list table snapshots by using one of the following options:
 Query the [`INFORMATION_SCHEMA.TABLE_SNAPSHOTS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -102,8 +98,6 @@ The result looks similar to the following:
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq ls \

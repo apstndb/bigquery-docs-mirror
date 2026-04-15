@@ -34,7 +34,7 @@ Here are some common use cases for labels:
 
   - **Ownership labels** : Used to identify the teams that are responsible for operations, for example: `team:shopping-cart` .
 
-**Note:** Don't include sensitive information in labels, including personally identifiable information, such as an individual's name or title. Labels are not designed to handle sensitive information.
+> **Note:** Don't include sensitive information in labels, including personally identifiable information, such as an individual's name or title. Labels are not designed to handle sensitive information.
 
 We don't recommend creating large numbers of unique labels, such as for timestamps or individual values for every API call. The problem with this approach is that when the values change frequently or with keys that clutter the catalog, this makes it difficult to effectively filter and report on resources.
 

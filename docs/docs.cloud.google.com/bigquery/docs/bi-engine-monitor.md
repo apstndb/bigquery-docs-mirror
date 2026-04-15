@@ -96,7 +96,7 @@ Use the following format to specify [regionality](https://docs.cloud.google.com/
 
     `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
 
-**Logging slot metrics:** Although slot metrics for BI Engine are reported, accelerated BI Engine input stages are not counted towards slot reservations. For more information, see the [pricing](https://docs.cloud.google.com/bigquery/pricing#bi-engine-pricing) page.
+> **Logging slot metrics:** Although slot metrics for BI Engine are reported, accelerated BI Engine input stages are not counted towards slot reservations. For more information, see the [pricing](https://docs.cloud.google.com/bigquery/pricing#bi-engine-pricing) page.
 
 ### View Looker Studio information schema details
 

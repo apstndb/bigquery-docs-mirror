@@ -7,7 +7,7 @@
   - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAssignments#body.aspect)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAssignments#try-it)
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated: Looks up assignments for a specified resource for a particular region. If the request is about a project:
 

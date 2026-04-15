@@ -38,7 +38,7 @@ The following permissions are required to view all data in the operational healt
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-**Note:** Viewing all data in the operational health and resource utilization charts is only available if you have defined Google Cloud organizations.
+> **Note:** Viewing all data in the operational health and resource utilization charts is only available if you have defined Google Cloud organizations.
 
 ## Monitor operational health across an organization
 
@@ -52,15 +52,13 @@ The operational health dashboard displays key metrics for your organization and 
   - Bytes processed
   - Total storage
 
-**Note:** The operational health dashboard doesn't monitor metrics for on-demand workloads. Other charts, such as resource utilization charts, display both on-demand and capacity-based workloads.
+> **Note:** The operational health dashboard doesn't monitor metrics for on-demand workloads. Other charts, such as resource utilization charts, display both on-demand and capacity-based workloads.
 
 ### View operational health charts
 
 To view information about the operational health of your organization, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/bigquery/admin/monitoring)
 
 2.  Select the administration project that you used to purchase slots and create reservations.
 
@@ -137,7 +135,7 @@ The table cell is color coded if the metric is greater than the predefined thres
 
 All thresholds are predefined and can't be customized. You can check a threshold by clicking info **Info** .
 
-**Note:** The **Total storage** column doesn't support color annotation.
+> **Note:** The **Total storage** column doesn't support color annotation.
 
 ![BigQuery administrative summary table.](https://docs.cloud.google.com/static/bigquery/images/admin-summary-table.png)
 
@@ -193,7 +191,7 @@ This table aggregates quota errors, access denied errors, and performance insigh
 
 The project operational health dashboard is the default view you get if you don't have access to the entire organization, or your project doesn't own any reservation. This view can help project analysts monitor system health for their projects, much like the operational health dashboard at the organizational level, but it shows only project-level data in its charts and filters.
 
-**Note:** If your project is assigned to a reservation owned by another project, the slot capacity overview chart displays 0 capacity. To view the total slot capacity, view the charts for the project that owns the reservation.
+> **Note:** If your project is assigned to a reservation owned by another project, the slot capacity overview chart displays 0 capacity. To view the total slot capacity, view the charts for the project that owns the reservation.
 
 ## View BigQuery resource utilization
 
@@ -235,8 +233,6 @@ The resource utilization chart has the following elements:
 To view and configure resource utilization charts, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/bigquery/admin/monitoring)
 
 2.  Select the project. As an administrator monitoring reservation resource use, choose the administration project used to buy slots and create reservations. As a data analyst monitoring job resource use, choose the corresponding project.
 
@@ -370,7 +366,7 @@ This view shows you metrics about job activity with reservation resources in the
 | **Reservation - Job duration**    | Monitors the runtime of completed jobs in the selected time period. Runtime measures the time between job creation to job completion. It includes queueing and retries. The default aggregation is by the average runtime in the selected time period. |
 | **Reservation - Shuffle usage**   | Monitors the shuffle usage ratio in the selected time period. The default aggregation is by the average usage in the selected time period.                                                                                                             |
 
-**Note:** BigQuery might allocate additional slots to perform a job, resulting in a slot usage value that exceeds the total maximum capacity value and a non-zero value for borrowed slot usage in reservations that ignore idle slots. In these instances, no additional charges are billed for usage above the max capacity.
+> **Note:** BigQuery might allocate additional slots to perform a job, resulting in a slot usage value that exceeds the total maximum capacity value and a non-zero value for borrowed slot usage in reservations that ignore idle slots. In these instances, no additional charges are billed for usage above the max capacity.
 
 ##### Custom view
 
@@ -459,7 +455,6 @@ By default, you have access to Edition resource charts when navigating from the 
 To view resource charts, follow these steps:
 
 1.  Go to the **BigQuery** page.  
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 2.  In the project menu, select the administration project that you used to purchase slots and create reservations.
 3.  In the navigation menu, click **Monitoring** .
 4.  In the **Chart options \> Scope** section, you can select the billing model from the list, which includes three types of Editions and on-demand. By default, the billing model is set to the Enterprise edition.
@@ -486,7 +481,7 @@ BigQuery provides the following metric types to display in the charts:
       - **Autoscale Capacity.** The autoscaled slot size.
       - **Maximum Capacity.** The maximum number of slots the user can access.
 
-**Note:** BigQuery sometimes allocates additional slots to perform a job, resulting in a **Total Usage** value that exceeds the **Maximum capacity** value and a non-zero value for **Borrowed Slot Usage** in reservations that ignore idle slots. In these instances, no additional charges are billed for usage above the reservation's **Maximum Capacity** .
+> **Note:** BigQuery sometimes allocates additional slots to perform a job, resulting in a **Total Usage** value that exceeds the **Maximum capacity** value and a non-zero value for **Borrowed Slot Usage** in reservations that ignore idle slots. In these instances, no additional charges are billed for usage above the reservation's **Maximum Capacity** .
 
   - **Job Concurrency.** Maximum number of jobs running simultaneously in the selected time period.
   - **Job Performance.** Average job runtime of completed jobs, calculated from job creation time to job end time.
@@ -513,7 +508,7 @@ For the **Failed Jobs** chart, the table component displays the following data:
   - **Average slot usage.** Same as the **Slot Usage** chart, but only for failed jobs.
   - **Total failed jobs.** The number of jobs that failed within the selected time period.
 
-**Note:** In addition to resource charts, you can write your own queries or dashboards. For example queries and Looker Studio templates, see [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/monitoring#information-schema) .
+> **Note:** In addition to resource charts, you can write your own queries or dashboards. For example queries and Looker Studio templates, see [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/monitoring#information-schema) .
 
 ##### Group by options
 
@@ -532,7 +527,7 @@ You can modify the time period in the following ways:
 
 The alignment period updates automatically as the selected timeframe changes. The smaller the alignment period, the more detailed the view. To better view resources that change frequently, for example the **Slot Usage** option, reduce the alignment period.
 
-**Note:** For more granular alignment periods on the slot usage chart, displayed usage might briefly exceed capacity due to data sampling and alignment.
+> **Note:** For more granular alignment periods on the slot usage chart, displayed usage might briefly exceed capacity due to data sampling and alignment.
 
 ##### Filter and search
 
@@ -540,7 +535,7 @@ To narrow the chart data, apply filters in the filter panel. Some filters are on
 
 The chart refreshes after you apply filters to show data within the selected parameters.
 
-**Note:** To filter by specific jobs, enter the job ID in the text field without the project prefix.
+> **Note:** To filter by specific jobs, enter the job ID in the text field without the project prefix.
 
 ## Monitor autoscaling
 

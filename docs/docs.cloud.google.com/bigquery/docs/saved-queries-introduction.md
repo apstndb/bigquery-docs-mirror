@@ -255,7 +255,7 @@ Saved queries have the following limitations:
 
 ## Classic saved queries
 
-**Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic-saved-queries-deprecation) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
+> **Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic-saved-queries-deprecation) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
 
 Classic saved queries are an earlier way of saving and sharing SQL queries. Classic saved queries provide the query text, and the only query setting retained by a classic saved query is the SQL version. This setting governs whether the query uses legacy SQL or GoogleSQL. To query the data, users must have access to the data that the saved query accesses.
 
@@ -263,7 +263,7 @@ You can see classic saved queries in the **(Classic) Queries** folder in the **C
 
 ![The (Classic) Queries folder in the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/saved-query-comparison.png)
 
-**Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Classic Explorer** pane, instead of the **(Classic) Queries** folder.
+> **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Classic Explorer** pane, instead of the **(Classic) Queries** folder.
 
 There are 3 types of classic saved queries:
 
@@ -299,7 +299,7 @@ To support this transition, the following BigQuery IAM roles were updated in Feb
       - `dataform.repositories.create`
       - `dataform.repositories.list`
 
-**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
+> **Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
 
 To let users without the BigQuery Admin, BigQuery Job User, or BigQuery User roles use saved queries, grant them the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions) in IAM.
 

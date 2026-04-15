@@ -12,7 +12,7 @@ This document describes AI-augmented data preparation in BigQuery. Data preparat
 
 You can create and manage data preparations in the **BigQuery Studio** page (see [Start a data preparation session](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#open-data-prep-editor) ).
 
-**Tip:** You can also use the **Pipelines & Connections** page to create a data preparation using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+> **Tip:** You can also use the **Pipelines & Connections** page to create a data preparation using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 When you open a table in BigQuery data preparation, a BigQuery job runs using your credentials. The run creates sample rows from the chosen table and writes the results into a temporary table in the same project. Gemini uses the sample data and schema to generate data preparation suggestions shown in the data preparation editor.
 
@@ -229,8 +229,6 @@ You can use data preparation in any supported [BigQuery location](https://docs.c
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, find the project in which you have enabled code assets.
 

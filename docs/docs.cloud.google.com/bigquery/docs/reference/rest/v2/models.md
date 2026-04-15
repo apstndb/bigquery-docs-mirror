@@ -232,7 +232,7 @@ Output only. All hyperparameter search spaces in this model.
 
 `string ( int64 format)`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 The best trialId across all training runs.
 
@@ -446,7 +446,7 @@ Output only. Options that were used for this training run, includes user specifi
 
 `string ( int64 format)`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Output only. The start time of this training run, in milliseconds since epoch.
 
@@ -2908,7 +2908,7 @@ Fields
 
 ` object ( ArimaOrder  ` )
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Non-seasonal order.
 
@@ -2916,7 +2916,7 @@ Non-seasonal order.
 
 ` object ( ArimaFittingMetrics  ` )
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Arima model fitting metrics.
 
@@ -2924,7 +2924,7 @@ Arima model fitting metrics.
 
 ` enum ( SeasonalPeriodType  ` )
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Seasonal periods. Repeated because multiple periods are supported for one time series.
 
@@ -2932,7 +2932,7 @@ Seasonal periods. Repeated because multiple periods are supported for one time s
 
 `boolean`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Whether Arima model fitted with drift or not. It is always false when d is not 1.
 
@@ -2940,7 +2940,7 @@ Whether Arima model fitted with drift or not. It is always false when d is not 1
 
 `string`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Id to differentiate different time series for the large-scale case.
 

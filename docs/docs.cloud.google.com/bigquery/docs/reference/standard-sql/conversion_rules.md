@@ -210,7 +210,7 @@ Literal coercion is needed when the actual literal type is different from the ty
 
 Literal conversion is evaluated at analysis time, and gives an error if the input literal can't be converted successfully to the target type.
 
-**Note:** String literals don't coerce to numeric types.
+> **Note:** String literals don't coerce to numeric types.
 
 #### Query parameter coercion
 
@@ -343,6 +343,23 @@ A supertype is a common type to which two or more expressions can be coerced. Su
 <td><code dir="ltr" translate="no">GEOGRAPHY</code></td>
 <td><code dir="ltr" translate="no">GEOGRAPHY</code><br />
 </td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">GRAPH_ELEMENT</code></td>
+<td><code dir="ltr" translate="no">GRAPH_ELEMENT</code> . Graph element <code dir="ltr" translate="no">a</code> is a supertype of graph element <code dir="ltr" translate="no">b</code> if the following are true:
+<ul>
+<li>Graph element <code dir="ltr" translate="no">a</code> and <code dir="ltr" translate="no">b</code> are the same element kind.</li>
+<li>Graph element <code dir="ltr" translate="no">a</code> 's property type list is a compatible superset of graph element <code dir="ltr" translate="no">b</code> 's property type list. This means that properties with the same name must also have the same type.</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">GRAPH_PATH</code></td>
+<td><code dir="ltr" translate="no">GRAPH_PATH</code> . Graph path <code dir="ltr" translate="no">a</code> is a supertype of graph path <code dir="ltr" translate="no">b</code> if the following are true:
+<ul>
+<li>The node type for <code dir="ltr" translate="no">a</code> is a supertype of the node type for <code dir="ltr" translate="no">b</code> .</li>
+<li>The edge type for <code dir="ltr" translate="no">a</code> is a supertype of the edge type for <code dir="ltr" translate="no">b</code> .</li>
+<li>Graph path <code dir="ltr" translate="no">a</code> 's property type list is a compatible superset of graph path <code dir="ltr" translate="no">b</code> 's property type list. This means that properties with the same name must also have the same type.</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">RANGE</code></td>

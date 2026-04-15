@@ -21,8 +21,6 @@ To use the `dbt-bigquery` adapter, enable the following APIs in your project:
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-[Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,storage.googleapis.com,compute.googleapis.com,dataform.googleapis.com,iam.googleapis.com,aiplatform.googleapis.com)
-
 ### Required roles
 
 The `dbt-bigquery` adapter supports OAuth-based and service account-based authentication. The following sections describe the required roles depending on how you plan to authenticate.
@@ -85,7 +83,7 @@ If you're using Colab Enterprise in a Shared VPC environment, ask your administr
 
   - [Compute Network User role](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkUser) ( `roles/compute.networkUser` ): If the notebook execution job feature is being used, grant this role to the Colab Enterprise service agent, `service- PROJECT_NUMBER @gcp-sa-vertex-nb.iam.gserviceaccount.com` , on the Shared VPC host project.
 
-**Note:** Replace PROJECT\_NUMBER with the Google Cloud project number.
+> **Note:** Replace PROJECT\_NUMBER with the Google Cloud project number.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -312,8 +310,6 @@ To use the merge strategy, you need to specify a `unique_key` property that dbt 
 You can observe the Python execution in the dbt logs.
 
 Additionally, you can view the code and the logs (including previous executions) in the **Colab Enterprise Executions** page.
-
-[Go to Colab Enterprise Executions](https://console.cloud.google.com/vertex-ai/colab/execution-jobs)
 
 ## Billing
 

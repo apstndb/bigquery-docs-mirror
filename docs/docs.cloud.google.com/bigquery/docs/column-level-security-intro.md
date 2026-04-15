@@ -1,6 +1,6 @@
 # Introduction to column-level access control
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 BigQuery provides fine-grained access to sensitive columns using *policy tags* , or type-based classification, of data. Using BigQuery column-level access control, you can create policies that check, at query time, whether a user has proper access. For example, a policy can enforce access checks such as:
 
@@ -24,7 +24,7 @@ To restrict data access at the column level:
 
 When a user tries to access column data at query time, BigQuery checks the column policy tag and its policy to see whether the user is authorized to access the data.
 
-**Note:** Column-level access control is enforced *in addition* to existing [dataset ACLs](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) . A user needs both dataset permission and policy tag permission in order to access data protected by column-level access control.
+> **Note:** Column-level access control is enforced *in addition* to existing [dataset ACLs](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) . A user needs both dataset permission and policy tag permission in order to access data protected by column-level access control.
 
 ## Identify what needs to be tagged
 
@@ -75,7 +75,7 @@ To set up column level security, a data steward, who has the [appropriate permis
     
     For details on using the `bq update` command to set a policy tag, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
     
-    **Note:** You can assign only one policy tag per column.
+    > **Note:** You can assign only one policy tag per column.
 
 6.  The admin performs similar steps for the **Medium** policy tag.
 

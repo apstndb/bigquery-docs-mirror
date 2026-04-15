@@ -1,6 +1,6 @@
 # Export query results to Blob Storage
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes how to export the result of a query that runs against a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) to your Azure Blob Storage.
 
@@ -26,8 +26,6 @@ Ensure that you have the following resources:
 BigQuery Omni writes to the specified Blob Storage location regardless of any existing content. The export query can overwrite existing data or mix the query result with existing data. We recommend that you export the query result to an empty Blob Storage container.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Query editor** field, enter a GoogleSQL export query:
     
@@ -50,7 +48,7 @@ BigQuery Omni writes to the specified Blob Storage location regardless of any ex
       - `  FORMAT  ` : supported formats are `JSON` , `AVRO` , `CSV` , and `PARQUET` .
       - `  QUERY  ` : the query to analyze the data that is stored in a BigLake table.
 
-**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+> **Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 ## Troubleshooting
 

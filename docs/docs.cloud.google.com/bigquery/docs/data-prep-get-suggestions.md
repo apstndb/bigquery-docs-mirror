@@ -21,7 +21,6 @@ On the **BigQuery** page, you can go to the data preparation editor in the follo
 To create a new data preparation in BigQuery, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.  
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Go to the **Create new** list and click **Data preparation** . The data preparation editor is displayed in a new untitled data preparation tab.
 
@@ -40,7 +39,6 @@ To create a new data preparation in BigQuery, follow these steps:
 To create a new data preparation from an existing table, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.  
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** .
 
@@ -63,7 +61,6 @@ To create a new data preparation from a file in Cloud Storage or Google Drive, f
 #### Load the file
 
 1.  In the Google Cloud console, go to the **BigQuery** page.  
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Create new** list, click **Data preparation** . The data preparation editor is displayed in a new untitled data preparation tab.
 
@@ -74,7 +71,7 @@ To create a new data preparation from a file in Cloud Storage or Google Drive, f
       - **Cloud Storage** : Select the file from a Cloud Storage bucket, or enter the path of your source. For example, enter a path to your CSV file: `  STORAGE_BUCKET_NAME / FILE_NAME .csv ` . Wildcard searches, such as `*.csv` , are supported.
       - **Google Drive** : Select the file from Google Drive by entering its URI. To load a subset of that data, you can enter a specific sheet name and a range.
     
-    **Note:** If you use Google Drive as a data source, you must use a service account to [run or schedule the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
+    > **Note:** If you use Google Drive as a data source, you must use a service account to [run or schedule the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
     
     The file format is automatically detected. Supported formats are Avro, CSV, JSONL, ORC, and Parquet. Other compatible file types, such as DAT, TSV, and TXT, are read as the CSV format. The Google Drive option also supports the Google Sheets format.
 
@@ -114,7 +111,6 @@ In the data view, prepare the staged data that you loaded by following these ste
 To open the editor for an existing data preparation, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.  
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** .
 
@@ -150,7 +146,7 @@ To apply a suggestion by Gemini as a data preparation step, do the following:
 
 2.  Optional: To improve the suggestions, edit the values of one to three cells in the table to demonstrate what the values in a column should look like. For example, enter a date the way you want to format all dates. Gemini generates new suggestions based on your changes.
     
-    **Note:** Your example change to the data isn't saved.
+    > **Note:** Your example change to the data isn't saved.
     
     The following image shows how you can edit values to improve the steps suggested by Gemini:
     
@@ -219,7 +215,7 @@ To flatten records, follow these steps:
 4.  Optional: Click **Preview** and review the step.
 5.  Click **Apply** .
 
-**Note:** Flattening a record doesn't expand nested JSON objects or repeated fields (arrays) within the record. To access their contents, you must flatten these fields in separate steps.
+> **Note:** Flattening a record doesn't expand nested JSON objects or repeated fields (arrays) within the record. To access their contents, you must flatten these fields in separate steps.
 
 ### Unnest arrays
 
@@ -240,7 +236,7 @@ To unnest arrays, follow these steps:
 4.  Optional: Click **Preview** and review the step.
 5.  Click **Apply** .
 
-**Note:** When unnesting an array column, you might encounter an error if a column in your original table has the same name as a column in the unnested array. To work around this, rename the conflicting column in your original table before performing the unnest operation.
+> **Note:** When unnesting an array column, you might encounter an error if a column in your original table has the same name as a column in the unnested array. To work around this, rename the conflicting column in your original table before performing the unnest operation.
 
 ### Filter rows
 
@@ -301,7 +297,7 @@ To add a join operation step between two sources in your data preparation, follo
     
       - **Join conditions** : The SQL expressions within the `ON` clause for the join operation. You can use the `L` and `R` qualifiers to refer to the left and right source tables, respectively. For example, to join the `customer_id` column from the left table to the `customer_id` column from the right table, enter `L.customerId = R.customerId` . These qualifiers aren't case-sensitive.
         
-        **Note:** If the **Join conditions** field is empty, the join operation type is automatically set to **Cross join** , even if you selected a different join type in the previous step.
+        > **Note:** If the **Join conditions** field is empty, the join operation type is automatically set to **Cross join** , even if you selected a different join type in the previous step.
 
 5.  Optional: To refine the suggestions from Gemini, edit the **Join description** field, and then click send **Send** .
 

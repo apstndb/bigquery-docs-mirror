@@ -29,8 +29,6 @@ To get started using a BigQuery public dataset, you must create or select a proj
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 For more information about the different ways to run queries, see [Run a query](https://docs.cloud.google.com/bigquery/docs/running-queries) .
 

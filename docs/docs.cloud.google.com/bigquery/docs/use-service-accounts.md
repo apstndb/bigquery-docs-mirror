@@ -68,8 +68,6 @@ Ensure that the service account you choose to run the transfer has the following
 The following procedure updates a data transfer configuration to authenticate as a service account instead of your individual user account.
 
 1.  In the Google Cloud console, go to the Data transfers page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click the transfer in the data transfers list.
 
@@ -94,7 +92,7 @@ For example, the following command updates a data transfer configuration to auth
     --update_credentials \
     --service_account_name=abcdef-test-sa@abcdef-test.iam.gserviceaccount.com projects/862514376110/locations/us/transferConfigs/5dd12f26-0000-262f-bc38-089e0820fe38 \
 
-**Note:** If you are using the bq command-line tool, use the `--service_account_name` flag instead of authenticating as a service account.
+> **Note:** If you are using the bq command-line tool, use the `--service_account_name` flag instead of authenticating as a service account.
 
 ### Java
 

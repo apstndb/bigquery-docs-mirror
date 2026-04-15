@@ -35,7 +35,7 @@ The simplest form of workload scheduling is [scheduling recurring queries](https
 
 **Scheduling method** : time-driven
 
-**Note:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you cannot schedule it for execution in Dataform. Instead, you need to use BigQuery execution and scheduling capabilities. For more information, see [Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) , [Schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
+> **Note:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you cannot schedule it for execution in Dataform. Instead, you need to use BigQuery execution and scheduling capabilities. For more information, see [Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) , [Schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
 
 ### Workflows
 

@@ -8,7 +8,7 @@ You can use multivariate time series models with the following functions:
   - Use the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) function to retrieve the forecasted values that were generated when you created the model, and compute the prediction intervals.
   - Use the [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
-**Note:** If you don't want to create and manage your own model, you can use BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) with the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to perform forecasting.
+> **Note:** If you don't want to create and manage your own model, you can use BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) with the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to perform forecasting.
 
 For more information about supported SQL statements and functions for this model, see [End-to-end user journey for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast) .
 
@@ -233,7 +233,7 @@ If non-seasonal d is determined to be 0 or 2, the number of candidate models eva
 
 If non-seasonal d is determined to be 1, the number of candidate models to evaluate is doubled, because there's an additional drift term to consider for all of the existing candidate models.
 
-**Note:** the number of bytes processed by the input `SELECT` statement is multiplied by the number of candidate models, which is controlled by the `AUTO_ARIMA_MAX_ORDER` and `AUTO_ARIMA_MIN_ORDER` options. This affects the pricing. See [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml) for details.
+> **Note:** the number of bytes processed by the input `SELECT` statement is multiplied by the number of candidate models, which is controlled by the `AUTO_ARIMA_MAX_ORDER` and `AUTO_ARIMA_MIN_ORDER` options. This affects the pricing. See [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml) for details.
 
 ### `AUTO_ARIMA_MIN_ORDER`
 
@@ -249,7 +249,7 @@ The minimum value for the sum of non-seasonal p and q. This value determines the
 
 The value is a `INT64` . The default value is `0` .
 
-**Note:** If `AUTO_ARIMA_MAX_ORDER` is set, the `AUTO_ARIMA_MIN_ORDER` value must be less than the `AUTO_ARIMA_MAX_ORDER` value.
+> **Note:** If `AUTO_ARIMA_MAX_ORDER` is set, the `AUTO_ARIMA_MIN_ORDER` value must be less than the `AUTO_ARIMA_MAX_ORDER` value.
 
 ### `NON_SEASONAL_ORDER`
 

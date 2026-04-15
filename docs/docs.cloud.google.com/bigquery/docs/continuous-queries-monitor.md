@@ -13,7 +13,7 @@ Due to the long running nature of a BigQuery continuous query, metrics that are 
 
 You can use a number of the `INFORMATION_SCHEMA` views to monitor continuous queries and continuous query reservations.
 
-**Note:** Data for a running continuous query is only retained for two days by the `JOBS* INFORMATION_SCHEMA` views.
+> **Note:** Data for a running continuous query is only retained for two days by the `JOBS* INFORMATION_SCHEMA` views.
 
 ### View job details
 
@@ -22,8 +22,6 @@ You can use the [`JOBS`](https://docs.cloud.google.com/bigquery/docs/information
 The following query returns the metadata for all active continuous queries. The metadata includes the output watermark timestamp, which represents the point up to which the continuous query has successfully processed data.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -57,8 +55,6 @@ You can use the [`ASSIGNMENTS`](https://docs.cloud.google.com/bigquery/docs/info
 Return reservation assignment details for continuous queries:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -91,8 +87,6 @@ You can use the [`ASSIGNMENTS`](https://docs.cloud.google.com/bigquery/docs/info
 Return slot consumption information for continuous queries:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -157,8 +151,6 @@ Instead of routinely checking whether your continuous queries have failed, it ca
 1.  When you create a continuous query, use a [custom job ID prefix](https://docs.cloud.google.com/bigquery/docs/continuous-queries#custom-job-id) . Multiple continuous queries can share the same prefix. For example, you might use the prefix `prod-` to indicate a production query.
 
 2.  In the Google Cloud console, go to the **Log-based Metrics** page.
-    
-    [Go to Log-based Metrics](https://console.cloud.google.com/logs/metrics)
 
 3.  Click **Create metric** . The **Create logs metric** panel appears.
 

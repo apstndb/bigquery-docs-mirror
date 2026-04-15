@@ -70,8 +70,6 @@ Select one of the following options:
 For clustered tables, you can query the `CLUSTERING_ORDINAL_POSITION` column in the [`INFORMATION_SCHEMA.COLUMNS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) to find the 1-indexed offset of the column within the table's clustering columns:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -162,7 +160,7 @@ Follow these steps to apply a new clustering specification to unpartitioned or p
     UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
     ```
     
-    **Note:** If a new clustering specification is applied to a table that is in long-term storage, then the table reverts to active storage pricing. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
+    > **Note:** If a new clustering specification is applied to a table that is in long-term storage, then the table reverts to active storage pricing. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
 ## What's next
 

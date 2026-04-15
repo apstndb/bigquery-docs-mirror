@@ -46,11 +46,11 @@ The difference between base table and table snapshot storage charges is shown in
 
 ![Table snapshot billing example](https://docs.cloud.google.com/static/bigquery/images/table-snapshot-billing.png)
 
-**Note:**
-
-  - Because BigQuery storage is column-based, small changes to the data in a base table can result in large increases in storage cost for its table snapshot.
-  - Some changes to a base table can result in you being charged the full storage amount for a table snapshot of the table. For example, if you modify a base table with [clustering](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) , that can lead to automatic re-clustering. Because re-clustering can rewrite the base table's storage blocks, the base table's storage is no longer the same as the storage of its snapshots. This might cause the oldest of the base table's snapshots to be charged up to the full storage amount of the modified partition.
-  - Partitions can help reduce storage costs for table snapshots. In general, BigQuery only makes a copy of modified data within a partition, instead of the entire table snapshot.
+> **Note:**
+> 
+>   - Because BigQuery storage is column-based, small changes to the data in a base table can result in large increases in storage cost for its table snapshot.
+>   - Some changes to a base table can result in you being charged the full storage amount for a table snapshot of the table. For example, if you modify a base table with [clustering](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) , that can lead to automatic re-clustering. Because re-clustering can rewrite the base table's storage blocks, the base table's storage is no longer the same as the storage of its snapshots. This might cause the oldest of the base table's snapshots to be charged up to the full storage amount of the modified partition.
+>   - Partitions can help reduce storage costs for table snapshots. In general, BigQuery only makes a copy of modified data within a partition, instead of the entire table snapshot.
 
 For more information, see [BigQuery storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 

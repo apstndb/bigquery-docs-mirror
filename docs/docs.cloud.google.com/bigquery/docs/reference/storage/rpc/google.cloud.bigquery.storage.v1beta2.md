@@ -112,7 +112,7 @@ New code should use the v1 Read API going forward, if they don't use Write API a
 
 ## BigQueryWrite
 
-This item is deprecated\!
+> This item is deprecated\!
 
 BigQuery Write API.
 
@@ -131,7 +131,9 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc AppendRows(              AppendRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">             AppendRowsResponse            </code> )</p>
 <p>Appends data to the given stream.</p>
 <p>If <code dir="ltr" translate="no">offset</code> is specified, the <code dir="ltr" translate="no">offset</code> is checked against the end of stream. The server returns <code dir="ltr" translate="no">OUT_OF_RANGE</code> in <code dir="ltr" translate="no">AppendRowsResponse</code> if an attempt is made to append to an offset beyond the current end of the stream or <code dir="ltr" translate="no">ALREADY_EXISTS</code> if user provids an <code dir="ltr" translate="no">offset</code> that has already been written to. User can retry with adjusted offset within the same RPC stream. If <code dir="ltr" translate="no">offset</code> is not specified, append happens at the end of the stream.</p>
@@ -152,7 +154,9 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc BatchCommitWriteStreams(              BatchCommitWriteStreamsRequest            </code> ) returns ( <code dir="ltr" translate="no">             BatchCommitWriteStreamsResponse            </code> )</p>
 <p>Atomically commits a group of <code dir="ltr" translate="no">PENDING</code> streams that belong to the same <code dir="ltr" translate="no">parent</code> table. Streams must be finalized before commit and cannot be committed multiple times. Once a stream is committed, data in the stream becomes available for read operations.</p></td>
 </tr>
@@ -170,7 +174,9 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc CreateWriteStream(              CreateWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">             WriteStream            </code> )</p>
 <p>Creates a write stream to the given table. Additionally, every table has a special COMMITTED stream named '_default' to which data can be written. This stream doesn't need to be created using CreateWriteStream. It is a stream that can be used simultaneously by any number of clients. Data written to this stream is considered committed as soon as an acknowledgement is received.</p></td>
 </tr>
@@ -188,7 +194,9 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc FinalizeWriteStream(              FinalizeWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">             FinalizeWriteStreamResponse            </code> )</p>
 <p>Finalize a write stream so that no new data can be appended to the stream. Finalize is not supported on the '_default' stream.</p></td>
 </tr>
@@ -206,7 +214,9 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc FlushRows(              FlushRowsRequest            </code> ) returns ( <code dir="ltr" translate="no">             FlushRowsResponse            </code> )</p>
 <p>Flushes rows to a BUFFERED stream. If users are appending rows to BUFFERED stream, flush operation is required in order for the rows to become available for reading. A Flush operation flushes up to any previously flushed offset in a BUFFERED stream, to the offset specified in the request. Flush is not supported on the _default stream, since it is not BUFFERED.</p></td>
 </tr>
@@ -224,7 +234,9 @@ The [google.cloud.bigquery.storage.v1 API](https://docs.cloud.google.com/bigquer
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc GetWriteStream(              GetWriteStreamRequest            </code> ) returns ( <code dir="ltr" translate="no">             WriteStream            </code> )</p>
 <p>Gets a write stream.</p></td>
 </tr>

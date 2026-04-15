@@ -22,8 +22,6 @@ When you finish the tasks that are described in this document, you can avoid con
     #### Check for the roles
     
     1.  In the Google Cloud console, go to the **IAM** page.
-        
-        [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
     
     2.  Select the project.
     
@@ -34,8 +32,6 @@ When you finish the tasks that are described in this document, you can avoid con
     #### Grant the roles
     
     1.  In the Google Cloud console, go to the **IAM** page.
-        
-        [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
     
     2.  Select the project.
     
@@ -68,8 +64,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -123,8 +117,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -153,8 +145,6 @@ Select one of the following options:
 Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -326,7 +316,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -402,7 +392,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ## Grant permissions to the connection's service account
 
@@ -411,8 +401,6 @@ Grant the connection's service account the Vertex AI User role. You must grant t
 To grant the role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
 
@@ -427,8 +415,6 @@ To grant the role, follow these steps:
 Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) statement to create a remote model that represents a hosted Vertex AI model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
 
@@ -455,8 +441,6 @@ The query takes several seconds to complete, after which the model `gemini_model
 Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by using the remote model and the `AI.GENERATE_TEXT` function:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement to perform keyword extraction on five movie reviews:
     
@@ -504,8 +488,6 @@ Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by usi
 Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by using the remote model and the `AI.GENERATE_TEXT` function:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement to perform sentiment analysis on movie reviews:
     
@@ -549,12 +531,12 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Delete the project
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 
@@ -567,8 +549,6 @@ If you want to reuse the project, then delete the resources that you created for
 ### Console
 
 1.  Go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Delete the `bqml_tutorial` dataset. Deleting the dataset also deletes the remote model.
     

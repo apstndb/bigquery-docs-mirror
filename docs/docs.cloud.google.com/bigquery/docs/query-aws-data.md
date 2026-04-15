@@ -1,6 +1,6 @@
 # Query Amazon S3 data
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes how to query data stored in an [Amazon Simple Storage Service (Amazon S3) BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) .
 
@@ -45,8 +45,6 @@ Run a query on a BigLake Amazon S3 table:
 To query the table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

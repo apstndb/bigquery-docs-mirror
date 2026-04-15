@@ -6,7 +6,7 @@ Price competitiveness data in BigQuery helps merchants understand how other merc
 
 The data is written to a table named ` PriceCompetitiveness_ MERCHANT_ID  ` if you are using an individual Merchant ID, or ` PriceCompetitiveness_ AGGREGATOR_ID  ` if you're using an MCA account.
 
-**Note:** To access price competitiveness data, you must meet the [eligibility requirements for market insights](https://support.google.com/merchants/answer/9712881) .
+> **Note:** To access price competitiveness data, you must meet the [eligibility requirements for market insights](https://support.google.com/merchants/answer/9712881) .
 
 ## Schema
 

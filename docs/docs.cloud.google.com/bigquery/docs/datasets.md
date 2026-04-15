@@ -44,21 +44,19 @@ Each of the following predefined IAM roles includes the permissions that you nee
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-**Note:** The creator of a dataset is automatically assigned the [BigQuery Data Owner ( `roles/bigquery.dataOwner` ) role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) on that dataset. So, a user or service account that has the ability to create a dataset also has the ability to delete it, even though that permission wasn't explicitly granted.
+> **Note:** The creator of a dataset is automatically assigned the [BigQuery Data Owner ( `roles/bigquery.dataOwner` ) role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) on that dataset. So, a user or service account that has the ability to create a dataset also has the ability to delete it, even though that permission wasn't explicitly granted.
 
 ## Create datasets
 
 When you create a dataset, you typically specify a location where the data is stored. If you don't specify a location, the [default location](https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings) is used. For more information, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
-**Note:** If you choose `EU` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU. Core BigQuery Customer Data is defined in the [Service Specific Terms](https://console.cloud.google.com/terms/service-terms#13-google-bigquery-service) .
+> **Note:** If you choose `EU` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU. Core BigQuery Customer Data is defined in the [Service Specific Terms](https://console.cloud.google.com/terms/service-terms#13-google-bigquery-service) .
 
 To create a dataset:
 
 ### Console
 
 Open the BigQuery page in the Google Cloud console.
-
-[Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -110,8 +108,6 @@ Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/
 To create a dataset in a project other than your default project, add the project ID to the dataset ID in the following format: `  PROJECT_ID . DATASET_ID  ` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -224,7 +220,7 @@ To confirm that the dataset was created, enter the `bq ls` command. Also, you ca
 
 Use the [`google_bigquery_dataset`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset) resource.
 
-**Note:** You must enable the Cloud Resource Manager API in order to use Terraform to create BigQuery objects.
+> **Note:** You must enable the Cloud Resource Manager API in order to use Terraform to create BigQuery objects.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -258,7 +254,7 @@ To grant access to the dataset, we recommend that you use one of the [`google_bi
 
 The following example creates a dataset named `mydataset` , then uses the [`google_bigquery_dataset_iam_policy`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy) resource to grant access to it.
 
-**Note:** Don't use this approach if you want to use authorized objects, such as [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , with this dataset. In that case, use the `google_bigquery_dataset_access` resource. For examples, see [`google_bigquery_dataset_access`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) .
+> **Note:** Don't use this approach if you want to use authorized objects, such as [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , with this dataset. In that case, use the `google_bigquery_dataset_access` resource. For examples, see [`google_bigquery_dataset_access`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) .
 
 ``` lang-terraform
 resource "google_bigquery_dataset" "default" {
@@ -416,7 +412,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -633,7 +629,7 @@ A hidden dataset is a dataset whose name begins with an underscore. You can quer
       - [Authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets)
       - [Authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines)
       - [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views)
-  - They don't appear in Data Catalog (deprecated) or Dataplex Universal Catalog.
+  - They don't appear in Data Catalog (deprecated) or Knowledge Catalog.
   - They can't be used as a source dataset for creating a [dataset replica](https://docs.cloud.google.com/bigquery/docs/data-replication#dataset_replication)
 
 ## Dataset security

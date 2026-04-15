@@ -2,7 +2,7 @@ GoogleSQL for BigQuery supports differentially private aggregate functions. For 
 
 You can only use differentially private aggregate functions with [differentially private queries](https://docs.cloud.google.com/bigquery/docs/differential-privacy) in a [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
 
-**Note:** In this topic, the privacy parameters in the examples aren't recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
+> **Note:** In this topic, the privacy parameters in the examples aren't recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
 ## Function list
 
@@ -109,7 +109,7 @@ The following differentially private query gets the average number of each item 
      | pen      | 18.5             |
      +----------+------------------*/
 
-**Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
+> **Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
 
 ## `COUNT` ( `DIFFERENTIAL_PRIVACY` )
 
@@ -177,7 +177,7 @@ The following differentially private query counts the number of requests for eac
      | pen      | 3               |
      +----------+-----------------*/
 
-**Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
+> **Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
 
 #### Signature 2
 
@@ -241,7 +241,7 @@ The following differentially private query counts the number of requests made fo
      | pen      | 3               |
      +----------+-----------------*/
 
-**Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
+> **Note:** For more information about when and when not to use noise, see [Remove noise](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
 
 ## `PERCENTILE_CONT` ( `DIFFERENTIAL_PRIVACY` )
 
@@ -356,7 +356,7 @@ The following differentially private query gets the sum of items requested. Smal
      | pen      | 58       |
      +----------+----------*/
 
-**Note:** For more information about when and when not to use noise, see [Use differential privacy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
+> **Note:** For more information about when and when not to use noise, see [Use differential privacy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#eliminate_noise) .
 
 ## Supplemental materials
 
@@ -408,4 +408,4 @@ Explicit bounds are uniformly applied to all aggregations. So even if some aggre
 
 Explicit bounds should be chosen to reflect public information. For example, bounding ages between 0 and 100 reflects public information because the age of most people generally falls within this range.
 
-**Important:** The results of the query reveal the explicit bounds. Don't use explicit bounds based on the entity data; explicit bounds should be based on public information.
+> **Important:** The results of the query reveal the explicit bounds. Don't use explicit bounds based on the entity data; explicit bounds should be based on public information.

@@ -1262,7 +1262,7 @@ Execution failure occurs when:
   - `point` : A generic value.
   - `boundaries_array` : A generic array of values.
 
-**Note:** The data type for `point` and the element type of `boundaries_array` must be equivalent. The data type must be [comparable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties) .
+> **Note:** The data type for `point` and the element type of `boundaries_array` must be equivalent. The data type must be [comparable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties) .
 
 **Return Value**
 

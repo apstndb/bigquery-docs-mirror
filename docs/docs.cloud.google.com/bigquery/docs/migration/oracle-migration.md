@@ -48,7 +48,7 @@ IAM provides these types of roles:
 
   - [Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) include the Owner, Editor, and Viewer roles.
     
-    **Caution:** BigQuery's dataset-level basic roles existed prior to the introduction of IAM. We recommend that you minimize the use of basic roles. In production environments, don't grant basic roles unless there is no alternative. Instead, use [predefined IAM](https://docs.cloud.google.com/bigquery/docs/access-control) roles.
+    > **Caution:** BigQuery's dataset-level basic roles existed prior to the introduction of IAM. We recommend that you minimize the use of basic roles. In production environments, don't grant basic roles unless there is no alternative. Instead, use [predefined IAM](https://docs.cloud.google.com/bigquery/docs/access-control) roles.
 
   - [Custom roles](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) provide granular access according to a user-specified list of permissions.
 
@@ -373,7 +373,7 @@ Figure 1: Sample sales data in a star schema
     LEFT OUTER JOIN location
       ON location.locationID = orders.locationID
 
-**Note:** BigQuery processes `JOIN` s from left to right (top to bottom). Placing `JOIN` s that reduce the number of records as early as possible in the chain increases query efficiency by reducing response time.
+> **Note:** BigQuery processes `JOIN` s from left to right (top to bottom). Placing `JOIN` s that reduce the number of records as early as possible in the chain increases query efficiency by reducing response time.
 
 #### Output of the flattened data
 

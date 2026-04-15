@@ -146,7 +146,7 @@ Gets the number of unit boundaries between two `DATETIME` values ( `end_datetime
 
 If `end_datetime` is earlier than `start_datetime` , the output is negative. Produces an error if the computation overflows, such as if the difference in microseconds between the two `DATETIME` values overflows.
 
-**Note:** The behavior of the this function follows the type of arguments passed in. For example, `DATETIME_DIFF(TIMESTAMP, TIMESTAMP, PART)` behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)` .
+> **Note:** The behavior of the this function follows the type of arguments passed in. For example, `DATETIME_DIFF(TIMESTAMP, TIMESTAMP, PART)` behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)` .
 
 **Return Data Type**
 
@@ -268,7 +268,7 @@ Truncates a `DATETIME` or `TIMESTAMP` value at a particular granularity.
 
   - `time_zone` : A time zone to use with the `TIMESTAMP` value. [Time zone parts](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_time_zone_parts) can be used. Use this argument if you want to use a time zone other than the default time zone, UTC, as part of the truncate operation.
     
-    **Note:** When truncating a timestamp to `MINUTE` or `HOUR` parts, this function determines the civil time of the timestamp in the specified (or default) time zone and subtracts the minutes and seconds (when truncating to `HOUR` ) or the seconds (when truncating to `MINUTE` ) from that timestamp. While this provides intuitive results in most cases, the result is non-intuitive near daylight savings transitions that aren't hour-aligned.
+    > **Note:** When truncating a timestamp to `MINUTE` or `HOUR` parts, this function determines the civil time of the timestamp in the specified (or default) time zone and subtracts the minutes and seconds (when truncating to `HOUR` ) or the seconds (when truncating to `MINUTE` ) from that timestamp. While this provides intuitive results in most cases, the result is non-intuitive near daylight savings transitions that aren't hour-aligned.
 
 <span id="datetime_trunc_granularity_date"></span>
 

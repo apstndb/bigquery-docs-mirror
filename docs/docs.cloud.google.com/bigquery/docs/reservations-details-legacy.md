@@ -1,6 +1,6 @@
 # Legacy capacity commitment plans
 
-**Note:** Legacy reservations, including access to flat-rate billing or certain commitment lengths, are only available to allow-listed customers. To determine if you have access to these legacy features, contact your administrator. The flat-rate billing model defines how you are billed for compute, but flat-rate reservations and commitments function as Enterprise edition slots.
+> **Note:** Legacy reservations, including access to flat-rate billing or certain commitment lengths, are only available to allow-listed customers. To determine if you have access to these legacy features, contact your administrator. The flat-rate billing model defines how you are billed for compute, but flat-rate reservations and commitments function as Enterprise edition slots.
 
 BigQuery offers the following capacity commitment plans:
 
@@ -10,7 +10,7 @@ BigQuery offers the following capacity commitment plans:
 
 The minimum commitment size is 100 slots, and commitments are available in 100-slot increments, up to your [slot quota](https://docs.cloud.google.com/bigquery/docs/slots#slot_quotas_and_limits) . There is no limit on the number of commitments that you can create. You are charged from the moment your commitment purchase is successful. For information about BigQuery costs, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
-**Note:** Customers who use on-demand billing typically have 2000 slots or more available for query processing. Allocating 100 slots might reduce the query performance.
+> **Note:** Customers who use on-demand billing typically have 2000 slots or more available for query processing. Allocating 100 slots might reduce the query performance.
 
 To learn more about capacity commitments and reservations, see [Introduction to reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
@@ -24,7 +24,7 @@ For example, if you purchase a commitment at 6:00 PM, you start being charged at
 
 ## Monthly commitment plans
 
-**Note:** Support for monthly commitments ended in August, 2023, when monthly commitments were converted to either annual commitments or baseline slots. For more information about commitments and renewal, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
+> **Note:** Support for monthly commitments ended in August, 2023, when monthly commitments were converted to either annual commitments or baseline slots. For more information about commitments and renewal, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
 
 ## Annual commitment plans
 
@@ -43,7 +43,7 @@ If you are on a flat-rate capacity model, you can change the renewal plan before
   - **Flex.** After 365 days, your commitment converts to a flex slots commitment. You are charged at the flex slots rate, and you can delete the commitment at any time.
   - **Annual.** After 365 days, your commitment renews for another year.
 
-**Note:** Starting on July 5, 2023, BigQuery customers will no longer be able to purchase flat-rate annual, flat-rate monthly, and flex slots commitments. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#flat-rate_compute_analysis_pricing) .
+> **Note:** Starting on July 5, 2023, BigQuery customers will no longer be able to purchase flat-rate annual, flat-rate monthly, and flex slots commitments. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#flat-rate_compute_analysis_pricing) .
 
 For information about purchasing and renewing commitments if you are not on a flat-rate capacity model, see [Create a capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#create_a_capacity_commitment) .
 

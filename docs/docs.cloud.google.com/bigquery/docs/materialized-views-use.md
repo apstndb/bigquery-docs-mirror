@@ -6,7 +6,7 @@ This document provides additional information about materialized views and how t
 
 You can query your materialized views directly, the same way you query a regular table or standard view. Queries against materialized views are always consistent with queries against the view's base tables, even if those tables have changed since the last time the materialized view was refreshed. Querying does not automatically trigger a materialized refresh.
 
-**Note:** If you delete a base table without first deleting the materialized view, queries over the materialized view fail. You must recreate the materialized view after you recreate the base table to query it again.
+> **Note:** If you delete a base table without first deleting the materialized view, queries over the materialized view fail. You must recreate the materialized view after you recreate the base table to query it again.
 
 ### Required roles
 

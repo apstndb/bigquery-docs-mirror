@@ -40,7 +40,7 @@ The following permissions are required to create a table:
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-**Note:** If you have the `bigquery.datasets.create` permission, you can create tables in the datasets that you create.
+> **Note:** If you have the `bigquery.datasets.create` permission, you can create tables in the datasets that you create.
 
 ## Table naming
 
@@ -94,8 +94,6 @@ To create an empty table with a schema definition:
 
 In the Google Cloud console, go to the **BigQuery** page.
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
-
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -122,15 +120,13 @@ In the **Create table** pane, specify the following details:
 5.  Optional: In the **Advanced options** section, if you want to use a customer-managed encryption key, then select the **Use a customer-managed encryption key (CMEK)** option. By default, BigQuery [encrypts customer content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) by using a Google-owned and Google-managed encryption key.
 6.  Click **Create table** .
 
-**Note:** When you create an empty table using the Google Cloud console, you cannot add a label, description, or expiration time. You can add these optional properties when you create a table using the bq command-line tool or API. After you create a table in the Google Cloud console, you can add an expiration, description, and labels.
+> **Note:** When you create an empty table using the Google Cloud console, you cannot add a label, description, or expiration time. You can add these optional properties when you create a table using the bq command-line tool or API. After you create a table in the Google Cloud console, you can add an expiration, description, and labels.
 
 ### SQL
 
 The following example creates a table named `newtable` that expires on January 1, 2023:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -154,8 +150,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -249,7 +243,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
+> **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -479,7 +473,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -768,8 +762,6 @@ To create a table from a query result, write the results to a destination table.
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -810,8 +802,6 @@ Alternatively, if you forget to specify a destination table before running your 
 The following example uses the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create the `trips` table from data in the public `bikeshare_trips` table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -835,8 +825,6 @@ For more information, see [Creating a new table from an existing table](https://
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -872,7 +860,7 @@ For more information, see [Creating a new table from an existing table](https://
         
         Examples:
         
-        **Note:** These examples query a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
+        > **Note:** These examples query a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
         
         Enter the following command to write query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
         
@@ -1219,8 +1207,6 @@ To get information about tables:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -1596,7 +1582,7 @@ The following example retrieves table metadata for all of the tables in the data
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLES `` .
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 ``` notranslate
 SELECT
@@ -2097,7 +2083,7 @@ The following example retrieves the default table expiration times for all table
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 ``` notranslate
   SELECT
@@ -2120,7 +2106,7 @@ The result is similar to the following:
   
 ```
 
-**Note:** Tables without an expiration time are excluded from the query results.
+> **Note:** Tables without an expiration time are excluded from the query results.
 
 ##### Example 2:
 
@@ -2285,7 +2271,7 @@ The following column is excluded from the query results:
 
   - `IS_UPDATABLE`
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 ``` notranslate
   SELECT
@@ -2407,7 +2393,7 @@ The `commits` table contains the following nested and nested and repeated column
 
 To view metadata about the `author` and `difference` columns, run the following query.
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 ``` notranslate
 SELECT
@@ -2646,8 +2632,6 @@ The following example shows you how to forecast the price difference per dataset
 The prices used in the pricing variables for this query are for the `us-central1` region. If you want to run this query for a different region, update the pricing variables appropriately. See [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) for pricing information.
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Enter the following GoogleSQL query in the **Query editor** box. `INFORMATION_SCHEMA` requires GoogleSQL syntax. GoogleSQL is the default syntax in the Google Cloud console.
     
@@ -2706,7 +2690,7 @@ The prices used in the pricing variables for this query are for the `us-central1
       (forecast_active_logical_cost + forecast_active_physical_cost) DESC;
     ```
     
-    **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+    > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 3.  Click **Run** .
 
@@ -2772,8 +2756,6 @@ To list the tables in a dataset:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -3046,8 +3028,6 @@ To browse audit logs, you need the `roles/logging.privateLogViewer` role. For mo
 You can access audit information from the Google Cloud console, `gcloud` command line, REST API, and all supported languages using client libraries. The logging filter shown in the following example can be used regardless of method used.
 
 1.  In the Google Cloud console, go to the **Logging** page.
-    
-    [Go to Logging](https://console.cloud.google.com/logs)
 
 2.  Use the following query to access the audit data:
     

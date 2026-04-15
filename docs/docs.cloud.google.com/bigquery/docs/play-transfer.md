@@ -136,8 +136,6 @@ To set up a Google Play data transfer:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -210,7 +208,7 @@ Where:
   - data\_source is the data source: `play` .
   - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/play-transfer#required_permissions) .
 
-**Caution:** You cannot configure notifications using the command-line tool.
+> **Caution:** You cannot configure notifications using the command-line tool.
 
 For example, the following command creates a Google Play data transfer named `My Transfer` using Cloud Storage bucket `pubsite_prod_rev_01234567890987654321` and target dataset `mydataset` . The data transfer is created in the default project:
 
@@ -227,7 +225,7 @@ The first time you run the command, you will receive a message like the followin
 
 Follow the instructions in the message and paste the authentication code on the command line.
 
-**Caution:** When you create a Google Play data transfer using the command-line tool, the transfer configuration is set up using the default value for **Schedule** (every 24 hours).
+> **Caution:** When you create a Google Play data transfer using the command-line tool, the transfer configuration is set up using the default value for **Schedule** (every 24 hours).
 
 ### API
 
@@ -289,7 +287,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-**Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
+> **Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
 
 ## Troubleshoot Google Play transfer set up
 

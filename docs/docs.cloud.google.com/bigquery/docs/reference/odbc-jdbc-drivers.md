@@ -203,7 +203,7 @@ To see a list of previous driver versions, expand the following section:
 
 ## Install and configure the Simba JDBC driver for BigQuery
 
-**Note:** As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+> **Note:** As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 1.  Download the [1.6.5.1002 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.6.5.1002.zip) .
 

@@ -33,7 +33,7 @@ Before creating an Amazon Redshift transfer:
 
 Add the following IP ranges of your private Amazon Redshift cluster to an allowlist by [configuring the security group rules](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html) . You can allowlist the IP addresses that correspond to your dataset's location, or you can allowlist all of the IP addresses in the table below. These Google-owned IP addresses are reserved for Amazon Redshift data migrations.
 
-**Caution:** The communication between BigQuery and Amazon Redshift happens through the following Google-owned IP addresses. However, the data movement from Amazon S3 to BigQuery happens over the public internet.
+> **Caution:** The communication between BigQuery and Amazon Redshift happens through the following Google-owned IP addresses. However, the data movement from Amazon S3 to BigQuery happens over the public internet.
 
 #### Regional locations
 
@@ -701,8 +701,6 @@ Select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Data transfers** .
 
@@ -722,7 +720,7 @@ Select one of the following options:
     
     3.  For **Password of your database** , enter the database password.
         
-        **Note:** By providing your Amazon credentials you acknowledge that the BigQuery Data Transfer Service is your agent solely for the limited purpose of accessing your data for transfers.
+        > **Note:** By providing your Amazon credentials you acknowledge that the BigQuery Data Transfer Service is your agent solely for the limited purpose of accessing your data for transfers.
     
     4.  For **Access key ID** and **Secret access key** , enter the access key pair you obtained from [Grant access to your S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/redshift#grant_access_to_your_S3_bucket) .
     
@@ -737,7 +735,7 @@ Select one of the following options:
         
         Leave this field empty to migrate all tables from the specified schema.
         
-        **Caution:** For very large tables, we recommend transferring one table at a time. [BigQuery has a load quota of 15 TB](https://docs.cloud.google.com/bigquery/docs/migration/redshift#quotas_and_limits) for each load job.
+        > **Caution:** For very large tables, we recommend transferring one table at a time. [BigQuery has a load quota of 15 TB](https://docs.cloud.google.com/bigquery/docs/migration/redshift#quotas_and_limits) for each load job.
     
     8.  For **VPC and the reserved IP range** , leave the field blank.
 
@@ -808,7 +806,7 @@ For example, the following command creates an Amazon Redshift transfer named `My
         --display_name='My Transfer' \
         --params='{"jdbc_url":"jdbc:postgresql://test-example-instance.sample.us-west-1.redshift.amazonaws.com:5439/dbname","database_username":"my_username","database_password":"1234567890","access_key_id":"A1B2C3D4E5F6G7H8I9J0","secret_access_key":"1234567890123456789012345678901234567890","s3_bucket":"s3://bucket/prefix","redshift_schema":"public","table_name_patterns":"table_name"}'
 
-**Note:** You cannot configure notifications using the command-line tool.
+> **Note:** You cannot configure notifications using the command-line tool.
 
 ### API
 
@@ -888,7 +886,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-If multiple transfers are created for the same Amazon Redshift tables, the data is appended to the same BigQuery destination tables. The data is not deleted or overwritten.
+> If multiple transfers are created for the same Amazon Redshift tables, the data is appended to the same BigQuery destination tables. The data is not deleted or overwritten.
 
 ## Quotas and limits
 

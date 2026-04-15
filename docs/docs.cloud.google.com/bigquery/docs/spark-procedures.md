@@ -73,8 +73,6 @@ If the body of your stored procedure is more than 1 MB, then we recommend that y
 To create a stored procedure for Spark in the SQL query editor, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, add the sample code for the [`CREATE PROCEDURE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) that appears.
     
@@ -175,8 +173,6 @@ When creating a procedure using the PySpark editor, you don't need to use the `C
 To create a stored procedure for Spark in the PySpark editor, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  If you want to type in the PySpark code directly, open the PySpark editor. To open the PySpark editor, click the arrow\_drop\_down menu next to add\_box **Create SQL query** , and then select **Create PySpark Procedure** .
 
@@ -205,8 +201,6 @@ To create a stored procedure for Spark in the PySpark editor, follow these steps
 After you [create the stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) by using the PySpark editor, you can save the stored procedure. To do so, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, create a stored procedure for Spark [using Python with PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) .
 
@@ -288,8 +282,6 @@ After you [create a stored procedure](https://docs.cloud.google.com/bigquery/doc
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click category **Classic Explorer** :
     
@@ -318,8 +310,6 @@ After you [create a stored procedure](https://docs.cloud.google.com/bigquery/doc
 To call a stored procedure, use the [`CALL PROCEDURE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -331,7 +321,7 @@ To call a stored procedure, use the [`CALL PROCEDURE` statement](https://docs.cl
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-**Note:** You can also obtain the Cloud Logging filter information and the Spark History Cluster endpoint by using the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) . To learn how to get log filters, see [View log filters](https://docs.cloud.google.com/bigquery/docs/spark-procedures#view-log-filters) in this document.
+> **Note:** You can also obtain the Cloud Logging filter information and the Spark History Cluster endpoint by using the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) . To learn how to get log filters, see [View log filters](https://docs.cloud.google.com/bigquery/docs/spark-procedures#view-log-filters) in this document.
 
 ## Use a custom service account
 
@@ -380,7 +370,7 @@ Your custom service account must have the following permissions:
       - `bigquery.readsessions.*` on your project.
       - The `roles/bigquery.admin` IAM role includes the previous permissions.
     
-    **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) , then your custom service account must have the `bigquery.jobs.create` permission on your project. For more information about IAM roles and permissions in BigQuery, see [IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
+    > **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) , then your custom service account must have the `bigquery.jobs.create` permission on your project. For more information about IAM roles and permissions in BigQuery, see [IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
   - (Optional) To read and write data from and to Cloud Storage:
     
@@ -623,8 +613,6 @@ df.write.format("bigquery") \
 After you [call a stored procedure for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#call-spark-procedure) , you can view the log information. To obtain the Cloud Logging filter information and the Spark History Cluster endpoint, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) . The filter information is available under the `SparkStatistics` field of the child job. To get log filters, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, list child jobs of the stored procedure's script job:
     

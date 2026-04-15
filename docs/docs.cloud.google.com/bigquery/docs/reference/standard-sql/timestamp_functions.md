@@ -545,7 +545,7 @@ Gets the number of unit boundaries between two `TIMESTAMP` values ( `end_timesta
 
 If `end_timestamp` is earlier than `start_timestamp` , the output is negative. Produces an error if the computation overflows, such as if the difference in microseconds between the two `TIMESTAMP` values overflows.
 
-**Note:** The behavior of the this function follows the type of arguments passed in. For example, `TIMESTAMP_DIFF(DATE, DATE, PART)` behaves like `DATE_DIFF(DATE, DATE, PART)` .
+> **Note:** The behavior of the this function follows the type of arguments passed in. For example, `TIMESTAMP_DIFF(DATE, DATE, PART)` behaves like `DATE_DIFF(DATE, DATE, PART)` .
 
 **Return Data Type**
 
@@ -706,7 +706,7 @@ Truncates a `TIMESTAMP` or `DATETIME` value at a particular granularity.
 
   - `time_zone` : A time zone to use with the `TIMESTAMP` value. [Time zone parts](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_time_zone_parts) can be used. Use this argument if you want to use a time zone other than the default time zone, UTC, as part of the truncate operation.
     
-    **Note:** When truncating a timestamp to `MINUTE` or `HOUR` parts, this function determines the civil time of the timestamp in the specified (or default) time zone and subtracts the minutes and seconds (when truncating to `HOUR` ) or the seconds (when truncating to `MINUTE` ) from that timestamp. While this provides intuitive results in most cases, the result is non-intuitive near daylight savings transitions that aren't hour-aligned.
+    > **Note:** When truncating a timestamp to `MINUTE` or `HOUR` parts, this function determines the civil time of the timestamp in the specified (or default) time zone and subtracts the minutes and seconds (when truncating to `HOUR` ) or the seconds (when truncating to `MINUTE` ) from that timestamp. While this provides intuitive results in most cases, the result is non-intuitive near daylight savings transitions that aren't hour-aligned.
 
   - `datetime_value` : A `DATETIME` value to truncate.
 

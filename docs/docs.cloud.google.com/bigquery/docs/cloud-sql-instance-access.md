@@ -23,8 +23,6 @@ To set up VPC peering, you must create VPC peering from the BigQuery Data Transf
 ### Create VPC peering from the BigQuery Data Transfer Service connector project
 
 1.  In the Google Cloud console, go to the **VPC network peering** page for your BigQuery Data Transfer Service connector project.
-    
-    [Go to VPC Network Peering](https://console.cloud.google.com/networking/peering/list)
 
 2.  Click add **Create peering connection** .
 
@@ -45,8 +43,6 @@ To set up VPC peering, you must create VPC peering from the BigQuery Data Transf
 To create VPC peering in the Cloud SQL database project to the BigQuery Data Transfer Service project, do the following:
 
 1.  In the Google Cloud console, go to the **VPC Network Peering** page for your BigQuery Data Transfer Service connector project.
-    
-    [Go to VPC Network Peering](https://console.cloud.google.com/networking/peering/list)
 
 2.  Click add **Create peering connection** .
 
@@ -65,14 +61,10 @@ To create VPC peering in the Cloud SQL database project to the BigQuery Data Tra
 If you didn't select import-export routes while configuring the peering connections earlier, follow these steps to do so now:
 
 1.  Go to the **Routes** page for your BigQuery Data Transfer Service connector project.
-    
-    [Go to Routes](https://console.cloud.google.com/networking/routes/list)
 
 2.  Ensure the routes exist to allow traffic between the peered VPC environments.
 
 3.  Go to the **Firewall policies** page.
-    
-    [Go to Firewall policies](https://console.cloud.google.com/networking/firewalls/list)
 
 4.  Create firewall rules to allow for traffic on the necessary ports (for example, port 3306 for MySQL and port 5432 for PostgreSQL) between the peered networks.
 
@@ -110,8 +102,6 @@ When connecting from a different Google Cloud project, use the internal IP addre
 To create the network attachment in the BigQuery Data Transfer Service connector project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Network attachments** page.
-    
-    [Go to Network attachments](https://console.cloud.google.com/net-services/psc/list/networkAttachments)
 
 2.  Click add **Create network attachment** .
 

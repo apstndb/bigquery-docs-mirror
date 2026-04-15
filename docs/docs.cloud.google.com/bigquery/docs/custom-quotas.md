@@ -12,7 +12,7 @@ To set custom cost controls, you can update one or both of the following query q
 
   - `QueryUsagePerUserPerDay` : User-level custom quota is separately applied to all users and [service accounts](https://docs.cloud.google.com/docs/authentication#user_accounts_and_service_accounts) within a project. Regardless of the per user limit, the total usage for all users in the project combined can never exceed the query usage per day limit.
 
-**Note:** You can't assign a custom quota to an individual user or service account.
+> **Note:** You can't assign a custom quota to an individual user or service account.
 
 The default limit for the `QueryUsagePerDay` quota is 200 Tebibytes (TiB) of data processed per project per day. The default limit for the `QueryUsagePerUserPerDay` is unlimited. To check your current limits, see the [Quotas page](https://console.cloud.google.com/iam-admin/quotas?metric=bigquery.googleapis.com%2Fquota%2Fquery%2Fusage) . You can [change the limits](https://docs.cloud.google.com/bigquery/docs/custom-quotas#set-custom-quotas) anytime - custom overrides supersede the default limits.
 
@@ -32,13 +32,11 @@ You might also be able to get this permission with [custom roles](https://docs.c
 
 You can set a custom quota or modify an existing custom quota for any quota displayed on the **Quotas & System Limits** page of the Google Cloud console. When you request a lower quota, the change takes effect within a few minutes. If you request a higher quota, your request goes through an approval process, which can take more time. For more information, see [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
 
-**Note:** Custom quotas are approximate. The custom quotas feature provides an additional safeguard against excessive spending, but is not designed to strictly limit bytes processed. BigQuery might occasionally run a query that exceeds a quota. For greater price consistency, consider a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+> **Note:** Custom quotas are approximate. The custom quotas feature provides an additional safeguard against excessive spending, but is not designed to strictly limit bytes processed. BigQuery might occasionally run a query that exceeds a quota. For greater price consistency, consider a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
 To set or update a custom cost control, such as limiting the amount of BigQuery data that can be processed each day, do the following:
 
 1.  In the Google Cloud console, open the **IAM & Admin** \> **Quotas & System Limits** page:
-    
-    [Go to Quotas & System Limits](https://console.cloud.google.com/iam-admin/quotas)
 
 2.  Use the **Service** filter in the **Filter** search box to filter for the BigQuery API.
 
@@ -56,7 +54,7 @@ To set or update a custom cost control, such as limiting the amount of BigQuery 
 
 For more information about viewing and managing quotas, see [View and manage quotas](https://docs.cloud.google.com/docs/quotas/view-manage) .
 
-**Note:** Query usage is an accumulation of billed bytes. The query usage value on the **Quotas & System Limits** page might not match the billed bytes for the same period obtained from the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) if some of the queries are charged at a higher rate compared to regular [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) . For example, regular query on-demand pricing might be charged at X $ per TiB, whereas another query operation, such as creating a logistic regression model, might be charged at a value of 50X $ per TiB, 50 times more than the regular price. In this case, the `INFORMATION_SCHEMA.JOBS` view might return 100 GiB of billed bytes, but the query usage reported on the **Quotas & System Limits** page would show 5 TiB of usage, 50 times more, because values for query usage are normalized against the regular on-demand pricing.
+> **Note:** Query usage is an accumulation of billed bytes. The query usage value on the **Quotas & System Limits** page might not match the billed bytes for the same period obtained from the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) if some of the queries are charged at a higher rate compared to regular [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) . For example, regular query on-demand pricing might be charged at X $ per TiB, whereas another query operation, such as creating a logistic regression model, might be charged at a value of 50X $ per TiB, 50 times more than the regular price. In this case, the `INFORMATION_SCHEMA.JOBS` view might return 100 GiB of billed bytes, but the query usage reported on the **Quotas & System Limits** page would show 5 TiB of usage, 50 times more, because values for query usage are normalized against the regular on-demand pricing.
 
 ## Returned error messages
 

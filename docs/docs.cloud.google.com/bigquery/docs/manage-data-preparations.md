@@ -7,7 +7,7 @@ Data preparations are [BigQuery](https://docs.cloud.google.com/bigquery/docs/que
 ## Before you begin
 
 1.  Ensure that you have enabled the [Gemini for Google Cloud API](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#enable-api) .
-2.  To manage data preparation metadata in Dataplex Universal Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
+2.  To manage data preparation metadata in Knowledge Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
 
 ### Required roles
 
@@ -29,13 +29,13 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 #### Get access to manage metadata
 
-To get the permissions you need to manage data preparation metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
+To get the permissions you need to manage data preparation metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
 
 #### Give access to the Dataform service account
 
 To ensure that the Dataform service account has the necessary permissions to execute data preparations in BigQuery, ask your administrator to grant the following IAM roles to the Dataform service account:
 
-**Important:** You must grant these roles to the Dataform service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+> **Important:** You must grant these roles to the Dataform service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - Access the source tables: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the table, dataset, or project
   - Access the destination tables: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table, dataset, or project
@@ -47,8 +47,6 @@ The Dataform service account might require additional permissions, depending on 
 To view a list of existing data preparations, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -65,8 +63,6 @@ To view a list of existing data preparations, follow these steps:
 To configure the way your prepared data is written into a destination table, follow these steps.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -105,8 +101,6 @@ BigQuery data preparations that aren't in repositories don't support viewing, co
 For a list of data preparation versions in chronological order, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -121,8 +115,6 @@ For a list of data preparation versions in chronological order, follow these ste
 To download a data preparation in a SQLX file, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -134,18 +126,16 @@ To download a data preparation in a SQLX file, follow these steps:
 
 5.  Click **Download** . The data preparation is saved in the [SQLX file format](https://docs.cloud.google.com/dataform/docs/overview#dataform-core) —for example, `  NAME data preparation.dp.sqlx ` .
 
-**Note:** Data preparation files created before July 2025 are automatically migrated to the SQLX format, which changes how they are stored and run. This one-time migration is triggered in the following scenarios:
-
-  - An existing data preparation migrates when you open it.
-  - A data preparation in a pipeline migrates when you save or update the data preparation.
+> **Note:** Data preparation files created before July 2025 are automatically migrated to the SQLX format, which changes how they are stored and run. This one-time migration is triggered in the following scenarios:
+> 
+>   - An existing data preparation migrates when you open it.
+>   - A data preparation in a pipeline migrates when you save or update the data preparation.
 
 ## Upload a data preparation
 
 To upload a data preparation from a SQLX file, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -163,13 +153,13 @@ To upload a data preparation from a SQLX file, follow these steps:
 
 8.  Click **Upload** .
 
-## Manage metadata in Dataplex Universal Catalog
+## Manage metadata in Knowledge Catalog
 
-Dataplex Universal Catalog lets you store and manage metadata for data preparations. Data preparations are available in Dataplex Universal Catalog by default, without additional configuration.
+Knowledge Catalog lets you store and manage metadata for data preparations. Data preparations are available in Knowledge Catalog by default, without additional configuration.
 
-You can use Dataplex Universal Catalog to manage data preparations in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing data preparations in Dataplex Universal Catalog is subject to [Dataplex Universal Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Dataplex Universal Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Knowledge Catalog to manage data preparations in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing data preparations in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
-Dataplex Universal Catalog automatically retrieves the following metadata from data preparations:
+Knowledge Catalog automatically retrieves the following metadata from data preparations:
 
   - Data asset name
   - Data asset parent
@@ -177,18 +167,18 @@ Dataplex Universal Catalog automatically retrieves the following metadata from d
   - Data asset type
   - Corresponding Google Cloud project
 
-Dataplex Universal Catalog logs data preparations as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Knowledge Catalog logs data preparations as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for data preparations is `@dataform` . To view details of data preparation entries in Dataplex Universal Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for data preparations is `@dataform` . To view details of data preparation entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for data preparations is `dataform-code-asset` . To view details of data preparations,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected data preparation. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for data preparations is `dataform-code-asset` . To view details of data preparations,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected data preparation. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for data preparations is `dataform-code-asset` . To provide additional context to data preparations in Dataplex Universal Catalog by annotating data preparation entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for data preparations is `dataform-code-asset` . To provide additional context to data preparations in Knowledge Catalog by annotating data preparation entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
   - Type  
     The type for data canvases is `DATA_PREPARATION` . This type lets you filter data preparations in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=DATA_PREPARATION` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets, see [Search for data assets in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
+For instructions about how to search for assets, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Knowledge Catalog documentation.
 
 ## What's next
 

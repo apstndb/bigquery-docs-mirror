@@ -1,6 +1,6 @@
 # Query multiple tables using a wildcard table
 
-**Note:** Wildcard tables have many [limitations](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables#limitations) and are less performant than regular BigQuery tables that take advantage of [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . As a best practice, use partitioned or clustered tables when possible.
+> **Note:** Wildcard tables have many [limitations](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables#limitations) and are less performant than regular BigQuery tables that take advantage of [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . As a best practice, use partitioned or clustered tables when possible.
 
 Wildcard tables enable you to query multiple tables using concise SQL statements. Wildcard tables are available only in GoogleSQL. For equivalent functionality in legacy SQL, see [Table wildcard functions](https://docs.cloud.google.com/bigquery/query-reference#tablewildcardfunctions) .
 

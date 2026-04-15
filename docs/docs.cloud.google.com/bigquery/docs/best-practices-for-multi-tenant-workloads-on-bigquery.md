@@ -203,7 +203,7 @@ We recommend that your decentralized data marts use [the same two-tier design](h
 
 ### Use a data catalog
 
-A data catalog provides organization-wide discovery, metadata tagging, and column policy configuration. Dataplex's discovery automatically creates [metadata entries](https://docs.cloud.google.com/dataplex/docs/catalog-overview) for all new BigQuery tables across your organization. Dataplex's capabilities help also data governance admins quickly identify new data assets and apply appropriate controls.
+A data catalog provides organization-wide discovery, metadata tagging, and column policy configuration. Knowledge Catalog discovery automatically creates [metadata entries](https://docs.cloud.google.com/dataplex/docs/catalog-overview) for all new BigQuery tables across your organization. Capabilities in Knowledge Catalog also help data governance admins quickly identify new data assets and apply appropriate controls.
 
 ### Configure VPC Service Controls perimeters
 
@@ -232,7 +232,7 @@ Multi-organization data sharing addresses the following concerns for the data sh
   - **Protection from inappropriate access** : only resources that are intended to be accessed can be accessed externally.
   - **Compute separation** : external parties are billed for queries that they initiate.
 
-**Note:** In some cases, queries that originate from the outside organization can fail unexpectedly. [Cloud Customer Care](https://cloud.google.com/support-hub/) can help you initiate a configuration change to fix the issue.
+> **Note:** In some cases, queries that originate from the outside organization can fail unexpectedly. [Cloud Customer Care](https://cloud.google.com/support-hub/) can help you initiate a configuration change to fix the issue.
 
 ### Protect internal projects from shared data projects
 

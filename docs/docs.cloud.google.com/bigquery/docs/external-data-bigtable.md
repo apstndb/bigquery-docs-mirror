@@ -239,9 +239,9 @@ Note that Bigtable auto-merges splits based on load. If your table is not being 
 
 ### Compute
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 When you query your Bigtable data from BigQuery, you have the following options for compute:
 
@@ -273,7 +273,7 @@ WHERE
 
 Range filters such as `rowkey > '1'` and `rowkey < '8'` are also supported, but only when rowkey is read as a string with the `readRowkeyAsString` option.
 
-**Note:** If `readRowkeyAsString` is set to `true` , then the rowkey column families are read and converted to strings. Otherwise they are read with BYTES type values.
+> **Note:** If `readRowkeyAsString` is set to `true` , then the rowkey column families are read and converted to strings. Otherwise they are read with BYTES type values.
 
 ### Filter by column family and qualifier
 

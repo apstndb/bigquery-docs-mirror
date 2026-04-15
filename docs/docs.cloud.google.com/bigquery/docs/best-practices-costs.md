@@ -59,7 +59,7 @@ When using the on-demand pricing model, queries are billed according to the numb
   - [Use the query validator](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#use-query-validator) in the Google Cloud console.
   - [Perform a dry run](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#perform-dry-run) for queries.
 
-**Note:** The estimate of the number of bytes that is billed for a query is an upper bound, and can be higher than the actual number of bytes billed after running the query.
+> **Note:** The estimate of the number of bytes that is billed for a query is an upper bound, and can be higher than the actual number of bytes billed after running the query.
 
 #### Use the query validator
 
@@ -80,8 +80,6 @@ To perform a dry run, do the following:
 ### Console
 
 1.  Go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Enter your query in the query editor.
     
@@ -111,7 +109,7 @@ For a valid query, the command produces the following response:
     Query successfully validated. Assuming the tables are not modified,
     running this query will process 10918 bytes of data.
 
-**Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
+> **Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
 
 ### API
 
@@ -317,9 +315,9 @@ To calculate the number of bytes processed by the various types of queries, see 
   - [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#on-demand-query-size-calculation)
   - [Clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables#block-pruning)
 
-**Note:** The selected [dataset storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) does not affect the on-demand query cost calculation. BigQuery always uses logical (uncompressed) bytes to calculate on-demand query costs.
+> **Note:** The selected [dataset storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) does not affect the on-demand query cost calculation. BigQuery always uses logical (uncompressed) bytes to calculate on-demand query costs.
 
-**Note:** If you are querying [external table data](https://docs.cloud.google.com/bigquery/docs/external-tables) is stored in [ORC](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#orc_conversions) or [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#parquet_conversions) , the number of bytes charged is limited to the columns that BigQuery reads. Because the data types from an external data source are converted to BigQuery data types by the query, the number of bytes read is computed based on the size of BigQuery data types.
+> **Note:** If you are querying [external table data](https://docs.cloud.google.com/bigquery/docs/external-tables) is stored in [ORC](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#orc_conversions) or [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#parquet_conversions) , the number of bytes charged is limited to the columns that BigQuery reads. Because the data types from an external data source are converted to BigQuery data types by the query, the number of bytes read is computed based on the size of BigQuery data types.
 
 ### Avoid running queries to explore table data
 
@@ -605,7 +603,7 @@ The general advice is following the recommended way of calculating the on-demand
 
 #### Billed for BigQuery Reservations API usage even though the API is disabled and not reservations or commitments used
 
-Inspect the SKU to better understand what services are charged. If the SKU billed is `BigQuery Governance SKU` —these are charges coming from Dataplex Universal Catalog. Some Dataplex Universal Catalog functionalities trigger job execution using BigQuery. These charges are now processed under the corresponding BigQuery Reservations API SKU. See the [Dataplex Universal Catalog Pricing](https://cloud.google.com/dataplex/pricing?e=48754805#dataplex-universal-catalog-pricing) documentation for more details.
+Inspect the SKU to better understand what services are charged. If the SKU billed is `BigQuery Governance SKU` —these are charges coming from Knowledge Catalog. Some Knowledge Catalog functionalities trigger job execution using BigQuery. These charges are now processed under the corresponding BigQuery Reservations API SKU. See the [Knowledge Catalog Pricing](https://cloud.google.com/dataplex/pricing?e=48754805#dataplex-universal-catalog-pricing) documentation for more details.
 
 #### Project is assigned to a reservation, but still seeing BigQuery Analysis on-demand costs
 

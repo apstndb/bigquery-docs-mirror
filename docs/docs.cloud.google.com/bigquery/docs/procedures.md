@@ -42,7 +42,7 @@ To call the procedure, use the [`CALL`](https://docs.cloud.google.com/bigquery/d
 
 Use the [`google_bigquery_routine` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_routine) .
 
-**Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
+> **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -122,7 +122,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Pass a value in with an input parameter
 
@@ -179,7 +179,7 @@ To call a stored procedure after it's been created, use the `CALL` statement. Fo
 
     CALL mydataset.create_customer();
 
-**Note:** Calling a stored procedure rather than including the procedure's SQL statements directly in your query introduces a small performance overhead.
+> **Note:** Calling a stored procedure rather than including the procedure's SQL statements directly in your query introduces a small performance overhead.
 
 ## Call a system procedure
 

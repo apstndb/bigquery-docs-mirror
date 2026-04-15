@@ -105,9 +105,9 @@ For more information about how to generate embeddings and use them to perform th
 
 ## Managed AI functions
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Managed AI functions are purpose-built to automate routine tasks, such as classification, ordering, aggregation, or filtering. These functions use Gemini and don't require customization. BigQuery uses prompt engineering and can select the appropriate model and parameters to use for the specific task to optimize the quality and consistency of your results. Each function returns a scalar value, such as a `BOOL` , `FLOAT64` or `STRING` , and doesn't include additional status information from the model. The following managed AI functions are available:
 

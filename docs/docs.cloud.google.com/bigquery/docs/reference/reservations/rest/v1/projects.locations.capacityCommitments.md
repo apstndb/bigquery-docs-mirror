@@ -112,13 +112,13 @@ Flex commitments have committed period of 1 minute after becoming ACTIVE. After 
 
 Same as FLEX, should only be used if flat-rate commitments are still available.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `TRIAL`
 
 Trial commitments have a committed period of 182 days after becoming ACTIVE. After that, they are converted to a new commitment based on the `renewalPlan` . Default `renewalPlan` for Trial commitment is Flex so that it can be deleted right after committed period ends.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `MONTHLY`
 
@@ -128,7 +128,7 @@ Monthly commitments have a committed period of 30 days after becoming ACTIVE. Af
 
 Same as MONTHLY, should only be used if flat-rate commitments are still available.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `ANNUAL`
 
@@ -138,7 +138,7 @@ Annual commitments have a committed period of 365 days after becoming ACTIVE. Af
 
 Same as ANNUAL, should only be used if flat-rate commitments are still available.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `THREE_YEAR`
 

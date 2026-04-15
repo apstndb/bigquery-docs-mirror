@@ -54,8 +54,6 @@ To delete a label from a dataset, choose one of the following options:
 Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) to set the labels on an existing dataset. Setting labels overwrites any existing labels on the dataset. The following example deletes all labels on the dataset `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -307,8 +305,6 @@ To delete a label from a table or view, choose one of the following options:
 Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to set the label on an existing table, or the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) to set the label on an existing view. Setting labels overwrites any existing labels on the table or view. The following example deletes all labels from the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -535,8 +531,6 @@ To delete a label from a reservation, choose one of the following options:
 To delete a reservation label, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) . To delete the labels on a reservation, set the labels to an empty array. The following example deletes the label on the reservation `myreservation` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

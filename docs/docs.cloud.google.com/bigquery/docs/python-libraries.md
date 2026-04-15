@@ -33,7 +33,7 @@ Both libraries support querying data stored in BigQuery. Key differences between
 
 The following sample shows how to run a GoogleSQL query with and without explicitly specifying a project. For both libraries, if a project is not specified, the project will be determined from the [default credentials](https://googleapis.dev/python/google-auth/latest/reference/google.auth.html#google.auth.default) .
 
-**Note:** The `pandas.read_gbq` method defaults to legacy SQL. To use standard SQL, you must explicitly set the `dialect` parameter to `'standard'` , as shown.
+> **Note:** The `pandas.read_gbq` method defaults to legacy SQL. To use standard SQL, you must explicitly set the `dialect` parameter to `'standard'` , as shown.
 
 **`pandas-gbq` :**
 

@@ -1,10 +1,10 @@
 # Analyze data with conversations
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
 This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables or views, that you select.
 
@@ -21,8 +21,6 @@ You can create a conversation with a data agent, or a direct conversation with o
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,geminidataanalytics.googleapis.com,cloudaicompanion.googleapis.com)
 
 ### Required roles
 
@@ -44,13 +42,11 @@ If you don't have appropriate roles on the source data tables used by the data a
 
 ## Best practices
 
-When using conversational analytics, queries are automatically run to answer your questions. You might incur unforeseen charges in the following cases:
+Conversational analytics automatically runs queries on your behalf to answer your questions. Consider the following factors that might increase query cost:
 
-  - If your tables are large
-  - If the queries use data joins
-  - If the queries make a lot of calls to AI functions
-
-To prevent this issue, consider size when selecting knowledge sources, and when having conversations, consider using joins.
+  - Large table sizes
+  - Use of data joins in queries
+  - Frequent calls to AI functions within queries
 
 ## Create conversations
 
@@ -69,8 +65,6 @@ To create a conversation with a data agent in the Google Cloud console, select o
 ### Agents page
 
 1.  Go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 
@@ -131,8 +125,6 @@ To create a conversation with a data source in the Google Cloud console, select 
 To create a direct conversation with a data source from the **Agents** page, follow these steps:
 
 1.  Go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, on the **Chat with your data** pane, click **Data sources** .
 
@@ -190,16 +182,12 @@ You can open, rename, or delete a conversation on the **Agents** page, and manag
 ### Open an existing conversation
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to open.
 
 ### Rename a conversation
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to rename.
 
@@ -214,8 +202,6 @@ You can open, rename, or delete a conversation on the **Agents** page, and manag
 Results from questions in a conversation persist even if the underlying data sources are deleted. To delete a conversation and all the results that it contains, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to delete.
 
@@ -232,8 +218,6 @@ Manage conversations using BigQuery Studio Explorer. This conversation list prov
 To manage your conversations, follow these steps:
 
 1.  Go to the BigQuery Studio Explorer page.
-    
-    [Go to Explorer](https://console.cloud.google.com/bigquery/explorer)
 
 2.  In the **Explorer** pane, expand a project name.
 

@@ -21,12 +21,8 @@ BigQuery excels in processing vector data, and Google Earth Engine excels in pro
 ## Before you begin
 
 1.  To use the `ST_REGIONSTATS` function in your queries, enable the Earth Engine API.
-    
-    [Enable the API](https://console.cloud.google.com/apis/library/earthengine.googleapis.com)
 
 2.  Optional: To subscribe to and use data published to BigQuery sharing (formerly Analytics Hub) by using the `ST_REGIONSTATS` function, enable the Analytics Hub API.
-    
-    [Enable the API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com)
 
 ### Required permissions
 
@@ -61,8 +57,6 @@ You can use BigQuery sharing (formerly Analytics Hub) to discover and access ras
 Google Earth Engine publishes publicly available datasets that contain raster data in the `US` and `EU` multi-regions. To [subscribe](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) to an Earth Engine dataset with raster data, follow these steps:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click search **Search listings** .
 
@@ -264,7 +258,7 @@ The following factors impact the compute usage when you run the `ST_REGIONSTATS`
 
 To control costs associated with the `ST_REGIONSTATS` function, you can adjust the quota that controls the amount of slot time that the function is allowed to consume. The default is 350 slot-hours per day. When you [view your quotas](https://docs.cloud.google.com/docs/quotas/view-manage) , filter the **Metric** list to `earthengine.googleapis.com/bigquery_slot_usage_time` to see the Earth Engine quota associated with calls from BigQuery. For more information, read about [BigQuery raster functions quotas](https://developers.google.com/earth-engine/guides/usage#bigquery_slot-time_per_day) in the Google Earth Engine documentation.
 
-**Note:** Like custom query quotas in BigQuery, this quota is approximate. It provides a safeguard against excessive spending, but it's not designed to strictly limit slot time. BigQuery might occasionally run a query that exceeds the quota limit, and you might exhaust your quota without being billed for the entire consumed amount.
+> **Note:** Like custom query quotas in BigQuery, this quota is approximate. It provides a safeguard against excessive spending, but it's not designed to strictly limit slot time. BigQuery might occasionally run a query that exceeds the quota limit, and you might exhaust your quota without being billed for the entire consumed amount.
 
 ## Supported regions
 

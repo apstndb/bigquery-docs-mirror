@@ -1,6 +1,6 @@
 # Create Cloud Storage external tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 BigQuery supports querying Cloud Storage data in the following formats:
 
@@ -76,8 +76,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -128,8 +126,6 @@ After the permanent table is created, you can run a query against the table as i
 You can create a permanent external table by running the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) . You can specify the schema explicitly, or use [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) to infer the schema from the external data.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -488,8 +484,6 @@ To create an external table for Hive partitioned data, choose one of the followi
 
 In the Google Cloud console, go to **BigQuery** .
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
-
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -755,8 +749,6 @@ To update an external table to a BigLake table, select one of the following opti
 Use the [`CREATE OR REPLACE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) to update a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -912,8 +904,6 @@ BigQuery does not support Cloud Storage resource paths that include multiple con
 To retrieve the Cloud Storage resource path:
 
 1.  Open the Cloud Storage console.
-    
-    [Cloud Storage console](https://console.cloud.google.com/storage/browser)
 
 2.  Browse to the location of the object (file) that contains the source data.
 
@@ -923,7 +913,7 @@ To retrieve the Cloud Storage resource path:
 
 4.  Copy the value provided in the **gsutil URI** field, which begins with `gs://` .
 
-**Note:** You can also use the [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
+> **Note:** You can also use the [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
 
 ### Wildcard support for Cloud Storage URIs
 

@@ -75,7 +75,7 @@ You can browse or read table data by:
 
 To read table and partition data, you need the `bigquery.tables.getData` Identity and Access Management (IAM) permission.
 
-**Note:** Consider [special cases](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#special_cases) when creating an [IAM deny policy](https://docs.cloud.google.com/iam/docs/deny-overview) on the `bigquery.tables.getData` permission.
+> **Note:** Consider [special cases](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#special_cases) when creating an [IAM deny policy](https://docs.cloud.google.com/iam/docs/deny-overview) on the `bigquery.tables.getData` permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to browse table and partition data:
 
@@ -95,8 +95,6 @@ To browse table data:
 ### Console
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -167,7 +165,7 @@ Configure these optional parameters to control the output:
   - `selectedFields` — Comma-separated list of columns to return; If unspecified, all columns are returned
   - `startIndex` — Zero-based index of the starting row to read
 
-**Note:** If you request a `startIndex` beyond the last row, the method will return successfully but without a `rows` property. You can find out how many rows are in your table by calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and examining the `numRows` property.
+> **Note:** If you request a `startIndex` beyond the last row, the method will return successfully but without a `rows` property. You can find out how many rows are in your table by calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and examining the `numRows` property.
 
 Values are returned wrapped in a JSON object that you must parse, as described in the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) reference documentation.
 

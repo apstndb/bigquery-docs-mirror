@@ -96,8 +96,6 @@ For more information, see how to [register an application](https://docs.microsof
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add data** .
     
@@ -190,7 +188,7 @@ This output includes the following values:
 
 Note the `  APP_ID  ` and the `  SUBJECT_ID  ` values for use in the next steps.
 
-**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+> **Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 Next, add a federated credential for your application.
 
@@ -380,7 +378,7 @@ Replace the following:
 
 The connection is now ready to use. However, there might be a propagation delay for a role assignment in Azure. If you are not able to use the connection due to permission issues, then retry after some time.
 
-**Caution:** When you delete the connection, the Google identity used to access the Azure application is deleted. The application in the Azure tenant is not deleted.
+> **Caution:** When you delete the connection, the Google identity used to access the Azure application is deleted. The application in the Azure tenant is not deleted.
 
 ## Share connections with users
 
@@ -397,8 +395,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 

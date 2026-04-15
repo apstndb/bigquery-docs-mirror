@@ -1,8 +1,8 @@
 # Generate metadata for translation and assessment
 
-**Preview**
-
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This document describes how to create metadata and query log files by using the `dwh-migration-dumper` command-line extraction tool. The metadata files describe the SQL objects in your source system.
 
@@ -102,7 +102,7 @@ The `dwh-migration-dumper` tool uses the following format:
 
 Running the `dwh-migration-dumper` tool creates an output file named `dwh-migration-<source platform>-metadata.zip` —for example, `dwh-migration-teradata-metadata.zip` , in your working directory.
 
-**Tip:** When using Windows PowerShell, surround flags with double quotes—for example, `dwh-migration-dumper "-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"` .
+> **Tip:** When using Windows PowerShell, surround flags with double quotes—for example, `dwh-migration-dumper "-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"` .
 
 Use the following instructions to learn how to run the `dwh-migration-dumper` tool for your source platform.
 

@@ -21,7 +21,7 @@ You can run query jobs by using the following methods:
 
 BigQuery saves query results to either a [temporary table (default) or permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) . When you specify a permanent table as the destination table for the results, you can choose whether to append or overwrite an existing table, or create a new table with a unique name.
 
-**Note:** If you query data from a project to data stored in a different project, the querying project is billed for the query job while the project storing the data is billed for the amount of data stored in BigQuery.
+> **Note:** If you query data from a project to data stored in a different project, the querying project is billed for the query job while the project storing the data is billed for the amount of data stored in BigQuery.
 
 ## Required roles
 
@@ -61,8 +61,6 @@ To run an interactive query, select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -109,8 +107,6 @@ To run an interactive query, select one of the following options:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -168,7 +164,7 @@ To run an interactive query, select one of the following options:
 
 Use the [`google_bigquery_job` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_job) .
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -252,7 +248,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -527,8 +523,6 @@ To run a batch query, select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -563,8 +557,6 @@ To run a batch query, select one of the following options:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -841,8 +833,6 @@ In the query editor, the **Reference** panel dynamically displays context-aware 
 To construct a new query using the **Reference** panel, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -901,8 +891,6 @@ To run a query using optional job creation mode, select one of the following opt
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -929,8 +917,6 @@ To run a query using optional job creation mode, select one of the following opt
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -966,7 +952,7 @@ To run a query using optional job creation mode, select one of the following opt
     
     The query job returns the output inline in the response.
     
-    **Note:** you may use `--apilog=stdout` to log API requests and responses to extract the `queryId` if needed.
+    > **Note:** you may use `--apilog=stdout` to log API requests and responses to extract the `queryId` if needed.
 
 ### API
 
@@ -1227,7 +1213,7 @@ Requires setting `JobCreationMode=2` in the connection string.
   
 ```
 
-**Note:** you may append `LogLevel=6;LogPath=log.txt` to the connection string to enable `TRACE` level logging and extract troubleshooting information, including `queryId` , if needed.
+> **Note:** you may append `LogLevel=6;LogPath=log.txt` to the connection string to enable `TRACE` level logging and extract troubleshooting information, including `queryId` , if needed.
 
 ### ODBC Driver
 
@@ -1243,7 +1229,7 @@ Requires setting `JobCreationMode=2` in the `.ini` file.
   
 ```
 
-**Note:** you may append `LogLevel=6` and `LogPath=log.txt` to the `.ini` file to enable detailed level logging and extract troubleshooting information, including `queryId` , if needed.
+> **Note:** you may append `LogLevel=6` and `LogPath=log.txt` to the `.ini` file to enable detailed level logging and extract troubleshooting information, including `queryId` , if needed.
 
 ## Global queries
 
@@ -1274,7 +1260,7 @@ A dry run in BigQuery provides the following information:
 
 Dry runs don't use query slots, and you are not charged for performing a dry run. You can use the estimate returned by a dry run to calculate query costs in the [pricing calculator](https://cloud.google.com/products/calculator) .
 
-**Note:** A dry run of a federated query that uses an external data source might report a lower bound of 0 bytes of data, even if rows are returned. This is because the amount of data processed from the external table can't be determined until the actual query completes. Running the federated query still incurs a cost for processing this data.
+> **Note:** A dry run of a federated query that uses an external data source might report a lower bound of 0 bytes of data, even if rows are returned. This is because the amount of data processed from the external table can't be determined until the actual query completes. Running the federated query still incurs a cost for processing this data.
 
 ### Perform a dry run
 
@@ -1283,8 +1269,6 @@ To perform a dry run, do the following:
 ### Console
 
 1.  Go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Enter your query in the query editor.
     
@@ -1314,7 +1298,7 @@ For a valid query, the command produces the following response:
     Query successfully validated. Assuming the tables are not modified,
     running this query will process 10918 bytes of data.
 
-**Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
+> **Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
 
 ### API
 

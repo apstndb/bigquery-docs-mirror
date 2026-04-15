@@ -79,8 +79,6 @@ Create a BigQuery dataset to contain your resources:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -133,8 +131,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -163,8 +159,6 @@ Select one of the following options:
 Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -336,7 +330,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -412,7 +406,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Grant access to the service account
 
@@ -421,8 +415,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
     
@@ -452,11 +444,11 @@ Replace the following:
 
 Failure to grant the permission results in a `Permission denied` error.
 
-**Note:** If you create the recognizer in a different project than the Cloud Storage bucket used by the object table, grant the service account Identity and Access Management (IAM) roles as follows:
-
-  - Grant the service account the Cloud Speech Client role in the project that contains the recognizer.
-  - Grant the service account the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
-  - Grant the Speech-to-Text service agent ( `service- my_project_number @gcp-sa-speech.iam.gserviceaccount.com` ) the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
+> **Note:** If you create the recognizer in a different project than the Cloud Storage bucket used by the object table, grant the service account Identity and Access Management (IAM) roles as follows:
+> 
+>   - Grant the service account the Cloud Speech Client role in the project that contains the recognizer.
+>   - Grant the service account the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
+>   - Grant the Speech-to-Text service agent ( `service- my_project_number @gcp-sa-speech.iam.gserviceaccount.com` ) the Storage Object Viewer role in the project that contains the Cloud Storage bucket.
 
 ## Create an object table
 
@@ -500,7 +492,7 @@ Replace the following:
     
     You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the `recognition_config` value that you provide.
 
-**Important:** You must specify the project ID for the connection even if the connection is in the default project.
+> **Important:** You must specify the project ID for the connection even if the connection is in the default project.
 
 ## Transcribe audio files
 

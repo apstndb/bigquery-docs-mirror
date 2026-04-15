@@ -2,7 +2,7 @@ In this tutorial, you register a Vertex AI endpoint as a remote model in BigQuer
 
 You can use remote models when a model is too large to import into BigQuery. They are also useful when you want to have a single point of inference for online, batch, and micro-batch use cases.
 
-**Note:** For a version of this tutorial that uses Python in a BigQuery notebook, see the [BQML Remote Model Tutorial](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/blob/master/notebooks/bqml-inference-remote-model-tutorial.md) in GitHub.
+> **Note:** For a version of this tutorial that uses Python in a BigQuery notebook, see the [BQML Remote Model Tutorial](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/blob/master/notebooks/bqml-inference-remote-model-tutorial.md) in GitHub.
 
 ## Objectives
 
@@ -35,8 +35,6 @@ When you finish the tasks that are described in this document, you can avoid con
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,aiplatform.googleapis.com,storage-component.googleapis.com,bigqueryconnection.googleapis.com)
 
 3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#required_permissions) to perform the tasks in this document.
 
@@ -55,8 +53,6 @@ Make sure that you have the following role or roles on the project:
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -67,8 +63,6 @@ Make sure that you have the following role or roles on the project:
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -90,13 +84,11 @@ In this tutorial you use a pretrained TensorFlow model that is available in Clou
 
 The model is a TensorFlow model that's named `saved_model.pb` . It is a customized sentiment analysis model that was created by fine-tuning a BERT model with plain text IMDB movie reviews. The model uses text input from the movie reviews and returns sentiment scores between zero and one. When you import the model into the Model Registry, you use a prebuilt TensorFlow container.
 
-**Note:** For a tutorial on creating the sample model, see [Classify text with BERT](https://www.tensorflow.org/text/tutorials/classify_text_with_bert) in the TensorFlow documentation.
+> **Note:** For a tutorial on creating the sample model, see [Classify text with BERT](https://www.tensorflow.org/text/tutorials/classify_text_with_bert) in the TensorFlow documentation.
 
 Follow these steps to import the model.
 
 1.  In the Google Cloud console, go to the Vertex AI **Model Registry** page.
-    
-    [Go to Model Registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  Click **Import** .
 
@@ -135,8 +127,6 @@ After the import is complete, your model appears on the **Model Registry** page.
 Follow these steps to deploy the model to an endpoint.
 
 1.  In the Google Cloud console go to the Vertex AI **Model Registry** page.
-    
-    [Go to Model Registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  In the **Name** column, click **`bert_sentiment`** .
 
@@ -156,7 +146,7 @@ Follow these steps to deploy the model to an endpoint.
     
     1.  In the **Compute settings** section, for **Minimum number of compute nodes** , enter `1` . This is the number of nodes that need to be available to the model at all times.
         
-        **Note:** In production, you should set the maximum number of compute nodes. This option turns on the autoscaling capability in Vertex AI, and it allows the endpoint to process more requests when your BigQuery table has a large number of rows.
+        > **Note:** In production, you should set the maximum number of compute nodes. This option turns on the autoscaling capability in Vertex AI, and it allows the endpoint to process more requests when your BigQuery table has a large number of rows.
     
     2.  In the **Advanced scaling options** section, for **Machine type** , choose **Standard (n1-standard-2)** . Because you chose GPU as the accelerator type when you imported the model, after you choose the machine type, the accelerator type and accelerator count are set automatically.
     
@@ -173,8 +163,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -226,8 +214,6 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -295,13 +281,11 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
 
 Grant the Vertex AI User role to the Cloud resource connection's service account. You must grant this role in the same project where you created the remote model endpoint.
 
-**Note:** If the connection is in a different project, this error is returned: `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
+> **Note:** If the connection is in a different project, this error is returned: `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 To grant the role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
 
@@ -322,8 +306,6 @@ When you create the remote model, you need the endpoint ID that was generated wh
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  For **Create new** , click **SQL query** .
 
@@ -389,8 +371,6 @@ In this example, 10,000 records are selected and sent for prediction. The remote
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Create new** section, click **SQL query** .
 
@@ -437,16 +417,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Console
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -454,12 +432,12 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 
 ### gcloud
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 

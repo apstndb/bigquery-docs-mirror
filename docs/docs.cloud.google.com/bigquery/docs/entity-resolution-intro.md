@@ -46,7 +46,7 @@ Identity provider components include the following:
   - **Control plane** : contains a [BigQuery remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions) that orchestrates the matching process. This function can be implemented as a [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) job, or a [Cloud Run function](https://docs.cloud.google.com/functions/docs/concepts/overview) . The control plane can also contain other services, such as authentication and authorization.
   - **Data plane** : contains the identity graph dataset and the stored procedure that implements the provider matching logic. The stored procedure can be implemented as a [SQL stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) or an [Apache Spark stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures) . The identity graph dataset contains the tables that the end-user data is matched against.
 
-**Note:** Identity graphs can also be stored in some external databases.
+> **Note:** Identity graphs can also be stored in some external databases.
 
 ## What's next
 

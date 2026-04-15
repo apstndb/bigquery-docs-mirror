@@ -2,7 +2,7 @@
 
 BigQuery supports IAM [basic roles](https://docs.cloud.google.com/iam/docs/roles-overview#basic) for project-level access.
 
-**Caution:** Avoid using basic roles. They predate IAM and grant excessive and uneven access. Use [predefined IAM](https://docs.cloud.google.com/bigquery/docs/access-control) roles instead.
+> **Caution:** Avoid using basic roles. They predate IAM and grant excessive and uneven access. Use [predefined IAM](https://docs.cloud.google.com/bigquery/docs/access-control) roles instead.
 
 <span id="primitive_roles_for_projects"></span>
 
@@ -53,7 +53,9 @@ By default, granting access to a project also grants access to datasets within i
 <p><strong>Exception:</strong> When a user runs a query, an <a href="https://docs.cloud.google.com/bigquery/docs/cached-results#how_cached_results_are_stored">anonymous dataset</a> is created to store the cached results table. Only the user that runs the query is given <code dir="ltr" translate="no">OWNER</code> access to the anonymous dataset.</p></li>
 </ul></li>
 </ul>
-Don't confuse the <code dir="ltr" translate="no">OWNER</code> basic role with the <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin">BigQuery Admin</a> ( <code dir="ltr" translate="no">roles/bigquery.admin</code> ) IAM role. BigQuery Admin provides a number of permissions that aren't granted by the <code dir="ltr" translate="no">OWNER</code> basic role. If you're granting project-level access to BigQuery, use IAM roles instead of basic roles.</td>
+<blockquote>
+Don't confuse the <code dir="ltr" translate="no">OWNER</code> basic role with the <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin">BigQuery Admin</a> ( <code dir="ltr" translate="no">roles/bigquery.admin</code> ) IAM role. BigQuery Admin provides a number of permissions that aren't granted by the <code dir="ltr" translate="no">OWNER</code> basic role. If you're granting project-level access to BigQuery, use IAM roles instead of basic roles.
+</blockquote></td>
 </tr>
 </tbody>
 </table>
@@ -91,7 +93,9 @@ The following basic roles apply at the dataset level.
 <li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/list">list</a> on table data for tables in the dataset</li>
 </ul></li>
 </ul>
-The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.dataViewer</code> ) predefined IAM role is mapped to the <code dir="ltr" translate="no">READER</code> BigQuery basic role. When you grant BigQuery Data Viewer to a principal at the dataset level, the principal is granted <code dir="ltr" translate="no">READER</code> access to the dataset.</td>
+<blockquote>
+The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer">BigQuery Data Viewer</a> ( <code dir="ltr" translate="no">roles/bigquery.dataViewer</code> ) predefined IAM role is mapped to the <code dir="ltr" translate="no">READER</code> BigQuery basic role. When you grant BigQuery Data Viewer to a principal at the dataset level, the principal is granted <code dir="ltr" translate="no">READER</code> access to the dataset.
+</blockquote></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">WRITER</code></td>
@@ -106,7 +110,9 @@ The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery
 </ul></li>
 </ul></li>
 </ul>
-The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">roles/bigquery.dataEditor</code> ) predefined IAM role is mapped to the <code dir="ltr" translate="no">WRITER</code> BigQuery basic role. When you grant BigQuery Data Editor to a principal at the dataset level, the principal is granted <code dir="ltr" translate="no">WRITER</code> access to the dataset.</td>
+<blockquote>
+The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor">BigQuery Data Editor</a> ( <code dir="ltr" translate="no">roles/bigquery.dataEditor</code> ) predefined IAM role is mapped to the <code dir="ltr" translate="no">WRITER</code> BigQuery basic role. When you grant BigQuery Data Editor to a principal at the dataset level, the principal is granted <code dir="ltr" translate="no">WRITER</code> access to the dataset.
+</blockquote></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">OWNER</code></td>
@@ -118,7 +124,9 @@ The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery
 </ul></li>
 </ul>
 <p>A dataset must have at least one entity with the <code dir="ltr" translate="no">OWNER</code> role. A user with the <code dir="ltr" translate="no">OWNER</code> role can't remove their own <code dir="ltr" translate="no">OWNER</code> role.</p>
-The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">roles/bigquery.dataOwner</code> ) predefined IAM role is mapped to the <code dir="ltr" translate="no">OWNER</code> BigQuery basic role. When you grant BigQuery Data Owner to a principal at the dataset level, the principal is granted <code dir="ltr" translate="no">OWNER</code> access to the dataset.</td>
+<blockquote>
+The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code dir="ltr" translate="no">roles/bigquery.dataOwner</code> ) predefined IAM role is mapped to the <code dir="ltr" translate="no">OWNER</code> BigQuery basic role. When you grant BigQuery Data Owner to a principal at the dataset level, the principal is granted <code dir="ltr" translate="no">OWNER</code> access to the dataset.
+</blockquote></td>
 </tr>
 </tbody>
 </table>

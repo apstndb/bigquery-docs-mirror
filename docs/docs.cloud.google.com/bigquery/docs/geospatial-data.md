@@ -33,7 +33,7 @@ For example, the following defines a point in WKT:
 
 To describe a spatial feature, WKT is usually embedded in a container file format, such as a CSV file, or in a database table. A file row or a table row usually corresponds to the spatial feature. The whole file or the whole table corresponds to the feature collection. To load WKT data into BigQuery, provide a [schema](https://docs.cloud.google.com/bigquery/docs/schemas) that specifies a `GEOGRAPHY` column for the geospatial data.
 
-**Note:** You can't use schema auto-detection to load WKT data as a `GEOGRAPHY` value. If auto-detection is enabled, then BigQuery loads the data as a `STRING` value.
+> **Note:** You can't use schema auto-detection to load WKT data as a `GEOGRAPHY` value. If auto-detection is enabled, then BigQuery loads the data as a `STRING` value.
 
 For example, you might have a CSV file that contains the following data:
 
@@ -219,7 +219,7 @@ You can also convert a GeoJSON geometry object into a `GEOGRAPHY` value by using
 
 When loading Parquet files, BigQuery checks for GeoParquet metadata. If GeoParquet metadata exists, BigQuery loads all of the columns it describes into a corresponding `GEOGRAPHY` column by default. For more information about loading Parquet files, see [Loading Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
 
-**Note:** GeoParquet support is disabled for a few projects to avoid breaking existing workflows. If your GeoParquet files aren't loaded directly to `GEOGRAPHY` columns, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+> **Note:** GeoParquet support is disabled for a few projects to avoid breaking existing workflows. If your GeoParquet files aren't loaded directly to `GEOGRAPHY` columns, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 #### Creating an external table from GeoParquet data
 

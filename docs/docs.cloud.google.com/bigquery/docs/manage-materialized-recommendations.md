@@ -1,10 +1,10 @@
 # Manage materialized view recommendations
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request access to this preview feature, complete the [Materialized view recommendations sign-up form](https://forms.gle/M3V75cWZZsHmDBCr6) . It might take up to a week from the request being accepted to when you can view your materialized view recommendations. To provide feedback or ask questions that are related to this preview release, contact <bq-mv-help@google.com> .
+> **Note:** To request access to this preview feature, complete the [Materialized view recommendations sign-up form](https://forms.gle/M3V75cWZZsHmDBCr6) . It might take up to a week from the request being accepted to when you can view your materialized view recommendations. To provide feedback or ask questions that are related to this preview release, contact <bq-mv-help@google.com> .
 
 This document describes how the materialized view recommender works, and also shows you how to view and apply any materialized view recommendations.
 
@@ -92,8 +92,6 @@ Select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Recommendations** .
 
@@ -225,7 +223,7 @@ You can also view your recommendations and insights using `INFORMATION_SCHEMA` v
        slot_hours_saved_monthly DESC
     LIMIT 3;
 
-**Note:** `INFORMATION_SCHEMA` view names are case sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case sensitive.
 
 The result is similar to the following:
 
@@ -247,17 +245,13 @@ For more information, see the following resources:
 
 You can apply a recommendation to create a materialized view by executing the suggested `CREATE MATERIALIZED VIEW` type DDL statement in the Google Cloud console.
 
-**Note:** To execute the suggested `CREATE MATERIALIZED VIEW` DDL statement, you must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#required_permissions) in all the following locations:
-
-  - The query project
-  - The dataset containing the source tables
-  - The dataset containing the materialized view
-
-<!-- end list -->
+> **Note:** To execute the suggested `CREATE MATERIALIZED VIEW` DDL statement, you must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#required_permissions) in all the following locations:
+> 
+>   - The query project
+>   - The dataset containing the source tables
+>   - The dataset containing the materialized view
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Recommendations** .
 

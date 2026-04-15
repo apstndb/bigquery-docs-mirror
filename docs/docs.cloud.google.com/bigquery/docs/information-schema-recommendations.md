@@ -1,8 +1,8 @@
 # INFORMATION\_SCHEMA.RECOMMENDATIONS view
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-recommendations+feedback@google.com> .
 
@@ -140,8 +140,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
@@ -176,7 +178,7 @@ The following example returns top 3 `COST` category recommendations on the basis
        slot_hours_saved_monthly DESC
     LIMIT 3;
 
-**Note:** `INFORMATION_SCHEMA` view names are case sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case sensitive.
 
 The result is similar to the following:
 

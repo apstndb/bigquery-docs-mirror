@@ -12,7 +12,7 @@ For example, the following query returns a historical version of the table from 
     FROM `mydataset.mytable`
       FOR SYSTEM_TIME AS OF TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR);
 
-**Note:** The `FOR SYSTEM_TIME AS OF` clause is supported in GoogleSQL. For legacy SQL, [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) provide equivalent functionality.
+> **Note:** The `FOR SYSTEM_TIME AS OF` clause is supported in GoogleSQL. For legacy SQL, [time decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators) provide equivalent functionality.
 
 If the timestamp specifies a time from prior to the time travel window or from before the table was created, then the query fails and returns an error like the following:
 
@@ -49,8 +49,6 @@ You can't undelete a table by using the Google Cloud console.
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
-    
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  To restore a table, first determine a UNIX timestamp of when the table existed (in milliseconds). You can use the Linux `date` command to generate the Unix timestamp from a regular timestamp value:
@@ -75,7 +73,7 @@ You can't undelete a table by using the Google Cloud console.
     bq cp mydataset.mytable@-3600000 mydataset.newtable
     ```
     
-    **Note:** If you attempt to recover data prior to the time travel window or from a time before the table was created, you'll receive an `Invalid time travel timestamp` error. For more information, see [Troubleshoot table recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#troubleshoot_table_recovery) .
+    > **Note:** If you attempt to recover data prior to the time travel window or from a time before the table was created, you'll receive an `Invalid time travel timestamp` error. For more information, see [Troubleshoot table recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#troubleshoot_table_recovery) .
 
 ### Go
 

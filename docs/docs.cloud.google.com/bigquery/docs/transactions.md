@@ -9,7 +9,7 @@ Uses for multi-statement transactions include:
 
 Transactions guarantee [ACID](https://en.wikipedia.org/wiki/ACID) properties and support snapshot isolation. During a transaction, all reads return a consistent snapshot of the tables referenced in the transaction. If a statement in a transaction modifies a table, the changes are visible to subsequent statements within the same transaction.
 
-**Note:** Reads from external data sources are not guaranteed to be consistent within a transaction if the underlying data source changes during the transaction.
+> **Note:** Reads from external data sources are not guaranteed to be consistent within a transaction if the underlying data source changes during the transaction.
 
 ## Transaction scope
 

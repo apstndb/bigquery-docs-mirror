@@ -232,8 +232,6 @@ To specify a table schema:
 In the Google Cloud console, you can specify a schema using the **Add field** option or the **Edit as text** option.
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -269,8 +267,6 @@ In the Google Cloud console, you can specify a schema using the **Add field** op
 Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) . Specify the schema using the [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) option. The following example creates a new table named `newtable` with columns x, y, z of types integer, string, and boolean:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -691,7 +687,7 @@ If you prefer, you can specify the schema using a JSON schema file instead of us
   - Optional: The column's [default value](https://docs.cloud.google.com/bigquery/docs/default-values)
   - Optional: The column's [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) , if the column is a `NUMERIC` or `BIGNUMERIC` type
 
-**Note:** You can also specify the JSON array that you create in your schema file by using the Google Cloud console **Edit as Text** option. It can also be used as a starting point for configuring the [`schema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#tableschema) property in the API.
+> **Note:** You can also specify the JSON array that you create in your schema file by using the Google Cloud console **Edit as Text** option. It can also be used as a starting point for configuring the [`schema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#tableschema) property in the API.
 
 ### Creating a JSON schema file
 

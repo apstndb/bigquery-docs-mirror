@@ -15,8 +15,6 @@ This document gives an overview of the features that BigQuery provides to help y
 
 To take a tour of BigQuery data administration features directly in the Google Cloud console, click **Take the tour** .
 
-[Take the tour](https://console.cloud.google.com/?walkthrough_id=bigquery--ui-tour-data-admin)
-
 ## Tools
 
 BigQuery provides several interfaces you can use for administration tasks. Often a particular task can be done with multiple tools, letting you choose the tool that works best for you. For example, you can create a table by using the **Explorer** pane in the Google Cloud console, a `bq mk --table` command, or a `CREATE TABLE` SQL statement.
@@ -95,7 +93,7 @@ You might want to create copies of your data for various reasons, such as protec
 
 ### Track data lineage
 
-Data lineage is a [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. For more information about how data lineage can help you track data movement in your project, see [About data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) in Dataplex Universal Catalog.
+Data lineage is a [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. For more information about how data lineage can help you track data movement in your project, see [About data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) in Knowledge Catalog.
 
 ### Secure resources
 

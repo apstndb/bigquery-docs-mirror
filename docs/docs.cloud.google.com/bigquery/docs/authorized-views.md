@@ -14,7 +14,7 @@ If a logical view relies on [a large or computationally expensive query](https:/
 
 To create and share a view, review these high-level steps, which are the same for authorized logical views and authorized materialized views.
 
-**Note:** You can also [share all views in a dataset](https://docs.cloud.google.com/bigquery/docs/authorized-views#share-all-views) .
+> **Note:** You can also [share all views in a dataset](https://docs.cloud.google.com/bigquery/docs/authorized-views#share-all-views) .
 
   - Create a dataset to contain your source data.
   - Run a query to load data into a destination table in the source dataset.
@@ -77,7 +77,7 @@ To create or update an authorized view, you need permissions to the dataset that
 
 You also need to grant users or groups access to the project and dataset that contain the view.
 
-**Note:** You can't change the SQL query of an authorized view unless you're a data owner.
+> **Note:** You can't change the SQL query of an authorized view unless you're a data owner.
 
 #### Admin permissions on the dataset that contains the view
 
@@ -120,8 +120,6 @@ To create an authorized view, choose one of the following options. For complete 
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, type the query that you want to base the authorized view on.
 
@@ -151,7 +149,7 @@ To create an authorized view, choose one of the following options. For complete 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 ``` lang-terraform
 # Creates an authorized view.
@@ -267,7 +265,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Manage users or groups for authorized views
 
@@ -282,15 +280,13 @@ For more information, see [Control access to resources using IAM](https://docs.c
 
 ### Remove authorization to a view
 
-**Note:** If you remove a view, wait 24 hours before reusing the view name, or use a unique name. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/docs/authorized-views#quotas_and_limits) .
+> **Note:** If you remove a view, wait 24 hours before reusing the view name, or use a unique name. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/docs/authorized-views#quotas_and_limits) .
 
 To remove authorization to a view, select one of the following options:
 
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

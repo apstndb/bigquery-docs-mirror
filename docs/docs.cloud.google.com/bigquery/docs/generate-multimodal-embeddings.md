@@ -40,29 +40,52 @@ These predefined roles contain the permissions required to perform the tasks in 
       - `bigquery.models.updateMetadata`
   - Create and use notebooks:
       - `resourcemanager.projects.get`
+    
       - `resourcemanager.projects.list`
+    
       - `bigquery.config.get`
+    
       - `bigquery.jobs.create`
+    
       - `bigquery.readsessions.create`
+    
       - `bigquery.readsessions.getData`
+    
       - `bigquery.readsessions.update`
+    
       - `dataform.locations.get`
+    
       - `dataform.locations.list`
+    
       - `dataform.repositories.create`  
           
-        Users who have the `dataform.repositories.create` permission can execute code using the default Dataform service account and all permissions granted to that service account. For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions)
+        
+        > Users who have the `dataform.repositories.create` permission can execute code using the default Dataform service account and all permissions granted to that service account. For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions)
+        
         .
+    
       - `dataform.repositories.list`
+    
       - `dataform.collections.create`
+    
       - `dataform.collections.list`
+    
       - `aiplatform.notebookRuntimeTemplates.apply`
+    
       - `aiplatform.notebookRuntimeTemplates.get`
+    
       - `aiplatform.notebookRuntimeTemplates.list`
+    
       - `aiplatform.notebookRuntimeTemplates.getIamPolicy`
+    
       - `aiplatform.notebookRuntimes.assign`
+    
       - `aiplatform.notebookRuntimes.get`
+    
       - `aiplatform.notebookRuntimes.list`
+    
       - `aiplatform.operations.list`
+    
       - `aiplatform.notebookRuntimeTemplates.apply`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
@@ -91,9 +114,7 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -102,8 +123,6 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
 ## Create a dataset
 
@@ -112,8 +131,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -163,8 +180,6 @@ Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/referen
 Create an object table over the art images in the public Cloud Storage [`gcs-public-data--met` bucket](https://console.cloud.google.com/storage/browser/gcs-public-data--met;tab=objects?prefix=&forceOnObjectsSortingFiltering=false) . The object table makes it possible to analyze the images without moving them from Cloud Storage.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -182,8 +197,6 @@ Create an object table over the art images in the public Cloud Storage [`gcs-pub
 Create a [Colab Enterprise notebook](https://docs.cloud.google.com/colab/docs/introduction) in BigQuery to explore the image data.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  [Create a notebook by using the BigQuery editor](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 
@@ -283,8 +296,6 @@ Create a [Colab Enterprise notebook](https://docs.cloud.google.com/colab/docs/in
 Create a remote model that represents a hosted Vertex AI multimodal embedding model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -301,8 +312,6 @@ Create a remote model that represents a hosted Vertex AI multimodal embedding mo
 Generate embeddings from the images in the object table by using the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) , and then write them to a table for use in a following step. Embedding generation is an expensive operation, so the query uses a subquery including the `LIMIT` clause to limit embedding generation to 10,000 images instead of embedding the full dataset of 601,294 images. This also helps keep the number of images under the 25,000 limit for the `AI.GENERATE_EMBEDDING` function. This query takes approximately 40 minutes to run.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -323,8 +332,6 @@ Check for and correct any embedding generation errors. Embedding generation can 
 The `AI.GENERATE_EMBEDDING` function returns error details in the `status` column. This column is empty if embedding generation was successful, or contains an error message if embedding generation failed.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to see if there were any embedding generation failures:
     
@@ -347,8 +354,6 @@ The `AI.GENERATE_EMBEDDING` function returns error details in the `status` colum
 You can optionally use the [`CREATE VECTOR INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) to create the `met_images_index` vector index on the `embedding` column of the `met_images_embeddings` table. A vector index lets you perform a vector search more quickly, with the trade-off of reducing recall and so returning more approximate results.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -376,8 +381,6 @@ You can optionally use the [`CREATE VECTOR INDEX` statement](https://docs.cloud.
 To search images that correspond to a specified text search string, you must first create a text embedding for that string. Use the same remote model to create the text embedding that you used to create the image embeddings, and then write the text embedding to a table for use in a following step. The search string is `pictures of white or cream colored dress from victorian era` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -397,8 +400,6 @@ To search images that correspond to a specified text search string, you must fir
 Use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) to perform a semantic search for images that best correspond to the search string represented by the text embedding.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to perform a semantic search and write the results to a table:
     
@@ -419,8 +420,6 @@ Use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/r
 Visualize the semantic search results by using a notebook.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Open the `met-image-analysis` notebook that you created earlier.
 
@@ -445,16 +444,14 @@ Visualize the semantic search results by using a notebook.
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

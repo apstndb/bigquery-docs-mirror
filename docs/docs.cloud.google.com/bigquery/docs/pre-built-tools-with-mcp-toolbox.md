@@ -1,6 +1,6 @@
 # Connect LLMs to BigQuery with MCP
 
-**Note:** MCP Toolbox for Databases is in beta (pre-v1.0) and may see breaking changes until the first stable release (v1.0).
+> **Note:** MCP Toolbox for Databases is in beta (pre-v1.0) and may see breaking changes until the first stable release (v1.0).
 
 This guide shows you how to use the [MCP Toolbox for Databases](https://github.com/googleapis/genai-toolbox) to connect your BigQuery project to a variety of Integrated Development Environments (IDEs) and developer tools. It uses the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) , an open protocol for connecting large language models (LLMs) to data sources like BigQuery, allowing you to run SQL queries and interact with your project directly from your existing tools.
 

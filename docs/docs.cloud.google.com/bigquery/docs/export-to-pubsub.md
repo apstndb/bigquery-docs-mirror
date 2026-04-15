@@ -52,8 +52,6 @@ Enable the BigQuery and Pub/Sub APIs.
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-[Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,pubsub.googleapis.com)
-
 ## Export to Pub/Sub
 
 Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data to a Pub/Sub topic:
@@ -61,8 +59,6 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click **More** \> **Query settings** .
 
@@ -96,8 +92,6 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 

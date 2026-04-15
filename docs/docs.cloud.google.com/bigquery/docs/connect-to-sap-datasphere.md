@@ -1,18 +1,16 @@
 # Connect to SAP Datasphere
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for this preview feature, contact <bq-sap-federation-support@google.com> .
+> **Note:** To get support or provide feedback for this preview feature, contact <bq-sap-federation-support@google.com> .
 
 As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to access SAP Datasphere data. This connection enables data analysts to [query data in SAP Datasphere](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) .
 
 ## Before you begin
 
 1.  Enable the BigQuery Connection API.
-    
-    [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
 2.  [Create a SAP Datasphere database user](https://help.sap.com/docs/SAP_DATASPHERE/be5967d099974c69b77f4549425ca4c0/798e3fd6707940c3bd2219b2d1ebaac2.html?locale=en-US) . Note the username, password, hostname, and port for BigQuery to connect to.
 
@@ -24,7 +22,7 @@ As a BigQuery administrator, you can create a [connection](https://docs.cloud.go
     
       - [Configure your connection with network attachments](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) so that BigQuery opens the connection from a static IP address.
         
-        **Note:** If your configured network attachment and VM are located in different regions, there might be cross-region data movement when you use this connection to query SAP Datasphere data.
+        > **Note:** If your configured network attachment and VM are located in different regions, there might be cross-region data movement when you use this connection to query SAP Datasphere data.
     
     For more information about configuring your SAP Datasphere tenant, see [Add IP address to IP Allowlist](https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/a3c214514ef94e899459f68f4c1e2a23.html?locale=en-US) .
 
@@ -41,8 +39,6 @@ You can connect BigQuery to SAP Datasphere in the Google Cloud console or the bq
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add data** .
     
@@ -131,8 +127,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 

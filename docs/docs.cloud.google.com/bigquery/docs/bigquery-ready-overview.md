@@ -59,15 +59,13 @@ Many BigQuery partners in Google Cloud Ready appear in BigQuery. To see a listin
 
 1.  In the Google Cloud console, go to the **Partner Center** page.
     
-    [Go to Partner Center](https://console.cloud.google.com/bigquery/partner-center)
-    
     A list of partners is displayed in their respective categories.
 
 2.  To find a specific partner listing, enter a name into the **Search** box and press **Enter** .
 
 3.  To see partner's details, including integrations steps and billing information, select a listing. If the partner is also available on the Google Cloud Marketplace, they are indicated by a Cloud Marketplace tag.
 
-**Note:** Third-party software is not supported by Cloud Customer Care when it has been identified that BigQuery is working as intended.
+> **Note:** Third-party software is not supported by Cloud Customer Care when it has been identified that BigQuery is working as intended.
 
 ## What's next
 

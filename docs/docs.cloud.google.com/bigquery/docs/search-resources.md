@@ -1,14 +1,14 @@
 # Search for resources
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> 
+> For information about access to this release, see the [access request page](https://docs.google.com/forms/d/e/1FAIpQLSfeucdQXFDYl88JsxPCylt-iU0KxuQMN6VZRalS1vM4ZD0U0Q/viewform) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+Use Knowledge Catalog search to find Google Cloud resources from within BigQuery, such as BigQuery datasets and tables.
 
-For information about access to this release, see the [access request page](https://docs.google.com/forms/d/e/1FAIpQLSfeucdQXFDYl88JsxPCylt-iU0KxuQMN6VZRalS1vM4ZD0U0Q/viewform) .
-
-Use Dataplex Universal Catalog search to find Google Cloud resources from within BigQuery, such as BigQuery datasets and tables.
-
-Dataplex Universal Catalog search supports natural language search queries (also known as semantic search queries), which let you search for resources using everyday language.
+Knowledge Catalog search supports natural language search queries (also known as semantic search queries), which let you search for resources using everyday language.
 
 Similar to keyword search, natural language search emphasizes the discovery of resources by analyzing the metadata that's associated with the resources within your organization. Search takes into account a broad range of metadata that describes the resources, including metadata that you create.
 
@@ -26,7 +26,7 @@ Before you use natural language search in BigQuery to search for Google Cloud re
 
 ### Required roles
 
-To search for resources, you need at least one of the following [Dataplex Universal Catalog IAM roles](https://docs.cloud.google.com/dataplex/docs/iam-roles#predefined-roles) on the project that is used for search: Dataplex Catalog Admin, Dataplex Catalog Editor, or Dataplex Catalog Viewer. Permissions on search results are checked independently of the selected project.
+To search for resources, you need at least one of the following [Knowledge Catalog IAM roles](https://docs.cloud.google.com/dataplex/docs/iam-roles#predefined-roles) on the project that is used for search: Dataplex Catalog Admin, Dataplex Catalog Editor, or Dataplex Catalog Viewer. Permissions on search results are checked independently of the selected project.
 
 The search results in BigQuery are scoped according to your IAM permissions over the underlying resources. To search for a resource in BigQuery, you must have permissions to access the corresponding resource. For more information, see the [Search scope](https://docs.cloud.google.com/bigquery/docs/search-resources#search-scope) section of this document.
 
@@ -43,13 +43,11 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ### Enable the API
 
-To use search, ensure that you have enabled the Dataplex API. The Dataplex API is [enabled by default](https://docs.cloud.google.com/bigquery/docs/service-dependencies) for all new Google Cloud projects with BigQuery. If the Dataplex API isn't enabled in your project, see [Enable Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/enable-api) .
+To use search, ensure that you have enabled the Dataplex API. The Dataplex API is [enabled by default](https://docs.cloud.google.com/bigquery/docs/service-dependencies) for all new Google Cloud projects with BigQuery. If the Dataplex API isn't enabled in your project, see [Enable Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/enable-api) .
 
 ## Search for resources
 
 1.  In the Google Cloud console, go to the BigQuery **Search** page.
-    
-    [Go to Search](https://console.cloud.google.com/bigquery/search)
 
 2.  In the search field, enter your query in natural language and then press Enter . The following are some sample queries:
     
@@ -62,12 +60,12 @@ To use search, ensure that you have enabled the Dataplex API. The Dataplex API i
 3.  To filter your search, click **Filters** . The following filters are available:
     
       - **Scope** : search across the organization (default), the current project, or only for starred resources. For more information, see the [Search scope](https://docs.cloud.google.com/bigquery/docs/search-resources#search-scope) section of this document.
-      - **Systems** : the Google Cloud service that the resource belongs to, such as BigQuery. The Dataplex Universal Catalog system contains [entry groups](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) .
+      - **Systems** : the Google Cloud service that the resource belongs to, such as BigQuery. The Knowledge Catalog system contains [entry groups](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) .
       - **Projects** : the projects to search in.
       - **Type** : the resource type, such as BigQuery connection, Cloud Storage bucket, or database. Depending on the resource type, you can also filter by subtype, such as the connection type or SQL dialect.
       - **Select locations** : the locations to search in.
       - **Select datasets** : this limits search results to BigQuery resources that belong to the selected BigQuery datasets. In the **Type to filter** field, enter the name of the dataset.
-      - **Annotations** : the Dataplex Universal Catalog [aspect types](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) that are associated with the resource that you're searching for. To filter by aspect values, click **Filter on annotation values** , and then select the values.
+      - **Annotations** : the Knowledge Catalog [aspect types](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) that are associated with the resource that you're searching for. To filter by aspect values, click **Filter on annotation values** , and then select the values.
     
     To remove a filter, click clear **Clear** next to the specific filter that you want to remove. Or, to remove all filters, click **Clear Filters** .
     
@@ -78,7 +76,7 @@ To use search, ensure that you have enabled the Dataplex API. The Dataplex API i
     This opens a resource summary in a split pane. Do any of the following:
     
       - To open the resource in the service that the resource belongs to, click **Open in PRODUCT\_NAME** for the resource. For example, to open a BigQuery dataset in BigQuery Studio, click **Open in Studio** . The options that are available depend on the resource.
-      - To view the Dataplex Universal Catalog metadata that's associated with a resource, click **Open in Dataplex Catalog** for the resource.
+      - To view the Knowledge Catalog metadata that's associated with a resource, click **Open in Knowledge Catalog** for the resource.
       - If you have important search results that you want to bookmark, you can star them. Click star\_border **Star** for the resource. You can view starred resources in BigQuery Studio.
       - To close the resource summary in the split pane, click close **Close** .
 
@@ -98,11 +96,11 @@ For projects that belong to a Google Cloud organization, search operates within 
 
 The search results respect permissions that you have over the resources. For example, if you have BigQuery metadata read access to a resource, that resource appears in your search results. If you have access to a BigQuery table but not to the dataset containing that table, the table still shows up as expected in the search results.
 
-**Note:** Permissions propagation to search might be delayed if the change affects a large number of resources or principals.
+> **Note:** Permissions propagation to search might be delayed if the change affects a large number of resources or principals.
 
 The search results include only those resources that belong to the same VPC Service Controls perimeter as the project under which search is performed. When using the Google Cloud console, this is the project that is selected in the console.
 
 ## What's next
 
   - Learn how to [analyze data in BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) .
-  - Learn how to [use keyword search in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) .
+  - Learn how to [use keyword search in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) .

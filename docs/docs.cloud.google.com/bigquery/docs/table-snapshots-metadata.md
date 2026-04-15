@@ -55,8 +55,6 @@ You can view the metadata for a table snapshot by using one of the following opt
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -79,8 +77,6 @@ You can view the metadata for a table snapshot by using one of the following opt
 To see metadata for a table snapshot, query the [`INFORMATION_SCHEMA.TABLE_SNAPSHOTS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -106,8 +102,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq show \

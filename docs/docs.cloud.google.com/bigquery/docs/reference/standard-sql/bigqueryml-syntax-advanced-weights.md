@@ -80,7 +80,7 @@ FROM
     STRUCT(FALSE AS standardize))
 ```
 
-**Note:** Because un-standardizing the standard error for the intercept column is computationally expensive, the standard error and p-value aren't provided. If the standard error and p-value for the intercept are required, then set the `STANDARDIZE` argument to `TRUE` .
+> **Note:** Because un-standardizing the standard error for the intercept column is computationally expensive, the standard error and p-value aren't provided. If the standard error and p-value for the intercept are required, then set the `STANDARDIZE` argument to `TRUE` .
 
 ### With standardization
 

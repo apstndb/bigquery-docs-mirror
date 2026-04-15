@@ -1,6 +1,6 @@
 # Create Amazon S3 BigLake external tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes how to create an Amazon Simple Storage Service (Amazon S3) BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Amazon S3. Access delegation decouples access to the BigLake table from access to the underlying datastore.
 
@@ -33,8 +33,6 @@ Before you create an external table, you need to create a dataset in the [suppor
 
 Go to the **BigQuery** page.
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
-
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, select the project where you want to create the dataset.
@@ -54,8 +52,6 @@ On the **Create dataset** page, specify the following details:
 Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) . The following example create a dataset in the `aws-us-east-1` region:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -142,8 +138,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -181,8 +175,6 @@ Select one of the following options:
 To create a BigLake table, use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) with the `WITH CONNECTION` clause:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -267,7 +259,7 @@ Replace the following:
     
     Set to `MANUAL` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache. You must set `  CACHE_MODE  ` if `  STALENESS_INTERVAL  ` is set to a value greater than 0.
 
-**Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
+> **Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
 Next, create the BigLake table:
 
@@ -382,8 +374,6 @@ To create a BigLake table based on Hive partitioned data, select one of the foll
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -438,8 +428,6 @@ To create a BigLake table based on Hive partitioned data, select one of the foll
 Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -730,9 +718,9 @@ For more information, see [Query Amazon S3 data](https://docs.cloud.google.com/b
 
 ## View resource metadata
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can view the resource metadata with [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) views. When you query the [`JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , [`JOBS_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) , and [`RESERVATION*`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) views, you must [specify the query's processing location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) that is collocated with the table's region. For information about BigQuery Omni locations, see [Locations](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) . For all other system tables, specifying the query job location is *optional* .
 
@@ -743,8 +731,6 @@ To query `JOBS_*` and `RESERVATION*` system tables, select one of the following 
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  If the **Editor** tab isn't visible, then click add\_box **Compose new query** .
 
@@ -799,8 +785,6 @@ Ensure that you have the required permissions to configure service perimeters. T
 ### Set up VPC Service Controls using the Google Cloud console
 
 1.  In the Google Cloud console navigation menu, click **Security** , and then click **VPC Service Controls** .
-    
-    [Go to VPC Service Controls](https://console.cloud.google.com/security/service-perimeter)
 
 2.  To set up VPC Service Controls for BigQuery Omni, follow the steps in the [Create a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters#create_a_service_perimeter) guide, and when you are in the **Egress rules** pane, follow these steps:
     

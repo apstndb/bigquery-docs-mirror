@@ -1,10 +1,10 @@
 # Organize code assets with folders
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To give feedback or request support for this feature, send an email to <bigquery-explorer-feedback@google.com> .
+> **Note:** To give feedback or request support for this feature, send an email to <bigquery-explorer-feedback@google.com> .
 
 The following document describes how BigQuery folders work. You can use folders to organize code assets in a hierarchical structure, similar to that used by operating systems. For example, you could create a folder to organize code assets for sales analysis, with subfolders for each fiscal year. You can also use folders to manage access to code assets. Folders offer Identity and Access Management (IAM) policy inheritance, which you can use to control access to code assets more efficiently. Policy inheritance lets subfolders and files inherit the permissions of their parent folder.
 
@@ -52,7 +52,7 @@ The following are best practices for applying IAM policies to files and folders:
   - Apply IAM policies to the highest folder in the hierarchy where the permissions are uniformly needed. For example, if a team needs access to all the data in their team's directory, grant the necessary roles at the level of the team folder instead of at the level of individual project subfolders.
   - Always grant the minimum set of permissions required for users or services to perform their tasks. Avoid granting broad roles where you can use more specific folder-level roles and permissions.
 
-**Note:** Roles granted to individual files or folders are preserved during a move, but inherited roles update to match the new location. Additionally, roles configured on the source and destination folders remain unaffected by a move.
+> **Note:** Roles granted to individual files or folders are preserved during a move, but inherited roles update to match the new location. Additionally, roles configured on the source and destination folders remain unaffected by a move.
 
 ## IAM roles granted on resource creation
 

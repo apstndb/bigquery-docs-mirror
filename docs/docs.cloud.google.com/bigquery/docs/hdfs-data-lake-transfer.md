@@ -1,10 +1,10 @@
 # Migrate Hive managed tables to Google Cloud
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for this feature, contact <bigquery-permission-migration-support@google.com> .
+> **Note:** To get support or provide feedback for this feature, contact <bigquery-permission-migration-support@google.com> .
 
 This document shows you how to migrate your Hive managed tables to Google Cloud.
 
@@ -113,8 +113,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -670,11 +668,11 @@ We recommend performing a few trial runs of the script manually to determine the
 
 ## Monitor and view transfer status
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
+> **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
 You can monitor resource-level transfers for individual tables to track progress, view granular error details, and query the state of specific resources being migrated.
 
@@ -683,8 +681,6 @@ To view the progress and status of your resources, select one of the following o
 ### Console
 
 1.  In the Google Cloud console, go to the **Data transfers** page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click your transfer configuration from the list.
 

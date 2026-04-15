@@ -31,7 +31,7 @@ The `INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS` view has the following schema:
 | `option_type`   | `STRING`  | The type of the option.                                                                                                                             |
 | `option_value`  | `STRING`  | The value of the option.                                                                                                                            |
 
-**Note:** If a search index option is not specified, a row containing the default search index option is produced by a query. The `analyzer` and `data_types` options are always populated in the `SEARCH_INDEX_OPTIONS` view regardless of whether they are specified in the DDL or not. If not specified, the default `LOG_ANALYZER` and `["STRING"]` values are respectively produced. Other options are populated in the `SEARCH_INDEX_OPTIONS` view only when they're specified in `CREATE SEARCH INDEX DDL` .
+> **Note:** If a search index option is not specified, a row containing the default search index option is produced by a query. The `analyzer` and `data_types` options are always populated in the `SEARCH_INDEX_OPTIONS` view regardless of whether they are specified in the DDL or not. If not specified, the default `LOG_ANALYZER` and `["STRING"]` values are respectively produced. Other options are populated in the `SEARCH_INDEX_OPTIONS` view only when they're specified in `CREATE SEARCH INDEX DDL` .
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 

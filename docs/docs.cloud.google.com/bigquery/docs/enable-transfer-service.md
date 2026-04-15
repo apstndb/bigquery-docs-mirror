@@ -7,7 +7,7 @@ To use the BigQuery Data Transfer Service, you must complete the following steps
 
 For more information on Identity and Access Management (IAM) roles, see [Roles and permissions](https://docs.cloud.google.com/iam/docs/roles-overview) in the IAM documentation.
 
-**Note:** If you call the BigQuery Data Transfer Service API immediately after you enable BigQuery Data Transfer Service programmatically, you should implement a retry mechanism with backoff delays between consecutive calls. This is necessary because API enablement is asynchronous and subject to propagation delays caused by eventual consistency.
+> **Note:** If you call the BigQuery Data Transfer Service API immediately after you enable BigQuery Data Transfer Service programmatically, you should implement a retry mechanism with backoff delays between consecutive calls. This is necessary because API enablement is asynchronous and subject to propagation delays caused by eventual consistency.
 
 ## Create a project and enable the BigQuery API
 
@@ -16,8 +16,6 @@ Before using the BigQuery Data Transfer Service, you must create a project and, 
 To create a project and enable the BigQuery API:
 
 1.  In the Google Cloud console, go to the project selector page.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
 2.  Select or create a Google Cloud project.
     
@@ -26,7 +24,7 @@ To create a project and enable the BigQuery API:
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 3.  Enable billing on your project for all transfers. You are billed $0 for free transfers.
     
@@ -36,7 +34,6 @@ To create a project and enable the BigQuery API:
 
 4.  BigQuery is automatically enabled in new projects. To activate BigQuery in an existing project, enable the BigQuery API.  
       
-    [Enable the BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
 
 ## Enable the BigQuery Data Transfer Service
 
@@ -49,8 +46,6 @@ To enable the BigQuery Data Transfer Service:
 2.  From the drop-down menu, select the appropriate project.
 
 3.  Click the ENABLE button.
-    
-    [Enable the Data Transfer API](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
 
 ## Service Agent
 
@@ -106,7 +101,7 @@ Where:
 
   - project\_number is the project number of the project where the BigQuery Data Transfer Service is enabled.
 
-**Warning:** Don't revoke the service agent role from the service agent. If you revoke the role, the BigQuery Data Transfer Service will no longer work.
+> **Warning:** Don't revoke the service agent role from the service agent. If you revoke the role, the BigQuery Data Transfer Service will no longer work.
 
 ## Grant `bigquery.admin` access
 
@@ -122,9 +117,9 @@ We recommend granting the `bigquery.admin` predefined IAM role to users who crea
       - `bigquery.datasets.setIamPolicy`
       - `bigquery.jobs.create`
 
-**Note:** Starting March 17, 2026, the BigQuery Data Transfer Service will require the `bigquery.datasets.getIamPolicy` and `bigquery.datasets.setIamPolicy` permissions. For more information, see [Changes to dataset-level access controls](https://docs.cloud.google.com/bigquery/docs/dataset-access-control) .
+> **Note:** Starting March 17, 2026, the BigQuery Data Transfer Service will require the `bigquery.datasets.getIamPolicy` and `bigquery.datasets.setIamPolicy` permissions. For more information, see [Changes to dataset-level access controls](https://docs.cloud.google.com/bigquery/docs/dataset-access-control) .
 
-**Note:** If the `bigquery.admin` role is too broad for a specific use case, you can [create a custom IAM role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) with only the necessary permissions.
+> **Note:** If the `bigquery.admin` role is too broad for a specific use case, you can [create a custom IAM role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) with only the necessary permissions.
 
 In some cases, the required permissions might differ between different data sources. Refer to the "Required permissions" section in each data source transfer guide for specific IAM information. For example, see [Amazon S3 transfer permissions](https://docs.cloud.google.com/bigquery/docs/s3-transfer#required_permissions) or [Cloud Storage transfer permissions](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#required_permissions) .
 
@@ -133,8 +128,6 @@ To grant the `bigquery.admin` role:
 ### Console
 
 1.  Open the IAM page in the Google Cloud console
-    
-    [Open the IAM page](https://console.cloud.google.com/iam-admin/iam)
 
 2.  Click **Select a project** .
 
@@ -156,7 +149,7 @@ To grant the `bigquery.admin` role:
 
 You can use the Google Cloud CLI to grant a user or group the `bigquery.admin` role.
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 To add a single binding to your project's IAM policy, type the following command. To add a user, supply the `--member` flag in the format `user:user@example.com` . To add a group, supply the `--member` flag in the format `group:group@example.com` .
 

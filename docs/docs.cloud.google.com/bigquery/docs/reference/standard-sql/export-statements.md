@@ -192,7 +192,7 @@ If `true` , allows export to overwrite existing data in the destination Bigtable
 
 If `true` , all existing data in the destination table will be deleted before any new data is written. Otherwise the export will proceed with a non-empty destination table. Default: `false` .
 
-**Warning:** Only use `truncate` when the destination table doesn't contain data that needs to be retained.
+> **Warning:** Only use `truncate` when the destination table doesn't contain data that needs to be retained.
 
 `uri`
 
@@ -235,11 +235,11 @@ FROM `bigquery_table`
 
 ## Export to Pub/Sub
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To enroll in the continuous queries preview, fill out [the request form](https://docs.google.com/forms/d/e/1FAIpQLSc-SL89C9K997jSm_u3oQH-UGGe3brzsybbX6mf5VFaA0a4iA/viewform) . To give feedback or request support for this feature, contact <bq-continuous-queries-feedback@google.com> .
+> **Note:** To enroll in the continuous queries preview, fill out [the request form](https://docs.google.com/forms/d/e/1FAIpQLSc-SL89C9K997jSm_u3oQH-UGGe3brzsybbX6mf5VFaA0a4iA/viewform) . To give feedback or request support for this feature, contact <bq-continuous-queries-feedback@google.com> .
 
 You can export BigQuery data to a Pub/Sub topic by using the `EXPORT DATA` statement in a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) . For more information about Pub/Sub configuration options, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
 

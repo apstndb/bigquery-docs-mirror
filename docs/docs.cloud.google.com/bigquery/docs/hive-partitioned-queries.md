@@ -1,6 +1,6 @@
 # Use externally partitioned data
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 You can use BigQuery external tables to query partitioned data in the following data stores:
 
@@ -84,11 +84,11 @@ When you create an externally partitioned table, you can require the use of pred
 
 When this option is enabled, attempts to query the externally partitioned table without specifying a `WHERE` clause produce the following error: `Cannot query over table <table_name> without a filter over column(s) <partition key names> that can be used for partition elimination` .
 
-**Note:** There must be at least one predicate that only references one or more partition keys for the filter to be considered eligible for partition elimination. For example, for a table with partition key `val` and column `f` in the file, both of the following `WHERE` clauses satisfy the requirement:  
-`WHERE val = "key"`  
-`WHERE val = "key" AND f = "column"`
-
-However, `WHERE (val = "key" OR f = "column")` is not sufficient.
+> **Note:** There must be at least one predicate that only references one or more partition keys for the filter to be considered eligible for partition elimination. For example, for a table with partition key `val` and column `f` in the file, both of the following `WHERE` clauses satisfy the requirement:  
+> `WHERE val = "key"`  
+> `WHERE val = "key" AND f = "column"`
+> 
+> However, `WHERE (val = "key" OR f = "column")` is not sufficient.
 
 ## Limitations
 

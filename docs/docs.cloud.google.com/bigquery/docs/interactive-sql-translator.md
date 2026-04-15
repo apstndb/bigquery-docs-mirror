@@ -9,12 +9,10 @@ You can use the [translation rule feature](https://docs.cloud.google.com/bigquer
 If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
-    
-    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
-**Note:** Projects created after February 15, 2022 have this API enabled automatically.
+> **Note:** Projects created after February 15, 2022 have this API enabled automatically.
 
 ### Permissions and roles
 
@@ -333,8 +331,6 @@ Israel
 Follow these steps to translate a query into GoogleSQL:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, click **More** , and then select **Translation settings** .
 
@@ -368,7 +364,7 @@ You can configure the interactive SQL translator to adjust how the interactive S
 
 ### Create and apply Gemini-enhanced translation rules
 
-**Note:** To get support and provide feedback for preview features, contact <ai-sql-translation-help@google.com> .
+> **Note:** To get support and provide feedback for preview features, contact <ai-sql-translation-help@google.com> .
 
 You can customize the way the interactive SQL translator translates SQL by creating translation rules. The interactive SQL translator adjusts its translations based on any Gemini-enhanced SQL translation rules that you assign to it, letting you customize the translation results based on your migration needs.
 
@@ -415,8 +411,6 @@ To create a Gemini-enhanced SQL translation rule, you can create a Gemini-based 
 Once you have uploaded a Gemini-enhanced SQL translation rule and uploaded it to Cloud Storage, you can apply the rule by doing the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click **More \> Translation settings** .
 
@@ -454,11 +448,11 @@ To update an existing configuration YAML file, do the following:
 
 ### Explain a translation
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** With Gemini-enhanced SQL translations, you can generate text explanation for your scripts by the Gemini model. Gemini-enhanced SQL translations are allowed a limited amount of Gemini usage at no charge. This usage is sufficient for most migration projects. To request an increase to this limit, or to get support and provide feedback for this Preview feature, contact <ai-sql-translation-help@google.com> .
+> **Note:** With Gemini-enhanced SQL translations, you can generate text explanation for your scripts by the Gemini model. Gemini-enhanced SQL translations are allowed a limited amount of Gemini usage at no charge. This usage is sufficient for most migration projects. To request an increase to this limit, or to get support and provide feedback for this Preview feature, contact <ai-sql-translation-help@google.com> .
 
 After running an interactive translation, you can request a Gemini-generated text explanation. The generated text includes a summary of the translated SQL query. Gemini also identifies translation differences and inconsistencies between the source SQL query and the translated GoogleSQL query.
 
@@ -523,11 +517,11 @@ To ensure the most accurate translation, you can input the data definition langu
 
 #### Fix translation issues with Gemini
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
+> **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
 To fixed failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to try to resolve these issues with the following steps.
 

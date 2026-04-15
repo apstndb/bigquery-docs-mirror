@@ -66,7 +66,7 @@ FROM
   `region-us`.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

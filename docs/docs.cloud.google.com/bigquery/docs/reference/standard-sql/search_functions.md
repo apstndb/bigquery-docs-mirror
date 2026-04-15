@@ -697,7 +697,7 @@ Use the following syntax for batch searches, when you want to perform a vector s
 
 Use the following syntax (in [Preview](https://cloud.google.com/products#product-launch-stages) ) for single searches, when you want to find the vectors closest to a single embedding value. When you call the function with this syntax, it's optimized to perform better than if you call the batch version on a table with a single row.
 
-**Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
+> **Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
 
     VECTOR_SEARCH(
       { TABLE base_table | (base_table_query) },

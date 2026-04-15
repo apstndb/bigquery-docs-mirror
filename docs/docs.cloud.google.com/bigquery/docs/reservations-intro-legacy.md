@@ -1,6 +1,6 @@
 # Introduction to legacy reservations
 
-**Note:** Legacy reservations, including access to flat-rate billing or certain commitment lengths, are only available to allow-listed customers. To determine if you have access to these legacy features, contact your administrator. The flat-rate billing model defines how you are billed for compute, but flat-rate reservations and commitments function as Enterprise edition slots.
+> **Note:** Legacy reservations, including access to flat-rate billing or certain commitment lengths, are only available to allow-listed customers. To determine if you have access to these legacy features, contact your administrator. The flat-rate billing model defines how you are billed for compute, but flat-rate reservations and commitments function as Enterprise edition slots.
 
 BigQuery reservations enable you to switch from [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) to [capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . With capacity-based pricing, you pay for dedicated or autoscaled query processing capacity rather than paying for each query individually.
 
@@ -8,7 +8,7 @@ Reservations enable you to allocate query capacity, measured in [slots](https://
 
 Creating a [capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details) is optional when working with reservations that leverage [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) , but can save on costs for steady-state workloads.
 
-**Note:** [Legacy flat-rate commitments](https://docs.cloud.google.com/bigquery/docs/reservations-intro-legacy#commitments) have access to the same features as [Enterprise edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) commitments. All legacy flat-rate commitments are labeled as `flat-rate` for the compute pricing model value and `Enterprise` for the edition value.
+> **Note:** [Legacy flat-rate commitments](https://docs.cloud.google.com/bigquery/docs/reservations-intro-legacy#commitments) have access to the same features as [Enterprise edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) commitments. All legacy flat-rate commitments are labeled as `flat-rate` for the compute pricing model value and `Enterprise` for the edition value.
 
 ## Overview
 

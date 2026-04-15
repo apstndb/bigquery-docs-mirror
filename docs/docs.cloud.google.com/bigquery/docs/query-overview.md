@@ -12,6 +12,8 @@ BigQuery supports several data analysis workflows:
 
   - **Geospatial analysis.** BigQuery uses geography data types and GoogleSQL geography functions to let you analyze and visualize geospatial data. For information about these data types and functions, see [Introduction to geospatial analytics](https://docs.cloud.google.com/bigquery/docs/geospatial-intro) .
 
+  - **Graph analysis.** [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) lets you model your data as a graph with nodes and edges. You can use Graph Query Language (GQL) to find complex, hidden relationships between data points that would be challenging to find using SQL.
+
   - **Search for data.** You can [index your data](https://docs.cloud.google.com/bigquery/docs/search-index) to perform flexible, optimized [searches](https://docs.cloud.google.com/bigquery/docs/search) on unstructured text or semi-structured JSON data.
 
   - **Search for Google Cloud resources.** Use [natural language search](https://docs.cloud.google.com/bigquery/docs/search-resources) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to discover Google Cloud resources from within BigQuery.
@@ -26,7 +28,7 @@ BigQuery supports several data analysis workflows:
 
 BigQuery can help you understand your data before you start writing SQL queries. Use the following features if you want to find data, are unfamiliar with your data, don't know which questions to ask, or need help writing SQL:
 
-  - [**Dataplex Universal Catalog.**](https://docs.cloud.google.com/bigquery/docs/search-resources) Find Google Cloud resources from within BigQuery, such as datasets and tables.
+  - [**Knowledge Catalog.**](https://docs.cloud.google.com/bigquery/docs/search-resources) Find Google Cloud resources from within BigQuery, such as datasets and tables.
 
   - [**Table explorer.**](https://docs.cloud.google.com/bigquery/docs/table-explorer) Visually explore the range and frequency of values in your table and interactively build queries.
 
@@ -155,20 +157,20 @@ BigQuery Studio helps you discover, analyze, and run inference on data in BigQue
   - A [PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) that lets you create stored Python procedures for Apache Spark.
   - Asset management and version history for code assets such as notebooks and [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) , built on top of [Dataform](https://docs.cloud.google.com/dataform) .
   - Assistive code development in the SQL editor and in notebooks, built on top of [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
-  - [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex) features for [data discovery](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#search-page) , and [data profiling](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) and [data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) scans.
+  - [Knowledge Catalog](https://docs.cloud.google.com/dataplex) features for [data discovery](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#search-page) , and [data profiling](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) and [data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) scans.
   - The ability to view [job history](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#studio-overview) on a per-user or per-project basis.
   - The ability to analyze saved query results by connecting to other tools such as Looker and Google Sheets, and to export saved query results for use in other applications.
 
-**Note:** BigQuery Studio requires the following APIs which are enabled by default in projects and automated scripts created after March 24, 2024:
-
-  - [Compute Engine API](https://docs.cloud.google.com/compute/docs/reference/rest/v1)
-  - [Analytics Hub API](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest)
-  - [Dataform API](https://docs.cloud.google.com/dataform/reference/rest)
-  - [Vertex AI API](https://docs.cloud.google.com/vertex-ai/docs/reference/rest)
-  - [BigQuery Connection API](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest)
-  - [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest)
-  - [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest)
-  - [Dataplex API](https://docs.cloud.google.com/dataplex/docs/reference/rest)
+> **Note:** BigQuery Studio requires the following APIs which are enabled by default in projects and automated scripts created after March 24, 2024:
+> 
+>   - [Compute Engine API](https://docs.cloud.google.com/compute/docs/reference/rest/v1)
+>   - [Analytics Hub API](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest)
+>   - [Dataform API](https://docs.cloud.google.com/dataform/reference/rest)
+>   - [Vertex AI API](https://docs.cloud.google.com/vertex-ai/docs/reference/rest)
+>   - [BigQuery Connection API](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest)
+>   - [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest)
+>   - [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest)
+>   - [Dataplex API](https://docs.cloud.google.com/dataplex/docs/reference/rest)
 
 ### BigQuery ML
 

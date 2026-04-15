@@ -8,12 +8,8 @@ As a BigQuery administrator, you can create a [connection](https://docs.cloud.go
 ## Before you begin
 
 1.  Select the project that contains the Cloud SQL database.  
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
 2.  Enable the BigQuery Connection API.  
-    
-    [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
 3.  Ensure that the Cloud SQL instance has a [public IP connection](https://docs.cloud.google.com/sql/docs/mysql/configure-ip) or a [private connection](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip) :  
     
@@ -34,8 +30,6 @@ Select one of the following options to create a Cloud SQL connection:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add** .
     
@@ -73,7 +67,7 @@ Select one of the following options to create a Cloud SQL connection:
         
           - Optional: To see the password, click visibility\_off **Show password** .
         
-        **Note:** If the same user credentials are valid for other databases in the external data source, that user can query those databases through the same connection resource.
+        > **Note:** If the same user credentials are valid for other databases in the external data source, that user can query those databases through the same connection resource.
 
 7.  Click **Create connection** .
 
@@ -200,8 +194,6 @@ You can grant the service agent associated with the connection the [Cloud SQL Cl
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
     
@@ -224,7 +216,7 @@ Provide the following values:
   - `  PROJECT_ID  ` : Your Google Cloud project ID.
   - `  SERVICE_AGENT_ID  ` : The service agent ID taken from the [connection information](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
 
-**Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#view-access) .
+> **Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#view-access) .
 
 ## Share connections with users
 
@@ -241,8 +233,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 

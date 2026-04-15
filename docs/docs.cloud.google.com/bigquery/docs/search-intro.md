@@ -1,6 +1,6 @@
 # Introduction to search in BigQuery
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 BigQuery search indexes let you use GoogleSQL to efficiently find unique data elements that are buried in unstructured text and semi-structured JSON data, without having to know the table schemas in advance.
 
@@ -8,7 +8,7 @@ With search indexes, BigQuery provides a powerful columnar store and text search
 
 BigQuery stores and manages your indexes, so that when data becomes available in BigQuery, you can immediately retrieve it with the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or [other operators and functions](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) , such as the equal ( `=` ), `IN` , or `LIKE` operators and certain string and JSON functions. To optimize your searches, read about [best practices](https://docs.cloud.google.com/bigquery/docs/search#best_practices) .
 
-**Important:** Join the [Search discussion group](https://groups.google.com/g/bq-search) to post questions and comments, and to follow the latest updates.
+> **Important:** Join the [Search discussion group](https://groups.google.com/g/bq-search) to post questions and comments, and to follow the latest updates.
 
 ## Use cases
 

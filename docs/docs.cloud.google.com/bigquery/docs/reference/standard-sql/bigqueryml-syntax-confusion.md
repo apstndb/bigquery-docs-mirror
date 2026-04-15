@@ -53,7 +53,7 @@ ML.CONFUSION_MATRIX(
 
   - `  TRIAL_ID  ` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
 
-**Note:** `ML.CONFUSION_MATRIX` requires input data with some models, and returns an error if it is absent. If this occurs, provide input data when using `ML.CONFUSION_MATRIX` with these models.
+> **Note:** `ML.CONFUSION_MATRIX` requires input data with some models, and returns an error if it is absent. If this occurs, provide input data when using `ML.CONFUSION_MATRIX` with these models.
 
 ## Output
 

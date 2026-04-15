@@ -94,8 +94,6 @@ To load JSON data from Cloud Storage into a new BigQuery table:
 
 In the Google Cloud console, go to the **BigQuery** page.
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
-
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -133,17 +131,15 @@ In the **Create table** pane, specify the following details:
       - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) .
 6.  Click **Create table** .
 
-**Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
-  
-After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+> **Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
+>   
+> After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
 
 ### SQL
 
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads a JSON file into the new table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -280,7 +276,7 @@ The following command loads data from `gs://mybucket/mydata.json` into a table n
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-**Note:** When you specify the schema using the bq tool, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#specifying_a_schema_file) instead.
+> **Note:** When you specify the schema using the bq tool, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#specifying_a_schema_file) instead.
 
 The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard. The schema is auto detected.
 
@@ -818,13 +814,11 @@ You can append or overwrite a table by using one of the following:
   - The `jobs.insert` API method and configuring a `load` job
   - The client libraries
 
-**Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
+> **Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
 
 ### Console
 
 In the Google Cloud console, go to the **BigQuery** page.
-
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -868,8 +862,6 @@ In the **Create table** pane, specify the following details:
 Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends a JSON file to the table `mytable` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

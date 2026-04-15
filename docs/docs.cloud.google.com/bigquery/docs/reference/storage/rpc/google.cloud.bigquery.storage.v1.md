@@ -437,7 +437,7 @@ IPC-serialized Arrow RecordBatch.
 
 `int64`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 \[Deprecated\] The count of rows in `serialized_record_batch` . Please use the format-independent ReadRowsResponse.row\_count instead.
 
@@ -529,7 +529,7 @@ Binary serialized rows in a block.
 
 `int64`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 \[Deprecated\] The count of rows in the returning block. Please use the format-independent ReadRowsResponse.row\_count instead.
 

@@ -115,8 +115,6 @@ To create a YouTube Channel data transfer:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -180,7 +178,7 @@ Where:
   - parameters contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For YouTube Channel data transfers, you must supply the `table_suffix` parameter. You may optionally set the `configure_jobs` parameter to `true` to allow the BigQuery Data Transfer Service to manage YouTube reporting jobs for you. If there are YouTube reports that don't exist for your channel, new reporting jobs are created to enable them.
   - data\_source is the data source — `youtube_channel` .
 
-**Caution:** You cannot configure notifications using the command-line tool.
+> **Caution:** You cannot configure notifications using the command-line tool.
 
 You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
@@ -193,7 +191,7 @@ For example, the following command creates a YouTube Channel data transfer named
     --params='{"table_suffix":"MT","configure_jobs":"true"}' \
     --data_source=youtube_channel
 
-**Caution:** When you create a YouTube Channel transfer using the command-line tool, the transfer configuration is set up using the [default value](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#connector_overview) for **Schedule** .
+> **Caution:** When you create a YouTube Channel transfer using the command-line tool, the transfer configuration is set up using the [default value](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#connector_overview) for **Schedule** .
 
 ### API
 
@@ -253,7 +251,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-**Note:** If you are setting up YouTube reporting jobs for the first time, you will experience a delay of up to 48 hours before your first reports are ready. For more information, see [Create a reporting job](https://developers.google.com/youtube/reporting/v1/reports/#step-3-create-a-reporting-job) in the YouTube Reporting API documentation.
+> **Note:** If you are setting up YouTube reporting jobs for the first time, you will experience a delay of up to 48 hours before your first reports are ready. For more information, see [Create a reporting job](https://developers.google.com/youtube/reporting/v1/reports/#step-3-create-a-reporting-job) in the YouTube Reporting API documentation.
 
 ## Query your data
 

@@ -157,7 +157,7 @@ The first few rows of output look similar to the following:
 
 Anomalies occur when the `time_series_data` is below the `lower_bound` or above the `upper_bound` . To visualize the results, in the **Query results** pane click **Visualization** .
 
-**Note:** The time displayed in the visualization is shown in the `America/Los_Angeles` time zone.
+> **Note:** The time displayed in the visualization is shown in the `America/Los_Angeles` time zone.
 
 ![Visualization of time series data with lower and upper bounds](https://docs.cloud.google.com/static/bigquery/images/anomaly-detection-graph.png)
 

@@ -8,6 +8,7 @@ BigQuery continuous queries are SQL statements that run continuously. Continuous
   - The [`tabledata.insertAll` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll)
   - [Batch load](https://docs.cloud.google.com/bigquery/docs/batch-loading-data)
   - The [`INSERT` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
+  - Mutating [data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) such as `DELETE` , `UPDATE` , and `MERGE` when [exporting data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
   - Writes from the [results of a batch query to a permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table)
   - Writes from the [results of a BigQuery continuous query to a permanent table](https://docs.cloud.google.com/bigquery/docs/continuous-queries#write-bigquery)
   - A [Pub/Sub BigQuery subscription](https://docs.cloud.google.com/pubsub/docs/bigquery)
@@ -30,7 +31,7 @@ Common use cases where you might want to use continuous queries are as follows:
   - **Data enrichment and entity extraction** : use continuous queries to perform real-time data enrichment and transformation by using SQL functions and ML models.
   - **Reverse extract-transform-load (ETL)** : perform real-time reverse ETL into other storage systems more suited for low latency application serving. For example, analyzing or enhancing event data that is written to BigQuery, and then streaming it to Bigtable or Spanner for application serving.
 
-## Supported operations
+## Supported functionality
 
 The following operations are supported in continuous queries:
 
@@ -63,7 +64,26 @@ The following operations are supported in continuous queries:
 
   - Using stateless GoogleSQL functions—for example, [conversion functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions) . In stateless functions, each row is processed independently from other rows in the table.
 
-  - Using the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to start continuous query processing from a specific point in time.
+  - Using [stateful operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) —for example [`JOIN` s, aggregations, and window aggregations](https://docs.cloud.google.com/bigquery/docs/continuous-queries#join-agg-window-example) . In stateful operations, the state of ingested data is retained across multiple rows or time intervals in order to compute an accurate result.
+
+  - Using the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to process appended data from a specific point in time.
+
+  - Using the [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) change history function to process changed data, including both appends and mutations, from a specific point in time when [exporting data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) . However, `CHANGES` is not supported when using a [stateful operation](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) .
+
+## Supported stateful operations
+
+> ****
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To request support or provide feedback for this feature, send an email to <bq-continuous-queries-feedback@google.com> .
+
+Stateful operations let continuous queries perform complex analysis that requires retaining information across multiple rows or time intervals. While stateless functions process each row independently, stateful operations maintain the state of ingested data to support functions like [`JOIN` s, aggregations, and window aggregations](https://docs.cloud.google.com/bigquery/docs/continuous-queries#join-agg-window-example) . This capability lets you correlate events from different streams or calculate metrics over time—such as a 30-minute average—by storing necessary data in memory while the query runs.
+
+Continuous queries support the following stateful operations:
+
+  - [JOINs](https://docs.cloud.google.com/bigquery/docs/continuous-query-joins)
+  - [Aggregations and windowing](https://docs.cloud.google.com/bigquery/docs/window-aggregations)
 
 ## Authorization
 
@@ -77,22 +97,9 @@ For a list of supported regions, see [BigQuery continuous query locations](https
 
 Continuous queries are subject to the following limitations:
 
-  - BigQuery continuous queries don't maintain the state of ingested data. Common operations that rely on state, such as a `JOIN` , aggregation function, or window function, aren't supported.
+  - The state of ingested data is only maintained for the specific [stateful operations in Preview](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) . While continuous queries now support some types of `JOIN` s, aggregations, and window aggregations, these are restricted to specific stateful operations. Not all types of stateful operations are supported.
 
-  - You can't use the following SQL capabilities in a continuous query:
-    
-      - [`JOIN` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types)
-    
-      - [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions)
-    
-      - [Approximate aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions)
-    
-      - The following [query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) clauses:
-        
-          - [`GROUP BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause)
-          - [`HAVING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#having_clause)
-          - [`ORDER BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause)
-          - [`LIMIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
+  - You can't use the following SQL capabilities in a continuous query, unless they are listed as a [supported stateful operation](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) :
     
       - The following [query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) operators:
         
@@ -110,9 +117,9 @@ Continuous queries are subject to the following limitations:
     
       - [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions)
     
-      - [Windowing functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls)
+      - [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls)
     
-      - BigQuery ML functions other than those listed in [Supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations)
+      - BigQuery ML functions other than those listed in [Supported functionality](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality)
     
       - [Data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
     
@@ -134,7 +141,7 @@ Continuous queries are subject to the following limitations:
       - [Wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
       - [Change Data Capture (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture) data.
       - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
-      - [Views](https://docs.cloud.google.com/bigquery/docs/views) that are defined by other continuous query limitations, such as `JOIN` operations, aggregate functions, change data capture-enabled tables.
+      - [Views](https://docs.cloud.google.com/bigquery/docs/views) that are defined by other continuous query limitations, such as `JOIN` operations, aggregate functions, user-defined functions or change data capture-enabled tables.
 
   - Continuous queries don't support the [column-](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) security features.
 
@@ -146,7 +153,7 @@ Continuous queries are subject to the following limitations:
 
   - You can't modify the SQL used in a continuous query while the continuous query job is running. For more information, see [Modify the SQL of a continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries#modify_the_sql_of_a_continuous_query) .
 
-  - If a continuous query job falls behind in processing incoming data and has an [output watermark lag](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) of more than 48 hours, then it fails. You can run the query again and use the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to resume processing from the point in time at which you stopped the previous continuous query job. For more information, see [Start a continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) .
+  - If a continuous query job falls behind in processing incoming data and has an [output watermark lag](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) of more than 48 hours, then it fails. You can run the query again and use the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) or [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) change history function to resume processing from the point in time at which you stopped the previous continuous query job. For more information, see [Start a continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) .
 
   - A continuous query configured with a user account can run for up to two days. A continuous query configured with a service account can run for up to 150 days. When the maximum query runtime is reached, the query fails and stops processing incoming data.
 

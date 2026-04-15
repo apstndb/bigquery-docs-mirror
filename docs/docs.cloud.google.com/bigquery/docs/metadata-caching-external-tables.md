@@ -1,6 +1,6 @@
 # Metadata caching for external tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes how to use metadata caching (also known as *column metadata indexing* ) to improve query performance on object tables and some types of BigLake tables.
 
@@ -91,8 +91,6 @@ The following limitations apply to the metadata cache:
     ### Console
     
     1.  Go to the **BigQuery** page.
-        
-        [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     2.  Select a tab in the Editor.
     

@@ -79,7 +79,7 @@ Before you create a Campaign Manager data transfer:
     
     `dcdt_-dcm_account123456`
     
-    The Google Cloud team doesn't have the ability to generate or grant access to Campaign Manager DTv2 files on your behalf. Contact Campaign Manager [support](https://support.google.com/campaignmanager/answer/9026876?&ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2) , your agency, or your Campaign Manager reseller for access to Campaign Manager DTv2 files.
+    > The Google Cloud team doesn't have the ability to generate or grant access to Campaign Manager DTv2 files on your behalf. Contact Campaign Manager [support](https://support.google.com/campaignmanager/answer/9026876?&ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2) , your agency, or your Campaign Manager reseller for access to Campaign Manager DTv2 files.
 
   - If you intend to set up transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
@@ -150,8 +150,6 @@ Contact [Campaign Manager support](https://support.google.com/campaignmanager/an
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -217,7 +215,7 @@ Where:
   - parameters contains the parameters for the created data transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For Campaign Manager, you must supply the `bucket` and `network_id` parameters. `bucket` is the Cloud Storage bucket that contains your Campaign Manager DTv2 files. `network_id` is your network, floodlight, or advertiser ID.
   - data\_source is the data source — `dcm_dt` (Campaign Manager).
 
-**Caution:** You cannot configure notifications using the command-line tool.
+> **Caution:** You cannot configure notifications using the command-line tool.
 
 You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
@@ -237,7 +235,7 @@ After running the command, you receive a message like the following:
 
 Follow the instructions and paste the authentication code on the command line.
 
-**Caution:** When you create a Campaign Manager data transfer using the command-line tool, the transfer configuration is set up using the default value for **Schedule** (every 8 hours).
+> **Caution:** When you create a Campaign Manager data transfer using the command-line tool, the transfer configuration is set up using the default value for **Schedule** (every 8 hours).
 
 ### API
 
@@ -302,7 +300,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-**Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
+> **Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
 
 ## Troubleshoot Campaign Manager transfer setup
 
@@ -318,7 +316,7 @@ If you query your tables directly instead of using the auto-generated views, you
 
 You can use the following Campaign Manager sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Campaign Manager data with BigQuery. For additional questions on what you can do with these reports, contact your Campaign Manager technical representative.
 
-**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+> **Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 In each of the following queries, replace the variables like dataset with your values.
 

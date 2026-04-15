@@ -1,6 +1,6 @@
 # Introduction to object tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes object tables, which are read-only tables over unstructured data objects that reside in Cloud Storage.
 
@@ -16,7 +16,7 @@ You can use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.co
 
 To learn more about creating object tables, see [Create object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) .
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 ## Object table schema
 
@@ -291,13 +291,13 @@ The following organizational roles are typically involved in managing and using 
 
 Data lake administrators are responsible for creating connections and sharing them with data warehouse administrators. In turn, data warehouse administrators create tables, set appropriate access controls, and share the tables with data analysts.
 
-**Caution:** Data analysts should **not** have the following:
-
-  - The ability to read objects directly from Cloud Storage (see the [Storage Object Viewer IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) ), which lets data analysts circumvent access controls placed by data warehouse administrators.
-
-  - The ability to bind tables to connections (like the BigQuery Connection Administrator).
-    
-    Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
+> **Caution:** Data analysts should **not** have the following:
+> 
+>   - The ability to read objects directly from Cloud Storage (see the [Storage Object Viewer IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) ), which lets data analysts circumvent access controls placed by data warehouse administrators.
+> 
+>   - The ability to bind tables to connections (like the BigQuery Connection Administrator).
+>     
+>     Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
 
 ## Supported object files
 

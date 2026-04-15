@@ -4,7 +4,7 @@ You purchase BI Engine capacity by creating a reservation. BI Engine is only ava
 
 When you use BI Engine, your charges are based on the BI Engine capacity you purchased for your project. BI Engine reservations are charged per GiB/hour, priced per region, see [BI Engine pricing](https://cloud.google.com/bigquery/pricing#bi_engine_pricing) .
 
-**Reservation project:** BI Engine reservations are managed by the billing project's ID. When purchasing a reservation, ensure that you specify the billing project ID and the region that will be used to query the data. This is not necessarily the same project that contains the dataset.
+> **Reservation project:** BI Engine reservations are managed by the billing project's ID. When purchasing a reservation, ensure that you specify the billing project ID and the region that will be used to query the data. This is not necessarily the same project that contains the dataset.
 
 ## Required roles
 
@@ -20,9 +20,7 @@ To reserve on-demand BI Engine capacity, follow these steps:
 
 1.  On the BigQuery page, in **Administration** , go to the **BI Engine** page.
     
-    [Go to BI Engine](https://console.cloud.google.com/bigquery/admin/bi-engine)
-    
-    **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
+    > **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
 2.  Click add **Create reservation** .
 
@@ -59,8 +57,6 @@ After you confirm your reservation, the details are displayed on the **Reservati
 Use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_bi_capacity_set_options_statement) to create or modify a BI Engine reservation.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -137,8 +133,6 @@ To modify an existing reservation, complete the following steps:
 To specify a set of tables for acceleration in an existing reservation, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the BigQuery navigation menu, click **BI Engine** .
     
@@ -169,8 +163,6 @@ To specify a set of tables for acceleration in an existing reservation, follow t
 You can use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_bi_capacity_set_options_statement) to create or modify a BI Engine reservation.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -201,8 +193,6 @@ To delete a capacity reservation, follow these steps:
 ### Console
 
 1.  On the BigQuery page, in **Administration** , go to the **BI Engine** page.
-    
-    [Go to BI Engine](https://console.cloud.google.com/bigquery/admin/bi-engine)
 
 2.  In the **Reservations** section, locate your reservation.
 
@@ -215,8 +205,6 @@ To delete a capacity reservation, follow these steps:
 Sets the options on BI Engine capacity.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

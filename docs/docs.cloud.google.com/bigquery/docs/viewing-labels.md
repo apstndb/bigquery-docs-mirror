@@ -74,8 +74,6 @@ To view a resource's labels, select one of the following options:
 Query the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets#schemata_options_view) to see the labels on a dataset, or the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) to see the labels on a table. For example, the following SQL query returns the labels on the dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -419,8 +417,6 @@ To see the labels on a job, select one of the following options:
 Query the [`INFORMATION_SCHEMA.JOB_BY_*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see the labels on a job. For example, the following SQL query returns the query text and labels on the jobs submitted by the current user in the current project:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -462,8 +458,6 @@ To see the labels on a reservation, select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -476,8 +470,6 @@ To see the labels on a reservation, select one of the following options:
 Query the [`INFORMATION_SCHEMA.RESERVATIONS` views](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) to see the labels on a reservation. For example, the following SQL query returns the reservation name and labels:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

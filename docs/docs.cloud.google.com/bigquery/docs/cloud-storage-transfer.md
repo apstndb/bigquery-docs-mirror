@@ -85,8 +85,6 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -106,7 +104,7 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
     
       - If you select **Event-driven** , you must also specify a **Pub/Sub subscription** . Choose your [subscription](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a subscription** . This option enables an [event-driven transfer](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer) that trigger transfer runs when events arrive at the Pub/Sub subscription.
         
-        **Note:** You must setup all [the required configurations](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer#gcs-event-driven-transfers) to enable an event-driven transfer.
+        > **Note:** You must setup all [the required configurations](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer#gcs-event-driven-transfers) to enable an event-driven transfer.
 
 6.  In the **Destination settings** section:
     
@@ -355,8 +353,6 @@ To trigger a data transfer:
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click sync\_alt **Data transfers** .
 

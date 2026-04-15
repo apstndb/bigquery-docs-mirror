@@ -11,8 +11,6 @@ By default, metadata indexing in BigQuery is a free background operation and req
 To see the last metadata index refresh time of a table, query the `LAST_METADATA_INDEX_REFRESH_TIME` column of the [`INFORMATION_SCHEMA.TABLE_STORAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) . To do so, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -67,8 +65,6 @@ After setting up your reservation, select one of the following methods to assign
 ### Console
 
 1.  In the Google Cloud console, go to the **Capacity Management** page.
-    
-    [Go to Capacity Management](https://console.cloud.google.com/bigquery/admin/reservations)
 
 2.  Click more\_vert **Reservation actions \> Create assignment** .
 
@@ -105,8 +101,6 @@ Replace the following:
 To assign a reservation to a project, use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery/)
 
 2.  In the query editor, enter the following statement:
     
@@ -159,8 +153,6 @@ To configure this alert for every background reservation, do the following:
 1.  Set up a [Monitoring notification channel](https://docs.cloud.google.com/monitoring/support/notification-options#creating_channels) if you haven't already.
 
 2.  Go to the **Integrations** page.
-    
-    [Go to Integrations](https://console.cloud.google.com/monitoring/integrations)
 
 3.  Find the **BigQuery** integration and click **View details** .
 
@@ -181,8 +173,6 @@ To configure this alert, do the following:
 1.  Set up a [Monitoring notification channel](https://docs.cloud.google.com/monitoring/support/notification-options#creating_channels) if you haven't already.
 
 2.  Go to the **Integrations** page.
-    
-    [Go to Integrations](https://console.cloud.google.com/monitoring/integrations)
 
 3.  Find the **BigQuery** integration and click **View details** .
 

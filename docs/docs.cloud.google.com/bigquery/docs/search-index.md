@@ -379,8 +379,6 @@ To index the tables in a project with a designated reservation, [create a reserv
 Use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -449,7 +447,7 @@ ORDER BY
 LIMIT 5;
 ```
 
-**Note:** You can't view information about indexing jobs run in the default shared slot pool.
+> **Note:** You can't view information about indexing jobs run in the default shared slot pool.
 
 #### Choose your reservation size
 

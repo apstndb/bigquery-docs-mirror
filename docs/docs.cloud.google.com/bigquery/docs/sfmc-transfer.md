@@ -115,8 +115,6 @@ Add Salesforce Marketing Cloud data into BigQuery by setting up a transfer confi
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 

@@ -6,7 +6,7 @@ When your Google Merchant Center reporting data is transferred to BigQuery, the 
 
 The data is written to a table named ` Products_ MERCHANT_ID  ` if you are using an individual Merchant ID, or ` Products_ AGGREGATOR_ID  ` if you're using an MCA account.
 
-**Note:** The `Products and product issues` data is not available immediately when the report is first requested. When you first request a transfer for a merchant or aggregator ID, there might be a delay of up to 1 day before the `Products_` table is available for exporting.
+> **Note:** The `Products and product issues` data is not available immediately when the report is first requested. When you first request a transfer for a merchant or aggregator ID, there might be a delay of up to 1 day before the `Products_` table is available for exporting.
 
 ## Schema
 
@@ -148,4 +148,4 @@ ORDER BY
   date DESC
 ```
 
-**Note:** This query constructs a unique key by using `merchant_id` and `product_id` . This is only required if you have an MCA account. When you use an MCA account, there is the potential for `product_id` collisions across multiple sub-accounts.
+> **Note:** This query constructs a unique key by using `merchant_id` and `product_id` . This is only required if you have an MCA account. When you use an MCA account, there is the potential for `product_id` collisions across multiple sub-accounts.

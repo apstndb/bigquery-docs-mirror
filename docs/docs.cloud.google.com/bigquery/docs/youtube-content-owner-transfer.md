@@ -135,8 +135,6 @@ To set up a YouTube Content Owner data transfer:
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console. Ensure that you are signed in to the account as either the Content Owner or Content Manager.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click **Transfers** .
 
@@ -214,7 +212,7 @@ Where:
   - data\_source is the data source — `youtube_content_owner` .
   - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#required_permissions) .
 
-**Caution:** You cannot configure notifications using the command-line tool.
+> **Caution:** You cannot configure notifications using the command-line tool.
 
 You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
@@ -227,7 +225,7 @@ For example, the following command creates a YouTube Content Owner data transfer
     --params='{"content_owner_id":"abCDE_8FghIjK","table_suffix":"MT","configure_jobs":"true"}' \
     --data_source=youtube_content_owner
 
-**Caution:** When you create a YouTube Content Owner data transfer using the command-line tool, the transfer configuration is set up using the [default value](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#connector_overview) for **Schedule** .
+> **Caution:** When you create a YouTube Content Owner data transfer using the command-line tool, the transfer configuration is set up using the [default value](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#connector_overview) for **Schedule** .
 
 ### API
 
@@ -290,7 +288,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-**Note:** If you are setting up YouTube reporting jobs for the first time, you will experience a delay of up to 48 hours before your first reports are ready. For more information, see [Create a reporting job](https://developers.google.com/youtube/reporting/v1/reports/#step-3-create-a-reporting-job) in the YouTube Reporting API documentation.
+> **Note:** If you are setting up YouTube reporting jobs for the first time, you will experience a delay of up to 48 hours before your first reports are ready. For more information, see [Create a reporting job](https://developers.google.com/youtube/reporting/v1/reports/#step-3-create-a-reporting-job) in the YouTube Reporting API documentation.
 
 ## Query your data
 

@@ -50,8 +50,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -101,8 +99,6 @@ Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/referen
 Aggregate the Wikipedia page view data for the [Google I/O](https://en.wikipedia.org/wiki/Google_I/O) page into a single table, grouped by day:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -127,8 +123,6 @@ Aggregate the Wikipedia page view data for the [Google I/O](https://en.wikipedia
 Create a model that forecasts daily page views for the Wikipedia "Google I/O" page, based on page view data before 2022 and taking built-in holidays into account:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -155,8 +149,6 @@ Create a model that forecasts daily page views for the Wikipedia "Google I/O" pa
 After you create the model using built-in holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -209,8 +201,6 @@ After you create the model using built-in holidays, join the original data from 
 As you can see in [Google I/O history](https://en.wikipedia.org/wiki/Google_I/O#History) , the Google I/O event occurred on different dates between 2017 and 2022. To take this variation into account, create a model that forecasts page views for the Wikipedia "Google\_I/O" page through 2022, based on page view data from before 2022, and using custom holidays to represent the Google I/O event each year. In this model, you also adjust the holiday effect window to cover three days around the event date, to better capture some potential page traffic before and after the event.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -258,8 +248,6 @@ As you can see in [Google I/O history](https://en.wikipedia.org/wiki/Google_I/O#
 After you create the model using custom holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -305,8 +293,6 @@ After you create the model using custom holidays, join the original data from th
 Inspect the list of holidays that were taken into account during modeling by using the [`ML.HOLIDAY_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info) :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -326,8 +312,6 @@ Inspect the list of holidays that were taken into account during modeling by usi
 Evaluate the effects of the custom holidays on the forecasted results by using the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -355,8 +339,6 @@ Evaluate the effects of the custom holidays on the forecasted results by using t
 Use the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to compare the performance of the first model created without custom holidays and the second model created with custom holidays. To see how the second model performs when it comes to forecasting a future custom holiday, set the time range to the week of Google I/O in 2022:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
@@ -407,16 +389,14 @@ Use the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/ref
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

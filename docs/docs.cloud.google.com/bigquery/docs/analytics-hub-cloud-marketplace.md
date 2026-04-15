@@ -36,8 +36,6 @@ To enable the Analytics Hub API, select one of the following options:
 
 Go to the **Analytics Hub API** page and enable the Analytics Hub API for your Google Cloud project.
 
-[Enable the API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com)
-
 ### gcloud
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
@@ -54,7 +52,7 @@ Cloud Marketplace-integrated listings have the following limitations:
 
   - All [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
   - BigQuery sharing publishers and subscribers must be located in a supported [Cloud Marketplace Agency Jurisdiction](https://cloud.google.com/terms/marketplace-agency-jurisdictions) .
-  - Cloud Marketplace-integrated listings are indexed in [Data Catalog](https://docs.cloud.google.com/bigquery/docs/data-catalog) (deprecated) and [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , but you can't specifically filter for its resource type.
+  - Cloud Marketplace-integrated listings are indexed in [Data Catalog](https://docs.cloud.google.com/bigquery/docs/data-catalog) (deprecated) and [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , but you can't specifically filter for its resource type.
   - Billing usage metrics for Cloud Marketplace-integrated listings aren't captured in provider usage metrics or in [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
   - Data clean rooms and Pub/Sub topics aren't supported for Cloud Marketplace integration.
 
@@ -81,14 +79,12 @@ When subscribing to a Cloud Marketplace-integrated listing, a linked resource is
 To create a BigQuery sharing listing and publish it on Cloud Marketplace, do the following:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Create a new [sharing data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) . Alternatively, choose an existing data exchange to retain existing subscriptions.
 
 3.  Create [listings in the data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) . Alternatively, choose existing listings to retain existing subscriptions.
     
-    **Note:** Both requesting access and Cloud Marketplace-integrated flows are supported on a single BigQuery sharing listing. This means that you can create a Cloud Marketplace-integrated listing from an existing (offline) commercial listing, without any disruptions to existing subscriptions.
+    > **Note:** Both requesting access and Cloud Marketplace-integrated flows are supported on a single BigQuery sharing listing. This means that you can create a Cloud Marketplace-integrated listing from an existing (offline) commercial listing, without any disruptions to existing subscriptions.
 
 4.  In the row of your data exchange, click more\_vert **More actions \> List on Marketplace** . You are redirected to the Cloud Marketplace Producer Portal.
 
@@ -120,7 +116,7 @@ To offboard a Cloud Marketplace-integrated listing, do the following:
 
 1.  In the Producer Portal, [request deprecation of your listing](https://docs.cloud.google.com/marketplace/docs/partners/deprecate-product#product-deprecation) .
     
-    **Note:** Standard product deprecation requires a notice period of at least 180 days for existing customers.
+    > **Note:** Standard product deprecation requires a notice period of at least 180 days for existing customers.
 
 2.  Wait for the deprecation date to pass. After the deprecation date passes, the Cloud Marketplace listing is permanently deleted.
 
@@ -130,7 +126,7 @@ Once a BigQuery sharing listing has been fully offboarded, it functions as a sta
 
 ### Delete a Cloud Marketplace-integrated listing
 
-**Warning:** We strongly recommend [offboarding a Cloud Marketplace-integrated listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace#offboard-listing) instead of deleting the Cloud Marketplace-integrated listing. Once you delete a Cloud Marketplace-integrated listing, you can't undo it. Deleting Cloud Marketplace-integrated listings might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
+> **Warning:** We strongly recommend [offboarding a Cloud Marketplace-integrated listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace#offboard-listing) instead of deleting the Cloud Marketplace-integrated listing. Once you delete a Cloud Marketplace-integrated listing, you can't undo it. Deleting Cloud Marketplace-integrated listings might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 
 To delete a Cloud Marketplace-integrated listing from BigQuery sharing and Cloud Marketplace, do the following:
 
@@ -143,8 +139,6 @@ To delete a Cloud Marketplace-integrated listing from BigQuery sharing and Cloud
 To subscribe to a BigQuery sharing listing on Cloud Marketplace, do the following:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click search **Search listings** .
 

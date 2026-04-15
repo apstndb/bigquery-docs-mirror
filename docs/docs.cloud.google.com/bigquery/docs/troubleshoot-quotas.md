@@ -30,7 +30,7 @@ In general, quota limits fall into two categories, indicated by the `reason` fie
 
   - **`quotaExceeded` .** This value indicates a longer-term limit. If you reach a longer-term quota limit, you should wait 10 minutes or longer before trying the operation again. If you consistently reach one of these longer-term quota limits, you should analyze your workload for ways to mitigate the issue. Mitigations can include optimizing your workload or requesting a quota increase.
 
-**Note:** Some quotas are expressed as daily quotas. For example, there is a daily quota on the number of [load jobs per table](https://docs.cloud.google.com/bigquery/quotas#load_jobs) . However, these quotas replenish incrementally over a 24-hour period, so you don't need to wait a full 24 hours after reaching the limit.
+> **Note:** Some quotas are expressed as daily quotas. For example, there is a daily quota on the number of [load jobs per table](https://docs.cloud.google.com/bigquery/quotas#load_jobs) . However, these quotas replenish incrementally over a 24-hour period, so you don't need to wait a full 24 hours after reaching the limit.
 
 For `quotaExceeded` errors, examine the error message to understand which quota limit was exceeded. Then, analyze your workload to see if you can avoid reaching the quota.
 
@@ -310,7 +310,7 @@ To resolve this error, do the following:
 
 BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email. For more information, see the [**Maximum number of API requests per second per user per method** rate limit](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
 
-**Note:** The BigQuery API rate limits don't apply to streaming inserts API requests.
+> **Note:** The BigQuery API rate limits don't apply to streaming inserts API requests.
 
 **Error message**
 
@@ -344,8 +344,6 @@ If you have not identified the method that has reached this rate limit, do the f
 Some API calls log errors in BigQuery audit logs in Cloud Logging. To identify the method that reached the limit, do the following:
 
 1.  In the Google Cloud console, go to the Google Cloud navigation menu menu and then select **Logging** \> **Logs Explorer** for your project:
-    
-    [Go to the Logs Explorer](https://console.cloud.google.com/logs/query)
 
 2.  Filter logs by running the following query:
     
@@ -515,8 +513,6 @@ Metadata table updates can originate from *API calls* that modify a table's meta
 ##### Identify API calls
 
 1.  Go to the Google Cloud navigation menu menu, and then select **Logging \> Logs Explorer** :
-    
-    [Go to the Logs Explorer](https://console.cloud.google.com/logs/query)
 
 2.  Filter logs to view table operations by running the following query:
     

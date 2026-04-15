@@ -2,7 +2,7 @@
 
 The `INFORMATION_SCHEMA.CAPACITY_COMMITMENTS` view contains a near real-time list of all current capacity commitments within the administration project. Each row represents a single, current capacity commitment. A current capacity commitment is either pending or active and has not been deleted. For more information about reservation, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
 
-**Note:** The view names `INFORMATION_SCHEMA.CAPACITY_COMMITMENTS` and `INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT` are synonymous and can be used interchangeably.
+> **Note:** The view names `INFORMATION_SCHEMA.CAPACITY_COMMITMENTS` and `INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required permission
 
@@ -46,8 +46,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 

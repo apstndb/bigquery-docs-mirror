@@ -97,7 +97,9 @@ For example:
 <pre dir="ltr" data-is-upgraded="" data-syntax="JSON" translate="no"><code>    JSON &#39;{&quot;FIELD1&quot;: &quot;VALUE1&quot;, &quot;FIELD2&quot;: &quot;VALUE2&quot;}&#39; as MY_COLUMN_FAMILY
     </code></pre>
 Where values VALUE1 and VALUE2 are written to Bigtable as columns FIELD1 and FIELD2 to the column family MY_COLUMN_FAMILY .
-<strong>Note:</strong> A JSON document nested in another <code dir="ltr" translate="no">JSON</code> or <code dir="ltr" translate="no">STRUCT</code> type is written to Bigtable as a string. Exporting a <code dir="ltr" translate="no">STRUCT</code> value nested in another struct is subject to limitations explained in the <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#bigtable_options">Configure exports with <code dir="ltr" translate="no">bigtable_options</code></a> section.</td>
+<blockquote>
+<strong>Note:</strong> A JSON document nested in another <code dir="ltr" translate="no">JSON</code> or <code dir="ltr" translate="no">STRUCT</code> type is written to Bigtable as a string. Exporting a <code dir="ltr" translate="no">STRUCT</code> value nested in another struct is subject to limitations explained in the <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#bigtable_options">Configure exports with <code dir="ltr" translate="no">bigtable_options</code></a> section.
+</blockquote></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">STRUCT</code></td>
@@ -294,7 +296,7 @@ Bob
 
 Exporting to Bigtable merges new values into the table instead of replacing entire rows. If values are already present in Bigtable for a row key, then new values can partially or fully override earlier values depending on the column family, column names, and timestamps of the cells being written.
 
-**Caution:** Avoid exporting results that have multiple rows with different values for the same row key, column family, column qualifier, and timestamp. The outcome of such an export is non-deterministic and depends on the query plan and scheduling inside BigQuery. BigQuery cannot determine whether the value overridden during the export existed in Bigtable before export or was previously inserted by the same export process.
+> **Caution:** Avoid exporting results that have multiple rows with different values for the same row key, column family, column qualifier, and timestamp. The outcome of such an export is non-deterministic and depends on the query plan and scheduling inside BigQuery. BigQuery cannot determine whether the value overridden during the export existed in Bigtable before export or was previously inserted by the same export process.
 
 ## Export multiple columns as Protocol Buffer (Protobuf) values
 

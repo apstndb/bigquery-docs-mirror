@@ -59,9 +59,9 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ## Copy datasets
 
-**Beta**
-
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Beta**
+> 
+> This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can copy a dataset, including partitioned data within a region or across regions, without extracting, moving, or reloading data into BigQuery. BigQuery uses the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) in the backend to copy datasets. For location considerations when you transfer data, see [Data location and transfers](https://docs.cloud.google.com/bigquery/docs/dts-locations) .
 
@@ -138,8 +138,6 @@ Select one of the following options:
 ### Console
 
 1.  [Enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) for your destination dataset.
-    
-    [Enable the BigQuery Data Transfer Service API](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
 
 2.  Ensure that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/managing-datasets#required-roles) .
     
@@ -154,8 +152,6 @@ Select one of the following options:
 To create a one-time transfer, use the BigQuery copy function:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -182,8 +178,6 @@ To create a one-time transfer, use the BigQuery copy function:
 To schedule recurring copies and configure email or Pub/Sub notifications, use the BigQuery Data Transfer Service in the Google Cloud console of the destination project:
 
 1.  Go to the **Data transfers** page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click **Create a transfer** .
 
@@ -197,7 +191,7 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
         
         If you select **Custom** , enter a custom frequency—for example, `every day 00:00` . For more information, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
         
-        **Note:** The minimum frequency between copy jobs is 12 hours.
+        > **Note:** The minimum frequency between copy jobs is 12 hours.
     
     2.  For **Start date and run time** , enter the date and time to start the transfer. If you choose **Start now** , this option is disabled.
 
@@ -402,8 +396,6 @@ To avoid additional storage costs, consider [deleting the prior dataset](https:/
 To see the status and view details of a dataset copy job in the Google Cloud console, do the following:
 
 1.  In the Google Cloud console, go to the **Data transfers** page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Select a transfer for which you want to view the transfer details, and then do the following:
     
@@ -448,8 +440,6 @@ To delete a dataset, select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -461,7 +451,7 @@ To delete a dataset, select one of the following options:
 
 5.  In the **Delete dataset** dialog, type `delete` into the field, and then click **Delete** .
 
-**Note:** When you delete a dataset using the Google Cloud console, the tables are automatically removed.
+> **Note:** When you delete a dataset using the Google Cloud console, the tables are automatically removed.
 
 ### SQL
 
@@ -470,8 +460,6 @@ To delete a dataset, use the [`DROP SCHEMA` DDL statement](https://docs.cloud.go
 The following example deletes a dataset named `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

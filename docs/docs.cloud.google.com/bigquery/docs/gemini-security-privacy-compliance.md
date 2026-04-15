@@ -18,7 +18,7 @@ The following diagram shows the components of the Gemini in BigQuery architectur
 
 ![Chart of Gemini in BigQuery global and EU and US jurisdictions.](https://docs.cloud.google.com/static/bigquery/images/ginbq-region-jurisdictions.svg)
 
-**Important:** Gemini in BigQuery processes data in the `US` or `EU` jurisdictions where the data resides. Data outside these jurisdictions is processed globally. To learn more about where Gemini in BigQuery processes your data, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
+> **Important:** Gemini in BigQuery processes data in the `US` or `EU` jurisdictions where the data resides. Data outside these jurisdictions is processed globally. To learn more about where Gemini in BigQuery processes your data, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
 
 ### How Gemini in BigQuery processes data
 
@@ -26,7 +26,7 @@ When a user uses Gemini in BigQuery, a prompt and its relevant context are sent 
 
 1.  **Prompt.** A user enters a prompt as a natural language question, such as "Show me the top 5 customers by sales last quarter". Or, a user types a partial SQL or Python snippet in the Google Cloud console in BigQuery Studio with Gemini in BigQuery enabled.
 2.  **Contextualization.** Gemini in BigQuery accesses the relevant metadata and schema of your BigQuery tables to add context to the user's prompt. Contextual information can include sampling data from tables and job histories. Gemini in BigQuery only has access to the resources to which the user has access.
-3.  **Gemini processing.** The prompt and contextual information are sent to Gemini's LLMs for processing. Gemini in BigQuery doesn't retain or store contextual information. Gemini in BigQuery uses the existing BigQuery context that is stored in Dataplex Universal Catalog and Spanner. This information resides in the same location as your data. Gemini generates a response, such as a SQL query, a data insight, or a Python code snippet.
+3.  **Gemini processing.** The prompt and contextual information are sent to Gemini's LLMs for processing. Gemini in BigQuery doesn't retain or store contextual information. Gemini in BigQuery uses the existing BigQuery context that is stored in Knowledge Catalog and Spanner. This information resides in the same location as your data. Gemini generates a response, such as a SQL query, a data insight, or a Python code snippet.
 4.  **Response.** The response is returned to the BigQuery interface. The user can then run the generated code, modify it, or continue to iterate on the response by using Gemini. You can provide feedback from Gemini in BigQuery in the Google Cloud console. To learn more about providing feedback, see [Provide feedback](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#provide_feedback_2) .
 
 ## Security controls

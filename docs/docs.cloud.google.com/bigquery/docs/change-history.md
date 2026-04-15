@@ -1,10 +1,10 @@
 # Work with change history
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** For support during the preview, contact <bq-change-history-feedback@google.com> .
+> **Note:** For support during the preview, contact <bq-change-history-feedback@google.com> .
 
 BigQuery change history lets you track the history of changes to a BigQuery table. You can use GoogleSQL [functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in) to see particular types of changes made during a specified time range, so that you can process incremental changes made to a table. Understanding what changes have been made to a table can help you do things like incrementally maintain a table replica outside of BigQuery while avoiding costly copies.
 

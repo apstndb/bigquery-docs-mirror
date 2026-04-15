@@ -441,7 +441,9 @@ This API allows users to manage their data transfers into BigQuery.
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc ScheduleTransferRuns(              ScheduleTransferRunsRequest            </code> ) returns ( <code dir="ltr" translate="no">             ScheduleTransferRunsResponse            </code> )</p>
 <p>Creates transfer runs for a time range [start_time, end_time]. For each date - or whatever granularity the data source supports - in the range, one transfer run is created. Note that runs are created per UTC time in the time range. DEPRECATED: use StartManualTransferRuns instead.</p>
 <dl>
@@ -602,7 +604,7 @@ Required. Data transfer configuration to create.
 
 `string`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated: Authorization code was required when `transferConfig.dataSourceId` is 'youtube\_channel' but it is no longer used in any data sources. Use `version_info` instead.
 
@@ -682,7 +684,7 @@ Api auth scopes for which refresh token needs to be obtained. These are scopes n
 
 `  TransferType  `
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated. This field has no effect.
 
@@ -690,7 +692,7 @@ Deprecated. This field has no effect.
 
 `bool`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated. This field has no effect.
 
@@ -2263,7 +2265,7 @@ Objects.
 
 ## TransferType
 
-This item is deprecated\!
+> This item is deprecated\!
 
 DEPRECATED. Represents data transfer type.
 
@@ -2325,7 +2327,7 @@ Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) p
 
 `string`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated: Authorization code was required when `transferConfig.dataSourceId` is 'youtube\_channel' but it is no longer used in any data sources. Use `version_info` instead.
 

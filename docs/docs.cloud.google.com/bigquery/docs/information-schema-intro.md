@@ -131,7 +131,7 @@ The BigQuery `INFORMATION_SCHEMA` views are read-only, system-defined views that
 
 <sup>†</sup> For `*BY_PROJECT` views, the `BY_PROJECT` suffix is optional. For example, querying `INFORMATION_SCHEMA.JOBS_BY_PROJECT` and `INFORMATION_SCHEMA.JOBS` return the same results.
 
-**Note:** Not all `INFORMATION_SCHEMA` views are supported for [BigQuery Omni system tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) . You can view resource metadata with `INFORMATION_SCHEMA` for [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#view_resource_metadata) and [Azure Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#view_resource_metadata_with_information_schema) .
+> **Note:** Not all `INFORMATION_SCHEMA` views are supported for [BigQuery Omni system tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) . You can view resource metadata with `INFORMATION_SCHEMA` for [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#view_resource_metadata) and [Azure Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#view_resource_metadata_with_information_schema) .
 
 ## Pricing
 
@@ -147,9 +147,9 @@ You are not charged storage fees for the `INFORMATION_SCHEMA` views.
 
 An `INFORMATION_SCHEMA` view needs to be qualified with a dataset or region.
 
-**Note:** You must [specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) to query an `INFORMATION_SCHEMA` view. Querying an `INFORMATION_SCHEMA` view fails with the following error if the location of the query execution doesn't match the location of the dataset or regional qualifier used:  
-
-    Table myproject: region-us.INFORMATION_SCHEMA.[VIEW] not found in location US
+> **Note:** You must [specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) to query an `INFORMATION_SCHEMA` view. Querying an `INFORMATION_SCHEMA` view fails with the following error if the location of the query execution doesn't match the location of the dataset or regional qualifier used:  
+> 
+>     Table myproject: region-us.INFORMATION_SCHEMA.[VIEW] not found in location US
 
 ### Dataset qualifier
 

@@ -16,8 +16,6 @@ The setup on Google Cloud requires creating the VPC network, the customer gatewa
 ### Create the VPC network
 
 1.  In the Google Cloud console, go to the **VPC networks** page.
-    
-    [Go to VPC networks](https://console.cloud.google.com/networking/networks/list)
 
 2.  Click add **Create VPC network** .
 
@@ -31,11 +29,9 @@ For more information, see [Create and manage VPC networks](https://docs.cloud.go
 
 ### Create the VPN gateway
 
-**Note:** The following steps describe how to create a [Classic VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create a high-availability (HA) VPN instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
+> **Note:** The following steps describe how to create a [Classic VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create a high-availability (HA) VPN instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
 
 1.  In the Google Cloud console, go to the **Cloud VPN gateways** page.
-    
-    [Go to Cloud VPN gateways](https://console.cloud.google.com/hybrid/vpn?tab=gateways)
 
 2.  Click **Create VPN gateway** .
 
@@ -73,8 +69,6 @@ For more information, see [Create a gateway and tunnel](https://docs.cloud.googl
 To attach the network to the Private Service Connect, do the following:
 
 1.  In the Google Cloud console, go to the **Private Service Connect** page.
-    
-    [Go to Private Service Connect](https://console.cloud.google.com/net-services/psc/list)
 
 2.  Select the resource that you want to attach to the network.
 

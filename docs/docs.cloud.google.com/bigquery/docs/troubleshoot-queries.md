@@ -176,8 +176,6 @@ If you still can't find the reason to explain slower than expected query perform
 To use Gemini Cloud Assist to help you [identify the cause of a query failure](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#analyze_jobs) , do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  On the Google Cloud toolbar, click spark **Open or close Gemini Cloud Assist chat** .
 
@@ -464,7 +462,7 @@ When addressing these errors, consider the following:
 
 To give permission to access a table or view, see [Grant access to a table or view](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_table_or_view) .
 
-**Note:** If the user account or service account is impacted by a deny policy, you may receive an `Access denied` error even if the account has the correct permissions. For more information, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
+> **Note:** If the user account or service account is impacted by a deny policy, you may receive an `Access denied` error even if the account has the correct permissions. For more information, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
 
 ### Permission `bigquery.reservations.use` denied on reservation
 

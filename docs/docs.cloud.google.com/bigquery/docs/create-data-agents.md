@@ -1,10 +1,10 @@
 # Create data agents
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
 This document describes how to create, edit, manage, and delete data agents in BigQuery.
 
@@ -19,8 +19,6 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,geminidataanalytics.googleapis.com,cloudaicompanion.googleapis.com)
 
 ### Required roles
 
@@ -44,17 +42,15 @@ To work with BigQuery resources, such as viewing tables or running queries, see 
 
 ## Best practices
 
-When using conversational analytics, queries are automatically run to answer your questions. You might incur unforeseen charges in the following cases:
+Conversational analytics automatically runs queries on your behalf to answer your questions. Consider the following factors that might increase query cost:
 
-  - If your tables are large
-  - If the queries use data joins
-  - If the queries make a lot of calls to AI functions
-
-To prevent this issue, consider size when selecting knowledge sources, and when having conversations, consider using joins.
+  - Large table sizes
+  - Use of data joins in queries
+  - Frequent calls to AI functions within queries
 
 ### Generate insights
 
-You can optionally [generate data insights](https://docs.cloud.google.com/dataplex/docs/data-insights) in Dataplex Universal Catalog for any table that you want to use as a knowledge source.
+You can optionally [generate data insights](https://docs.cloud.google.com/dataplex/docs/data-insights) in Knowledge Catalog for any table that you want to use as a knowledge source.
 
 Generated insights provide table metadata that the data agent can use to help generate responses to your questions.
 
@@ -67,8 +63,6 @@ If you're unfamiliar with configuring agents for conversational analytics, you c
 To view the sample agent, do the following:
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent catalog** tab.
 
@@ -80,13 +74,11 @@ The following sections describe how to create a data agent.
 
 After you create an agent, you can [edit its settings](https://docs.cloud.google.com/bigquery/docs/create-data-agents#edit-agent) .
 
-**Note:** If you're in a conversation with a data source, you can also [create an agent](https://docs.cloud.google.com/bigquery/docs/create-conversations#create-agent-from-conversation) from that conversation.
+> **Note:** If you're in a conversation with a data source, you can also [create an agent](https://docs.cloud.google.com/bigquery/docs/create-conversations#create-agent-from-conversation) from that conversation.
 
 ### Configure basics
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent catalog** tab.
 
@@ -141,7 +133,7 @@ Follow these steps to configure table and field descriptions:
 
 ### Configure advanced features
 
-Configure optional advanced features such as agent instructions, verified queries (previously known as *golden queries* ), BigQuery custom glossary terms, and agent settings. You can also review business glossary terms imported from Dataplex Universal Catalog.
+Configure optional advanced features such as agent instructions, verified queries (previously known as *golden queries* ), BigQuery custom glossary terms, and agent settings. You can also review business glossary terms imported from Knowledge Catalog.
 
 #### Create agent instructions
 
@@ -235,12 +227,12 @@ To create a verified query for the data agent, formerly known as a *golden query
 
 #### Create or review glossary terms
 
-You can create BigQuery custom glossary terms local to an agent, or review business glossary terms imported from Dataplex Universal Catalog that apply to the knowledge sources that you selected for an agent.
+You can create BigQuery custom glossary terms local to an agent, or review business glossary terms imported from Knowledge Catalog that apply to the knowledge sources that you selected for an agent.
 
-  - Because business glossary terms from Dataplex Universal Catalog apply globally to BigQuery resources, if you use Dataplex Universal Catalog, [create and manage](https://docs.cloud.google.com/dataplex/docs/manage-glossaries) business glossary terms in Dataplex Universal Catalog instead of for individual agents.
-  - If you need to modify business glossary terms imported from Dataplex Universal Catalog, you must edit them in Dataplex Universal Catalog and return to conversational analytics to see them.
-  - BigQuery custom glossary terms stay in BigQuery. They don't appear in Dataplex Universal Catalog.
-  - If you're not using Dataplex Universal Catalog, you can create BigQuery custom glossary terms for terms that you need to define for a specific agent.
+  - Because business glossary terms from Knowledge Catalog apply globally to BigQuery resources, if you use Knowledge Catalog, [create and manage](https://docs.cloud.google.com/dataplex/docs/manage-glossaries) business glossary terms in Knowledge Catalog instead of for individual agents.
+  - If you need to modify business glossary terms imported from Knowledge Catalog, you must edit them in Knowledge Catalog and return to conversational analytics to see them.
+  - BigQuery custom glossary terms stay in BigQuery. They don't appear in Knowledge Catalog.
+  - If you're not using Knowledge Catalog, you can create BigQuery custom glossary terms for terms that you need to define for a specific agent.
 
 Follow these steps to create custom glossary terms for an agent:
 
@@ -252,12 +244,12 @@ Follow these steps to create custom glossary terms for an agent:
     3.  If you want to delete the new term, click **Delete** .
 4.  To create more custom terms, repeat these steps.
 
-Follow these steps to view business glossary terms imported from Dataplex Universal Catalog:
+Follow these steps to view business glossary terms imported from Knowledge Catalog:
 
 1.  In the **Glossary** section of the agent **Editor** page, click **Add term** .
-2.  Navigate to the page section called **Imported from Dataplex Universal Catalog** .
-3.  To modify imported terms in Dataplex Universal Catalog, you must click the link "Go to Dataplex Universal Catalog glossaries."
-4.  After you've modified the terms in Dataplex Universal Catalog, you can return to the agent **Editor** page to view the modified terms.
+2.  Navigate to the page section called **Imported from Knowledge Catalog** .
+3.  To modify imported terms in Knowledge Catalog, you must click the link "Go to Knowledge Catalog glossaries."
+4.  After you've modified the terms in Knowledge Catalog, you can return to the agent **Editor** page to view the modified terms.
 
 #### Configure settings
 
@@ -328,8 +320,6 @@ You can find existing agents in the **Agent Catalog** tab, which consists of thr
 Follow these steps to edit a data agent:
 
 1.  Go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 
@@ -352,8 +342,6 @@ Follow these steps to edit a data agent:
 Follow these steps to share a published data agent. You can't share draft agents.
 
 1.  Go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 
@@ -386,8 +374,6 @@ Follow these steps to share a published data agent. You can't share draft agents
 ### Delete a data agent
 
 1.  Go to the BigQuery **Agents** page.
-    
-    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 

@@ -10,7 +10,7 @@ You can transfer data into BigQuery in the following ways:
 
   - Create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) of external Amazon S3, Apache Iceberg, or Salesforce Data Cloud data in a BigQuery dataset so that the data is available locally in BigQuery.
 
-**Note:** If you want to transfer large files from Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into BigQuery tables on a scheduled basis, use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . If you want to read and process data before transferring data into BigQuery tables, use the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) .
+> **Note:** If you want to transfer large files from Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into BigQuery tables on a scheduled basis, use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . If you want to read and process data before transferring data into BigQuery tables, use the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) .
 
 ## Quotas and limits
 
@@ -187,7 +187,7 @@ Now, using the `CREATE TABLE AS SELECT` statement you can selectively load data 
     WHERE
       EXTRACT(YEAR FROM l_commitdate) = 1992;
 
-**Note:** If you get a `ResourceExhausted` error, retry after some time. If the issue persists, you can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+> **Note:** If you get a `ResourceExhausted` error, retry after some time. If the issue persists, you can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 You can then perform a join operation with the newly created table:
 
@@ -291,8 +291,6 @@ Select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

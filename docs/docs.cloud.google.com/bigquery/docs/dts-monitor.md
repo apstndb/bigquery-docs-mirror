@@ -15,8 +15,6 @@ To create custom dashboards, set up alerts, and query metrics with Monitoring, y
 ### View transfer data in Metrics Explorer
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  In the navigation pane, click **Metrics Explorer** .
 
@@ -41,8 +39,6 @@ To create custom dashboards, set up alerts, and query metrics with Monitoring, y
 You can define [Monitoring alerts](https://docs.cloud.google.com/monitoring/alerts) for BigQuery Data Transfer Service metrics:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  In the navigation pane, select **Alerting \> Create policy** .
     
@@ -63,8 +59,6 @@ For more information about alerting policies and concepts, see [Introduction to 
 You can create custom dashboards over BigQuery Data Transfer Service metrics:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  In the navigation pane, select **Dashboards \> Create Dashboard** .
 
@@ -170,8 +164,6 @@ The Logs Viewer role ( `roles/logging.viewer` ) gives you read-only access to al
 ### View logs
 
 To view logs, go to the **Logs Explorer** page.
-
-[Go to Logs Explorer](https://console.cloud.google.com/logs)
 
 BigQuery Data Transfer Service logs are indexed first by the transfer configuration and then by the individual transfer run.
 

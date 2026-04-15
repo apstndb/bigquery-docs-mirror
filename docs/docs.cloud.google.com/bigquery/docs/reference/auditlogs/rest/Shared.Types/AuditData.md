@@ -1400,7 +1400,7 @@ The total number of slot-ms consumed by the query job.
 
 ` object ( JobStatistics.ReservationResourceUsage  ` )
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated as of 12/15/2022.
 

@@ -22,8 +22,6 @@ Enable the BigQuery Connection API.
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigqueryconnection.googleapis.com)
-
 ### Required roles and permissions
 
 To work with default connections, use the following Identity and Access Management (IAM) roles:
@@ -83,7 +81,7 @@ To configure the default connection for the first time, use one of the following
       - **Name:** `__default_cloudresource_connection__`
       - **Type:** `CLOUD_RESOURCE`
 
-**Important:** Use of a default connection can extend additional privileges to users. For example, if an administrator uses the default connection to create an object table, the default connection's service account is granted the Storage Legacy Bucket Reader and Storage Legacy Object Reader roles on the appropriate Cloud Storage bucket. Any user that has been granted access to use the connection can then also access that Cloud Storage bucket with the permissions granted to these roles.
+> **Important:** Use of a default connection can extend additional privileges to users. For example, if an administrator uses the default connection to create an object table, the default connection's service account is granted the Storage Legacy Bucket Reader and Storage Legacy Object Reader roles on the appropriate Cloud Storage bucket. Any user that has been granted access to use the connection can then also access that Cloud Storage bucket with the permissions granted to these roles.
 
 ## Set the default connection for a project
 

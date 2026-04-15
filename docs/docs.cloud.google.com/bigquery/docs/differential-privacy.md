@@ -1,6 +1,6 @@
 This document provides general information about differential privacy for BigQuery. For syntax, see the [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) . For a list of functions that you can use with this syntax, see [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .
 
-**Note:** In this topic, the privacy parameters in the examples aren't recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
+> **Note:** In this topic, the privacy parameters in the examples aren't recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
 ## What is differential privacy?
 
@@ -43,9 +43,9 @@ With GoogleSQL for BigQuery, you can transform the results of a query with diffe
 
 The final result is a dataset where each group has noisy aggregate results and small groups have been eliminated.
 
-**Note:** BigQuery relies on [Google's open source differential privacy library](https://github.com/google/differential-privacy) to implement differential privacy functionality. The library provides low-level differential privacy primitives that you can use to implement end-to-end privacy systems. For additional information on guarantees, see [Limitations on privacy guarantees](https://docs.cloud.google.com/bigquery/docs/differential-privacy#privacy_guarantees) .
+> **Note:** BigQuery relies on [Google's open source differential privacy library](https://github.com/google/differential-privacy) to implement differential privacy functionality. The library provides low-level differential privacy primitives that you can use to implement end-to-end privacy systems. For additional information on guarantees, see [Limitations on privacy guarantees](https://docs.cloud.google.com/bigquery/docs/differential-privacy#privacy_guarantees) .
 
-**Note:** BigQuery additionally supports differential privacy for BigQuery Omni data sources, including Amazon Simple Storage Service (Amazon S3). BigQuery remote functions can also call external differential privacy libraries like [Tumult Analytics](https://docs.tmlt.dev/analytics/latest/index.html) .
+> **Note:** BigQuery additionally supports differential privacy for BigQuery Omni data sources, including Amazon Simple Storage Service (Amazon S3). BigQuery remote functions can also call external differential privacy libraries like [Tumult Analytics](https://docs.tmlt.dev/analytics/latest/index.html) .
 
 For additional context on what differential privacy is and its use cases, see the following articles:
 

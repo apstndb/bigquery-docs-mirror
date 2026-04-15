@@ -211,11 +211,11 @@ Quantiles are typically defined in two ways:
 
   - For a positive integer `q` , `q` -quantiles are a set of values that partition an input set into `q` subsets of nearly equal size. Some of these have specific names: the single 2-quantile is the median, the 4-quantiles are quartiles, the 100-quantiles are percentiles, etc. KLL functions additionally return the (exact) minimum and the maximum of the input, so when querying for the 2-quantiles, three values are returned.
     
-    **Tip:** To extract a set of `q` -quantiles where `q` is the `number` argument, use the `MERGE` and `EXTRACT` functions in the `KLL_QUANTILES.*` functions.
+    > **Tip:** To extract a set of `q` -quantiles where `q` is the `number` argument, use the `MERGE` and `EXTRACT` functions in the `KLL_QUANTILES.*` functions.
 
   - Alternatively, quantiles might be considered individual `Φ` -quantiles, where `Φ` is a real number with `0 <= Φ <= 1` . The `Φ` -quantile `x` is an element of the input such that a `Φ` fraction of the input is less than or equal to `x` , and a `(1-Φ)` fraction is greater than or equal to `x` . In this notation, the median is the 0.5-quantile, and the 95th percentile is the 0.95-quantile.
     
-    **Tip:** To extract individual `Φ` -quantiles, use the quantile-supporting `MERGE_POINT` and `EXTRACT_POINT` functions, where `Φ` is the `phi` argument.
+    > **Tip:** To extract individual `Φ` -quantiles, use the quantile-supporting `MERGE_POINT` and `EXTRACT_POINT` functions, where `Φ` is the `phi` argument.
 
 For example, you can use a quantiles-supporting sketch to get the median of the number of times an application is opened by users.
 

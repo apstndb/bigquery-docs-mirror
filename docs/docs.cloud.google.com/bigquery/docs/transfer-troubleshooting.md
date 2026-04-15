@@ -106,8 +106,6 @@ The following are some common permission errors that you can encounter when you 
     **Resolution:** Verify that the service agent role is granted with the following steps:
     
     1.  In the Google Cloud console, go to the **IAM & Admin** page.
-        
-        [Go to IAM & Admin](https://console.cloud.google.com/iam-admin/iam?project=)
     
     2.  Select the **Include Google-provided role grants** checkbox.
     
@@ -127,8 +125,6 @@ The following are some common permission errors that you can encounter when you 
     **Resolution:**
     
     1.  In the Google Cloud console, go to the **BigQuery** page.
-        
-        [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     2.  Click the destination dataset used in the transfer.
     
@@ -144,8 +140,6 @@ The following are some common permission errors that you can encounter when you 
     **Resolution:**
     
     1.  In the Google Cloud console, go to the **Data Transfers** page.
-        
-        [Go to Data Transfers](https://console.cloud.google.com/bigquery/transfers?project=)
     
     2.  Click the failed transfer, then select the **Configuration** tab.
     
@@ -192,8 +186,6 @@ The following are common issues you might encounter when creating an event-drive
     **Resolution:** Verify that the BigQuery Data Transfer Service [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) is granted the [`pubsub.subscriber` role](https://docs.cloud.google.com/iam/docs/roles-permissions/pubsub#pubsub.subscriber) :
     
     1.  In the Google Cloud console, go to the **Pub/Sub** page.
-        
-        [Go to Pub/Sub](https://console.cloud.google.com/cloudpubsub/subscription/list?project=)
     
     2.  Select the Pub/Sub subscription that you used in the event-driven transfer.
     
@@ -209,8 +201,6 @@ The following are common issues you might encounter when creating an event-drive
     **Resolution:** Verify that Cloud Pub/Sub API is enabled for your project:
     
     1.  In the Google Cloud console, go to the **APIs & Services** page.
-        
-        [Go to APIs & Services](https://console.cloud.google.com/apis/dashboard?project=)
     
     2.  Click **Enable APIs and services** .
     
@@ -220,8 +210,6 @@ The following are common issues you might encounter when creating an event-drive
     **Resolution:** Verify that the BigQuery Data Transfer Service [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) is granted the [`serviceusage.serviceUsageConsumer` role](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) :
     
     1.  In the Google Cloud console, go to the **IAM & Admin** page.
-        
-        [Go to IAM & Admin](https://console.cloud.google.com/iam-admin/iam?project=)
     
     2.  Select the **Include Google-provided role grants** checkbox.
     
@@ -235,8 +223,6 @@ The following are common issues you might encounter when creating an event-drive
     **Resolution:** Verify that your Pub/Sub subscription specified in the transfer config is able to get messages published from Cloud Storage events:
     
     1.  In the Google Cloud console, go to the **Pub/Sub** page.
-        
-        [Go to Pub/Sub](https://console.cloud.google.com/cloudpubsub/subscription/list?project=)
     
     2.  Select the Pub/Sub subscription that you used in the event-driven transfer.
     
@@ -725,7 +711,7 @@ The following are common errors encountered when [creating a YouTube transfer](h
   - Error: `No reports for reporting job with name name .`  
     **Resolution:** This is not an error. It is a warning that indicates no data was found for the specified report. You can ignore this warning. Future transfers will continue to run.
 
-**Note:** For YouTube content managers, certain files are only available once a month. These monthly reports appear as 'missing' on other days. This is expected behavior. No action is required. If the report shouldn't be missing, contact YouTube support using the [Help forum](https://productforums.google.com/forum/#!forum/youtube) .
+> **Note:** For YouTube content managers, certain files are only available once a month. These monthly reports appear as 'missing' on other days. This is expected behavior. No action is required. If the report shouldn't be missing, contact YouTube support using the [Help forum](https://productforums.google.com/forum/#!forum/youtube) .
 
   - Issue: The resulting tables created by the transfer are incomplete, or the results are unexpected.  
     **Resolution:** If you have multiple accounts, you must choose the correct account when you receive the YouTube permissions dialog.
@@ -735,7 +721,7 @@ The following are common errors encountered when [creating a YouTube transfer](h
     
     **Resolution:** If the reported numbers are indeed incorrect, then both YouTube's system and BigQuery Data Transfer Service YouTube transfer are set up to backfill missing numbers and make them available in new generated reports for the backfilled days. Because a BigQuery Data Transfer Service YouTube configuration loads all available reports created by YouTube Reporting API, when BigQuery transfer automatically imports future generated YouTube Reports, it will also account for the newly generated and updated data, and ingest it into the correct Date partition table.
     
-    **Note:** YouTube data for a given day should be made available in YouTube Analytics at most 24-48 hours after the end of that day (sometimes longer). Therefore proceeding generated YouTube Reports and BigQuery Transfers also follow this delay.
+    > **Note:** YouTube data for a given day should be made available in YouTube Analytics at most 24-48 hours after the end of that day (sometimes longer). Therefore proceeding generated YouTube Reports and BigQuery Transfers also follow this delay.
 
 ### YouTube permissions issues
 

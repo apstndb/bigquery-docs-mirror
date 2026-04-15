@@ -24,11 +24,11 @@ Notebooks in BigQuery offer the following benefits:
 
 ## Notebook gallery
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or to request product enhancements, contact <bigquery-notebook-gallery@google.com> .
+> **Note:** To provide feedback or to request product enhancements, contact <bigquery-notebook-gallery@google.com> .
 
 The notebook gallery is a central hub for discovering and using prebuilt notebook templates. These templates let you perform common tasks like data preparation, data analysis, and visualization. Notebook templates also help you explore BigQuery Studio features, manage workflows, and promote best practices.
 
@@ -39,8 +39,6 @@ The notebook gallery provides templates for every skill level. The gallery inclu
 To get started with the notebook gallery, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  From from the BigQuery Studio home page, click **View notebook gallery** .
     

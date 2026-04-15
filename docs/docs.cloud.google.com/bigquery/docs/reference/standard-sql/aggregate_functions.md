@@ -738,7 +738,7 @@ INT64
 
 Gets the number of rows in the input or the number of rows with an expression evaluated to any value other than `NULL` .
 
-**Note:** If you're querying a large dataset, you can compute results faster and save resources by using [HLL++ functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions) for approximate distinct counts. For more information, see [Sketches](https://docs.cloud.google.com/bigquery/docs/sketches) .
+> **Note:** If you're querying a large dataset, you can compute results faster and save resources by using [HLL++ functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions) for approximate distinct counts. For more information, see [Sketches](https://docs.cloud.google.com/bigquery/docs/sketches) .
 
 **Definitions**
 

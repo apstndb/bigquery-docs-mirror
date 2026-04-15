@@ -1,10 +1,10 @@
 # The AI.CLASSIFY function
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** For support during the preview, contact <bqml-feedback@google.com> .
+> **Note:** For support during the preview, contact <bqml-feedback@google.com> .
 
 This document describes the `AI.CLASSIFY` function, which uses a Vertex AI Gemini model to classify inputs into categories that you provide. BigQuery automatically [structures](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/structure-prompts) your input to improve the quality of the classification.
 
@@ -120,7 +120,7 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
     
         https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/gemini-3-pro-preview
     
-    **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
+    > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
 
   - `  OUTPUT_MODE  ` : a `STRING` value that indicates whether a single input can be classified into multiple categories. Specifying an output mode changes the return type of the function to `ARRAY<STRING>` . The supported values are the following:
     

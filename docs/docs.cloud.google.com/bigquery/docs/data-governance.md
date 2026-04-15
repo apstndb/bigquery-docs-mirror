@@ -11,24 +11,24 @@ Administrators, data stewards, data governance managers, and data custodians can
   - Ensure that data is used consistently and in compliance with organizational policies.
   - Share data at scale and in a secure fashion.
 
-BigQuery governance capabilities are powered by [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , a centralized inventory of all data assets in your organization. Dataplex Universal Catalog holds business, technical, and operational metadata for all of your data. It helps you discover relationships and semantics in the metadata by applying artificial intelligence and machine learning.
+BigQuery governance capabilities are powered by [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , a centralized inventory of all data assets in your organization. Knowledge Catalog holds business, technical, and operational metadata for all of your data. It helps you discover relationships and semantics in the metadata by applying artificial intelligence and machine learning.
 
 BigLake metastore lets you use multiple data processing engines to query a single copy of data with a single schema, without data duplication. The data processing engines that you can use include BigQuery, Apache Spark, Apache Flink, and Apache Hive. Your data can be stored in locations like BigQuery storage tables, BigLake tables for Apache Iceberg in BigQuery, or BigLake external tables.
 
-BigQuery supports an end-to-end data lifecycle, from discovery to use of data. Governance features are also available in Dataplex Universal Catalog.
+BigQuery supports an end-to-end data lifecycle, from discovery to use of data. Governance features are also available in Knowledge Catalog.
 
 ## Data discovery
 
-BigQuery discovers data across the organization in Google Cloud, whether the data is in BigQuery, Spanner, Cloud SQL, Pub/Sub, or Cloud Storage. The metadata is automatically extracted and stored in Dataplex Universal Catalog. For example, you can extract metadata for structured and unstructured data from Cloud Storage, and you can automatically create query-ready BigLake tables at scale. This lets you perform analytics with an open source engine without data duplication.
+BigQuery discovers data across the organization in Google Cloud, whether the data is in BigQuery, Spanner, Cloud SQL, Pub/Sub, or Cloud Storage. The metadata is automatically extracted and stored in Knowledge Catalog. For example, you can extract metadata for structured and unstructured data from Cloud Storage, and you can automatically create query-ready BigLake tables at scale. This lets you perform analytics with an open source engine without data duplication.
 
 You can also extract and catalog metadata from third-party data sources using custom connectors.
 
 BigQuery offers the following data discovery capabilities:
 
-  - **Search.** Search for data and AI resources across projects and the organization. Within BigQuery in the Google Cloud console, use [semantic search](https://docs.cloud.google.com/bigquery/docs/search-resources) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to search for resources by using everyday language. Or, find resources by using [keyword search](https://docs.cloud.google.com/dataplex/docs/search-assets) in Dataplex Universal Catalog.
+  - **Search.** Search for data and AI resources across projects and the organization. Within BigQuery in the Google Cloud console, use [semantic search](https://docs.cloud.google.com/bigquery/docs/search-resources) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to search for resources by using everyday language. Or, find resources by using [keyword search](https://docs.cloud.google.com/dataplex/docs/search-assets) in Knowledge Catalog.
   - **[Automatic discovery of Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/automatic-discovery) .** Scan for data in Cloud Storage buckets to extract and then catalog metadata. Automatic discovery creates tables for both structured and unstructured data.
-  - **[Metadata import](https://docs.cloud.google.com/dataplex/docs/managed-connectivity-overview) .** Import metadata at scale from third-party systems into Dataplex Universal Catalog. You can build custom connectors to extract data from your data sources, and then run managed connectivity pipelines that orchestrate the metadata import workflow.
-  - **[Metadata export](https://docs.cloud.google.com/dataplex/docs/export-metadata) .** Export metadata at scale out of Dataplex Universal Catalog. You can analyze the exported metadata with BigQuery, or integrate the metadata into custom applications or programmatic processing workflows.
+  - **[Metadata import](https://docs.cloud.google.com/dataplex/docs/managed-connectivity-overview) .** Import metadata at scale from third-party systems into Knowledge Catalog. You can build custom connectors to extract data from your data sources, and then run managed connectivity pipelines that orchestrate the metadata import workflow.
+  - **[Metadata export](https://docs.cloud.google.com/dataplex/docs/export-metadata) .** Export metadata at scale out of Knowledge Catalog. You can analyze the exported metadata with BigQuery, or integrate the metadata into custom applications or programmatic processing workflows.
 
 ## Curation and data stewardship
 

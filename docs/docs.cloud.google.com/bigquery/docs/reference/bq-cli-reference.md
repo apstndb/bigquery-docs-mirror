@@ -9,8 +9,6 @@ For a tutorial on using the bq command-line tool, see [Load and query data with 
 You can enter bq command-line tool commands in [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) either from the Google Cloud console or from a local installation of the [Google Cloud CLI](https://docs.cloud.google.com/sdk/docs) .
 
   - To use the bq command-line tool from the Google Cloud console, activate Cloud Shell:
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
   - To use the bq command-line tool locally, [install and configure the gcloud CLI](https://docs.cloud.google.com/sdk/docs/install) . To keep your installation current, see [Manage an installation](https://docs.cloud.google.com/sdk/docs/install#manage_an_installation) in the gcloud CLI documentation.
 
@@ -82,7 +80,7 @@ Replace the following:
 
 Some commands require the use of quotes around arguments. If quotes are required, either single or double quotes are acceptable. Arguments that require quotes are typically values that contain spaces, commas, or other special characters. If your argument contains a BigQuery resource, be sure to follow the [rules for specifying resource names](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#specify-resource) in commands.
 
-**Note:** The following examples use the `--nouse_legacy_sql` flag. This flag is required to run a GoogleSQL query from the command line unless you [set a default value in `.bigqueryrc`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) or [set the configuration setting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) `default_sql_dialect_option` to 'default\_legacy\_sql' at the project or organization level.
+> **Note:** The following examples use the `--nouse_legacy_sql` flag. This flag is required to run a GoogleSQL query from the command line unless you [set a default value in `.bigqueryrc`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) or [set the configuration setting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) `default_sql_dialect_option` to 'default\_legacy\_sql' at the project or organization level.
 
 This example shows how to run a GoogleSQL query on the command line:
 
@@ -159,7 +157,7 @@ You can set default values for command-line flags by including them in the bq co
 
 If the `--bigqueryrc` flag is not specified, then the `BIGQUERYRC` environment variable is used. If that is not specified, then the path `~/.bigqueryrc` is used. The default path is `$HOME/.bigqueryrc` .
 
-**Note:** Creating a `.bigqueryrc` file using the `bq init` command is not recommended.
+> **Note:** Creating a `.bigqueryrc` file using the `bq init` command is not recommended.
 
 ### How to add flags to `.bigqueryrc`
 
@@ -194,7 +192,7 @@ The preceding example sets default values for the following flags:
 
   - The `query` command-specific flag `--use_legacy_sql` is set to `false` to make GoogleSQL the default query syntax.
     
-    **Note:** You cannot use `--nouse_legacy_sql` in `.bigqueryrc` .
+    > **Note:** You cannot use `--nouse_legacy_sql` in `.bigqueryrc` .
 
   - The `query` command-specific flag `--max_rows` is set to `100` to control the number of rows in the query output.
 
@@ -291,7 +289,7 @@ You can use the following flags with any `bq` command, where applicable:
     
         --httplib2_debuglevel=1
     
-    **Note:** Multi-level debugging is not supported for this flag, so you can set `  DEBUG_LEVEL  ` to any positive number.
+    > **Note:** Multi-level debugging is not supported for this flag, so you can set `  DEBUG_LEVEL  ` to any positive number.
 
   - **` --job_id= JOB_ID  `**  
     Specifies a job identifier for a new job. This flag applies only to commands that create jobs: `cp` , `extract` , `load` , and `query` . If you don't use the `--job_id` flag, then the commands generate a unique job identifier. For more information, see [Running jobs programmatically](https://docs.cloud.google.com/bigquery/docs/running-jobs) .
@@ -314,7 +312,7 @@ You can use the following flags with any `bq` command, where applicable:
     
     All other commands ignore the `--location` flag.
     
-    **Note:** The `--location` flag was introduced in bq version 2.0.29. To verify the version of the bq command-line tool, enter `bq version` .
+    > **Note:** The `--location` flag was introduced in bq version 2.0.29. To verify the version of the bq command-line tool, enter `bq version` .
 
   - **` --max_rows_per_request= MAX_ROWS  `**  
     An integer that specifies the maximum number of rows to return per read.
@@ -368,7 +366,7 @@ This command is an alternative to the following three-step process:
 2.  Editing the policy file.
 3.  Using the [`bq set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command to update the policy with a new binding.
 
-**Note:** `bq add-iam-policy-binding` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
+> **Note:** `bq add-iam-policy-binding` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
 
 #### Synopsis
 
@@ -557,7 +555,7 @@ For more information about using the `bq extract` command, see [Exporting table 
 
 Use the `bq get-iam-policy` command to retrieve the [IAM policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy#binding) for a resource and print it to `stdout` . The resource can be a table, a view, or a [slot reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_reservations) . The policy is in JSON format.
 
-**Note:** `bq get-iam-policy` does not support datasets. To get the IAM policy of a dataset, see [View the access policy of a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#view_the_access_policy_of_a_dataset) .
+> **Note:** `bq get-iam-policy` does not support datasets. To get the IAM policy of a dataset, see [View the access policy of a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#view_the_access_policy_of_a_dataset) .
 
 #### Synopsis
 
@@ -735,7 +733,7 @@ The `bq load` command uses the following flags and arguments:
     
     Equivalent to the `WRITE_TRUNCATE` value for [`JobConfigurationLoad.writeDisposition`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) .
     
-    **Note:** You can use the [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement to remove all rows from a table without deleting the schema.
+    > **Note:** You can use the [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement to remove all rows from a table without deleting the schema.
 
   - **` --schema={ SCHEMA_FILE | SCHEMA  ` }**  
     Specifies either the path to a local JSON schema file or a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . If you use a schema file, don't add an extension to the filename.
@@ -1343,7 +1341,7 @@ Creates a table. The following flags are supported:
         
           - For multiple files in multiple buckets: `gs://mybucket1/*,gs://mybucket2/folder5/*` .
             
-            **Important:** If you specify more than one file, all of the files must have compatible schemas.
+            > **Important:** If you specify more than one file, all of the files must have compatible schemas.
             
             You can use wildcards to limit the files included in the BigLake table. For example, if the bucket contains several types of data, you could have the table only use PARQUET files by specifying `gs://bucket_name/*.parquet` . For more information about using wildcards, see [URI wildcards](https://docs.cloud.google.com/storage/docs/wildcards) .
     
@@ -1467,7 +1465,7 @@ Creates a transfer configuration. The following flags are supported:
   - `redshift` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
   - `on_premises` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
 
-**Note:** The `redshift` and `on_premises` values are for data migrations; before you use the `bq mk --transfer_config` command with these values, consult the linked documentation from the preceding list.
+> **Note:** The `redshift` and `on_premises` values are for data migrations; before you use the `bq mk --transfer_config` command with these values, consult the linked documentation from the preceding list.
 
   - **` --display_name= DISPLAY_NAME  `**  
     Specifies the display name for the transfer configuration.
@@ -1792,7 +1790,7 @@ The `bq query` command uses the following flags and arguments:
   - **`--replace={true|false}`**  
     To overwrite the destination table with the query results, set to `true` . Any existing data and schema are erased. Any Cloud KMS key is also removed, unless you specify the `--destination_kms_key` flag. The default value is `false` .
     
-    **Note:** To remove all rows from a table without deleting the schema, use the [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement.
+    > **Note:** To remove all rows from a table without deleting the schema, use the [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement.
 
   - **`--require_cache={true|false}`**  
     If specified, then run the query only if results can be retrieved from the cache.
@@ -1886,7 +1884,7 @@ This command is an alternative to the following three-step process:
 2.  Editing the policy file.
 3.  Using the [`bq set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command to update the policy without the binding.
 
-**Note:** `bq remove-iam-policy-binding` does not support datasets. To remove access to a dataset, see [Revoke access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
+> **Note:** `bq remove-iam-policy-binding` does not support datasets. To remove access to a dataset, see [Revoke access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
 
 #### Synopsis
 
@@ -1972,7 +1970,7 @@ The `etag` field in the updated policy must match the `etag` value of the curren
 
 You can obtain the current policy and `etag` value for a resource by using the [`bq get-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) command.
 
-**Note:** `bq set-iam-policy` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) or [Revoke access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
+> **Note:** `bq set-iam-policy` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) or [Revoke access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
 
 #### Synopsis
 
@@ -2287,7 +2285,7 @@ Use the `bq version` command to display the version number of your bq command-li
 
     bq version
 
-**Note:** You can see the version number of all components in your Google Cloud CLI installation by using the [`gcloud version`](https://docs.cloud.google.com/sdk/gcloud/reference/version) command.
+> **Note:** You can see the version number of all components in your Google Cloud CLI installation by using the [`gcloud version`](https://docs.cloud.google.com/sdk/gcloud/reference/version) command.
 
 ### `bq wait`
 

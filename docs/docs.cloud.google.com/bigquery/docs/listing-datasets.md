@@ -35,8 +35,6 @@ Select one of the following options:
 Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -331,8 +329,6 @@ By default, [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datase
 Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

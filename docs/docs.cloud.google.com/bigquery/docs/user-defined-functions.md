@@ -4,7 +4,7 @@ A user-defined function (UDF) lets you create a function by using a SQL expressi
 
 You can define UDFs as either persistent or temporary. You can reuse persistent UDFs across multiple queries, while temporary UDFs only exist in the scope of a single query.
 
-**Note:** Persistent UDFs are safe to call when shared between owners. UDFs cannot mutate data, talk to external systems, or send logs to Google Cloud Observability or similar applications.
+> **Note:** Persistent UDFs are safe to call when shared between owners. UDFs cannot mutate data, talk to external systems, or send logs to Google Cloud Observability or similar applications.
 
 To create a UDF, use the [`CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) statement. To delete a persistent user-defined function, use the [`DROP FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement) statement. Temporary UDFs expire as soon as the query finishes. The `DROP FUNCTION` statement is only supported for temporary UDFs in [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) and [procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
@@ -449,8 +449,6 @@ To add a description to a UDF, follow these steps:
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -473,8 +471,6 @@ To add a description to a UDF, follow these steps:
 To update the description of a function, recreate your function using the [`CREATE FUNCTION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) and set the `description` field in the `OPTIONS` list:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -493,7 +489,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ## Create custom masking routines
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 You can create UDFs for use with [custom masking routines](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask) . You should create dedicated datasets and set up proper IAM permissions for managing masking UDFs. Custom masking routines must meet the following requirements:
 

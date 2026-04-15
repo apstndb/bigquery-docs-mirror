@@ -10,7 +10,7 @@ To prepare and run a BigQuery migration assessment, follow these steps:
 
 1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
     
-    **Note:** [Use the `--pap` flag](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
+    > **Note:** [Use the `--pap` flag](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
 
 2.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse using the `dwh-migration-dumper` tool.
 
@@ -114,7 +114,7 @@ Replace the following:
 
 By default, the query logs are extracted from the view `dbc.QryLogV` and from the table `dbc.DBQLSqlTbl` . If you need to extract the query logs from an alternative location, you can specify the names of the tables or views by using the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags.
 
-**Tip:** To improve performance of joining tables that are specified by the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags, you can include an additional column of type `DATE` in the `JOIN` condition. This column must be defined in both tables and it must be part of the Partitioned Primary Index. To include this column, use the `-Dteradata-logs.log-date-column` flag.
+> **Tip:** To improve performance of joining tables that are specified by the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags, you can include an additional column of type `DATE` in the `JOIN` condition. This column must be defined in both tables and it must be part of the Partitioned Primary Index. To include this column, use the `-Dteradata-logs.log-date-column` flag.
 
 By default, the utility logs are extracted from the table `dbc.DBQLUtilityTbl` . If you need to extract the utility logs from an alternative location, you can specify the name of the table using the `-Dteradata-logs.utility-logs-table` flag.
 
@@ -267,11 +267,11 @@ dwh-migration-dumper \
 
 You can also generate multiple zip files containing query logs covering different periods and provide all of them for assessment.
 
-**Note:** Earlier versions of the `dwh-migration-dumper` tool preferred the `--password` option over `--iam-profile` . This option still works, but it is deprecated, and it might lead to some gaps in the report.
+> **Note:** Earlier versions of the `dwh-migration-dumper` tool preferred the `--password` option over `--iam-profile` . This option still works, but it is deprecated, and it might lead to some gaps in the report.
 
 ### Redshift Serverless
 
-**Preview:** BigQuery Migration Assessment for Amazon Redshift Serverless is in [Preview](https://cloud.google.com/products#product-launch-stages) . To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/e/1FAIpQLScr8inhgfdAFg5phMFjs9TQRTDuucmQ3vACzKgtRGmjmqlzdA/viewform) or send an email to <bq-edw-migration-support@google.com> .
+> **Preview:** BigQuery Migration Assessment for Amazon Redshift Serverless is in [Preview](https://cloud.google.com/products#product-launch-stages) . To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/e/1FAIpQLScr8inhgfdAFg5phMFjs9TQRTDuucmQ3vACzKgtRGmjmqlzdA/viewform) or send an email to <bq-edw-migration-support@google.com> .
 
 ### Requirements
 
@@ -412,9 +412,9 @@ You can also generate multiple zip files containing query logs covering non-over
 
 ### Oracle
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
 
@@ -469,9 +469,9 @@ Replace the following:
 
 ### Hadoop / Cloudera
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
 
@@ -591,9 +591,9 @@ To use the Hive connector, see the Apache Hive tab.
 
 ### Apache Hive
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 ### Requirements
 
@@ -713,7 +713,7 @@ If you already have other values for the following configuration keys, append th
       - `dwhassessment.hook.rollover-interval` : the frequency at which the file rollover must be performed. For example, `600s` . The default value is 3600 seconds (1 hour).
       - `dwhassessment.hook.rollover-eligibility-check-interval` : the frequency at which the file rollover eligibility check is triggered in the background. For example, `600s` . The default value is 600 seconds (10 minutes).
 
-**Important:** To apply the configuration changes, you must restart Hive services.
+> **Important:** To apply the configuration changes, you must restart Hive services.
 
 #### Verify the logging hook
 
@@ -737,9 +737,9 @@ You can also generate folders containing query logs from different Hive clusters
 
 ### Informatica
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
 
@@ -817,7 +817,7 @@ The limit for the total uncompressed size of all the query history files is 5 TB
 
 ### Redshift Serverless
 
-**Preview:** BigQuery Migration Assessment for Amazon Redshift Serverless is in [Preview](https://cloud.google.com/products#product-launch-stages) . To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/e/1FAIpQLScr8inhgfdAFg5phMFjs9TQRTDuucmQ3vACzKgtRGmjmqlzdA/viewform) or send an email to <bq-edw-migration-support@google.com> .
+> **Preview:** BigQuery Migration Assessment for Amazon Redshift Serverless is in [Preview](https://cloud.google.com/products#product-launch-stages) . To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/e/1FAIpQLScr8inhgfdAFg5phMFjs9TQRTDuucmQ3vACzKgtRGmjmqlzdA/viewform) or send an email to <bq-edw-migration-support@google.com> .
 
 Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
@@ -835,9 +835,9 @@ For more information about creating buckets and uploading files to Cloud Storage
 
 ### Oracle
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
@@ -847,9 +847,9 @@ For more information about creating buckets and uploading files to Cloud Storage
 
 ### Hadoop / Cloudera
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
@@ -859,9 +859,9 @@ For more information about creating buckets and uploading files to Cloud Storage
 
 ### Apache Hive
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Upload the metadata and folders containing query logs from one or multiple Hive clusters to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
@@ -873,9 +873,9 @@ Query logs folders have query history files with the `dwhassessment_` prefix. Th
 
 ### Informatica
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
@@ -912,7 +912,7 @@ To access and use the BigQuery Migration Service, you need the following permiss
   - `bigquerymigration.subtasks.get`
   - `bigquerymigration.subtasks.list`
 
-**Note:** You can only set the permissions and roles with the `bigquerymigration.*` prefix using the Google Cloud CLI. For information on how to set up and use the Google Cloud CLI, see the [gcloud CLI tool overview](https://docs.cloud.google.com/sdk/gcloud) .
+> **Note:** You can only set the permissions and roles with the `bigquerymigration.*` prefix using the Google Cloud CLI. For information on how to set up and use the Google Cloud CLI, see the [gcloud CLI tool overview](https://docs.cloud.google.com/sdk/gcloud) .
 
 To run the BigQuery Migration Service, you need the following additional permissions.
 
@@ -1039,8 +1039,6 @@ Before you run the assessment, you must enable the BigQuery Migration API and cr
 Enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
-    
-    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
@@ -1048,15 +1046,13 @@ Enable the BigQuery Migration API as follows:
 
 The BigQuery migration assessment writes the assessment results to tables in BigQuery. Before you begin, [create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to hold these tables. When you share the Looker Studio report, you must also give users permission to read this dataset. For more information, see [Make the report available to users](https://docs.cloud.google.com/bigquery/docs/migration-assessment#share_the_data_studio_report) .
 
-**Note:** The dataset should be in the same region as the Cloud Storage bucket containing the metadata and log files extracted from the source database. However, if the Cloud Storage bucket is located in a multi-region, then the dataset must be in any of the regions inside this multi-region.
+> **Note:** The dataset should be in the same region as the Cloud Storage bucket containing the metadata and log files extracted from the source database. However, if the Cloud Storage bucket is located in a multi-region, then the dataset must be in any of the regions inside this multi-region.
 
 ### Run the migration assessment
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu under `Migration` , click **Services** .
 
@@ -1075,7 +1071,7 @@ The BigQuery migration assessment writes the assessment results to tables in Big
           - Keep the **Automatically create the new BigQuery dataset** checkbox selected to have the BigQuery dataset created automatically. The name of the dataset is generated automatically.
           - Clear the **Automatically create the new BigQuery dataset** checkbox and either choose the existing empty BigQuery dataset using the format `projectId.datasetId` , or create a new dataset name. In this option you can choose the BigQuery dataset name.
         
-        **Important:** The Cloud Storage bucket location and the BigQuery dataset location must be in the same multi-region or in the location inside this multi-region. For more information on location constraints, see [Location considerations](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#data-locations) .
+        > **Important:** The Cloud Storage bucket location and the BigQuery dataset location must be in the same multi-region or in the location inside this multi-region. For more information on location constraints, see [Location considerations](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#data-locations) .
     
     **Option 1** - automatic BigQuery dataset generation (default) ![Assessment configuration dialog.](https://docs.cloud.google.com/static/bigquery/images/assessment-config.png)
     
@@ -1103,9 +1099,9 @@ The assessment creates tables in the BigQuery dataset you created earlier. You c
 
 #### Shareable aggregated assessment result
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 For Amazon Redshift, Teradata, and Snowflake assessments, in addition to the previously created BigQuery dataset, the workflow creates another lightweight dataset with the same name, plus the `_shareableRedactedAggregate` suffix. This dataset contains highly aggregated data that is derived from the output dataset, and contains no personally identifiable information (PII).
 
@@ -1359,7 +1355,7 @@ The **Migration path** section contains the following views:
 
 ### Redshift Serverless
 
-**Preview:** BigQuery Migration Assessment for Amazon Redshift Serverless is in [Preview](https://cloud.google.com/products#product-launch-stages) . To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/e/1FAIpQLScr8inhgfdAFg5phMFjs9TQRTDuucmQ3vACzKgtRGmjmqlzdA/viewform) or send an email to <bq-edw-migration-support@google.com> .
+> **Preview:** BigQuery Migration Assessment for Amazon Redshift Serverless is in [Preview](https://cloud.google.com/products#product-launch-stages) . To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/e/1FAIpQLScr8inhgfdAFg5phMFjs9TQRTDuucmQ3vACzKgtRGmjmqlzdA/viewform) or send an email to <bq-edw-migration-support@google.com> .
 
   - Migration Highlights  
     This report page shows the summary of existing Amazon Redshift Serverless databases including the size and number of tables. Additionally, it provides the high level estimate of the Annual Contract Value (ACV)—the cost of compute and storage in BigQuery. The Migration Highlights view provides an executive summary of the three sections of the report.
@@ -1458,9 +1454,9 @@ The **PoC** (proof of concept) section contains the following views:
 
 ### Oracle
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
@@ -1667,11 +1663,9 @@ The following example gets the total number of unique queries, the number of que
 
 After inspecting the dataset, if you would like to share it with a user that is not in your project, you can do so by utilizing the [publisher workflow of BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#publisher_workflow) .
 
-**Note:** There is no additional cost for managing [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) or listings in sharing.
+> **Note:** There is no additional cost for managing [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) or listings in sharing.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the dataset to view its details.
 

@@ -21,7 +21,7 @@ When you filter a `DataFrame` object using partial ordering mode, BigQuery DataF
 
 With both partial and strict ordering modes, you pay for the BigQuery resources you use. However, using partial ordering mode can lower costs when working with large clustered and partitioned tables. This cost reduction occurs because row filters on cluster and partition columns reduce the amount of data processed.
 
-**Note:** Partial ordering mode doesn't apply to the BigQuery API, the bq command-line tool, or Terraform, because BigQuery DataFrames is a client-side library.
+> **Note:** Partial ordering mode doesn't apply to the BigQuery API, the bq command-line tool, or Terraform, because BigQuery DataFrames is a client-side library.
 
 ### Enable partial ordering mode
 

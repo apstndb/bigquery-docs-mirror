@@ -45,7 +45,7 @@ Additionally, if you have the `bigquery.datasets.create` permission, you can cre
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-**Note:** To create or update an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) or a view in an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#create_or_update_view) , you need additional permissions. For more information, see [required permissions for authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) and [required permissions for views in authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#permissions_datasets) .
+> **Note:** To create or update an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) or a view in an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#create_or_update_view) , you need additional permissions. For more information, see [required permissions for authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) and [required permissions for views in authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#permissions_datasets) .
 
 ## View naming
 
@@ -77,8 +77,6 @@ To create a view:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -97,15 +95,13 @@ To create a view:
       - In the **Table** field, enter the name of the view.
       - Click **Save** .
 
-**Note:** When you create a view using Google Cloud console, you cannot add a label, description, or expiration time. You can add these optional properties when you create a view using the API or bq command-line tool. After you create a view using the Google Cloud console, you can add an expiration, description, and labels. For more information, see [Updating views](https://docs.cloud.google.com/bigquery/docs/updating-views) .
+> **Note:** When you create a view using Google Cloud console, you cannot add a label, description, or expiration time. You can add these optional properties when you create a view using the API or bq command-line tool. After you create a view using the Google Cloud console, you can add an expiration, description, and labels. For more information, see [Updating views](https://docs.cloud.google.com/bigquery/docs/updating-views) .
 
 ### SQL
 
 Use the [`CREATE VIEW` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) . The following example creates a view named `usa_male_names` from the USA names public dataset:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -135,7 +131,7 @@ If your query references external user-defined function (UDF) resources stored i
 
 If you are creating a view in a project other than your default project, specify the project ID using the `--project_id` flag.
 
-**Note:** The dataset that contains your view and the dataset that contains the tables referenced by the view must be in the same [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+> **Note:** The dataset that contains your view and the dataset that contains the tables referenced by the view must be in the same [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
     bq mk \
     --use_legacy_sql=false \
@@ -206,7 +202,7 @@ After the view is created, you can update the view's expiration, description, an
 
 Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -295,7 +291,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 

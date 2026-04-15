@@ -1,8 +1,8 @@
 # Introduction to BigQuery Omni
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 With BigQuery Omni, you can run BigQuery analytics on data stored in Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage using BigLake tables.
 
@@ -48,7 +48,7 @@ Query results can be returned to Google Cloud over a secure connection — for e
 
 BigQuery Omni uses standard AWS IAM roles or Azure Active Directory principals to access the data in your subscription. You delegate read or write access to BigQuery Omni, and you can revoke access at any time.
 
-**Note:** Write access is only required if you want to write query results back to your Amazon S3 bucket or Blob Storage container.
+> **Note:** Write access is only required if you want to write query results back to your Amazon S3 bucket or Blob Storage container.
 
 ### Data flow when querying data
 

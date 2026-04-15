@@ -28,7 +28,7 @@ Executes a query on an external database and returns the results as a temporary 
     
     For example, `projects/example-project/locations/us/connections/sql-bq` .
     
-    **Caution:** If you have a view that's shared across multiple projects where you use `EXTERNAL_QUERY` , always use the fully qualified connection ID (projects/ PROJECT\_ID /locations/ LOCATION /connections/ CONNECTION\_ID ), otherwise the wrong project might be used.
+    > **Caution:** If you have a view that's shared across multiple projects where you use `EXTERNAL_QUERY` , always use the fully qualified connection ID (projects/ PROJECT\_ID /locations/ LOCATION /connections/ CONNECTION\_ID ), otherwise the wrong project might be used.
 
   - <span id="external_query_options"></span> `options` : An optional string of a JSON format map with key value pairs of option name and value (both are case sensitive).
     

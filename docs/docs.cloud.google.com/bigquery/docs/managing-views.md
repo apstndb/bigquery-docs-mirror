@@ -37,7 +37,7 @@ Additionally, if you have the `bigquery.datasets.create` permission, you can upd
 
 To update the view's SQL query, you must also have permissions to query any tables referenced by the view's SQL query.
 
-**Note:** To update the SQL of an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , or a view in an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you must have the `bigquery.datasets.update` permission on the dataset that contains the view. You don't need this permission on the datasets that the view reads from or those that contain referenced UDFs. The methods used to update a view—for example, `CREATE OR REPLACE VIEW` —are identical for both standard and authorized views. Updating a view preserves its authorization status. That is, if a view is already authorized, it remains authorized after the update; if the view isn't authorized, the update results in a standard view. For more information, see the [required permissions for authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) and the [required permissions for views in authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#permissions_datasets) .
+> **Note:** To update the SQL of an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , or a view in an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you must have the `bigquery.datasets.update` permission on the dataset that contains the view. You don't need this permission on the datasets that the view reads from or those that contain referenced UDFs. The methods used to update a view—for example, `CREATE OR REPLACE VIEW` —are identical for both standard and authorized views. Updating a view preserves its authorization status. That is, if a view is already authorized, it remains authorized after the update; if the view isn't authorized, the update results in a standard view. For more information, see the [required permissions for authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views#required_permissions) and the [required permissions for views in authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#permissions_datasets) .
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -306,7 +306,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     view = client.update_table(view, ["view_query"])
     print(f"Updated {view.table_type}: {str(view.reference)}")
 
-**Note:** If you update the datasets referenced by the query of an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , you must [authorize the view](https://docs.cloud.google.com/bigquery/docs/authorized-views#manage_users_or_groups_for_authorized_views) access to any new underlying datasets.
+> **Note:** If you update the datasets referenced by the query of an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , you must [authorize the view](https://docs.cloud.google.com/bigquery/docs/authorized-views#manage_users_or_groups_for_authorized_views) access to any new underlying datasets.
 
 ### Updating a view's expiration time
 
@@ -320,7 +320,7 @@ At any point after the view is created, you can update the view's expiration tim
   - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
   - Using the client libraries
 
-**Note:** If you set an expiration time that has already passed, the view is deleted immediately.
+> **Note:** If you set an expiration time that has already passed, the view is deleted immediately.
 
 To update a view's expiration time:
 
@@ -347,8 +347,6 @@ To update a view's expiration time:
 Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -553,8 +551,6 @@ You cannot add a description when you create a view using the Google Cloud conso
 Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -741,7 +737,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can copy views in the datasets that you create. You also need access to the destination dataset unless you created it.
 
-**Note:** `bigquery.jobs.create` permissions are not required to copy a view. The Google Cloud console does not generate a copy job when you copy a view.
+> **Note:** `bigquery.jobs.create` permissions are not required to copy a view. The Google Cloud console does not generate a copy job when you copy a view.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -795,14 +791,14 @@ To automatically delete views after a specified period of time, set the default 
 
 When you delete an [authorized view](https://docs.cloud.google.com/bigquery/docs/share-access-views) , it might take up to 24 hours to remove the deleted view from the *authorized views* list of the source dataset.
 
-**Caution:** Deleting a view cannot be undone. If you recreate an authorized view with the same name as the deleted view, you must add the new view to the *authorized views* list of the source dataset.
+> **Caution:** Deleting a view cannot be undone. If you recreate an authorized view with the same name as the deleted view, you must add the new view to the *authorized views* list of the source dataset.
 
 Deleting a view also deletes any permissions associated with this view. When you recreate a deleted view, you must also manually [reconfigure any access permissions](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) previously associated with it.
 
-**Note:** You cannot recover views directly, but you can recover the view creation statement by searching for the corresponding [audit log activity](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) .
-
-  - For information about using the log explorer to query the activity log by audit log name, see the [audit logs overview](https://docs.cloud.google.com/logging/docs/audit) .
-  - For information about using `projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity` , see [BigQuery Data Policy audit logging](https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging) .
+> **Note:** You cannot recover views directly, but you can recover the view creation statement by searching for the corresponding [audit log activity](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) .
+> 
+>   - For information about using the log explorer to query the activity log by audit log name, see the [audit logs overview](https://docs.cloud.google.com/logging/docs/audit) .
+>   - For information about using `projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity` , see [BigQuery Data Policy audit logging](https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging) .
 
 ### Required permissions
 
@@ -827,8 +823,6 @@ To delete a view:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -847,8 +841,6 @@ To delete a view:
 Use the [`DROP VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_view_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -891,8 +883,6 @@ You can use the bq command-line tool to run `bq` commands.
 
 In the Google Cloud console, activate **Cloud Shell** .
 
-[Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
-
 Enter the following command to delete `myview` from `mydataset` . `mydataset` is in your default project.
 
     bq rm -t mydataset.myview
@@ -905,7 +895,7 @@ Enter the following command to delete `myview` from `mydataset` . `mydataset` is
 
     bq rm -f -t mydataset.myview
 
-**Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to confirm that a view was removed from a dataset.
+> **Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to confirm that a view was removed from a dataset.
 
 ### API
 

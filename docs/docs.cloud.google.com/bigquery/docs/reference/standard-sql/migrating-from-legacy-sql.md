@@ -1135,7 +1135,7 @@ In GoogleSQL, an equivalent query uses a table wildcard and the `BETWEEN` clause
 
 This function is equivalent to `TABLE_DATE_RANGE` , except that it fails with an error if any daily table in the sequence is missing.
 
-**Note:** If you don't need the query to fail when tables are missing, use the simpler `_TABLE_SUFFIX BETWEEN 'YYYYMMDD' AND 'YYYYMMDD'` filter, as shown in the [`TABLE_DATE_RANGE` migration example](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#the_table_date_range_function) .
+> **Note:** If you don't need the query to fail when tables are missing, use the simpler `_TABLE_SUFFIX BETWEEN 'YYYYMMDD' AND 'YYYYMMDD'` filter, as shown in the [`TABLE_DATE_RANGE` migration example](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#the_table_date_range_function) .
 
 **Detailed migration for the TABLE\_DATE\_RANGE\_STRICT function**
 
@@ -1304,7 +1304,7 @@ FROM
 
 In GoogleSQL, you can query the [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) view instead.
 
-**Note:** `INFORMATION_SCHEMA.PARTITIONS` is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see the [documentation](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) .
+> **Note:** `INFORMATION_SCHEMA.PARTITIONS` is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see the [documentation](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) .
 
 To migrate a query that uses `__PARTITIONS_SUMMARY__` and keep the output schema and error handling consistent, use the following GoogleSQL query:
 
@@ -1323,7 +1323,7 @@ WHERE
   table_name = 'TABLE_NAME';
 ```
 
-**Warning:** Partition-level `creation_time` isn't available in `INFORMATION_SCHEMA.PARTITIONS` and is set to `NULL` in the example. For table-level creation time, use the [`INFORMATION_SCHEMA.TABLES` `creation_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#schema) field.
+> **Warning:** Partition-level `creation_time` isn't available in `INFORMATION_SCHEMA.PARTITIONS` and is set to `NULL` in the example. For table-level creation time, use the [`INFORMATION_SCHEMA.TABLES` `creation_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#schema) field.
 
 The permissions required to access the partition metadata differ between legacy SQL and GoogleSQL:
 

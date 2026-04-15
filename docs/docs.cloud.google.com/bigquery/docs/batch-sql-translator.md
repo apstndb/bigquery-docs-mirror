@@ -1,6 +1,6 @@
 # Migrate code with the batch SQL translator
 
-**Note:** For API-based translations, including new batch translations, we recommend that you use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) to translate your SQL scripts. The BigQuery Migration API works much like the batch SQL translator, but without the need to install or use client code.
+> **Note:** For API-based translations, including new batch translations, we recommend that you use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) to translate your SQL scripts. The BigQuery Migration API works much like the batch SQL translator, but without the need to install or use client code.
 
 This document describes how to use the batch SQL translator in BigQuery to translate scripts written in other SQL dialects into GoogleSQL queries. This document is intended for users who are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
 
@@ -59,12 +59,10 @@ You can have all the above necessary Cloud Storage permissions from the followin
 If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
-    
-    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
-**Note:** Projects created after February 15, 2022 have this API enabled automatically.
+> **Note:** Projects created after February 15, 2022 have this API enabled automatically.
 
 ### Collect source files
 
@@ -131,7 +129,7 @@ Additionally, translation of the following SQL dialects is supported in [preview
   - SQLite
   - Vertica SQL
 
-**Important:** Translation is done on a best effort basis. Translation success can vary, depending on the uniqueness and complexity of the SQL statements in your source scripts. You might need to manually translate some scripts. Use the **Actions** tab in the [Google Cloud console output](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#output) to diagnose and correct translation issues.
+> **Important:** Translation is done on a best effort basis. Translation success can vary, depending on the uniqueness and complexity of the SQL statements in your source scripts. You might need to manually translate some scripts. Use the **Actions** tab in the [Google Cloud console output](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#output) to diagnose and correct translation issues.
 
 ### Handling unsupported SQL functions with helper UDFs
 
@@ -391,8 +389,6 @@ Follow these steps to start a translation job, view its progress, and see the re
 These steps assume you have source files uploaded into a Cloud Storage bucket already.
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
-    
-    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the **SQL translation** panel, click **Start translation** .
 
@@ -423,7 +419,7 @@ Once the translation job is created, you can see its status in the translation j
 
 ### Batch translation client
 
-**Note:** We recommend that new translations use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) instead of the batch translation client.
+> **Note:** We recommend that new translations use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) instead of the batch translation client.
 
 1.  [Install the batch translation client and the Google Cloud CLI](https://github.com/google/dwh-migration-tools/blob/main/client/README.md#installation) .
 
@@ -592,8 +588,6 @@ After running the translation job, you can see information about the job in the 
 To see translation job details, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
-    
-    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job for which you want to see the translation details. Then, click the translation job name. You can see a Sankey visualization that illustrates the overall quality of the job, the number of input lines of code (excluding blank lines and comments), and a list of issues that occurred during the translation process. You should prioritize fixes from left to right. Issues in an early stage can cause additional issues in subsequent stages.
 
@@ -612,8 +606,6 @@ The summary report is a CSV file that contains a table of all of the warning and
 To see the summary file in the Google Cloud console, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
-    
-    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
@@ -647,8 +639,6 @@ The code tab lets you review further information about the input and output file
 To access the code tab, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
-    
-    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
@@ -662,7 +652,7 @@ To access the code tab, follow these steps:
 
 4.  Optional: To view an input file and its output file in the [BigQuery interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#debug-interactive-translator) , click **Edit** . You can edit the files and save the output file back to Cloud Storage.
 
-**Note:** You can view log summaries and messages for the overall translation job from the [Results page](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output)
+> **Note:** You can view log summaries and messages for the overall translation job from the [Results page](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output)
 
 ### Configuration tab
 
@@ -671,8 +661,6 @@ You can add, rename, view, or edit your configuration YAML files in the **Config
 To access the configuration tab, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
-    
-    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
@@ -702,7 +690,7 @@ This JSON file contains the output name mapping rules that were used by the tran
 
 For each source file, a corresponding output file is generated in the destination path. The output file contains the translated query.
 
-**Important:** Translation is done on a best effort basis. Whenever possible, validate the translated queries.
+> **Important:** Translation is done on a best effort basis. Whenever possible, validate the translated queries.
 
 ## Debug batch translated SQL queries with the interactive SQL translator
 
@@ -711,8 +699,6 @@ You can use the BigQuery interactive SQL translator to review or debug a SQL que
 To start an interactive SQL translation by using a batch translation configuration ID, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
-    
-    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, and then click more\_vert **More Options \> Open Interactive Translation** .
     
@@ -721,8 +707,6 @@ To start an interactive SQL translation by using a batch translation configurati
 To debug a batch translation file in the interactive SQL translator, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
-    
-    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, and then click the job name or click **More options \> Show details** .
 
@@ -769,11 +753,11 @@ For more information, see [Generate metadata for translation and assessment](htt
 
 #### Fix translation issues with Gemini
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
+> **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
 To fixed failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to try to resolve these issues with the following steps.
 

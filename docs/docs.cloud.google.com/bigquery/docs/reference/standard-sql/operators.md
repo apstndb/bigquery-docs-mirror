@@ -341,27 +341,33 @@ All comparison operators have the same priority, but comparison operators aren't
 
 ### Operator list
 
-| Name                                                                                                                                        | Summary                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [Field access operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator)                 | Gets the value of a field.                                                        |
-| [Array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator)           | Gets a value from an array at a specific position.                                |
-| [Struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator)         | Gets the value of a field at a selected position in a struct.                     |
-| [JSON subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#json_subscript_operator)             | Gets a value of an array element or field in a JSON expression.                   |
-| [Arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#arithmetic_operators)                   | Performs arithmetic operations.                                                   |
-| [Date arithmetics operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#date_arithmetics_operators)       | Performs arithmetic operations on dates.                                          |
-| [Datetime subtraction](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#datetime_subtraction)                   | Computes the difference between two datetimes as an interval.                     |
-| [Interval arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#interval_arithmetic_operators) | Adds an interval to a datetime or subtracts an interval from a datetime.          |
-| [Bitwise operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators)                         | Performs bit manipulation.                                                        |
-| [Logical operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators)                         | Tests for the truth of some condition and produces `TRUE` , `FALSE` , or `NULL` . |
-| [Comparison operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                   | Compares operands and produces the results of the comparison as a `BOOL` value.   |
-| [`EXISTS` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#exists_operator)                           | Checks if a subquery produces one or more rows.                                   |
-| [`IN` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators)                                  | Checks for an equal value in a set of values.                                     |
-| [`IS` operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_operators)                                 | Checks for the truth of a condition and produces either `TRUE` or `FALSE` .       |
-| [`IS DISTINCT FROM` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_distinct)                     | Checks if values are considered to be distinct from each other.                   |
-| [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator)                               | Checks if values are like or not like one another.                                |
-| [Quantified `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified)         | Checks a search value for matches against several patterns.                       |
-| [Concatenation operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#concatenation_operator)               | Combines multiple values into one.                                                |
-| [`WITH` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#with_expression)                           | Creates variables for re-use and produces a result expression.                    |
+| Name                                                                                                                                        | Summary                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [Field access operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator)                 | Gets the value of a field.                                                                         |
+| [Array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator)           | Gets a value from an array at a specific position.                                                 |
+| [Struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator)         | Gets the value of a field at a selected position in a struct.                                      |
+| [JSON subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#json_subscript_operator)             | Gets a value of an array element or field in a JSON expression.                                    |
+| [Arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#arithmetic_operators)                   | Performs arithmetic operations.                                                                    |
+| [Date arithmetics operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#date_arithmetics_operators)       | Performs arithmetic operations on dates.                                                           |
+| [Datetime subtraction](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#datetime_subtraction)                   | Computes the difference between two datetimes as an interval.                                      |
+| [Interval arithmetic operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#interval_arithmetic_operators) | Adds an interval to a datetime or subtracts an interval from a datetime.                           |
+| [Bitwise operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators)                         | Performs bit manipulation.                                                                         |
+| [Logical operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators)                         | Tests for the truth of some condition and produces `TRUE` , `FALSE` , or `NULL` .                  |
+| [Graph logical operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#graph_logical_operators)             | Tests for the truth of a condition in a graph label and produces either `TRUE` or `FALSE` .        |
+| [Graph predicates](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#graph_predicates)                           | Tests for the truth of a condition for a graph element and produces `TRUE` , `FALSE` , or `NULL` . |
+| [`ALL_DIFFERENT` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#all_different_predicate)           | In a graph, checks to see if the elements in a list are all different.                             |
+| [`IS DESTINATION` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_destination_predicate)         | In a graph, checks to see if a node is or isn't the destination of an edge.                        |
+| [`IS SOURCE` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_source_predicate)                   | In a graph, checks to see if a node is or isn't the source of an edge.                             |
+| [`SAME` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#same_predicate)                             | In a graph, checks if all graph elements in a list bind to the same node or edge.                  |
+| [Comparison operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                   | Compares operands and produces the results of the comparison as a `BOOL` value.                    |
+| [`EXISTS` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#exists_operator)                           | Checks if a subquery produces one or more rows.                                                    |
+| [`IN` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators)                                  | Checks for an equal value in a set of values.                                                      |
+| [`IS` operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_operators)                                 | Checks for the truth of a condition and produces either `TRUE` or `FALSE` .                        |
+| [`IS DISTINCT FROM` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_distinct)                     | Checks if values are considered to be distinct from each other.                                    |
+| [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator)                               | Checks if values are like or not like one another.                                                 |
+| [Quantified `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified)         | Checks a search value for matches against several patterns.                                        |
+| [Concatenation operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#concatenation_operator)               | Combines multiple values into one.                                                                 |
+| [`WITH` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#with_expression)                           | Creates variables for re-use and produces a result expression.                                     |
 
 ### Field access operator
 
@@ -375,13 +381,15 @@ Input values:
 
   - `STRUCT`
   - `JSON`
+  - `GRAPH_ELEMENT`
 
-**Note:** If the field to access is within a `STRUCT` , you can use the [struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator) to access the field by its position within the `STRUCT` instead of by its name. Accessing by a field by position is useful when fields are un-named or have ambiguous names.
+> **Note:** If the field to access is within a `STRUCT` , you can use the [struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator) to access the field by its position within the `STRUCT` instead of by its name. Accessing by a field by position is useful when fields are un-named or have ambiguous names.
 
 **Return type**
 
   - For `STRUCT` : SQL data type of `fieldname` . If a field isn't found in the struct, an error is thrown.
   - For `JSON` : `JSON` . If a field isn't found in a JSON value, a SQL `NULL` is returned.
+  - For `GRAPH_ELEMENT` : SQL data type of `fieldname` . If a field (property) isn't found in the graph element, an error is returned.
 
 **Example**
 
@@ -400,7 +408,7 @@ In the following example, the field access operations are `.address` and `.count
 
 ### Array subscript operator
 
-**Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
+> **Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
 
     array_expression "[" array_subscript_specifier "]"
     
@@ -455,7 +463,7 @@ When you reference an index that's out of range in an array, and a positional ke
 
 ### Struct subscript operator
 
-**Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
+> **Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
 
     struct_expression "[" struct_subscript_specifier "]"
     
@@ -477,7 +485,7 @@ Gets the value of a field at a selected position in a struct.
       - `ORDINAL(index)` : The index starts at one. Produces an error if the index is out of range.
   - `index` : An integer literal or constant that represents a specific position in the struct. If used by itself without a position keyword, the index starts at zero and produces an error if the index is out of range.
 
-**Note:** The struct subscript operator doesn't support `SAFE` positional keywords at this time.
+> **Note:** The struct subscript operator doesn't support `SAFE` positional keywords at this time.
 
 **Examples**
 
@@ -504,7 +512,7 @@ When you reference an index that's out of range in a struct, an error is produce
 
 ### JSON subscript operator
 
-**Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
+> **Note:** Syntax characters enclosed in double quotes ( `""` ) are literal and required.
 
     json_expression "[" array_element_id "]"
 
@@ -837,6 +845,188 @@ The examples in this section reference a table called `entry_table` :
      +-------+
      | NULL  |
      +-------*/
+
+### Graph logical operators
+
+GoogleSQL supports the following logical operators in [element pattern label expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-patterns#element_pattern_definition) :
+
+| Name  | Syntax   | Description                                                                   |
+| ----- | -------- | ----------------------------------------------------------------------------- |
+| `NOT` | `!X`     | Returns `TRUE` if `X` isn't included, otherwise, returns `FALSE` .            |
+| `OR`  | `X \| Y` | Returns `TRUE` if either `X` or `Y` is included, otherwise, returns `FALSE` . |
+| `AND` | `X & Y`  | Returns `TRUE` if both `X` and `Y` are included, otherwise, returns `FALSE` . |
+
+### Graph predicates
+
+GoogleSQL supports the following graph-specific predicates in graph expressions. A predicate can produce `TRUE` , `FALSE` , or `NULL` .
+
+  - [`ALL_DIFFERENT` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#all_different_predicate)
+  - [`IS SOURCE` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_source_predicate)
+  - [`IS DESTINATION` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_destination_predicate)
+  - [`SAME` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#same_predicate)
+
+### `ALL_DIFFERENT` predicate
+
+    ALL_DIFFERENT(element, element[, ...])
+
+**Description**
+
+In a graph, checks to see if the elements in a list are all different. Returns `TRUE` if none of the elements in the list equal one another, otherwise `FALSE` .
+
+**Definitions**
+
+  - `element` : The graph pattern variable for a node or edge element.
+
+**Details**
+
+Produces an error if `element` is `NULL` .
+
+**Return type**
+
+`BOOL`
+
+**Examples**
+
+    GRAPH graph_db.FinGraph
+    MATCH
+      (a1:Account)-[t1:Transfers]->(a2:Account)-[t2:Transfers]->
+      (a3:Account)-[t3:Transfers]->(a4:Account)
+    WHERE a1.id < a4.id
+    RETURN
+      ALL_DIFFERENT(t1, t2, t3) AS results
+    
+    /*---------+
+     | results |
+     +---------+
+     | FALSE   |
+     | TRUE    |
+     | TRUE    |
+     +---------*/
+
+### `IS DESTINATION` predicate
+
+    node IS [ NOT ] DESTINATION [ OF ] edge
+
+**Description**
+
+In a graph, checks to see if a node is or isn't the destination of an edge. Can produce `TRUE` , `FALSE` , or `NULL` .
+
+Arguments:
+
+  - `node` : The graph pattern variable for the node element.
+  - `edge` : The graph pattern variable for the edge element.
+
+**Examples**
+
+    GRAPH graph_db.FinGraph
+    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+    WHERE a IS DESTINATION of transfer
+    RETURN a.id AS a_id, b.id AS b_id
+    
+    /*-------------+
+     | a_id | b_id |
+     +-------------+
+     | 16   | 7    |
+     | 16   | 7    |
+     | 20   | 16   |
+     | 7    | 20   |
+     | 16   | 20   |
+     +-------------*/
+
+    GRAPH graph_db.FinGraph
+    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+    WHERE b IS DESTINATION of transfer
+    RETURN a.id AS a_id, b.id AS b_id
+    
+    /*-------------+
+     | a_id | b_id |
+     +-------------+
+     | 7    | 16   |
+     | 7    | 16   |
+     | 16   | 20   |
+     | 20   | 7    |
+     | 20   | 16   |
+     +-------------*/
+
+### `IS SOURCE` predicate
+
+    node IS [ NOT ] SOURCE [ OF ] edge
+
+**Description**
+
+In a graph, checks to see if a node is or isn't the source of an edge. Can produce `TRUE` , `FALSE` , or `NULL` .
+
+Arguments:
+
+  - `node` : The graph pattern variable for the node element.
+  - `edge` : The graph pattern variable for the edge element.
+
+**Examples**
+
+    GRAPH graph_db.FinGraph
+    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+    WHERE a IS SOURCE of transfer
+    RETURN a.id AS a_id, b.id AS b_id
+    
+    /*-------------+
+     | a_id | b_id |
+     +-------------+
+     | 20   | 7    |
+     | 7    | 16   |
+     | 7    | 16   |
+     | 20   | 16   |
+     | 16   | 20   |
+     +-------------*/
+
+    GRAPH graph_db.FinGraph
+    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+    WHERE b IS SOURCE of transfer
+    RETURN a.id AS a_id, b.id AS b_id
+    
+    /*-------------+
+     | a_id | b_id |
+     +-------------+
+     | 7    | 20   |
+     | 16   | 7    |
+     | 16   | 7    |
+     | 16   | 20   |
+     | 20   | 16   |
+     +-------------*/
+
+### `SAME` predicate
+
+    SAME (element, element[, ...])
+
+**Description**
+
+In a graph, checks if all graph elements in a list bind to the same node or edge. Returns `TRUE` if the elements bind to the same node or edge, otherwise `FALSE` .
+
+Arguments:
+
+  - `element` : The graph pattern variable for a node or edge element.
+
+**Details**
+
+Produces an error if `element` is `NULL` .
+
+**Example**
+
+The following query returns the source and destination IDs for transfers between different accounts:
+
+    GRAPH graph_db.FinGraph
+    MATCH (src:Account)<-[transfer:Transfers]-(dest:Account)
+    WHERE NOT SAME(src, dest)
+    RETURN src.id AS source_id, dest.id AS destination_id
+    
+    /*----------------------------+
+     | source_id | destination_id |
+     +----------------------------+
+     | 7         | 20             |
+     | 16        | 7              |
+     | 16        | 7              |
+     | 16        | 20             |
+     | 20        | 16             |
+     +----------------------------*/
 
 ### Comparison operators
 
@@ -1197,6 +1387,8 @@ You can use this operation with fields in a complex data type, but not on the co
 
   - `STRUCT`
   - `ARRAY`
+  - `GRAPH_ELEMENT`
+  - `GRAPH_PATH`
 
 Input values:
 
@@ -1610,7 +1802,7 @@ The concatenation operator combines multiple values into one.
 | `BYTES \|\| BYTES [ \|\| ... ]`       | `BYTES`         | `BYTES`          |
 | `ARRAY<T> \|\| ARRAY<T> [ \|\| ... ]` | `ARRAY<T>`      | `ARRAY<T>`       |
 
-**Note:** The concatenation operator is translated into a nested [`CONCAT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat) function call. For example, `'A' || 'B' || 'C'` becomes `CONCAT('A', CONCAT('B', 'C'))` .
+> **Note:** The concatenation operator is translated into a nested [`CONCAT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat) function call. For example, `'A' || 'B' || 'C'` becomes `CONCAT('A', CONCAT('B', 'C'))` .
 
 ### `WITH` expression
 

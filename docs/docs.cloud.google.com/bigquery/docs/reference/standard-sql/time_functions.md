@@ -259,7 +259,7 @@ Gets the number of unit boundaries between two `TIME` values ( `end_time` - `sta
 
 If `end_time` is earlier than `start_time` , the output is negative. Produces an error if the computation overflows, such as if the difference in microseconds between the two `TIME` values overflows.
 
-**Note:** The behavior of the this function follows the type of arguments passed in. For example, `TIME_DIFF(TIMESTAMP, TIMESTAMP, PART)` behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)` .
+> **Note:** The behavior of the this function follows the type of arguments passed in. For example, `TIME_DIFF(TIMESTAMP, TIMESTAMP, PART)` behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)` .
 
 **Return Data Type**
 

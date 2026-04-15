@@ -90,7 +90,7 @@ TENSORFLOW (imported)
 
 Exactly the same files that were present when importing the model
 
-**Note:** The [automatic data preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing) performed during model creation, such as standardization and label encoding, is saved in the exported files as part of the graph for TensorFlow SavedModel, and in the external files for Booster. Explicit preprocessing is unneeded before passing data for prediction. Input should generally match that used for BigQuery ML [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . All numerical values in the exported model signatures are cast as data type `FLOAT64` . Also, all `STRUCT` fields must be expanded into separate fields. For example, field `f1` in `STRUCT f2` should be renamed as `f2_f1` and passed as a separate column.
+> **Note:** The [automatic data preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing) performed during model creation, such as standardization and label encoding, is saved in the exported files as part of the graph for TensorFlow SavedModel, and in the external files for Booster. Explicit preprocessing is unneeded before passing data for prediction. Input should generally match that used for BigQuery ML [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . All numerical values in the exported model signatures are cast as data type `FLOAT64` . Also, all `STRUCT` fields must be expanded into separate fields. For example, field `f1` in `STRUCT f2` should be renamed as `f2_f1` and passed as a separate column.
 
 ## Export model trained with `TRANSFORM`
 
@@ -178,8 +178,6 @@ To export a model, select one of the following:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.  
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -209,8 +207,6 @@ The `EXPORT MODEL` statement lets you export BigQuery ML models to [Cloud Storag
 To export a BigQuery ML model in the Google Cloud console by using the `EXPORT MODEL` statement, follow these steps:
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 
@@ -228,7 +224,7 @@ To export a BigQuery ML model in the Google Cloud console by using the `EXPORT M
 
 ### bq
 
-**Note:** To export a model using the bq command-line tool, you must have bq tool version 2.0.56 or later, which is included with gcloud CLI [version 287.0.0](https://docs.cloud.google.com/sdk/docs/release-notes#28700_2020-04-01) and later. To see your installed bq tool version, use [`bq version`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#getting_help) and, if needed, update the gcloud CLI using [`gcloud components update`](https://docs.cloud.google.com/sdk/gcloud/reference/components/update) .
+> **Note:** To export a model using the bq command-line tool, you must have bq tool version 2.0.56 or later, which is included with gcloud CLI [version 287.0.0](https://docs.cloud.google.com/sdk/docs/release-notes#28700_2020-04-01) and later. To see your installed bq tool version, use [`bq version`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#getting_help) and, if needed, update the gcloud CLI using [`gcloud components update`](https://docs.cloud.google.com/sdk/gcloud/reference/components/update) .
 
 Use the `bq extract` command with the `--model` flag.
 
@@ -917,7 +913,7 @@ This example plots multiple trees (one tree per iteration):
 
 ![Export model](https://docs.cloud.google.com/static/bigquery/images/boosted-tree-colab.png)
 
-**Note:** We use the label encoder to encode categorical features, so you can get the corresponding category for a split value from the vocabulary file in the 'assets/' directory inside the model export Cloud Storage bucket. For example, when you see "f0 \< 2.95" in a node, you can find the corresponding category in the vocabulary file by looking for the 3rd item.
+> **Note:** We use the label encoder to encode categorical features, so you can get the corresponding category for a split value from the vocabulary file in the 'assets/' directory inside the model export Cloud Storage bucket. For example, when you see "f0 \< 2.95" in a node, you can find the corresponding category in the vocabulary file by looking for the 3rd item.
 
 We don't save feature names in the model, so you will see names such as "f0", "f1", and so on. You can find the corresponding feature names in the `assets/model_metadata.json` exported file using these names (such as "f0") as indexes.
 

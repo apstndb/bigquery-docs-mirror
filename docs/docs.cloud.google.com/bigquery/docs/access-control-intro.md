@@ -15,7 +15,7 @@ A role is a collection of permissions that can be granted to an IAM principal. Y
   - [**Predefined roles**](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) are managed by Google Cloud and support common use cases and access control patterns.
   - [**Custom roles**](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) provide access according to a user-specified list of permissions. For information on creating custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) in the IAM documentation.
 
-**Note:** When new capabilities are added to BigQuery, new permissions might be added to predefined IAM roles. Also, new predefined IAM roles can be added to BigQuery at any time. If your organization requires role definitions to remain unchanged, you should create [custom IAM roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
+> **Note:** When new capabilities are added to BigQuery, new permissions might be added to predefined IAM roles. Also, new predefined IAM roles can be added to BigQuery at any time. If your organization requires role definitions to remain unchanged, you should create [custom IAM roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 To determine if one or more permissions are included in a predefined IAM role, you can use one of the following methods:
 
@@ -54,7 +54,7 @@ For additional information on using IAM to manage access to Resource Manager res
 
 You can assign roles at the dataset level to provide access to a specific dataset, without providing complete access to the project's other resources. In the [IAM resource hierarchy](https://docs.cloud.google.com/iam/docs/overview#policy_hierarchy) , BigQuery datasets are child resources of projects. For more information on assigning roles at the dataset level, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 
-**Caution:** Don't grant BigQuery basic roles to datasets. BigQuery's dataset-level basic roles existed prior to the introduction of IAM. BigQuery basic roles provide excessive and uneven access, and you are discouraged from using them. For example, the `Owner` basic role does *not* provide table access permissions. For more information, see [Basic roles & permissions](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) .
+> **Caution:** Don't grant BigQuery basic roles to datasets. BigQuery's dataset-level basic roles existed prior to the introduction of IAM. BigQuery basic roles provide excessive and uneven access, and you are discouraged from using them. For example, the `Owner` basic role does *not* provide table access permissions. For more information, see [Basic roles & permissions](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) .
 
 ### Grant access to individual resources within datasets
 
@@ -65,7 +65,7 @@ Roles can be applied to the following resources within datasets:
   - Tables and views
   - Routines
 
-**Note:** Roles cannot be applied to models.
+> **Note:** Roles cannot be applied to models.
 
 For more information on assigning roles at the table, view, or routine level, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 

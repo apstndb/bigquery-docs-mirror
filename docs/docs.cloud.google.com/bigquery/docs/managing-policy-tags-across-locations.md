@@ -20,7 +20,7 @@ You can explicitly copy (or replicate) a taxonomy and its policy tag definitions
 
 When you replicate them, the taxonomy and policy tags retain the same IDs in each location.
 
-**Caution:** Syncing a taxonomy across locations syncs only the taxonomy and policy tags in the taxonomy. The permissions granted to a policy tag and the columns governed by that policy tag are not synced, and can vary by location.
+> **Caution:** Syncing a taxonomy across locations syncs only the taxonomy and policy tags in the taxonomy. The permissions granted to a policy tag and the columns governed by that policy tag are not synced, and can vary by location.
 
 The taxonomy and policy tags can be synced again, to keep them unified across multiple locations. Explicit replication of a taxonomy is accomplished by a call to the [Data Catalog](https://docs.cloud.google.com/data-catalog/docs) API. Future syncs of the replicated taxonomy use the same API command, which overwrites the previous taxonomy.
 
@@ -46,7 +46,7 @@ Call the [`projects.locations.taxonomies.import`](https://docs.cloud.google.com/
 
 The `parent` path parameter is the destination project and location that you want to copy the taxonomy to. Example: `projects/MyProject/locations/eu`
 
-**Key Point:** To sync the replicated taxonomy across locations in the future, repeat the same steps.
+> **Key Point:** To sync the replicated taxonomy across locations in the future, repeat the same steps.
 
 ## Syncing a replicated taxonomy
 
@@ -54,7 +54,7 @@ To sync a taxonomy that's already been replicated across locations, repeat the D
 
 Alternatively, you can use a service account and Cloud Scheduler to sync the taxonomy on a specified schedule. Setting up a service account in Cloud Scheduler also lets you trigger an on-demand (unscheduled) sync through the Cloud Scheduler page in the Google Cloud console or with Google Cloud CLI.
 
-**Note:** Once a taxonomy is replicated in other locations, changes made in one location are not automatically reflected in other locations. The taxonomy must be explicitly synced again, by a user or a service account with the appropriate permissions.
+> **Note:** Once a taxonomy is replicated in other locations, changes made in one location are not automatically reflected in other locations. The taxonomy must be explicitly synced again, by a user or a service account with the appropriate permissions.
 
 ## Syncing a replicated taxonomy with Cloud Scheduler
 
@@ -70,8 +70,7 @@ To create a new service account, see [Create service accounts](https://docs.clou
 
 1.  The service account that is syncing the taxonomy must have the **Data Catalog Policy Tags Admin** role. For more information, see [Grant the Policy Tags Admin role](https://docs.cloud.google.com/bigquery/docs/column-level-security#policy_tags_admin) .
 
-2.  [Enable the Cloud Scheduler API](https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com)
-
+2.  
 ### Setting up a taxonomy sync with Cloud Scheduler
 
 To sync a replicated taxonomy across locations with Cloud Scheduler:
@@ -104,7 +103,7 @@ Now, test that the job is configured correctly.
     
     ![Test a scheduler job](https://docs.cloud.google.com/static/bigquery/images/test-scheduler-job.png)
 
-**Key Point:** For future on-demand (unscheduled) syncing of the replicated taxonomy, click **Run now** in the [Cloud Scheduler](https://console.cloud.google.com/cloudscheduler) page in the Google Cloud console.
+> **Key Point:** For future on-demand (unscheduled) syncing of the replicated taxonomy, click **Run now** in the [Cloud Scheduler](https://console.cloud.google.com/cloudscheduler) page in the Google Cloud console.
 
 ### gcloud
 

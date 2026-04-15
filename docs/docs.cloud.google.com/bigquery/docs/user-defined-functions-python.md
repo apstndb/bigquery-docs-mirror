@@ -1,10 +1,10 @@
 # User-defined functions in Python
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** For support during the preview, email <bq-python-udf-feedback@google.com> .
+> **Note:** For support during the preview, email <bq-python-udf-feedback@google.com> .
 
 A Python user-defined function (UDF) lets you implement a scalar function in Python and use it in a SQL query. Python UDFs are similar to [SQL and Javascript UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) , but with additional capabilities. Python UDFs let you install third-party libraries from [the Python Package Index (PyPI)](https://pypi.org/) and let you access external services using a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) .
 
@@ -85,6 +85,122 @@ If you're invoking a Python UDF, the following predefined IAM roles should be gr
 
 For more information about roles in BigQuery, see [Predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) .
 
+## Call a Python UDF
+
+If you have permission to invoke a Python UDF, then you can call it like any other function. To use a function defined in a different project, use the fully qualified name for the function. For example, to call the [`cw_xml_extract` Python UDF](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx) defined as a [bigquery-utils](https://github.com/GoogleCloudPlatform/bigquery-utils) community UDF, follow these steps:
+
+### Console
+
+1.  Go to the **BigQuery** page.
+
+2.  In the query editor, enter the following example:
+    
+        SELECT
+          `bqutil`.`fn`.`cw_xml_extract`(xml, '//title/text()') AS `title`
+        FROM UNNEST([
+          STRUCT('''<book id="1">
+            <title>The Great Gatsby</title>
+            <author>F. Scott Fitzgerald</author>
+          </book>''' AS xml),
+          STRUCT('''<book id="2">
+            <title>1984</title>
+            <author>George Orwell</author>
+          </book>''' AS xml),
+          STRUCT('''<book id="3">
+            <title>Brave New World</title>
+            <author>Aldous Huxley</author>
+          </book>''' AS xml)
+        ])
+
+3.  Click play\_circle\_filled **Run** .
+    
+    This example produces the following output:
+    
+        +--------------------------+
+        | title                    |
+        +--------------------------+
+        | The Great Gatsby         |
+        | 1984                     |
+        | Brave New World          |
+        +--------------------------+
+
+### BigQuery DataFrames
+
+The following example uses the [BigQuery DataFrames](https://dataframes.bigquery.dev/index.html) [`sql_scalar`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.sql_scalar.html) , [`read_gbq_function`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq_function.html) , and [`apply`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.apply.html) methods to call a Python UDF:
+
+    import textwrap
+    from typing import Tuple
+    
+    import bigframes.pandas as bpd
+    import pandas as pd
+    import pyarrow as pa
+    
+    
+    # Using partial ordering mode enables more efficient query optimizations.
+    bpd.options.bigquery.ordering_mode = "partial"
+    
+    
+    def call_python_udf(
+        project_id: str, location: str,
+    ) -> Tuple[pd.Series, bpd.Series]:
+        # Set the billing project to use for queries. This step is optional, as the
+        # project can be inferred from your environment in many cases.
+        bpd.options.bigquery.project = project_id  # "your-project-id"
+    
+        # Since this example works with local data, set a processing location.
+        bpd.options.bigquery.location = location  # "US"
+    
+        # Create a sample series.
+        xml_series = pd.Series(
+            [
+                textwrap.dedent(
+                    """
+                    <book id="1">
+                        <title>The Great Gatsby</title>
+                        <author>F. Scott Fitzgerald</author>
+                    </book>
+                    """
+                ),
+                textwrap.dedent(
+                    """
+                    <book id="2">
+                        <title>1984</title>
+                        <author>George Orwell</author>
+                    </book>
+                    """
+                ),
+                textwrap.dedent(
+                    """
+                    <book id="3">
+                        <title>Brave New World</title>
+                        <author>Aldous Huxley</author>
+                    </book>
+                    """
+                ),
+            ],
+            dtype=pd.ArrowDtype(pa.string()),
+        )
+        df = pd.DataFrame({"xml": xml_series})
+    
+        # Use the BigQuery Accessor, which is automatically registered on pandas
+        # DataFrames when you import bigframes.  This example uses a function that
+        # has been deployed to bigquery-utils for demonstration purposes. To use in
+        # production, deploy the function at
+        # https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx
+        # to your own project.
+        titles_pandas = df.bigquery.sql_scalar(
+            "`bqutil`.`fn`.cw_xml_extract({xml}, '//title/text()')",
+        )
+    
+        # Alternatively, call read_gbq_function to get a pointer to the function
+        # that can be applied on BigQuery DataFrames objects.
+        cw_xml_extract = bpd.read_gbq_function("bqutil.fn.cw_xml_extract")
+        xml_bigframes = bpd.read_pandas(xml_series)
+    
+        xpath_query = "//title/text()"
+        titles_bigframes = xml_bigframes.apply(cw_xml_extract, args=(xpath_query,))
+        return titles_pandas, titles_bigframes
+
 ## Create a persistent Python UDF
 
 Follow these rules when you create a Python UDF:
@@ -108,8 +224,6 @@ To see an example of creating a persistent Python UDF, choose on of the followin
 The following example creates a persistent Python UDF named `multiplyInputs` and calls the UDF from within a `SELECT` statement:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
@@ -264,8 +378,6 @@ Your function needs to return either a [`pandas.Series`](https://pandas.pydata.o
 The following example creates a vectorized Python UDF named `multiplyInputs` with two parameters— `x` and `y` :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
@@ -424,8 +536,6 @@ When you install a package, you must provide the package name, and you can optio
 The following example shows you how to create a Python UDF that installs the `scipy` package using the `CREATE OR REPLACE FUNCTION` option list:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
@@ -451,7 +561,7 @@ The following example shows you how to create a Python UDF that installs the `sc
 
 You can extend your Python UDFs using the [Function option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#function_option_list) by importing Python files from Cloud Storage.
 
-**Note:** The user that creates the UDF needs the [`storage.objects.get`](https://docs.cloud.google.com/storage/docs/access-control/iam-permissions#objects) permission on the Cloud Storage bucket.
+> **Note:** The user that creates the UDF needs the [`storage.objects.get`](https://docs.cloud.google.com/storage/docs/access-control/iam-permissions#objects) permission on the Cloud Storage bucket.
 
 In your UDF's Python code, you can import the Python files from Cloud Storage as modules by using the import statement followed by the path to the Cloud Storage object. For example, if you are importing `gs://BUCKET_NAME/path/to/lib1.py` , then your import statement would be `import path.to.lib1` .
 
@@ -464,8 +574,6 @@ The Python filename needs to be a Python identifier. Each `folder` name in the o
 The following example shows you how to create a Python UDF that imports the `lib1.py` client library package from a Cloud Storage bucket named `my_bucket` :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
@@ -499,8 +607,6 @@ By default, the memory allocated to each container instance is 512 MiB, and the 
 The following example creates a Python UDF using the `CREATE FUNCTION` option list to specify container limits:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
@@ -563,8 +669,6 @@ After you create the connection, open it, and in the **Connection info** pane, c
 To grant the Cloud resource connection service account access to your projects, grant the service account the [Service usage consumer role](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` ) in `my_query_project` and the [Cloud Translation API user role](https://docs.cloud.google.com/translate/docs/access-control#cloudtranslate.user) ( `roles/cloudtranslate.user` ) in `my_translate_project` .
 
 1.  Go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Verify that `my_query_project` is selected.
 
@@ -579,8 +683,6 @@ To grant the Cloud resource connection service account access to your projects, 
 7.  In the project selector, choose **`my_translate_project`** .
 
 8.  Go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/project/_/iam-admin)
 
 9.  Click person\_add **Grant Access** .
 
@@ -595,8 +697,6 @@ To grant the Cloud resource connection service account access to your projects, 
 In `my_query_project` , create a Python UDF that calls the Cloud Translation service using your Cloud resource connection.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Enter the following `CREATE FUNCTION` statement in the query editor:
     

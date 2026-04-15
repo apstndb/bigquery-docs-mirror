@@ -83,8 +83,6 @@ Use GoogleSQL, the bq command-line tool, or the BigQuery API to create a table c
 To clone a table, use the [CREATE TABLE CLONE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) statement.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -107,8 +105,6 @@ Replace the following:
 ### bq
 
 Use a [`bq cp`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command with the `--clone` flag:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq cp --clone --no_clobber project1:myDataset.myTable PROJECT:DATASET.CLONE_NAME

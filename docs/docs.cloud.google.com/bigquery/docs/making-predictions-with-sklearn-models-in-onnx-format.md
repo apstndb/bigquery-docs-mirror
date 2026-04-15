@@ -36,8 +36,6 @@ When you finish the tasks that are described in this document, you can avoid con
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,storage-component.googleapis.com)
 
 3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format#required_permissions) to perform the tasks in this document.
 
@@ -55,8 +53,6 @@ Make sure that you have the following role or roles on the project:
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -67,8 +63,6 @@ Make sure that you have the following role or roles on the project:
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -111,7 +105,7 @@ Use the following sample code to create and train a scikit-learn [pipeline](http
                     ('clr', RandomForestClassifier())])
     pipe.fit(X, y)
 
-**Note:** The scikit-learn pipeline lets you include models from other libraries such as [LightGBM](https://lightgbm.readthedocs.io/en/latest/) and [XGBoost](https://xgboost.readthedocs.io/en/latest/) , which can be converted to ONNX by sklearn-onnx. For more information, see [Convert a pipeline](https://onnx.ai/sklearn-onnx/pipeline.html#convert-a-pipeline) and [Using converters from other libraries](https://onnx.ai/sklearn-onnx/tutorial_1-5_external.html#using-converters-from-other-libraries) .
+> **Note:** The scikit-learn pipeline lets you include models from other libraries such as [LightGBM](https://lightgbm.readthedocs.io/en/latest/) and [XGBoost](https://xgboost.readthedocs.io/en/latest/) , which can be converted to ONNX by sklearn-onnx. For more information, see [Convert a pipeline](https://onnx.ai/sklearn-onnx/pipeline.html#convert-a-pipeline) and [Using converters from other libraries](https://onnx.ai/sklearn-onnx/tutorial_1-5_external.html#using-converters-from-other-libraries) .
 
 ### Convert the pipeline into an ONNX model
 
@@ -156,8 +150,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -222,8 +214,6 @@ To import the ONNX model into your dataset, select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following `CREATE MODEL` statement.
     
@@ -313,8 +303,6 @@ To make predictions with the imported ONNX model, choose one of the following op
 ### Console
 
 1.  Go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter this query that uses the `ML.PREDICT` function.
     
@@ -369,16 +357,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Console
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -386,12 +372,12 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 
 ### gcloud
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 

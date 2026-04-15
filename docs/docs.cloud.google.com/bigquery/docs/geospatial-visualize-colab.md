@@ -1,3 +1,5 @@
+[Video](https://www.youtube.com/watch?v=t_q-qLa1lX0)
+
 In this tutorial, you visualize geospatial analytics data from BigQuery by using a Colab notebook.
 
 This tutorial uses the following BigQuery [public datasets](https://docs.cloud.google.com/bigquery/public-data) :
@@ -52,8 +54,6 @@ Make sure that you have the following role or roles on the project:
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -64,8 +64,6 @@ Make sure that you have the following role or roles on the project:
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -86,8 +84,6 @@ For more information about roles in BigQuery, see [Predefined IAM roles](https:/
 This tutorial builds a Colab notebook to visualize geospatial analytics data. You can open a prebuilt version of the notebook in Colab, Colab Enterprise, or BigQuery Studio by clicking the links at the top of the GitHub version of the tutorial— [BigQuery Geospatial Visualization in Colab](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/notebooks/bigquery_geospatial_visualization.ipynb) .
 
 1.  Open Colab.
-    
-    [Open Colab](https://colab.research.google.com/)
 
 2.  In the **Open notebook** dialog, click **New notebook** .
 
@@ -99,7 +95,7 @@ This tutorial builds a Colab notebook to visualize geospatial analytics data. Yo
 
 This tutorial queries BigQuery datasets and uses the Google Maps JavaScript API. To use these resources, you authenticate the Colab runtime with Google Cloud and the Maps API.
 
-**Note:** Using the Maps API is optional. You can run the code in this tutorial without using the Google Maps JavaScript API.
+> **Note:** Using the Maps API is optional. You can run the code in this tutorial without using the Google Maps JavaScript API.
 
 ### Authenticate with Google Cloud
 
@@ -579,7 +575,7 @@ For heatmaps, it is recommended that you quantize and aggregate the data before 
 
 In this example, quantizing is done using the `h3` Python library to aggregate the incident points into hexagons. The `h3.latlng_to_cell` function is used to map the incident's position (latitude and longitude) to an H3 cell index. An H3 resolution of nine provides sufficient aggregated hexagons for the heatmap. The `h3.cell_to_latlng` function is used to determine the center of each hexagon.
 
-**Note:** You can also use Carto's [Analytics toolbox for BigQuery](https://carto.com/blog/spatial-functions-bigquery-uber) to perform similar conversions.
+> **Note:** You can also use Carto's [Analytics toolbox for BigQuery](https://carto.com/blog/spatial-functions-bigquery-uber) to perform similar conversions.
 
 1.  To insert a code cell, click add **Code** .
 
@@ -713,16 +709,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Console
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -730,12 +724,12 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 
 ### gcloud
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 

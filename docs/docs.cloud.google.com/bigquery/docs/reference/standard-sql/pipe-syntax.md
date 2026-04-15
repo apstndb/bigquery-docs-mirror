@@ -757,7 +757,7 @@ The following examples compare calling both TVFs on an input table by using stan
 
 **Description**
 
-Sorts results by a list of expressions. The `ORDER BY` operator behaves the same as the [`ORDER BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in standard syntax. Suffixes like `ASC` , `DESC` , and `NULLS LAST` are supported for customizing the ordering for each expression.
+Sorts results by a list of expressions. The `ORDER BY` operator behaves the same as the [`ORDER BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in standard syntax. Suffixes like `DESC` and `NULLS LAST` are supported for customizing the ordering for each expression.
 
 In pipe syntax, the [`AGGREGATE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) also supports [shorthand ordering suffixes](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#shorthand_order_pipe_syntax) to apply `ORDER BY` behavior more concisely as part of aggregation.
 
@@ -1164,11 +1164,11 @@ Without the `BY NAME` modifier, the same columns in differing order are consider
 
 ### `TABLESAMPLE` pipe operator
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@google.com> .
 
 ``` no-copy
 |> TABLESAMPLE SYSTEM (percent PERCENT)

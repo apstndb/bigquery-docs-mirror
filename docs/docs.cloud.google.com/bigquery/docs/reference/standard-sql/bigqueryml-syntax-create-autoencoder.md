@@ -316,7 +316,7 @@ The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` sub
 
 An `INT64` value between `1` and `100` , inclusive.
 
-**Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
+> **Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
 
 ### `MAX_PARALLEL_TRIALS`
 
@@ -332,7 +332,7 @@ The maximum number of trials to run at the same time. If you specify a value for
 
 An `INT64` value between `1` and `5` , inclusive. The default value is `1` .
 
-**Note:** Although specifying larger `MAX_PARALLEL_TRIALS` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `VIZIER_DEFAULT` as the [`HPARAM_TUNING_ALGORITHM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
+> **Note:** Although specifying larger `MAX_PARALLEL_TRIALS` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `VIZIER_DEFAULT` as the [`HPARAM_TUNING_ALGORITHM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
 
 ### `HPARAM_TUNING_ALGORITHM`
 

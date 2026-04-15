@@ -18,7 +18,7 @@ Data warehouse migrations from [Teradata](https://docs.cloud.google.com/bigquery
 
 Redshift data warehouse migrations do not require a colocated Cloud Storage bucket.
 
-**Key Point:** You can copy a dataset or manually move it to another location. See [Managing datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets) for details. For more information about using Cloud Storage to store and move large datasets, see [Using Cloud Storage with big data](https://docs.cloud.google.com/storage/docs/working-with-big-data) .
+> **Key Point:** You can copy a dataset or manually move it to another location. See [Managing datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets) for details. For more information about using Cloud Storage to store and move large datasets, see [Using Cloud Storage with big data](https://docs.cloud.google.com/storage/docs/working-with-big-data) .
 
 ## What's next
 

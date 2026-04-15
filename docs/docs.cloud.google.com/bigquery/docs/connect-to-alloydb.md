@@ -11,8 +11,6 @@ To connect to AlloyDB, you must perform the following steps:
 ## Before you begin
 
 1.  Enable the BigQuery Connection API.  
-    
-    [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
 2.  To get the permissions that you need to create an AlloyDB connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
@@ -27,8 +25,6 @@ Select one of the following options to create an AlloyDB connection:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add** .
     
@@ -68,7 +64,7 @@ Select one of the following options to create an AlloyDB connection:
         
           - Sample URI: ` //alloydb.googleapis.com/projects/ PROJECT_ID /locations/ REGION_ID /clusters/ CLUSTER_NAME /instances/ INSTANCE_ID  `
         
-        **Note:** If the same user credentials are valid for other databases in the external data source, that user can query those databases through the same connection resource.
+        > **Note:** If the same user credentials are valid for other databases in the external data source, that user can query those databases through the same connection resource.
 
 7.  Click **Create connection** .
 
@@ -137,8 +133,6 @@ You can grant the service account associated with the connection the [AlloyDB Cl
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
     
@@ -161,7 +155,7 @@ Provide the following values:
   - `  PROJECT_ID  ` : Your Google Cloud project ID.
   - `  SERVICE_ACCOUNT_ID  ` : Replace project number in `service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com` and use it.
 
-**Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#view-access) .
+> **Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#view-access) .
 
 ## Share connections with users
 
@@ -178,8 +172,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 

@@ -45,8 +45,6 @@ To enable the IAM API, select one of the following options:
 
 Go to the **Identity and Access Management (IAM) API** page and enable the API.
 
-[Enable the API](https://console.cloud.google.com/apis/library/iam.googleapis.com)
-
 ### gcloud
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
@@ -62,8 +60,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -114,8 +110,6 @@ To add conditions to a dataset, select one of the following methods. When you bu
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -176,8 +170,6 @@ To remove conditions from a dataset, select one of the following methods. When y
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

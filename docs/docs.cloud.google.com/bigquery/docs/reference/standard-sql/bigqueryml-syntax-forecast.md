@@ -37,7 +37,7 @@ ML.FORECAST(
 
   - `  HORIZON  ` : an `INT64` value that specifies the number of time points to forecast. The default value is `3` , and the maximum value is the value of the `HORIZON` option specified in the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement for time-series models, or `1000` if that option isn't specified. When forecasting multiple time series at the same time, this parameter applies to each time series.
     
-    **Note:** Forecasting takes place when the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) runs. `ML.FORECAST` just retrieves the forecasting values and computes the prediction intervals. Therefore, this argument exists mainly for filtering results when forecasting multiple time series. To save query time, you should specify a value for the `HORIZON` option in the `CREATE MODEL` statement.
+    > **Note:** Forecasting takes place when the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) runs. `ML.FORECAST` just retrieves the forecasting values and computes the prediction intervals. Therefore, this argument exists mainly for filtering results when forecasting multiple time series. To save query time, you should specify a value for the `HORIZON` option in the `CREATE MODEL` statement.
 
   - `  CONFIDENCE_LEVEL  ` : a `FLOAT64` value that specifies percentage of the future values that fall in the prediction interval. The default value is `0.95` . The valid input range is `[0, 1)` .
 

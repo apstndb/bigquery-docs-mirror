@@ -100,8 +100,6 @@ BigQuery does not support Cloud Storage resource paths that include multiple con
 To retrieve the Cloud Storage resource path:
 
 1.  Open the Cloud Storage console.
-    
-    [Cloud Storage console](https://console.cloud.google.com/storage/browser)
 
 2.  Browse to the location of the object (file) that contains the source data.
 
@@ -111,7 +109,7 @@ To retrieve the Cloud Storage resource path:
 
 4.  Copy the value provided in the **gsutil URI** field, which begins with `gs://` .
 
-**Note:** You can also use the [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
+> **Note:** You can also use the [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
 
 For Google Datastore exports, only one URI can be specified, and it must end with `.backup_info` or `.export_metadata` .
 
@@ -172,8 +170,6 @@ To load data from a local data source:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -207,7 +203,7 @@ To load data from a local data source:
         
           - Clicking **Edit as text** and entering the table schema as a JSON array:
             
-            **Note:** You can view the schema of an existing table in JSON format by entering the following command: ` bq show --format=prettyjson dataset.table  ` .
+            > **Note:** You can view the schema of an existing table in JSON format by entering the following command: ` bq show --format=prettyjson dataset.table  ` .
         
           - Using **Add Field** to manually input the schema.
 
@@ -271,7 +267,7 @@ The following command loads a local CSV file ( `mydata.csv` ) into a table named
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-**Note:** When you specify the schema on the command line, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#specifying_a_schema_file) instead.
+> **Note:** When you specify the schema on the command line, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#specifying_a_schema_file) instead.
 
 The following command loads a local CSV file ( `mydata.csv` ) into a table named `mytable` in `mydataset` in your default project. The schema is defined using [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
 

@@ -40,7 +40,9 @@ The following limitations apply to BigQuery disaster recovery:
 
   - Soft failover can only be triggered if both the source and destination regions are available.
 
-  - Soft failover cannot be triggered if there are any errors transient or otherwise during reservation replication. For example, if there is insufficient slots quota in the secondary region for the reservation update.
+  - If replication fails during the initial creation of the resources, the reservation will not be created in the secondary location, meaning neither hard nor soft failover will be available.
+
+  - Soft failover cannot be triggered if reservation configuration changes have not been successfully replicated to the secondary region. Any errors during reservation replication, such as insufficient slot quota in the secondary region or other transient issues will prevent the soft failover from being initiated.
 
   - The reservation and attached datasets cannot be updated during an active soft failover but they can still be read from.
 
@@ -143,7 +145,7 @@ If you need to perform stale reads in the secondary region, you must [purchase](
 
 ## Create or alter an Enterprise Plus reservation
 
-**Caution:** Before creating a failover reservation, verify that no reservation with the same name already exists in the secondary region. Similarly, make sure a new assignment to a failover reservation does not reassign the same resource with the same job type in the secondary location. Such conflicts can cause replication failures, which results in an inconsistency between the primary and secondary locations. That can in turn prevent a successful failover operation later.
+> **Caution:** Before creating a failover reservation, verify that no reservation with the same name already exists in the secondary region. Similarly, make sure a new assignment to a failover reservation does not reassign the same resource with the same job type in the secondary location. Such conflicts can cause replication failures, which results in an inconsistency between the primary and secondary locations. That can in turn prevent a successful failover operation later.
 
 Before attaching a dataset to a reservation, you must create an Enterprise Plus reservation or alter an existing reservation and configure it for disaster recovery.
 
@@ -154,8 +156,6 @@ Select one of the following:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** , and then click **Create reservation** .
 
@@ -188,8 +188,6 @@ The new reservation is visible in the **Slot reservations** tab.
 To create a reservation, use the [`CREATE RESERVATION` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -227,8 +225,6 @@ Select one of the following:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -247,8 +243,6 @@ Select one of the following:
 To add or change a secondary location to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -277,13 +271,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To enable disaster recovery for the previously created reservation, complete the following steps. The dataset must already be configured for replication in the same primary and secondary regions as the reservation. For more information, see [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#replicate_a_dataset) .
 
-**Caution:** After a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from datasets attached to a failover reservation with any capacity model. For more information see [Limitations](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#limitations) .
+> **Caution:** After a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from datasets attached to a failover reservation with any capacity model. For more information see [Limitations](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#limitations) .
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** , and then click the **Slot Reservations** tab.
 
@@ -302,8 +294,6 @@ To enable disaster recovery for the previously created reservation, complete the
 To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -331,8 +321,6 @@ To stop managing the failover behavior of a dataset through a reservation, detac
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** , and then click the **Slot Reservations** tab.
 
@@ -349,8 +337,6 @@ To stop managing the failover behavior of a dataset through a reservation, detac
 To detach a dataset from a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -376,8 +362,6 @@ In the event of a regional outage, you must manually failover your reservation t
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Disaster recovery** .
 
@@ -392,8 +376,6 @@ In the event of a regional outage, you must manually failover your reservation t
 To add or change a secondary location to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) and set `is_primary` to `TRUE` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -431,8 +413,6 @@ For information about creating alerts on these metrics, see [Create dashboards, 
 To view the replication status and latency for a dataset in the Google Cloud console, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, expand your project.
 
@@ -452,8 +432,6 @@ BigQuery provides the following metrics in Monitoring to help you monitor replic
 To view these metrics in Monitoring, do the following:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Click **Metrics explorer** .
 

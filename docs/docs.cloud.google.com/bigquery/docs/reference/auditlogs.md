@@ -15,8 +15,6 @@ This document lists the audited methods for BigQuery. Google Cloud services gene
 To view the BigQuery audit logs, do the following:
 
 1.  In the Google Cloud console, go to the Logs Explorer page:
-    
-    [Go to Logs Explorer](https://console.cloud.google.com/logs/query)
 
 2.  Copy and paste the following query into the **Query** field of the Logs Explorer, and then click **Run query** .
     

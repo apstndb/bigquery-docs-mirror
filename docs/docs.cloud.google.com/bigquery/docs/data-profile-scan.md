@@ -1,10 +1,10 @@
 # Profile your data
 
-This document explains how to use data profile scans to better understand your data. BigQuery uses Dataplex Universal Catalog to analyze the statistical characteristics of your data, such as average values, unique values, and maximum values. Dataplex Universal Catalog also uses this information to [recommend rules for data quality checks](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview) .
+This document explains how to use data profile scans to better understand your data. BigQuery uses Knowledge Catalog to analyze the statistical characteristics of your data, such as average values, unique values, and maximum values. Knowledge Catalog also uses this information to [recommend rules for data quality checks](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview) .
 
 For more information about data profiling, see [About data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
 
-**Tip:** The steps in this document show how to manage data profile scans across your project. You can also create and manage data profile scans when working with a specific table. For more information, see the [Manage data profile scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#start-from-table) section of this document.
+> **Tip:** The steps in this document show how to manage data profile scans across your project. You can also create and manage data profile scans when working with a specific table. For more information, see the [Manage data profile scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#start-from-table) section of this document.
 
 ## Before you begin
 
@@ -14,11 +14,9 @@ Enable the Dataplex API.
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com)
-
 ## Required roles
 
-This section describes the IAM roles and permissions needed to use Dataplex Universal Catalog data profile scans.
+This section describes the IAM roles and permissions needed to use Knowledge Catalog data profile scans.
 
 ### User roles and permissions
 
@@ -26,7 +24,7 @@ To get the permissions that you need to create and manage data profile scans, as
 
   - Create, run, update, and delete data profile scans: [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `roles/dataplex.dataScanEditor` ) on the project containing the data scan
   - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `roles/dataplex.dataScanViewer` ) on the project containing the data scan
-  - Publish data profile scan results to Dataplex Universal Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the `@bigquery` entry group
+  - Publish data profile scan results to Knowledge Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the `@bigquery` entry group
   - View published data profile scan results in BigQuery on the **Data profile** tab: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -51,21 +49,21 @@ The following permissions are required to create and manage data profile scans:
       - `dataplex.datascans.list` on project
       - `dataplex.dataScanJobs.get` on data scan job
       - `dataplex.dataScanJobs.list` on data scan
-  - Publish data profile scan results to Dataplex Universal Catalog:
+  - Publish data profile scan results to Knowledge Catalog:
       - `dataplex.entryGroups.useDataProfileAspect` on entry group
       - `bigquery.tables.update` on table
       - `dataplex.entries.update` on entry
-  - View published data profile results for a table in BigQuery or Dataplex Universal Catalog:
+  - View published data profile results for a table in BigQuery or Knowledge Catalog:
       - `bigquery.tables.get` on table
       - `bigquery.tables.getData` on table
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-### Dataplex Universal Catalog service account roles and permissions
+### Knowledge Catalog service account roles and permissions
 
-To ensure that the Dataplex Universal Catalog service account has the necessary permissions to run data profile scans and export results, ask your administrator to grant the following IAM roles to the Dataplex Universal Catalog service account:
+To ensure that the Knowledge Catalog service account has the necessary permissions to run data profile scans and export results, ask your administrator to grant the following IAM roles to the Knowledge Catalog service account:
 
-**Important:** You must grant these roles to the Dataplex Universal Catalog service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+> **Important:** You must grant these roles to the Knowledge Catalog service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - Run data profile scans against BigQuery data:
       - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on project running the scan
@@ -94,17 +92,17 @@ The following permissions are required to run data profile scans and export resu
       - `bigquery.tables.create` on dataset
       - `bigquery.tables.updateData` on table
 
-Your administrator might also be able to give the Dataplex Universal Catalog service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the Knowledge Catalog service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Dataplex Universal Catalog can only scan rows visible to the Dataplex Universal Catalog service account. To allow Dataplex Universal Catalog to scan all rows, add its service account to a row filter where the predicate is `TRUE` .
+If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Knowledge Catalog can only scan rows visible to the Knowledge Catalog service account. To allow Knowledge Catalog to scan all rows, add its service account to a row filter where the predicate is `TRUE` .
 
-If a table uses BigQuery [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) , then Dataplex Universal Catalog requires access to scan protected columns. To grant access, give the Dataplex Universal Catalog service account the **Data Catalog Fine-Grained Reader** ( `roles/datacatalog.fineGrainedReader` ) role on all policy tags used in the table. The user creating or updating a data scan also needs permissions on protected columns.
+If a table uses BigQuery [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) , then Knowledge Catalog requires access to scan protected columns. To grant access, give the Knowledge Catalog service account the **Data Catalog Fine-Grained Reader** ( `roles/datacatalog.fineGrainedReader` ) role on all policy tags used in the table. The user creating or updating a data scan also needs permissions on protected columns.
 
-### Grant roles to the Dataplex Universal Catalog service account
+### Grant roles to the Knowledge Catalog service account
 
-To run data profile scans, Dataplex Universal Catalog uses a service account that requires permissions to run BigQuery jobs and read BigQuery table data. To grant the required roles, follow these steps:
+To run data profile scans, Knowledge Catalog uses a service account that requires permissions to run BigQuery jobs and read BigQuery table data. To grant the required roles, follow these steps:
 
-1.  Get the Dataplex Universal Catalog service account email address. If you haven't created a data profile or data quality scan in this project before, run the following `gcloud` command to generate the service identity:
+1.  Get the Knowledge Catalog service account email address. If you haven't created a data profile or data quality scan in this project before, run the following `gcloud` command to generate the service identity:
     
         gcloud beta services identity create --service=dataplex.googleapis.com
     
@@ -121,7 +119,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     Replace the following:
     
       - `  PROJECT_ID  ` : your Google Cloud project ID.
-      - `service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com` : the email of the Dataplex Universal Catalog service account.
+      - `service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com` : the email of the Knowledge Catalog service account.
 
 3.  Grant the service account the **BigQuery Data Viewer** ( `roles/bigquery.dataViewer` ) role for each table that you want to profile. This role grants read-only access to the tables.
     
@@ -133,15 +131,13 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     
       - `  DATASET_ID  ` : the ID of the dataset containing the table.
       - `  TABLE_ID  ` : the ID of the table to profile.
-      - `service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com` : the email of the Dataplex Universal Catalog service account.
+      - `service- PROJECT_NUMBER @gcp-sa-dataplex.iam.gserviceaccount.com` : the email of the Knowledge Catalog service account.
 
 ## Create a data profile scan
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click **Create data profile scan** .
 
@@ -155,66 +151,74 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     
     For tables in multi-region datasets, choose a region where to create the data scan.
     
-    To browse the tables organized within Dataplex Universal Catalog lakes, click **Browse within Dataplex Lakes** .
+    To browse the tables organized within Knowledge Catalog lakes, click **Browse within Knowledge Catalog Lakes** .
 
-7.  In the **Scope** field, choose **Incremental** or **Entire data** .
+7.  In the **Mode** section, select one of the following options:
     
-      - If you choose **Incremental data** , in the **Timestamp column** field, select a column of type `DATE` or `TIMESTAMP` from your BigQuery table that increases as new records are added, and that can be used to identify new records. For tables partitioned on a column of type `DATE` or `TIMESTAMP` , we recommend using the partition column as the timestamp field.
+      - **Standard** : profiles your data with customizable scan settings. This is the default mode.
+    
+      - **Lightweight** : provides quick insights with a low-latency, low-fidelity scan.
 
-8.  Optional: To filter your data, do any of the following:
+8.  If you chose the **Standard** mode, configure the following options. These options don't appear when you select **Lightweight** mode.
     
-      - To filter by rows, select the **Filter rows** checkbox. Enter a valid SQL expression that can be used in a [`WHERE` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example: `col1 >= 0` .
+    1.  In the **Scope** field, choose **Incremental** or **Entire data** .
         
-        The filter can be a combination of SQL conditions over multiple columns. For example: `col1 >= 0 AND col2 < 10` .
+        If you choose **Incremental data** , in the **Timestamp column** field, select a column of type `DATE` or `TIMESTAMP` from your BigQuery table. Knowledge Catalog uses this column to identify new records as they are added. For tables partitioned on a column of type `DATE` or `TIMESTAMP` , we recommend using this column as the partition column.
     
-      - To filter by columns, select the **Filter columns** checkbox.
+    2.  Optional: To filter your data, do any of the following:
+        
+          - To filter by rows, select the **Filter rows** checkbox. Enter a valid SQL expression that can be used in a [`WHERE` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example: `col1 >= 0` .
+            
+            The filter can be a combination of SQL conditions over multiple columns. For example: `col1 >= 0 AND col2 < 10` .
+        
+          - To filter by columns, select the **Filter columns** checkbox.
         
           - To include columns in the profile scan, in the **Include columns** field, click **Browse** . Select the columns to include, and then click **Select** .
         
           - To exclude columns from the profile scan, in the **Exclude columns** field, click **Browse** . Select the columns to exclude, and then click **Select** .
         
-        **Note:** You can use **Include columns** , **Exclude columns** , or both. If you use both the fields, then the data profile scan first selects the columns based on your input in the **Include columns** field and then excludes the columns based on your input in the **Exclude columns** field.
+        > **Note:** You can use **Include columns** , **Exclude columns** , or both. If you use both the fields, then the data profile scan first selects the columns based on your input in the **Include columns** field and then excludes the columns based on your input in the **Exclude columns** field.
+    
+    3.  To apply sampling to your data profile scan, in the **Sampling size** list, select a sampling percentage. Choose a percentage value that ranges between 0.0% and 100.0% with up to 3 decimal digits.
+        
+          - For larger datasets, choose a lower sampling percentage. For example, for a 1 PB table, if you enter a value between 0.1% and 1.0%, the data profile samples between 1-10 TB of data.
+        
+          - There must be at least 100 records in the sampled data to return a result.
+        
+          - For incremental data scans, the data profile scan applies sampling to the latest increment.
 
-9.  To apply sampling to your data profile scan, in the **Sampling size** list, select a sampling percentage. Choose a percentage value that ranges between 0.0% and 100.0% with up to 3 decimal digits.
+9.  Optional: Publish the data profile scan results in the BigQuery and Knowledge Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Knowledge Catalog** checkbox.
     
-      - For larger datasets, choose a lower sampling percentage. For example, for a 1 PB table, if you enter a value between 0.1% and 1.0%, the data profile samples between 1-10 TB of data.
-    
-      - There must be at least 100 records in the sampled data to return a result.
-    
-      - For incremental data scans, the data profile scan applies sampling to the latest increment.
-
-10. Optional: Publish the data profile scan results in the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Dataplex Catalog** checkbox.
-    
-    You can view the latest scan results in the **Data profile** tab in the BigQuery and Dataplex Universal Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
+    You can view the latest scan results in the **Data profile** tab in the BigQuery and Knowledge Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
     
     The publishing option might not be available in the following cases:
     
       - You don't have the required permissions on the table.
       - Another data profile scan is set to publish results.
 
-11. In the **Schedule** section, choose one of the following options:
+10. In the **Schedule** section, choose one of the following options:
     
       - **Repeat** : Run the data profile scan on a schedule: hourly, daily, weekly, monthly, or custom. Specify how often the scan should run and at what time. If you choose custom, use [cron](https://en.wikipedia.org/wiki/Cron) format to specify the schedule.
     
       - **On-demand** : Run the data profile scan on demand.
     
-      - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+      - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
         
           - **Set post-scan results auto-deletion** : The auto-deletion time defines the duration a data profile scan remains active after execution. A data profile scan without a specified auto-deletion time is automatically removed after 24 hours. The auto-deletion time can range from 0 seconds (immediate deletion) to 365 days.
 
-12. Click **Continue** .
+11. Click **Continue** .
 
-13. Optional: Export the scan results to a BigQuery standard table. In the **Export scan results to BigQuery table** section, do the following:
+12. Optional: Export the scan results to a BigQuery standard table. In the **Export scan results to BigQuery table** section, do the following:
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data profile scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Dataplex Universal Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
         
-        **Note:** You can use the same results table for multiple data profile scans.
+        > **Note:** You can use the same results table for multiple data profile scans.
 
-14. Optional: Add labels. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
+13. Optional: Add labels. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
 
-15. To create the scan, click **Create** .
+14. To create the scan, click **Create** .
     
     If you set the schedule to on-demand, you can also run the scan now by clicking **Run scan** .
 
@@ -222,13 +226,13 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 To create a data profile scan, use the [`gcloud dataplex datascans create data-profile` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-profile) .
 
-If the source data is organized in a Dataplex Universal Catalog lake, include the `--data-source-entity` flag:
+If the source data is organized in a Knowledge Catalog lake, include the `--data-source-entity` flag:
 
     gcloud dataplex datascans create data-profile DATASCAN \
     --location=LOCATION \
     --data-source-entity=DATA_SOURCE_ENTITY
 
-If the source data isn't organized in a Dataplex Universal Catalog lake, include the `--data-source-resource` flag:
+If the source data isn't organized in a Knowledge Catalog lake, include the `--data-source-resource` flag:
 
     gcloud dataplex datascans create data-profile DATASCAN \
     --location=LOCATION \
@@ -238,7 +242,7 @@ Replace the following variables:
 
   - `  DATASCAN  ` : The name of the data profile scan.
   - `  LOCATION  ` : The Google Cloud region in which to create the data profile scan.
-  - `  DATA_SOURCE_ENTITY  ` : The Dataplex Universal Catalog entity that contains the data for the data profile scan. For example, `projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity` .
+  - `  DATA_SOURCE_ENTITY  ` : The Knowledge Catalog entity that contains the data for the data profile scan. For example, `projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity` .
   - `  DATA_SOURCE_RESOURCE  ` : The name of the resource that contains the data for the data profile scan. For example, `//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table` .
 
 ### C\#
@@ -470,21 +474,19 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To create a data profile scan, use the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
-**Note:** If your BigQuery table is configured with the `Require partition filter` setting set to `true` , use the table's partition column as the data profile scan's row filter or timestamp column.
+> **Note:** If your BigQuery table is configured with the `Require partition filter` setting set to `true` , use the table's partition column as the data profile scan's row filter or timestamp column.
 
 ## Create multiple data profile scans
 
 You can configure data profile scans for multiple tables in a BigQuery dataset at the same time by using the Google Cloud console.
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click **Create data profile scan** .
 
 3.  Select the **Multiple data profile scans** option.
 
-4.  Enter an **ID prefix** . Dataplex Universal Catalog automatically generates scan IDs by using the provided prefix and unique suffixes.
+4.  Enter an **ID prefix** . Knowledge Catalog automatically generates scan IDs by using the provided prefix and unique suffixes.
 
 5.  Enter a **Description** for all of the data profile scans.
 
@@ -492,49 +494,55 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
 
 7.  If the dataset is multi-regional, select a **Region** in which to create the data profile scans.
 
-8.  Configure the common settings for the scans:
+8.  In the **Mode** section, choose one of the following options:
+    
+      - **Standard** : profiles your data with customizable scan settings. This is the default mode.
+    
+      - **Lightweight** : provides quick insights with a low-latency, low-fidelity scan. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+9.  If you chose the **Standard** mode, configure the following settings for the scans. These settings don't appear when **Lightweight** mode is selected.
     
     1.  In the **Scope** field, choose **Incremental** or **Entire data** .
         
-        **Note:** If you choose **Incremental** data, you can select only tables that are partitioned on a column of type `DATE` or `TIMESTAMP` .
+        If you choose **Incremental** data, you can select only tables that are partitioned on a column of type `DATE` or `TIMESTAMP` .
     
     2.  To apply sampling to the data profile scans, in the **Sampling size** list, select a sampling percentage.
         
         Choose a percentage value between 0.0% and 100.0% with up to 3 decimal digits.
+
+10. Optional: Publish the data profile scan results in the BigQuery and Knowledge Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Knowledge Catalog** checkbox.
     
-    3.  Optional: Publish the data profile scan results in the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Dataplex Catalog** checkbox.
-        
-        You can view the latest scan results in the **Data profile** tab in the BigQuery and Dataplex Universal Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
-        
-        **Note:** You must choose tables that don't have any existing scans publishing their results.
+    You can view the latest scan results in the **Data profile** tab in the BigQuery and Knowledge Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
     
-    4.  In the **Schedule** section, choose one of the following options:
+    > **Note:** You must choose tables that don't have any existing scans publishing their results.
+
+11. In the **Schedule** section, choose one of the following options:
+    
+      - **Repeat** : Run the data profile scans on a schedule: hourly, daily, weekly, monthly, or custom. Specify how often the scans should run and at what time. If you choose custom, use [cron](https://en.wikipedia.org/wiki/Cron) format to specify the schedule.
+    
+      - **On-demand** : Run the data profile scans on demand.
         
-          - **Repeat** : Run the data profile scans on a schedule: hourly, daily, weekly, monthly, or custom. Specify how often the scans should run and at what time. If you choose custom, use [cron](https://en.wikipedia.org/wiki/Cron) format to specify the schedule.
-        
-          - **On-demand** : Run the data profile scans on demand.
-        
-          - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+          - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
             
               - **Set post-scan results auto-deletion** : The auto-deletion time defines the duration a data profile scan remains active after execution. A data profile scan without a specified auto-deletion time is automatically removed after 24 hours. The auto-deletion time can range from 0 seconds (immediate deletion) to 365 days.
 
-9.  Click **Continue** .
+12. Click **Continue** .
 
-10. In the **Choose tables** field, click **Browse** . Choose one or more tables to scan, and then click **Select** .
+13. In the **Choose tables** field, click **Browse** . Choose one or more tables to scan, and then click **Select** .
 
-11. Click **Continue** .
+14. Click **Continue** .
 
-12. Optional: Export the scan results to a BigQuery standard table. In the **Export scan results to BigQuery table** section, do the following:
+15. Optional: Export the scan results to a BigQuery standard table. In the **Export scan results to BigQuery table** section, do the following:
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data profile scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Dataplex Universal Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
         
-        Dataplex Universal Catalog uses the same results table for all of the data profile scans.
+        Knowledge Catalog uses the same results table for all of the data profile scans.
 
-13. Optional: Add labels. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
+16. Optional: Add labels. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
 
-14. To create the scans, click **Create** .
+17. To create the scans, click **Create** .
     
     If you set the schedule to on-demand, you can also run the scans now by clicking **Run scan** .
 
@@ -543,11 +551,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
-
 2.  Click the data profile scan to run.
-
 3.  Click **Run now** .
 
 ### gcloud
@@ -746,15 +750,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To run a data profile scan, use the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
 
-**Note:** Run isn't supported for data profile scans that are on a one-time schedule.
+> **Note:** Run isn't supported for data profile scans that are on a one-time schedule.
 
 ## View data profile scan results
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
     
@@ -764,7 +766,7 @@ To run a data profile scan, use the [`dataScans.run` method](https://docs.cloud.
 
 3.  To see detailed information about a job, such as the scanned table's columns, statistics about the columns that were found in the scan, and the job logs, click the **Jobs history** tab. Then, click a job ID.
 
-**Note:** If you exported the scan results to a BigQuery table, then you can also access the scan results from the table.
+> **Note:** If you exported the scan results to a BigQuery table, then you can also access the scan results from the table.
 
 ### gcloud
 
@@ -969,11 +971,9 @@ To view the results of a data profile scan, use the [`dataScans.get` method](htt
 
 ### View published results
 
-If the data profile scan results are published to the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console, then you can see the latest scan results on the source table's **Data profile** tab.
+If the data profile scan results are published to the BigQuery and Knowledge Catalog pages in the Google Cloud console, then you can see the latest scan results on the source table's **Data profile** tab.
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -989,15 +989,13 @@ If the data profile scan results are published to the BigQuery and Dataplex Univ
     
     The latest published results are displayed.
     
-    **Note:** Published results might not be available if a scan is running for the first time.
+    > **Note:** Published results might not be available if a scan is running for the first time.
 
 ### View the most recent data profile scan job
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
 
@@ -1025,13 +1023,11 @@ To view the most recent scan job, use the [`dataScans.get` method](https://docs.
 
 ### View historical scan results
 
-Dataplex Universal Catalog saves the data profile scan history of the last 300 jobs or for the past year, whichever occurs first.
+Knowledge Catalog saves the data profile scan history of the last 300 jobs or for the past year, whichever occurs first.
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
 
@@ -1301,8 +1297,6 @@ To view historical data profile scan jobs, use the [`dataScans.jobs.list` method
 To view the data profile scans that apply to a specific table, do the following:
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Filter the list by table name and scan type.
 
@@ -1311,8 +1305,6 @@ To view the data profile scans that apply to a specific table, do the following:
 To enable the users in your organization to view the scan results, do the following:
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the data profile scan you want to share the results of.
 
@@ -1330,8 +1322,6 @@ The steps in this document show how to manage data profile scans across your pro
 You can also create and manage data profile scans when working with a specific table. In the Google Cloud console, on the BigQuery page for the table, use the **Data profile** tab. Do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     In the **Explorer** pane (in the left pane), click **Datasets** , and then click your dataset. Now click **Overview \> Tables** , and select the table whose data profile scan results you want to see.
 
@@ -1366,8 +1356,6 @@ You can also create and manage data profile scans when working with a specific t
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
 
@@ -1389,7 +1377,7 @@ Replace the following variables:
   - `  LOCATION  ` : The Google Cloud region in which the data profile scan was created.
   - `  DESCRIPTION  ` : The new description for the data profile scan.
 
-**Note:** You can update specification fields, such as `rowFilter` , `samplingPercent` , or `includeFields` , in the data profile specification file. See the [JSON format](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataProfileSpec) .
+> **Note:** You can update specification fields, such as `rowFilter` , `samplingPercent` , or `includeFields` , in the data profile specification file. See the [JSON format](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataProfileSpec) .
 
 ### C\#
 
@@ -1616,15 +1604,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To edit a data profile scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
 
-**Note:** Update isn't supported for data profile scans that are on a one-time schedule.
+> **Note:** Update isn't supported for data profile scans that are on a one-time schedule.
 
 ## Delete a data profile scan
 
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
-    
-    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the scan you want to delete.
 
@@ -1646,7 +1632,7 @@ Replace the following variables:
 
 To delete a data profile scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
 
-**Note:** Delete isn't supported for data profile scans that are on a one-time schedule.
+> **Note:** Delete isn't supported for data profile scans that are on a one-time schedule.
 
 ## What's next
 

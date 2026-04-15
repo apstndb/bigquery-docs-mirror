@@ -47,8 +47,6 @@ Third party transfers are subject to the following limitations:
 To create a third party data transfer by using the Google Cloud console:
 
 1.  Go to the Google Cloud Marketplace.
-    
-    [Go to the Google Cloud Marketplace](https://console.cloud.google.com/marketplace/browse?filter=category:data-transfer-services)
 
 2.  Click the appropriate third party provider.
 
@@ -93,7 +91,7 @@ To create a third party data transfer by using the Google Cloud console:
 
 6.  Click **Connect Source** .
     
-    **Note:** If you did not select a destination dataset, clicking **Connect Source** produces the following error: `A selected destination dataset is required before connecting to the source.`
+    > **Note:** If you did not select a destination dataset, clicking **Connect Source** produces the following error: `A selected destination dataset is required before connecting to the source.`
 
 7.  When prompted, click **Accept** to give the BigQuery Data Transfer Service permission to connect to the data source and to manage your data in BigQuery.
 

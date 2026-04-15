@@ -91,7 +91,7 @@ A `STRING` value that contains the model name of the target Vertex AI LLM. The f
 
 All of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) and [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview-gemini-models) Gemini models are supported.
 
-**Note:** To provide feedback or request support for the models in preview, send an email to <bqml-feedback@google.com> .
+> **Note:** To provide feedback or request support for the models in preview, send an email to <bqml-feedback@google.com> .
 
 For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
 
@@ -101,9 +101,9 @@ For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative
 
 Using the global endpoint for your requests can improve overall availability while reducing resource exhausted (429) errors, which occur when you exceed your quota for a regional endpoint. If you want to use Gemini in a region where it isn't available, you can avoid migrating your data to a different region by using the global endpoint instead. You can only use the global endpoint with the `AI.GENERATE_TEXT` function.
 
-**Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
+> **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
 
-**Note:** Using Gemini 2.5 models with any of these functions incurs charges for the [thinking process](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking) . With some functions, you can set a budget for the thinking process for Gemini 2.5 Flash and Gemini 2.5 Flash-Lite models. You can't set a budget for Gemini 2.5 Pro models. See the documentation for a given function for details.
+> **Note:** Using Gemini 2.5 models with any of these functions incurs charges for the [thinking process](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking) . With some functions, you can set a budget for the thinking process for Gemini 2.5 Flash and Gemini 2.5 Flash-Lite models. You can't set a budget for Gemini 2.5 Pro models. See the documentation for a given function for details.
 
 ### Claude models
 
@@ -152,7 +152,7 @@ The following [Llama models](https://docs.cloud.google.com/vertex-ai/generative-
   - Llama 3.1 70B (Preview), endpoint `openapi/meta/llama-3.1-70b-instruct-maas`
   - Llama 3.1 8B (Preview), endpoint `openapi/meta/llama-3.1-8b-instruct-maas`
 
-**Important:** For Llama 4.0 and greater models, you must create the dataset and connection for the remote model in the same region as the Llama model endpoint.
+> **Important:** For Llama 4.0 and greater models, you must create the dataset and connection for the remote model in the same region as the Llama model endpoint.
 
 You must enable Llama models in Vertex AI before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 

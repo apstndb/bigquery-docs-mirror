@@ -1,20 +1,14 @@
 # BigQuery documentation
 
-[Read product documentation](https://docs.cloud.google.com/bigquery/docs/introduction)
-
-BigQuery is Google Cloud's fully managed, petabyte-scale, and cost-effective analytics data warehouse that lets you run analytics over vast amounts of data in near real time. With BigQuery, there's no infrastructure to set up or manage, letting you focus on finding meaningful insights using GoogleSQL and taking advantage of flexible pricing models across on-demand and flat-rate options.
+BigQuery is Google Cloud's fully managed, petabyte-scale, and cost-effective analytics data warehouse that lets you run analytics over vast amounts of data in near real time. With BigQuery, there's no infrastructure to set up or manage, letting you focus on finding meaningful insights using GoogleSQL or Python and taking advantage of flexible pricing models across on-demand and flat-rate options.
 
 [Go to the BigQuery product page for more.](https://cloud.google.com/bigquery)
-
-## Documentation resources
-
-Find quickstarts and guides, review key references, and get help with common issues.
 
 format\_list\_numbered
 
 ### Guides
 
-  - Quickstarts: [Console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) , [Command line](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq) , or [Client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries)
+  - Quickstarts: [Console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) , [Command line](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq) , [Client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) , or [BigQuery DataFrames (Python)](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart)
 
   - [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables)
 
@@ -56,6 +50,8 @@ find\_in\_page
 
   - [End-to-end journey for machine learning models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey)
 
+  - [BigQuery DataFrames (Python)](https://dataframes.bigquery.dev/reference/index.html)
+
   - [BigQuery API Client Libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)
 
   - [Creating and training models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create)
@@ -85,16 +81,6 @@ info
   - [Troubleshooting BigQuery quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas)
 
   - [Billing questions](https://docs.cloud.google.com/bigquery/docs/billing-questions)
-
-## Related resources
-
-Training and tutorials
-
-Use cases
-
-Code samples
-
-Explore self-paced training, use cases, reference architectures, and code samples with examples of how to use and connect Google Cloud services.
 
 Training
 
@@ -190,15 +176,15 @@ Code sample
 
 Code Samples
 
-### [Python samples](https://github.com/googleapis/python-bigquery/tree/main/samples)
+### [Python samples](https://github.com/GoogleCloudPlatform/python-docs-samples/tree/main/bigquery)
 
-Working with BigQuery with the Google Cloud Python client library
+Working with BigQuery with the BigQuery DataFrames and Google Cloud Python client library
 
 Code sample
 
 Code Samples
 
-### [Node.js samples](https://github.com/googleapis/nodejs-bigquery/tree/main/samples)
+### [Node.js samples](https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/main/bigquery/cloud-client)
 
 Samples for the Node.js client library for BigQuery
 

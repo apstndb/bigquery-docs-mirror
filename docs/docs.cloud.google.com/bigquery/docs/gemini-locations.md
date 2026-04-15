@@ -58,7 +58,7 @@ The following limitations apply when you identify where Gemini in BigQuery proce
 
   - BigQuery Python notebook code assist and the Data Science Agent for Colab Enterprise in BigQuery only support global Gemini processing.
     
-    **Note:** To opt out of the Colab Enterprise preview feature without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent Public Preview Opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) . To learn more about how to turn off Data Science Agent, see [Turn off Gemini in Colab Enterprise](https://docs.cloud.google.com/colab/docs/use-data-science-agent#turn-off) .
+    > **Note:** To opt out of the Colab Enterprise preview feature without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent Public Preview Opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) . To learn more about how to turn off Data Science Agent, see [Turn off Gemini in Colab Enterprise](https://docs.cloud.google.com/colab/docs/use-data-science-agent#turn-off) .
 
   - Gemini in Cloud Assist chat (GCA) only supports global Gemini processing. You can deny access to the GCA chat panel by removing the `geminicloudassist.agents.invoke` Identity and Access Management (IAM) permission for your users. To learn more about how to create custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 

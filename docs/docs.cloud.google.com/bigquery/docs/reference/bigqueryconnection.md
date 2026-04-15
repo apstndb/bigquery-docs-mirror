@@ -2,9 +2,9 @@ This page shows how to get started with the Cloud Client Libraries for the BigQu
 
 Read more about the Cloud Client Libraries and the older Google API Client Libraries in [Client libraries explained](https://docs.cloud.google.com/apis/docs/client-libraries-explained) .
 
-**Beta**
-
-This library is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA libraries are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Beta**
+> 
+> This library is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA libraries are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 <span id="installing_the_client_library"></span>
 
@@ -51,7 +51,7 @@ If you're using Visual Studio Code or IntelliJ, you can add client libraries to 
 
 The plugins provide additional functionality, such as key management for service accounts. Refer to each plugin's documentation for details.
 
-**Note:** Cloud Java client libraries do not currently support Android.
+> **Note:** Cloud Java client libraries do not currently support Android.
 
 For more information, see [Setting Up a Java Development Environment](https://docs.cloud.google.com/java/docs/setup) .
 

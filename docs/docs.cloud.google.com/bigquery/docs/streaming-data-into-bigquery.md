@@ -310,7 +310,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       end
     end
 
-**Note:** To specify a `NUMERIC` or `BIGNUMERIC` value in a row, you must surround the value with double quotation marks, such as `"big_numeric_col":"0.123456789123"` .
+> **Note:** To specify a `NUMERIC` or `BIGNUMERIC` value in a row, you must surround the value with double quotation marks, such as `"big_numeric_col":"0.123456789123"` .
 
 You don't need to populate the `insertID` field when you insert rows. The following example shows how to avoid sending an `insertID` for each row when streaming.
 
@@ -521,7 +521,7 @@ For testing, you can use the bq command-line tool [`bq insert`](https://docs.clo
 
     echo '{"a":1, "b":2}' | bq insert 'mydataset.mytable$20170101'
 
-**Caution:** The `bq insert` command is intended for testing only.
+> **Caution:** The `bq insert` command is intended for testing only.
 
 ### Time-unit column partitioning
 

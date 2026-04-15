@@ -134,7 +134,7 @@ The `FinalizeWriteStream` method finalizes the stream so that no new data can be
 
 If an error occurs, the returned `google.rpc.Status` can include a [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError) in the [error details](https://docs.cloud.google.com/apis/design/errors#error_details) . Review the [`StorageErrorCode`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode) for find the specific error type. For more information about the Google API error model, see [Errors](https://docs.cloud.google.com/apis/design/errors) .
 
-**Important:** When using the gRPC API directly, if you write data to any region except the `US` multiregion, you must include the following header in your requests: `x-goog-request-params: write_stream=<stream_name>` , where `<stream_name>` is the name of the write stream. You don't need to add this header when using the client libraries.
+> **Important:** When using the gRPC API directly, if you write data to any region except the `US` multiregion, you must include the following header in your requests: `x-goog-request-params: write_stream=<stream_name>` , where `<stream_name>` is the name of the write stream. You don't need to add this header when using the client libraries.
 
 ### Connections
 
@@ -234,7 +234,7 @@ This plugin supports the following:
 
 For metrics to monitor your data ingestion with the Storage Write API, use the [`INFORMATION_SCHEMA.WRITE_API_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api) or see [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) .
 
-**Note:** The latency dashboard for the `AppendRows` method in the Google Cloud console doesn't reflect bi-directional streaming request level latency, it reflects the length of the bi-directional streaming connection. Also, the errors dashboard for `AppendRows` reflects the bi-directional streaming connection level error instead of the request level error. For request level metrics, you should use [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) .
+> **Note:** The latency dashboard for the `AppendRows` method in the Google Cloud console doesn't reflect bi-directional streaming request level latency, it reflects the length of the bi-directional streaming connection. Also, the errors dashboard for `AppendRows` reflects the bi-directional streaming connection level error instead of the request level error. For request level metrics, you should use [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) .
 
 ## Use data manipulation language (DML) with recently streamed data
 

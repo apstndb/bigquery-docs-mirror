@@ -99,7 +99,7 @@ You can specify PEM-encoded certificates in the **Trusted PEM Certificate** fiel
 
 You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a PostgreSQL transfer](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#set-up) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
-**Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
+> **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
 
 You can configure a *full* data transfer to transfer all data from your PostgreSQL datasets with each data transfer.
 
@@ -216,8 +216,6 @@ Add PostgreSQL data into BigQuery by setting up a transfer configuration using o
 ### Console
 
 1.  Go to the **Data transfers** page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -355,7 +353,7 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 ## Data type mapping
 
-**Note:** On March 16, 2027, the PostgreSQL connector will update some of its data type mapping. For more information, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-postgresql) .
+> **Note:** On March 16, 2027, the PostgreSQL connector will update some of its data type mapping. For more information, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-postgresql) .
 
 The following table maps PostgreSQL data types to the corresponding BigQuery data types.
 

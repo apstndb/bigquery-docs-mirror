@@ -1,8 +1,8 @@
 # Create queries with table explorer
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, email <bq-studio-product-team@google.com> .
 
@@ -62,8 +62,6 @@ For more information about BigQuery Identity and Access Management (IAM), see [A
 To explore table data and create a query based on your selection of table fields and values, follow these steps:
 
 1.  In the Google Cloud console, go to BigQuery Studio.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

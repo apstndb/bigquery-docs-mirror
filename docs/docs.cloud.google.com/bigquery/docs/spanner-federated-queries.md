@@ -102,7 +102,7 @@ The default priority is `medium` .
 
 Queries with priority `high` will compete with transactional traffic. Queries with priority `low` are best-effort, and might get preempted by background load, for example scheduled backups.
 
-**Caution:** Queries with `low` priority fall below queries like backup jobs which might never complete within the timeouts for BigQuery.
+> **Caution:** Queries with `low` priority fall below queries like backup jobs which might never complete within the timeouts for BigQuery.
 
 When running federated queries with external datasets, all queries have always `medium` priority.
 

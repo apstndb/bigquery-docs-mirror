@@ -18,8 +18,6 @@ One way to ensure that you have both is to complete the [Quickstart using the Go
 To use Cloud Monitoring to monitor your BigQuery project:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Select the name of your project if it is not already selected at the top of the page.
 
@@ -32,8 +30,6 @@ To use Cloud Monitoring to monitor your BigQuery project:
 To visualize the slots available and slots allocated to your project, go to the dashboard for BigQuery described in [Viewing the Cloud Monitoring dashboard](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view-dashboards) :
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Select **Dashboards \> BigQuery** .
 
@@ -46,8 +42,6 @@ The **Slot Utilization** chart appears on both the main Cloud Monitoring default
 Display the metrics collected by Cloud Monitoring in your own charts and dashboards:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Select **Dashboards \> Create Dashboard** .
 
@@ -69,8 +63,6 @@ Display the metrics collected by Cloud Monitoring in your own charts and dashboa
 In Cloud Monitoring, you can view metrics for quota usage and limits:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  In the navigation pane, select bar\_chart **Metrics explorer** .
 
@@ -86,7 +78,7 @@ In Cloud Monitoring, you can view metrics for quota usage and limits:
     
     ![Metrics explorer.](https://docs.cloud.google.com/static/bigquery/images/stackdriver-metrics-explorer.png)
 
-**Note:** You can view metrics for quota usage and limits only for the [BigQuery Storage Write API's](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) concurrent connections and throughput quotas.
+> **Note:** You can view metrics for quota usage and limits only for the [BigQuery Storage Write API's](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) concurrent connections and throughput quotas.
 
 ### Create an alert
 
@@ -97,8 +89,6 @@ To create an alerting policy that triggers when the 99th percentile of the execu
 To create an alerting policy, do the following:
 
 1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
-    
-    [Go to **Alerting**](https://console.cloud.google.com/monitoring/alerting)
     
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 

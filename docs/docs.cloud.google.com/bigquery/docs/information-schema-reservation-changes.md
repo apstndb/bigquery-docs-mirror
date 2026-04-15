@@ -2,7 +2,7 @@
 
 The `INFORMATION_SCHEMA.RESERVATION_CHANGES` view contains a near real-time list of all changes to reservations within the administration project. Each row represents a change to a single reservation. For more information, see [Introduction to reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
-**Note:** The view names `INFORMATION_SCHEMA.RESERVATION_CHANGES` and `INFORMATION_SCHEMA.RESERVATION_CHANGES_BY_PROJECT` are synonymous and can be used interchangeably.
+> **Note:** The view names `INFORMATION_SCHEMA.RESERVATION_CHANGES` and `INFORMATION_SCHEMA.RESERVATION_CHANGES_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required permission
 
@@ -84,8 +84,10 @@ The `INFORMATION_SCHEMA.RESERVATION_CHANGES` view has the following schema:
 <td><code dir="ltr" translate="no">STRUCT</code></td>
 <td><p>Information about the autoscale capacity of the reservation. Fields include the following:</p>
 <ul>
-<li><code dir="ltr" translate="no">current_slots</code> : the number of slots added to the reservation by autoscaling.
-<strong>Note:</strong> After users reduce <code dir="ltr" translate="no">max_slots</code> , it may take a while before it can be propagated, so <code dir="ltr" translate="no">current_slots</code> may stay in the original value and could be larger than <code dir="ltr" translate="no">max_slots</code> for that brief period (less than one minute).</li>
+<li><p><code dir="ltr" translate="no">current_slots</code> : the number of slots added to the reservation by autoscaling.</p>
+<blockquote>
+<strong>Note:</strong> After users reduce <code dir="ltr" translate="no">max_slots</code> , it may take a while before it can be propagated, so <code dir="ltr" translate="no">current_slots</code> may stay in the original value and could be larger than <code dir="ltr" translate="no">max_slots</code> for that brief period (less than one minute).
+</blockquote></li>
 <li><code dir="ltr" translate="no">max_slots</code> : the maximum number of slots that could be added to the reservation by autoscaling.</li>
 </ul></td>
 </tr>
@@ -149,8 +151,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 

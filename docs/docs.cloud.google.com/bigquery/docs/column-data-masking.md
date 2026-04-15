@@ -29,8 +29,6 @@ Use policy tags to selectively obscure sensitive data.
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&redirect=https://console.cloud.google.com)
 
 2.  If you are creating a data policy that references a [custom masking routine](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask) , create the associated masking UDF so that it is available in the following steps.
 
@@ -41,8 +39,6 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 ### Console
 
 1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
-    
-    [Open the Policy tag taxonomies page](https://console.cloud.google.com/bigquery/policy-tags)
 
 2.  Click **Create taxonomy** .
 
@@ -84,21 +80,12 @@ You can create up to nine data policies for a policy tag. One of these policies 
 ### Console
 
 1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
-    
-    [Open the Policy tag taxonomies page](https://console.cloud.google.com/bigquery/policy-tags)
-
 2.  Click the name of the taxonomy to open.
-
 3.  Select a policy tag.
-
 4.  Click **Manage Data Policies** .
-
 5.  For **Data Policy Name** , type a name for the data policy. The data policy name must be unique within the project that data policy resides in.
-
 6.  For **Masking Rule** , choose a predefined masking rule or a custom masking routine. If you are selecting a custom masking routine, ensure that you have both the `bigquery.routines.get` and the `bigquery.routines.list` permissions at the project level.
-
 7.  For **Principal** , type the name of one or more users or groups to whom you want to grant masked access to the column. Note that all users and groups you enter here are granted the BigQuery Masked Reader role.
-
 8.  Click **Submit** .
 
 ### API
@@ -249,15 +236,13 @@ The user or service account that sets a policy tag needs the `datacatalog.taxono
 
 To view taxonomies and policy tags across all projects in an organization in Google Cloud console, users need the `resourcemanager.organizations.get` permission, which is included in the Organization Viewer role.
 
-**Note:** You can assign only one policy tag per column.
+> **Note:** You can assign only one policy tag per column.
 
 ### Console
 
 Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) using the Google Cloud console.
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the BigQuery Explorer, locate and select the table that you want to update. The table schema for that table opens.
 
@@ -714,19 +699,11 @@ The `bigquery.dataPolicies.update` and `bigquery.dataPolicies.setIamPolicy` perm
 ### Console
 
 1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
-    
-    [Open the Policy tag taxonomies page](https://console.cloud.google.com/bigquery/policy-tags)
-
 2.  Click the name of the taxonomy to open.
-
 3.  Select a policy tag.
-
 4.  Click **Manage Data Policies** .
-
 5.  Optionally, change the masking rule.
-
 6.  Optional: Add or remove principals.
-
 7.  Click **Submit** .
 
 ### API
@@ -879,19 +856,11 @@ The user or service account that creates a data policy must have the `bigquery.d
 ### Console
 
 1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
-    
-    [Open the Policy tag taxonomies page](https://console.cloud.google.com/bigquery/policy-tags)
-
 2.  Click the name of the taxonomy to open.
-
 3.  Select a policy tag.
-
 4.  Click **Manage Data Policies** .
-
 5.  Click delete next to the data policy to delete.
-
 6.  Click **Submit** .
-
 7.  Click **Confirm** .
 
 ### API
@@ -973,7 +942,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Mask data by applying data policies to a column
 
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-security-feedback@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security-feedback@google.com> .
 
 As an alternative to creating policy tags, you can create data policies and apply them directly on a column.
 

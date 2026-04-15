@@ -41,8 +41,6 @@ To see an example of using Geo Viz to visualize geospatial data, see [Get starte
 
 To explore Geo Viz, go to the Geo Viz web tool:
 
-[Go to Geo Viz](https://bigquerygeoviz.appspot.com/)
-
 ### Geo Viz limitations
 
   - Geo Viz supports geometry inputs (points, lines, and polygons) that are retrieved as a `GEOGRAPHY` column. You can use BigQuery's geography functions to convert latitude and longitude to `GEOGRAPHY` .

@@ -10,7 +10,7 @@ You can perform the following tasks with row-level access policies:
   - [Delete a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#delete-policy) from a table
   - [Query a table with a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#query-policy)
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 ## Limitations
 
@@ -49,7 +49,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
 
 When you create a row-level access policy, BigQuery automatically grants the `bigquery.filteredDataViewer` role to the members of the grantee list. When you [list a table's row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#list-policy) in the Google Cloud console, this role is displayed in association with the members of the policy's grantee list.
 
-**Caution:** Don't apply the `bigquery.filteredDataViewer` role directly to a resource through IAM. `bigquery.filteredDataViewer` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
+> **Caution:** Don't apply the `bigquery.filteredDataViewer` role directly to a resource through IAM. `bigquery.filteredDataViewer` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
 
 ### Create or update row-level access policies
 
@@ -61,13 +61,13 @@ To create or update a row-level access policy, use one of the following DDL stat
 
   - The `CREATE OR REPLACE ROW ACCESS POLICY` statement updates an existing row-level access policy with the same name on the specified table.
     
-    **Key points to remember:**
-    
-      - Each row-level access policy on a table must have a unique name.
-      - Like a `WHERE` clause, the `filter_expression` matches the data that you want to be visible to the members of the `grantee_list` .
-      - You can combine a series of users and groups in the `grantee_list` list, if they are comma-separated and quoted separately.
-      - All identities in the `grantee_list` must exist. If any identity does not exist, the policy is not created and the statement fails.
-      - You cannot apply row-level access policies on [JSON columns](https://docs.cloud.google.com/bigquery/docs/json-data) . To learn about additional limitations for row-level security, see [Limitations](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#limitations)
+    > **Key points to remember:**
+    > 
+    >   - Each row-level access policy on a table must have a unique name.
+    >   - Like a `WHERE` clause, the `filter_expression` matches the data that you want to be visible to the members of the `grantee_list` .
+    >   - You can combine a series of users and groups in the `grantee_list` list, if they are comma-separated and quoted separately.
+    >   - All identities in the `grantee_list` must exist. If any identity does not exist, the policy is not created and the statement fails.
+    >   - You cannot apply row-level access policies on [JSON columns](https://docs.cloud.google.com/bigquery/docs/json-data) . To learn about additional limitations for row-level security, see [Limitations](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#limitations)
 
 ### Examples
 
@@ -271,8 +271,6 @@ To list row-level access policies, do the following:
 ### Console
 
 1.  To view row-level access policies, go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the table name to see its details, and then click **View row access policies** .
     
@@ -286,7 +284,7 @@ To list row-level access policies, do the following:
     
     ![Row access policies detail](https://docs.cloud.google.com/static/bigquery/images/view-row-access-policy-permissions.png)
     
-    **Important:** adding members to a policy and removing members from a policy are only supported using DDL statements.
+    > **Important:** adding members to a policy and removing members from a policy are only supported using DDL statements.
 
 ### bq
 
@@ -342,7 +340,7 @@ To delete a row access policy from a table, use the following DDL statements:
 
   - The `DROP ALL ROW ACCESS POLICIES` statement deletes all row-level access policies on the specified table.
 
-**Important:** You cannot delete the last row-level access policy from a table using `DROP ROW ACCESS POLICY` . Attempting to do so results in an error. To delete the last row-level access policy on a table, you must use `DROP ALL ROW ACCESS POLICIES` instead. For more information about dropping the last row-level access policy on a table, see [Best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#avoid_inadvertent_access_when_re-creating_row-level_access_policies) .
+> **Important:** You cannot delete the last row-level access policy from a table using `DROP ROW ACCESS POLICY` . Attempting to do so results in an error. To delete the last row-level access policy on a table, you must use `DROP ALL ROW ACCESS POLICIES` instead. For more information about dropping the last row-level access policy on a table, see [Best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#avoid_inadvertent_access_when_re-creating_row-level_access_policies) .
 
 ### Examples
 
@@ -370,7 +368,7 @@ To query a BigQuery table with row-level access policies, you must have the `big
 
 To gain these permissions with predefined roles, you need to be granted the [`roles/bigquery.dataViewer`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) role on the table using IAM, and you must be granted the [`roles/bigquery.filteredDataViewer`](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#filtered-data-viewer-role) IAM role on the table through the row-level access policy.
 
-**Caution:** Don't apply the `bigquery.filteredDataViewer` role directly to a resource through IAM. `bigquery.filteredDataViewer` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
+> **Caution:** Don't apply the `bigquery.filteredDataViewer` role directly to a resource through IAM. `bigquery.filteredDataViewer` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
 
 You must have the `datacatalog.categories.fineGrainedGet` permission on all relevant columns with [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) . To gain this permission with predefined roles, you need the `datacatalog.categoryFineGrainedReader` role.
 

@@ -232,8 +232,6 @@ To replicate a dataset, select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click the dataset that you want to replicate.
 
@@ -285,8 +283,6 @@ To promote a replica to be the primary replica, select one of the following opti
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click the dataset you want to promote.
 
@@ -319,8 +315,6 @@ To remove a replica and stop replicating the dataset, select one of the followin
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click the dataset where you want to remove a replica.
 
@@ -358,8 +352,6 @@ For information about creating alerts on these metrics, see [Create dashboards, 
 To view the replication status and latency for a dataset in the Google Cloud console, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, expand your project.
 
@@ -379,8 +371,6 @@ BigQuery provides the following metrics in Monitoring to help you monitor replic
 To view these metrics in Monitoring, do the following:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
-    
-    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Click **Metrics explorer** .
 

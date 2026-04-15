@@ -1,6 +1,6 @@
 # Introduction to BigQuery row-level security
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 This document explains the concept of row-level security, how it works in BigQuery, when to use row-level security to secure your data, and other details.
 
@@ -16,13 +16,13 @@ One table can have multiple row-level access policies. Row-level access policies
 
 At a high level, row-level security involves the creation of row-level access policies on a target BigQuery table. These policies act as filters to hide or display certain rows of data, depending on whether a user or group is in an allowed list. Any users or groups not specifically included in the allowed list are denied access.
 
-**Note:** If you create a new row-level security policy to limit row access, users that previously had full access must be added to a [`TRUE` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) to maintain their access.
+> **Note:** If you create a new row-level security policy to limit row access, users that previously had full access must be added to a [`TRUE` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) to maintain their access.
 
 An authorized user, with the Identity and Access Management (IAM) roles [BigQuery Admin or BigQuery DataOwner](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) , can create row-level access policies on a BigQuery table.
 
 When you create a row-level access policy, you specify the table by name, and which users or groups (called the `grantee-list` ) can access certain row data. The policy also includes the data on which you want to filter, called the `filter_expression` . The `filter_expression` functions like a `WHERE` clause in a typical query.
 
-**Remember:** Like a `WHERE` clause, the `filter_expression` matches the data that you want to be visible to the principals in the `grantee_list` . The users that are not in the `grantee_list` cannot see any rows.
+> **Remember:** Like a `WHERE` clause, the `filter_expression` matches the data that you want to be visible to the principals in the `grantee_list` . The users that are not in the `grantee_list` cannot see any rows.
 
 For instructions on how to create and use a row-level access policy, see [Managing row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) .
 
@@ -32,7 +32,7 @@ See the [DDL reference](https://docs.cloud.google.com/bigquery/docs/reference/st
 
 The following examples demonstrate potential use cases for row-level security.
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 #### Filter row data based on region
 
@@ -262,7 +262,7 @@ For more information about how row-level security interacts with some BigQuery f
     
       - Row access policies that incorporate [subqueries](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#filter_row_data_based_on_lookup_table) aren't compatible with the [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) . The BigQuery Storage Read API only supports simple filter predicates.
 
-  - Non-query operations, including service account jobs, that need full access to table data can use row-level security with the [`TRUE` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) . Examples include [table copying](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter) , [dataproc workflows](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#tabledata-list) , and more. For more information, see [Using row-level security](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features) .
+  - Non-query operations, including service account jobs, that need full access to table data can use row-level security with the [`TRUE` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) . Examples include [table copying](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter) , [Managed Service for Apache Spark workflows](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#tabledata-list) , and more. For more information, see [Using row-level security](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features) .
 
   - You can create, replace, or delete row-level access policies with DDL statements or [row access policy APIs](https://docs.cloud.google.com/bigquery/docs/reference/rest#rest-resource:-v2.rowaccesspolicies) . You can also perform all available actions in the row access policy APIs in the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) . You can list and view row-level access policies in the Google Cloud console.
 

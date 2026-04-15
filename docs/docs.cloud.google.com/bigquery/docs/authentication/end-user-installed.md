@@ -48,8 +48,6 @@ To ensure the app accesses only BigQuery tables that are available to the end us
 
 Use the following button to select a project and create the required credentials.
 
-<span class="devsite-api-getstarted-widget gc-analytics-event button button-primary">Get Credentials</span>
-
 ### Manually create credentials
 
 1.  Go to the [**Credentials** page](https://console.cloud.google.com/apis/credentials) in the Google Cloud console.

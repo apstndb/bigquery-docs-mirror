@@ -2,7 +2,7 @@
 
 The `INFORMATION_SCHEMA.JOBS` view contains near real-time metadata about all BigQuery jobs in the current project.
 
-**Note:** The view names `INFORMATION_SCHEMA.JOBS` and `INFORMATION_SCHEMA.JOBS_BY_PROJECT` are synonymous and can be used interchangeably.
+> **Note:** The view names `INFORMATION_SCHEMA.JOBS` and `INFORMATION_SCHEMA.JOBS_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required role
 
@@ -276,8 +276,8 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <li><code dir="ltr" translate="no">DEFAULT_LEGACY_SQL</code> : No query dialect was specified in the job request. BigQuery used the default value of LegacySQL.</li>
 <li><code dir="ltr" translate="no">DEFAULT_GOOGLE_SQL</code> : No query dialect was specified in the job request. BigQuery used the default value of GoogleSQL.</li>
 </ul>
-<br />
-This field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</td>
+<p>For jobs submitted by users, this field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</p>
+<p>For background jobs, the value of this field isn't controlled by the default query dialect configuration settings, and doesn't impact jobs submitted by users. For some background jobs, the value is omitted.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">continuous</code></td>
@@ -329,8 +329,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Dry run query estimates
 
@@ -353,7 +355,7 @@ Replace the following:
 
 For example, `` `myproject`.`region-us-central1`.INFORMATION_SCHEMA.JOBS `` .
 
-**Note:** For maximum query efficiency, filter on the `creation_time` column whenever possible. This allows BigQuery to prune partitions, which improves query performance and reduces costs.
+> **Note:** For maximum query efficiency, filter on the `creation_time` column whenever possible. This allows BigQuery to prune partitions, which improves query performance and reduces costs.
 
 ### Compare on-demand job usage to billing data
 
@@ -458,7 +460,7 @@ WHERE
   AND end_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP();
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -515,7 +517,7 @@ GROUP BY
   user_email;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -550,7 +552,7 @@ The following example returns the number of jobs by day, dataset, and table so t
     ORDER BY
         day DESC;
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -759,7 +761,7 @@ If you don't have organization-level permissions or only need to monitor a speci
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -795,7 +797,7 @@ If you don't have organization-level permissions or only need to monitor a speci
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `region-us` .
 
-**Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+> **Note:** You must use a region qualifier to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The result looks similar to the following:
 
@@ -922,7 +924,7 @@ WHERE job_id = 'JOB_ID'
 
 Replace `  JOB_ID  ` with the `job_id` you are investigating.
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result will be similar to the following:
 
@@ -1208,7 +1210,7 @@ ORDER BY
   j.creation_time DESC;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -1254,7 +1256,7 @@ concurrent_jobs AS (
 SELECT ROUND(AVG(concurrent_jobs_count),1) as average_concurrent_jobs FROM concurrent_jobs
 ```
 
-**Note:** The granularity for metadata aggregation is set to seconds. If you require a more precise granularity for shorter running jobs, replace `SECOND` with `MILLISECOND` in the query body for milliseconds sampling.
+> **Note:** The granularity for metadata aggregation is set to seconds. If you require a more precise granularity for shorter running jobs, replace `SECOND` with `MILLISECOND` in the query body for milliseconds sampling.
 
 Replace the following:
 

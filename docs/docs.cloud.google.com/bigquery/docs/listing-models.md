@@ -26,8 +26,6 @@ To list models in a dataset:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

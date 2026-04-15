@@ -38,7 +38,7 @@ To see the active bytes of the table alone, subtract the `TIME_TRAVEL_PHYSICAL_B
 
 For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
-**Note:** The view names `INFORMATION_SCHEMA.TABLE_STORAGE` and `INFORMATION_SCHEMA.TABLE_STORAGE_BY_PROJECT` are synonymous and can be used interchangeably.
+> **Note:** The view names `INFORMATION_SCHEMA.TABLE_STORAGE` and `INFORMATION_SCHEMA.TABLE_STORAGE_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Understanding byte values versus billing units
 
@@ -226,8 +226,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The following example shows how to return storage information for tables in a specified project and region:
 
@@ -293,8 +295,6 @@ The following example shows you how to forecast the price difference per dataset
 The prices used in the pricing variables for this query are for the `us-central1` region. If you want to run this query for a different region, update the pricing variables appropriately. See [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) for pricing information.
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Enter the following GoogleSQL query in the **Query editor** box. `INFORMATION_SCHEMA` requires GoogleSQL syntax. GoogleSQL is the default syntax in the Google Cloud console.
     
@@ -353,7 +353,7 @@ The prices used in the pricing variables for this query are for the `us-central1
       (forecast_active_logical_cost + forecast_active_physical_cost) DESC;
     ```
     
-    **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+    > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 3.  Click **Run** .
 

@@ -88,7 +88,7 @@ Splits a given `ReadStream` into two `ReadStream` objects.
 
 ## `        google.cloud.bigquery.storage.v1beta2.BigQueryWrite       `
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Methods
 

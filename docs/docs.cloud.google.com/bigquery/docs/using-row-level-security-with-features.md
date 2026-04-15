@@ -4,7 +4,7 @@ This document describes how to use row-level access security with other BigQuery
 
 Before you read this document, familiarize yourself with row-level security by reading [Introduction to BigQuery row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [Working with row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) .
 
-**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 ## The `TRUE` filter
 
@@ -38,7 +38,7 @@ Cross-region copies are allowed and all policies are copied. Subsequent queries 
 
 Row-level access policies on a table must have unique names. A collision in row-level access policy names during the copy results in an invalid input error.
 
-**Caution:** After a table is copied, any row-level or column-level access policies that were copied are independent from the original table's security. The destination table's security is not synchronized with the original table's security.
+> **Caution:** After a table is copied, any row-level or column-level access policies that were copied are independent from the original table's security. The destination table's security is not synchronized with the original table's security.
 
 ##### Required permissions to copy a table with a row-level access policy
 

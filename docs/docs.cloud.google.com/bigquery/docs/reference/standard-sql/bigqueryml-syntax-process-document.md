@@ -80,7 +80,7 @@ OPTIONS (remote_service_type = 'cloud_ai_document_v1',
 document_processor='processor_id');
 ```
 
-**Note:** For more information about how to specify a processor ID, see [Create a model](https://docs.cloud.google.com/bigquery/docs/process-document#create_a_model) .
+> **Note:** For more information about how to specify a processor ID, see [Create a model](https://docs.cloud.google.com/bigquery/docs/process-document#create_a_model) .
 
 Process the documents:
 

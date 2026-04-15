@@ -53,9 +53,7 @@ You might also be able to get these permissions with [custom roles](https://docs
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -64,8 +62,6 @@ You might also be able to get these permissions with [custom roles](https://docs
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
 ## Create a dataset
 
@@ -74,8 +70,6 @@ Create a BigQuery dataset to contain your resources:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -128,8 +122,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -158,8 +150,6 @@ Select one of the following options:
 Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -331,7 +321,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -407,7 +397,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Grant a role to the remote model connection's service account
 
@@ -424,8 +414,6 @@ To grant the Vertex AI User role, follow these steps:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Add** .
     
@@ -455,8 +443,6 @@ If you are using the remote model to generate text from object table data, grant
 To find the service account for the object table connection, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -483,8 +469,6 @@ To grant the role, follow these steps:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Add** .
     
@@ -512,8 +496,6 @@ Replace the following:
 This step is only required if you want to use Anthropic Claude, Llama, or Mistral AI models.
 
 1.  In the Google Cloud console, go to the Vertex AI **Model Garden** page.
-    
-    [Go to Model Garden](https://console.cloud.google.com/vertex-ai/model-garden)
 
 2.  Search or browse for the partner model that you want to use.
 
@@ -538,8 +520,6 @@ Create a remote model:
 ### Vertex AI models
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
     
@@ -577,8 +557,6 @@ Create a remote model:
 ### New open models
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
@@ -680,8 +658,6 @@ Create a remote model:
 ### Deployed open models
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
@@ -754,9 +730,9 @@ Replace the following:
 
   - `  PROMPT_QUERY  ` : a query that provides the prompt data. This query must produce a column that's named `prompt` .
     
-    **Note:**
-    
-    We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
+    > **Note:**
+    > 
+    > We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
 
   - `  TOKENS  ` : an `INT64` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `[1,8192]` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `128` .
 
@@ -963,9 +939,9 @@ Replace the following:
 
   - `  PROMPT_QUERY  ` : a query that provides the prompt data. This query must produce a column that's named `prompt` .
     
-    **Note:**
-    
-    We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
+    > **Note:**
+    > 
+    > We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
 
   - `  TOKENS  ` : an `INT64` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `[1,4096]` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `128` .
 
@@ -1065,9 +1041,9 @@ Replace the following:
 
   - `  PROMPT_QUERY  ` : a query that provides the prompt data. This query must produce a column that's named `prompt` .
     
-    **Note:**
-    
-    We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
+    > **Note:**
+    > 
+    > We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
 
   - `  TOKENS  ` : an `INT64` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `[1,4096]` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `128` .
 
@@ -1171,9 +1147,9 @@ Replace the following:
 
   - `  PROMPT_QUERY  ` : a query that provides the prompt data. This query must produce a column that's named `prompt` .
     
-    **Note:**
-    
-    We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
+    > **Note:**
+    > 
+    > We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
 
   - `  TOKENS  ` : an `INT64` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `[1,4096]` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `128` .
 
@@ -1246,7 +1222,7 @@ FROM
 
 ### Open models
 
-**Note:** You must deploy open models in Vertex AI before you can use them. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
+> **Note:** You must deploy open models in Vertex AI before you can use them. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
 
 ``` notranslate
 SELECT *
@@ -1279,9 +1255,9 @@ Replace the following:
 
   - `  PROMPT_QUERY  ` : a query that provides the prompt data. This query must produce a column that's named `prompt` .
     
-    **Note:**
-    
-    We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
+    > **Note:**
+    > 
+    > We recommend against using the [`LIMIT and OFFSET` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `LIMIT` and `OFFSET` .
 
   - `  TOKENS  ` : an `INT64` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `[1,4096]` . Specify a lower value for shorter responses and a higher value for longer responses. If you don't specify a value, the model determines an appropriate value.
 

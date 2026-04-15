@@ -20,7 +20,7 @@ You can view the project and reservation slot usage in the following ways:
     
     ![Reservations monitoring.](https://docs.cloud.google.com/static/bigquery/images/reservations-monitoring.png)
 
-**Note:** The number of slots in use might appear higher than your reservation slot count because of how BigQuery provisions resources to reservations. You are not charged for slots beyond your reservation slot count.
+> **Note:** The number of slots in use might appear higher than your reservation slot count because of how BigQuery provisions resources to reservations. You are not charged for slots beyond your reservation slot count.
 
 ## View your capacity-based bill
 
@@ -28,7 +28,7 @@ To view your capacity-based bill in real time, follow these steps:
 
 1.  In the Google Cloud console, go to the **Billing** page.
     
-    [Go to **Billing**](https://console.cloud.google.com/billing) .
+    .
 
 2.  Select the billing account project for which you want to view the bill.
 
@@ -37,7 +37,7 @@ To view your capacity-based bill in real time, follow these steps:
     1.  From the **Services** list, select **BigQuery** and select all that's applicable.
     2.  Select **All SKUs** from the **SKUs** list.
 
-**Note:** BigQuery annual and three-year commitments are priced by months. Your bill doesn't change due to variability in the month length. If your slot usage remains unchanged, the rate remains the same every month.
+> **Note:** BigQuery annual and three-year commitments are priced by months. Your bill doesn't change due to variability in the month length. If your slot usage remains unchanged, the rate remains the same every month.
 
 ## Reservation cost attribution
 

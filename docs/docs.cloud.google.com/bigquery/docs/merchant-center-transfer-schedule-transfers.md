@@ -1,10 +1,10 @@
 # Schedule Merchant Center Transfers
 
-**Preview**
+> **Preview**
+> 
+> This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
+> **Note:** To get support or provide feedback for Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
 ## Before you begin
 
@@ -68,8 +68,6 @@ To create a data transfer for Merchant Center reporting:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -150,7 +148,7 @@ Where:
   - data\_source is the data source — `merchant_center` .
   - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers#required_permissions) .
 
-**Caution:** You cannot configure notifications by using the command-line tool.
+> **Caution:** You cannot configure notifications by using the command-line tool.
 
 For example, the following command creates a Merchant Center data transfer named `My Transfer` using Merchant ID `1234` and target dataset `mydataset` . The data transfer is created in your default project.
 
@@ -167,7 +165,7 @@ The first time you run the command, you receive a message like the following:
 
 Follow the instructions in the message and paste the authentication code on the command line.
 
-**Caution:** When you create a Merchant Center data transfer by using the command-line tool, the transfer configuration is set up using the default values for **Schedule** (every 24 hours at creation time). The first transfer run will start immediately, and it will fail with the following error message: \`No data to transfer found for the Merchant account.
+> **Caution:** When you create a Merchant Center data transfer by using the command-line tool, the transfer configuration is set up using the default values for **Schedule** (every 24 hours at creation time). The first transfer run will start immediately, and it will fail with the following error message: \`No data to transfer found for the Merchant account.
 
 If you have just created this data transfer, you may need to wait for up to a day before the data of your Merchant account are prepared and available for the transfer.\` The next scheduled run should run successfully. If the data of your Merchant account are prepared on the same date in UTC time, you can [set up a backfill](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) for today's run.
 

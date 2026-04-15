@@ -63,7 +63,6 @@ To disable the **Use cached results** option:
 ### Console
 
 1.  Open the Google Cloud console.  
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 

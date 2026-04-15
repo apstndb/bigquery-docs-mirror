@@ -1,10 +1,10 @@
 # Use the Colab Enterprise Data Science Agent with BigQuery
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback, to ask questions, or to request to opt out of this Preview feature, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent Public Preview Opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) .
+> **Note:** To provide feedback, to ask questions, or to request to opt out of this Preview feature, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent Public Preview Opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) .
 
 The Data Science Agent (DSA) for Colab Enterprise and BigQuery lets you automate exploratory data analysis, perform machine learning tasks, and deliver insights all within a Colab Enterprise notebook.
 
@@ -15,8 +15,6 @@ The Data Science Agent (DSA) for Colab Enterprise and BigQuery lets you automate
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,aiplatform.googleapis.com,dataform.googleapis.com,compute.googleapis.com)
     
     For new projects, the BigQuery API is automatically enabled.
 
@@ -80,8 +78,6 @@ The following steps show you how to use the Data Science Agent in BigQuery.
 To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  On the BigQuery Studio welcome page, under **Create new** , click **Notebook** .
     
@@ -89,7 +85,7 @@ To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
 
 3.  Click the ![](https://docs.cloud.google.com/static/colab/images/icon-gemini.png) **Toggle Gemini in Colab** button to open the chat dialog.
     
-    **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
+    > **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
 
 4.  Upload your CSV file.
     
@@ -112,8 +108,6 @@ To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
 To analyze a BigQuery table, choose one or more tables in the table selector, provide a reference to the table in your prompt, or search for a table by using the `@` symbol.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  On the BigQuery Studio welcome page, under **Create new** , click **Notebook** .
     
@@ -121,7 +115,7 @@ To analyze a BigQuery table, choose one or more tables in the table selector, pr
 
 3.  Click the ![](https://docs.cloud.google.com/static/colab/images/icon-gemini.png) **Toggle Gemini in Colab** button to open the chat dialog.
     
-    **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
+    > **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
 
 4.  Enter your prompt in the chat window.
 
@@ -193,7 +187,7 @@ To turn off Gemini in BigQuery for a Google Cloud project, an administrator must
 
 To turn off Gemini in BigQuery for a specific user, an administrator needs to revoke the [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` ) role for that user. See [Revoke a single IAM role](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#revoke-single-role) .
 
-**Note:** To opt out of using the Data Science Agent Preview without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> .
+> **Note:** To opt out of using the Data Science Agent Preview without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> .
 
 ## Pricing
 

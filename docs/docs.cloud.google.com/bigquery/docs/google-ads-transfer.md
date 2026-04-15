@@ -124,8 +124,6 @@ To create a data transfer for Google Ads reporting, select one of the following 
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -217,7 +215,7 @@ Where:
   - REFRESH\_DAYS is an integer that specifies the refresh window for a transfer configuration in days. The default value is `7` .
   - SERVICE\_ACCOUNT\_NAME is the service account name used to authenticate your transfer. The service account must be owned by the same `project_id` used to create the transfer and it must have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#required_permissions) .
 
-**Caution:** You can't configure notifications using the command-line tool.
+> **Caution:** You can't configure notifications using the command-line tool.
 
 For example, the following command creates a Google Ads data transfer named `My Transfer` using Customer ID `123-123-1234` and target dataset `mydataset` . The data transfer is created in the default project:
 
@@ -380,7 +378,7 @@ Using Google Ads manager accounts provides several benefits over using individua
 
 For more information about Google Ads manager accounts (MCCs), see [Working with managed accounts](https://support.google.com/google-ads/topic/7554359) and [About linking accounts to your manager account](https://support.google.com/google-ads/answer/7456530) .
 
-**Note:** The BigQuery Data Transfer Service pulls reports for all listed Customer IDs, but you may not see Customer IDs in your reports if they don't report activity for the requested day or the account is inactive when the transfer run happens.
+> **Note:** The BigQuery Data Transfer Service pulls reports for all listed Customer IDs, but you may not see Customer IDs in your reports if they don't report activity for the requested day or the account is inactive when the transfer run happens.
 
 ### Example
 

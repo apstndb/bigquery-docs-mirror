@@ -1,6 +1,6 @@
 # Run inference on image object tables
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 This document describes how to use BigQuery ML to run inference on image [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
@@ -118,8 +118,6 @@ You can inspect the uploaded model to see what its input and output fields are. 
 Follow these steps to inspect a model:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

@@ -59,7 +59,7 @@ The key type determines the [encryption mode](https://docs.cloud.google.com/bigq
 
 Encrypting plaintext more than once using the same keyset generally returns different ciphertext values due to different [initialization vectors (IVs)](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#block_cipher_modes) , which are chosen using the pseudo-random number generator provided by OpenSSL.
 
-**Note:** If you attempt to pass keysets in plaintext as part of queries, the query text may be logged, and with them the plaintext keyset. You can use BigQuery's [parameterized queries](https://cloud.google.com/bigquery/docs/parameterized-queries) to avoid logging the plaintext keyset.
+> **Note:** If you attempt to pass keysets in plaintext as part of queries, the query text may be logged, and with them the plaintext keyset. You can use BigQuery's [parameterized queries](https://cloud.google.com/bigquery/docs/parameterized-queries) to avoid logging the plaintext keyset.
 
 ### Wrapped keysets
 

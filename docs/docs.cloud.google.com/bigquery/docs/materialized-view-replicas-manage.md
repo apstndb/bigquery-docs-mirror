@@ -76,8 +76,6 @@ To get information about a materialized view replica, including the source [mate
 To get information about materialized view replicas, query the [`INFORMATION_SCHEMA.TABLES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -123,7 +121,7 @@ To get materialized view replica information by using the API, call the [`tables
 
 You can delete a materialized view replica through the Google Cloud console.
 
-**Caution:** Deleting a materialized view replica can't be undone.
+> **Caution:** Deleting a materialized view replica can't be undone.
 
 ### Required permissions
 

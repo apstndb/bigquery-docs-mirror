@@ -12,11 +12,9 @@ These examples use Looker Studio to visualize data in the BigQuery [`austin_bike
 
 You can construct an arbitrary SQL query and visualize the data in Looker Studio. This is useful if you want to modify the data in BigQuery before working with it in Looker Studio, or if you only need a subset of the fields in the table. Dashboards are based on temporary tables based on query results. Temporary tables are stored for up to 24 hours.
 
-**Note:** You can visualize a maximum of 5,000 rows of data in Looker Studio charts.
+> **Note:** You can visualize a maximum of 5,000 rows of data in Looker Studio charts.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select your [billing project](https://docs.cloud.google.com/billing/docs/concepts#billing_account) .
 
@@ -97,11 +95,9 @@ For more information about adding charts to a report, see [Add charts to your re
 
 You can export table schema to see the metadata of your data in Looker Studio. This is useful if you don't want to modify the data in BigQuery before working with it in Looker Studio.
 
-**Note:** BigQuery queries can return a maximum of 20 MB of data. If you explore very large table schemas, Looker Studio might truncate the results.
+> **Note:** BigQuery queries can return a maximum of 20 MB of data. If you explore very large table schemas, Looker Studio might truncate the results.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select your [billing project](https://docs.cloud.google.com/billing/docs/concepts#billing_account) .
 
@@ -123,7 +119,7 @@ You can export table schema to see the metadata of your data in Looker Studio. T
 
 You can share reports with others by sending them an email invitation to visit Looker Studio. You can invite specific people or Google Groups. To share more broadly, you can also create a link that lets anyone access your Looker Studio reports.
 
-**Note:** Before you can share a report created by the BigQuery export feature, you must first click **Save and share** .
+> **Note:** Before you can share a report created by the BigQuery export feature, you must first click **Save and share** .
 
 To share a report with another person, follow these steps:
 

@@ -1,6 +1,6 @@
 # Query open table formats with manifests
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes how to use manifest files to query data stored in open table formats such as [Apache Hudi](https://github.com/apache/hudi) and [Delta Lake](https://github.com/delta-io) .
 
@@ -13,8 +13,6 @@ Some open table formats such as Hudi and Delta Lake export their current state a
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigqueryconnection.googleapis.com,biglake.googleapis.com,%20bigqueryreservation.googleapis.com&redirect=https://console.cloud.google.com)
 
   - To create BigLake tables, you can run the Spark commands by using one of the following methods:
     
@@ -60,7 +58,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ## Query Hudi workloads
 
-**Important:** To perform the actions described in the following sections, you must use either the [Hudi-BigQuery connector](https://hudi.apache.org/docs/gcp_bigquery/) version 0.14.0 or greater, or the Hudi component in Managed Service for Apache Spark 2.1, which has the appropriate version of the connector backported. In the previous versions, the connector created views on the manifest files which wasn't optimal for query performance. If you are using the previous version of the connector, then you must drop the existing view that represents the Hudi table in BigQuery to avoid schema mismatch error.
+> **Important:** To perform the actions described in the following sections, you must use either the [Hudi-BigQuery connector](https://hudi.apache.org/docs/gcp_bigquery/) version 0.14.0 or greater, or the Hudi component in Managed Service for Apache Spark 2.1, which has the appropriate version of the connector backported. In the previous versions, the connector created views on the manifest files which wasn't optimal for query performance. If you are using the previous version of the connector, then you must drop the existing view that represents the Hudi table in BigQuery to avoid schema mismatch error.
 
 To [query Hudi data](https://docs.cloud.google.com/bigquery/docs/query-open-table-format-using-manifest-files#query-biglake-external-table) , follow these steps:
 
@@ -170,8 +168,6 @@ Using Spark, run the following command on a Delta table at location `path-to-del
 To create a Delta BigLake table, use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) with the `file_set_spec_type` field set to `NEW_LINE_DELIMITED_MANIFEST` :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the `CREATE EXTERNAL TABLE` statement:
     
@@ -243,8 +239,6 @@ To update an external table to a BigLake table or update an existing BigLake, se
 Use the [`CREATE OR REPLACE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) to update a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

@@ -26,42 +26,40 @@ When generating table insights, BigQuery provides two modes:
 <tbody>
 <tr class="odd">
 <td><strong>Generate and publish</strong> ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
-<td><p>Persists generated table insights into Dataplex Universal Catalog as metadata aspects. You must have the necessary permissions to publish. When you use <strong>Generate and publish</strong> , the following actions occur:</p>
+<td><p>Persists generated table insights into Knowledge Catalog as metadata aspects. You must have the necessary permissions to publish. When you use <strong>Generate and publish</strong> , the following actions occur:</p>
 <ul>
-<li>Stores table and column descriptions in Dataplex Universal Catalog.</li>
+<li>Stores table and column descriptions in Knowledge Catalog.</li>
 <li>Captures suggested queries and questions as reusable aspects.</li>
-<li>Makes published insights accessible to all users who have appropriate Dataplex Universal Catalog access, ensuring shared organizational knowledge.</li>
-<li>Lets you edit and save descriptions directly in Dataplex Universal Catalog.</li>
+<li>Makes published insights accessible to all users who have appropriate Knowledge Catalog access, ensuring shared organizational knowledge.</li>
+<li>Lets you edit and save descriptions directly in Knowledge Catalog.</li>
 </ul></td>
 <td><p>Use this mode for enterprise-wide data documentation that persists and is reusable, or when building catalog-driven governance workflows.</p></td>
 </tr>
 <tr class="even">
 <td><strong>Generate without publishing</strong></td>
-<td><p>Creates table insights such as descriptions, natural language questions, and SQL queries on demand. <strong>Generate without publishing</strong> doesn't publish insights to Dataplex Universal Catalog.</p></td>
+<td><p>Creates table insights such as descriptions, natural language questions, and SQL queries on demand. <strong>Generate without publishing</strong> doesn't publish insights to Knowledge Catalog.</p></td>
 <td><p>Use this mode for quick, ad hoc exploration to avoid cluttering the catalog.</p></td>
 </tr>
 </tbody>
 </table>
 
-**Note:** Modes apply only to table-level insights. The system generates dataset-level insights on demand and doesn't publish them to Dataplex Universal Catalog in the same way.
+> **Note:** Modes apply only to table-level insights. The system generates dataset-level insights on demand and doesn't publish them to Knowledge Catalog in the same way.
 
 ## Before you begin
 
 Data insights are generated using [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/overview) . To start generating insights, you must first [set up Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/set-up-gemini) .
 
-**Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
+> **Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
 
 ### Enable APIs
 
-**Important:** To enable any API in your project, ask your administrator to grant you the `serviceusage.services.enable` permission on your project.
+> **Important:** To enable any API in your project, ask your administrator to grant you the `serviceusage.services.enable` permission on your project.
 
 To use data insights, enable the following APIs in your project: Dataplex API, BigQuery API, and Gemini for Google Cloud API.
 
 **Roles required to enable APIs**
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-[Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com,bigquery.googleapis.com,cloudaicompanion.googleapis.com)
 
 For more information about enabling the Gemini for Google Cloud API, see [Enable the Gemini for Google Cloud API in a Google Cloud project](https://docs.cloud.google.com/gemini/docs/discover/set-up-gemini#enable-api) .
 
@@ -78,7 +76,7 @@ To get read-only access to the generated insights, ask your administrator to gra
 
   - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `roles/dataplex.dataScanDataViewer` ) on the project containing the BigQuery tables for which you want to view insights.
 
-To publish data insights to Dataplex Universal Catalog, ask your administrator to grant you the following IAM roles on the resource:
+To publish data insights to Knowledge Catalog, ask your administrator to grant you the following IAM roles on the resource:
 
   - Publish descriptions as aspects: [Dataplex Catalog Editor](https://docs.cloud.google.com/dataplex/docs/iam-roles#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )
   - Publish queries as aspects: [Dataplex Entry and EntryLink Owner](https://docs.cloud.google.com/dataplex/docs/iam-roles#dataplex.entryOwner) ( `roles/dataplex.entryOwner` )
@@ -103,23 +101,21 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## Generate insights for a BigQuery table
 
-To generate insights for BigQuery tables, you can use the Google Cloud console or the `DATA_DOCUMENTATION` scan type supported by the Dataplex Universal Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . These scans generate metadata, SQL queries for data exploration, schema descriptions, and table-level summaries.
+To generate insights for BigQuery tables, you can use the Google Cloud console or the `DATA_DOCUMENTATION` scan type supported by the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . These scans generate metadata, SQL queries for data exploration, schema descriptions, and table-level summaries.
 
 ### Console
 
 To generate insights for a BigQuery table, you must access the table entry in BigQuery using BigQuery Studio.
 
 1.  In the Google Cloud console, go to BigQuery Studio.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, select the project, dataset, and then the table you want to generate insights for.
 
 3.  Click the **Insights** tab. If the tab is empty, it means that the insights for this table are not generated yet.
 
-4.  To generate insights and publish them to Dataplex Universal Catalog, click **Generate and publish** ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+4.  To generate insights and publish them to Knowledge Catalog, click **Generate and publish** ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
     
-    To generate insights without publishing them to Dataplex Universal Catalog, click **Generate without publishing** .
+    To generate insights without publishing them to Knowledge Catalog, click **Generate without publishing** .
     
     For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#modes_for_generating_table_data_insights) .
 
@@ -149,7 +145,7 @@ After you have generated insights for a table, anyone with the `dataplex.datasca
 
 ### REST
 
-To generate insights programmatically, use the Dataplex Universal Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . To do this, complete the following steps:
+To generate insights programmatically, use the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . To do this, complete the following steps:
 
 1.  [Optional: Create a data profile scan for the table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#create-profile-scan)
 2.  [Generate a data documentation datascan for the BigQuery table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#create-doc-scan)
@@ -184,7 +180,7 @@ Use this method if you want to manage the scan resource over time.
 
 1.  Create a data documentation data scan using the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
-You can customize the scope of the generation to include schema, descriptions, queries, or a combination using the `generation_scopes` parameter. Optionally, you can publish these insights to Dataplex Universal Catalog by setting the `catalogPublishingEnabled` parameter to `true` .
+You can customize the scope of the generation to include schema, descriptions, queries, or a combination using the `generation_scopes` parameter. Optionally, you can publish these insights to Knowledge Catalog by setting the `catalogPublishingEnabled` parameter to `true` .
 
   - To generate schema, table descriptions, and SQL queries, leave `data_documentation_spec` empty or set `generation_scopes` to `ALL` . For example:
     
@@ -276,7 +272,7 @@ You can customize the scope of the generation to include schema, descriptions, q
 
 Use this method to initiate and complete a scan in a single API call. This method removes the need to call the run method separately and allows for automatic deletion of the scan resource using Time to Live (TTL) functionality.
 
-**Note:** One-time scan doesn't support subsequent run or update operations.
+> **Note:** One-time scan doesn't support subsequent run or update operations.
 
 Create and trigger the scan using the `dataScans.create` method. For example:
 
@@ -331,7 +327,7 @@ To publish the scan results to the BigQuery table, attach the following data doc
 
 ## Generate insights for a BigQuery external table
 
-BigQuery data insights supports generating insights for BigQuery external tables with data in Cloud Storage. You and the Dataplex Universal Catalog service account for the current project must have the [Storage Object Viewer role](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on the Cloud Storage bucket that contains the data. For more information, see [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#console) .
+BigQuery data insights supports generating insights for BigQuery external tables with data in Cloud Storage. You and the Knowledge Catalog service account for the current project must have the [Storage Object Viewer role](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on the Cloud Storage bucket that contains the data. For more information, see [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#console) .
 
 To generate insights for a BigQuery external table, follow the instructions described in the [Generate insights for a BigQuery table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-table) section of this document.
 
@@ -340,8 +336,6 @@ To generate insights for a BigQuery external table, follow the instructions desc
 To generate insights for a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , follow these steps:
 
 1.  Enable the BigQuery Connection API in your project.
-    
-    [Enable the BigQuery Connection API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
 2.  Create a BigQuery connection. For more information, see [Manage connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
 
@@ -359,7 +353,7 @@ Gemini in BigQuery automatically generates table and column descriptions when yo
 
 You can guide Gemini to generate table and column descriptions in a specific language. To do this, add a short directive (for example, "Generate table and column descriptions using the French language") to your table's existing description before you generate the data insights.
 
-**Note:** To help Gemini understand your request, include the word "language" in your prompt.
+> **Note:** To help Gemini understand your request, include the word "language" in your prompt.
 
 When you generate insights, Gemini interprets this directive and produces the metadata in the requested language. This mechanism works because Gemini uses existing table descriptions as context when generating new ones.
 
@@ -379,7 +373,7 @@ To generate table and column descriptions, follow these steps:
 
 3.  Click **View column descriptions** .
     
-    **Note:** If you don't see the **View column descriptions** button, click **Describe data** . You might need to scroll to see this button.
+    > **Note:** If you don't see the **View column descriptions** button, click **Describe data** . You might need to scroll to see this button.
     
     The table description and column descriptions that were generated are displayed.
 
@@ -419,7 +413,7 @@ To enhance the precision of your generated insights, adhere to the following rec
 
 In generative AI, grounding is the ability to connect model output to verifiable sources of information. You can ground generated table insights to data profiling results. [Data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) analyzes the columns in your BigQuery tables and identifies common statistical characteristics, such as typical data values and data distribution.
 
-When you [create a data profiling scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#create_a_data_profile_scan) for a table, you can choose to publish the scan results to the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console. Insights uses data profiling results to create more accurate, relevant queries by doing the following:
+When you [create a data profiling scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#create_a_data_profile_scan) for a table, you can choose to publish the scan results to the BigQuery and Knowledge Catalog pages in the Google Cloud console. Insights uses data profiling results to create more accurate, relevant queries by doing the following:
 
 1.  Analyzes the data profiling results to identify interesting patterns, trends, or outliers in the data.
 
@@ -471,4 +465,4 @@ If you save the [column descriptions that Gemini generates](https://docs.cloud.g
 
   - Learn about [Data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
   - Learn how to [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
-  - Learn more about [Dataplex Universal Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
+  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .

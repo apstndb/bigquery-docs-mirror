@@ -70,7 +70,7 @@ Only projects within the same [Organization resource](https://docs.cloud.google.
 
 The administration project is billed for the committed slots. Projects that use the slots are billed for storage but not billed for the slots. You can purchase more than one type of plan (for example, annual and three-year) and put the slots into the same administration project.
 
-**Note:** After you create a reservation or a commitment, you can't move it to a different administration project.
+> **Note:** After you create a reservation or a commitment, you can't move it to a different administration project.
 
 As a best practice, limit the number of administration projects. This helps to simplify billing management and slot allocation. One administration project for all of your organization's reservations is recommended where practical. Complex organizations might require additional administration projects to meet management or billing requirements.
 
@@ -129,7 +129,7 @@ However, if you have a complex organization with multiple divisions that manage 
 
 If you use multiple Google Cloud organizations, you must create at least one administration project for each organization, and then manage reservations and commitments for each organization in its related administration project. You can't share capacity across organizations.
 
-**Note:** [Changing the Cloud Billing account](https://docs.cloud.google.com/billing/docs/how-to/modify-project#change_the_billing_account_for_a_project) that is linked to the project doesn't create downtime in already existing commitments and reservations. Slots are linked to a project or organization and are independent from the Cloud Billing account.
+> **Note:** [Changing the Cloud Billing account](https://docs.cloud.google.com/billing/docs/how-to/modify-project#change_the_billing_account_for_a_project) that is linked to the project doesn't create downtime in already existing commitments and reservations. Slots are linked to a project or organization and are independent from the Cloud Billing account.
 
 ### Manage enhanced control on reservations
 
@@ -238,9 +238,9 @@ Reservation predictability is subject to the following limitations:
 
 ## Reservation groups
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
 

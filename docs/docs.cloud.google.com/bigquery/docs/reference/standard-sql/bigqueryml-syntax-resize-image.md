@@ -37,7 +37,7 @@ ML.RESIZE_IMAGE(image, target_height, target_width, preserve_aspect_ratio)
 
 The first array in the struct represents the dimensions of the image, and the second array in the struct contains the image data, similar to the `image` input argument.
 
-**Note:** If you reference `ML.RESIZE_IMAGE` in SQL statements in the BigQuery editor, it is possible for the function output to be too large to display. If this occurs, write the output to a table instead.
+> **Note:** If you reference `ML.RESIZE_IMAGE` in SQL statements in the BigQuery editor, it is possible for the function output to be too large to display. If this occurs, write the output to a table instead.
 
 ## Examples
 

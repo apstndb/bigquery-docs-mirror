@@ -1,6 +1,6 @@
 # Overview of Data Catalog with BigQuery
 
-**Caution:** Data Catalog is [deprecated](https://docs.cloud.google.com/data-catalog/docs/deprecations) in favor of [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) . Dataplex Universal Catalog is also integrated with BigQuery, offering similar capabilities. See [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) for details on enriching your data with aspects, which are the equivalent of Data Catalog tags.
+> **Caution:** Data Catalog is [deprecated](https://docs.cloud.google.com/data-catalog/docs/deprecations) in favor of [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) . Knowledge Catalog is also integrated with BigQuery, offering similar capabilities. See [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) for details on enriching your data with aspects, which are the equivalent of Data Catalog tags.
 
 This document provides an overview of how Data Catalog relates to BigQuery.
 

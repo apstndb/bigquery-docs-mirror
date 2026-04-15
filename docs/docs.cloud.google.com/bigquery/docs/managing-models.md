@@ -62,7 +62,7 @@ Issue the `bq cp` command. Optional flags:
     
     If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination model.
 
-**Note:** The `--destination_kms_key` flag is not supported when you copy a model.
+> **Note:** The `--destination_kms_key` flag is not supported when you copy a model.
 
 If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `  PROJECT_ID : DATASET  ` .
 

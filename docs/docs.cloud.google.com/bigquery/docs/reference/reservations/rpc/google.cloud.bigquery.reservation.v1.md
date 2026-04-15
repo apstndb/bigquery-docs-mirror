@@ -689,7 +689,9 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>This item is deprecated!</p>
+<td><blockquote>
+<p>This item is deprecated!</p>
+</blockquote>
 <p><code dir="ltr" translate="no">rpc SearchAssignments(              SearchAssignmentsRequest            </code> ) returns ( <code dir="ltr" translate="no">             SearchAssignmentsResponse            </code> )</p>
 <p>Deprecated: Looks up assignments for a specified resource for a particular region. If the request is about a project:</p>
 <ol>
@@ -1131,13 +1133,13 @@ Flex commitments have committed period of 1 minute after becoming ACTIVE. After 
 
 Same as FLEX, should only be used if flat-rate commitments are still available.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `TRIAL`
 
 Trial commitments have a committed period of 182 days after becoming ACTIVE. After that, they are converted to a new commitment based on the `renewal_plan` . Default `renewal_plan` for Trial commitment is Flex so that it can be deleted right after committed period ends.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `MONTHLY`
 
@@ -1147,7 +1149,7 @@ Monthly commitments have a committed period of 30 days after becoming ACTIVE. Af
 
 Same as MONTHLY, should only be used if flat-rate commitments are still available.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `ANNUAL`
 
@@ -1157,7 +1159,7 @@ Annual commitments have a committed period of 365 days after becoming ACTIVE. Af
 
 Same as ANNUAL, should only be used if flat-rate commitments are still available.
 
-This item is deprecated\!
+> This item is deprecated\!
 
 `THREE_YEAR`
 
@@ -1935,7 +1937,7 @@ Please note, in this mode, the ignore\_idle\_slots field must be set to true. Ot
 
 `IDLE_SLOTS_ONLY`
 
-The reservation will scale up using only idle slots contributed by other reservations or from unassigned commitments. If no idle slots are available it will not scale up further. If the idle slots which it is using are reclaimed by the contributing reservation(s) it may be forced to scale down. The max idle slots the reservation can be max\_slots - baseline capacity. For example, if max\_slots is 1000, baseline is 200 and customer sets ScalingMode to IDLE\_SLOTS\_ONLY, 1. if there are 1000 idle slots available in other reservations, the reservation will scale up to 1000 slots with 200 baseline and 800 idle slots. 2. if there are 500 idle slots available in other reservations, the reservation will scale up to 700 slots with 200 baseline and 300 idle slots. Please note, in this mode, the reservation might not be able to scale up to max\_slots.
+The reservation will scale up using only idle slots contributed by other reservations or from unassigned commitments. If no idle slots are available it will not scale up further. If the idle slots which it is using are reclaimed by the contributing reservation(s) it may be forced to scale down. The max idle slots the reservation can be max\_slots - baseline capacity. For example, if max\_slots is 1000, baseline is 200 and customer sets ScalingMode to IDLE\_SLOTS\_ONLY, 1. if there are 1000 idle slots available in other reservations, the reservation will scale up to 1000 slots with 200 baseline and 800 idle slots. 2. if there are 500 idle slots available in other reservations, the reservation will scale up to 700 slots with 200 baseline and 500 idle slots. Please note, in this mode, the reservation might not be able to scale up to max\_slots.
 
 Please note, in this mode, the ignore\_idle\_slots field must be set to false. Otherwise the request will be rejected with error code `google.rpc.Code.INVALID_ARGUMENT` .
 

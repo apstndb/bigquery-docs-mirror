@@ -12,8 +12,6 @@ To load Hive partitioned data, choose one of the following options:
 
 In the Google Cloud console, go to **BigQuery** .
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
-
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -90,7 +88,7 @@ The partition key schema is encoded immediately following the source URI prefix.
 
 Support for Hive partitioning exists by setting the [`HivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) on the [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationload) .
 
-**Note:** When `hivePartitioningOptions.mode` is set to `CUSTOM` , you must encode the partition key schema in the `hivePartitioningOptions.sourceUriPrefix` field as follows: `gs:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...`
+> **Note:** When `hivePartitioningOptions.mode` is set to `CUSTOM` , you must encode the partition key schema in the `hivePartitioningOptions.sourceUriPrefix` field as follows: `gs:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...`
 
 ## Perform incremental loads
 

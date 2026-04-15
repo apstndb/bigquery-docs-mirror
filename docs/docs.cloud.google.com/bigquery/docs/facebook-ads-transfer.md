@@ -170,8 +170,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -279,7 +277,7 @@ Action collections represent the fields of the [`list<AdsActionStats>` type](htt
 
 When a transfer completes, these action collections are populated in the [`AdInsightsActions` table](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation#adinsightsactions_report) .
 
-**Caution:** The more action collections that you specify for a transfer, the more likely you will [reach the rate limits imposed by Facebook Ads](https://developers.facebook.com/docs/marketing-api/overview/rate-limiting) .
+> **Caution:** The more action collections that you specify for a transfer, the more likely you will [reach the rate limits imposed by Facebook Ads](https://developers.facebook.com/docs/marketing-api/overview/rate-limiting) .
 
 The following is a list of action collections supported in a Facebook Ads data transfer:
 

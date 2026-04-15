@@ -7,7 +7,7 @@ Embeddings are high-dimensional numerical vectors that represent a given entity.
 You can create embeddings for the following types of data:
 
   - Text data from standard tables.
-  - Visual data that is returned as [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`OBJ.GET_ACCESS_URL` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values from standard tables as input to the `OBJ.GET_ACCESS_URL` function. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+  - Visual data that is returned as [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`OBJ.GET_ACCESS_URL` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values from standard tables as input to the `OBJ.GET_ACCESS_URL` function.
   - Visual data in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
   - Output data from [PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) , [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) , or [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models.
 

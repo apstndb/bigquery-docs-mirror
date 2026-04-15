@@ -43,8 +43,6 @@ For small batch queries with the TreeAH index type, `VECTOR_SEARCH` or `AI.SEARC
 To create an IVF vector index, use the [`CREATE VECTOR INDEX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) data definition language (DDL) statement:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement:
     
@@ -124,8 +122,6 @@ OPTIONS(index_type = 'IVF');
 To create a TreeAH vector index, use the [`CREATE VECTOR INDEX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) data definition language (DDL) statement:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement:
     
@@ -303,11 +299,11 @@ FROM
 
 ### Pre-filter with partitions
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
+> **Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
 
 If the table that you are creating the vector index on is partitioned, you can choose to also partition the vector index. Partitioning the vector index has the following benefits:
 
@@ -591,8 +587,6 @@ To index the tables in a project with a designated reservation, [create a reserv
 Use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -661,7 +655,7 @@ ORDER BY
 LIMIT 5;
 ```
 
-**Note:** You can't view information about indexing jobs run in the default shared slot pool.
+> **Note:** You can't view information about indexing jobs run in the default shared slot pool.
 
 #### Choose your reservation size
 
@@ -708,11 +702,11 @@ When there are insufficient slots to run index-management jobs, an index can bec
 
 ## Rebuild a vector index
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bq-vector-search@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bq-vector-search@google.com> .
 
 When table data changes significantly after a vector index is created, the vector index can become less efficient. When a vector index is less efficient, a vector search query that initially had high [recall](https://developers.google.com/machine-learning/glossary#recall) when using the index will have lower recall, because the data distribution shift in the base table isn't represented in the vector index.
 
@@ -729,8 +723,6 @@ You can use the [`VECTOR_INDEX.STATISTICS` function](https://docs.cloud.google.c
 Follow these steps to rebuild a vector index:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement to check the indexed table's data drift:
     
@@ -788,8 +780,6 @@ To cancel a vector index rebuild, use the [`BQ.CANCEL_INDEX_ALTERATION` system p
 When you no longer need a vector index or want to change which column is indexed on a table, you can delete the index on that table by using the [`DROP VECTOR INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_vector_index) :
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following SQL statement:
     

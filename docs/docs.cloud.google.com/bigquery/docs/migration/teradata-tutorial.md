@@ -29,7 +29,7 @@ You can use the [pricing calculator](https://cloud.google.com/products/calculato
 
   - Make sure that the machine has network connectivity with Google Cloud for the BigQuery Data Transfer Service agent to communicate with BigQuery and transfer the schema and data.
 
-**Note:** The instructions to migrate the schema and data are covered in a separate tutorial that is linked from this one, as explained later.
+> **Note:** The instructions to migrate the schema and data are covered in a separate tutorial that is linked from this one, as explained later.
 
 ## Introduction
 
@@ -237,7 +237,7 @@ The following procedure shows how to create the `lineitem` table, which is the l
 
 The instructions for how to migrate the schema and data to BigQuery are in a separate tutorial: [Migrate data from Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata) . We've included details in this section on how to proceed with certain steps of that tutorial. When you've finished the steps in the other tutorial, return to this document and continue with the next section, [Verifying query results](https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial#verifying_query_results) .
 
-**Note:** You run all of the commands in this section in [Cloud Shell](https://console.cloud.google.com/cloudshell) .
+> **Note:** You run all of the commands in this section in [Cloud Shell](https://console.cloud.google.com/cloudshell) .
 
 ### Create the BigQuery dataset
 
@@ -339,8 +339,6 @@ Run the query in Teradata:
 Run the same query in BigQuery:
 
 1.  Go to the BigQuery console:
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Copy the query into the query editor.
 
@@ -458,14 +456,12 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 The simplest way to stop billing charges is to delete the project you created for this tutorial.
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

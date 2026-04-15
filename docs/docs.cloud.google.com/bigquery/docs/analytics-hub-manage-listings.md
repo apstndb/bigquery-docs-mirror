@@ -15,7 +15,7 @@ A listing is a reference to a shared dataset that a publisher lists in a [data e
 
   - **Private listing.** A private listing is shared directly with individuals or groups. For example, a private listing can reference marketing metrics dataset that you share with other internal teams within your organization. Even though you can [allow Google Cloud users ( `allAuthenticatedUsers` )](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#give_users_access_to_a_listing) to subscribe to your listings, the listing will remain private and won't [show as a public listing on the BigQuery sharing page](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) . To share such listings with users, share the listing's URL with them. To make a private listing discoverable, [make your exchange public](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#make-data-exchange-public) .
 
-**Note:** Both requesting access and Cloud Marketplace-integrated flows are supported on a single BigQuery sharing listing. This means that you can create a Cloud Marketplace-integrated listing from an existing (offline) commercial listing, without any disruptions to existing subscriptions.
+> **Note:** Both requesting access and Cloud Marketplace-integrated flows are supported on a single BigQuery sharing listing. This means that you can create a Cloud Marketplace-integrated listing from an existing (offline) commercial listing, without any disruptions to existing subscriptions.
 
 ## Before you begin
 
@@ -36,8 +36,6 @@ To enable the Analytics Hub API, select one of the following options:
 ### Console
 
 Go to the **Analytics Hub API** page and enable the Analytics Hub API for your Google Cloud project.
-
-[Enable the Analytics Hub API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com)
 
 ### gcloud
 
@@ -72,15 +70,13 @@ To view the list of data exchanges in your organization that you have access to,
 
 A listing is a reference to a [shared dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#shared_datasets) that a BigQuery sharing publisher lists in a data exchange.
 
-**Caution:** We recommend that you don't add your shared datasets in a Google Cloud project with a VPC Service Controls perimeter. If you do so, then you must add the appropriate [ingress and egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules#create_a_listing) .
+> **Caution:** We recommend that you don't add your shared datasets in a Google Cloud project with a VPC Service Controls perimeter. If you do so, then you must add the appropriate [ingress and egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules#create_a_listing) .
 
 To create a listing, follow these steps:
 
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
     
     A page appears that lists all data exchanges that you can access.
 
@@ -126,7 +122,7 @@ To create a listing, follow these steps:
     
       - **Subscriber Email Logging** : turn on logging of the [principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) of all users running jobs and queries on linked datasets. When you enable this option, all future subscriptions for this listing have subscriber email logging turned on. The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
         
-        **Note:** Once you enable and save email logging, this setting cannot be edited. To disable email logging, delete the listing and recreate it without clicking the **Subscriber Email Logging** toggle.
+        > **Note:** Once you enable and save email logging, this setting cannot be edited. To disable email logging, delete the listing and recreate it without clicking the **Subscriber Email Logging** toggle.
     
       - **Documentation \> Markdown** : additional information such as links to any relevant documentation and any additional information that can help BigQuery sharing subscribers to use your topic.
 
@@ -178,8 +174,6 @@ For more information about the tasks that you can perform on listings using APIs
 You can also create a listing from a dataset by doing the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click a dataset to view its details.
 
@@ -223,7 +217,7 @@ You can also create a listing from a dataset by doing the following:
     
       - **Subscriber Email Logging** : turn on logging of the [principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) of subscribers running jobs and queries on this listing's linked dataset for all future subscriptions. When you enable this option, only newly created subscriptions log the principal identifiers. The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
         
-        **Note:** Once you enable and save email logging, this setting cannot be edited. To disable email logging, delete the listing and recreate it without clicking the **Subscriber Email Logging** toggle.
+        > **Note:** Once you enable and save email logging, this setting cannot be edited. To disable email logging, delete the listing and recreate it without clicking the **Subscriber Email Logging** toggle.
     
       - **Documentation \> Markdown** : additional information such as links to any relevant documentation and any additional information that can help subscribers to use your topic.
 
@@ -251,9 +245,9 @@ You can also create a listing from a dataset by doing the following:
 
 ### Share a SQL stored procedure within a listing
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Note: To request support or provide feedback for this feature, contact <bq-data-sharing-feedback@google.com> .
 
@@ -282,8 +276,6 @@ To give users access to view or subscribe to your listing, follow these steps:
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing.
 
@@ -309,7 +301,7 @@ To give users access to view or subscribe to your listing, follow these steps:
     
       - For Cloud Marketplace-integrated listings, the Analytics Hub Subscriber role ( `roles/analyticshub.subscriber` ) doesn't need to be granted, as subscriptions are automatically governed and managed based on the Cloud Marketplace order.
     
-    **Note:** After you grant licenses to users to access non-Cloud Marketplace-integrated commercial listings, you can either create a private listing for those users, or grant those users the Analytics Hub Subscriber ( `roles/analyticshub.subscriber` ) role for your commercial listing.
+    > **Note:** After you grant licenses to users to access non-Cloud Marketplace-integrated commercial listings, you can either create a private listing for those users, or grant those users the Analytics Hub Subscriber ( `roles/analyticshub.subscriber` ) role for your commercial listing.
     
     For more information, see the [Analytics Hub Subscriber and Viewer roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) .
 
@@ -354,15 +346,13 @@ To give users access to view or subscribe to your listing, follow these steps:
 
 For more information about the tasks that you can perform on listings using APIs, see [`projects.locations.dataExchanges.listings` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
 
-**Note:** After you grant licenses to users to access your commercial listing, you can either [create a private listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) for those users or grant those users the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) for your commercial listing.
+> **Note:** After you grant licenses to users to access your commercial listing, you can either [create a private listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) for those users or grant those users the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) for your commercial listing.
 
 ### Create a non-authenticated URL for public listing
 
 To create a non-authenticated BigQuery sharing listing URL that is viewable to even non-Google Cloud users, do the following:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
     
     A page appears that lists all data exchanges that you can access.
 
@@ -383,8 +373,6 @@ To view all the current subscriptions to your listing, select one of the followi
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing for which you want to manage the subscriptions.
 
@@ -399,8 +387,6 @@ To view all the current subscriptions to your listing, select one of the followi
 Alternatively, if you have access to the [shared dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#shared_datasets) , you can follow these steps to list subscribers:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -449,7 +435,7 @@ Replace the following:
 
 When you remove a subscription created before July 25, 2023 from your listings, the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#listings) gets unlinked from the [shared dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#shared_datasets) . Subscribers can still see the datasets in their projects but they are no longer linked with the shared dataset.
 
-**Note:** Revoking [Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might impact your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
+> **Note:** Revoking [Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might impact your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 
 To remove a subscription created before July 25, 2023 from your listings, follow these steps:
 
@@ -494,8 +480,6 @@ To update a listing, follow these steps:
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing.
 
@@ -516,7 +500,7 @@ To update a listing, follow these steps:
 
 8.  To save changes, click **Save** . To avoid discrepancies with Cloud Marketplace-integrated listings, a notification appears that prompts an update to the Cloud Marketplace data product listing.
     
-    **Note:** Updating the Cloud Marketplace data product listing requires review and approval by the Marketplace Operations Team.
+    > **Note:** Updating the Cloud Marketplace data product listing requires review and approval by the Marketplace Operations Team.
 
 ### API
 
@@ -550,21 +534,19 @@ When you delete a listing, subscribers can no longer [view the listing](https://
 
 You can't delete [Cloud Marketplace-integrated listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) with active commercial subscriptions. [Revoke all commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions#revoke-subscription) before you delete the listing.
 
-**Caution:** Be aware that revoking Cloud Marketplace-integrated commercial subscriptions might impact your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
+> **Caution:** Be aware that revoking Cloud Marketplace-integrated commercial subscriptions might impact your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 
 Deleting a listing for multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ) doesn't delete the shared dataset replicas. After deleting the listing for multiple regions, subscribers can no longer view the listing or query the linked datasets. If the shared dataset replicas aren't referenced in other listings, you can [choose to delete them](https://docs.cloud.google.com/bigquery/docs/data-replication#remove_a_dataset_replica) .
 
 Before deleting a listing for multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), ensure there are no active subscriptions associated with it. If active subscriptions exist, you must first revoke them using the [`projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) . After all the active subscriptions are removed, you can proceed with deleting the listing for multiple regions.
 
-**Caution:** If you delete a listing, you cannot undo it.
+> **Caution:** If you delete a listing, you cannot undo it.
 
 To delete a listing, follow these steps:
 
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing.
 

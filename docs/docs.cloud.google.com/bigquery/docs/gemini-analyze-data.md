@@ -30,15 +30,11 @@ To estimate your costs based on your projected usage, use the [pricing calculato
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Ensure that Gemini in BigQuery is set up for your Google Cloud project](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
 3.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 4.  [Create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) that's named `bqml_tutorial` . You use the dataset to store database objects, including tables and models.
 
@@ -63,7 +59,7 @@ Gemini in BigQuery can also provide information about how to analyze your data. 
 
 ## Access and analyze data
 
-As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
+> As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
 Gemini in BigQuery can help you know *what* data you can access for analysis, and *how* to analyze that data.
 
@@ -80,8 +76,6 @@ Before you can query data, you need to know what data you can access. Every data
 To get help, you can send Gemini in BigQuery a prompt like "How do I learn which datasets and tables are available to me in BigQuery?"
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the Google Cloud console toolbar, click spark **Open or close Gemini Cloud Assist chat** .
 
@@ -95,7 +89,7 @@ To get help, you can send Gemini in BigQuery a prompt like "How do I learn which
 
 5.  Optional: To reset your chat history, in the **Cloud Assist** panel, click delete **Clear chat** , and then click **Reset chat** .
     
-    **Note:** The chat history state is kept in memory only and doesn't persist when you switch to another workspace or when you close the Google Cloud console.
+    > **Note:** The chat history state is kept in memory only and doesn't persist when you switch to another workspace or when you close the Google Cloud console.
 
 ### Understand and write SQL in BigQuery
 
@@ -106,8 +100,6 @@ For this example, assume that you selected data to analyze and now want to query
 Consider that you want to understand a complex query that someone else wrote. Gemini in BigQuery can explain the query in plain language—such as the query syntax, underlying schema, and business context.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, open or paste the query that you want explained. For example:
     
@@ -143,8 +135,6 @@ This type of query is often complex, but using Gemini in BigQuery, you can autom
 To prompt Gemini in BigQuery to generate a query that lists your top products, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Studio** .
 
@@ -167,7 +157,7 @@ To prompt Gemini in BigQuery to generate a query that lists your top products, f
           ON t1.product_id = t2.id
         GROUP BY 2, 3
     
-    **Note:** Gemini in BigQuery might suggest multiple SQL statements for your prompt.
+    > **Note:** Gemini in BigQuery might suggest multiple SQL statements for your prompt.
 
 5.  To accept the suggested code, click **Tab** , and then click **Run** to run the SQL statement. You can also scroll through the suggested SQL and accept specific words suggested in the statement.
 
@@ -204,7 +194,7 @@ You use the following example query with actual sales, which are used as an inpu
     
     You can use Gemini in BigQuery to help you [understand this query](https://docs.cloud.google.com/bigquery/docs/gemini-analyze-data#prompt-gemini-explain-sql-queries) .
     
-    **Note:** While the model is running, you can also prompt Gemini in BigQuery in the **Cloud Assist** panel with questions like `What is an ARIMA_PLUS model type?`
+    > **Note:** While the model is running, you can also prompt Gemini in BigQuery in the **Cloud Assist** panel with questions like `What is an ARIMA_PLUS model type?`
     
     When the model is created, the **Results** tab of the **Query results** pane displays a message that's similar to the following:
     
@@ -225,7 +215,7 @@ You use the following example query with actual sales, which are used as an inpu
     
     In this response, `  PROJECT_ID  ` is your Google Cloud project.
     
-    **Note:** Gemini in BigQuery uses the context of the chat session to help answer questions in the same session.
+    > **Note:** Gemini in BigQuery uses the context of the chat session to help answer questions in the same session.
 
 3.  In the **Cloud Assist** panel, copy the SQL query.
 
@@ -237,16 +227,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Delete project
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -257,8 +245,6 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, then you can delete the dataset that you created in this tutorial.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, select the **`bqml_tutorial`** dataset that you created.
 

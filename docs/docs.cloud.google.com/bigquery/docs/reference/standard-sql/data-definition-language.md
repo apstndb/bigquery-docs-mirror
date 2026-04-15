@@ -32,8 +32,6 @@ You can run DDL statements by using the Google Cloud console, by using the bq co
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 
@@ -254,7 +252,7 @@ For more information about cost estimation, see [Estimate and control costs](htt
 
 Creates a new dataset.
 
-**Key Point:** This SQL statement uses the term `SCHEMA` to refer to a logical collection of tables, views, and other resources. The equivalent concept in BigQuery is a *dataset* . In this context, `SCHEMA` does not refer to BigQuery [table schemas](https://docs.cloud.google.com/bigquery/docs/schemas) .
+> **Key Point:** This SQL statement uses the term `SCHEMA` to refer to a logical collection of tables, views, and other resources. The equivalent concept in BigQuery is a *dataset* . In this context, `SCHEMA` does not refer to BigQuery [table schemas](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
 ### Syntax
 
@@ -535,7 +533,7 @@ This statement supports the following variants, which have the same limitations:
 
 `(column_name column_schema[, ...])` contains the table's schema information in a comma-separated list.
 
-**Note:** Constraints cannot be specified on `ARRAY` or `STRUCT` elements.
+> **Note:** Constraints cannot be specified on `ARRAY` or `STRUCT` elements.
 
     column :=
       column_name column_schema
@@ -630,7 +628,7 @@ This statement supports the following variants, which have the same limitations:
 
 `CLUSTER BY` is an optional clause that controls [table clustering](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) . `clustering_column_list` is a comma-separated list that determines how to cluster the table. The clustering column list can contain a list of up to four clustering columns.
 
-**Note:** You cannot have collation on a column in `clustering_column_list` .
+> **Note:** You cannot have collation on a column in `clustering_column_list` .
 
 ### `table_option_list`
 
@@ -916,7 +914,7 @@ The table schema contains two columns:
       - **a:** An array of strings, with description "A repeated STRING field"
       - **b:** A boolean
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
+    > **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -953,7 +951,7 @@ The table schema contains 2 columns:
 
   - **top\_words:** An `ARRAY` of `STRUCT` s containing 2 fields: `word` (a `STRING` ) and `word_count` (an `INT64` with the word count)
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
+    > **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -980,7 +978,7 @@ The table schema contains 2 columns:
 
   - **y:** A STRUCT containing a (an array of strings) and b (a boolean)
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
+    > **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -1009,7 +1007,7 @@ The table schema contains 2 columns:
 
   - **y:** A STRUCT containing a (an array of strings) and b (a boolean)
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
+    > **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -1047,7 +1045,7 @@ The table schema contains 3 columns:
 
   - **z:** A `NULLABLE` string
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
+    > **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 #### Creating a table with collation support
 
@@ -1260,9 +1258,9 @@ The table option list specifies the:
 
 #### Creating a table with autonomous embedding generation
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following example creates a table named `embedded_table` in `mydataset` with an [automatically generated embedding](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `embedding` that generates embeddings from the `content` column:
 
@@ -1435,7 +1433,7 @@ Now, using the `CREATE TABLE AS SELECT` statement you can selectively load data 
     WHERE
       EXTRACT(YEAR FROM l_commitdate) = 1992;
 
-**Note:** If you get a `ResourceExhausted` error, retry after some time. If the issue persists, you can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+> **Note:** If you get a `ResourceExhausted` error, retry after some time. If the issue persists, you can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 You can then perform a join operation with the newly created table:
 
@@ -1992,7 +1990,9 @@ Specify a view option list in the following format:
 <td><code dir="ltr" translate="no">privacy_policy</code></td>
 <td><p><code dir="ltr" translate="no">JSON-formatted STRING</code></p></td>
 <td><p>The policies to enforce when anyone queries the view. To learn more about the policies available for a view, see the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy"><code dir="ltr" translate="no">privacy_policy</code></a> view option.</p>
-<strong>Note:</strong> Time travel is disabled on any view that has an analysis rule.</td>
+<blockquote>
+<strong>Note:</strong> Time travel is disabled on any view that has an analysis rule.
+</blockquote></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">tags</code></td>
@@ -2115,7 +2115,7 @@ The following policies are available in the [`privacy_policy` view option](https
 </tbody>
 </table>
 
-**Note:** Time travel is disabled on any view that has a policy.
+> **Note:** Time travel is disabled on any view that has a policy.
 
 ### Default project in view body
 
@@ -3137,11 +3137,11 @@ determinism_specifier:
 
 To create a Python UDF, use the following syntax:
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** For support during the preview, email <bq-python-udf-feedback@google.com> .
+> **Note:** For support during the preview, email <bq-python-udf-feedback@google.com> .
 
 ``` notranslate
 CREATE [OR REPLACE] FUNCTION [IF NOT EXISTS]
@@ -3631,7 +3631,7 @@ data type</th>
 </tbody>
 </table>
 
-**Note:** The SQL encodings for JavaScript UDAFs are different from those for JavaScript UDFs.
+> **Note:** The SQL encodings for JavaScript UDAFs are different from those for JavaScript UDFs.
 
 ### Required aggregation functions in a JavaScript UDAF
 
@@ -4082,7 +4082,9 @@ LANGUAGE PYTHON&#39;
 Invalid properties: \
 Attempted to set unsupported properties: \
 [spark:spark.yarn.am.memory] at [1:1]</code></pre>
-<strong>Note:</strong> You can use the <a href="https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run">BigQuery dry run feature</a> to validate your stored procedure without creating it.</td>
+<blockquote>
+<strong>Note:</strong> You can use the <a href="https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run">BigQuery dry run feature</a> to validate your stored procedure without creating it.
+</blockquote></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">main_file_uri</code></td>
@@ -4256,7 +4258,7 @@ Creates or replaces a [row-level access policy](https://docs.cloud.google.com/bi
 
   - `GRANT TO grantee_list` : An optional clause that specifies the initial members that the row-level access policy should be created with.
     
-    **Caution:** If no `grantee_list` is provided, then the row-level access policy for the specified filter is initialized with no principals. This configuration prevents all data reads by everyone.
+    > **Caution:** If no `grantee_list` is provided, then the row-level access policy for the specified filter is initialized with no principals. This configuration prevents all data reads by everyone.
     
     `grantee_list` is a list of `iam_member` users or groups. Strings must be valid [IAM principals](https://docs.cloud.google.com/iam/docs/overview#concepts_related_identity) , or members, following the format of an [IAM Policy Binding member](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Binding) , and must be quoted. The following types are supported:
     
@@ -4291,7 +4293,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 Purchases [slots](https://docs.cloud.google.com/bigquery/docs/slots) by creating a new capacity commitment.
 
-**Caution:** Before you purchase slots, understand the details of the [commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .
+> **Caution:** Before you purchase slots, understand the details of the [commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .
 
 ### Syntax
 
@@ -4759,11 +4761,11 @@ OPTIONS (
 
 ## `CREATE DATA_POLICY` statement
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
 
 Creates or replaces a [data policy](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) . The name of the data policy must be unique within the project.
 
@@ -5564,9 +5566,9 @@ ADD COLUMN word STRING COLLATE 'und:ci'
 
 #### Adding an automatically generated embedding column
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following example adds an [automatically generated embedding](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `embedding` that generates embeddings from `content` column to the existing table `embedded_table` in `mydataset` :
 
@@ -5707,7 +5709,7 @@ Renames a clone, snapshot, or table.
 
 The `ALTER TABLE RENAME TO` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
 
-**Caution:** Renaming a table deletes all [tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) or [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that may be attached to it or its columns in [Data Catalog](https://docs.cloud.google.com/data-catalog) or [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , respectively.
+> **Caution:** Renaming a table deletes all [tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) or [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that may be attached to it or its columns in [Data Catalog](https://docs.cloud.google.com/data-catalog) or [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , respectively.
 
 ### Syntax
 
@@ -5730,7 +5732,7 @@ RENAME TO new_table_name
   - While a table can usually be renamed 5 hours after the last streaming operation, it might take longer.
   - Existing table ACLs and row access policies are preserved, but table ACL and row access policy updates made during the table rename are not preserved.
   - You can't concurrently rename a table and run a DML statement on that table.
-  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Dataplex Universal Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) on the table.
+  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) on the table.
   - Any search index or vector index created on the table is dropped when the table is renamed.
   - You can't rename external tables.
 
@@ -5755,7 +5757,7 @@ ALTER TABLE mydataset.mytable RENAME TO mynewtable
 
 ## `ALTER TABLE RENAME COLUMN` statement
 
-**Caution:** Renaming a column deletes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) and [Dataplex Universal Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
+> **Caution:** Renaming a column deletes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
 
 Renames one or more columns in an existing table schema.
 
@@ -6519,7 +6521,9 @@ Specify a view option list in the following format:
 <td><code dir="ltr" translate="no">privacy_policy</code></td>
 <td><p><code dir="ltr" translate="no">JSON-formatted STRING</code></p></td>
 <td><p>The policies to enforce when anyone queries the view. To learn more about the policies available for a view, see the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy"><code dir="ltr" translate="no">privacy_policy</code></a> view option.</p>
-<strong>Note:</strong> Time travel is disabled on any view that has an analysis rule.</td>
+<blockquote>
+<strong>Note:</strong> Time travel is disabled on any view that has an analysis rule.
+</blockquote></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">tags</code></td>
@@ -7210,11 +7214,11 @@ SET OPTIONS (
 
 ## `ALTER VECTOR INDEX REBUILD` statement
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
+> **Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
 
 Rebuild a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) on a table.
 
@@ -7264,11 +7268,11 @@ REBUILD;
 
 ## `ALTER DATA_POLICY` statement
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
 
 ### Syntax
 
@@ -7401,9 +7405,9 @@ The following example drops the dataset named `mydataset` and any resources in t
 
 ## `UNDROP SCHEMA` statement
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 [Undeletes a dataset](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) within your time travel window.
 
@@ -7710,9 +7714,9 @@ The following example statement deletes the function `parseJsonAsStruct` from th
 
 ## `DROP TABLE FUNCTION`
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Deletes a [table function](https://docs.cloud.google.com/bigquery/docs/table-functions) .
 
@@ -7786,7 +7790,7 @@ The following example statement deletes the procedure `myProcedure` from the dat
 
 Deletes a row-level access policy.
 
-**Important:** You cannot delete the last row-level access policy from a table using `DROP ROW ACCESS POLICY` . Attempting to do so results in an error. To delete the last row-level access policy on table, you must use `DROP ALL ROW ACCESS POLICIES` instead.
+> **Important:** You cannot delete the last row-level access policy from a table using `DROP ROW ACCESS POLICY` . Attempting to do so results in an error. To delete the last row-level access policy on table, you must use `DROP ALL ROW ACCESS POLICIES` instead.
 
 ### Syntax
 
@@ -7980,11 +7984,11 @@ The following example deletes a vector index `my_index` from `my_table` :
 
 ## `DROP DATA_POLICY` statement
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
 
 Deletes a data policy in a project.
 

@@ -127,8 +127,6 @@ For more information about counter metrics, see [Configure counter metrics](http
 Complete the following steps to create an alert policy that specifies the conditions and sends an email when three materialized view refresh jobs fail within a ten-minute period. This option provides added flexibility when configuring an alerting policy. If you create a logs-based metric directly, an alert is sent each time a failed materialized view refresh error is present in the logs.
 
 1.  In the Google Cloud console, go to the **Log-based Metrics** page.
-    
-    [Go to the Log-based Metrics](https://console.cloud.google.com/logs/metrics)
 
 2.  Adjacent to your user-defined logs-based metric for materialized view refreshes, click more\_vert **More actions** \> **Create alert from metric** .
 

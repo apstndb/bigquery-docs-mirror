@@ -7,7 +7,7 @@ This document describes how to create monthly snapshots of a table using a [serv
 3.  Write a query that creates monthly snapshots of the `  TABLE  ` table and places them in the `  BACKUP  ` dataset. Because you can't overwrite an existing table snapshot, the table snapshots must have unique names. To achieve this, the query appends the current date to the table snapshot names; for example, `  TABLE _20220521 ` . The table snapshots expire after 40 days.
 4.  Schedule the `snapshot-bot` service account to run the query on the first day of every month.
 
-**Note:** To customize this document to use your own project, dataset, and/or table names in the text and examples, edit these variables: `  PROJECT  ` , `  DATASET  ` , `  BACKUP  ` , `  TABLE  ` .
+> **Note:** To customize this document to use your own project, dataset, and/or table names in the text and examples, edit these variables: `  PROJECT  ` , `  DATASET  ` , `  BACKUP  ` , `  TABLE  ` .
 
 This document is intended for users who are familiar with [BigQuery](https://docs.cloud.google.com/bigquery/docs) and [BigQuery table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
@@ -94,8 +94,6 @@ Follow these steps to create the `snapshot-bot` [service account](https://docs.c
 ### Console
 
 1.  In Google Cloud console, go to the **Service accounts** page:
-    
-    [Go to Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts)
 
 2.  Select the `  PROJECT  ` project.
 
@@ -122,8 +120,6 @@ To verify that BigQuery created the service account with the permissions that yo
 Verify that BigQuery has created the service account:
 
 1.  In Google Cloud console, go to the **Service accounts** page:
-    
-    [Go to Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts)
 
 2.  Select the `  PROJECT  ` project.
 
@@ -134,8 +130,6 @@ Verify that BigQuery has created the service account:
 Verify that BigQuery has granted your service account the permission that it needs to run queries:
 
 1.  In Google Cloud console, go to to the **Manage resources** page:
-    
-    [Go to Manage Resources](https://console.cloud.google.com/cloud-resource-manager)
 
 2.  Click `  PROJECT  ` .
 
@@ -156,8 +150,6 @@ To give the `snapshot-bot` service account the permissions that it needs to take
 ### Console
 
 1.  In Google Cloud console, open the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -188,8 +180,6 @@ To give the `snapshot-bot` service account the permissions that it needs to take
 ### bq
 
 1.  In Google Cloud console, activate Cloud Shell:
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 2.  Enter the following [`bq add-iam-policy-binding`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_add-iam-policy-binding) command:
     
@@ -208,8 +198,6 @@ Give the `snapshot-bot` service account the permissions that it needs to create 
 ### Console
 
 1.  In Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -276,8 +264,6 @@ EXECUTE IMMEDIATE query;
 ### bq
 
 1.  In Google Cloud console, activate Cloud Shell:
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 2.  Enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
     
@@ -343,8 +329,6 @@ To verify that BigQuery has scheduled your monthly table snapshots query, follow
 ### Console
 
 1.  In Google Cloud console, go to the **Scheduled queries** page:
-    
-    [Go to Scheduled queries](https://console.cloud.google.com/bigquery/scheduled-queries)
 
 2.  Click **Monthly snapshots of the TABLE table** .
 
@@ -359,8 +343,6 @@ After the scheduled query has run, you can see whether it ran successfully as fo
 ### Console
 
 1.  In Google Cloud console, go to the **Scheduled queries** page:
-    
-    [Go to Scheduled queries](https://console.cloud.google.com/bigquery/scheduled-queries)
 
 2.  Click the query description, **Monthly snapshots of the TABLE table** .
 
@@ -375,8 +357,6 @@ To verify that the table snapshots are being created, follow these steps:
 ### Console
 
 1.  In Google Cloud console, go to the **BigQuery** page:
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery/scheduled-queries)
 
 2.  In the left pane, click explore **Explorer** :
     

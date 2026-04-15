@@ -44,8 +44,6 @@ You might also be able to get these permissions with [custom roles](https://docs
 To discover public and private listings, follow these steps:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click **Search listings** . A dialog appears containing listings that you can access.
 
@@ -68,8 +66,6 @@ To discover public and private listings, follow these steps:
 To discover data exchanges, follow these steps:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click **Search listings** . A dialog appears containing listings and data exchanges that you can subscribe to.
 
@@ -89,7 +85,7 @@ To discover data exchanges, follow these steps:
 
 Subscribing to a [listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#listings) gives you *read-only access* to the data in the listing by creating a [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) in your project.
 
-**Caution:** We recommend that you avoid placing data in a project that is within a VPC Service Controls perimeter. If you do so, then you must add the appropriate [ingress and egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules#subscribe_to_a_listing) .
+> **Caution:** We recommend that you avoid placing data in a project that is within a VPC Service Controls perimeter. If you do so, then you must add the appropriate [ingress and egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules#subscribe_to_a_listing) .
 
 To subscribe to a listing, follow these steps:
 
@@ -111,11 +107,11 @@ To subscribe to a listing, follow these steps:
     
       - **Primary region** : select the region where you want to create the linked dataset.
         
-        **Note:** The selected primary region doesn't need to be the same as the provider's primary region. You might choose to colocate your linked dataset in the same region as the provider to minimize data replication latency.
+        > **Note:** The selected primary region doesn't need to be the same as the provider's primary region. You might choose to colocate your linked dataset in the same region as the provider to minimize data replication latency.
     
       - Optional: **Replica regions** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): select the region or regions where you want to create additional linked dataset secondary replicas. You might choose to colocate your linked dataset in the same region as your other data to minimize egress and facilitate cross-dataset joins. To create linked dataset replicas, you must have the `bigquery.datasets.update` permission on the linked dataset.
     
-    **Note:** Linked dataset replicas are created on a best-effort basis. If permissions are missing, replicas aren't created.
+    > **Note:** Linked dataset replicas are created on a best-effort basis. If permissions are missing, replicas aren't created.
 
 6.  To save your changes, click **Save** . The linked dataset is listed in your project.
 
@@ -136,7 +132,7 @@ In the body of the request, specify the dataset where you want to create the [li
 
 To create a subscription with linked dataset replicas available in multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), specify the primary region of the linked dataset using the `location` field in the request body. For the secondary regions where you want to create linked dataset replicas, you can optionally use the `destinationDataset.replica_locations` field in the request body and list all the selected secondary replica regions. Ensure that the specified regions in the `location` property and in the `destinationDataset.replica_locations` field are regions where the associated listing is available.
 
-**Note:** Linked dataset replicas are created on a best-effort basis. If the `bigquery.datasets.update` permission is missing on the linked dataset, replicas aren't created.
+> **Note:** Linked dataset replicas are created on a best-effort basis. If the `bigquery.datasets.update` permission is missing on the linked dataset, replicas aren't created.
 
 If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#response-body) .
 
@@ -144,7 +140,7 @@ If you enable subscriber email logging for the data exchange or listing with the
 
 If you enable stored procedure sharing ( [Preview](https://cloud.google.com/products#product-launch-stages) ), the listing response contains `stored_procedure_config: true` .
 
-**Note:** BigQuery sharing subscribers must [authorize shared stored procedures](https://docs.cloud.google.com/bigquery/docs/authorized-routines) in a linked dataset to read from and write to certain resources owned by the subscriber.
+> **Note:** BigQuery sharing subscribers must [authorize shared stored procedures](https://docs.cloud.google.com/bigquery/docs/authorized-routines) in a linked dataset to read from and write to certain resources owned by the subscriber.
 
 ## Subscribe to data exchanges
 
@@ -193,8 +189,6 @@ To view linked datasets in your project, follow these steps:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Classic Explorer** pane, click category **Classic Explorer** :
     
@@ -204,7 +198,7 @@ To view linked datasets in your project, follow these steps:
 
 3.  In the **Classic Explorer** pane, click the project name that contains the ![Analytics Hub linked dataset icon](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-linked-dataset.png) linked dataset.
 
-Alternatively, you can also use [Data Catalog (deprecated)](https://docs.cloud.google.com/data-catalog/docs/how-to/search#how_to_search_for_data_assets) or [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) to search and view linked datasets. To match all BigQuery sharing linked datasets, use the `type=dataset.linked` predicate. For more information, see [Data Catalog search syntax](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference) or [Dataplex Universal Catalog search syntax](https://docs.cloud.google.com/dataplex/docs/search-syntax) .
+Alternatively, you can also use [Data Catalog (deprecated)](https://docs.cloud.google.com/data-catalog/docs/how-to/search#how_to_search_for_data_assets) or [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) to search and view linked datasets. To match all BigQuery sharing linked datasets, use the `type=dataset.linked` predicate. For more information, see [Data Catalog search syntax](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference) or [Knowledge Catalog search syntax](https://docs.cloud.google.com/dataplex/docs/search-syntax) .
 
 ### Cloud Shell
 
@@ -215,7 +209,7 @@ Run the following command:
 
 Replace `  PROJECT_ID  ` with your Google Cloud project ID.
 
-**Note:** If a BigQuery sharing publisher [removes the subscription](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#remove_a_subscription) , then the linked dataset details page shows that the dataset is unlinked. You can delete an [unlinked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#delete-linked-datasets) because you can't query an unlinked dataset.
+> **Note:** If a BigQuery sharing publisher [removes the subscription](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#remove_a_subscription) , then the linked dataset details page shows that the dataset is unlinked. You can delete an [unlinked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#delete-linked-datasets) because you can't query an unlinked dataset.
 
 ## Query linked datasets
 
@@ -230,8 +224,6 @@ You can only update the description and labels of your linked datasets. Changes 
 To update the description and labels of a linked dataset, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click explore **Explorer** :
     
@@ -258,7 +250,7 @@ To view the underlying table metadata, query the [`INFORMATION_SCHEMA.TABLES`](h
 
 Replace LINKED-DATASET with the name of your linked dataset.
 
-**Note:** [Region-based `INFORMATION_SCHEMA` queries](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) don't return metadata of linked tables. To learn about `INFORMATION_SCHEMA` views that don't support dataset qualifiers for linked datasets, see [Limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) .
+> **Note:** [Region-based `INFORMATION_SCHEMA` queries](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) don't return metadata of linked tables. To learn about `INFORMATION_SCHEMA` views that don't support dataset qualifiers for linked datasets, see [Limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) .
 
 ## Unsubscribe from or delete linked datasets
 
@@ -271,8 +263,6 @@ If your [subscription is removed](https://docs.cloud.google.com/bigquery/docs/an
 To delete a linked dataset, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click explore **Explorer** :
     

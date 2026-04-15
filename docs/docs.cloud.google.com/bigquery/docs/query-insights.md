@@ -42,8 +42,6 @@ The lines that connect stages represent the exchange of intermediary data betwee
 Follow these steps to see query performance insights:
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -98,8 +96,6 @@ For any query that has performance regression issues, performance insights are a
 ### SQL
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -229,9 +225,9 @@ Check your join conditions to confirm that the increase in the size of the outpu
 
 ### Partition skew
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To provide feedback or request support with this feature, send email to [`bq-query-inspector-feedback@google.com`](mailto:%0Abq-query-inspector-feedback@google.com) .
 

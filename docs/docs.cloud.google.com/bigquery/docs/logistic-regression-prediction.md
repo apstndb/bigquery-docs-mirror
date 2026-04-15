@@ -31,9 +31,7 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -42,8 +40,6 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
 
 ## Required permissions
 
@@ -71,8 +67,6 @@ In this tutorial, you create a binary logistic regression model that predicts wh
 Create a BigQuery dataset to store your model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -101,8 +95,6 @@ Examine the dataset and identify which columns to use as training data for the l
 ### SQL
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following GoogleSQL query:
     
@@ -181,8 +173,6 @@ Create a [view](https://docs.cloud.google.com/bigquery/docs/views-intro) a view 
 Run the query that prepares the sample data:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -266,8 +256,6 @@ The following are useful things to know about the `CREATE MODEL` statement:
 Run the query that creates your logistic regression model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -352,8 +340,6 @@ For input, the `ML.EVALUATE` function takes the trained model and the rows from 
 Run the `ML.EVALUATE` query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -420,8 +406,6 @@ Use the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/refe
 Run the `ML.PREDICT` query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -484,8 +468,6 @@ To understand why the model is generating these prediction results, you can use 
 Run the `ML.EXPLAIN_PREDICT` query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
@@ -508,7 +490,7 @@ Run the `ML.EXPLAIN_PREDICT` query:
     
     ![ML.EXPLAIN\_PREDICT output](https://docs.cloud.google.com/static/bigquery/images/explain-census.png)
 
-**Note:** The `ML.EXPLAIN_PREDICT` query outputs all the input feature columns, similar to what `ML.PREDICT` does. For readability purposes, only one feature column, `age` , is shown in the preceding figure.
+> **Note:** The `ML.EXPLAIN_PREDICT` query outputs all the input feature columns, similar to what `ML.PREDICT` does. For readability purposes, only one feature column, `age` , is shown in the preceding figure.
 
 For logistic regression models, [Shapley values](https://wikipedia.org/wiki/Shapley_value) are used to determine relative feature attribution for each feature in the model. Because the `top_k_features` option was set to `3` in the query, `ML.EXPLAIN_PREDICT` outputs the top three feature attributions for each row of the `input_data` view. These attributions are shown in descending order by the absolute value of the attribution.
 
@@ -519,8 +501,6 @@ To know which features are the most important to determine the income bracket, u
 Get global explanations for the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to get global explanations:
     
@@ -544,8 +524,6 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **census** dataset you created.
 
@@ -557,16 +535,14 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

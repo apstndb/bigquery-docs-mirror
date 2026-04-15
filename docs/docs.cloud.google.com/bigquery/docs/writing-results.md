@@ -11,8 +11,6 @@ BigQuery saves all query results to a table, which can be either permanent or te
   - After a query finishes, the temporary table exists for up to 24 hours. To view table structure and data, do the following:
     
     1.  Go to the **BigQuery** page.
-        
-        [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     2.  In the left pane, click explore **Explorer** :
         
@@ -36,7 +34,7 @@ BigQuery saves all query results to a table, which can be either permanent or te
 
   - You can't save query results in a temporary table when the [domain-restricted organization policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) is enabled. As a workaround, temporarily disable the domain-restricted organization policy, run the query, and then again enable the policy. Alternatively, you can save query results in a destination table.
 
-**Note:** If you query data from a project to data stored in a different project, the querying project is billed for the query job while the project storing the data is billed for the amount of data stored in BigQuery.
+> **Note:** If you query data from a project to data stored in a different project, the querying project is billed for the query job while the project storing the data is billed for the amount of data stored in BigQuery.
 
 ## Required permissions
 
@@ -75,8 +73,6 @@ Use the following procedure to write your query results to a permanent table. To
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -117,8 +113,6 @@ Alternatively, if you forget to specify a destination table before running your 
 The following example uses the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create the `trips` table from data in the public `bikeshare_trips` table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -142,8 +136,6 @@ For more information, see [Creating a new table from an existing table](https://
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -179,7 +171,7 @@ For more information, see [Creating a new table from an existing table](https://
         
         Examples:
         
-        **Note:** These examples query a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
+        > **Note:** These examples query a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
         
         Enter the following command to write query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
         
@@ -459,8 +451,6 @@ To write large result sets using legacy SQL:
 ### Console
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 
@@ -518,7 +508,7 @@ Replace the following:
 
 Examples:
 
-**Note:** These examples query a public dataset. Because the dataset is stored in the `US` multi-region location, your destination dataset must also be in the US. You cannot write public data query results to a table in another region.
+> **Note:** These examples query a public dataset. Because the dataset is stored in the `US` multi-region location, your destination dataset must also be in the US. You cannot write public data query results to a table in another region.
 
 Enter the following command to write large query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) . This query is used for example purposes only. The results set returned does not exceed the maximum response size.
 

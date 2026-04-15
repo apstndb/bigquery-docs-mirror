@@ -5,8 +5,6 @@ As a BigQuery administrator, you can create a [connection](https://docs.cloud.go
 ## Before you begin
 
   - Enable the BigQuery Connection API.
-    
-    [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
   - To get the permissions that you need to create a Spark connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
@@ -39,8 +37,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add data** .
     
@@ -92,7 +88,7 @@ Select one of the following options:
         
             --properties='{
             "metastoreServiceConfig": {"metastoreService": "METASTORE_SERVICE_NAME"},
-            "sparkHistoryServerConfig": {"dataprocCluster": "DATAPROC_CLUSTER_NAME"}
+            "sparkHistoryServerConfig": {"dataprocCluster": "MANAGED_SERVICE_FOR_APACHE_SPARK_CLUSTER_NAME"}
             }'
         
         Replace the following:
@@ -101,7 +97,7 @@ Select one of the following options:
             
             For more information, see how to access the [stored Hive metastore metadata using an endpoint protocol](https://docs.cloud.google.com/dataproc-metastore/docs/endpoint-protocol) .
         
-          - `  DATAPROC_CLUSTER_NAME  ` : the Spark History Server configuration—for example, `projects/my-project-id/regions/us-central1/clusters/my-cluster`
+          - `  MANAGED_SERVICE_FOR_APACHE_SPARK_CLUSTER_NAME  ` : the Spark History Server configuration—for example, `projects/my-project-id/regions/us-central1/clusters/my-cluster`
             
             For more information, see [Create a Persistent History Server cluster](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server#create_a_phs_cluster) .
     
@@ -138,7 +134,7 @@ To let a stored procedure for Apache Spark access your Google Cloud resources, y
     
     The `roles/bigquery.admin` IAM role includes the permissions that the service account needs in order to read and write data from and to BigQuery.
     
-    **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) , then you need to give the service account the `bigquery.jobs.create` permission on your project. For more information about IAM roles and permissions in BigQuery, see [Access control with IAM](https://docs.cloud.google.com/bigquery/access-control) .
+    > **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) , then you need to give the service account the `bigquery.jobs.create` permission on your project. For more information about IAM roles and permissions in BigQuery, see [Access control with IAM](https://docs.cloud.google.com/bigquery/access-control) .
 
   - To read and write data from and to Cloud Storage, you need to give the service account the `storage.objects.*` permission on your Cloud Storage objects.
     
@@ -172,8 +168,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 

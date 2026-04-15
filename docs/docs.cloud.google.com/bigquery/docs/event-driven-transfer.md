@@ -29,8 +29,6 @@ Event-driven transfers from Cloud Storage use Pub/Sub notifications to know when
 Before configuring a Cloud Storage event-driven transfer, you must perform the following steps:
 
 1.  Enable the Pub/Sub API for the project that receives notifications.
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=pubsub)
 
 2.  If you are the Cloud Storage Admin ( `roles/storage.admin` ) and the Pub/Sub Admin ( `roles/pubsub.admin` ), you can proceed to [Create an event-driven transfer configuration](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer#create-transfer-configuration) .
 
@@ -96,15 +94,13 @@ Before configuring a Cloud Storage event-driven transfer, you must perform the f
     
     You can create a pull subscription using [other methods](https://docs.cloud.google.com/pubsub/docs/create-subscription#pubsub_create_pull_subscription) .
     
-    **Note:** The same Pub/Sub subscription cannot be reused by multiple event-driven transfer configurations.
+    > **Note:** The same Pub/Sub subscription cannot be reused by multiple event-driven transfer configurations.
 
 #### Configure Service Agent permissions
 
 1.  Find the name of the [BigQuery Data Transfer Service agent](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) for your project:
     
     1.  Go to the **IAM & Admin** page.
-        
-        [Go to IAM & Admin](https://console.cloud.google.com/iam-admin/iam?project=)
     
     2.  Select the **Include Google-provided role grants** checkbox.
     
@@ -139,8 +135,6 @@ Before configuring a Cloud Storage event-driven transfer, you must perform the f
 3.  Verify that the BigQuery Data Transfer Service agent is granted the [Pub/Sub Subscriber role](https://docs.cloud.google.com/iam/docs/roles-permissions/pubsub#pubsub.subscriber) ( `pubsub.subscriber` ).
     
     1.  In the Google Cloud console, go to the **Pub/Sub** page.
-        
-        [Go to Pub/Sub](https://console.cloud.google.com/cloudpubsub/subscription/list?project=)
     
     2.  Select the Pub/Sub subscription that you used in the event-driven transfer.
     
@@ -182,4 +176,4 @@ You can create an event-driven Cloud Storage transfer by [creating a Cloud Stora
 
 If you aren't the Cloud Storage Admin ( `roles/storage.admin` ) and the Pub/Sub Admin ( `roles/pubsub.admin` ), you must instead ask your administrator to grant you the roles or ask your administrator to complete the required [Pub/Sub notifications in Cloud Storage configurations](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer#configure-pubsub) and [Service Agent permission configurations](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer#configure-service-agent-permissions) before you can create the event-driven transfer.
 
-**Caution:** Don't remove the [BigQuery Data Transfer Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquerydatatransfer.serviceAgent) from the `pubsub.subscriber` and `serviceusage.serviceUsageConsumer` predefined IAM role. The removal prevent BigQuery from receiving notifications from the Pub/Sub topic and subscription.
+> **Caution:** Don't remove the [BigQuery Data Transfer Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquerydatatransfer.serviceAgent) from the `pubsub.subscriber` and `serviceusage.serviceUsageConsumer` predefined IAM role. The removal prevent BigQuery from receiving notifications from the Pub/Sub topic and subscription.

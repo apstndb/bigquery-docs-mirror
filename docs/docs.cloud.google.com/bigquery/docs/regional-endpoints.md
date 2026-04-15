@@ -95,7 +95,7 @@ Replace `  JURISDICTION  ` with one of the following values:
   - `sa` if the resource is located in the Kingdom of Saudi Arabia
   - `us` if the resource is located in the United States
 
-**Note:** You cannot use the jurisdictional Google Cloud console to upload files in `eu` , `sa` , or `us` .
+> **Note:** You cannot use the jurisdictional Google Cloud console to upload files in `eu` , `sa` , or `us` .
 
 ### Command line
 

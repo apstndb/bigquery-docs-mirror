@@ -6,7 +6,7 @@ This document describes how to define a BigQuery standard table schema with colu
 
 For more information about working with multimodal data, see [Analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) . For a tutorial that shows how to work with `ObjectRef` data, see [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) .
 
-**Note:** The examples in this document use the [`CREATE OR REPLACE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create and populate an `ObjectRef` column in a single operation, but you can also use the [`ALTER TABLE ADD COLUMN` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) to add a `STRUCT` column to an existing table and then use the [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) to populate that column in a separate operation.
+> **Note:** The examples in this document use the [`CREATE OR REPLACE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create and populate an `ObjectRef` column in a single operation, but you can also use the [`ALTER TABLE ADD COLUMN` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) to add a `STRUCT` column to an existing table and then use the [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) to populate that column in a separate operation.
 
 ## Prerequisites
 
@@ -31,8 +31,6 @@ To create and populate an `ObjectRef` column in a standard table, select one of 
 Create and populate an `ObjectRef` column based on output from the `OBJ.MAKE_REF` function:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -67,8 +65,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 Create and populate an `ObjectRef` column based on data from an object table `ref` column:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -109,8 +105,6 @@ To update an `ObjectRef` column in a standard table, select one of the following
 Update an `ObjectRef` column by using data from an object table `ref` column:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -136,8 +130,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 Update an `ObjectRef` column by using output from the `OBJ.FETCH_METADATA` and `OBJ.MAKE_REF` functions:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

@@ -10,8 +10,6 @@ Google Cloud offers public datasets that are stored in BigQuery and made availab
 
 To follow step-by-step guidance for this task directly in the Google Cloud console, click **Guide me** :
 
-[Guide me](https://console.cloud.google.com/freetrial?redirectPath=/?walkthrough_id=bigquery--bigquery-quickstart-query-public-dataset)
-
 -----
 
 ## Before you begin
@@ -19,8 +17,6 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 ### Enable the BigQuery sandbox
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     You can also open BigQuery in the Google Cloud console by entering the following URL in your browser:
     
@@ -81,8 +77,6 @@ The BigQuery sandbox is subject to the following limits:
 BigQuery public datasets are available by default in BigQuery Studio in a project named `bigquery-public-data` . In this tutorial you query the NYC Citi Bike Trips dataset. Citi Bike is a large bike share program, with 10,000 bikes and 600 stations across Manhattan, Brooklyn, Queens, and Jersey City. This dataset includes Citi Bike trips since Citi Bike launched in September 2013.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -107,8 +101,6 @@ In the following steps, you query the `citibike_trips` table to determine the 10
 The query uses the [ST\_GEOGPOINT function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) to create a point from each station's longitude and latitude parameters and returns that point in a `GEOGRAPHY` column. The `GEOGRAPHY` column is used to generate a heatmap in the integrated geography data viewer.
 
 1.  In the Google Cloud console, open the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -176,16 +168,14 @@ The easiest way to eliminate billing is to delete the project that you created f
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

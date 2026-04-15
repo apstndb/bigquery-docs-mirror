@@ -36,8 +36,6 @@ Before you begin, ensure that you have a project to use, that you have enabled b
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
-    
     For new projects, the BigQuery API is automatically enabled.
 
 ### Required roles
@@ -59,8 +57,6 @@ Additional permissions might be needed if you have are using a custom OAuth clie
 The first step is to create a BigQuery dataset to store your BI Engine-managed table. To create your dataset, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -95,8 +91,6 @@ In this section, you create a table by copying data from the [San Francisco 311 
 To create your table, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -130,9 +124,7 @@ To create your table, follow these steps:
 
 1.  In the Google Cloud console, under **Administration** go to the **BI Engine** page.
     
-    [Go to the BI Engine page](https://console.cloud.google.com/bigquery/admin/bi-engine)
-    
-    **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
+    > **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
 2.  Click add **Create reservation** .
 
@@ -215,16 +207,14 @@ The easiest way to eliminate billing is to delete the project that you created f
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -238,9 +228,7 @@ To delete your reservation, follow these steps:
 
 1.  In the Google Cloud console, under **Administration** go to the **BI Engine** page.
     
-    [Go to the BI Engine page](https://console.cloud.google.com/bigquery/admin/bi-engine)
-    
-    **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
+    > **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
 2.  In the **Reservations** section, locate your reservation.
 

@@ -46,6 +46,16 @@ SQL type name: <code dir="ltr" translate="no">DATETIME</code></td>
 SQL type name: <code dir="ltr" translate="no">GEOGRAPHY</code></td>
 </tr>
 <tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#graph_element_type">Graph element type</a></td>
+<td>An element in a property graph. Can be a <code dir="ltr" translate="no">GRAPH_NODE</code> or <code dir="ltr" translate="no">GRAPH_EDGE</code> .<br />
+SQL type name: <code dir="ltr" translate="no">GRAPH_ELEMENT</code></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#graph_path_type">Graph path type</a></td>
+<td>A path in a property graph.<br />
+SQL type name: <code dir="ltr" translate="no">GRAPH_PATH</code></td>
+</tr>
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type">Interval type</a></td>
 <td>A duration of time, without referring to any specific point in time.<br />
 SQL type name: <code dir="ltr" translate="no">INTERVAL</code></td>
@@ -114,6 +124,8 @@ Expressions of orderable data types can be used in an `ORDER BY` clause. Applies
   - `STRUCT`
   - `GEOGRAPHY`
   - `JSON`
+  - `GRAPH_ELEMENT`
+  - `GRAPH_PATH`
 
 #### Ordering `NULL` s
 
@@ -141,6 +153,7 @@ Groupable data types can generally appear in an expression following `GROUP BY` 
 
   - `GEOGRAPHY`
   - `JSON`
+  - `GRAPH_PATH`
 
 #### Grouping with floating point types
 
@@ -684,13 +697,56 @@ The structure of compound geometry objects isn't preserved if a simpler type can
 
 A geography is the result of, or an argument to, a [Geography Function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
 
+## Graph element type
+
+| Name            | Description                     |
+| --------------- | ------------------------------- |
+| `GRAPH_ELEMENT` | An element in a property graph. |
+
+A variable with a `GRAPH_ELEMENT` type is produced by a graph query. The generated type has this format:
+
+    GRAPH_ELEMENT<T>
+
+A graph element is either a node or an edge, representing data from a matching node or edge table based on its label. Each graph element holds a set of properties that can be accessed with a case-insensitive name, similar to fields of a struct.
+
+**Example**
+
+In the following example, `n` represents a graph element in the [`FinGraph`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#fin_graph) property graph:
+
+    GRAPH graph_db.FinGraph
+    MATCH (n:Person)
+    RETURN n.name
+
+In the following example, the [`TYPEOF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/utility-functions#typeof) function is used to inspect the set of properties defined in the graph element type.
+
+    GRAPH graph_db.FinGraph
+    MATCH (n:Person)
+    RETURN TYPEOF(n) AS t
+    LIMIT 1
+    
+    /*--------------------------------------------------------+
+     | t                                                      |
+     +--------------------------------------------------------+
+     | GRAPH_NODE(myproject.graph_db.FinGraph)<id INT64, ...> |
+     +--------------------------------------------------------*/
+
+## Graph path type
+
+| Name         | Description                 |
+| ------------ | --------------------------- |
+| `GRAPH_PATH` | A path in a property graph. |
+
+The graph path data type represents a sequence of nodes interleaved with edges and has this format:
+
+    GRAPH_PATH<NODE_TYPE, EDGE_TYPE>
+
 ## Interval type
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@google.com> .
 
 | Name       | Range                                                            |
 | ---------- | ---------------------------------------------------------------- |
@@ -960,7 +1016,7 @@ If a value has more than `P` digits, throws an `OUT_OF_RANGE` error. For example
 
 See [Parameterized Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) for more information on parameterized types and where they can be used.
 
-**Note:** Applying restrictions with precision and scale doesn't impact the storage size of the underlying data type.
+> **Note:** Applying restrictions with precision and scale doesn't impact the storage size of the underlying data type.
 
 ### Floating point type
 

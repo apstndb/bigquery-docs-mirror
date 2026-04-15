@@ -53,8 +53,6 @@ Select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -73,8 +71,6 @@ Select one of the following options:
 To set the maximum concurrency target for a new reservation, use the [`CREATE RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) and set the [`target_job_concurrency` field](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -142,8 +138,6 @@ Select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -166,8 +160,6 @@ Select one of the following options:
 To update the maximum concurrency target for an existing reservation, use the [`ALTER RESERVATION` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) and set the [`target_job_concurrency` field](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_option_list) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -265,7 +257,7 @@ Replace the following:
   - `  REGION_ID  ` : the location where the queries were processed
   - `  RESERVATION_ID  ` : the name of the reservation the queries are running in
 
-**Note:** To view the dynamic concurrency for on-demand projects, remove the reservation filtering.
+> **Note:** To view the dynamic concurrency for on-demand projects, remove the reservation filtering.
 
 You can monitor the query queue length for your reservation by using [BigQuery administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-resource-utilization) and selecting the **Job Concurrency** chart with the metric **Pending** .
 

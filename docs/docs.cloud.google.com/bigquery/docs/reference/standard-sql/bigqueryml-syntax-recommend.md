@@ -2,7 +2,7 @@
 
 This document describes the `ML.RECOMMEND` function, which lets you generate a predicted rating for every user-item row combination for a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) . Because the input data for a matrix factorization model tends to be a sparse matrix with missing values, `ML.RECOMMEND` can return the predictions for those missing values without requiring specification of each entry.
 
-**Note:** `ML.RECOMMEND` can generate large outputs. Consider saving the output to a table for analysis.
+> **Note:** `ML.RECOMMEND` can generate large outputs. Consider saving the output to a table for analysis.
 
 ## Syntax
 

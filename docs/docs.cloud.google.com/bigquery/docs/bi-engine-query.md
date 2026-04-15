@@ -62,7 +62,7 @@ For information on BI Engine pricing, see the [BigQuery Pricing](https://cloud.g
 
 ## Query optimization and acceleration
 
-**Note:** For BI Engine maximum reservation size, see [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#biengine-limits) .
+> **Note:** For BI Engine maximum reservation size, see [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#biengine-limits) .
 
 BigQuery, and by extension BI Engine, breaks down the query plan that's produced for a SQL query into subqueries. A subquery contains a number of operations, such as scanning, filtering, or aggregating data, and is often the unit of execution on a shard.
 

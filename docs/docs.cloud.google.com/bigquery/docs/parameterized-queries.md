@@ -15,7 +15,7 @@ Query parameters are only supported in [GoogleSQL syntax](https://docs.cloud.goo
 
 To specify a named parameter, use the `@` character followed by an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) , such as `@param_name` . Alternatively, use the placeholder value `?` to specify a positional parameter. A query can use positional or named parameters, but not both.
 
-**Note:** To protect potentially sensitive information, the parameter value isn't logged in the BigQuery [logs](https://docs.cloud.google.com/bigquery/docs/monitoring#logs) when you run a query with a parameter.
+> **Note:** To protect potentially sensitive information, the parameter value isn't logged in the BigQuery [logs](https://docs.cloud.google.com/bigquery/docs/monitoring#logs) when you run a query with a parameter.
 
 You can run a parameterized query in BigQuery in the following ways:
 
@@ -35,8 +35,6 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 ## Add the parameters in the Google Cloud console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor toolbar, click settings **More** and select **Query settings** .
 
@@ -77,8 +75,6 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
@@ -617,13 +613,11 @@ Arrays in parameterized queries aren't supported by the Google Cloud console.
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
-    
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  This query selects the most popular names for baby boys born in US states starting with the letter W:
     
-    **Note:** This example queries a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
+    > **Note:** This example queries a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
     
     ``` notranslate
     bq query \
@@ -962,8 +956,6 @@ Follow the steps for [adding parameters in the Google Cloud console](https://doc
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
-    
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  This query adds an hour to the timestamp parameter value:
@@ -1230,8 +1222,6 @@ Structs in parameterized queries aren't supported by the Google Cloud console.
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
-    
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  This trivial query demonstrates the use of structured types by returning the parameter value:
@@ -1482,8 +1472,6 @@ Ranges in parameterized queries aren't supported by the Google Cloud console.
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 

@@ -83,8 +83,6 @@ To create an empty clustered table with a schema definition:
 
 In the Google Cloud console, go to the **BigQuery** page.
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
-
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -116,8 +114,6 @@ In the **Create table** pane, specify the following details:
 Use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) command with the `CLUSTER BY` option. The following example creates a clustered table named `myclusteredtable` in `mydataset` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -211,7 +207,7 @@ After the table is created, you can update the table's [description](https://doc
 
 Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
+> **Note:** To create BigQuery objects using Terraform, you must enable the Cloud Resource Manager API.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -316,7 +312,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -480,8 +476,6 @@ When you create a clustered table from a query result, you must use standard SQL
 To create a clustered table from a query result, use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `CLUSTER BY` option. The following example creates a new table clustered by `customer_id` by querying an existing unclustered table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -553,8 +547,6 @@ To define clustering when defining a load job:
 Use the [`LOAD DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads AVRO data to create a table that is partitioned by the `transaction_date` field and clustered by the `customer_id` field. It also configures the partitions to expire after three days.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

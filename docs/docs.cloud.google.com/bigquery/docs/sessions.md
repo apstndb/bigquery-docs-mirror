@@ -13,8 +13,6 @@ If you would like to capture a group of your SQL activities, create a BigQuery s
 In the Google Cloud console, each session is assigned to an editor tab.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **Compose new query** . A new editor tab opens.
 
@@ -85,8 +83,6 @@ After you create a session, you can run queries in that session:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the editor tab that contains the session.
 
@@ -153,8 +149,6 @@ You can terminate your current session with a SQL statement or in the Google Clo
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Find the editor tab that contains your session and close it. The session is terminated.
 
@@ -163,8 +157,6 @@ You can terminate your current session with a SQL statement or in the Google Clo
 Do the following to terminate your session:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -199,8 +191,6 @@ You don't need to provide the session ID to run a new query inside a session in 
 Before you complete these steps, make sure that you have run at least one query in an active session.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the editor tab that contains the session.
 
@@ -233,8 +223,6 @@ To get session IDs of active and inactive sessions, follow these steps:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -258,8 +246,6 @@ To get session IDs of active and inactive sessions, follow these steps:
 To get a list of your three most recent sessions including the active and terminated sessions, run the following query in the editor tab:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -297,8 +283,6 @@ A session captures your SQL activities within a timeframe. This information is s
 To view the history of a session in the Google Cloud console, you can filter your **Personal History** or **Project History** by session ID to view all SQL queries run in a specific session.
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -322,8 +306,6 @@ To view the history of a session in the Google Cloud console, you can filter you
 To view historical data for a specific session, first [get your session ID](https://docs.cloud.google.com/bigquery/docs/sessions#get-id) , then follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

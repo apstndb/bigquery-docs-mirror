@@ -27,7 +27,7 @@ If you are familiar with pandas, you can use BigQuery DataFrames to work with Bi
         .head(10)
     )
 
-**Note:** There are breaking changes to some default parameters in BigQuery DataFrames version 2.0. To learn about these changes and how to migrate to version 2.0, see [Migrate to BigQuery DataFrames 2.0](https://docs.cloud.google.com/bigquery/docs/migrate-dataframes) .
+> **Note:** There are breaking changes to some default parameters in BigQuery DataFrames version 2.0. To learn about these changes and how to migrate to version 2.0, see [Migrate to BigQuery DataFrames 2.0](https://docs.cloud.google.com/bigquery/docs/migrate-dataframes) .
 
 ## BigQuery DataFrames benefits
 

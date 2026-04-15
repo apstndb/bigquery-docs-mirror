@@ -56,8 +56,6 @@ You can change the description for a table snapshot by using one of the followin
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -78,8 +76,6 @@ You can change the description for a table snapshot by using one of the followin
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq update \
@@ -114,8 +110,6 @@ You can change the expiration of a table snapshot by using one of the following 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -134,8 +128,6 @@ You can change the expiration of a table snapshot by using one of the following 
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq update \
@@ -170,8 +162,6 @@ You can give a user access to view the data in a table snapshot by using one of 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -192,8 +182,6 @@ You can give a user access to view the data in a table snapshot by using one of 
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq add-iam-policy-binding \

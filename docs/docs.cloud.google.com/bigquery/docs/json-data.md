@@ -26,8 +26,6 @@ You can create an empty table with a `JSON` column by using SQL or by using the 
 Use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement and declare a column with the `JSON` type.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -534,4 +532,4 @@ FROM (SELECT JSON '{"a": null}' AS json);
     | null       | NULL       |
     +------------+------------+
 
-**Caution:** This behavior does not apply to JSON values stored in a `STRING` type. When passed a `STRING` value, the `JSON_QUERY` function returns SQL `NULL` values in place of JSON `null` values.
+> **Caution:** This behavior does not apply to JSON values stored in a `STRING` type. When passed a `STRING` value, the `JSON_QUERY` function returns SQL `NULL` values in place of JSON `null` values.

@@ -14,15 +14,13 @@ As a BigQuery administrator, you can create and manage connections that are used
 
 To create a default connection for a project, see the [Default connection overview](https://docs.cloud.google.com/bigquery/docs/default-connections) .
 
-**Tip:** You can also use the **Pipelines & Connections** page to create and manage connections using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+> **Tip:** You can also use the **Pipelines & Connections** page to create and manage connections using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 ## Before you begin
 
   - Ensure that you have a working [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) . Connections are [type-specific](https://docs.cloud.google.com/bigquery/docs/connections-api-intro#connection_types) and depend on the connected external data source.
 
   - Enable the BigQuery Connection API.
-    
-    [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
 
   - Ensure that you can view a [list of service accounts in your project](https://docs.cloud.google.com/iam/docs/service-accounts-list-edit#listing) . BigQuery creates and uses a [service account](https://docs.cloud.google.com/iam/docs/service-agents) to connect to your external data source. When you create a connection, a [Google Cloud–managed Identity and Access Management (IAM) service account](https://docs.cloud.google.com/iam/docs/service-account-types#google-managed) is created on your behalf. To view the service account attached to a particular connection, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
 
@@ -58,8 +56,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 
@@ -229,8 +225,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Connections are listed in your project, in a group called **Connections** .
 
@@ -500,8 +494,6 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
     
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
-    
     Connections are listed in your project, in a group called **Connections** .
 
 2.  In the left pane, click explore **Explorer** :
@@ -587,8 +579,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 
@@ -799,8 +789,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
     
     Connections are listed in your project, in a group called **Connections** .
 

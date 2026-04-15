@@ -2259,7 +2259,7 @@ The following example uses `ST_POINTN` , [`ST_STARTPOINT`](https://docs.cloud.go
 
 Returns statistics summarizing the pixel values of the raster image referenced by `raster_id` that intersect with `geography` . The statistics include the count, minimum, maximum, sum, standard deviation, mean, and area of the valid pixels of the raster band named `band_name` . Google Earth Engine computes the results of the function call.
 
-**Note:** This function incurs charges under the BigQuery Services SKU. For more information, read about [billing](https://docs.cloud.google.com/bigquery/docs/raster-data#billing) for the `ST_REGIONSTATS` function.
+> **Note:** This function incurs charges under the BigQuery Services SKU. For more information, read about [billing](https://docs.cloud.google.com/bigquery/docs/raster-data#billing) for the `ST_REGIONSTATS` function.
 
   - `geography` : A `GEOGRAPHY` value to intersect with the raster image.
 

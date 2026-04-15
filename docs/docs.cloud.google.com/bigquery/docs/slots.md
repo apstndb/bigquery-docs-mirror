@@ -135,7 +135,7 @@ Assignments of type `ML_EXTERNAL` are an exception in that slots used by BigQuer
 
 ### Reservation-based fairness
 
-**Note:** You must [enable reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#fairness) before you can [create a predictable reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#predictable) .
+> **Note:** You must [enable reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#fairness) before you can [create a predictable reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#predictable) .
 
 With reservation-based fairness, BigQuery prioritizes and allocates idle slots equally across all reservations within the same [admin project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , regardless of the number of projects running jobs in each reservation. Each reservation receives a similar share of available capacity in the idle slot pool, and then its slots are distributed fairly within its projects. This feature is only supported with the Enterprise or Enterprise Plus editions.
 

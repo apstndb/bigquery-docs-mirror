@@ -40,8 +40,6 @@ The interface you use to query your data determines which query dialect is the d
 The default dialect for the Google Cloud console is GoogleSQL. To change the dialect to legacy SQL:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click the **More \> Query settings** button.
 
@@ -52,8 +50,6 @@ The default dialect for the Google Cloud console is GoogleSQL. To change the dia
 The default SQL dialect is GoogleSQL. You can set the SQL dialect by including the prefix `#standardSQL` or `#legacySQL` as part of your query. These query prefixes are not case-sensitive, must precede the query, and must be separated from the query by a newline character. The following example sets the dialect to legacy SQL and queries the natality dataset:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

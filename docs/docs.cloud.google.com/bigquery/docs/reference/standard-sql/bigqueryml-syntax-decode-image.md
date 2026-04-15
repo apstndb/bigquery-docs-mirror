@@ -40,7 +40,7 @@ If the struct value is larger than 60 MB, it is downscaled to that size while pr
 
 You can use `ML.DECODE_IMAGE` output directly in an `ML.PREDICT` function, or you can write the results to a table column and reference that column when you call `ML.PREDICT` . You can also pass `ML.DECODE_IMAGE` output to another image processing function for additional preprocessing.
 
-**Note:** If you reference `ML.DECODE_IMAGE` in SQL statements in the BigQuery editor, it is possible for the function output to be too large to display. If this occurs, write the output to a table instead.
+> **Note:** If you reference `ML.DECODE_IMAGE` in SQL statements in the BigQuery editor, it is possible for the function output to be too large to display. If this occurs, write the output to a table instead.
 
 If you are using `ML.DECODE_IMAGE` output directly in an `ML.PREDICT` function, you must alias the output of this function with the name of an input field for the model that is referenced in the `ML.PREDICT` function. You can find this information by [inspecting the model](https://docs.cloud.google.com/bigquery/docs/object-table-inference#inspect_the_model) and looking at the field names in the **Features** section. For more information, see [Run inference on image object tables](https://docs.cloud.google.com/bigquery/docs/object-table-inference) .
 

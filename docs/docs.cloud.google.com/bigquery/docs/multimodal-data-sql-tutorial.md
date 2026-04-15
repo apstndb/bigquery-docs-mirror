@@ -43,9 +43,7 @@ For more information about, see the following pricing pages:
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
       - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
@@ -54,8 +52,6 @@ For more information about, see the following pricing pages:
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,storage.googleapis.com,aiplatform.googleapis.com)
 
 ### Required roles
 
@@ -80,8 +76,6 @@ In this section, you create the dataset, connection, tables, and models used in 
 Create a BigQuery dataset to contain the objects you create in this tutorial:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -102,8 +96,6 @@ Create a BigQuery dataset to contain the objects you create in this tutorial:
 Create a Cloud Storage bucket for storing transformed objects:
 
 1.  Go to the **Buckets** page.
-    
-    [Go to Buckets](https://console.cloud.google.com/storage/browser)
 
 2.  Click add\_box **Create** .
 
@@ -116,8 +108,6 @@ Create a Cloud Storage bucket for storing transformed objects:
 Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. BigQuery uses the connection to access objects in Cloud Storage:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -154,8 +144,6 @@ Grant the connection's service account the appropriate roles to access other ser
 Give the service account access to use objects in the bucket you created:
 
 1.  Go to the **Buckets** page.
-    
-    [Go to Buckets](https://console.cloud.google.com/storage/browser)
 
 2.  Click the name of the bucket you created.
 
@@ -174,8 +162,6 @@ Give the service account access to use objects in the bucket you created:
 Give the service account access to use Vertex AI models:
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant access** . The **Grant access** dialog opens.
 
@@ -194,8 +180,6 @@ Create tables to store the Cymbal pets product information.
 Create a standard table that contains the Cymbal pets product information:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Run the following to create the `products` table:
     
@@ -1234,8 +1218,6 @@ As part of the analysis tasks, you convert the array of `ObjectRef` values to an
 Follow these steps to process ordered multimodal data using arrays of `ObjectRef` values:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Run the following to recreate the `product_manuals` table:
     
@@ -1493,16 +1475,14 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
 
 ## Clean up
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

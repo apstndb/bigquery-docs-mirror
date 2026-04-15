@@ -1,10 +1,10 @@
 # Load Google Merchant Center data into BigQuery
 
-**Preview**
+> **Preview**
+> 
+> This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To get support or provide feedback for Google Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
+> **Note:** To get support or provide feedback for Google Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
 You can load data from Google Merchant Center to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Google Merchant Center connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Merchant Center to BigQuery.
 
@@ -68,7 +68,7 @@ Using Google Merchant Center MCAs provides several benefits over using individua
 
 One possible disadvantage of using MCAs is that your subsequent query costs are likely to be higher. Because all of your data is stored in the same table, queries that retrieve data for an individual Merchant ID must still scan the entire table.
 
-**Note:** The BigQuery Data Transfer Service pulls reports for all listed Merchant IDs. If there are no products in Google Shopping for a specific day, you may not see Merchant IDs in the BigQuery table.
+> **Note:** The BigQuery Data Transfer Service pulls reports for all listed Merchant IDs. If there are no products in Google Shopping for a specific day, you may not see Merchant IDs in the BigQuery table.
 
 If you are using an MCA, the MCA ID is listed under `aggregator_id` and the individual sub-accounts are listed under `merchant_id` . For accounts that don't use an MCA, `aggregator_id` is set to `null` .
 

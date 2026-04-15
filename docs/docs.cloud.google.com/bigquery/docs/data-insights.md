@@ -2,13 +2,13 @@
 
 This document provides an overview of data insights, a Gemini in BigQuery feature that helps accelerate initial exploration and analysis when facing new or unfamiliar data. Data insights automatically generates descriptions, relationship graphs, and SQL queries, along with suggested questions in natural language, from your table and dataset metadata. This information helps you quickly understand data structure, content, and relationships without extensive manual setup.
 
-**Note:** To give feedback for this feature, contact <dataplex-data-insights-help@google.com> .
+> **Note:** To give feedback for this feature, contact <dataplex-data-insights-help@google.com> .
 
 ## Before you begin
 
 Data insights are generated using [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/overview) . To start generating insights, you must first [set up Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/set-up-gemini) .
 
-**Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
+> **Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
 
 ## Types of data insights
 
@@ -25,7 +25,7 @@ To investigate further, you can ask follow-up questions in [data canvas](https:/
 Table insights help you understand the content, quality, and patterns within a single BigQuery table. For example, by generating queries that perform statistical analysis, you can use table insights to detect data patterns, anomalies, and outliers. Table insights can also help you detect quality issues, especially when [data profile scans](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) are available for a table. When you generate insights for a table, Gemini provides table description, column descriptions, and profile scan output based on the table's metadata. The following options are available:
 
   - **Generate queries:** suggests natural language questions and provides the corresponding SQL queries to answer them. This helps you uncover patterns, assess data quality, and perform statistical analysis without writing SQL from scratch.
-  - **Generate descriptions:** generates descriptions for the table and its columns. Gemini uses profile scan output (if available) to ground the generated descriptions. You can review, edit, and publish these descriptions to Dataplex Universal Catalog to improve data discoverability and documentation.
+  - **Generate descriptions:** generates descriptions for the table and its columns. Gemini uses profile scan output (if available) to ground the generated descriptions. You can review, edit, and publish these descriptions to Knowledge Catalog to improve data discoverability and documentation.
 
 ### Dataset insights
 
@@ -144,7 +144,7 @@ These workflows are for data engineers, analytics engineers, and others who buil
 
   - **Generate baseline data documentation:** automatically create and maintain essential metadata descriptions. You can perform the following tasks:
     
-      - After table creation or modification, trigger data insights to generate table and column descriptions. You can also generate these descriptions at scale by using the [Dataplex Universal Catalog automated metadata generation API](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#add-aspects) .
+      - After table creation or modification, trigger data insights to generate table and column descriptions. You can also generate these descriptions at scale by using the [Knowledge Catalog automated metadata generation API](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#add-aspects) .
     
       - Review and refine the AI-generated text to ensure technical accuracy and business relevance.
     
@@ -212,7 +212,7 @@ You can use data insights in all [BigQuery locations](https://docs.cloud.google.
 
   - Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
 
-  - Learn more about [Dataplex Universal Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
+  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
 
   - Learn how to [write queries with Gemini assistance in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
 

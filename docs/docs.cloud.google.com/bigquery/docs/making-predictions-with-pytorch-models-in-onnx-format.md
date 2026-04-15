@@ -6,7 +6,7 @@
 
 This tutorial shows you how to import ONNX models trained with [PyTorch](https://pytorch.org/) into a BigQuery dataset and use them to make predictions from a SQL query.
 
-**Important:** You must have a reservation in order to run predictions using imported models and object tables. For more information, see the [Limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx#limitations) on imported ONNX models.
+> **Important:** You must have a reservation in order to run predictions using imported models and object tables. For more information, see the [Limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx#limitations) on imported ONNX models.
 
 ## Objectives
 
@@ -38,8 +38,6 @@ When you finish the tasks that are described in this document, you can avoid con
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,storage-component.googleapis.com,bigqueryconnection.googleapis.com)
 
 3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-pytorch-models-in-onnx-format#required_roles) to perform the tasks in this document.
 
@@ -58,8 +56,6 @@ Make sure that you have the following role or roles on the project:
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -70,8 +66,6 @@ Make sure that you have the following role or roles on the project:
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -154,8 +148,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -207,8 +199,6 @@ The following steps show you how to import the sample ONNX model from Cloud Stor
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) statement.
     
@@ -275,11 +265,9 @@ Follow these steps to create a Cloud Storage bucket and to upload an image of a 
 
 ### Console
 
-**Note:** When creating a bucket using the Google Cloud console, you're only required to set a globally unique name for your bucket; all other steps are either optional or have default settings.
+> **Note:** When creating a bucket using the Google Cloud console, you're only required to set a globally unique name for your bucket; all other steps are either optional or have default settings.
 
 1.  In the Google Cloud console, go to the Cloud Storage **Buckets** page.  
-    
-    [Go to Buckets](https://console.cloud.google.com/storage/browser)
 
 2.  Click add\_box **Create** .
 
@@ -330,8 +318,6 @@ Complete the following steps to upload the image:
 ### Console
 
 1.  In the Google Cloud console, go to the Cloud Storage **Buckets** page.  
-    
-    [Go to Buckets](https://console.cloud.google.com/storage/browser)
 
 2.  In the list of buckets, click **`bqml_images`** .
 
@@ -367,8 +353,6 @@ Follow these steps to create your Cloud resource connection.
 ### Console
 
 1.  Go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -436,13 +420,11 @@ Follow these steps to create your Cloud resource connection.
 
 Grant the Storage Object Admin role to the Cloud resource connection's service account. You must grant this role in the same project where you uploaded the image files.
 
-**Note:** If the connection is in a different project, this error is returned: `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
+> **Note:** If the connection is in a different project, this error is returned: `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 To grant the role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://docs.cloud.google.com/bigquery/docs/object-tables)
 
 2.  Click person\_add **Grant Access** .
 
@@ -459,8 +441,6 @@ Follow these steps to create an object table named `goldfish_image_table` using 
 ### Console
 
 1.  Go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/bqml-introduction)
 
 2.  In the query editor, enter this query to create the object table.
     
@@ -513,9 +493,9 @@ For more information, see [Create object tables](https://docs.cloud.google.com/b
 
 ## Make predictions with the imported ONNX model
 
-**Important:** You must have a reservation in order to run predictions using imported models and object tables. For more information, see the [limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx#limitations) on imported ONNX models.  
-  
-If you don't have a reservation, running a query using `ML.PREDICT` produces this error: `` BigQuery ML inference using imported models and object tables requires a reservation, but no reservations were assigned for job type `QUERY`...` `` .
+> **Important:** You must have a reservation in order to run predictions using imported models and object tables. For more information, see the [limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx#limitations) on imported ONNX models.  
+>   
+> If you don't have a reservation, running a query using `ML.PREDICT` produces this error: `` BigQuery ML inference using imported models and object tables requires a reservation, but no reservations were assigned for job type `QUERY`...` `` .
 
 You use the following query that contains the [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) function to make predictions from image data in the input object table `goldfish_image_table` . This query outputs the predicted class label of the input image based on the [ImageNet labels](https://raw.githubusercontent.com/pytorch/hub/master/imagenet_classes.txt) dictionary.
 
@@ -528,8 +508,6 @@ To make predictions from your image data, do the following.
 ### Console
 
 1.  Go to the **BigQuery Studio** page.
-    
-    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following `ML.PREDICT` query.
     
@@ -569,16 +547,14 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Console
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -586,12 +562,12 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 
 ### gcloud
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 

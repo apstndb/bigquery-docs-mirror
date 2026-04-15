@@ -26,7 +26,7 @@ For example, if you attempt to run a query with insufficient permissions, you se
 
 Examine the error to determine the principal, the resource, and the permissions.
 
-**Note:** You can also view job details by using the [job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
+> **Note:** You can also view job details by using the [job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
 
 In some cases, you may be able to request missing permissions directly from the error message. For more information, see [Permission error messages](https://docs.cloud.google.com/iam/docs/permission-error-messages) in the IAM documentation.
 
@@ -35,8 +35,6 @@ In some cases, you may be able to request missing permissions directly from the 
 If the error message is generic, missing information, or if the action failed in a background process, use the Cloud Audit Logs Logs Explorer to get information about the error.
 
 1.  In the Google Cloud console, go to the **Logs Explorer** page.
-    
-    [Go to Logs Explorer](https://console.cloud.google.com/logs/query)
     
     Alternatively, from the navigation menu, choose **Monitoring \> Logs Explorer** .
 
@@ -66,21 +64,19 @@ If the error message is generic, missing information, or if the action failed in
     
     ![The authorizationInfo section of the protoPayload that shows the permission, resource, and principalEmail.](https://docs.cloud.google.com/bigquery/images/authinfo.png)
 
-**Note:** You can find additional BigQuery audit log sample queries on the Google Cloud Observability [**Sample queries** page](https://docs.cloud.google.com/logging/docs/view/query-library#bigquery-filters) .
+> **Note:** You can find additional BigQuery audit log sample queries on the Google Cloud Observability [**Sample queries** page](https://docs.cloud.google.com/logging/docs/view/query-library#bigquery-filters) .
 
 ## Use the Policy Analyzer for allow policies
 
 Policy Analyzer for allow policies lets you find out which [IAM principals](https://docs.cloud.google.com/iam/docs/principals-overview) have what access to which BigQuery resources based on your [IAM allow policies](https://docs.cloud.google.com/iam/docs/policies) .
 
-**Note:** Policy Intelligence also provides a [Policy Troubleshooter for IAM](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access) that lets you troubleshoot access for a specific principal.
+> **Note:** Policy Intelligence also provides a [Policy Troubleshooter for IAM](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access) that lets you troubleshoot access for a specific principal.
 
 After you gather information about the permissions error, you can use the Policy Analyzer to understand why the principal lacks the required access. This tool analyzes all relevant policies, memberships in Google Groups, and inheritance from parent resources such as a project, a folder, and your organization.
 
 To use Policy Analyzer for allow policies, you create an analysis query, specify a scope for the analysis, and then run the query.
 
 1.  In the Google Cloud console, go to the **Policy Analyzer** page.
-    
-    [Go to Policy Analyzer](https://console.cloud.google.com/iam-admin/analyzer)
     
     Alternatively, from the navigation menu, choose **IAM & Admin \> Policy Analyzer** .
 

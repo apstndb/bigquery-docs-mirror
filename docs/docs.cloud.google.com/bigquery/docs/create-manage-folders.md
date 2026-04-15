@@ -1,10 +1,10 @@
 # Create and manage folders
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To give feedback or request support for this feature, send an email to <bigquery-explorer-feedback@google.com> .
+> **Note:** To give feedback or request support for this feature, send an email to <bigquery-explorer-feedback@google.com> .
 
 The following document describes how create and manage folders in BigQuery. You can use folders to organize and control access to single file code assets, such as [notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) , [saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) , [data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas) , and [data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) files. BigQuery offers user folders for individuals to manage their own code assets, and team folders to manage a team's code assets.
 
@@ -80,8 +80,6 @@ To gain full access to all the folders and files in your project, ask your admin
 Follow these steps to view folders and code assets in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -100,8 +98,6 @@ Follow these steps to view folders and code assets in BigQuery:
 You can have folders and code assets in [different code regions](https://docs.cloud.google.com/bigquery/docs/code-asset-folders#folder_code_regions) . Follow these steps to change the code region that you are viewing:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -126,8 +122,6 @@ For information about creating a team folder, see [Create a team folder](https:/
 Follow these steps to create a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -146,8 +140,6 @@ Follow these steps to create a folder or code asset in BigQuery:
 Follow these steps to create a team folder in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -166,8 +158,6 @@ Follow these steps to create a team folder in BigQuery:
 Follow these steps to upload a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -193,8 +183,6 @@ Follow these steps to upload a code asset in BigQuery:
 Follow these steps to download a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -209,8 +197,6 @@ Follow these steps to download a code asset in BigQuery:
 Follow these steps to rename a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -229,8 +215,6 @@ Follow these steps to rename a folder or code asset in BigQuery:
 Follow these steps to share a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -267,8 +251,6 @@ Follow these steps to share a folder or code asset in BigQuery:
 Follow these steps to move a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -287,8 +269,6 @@ Follow these steps to move a folder or code asset in BigQuery:
 Follow these steps to copy a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     
@@ -307,8 +287,6 @@ Follow these steps to copy a folder or code asset in BigQuery:
 Follow these steps to delete a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
     

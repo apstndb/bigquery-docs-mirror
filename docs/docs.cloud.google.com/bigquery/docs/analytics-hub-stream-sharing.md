@@ -58,7 +58,7 @@ Stream sharing with Pub/Sub has the following limitations:
 
   - A shared topic supports a maximum of 10,000 Pub/Sub subscriptions. This limit includes linked Pub/Sub subscriptions and Pub/Sub subscriptions created outside of Sharing, for example, those created directly from Pub/Sub.
 
-  - Shared topics are indexed in Data Catalog (deprecated) and Dataplex Universal Catalog, but you cannot filter specifically for their resource type.
+  - Shared topics are indexed in Data Catalog (deprecated) and Knowledge Catalog, but you cannot filter specifically for their resource type.
 
   - Usage metrics are captured and displayed in the Metrics dashboard for shared Pub/Sub topics and subscriptions, but are not available in `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` .
     
@@ -81,8 +81,6 @@ To enable the Analytics Hub API, do the following:
 
 Go to the API library and enable the Analytics Hub API for your Google Cloud project.
 
-[Enable the Analytics Hub API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com)
-
 ### gcloud
 
 Run the [`gcloud services enable`](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) command:
@@ -92,8 +90,6 @@ Run the [`gcloud services enable`](https://docs.cloud.google.com/sdk/gcloud/refe
 ### Enable the Pub/Sub API
 
 Go to the API library and enable the Pub/Sub API for your Google Cloud project.
-
-[Enable the Pub/Sub API](https://console.cloud.google.com/apis/library/pubsub.googleapis.com)
 
 ## Shared topic publisher workflows
 
@@ -119,8 +115,6 @@ To add a shared topic to a listing, select one of the following options:
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
     
     The page lists all data exchanges that you can access.
 
@@ -194,8 +188,6 @@ To update a listing, select one of the following options:
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing.
 
@@ -234,8 +226,6 @@ To delete a listing, select one of the following options:
 ### Console
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing.
 
@@ -269,8 +259,6 @@ To give users access to a private listing, set an IAM policy for an individual o
 To give users access to view or subscribe to your listing, do the following:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing.
 
@@ -299,8 +287,6 @@ For more information, see [Analytics Hub Subscriber and Viewer roles](https://do
 To let a user subscribe to a listing with a shared topic, grant them the [Analytics Hub Subscriber](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) and [Analytics Hub Subscription Owner](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) ( `roles/analyticshub.subscriptionOwner` ) roles on a specific listing:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the data exchange name that contains the listing for which you want to manage subscriptions.
 

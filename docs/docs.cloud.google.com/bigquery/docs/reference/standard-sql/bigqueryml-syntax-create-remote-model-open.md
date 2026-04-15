@@ -437,8 +437,6 @@ After the model is undeployed, inference requests sent to the model return an er
 To deploy an open model from the Model Garden, do the following:
 
 1.  Go to Model Garden.
-    
-    [Go to Model Garden](https://console.cloud.google.com/vertex-ai/model-garden)
 
 2.  Locate the model's model card in the Model Garden and click it.
 

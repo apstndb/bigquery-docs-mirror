@@ -72,9 +72,9 @@ ML.EVALUATE(
         
         The value of the `  CONFIDENCE_LEVEL  ` argument affects the `upper_bound` and `lower_bound` values in the output.
 
-**Note:**
-
-For `ARIMA_PLUS` and `ARIMA_PLUS_XREG` models, the output columns differ depending on whether the input data is provided or not. If no input data is provided, use `ML.ARIMA_EVALUATE` instead. The support of `ML.EVALUATE` without input data is deprecated.
+> **Note:**
+> 
+> For `ARIMA_PLUS` and `ARIMA_PLUS_XREG` models, the output columns differ depending on whether the input data is provided or not. If no input data is provided, use `ML.ARIMA_EVALUATE` instead. The support of `ML.EVALUATE` without input data is deprecated.
 
 ### Classification & regression
 
@@ -522,19 +522,19 @@ For models that return them, the `precision` , `recall` , `f1_score` , `log_loss
   - `absolute_error` : a `FLOAT64` value that contains the absolute value of the difference between the forecasted value and the actual data value.
   - `absolute_percentage_error` : a `FLOAT64` value that contains the absolute value of the absolute error divided by the actual value.
 
-**Notes:**
-
-The following things are true for time series models when input data is provided and `perform_aggregation` is `FALSE` :
-
-`ML.EVALUATE` evaluates the forecasting accuracy of each forecasted timestamp.
-
-For history timestamps, the following columns are `NULL` :
-
-  - `forecasted_time_series_data_col`
-  - `lower_bound`
-  - `upper_bound`
-  - `absolute_error`
-  - `absolute_percentage_error`
+> **Notes:**
+> 
+> The following things are true for time series models when input data is provided and `perform_aggregation` is `FALSE` :
+> 
+> `ML.EVALUATE` evaluates the forecasting accuracy of each forecasted timestamp.
+> 
+> For history timestamps, the following columns are `NULL` :
+> 
+>   - `forecasted_time_series_data_col`
+>   - `lower_bound`
+>   - `upper_bound`
+>   - `absolute_error`
+>   - `absolute_percentage_error`
 
 `ML.EVALUATE` returns the following columns for `ARIMA_PLUS` or `ARIMA_PLUS_XREG` models when input data is provided and `perform_aggregation` is `TRUE` :
 
@@ -545,12 +545,12 @@ For history timestamps, the following columns are `NULL` :
   - `mean_absolute_percentage_error` : a `FLOAT64` value that contains the [mean absolute percentage error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) for the model.
   - `symmetric_mean_absolute_percentage_error` : a `FLOAT64` value that contains the [symmetric mean absolute percentage error](https://en.wikipedia.org/wiki/Symmetric_mean_absolute_percentage_error) for the model.
 
-**Notes:**
-
-The following things are true for time series models when input data is provided and `perform_aggregation` is `TRUE` :
-
-  - `ML.EVALUATE` evaluates the forecasting accuracy of each forecasted timestamp.
-  - The error metrics are aggregated over the forecasting error on each forecasted timestamp.
+> **Notes:**
+> 
+> The following things are true for time series models when input data is provided and `perform_aggregation` is `TRUE` :
+> 
+>   - `ML.EVALUATE` evaluates the forecasting accuracy of each forecasted timestamp.
+>   - The error metrics are aggregated over the forecasting error on each forecasted timestamp.
 
 `ML.EVALUATE` returns the following columns for an `ARIMA_PLUS` model when input data isn't provided:
 
@@ -567,7 +567,7 @@ The following things are true for time series models when input data is provided
   - `has_spikes_and_dips` : a `BOOL` value that indicates whether the model performs automatic spikes and dips detection and cleanup.
   - `has_step_changes` : a `BOOL` value that indicates whether the model has step changes.
 
-**Note:** The support of `ML.EVALUATE` without input data is deprecated. Use `ML.ARIMA_EVALUATE` instead.
+> **Note:** The support of `ML.EVALUATE` without input data is deprecated. Use `ML.ARIMA_EVALUATE` instead.
 
 ### Classification
 

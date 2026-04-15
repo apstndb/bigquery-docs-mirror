@@ -7,8 +7,6 @@ Some third-party applications and services provide connectors that can ingest da
 To load data using Informatica Data Loader, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add** .
     
@@ -29,8 +27,6 @@ To load data using Informatica Data Loader, follow these steps:
 To load data using Fivetran Data Pipelines, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add** .
     

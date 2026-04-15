@@ -2,7 +2,7 @@
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
-**Caution:** The assignee and the reservation must be in the same organization and in the same location. If you move the assignee to a different organization after the assignment is created, [reservations monitoring](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) will be inaccurate.
+> **Caution:** The assignee and the reservation must be in the same organization and in the same location. If you move the assignee to a different organization after the assignment is created, [reservations monitoring](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) will be inaccurate.
 
 ## Create reservation assignments
 
@@ -41,8 +41,6 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -77,8 +75,6 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 To assign an organization to a reservation, use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -140,8 +136,6 @@ When you create a reservation assignment, wait at least 5 minutes before running
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -176,8 +170,6 @@ When you create a reservation assignment, wait at least 5 minutes before running
 To assign a project to a reservation, use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -236,7 +228,7 @@ Replace the following:
 
 Use the [`google_bigquery_reservation_assignment`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_reservation_assignment) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -320,27 +312,25 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 When you create a reservation assignment, wait at least 5 minutes before running a query. Otherwise the query might be billed using on-demand pricing.
 
 To make a project that only uses [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) , [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) with `0` slots assigned to it, then follow the prior steps to assign the project to that reservation.
 
-**Note:** A project can be assigned to at most one reservation in a single region.
+> **Note:** A project can be assigned to at most one reservation in a single region.
 
 ### Assign a project to `none`
 
 Assignments to `none` represent the absence of an assignment. Projects assigned to `none` use on-demand pricing.
 
-**Note:** Assignments to `none` are supported for QUERY jobs only.
+> **Note:** Assignments to `none` are supported for QUERY jobs only.
 
 ### SQL
 
 To assign a project to `none` , use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -389,7 +379,7 @@ Replace the following:
 
 Use the [`google_bigquery_reservation_assignment`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_reservation_assignment) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -461,7 +451,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### Override a reservation on a query
 
@@ -474,8 +464,6 @@ To assign a query to run in a specific reservation, do one of the following:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -496,8 +484,6 @@ To assign a query to run in a specific reservation, do one of the following:
 Set the `@@reservation` system variable in the session to assign the reservation your query runs in:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -527,8 +513,6 @@ SELECT 42;
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
-    
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  In Cloud Shell, run the query by using the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) with the `--reservation_id` flag:
@@ -554,7 +538,7 @@ SELECT 42;
 
 To specify a reservation using the API, [insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the `query` job configuration property. Specify your reservation in the `reservation` field.
 
-**Caution:** A query can use a reservation declared in another project. However, the query and the reservation must be in the same organization and in the same location.
+> **Caution:** A query can use a reservation declared in another project. However, the query and the reservation must be in the same organization and in the same location.
 
 ### Assign slots to BigQuery ML workloads
 
@@ -608,8 +592,6 @@ You can find out if your project, folder, or organization is assigned to a reser
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -622,8 +604,6 @@ You can find out if your project, folder, or organization is assigned to a reser
 To find which reservation your project's query jobs are assigned to, query the [`INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations#schema) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -649,7 +629,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### bq
 
-**Caution:** This command does not work in Cloud Shell. To use this command, run it from a local command line.
+> **Caution:** This command does not work in Cloud Shell. To use this command, run it from a local command line.
 
 To find which reservation your project's query jobs are assigned to, use the `bq show` command with the `--reservation_assignment` flag:
 
@@ -714,7 +694,7 @@ Replace the following:
     
     To get the assignment ID, see [List a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .
 
-**Note:** Updated reservation assignments only apply to new jobs. Existing jobs continue to use their original reservation assignment.
+> **Note:** Updated reservation assignments only apply to new jobs. Existing jobs continue to use their original reservation assignment.
 
 ## Delete reservation assignments
 
@@ -741,8 +721,6 @@ To remove a project from a reservation:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -759,8 +737,6 @@ To remove a project from a reservation:
 Use the [`DROP ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_assignment_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

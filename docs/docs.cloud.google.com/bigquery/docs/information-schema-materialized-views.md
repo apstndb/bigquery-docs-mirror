@@ -48,9 +48,12 @@ Queries against this view must include a dataset or a region qualifier. For quer
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
   - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 For example:
 
@@ -77,7 +80,7 @@ WHERE
   last_refresh_status IS NOT NULL;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -105,7 +108,7 @@ WHERE
   table_name = 'myview';
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -118,4 +121,4 @@ The result is similar to the following:
   
 ```
 
-**Note:** If there have been no recent changes to the base tables, BigQuery periodically increases the `refresh_watermark` to indicate that the materialized view is up-to-date without actually refreshing it. As a result, the `last_refresh_time` can be earlier than the `refresh_watermark` .
+> **Note:** If there have been no recent changes to the base tables, BigQuery periodically increases the `refresh_watermark` to indicate that the materialized view is up-to-date without actually refreshing it. As a result, the `last_refresh_time` can be earlier than the `refresh_watermark` .

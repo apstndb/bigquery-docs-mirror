@@ -73,8 +73,6 @@ When you enabled the API for Cloud Run functions, a [Compute Engine default serv
     Replace `  PROJECT_NUMBER  ` with your project ID.
 
 3.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project,folder,organizationId)
 
 4.  Select your project.
 
@@ -257,8 +255,6 @@ Create a BigQuery connection so that you can implement a remote function with an
 The service account that you created in the previous step needs permission to use Cloud Run so that the BigQuery remote function can use the Cloud Run functions function. To grant permissions to the service account, complete the following steps:
 
 1.  Go to the **Cloud Run** page.
-    
-    [Go to Cloud Run](https://console.cloud.google.com/project/_/run)
 
 2.  Select your project.
 
@@ -272,15 +268,13 @@ The service account that you created in the previous step needs permission to us
 
 7.  Click **Save** .
 
-**Note:** It can take up to a minute before new permissions take effect.
+> **Note:** It can take up to a minute before new permissions take effect.
 
 ## Create a BigQuery remote function
 
 To use the Cloud Run functions function that translates text into Spanish with a BigQuery remote function, complete the following steps.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following query:
     
@@ -301,7 +295,7 @@ To use the Cloud Run functions function that translates text into Spanish with a
     your_project.remote_function_test.translate_text.
     ```
 
-**Note:** To limit how many rows are included in an HTTP request, the `max_batching_rows` option is set to `10` . When you do not specify the `max_batching_rows` option, BigQuery decides how many rows are included in an HTTP request.
+> **Note:** To limit how many rows are included in an HTTP request, the `max_batching_rows` option is set to `10` . When you do not specify the `max_batching_rows` option, BigQuery decides how many rows are included in an HTTP request.
 
 ## Call the BigQuery remote function
 
@@ -347,16 +341,14 @@ After you create your remote function, test it to make sure that it is linked to
 
 If you don't plan to use these functions in this project, you can avoid additional costs by deleting your project. This permanently deletes all resources associated with the project.
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

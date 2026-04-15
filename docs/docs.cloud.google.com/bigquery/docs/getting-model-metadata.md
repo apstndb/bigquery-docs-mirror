@@ -6,7 +6,7 @@ This page shows you how to get information or metadata about BigQuery ML models.
   - Using the `bq show` CLI command
   - Calling the [`models.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get) API method directly or by using the client libraries
 
-**Note:** Getting information about models by querying the `INFORMATION_SCHEMA` views is unsupported.
+> **Note:** Getting information about models by querying the `INFORMATION_SCHEMA` views is unsupported.
 
 ## Required permissions
 

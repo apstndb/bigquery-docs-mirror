@@ -140,7 +140,7 @@ Supported by <code dir="ltr" translate="no">to_pandas()</code> only.</td>
 </tbody>
 </table>
 
-**Note:** BigQuery DataFrames doesn't support the following BigQuery data types: `INTERVAL` and `RANGE` . All other BigQuery data types display as the object type.
+> **Note:** BigQuery DataFrames doesn't support the following BigQuery data types: `INTERVAL` and `RANGE` . All other BigQuery data types display as the object type.
 
 ### Type conversions
 

@@ -1,4 +1,4 @@
-**Note:** Exporting your models is not required for deployment on Vertex AI if you are using the Vertex AI Model Registry. To learn more about the registry, see [Manage BigQuery ML models in the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
+> **Note:** Exporting your models is not required for deployment on Vertex AI if you are using the Vertex AI Model Registry. To learn more about the registry, see [Manage BigQuery ML models in the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
 
 This tutorial shows how to [export a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/exporting-models) and then deploy the model either on Vertex AI or on a local machine. You will use the [`iris` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=iris&page=table) from the BigQuery public datasets and work through the following three end-to-end scenarios:
 
@@ -29,16 +29,12 @@ For more information about Vertex AI costs, see [Custom-trained models](https://
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 2.  Enable the AI Platform Training and Prediction API and Compute Engine APIs.
     
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=ml.googleapis.com,compute_component)
 
 3.  Install the [Google Cloud CLI](https://docs.cloud.google.com/sdk/install) and the [Google Cloud CLI](https://docs.cloud.google.com/sdk/downloads#interactive) .
 
@@ -49,8 +45,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -258,7 +252,7 @@ Install the [XGBoost library](https://xgboost.readthedocs.io/en/latest/build.htm
 
 This section uses the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud) to deploy and run predictions against the exported model. For more information, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions) .
 
-**Note:** For serving on [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) Prediction, follow [Request Predictions](https://docs.cloud.google.com/vertex-ai/docs/predictions/getting-predictions) and use the following containers for your region respectively: 1) us-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 2) europe-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 3) asia-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
+> **Note:** For serving on [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) Prediction, follow [Request Predictions](https://docs.cloud.google.com/vertex-ai/docs/predictions/getting-predictions) and use the following containers for your region respectively: 1) us-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 2) europe-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 3) asia-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
 
 For more information about deploying a model to Vertex AI for online or batch predictions using custom routines, see [Deploy a model to an endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment) .
 
@@ -404,8 +398,6 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -418,8 +410,6 @@ Deleting your project removes all datasets and all tables in the project. If you
 Deleting your project removes all Cloud Storage buckets in the project. If you prefer to reuse the project, you can delete the bucket you created in this tutorial
 
 1.  In the Google Cloud console, go to the Cloud Storage **Buckets** page.  
-    
-    [Go to Buckets](https://console.cloud.google.com/storage/browser)
 
 2.  Select the checkbox of the bucket you want to delete.
 
@@ -431,16 +421,14 @@ Deleting your project removes all Cloud Storage buckets in the project. If you p
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

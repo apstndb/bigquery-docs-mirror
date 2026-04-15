@@ -131,7 +131,7 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="odd">
 <td><code dir="ltr" translate="no">dataplex.googleapis.com</code></td>
 <td><ul>
-<li>Dataplex Universal Catalog provides data cataloging and governance capabilities that are used by the following:
+<li>Knowledge Catalog provides data cataloging and governance capabilities that are used by the following:
 <ul>
 <li>Resource Explorer in BigQuery Studio</li>
 <li>Autocomplete in BigQuery Studio SQL editor</li>
@@ -313,8 +313,6 @@ To manually enable code asset management, you must have the Identity and Access 
 To enable required API dependencies for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  On the **Studio** , in the tab bar of the editor pane, click the arrow\_drop\_down arrow drop-down next to the **+** sign, hold the pointer over **Notebook** , and then select **Empty notebook** .
 

@@ -47,20 +47,18 @@ To see the exact permissions that are required, expand the **Required permission
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-**Caution:** Users that are meant to only query the data should **not** have the following:
-
-  - The ability to read objects directly from Cloud Storage, granted by the Storage Object Viewer role.
-  - The ability to bind tables to connections, granted by the BigQuery Connection Administrator role.
-
-Otherwise, users can create new object tables that don't have any access controls, thus circumventing controls placed by data warehouse administrators.
+> **Caution:** Users that are meant to only query the data should **not** have the following:
+> 
+>   - The ability to read objects directly from Cloud Storage, granted by the Storage Object Viewer role.
+>   - The ability to bind tables to connections, granted by the BigQuery Connection Administrator role.
+> 
+> Otherwise, users can create new object tables that don't have any access controls, thus circumventing controls placed by data warehouse administrators.
 
 ## Create a dataset
 
 Create a BigQuery dataset to contain the object table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -90,8 +88,6 @@ You can skip this step if you either have a default connection configured, or yo
 Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) for the object table to use, and get the connection's service account.
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -131,8 +127,6 @@ Grant the connection's service account the Storage Object Viewer role:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
-    
-    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Add** .
     
@@ -164,8 +158,6 @@ To create an object table:
 Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -474,7 +466,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ## Query object tables
 

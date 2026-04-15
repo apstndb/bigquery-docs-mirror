@@ -21,7 +21,7 @@ You can use federated queries with the following data stores:
       - If the admin and user B are the same person, there is no need to grant permission.
   - User B writes a query in BigQuery with the new [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) SQL function.
 
-**Caution:** The performance of federated queries might be lower than queries that read data residing in BigQuery storage.
+> **Caution:** The performance of federated queries might be lower than queries that read data residing in BigQuery storage.
 
 ## Alternatives to federated queries: external tables and datasets
 
@@ -53,13 +53,13 @@ A BigQuery multi-region can query any data source region in the same large geogr
 
   - A query that runs in the BigQuery US multi-region can query any single region in the US geographic area, such as `us-central1` , `us-east4` , or `us-west2` .
     
-    **Caution:** Querying external data sources located in `southamerica-east1` from BigQuery datasets in the US multi-region isn't supported.
+    > **Caution:** Querying external data sources located in `southamerica-east1` from BigQuery datasets in the US multi-region isn't supported.
 
   - A query that runs in the BigQuery EU multi-region can query any single region in [member states](https://europa.eu/european-union/about-eu/countries_en) of the European Union, such as `europe-north1` or `europe-west3` .
 
   - The location where the query runs must be the same as the location of the connection resource. For example, queries executed from the US multi-region must use a connection located in the US multi-region.
     
-    **Caution:** Queries that originate in multi-regions can no longer reference connections in single regions. If you have an affected connection, then recreate the connection in the same multi-region as your query.
+    > **Caution:** Queries that originate in multi-regions can no longer reference connections in single regions. If you have an affected connection, then recreate the connection in the same multi-region as your query.
 
 The query performance varies based on the proximity between the dataset and the external data source. For example, a federated query between a dataset in the US multi-region and a Cloud SQL instance in `us-central1` is fast. However, if you run the same query between the US multi-region and a Cloud SQL instance in `us-east4` , the performance might be slower.
 

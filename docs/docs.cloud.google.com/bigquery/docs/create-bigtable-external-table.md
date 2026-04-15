@@ -28,9 +28,9 @@ Before you create an external table, you must [create a dataset](https://docs.cl
 
 ### Plan your compute usage
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Determine the type of compute you want to use when you query your data. You specify that you want to use Data Boost or that you want to route to a dedicated cluster in your [app profile settings](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#app-profile) .
 
@@ -57,8 +57,6 @@ To use Data Boost serverless compute, create a Data Boost app profile. To use cl
 To create an external table for a Bigtable data source, you must provide the Bigtable URI. To retrieve the Bigtable URI, do the following:
 
 1.  Open the Bigtable page in the console.
-    
-    [Go to Bigtable](https://console.cloud.google.com/bigtable)
 
 2.  Retrieve the following details about your Bigtable data source:
     
@@ -76,7 +74,7 @@ To create an external table for a Bigtable data source, you must provide the Big
     
     ` https://googleapis.com/bigtable/projects/ PROJECT_ID /instances/ INSTANCE_ID [/appProfiles/ APP_PROFILE ]/tables/ TABLE_NAME  `
 
-**Note:** Exactly one Bigtable URI can be specified, and it must be a fully specified, valid HTTPS URL for a Bigtable table. Wildcards are not supported for Bigtable external data sources.
+> **Note:** Exactly one Bigtable URI can be specified, and it must be a fully specified, valid HTTPS URL for a Bigtable table. Wildcards are not supported for Bigtable external data sources.
 
 ## Create permanent external tables
 
@@ -94,8 +92,6 @@ To create a permanent table, choose one of the following methods.
 You can create a permanent external table by running the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) . You must specify the table schema explicitly as part of the statement options.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

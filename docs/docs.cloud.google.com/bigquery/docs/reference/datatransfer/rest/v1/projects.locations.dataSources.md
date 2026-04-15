@@ -64,7 +64,7 @@ Api auth scopes for which refresh token needs to be obtained. These are scopes n
 
 ` enum ( TransferType  ` )
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated. This field has no effect.
 
@@ -72,7 +72,7 @@ Deprecated. This field has no effect.
 
 `boolean`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Deprecated. This field has no effect.
 

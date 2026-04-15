@@ -1,8 +1,8 @@
 # Load Microsoft SQL Server data into BigQuery
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Note: To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
@@ -76,7 +76,7 @@ You can specify PEM-encoded certificates in the **Trusted PEM Certificate** fiel
 
 You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a Microsoft SQL Server transfer](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#set-up) . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) .
 
-**Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
+> **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
 
 You can configure a *full* data transfer to transfer all data from your Microsoft SQL Server datasets with each data transfer.
 
@@ -186,8 +186,6 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **Data transfers** page.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -308,7 +306,7 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 ## Data type mapping
 
-**Note:** On March 16, 2027, the Microsoft SQL Server connector will update some of its data type mapping, as indicated in the following table. For more information, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-sqlserver) .
+> **Note:** On March 16, 2027, the Microsoft SQL Server connector will update some of its data type mapping, as indicated in the following table. For more information, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-sqlserver) .
 
 The following table maps Microsoft SQL Server data types to the corresponding BigQuery data types:
 

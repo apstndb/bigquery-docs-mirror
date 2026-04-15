@@ -38,8 +38,6 @@ To list the routines in a dataset, you must have the `bigquery.routines.get` and
 ### Console
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -56,8 +54,6 @@ To list the routines in a dataset, you must have the `bigquery.routines.get` and
 Query the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -132,8 +128,6 @@ To view the body of a routine, you must have the `bigquery.routines.get` permiss
 ### Console
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -150,8 +144,6 @@ To view the body of a routine, you must have the `bigquery.routines.get` permiss
 Select the `routine_definition` column of the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -227,8 +219,6 @@ To delete a routine, you must have the `bigquery.routines.delete` permission.
 ### Console
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

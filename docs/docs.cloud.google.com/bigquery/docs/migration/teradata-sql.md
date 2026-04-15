@@ -6,7 +6,7 @@ This document details the similarities and differences in SQL syntax between Ter
 
 This section shows equivalents between data types in Teradata and in BigQuery.
 
-**Note:** Teradata supports [`DEFAULT`](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Table-Statements/CREATE-TABLE-and-CREATE-TABLE-AS/Syntax-Elements/column_partition_definition/column_data_type_attribute/DEFAULT?tocId=FGX%7EnkdqLciLCOJTJMvFnA) and other [constraints](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Table-Statements/CREATE-TABLE-and-CREATE-TABLE-AS/Syntax-Elements/column_partition_definition/table_constraint) ; these are not used in BigQuery.
+> **Note:** Teradata supports [`DEFAULT`](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Table-Statements/CREATE-TABLE-and-CREATE-TABLE-AS/Syntax-Elements/column_partition_definition/column_data_type_attribute/DEFAULT?tocId=FGX%7EnkdqLciLCOJTJMvFnA) and other [constraints](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Table-Statements/CREATE-TABLE-and-CREATE-TABLE-AS/Syntax-Elements/column_partition_definition/table_constraint) ; these are not used in BigQuery.
 
 <table style="width:29%;">
 <colgroup>
@@ -246,7 +246,7 @@ For information about the default formats that Teradata SQL uses for each data t
 
 The following table summarizes the differences in timestamp and date formatting elements between Teradata SQL and GoogleSQL.
 
-**Note:** There are no parentheses in the Teradata formats, because the formats ( `CURRENT_*` ) are keywords, not functions.
+> **Note:** There are no parentheses in the Teradata formats, because the formats ( `CURRENT_*` ) are keywords, not functions.
 
 <table>
 <colgroup>
@@ -1247,7 +1247,7 @@ An often-used pattern in Teradata scripts ( [BTEQ](https://docs.teradata.com/r/B
 
 The following table shows equivalents between Teradata and BigQuery for the `CREATE VIEW` statement. The clauses for table locking such as [`LOCKING ROW FOR ACCESS`](https://docs.teradata.com/r/SQL-Data-Manipulation-Language/July-2021/Statement-Syntax/LOCKING-Request-Modifier/Usage-Notes/Using-LOCKING-ROW) are not needed within BigQuery.
 
-**Note:** Teradata does not directly support [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) like BigQuery, only join indexes.
+> **Note:** Teradata does not directly support [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) like BigQuery, only join indexes.
 
 | Teradata                                                               | BigQuery                                                                                                | Notes                                                                                  |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |

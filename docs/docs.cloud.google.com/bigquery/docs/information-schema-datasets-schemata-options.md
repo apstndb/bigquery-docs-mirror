@@ -78,8 +78,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
@@ -105,7 +107,7 @@ WHERE
   option_name = 'default_table_expiration_days';
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -120,7 +122,7 @@ The result is similar to the following:
   
 ```
 
-**Note:** `0.08333333333333333` is the floating point representation of 2 hours.
+> **Note:** `0.08333333333333333` is the floating point representation of 2 hours.
 
 #### Retrieve labels for all datasets in your project
 
@@ -139,7 +141,7 @@ WHERE
   option_name = 'labels';
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -153,4 +155,4 @@ The result is similar to the following:
   
 ```
 
-**Note:** Datasets without labels are excluded from the query results.
+> **Note:** Datasets without labels are excluded from the query results.

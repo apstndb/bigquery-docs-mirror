@@ -58,7 +58,7 @@ With existing constraints, the query results are similar to the following:
     |   2 | myConstraintCatalog | myDataset    | orders     | o_okey      | myConstraintCatalog | myDataset         | lineitem.lineitem_order |
     +-----+---------------------+--------------+------------+-------------+---------------------+-------------------+-------------------------+
 
-**Note:** `lineitem.lineitem_order` is the foreign key defined in the `lineitem` table.
+> **Note:** `lineitem.lineitem_order` is the foreign key defined in the `lineitem` table.
 
 If the table or dataset has no constraints, the query results look like this:
 

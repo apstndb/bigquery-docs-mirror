@@ -4,7 +4,7 @@ This document provides examples of how to extend differential privacy for BigQue
 
 BigQuery lets you extend [differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) to multi-cloud data sources and external differential privacy libraries. This document provides examples of how to apply differential privacy for multi-cloud data sources like AWS S3 with BigQuery Omni, how to call an external differential privacy library using a remote function, and how to perform differential privacy aggregations with [PipelineDP](https://pipelinedp.io/) , a Python library that can run with Apache Spark and Apache Beam.
 
-**Note:** In this document, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
+> **Note:** In this document, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
 For more information about differential privacy, see [Use differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) .
 

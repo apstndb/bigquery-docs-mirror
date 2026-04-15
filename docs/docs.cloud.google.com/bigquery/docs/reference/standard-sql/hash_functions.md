@@ -52,7 +52,7 @@ Computes the hash of the input using the [MD5 algorithm](https://en.wikipedia.or
 
 This function returns 16 bytes.
 
-**Warning:** MD5 is no longer considered secure. For increased security use another hashing function.
+> **Warning:** MD5 is no longer considered secure. For increased security use another hashing function.
 
 **Return type**
 
@@ -79,7 +79,7 @@ Computes the hash of the input using the [SHA-1 algorithm](https://en.wikipedia.
 
 This function returns 20 bytes.
 
-**Warning:** SHA1 is no longer considered secure. For increased security, use another hashing function.
+> **Warning:** SHA1 is no longer considered secure. For increased security, use another hashing function.
 
 **Return type**
 

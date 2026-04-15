@@ -4,7 +4,7 @@ The `INFORMATION_SCHEMA.STREAMING_TIMELINE` view contains per minute aggregated 
 
 You can query the `INFORMATION_SCHEMA` streaming views to retrieve historical and real-time information about streaming data into BigQuery that uses the legacy [`tabledata.insertAll` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) and not the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . For more information about streaming data into BigQuery, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
-**Note:** The view names `INFORMATION_SCHEMA.STREAMING_TIMELINE` and `INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
+> **Note:** The view names `INFORMATION_SCHEMA.STREAMING_TIMELINE` and `INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required permission
 
@@ -20,7 +20,7 @@ Each of the following predefined IAM roles includes the required permission:
   - `roles/bigquery.resourceAdmin`
   - `roles/bigquery.admin`
 
-**Caution:** The required \`bigquery.tables.list\` permission is *not* included in the [basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) Owner or Editor.
+> **Caution:** The required \`bigquery.tables.list\` permission is *not* included in the [basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) Owner or Editor.
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -59,8 +59,10 @@ Queries against this view must include a [region qualifier](https://docs.cloud.g
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+
   - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+    
+    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
@@ -93,7 +95,7 @@ ORDER BY
   start_timestamp DESC;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -141,7 +143,7 @@ ORDER BY
   start_timestamp DESC;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -177,7 +179,7 @@ ORDER BY
 LIMIT 10;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
@@ -220,7 +222,7 @@ ORDER BY
   day, project_id, dataset_id DESC;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

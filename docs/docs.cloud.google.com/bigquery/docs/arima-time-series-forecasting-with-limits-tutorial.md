@@ -51,8 +51,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -232,7 +230,7 @@ Run the `CREATE MODEL` query to create and train your model:
     
     The query takes approximately 80 seconds to complete, after which you can access the ( `nyc_citibike_arima_model` ) model. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
-**Note:** You might wonder if United States holidays have an impact on the time series. You can try adding [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) to the `OPTIONS` list in the query. This allows a more accurate modeling on those United States holidays time points if there are indeed United States holiday patterns in the time series.
+> **Note:** You might wonder if United States holidays have an impact on the time series. You can try adding [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) to the `OPTIONS` list in the query. This allows a more accurate modeling on those United States holidays time points if there are indeed United States holiday patterns in the time series.
 
 ## Forecast the time series and visualize the results
 
@@ -360,7 +358,7 @@ Run the `CREATE MODEL` query to create and train your model:
     
     The query takes approximately 100 seconds to complete, after which you can access the ( `nyc_citibike_arima_model_with_limits` ) model. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
-**Note:** You might wonder if United States holidays have an impact on the time series. You can try adding [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) to the `OPTIONS` list in the query. This allows a more accurate modeling on those United States holidays time points if there are indeed United States holiday patterns in the time series.
+> **Note:** You might wonder if United States holidays have an impact on the time series. You can try adding [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) to the `OPTIONS` list in the query. This allows a more accurate modeling on those United States holidays time points if there are indeed United States holiday patterns in the time series.
 
 ## Forecast the time series by using the model with limits
 
@@ -434,8 +432,6 @@ As this tutorial shows, the `forecast_limit_lower_bound` and `forecast_limit_upp
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -447,16 +443,14 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

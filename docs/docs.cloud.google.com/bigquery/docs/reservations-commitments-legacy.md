@@ -1,6 +1,6 @@
 # Purchase and manage legacy slot commitments
 
-**Note:** Legacy reservations, including access to flat-rate billing or certain commitment lengths, are only available to allow-listed customers. To determine if you have access to these legacy features, contact your administrator. The flat-rate billing model defines how you are billed for compute, but flat-rate reservations and commitments function as Enterprise edition slots.
+> **Note:** Legacy reservations, including access to flat-rate billing or certain commitment lengths, are only available to allow-listed customers. To determine if you have access to these legacy features, contact your administrator. The flat-rate billing model defines how you are billed for compute, but flat-rate reservations and commitments function as Enterprise edition slots.
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
@@ -17,7 +17,7 @@ The BigQuery Reservation API is distinct from the existing BigQuery API and must
 
 ![Enable API.](https://docs.cloud.google.com/static/bigquery/images/reservations-enable-api.png)
 
-**Note:** If you want to prevent anyone in your organization from enabling the BigQuery Reservation API, [contact support](https://docs.cloud.google.com/support) .
+> **Note:** If you want to prevent anyone in your organization from enabling the BigQuery Reservation API, [contact support](https://docs.cloud.google.com/support) .
 
 ## Purchase slots
 
@@ -38,15 +38,13 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 ### Create a capacity commitment
 
-**Caution:** Before creating a capacity commitment, understand the details of the [commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+> **Caution:** Before creating a capacity commitment, understand the details of the [commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
 Commitments are a regional resource. Commitments purchased in one region or multi-region cannot be used in any other regions or multi-regions. Commitments cannot be moved between regions or between regions and multi-regions.
 
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -81,7 +79,7 @@ Commitments are a regional resource. Commitments purchased in one region or mult
 
 7.  To view the commitment, click **View slot commitments** . After the capacity is provisioned, the requested capacity commitment has a green status.
     
-    **Note:** Slots are usually provisioned quickly, but in rare cases it can take several hours. If you have a critical workload where you expect to have increased demand, reserve your slots at least one day in advance.
+    > **Note:** Slots are usually provisioned quickly, but in rare cases it can take several hours. If you have a critical workload where you expect to have increased demand, reserve your slots at least one day in advance.
 
 The first time you purchase capacity, a `default` reservation is created.
 
@@ -90,8 +88,6 @@ The first time you purchase capacity, a `default` reservation is created.
 To create a capacity commitment, use the [`CREATE CAPACITY` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_capacity_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -159,7 +155,7 @@ Each of the following predefined IAM roles includes this permission:
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-**Note:** When you view legacy capacity commitments, the value of the **Capacity Model** column is `Flat-Rate` . The value of the **Edition** column is `Enterprise` . The value of the **Edition** column doesn't indicate that that you have purchased a commitment associated with an edition.
+> **Note:** When you view legacy capacity commitments, the value of the **Capacity Model** column is `Flat-Rate` . The value of the **Edition** column is `Enterprise` . The value of the **Edition** column doesn't indicate that that you have purchased a commitment associated with an edition.
 
 ### View capacity commitments by project
 
@@ -174,8 +170,6 @@ It's not possible to view legacy capacity commitments using the Google Cloud con
 To view the commitments for an administration project, query the [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations#schema) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -245,8 +239,6 @@ Annual commitments have a renewal plan, which you specify when you create or con
 You can change your renewal plan for an annual commitment as follows:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -329,8 +321,6 @@ When you split a commitment, the new commitment has the same plan and the same c
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -377,8 +367,6 @@ You can merge multiple commitments into one commitment. The merging commitments 
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -429,15 +417,13 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 ### Deleting a capacity commitment
 
-**Caution:** This operation cannot be undone.
+> **Caution:** This operation cannot be undone.
 
 ### Console
 
 To delete a capacity commitment, complete the following steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -458,8 +444,6 @@ To delete a capacity commitment, complete the following steps:
 To delete a capacity commitment, use the [`DROP CAPACITY` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_capacity_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     

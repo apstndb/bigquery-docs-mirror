@@ -50,7 +50,7 @@ You can delete a table snapshot by using one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
+<!-- end list -->
 
 1.  In the left pane, click explore **Explorer** :
     
@@ -71,8 +71,6 @@ You can delete a table snapshot by using one of the following options:
 Use the [`DROP SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -93,8 +91,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 ### bq
 
 Enter the following command in the Cloud Shell:
-
-[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 ``` notranslate
 bq rm \

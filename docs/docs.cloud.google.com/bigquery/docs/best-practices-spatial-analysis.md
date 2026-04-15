@@ -44,7 +44,7 @@ The `grid_size` argument in this function serves as the exponent, which means 10
 
 After you create these views, query the `base_mv` view using the same query semantics you would use to query the base table. You can use this technique to quickly identify a collection of shapes that need to be analyzed more deeply, and then you can perform a second deeper analysis on the base table. Test your queries to see which threshold values work best for your data.
 
-**Note:** The `ST_SIMPLIFY` function preserves the topology of the input shape to avoid oversimplification.
+> **Note:** The `ST_SIMPLIFY` function preserves the topology of the input shape to avoid oversimplification.
 
 For measurement use cases, determine the level of accuracy that your use case requires. When using the `ST_SIMPLIFY` function, set the `threshold_meters` parameter to the required level of accuracy. For measuring distances at the scale of a city or larger, set a threshold of 10 meters. At smaller scales—for example, when measuring the distance between a building and the nearest body of water—consider using a smaller threshold of 1 meter or less. Using smaller threshold values results in removing fewer points from the given shape.
 
@@ -135,7 +135,7 @@ This query identifies the 10 buildings nearest to a particular anchor building:
         distance_type => 'EUCLIDEAN',
         options => '{"fraction_lists_to_search":0.1}')
 
-**Note:** You might need to adjust some parameters—such as `top_k` and `fraction_lists_to_search` —to work with your particular data.
+> **Note:** You might need to adjust some parameters—such as `top_k` and `fraction_lists_to_search` —to work with your particular data.
 
 In the **Query results** pane, click the **Visualization** tab. The map shows a cluster of building shapes nearest to the anchor building:
 
@@ -143,7 +143,7 @@ In the **Query results** pane, click the **Visualization** tab. The map shows a 
 
 When you run this query in the Google Cloud console, click **Job Information** and verify that **Vector Index Usage Mode** is set to `FULLY_USED` . This indicates that the query is leveraging the `building_vector_index` vector index, which you created earlier.
 
-**Caution:** Because Euclidean distance is used in this vector search, you might get different results than if the `ST_DISTANCE` function was used directly, especially if you are comparing over long distances where the curvature of the earth begins to have a larger effect.
+> **Caution:** Because Euclidean distance is used in this vector search, you might get different results than if the `ST_DISTANCE` function was used directly, especially if you are comparing over long distances where the curvature of the earth begins to have a larger effect.
 
 ## Divide large shapes
 

@@ -9,8 +9,6 @@ Downloading query results to a local file is not supported by the bq command-lin
 To download query results as a CSV or newline-delimited JSON file, use the Google Cloud console:
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -26,9 +24,9 @@ To download query results as a CSV or newline-delimited JSON file, use the Googl
 
 ## Save query results to Google Drive
 
-**Beta**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Beta**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Saving query results to Google Drive is not supported by the bq command-line tool or the API.
 
@@ -37,8 +35,6 @@ You might get an error when you try to save the BigQuery results to Google Drive
 To save query results to Google Drive, use the Google Cloud console:
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -65,8 +61,6 @@ You might get an error when you try to open the BigQuery results from Google She
 To save query results to Google Sheets, use the Google Cloud console:
 
 1.  In the Google Cloud console, open the BigQuery page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -86,7 +80,7 @@ To save query results to Google Sheets, use the Google Cloud console:
     
     When you save query results to Google Sheets, the filename begins with `results-[DATE]` where `[DATE]` is today's date in the format `YYYYMMDD` .
     
-    **Note:** Saving results to Google Sheets is not supported by the bq command-line tool or the API. For more information, see [Using Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
+    > **Note:** Saving results to Google Sheets is not supported by the bq command-line tool or the API. For more information, see [Using Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
 
 ### Troubleshoot saving results to Google Sheets
 
@@ -97,8 +91,6 @@ When saving data from BigQuery to Google Sheets, you might find that some cells 
 You can export your query results to Cloud Storage in the Google Cloud console with the following steps:
 
 1.  Open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 

@@ -681,7 +681,7 @@ In the following example, the operation is ignored because you can't insert data
 
 ## `JSON_EXTRACT`
 
-**Note:** This function is deprecated. Consider using [JSON\_QUERY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query) .
+> **Note:** This function is deprecated. Consider using [JSON\_QUERY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query) .
 
     JSON_EXTRACT(json_string_expr, json_path)
 
@@ -872,7 +872,7 @@ In the following examples, JSON data is extracted and returned as JSON-formatted
 
 ## `JSON_EXTRACT_ARRAY`
 
-**Note:** This function is deprecated. Consider using [JSON\_QUERY\_ARRAY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query_array) .
+> **Note:** This function is deprecated. Consider using [JSON\_QUERY\_ARRAY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query_array) .
 
     JSON_EXTRACT_ARRAY(json_string_expr[, json_path])
 
@@ -1039,7 +1039,7 @@ The following examples explore how invalid requests and empty arrays are handled
 
 ## `JSON_EXTRACT_SCALAR`
 
-**Note:** This function is deprecated. Consider using [JSON\_VALUE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value) .
+> **Note:** This function is deprecated. Consider using [JSON\_VALUE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value) .
 
     JSON_EXTRACT_SCALAR(json_string_expr[, json_path])
 
@@ -1119,7 +1119,7 @@ In cases where a JSON key uses invalid JSONPath characters, you can escape those
 
 ## `JSON_EXTRACT_STRING_ARRAY`
 
-**Note:** This function is deprecated. Consider using [JSON\_VALUE\_ARRAY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value_array) .
+> **Note:** This function is deprecated. Consider using [JSON\_VALUE\_ARRAY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value_array) .
 
     JSON_EXTRACT_STRING_ARRAY(json_string_expr[, json_path])
 
@@ -1304,11 +1304,11 @@ The following examples explore how invalid requests and empty arrays are handled
 
 ## `JSON_FLATTEN`
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@googlegroups.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@googlegroups.com> .
 
     JSON_FLATTEN(json_expr)
 
@@ -3743,6 +3743,88 @@ In this example, the values `9007199254740993` ( `INT64` ) and `2.1` ( `FLOAT64`
      | {"id":2.1}                   |
      +------------------------------*/
 
+In the following example, a graph path is converted into a JSON array.
+
+    GRAPH graph_db.FinGraph
+    MATCH p=(src:Account)-[t1:Transfers]->(dst:Account)
+    RETURN TO_JSON(p) AS json_array
+    
+    /*--------------------------------------------------------------------+
+     | json_array                                                         |
+     +--------------------------------------------------------------------+
+     | [{                                                                 |
+     |    "identifier":"mUZpbkdyYXBoLkFjY291bnQAeJEg",                    |
+     |    "kind":"node",                                                  |
+     |    "labels":["Account"],                                           |
+     |    "properties":{                                                  |
+     |      "create_time":"2020-01-28T01:55:09.206Z",                     |
+     |      "id":16,                                                      |
+     |      "is_blocked":true,                                            |
+     |      "nick_name":"Vacation Fund"                                   |
+     |    }                                                               |
+     |  },                                                                |
+     |  {                                                                 |
+     |    "destination_node_identifier":"mUZpbkdyYXBoLkFjY291bnQAeJEo",   |
+     |    "identifier":"mUZpbkdyYXBoLkFjY291...",                         |
+     |    "kind":"edge",                                                  |
+     |    "labels":["Transfers"],                                         |
+     |    "properties":{                                                  |
+     |      "amount":300.0,                                               |
+     |      "create_time":"2020-09-25T09:36:14.926Z",                     |
+     |      "id":16,                                                      |
+     |      "order_number":"103650009791820",                             |
+     |      "to_id":20                                                    |
+     |    },                                                              |
+     |    "source_node_identifier":"mUZpbkdyYXBoLkFjY291bnQAeJEg"         |
+     |  },                                                                |
+     |  {                                                                 |
+     |    "identifier":"mUZpbkdyYXBoLkFjY291bnQAeJEo",                    |
+     |    "kind":"node",                                                  |
+     |    "labels":["Account"],                                           |
+     |    "properties":{                                                  |
+     |      "create_time":"2020-02-18T13:44:20.655Z",                     |
+     |      "id":20,                                                      |
+     |      "is_blocked":false,                                           |
+     |      "nick_name":"Vacation Fund"                                   |
+     |    }                                                               |
+     |  }                                                                 |
+     |  ...                                                               |
+     | ]                                                                  |
+     +--------------------------------------------------------------------/*
+
+In the following example, each graph node called `src` is converted into a JSON object:
+
+    GRAPH graph_db.FinGraph
+    MATCH (src:Account {id: 7})-[t1:Transfers]->(dst:Account)
+    RETURN TO_JSON(src) AS json_array
+    
+    /*--------------------------------------------------------------------+
+     | json_array                                                         |
+     +--------------------------------------------------------------------+
+     | {                                                                  |
+     |   "identifier":"rhYAAAANAAAApgAAAAAAAAAApgcAAAAAAAAA",             |
+     |   "kind":"node",                                                   |
+     |   "labels":["Account"],                                            |
+     |   "properties":{                                                   |
+     |     "create_time":"2020-01-10T06:22:20.222Z",                      |
+     |     "id":7,                                                        |
+     |     "is_blocked":false,                                            |
+     |     "nick_name":"Vacation Fund"                                    |
+     |   }                                                                |
+     | }                                                                  |
+     | {                                                                  |
+     |   "identifier":"rhYAAAANAAAApgAAAAAAAAAApgcAAAAAAAAA",             |
+     |   "kind":"node",                                                   |
+     |   "labels":["Account"],                                            |
+     |   "properties":{                                                   |
+     |     "create_time":"2020-01-10T06:22:20.222Z",                      |
+     |     "id":7,                                                        |
+     |     "is_blocked":false,                                            |
+     |     "nick_name":"Vacation Fund"                                    |
+     |   }                                                                |
+     | }                                                                  |
+     +--------------------------------------------------------------------*/
+
 ## `TO_JSON_STRING`
 
     TO_JSON_STRING(value[, pretty_print])
@@ -4122,6 +4204,47 @@ JSON output: <code dir="ltr" translate="no">[1,2,3]</code><br />
 <td>SQL input: <code dir="ltr" translate="no">STRUCT(12 AS purchases, TRUE AS inStock)</code><br />
 JSON output: <code dir="ltr" translate="no">{"inStock": true,"purchases":12}</code><br />
 </td>
+</tr>
+<tr class="even">
+<td>GRAPH_ELEMENT</td>
+<td><p>( <code dir="ltr" translate="no">TO_JSON</code> only)</p>
+<p>object</p>
+<p>The object can contain zero or more key-value pairs. Each value is formatted according to its type.</p>
+<p>For <code dir="ltr" translate="no">TO_JSON</code> , graph element (node or edge) objects are supported.</p>
+<ul>
+<li>The graph element identifier is only valid within the scope of the same query response and can't be used to correlate entities across different queries.</li>
+<li>Field names that aren't valid UTF-8 might result in unparseable JSON.</li>
+<li>The result may include internal key-value pairs that aren't defined by the users.</li>
+<li>The conversion can fail if the object contains values of unsupported types.</li>
+</ul></td>
+<td>SQL:<br />
+
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>GRAPH graph_db.FinGraph
+MATCH (p:Person WHERE p.name = &#39;Dana&#39;)
+RETURN TO_JSON(p) AS dana_json;</code></pre>
+<br />
+JSON output (truncated):<br />
+
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>{&quot;identifier&quot;:&quot;ZGFuYQ==&quot;,&quot;kind&quot;:&quot;node&quot;,&quot;labels&quot;:[&quot;Person&quot;],&quot;properties&quot;:{&quot;id&quot;:2,&quot;name&quot;:&quot;Dana&quot;}}</code></pre></td>
+</tr>
+<tr class="odd">
+<td>GRAPH_PATH</td>
+<td><p>( <code dir="ltr" translate="no">TO_JSON</code> only)</p>
+<p>array</p>
+<p>The array can contain one or more objects that represent graph elements in a graph path.</p></td>
+<td>SQL:<br />
+
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>GRAPH graph_db.FinGraph
+MATCH account_ownership = (p:Person)-[o:Owns]-&gt;(a:Account)
+RETURN TO_JSON(account_ownership) AS results</code></pre>
+<br />
+JSON output for <code dir="ltr" translate="no">account_ownership</code> (truncated):<br />
+
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>[
+  {&quot;identifier&quot;:&quot;ZGFuYQ==&quot;,&quot;kind&quot;:&quot;node&quot;,&quot;labels&quot;:[&quot;Person&quot;], ...},
+  {&quot;identifier&quot;:&quot;TPZuYM==&quot;,&quot;kind&quot;:&quot;edge&quot;,&quot;labels&quot;:[&quot;Owns&quot;], ...},
+  {&quot;identifier&quot;:&quot;PRTuMI==&quot;,&quot;kind&quot;:&quot;node&quot;,&quot;labels&quot;:[&quot;Account&quot;], ...}
+]</code></pre></td>
 </tr>
 <tr class="even">
 <td>RANGE</td>

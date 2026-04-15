@@ -132,15 +132,15 @@ Don't use edition tiers to restrict access to specific features, because the fea
 </tr>
 <tr class="odd">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/export-intro">Data export</a></strong></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a></td>
+<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
+<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
 </tr>
 </tbody>
 </table>
 
-**Note:** BigQuery Enterprise Plus edition supports [Assured Workloads platform controls](https://docs.cloud.google.com/assured-workloads/docs/supported-products) for regulatory compliance regimes, including FedRAMP, CJIS, IL4, and ITAR.
+> **Note:** BigQuery Enterprise Plus edition supports [Assured Workloads platform controls](https://docs.cloud.google.com/assured-workloads/docs/supported-products) for regulatory compliance regimes, including FedRAMP, CJIS, IL4, and ITAR.
 
 ### Analysis features
 
@@ -302,10 +302,10 @@ Don't use edition tiers to restrict access to specific features, because the fea
 </tr>
 <tr class="odd">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/export-intro">Data export</a></strong></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a></td>
+<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">exporting data to AlloyDB for PostgreSQL</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">exporting data to AlloyDB for PostgreSQL</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">exporting data to AlloyDB for PostgreSQL</a></td>
+<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">exporting data to Spanner</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">exporting data to AlloyDB for PostgreSQL</a></td>
 </tr>
 <tr class="even">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/encryption-at-rest">Storage encryption</a></strong></td>
@@ -333,10 +333,17 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <p><a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro">Dynamic data masking</a></p>
 <p><a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#custom-mask">Custom data masking</a></p></td>
 </tr>
+<tr class="even">
+<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></strong></td>
+<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
+<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/bgraph-overview">BigQuery Graph</a></td>
+</tr>
 </tbody>
 </table>
 
-**Note:** BigQuery [automatically encrypts all data](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) at rest. By default, Google manages the encryption keys used to protect your data. You can also use [customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) in the Enterprise edition and Enterprise Plus edition.
+> **Note:** BigQuery [automatically encrypts all data](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) at rest. By default, Google manages the encryption keys used to protect your data. You can also use [customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) in the Enterprise edition and Enterprise Plus edition.
 
 ## What's next
 

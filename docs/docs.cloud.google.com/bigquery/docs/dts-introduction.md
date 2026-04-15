@@ -8,13 +8,13 @@ You can access the BigQuery Data Transfer Service using the:
   - [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference)
   - [BigQuery Data Transfer Service API](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest)
 
-**Tip:** You can also use the **Pipelines & Connections** page to create a transfer using a [streamlined workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+> **Tip:** You can also use the **Pipelines & Connections** page to create a transfer using a [streamlined workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 After you configure a data transfer, the BigQuery Data Transfer Service automatically loads data into BigQuery on a regular basis. You can also initiate data backfills to recover from any outages or gaps. You cannot use the BigQuery Data Transfer Service to transfer data out of BigQuery.
 
 In addition to loading data into BigQuery, BigQuery Data Transfer Service is used for two BigQuery operations: [dataset copies](https://docs.cloud.google.com/bigquery/docs/copying-datasets) and [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
 
-**Note:** Subscribe to the [BigQuery DTS announcements group](https://groups.google.com/g/bigquery-dts-announcements) to receive announcements related to the BigQuery Data Transfer Service.
+> **Note:** Subscribe to the [BigQuery DTS announcements group](https://groups.google.com/g/bigquery-dts-announcements) to receive announcements related to the BigQuery Data Transfer Service.
 
 ## Supported data sources
 

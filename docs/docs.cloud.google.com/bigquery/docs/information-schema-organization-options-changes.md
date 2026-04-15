@@ -55,7 +55,7 @@ WHERE
   updated_options.default_query_job_timeout_ms is not null;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

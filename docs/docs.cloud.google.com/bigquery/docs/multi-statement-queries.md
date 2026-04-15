@@ -204,8 +204,6 @@ After a multi-statement query finishes, the temporary table exists for up to 24 
 After you create a temporary table, you can view the structure of the table and any data in it. To view the table structure and data, follow these steps:
 
 1.  In the Google Cloud console, open the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -219,7 +217,7 @@ After you create a temporary table, you can view the structure of the table and 
 
 5.  In the **Destination table** row, click **Temporary table** .
     
-    **Note:** The name of the temporary table used in the multi-statement query is not preserved. In the Google Cloud console, it has a random name.
+    > **Note:** The name of the temporary table used in the multi-statement query is not preserved. In the Google Cloud console, it has a random name.
 
 ### Qualify temporary tables with `_SESSION`
 
@@ -343,7 +341,7 @@ If you use on-demand billing, BigQuery charges for multi-statement queries based
 
 To get an estimate of how many bytes a multi-statement query might process, you can run a [dry run](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#dryrun_multi_statement_queries) .
 
-**Note:** The number of bytes scanned by a multi-statement query is generally not known before executing it. To avoid unintended query costs, consider using [capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . Alternatively, you can use the BigQuery [sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) to take advantage of limited free query execution.
+> **Note:** The number of bytes scanned by a multi-statement query is generally not known before executing it. To avoid unintended query costs, consider using [capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . Alternatively, you can use the BigQuery [sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) to take advantage of limited free query execution.
 
 The following pricing applies for these multi-statement queries:
 

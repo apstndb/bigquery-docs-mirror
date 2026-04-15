@@ -24,7 +24,7 @@ To grant permissions to many related BigQuery resources at the same time, includ
     
     For example, Data Catalog cannot verify IAM tag conditions on BigQuery datasets and tables. Suppose there is a conditional IAM policy that gives an intern the BigQuery Data Viewer role on datasets with the `employee_type=intern` tag. Since this is a positive tag condition, the intern cannot view datasets by searching in Data Catalog even if those datasets do have the `employee_type=intern` tag. If the tag condition was changed to a negative one, so that the intern could only view datasets that did *not* have the `employee_type=intern` tag, then the check would be skipped entirely and the intern could view the datasets that they couldn't normally access in BigQuery.
     
-    **Best practice:** Use positive IAM tag conditions rather than negative ones to prevent granting roles unintentionally.
+    > **Best practice:** Use positive IAM tag conditions rather than negative ones to prevent granting roles unintentionally.
 
 ## Required roles
 
@@ -138,8 +138,6 @@ After you create a tag, you can attach it to a new BigQuery dataset. You can att
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -180,8 +178,6 @@ After you create a tag, you can attach it to a new BigQuery dataset. You can att
 Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -224,7 +220,7 @@ Replace the following:
 
 Use the [`google_bigquery_dataset`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -327,7 +323,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -340,8 +336,6 @@ After you create a tag, you can attach it to an existing dataset. You can attach
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -380,8 +374,6 @@ Use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/big
 The following example overwrites all tags for an existing dataset.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -408,8 +400,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 The following example uses the `+=` operator to attach tags to a dataset without overwriting existing tags. If an existing tag has the same key, that tag is overwritten.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -481,8 +471,6 @@ The following steps provide a list of tag bindings attached directly to a datase
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -563,8 +551,6 @@ You can detach a tag from a resource by deleting the tag binding resource. If yo
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -585,8 +571,6 @@ Use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/big
 The following example detaches tags from a dataset using the `-=` operator. To detach all tags from a dataset, you can specify `tags=NULL` or `tags=[]` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -670,8 +654,6 @@ After you create a tag, you can attach it to a new table. You can attach only on
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -710,8 +692,6 @@ After you create a tag, you can attach it to a new table. You can attach only on
 Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -758,7 +738,7 @@ Replace the following:
 
 Use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -868,7 +848,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
-**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -881,8 +861,6 @@ After you create a tag, you can attach it to an existing table. You can attach o
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -923,8 +901,6 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 The following example overwrites all tags for an existing table.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -951,8 +927,6 @@ For more information about how to run queries, see [Run an interactive query](ht
 The following example uses the `+=` operator to attach a tag to a table without overwriting existing tags. If an existing tag has the same key, that tag is overwritten.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -1025,8 +999,6 @@ You can list tags that are attached directly to a table. This process doesn't li
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -1109,8 +1081,6 @@ You can remove a tag association from a table by deleting the tag binding. If yo
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -1133,8 +1103,6 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 The following example detaches tags from a table using the `-=` operator. To detach all tags from a table, you can specify `tags=NULL` or `tags=[]` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -1225,8 +1193,6 @@ Suppose you are an administrator of an organization. Your data analysts are all 
     ![Example of creating tag key and values.](https://docs.cloud.google.com/static/bigquery/images/tag-key-value-example.png)
 
 2.  In the Google Cloud console, go to the **IAM** page.
-    
-    [Go to IAM](https://console.cloud.google.com/iam-admin/iam)
 
 3.  Locate the row that contains the intern whose dataset access you want to restrict, and click edit **Edit principal** in that row.
 

@@ -55,8 +55,6 @@ You can delete a model in the Google Cloud console by using the **Delete Model**
 **Option two:** Use a DDL statement.
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 

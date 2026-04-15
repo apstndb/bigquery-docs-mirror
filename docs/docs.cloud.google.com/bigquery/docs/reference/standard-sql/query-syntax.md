@@ -1,4 +1,4 @@
-GoogleSQL is the new name for Google Standard SQL\! New name, same great SQL dialect.
+> GoogleSQL is the new name for Google Standard SQL\! New name, same great SQL dialect.
 
 Query statements scan one or more tables or expressions and return the computed result rows. This topic describes the syntax for SQL queries in GoogleSQL for BigQuery.
 
@@ -149,7 +149,7 @@ If the expression doesn't have an explicit alias, it receives an implicit alias 
 
 An item in a `SELECT` list can also take the form of `expression.*` . This produces one output column for each column or top-level field of `expression` . The expression must either be a table alias or evaluate to a single value of a data type with fields, such as a STRUCT.
 
-**Note:** The `*` or `.*` wildcard preserves the order of the fields in the data structure on which they're operating.
+> **Note:** The `*` or `.*` wildcard preserves the order of the fields in the data structure on which they're operating.
 
 The following query produces one output column for each column in the table `groceries` , aliased as `g` .
 
@@ -211,7 +211,7 @@ A `SELECT * EXCEPT` statement specifies the names of one or more columns to excl
      | sprocket  | 200      |
      +-----------+----------*/
 
-**Note:** `SELECT * EXCEPT` doesn't exclude columns that don't have names.
+> **Note:** `SELECT * EXCEPT` doesn't exclude columns that don't have names.
 
 ### `SELECT * REPLACE`
 
@@ -245,11 +245,14 @@ A `SELECT * REPLACE` statement doesn't change the names or order of columns. How
      | 5        | sprocket  | 100      |
      +----------+-----------+----------*/
 
-**Note:** `SELECT * REPLACE` doesn't replace columns that don't have names.
+> **Note:** `SELECT * REPLACE` doesn't replace columns that don't have names.
 
 ### `SELECT DISTINCT`
 
 A `SELECT DISTINCT` statement discards duplicate rows and returns only the remaining rows. `SELECT DISTINCT` can't return columns of the following types:
+
+  - `GRAPH_ELEMENT`
+  - `GRAPH_PATH`
 
 In the following example, `SELECT DISTINCT` is used to produce distinct arrays:
 
@@ -343,6 +346,7 @@ The query above produces a table with row type `STRUCT<a int64, b int64>` .
         | field_path
         | unnest_operator
         | cte_name [ as_alias ]
+        | graph_table_operator [ as_alias ]
       }
     
     as_alias:
@@ -365,6 +369,10 @@ See [TABLESAMPLE operator](https://docs.cloud.google.com/bigquery/docs/reference
 #### `match_recognize_clause`
 
 See [MATCH\_RECOGNIZE clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#match_recognize_clause) .
+
+#### `graph_table_operator`
+
+See [GRAPH\_TABLE operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_table_operator) .
 
 #### `table_name`
 
@@ -399,7 +407,7 @@ The value of `timestamp_expression` can't fall into the following ranges:
 
 A single query statement can't reference a single table at more than one point in time, including the current time. That is, a query can reference a table multiple times at the same timestamp, but not the current version and a historical version, or two different historical versions.
 
-**Note:** DML statements always operate on the current version of the destination table, so if the destination table is used multiple times in the query, all of them must use the current version.
+> **Note:** DML statements always operate on the current version of the destination table, so if the destination table is used multiple times in the query, all of them must use the current version.
 
 The default time zone for `timestamp_expression` in a `FOR SYSTEM_TIME AS OF` expression is `America/Los_Angeles` , even though the default time zone for timestamp literals is `UTC` .
 
@@ -501,9 +509,9 @@ Some examples of valid `field_path` values include:
 
 Field paths in the `FROM` clause must end in an array field. In addition, field paths can't contain arrays before the end of the path. For example, the path `array_column.some_array.some_array_field` is invalid because it contains an array before the end of the path.
 
-**Note:** If a path has only one name, it's interpreted as a table. To work around this, wrap the path using `UNNEST` , or use the fully-qualified path.
+> **Note:** If a path has only one name, it's interpreted as a table. To work around this, wrap the path using `UNNEST` , or use the fully-qualified path.
 
-**Note:** If a path has more than one name, and it matches a field name, it's interpreted as a field name. To force the path to be interpreted as a table name, wrap the path using `` ` `` .
+> **Note:** If a path has more than one name, and it matches a field name, it's interpreted as a field name. To force the path to be interpreted as a table name, wrap the path using `` ` `` .
 
 #### `unnest_operator`
 
@@ -1605,6 +1613,10 @@ To scale the performance of queries that contain the `MATCH_RECOGNIZE` clause, u
   - Use the `ORDER BY` clause to guarantee the order in which the input rows are processed. Otherwise the `MATCH_RECOGNIZE` clause can produce non-deterministic results.
 
 For more example queries, see the [`MATCH_RECOGNIZE` notebook tutorial](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/notebooks/bigquery_match_recognize_demo.ipynb) .
+
+## `GRAPH_TABLE` operator
+
+To learn more about this operator, see [`GRAPH_TABLE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_table_operator) in the Graph Query Language (GQL) reference guide.
 
 ## Join operation
 
@@ -4301,7 +4313,7 @@ The rows that are returned by `LIMIT` and `OFFSET` have undefined order unless t
 
 A constant expression can be represented by a general expression, literal, or parameter value.
 
-**Note:** Although the `LIMIT` clause limits the rows that a query produces, it doesn't limit the amount of data processed by that query.
+> **Note:** Although the `LIMIT` clause limits the rows that a query produces, it doesn't limit the amount of data processed by that query.
 
 **Examples**
 

@@ -1,6 +1,6 @@
 # Discover and catalog Cloud Storage data
 
-This document explains how to use Dataplex Universal Catalog automatic discovery, a feature in BigQuery that lets you scan data in Cloud Storage buckets to extract and then catalog metadata. As part of the discovery scan, automatic discovery creates BigLake or external tables for structured data and object tables for unstructured data. This centralized table data eases AI-powered data insights, data security, and governance.
+This document explains how to use Knowledge Catalog automatic discovery, a feature in BigQuery that lets you scan data in Cloud Storage buckets to extract and then catalog metadata. As part of the discovery scan, automatic discovery creates BigLake or external tables for structured data and object tables for unstructured data. This centralized table data eases AI-powered data insights, data security, and governance.
 
 To use automatic discovery of Cloud Storage data, you create and run a discovery scan.
 
@@ -35,7 +35,7 @@ The discovery scan supports the following formats:
   - Documents (such as PDF, slide presentations, and text reports)
   - Audio or video (such as WAV, MP3, and MP4)
 
-**Note:** Apache Iceberg and Delta Lake table formats aren't supported by the discovery scan.
+> **Note:** Apache Iceberg and Delta Lake table formats aren't supported by the discovery scan.
 
 The discovery scan supports the following compression formats:
 
@@ -66,7 +66,7 @@ For object tables, compression is managed primarily through [Cloud Storage objec
 
 To see the limit of how many tables a discovery scan supports, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#dataplex-discovery) .
 
-The discovered tables are registered in BigQuery as BigLake external tables, BigLake object tables, or external tables. This makes their data available for analysis in BigQuery. Metadata caching for BigLake tables and object tables is also enabled. All the BigLake tables are automatically ingested into Dataplex Universal Catalog for search and discovery.
+The discovered tables are registered in BigQuery as BigLake external tables, BigLake object tables, or external tables. This makes their data available for analysis in BigQuery. Metadata caching for BigLake tables and object tables is also enabled. All the BigLake tables are automatically ingested into Knowledge Catalog for search and discovery.
 
 ## Before you begin
 
@@ -76,11 +76,9 @@ Enable the Dataplex API.
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com)
+### Required roles for the Knowledge Catalog service account
 
-### Required roles for the Dataplex Universal Catalog service account
-
-Before you begin, assign the IAM permissions to the Dataplex Universal Catalog service account in your project.
+Before you begin, assign the IAM permissions to the Knowledge Catalog service account in your project.
 
 ``` 
   service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com
@@ -91,7 +89,7 @@ Replace `  PROJECT_NUMBER  ` with the project in which the Dataplex API is enabl
 
 To ensure that the Dataplex service account has the necessary permissions to create and run a discovery scan, ask your administrator to grant the following IAM roles to the Dataplex service account:
 
-**Important:** You must grant these roles to the Dataplex service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+> **Important:** You must grant these roles to the Dataplex service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - [Dataplex Discovery Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `roles/dataplex.discoveryServiceAgent` ) on the storage bucket
   - [Dataplex Discovery Publishing Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryPublishingServiceAgent) ( `roles/dataplex.discoveryPublishingServiceAgent` ) on the user project
@@ -120,7 +118,7 @@ Your administrator might also be able to give the Dataplex service account these
 
 To ensure that the BigQuery Connection Service account has the necessary permissions to create a discovery scan, ask your administrator to grant the [Dataplex Discovery Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `roles/dataplex.discoveryServiceAgent` ) IAM role to the BigQuery Connection Service account on the Cloud Storage bucket.
 
-**Important:** You must grant this role to the BigQuery Connection Service account, *not* to your user account. Failure to grant the role to the correct principal might result in permission errors.
+> **Important:** You must grant this role to the BigQuery Connection Service account, *not* to your user account. Failure to grant the role to the correct principal might result in permission errors.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -179,8 +177,6 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 ### Console
 
 1.  In the Google Cloud console, go to the **Metadata curation** page.
-    
-    [Go to Metadata curation](https://console.cloud.google.com/bigquery/governance/metadata-curation/cloud-storage-discovery)
 
 2.  In the **Cloud Storage discovery** tab, click **Create** .
 
@@ -308,7 +304,7 @@ If you want to manage the schema and other metadata like CSV or JSON options you
 
 To update the label, you can [edit the value of the label key](https://docs.cloud.google.com/bigquery/docs/updating-labels#updating_a_table_or_view_label) `metadata-managed-mode` to `user_managed` instead of `discovery-managed` . In this case, the discovery scan doesn't update the schema of the table as long as the `user_managed` label is attached to the table.
 
-**Note:** You can apply access policies, such as [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , even if your tables are managed by the discovery scan.
+> **Note:** You can apply access policies, such as [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , even if your tables are managed by the discovery scan.
 
 ### Update published BigLake tables
 
@@ -317,8 +313,6 @@ For BigLake tables published using the discovery scan jobs with the default conf
 To update a published BigLake table, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  [Update one or more table properties](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_table_properties) .
 
@@ -338,7 +332,7 @@ To update a published BigLake table, follow these steps:
     
     2.  Next to the **metadata-managed-mode** key, in the **value** field, enter `user_managed` .
 
-**Note:** A table with an updated schema becomes available for SQL and Spark queries. When the next discovery scans run, the table metadata remains unchanged.
+> **Note:** A table with an updated schema becomes available for SQL and Spark queries. When the next discovery scans run, the table metadata remains unchanged.
 
 ### Delete published BigLake tables
 
@@ -347,8 +341,6 @@ To delete a published BigLake table, follow these steps:
 1.  [Delete the data files for the table in the Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/deleting-objects) .
 
 2.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 3.  In the left pane, click explore **Explorer** :
     
@@ -364,7 +356,7 @@ To delete a published BigLake table, follow these steps:
     
     2.  Next to the **metadata-managed-mode** key, in the **value** field, enter `discovery-managed` .
         
-        **Note:** If the **metadata-managed-mode** label is set to `user_managed` , the discovery scan doesn't override the table metadata, which causes your table not to be deleted.
+        > **Note:** If the **metadata-managed-mode** label is set to `user_managed` , the discovery scan doesn't override the table metadata, which causes your table not to be deleted.
 
 7.  Click **Run** . The discovery scan runs on demand.
 
@@ -377,8 +369,6 @@ To run a discovery scan on demand, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -409,8 +399,6 @@ To list your discovery scans, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -436,8 +424,6 @@ To view a discovery scan, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -473,8 +459,6 @@ To view historical discovery scan results, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -505,13 +489,11 @@ To view all the jobs of a discovery scan, use the [`dataScans.job/list` method](
 
 To change the schedule of a discovery scan, for example, to change the schedule from on-demand to recurring, update the discovery scan.
 
-**Note:** Updating a discovery scan is not supported for one-time discovery scans.
+> **Note:** Updating a discovery scan is not supported for one-time discovery scans.
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -546,8 +528,6 @@ To delete a discovery scan, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 

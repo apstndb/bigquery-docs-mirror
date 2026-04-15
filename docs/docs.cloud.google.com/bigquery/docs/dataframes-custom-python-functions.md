@@ -79,8 +79,6 @@ When you use BigQuery DataFrames remote functions, you need the [Project IAM Adm
 BigQuery connections are created in the same location as the BigQuery DataFrames session, using the name you provide in the custom function definition. To view and manage connections, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select the project in which you created the remote function.
 
@@ -93,8 +91,6 @@ BigQuery connections are created in the same location as the BigQuery DataFrames
 BigQuery remote functions are created in the dataset you specify, or they are created in an anonymous dataset, which is a type of [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) . If you don't set a name for a remote function during its creation, BigQuery DataFrames applies a default name that begins with the `bigframes` prefix. To view and manage remote functions created in a user-specified dataset, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select the project in which you created the remote function.
 
@@ -111,8 +107,6 @@ BigQuery remote functions are created in the dataset you specify, or they are cr
 To view and manage Cloud Run functions, do the following:
 
 1.  Go to the **Cloud Run** page.
-    
-    [Go to Cloud Run](https://console.cloud.google.com/project/_/run)
 
 2.  Select the project in which you created the function.
 

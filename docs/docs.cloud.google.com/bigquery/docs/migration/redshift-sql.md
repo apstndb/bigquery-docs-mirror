@@ -4,7 +4,7 @@ This document details the similarities and differences in SQL syntax between Ama
 
 The intended audience for this guide is enterprise architects, database administrators, application developers, and IT security specialists. It assumes you are familiar with Amazon Redshift.
 
-**Note:** In some cases, there is no direct mapping between a SQL element in Amazon Redshift and BigQuery. However, in most cases, you can achieve the same functionality in BigQuery that you can in Amazon Redshift using alternative means, as shown in the examples in this document.
+> **Note:** In some cases, there is no direct mapping between a SQL element in Amazon Redshift and BigQuery. However, in most cases, you can achieve the same functionality in BigQuery that you can in Amazon Redshift using alternative means, as shown in the examples in this document.
 
 ## Data types
 

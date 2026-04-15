@@ -44,11 +44,11 @@ Complete the tasks in this section to prepare your local environment for the tra
 
   - Make sure you have the username and password of a Teradata user with read access to the system tables and the tables that are being migrated.
     
-    The username and password are captured through a prompt and are only stored in RAM. Optionally, you can create a credentials file for the username or password in a later step. When using a credentials file, take appropriate steps to control access to the folder where you store it on the local file system, because it is not encrypted.
+    > The username and password are captured through a prompt and are only stored in RAM. Optionally, you can create a credentials file for the username or password in a later step. When using a credentials file, take appropriate steps to control access to the folder where you store it on the local file system, because it is not encrypted.
 
   - Make sure you know the hostname and port number to connect to the Teradata instance.
     
-    Authentication modes, such as LDAP, are not supported.
+    > Authentication modes, such as LDAP, are not supported.
 
 #### Download the JDBC driver
 
@@ -96,7 +96,7 @@ Replace the following:
   - `  ACCESS_ID  ` : the access key ID, or the `client_email` value in your service account key file.
   - `  ACCESS_KEY  ` : the secret access key, or the `private_key` value in your service account key file.
 
-**Note:** you can modify the location of the credential file with the `gcs-module-config-dir` parameter when you [set up the transfer](https://docs.cloud.google.com/bigquery/docs/migration/teradata#set_up_a_transfer)
+> **Note:** you can modify the location of the credential file with the `gcs-module-config-dir` parameter when you [set up the transfer](https://docs.cloud.google.com/bigquery/docs/migration/teradata#set_up_a_transfer)
 
 ## Set up a transfer
 
@@ -111,8 +111,6 @@ If you are creating a recurring transfer, we strongly recommend that you specify
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click **Data transfers** .
 
@@ -143,7 +141,7 @@ If you are creating a recurring transfer, we strongly recommend that you specify
           - `sales|expenses` matches tables that are named `sales` and `expenses` .
           - `.*` matches all tables.
         
-        **Note:** For information about regular expression syntax for Teradata transfers, see the [re2 library](https://github.com/google/re2/wiki/Syntax) .
+        > **Note:** For information about regular expression syntax for Teradata transfers, see the [re2 library](https://github.com/google/re2/wiki/Syntax) .
     
       - For **Service account email** , enter the email address associated with the service account's credentials used by an migration agent.
     
@@ -374,7 +372,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
           - `sales|expenses` matches tables that are named `sales` and `expenses` .
           - `.*` matches all tables.
         
-        **Note:** For information about regular expression syntax for Teradata transfers, see the [re2 library](https://github.com/google/re2/wiki/Syntax) .
+        > **Note:** For information about regular expression syntax for Teradata transfers, see the [re2 library](https://github.com/google/re2/wiki/Syntax) .
     
     11. Optional: Type the path to a local JSON schema file. This is strongly recommended for recurring transfers.
         
@@ -466,19 +464,19 @@ The configuration file created in the initialization step looks similar to this 
         
         When using a credentials file, take care to control access to the folder where you store it on the local file system, because it isn't encrypted. If no path is provided, you will be prompted for a username and password when you start an agent.
         
-        Authentication modes, such as LDAP, are not supported.
+        > Authentication modes, such as LDAP, are not supported.
     
       - `max-local-storage` : The maximum amount of local storage to use for the extraction in the specified staging directory. The default value is `50GB` . The supported format is: `  number KB|MB|GB|TB ` .
         
         In all extraction modes, files are deleted from your local staging directory after they are uploaded to Cloud Storage.
         
-        Note: the \`max-local-storage\` limit has additional effects when Teradata Parallel Transporter (TPT) is used. If the table has multiple partitions smaller than the \`max-local-storage\` value, then table extraction is split into multiple TPT jobs, each not exceeding the \`max-local-storage\` value. If the table is not partitioned, or if any of the partitions is bigger than \`max-local-storage\`, then extraction proceeds but the actual space required for extraction exceeds the limit.
+        > Note: the \`max-local-storage\` limit has additional effects when Teradata Parallel Transporter (TPT) is used. If the table has multiple partitions smaller than the \`max-local-storage\` value, then table extraction is split into multiple TPT jobs, each not exceeding the \`max-local-storage\` value. If the table is not partitioned, or if any of the partitions is bigger than \`max-local-storage\`, then extraction proceeds but the actual space required for extraction exceeds the limit.
     
       - `use-tpt` : Directs the migration agent to use Teradata Parallel Transporter (TPT) as an extraction method.
         
         For each table, the migration agent generates a TPT script, starts a `tbuild` process and waits for completion. Once the `tbuild` process completes, the agent lists and uploads the extracted files to Cloud Storage, and then deletes the TPT script. For more information, see [Extraction method](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
         
-        Warning: An agent generates and saves a TPT script into a file in the local extraction folder. The script contains a Teradata username and password. Take appropriate steps to restrict access to files in the local extraction folder, because the username and password aren't encrypted.
+        > Warning: An agent generates and saves a TPT script into a file in the local extraction folder. The script contains a Teradata username and password. Take appropriate steps to restrict access to files in the local extraction folder, because the username and password aren't encrypted.
     
       - `transfer-views` : Directs the migration agent to also transfer data from views. Use this only when you require data customization during migration. In other cases, migrate views to [BigQuery Views](https://docs.cloud.google.com/bigquery/docs/views-intro) . This option has the following prerequisites:
         
@@ -565,7 +563,7 @@ The configuration file created in the initialization step looks similar to this 
     
       - `gcs-module-writer-instances` : **(Optional)** This parameter specifies number of Cloud Storage writer instances. By default, the value is 1. You can increase this value to increase throughput during the writing phase of the TPT export.
 
-**Note:** All configuration parameters listed earlier can be overridden for a particular agent run by using a startup flag with the full parameter path. For example: `java -cp … --teradata-config.local-processing-space=<value>`
+> **Note:** All configuration parameters listed earlier can be overridden for a particular agent run by using a startup flag with the full parameter path. For example: `java -cp … --teradata-config.local-processing-space=<value>`
 
 #### Optimize agent data extraction
 
@@ -600,7 +598,7 @@ After initializing the migration agent and creating the configuration file, use 
 
 1.  Run the agent by specifying the paths to the JDBC driver, the migration agent, and the configuration file that was created in the previous initialization step.
     
-    The migration agent must keep running for the entire period of the transfer. If you run the agent remotely, for example by using SSH, make sure it remains active even if the remote connection is closed. You can do this by using \`tmux\` or similar utilities.
+    > The migration agent must keep running for the entire period of the transfer. If you run the agent remotely, for example by using SSH, make sure it remains active even if the remote connection is closed. You can do this by using \`tmux\` or similar utilities.
     
     ``` notranslate
     java -cp \
@@ -638,7 +636,7 @@ After initializing the migration agent and creating the configuration file, use 
 
 5.  If the migration agent stops working while the transfer is in progress or scheduled, the Google Cloud console shows the error status and prompts you to restart the agent. To restart the migration agent, return to the start of this section. You don't need to repeat the initialization command. The transfer resumes from the point where tables were not completed.
     
-    WARNING: The extracted data from Teradata is not encrypted. Take appropriate steps to restrict access to extracted files in the local machine's extraction folder, and ensure that your Cloud Storage bucket is not publicly available. Read more about controlling access to Cloud Storage buckets with [IAM roles](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions) .
+    > WARNING: The extracted data from Teradata is not encrypted. Take appropriate steps to restrict access to extracted files in the local machine's extraction folder, and ensure that your Cloud Storage bucket is not publicly available. Read more about controlling access to Cloud Storage buckets with [IAM roles](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions) .
 
 ## Track the progress of the migration
 

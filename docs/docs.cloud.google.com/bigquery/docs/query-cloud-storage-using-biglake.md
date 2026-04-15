@@ -1,6 +1,6 @@
 # Query Cloud Storage data in BigLake tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
+> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
 This document describes how to query data stored in a [Cloud Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
 
@@ -80,7 +80,7 @@ For more information about the Hive-BigQuery connector, see [Use the Hive-BigQue
 
 To read BigLake tables from [Dataflow](https://docs.cloud.google.com/dataflow) , use the Dataflow connector in `DIRECT_READ` mode to use the BigQuery Storage API. Reading from a query string is also supported. See [BigQuery I/O](https://beam.apache.org/documentation/io/built-in/google-bigquery/) in the Apache Beam documentation.
 
-**Note:** The default `EXPORT` mode for Dataflow is not supported.
+> **Note:** The default `EXPORT` mode for Dataflow is not supported.
 
 ## Query temporary BigLake tables
 

@@ -41,7 +41,7 @@ Following the same example, suppose that the user then creates another file in t
 
 The preceding example shows that when a transfer fails, no files are transferred to the BigQuery destination table. Any file changes are transferred at the next successful transfer run. Any subsequent successful transfers following a failed transfer does not cause duplicate data. In the case of a failed transfer, you can also choose to [manually trigger a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) outside its regularly scheduled time.
 
-**Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`updated`](https://docs.cloud.google.com/storage/docs/metadata#timestamps) .
+> **Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`updated`](https://docs.cloud.google.com/storage/docs/metadata#timestamps) .
 
 ### Truncated transfers
 
@@ -60,8 +60,6 @@ BigQuery does not support Cloud Storage resource paths that include multiple con
 To retrieve the Cloud Storage resource path:
 
 1.  Open the Cloud Storage console.
-    
-    [Cloud Storage console](https://console.cloud.google.com/storage/browser)
 
 2.  Browse to the location of the object (file) that contains the source data.
 
@@ -71,7 +69,7 @@ To retrieve the Cloud Storage resource path:
 
 4.  Copy the value provided in the **gsutil URI** field, which begins with `gs://` .
 
-**Note:** You can also use the [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
+> **Note:** You can also use the [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
 
 ### Wildcard support for Cloud Storage resource paths
 

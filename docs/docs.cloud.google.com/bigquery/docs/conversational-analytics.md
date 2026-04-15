@@ -1,10 +1,10 @@
 # Conversational analytics overview
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
 Conversational analytics in BigQuery lets you chat with agents about your data using natural language. To get answers about your data, you can do the following:
 
@@ -24,7 +24,7 @@ Conversational analytics is powered by [Gemini for Google Cloud](https://docs.cl
 
 Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .
 
-As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
+> As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
 ## Data agents
 
@@ -36,7 +36,7 @@ Data agents consist of one or more knowledge sources, and a set of instructions 
       - Synonyms and business terms for field names
       - Most important fields and defaults for filtering and grouping
   - Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) .
-  - Create BigQuery custom glossary terms for each agent or import business glossary terms from Dataplex Universal Catalog. These terms help an agent interpret user prompts. For advice on when to use each type, see [Create or review glossary terms](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-review-glossary-terms) .
+  - Create BigQuery custom glossary terms for each agent or import business glossary terms from Knowledge Catalog. These terms help an agent interpret user prompts. For advice on when to use each type, see [Create or review glossary terms](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-review-glossary-terms) .
 
 ### Manage data agents
 
@@ -102,15 +102,17 @@ Conversational analytics operates globally; you can't choose which region to use
 
 You are charged at [BigQuery compute pricing](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) for queries that run when you create data agents and have conversations with data agents or data sources. There is no additional charge for creating and using data agents and conversations during the Preview period.
 
-### Best practices
+## Best practices
 
-When using conversational analytics, queries are automatically run to answer your questions. You might incur unforeseen charges in the following cases:
+Review the following guides to learn about best practices for using the Conversational Analytics API:
 
-  - If your tables are large
-  - If the queries use data joins
-  - If the queries make a lot of calls to AI functions
+  - Set project-level, user-level, and query-level spending limits to [manage costs for your agents](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/manage-costs) .
+  - [Ask effective questions](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/ask-effective-questions) in your conversations.
+  - Understand how [data retention and deletion](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/retention-deletion) works for data agents and conversations.
 
-To prevent this issue, consider size when selecting knowledge sources, and when having conversations, consider using joins.
+## Limitations
+
+For more information about limitations on queries, conversations, data, and visualizations, see [Conversational Analytics API known limitations](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/known-limitations) .
 
 ## Dynamic shared quota
 

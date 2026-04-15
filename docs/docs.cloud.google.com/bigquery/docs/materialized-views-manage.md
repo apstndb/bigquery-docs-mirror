@@ -44,8 +44,6 @@ For more information about BigQuery Identity and Access Management (IAM), see [P
 To alter a materialized view, use the [`ALTER MATERIALIZED VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_materialized_view_set_options_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -282,8 +280,6 @@ To get information about a materialized view, including any dependent [materiali
 To get information about materialized views, query the [`INFORMATION_SCHEMA.TABLES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -329,7 +325,7 @@ To get materialized view information by using the API, call the [`tables.get`](h
 
 You can delete a materialized view through the Google Cloud console, the bq command-line tool, or the API.
 
-**Caution:** Deleting a materialized view cannot be undone.
+> **Caution:** Deleting a materialized view cannot be undone.
 
 Deleting a materialized view also deletes any permissions associated with this materialized view. When you recreate a deleted materialized view, you must also manually [reconfigure any access permissions](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) previously associated with it.
 
@@ -350,8 +346,6 @@ For more information about BigQuery Identity and Access Management (IAM), see [P
 To delete a materialized view, use the [`DROP MATERIALIZED VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_materialized_view_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
@@ -422,7 +416,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-**Caution:** If you delete a materialized view's base table without first deleting the materialized view, then any refresh or query of the materialized view will fail. If you decide to recreate the base table, then you must also recreate the materialized view.
+> **Caution:** If you delete a materialized view's base table without first deleting the materialized view, then any refresh or query of the materialized view will fail. If you decide to recreate the base table, then you must also recreate the materialized view.
 
 ## Refresh materialized views
 
@@ -437,7 +431,7 @@ This section describes how to do the following:
   - [Configure automatic refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh)
   - [Manually refresh a materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#manual-refresh)
 
-**Note:** If you delete a base table without first deleting the materialized view, refreshes of the materialized view will fail. To recreate a base table, you must also recreate the materialized view.
+> **Note:** If you delete a base table without first deleting the materialized view, refreshes of the materialized view will fail. To recreate a base table, you must also recreate the materialized view.
 
 ### Automatic refresh
 
@@ -465,7 +459,7 @@ ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
 SET OPTIONS (enable_refresh = true);
 ```
 
-**Note:** Enabling automatic refresh immediately triggers an automatic refresh of the materialized view.
+> **Note:** Enabling automatic refresh immediately triggers an automatic refresh of the materialized view.
 
 #### Set the frequency cap
 
@@ -496,7 +490,7 @@ You can perform a manual refresh of a materialized view at any time, and its tim
 
 Automatic refresh is performed on a best-effort basis. BigQuery attempts to start a refresh within 5 minutes of a change in the base table (if the previous refresh was done earlier than 30 minutes ago), but it doesn't guarantee that the refresh will be started at that time, nor does it guarantee when it will complete.
 
-**Note:** Querying materialized views reflects the latest state of the base tables, but if the view wasn't refreshed recently, the query cost or latency can be higher than expected.
+> **Note:** Querying materialized views reflects the latest state of the base tables, but if the view wasn't refreshed recently, the query cost or latency can be higher than expected.
 
 Automatic refresh is treated similarly to a query with [batch](https://docs.cloud.google.com/bigquery/docs/running-queries#batch) priority. If the materialized view's project does not have the capacity at the moment, the refresh is delayed. If the project contains many views whose refresh turns out to be expensive, each individual view might lag significantly relative to its base tables.
 
@@ -522,7 +516,7 @@ To update the data in the materialized view, call the [`BQ.REFRESH_MATERIALIZED_
 CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT.DATASET.MATERIALIZED_VIEW');
 ```
 
-**Caution:** Don't perform more than one refresh at a time. If you run multiple refreshes concurrently for the same materialized view, then only the first refresh to complete is successful.
+> **Caution:** Don't perform more than one refresh at a time. If you run multiple refreshes concurrently for the same materialized view, then only the first refresh to complete is successful.
 
 ## Monitor materialized views
 

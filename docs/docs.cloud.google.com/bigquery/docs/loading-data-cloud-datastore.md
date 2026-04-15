@@ -4,7 +4,7 @@ BigQuery supports loading data from [Datastore](https://docs.cloud.google.com/da
 
 To learn how to create a Datastore export file, see [Exporting and importing entities](https://docs.cloud.google.com/datastore/docs/export-import-entities) in the Datastore documentation. For information on scheduling exports, see [Scheduling an export](https://docs.cloud.google.com/datastore/docs/schedule-export) .
 
-**Note:** If you intend to load a Datastore export into BigQuery, you must specify an entity filter in your [export command](https://docs.cloud.google.com/datastore/docs/export-import-entities#exporting_entities) . Data exported without specifying an entity filter cannot be loaded into BigQuery.
+> **Note:** If you intend to load a Datastore export into BigQuery, you must specify an entity filter in your [export command](https://docs.cloud.google.com/datastore/docs/export-import-entities#exporting_entities) . Data exported without specifying an entity filter cannot be loaded into BigQuery.
 
 You can control which properties BigQuery should load by setting the [`projectionFields` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.projection_fields) in the API or by using the `--projection_fields` flag in the bq command-line tool.
 
@@ -75,8 +75,6 @@ To load data from a Datastore export metadata file:
 ### Console
 
 In the Google Cloud console, go to the **BigQuery** page.
-
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -149,8 +147,6 @@ To overwrite an existing table with Datastore export data:
 ### Console
 
 In the Google Cloud console, go to the **BigQuery** page.
-
-[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 

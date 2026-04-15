@@ -50,7 +50,7 @@ The following sections provide more information on the data ingestion options wh
 
 You can specify how data is loaded into BigQuery by selecting either the **Full** or **Incremental** write preference in the transfer configuration when you [set up a Salesforce transfer](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#sf-transfer-setup) . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) .
 
-**Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
+> **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
 
 You can configure a *full* data transfer to transfer all data from your Salesforce datasets with each data transfer.
 
@@ -220,7 +220,7 @@ To do so, you must first set up and configure your Google Cloud network to use a
 
 Next, you must [configure the trusted IP ranges in Salesforce](https://help.salesforce.com/s/articleView?id=xcloud.security_networkaccess.htm&type=5) . When adding the range of the IP address, use the static IP address from your Google Cloud public NAT for both the beginning and ending IP addresses for the IP range.
 
-**Note:** For more granular control, you can apply IP restrictions at the profile level or on every API call. For more information, see [Restrict Login IP Addresses in Profiles](https://help.salesforce.com/s/articleView?id=platform.login_ip_ranges.htm&type=5) .
+> **Note:** For more granular control, you can apply IP restrictions at the profile level or on every API call. For more information, see [Restrict Login IP Addresses in Profiles](https://help.salesforce.com/s/articleView?id=platform.login_ip_ranges.htm&type=5) .
 
 Once you have set up the IP ranges, you can now specify the static IP when you [set up your transfer configuration](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-transfer-setup) by selecting your network attachment in the **Network attachment** field.
 
@@ -261,8 +261,6 @@ Add Salesforce data into BigQuery by setting up a transfer configuration using o
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
-    
-    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 

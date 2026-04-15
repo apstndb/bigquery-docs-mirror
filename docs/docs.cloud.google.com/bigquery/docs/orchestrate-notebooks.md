@@ -61,15 +61,13 @@ For more information about Dataform IAM, see [Control access with IAM](https://d
 
 ## Create a schedule
 
-**Tip:** You can also use the **Pipelines & Connections** page to create a notebook schedule using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+> **Tip:** You can also use the **Pipelines & Connections** page to create a notebook schedule using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 To create a notebook schedule, follow these steps:
 
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -94,9 +92,9 @@ To create a notebook schedule, follow these steps:
 
 8.  In the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
     
-    **Note:** A notebook runtime template must be in the same region as the notebook.
+    > **Note:** A notebook runtime template must be in the same region as the notebook.
     
-    **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#required_permissions) for using notebook runtime templates, you can still run and schedule notebooks with the default runtime specifications.
+    > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#required_permissions) for using notebook runtime templates, you can still run and schedule notebooks with the default runtime specifications.
 
 9.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket.
     
@@ -117,8 +115,6 @@ The latest deployed version of the notebook runs at the selected time and freque
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click **Create** , and then select **Notebook schedule** from the menu.
 
@@ -133,9 +129,9 @@ The latest deployed version of the notebook runs at the selected time and freque
 
 6.  In the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
     
-    **Note:** A notebook runtime template must be in the same region as the notebook.
+    > **Note:** A notebook runtime template must be in the same region as the notebook.
     
-    **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#required_permissions) for using notebook runtime templates, you can still run and schedule notebooks with the default runtime specifications.
+    > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#required_permissions) for using notebook runtime templates, you can still run and schedule notebooks with the default runtime specifications.
 
 7.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket.
     
@@ -155,11 +151,11 @@ The latest deployed version of the notebook runs at the selected time and freque
 
 ### Authorize your Google Account
 
-**Preview**
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
+> **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
 To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
 
@@ -171,7 +167,7 @@ To revoke the permission that you granted, follow these steps:
 2.  Click **BigQuery Pipelines** .
 3.  Click **Remove access** .
 
-**Warning:** Revoking access permissions prevents any future pipeline runs that this Google Account owns across all regions.
+> **Warning:** Revoking access permissions prevents any future pipeline runs that this Google Account owns across all regions.
 
 Changing the notebook schedule owner by updating credentials also requires manual approval if the new Google Account owner has never created a schedule before.
 
@@ -184,8 +180,6 @@ If you have a schedule for this notebook, BigQuery prompts you to deploy changes
 To deploy a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -206,8 +200,6 @@ When you manually run a notebook deployed in a selected schedule, BigQuery execu
 To manually run a deployed notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected notebook schedule.
 
@@ -218,8 +210,6 @@ To manually run a deployed notebook, follow these steps:
 To view all notebook schedules in your project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Optional: To display additional columns with notebook schedule details, click view\_column **Column display options** , and then select columns and click **OK** .
 
@@ -232,8 +222,6 @@ To view schedule details for a selected notebook, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -252,8 +240,6 @@ To view schedule details for a selected notebook, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected notebook schedule.
 
@@ -266,8 +252,6 @@ To view past executions of a selected notebook schedule, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -282,8 +266,6 @@ To view past executions of a selected notebook schedule, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected notebook schedule.
 
@@ -300,8 +282,6 @@ To disable a schedule for a selected notebook, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -322,8 +302,6 @@ To disable a schedule for a selected notebook, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected notebook.
 
@@ -336,8 +314,6 @@ To resume scheduled runs of a disabled notebook schedule, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -356,8 +332,6 @@ To resume scheduled runs of a disabled notebook schedule, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected notebook.
 
@@ -372,8 +346,6 @@ To edit a schedule, follow these steps:
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -390,8 +362,6 @@ To edit a schedule, follow these steps:
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected notebook schedule.
 
@@ -406,8 +376,6 @@ To edit a schedule, follow these steps:
 To permanently delete a schedule for a selected notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
-    
-    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Do either of the following:
     

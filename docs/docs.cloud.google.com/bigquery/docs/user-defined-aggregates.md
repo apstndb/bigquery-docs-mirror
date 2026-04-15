@@ -619,13 +619,13 @@ data type</th>
 </tbody>
 </table>
 
-**Note:** The SQL encodings for JavaScript UDAFs are different from those for JavaScript UDFs.
+> **Note:** The SQL encodings for JavaScript UDAFs are different from those for JavaScript UDFs.
 
 ## Call a UDAF
 
 This section describes the various ways that you can call a persistent or temporary UDAF after you create it in BigQuery.
 
-**Note:** JavaScript UDAF calls don't support the `ORDER BY` clause.
+> **Note:** JavaScript UDAF calls don't support the `ORDER BY` clause.
 
 ### Call a persistent UDAF
 

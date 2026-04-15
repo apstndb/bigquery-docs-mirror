@@ -1,10 +1,10 @@
 # Create data integration workflows using the Pipelines & Connections page
 
-**Preview**
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback, to ask questions, or to request to opt out of this Preview feature, contact <bigquery-pc-feedback@google.com> .
+> **Note:** To provide feedback, to ask questions, or to request to opt out of this Preview feature, contact <bigquery-pc-feedback@google.com> .
 
 The BigQuery **Pipelines & Connections** page in the console streamlines your data integration tasks by providing guided, BigQuery-specific configuration workflows for services like BigQuery Data Transfer Service, Datastream, and Pub/Sub.
 
@@ -30,8 +30,6 @@ During Preview, you can opt into or out of using the **Pipelines & Connections**
 To opt into using the **Pipelines & Connections** page, follow these steps:
 
 1.  Go to the Google Cloud console.
-    
-    [Go to the console](https://console.cloud.google.com/)
 
 2.  In the Google Cloud console toolbar, click menu **Navigation menu** .
 
@@ -59,7 +57,7 @@ To opt into using the **Pipelines & Connections** page, follow these steps:
     
     After you opt in, the existing **Data transfers** , **Scheduling** , and **Scheduled queries** pages are replaced by the **Pipelines & Connections** page.
     
-    **Note:** There is no change to the **Dataform** page.
+    > **Note:** There is no change to the **Dataform** page.
 
 ### Opt out
 
@@ -78,8 +76,6 @@ To opt out of using the unified **Pipelines & Connections** page, follow these s
 To create assets such as scheduled queries, data transfers, and external connections, do the following:
 
 1.  Go to the **Pipelines & Connections** page.
-    
-    [Go to Pipelines & Connections](https://console.cloud.google.com/bigquery/pipelines-and-connections)
 
 2.  Click **Create** .
 
@@ -98,8 +94,6 @@ To create assets such as scheduled queries, data transfers, and external connect
 After you create your assets, you can view and monitor them.
 
 1.  Go to the **Pipelines & Connections** page.
-    
-    [Go to Pipelines & Connections](https://console.cloud.google.com/bigquery/pipelines-and-connections)
 
 2.  To view details about your connections, click the **Connections** tab.
 

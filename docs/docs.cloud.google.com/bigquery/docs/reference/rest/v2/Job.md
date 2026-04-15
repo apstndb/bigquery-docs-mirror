@@ -1276,7 +1276,7 @@ Output only. Slot-milliseconds for the job.
 
 `object`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Output only. Job resource usage breakdown by reservation. This field reported misleading information and will no longer be populated.
 
@@ -1434,7 +1434,7 @@ Output only. Slot-milliseconds for the job.
 
 `object`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Output only. Job resource usage breakdown by reservation. This field reported misleading information and will no longer be populated.
 
@@ -2405,7 +2405,7 @@ Output only. The number of bad records encountered while processing a LOAD query
 
 `string ( Int64Value format)`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Output only. This field is deprecated. The number of bytes of source data copied over the network for a `LOAD` query. `transferredBytes` has the canonical value for physical transferred bytes, which is used for BigQuery Omni billing.
 

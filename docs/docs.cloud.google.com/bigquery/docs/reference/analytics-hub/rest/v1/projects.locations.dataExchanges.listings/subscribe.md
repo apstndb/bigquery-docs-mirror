@@ -795,7 +795,7 @@ Fields
 
 `boolean`
 
-This item is deprecated\!
+> This item is deprecated\!
 
 Optional. This field is deprecated, use the `disabled` field to disable transforms.
 

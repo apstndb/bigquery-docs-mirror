@@ -11,8 +11,6 @@ This document describes how to monitor listings in BigQuery sharing (formerly An
 To get usage metrics for your shared data using Sharing, follow these steps:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
-    
-    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click the name of the [data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) that contains the listing to view its usage metrics.
 
@@ -33,7 +31,7 @@ The page displays the following usage metrics:
   - **Daily Executed Jobs** : this chart displays the jobs consumption from the selected listing.
   - **Tables' job frequency** : the frequency at which the tables are accessed on the selected listing.
 
-**Note:** You can also use the [BigQuery sharing subscriber APIs](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) to retrieve the **Total Subscriptions** , **Total Subscribers** , and **Daily Subscriptions** fields.
+> **Note:** You can also use the [BigQuery sharing subscriber APIs](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) to retrieve the **Total Subscriptions** , **Total Subscribers** , and **Daily Subscriptions** fields.
 
 ## Use `INFORMATION_SCHEMA` view
 

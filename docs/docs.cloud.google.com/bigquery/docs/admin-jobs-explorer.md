@@ -10,7 +10,7 @@ BigQuery provides job details and insights through the following `INFORMATION_SC
   - [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)
   - [`INFORMATION_SCHEMA.JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user)
 
-**Note:** If you use organization restrictions, see [Enable access to Google-owned resources](https://docs.cloud.google.com/resource-manager/docs/organization-restrictions/additional-considerations#google-owned-resources) .
+> **Note:** If you use organization restrictions, see [Enable access to Google-owned resources](https://docs.cloud.google.com/resource-manager/docs/organization-restrictions/additional-considerations#google-owned-resources) .
 
 ## Required roles
 
@@ -28,15 +28,13 @@ The following permissions are required to use administrative jobs explorer:
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-**Note:** This organization view is only available if you have defined Google Cloud organizations.
+> **Note:** This organization view is only available if you have defined Google Cloud organizations.
 
 ## Filter jobs
 
 To filter jobs for queries that are contained in the `INFORMATION_SCHEMA.JOBS*` views, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Jobs explorer** .
 
@@ -64,8 +62,6 @@ To filter jobs for queries that are contained in the `INFORMATION_SCHEMA.JOBS*` 
 To view query execution details of jobs, do the following:
 
 1.  Go to the **Jobs explorer** page.
-    
-    [Go to Jobs explorer](https://console.cloud.google.com/bigquery/admin/jobs-explorer)
 
 2.  To view jobs, click **Jobs explorer** .
 
@@ -81,9 +77,9 @@ For information about how to interpret insights, see [Interpret query performanc
 
 ## Get BigQuery job details
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com> .
 
@@ -117,8 +113,6 @@ You might also be able to get these permissions with [custom roles](https://docs
 To view the job details page, do the following:
 
 1.  Go to the **Jobs Explorer** page.
-    
-    [Go to Jobs Explorer](https://console.cloud.google.com/bigquery/admin/jobs-explorer)
 
 2.  Optional: [filter](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) the jobs to narrow the available jobs displayed.
 
@@ -144,9 +138,9 @@ The following list describes the information and metrics available on the **Perf
 
 ## Compare jobs
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com> .
 
@@ -216,8 +210,6 @@ For example, if a job received fewer slots than previous executions, it might be
 To compare two jobs:
 
 1.  Go to the **Jobs Explorer** page.
-    
-    [Go to Jobs Explorer](https://console.cloud.google.com/bigquery/admin/jobs-explorer)
 
 2.  Optional: [filter](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) the jobs to narrow the available jobs displayed.
 

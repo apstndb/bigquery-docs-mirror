@@ -120,7 +120,7 @@ FROM
   `region-REGION`.INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS;
 ```
 
-**Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 

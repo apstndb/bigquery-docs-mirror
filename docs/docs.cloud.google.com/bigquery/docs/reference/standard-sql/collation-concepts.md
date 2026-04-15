@@ -253,7 +253,7 @@ You can assign a collation specification to the following data types.
 | [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) | You can apply a collation specification to a `STRING` field in a `STRUCT` . A `STRUCT` can have `STRING` fields with different collation specifications. A `STRUCT` can only be used in comparisons with the following operators and conditional expressions: `=` , `!=` , `IN` , `NULLIF` , and `CASE` . |
 | [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type)   | You can apply a collation specification to a `STRING` element in an `ARRAY` . An `ARRAY` can have `STRING` elements with different collation specifications.                                                                                                                                              |
 
-**Note:** Use the [`COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#collate) function to apply a collation specification to collation-supported expressions.
+> **Note:** Use the [`COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#collate) function to apply a collation specification to collation-supported expressions.
 
 ### Functions, operators, and conditional expressions
 

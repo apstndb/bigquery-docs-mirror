@@ -34,8 +34,6 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
-    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
@@ -62,8 +60,6 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -130,8 +126,6 @@ Follow these steps to visualize the time series data:
 In the following GoogleSQL query, the `SELECT` statement parses the `date` column from the input table to the `TIMESTAMP` type and renames it to `parsed_date` , and uses the `SUM(...)` clause and the `GROUP BY date` clause to create a daily `totals.visits` value.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -156,7 +150,7 @@ In the following GoogleSQL query, the `SELECT` statement parses the `date` colum
         
         Looking at the chart, you can see that the input time series has a weekly seasonal pattern.
         
-        **Note:** For more information about Looker Studio support, see [Looker Support integrations with Google Cloud](https://docs.cloud.google.com/looker/docs/best-practices/looker-support-integrations-with-google-cloud) .
+        > **Note:** For more information about Looker Studio support, see [Looker Support integrations with Google Cloud](https://docs.cloud.google.com/looker/docs/best-practices/looker-support-integrations-with-google-cloud) .
 
 ### BigQuery DataFrames
 
@@ -200,8 +194,6 @@ In the following query, the `OPTIONS(model_type='ARIMA_PLUS', time_series_timest
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -225,7 +217,7 @@ Follow these steps to create the model:
     
     The query takes about 4 seconds to complete, after which you can access the `ga_arima_model` model. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
-**Note:** You might wonder if United States holidays have an impact on the time series. You can try setting the [`holiday_region` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#holiday_region) of the `CREATE MODEL` statement to `US` . Setting this option allows a more accurate modeling on holiday time points if there are any holiday patterns in the time series.
+> **Note:** You might wonder if United States holidays have an impact on the time series. You can try setting the [`holiday_region` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#holiday_region) of the `CREATE MODEL` statement to `US` . Setting this option allows a more accurate modeling on holiday time points if there are any holiday patterns in the time series.
 
 ### BigQuery DataFrames
 
@@ -265,8 +257,6 @@ Evaluate the time series models by using the `ML.ARIMA_EVALUATE` function. The `
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -324,8 +314,6 @@ Inspect the time series model's coefficients by using the `ML.ARIMA_COEFFICIENTS
 Follow these steps to retrieve the model's coefficients:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -368,8 +356,6 @@ In the following GoogleSQL query, the `STRUCT(30 AS horizon, 0.8 AS confidence_l
 Follow these steps to forecast data with the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -419,8 +405,6 @@ Similar to the `ML.FORECAST` function, the `STRUCT(30 AS horizon, 0.8 AS confide
 Follow these steps to explain the model's results:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
@@ -483,8 +467,6 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
-    
-    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -496,16 +478,14 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 To delete the project:
 
-**Caution** : Deleting a project has the following effects:
-
-  - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
-  - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-
-If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
-
-[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

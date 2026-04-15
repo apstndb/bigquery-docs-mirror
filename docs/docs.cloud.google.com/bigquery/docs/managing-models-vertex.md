@@ -4,7 +4,7 @@ You can register BigQuery ML models with the Vertex AI Model Registry, in order 
 
 To learn more about Vertex AI prediction, see [Overview of getting predictions on Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/predictions/overview) .
 
-**Note:** Although all model types can be registered, there are limitations on deployment for certain model types. For more information, see [Model deployment](https://docs.cloud.google.com/bigquery/docs/exporting-models#model-deployment) .
+> **Note:** Although all model types can be registered, there are limitations on deployment for certain model types. For more information, see [Model deployment](https://docs.cloud.google.com/bigquery/docs/exporting-models#model-deployment) .
 
 To learn how to manage your BigQuery ML models from Vertex AI Model Registry, see [Introduction to Vertex AI Model Registry](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction) .
 
@@ -15,8 +15,6 @@ Enable the Vertex AI API.
 **Roles required to enable APIs**
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=aiplatform.googleapis.com)
 
 ## Required permissions
 
@@ -67,8 +65,6 @@ The following examples show how to register an existing model:
 ### Console
 
 1.  Go to the **BigQuery** page.
-    
-    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
     

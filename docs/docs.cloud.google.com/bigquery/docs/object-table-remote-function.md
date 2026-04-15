@@ -87,7 +87,7 @@ For step-by-step guidance, see [Tutorial: Analyze an object table with a remote 
 
 To call a remote function on object table data, reference the remote function in the [`select_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list) of the query, and then call the [`EXTERNAL_OBJECT_TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#external_object_transform) in the [`FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) to generate the signed URLs for the objects.
 
-**Note:** When using one of the [AI APIs](https://cloud.google.com/products/ai) , be aware of the relevant quotas for the API you are targeting. Use a `LIMIT` clause to limit the results returned if necessary to stay within quota.
+> **Note:** When using one of the [AI APIs](https://cloud.google.com/products/ai) , be aware of the relevant quotas for the API you are targeting. Use a `LIMIT` clause to limit the results returned if necessary to stay within quota.
 
 The following example shows typical statement syntax:
 

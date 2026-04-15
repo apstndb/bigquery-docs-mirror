@@ -11,7 +11,7 @@ You can specify a configuration YAML file to use in a SQL translation in the fol
   - If you are performing a batch SQL translation, place the configuration YAML in the same Cloud Storage bucket as the input SQL files.
   - If you are using the [batch translation Python client](https://github.com/google/dwh-migration-tools/tree/main/client#readme) , place the configuration YAML file in the local translation input folder.
 
-**Note:** For API-based translations, we recommend using the BigQuery Migration API instead of the batch SQL translation API or client.
+> **Note:** For API-based translations, we recommend using the BigQuery Migration API instead of the batch SQL translation API or client.
 
 The interactive SQL translator, BigQuery Migration API, the batch SQL translator, and the batch translation Python client supports the use of multiple configuration YAML files in a single translation job. See [Applying multiple YAML configurations](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_multiple) for more information.
 
@@ -146,9 +146,9 @@ The following examples use Teradata or Hive as the input SQL dialect and BigQuer
 
 ### Change object-name case
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the upper or lower-casing of object names:
 
@@ -192,9 +192,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Make table temporary
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes a regular table to a [temporary table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) :
 
@@ -231,9 +231,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Make table ephemeral
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes a regular table to an [ephemeral table](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time) with a 60 second expiration.
 
@@ -273,9 +273,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Set partition expiration
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the [expiration of a partitioned table](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) to 1 day:
 
@@ -317,9 +317,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Change external location or format for a table
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the [external location and format for a table](https://docs.cloud.google.com/bigquery/docs/external-data-sources#external_tables) :
 
@@ -363,9 +363,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Set or change table description
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML sets the description of a table:
 
@@ -503,9 +503,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Change type of a column attribute
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the data type for an attribute of a column:
 
@@ -548,13 +548,13 @@ A SQL translation with this configuration YAML file might look like the followin
 </tbody>
 </table>
 
-**Note:** BigQuery translation increases numeric precision to the highest precision available for a given scale.
+> **Note:** BigQuery translation increases numeric precision to the highest precision available for a given scale.
 
 ### Add connection to external data lake
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML marks the source table as being an external table that points to data stored in an external data lake, specified by a data lake connection.
 
@@ -599,9 +599,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Change the character encoding of an input file
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 By default, the BigQuery Migration Service attempts to automatically detect the character encoding of input files. In cases where BigQuery Migration Service might misidentify the encoding of a file, you can use a configuration YAML to specify the character encoding explicitly.
 
@@ -617,9 +617,9 @@ The following configuration YAML specifies the explicit character encoding of th
 
 ### Global type conversion
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes a data type to another across all scripts, and specifies a source data type to avoid in the transpiled script. This is different from the [Change type of a column attribute](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#change_type_of_a_column_attribute) configuration, where only the data type for a single attribute is changed.
 
@@ -639,9 +639,9 @@ In the following example, the configuration YAML converts a `TIMESTAMP` data typ
 
 ### Setting default time zone
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Database dialects have varying semantics and names for different date and time related data types. The translation service standardizes on the following terminology in its YAML configuration, regardless of the name of the input dialect's data type:
 
@@ -775,9 +775,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Select statement modification
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the star projection, `GROUP BY` , and `ORDER BY` clauses in `SELECT` statements.
 
@@ -873,9 +873,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Setting decimal precision strictness
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 By default, BigQuery Migration Service increases numeric precision to the highest precision available for a given scale. The following configuration YAML overrides this behavior by configuring the precision strictness to retain the decimal precision of the source statement.
 
@@ -910,9 +910,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Setting string precision strictness
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 By default, BigQuery Migration Service omits string precision when translating `CHAR` and `VARCHAR` columns. This can help prevent truncation errors when values are written. Some SQL dialects, such as Teradata, truncate values that exceed the maximum precision on write, while BigQuery returns an error in this scenario.
 
@@ -951,9 +951,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Output name mapping
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can use configuration YAML to map SQL object names. You can change different parts of the name depending on the object being mapped.
 
@@ -1051,9 +1051,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Specifying default database and schema search path
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML specifies a [default database](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) and [schema search path](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_schema) .
 
@@ -1087,9 +1087,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Setting `NLS_DATE_FORMAT`
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML sets the `NLS_DATE_FORMAT` parameter to the format `DD/MM/YYYY` . We recommend that you specify `NLS_DATE_FORMAT` for implicit uses of date format and casts. If not set, the default format for translation, `DD-MON-RR` , is used.
 
@@ -1128,9 +1128,9 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Global output name rewrite
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the output names of all objects (database, schema, relation, and attributes) in the script according to the configured rules.
 
@@ -1320,7 +1320,7 @@ A SQL translation with this optimization might look like the following:
 
 ## Create a Gemini-based configuration YAML file
 
-**Note:** The Translation service can call Gemini model to generate suggestions to your translated SQL query based on your AI configuration YAML file.
+> **Note:** The Translation service can call Gemini model to generate suggestions to your translated SQL query based on your AI configuration YAML file.
 
 To generate AI output, the source directory containing your SQL translation input must include a configuration YAML file.
 
