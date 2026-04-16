@@ -117,7 +117,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Visualize the input data
 
-Before creating the model, you can optionally visualize your input time series data to get a sense of the distribution. You can do this by using Looker Studio.
+Before creating the model, you can optionally visualize your input time series data to get a sense of the distribution. You can do this by using Data Studio.
 
 Follow these steps to visualize the time series data:
 
@@ -138,9 +138,9 @@ In the following GoogleSQL query, the `SELECT` statement parses the `date` colum
     GROUP BY date;
     ```
     
-    1.  When the query completes, click **Open in** \> **Looker Studio** . Looker Studio opens in a new tab. Complete the following steps in the new tab.
+    1.  When the query completes, click **Open in** \> **Data Studio** . Data Studio opens in a new tab. Complete the following steps in the new tab.
     
-    2.  In the Looker Studio, click **Insert** \> **Time series chart** .
+    2.  In Data Studio, click **Insert** \> **Time series chart** .
     
     3.  In the **Chart** pane, choose the **Setup** tab.
     
@@ -150,7 +150,7 @@ In the following GoogleSQL query, the `SELECT` statement parses the `date` colum
         
         Looking at the chart, you can see that the input time series has a weekly seasonal pattern.
         
-        > **Note:** For more information about Looker Studio support, see [Looker Support integrations with Google Cloud](https://docs.cloud.google.com/looker/docs/best-practices/looker-support-integrations-with-google-cloud) .
+        > **Note:** For more information about Data Studio support, see [Data Studio help and support options](https://docs.cloud.google.com/looker/docs/studio/contact-us) .
 
 ### BigQuery DataFrames
 
@@ -446,7 +446,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # 4   2016-08-05 00:00:00+00:00       history                2702.0                1394.395741             206.939556            <NA>                     <NA>                              <NA>              1248.707386        <NA>                           <NA>                       <NA>                  145.688355                   <NA>                    <NA>              <NA>         1205.283526     102.320733
     # 5   2016-08-06 00:00:00+00:00       history                1663.0                437.09243               206.939556            <NA>                     <NA>                              <NA>              1188.59004         <NA>                           <NA>                       <NA>                  -751.49761                   <NA>                    <NA>              <NA>         1205.283526      20.624044
 
-If you would like to visualize the results, you can use Looker Studio as described in the [Visualize the input data](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial#visualize_the_input_data) section to create a chart, using the following columns as metrics:
+If you would like to visualize the results, you can use Data Studio as described in the [Visualize the input data](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial#visualize_the_input_data) section to create a chart, using the following columns as metrics:
 
   - `time_series_data`
   - `prediction_interval_lower_bound`

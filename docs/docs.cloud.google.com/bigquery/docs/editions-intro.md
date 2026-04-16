@@ -338,7 +338,7 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/bgraph-overview">BigQuery Graph</a></td>
+<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
 </tr>
 </tbody>
 </table>

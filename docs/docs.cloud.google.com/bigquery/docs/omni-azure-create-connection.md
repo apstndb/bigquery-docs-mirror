@@ -60,7 +60,7 @@ To create an application in your Azure tenant, follow these steps:
 
 1.  In the Azure portal, go to **App registrations** , and then click **New registration** .
 
-2.  For **Names** , enter a name for your application.
+2.  For **Name** , enter a name for your application.
 
 3.  For **Supported account types** , select **Accounts in this organizational directory only** .
 

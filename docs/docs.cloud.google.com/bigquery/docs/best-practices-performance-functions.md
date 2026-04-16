@@ -147,3 +147,9 @@ WITH numbers AS
 SELECT val, `your_project.your_dataset.addFourAndDivide`(val, 2) AS result
 FROM numbers;
 ```
+
+## Optimize AI costs
+
+**Best practice:** If your use case supports it, use the optimized mode when running `AI.IF` or `AI.CLASSIFY` on large datasets.
+
+If you are processing more than a few thousand rows using managed AI functions, you can enable the optimized mode to automatically train a lightweight, distilled model. This significantly reduces LLM token consumption and query latency. For more information, see [Optimize AI functions for large-scale data](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) .

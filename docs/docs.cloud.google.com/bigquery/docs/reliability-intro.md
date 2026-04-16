@@ -120,9 +120,9 @@ Assuming the user has configured BigQuery data in us-east4 to be exported nightl
 
 ### Use case: Batch data processing
 
-For this use case it is business critical that a daily report is completed by a fixed deadline to be sent to a regulator. Implementing redundancy by running two separate instances of the entire processing pipeline is likely worth the cost. Using two separate regions, e.g. us-west1 and us-east4, provides geographic separation and two independent failure domains in case of extended unavailability of a region or even the unlikely event of a permanent region loss.
+For this use case it is business critical that a daily report is completed by a fixed deadline to be sent to a regulator. Implementing redundancy by running two separate instances of the entire processing pipeline is likely worth the cost. Using two separate regions, for example, us-west1 and us-east4, provides geographic separation and two independent failure domains in case of extended unavailability of a region or even the unlikely event of a permanent region loss.
 
-Assuming we need the report to be delivered exactly once, we need to reconcile the expected case of both pipelines finishing successfully. A reasonable strategy is simply picking the result from the pipeline finishing first e.g. by notifying a Pub/Sub topic on successful completion. Alternatively, overwrite the result and re-version the Cloud Storage object. If the pipeline finishing later writes corrupt data, you can recover by restoring the version written by the pipeline finishing first from Cloud Storage.
+Assuming we need the report to be delivered exactly once, we need to reconcile the expected case of both pipelines finishing successfully. A reasonable strategy is simply picking the result from the pipeline finishing first, for example, by notifying a Pub/Sub topic on successful completion. Alternatively, overwrite the result and re-version the Cloud Storage object. If the pipeline finishing later writes corrupt data, you can recover by restoring the version written by the pipeline finishing first from Cloud Storage.
 
 ## Error handling
 
@@ -166,13 +166,13 @@ The wait time between retries and the number of retries depend on your use case 
 
 ### Retry failed job insertions
 
-If exactly-once insertion semantics are important for your application, there are additional considerations when it comes to inserting jobs. How to achieve at most once semantics depends on which [WriteDisposition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) you specify. The write disposition tells BigQuery what it should do when encountering existing data in a table: fail, overwrite or append.
+If exactly-once insertion semantics are important for your application, there are additional considerations when it comes to inserting jobs. How to achieve at-most-once semantics depends on which [WriteDisposition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) you specify. The write disposition tells BigQuery what it should do when encountering existing data in a table: fail, overwrite or append.
 
 With a `WRITE_EMPTY` or `WRITE_TRUNCATE` disposition, this is achieved by simply retrying any failed job insertion or execution. This is because all rows ingested by a job are atomically written to the table.
 
 With a `WRITE_APPEND` disposition, the client needs to specify the job ID to guard against a retry appending the same data a second time. This works because BigQuery rejects job creation requests that attempt to use an ID from a previous job. This achieves at-most-once semantics for any given job ID. You can then achieve exactly-once by retrying under a new predictable job ID once you've confirmed with BigQuery that all previous attempts have failed.
 
-In some cases, the API client or HTTP client might not receive the confirmation that the job is inserted due to transient issues or network interruptions. When the insertion is retried, that request fails with `status=ALREADY_EXISTS` ( `code=409` and `reason="duplicate"` ). The existing job status can be retrieved with a call to `jobs.get` . After the status of the existing job is `retrieved` , the caller can determine whether a new job with a new JOB ID should be created.
+In some cases, the API client or HTTP client might not receive the confirmation that the job is inserted due to transient issues or network interruptions. When the insertion is retried, that request fails with `status=ALREADY_EXISTS` ( `code=409` and `reason="duplicate"` ). The existing job status can be retrieved with a call to `jobs.get` . After the status of the existing job is `retrieved` , the caller can determine whether a new job with a new job ID should be created.
 
 ## Use cases and reliability requirements
 

@@ -1,11 +1,5 @@
 # The AI.CLASSIFY function
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** For support during the preview, contact <bqml-feedback@google.com> .
-
 This document describes the `AI.CLASSIFY` function, which uses a Vertex AI Gemini model to classify inputs into categories that you provide. BigQuery automatically [structures](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/structure-prompts) your input to improve the quality of the classification.
 
 The following are common use cases:
@@ -26,16 +20,20 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
 ## Syntax
 
     AI.CLASSIFY(
-      [ input => ] 'INPUT',
-      [ categories => ] 'CATEGORIES'
+      [ input => ] INPUT,
+      [ categories => ] CATEGORIES
+      [, examples => EXAMPLES ]
       [, connection_id => 'CONNECTION' ]
       [, endpoint => 'ENDPOINT' ]
       [, output_mode => 'OUTPUT_MODE' ]
+      [, embeddings => EMBEDDINGS ]
+      [, optimization_mode => 'OPTIMIZATION_MODE' ]
+      [, max_error_ratio => MAX_ERROR_RATIO ]
     )
 
 ### Arguments
 
-`AI.CLASSIFY` takes the following arguments:
+`AI.CLASSIFY` takes the following arguments.
 
   - `  INPUT  ` : a `STRING` or `STRUCT` value that specifies the input to classify. The input must be the first argument that you specify. You can provide the input value in the following ways: You can provide the value in the following ways:
       - Specify a `STRING` value. For example, 'apples'
@@ -110,15 +108,19 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
     
     To use categories that come from a column of a table, you can [define a variable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) based on that column and then use that variable as your categories argument.
 
+  - `  EXAMPLES  ` : an `ARRAY<STRUCT<STRING, STRING>>` value that contains representative examples of input strings and the output category that you expect. You can provide examples to help the model understand your intended threshold for a condition with nuanced or subjective logic. We recommend that you provide at most 5 examples.
+    
+    If you specify `output_mode => 'multi'` , then your examples must have the type `ARRAY<STRUCT<STRING, ARRAY<STRING>>>` .
+
   - `  CONNECTION  ` : a `STRING` value specifying the connection to use to communicate with the model, in the format ` [ PROJECT_ID ]. LOCATION . CONNECTION_ID  ` . For example, `myproject.us.myconnection` .
     
     If you don't specify a connection, then the query uses your [end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
     
     For information about configuring permissions, see [Set permissions for BigQuery ML generative AI functions that call Vertex AI models](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) .
 
-  - `  ENDPOINT  ` : a `STRING` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML dynamically chooses a model based on your query to have the best cost to quality tradeoff for the task. You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, to use `gemini-3-pro-preview` , specify the following endpoint:
+  - `  ENDPOINT  ` : a `STRING` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML dynamically chooses a model based on your query to have the best cost to quality tradeoff for the task. You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) :
     
-        https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/gemini-3-pro-preview
+        https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/GEMINI_ENDPOINT
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
 
@@ -127,13 +129,28 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
       - `single` : Each input is classified into exactly one category.
       - `multi` : Each value is classified into zero or more categories. In this case, the function returns an array that contains each relevant category, or an empty array if no category applies.
 
+  - `  EMBEDDINGS  ` : the embeddings to use for optimized mode (Preview). This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
+    
+    This argument accepts the following data types:
+    
+      - `ARRAY<FLOAT64>` : use this for a single column reference.
+      - `ARRAY<STRUCT<STRING, ARRAY<FLOAT64>>>` : use this to map multiple columns to their corresponding embeddings. For example: `[STRUCT('title', title_embedding), STRUCT('body', body_embedding)]` .
+      - `ARRAY<STRUCT<ARRAY<STRING>, ARRAY<FLOAT64>>>` : use this for advanced mapping scenarios.
+
+  - `  OPTIMIZATION_MODE  ` : a `STRING` value that specifies the optimization strategy to use. Supported values are as follows:
+    
+      - `MINIMIZE_COST` (default): uses a local, distilled model to process the majority of rows, reducing latency and cost. This mode requires input embeddings and that the input to the AI function contain approximately 3,000 rows to ensure enough data for model training. Note that `output_mode => 'multi'` is not supported in this mode.
+      - `MAXIMIZE_QUALITY` : always uses the remote LLM for inference.
+
+  - `  MAX_ERROR_RATIO  ` : a `FLOAT64` value between `0.0` and `1.0` that contains the maximum acceptable ratio of row-level inference failures to rows processed on this function. If this value is exceeded, then the query fails and BigQuery returns an error message that describes the most frequent types of errors. For example, if the value is `0.3` then the query fails if more than 30% of rows processed have failed to return results. If `max_error_ratio` is set for multiple functions, the query fails if the ratio is exceeded on any function. The default value is `1.0` . However, the query still fails if inference fails for every row. This argument isn't supported when `optimization_mode` is set to `MINIMIZE_COST` .
+
 ## Output
 
 If you don't specify an `OUTPUT_MODE` , then `AI.CLASSIFY` returns a `STRING` value containing the category that best fits the input.
 
 If you specify an `OUTPUT_MODE` , then `AI.CLASSIFY` returns an `ARRAY<STRING>` value that contains all categories that the input is classified into. If `OUTPUT_MODE` is `single` then the array always has length 1. If `OUTPUT_MODE` is `multi` then the array length is between 0 and the number of categories.
 
-If the call to Vertex AI is unsuccessful for any reason, such as exceeding quota or model unavailability, then the function returns `NULL` .
+If the call to Vertex AI is unsuccessful for any reason, such as exceeding quota or model unavailability, then the function returns `NULL` for that row. However, if the ratio of unsuccessful rows exceeds the value of `max_error_ratio` , then the entire query fails.
 
 ## Examples
 
@@ -180,28 +197,58 @@ To extract your categories from a table instead of using an array of string lite
 
 ### Classify text into multiple topics
 
-The following query categorizes BBC news articles into high-level categories and allows the function to assign multiple categories to each article:
+The following query categorizes each news article into one or more high-level categories and provides two examples of categorization to the function:
+
+    WITH NewsArticles AS (
+      SELECT
+        'A major streaming platform announced a high-tech virtual reality broadcast for the upcoming championship game.' AS article_text
+      UNION ALL
+      SELECT
+        'New legislation has been proposed to regulate the use of facial recognition technology in government buildings.' AS article_text
+      UNION ALL
+      SELECT
+        'The superstar athlete announced a multi-million dollar movie deal and a new sports apparel venture.' AS article_text
+    )
+    SELECT
+      article_text,
+      AI.CLASSIFY(
+        ('Main topics of this news article: ', article_text),
+        categories => ['Politics', 'Finance', 'Technology', 'Sports', 'Entertainment'],
+        output_mode => 'multi',
+        examples => [
+          ('The new stock market app is a hit with investors.', ['Finance', 'Technology']),
+          ('The senator\'s speech on the economy was widely criticized.', ['Politics', 'Finance'])
+        ]
+      ) AS topics
+    FROM NewsArticles;
+
+The result is similar to the following:
+
+    +----------------------+-------------------------------------+
+    | article_text         | topics                              |
+    +----------------------+-------------------------------------+
+    | New legislation...   | [Politics, Technology]              |
+    | The superstar...     | [Sports, Entertainment, Finance]    |
+    | A major streaming... | [Technology, Sports, Entertainment] |
+    +----------------------+-------------------------------------+
+
+### Classify text with optimized mode
+
+The following query categorizes BBC news articles using optimized mode (Preview):
 
     SELECT
       title,
       body,
       AI.CLASSIFY(
         body,
-        categories => ['tech', 'sport', 'business', 'politics', 'entertainment', 'other'],
-        output_mode => 'multi') AS categories
+        categories => ['tech', 'sport', 'business', 'other'],
+        embeddings => AI.EMBED(body, endpoint => 'text-embedding-005', task_type => 'CLASSIFICATION').result,
+        optimization_mode => 'MINIMIZE_COST'
+       ) AS category
     FROM
-      `bigquery-public-data.bbc_news.fulltext`
-    LIMIT 100;
+      `bigquery-public-data.bbc_news.fulltext`;
 
-The result is similar to the following:
-
-    +-------------------------------+------------------------------------+------------------+
-    | title                         | body                               | categories       |
-    +-------------------------------+------------------------------------+------------------+
-    | Anti-spam screensave scrapped | A contentious campaign to bump up  | [tech, business] |
-    |                               | the bandwidth bills of spammers... |                  |
-    | ...                           | ...                                | ...              |
-    +-------------------------------+------------------------------------+------------------+
+For this example, embeddings are generated on-the-fly. In practice, we recommend that you materialize embeddings so that they can be reused. For more information, see [Optimize AI function costs](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) .
 
 ### Classify reviews by sentiment
 
@@ -247,6 +294,23 @@ The following query creates an external table from images of pet products stored
       EXTERNAL_OBJECT_TRANSFORM(TABLE `cymbal_pets.product_images`,
                                   ['SIGNED_URL']) AS images
     LIMIT 10;
+
+### Handle inference errors
+
+The following query classifies news articles but sets `max_error_ratio` to `0.05` , meaning the query fails if more than 5% of rows return an error during inference:
+
+    SELECT
+      title,
+      body,
+      AI.CLASSIFY(
+        body,
+        categories => ['tech', 'sport', 'business', 'politics', 'entertainment', 'other'],
+        max_error_ratio => 0.05) AS category
+    FROM
+      `bigquery-public-data.bbc_news.fulltext`
+    LIMIT 100;
+
+If the query exceeds the 0.05 error ratio, it fails and returns an error message similar to the following: `Query failed because AI functions exceeded their allowed error ratio`
 
 ## Locations
 

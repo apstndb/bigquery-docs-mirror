@@ -146,7 +146,7 @@ Create a model that forecasts daily page views for the Wikipedia "Google I/O" pa
 
 ## Visualize the forecasted results
 
-After you create the model using built-in holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
+After you create the model using built-in holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
 
@@ -176,9 +176,9 @@ After you create the model using built-in holidays, join the original data from 
       original.date;
     ```
 
-3.  In the **Query results** pane, click **Open in** \> **Looker Studio** . Looker Studio opens in a new tab.
+3.  In the **Query results** pane, click **Open in** \> **Data Studio** . Data Studio opens in a new tab.
 
-4.  In the Looker Studio tab, click **Add a chart** , and then click the time series chart:
+4.  In the Data Studio tab, click **Add a chart** , and then click the time series chart:
     
     ![Add a time series chart.](https://docs.cloud.google.com/static/bigquery/images/time-series-chart.png)
     
@@ -245,7 +245,7 @@ As you can see in [Google I/O history](https://en.wikipedia.org/wiki/Google_I/O#
 
 ## Visualize the forecasted results
 
-After you create the model using custom holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
+After you create the model using custom holidays, join the original data from the `bqml_tutorial.googleio_page_views` table with the forecasted value from the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
 
@@ -276,9 +276,9 @@ After you create the model using custom holidays, join the original data from th
       original.date;
     ```
 
-3.  In the **Query results** pane, click **Explore data** , and then click **Explore with Looker Studio** . Looker Studio opens in a new tab.
+3.  In the **Query results** pane, click **Explore data** , and then click **Explore with Data Studio** . Data Studio opens in a new tab.
 
-4.  In the Looker Studio tab, click **Add a chart** , click the time series chart, and place the chart on the report.
+4.  In the Data Studio tab, click **Add a chart** , click the time series chart, and place the chart on the report.
 
 5.  On the **Setup** tab of the **Chart** pane, click **Add metric** and select **adjusted\_views\_with\_custom\_holiday** .
     

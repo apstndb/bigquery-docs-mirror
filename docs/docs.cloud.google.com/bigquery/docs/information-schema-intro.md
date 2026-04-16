@@ -37,26 +37,31 @@ The BigQuery `INFORMATION_SCHEMA` views are read-only, system-defined views that
 <td><code dir="ltr" translate="no">        SCHEMATA                 SCHEMATA_LINKS                 SCHEMATA_OPTIONS                 SHARED_DATASET_USAGE                 SCHEMATA_REPLICAS                 SCHEMATA_REPLICAS_BY_FAILOVER_RESERVATION       </code></td>
 </tr>
 <tr class="odd">
+<td>Graphs</td>
+<td><code dir="ltr" translate="no">        PROPERTY_GRAPHS       </code><br />
+</td>
+</tr>
+<tr class="even">
 <td>Jobs</td>
 <td><code dir="ltr" translate="no">        JOBS_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        JOBS_BY_USER       </code><br />
 <code dir="ltr" translate="no">        JOBS_BY_FOLDER       </code><br />
 <code dir="ltr" translate="no">        JOBS_BY_ORGANIZATION       </code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Jobs by timeslice</td>
 <td><code dir="ltr" translate="no">        JOBS_TIMELINE_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        JOBS_TIMELINE_BY_USER       </code><br />
 <code dir="ltr" translate="no">        JOBS_TIMELINE_BY_FOLDER       </code><br />
 <code dir="ltr" translate="no">        JOBS_TIMELINE_BY_ORGANIZATION       </code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Recommendations and insights</td>
 <td><code dir="ltr" translate="no">        INSIGHTS                science       </code><br />
 <code dir="ltr" translate="no">        RECOMMENDATIONS                science       </code><br />
 <code dir="ltr" translate="no">        RECOMMENDATIONS_BY_ORGANIZATION                science       </code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Reservations</td>
 <td><code dir="ltr" translate="no">        ASSIGNMENTS_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        ASSIGNMENT_CHANGES_BY_PROJECT                 †        </code><br />
@@ -66,13 +71,13 @@ The BigQuery `INFORMATION_SCHEMA` views are read-only, system-defined views that
 <code dir="ltr" translate="no">        RESERVATION_CHANGES_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        RESERVATIONS_TIMELINE_BY_PROJECT                 †        </code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Routines</td>
 <td><code dir="ltr" translate="no">        PARAMETERS       </code><br />
 <code dir="ltr" translate="no">        ROUTINES       </code><br />
 <code dir="ltr" translate="no">        ROUTINE_OPTIONS       </code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Search indexes</td>
 <td><code dir="ltr" translate="no">        SEARCH_INDEXES       </code><br />
 <code dir="ltr" translate="no">        SEARCH_INDEX_COLUMNS       </code><br />
@@ -80,18 +85,18 @@ The BigQuery `INFORMATION_SCHEMA` views are read-only, system-defined views that
 <code dir="ltr" translate="no">        SEARCH_INDEX_OPTIONS       </code><br />
 <code dir="ltr" translate="no">        SEARCH_INDEXES_BY_ORGANIZATION       </code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Sessions</td>
 <td><code dir="ltr" translate="no">        SESSIONS_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        SESSIONS_BY_USER       </code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Streaming</td>
 <td><code dir="ltr" translate="no">        STREAMING_TIMELINE_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        STREAMING_TIMELINE_BY_FOLDER       </code><br />
 <code dir="ltr" translate="no">        STREAMING_TIMELINE_BY_ORGANIZATION       </code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Tables</td>
 <td><code dir="ltr" translate="no">        COLUMNS       </code><br />
 <code dir="ltr" translate="no">        COLUMN_FIELD_PATHS       </code><br />
@@ -109,18 +114,18 @@ The BigQuery `INFORMATION_SCHEMA` views are read-only, system-defined views that
 <code dir="ltr" translate="no">        TABLE_STORAGE_USAGE_TIMELINE_BY_FOLDER                science       </code><br />
 <code dir="ltr" translate="no">        TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION                science       </code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Vector indexes</td>
 <td><code dir="ltr" translate="no">        VECTOR_INDEXES       </code><br />
 <code dir="ltr" translate="no">        VECTOR_INDEX_COLUMNS       </code><br />
 <code dir="ltr" translate="no">        VECTOR_INDEX_OPTIONS       </code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Views</td>
 <td><code dir="ltr" translate="no">        VIEWS       </code><br />
 <code dir="ltr" translate="no">        MATERIALIZED_VIEWS       </code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Write API</td>
 <td><code dir="ltr" translate="no">        WRITE_API_TIMELINE_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        WRITE_API_TIMELINE_BY_FOLDER       </code><br />

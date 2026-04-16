@@ -1,6 +1,6 @@
 # Work with remote functions
 
-A BigQuery remote function allows you to implement your function in other languages than SQL and Javascript or with the libraries or services which are not allowed in BigQuery [user-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) .
+A BigQuery remote function allows you to implement your function in other languages than SQL and JavaScript or with the libraries or services which are not allowed in BigQuery [user-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) .
 
 ## Overview
 
@@ -173,7 +173,7 @@ JSON encoding in HTTP request/response follows [the existing BigQuery JSON encod
 
 ### Sample Cloud Run function code
 
-The following sample Python code implements adding all the integer arguments of the remote function. It handles a request with the arguments for batched invocations and returns all the result in a response.
+The following sample Python code implements adding all the integer arguments of the remote function. It handles a request with the arguments for batched invocations and returns all the results in a response.
 
     import functions_framework
     

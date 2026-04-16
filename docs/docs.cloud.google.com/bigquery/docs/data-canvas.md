@@ -216,12 +216,6 @@ From the insights node, you can do the following:
   - Duplicate the node.
   - Run the node.
 
-### Advanced analysis (Python node) (Deprecated)
-
-Advanced analysis, also called a Python node, is a [Preview](https://cloud.google.com/products/#product-launch-stages) feature.
-
-This feature is now deprecated. To continue using your canvas, [export your query to a notebook](https://docs.cloud.google.com/bigquery/docs/data-canvas#export-notebook) .
-
 ## Use BigQuery data canvas
 
 You can use BigQuery data canvas in the Google Cloud console, a query, or a table.

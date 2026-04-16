@@ -537,6 +537,29 @@ To address this error, avoid large `OFFSET` values in `ORDER BY` ... `LIMIT` que
     )
     WHERE rn > @start_index AND rn <= @page_size + @start_index  -- note that row_number() starts with 1
 
+### TensorFlow worker out of memory
+
+Error string: `Resources exceeded during query execution: TensorFlow worker out of memory` .
+
+Models that exceed the memory limit (typically 250 MB), particularly when using resource-intensive functions like `ML.EXPLAIN_PREDICT` , can trigger this error.
+
+To address this error, do the following:
+
+1.  *Use Vertex AI remote models* : For models that exceed memory limits, deploy your model to Vertex AI using the Vertex AI SDK for Python steps to [deploy a model](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-api) , and then access it using [Create and use remote models](https://docs.cloud.google.com/bigquery/docs/predictions/deploy-model-api) . This offloads the memory requirements to dedicated Vertex AI infrastructure.
+
+2.  *Optimize the model* : Reduce the model's RAM footprint by using architecture simplification, quantization, or pruning.
+
+3.  *Use less intensive functions* : If the error occurs during an `ML.EXPLAIN_PREDICT` call, try running the job with `ML.PREDICT` to determine if the model can execute without the extra overhead of explainability features.
+
+4.  *Analyze input data size* : Large individual rows can contribute to memory exhaustion. Check the size of your largest rows using:
+    
+    ``` notranslate
+    SELECT BYTE_LENGTH(TO_JSON_STRING(t)) AS row_size
+    FROM your_table AS t
+    ORDER BY row_size DESC
+    LIMIT 10
+    ```
+
 ### Query exceeds shuffle resources
 
 Error string: `Resources exceeded during query execution: Your project or organization exceeded the maximum disk and memory limit available for shuffle operations`

@@ -508,7 +508,7 @@ For the **Failed Jobs** chart, the table component displays the following data:
   - **Average slot usage.** Same as the **Slot Usage** chart, but only for failed jobs.
   - **Total failed jobs.** The number of jobs that failed within the selected time period.
 
-> **Note:** In addition to resource charts, you can write your own queries or dashboards. For example queries and Looker Studio templates, see [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/monitoring#information-schema) .
+> **Note:** In addition to resource charts, you can write your own queries or dashboards. For example queries and Data Studio templates, see [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/monitoring#information-schema) .
 
 ##### Group by options
 

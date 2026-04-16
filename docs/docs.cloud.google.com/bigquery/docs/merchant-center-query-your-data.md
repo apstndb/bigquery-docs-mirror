@@ -12,7 +12,7 @@ The `Products_` table contains nested and repeated fields. For information on ha
 
 ## Google Merchant Center sample queries
 
-You can use the following Google Merchant Center sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) .
+You can use the following Google Merchant Center sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Data Studio](https://www.google.com/analytics/data-studio/) .
 
 In each of the following queries, replace dataset with your dataset name. Replace merchant\_id with your Merchant ID. If you're using an MCA, replace merchant\_id with your MCA ID.
 

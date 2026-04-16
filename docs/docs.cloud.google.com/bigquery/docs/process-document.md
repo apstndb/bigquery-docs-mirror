@@ -145,7 +145,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
     OPTIONS (
       connection_type = "CLOUD_RESOURCE",
-      friendly_name = &quot;FRIENDLY_NAME";,
+      friendly_name = "FRIENDLY_NAME",
       description = "DESCRIPTION"
       );
     ```
@@ -246,7 +246,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
         except google.api_core.exceptions.AlreadyExists:
             print(f"Connection with ID '{connection_id}' already exists.")
-            print("Please use a different connection ID.")exceptExceptionase:print(f"An unexpected error occurred while creating the connection: {e}")
+            print("Please use a different connection ID.")
+        except Exception as e:
+            print(f"An unexpected error occurred while creating the connection: {e}")
 
 ### Node.js
 
@@ -255,7 +257,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     const {ConnectionServiceClient} =
-      require(&#39;@google-cloud/bigquery-connection').v1;
+      require('@google-cloud/bigquery-connection').v1;
     const {status} = require('@grpc/grpc-js');
     
     const client = new ConnectionServiceClient();
@@ -298,7 +300,10 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         if (err.code === status.ALREADY_EXISTS) {
           console.log(`Connection '${connectionId}' already exists.`);
         } else {
-          console.error(`Error creating connection: ${err.message}`);    }  }}
+          console.error(`Error creating connection: ${err.message}`);
+        }
+      }
+    }
 
 ### Terraform
 

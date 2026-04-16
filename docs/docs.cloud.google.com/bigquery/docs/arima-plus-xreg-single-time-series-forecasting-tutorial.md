@@ -163,7 +163,7 @@ Follow these steps to create the input data table:
 
 ## Visualize the input data
 
-Before creating the model, you can optionally visualize your input time series data to get a sense of the distribution. You can do this by using Looker Studio.
+Before creating the model, you can optionally visualize your input time series data to get a sense of the distribution. You can do this by using Data Studio.
 
 Follow these steps to visualize the time series data:
 
@@ -178,9 +178,9 @@ Follow these steps to visualize the time series data:
       `bqml_tutorial.seattle_air_quality_daily`;
     ```
 
-3.  When the query completes, click **Open in** \> **Looker Studio** . Looker Studio opens in a new tab. Complete the following steps in the new tab.
+3.  When the query completes, click **Open in** \> **Data Studio** . Data Studio opens in a new tab. Complete the following steps in the new tab.
 
-4.  In the Looker Studio, click **Insert** \> **Time series chart** .
+4.  In Data Studio, click **Insert** \> **Time series chart** .
 
 5.  In the **Chart** pane, choose the **Setup** tab.
 
@@ -190,7 +190,7 @@ Follow these steps to visualize the time series data:
     
     Looking at the chart, you can see that the input time series has a weekly seasonal pattern.
 
-> **Note:** For more information about Looker Studio support, see [Looker Support integrations with Google Cloud](https://docs.cloud.google.com/looker/docs/best-practices/looker-support-integrations-with-google-cloud) .
+> **Note:** For more information about Data Studio support, see [Data Studio help and support options](https://docs.cloud.google.com/looker/docs/studio/contact-us) .
 
 ## Create the time series model
 

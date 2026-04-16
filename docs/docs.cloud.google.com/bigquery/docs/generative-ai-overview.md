@@ -2,8 +2,6 @@
 
 This document describes the generative artificial intelligence (AI) functions that BigQuery supports. These functions accept natural language inputs and use pre-trained [Vertex AI models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) and built-in BigQuery models.
 
-## Overview
-
 BigQuery offers a variety of AI functions to help with tasks such as the following:
 
   - Generate creative content.
@@ -14,7 +12,7 @@ BigQuery offers a variety of AI functions to help with tasks such as the followi
   - Generate embeddings to search for similar text, images, and video.
   - Rate inputs in order to rank them by quality, similarity, or other criteria.
 
-The following categories of AI functions to help you accomplish these tasks:
+AI functions are grouped into the following categories to help you accomplish these tasks:
 
   - **[General-purpose AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#general_purpose_ai) :** These functions give you full control and transparency on the choice of model, prompt, and parameters to use.
     
@@ -34,15 +32,19 @@ The following categories of AI functions to help you accomplish these tasks:
           - `AI.EMBED` : Create an embedding from text or image data.
           - `AI.GENERATE_EMBEDDING` : A table-valued function that adds a column of embedded text, image, audio, video, or document data to your table.
 
-  - **[Managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) :** These functions have a streamlined syntax and are optimized for cost and quality.
+  - **[Managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) :** These functions have a streamlined syntax and are optimized for cost and quality. With [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview), these functions scale to millions or billions of rows.
     
-      - `AI.IF` : filter your data with natural language conditions.
+      - Filter your data with natural language conditions
+        
+          - `AI.IF`
     
-      - `AI.SCORE` : rate input, such as by quality or sentiment.
+      - Rate input, such as by quality or sentiment
+        
+          - `AI.SCORE`
     
-      - `AI.CLASSIFY` : classify input into user-defined categories.
-    
-      - `AI.AGG` : aggregate input to summarize or analyze your data.
+      - Classify input into user-defined categories
+        
+          - `AI.CLASSIFY`
 
   - **[Task-specific functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#task-specific_functions) :** These functions use Cloud AI APIs to help you perform tasks such as natural language processing, machine translation, document processing, audio transcription, and computer vision.
 
@@ -74,7 +76,7 @@ For some models, you can optionally choose to configure [supervised tuning](http
 
 Structured data generation is very similar to text generation, except that you can format the response from the model by specifying a SQL schema. For example, you might generate a table that contains a customer's name, phone number, address, request, and pricing quote from a transcript of a phone call.
 
-You can generate data structured data in the following ways:
+You can generate structured data in the following ways:
 
   - The [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) calls a Vertex AI endpoint and can generate a `STRUCT` value with your custom schema.
     
@@ -105,16 +107,14 @@ For more information about how to generate embeddings and use them to perform th
 
 ## Managed AI functions
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-Managed AI functions are purpose-built to automate routine tasks, such as classification, ordering, aggregation, or filtering. These functions use Gemini and don't require customization. BigQuery uses prompt engineering and can select the appropriate model and parameters to use for the specific task to optimize the quality and consistency of your results. Each function returns a scalar value, such as a `BOOL` , `FLOAT64` or `STRING` , and doesn't include additional status information from the model. The following managed AI functions are available:
+Managed AI functions simplify routine tasks, such as filtering, classification, or aggregation. These functions can analyze text, image, audio, video, or PDF data, except for `AI.AGG` , which supports text and image data only. These functions use Gemini and don't require customization. BigQuery uses prompt engineering and can select the appropriate model and parameters to use for the specific task to optimize the quality and consistency of your results. Each function returns a scalar value, such as a `BOOL` , `FLOAT64` , or `STRING` , and doesn't include additional status information from the model. The following managed AI functions are available:
 
   - [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) : Filter text or multi-modal data, such as in a `WHERE` or `JOIN` clause, based on a prompt. For example, you could filter product descriptions by those that describe an item that would make a good gift.
   - [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) : Rate inputs based on a prompt in order to rank rows by quality, similarity, or other criteria. You can use this function in an `ORDER BY` clause to extract the top K items according to score. For example, you could find the top 10 most positive or negative user reviews for a product.
   - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : Classify text into user-defined categories. You can use this function in a `GROUP BY` clause to group inputs according to the categories that you define. For example, you could classify support tickets by whether they relate to billing, shipping, product quality, or something else.
   - [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) : Aggregate input based on natural language instructions to summarize or analyze your data. For example, you could scan logs of user application sessions to determine where customers are having difficulty, or you could summarize the contents of a large set of images.
+
+> **Note:** To process large datasets more efficiently, you can use *optimized mode* (Preview) for `AI.IF` and `AI.CLASSIFY` functions. This mode works by training a lightweight, distilled model on a sample of your data, then using that model for inference on the majority of rows. This approach avoids calling an LLM for every row, which [reduces token consumption and latency](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) when working with thousands or even billions of rows.
 
 For a tutorial that shows examples of how to use these functions, see [Perform semantic analysis with managed AI functions](https://docs.cloud.google.com/bigquery/docs/semantic-analysis) .
 
@@ -173,6 +173,22 @@ To better understand the behavior of AI functions that you call in BigQuery, you
         SELECT *
         FROM `my_project.my_dataset.request_response_logging`
         WHERE JSON_VALUE(full_request, '$.labels.bigquery_job_id_prefix') = 'bquxjob_123456...';
+
+## Error management
+
+Row-level errors, such as `RESOURCE_EXHAUSTED` , can occur if an AI function exceeds the quota or limits of the remote service. When a row-level error occurs, the function returns `NULL` for that row, which can result in incomplete query results.
+
+All AI functions can encounter these errors. However, the managed AI functions ( `AI.IF` , `AI.CLASSIFY` , and `AI.SCORE` ) support the `max_error_ratio` argument to help you manage them. Use this argument to set a failure threshold that allows the query to succeed despite row-level failures.
+
+The default value for `max_error_ratio` is `1.0` . To lower your error tolerance, set it to a smaller value (for example, `0.2` ) so that the query fails instead of succeeding with partial failures. For syntax details, see the reference documentation for [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if#arguments) , [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify#arguments) , or [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score#arguments) .
+
+If the query succeeds with partial failures, BigQuery returns a warning. For more information about the function errors, check the **Gen AI function errors** field in the **Job information** tab of the query results in the Google Cloud console.
+
+> **Note:** The error ratio is calculated as the number of failed rows divided by the total number of rows processed by the model.
+
+If your query includes a `LIMIT` clause, the limit is applied *after* the model processes a batch of rows. Consequently, the proportion of `NULL` values in your final result set might appear higher than the specified `max_error_ratio` .
+
+For example, suppose your query has a `LIMIT 10` clause and a `max_error_ratio` of `0.2` . The model might process 20 rows before the limit is applied. If 3 of those 20 rows fail, the error ratio is `0.15` (15%), which is within the 20% threshold. However, if the subset of rows selected by the `LIMIT` clause happens to include all 3 failed rows, your visible output will contain 30% `NULL` values.
 
 ## What's next
 

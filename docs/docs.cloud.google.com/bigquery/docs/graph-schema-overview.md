@@ -266,7 +266,17 @@ You are responsible for avoiding breaking schema changes. Follow these best prac
 
 ## View graph schemas
 
-You can [visualize your graph schema](https://docs.cloud.google.com/bigquery/docs/graph-visualization#visualize-schema) in a notebook.
+To see the `CREATE PROPERTY GRAPH` statement used to construct an existing graph, query the [`INFORMATION_SCHEMA.PROPERTY_GRAPHS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-property-graphs) :
+
+    SELECT
+      property_graph_name,
+      ddl
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.PROPERTY_GRAPHS;
+
+Replace `  REGION  ` with the region of the dataset that contains the graph.
+
+Alternatively, you can [visualize your graph schema](https://docs.cloud.google.com/bigquery/docs/graph-visualization#visualize-schema) in a notebook.
 
 ## Update a graph schema
 

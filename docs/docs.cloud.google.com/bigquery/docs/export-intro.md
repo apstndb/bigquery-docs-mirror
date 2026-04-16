@@ -62,11 +62,12 @@ You can download [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/q
 
 ## Export using reverse ETL
 
-You can set up reverse ETL (RETL) workflows ( [preview](https://cloud.google.com/products#product-launch-stages) ) to move data from BigQuery to the following databases:
+You can set up reverse ETL (RETL) workflows to move data from BigQuery to the following databases:
 
   - [Export to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable)
   - [Export to Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner)
   - [Export to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub)
+  - [Export to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) ( [preview](https://cloud.google.com/products#product-launch-stages) )
 
 ## What's next
 

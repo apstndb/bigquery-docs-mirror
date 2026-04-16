@@ -55,7 +55,7 @@ Wildcard tables are useful when a dataset contains multiple, similarly named tab
 
 A query that scans all the table IDs from 1929 through 1940 would be very long if you have to name all 12 tables in the `FROM` clause (most of the tables are omitted in this sample):
 
-``` translate no
+``` no translate
 #standardSQL
 SELECT
   max,

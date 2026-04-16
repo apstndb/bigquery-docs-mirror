@@ -213,6 +213,7 @@ https://docs.cloud.google.com/bigquery/docs/explore-data-colab
 https://docs.cloud.google.com/bigquery/docs/export-file
 https://docs.cloud.google.com/bigquery/docs/export-intro
 https://docs.cloud.google.com/bigquery/docs/export-model-tutorial
+https://docs.cloud.google.com/bigquery/docs/export-to-alloydb
 https://docs.cloud.google.com/bigquery/docs/export-to-bigtable
 https://docs.cloud.google.com/bigquery/docs/export-to-pubsub
 https://docs.cloud.google.com/bigquery/docs/export-to-spanner
@@ -332,6 +333,7 @@ https://docs.cloud.google.com/bigquery/docs/information-schema-parameters
 https://docs.cloud.google.com/bigquery/docs/information-schema-partitions
 https://docs.cloud.google.com/bigquery/docs/information-schema-project-options
 https://docs.cloud.google.com/bigquery/docs/information-schema-project-options-changes
+https://docs.cloud.google.com/bigquery/docs/information-schema-property-graphs
 https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations
 https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org
 https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes
@@ -499,6 +501,7 @@ https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection
 https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table
 https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage
 https://docs.cloud.google.com/bigquery/docs/omni-introduction
+https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions
 https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs
 https://docs.cloud.google.com/bigquery/docs/oracle-transfer
 https://docs.cloud.google.com/bigquery/docs/orchestrate-dags

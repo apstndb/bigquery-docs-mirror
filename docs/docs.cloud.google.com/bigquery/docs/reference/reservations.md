@@ -47,11 +47,11 @@ If you are using [Maven](https://maven.apache.org/) , add the following to your 
 
 If you are using [Gradle](https://gradle.org/) , add the following to your dependencies:
 
-    implementation 'com.google.cloud:google-cloud-bigqueryreservation:2.89.0'
+    implementation 'com.google.cloud:google-cloud-bigqueryreservation:2.91.0'
 
 If you are using [sbt](https://www.scala-sbt.org/) , add the following to your dependencies:
 
-    libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.89.0"
+    libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.91.0"
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your project using the following IDE plugins:
 

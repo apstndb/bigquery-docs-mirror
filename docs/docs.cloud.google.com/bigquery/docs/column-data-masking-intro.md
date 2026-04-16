@@ -607,7 +607,7 @@ Compatible. Data masking policies are enforced in the BigQuery Storage Read API.
 
 ### BigQuery BI Engine
 
-Compatible. Data masking policies are enforced in the BI Engine. Queries that have data masking in effect are not accelerated by BI Engine. Use of such queries in Looker Studio might cause related reports or dashboards to become slower and more expensive.
+Compatible. Data masking policies are enforced in the BI Engine. Queries that have data masking in effect are not accelerated by BI Engine. Use of such queries in Data Studio might cause related reports or dashboards to become slower and more expensive.
 
 ### BigQuery Omni
 

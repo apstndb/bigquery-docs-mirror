@@ -64,7 +64,7 @@ For information about integer-range partitioned tables, see [Create an integer-r
 
 You can partition a table on a `DATE` , `TIMESTAMP` , or `DATETIME` column in the table. When you write data to the table, BigQuery automatically puts the data into the correct partition, based on the values in the column.
 
-For `TIMESTAMP` and `DATETIME` columns, the partitions can have either hourly, daily, monthly, or yearly granularity. For `DATE` columns, the partitions can have daily, monthly, or yearly granularity. Partitions boundaries are based on UTC time.
+For `TIMESTAMP` and `DATETIME` columns, the partitions can have either hourly, daily, monthly, or yearly granularity. For `DATE` columns, the partitions can have daily, monthly, or yearly granularity. Partition boundaries are based on UTC time.
 
 For example, suppose that you partition a table on a `DATETIME` column with monthly partitioning. If you insert the following values into the table, the rows are written to the following partitions:
 
@@ -83,7 +83,7 @@ For information about time-unit column-partitioned tables, see [Create a time-un
 
 ### Ingestion time partitioning
 
-When you create a table partitioned by ingestion time, BigQuery automatically assigns rows to partitions based on the time when BigQuery ingests the data. You can choose hourly, daily, monthly, or yearly granularity for the partitions. Partitions boundaries are based on UTC time.
+When you create a table partitioned by ingestion time, BigQuery automatically assigns rows to partitions based on the time when BigQuery ingests the data. You can choose hourly, daily, monthly, or yearly granularity for the partitions. Partition boundaries are based on UTC time.
 
 If your data might reach the maximum number of partitions per table when using a finer time granularity, use a coarser granularity instead. For example, you can partition by month instead of day to reduce the number of partitions. You can also [cluster](https://docs.cloud.google.com/bigquery/docs/clustered-tables) the partition column to further improve performance.
 
@@ -113,11 +113,11 @@ When you partition a table by time-unit column or ingestion time, you choose whe
 
 ## Combining clustered and partitioned tables
 
-You can combine table partitioning with [table clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) to achieve finely grained sorting for further query optimization.
+You can combine table partitioning with [table clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) to achieve fine-grained sorting for further query optimization.
 
 A clustered table contains clustered columns that sort data based on user-defined sort properties. Data within these clustered columns are sorted into storage blocks which are adaptively sized based on the size of the table. When you run a query that filters by the clustered column, BigQuery only scans the relevant blocks based on the clustered columns instead of the entire table or table partition. In a combined approach using both table partitioning and clustering, you first segment table data into partitions, then you cluster the data within each partition by the clustering columns.
 
-When you create a table that is clustered and partitioned, you can achieve more finely grained sorting, as the following diagram shows:
+When you create a table that is clustered and partitioned, you can achieve more fine-grained sorting, as the following diagram shows:
 
 ![Comparing tables that are not clustered or partitioned to tables that are clustered and partitioned.](https://docs.cloud.google.com/static/bigquery/images/clustering-and-partitioning-tables.png)
 

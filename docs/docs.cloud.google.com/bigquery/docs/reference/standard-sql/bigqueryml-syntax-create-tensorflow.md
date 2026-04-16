@@ -133,6 +133,9 @@ Imported TensorFlow models have the following limitations:
   - Only core TensorFlow operations are supported; models that use custom or `tf.contrib` operations aren't supported.
   - RaggedTensors aren't supported.
   - You can only use an imported TensorFlow model with an object table when you use capacity-based pricing through reservations. On-demand pricing isn't supported.
+  - When you load TensorFlow models into RAM for predictions, they have a memory limit (typically 250 MB).
+
+> **Note:** Models that exceed the memory limits—particularly when using resource-intensive functions like `ML.EXPLAIN_PREDICT` —may trigger the error: `Resources exceeded during query execution: TensorFlow worker out of memory` . For more information and resolution steps, see [TensorFlow worker out of memory](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#tensorflow_worker_oom) .
 
 ## Example
 

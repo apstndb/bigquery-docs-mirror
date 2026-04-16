@@ -243,12 +243,12 @@ Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference
 ``` notranslate
 {
 "tableReference": {
-  "tableId": "TABLE_NAME"
+  &quot;tableId": "TABLE_NAME"
 },
-"biglakeConfiguration": {
+"biglakeConfiguration&quot;: {
   "connectionId": "CONNECTION_NAME",
-  "fileFormat": "PARQUET",
-  "tableFormat": "ICEBERG",
+  "fileFormat";: "PARQUET",
+  "tableFormat": &quot;ICEBERG",
   "storageUri": "STORAGE_URI"
 },
 "schema": {
@@ -288,8 +288,8 @@ See the following for tool-specific examples of batch loads into managed tables:
 ``` notranslate
 LOAD DATA INTO MANAGED_TABLE_NAME
 FROM FILES (
-uris=['STORAGE_URI'],
-format='FILE_FORMAT');
+uris=[&#39;STORAGE_URI'],
+format=';FILE_FORMAT');
 ```
 
 Replace the following:
@@ -372,7 +372,7 @@ spark-sql \
   --packages org.apache.iceberg:iceberg-spark-runtime-ICEBERG_VERSION_NUMBER \
   --conf spark.sql.catalog.CATALOG_NAME=org.apache.iceberg.spark.SparkCatalog \
   --conf spark.sql.catalog.CATALOG_NAME.type=hadoop \
-  --conf spark.sql.catalog.CATALOG_NAME.warehouse='BUCKET_PATH' \
+  --conf spark.sql.catalog.CATALOG_NAME.warehouse=&#39;BUCKET_PATH' \
 
 # Query the table
 SELECT * FROM CATALOG_NAME.FOLDER_NAME;

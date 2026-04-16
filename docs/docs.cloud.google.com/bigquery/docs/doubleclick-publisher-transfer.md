@@ -318,7 +318,7 @@ If you query your tables directly instead of using the auto-generated views, you
 
 ## Sample queries
 
-You can use the following Google Ad Manager sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Google Ad Manager data with BigQuery. For additional questions on what you can do with these reports, contact your Google Ad Manager technical representative.
+You can use the following Google Ad Manager sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Data Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Google Ad Manager data with BigQuery. For additional questions on what you can do with these reports, contact your Google Ad Manager technical representative.
 
 > **Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 

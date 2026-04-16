@@ -1,14 +1,10 @@
 # Visualize query results
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+You can use [visualization cells](https://docs.cloud.google.com/colab/docs/visualization-cells) to generate and customize charts and graphs for large-scale analysis without leaving your notebook environment. In this quickstart, you learn how to complete the following tasks:
 
-Use this quickstart to run SQL and visualize your results in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) :
-
-  - Run a query using the `bigquery-public-data.ml_datasets.penguins` public dataset.
-  - Use a SQL cell to iterate on your query results.
-  - Use a visualization cell to display the average culmen length and depth of female penguins for each species.
+1.  Run a SQL query by using the `bigquery-public-data.ml_datasets.penguins` public dataset.
+2.  Iterate on your query results by using SQL cells.
+3.  Use a visualization cell to analyze penguin characteristics across species.
 
 ## Before you begin
 
@@ -27,7 +23,7 @@ To create and run notebooks, you need the following Identity and Access Manageme
 
 ## Create a notebook
 
-Follow the instructions in [Create a notebook from the BigQuery editor](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) to create a new notebook.
+To create a new notebook, follow the instructions in [Create a notebook from the BigQuery editor](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 
 ## Run a query
 

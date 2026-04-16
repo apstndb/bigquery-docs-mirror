@@ -44,7 +44,7 @@ The `Products_` table contains nested and repeated fields. For information on ha
 
 ## CSS Center sample queries
 
-You can use the following CSS Center sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) .
+You can use the following CSS Center sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Data Studio](https://www.google.com/analytics/data-studio/) .
 
 In each of the following queries, replace dataset with your dataset name. Replace css\_id with your CSS domain ID.
 

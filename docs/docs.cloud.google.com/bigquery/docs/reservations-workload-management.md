@@ -54,7 +54,7 @@ To flexibly assign reservations, [run an interactive query](https://docs.cloud.g
 
 ### Combine reservations with on-demand billing
 
-You can use capacity-based in one region and on-demand in another region. By default, all projects use on-demand billing. Within a region, you can opt a project, folder, or organization into capacity-based billing by assigning it to a reservation. For example, if you purchase a slot commitment in the US multi-region and assign your organization to the default reservation, your organization will be on capacity-based billing in the US multi-region, but will remain on on-demand billing in all other regions.
+You can use capacity-based billing in one region and on-demand in another region. By default, all projects use on-demand billing. Within a region, you can opt a project, folder, or organization into capacity-based billing by assigning it to a reservation. For example, if you purchase a slot commitment in the US multi-region and assign your organization to the default reservation, your organization will be on capacity-based billing in the US multi-region, but will remain on on-demand billing in all other regions.
 
 Within a region, you can combine capacity-based and on-demand billing by explicitly assigning projects to a reservation. Any project not assigned to a reservation remains on on-demand billing. You can also explicitly assign a project to use on-demand billing by assigning the reservation ID `none` . This is useful if you assign a folder or an organization to a reservation, but want some projects within that folder or organization to use on-demand billing. For more information, see [assign a project to none](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-project-to-none) .
 
@@ -115,7 +115,7 @@ Instead of partitioning your capacity across workload types, you might choose to
 
 ### Manage reservations in different regions
 
-Reservations are regional resources. Slots purchased and reservations created in one region cannot be used in any other region. Project, folders, and organizations can be assigned to reservations in one region and run on-demand in another. To manage reservations in another region, you must change the region in the BigQuery **Capacity Management** page:
+Reservations are regional resources. Slots purchased and reservations created in one region cannot be used in any other region. Projects, folders, and organizations can be assigned to reservations in one region and run on-demand in another. To manage reservations in another region, you must change the region in the BigQuery **Capacity Management** page:
 
 1.  In the BigQuery console, click **Reservations** .
 2.  Click the **Location** picker and select a region where you want to manage reservations. ![Select different region.](https://docs.cloud.google.com/static/bigquery/images/reservations-different-region.png)
@@ -147,7 +147,7 @@ A *slot commitment* is a purchase of slots for a specified period of time. You c
 
   - **Annual commitment** . You purchase a 365-day commitment. You can choose whether to renew or convert to a different type of commitment plan after 365 days.
 
-  - **Three-year commitment** . You purchase a three year commitment. You can choose whether to renew or convert to a different type of commitment plan after 3 years (1,095 days).
+  - **Three-year commitment** . You purchase a three-year commitment. You can choose whether to renew or convert to a different type of commitment plan after 3 years (1,095 days).
 
 At the end of the commitment period, your commitment will renew based on the [selected renewal plan](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) .
 
@@ -200,7 +200,7 @@ If you accidentally purchase a commitment or make a mistake when you configure y
 
 To use reservation predictability, you must first enable [reservation fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) .
 
-Reservation predictability allows you to set the absolute maximum number of consumed slots on a reservation. BigQuery offers baseline slots, idle slots, and autoscaling slots as potential capacity resources. When you create a reservation with a maximum size, confirm the number of baseline slots and the appropriate configuration of autoscaling and idle slots based on your past workloads.
+Reservation predictability lets you set the absolute maximum number of consumed slots on a reservation. BigQuery offers baseline slots, idle slots, and autoscaling slots as potential capacity resources. When you create a reservation with a maximum size, confirm the number of baseline slots and the appropriate configuration of autoscaling and idle slots based on your past workloads.
 
 To enable reservation predictability, you must set the value of both the maximum slots and the scaling mode on the reservation. The number of maximum slots must be a positive number, and greater than the number of baseline slots assigned to the reservation. To learn more about working with reservation predictability, see [Create a reservation with dedicated slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) . You can't configure the value for `autoscale_max_slots` when you set the maximum slots value on the reservation.
 
@@ -246,7 +246,7 @@ To request support or provide feedback for this feature, contact <bigquery-wlm-f
 
 To use reservation groups, you must first enable [reservation fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) .
 
-Reservation groups lets you manage the properties of multiple reservations, similar to how datasets organize tables.
+Reservation groups let you manage the properties of multiple reservations, similar to how datasets organize tables.
 
 Reservations with the same reservation group will share idle slots with each other first before being available to the organization:
 

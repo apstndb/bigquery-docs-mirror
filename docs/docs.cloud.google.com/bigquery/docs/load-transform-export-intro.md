@@ -60,7 +60,7 @@ In the extract-transform-load (ETL) approach, you extract and transform data bef
 After you process and analyze data in BigQuery, you can export the results to apply them in other systems. BigQuery supports the following exports:
 
   - Exporting query results to a local file, Google Drive, Google Sheets
-  - Exporting tables or query results to Cloud Storage, Bigtable, Spanner, and Pub/Sub
+  - Exporting tables or query results to Cloud Storage, Bigtable, Spanner, AlloyDB for PostgreSQL, and Pub/Sub
 
 This process is referred to as reverse ETL.
 

@@ -26,7 +26,7 @@ Payment platforms:
 Databases and data warehouses:
 
   - [Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift)
-  - [Apache Hive](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Apache Hive Metastore](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer)
   - [Microsoft SQL Server](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
   - [MySQL](https://docs.cloud.google.com/bigquery/docs/mysql-transfer)
   - [Oracle](https://docs.cloud.google.com/bigquery/docs/oracle-transfer)

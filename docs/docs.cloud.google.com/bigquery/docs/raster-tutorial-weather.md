@@ -102,7 +102,7 @@ Run the following query to compute the average temperature of each country on Ja
     ORDER BY
       mean_temperature DESC;
 
-This query runs on the publicly available `division_area` table that contains `GEOGRAPHY` values representing the boundaries of various regions on Earth, including countries. The `ST_REGIONSTATS` function uses the `temerature_2m` band of the raster image, which contains the temperature of the air at 2 meters above the surface of the land at the given pixel.
+This query runs on the publicly available `division_area` table that contains `GEOGRAPHY` values representing the boundaries of various regions on Earth, including countries. The `ST_REGIONSTATS` function uses the `temperature_2m` band of the raster image, which contains the temperature of the air at 2 meters above the surface of the land at the given pixel.
 
 ## Visualize the query results in BigQuery
 

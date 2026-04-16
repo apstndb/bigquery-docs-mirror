@@ -309,7 +309,7 @@ The following query shows how to use the `model_params` argument to specify a [c
             '''{"cachedContent": "projects/PROJECT_NUMBER/locations/LOCATION/cachedContents/CACHED_CONTENT_ID",
                "generation_config": {"thinking_config":{"thinking_level": "LOW"}}}''')
 
-## Manage inference costs
+## Manage Inference Costs
 
 Inference using the Vertex AI Gemini model can be a relatively expensive operation. Due to the nature of query processing in BigQuery, the actual number of rows processed by the model might differ from what you expect, particularly when running complex queries, such as `JOIN` or `ORDER BY ... LIMIT` clauses. To strictly control the number of rows processed by your complex queries, we recommended that you write the results of your query to a separate table beforehand, and then perform the Gemini inference directly on that materialized table. For information about how to view inference charges that you incur in Vertex AI, see [Track costs](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#track_costs) .
 

@@ -3,6 +3,7 @@
 This document helps you understand where Gemini in BigQuery processes your data. This behavior applies to the following Gemini in BigQuery features:
 
   - [SQL code assist](https://docs.cloud.google.com/bigquery/docs/gemini-locations#sql-editor-canvas)
+  - [BigQuery Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-engineering-agent)
   - [BigQuery data canvas](https://docs.cloud.google.com/bigquery/docs/gemini-locations#sql-editor-canvas)
   - [BigQuery data insights](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-insights)
   - [BigQuery data preparation](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-preparation)
@@ -35,6 +36,16 @@ A BigQuery administrator can specify an organization-level or project-level defa
 For more information on configuring the default location, see [Specify global settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings) .
 
 For more information on verifying the default location configuration, see [Retrieve configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#retrieve-configuration) .
+
+## BigQuery Data Engineering Agent
+
+The [Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) supports jurisdiction-level regionalization that provides dedicated service endpoints for the `us` , `eu` , and global regions. The regional preference is automatically assigned based on the associated Dataform workspace location.
+
+When interacting with the agent in the Google Cloud console, all internal processing—including the reasoning engine and temporary storage of conversation context—is maintained strictly within the jurisdictional boundary defined by the Dataform workspace region.
+
+When interacting with the agent using the public API, select `us` or `eu` to ensure that all processing, reasoning, and downstream service calls remain within that jurisdiction. If the specified API region does not align with the workspace region, the system returns an error.
+
+To change your processing region, you must [create a new Dataform repository](https://docs.cloud.google.com/dataform/docs/create-repository) and configure it to the updated region.
 
 ## BigQuery data insights
 

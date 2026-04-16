@@ -305,7 +305,7 @@ A notebook is made up of cells that you can edit. The following types of cells a
         # Reference previous query results to iterate on your queries.
         SELECT * FROM {df};
 
-  - **Visualization cell** ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ): Use a [visualization cell](https://docs.cloud.google.com/colab/docs/visualization-cells) to automatically generate a visualization of any DataFrame in your notebook. You can modify which columns are displayed and select from various chart types and aggregations. You can also choose custom colors, data labels, and titles.
+  - **Visualization cell** : Use a [visualization cell](https://docs.cloud.google.com/colab/docs/visualization-cells) to automatically generate a visualization of any DataFrame in your notebook. You can modify which columns are displayed and select from various chart types and aggregations. You can also choose custom colors, data labels, and titles.
 
 ## Grant access to notebooks
 

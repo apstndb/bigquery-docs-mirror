@@ -237,7 +237,7 @@ While you run a `JOIN` operation, BigQuery partitions the data on the left and r
 
 #### Identify partition skew
 
-Use the **Execution graph** tab in BigQuery Studio to find which stage of the query is experiencing the partition skew. The insight is flagged on the stage. From the stage details, you can determine the relevant part of the query text and the tables being processed. For more information, see \[Understand steps with query text\](/bigquery/docs/query-plan-explanation\#query\_text\_heatmap.
+Use the **Execution graph** tab in BigQuery Studio to find which stage of the query is experiencing the partition skew. The insight is flagged on the stage. From the stage details, you can determine the relevant part of the query text and the tables being processed. For more information, see [Understand steps with query text](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#query_text_heatmap) .
 
 **Example**
 

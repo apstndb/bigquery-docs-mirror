@@ -82,7 +82,7 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
         
         The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
     
-      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number baseline of slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
+      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
     
       - `  EDITION  ` : the edition of the reservation. Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
     
@@ -379,7 +379,7 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
     
       - `  RESERVATION_NAME  ` : the name of the reservation.The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
     
-      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number baseline of slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
+      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
     
       - `  EDITION  ` : the edition of the reservation. Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
     
@@ -800,7 +800,7 @@ In the bq command-line tool, you can grant access to an individual reservation r
 
 To grant access to a reservation, use the [`bq set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command:
 
-``` notranslate lang-sh
+``` lang-sh notranslate
 bq set-iam-policy --reservation RESOURCE FILE_NAME
 ```
 
@@ -1051,7 +1051,7 @@ You might encounter the following errors when creating or updating a reservation
   - Error: `Max reservation size can only be configured in multiples of 50, except when covered by excess commitments.`  
     Error: `Baseline slots can only be configured in multiples of 50, except when covered by excess commitments.`  
     Slots always autoscale to a multiple of 50. Scaling up is based on actual usage, and is rounded up to the nearest 50 slot increment. When there is no commitment or if the commitment cannot cover the increases, the baseline and autoscaling slots can only be increased in multiples of 50.
-    If `reservation size - baseline slots` isn't a multiple of 50, then the reservation can't scale up to the maximum reservations size, resulting in this error.
+    If `reservation size - baseline slots` isn't a multiple of 50, then the reservation can't scale up to the maximum reservation size, resulting in this error.
     **Resolution:**
       - Purchase more capacity commitments to cover the slot increases.
       - Choose baseline and max slots that are increments of 50.

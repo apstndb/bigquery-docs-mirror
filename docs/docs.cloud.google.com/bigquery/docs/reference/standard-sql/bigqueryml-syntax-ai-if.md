@@ -1,11 +1,5 @@
 # The AI.IF function
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** For support during the preview, contact <bqml-feedback@google.com> .
-
 This document describes the `AI.IF` function, which uses a Vertex AI Gemini model to evaluate a condition described in natural language and returns a `BOOL` .
 
 You can use the `AI.IF` function to filter and join data based on conditions described in natural language or multimodal input. The following are common use cases:
@@ -32,14 +26,18 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
 ## Syntax
 
     AI.IF(
-      [ prompt => ] 'PROMPT'
+      [ prompt => ] PROMPT
+      [, examples => EXAMPLES ]
       [, connection_id => 'CONNECTION' ]
       [, endpoint => 'ENDPOINT' ]
+      [, embeddings => EMBEDDINGS ]
+      [, optimization_mode => 'OPTIMIZATION_MODE' ]
+      [, max_error_ratio => MAX_ERROR_RATIO ]
     )
 
 ### Arguments
 
-`AI.IF` takes the following arguments:
+`AI.IF` takes the following arguments.
 
   - `  PROMPT  ` : a `STRING` or `STRUCT` value that specifies the `PROMPT` value to send to the model. The prompt must be the first argument that you specify. You can provide the value in the following ways:
       - Specify a `STRING` value. For example, 'This is a prompt.'
@@ -92,17 +90,34 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
 
 <!-- end list -->
 
+  - `  EXAMPLES  ` : an `ARRAY<STRUCT<STRING, BOOL>>` value that contains representative examples of input strings and the output truth value that you expect. You can provide examples to help the model understand your intended threshold for a condition with nuanced or subjective logic. We recommend that you provide at most 5 examples.
+
   - `  CONNECTION  ` : a `STRING` value specifying the connection to use to communicate with the model, in the format ` [ PROJECT_ID ]. LOCATION . CONNECTION_ID  ` . For example, `myproject.us.myconnection` .
     
     If you don't specify a connection, then the query uses your [end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
     
     For information about configuring permissions, see [Set permissions for BigQuery ML generative AI functions that call Vertex AI models](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) .
 
-  - `  ENDPOINT  ` : a `STRING` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML dynamically chooses a model based on your query to have the best cost to quality tradeoff for the task. You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, to use `gemini-3-pro-preview` , specify the following endpoint:
+  - `  ENDPOINT  ` : a `STRING` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML dynamically chooses a model based on your query to have the best cost to quality tradeoff for the task. You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) :
     
-        https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/gemini-3-pro-preview
+        https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/GEMINI_ENDPOINT
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
+
+  - `  EMBEDDINGS  ` : the embeddings to use for [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview). This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
+    
+    This argument accepts the following data types:
+    
+      - `ARRAY<FLOAT64>` : use this for a single column reference.
+      - `ARRAY<STRUCT<STRING, ARRAY<FLOAT64>>>` : use this to map multiple columns to their corresponding embeddings. For example: `[STRUCT('title', title_embedding), STRUCT('body', body_embedding)]` .
+      - `ARRAY<STRUCT<ARRAY<STRING>, ARRAY<FLOAT64>>>` : use this for advanced mapping scenarios.
+
+  - `  OPTIMIZATION_MODE  ` : a `STRING` value that specifies the optimization strategy to use. Supported values are as follows:
+    
+      - `MINIMIZE_COST` (default): uses a local, distilled model to process the majority of rows, reducing latency and cost. This mode requires input embeddings and that the input to the AI function contain approximately 3,000 rows to ensure enough data for model training.
+      - `MAXIMIZE_QUALITY` : always uses the remote LLM for inference.
+
+  - `  MAX_ERROR_RATIO  ` : a `FLOAT64` value between `0.0` and `1.0` that contains the maximum acceptable ratio of row-level inference failures to rows processed on this function. If this value is exceeded, then the query fails and BigQuery returns an error message that describes the most frequent types of errors. For example, if the value is `0.3` then the query fails if more than 30% of rows processed have failed to return results. If `max_error_ratio` is set for multiple functions, the query fails if the ratio is exceeded on any function. The default value is `1.0` . However, the query still fails if inference fails for every row. This argument isn't supported when `optimization_mode` is set to `MINIMIZE_COST` .
 
 ## Output
 
@@ -135,17 +150,48 @@ The result is similar to the following:
     | ...                              | ...                                         |
     +----------------------------------+---------------------------------------------+
 
-### Combine filters
+### Filter text by topic with optimized mode
 
-BigQuery optimizes queries to reduce the number of calls to Gemini. The following query first filters by the equality operator, and then filters using the `AI.IF` function:
+The following query uses `AI.IF` to find news that covers a natural disaster using optimized mode (Preview):
 
     SELECT
-      title, body
+      title,
+      body
     FROM
       `bigquery-public-data.bbc_news.fulltext`
     WHERE
-      AI.IF(('This news is related to Google: ', body))
-      AND category = 'tech';    -- Non-AI filters are evaluated first
+      AI.IF(
+        ('The following news story is about a natural disaster: ', body),
+        embeddings => AI.EMBED(body, endpoint => 'text-embedding-005', task_type => 'CLASSIFICATION').result,
+        optimization_mode => 'MINIMIZE_COST'
+      );
+
+For this example, embeddings are generated on-the-fly. In practice, we recommend that you materialize embeddings so that they can be reused. For more information, see [Optimize AI function costs](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) .
+
+### Use a subjective condition
+
+The following query provides examples to the `AI.IF` function to show what counts as an emotional review. Because "emotion" is a subjective quality, you might provide different expected results in different contexts.
+
+    SELECT
+      review,
+      AI.IF(
+        ("The review is emotional:", review),
+        examples => [
+          ("I really love this product", TRUE),
+          ("The product performed extremely well", FALSE)]) AS is_emotional
+    FROM (
+        SELECT "This product did everything it was supposed to" AS review
+        UNION ALL
+        SELECT "This product was absolutely incredible!!" AS review);
+
+The result is similar to the following:
+
+    +------------------------------------------------+--------------+
+    | review                                         | is_emotional |
+    +------------------------------------------------+--------------+
+    | This product was absolutely incredible!!       | true         |
+    | This product did everything it was supposed to | false        |
+    +------------------------------------------------+--------------+
 
 ### Filter images
 
@@ -210,7 +256,7 @@ The following queries create a table of product data and a table of product imag
       products.category = "Toys" AND
       products.brand = "Fluffy Buns";
 
-## Filter audio by speech topic
+### Filter audio by speech topic
 
 The following queries create a table of audio data stored in a publicly available Cloud Storage bucket. The query filters the audio samples to those that contain speech discussing a large language model.
 
@@ -232,6 +278,20 @@ The following queries create a table of audio data stored in a publicly availabl
       `audio_repo.prompt_audio`
     WHERE
       AI.IF(('Does the audio talk about large language models? ', OBJ.GET_ACCESS_URL(ref, 'r')));
+
+### Handle inference errors
+
+The following query filters news stories but sets `max_error_ratio` to `0.05` , meaning the query fails if more than 5% of rows return an error during inference:
+
+    SELECT
+      title, body
+    FROM
+      `bigquery-public-data.bbc_news.fulltext`
+    WHERE
+      AI.IF(('The following news story is about a natural disaster: ', body),
+      max_error_ratio => 0.05);
+
+If the query exceeds the 0.05 error ratio, it fails and returns an error message similar to the following: `Query failed because AI functions exceeded their allowed error ratio`
 
 ## Related functions
 

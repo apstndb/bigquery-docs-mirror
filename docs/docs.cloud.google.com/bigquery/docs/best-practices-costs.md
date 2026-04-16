@@ -451,7 +451,7 @@ To free capacity, check on long-running jobs to make sure that they should conti
 
 **Best practice:** Create a dashboard to analyze your Cloud Billing data so you can monitor and make adjustments to your BigQuery usage.
 
-You can [export your billing data](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery) to BigQuery and visualize it in a tool such as Looker Studio. For a tutorial about creating a billing dashboard, see [Visualize Google Cloud billing using BigQuery and Looker Studio](https://medium.com/google-cloud/visualize-gcp-billing-using-bigquery-and-data-studio-d3e695f90c08) .
+You can [export your billing data](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery) to BigQuery and visualize it in a tool such as Data Studio. For a tutorial about creating a billing dashboard, see [Visualize Google Cloud billing using BigQuery and Data Studio](https://medium.com/google-cloud/visualize-gcp-billing-using-bigquery-and-data-studio-d3e695f90c08) .
 
 ### Use billing budgets and alerts
 
@@ -664,4 +664,4 @@ Storage costs can increase if data in long-term storage moves to active BigQuery
     
       - [Create, edit, or delete budgets and budget alerts](https://docs.cloud.google.com/billing/docs/how-to/budgets)
       - [Export Cloud Billing data to BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery)
-      - [Visualize your costs with Looker Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)
+      - [Visualize your costs with Data Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)

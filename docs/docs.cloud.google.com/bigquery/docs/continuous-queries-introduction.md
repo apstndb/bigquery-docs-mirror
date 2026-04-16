@@ -30,6 +30,8 @@ Common use cases where you might want to use continuous queries are as follows:
   - **Customizable event-driven pipelines** : use continuous query integration with Pub/Sub to trigger downstream applications based on incoming data.
   - **Data enrichment and entity extraction** : use continuous queries to perform real-time data enrichment and transformation by using SQL functions and ML models.
   - **Reverse extract-transform-load (ETL)** : perform real-time reverse ETL into other storage systems more suited for low latency application serving. For example, analyzing or enhancing event data that is written to BigQuery, and then streaming it to Bigtable or Spanner for application serving.
+  - **Autonomous agent triggering** : trigger agentic data pipelines in real-time based on complex events detected in live data streams. For an example, refer to the [Build an Event-Driven Data Agent with BigQuery and Agent Development Kit (ADK) codelab](https://codelabs.developers.google.com/bigquery-adk-event-driven-agents) .
+  - **Autonomous agent monitoring** : develop real-time automated monitoring and alerting for real-time agentic interactions using the [BigQuery agent analytics plugin](https://adk.dev/integrations/bigquery-agent-analytics/) , which streams all agent trace data, tool usage, and operational logs directly into BigQuery for deep observability into your AI workforce.
 
 ## Supported functionality
 

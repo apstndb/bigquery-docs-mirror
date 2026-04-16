@@ -1248,16 +1248,6 @@ No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](http
 
 10,000,000 for a call with an average of 500 tokens in each input row and 50 output tokens.
 
-`  AI.AGG  `
-
-Various Gemini models
-
-See [Locations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg#locations)
-
-No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) .
-
-20,000,000
-
 `  AI.GENERATE_TEXT  `  
   
 `  ML.GENERATE_TEXT  `

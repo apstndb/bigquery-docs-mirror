@@ -73,11 +73,11 @@ In particular, `MERGE` statements interact with row-level access policies as fol
 
 Row-level access policies cannot be applied on [JSON columns](https://docs.cloud.google.com/bigquery/docs/json-data) . To learn more about the limitations for row-level security, see [Limitations](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#limitations) .
 
-## BigQuery BI Engine and Looker Studio
+## BigQuery BI Engine and Data Studio
 
 [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) does not accelerate queries that are run on tables with one or more row-level access policies; those queries are run as standard queries in BigQuery.
 
-The data in a Looker Studio dashboard is filtered according to the underlying source table's row-level access policies.
+The data in a Data Studio dashboard is filtered according to the underlying source table's row-level access policies.
 
 ## Column-level security
 

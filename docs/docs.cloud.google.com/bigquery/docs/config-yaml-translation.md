@@ -655,6 +655,8 @@ We recommend that you specify the default time zone for translation if your sour
 
 In the following example, the configuration YAML converts a `TIMESTAMP` and a `TIMESTAMPTZ` data type to `DATETIME` , with the target time zone set to `Europe/Paris` .
 
+For valid string time zone values, see [Time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
+
     type: experimental_object_rewriter
     global:
       typeConvert:

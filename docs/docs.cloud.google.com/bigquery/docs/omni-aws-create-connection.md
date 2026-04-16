@@ -28,7 +28,7 @@ Ensure that you follow [security best practices for Amazon S3](https://docs.aws.
   - Set up an AWS policy that prevents public access to your Amazon S3 bucket.
   - Use Amazon S3 server-side encryption.
   - Limit permissions granted to the Google Account to the required minimum.
-  - Set up CloudTrails and enable Amazon S3 data events.
+  - Set up CloudTrail and enable Amazon S3 data events.
 
 To create an AWS IAM policy, use the AWS console or Terraform:
 
@@ -461,7 +461,7 @@ BigQuery Omni provides two methods for securely accessing data from Amazon S3. Y
 
 ### Add a trust policy to the AWS role
 
-The trust relationship lets the connection assume the role and access the Amazon S3 data as specified in the roles policy.
+The trust relationship lets the connection assume the role and access the Amazon S3 data as specified in the role's policy.
 
 To add a trust relationship, use the AWS console or Terraform:
 
@@ -579,7 +579,7 @@ Update the `aws_iam_role` resource in the Terraform configuration to add a trust
                   "StringEquals": {
                     "accounts.google.com:sub": "${google_bigquery_connection.connection.aws[0].access_role[0].identity}"
                   }
-                }
+                }`
               }
             ]
           }

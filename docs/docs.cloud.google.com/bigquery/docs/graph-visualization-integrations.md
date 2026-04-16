@@ -25,7 +25,6 @@ BigQuery Studio notebooks let you visualize your BigQuery Graph query results by
 ## What's next
 
   - Learn about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
-  - Learn about [BigQuery Graph queries](https://docs.cloud.google.com/bigquery/docs/graph/queries-overview) .
+  - Learn about [BigQuery Graph queries](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
   - Learn about [graph visualization](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .
-  - Learn how to [work with BigQuery Graph visualizations](https://docs.cloud.google.com/bigquery/docs/graph/work-with-visualizations) .
   - Learn how to [compare BigQuery Graph and Spanner Graph](https://docs.cloud.google.com/bigquery/docs/graph-compare) .

@@ -425,7 +425,7 @@ If you query your tables directly instead of using the auto-generated views, you
 
 ## Search Ads 360 sample queries
 
-You can use the following Search Ads 360 sample queries to analyze your transferred data. You can also view the queries in a visualization tool such as [Looker Studio](https://cloud.google.com/looker-studio) .
+You can use the following Search Ads 360 sample queries to analyze your transferred data. You can also view the queries in a visualization tool such as [Data Studio](https://cloud.google.com/looker-studio) .
 
 The following queries are examples to get started querying your Search Ads 360 data with BigQuery Data Transfer Service. For additional questions about what you can do with these reports, contact your Search Ads 360 technical representative.
 

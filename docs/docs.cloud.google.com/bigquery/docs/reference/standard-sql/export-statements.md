@@ -10,6 +10,7 @@ The `EXPORT DATA` statement exports the results of a query to an external storag
   - Spanner
   - Bigtable
   - Pub/Sub
+  - AlloyDB ( [Preview](https://cloud.google.com/products#product-launch-stages) )
 
 ### Syntax
 
@@ -28,6 +29,7 @@ The `EXPORT DATA` statement exports the results of a query to an external storag
       - [Bigtable export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#bigtable_export_option)
       - [Pub/Sub export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#pubsub_export_option)
       - [Spanner export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#spanner_export_option)
+      - [AlloyDB export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#alloydb_export_option)
 
   - `query_statement` : A SQL query. The query result is exported to the external destination. The query can't reference metatables, including `INFORMATION_SCHEMA` views, system tables, or wildcard tables.
 
@@ -44,7 +46,7 @@ You are not billed for the export operation, but you are billed for running the 
 
 ### Cloud Storage, Amazon S3, and Blob Storage export option list
 
-The option list specifies options for exporting to Cloud Storage, Amazon S3, or Blob Storage. Specify the option list in the following format: `NAME=VALUE, ...`
+The option list specifies options for exporting to Cloud Storage, Amazon S3, or Blob Storage.
 
 Options
 
@@ -164,7 +166,7 @@ You are not billed for the export operation, but you are billed for running the 
 
 ### Bigtable export option list
 
-The option list specifies options for exporting to Bigtable. Specify the option list in the following format: `NAME=VALUE` , ...
+The option list specifies options for exporting to Bigtable.
 
 Options
 
@@ -235,19 +237,13 @@ FROM `bigquery_table`
 
 ## Export to Pub/Sub
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To enroll in the continuous queries preview, fill out [the request form](https://docs.google.com/forms/d/e/1FAIpQLSc-SL89C9K997jSm_u3oQH-UGGe3brzsybbX6mf5VFaA0a4iA/viewform) . To give feedback or request support for this feature, contact <bq-continuous-queries-feedback@google.com> .
-
 You can export BigQuery data to a Pub/Sub topic by using the `EXPORT DATA` statement in a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) . For more information about Pub/Sub configuration options, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
 
 For information about the costs involved with exporting to Pub/Sub by using a continuous query, see [Costs](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#pricing) .
 
 ### Pub/Sub export option list
 
-The option list specifies options for exporting to Pub/Sub. Specify the option list in the following format: `NAME=VALUE` , ...
+The option list specifies options for exporting to Pub/Sub.
 
 Options
 
@@ -291,7 +287,7 @@ You can export data from a BigQuery table to a [Spanner](https://docs.cloud.goog
 
 ### Spanner export option list
 
-The option list specifies options for the export operation. Specify the option list in the following format: `NAME=VALUE, ...`
+The option list specifies options for the export operation.
 
 Options
 
@@ -329,3 +325,64 @@ AS SELECT * FROM `bigquery_table`
 ```
 
 For more Spanner export examples and configuration options, see [Export data to Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) .
+
+## Export to AlloyDB
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To request access to this preview feature, complete the [BigQuery to AlloyDB Batch Exports - Preview Sign-Up](https://forms.gle/nTbRPvmMQLDGRsYr8) interest form. To provide feedback or request support for this feature, send email to <bq-alloydb-export-feedback@google.com> .
+
+You can export BigQuery data to an AlloyDB table by using the `EXPORT DATA` statement. For AlloyDB export examples and configuration options, see [Export data to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) .
+
+You aren't billed for the export operation, but you are billed for running the query and for storing data in AlloyDB. For more information, see [AlloyDB for PostgreSQL pricing](https://cloud.google.com/alloydb/pricing) .
+
+### AlloyDB export option list
+
+The option list specifies options for exporting to AlloyDB.
+
+Options
+
+`format`
+
+`STRING`
+
+Required. When exporting to AlloyDB, the value must always be `ALLOYDB` .
+
+`uri`
+
+`STRING`
+
+Required. The destination URI for the export. For AlloyDB, the URI must be provided in the following format: ` https://alloydb.googleapis.com/v1/projects/ PROJECT_ID /locations/ LOCATION /clusters/ CLUSTER_ID /instances/ INSTANCE_ID  `
+
+`alloydb_options`
+
+`STRING`
+
+Required. A JSON string containing configurations related to mapping exported fields to AlloyDB columns. For more information, see [Configure exports with `alloydb_options` option.](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#alloydb_options)
+
+### Example
+
+#### Export data to AlloyDB
+
+The following example exports data to an AlloyDB table:
+
+``` notranslate
+EXPORT DATA
+  WITH CONNECTION `myproject.us-central1.my-alloydb-conn`
+  OPTIONS (
+    format='ALLOYDB',
+    uri="https://alloydb.googleapis.com/v1/projects/myproject/locations/us-central1/clusters/my-cluster/instances/my-instance",
+    alloydb_options="""{
+      "schema": "public",
+      "table": "my_target_table"
+    }"""
+  )
+AS SELECT
+  col1 AS id,
+  col2 AS name,
+  col3 AS value
+FROM
+  `mydataset.table1`;
+```

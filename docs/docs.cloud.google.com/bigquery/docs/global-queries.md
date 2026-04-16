@@ -158,10 +158,9 @@ For information about quotas regarding global queries, see [Query jobs](https://
   - Global queries incur higher latency than single-region queries due to the time required to transfer data between regions.
   - Global queries don't use any cache to avoid transferring data between regions.
   - You can't query pseudocolumns, such `_PARTITIONTIME` , with global queries.
+  - You can't query `RANGE` type columns with global queries.
   - You can't query columns using [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with global queries.
   - You can't query [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) from a remote region in a global query.
-  - You can't query [BigLake metastore](https://docs.cloud.google.com/biglake/docs/about-blms) Apache Iceberg tables from a remote region in a global query.
-  - When you reference the columns of a BigLake table in a `WHERE` clause, you can't use `RANGE` or `INTERVAL` literals.
   - Global [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location).
   - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) over global queries are not supported.
   - If your global query references `STRUCT` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the remote region that filters `STRUCT` columns and returns only the necessary fields as individual columns.

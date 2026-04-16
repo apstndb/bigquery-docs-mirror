@@ -12,7 +12,7 @@ To prepare and run a BigQuery migration assessment, follow these steps:
     
     > **Note:** [Use the `--pap` flag](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
 
-2.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse using the `dwh-migration-dumper` tool.
+2.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse.
 
 3.  [Upload your metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload) to your Cloud Storage bucket.
 
@@ -951,7 +951,7 @@ The following example shows you how to grant the required roles to a user that y
 
 ``` notranslate
 gcloud projects add-iam-policy-binding \
-  " translate="no">PROJECT \
+  PROJECT \
   --member=user:REPORT_VIEWER_EMAIL \
   --role=roles/bigquery.dataViewer
 

@@ -3652,7 +3652,7 @@ ETL & Data Integration
 
 **Description**
 
-Supermetrics is the leading marketing data engine for effortless cross-channel data crunching and reporting. With Supermetrics, marketers can independently get all of their marketing data from different platforms to their favorite tools like Google Sheets, Looker Studio, and various BI tools. Supermetrics is a no-code solution. No programming skills or integration work is required. The solution involves the following steps:
+Supermetrics is the leading marketing data engine for effortless cross-channel data crunching and reporting. With Supermetrics, marketers can independently get all of their marketing data from different platforms to their favorite tools like Google Sheets, Data Studio, and various BI tools. Supermetrics is a no-code solution. No programming skills or integration work is required. The solution involves the following steps:
 
   - Get the data
   - Connect

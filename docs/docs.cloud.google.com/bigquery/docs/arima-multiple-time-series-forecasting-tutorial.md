@@ -119,7 +119,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Visualize the input data
 
-Before creating the model, you can optionally visualize your input time series data to get a sense of the distribution. You can do this by using Looker Studio.
+Before creating the model, you can optionally visualize your input time series data to get a sense of the distribution. You can do this by using Data Studio.
 
 ### SQL
 
@@ -140,9 +140,9 @@ Follow these steps to visualize the time series data:
     GROUP BY date;
     ```
 
-3.  When the query completes, click **Open in** \> **Looker Studio** . Looker Studio opens in a new tab. Complete the following steps in the new tab.
+3.  When the query completes, click **Open in** \> **Data Studio** . Data Studio opens in a new tab. Complete the following steps in the new tab.
 
-4.  In the Looker Studio, click **Insert** \> **Time series chart** .
+4.  In Data Studio, click **Insert** \> **Time series chart** .
 
 5.  In the **Chart** pane, choose the **Setup** tab.
 

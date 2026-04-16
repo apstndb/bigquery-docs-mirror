@@ -129,4 +129,4 @@ With no remaining quota, BigQuery stops working for everyone in that project.
     
       - [Create, edit, or delete budgets and budget alerts](https://docs.cloud.google.com/billing/docs/how-to/budgets)
       - [Export Cloud Billing data to BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery)
-      - [Visualize your costs with Looker Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)
+      - [Visualize your costs with Data Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)
